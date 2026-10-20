@@ -1,5 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+require('../support/unit1112-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function capture(page,name){
  await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));

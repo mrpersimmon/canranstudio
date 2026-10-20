@@ -1,0 +1,42 @@
+[WebServer] (node:13704) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:29796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit11-12-fivezones.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (48.5s)
+
+
+  1) tests\login\unit11-12-fivezones.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 ───────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-grammar').getByRole('group', { name: '第1处填空', exact: true }).getByRole('button', { name: 'are', exact: true })
+
+
+       at ..\support\units1-30-tasks.js:8
+
+       6 | async function select(room,answer){
+       7 |  if(answer?.scene)await room.getByRole('group',{name:'在场景中选择',exact:true}).getByRole('button',{name:answer.scene,exact:true}).click();
+    >  8 |  else if(answer?.fills){for(let i=0;i<answer.fills.length;i++)await room.getByRole('group',{name:'第'+(i+1)+'处填空',exact:true}).getByRole('button',{name:answer.fills[i],exact:true}).click();}
+         |                                                                                                                                                                                     ^
+       9 |  else if(answer?.pairs){for(const[en,cn]of answer.pairs){await room.getByRole('group',{name:answer.leftLabel||'英文',exact:true}).getByRole('button',{name:en,exact:true}).click();await room.getByRole('group',{name:answer.rightLabel||'词义',exact:true}).getByRole('button',{name:cn,exact:true}).click();}}
+      10 |  else if(answer?.object){await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:answer.object,exact:true}).click();await room.getByRole('group',{name:'接收者',exact:true}).getByRole('button',{name:answer.recipient,exact:true}).click();}
+      11 |  else if(Array.isArray(answer)){
+        at commonSelect (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\units1-30-tasks.js:8:181)
+        at Object.select (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit1112-fivezones.js:10:42)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit11-12-fivezones.spec.js:128:52
+
+    Error Context: output\test-login\unit11-12-fivezones-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit11-12-fivezones-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit11-12-fivezones-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit11-12-fivezones.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 ────────────────

@@ -1,5 +1,6 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
+require('../support/unit1112-legacy').historicalSuite(test);
 const fs=require('node:fs/promises');
 const legacy=require('../fixtures/unit11-12-classroom-before/flow');
 const {finishExamFrom}=require('../support/unit11-12-exam');

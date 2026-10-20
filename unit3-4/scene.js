@@ -4,7 +4,7 @@
     const element = document.createElement(tag); element.className = className; element.textContent = text; return element;
   };
   function picture(name, alt = '') {
-    const image = node('img'); image.src = '/assets/' + (name === 'coat' ? 'unit1-2/' : 'unit3-4/') + name + '.svg'; image.alt = alt; return image;
+    const image = node('img'); image.src = root.CanranCore.unit34Current?.image(name) || '/assets/' + (name === 'coat' ? 'unit1-2/' : 'unit3-4/') + name + '.svg'; image.alt = alt; return image;
   }
   function actor(who, name, context) {
     const person = node('div', 'cloakroom-actor ' + context + '-actor ' + context + '-' + who);
@@ -50,7 +50,7 @@
     const ticket = node('div', 'cloakroom-prop ticket-prop'); ticket.append(picture('ticket', '寄存牌'));
     const coat = node('div', 'cloakroom-prop coat-prop'); coat.append(picture('coat', '外套'));
     const umbrella = node('div', 'cloakroom-prop umbrella-prop'); umbrella.append(picture('umbrella-red', '红色纯色雨伞'));
-    const status = node('span', 'scene-caption'); element.append(ticket, coat, umbrella, status);
+    element.append(ticket, coat, umbrella);
     let previousIndex = -1;
     return { element, update(index) {
       const returned = index >= 10;
@@ -63,7 +63,7 @@
       element.dataset.beat = returned ? 'returned' : index >= 5 ? 'checking' : 'waiting';
       element.dataset.ticket = index >= 2 ? 'counter' : 'visitor';
       ticket.hidden = index < 1;
-      status.textContent = returned ? '客人确认：是这把' : index >= 5 ? '继续确认雨伞' : '';
+
     } };
   }
   const beats = {
@@ -73,7 +73,7 @@
     'u34-v1-polite-yes': { name: '确认领回', item: 'umbrella', before: 'Is this your umbrella?', after: 'Yes, it is.' }
   };
   function create({ element }) {
-    let question, scene, speech, prop, status, heading;
+    let question, scene, speech, prop, status, heading, questionStart;
     const receipt = storyProps(); receipt.update(10); receipt.element.classList.add('claim-receipt');
     // No unrelated success emblem: the completed scene shows the resolved task.
     receipt.element.querySelector('.ticket-prop').hidden = true;
@@ -101,6 +101,7 @@
     }
     function present(q, progress) {
       question = q;
+      questionStart=progress;
       const content = element.querySelector('.practice-content'), options = content.querySelector('.practice-options');
       element.classList.remove('role-runner'); element.classList.add('counter-runner');
       const intro = node('div', 'counter-introduction'); heading = node('h3', 'counter-prompt', q.prompt); intro.append(progress, heading);
@@ -112,9 +113,9 @@
       if (beats[q.id].item === 'coat') prop.append(picture('umbrella-red', '红色纯色雨伞'));
       status = node('span', 'counter-item-status scene-caption');
       scene.append(speech, prop, status);
-      content.insertBefore(intro, options); content.insertBefore(scene, options); answer(false);
+      content.prepend(intro); content.insertBefore(scene, options); answer(false);
     }
-    return { present, answer, heading: () => heading, finish() {}, completion: () => receipt.element };
+    return { present, answer, heading: () => questionStart?.isConnected?questionStart:heading, finish() {}, completion: () => receipt.element };
   }
   root.CanranCore.unit34Scene = { create, storyProps };
 })(globalThis);

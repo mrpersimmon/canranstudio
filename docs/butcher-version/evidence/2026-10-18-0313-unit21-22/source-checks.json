@@ -1,0 +1,98 @@
+{
+  "complete": true,
+  "at": "2026-10-17T19:48:30.211Z",
+  "checks": [
+    {
+      "name": "Entire current 45-question definition unchanged, including sessions, reward and material",
+      "passed": true
+    },
+    {
+      "name": "Entire earlier 30-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Actual 3 presentation files frozen with exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "Earlier server history and fixture definitions untouched",
+      "passed": true
+    },
+    {
+      "name": "All question IDs unique and all inline fill tasks have one or two blanks",
+      "passed": true
+    },
+    {
+      "name": "All other current course files retain baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "All 70 original asset files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Font binaries and licenses unchanged; all current glyphs covered",
+      "passed": true
+    },
+    {
+      "name": "All 415 recorded body text source hashes match the final input",
+      "passed": true
+    },
+    {
+      "name": "Other 96 shared runtime/server files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Latest unified standard unchanged",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages /",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages /lesson/",
+      "passed": true
+    },
+    {
+      "name": "Captured five original valid rounds survive normalization",
+      "passed": true
+    },
+    {
+      "name": "Original preview records, awards and signing key retained",
+      "passed": true
+    },
+    {
+      "name": "Changed JS parses",
+      "passed": true
+    },
+    {
+      "name": "Local links in changed repository documentation resolve",
+      "passed": true
+    }
+  ],
+  "packages": {
+    "/": {
+      "title": "寻物交接站",
+      "revision": "3376355f8cdd2ac92d85f5a2837a3c589aca67fbad5b106776efaaf330da86f6",
+      "manifest": "/course-packages/unit21-22/3376355f8cdd2ac92d85f5a2837a3c589aca67fbad5b106776efaaf330da86f6.json",
+      "sha256": "5b07bef7da0a1724f46c7dfbb0a3d9c44c3f880370df74d8fb9d5b47b8e3a8ce"
+    },
+    "/lesson/": {
+      "title": "寻物交接站",
+      "revision": "96964c3fe6bd517a28bd78d7991234b6cd8cdcbe6fda0cee2108d705aae25230",
+      "manifest": "/lesson/course-packages/unit21-22/96964c3fe6bd517a28bd78d7991234b6cd8cdcbe6fda0cee2108d705aae25230.json",
+      "sha256": "243ecff037504d50f05d294be80588a1b53b40790fcbbce5cbde5bc8e60d91a7"
+    }
+  },
+  "questions": {
+    "before": 45,
+    "current": 45,
+    "unchanged": 45,
+    "legacy": 30
+  },
+  "originalAssetFiles": 70,
+  "commonExceptions": [
+    "server/progress.js"
+  ]
+}

@@ -1,0 +1,36 @@
+'use strict';
+const {test,expect,devices}=require('@playwright/test');
+const fs=require('fs/promises'),path=require('path'),os=require('os'),sharp=require('sharp');
+const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
+const {adminLogin,createStudent,signIn}=require('./helpers'),flow=require('../support/unit56-v154');
+const {defaultBrowserType,...mobile}=devices['iPhone 13'],webkit=process.env.UNIT56_REVIEW_BROWSER==='webkit';
+test.use({actionTimeout:10000,...(webkit?{...mobile,browserName:'webkit'}:{})});
+for(const kind of ['card','certificate'])test(`同库升级：原${kind==='card'?'26题五星卡全部帧':'26题旧证PNG'}、精确时间与跨设备历史保留`,async({browser},info)=>{
+ test.setTimeout(300000);const root=path.resolve(__dirname,'../..'),temp=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit56-v154-')),oldRoot=path.join(temp,'site'),dataDir=path.join(temp,'accounts');
+ const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1),ports=require('../support/login-test-ports'),origin=ports.origin(4271);let server,first,second;
+ const read=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit5-6:learning:v1')));
+ const stop=async()=>{if(server){await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});server=null;}};
+ const start=async old=>{server=await createApp({root:old?oldRoot:root,dataDir,origin,basePath:base});await new Promise(resolve=>server.listen(ports.port(4271),'127.0.0.1',resolve));};
+ async function mirror(a,b){const stat=await fs.stat(a);if(stat.isDirectory())await fs.symlink(a,b,process.platform==='win32'?'junction':'dir');else await fs.copyFile(a,b);}
+ try{
+  await fs.mkdir(oldRoot);for(const e of await fs.readdir(root,{withFileTypes:true})){if(['.git','unit5-6'].includes(e.name))continue;const a=path.join(root,e.name),b=path.join(oldRoot,e.name);if(/^unit\d+-\d+$/.test(e.name)){await fs.mkdir(b);for(const n of await fs.readdir(a))await mirror(path.join(a,n),path.join(b,n));}else await mirror(a,b);}
+  await fs.mkdir(path.join(oldRoot,'unit5-6'));for(const n of await fs.readdir(path.join(root,'unit5-6')))await mirror(path.join(root,'unit5-6',n),path.join(oldRoot,'unit5-6',n));
+  const fixture=kind==='card'?'unit5-6-before-v154':'unit5-6-before-awards';for(const n of ['index.html','content.js','unit.js','unit.css','scene.js']){let a=path.join(root,'tests/fixtures',fixture,n);if(!require('fs').existsSync(a))a=path.join(root,'tests/fixtures/unit5-6-before-v154',n);await fs.copyFile(a,path.join(oldRoot,'unit5-6',n));}
+  // The old paper-certificate package has no keepsake image dependency. Use
+  // its real former homepage instead of requesting today's card-only artwork.
+  const homeFile=path.join(oldRoot,'index.html'),oldHome=await fs.readFile(path.join(root,'tests/fixtures/unit5-6-before-v154/home-section.html'),'utf8');await fs.writeFile(homeFile,(await fs.readFile(homeFile,'utf8')).replace(/<section[^>]+data-unit="unit5-6"[\s\S]*?<\/section>/,oldHome));
+  const store=openStore(dataDir);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();await start(true);
+  first=await browser.newContext({baseURL:origin,...(webkit?mobile:{})});const p=await first.newPage();await adminLogin(p,base);const account=await createStudent(p,'朋友历史验收班','小伙伴',[/Lesson 5–6/]);await signIn(p,account,base);await flow.complete(p,prefix,kind==='certificate'?'classroom':'before');
+  if(kind==='certificate'){await p.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('原证姓名');await p.getByRole('button',{name:'领取单元证书',exact:true}).click();}
+  await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');const before=await read(p),date=await p.locator('#certificateDate').innerText(),issued=kind==='card'?await p.locator('#certificateDate').getAttribute('datetime'):before.activity.unitCertificateIssuedAt,ext=kind==='card'?'gif':'png';
+  const original=info.outputPath('before.'+ext);let dl=p.waitForEvent('download');await p.getByRole('button',{name:kind==='card'?'保存动图':'保存图片',exact:true}).click();await(await dl).saveAs(original);if(kind==='certificate')await p.keyboard.press('Escape');
+  await stop();await start(false);await p.goto(base+'unit5-6/?course-retry=1#learn/certificate');await flow.ready(p);await expect(p.locator('#starCount')).toHaveText(kind==='card'?'5':'0');await p.getByText('之前的学习记录与证书',{exact:true}).click();
+  if(kind==='certificate'){await p.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(p.locator('#legacyCertificateDate')).toHaveText(date);await expect(p.locator('#legacyCertificateName')).toHaveText('原证姓名');}else{await expect(p.locator('#certificateDate')).toHaveText(date);await expect(p.locator('#certificateDate')).toHaveAttribute('datetime',issued);}
+  const retained=info.outputPath('after.'+ext);dl=p.waitForEvent('download');await p.getByRole('button',{name:kind==='card'?'保存动图':'保存图片',exact:true}).click();await(await dl).saveAs(retained);const opts=kind==='card'?{animated:true}:{};expect((await sharp(original,opts).raw().toBuffer()).equals(await sharp(retained,opts).raw().toBuffer())).toBe(true);if(kind==='card')expect((await sharp(retained,{animated:true}).metadata()).pages).toBe(60);else await p.keyboard.press('Escape');
+  await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');second=await browser.newContext({baseURL:origin,...(webkit?mobile:{})});const q=await second.newPage();await signIn(q,account,base);await q.goto(base+'unit5-6/#learn/certificate');await flow.ready(q);const archive=(await read(q)).activity.unit56HistoryProgress;expect(archive.records).toEqual(before.records);
+  if(kind==='certificate'){await q.getByText('之前的学习记录与证书',{exact:true}).click();await expect(q.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',issued);await q.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(q.locator('#legacyCertificateName')).toHaveText('原证姓名');await expect(q.locator('#legacyCertificateDate')).toHaveText(date);await q.keyboard.press('Escape');}else await expect(q.locator('#certificateDate')).toHaveAttribute('datetime',issued);
+  await q.goto(base+'unit5-6/#learn/roles');await flow.ready(q);await expect(q.locator('.stage-roles .progress-copy')).toHaveText('第 1 / 3 题');for(const id of ['roles','introduce','cars','exam'])await flow.activity(q,id,{base:prefix});await expect(q.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await q.reload();await flow.ready(q);expect((await read(q)).activity.unit56HistoryProgress.records).toEqual(before.records);
+  await fs.writeFile(info.outputPath('preservation.json'),JSON.stringify({kind,engine:webkit?'webkit':'chromium',base,originalRecords:Object.keys(before.records).length,archivedRecords:Object.keys(archive.records).length,exportPixelsIdentical:true,issuedAt:issued,date},null,2));
+ }catch(error){await fs.writeFile(info.outputPath('primary-error.txt'),error.stack||String(error));throw error;}
+ finally{await first?.close();await second?.close();await stop();if(!path.resolve(temp).startsWith(path.join(os.tmpdir(),'canran-unit56-v154-')))throw Error('Invalid temporary path');try{await fs.rm(temp,{recursive:true,force:true});}catch(error){info.annotations.push({type:'temporary-cleanup',description:temp+' '+error.code});}}
+});

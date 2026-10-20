@@ -1,0 +1,1250 @@
+{
+  "listen": [
+    {
+      "id": "u3132-v1-garden-words",
+      "target": "区分场所、树与地面",
+      "prompt": "给花园里的词语配上意思。",
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "区分场所、树与地面",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "garden",
+          "cn": "花园"
+        },
+        {
+          "id": "1",
+          "en": "tree",
+          "cn": "树"
+        },
+        {
+          "id": "2",
+          "en": "grass",
+          "cn": "草地"
+        }
+      ],
+      "distractorRationale": "每项只对应一处含义，区分同组对象或问句用途。"
+    },
+    {
+      "id": "u3132-v1-objects",
+      "target": "辨认 Lesson32 的动作对象",
+      "prompt": "把物品和意思连起来。",
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "辨认 Lesson32 的动作对象",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "letter",
+          "cn": "信"
+        },
+        {
+          "id": "1",
+          "en": "basket",
+          "cn": "篮子"
+        },
+        {
+          "id": "2",
+          "en": "bone",
+          "cn": "骨头"
+        }
+      ],
+      "distractorRationale": "每项只对应一处含义，区分同组对象或问句用途。"
+    },
+    {
+      "id": "u3132-v1-cat",
+      "target": "认识 cat",
+      "prompt": "看看图，选出英文。",
+      "answer": "cat",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "认识 cat",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "cat",
+        "dog",
+        "tree"
+      ],
+      "image": "/assets/unit31-32/cat.svg",
+      "imageAlt": "一只猫",
+      "distractorRationale": "dog 是狗，tree 是树，不凭同图配同图。"
+    },
+    {
+      "id": "u3132-v1-type",
+      "target": "type 的动词义",
+      "prompt": "type a letter\n这里的 type 要做什么？",
+      "answer": "打字",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "type 的动词义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "打字",
+        "阅读",
+        "打开"
+      ],
+      "distractorRationale": "区分 type、read、open；不扩展名词“类型”。"
+    },
+    {
+      "id": "u3132-v1-cook",
+      "target": "cook 的动词义",
+      "prompt": "cook a meal\n这里要做什么？",
+      "answer": "做饭",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "cook 的动词义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "做饭",
+        "吃饭",
+        "喝牛奶"
+      ],
+      "distractorRationale": "做、吃、喝是不同动作。"
+    },
+    {
+      "id": "u3132-v1-food-body",
+      "target": "区分食物、用餐事件与身体部位",
+      "prompt": "把新词和意思连起来。",
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "区分食物、用餐事件与身体部位",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "milk",
+          "cn": "牛奶"
+        },
+        {
+          "id": "1",
+          "en": "meal",
+          "cn": "一顿饭"
+        },
+        {
+          "id": "2",
+          "en": "tooth",
+          "cn": "牙齿"
+        }
+      ],
+      "distractorRationale": "每项只对应一处含义，区分同组对象或问句用途。"
+    },
+    {
+      "id": "u3132-v1-clean",
+      "target": "clean 的语境义",
+      "prompt": "He is cleaning his teeth.\n这里的 cleaning 表示什么？",
+      "answer": "清洁",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "clean 的语境义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "清洁",
+        "穿上",
+        "追赶"
+      ],
+      "distractorRationale": "在句中是动作，不能按形容词“干净的”套用。"
+    },
+    {
+      "id": "u3132-v1-run-climb",
+      "target": "区分跑与攀爬",
+      "prompt": "哪个词表示“攀爬”？",
+      "answer": "climb",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "区分跑与攀爬",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "climb",
+        "run",
+        "sit"
+      ],
+      "distractorRationale": "区分接下来故事中的三个动作。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u3132-v1-tim",
+      "target": "原文中的动作执行者",
+      "prompt": "课文中，谁正在爬树？",
+      "answer": "Tim",
+      "source": "PDF95–98；Lesson31 D07–D10",
+      "decision": "原文中的动作执行者",
+      "hint": "回看 Jean 问 Who 的那段对话。",
+      "explanation": "",
+      "options": [
+        "Tim",
+        "Sally",
+        "Jack"
+      ],
+      "distractorRationale": "Jack 是解释的人，Sally 在树下坐着；不混淆说话人与行动者。"
+    },
+    {
+      "id": "u3132-v1-chasing",
+      "target": "定位狗追赶的对象",
+      "prompt": "点出说明狗正在追谁的完整原句。",
+      "answer": "It’s running after a cat.",
+      "source": "PDF95–98；Lesson31 D12–D14",
+      "decision": "定位狗追赶的对象",
+      "hint": "区分在哪里、经过哪里和追着谁。",
+      "explanation": "",
+      "options": [
+        "The dog’s in the garden, too.",
+        "It’s running across the grass.",
+        "It’s running after a cat."
+      ],
+      "type": "locate",
+      "fragments": [
+        {
+          "value": "The dog’s in the garden, too."
+        },
+        "\n",
+        {
+          "value": "It’s running across the grass."
+        },
+        "\n",
+        {
+          "value": "It’s running after a cat."
+        }
+      ],
+      "distractorRationale": "across 提供路线，after 提供追赶对象。"
+    },
+    {
+      "id": "u3132-v1-pardon",
+      "target": "请求重复的交际目的",
+      "prompt": "Jean 说 I beg your pardon?，希望 Jack 怎样做？",
+      "answer": "把刚才的话再说一遍",
+      "source": "PDF95–98；Lesson31 D08–D10",
+      "decision": "请求重复的交际目的",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "把刚才的话再说一遍",
+        "向她道谢",
+        "把门关上"
+      ],
+      "distractorRationale": "本课是没有听清后的请求，不强行解释成道歉。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3132-five-g-form",
+      "target": "现在进行时由be和动作-ing组成",
+      "prompt": "眼前的蒂姆正在爬树，补全描述。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "is climbing",
+        "climbing",
+        "is climb"
+      ],
+      "answer": "is climbing",
+      "display": {
+        "title": "眼前的蒂姆正在爬树，补全描述。",
+        "material": "Tim ___ the tree."
+      },
+      "explanation": "说现在正在做的动作，用am/is/are加动作-ing；Tim是一个人，用is。",
+      "hint": "",
+      "workshop": {
+        "rule": "说现在正在做的动作，用am/is/are加动作-ing；Tim是一个人，用is。",
+        "model": {
+          "lines": [
+            [
+              "Sally is sitting under the tree.",
+              "萨莉正坐在树下。is和sitting一起表示正在做。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-agreement",
+      "target": "am/is/are随主语变化",
+      "prompt": "我正在读书，孩子们正在跑步，分别补好be。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " reading a book.",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "The children ",
+          "after": " running.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"am\",\"are\"]",
+      "explanation": "I用am，he/she/it或单个人名用is，you/we/they和复数主语用are。",
+      "hint": "",
+      "workshop": {
+        "rule": "I用am，he/she/it或单个人名用is，you/we/they和复数主语用are。",
+        "model": {
+          "lines": [
+            [
+              "I am watching TV now. / They are playing football.",
+              "导学原例：I am；They are。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-negative",
+      "target": "not放在be后",
+      "prompt": "孩子们没有在打扫房间。用aren’t组织否定句。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "wordbank",
+      "language": "en",
+      "tokens": [
+        "The children",
+        "aren’t",
+        "cleaning",
+        "the room.",
+        "not"
+      ],
+      "slots": 4,
+      "answer": "The children aren’t cleaning the room.",
+      "explanation": "否定在be后加not，are not可以缩写为aren’t；后面的动作-ing不变。",
+      "hint": "",
+      "workshop": {
+        "rule": "否定在be后加not，are not可以缩写为aren’t；后面的动作-ing不变。",
+        "model": {
+          "lines": [
+            [
+              "Sarah is singing. → Sarah is not singing.",
+              "否定动作时not放在is后面。sing：唱歌。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-question",
+      "target": "一般疑问句把be提前",
+      "prompt": "把“她正在打信”改成一般疑问句。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "wordbank",
+      "language": "en",
+      "tokens": [
+        "Is",
+        "she",
+        "typing",
+        "a letter?",
+        "Does"
+      ],
+      "slots": 4,
+      "answer": "Is she typing a letter?",
+      "display": {
+        "title": "把“她正在打信”改成一般疑问句。",
+        "material": "She is typing a letter."
+      },
+      "explanation": "把is放在she前面，typing不变，不另加does。",
+      "hint": "",
+      "workshop": {
+        "rule": "把is放在she前面，typing不变，不另加does。",
+        "model": {
+          "lines": [
+            [
+              "They are playing football. → Are they playing football?",
+              "一般问句把are放在they前。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-yes",
+      "target": "肯定简答的人称与be",
+      "prompt": "朋友问你是否在读书。你确实正在读，怎样回答？",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "Yes, I am.",
+        "Yes, you are.",
+        "Yes, I do."
+      ],
+      "answer": "Yes, I am.",
+      "display": {
+        "title": "朋友问你是否在读书。你确实正在读，怎样回答？",
+        "material": "Friend: Are you reading?\nYou: ___"
+      },
+      "explanation": "别人问的you指我，我回答自己用I am；简答回应be，不换成do。",
+      "hint": "",
+      "workshop": {
+        "rule": "别人问的you指我，我回答自己用I am；简答回应be，不换成do。",
+        "model": {
+          "lines": [
+            [
+              "Is Sally sitting under the tree? — Yes, she is.",
+              "已经确认萨莉坐在树下，再作肯定简答。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-no",
+      "target": "根据事实作否定简答",
+      "prompt": "小猫正在喝奶，没有在啃骨头。补好回答。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "No, ",
+          "after": ".",
+          "options": [
+            "it isn’t",
+            "it is",
+            "he isn’t"
+          ]
+        }
+      ],
+      "answer": "[\"it isn’t\"]",
+      "display": {
+        "title": "小猫正在喝奶，没有在啃骨头。补好回答。",
+        "material": "Is the cat eating a bone?"
+      },
+      "explanation": "事实与猜测不符，回答No, it isn’t.；沿用题目中的小猫用it。",
+      "hint": "",
+      "workshop": {
+        "rule": "事实与猜测不符，回答No, it isn’t.；沿用题目中的小猫用it。",
+        "model": {
+          "lines": [
+            [
+              "Is Tim sitting? — No, he isn’t. He is climbing the tree.",
+              "蒂姆实际在爬树，先否定错误猜测，再说真实动作。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-period",
+      "target": "现在进行时也可表示现阶段活动",
+      "prompt": "这周我正在读一本书，现在暂时合上它休息。哪种理解合适？",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "表示这周正在进行的阅读，不要求此刻正翻书。",
+        "只能表示说话这一秒正翻书。",
+        "表示每周固定读同一本书。"
+      ],
+      "answer": "表示这周正在进行的阅读，不要求此刻正翻书。",
+      "display": {
+        "title": "这周我正在读一本书，现在暂时合上它休息。哪种理解合适？",
+        "material": "I am reading a book this week.\nthis week：这周"
+      },
+      "explanation": "现在进行时还可以表示现阶段正在进行的活动，不要求每一秒都做。",
+      "hint": "",
+      "workshop": {
+        "rule": "现在进行时还可以表示现阶段正在进行的活动，不要求每一秒都做。",
+        "model": {
+          "lines": [
+            [
+              "The farmers are working on the farm day and night.",
+              "导学原例用农民这段时间的活动说明用法。farmer：农民；day and night：日夜。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-state",
+      "target": "区分所在地点与正在做",
+      "prompt": "句子只说萨莉在哪里，哪种形式合适？",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "She is in the garden.",
+        "She is being in the garden.",
+        "She in the garden."
+      ],
+      "answer": "She is in the garden.",
+      "explanation": "说明所在地点用be加地点，不把每个带is的句子都看成现在进行时，也不机械添加being。",
+      "hint": "",
+      "workshop": {
+        "rule": "说明所在地点用be加地点，不把每个带is的句子都看成现在进行时，也不机械添加being。",
+        "model": {
+          "lines": [
+            [
+              "She is in the garden. / She is sitting in the garden.",
+              "前句说地点，后句的is sitting说正在做的动作。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-five-g-spelling",
+      "target": "区别直接加ing与双写",
+      "prompt": "把open和put变成动作-ing形式。",
+      "source": "同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is ",
+          "after": " the window. (open)",
+          "options": [
+            "opening",
+            "openning",
+            "open"
+          ]
+        },
+        {
+          "before": "She is ",
+          "after": " on her coat. (put)",
+          "options": [
+            "putting",
+            "puting",
+            "put"
+          ]
+        }
+      ],
+      "answer": "[\"opening\",\"putting\"]",
+      "explanation": "open → opening，不双写；put → putting。重读短元音后单辅音结尾的本课短词sit/run/shut/put双写；不能一见辅音结尾就双写。",
+      "hint": "",
+      "workshop": {
+        "rule": "open → opening，不双写；put → putting。重读短元音后单辅音结尾的本课短词sit/run/shut/put双写；不能一见辅音结尾就双写。",
+        "model": {
+          "lines": [
+            [
+              "look → looking；make → making；run → running",
+              "通常直接加ing；不发音e结尾如make去e；run双写n。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3132-v1-question-purpose",
+      "target": "区分地点、动作和动作执行者",
+      "prompt": "给问题找到它想知道的信息。",
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "区分地点、动作和动作执行者",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "Where is Sally?",
+          "cn": "她在哪里"
+        },
+        {
+          "id": "1",
+          "en": "What is she doing?",
+          "cn": "她正在做什么"
+        },
+        {
+          "id": "2",
+          "en": "Who is climbing the tree?",
+          "cn": "谁正在爬树"
+        }
+      ],
+      "distractorRationale": "每项只对应一处含义，区分同组对象或问句用途。"
+    },
+    {
+      "id": "u3132-v1-be-ing",
+      "target": "现在进行时需要 be 和动作-ing",
+      "prompt": "说说图中 Tim 正在做什么。",
+      "answer": "[\"is climbing\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "现在进行时需要 be 和动作-ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He ",
+          "after": " the tree.",
+          "options": [
+            "is climbing",
+            "climb",
+            "is climb"
+          ]
+        }
+      ],
+      "image": "/assets/unit31-32/climb.svg",
+      "imageAlt": "Tim 双手攀着树干，脚踩树杈",
+      "distractorRationale": "不能省略 is，也不能把 is 直接接动作原形。"
+    },
+    {
+      "id": "u3132-v1-command-now",
+      "target": "从指令区分正在发生的动作",
+      "prompt": "哪一句是在描述“她正在关门”？",
+      "answer": "She is shutting the door.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "从指令区分正在发生的动作",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "She is shutting the door.",
+        "Shut the door, please.",
+        "Where is the door?"
+      ],
+      "distractorRationale": "祈使句是请求做事，不说明已经在做；where 问位置。"
+    }
+  ],
+  "apply": [
+    {
+      "id": "u3132-v1-find-sally",
+      "target": "根据英文位置与动作识别人",
+      "prompt": "读英文，在花园里选出对应的人。",
+      "answer": "sally",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "根据英文位置与动作识别人",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "jack",
+        "sally",
+        "tim"
+      ],
+      "type": "scene-find",
+      "reference": "She is sitting under the tree.",
+      "sceneImage": "/assets/unit31-32/garden-find.svg",
+      "mobileScene": "/assets/unit31-32/garden-find-mobile.svg",
+      "sceneDescription": "树下坐着 Sally，树干旁 Tim 正在攀爬，左边 Jack 站着。",
+      "spots": [
+        {
+          "id": "jack",
+          "name": "Jack",
+          "bounds": [
+            1,
+            20,
+            23,
+            73
+          ],
+          "mobileBounds": [
+            0,
+            20,
+            27,
+            72
+          ]
+        },
+        {
+          "id": "sally",
+          "name": "Sally",
+          "bounds": [
+            61,
+            48,
+            12,
+            45
+          ],
+          "mobileBounds": [
+            46,
+            53,
+            21,
+            40
+          ]
+        },
+        {
+          "id": "tim",
+          "name": "Tim",
+          "bounds": [
+            73,
+            10,
+            25,
+            68
+          ],
+          "mobileBounds": [
+            69,
+            8,
+            30,
+            65
+          ]
+        }
+      ],
+      "distractorRationale": "须同时理解 sitting 与 under；无中文翻译标目标。"
+    },
+    {
+      "id": "u3132-v1-open-window",
+      "target": "用图片理解现在的动作",
+      "prompt": "What is he doing?",
+      "answer": "He is opening the window.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "用图片理解现在的动作",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "He is opening the window.",
+        "He is cleaning his teeth.",
+        "He is reading a magazine."
+      ],
+      "image": "/assets/unit31-32/opening.svg",
+      "imageAlt": "一位男士正把窗扇向外推开",
+      "distractorRationale": "不同于课文爬树，读取新动作画面再选完整描述。"
+    },
+    {
+      "id": "u3132-v1-making",
+      "target": "去掉不发音的 e 再加 ing",
+      "prompt": "type → typing\n用 make 的 -ing 形式填好句子。",
+      "answer": "[\"making\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "去掉不发音的 e 再加 ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "My mother is ",
+          "after": " the bed.",
+          "options": [
+            "making",
+            "makeing",
+            "make"
+          ]
+        }
+      ],
+      "distractorRationale": "示范 type 不提供本题 make 的答案；不把所有词尾 e 都教成必去。"
+    },
+    {
+      "id": "u3132-v1-sitting-running",
+      "target": "本课 sit/run 双写后加 ing",
+      "prompt": "分别填入 sit 和 run 的 -ing 形式。",
+      "answer": "[\"sitting\",\"running\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "本课 sit/run 双写后加 ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Sally is ",
+          "after": " under the tree.",
+          "options": [
+            "sitting",
+            "siting",
+            "sit"
+          ]
+        },
+        {
+          "before": "The dog is ",
+          "after": " across the grass.",
+          "options": [
+            "running",
+            "runing",
+            "run"
+          ]
+        }
+      ],
+      "distractorRationale": "本课两个短词各核对一个重读短元音加单辅音词尾；不可总结成任意词都双写。"
+    },
+    {
+      "id": "u3132-v1-ask-action",
+      "target": "组织询问正在进行动作的问句",
+      "prompt": "她正在做什么？",
+      "answer": "What is she doing?",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "组织询问正在进行动作的问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "is",
+        "she",
+        "doing?"
+      ]
+    },
+    {
+      "id": "u3132-v1-negative",
+      "target": "组织现在进行时否定句",
+      "prompt": "她没有在倒空篮子。",
+      "answer": "She isn’t emptying the basket.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "组织现在进行时否定句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "She",
+        "isn’t",
+        "emptying",
+        "the",
+        "basket."
+      ]
+    },
+    {
+      "id": "u3132-v1-after",
+      "target": "把追赶对象接在动作后",
+      "prompt": "狗正在追一只猫。",
+      "answer": "The dog is running after a cat.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "把追赶对象接在动作后",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "The",
+        "dog",
+        "is",
+        "running",
+        "after",
+        "a",
+        "cat."
+      ]
+    },
+    {
+      "id": "u3132-five-a-location",
+      "target": "按回答区分地点与动作",
+      "prompt": "萨莉正在花园里坐着，你只想问她在哪里。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " Sally sitting?",
+          "options": [
+            "Where is",
+            "What is",
+            "Who is"
+          ]
+        }
+      ],
+      "answer": "[\"Where is\"]",
+      "display": {
+        "title": "萨莉正在花园里坐着，你只想问她在哪里。",
+        "material": "Sally is sitting in the garden.\n— ___ Sally sitting? — In the garden."
+      },
+      "explanation": "问正在坐的地点用Where is…sitting，不用What is…doing问动作。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-a-plural",
+      "target": "用are描述复数人物的动作",
+      "prompt": "两位朋友此刻正在一起读杂志，选出描述。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "They are reading a magazine.",
+        "They is reading a magazine.",
+        "They are read a magazine."
+      ],
+      "answer": "They are reading a magazine.",
+      "explanation": "They是复数主语，用are reading。",
+      "hint": ""
+    }
+  ],
+  "exam": [
+    {
+      "id": "u3132-v1-where",
+      "target": "独立区分问地点与问动作",
+      "prompt": "补全问答。",
+      "answer": "[\"Where is\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "独立区分问地点与问动作",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " the cat? — It is in the garden.",
+          "options": [
+            "Where is",
+            "What is",
+            "Who is"
+          ]
+        }
+      ],
+      "distractorRationale": "回答是地点，不能选问动作或身份的词。"
+    },
+    {
+      "id": "u3132-v1-reader",
+      "target": "结合两个原文事实判断人物",
+      "prompt": "Sally is sitting under the tree.\nTim is climbing the tree.\n谁在树下坐着？",
+      "answer": "Sally",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "结合两个原文事实判断人物",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Sally",
+        "Tim",
+        "Jean"
+      ],
+      "distractorRationale": "从并列事实选动作和位置都符合的人，不依据人物颜色。"
+    },
+    {
+      "id": "u3132-v1-what-question",
+      "target": "独立组织动作问句",
+      "prompt": "你想知道图中的 Jack 正在做什么，应问：",
+      "answer": "What is he doing?",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "独立组织动作问句",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "What is he doing?",
+        "Where is he?",
+        "Who is he?"
+      ],
+      "image": "/assets/unit31-32/reading.svg",
+      "imageAlt": "Jack 在读一本杂志",
+      "distractorRationale": "意图是动作，不是地点或身份。"
+    },
+    {
+      "id": "u3132-v1-who",
+      "target": "识别 who 的提问目标",
+      "prompt": "Who is climbing the tree?\n选出回答这个问题的一句。",
+      "answer": "Tim is.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "识别 who 的提问目标",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Tim is.",
+        "In the garden.",
+        "He is climbing."
+      ],
+      "distractorRationale": "询问具体是谁，后两项重复地点或动作。"
+    },
+    {
+      "id": "u3132-v1-across",
+      "target": "独立表达路线而非追赶对象",
+      "prompt": "狗正在跑过草地。",
+      "answer": "The dog is running across the grass.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "独立表达路线而非追赶对象",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "The",
+        "dog",
+        "is",
+        "running",
+        "across",
+        "the",
+        "grass."
+      ]
+    },
+    {
+      "id": "u3132-v1-after-meaning",
+      "target": "迁移 run after 的语境含义",
+      "prompt": "The cat is running after the dog.\n这一次是谁追着谁？",
+      "answer": "猫追着狗",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "迁移 run after 的语境含义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "猫追着狗",
+        "狗追着猫",
+        "猫坐在树下"
+      ],
+      "distractorRationale": "交换动作双方，不能照背原文。"
+    },
+    {
+      "id": "u3132-v1-ongoing",
+      "target": "独立使用现在进行时",
+      "prompt": "图中的 Nicola 正在打信，补全描述。",
+      "answer": "[\"is typing\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "独立使用现在进行时",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Nicola ",
+          "after": " a letter.",
+          "options": [
+            "is typing",
+            "typing",
+            "is type"
+          ]
+        }
+      ],
+      "image": "/assets/unit31-32/typing.svg",
+      "imageAlt": "Nicola 双手放在打字机键盘上，机内有信纸",
+      "distractorRationale": "保留 is 和正确动作形式。"
+    },
+    {
+      "id": "u3132-v1-no-correction",
+      "target": "根据图片否定错误猜测并纠正",
+      "prompt": "Is he cleaning his teeth?",
+      "answer": "No, he isn’t. He is opening the window.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "根据图片否定错误猜测并纠正",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "No, he isn’t. He is opening the window.",
+        "Yes, he is. He is cleaning his teeth.",
+        "No, she isn’t. She is opening the window."
+      ],
+      "image": "/assets/unit31-32/opening.svg",
+      "imageAlt": "Mr. Richards 正把窗扇向外推开",
+      "distractorRationale": "同时核对否定、正确动作和 he 指代，不能只猜首个 No。"
+    },
+    {
+      "id": "u3132-v1-yes",
+      "target": "根据图景作肯定简答",
+      "prompt": "Is it eating a bone?",
+      "answer": "Yes, it is.",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "根据图景作肯定简答",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Yes, it is.",
+        "No, it isn’t.",
+        "Yes, he is."
+      ],
+      "image": "/assets/unit31-32/eating.svg",
+      "imageAlt": "狗嘴边叼着一根骨头",
+      "distractorRationale": "图中动作成立，沿用题干 it。"
+    },
+    {
+      "id": "u3132-v1-spelling",
+      "target": "独立迁移直接加 ing 与去 e 规则",
+      "prompt": "用括号中动作的 -ing 形式填空。",
+      "answer": "[\"cooking\",\"making\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "独立迁移直接加 ing 与去 e 规则",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Emma is ",
+          "after": " a meal. (cook)",
+          "options": [
+            "cooking",
+            "cookking",
+            "cook"
+          ]
+        },
+        {
+          "before": "My mother is ",
+          "after": " the bed. (make)",
+          "options": [
+            "making",
+            "makeing",
+            "make"
+          ]
+        }
+      ],
+      "distractorRationale": "一个直接加，一个去不发音 e；不能用同一变化规则包办。"
+    },
+    {
+      "id": "u3132-v1-double",
+      "target": "把双写规则迁移到 shut",
+      "prompt": "用 shut 的 -ing 形式补全描述。",
+      "answer": "[\"shutting\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "把双写规则迁移到 shut",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Sally is ",
+          "after": " the door.",
+          "options": [
+            "shutting",
+            "shuting",
+            "shut"
+          ]
+        }
+      ],
+      "distractorRationale": "学过 sit/run 的形式后迁移到教材 shutting；不开出未教生词。"
+    },
+    {
+      "id": "u3132-v1-its",
+      "target": "区分 is、所有格 its 和动作搭配",
+      "prompt": "把两个动作描述补完整。",
+      "answer": "[\"its\",\"at\"]",
+      "source": "PDF95–98；Lesson31–32",
+      "decision": "区分 is、所有格 its 和动作搭配",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The cat is drinking ",
+          "after": " milk.",
+          "options": [
+            "its",
+            "it’s",
+            "it"
+          ]
+        },
+        {
+          "before": "My sister is looking ",
+          "after": " a picture.",
+          "options": [
+            "at",
+            "after",
+            "across"
+          ]
+        }
+      ],
+      "distractorRationale": "its 表所属且没有撇号，look at 表示看；两空各自判断。"
+    },
+    {
+      "id": "u3132-five-e-be",
+      "target": "独立选择am/is/are",
+      "prompt": "补全“我在打信，他们在做饭”的正在进行描述。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " typing a letter.",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "They ",
+          "after": " cooking a meal.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"am\",\"are\"]",
+      "explanation": "I am，They are，后接typing和cooking。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-negative",
+      "target": "独立组织否定句",
+      "prompt": "两位孩子没有在读书。用aren’t组织句子。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "wordbank",
+      "language": "en",
+      "tokens": [
+        "The children",
+        "aren’t",
+        "reading",
+        "a book.",
+        "don’t"
+      ],
+      "slots": 4,
+      "answer": "The children aren’t reading a book.",
+      "explanation": "现在进行时的否定用be not加动作-ing。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-question",
+      "target": "独立组织进行时问句",
+      "prompt": "用Is开头问“他正在开窗吗？”",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "wordbank",
+      "language": "en",
+      "tokens": [
+        "Is",
+        "he",
+        "opening",
+        "the window?",
+        "Does"
+      ],
+      "slots": 4,
+      "answer": "Is he opening the window?",
+      "explanation": "把is放到主语he前，opening不变。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-reply",
+      "target": "独立按事实和人称简答",
+      "prompt": "同学问你是否正在写信，你确实正在写。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "Yes, I am.",
+        "Yes, you are.",
+        "No, I’m not."
+      ],
+      "answer": "Yes, I am.",
+      "display": {
+        "title": "同学问你是否正在写信，你确实正在写。",
+        "material": "Classmate: Are you writing a letter?\nYou: ___\nwrite a letter：写信"
+      },
+      "explanation": "回应自己的动作，用Yes, I am.，不照抄问句you。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-period",
+      "target": "独立理解现阶段正在进行",
+      "prompt": "这周的阅读还在继续，但我此刻正在休息。这句话是否仍可描述这周的活动？",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "可以，它也能说现阶段正在进行的活动。",
+        "不可以，它只能说这一秒手上正在做的事。",
+        "可以，但它只表示每天的习惯。"
+      ],
+      "answer": "可以，它也能说现阶段正在进行的活动。",
+      "display": {
+        "title": "这周的阅读还在继续，但我此刻正在休息。这句话是否仍可描述这周的活动？",
+        "material": "I am reading a book this week.\nthis week：这周"
+      },
+      "explanation": "现在进行时可以说现阶段的暂时活动；不能把它限制为每一秒。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-place",
+      "target": "独立区别地点与动作表达",
+      "prompt": "只有“狗在花园里”这个地点信息，选出对应句子。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "options": [
+        "The dog is in the garden.",
+        "The dog is running in the garden.",
+        "The dog is being in the garden."
+      ],
+      "answer": "The dog is in the garden.",
+      "explanation": "地点信息没有说明狗在跑，不能增加动作，也不机械加being。",
+      "hint": ""
+    },
+    {
+      "id": "u3132-five-e-open",
+      "target": "独立迁移拼写规则",
+      "prompt": "用open与take的动作-ing形式补空。",
+      "source": "课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is ",
+          "after": " the window. (open)",
+          "options": [
+            "opening",
+            "openning",
+            "open"
+          ]
+        },
+        {
+          "before": "She is ",
+          "after": " off her coat. (take)",
+          "options": [
+            "taking",
+            "takeing",
+            "take"
+          ]
+        }
+      ],
+      "answer": "[\"opening\",\"taking\"]",
+      "explanation": "open直接加ing，take去不发音e再加ing。",
+      "hint": ""
+    }
+  ]
+}

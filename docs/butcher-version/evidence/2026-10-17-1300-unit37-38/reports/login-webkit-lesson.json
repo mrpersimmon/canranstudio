@@ -1,0 +1,534 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit37-38-fivezones.spec.js",
+      "tests/login/unit37-38-fivezones-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit3738-login-webkit-lesson"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3738-login-webkit-lesson",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit37-38-fivezones-upgrade.spec.js",
+      "file": "unit37-38-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "old-course-ready",
+                  "description": "10149ms; no old answers or certificate injected"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 95152,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:29444) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:51:17.814Z",
+                  "annotations": [
+                    {
+                      "type": "old-course-ready",
+                      "description": "10149ms; no old answers or certificate injected"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c6c2f9e2aabdb7e42a75-d555ee0fc673c7284e27",
+          "file": "unit37-38-fivezones-upgrade.spec.js",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit37-38-fivezones.spec.js",
+      "file": "unit37-38-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "11982ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:52:53.054Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "11982ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-863b58adc71298467a1d",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2852,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:53:08.367Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-353742ac1f2bd5983a4b",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "12609ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "41ms after navigation"
+                },
+                {
+                  "type": "engine-boundary",
+                  "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                },
+                {
+                  "type": "course-ready",
+                  "description": "7654ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 115538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:53:11.226Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "12609ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "41ms after navigation"
+                    },
+                    {
+                      "type": "engine-boundary",
+                      "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "7654ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-c5bd19d84a9d50fd60a7",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "7723ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25068,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:55:06.777Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "7723ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-21777122a9d38988451d",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "11945ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "34ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "22ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "7ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "9ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 70463,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:55:31.853Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "11945ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "34ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "22ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "7ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "9ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-1a58bb63a2f3c5fbb667",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "19ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "12623ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "12097ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49639,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:56:42.326Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "19ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "12623ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "12097ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-dacabe86d6b004a63f89",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "7930ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "7721ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 43800,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:57:31.975Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "7930ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "7721ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "75e34096d5dfd6fadbab-c3b1f4f8af86899e8280",
+          "file": "unit37-38-fivezones.spec.js",
+          "line": 232,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T05:51:13.448Z",
+    "duration": 422925.959,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

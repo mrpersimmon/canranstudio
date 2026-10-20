@@ -131,3 +131,19 @@ unit.learning.WRITING_B=[
 ];
 core.unit6162=unit;if(root.document?.documentElement?.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit6162,excerpts={"u6162-v1-r-where":[0,1],"u6162-v1-r-phone":[5,6,7,8],"u6162-v1-r-check":[9],"u6162-v1-r-cold":[10,11],"u6162-v1-r-week":[10,11],"u6162-v1-r-reason":[11,12,13,14]},speakers={"father":"Mr. Williams","mother":"Mrs. Williams","doctor":"Doctor"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 61',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);
+// Clarify the original intended object without invalidating an existing draft.
+(function(core){const unit=core.unit6162;unit.copy.questions['u6162-v1-r-view']={title:'妈妈说“That’s good news for Jimmy.”，她认为这对谁是好消息？'};})(globalThis.CanranCore);

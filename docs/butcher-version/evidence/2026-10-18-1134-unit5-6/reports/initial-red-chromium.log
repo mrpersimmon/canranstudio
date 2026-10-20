@@ -1,0 +1,116 @@
+
+Running 3 tests using 1 worker
+
+(node:31000) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit5-6-v154.spec.js:4:1 › 当前首页使用确认故事图 (6.0s)
+(node:28500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\unit5-6-v154.spec.js:5:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (5.5s)
+(node:6664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 tests\e2e\unit5-6-v154.spec.js:6:1 › 原文理解在未答页提供必要对白 (6.8s)
+
+
+  1) tests\e2e\unit5-6-v154.spec.js:4:1 › 当前首页使用确认故事图 ──────────────────────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('[data-unit="unit5-6"] .featured-art img')
+    Expected: 1
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('[data-unit="unit5-6"] .featured-art img')
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+      2 | const {test,expect}=require('@playwright/test');
+      3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
+    > 4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit="unit5-6"] .featured-art img')).toHaveCount(1);});
+        |                                                                                                                               ^
+      5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});
+      6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});
+      7 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:4:127
+
+    Error Context: output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-当前首页使用确认故事图\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-当前首页使用确认故事图\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-当前首页使用确认故事图\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit5-6-v154.spec.js:5:1 › Grammar先示范特殊疑问句，再立即练习信息类型 ────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })
+    Expected substring: "What make is it?"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })
+
+
+      3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
+      4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit="unit5-6"] .featured-art img')).toHaveCount(1);});
+    > 5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});
+        |                                                                                                                                                                                                          ^
+      6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});
+      7 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:5:202
+
+    Error Context: output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-Grammar先示范特殊疑问句，再立即练习信息类型\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-Grammar先示范特殊疑问句，再立即练习信息类型\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-Grammar先示范特殊疑问句，再立即练习信息类型\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\e2e\unit5-6-v154.spec.js:6:1 › 原文理解在未答页提供必要对白 ───────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })
+    Expected substring: "Sophie is a new student."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })
+
+
+      4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit="unit5-6"] .featured-art img')).toHaveCount(1);});
+      5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});
+    > 6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});
+        |                                                                                                                                                                                                                                     ^
+      7 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:6:229
+
+    Error Context: output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-原文理解在未答页提供必要对白\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-原文理解在未答页提供必要对白\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\initial-red-chromium\unit5-6-v154-原文理解在未答页提供必要对白\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests\e2e\unit5-6-v154.spec.js:4:1 › 当前首页使用确认故事图 ───────────────────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:5:1 › Grammar先示范特殊疑问句，再立即练习信息类型 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:6:1 › 原文理解在未答页提供必要对白 ────────────────────────────────────────────

@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-18T03:32:41.739Z",
+  "checks": [
+    {
+      "name": "Original learning retained",
+      "passed": true
+    },
+    {
+      "name": "Original reward retained",
+      "passed": true
+    },
+    {
+      "name": "Original progress retained",
+      "passed": true
+    },
+    {
+      "name": "Original version retained",
+      "passed": true
+    },
+    {
+      "name": "Original stages retained",
+      "passed": true
+    },
+    {
+      "name": "33 questions in five zones",
+      "passed": true
+    },
+    {
+      "name": "31 original questions byte-equivalent in parsed definition",
+      "passed": true
+    },
+    {
+      "name": "Only two reading questions receive new identities and original text",
+      "passed": true
+    },
+    {
+      "name": "Original roles round frozen as exact predecessor",
+      "passed": true
+    },
+    {
+      "name": "Other four sessions and predecessors unchanged",
+      "passed": true
+    },
+    {
+      "name": "All original earlier predecessors retained",
+      "passed": true
+    },
+    {
+      "name": "25 words, 12 lines, 15 questions and 11 reply models",
+      "passed": true
+    },
+    {
+      "name": "Original unit art retained",
+      "passed": true,
+      "details": {
+        "files": 39
+      }
+    },
+    {
+      "name": "Shared runtime and grammar/completion retained",
+      "passed": true,
+      "details": {
+        "files": 49
+      }
+    },
+    {
+      "name": "Font and licence bytes retained",
+      "passed": true
+    },
+    {
+      "name": "v1.54 standard unchanged",
+      "passed": true
+    },
+    {
+      "name": "Branch retained",
+      "passed": true
+    },
+    {
+      "name": "root 72 protected course packages",
+      "passed": true
+    },
+    {
+      "name": "root other 71 course manifests unchanged",
+      "passed": true
+    },
+    {
+      "name": "sub 72 protected course packages",
+      "passed": true
+    },
+    {
+      "name": "sub other 71 course manifests unchanged",
+      "passed": true
+    },
+    {
+      "name": "Zero missing font characters",
+      "passed": true
+    },
+    {
+      "name": "Changed existing JS syntax",
+      "passed": true,
+      "details": {
+        "files": 10
+      }
+    },
+    {
+      "name": "All current unit JS syntax",
+      "passed": true
+    },
+    {
+      "name": "Homepage uses approved art",
+      "passed": true
+    },
+    {
+      "name": "Updated repository documentation links resolve",
+      "passed": true,
+      "details": {
+        "broken": []
+      }
+    }
+  ],
+  "revised": [
+    {
+      "old": "u34-v1-story-wrong",
+      "current": "u34-v154-story-wrong"
+    },
+    {
+      "old": "u34-v1-story-it",
+      "current": "u34-v154-story-it"
+    }
+  ]
+}

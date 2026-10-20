@@ -1,0 +1,66 @@
+{
+  "id": "unit99-100",
+  "source": {
+    "file": "tests/support/unit99100.js",
+    "sha256": "889ef2c46d67e77ccfafa596a7a836231f8872ce4f71df50dfb3600dbe697c33"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u99100-v1-r-event",
+      "text": "Lesson 99\n\nAndy: Ow!\n\nLucy: What’s the matter, Andy?\n\nAndy: I slipped and fell downstairs."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u99100-v1-r-back",
+      "text": "Lesson 99\n\nLucy: Have you hurt yourself?\n\nAndy: Yes, I have. I think that I’ve hurt my back."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u99100-v1-r-cannot",
+      "text": "Lesson 99\n\nLucy: Try and stand up. Can you stand up? Here. Let me help you.\n\nAndy: I’m sorry, Lucy. I’m afraid that I can’t get up."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u99100-v1-r-call",
+      "text": "Lesson 99\n\nLucy: I think that the doctor had better see you. I’ll phone Dr. Carter.\n\nLucy: The doctor says that he will come at once. I’m sure that you need an X-ray, Andy."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u99100-v1-r-opinion",
+      "text": "Lesson 99\n\nLucy: I think that the doctor had better see you. I’ll phone Dr. Carter.\n\nLucy: The doctor says that he will come at once. I’m sure that you need an X-ray, Andy."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u99100-v1-r-question",
+      "text": "Lesson 99\n\nLucy: I think that the doctor had better see you. I’ll phone Dr. Carter.\n\nLucy: The doctor says that he will come at once. I’m sure that you need an X-ray, Andy."
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u99100-v1-e-story",
+      "text": "Lesson 99\n\nLucy: I think that the doctor had better see you. I’ll phone Dr. Carter.\n\nLucy: The doctor says that he will come at once. I’m sure that you need an X-ray, Andy."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-3",
+    "R2": "4-5",
+    "R3": "6-7",
+    "R4": "8-9",
+    "R6": "8-9",
+    "R7": "8-9",
+    "E1": "8-9"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

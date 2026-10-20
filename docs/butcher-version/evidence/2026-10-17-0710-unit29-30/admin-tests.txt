@@ -1,0 +1,27 @@
+(node:24632) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (152.9605ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.6533ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (2.8287ms)
+✔ partial wrong submission is observable without awards or resumable completion (57.393ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (56.6524ms)
+✔ reset isolates a new generation and preserves earlier observation history (51.9176ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (61.7733ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (56.5088ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.3176ms)
+✔ student identity, pagination and filters expose learning summaries only (757.3994ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (4767.3043ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (2.4804ms)
+✔ three learning statuses require current work, not visits, stars or old content (2.691ms)
+✔ all published courses reach completed only with every required activity including reading (173.5293ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (166.5709ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (935.8209ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (133.5151ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7685.8257

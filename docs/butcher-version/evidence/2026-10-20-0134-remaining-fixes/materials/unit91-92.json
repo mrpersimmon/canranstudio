@@ -1,0 +1,73 @@
+{
+  "id": "unit91-92",
+  "source": {
+    "file": "tests/support/unit9192.js",
+    "sha256": "222039fbfce5a9444f177437073516d1193ec50af9e26f68ce45210b351f6a73"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u9192-v1-r-sale",
+      "text": "Lesson 91\n\nCatherine: Has Ian sold his house yet?\n\nJenny: Yes, he has. He sold it last week."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u9192-v1-r-move",
+      "text": "Lesson 91\n\nCatherine: Has he moved to his new house yet?\n\nJenny: No, not yet. He’s still here. He’s going to move tomorrow."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u9192-v1-r-time",
+      "text": "Lesson 91\n\nCatherine: Has he moved to his new house yet?\n\nJenny: No, not yet. He’s still here. He’s going to move tomorrow.\n\nCatherine: When? Tomorrow morning?\n\nJenny: No. Tomorrow afternoon. I’ll miss him. He has always been a good neighbour."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u9192-v1-r-new",
+      "text": "Lesson 91\n\nCatherine: When will the new people move into this house?\n\nJenny: I think that they’ll move in the day after tomorrow."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u9192-v1-r-regards",
+      "text": "Lesson 91\n\nLinda: Will you see Ian today, Jenny?\n\nJenny: Yes, I will.\n\nLinda: Please give him my regards."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u9192-v1-r-neighbour",
+      "text": "Lesson 91\n\nJenny: No. Tomorrow afternoon. I’ll miss him. He has always been a good neighbour.\n\nLinda: He’s a very nice person. We’ll all miss him."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u9192-v1-r-wife",
+      "text": "Lesson 91\n\nCatherine: Poor Ian! He didn’t want to leave this house.\n\nJenny: No, he didn’t want to leave, but his wife did!"
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u9192-v1-e-speaker",
+      "text": "Lesson 91\n\nCatherine: Poor Ian! He didn’t want to leave this house.\n\nJenny: No, he didn’t want to leave, but his wife did!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-4",
+    "R3": "3-6",
+    "R4": "8-9",
+    "R5": "10-12",
+    "R6": "6-7",
+    "R7": "13-14",
+    "E2": "13-14"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

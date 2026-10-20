@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:4424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit139-140.spec.js:24:1 › 12词卡、140课1–9及A至D的18原题完整 (7.2s)
+
+
+  1) tests\e2e\unit139-140.spec.js:24:1 › 12词卡、140课1–9及A至D的18原题完整 ──────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar details')
+    Expected substring: "不是所有do都删除"
+    Received string:    "语法小参考本课导学Grammar是宾语从句：陈述内容可用that，普通是否问题可用if／whether，具体信息保留what／when／why／where／how／which／who等词。连接词必须与所问的信息相符，不把“为什么”改成“是否”还称原意不变。内部通常用陈述语序：where he is、what you are reading、when she can start。Do you know where he is?的外层仍是问句，用问号；I know where he is.是陈述句。不是看见嵌入问句就把整句问号全部删掉。疑问助动词do／does／did不照搬到主语前，但实义动词do要保留并变化：When does Tom do his homework? → He wants to know when Tom does his homework. 用于否定的doesn’t／didn’t也不能删除，后面仍用原形。本课原例用现在的wants to know／I want to know或Tell me，按当前语境保留原问句所指的时间。过去动作仍用过去式、正在做保留进行形式；不是所有间接表达都机械向过去再退一层。139课I said I would be ...另保留原文已使用的过去转述。if与whether在普通是否从句里都可用，不能把另一合法表达当错项。是否从句的will谈未来合法，与137–138普通条件if的常用形式不同。本课完整学习所问的信息和内部语序，不重复上一课全部条件句。在介词后、to不定式前用whether；or not可紧跟whether，而if的or not放在从句末尾。导学练习We are talking about whether to climb the hill or not保留这一结构，不把if与whether处处互换。疑问词可本身作主语：Who called? → I want to know who called. 不能为了套“连接词＋主语＋谓语”再强加he。who he called则是在问他打给谁，问题改变。who／whom还要结合其实际成分，不按字面一律补同一人称。本句He says (that) he is busy中的that可省；He wants to know where he is中的where携带地点信息，不能照样省略。导学My mother wondered why I fell behind in my studies保留why与内部语序。导学还用how far与how long区别距离和时长，用what I saw表示我所见到的事情；不是所有wh从句都必须虚构一段先前的直接问话。按所需信息与当前句子理解，不从连接词制造未写出的事件。人称随原说话人、原听话人和现在对谁说话而定。原话的you不总改I，继续对同一个人讲话时可保留you；my／your／their与物主分别核对。课本140图示参考的you按仍向原听话人说明来理解。I don’t know if the bus has arrived只说明不知道是否到达，不证明车没到。Graham不知道工作结束时刻，不能拿六点原到达计划当结束时间；妻子想知道Mary是否需要帮助，不等于Mary已回答需要或不需要。接听者确认John Smith这个名字和工程师身份，否认在Overseas Engineering Company工作。姓名、职业、单位分开核对；不补他说谎、曾换工作、拨错哪个号码或Mary已收到通知。正在修理也不是已经修好。140A1按接听者实际姓名回答，不能因身份误会就否认他叫John Smith；A5按Graham不知道结束时间回答。否定问句和附加问句的Yes／No依据事实，不按中文附和词机械翻译。140B／C／D原例各有四个输出：I want to know与Tell me各说一次是否、各说一次why／what／when。它们询问信息不同，不是四句无差别同义句。D的when句按原例把early／late／yesterday这一限定改为待询问的时间；保留原题，不漏掉一半输出。extra在extra work中是额外的，engineering是工程、engineer是工程师；overseas可作形容词，也可像go overseas那样作副词。line在本篇是电话线路。by the way引出顺便说的话；Yes, speaking是电话应答。"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar details')
+        14 × locator resolved to <details open="" class="offline-task">…</details>
+           - unexpected value "语法小参考本课导学Grammar是宾语从句：陈述内容可用that，普通是否问题可用if／whether，具体信息保留what／when／why／where／how／which／who等词。连接词必须与所问的信息相符，不把“为什么”改成“是否”还称原意不变。内部通常用陈述语序：where he is、what you are reading、when she can start。Do you know where he is?的外层仍是问句，用问号；I know where he is.是陈述句。不是看见嵌入问句就把整句问号全部删掉。疑问助动词do／does／did不照搬到主语前，但实义动词do要保留并变化：When does Tom do his homework? → He wants to know when Tom does his homework. 用于否定的doesn’t／didn’t也不能删除，后面仍用原形。本课原例用现在的wants to know／I want to know或Tell me，按当前语境保留原问句所指的时间。过去动作仍用过去式、正在做保留进行形式；不是所有间接表达都机械向过去再退一层。139课I said I would be ...另保留原文已使用的过去转述。if与whether在普通是否从句里都可用，不能把另一合法表达当错项。是否从句的will谈未来合法，与137–138普通条件if的常用形式不同。本课完整学习所问的信息和内部语序，不重复上一课全部条件句。在介词后、to不定式前用whether；or not可紧跟whether，而if的or not放在从句末尾。导学练习We are talking about whether to climb the hill or not保留这一结构，不把if与whether处处互换。疑问词可本身作主语：Who called? → I want to know who called. 不能为了套“连接词＋主语＋谓语”再强加he。who he called则是在问他打给谁，问题改变。who／whom还要结合其实际成分，不按字面一律补同一人称。本句He says (that) he is busy中的that可省；He wants to know where he is中的where携带地点信息，不能照样省略。导学My mother wondered why I fell behind in my studies保留why与内部语序。导学还用how far与how long区别距离和时长，用what I saw表示我所见到的事情；不是所有wh从句都必须虚构一段先前的直接问话。按所需信息与当前句子理解，不从连接词制造未写出的事件。人称随原说话人、原听话人和现在对谁说话而定。原话的you不总改I，继续对同一个人讲话时可保留you；my／your／their与物主分别核对。课本140图示参考的you按仍向原听话人说明来理解。I don’t know if the bus has arrived只说明不知道是否到达，不证明车没到。Graham不知道工作结束时刻，不能拿六点原到达计划当结束时间；妻子想知道Mary是否需要帮助，不等于Mary已回答需要或不需要。接听者确认John Smith这个名字和工程师身份，否认在Overseas Engineering Company工作。姓名、职业、单位分开核对；不补他说谎、曾换工作、拨错哪个号码或Mary已收到通知。正在修理也不是已经修好。140A1按接听者实际姓名回答，不能因身份误会就否认他叫John Smith；A5按Graham不知道结束时间回答。否定问句和附加问句的Yes／No依据事实，不按中文附和词机械翻译。140B／C／D原例各有四个输出：I want to know与Tell me各说一次是否、各说一次why／what／when。它们询问信息不同，不是四句无差别同义句。D的when句按原例把early／late／yesterday这一限定改为待询问的时间；保留原题，不漏掉一半输出。extra在extra work中是额外的，engineering是工程、engineer是工程师；overseas可作形容词，也可像go overseas那样作副词。line在本篇是电话线路。by the way引出顺便说的话；Yes, speaking是电话应答。"
+
+
+      30 |  await expect(page.locator('.verb-forms strong')).toHaveText(['do','did','done','invite','invited','invited']);await expect(page.locator('.reference-phonetic')).toHaveText(['/duː/','/dɪd/','/dʌn/','/ɪnˈvaɪt/','/ɪnˈvaɪtɪd/','/ɪnˈvaɪtɪd/']);expect(await page.locator('.reference-phonetic').evaluateAll(es=>es.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);
+      31 |  await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.structure-mobile dd,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});await expect(page.locator('.structure-mobile dl:visible')).toHaveCount(6);
+    > 32 |  await page.goto('/unit139-140/#learn/grammar');await page.getByText('语法小参考',{exact:true}).click();for(const text of ['不是所有do都删除','didn’t也不能删除','不是所有间接表达都机械','who已经','不知道是否到达']){if(text==='who已经')await expect(page.locator('.stage-grammar details')).toContainText('疑问词可本身作主语');else await expect(page.locator('.stage-grammar details')).toContainText(text);}
+         |                                                                                                                                                                                                                                                                                                                                               ^
+      33 |  await page.goto('/unit139-140/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();for(const[i,n]of [6,4,4,4].entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveCount(n);
+      34 |  const expected=[['Isn’t Graham Turner speaking to John Smith?','Who invited Mr. and Mrs. Turner to dinner?','What time did Graham Turner say he would be there?','Why can’t he be there at six o’clock?','Graham Turner doesn’t know when he will finish work, does he?','What does Mr. Turner’s wife want to know?'],['Are you late? Why?','Are you dirty? Why?','Are you lazy? Why?','Are you busy? Why?'],['Are you writing? What?','Are you cooking? What?','Are you painting? What?','Are you playing? What?'],['Did Tom get up early? When?','Did Tom arrive late? When?','Did Tom do his homework yesterday? When?','Did Tom have a bath yesterday? When?']];for(const[i,items]of expected.entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveText(items);
+      35 |  await expect(page.locator('.writing-example')).toHaveCount(3);for(const text of ['I want to know if you are tired.','Tell me if you are tired.','I want to know why you are tired.','Tell me why you are tired.','I want to know if you are reading.','Tell me if you are reading.','I want to know what you are reading.','Tell me what you are reading.','I want to know if Tom went to bed early.','Tell me if Tom went to bed early.','I want to know when Tom went to bed.','Tell me when Tom went to bed.'])await expect(page.locator('#unitWriting')).toContainText(text);expect(await page.locator('.writing-example').evaluateAll(es=>es.every(e=>getComputedStyle(e).whiteSpace==='pre-line'))).toBe(true);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit139-140.spec.js:32:335
+
+    Error Context: output\unit139140-isolated\unit139-140-12词卡、140课1–9及A至D的18原题完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit139140-isolated\unit139-140-12词卡、140课1–9及A至D的18原题完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit139140-isolated\unit139-140-12词卡、140课1–9及A至D的18原题完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit139-140.spec.js:24:1 › 12词卡、140课1–9及A至D的18原题完整 ───────────────────────────────────

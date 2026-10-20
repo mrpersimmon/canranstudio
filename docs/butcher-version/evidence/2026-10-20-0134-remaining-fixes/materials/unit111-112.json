@@ -1,0 +1,87 @@
+{
+  "id": "unit111-112",
+  "source": {
+    "file": "tests/support/unit111112.js",
+    "sha256": "8523024d51b9835453046a1c9b36e91efc2e8405d9feea480f8eb819a6fa29ab"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u111112-v1-r-opening",
+      "text": "Lesson 111\n\nMr. Frith: I like this television very much. How much does it cost?\n\nAssistant: It’s the most expensive model in the shop. It costs five hundred pounds."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u111112-v1-r-price",
+      "text": "Lesson 111\n\nMr. Frith: I like this television very much. How much does it cost?\n\nAssistant: It’s the most expensive model in the shop. It costs five hundred pounds.\n\nMrs. Frith: That’s too expensive for us. We can’t afford all that money.\n\nAssistant: This model’s less expensive than that one. It’s only three hundred pounds. But, of course, it’s not as good as the expensive one."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u111112-v1-r-likes",
+      "text": "Lesson 111\n\nMr. Frith: I like this television very much. How much does it cost?\n\nAssistant: It’s the most expensive model in the shop. It costs five hundred pounds.\n\nMrs. Frith: That’s too expensive for us. We can’t afford all that money.\n\nMr. Frith: Do you like it, dear?\n\nMrs. Frith: I certainly do, but I don’t like the price. You always want the best, but we can’t afford it. Sometimes you think you’re a millionaire!"
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u111112-v1-r-quality",
+      "text": "Lesson 111\n\nAssistant: This model’s less expensive than that one. It’s only three hundred pounds. But, of course, it’s not as good as the expensive one."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u111112-v1-r-worth",
+      "text": "Lesson 111\n\nMr. Frith: I don’t like this model. The other model’s more expensive, but it’s worth the money."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u111112-v1-r-plan",
+      "text": "Lesson 111\n\nMr. Frith: Can we buy it on instalments?\n\nAssistant: Of course. You can pay a deposit of thirty pounds, and then fourteen pounds a month for three years."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u111112-v1-r-opening-answer",
+      "text": "Lesson 111\n\nMr. Frith: Can we buy it on instalments?\n\nAssistant: Of course. You can pay a deposit of thirty pounds, and then fourteen pounds a month for three years."
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u111112-v1-e-prices",
+      "text": "Lesson 111\n\nMr. Frith: I like this television very much. How much does it cost?\n\nAssistant: It’s the most expensive model in the shop. It costs five hundred pounds.\n\nMrs. Frith: That’s too expensive for us. We can’t afford all that money.\n\nAssistant: This model’s less expensive than that one. It’s only three hundred pounds. But, of course, it’s not as good as the expensive one."
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u111112-v1-e-payments",
+      "text": "Lesson 111\n\nMr. Frith: Can we buy it on instalments?\n\nAssistant: Of course. You can pay a deposit of thirty pounds, and then fourteen pounds a month for three years."
+    },
+    {
+      "zone": "exam",
+      "index": 24,
+      "questionId": "u111112-v1-e-ending",
+      "text": "Lesson 111\n\nMr. Frith: I like this television very much. How much does it cost?\n\nAssistant: It’s the most expensive model in the shop. It costs five hundred pounds.\n\nMrs. Frith: That’s too expensive for us. We can’t afford all that money.\n\nAssistant: This model’s less expensive than that one. It’s only three hundred pounds. But, of course, it’s not as good as the expensive one.\n\nMr. Frith: I don’t like this model. The other model’s more expensive, but it’s worth the money.\n\nMr. Frith: Can we buy it on instalments?\n\nAssistant: Of course. You can pay a deposit of thirty pounds, and then fourteen pounds a month for three years.\n\nMr. Frith: Do you like it, dear?\n\nMrs. Frith: I certainly do, but I don’t like the price. You always want the best, but we can’t afford it. Sometimes you think you’re a millionaire!\n\nMr. Frith: Millionaires don’t buy things on instalments!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "1-4",
+    "R3": "1-3,8-9",
+    "R4": "4",
+    "R5": "5",
+    "R6": "6-7",
+    "R7": "6-7",
+    "E1": "1-4",
+    "E2": "6-7",
+    "E24": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "unit11-12",
+  "source": {
+    "file": "tests/support/unit1112-fivezones.js",
+    "sha256": "2f96008bba74a31bac6bfee72ec0e3eb77e90d9e2b731d418694f885f9d842e9"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u1112-v1-story-owner",
+      "text": "Lesson 11\n\n老师: Is this shirt Tim's?\n\nDave: Perhaps it is, sir.\n\nDave: Tim's shirt's white."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u1112-v1-story-it",
+      "text": "Lesson 11\n\n老师: Whose shirt is that?\n\n老师: Is this your shirt, Dave?\n\nDave: No, sir.\n\nDave: It's not my shirt.\n\nDave: This is my shirt.\n\nDave: My shirt's blue."
+    }
+  ],
+  "sourceLines": {
+    "R1": "7-9",
+    "R2": "1-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

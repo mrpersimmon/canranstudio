@@ -19,7 +19,7 @@ const REQUIRED_FILES = Object.freeze([
 const REQUIRED_DIRECTORIES = Object.freeze([
   ...PUBLISHED_COURSES.flatMap(course => course.assetDirectories),
   'core',
-  'unit49-50', 'unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90',
+  'unit49-50', 'unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit91-92','unit93-94','unit95-96','unit97-98','unit99-100','unit101-102','unit103-104','unit105-106','unit107-108','unit109-110','unit111-112','unit113-114','unit115-116','unit117-118','unit119-120','unit121-122','unit123-124','unit125-126','unit127-128','unit129-130','unit131-132','unit133-134','unit135-136','unit137-138','unit139-140','unit141-142','unit143-144',
   'unit1-2',
   'unit3-4',
   'unit5-6',

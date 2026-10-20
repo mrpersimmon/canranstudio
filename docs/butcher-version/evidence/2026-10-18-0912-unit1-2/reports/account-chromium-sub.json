@@ -1,0 +1,308 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit1-2-v154-account.spec.js",
+      "tests/login/unit1-2-v154-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/account-chromium-sub"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/account-chromium-sub",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154-account.spec.js",
+      "file": "unit1-2-v154-account.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6663,
+                  "error": {
+                    "message": "Error: locator.evaluate: TypeError: Failed to fetch\n    at eval (eval at evaluate (:311:30), <anonymous>:3:32)\n    at async <anonymous>:337:30",
+                    "stack": "Error: locator.evaluate: TypeError: Failed to fetch\n    at eval (eval at evaluate (:311:30), <anonymous>:3:32)\n    at async <anonymous>:337:30\n    at eval (eval at evaluate (:311:30), <anonymous>:3:32)\n    at async <anonymous>:337:30\n    at imageHash (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\home-banners-1730.js:9:50)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js:19:16",
+                    "location": {
+                      "file": "eval at evaluate (:311:30), <anonymous>",
+                      "column": 32,
+                      "line": 3
+                    }
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "eval at evaluate (:311:30), <anonymous>",
+                        "column": 32,
+                        "line": 3
+                      },
+                      "message": "Error: locator.evaluate: TypeError: Failed to fetch\n    at eval (eval at evaluate (:311:30), <anonymous>:3:32)\n    at async <anonymous>:337:30\n    at eval (eval at evaluate (:311:30), <anonymous>:3:32)\n    at async <anonymous>:337:30\n    at imageHash (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\home-banners-1730.js:9:50)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js:19:16"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:35:23.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-chromium-sub\\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-chromium-sub\\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "eval at evaluate (:311:30), <anonymous>",
+                    "column": 32,
+                    "line": 3
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-ae47f2e6dbb058bff210",
+          "file": "unit1-2-v154-account.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "账号姓名、跨设备五星、首次日期、重开练习与学生隔离",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 40011,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:35:31.696Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-43db3fcd3e75d424d5c3",
+          "file": "unit1-2-award.spec.js",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "订正完成但零星，课程首页仍可继续学习",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:11.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-0294e341cfe365e08f02",
+          "file": "unit1-2-award.spec.js",
+          "line": 142,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-v154-upgrade.spec.js",
+      "file": "unit1-2-v154-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "同库更新与跨设备：原五星全部GIF帧和精确日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 29721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:34348) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:20.127Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9014dd4a36bee01ee736-ab8e371e233a90f664f5",
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "line": 9,
+          "column": 42
+        },
+        {
+          "title": "同库更新与跨设备：原25题证书PNG和精确日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26301,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:49.951Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9014dd4a36bee01ee736-a465f0bd75a94b1eec38",
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "line": 9,
+          "column": 42
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:35:18.120Z",
+    "duration": 118797.40400000001,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

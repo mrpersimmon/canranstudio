@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit45-46-v153-materials.spec.js",
+      "--grep",
+      "窄屏24词卡",
+      "--reporter=list,json",
+      "--output=output/unit4546-work/word-cards-final"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4546-work/word-cards-final",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4509",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit45-46-v153-materials.spec.js",
+      "file": "unit45-46-v153-materials.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "窄屏24词卡长单词不拆行，数字采用新字形且可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 946,
+                  "error": {
+                    "message": "Error: handwriting\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m30\u001b[39m\nReceived:    \u001b[31m25.65625\u001b[39m",
+                    "stack": "Error: handwriting\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m30\u001b[39m\nReceived:    \u001b[31m25.65625\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-materials.spec.js:15:592",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-materials.spec.js",
+                      "column": 592,
+                      "line": 15
+                    },
+                    "snippet": "  13 | });\n  14 | test('窄屏24词卡长单词不拆行，数字采用新字形且可读',async({page},info)=>{\n> 15 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit45-46/#learn/words');await page.evaluate(()=>document.fonts.ready);for(let i=0;i<4;i++){for(const card of await page.locator('.unit-word').all()){const en=await card.getAttribute('aria-label'),bounds=await card.boundingBox(),text=card.locator('strong'),rects=await text.evaluate(e=>{const r=document.createRange();r.selectNodeContents(e);return [...r.getClientRects()].map(x=>({x:x.x,right:x.right,width:x.width}));});if(!en.includes(' '))expect(rects.length,en+'不应拆成多行').toBe(1);for(const r of rects){expect(r.x,en).toBeGreaterThanOrEqual(bounds.x);expect(r.right,en).toBeLessThanOrEqual(bounds.x+bounds.width);}if(['thousand','million'].includes(en))await expect(card.locator('img')).toHaveAttribute('src',new RegExp(en+'-v153.svg$'));}await page.locator('.stage-words').screenshot({path:info.outputPath('words-'+(i+1)+'.png')});if(i<3)await page.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  16 | });\n  17 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-materials.spec.js",
+                        "column": 592,
+                        "line": 15
+                      },
+                      "message": "Error: handwriting\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m30\u001b[39m\nReceived:    \u001b[31m25.65625\u001b[39m\n\n  13 | });\n  14 | test('窄屏24词卡长单词不拆行，数字采用新字形且可读',async({page},info)=>{\n> 15 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit45-46/#learn/words');await page.evaluate(()=>document.fonts.ready);for(let i=0;i<4;i++){for(const card of await page.locator('.unit-word').all()){const en=await card.getAttribute('aria-label'),bounds=await card.boundingBox(),text=card.locator('strong'),rects=await text.evaluate(e=>{const r=document.createRange();r.selectNodeContents(e);return [...r.getClientRects()].map(x=>({x:x.x,right:x.right,width:x.width}));});if(!en.includes(' '))expect(rects.length,en+'不应拆成多行').toBe(1);for(const r of rects){expect(r.x,en).toBeGreaterThanOrEqual(bounds.x);expect(r.right,en).toBeLessThanOrEqual(bounds.x+bounds.width);}if(['thousand','million'].includes(en))await expect(card.locator('img')).toHaveAttribute('src',new RegExp(en+'-v153.svg$'));}await page.locator('.stage-words').screenshot({path:info.outputPath('words-'+(i+1)+'.png')});if(i<3)await page.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  16 | });\n  17 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-materials.spec.js:15:592"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:27:44.895Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\word-cards-final\\unit45-46-v153-materials-窄屏24词卡长单词不拆行，数字采用新字形且可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\word-cards-final\\unit45-46-v153-materials-窄屏24词卡长单词不拆行，数字采用新字形且可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-materials.spec.js",
+                    "column": 592,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0150fe60d582868f9c2d-fbead180b75eec9d4d55",
+          "file": "unit45-46-v153-materials.spec.js",
+          "line": 14,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T14:27:44.326Z",
+    "duration": 2199.018,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

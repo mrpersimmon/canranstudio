@@ -1,0 +1,21 @@
+
+Running 14 tests using 1 worker
+
+(node:7568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 (23.3s)
+  ok  2 tests\e2e\unit3-4-v154-history.spec.js:5:49 › voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留 (1.0m)
+  ok  3 tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 (2.0s)
+  ok  4 tests\e2e\unit3-4-v154.spec.js:6:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 (2.7s)
+  ok  5 tests\e2e\unit3-4-v154.spec.js:13:1 › 理解题未作答时有原文依据 (2.7s)
+  ok  6 tests\e2e\unit3-4-v154.spec.js:17:1 › 真实提交记录已显示的短示范 (1.0s)
+  ok  7 tests\e2e\unit3-4-v154.spec.js:21:39 › 320宽首页、25词卡、12句课文与三把伞同框可读 (10.4s)
+  ok  8 tests\e2e\unit3-4-v154.spec.js:21:39 › 390宽首页、25词卡、12句课文与三把伞同框可读 (10.8s)
+  ok  9 tests\e2e\unit3-4-v154.spec.js:21:39 › 768宽首页、25词卡、12句课文与三把伞同框可读 (10.9s)
+  ok 10 tests\e2e\unit3-4-v154.spec.js:21:39 › 1280宽首页、25词卡、12句课文与三把伞同框可读 (11.7s)
+  ok 11 tests\e2e\unit3-4-v154.spec.js:40:1 › 33题逐题未答材料、撤支持、无英语音频与全部声音失败仍可完成 (27.6s)
+  ok 12 tests\e2e\unit3-4-v154.spec.js:46:49 › 320x568短屏三卡与推进按钮完整 (4.0s)
+  ok 13 tests\e2e\unit3-4-v154.spec.js:46:49 › 390x500短屏三卡与推进按钮完整 (3.8s)
+  ok 14 tests\e2e\unit3-4-v154.spec.js:49:1 › 原33题未改轮次、选择、错答及原五星保留；两道补材料题重新亲自作答 (23.5s)
+
+  14 passed (3.3m)

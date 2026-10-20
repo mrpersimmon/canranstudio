@@ -1,0 +1,174 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit21-22-teaching-review.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit2122-review-20261018/account-rounds-red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2122-review-20261018/account-rounds-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit21-22-teaching-review.spec.js",
+      "file": "unit21-22-teaching-review.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "45题原五星更新：全部有效轮次、原卡全帧、姓名日期与跨设备旧证保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "historical-chain",
+                  "description": "Real 30-question 15-star certificate -> real 45-question five-star round -> current presentation, unchanged 45 questions"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 62571,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-listen .completion-number')\nTimeout: 5000ms\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"0\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-listen .completion-number')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-listen .completion-number')\nTimeout: 5000ms\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"0\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-listen .completion-number')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit21-22-teaching-review.spec.js:36:174",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit21-22-teaching-review.spec.js",
+                      "column": 174,
+                      "line": 36
+                    },
+                    "snippet": "  34 |   second=await browser.newContext({baseURL:origin,...(process.env.UNIT2122_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit21-22/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');\n  35 |   const after=await readLearning(other);await fs.writeFile(info.outputPath('after45-progress.json'),JSON.stringify(after));expect(after.records).toEqual(before.records);\n> 36 |   for(const id of Object.keys(old.ANSWERS)){await other.goto(base+'unit21-22/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit2122-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}\n     |                                                                                                                                                                              ^\n  37 |   await other.goto(base+'unit21-22/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.select(room,'I');await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);\n  38 |   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit21-22/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}\n  39 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2122-review-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit21-22-teaching-review.spec.js",
+                        "column": 174,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-listen .completion-number')\nTimeout: 5000ms\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"10\",\u001b[39m\n\u001b[32m-   \"0\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[31m+   \"—\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-listen .completion-number')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n\n\n  34 |   second=await browser.newContext({baseURL:origin,...(process.env.UNIT2122_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit21-22/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');\n  35 |   const after=await readLearning(other);await fs.writeFile(info.outputPath('after45-progress.json'),JSON.stringify(after));expect(after.records).toEqual(before.records);\n> 36 |   for(const id of Object.keys(old.ANSWERS)){await other.goto(base+'unit21-22/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit2122-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}\n     |                                                                                                                                                                              ^\n  37 |   await other.goto(base+'unit21-22/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.select(room,'I');await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);\n  38 |   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit21-22/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}\n  39 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2122-review-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit21-22-teaching-review.spec.js:36:174"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:33096) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T19:21:26.399Z",
+                  "annotations": [
+                    {
+                      "type": "historical-chain",
+                      "description": "Real 30-question 15-star certificate -> real 45-question five-star round -> current presentation, unchanged 45 questions"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\account-rounds-red\\unit21-22-teaching-review-45题原五星更新：全部有效轮次、原卡全帧、姓名日期与跨设备旧证保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\account-rounds-red\\unit21-22-teaching-review-45题原五星更新：全部有效轮次、原卡全帧、姓名日期与跨设备旧证保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit21-22-teaching-review.spec.js",
+                    "column": 174,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8e52cce97660f8615a01-eb2028d1850540cb7ba7",
+          "file": "unit21-22-teaching-review.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T19:21:20.905Z",
+    "duration": 70270.83,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

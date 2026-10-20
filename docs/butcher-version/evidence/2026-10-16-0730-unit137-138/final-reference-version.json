@@ -1,0 +1,132 @@
+{
+  "at": "2026-10-16T08:16:35.655325",
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "declaredBrowserBundles": [
+    {
+      "name": "chromium",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome for Testing"
+    },
+    {
+      "name": "chromium-headless-shell",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome Headless Shell"
+    },
+    {
+      "name": "chromium-tip-of-tree",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary for Testing"
+    },
+    {
+      "name": "chromium-tip-of-tree-headless-shell",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary Headless Shell"
+    },
+    {
+      "name": "firefox",
+      "revision": "1538",
+      "installByDefault": true,
+      "browserVersion": "153.0",
+      "title": "Firefox"
+    },
+    {
+      "name": "firefox-beta",
+      "revision": "1526",
+      "installByDefault": false,
+      "browserVersion": "152.0b1",
+      "title": "Firefox Beta"
+    },
+    {
+      "name": "webkit",
+      "revision": "2336",
+      "installByDefault": true,
+      "revisionOverrides": {
+        "mac14": "2251",
+        "mac14-arm64": "2251",
+        "ubuntu20.04-x64": "2092",
+        "ubuntu20.04-arm64": "2092"
+      },
+      "browserVersion": "26.5",
+      "title": "WebKit"
+    },
+    {
+      "name": "ffmpeg",
+      "revision": "1011",
+      "installByDefault": true
+    },
+    {
+      "name": "winldd",
+      "revision": "1007",
+      "installByDefault": false
+    },
+    {
+      "name": "android",
+      "revision": "1001",
+      "installByDefault": false
+    }
+  ],
+  "branch": "codex/release-canranstudio",
+  "head": "d0a4382f963e36c1abd0f5a5ba9ef79b17794093",
+  "files": {
+    "unit137-138/content.js": "2bac7d9a3b36a2b9f4e6b78cc8d79b766548d5fb44edb56482e4b220328295ee",
+    "unit137-138/grammar.js": "d08d087db46612ae8266f047753a2346b6d8267113e6c19b3e41d0e982a69597",
+    "unit137-138/index.html": "fd6e0570f4463da39cf6b8c9b94f3a47d1ae6fd20f5883f6eed0fd154f77cb49",
+    "unit137-138/README.md": "da1205243a4392788e6e2f39b5b893b0d53b49dbccf8e01be84a5bad2d042764",
+    "unit137-138/scene.js": "211622ea88ce7d1d724b1a2fdd47d38a568f7701984543c05e8f13b1f3782c14",
+    "unit137-138/typography.css": "bbb5a1be89612c7c5c2ccd15f501dc15596d648d01db77e606afe876057d9c04",
+    "unit137-138/unit.css": "ea63199a9846c9928c155683664758c8a88ad8954514af074e115e86e8844763",
+    "unit137-138/unit.js": "f789ce325ba4c37d09de7da1f4d817655b6f20177e3fa85afa90786ccbde1df0",
+    "assets/unit137-138/bed.svg": "1c4af9e20db9fef453818b711b7330335feea8083e8af6953350987776c61ba3",
+    "assets/unit137-138/car.svg": "f99710750b13814999c65aac2951e2546a487abafb7c9008805def056f1531de",
+    "assets/unit137-138/check-record.svg": "a21c26fd3e08598ec78a64b69a94ad82b4898fba71859752ad99f245ff4cee20",
+    "assets/unit137-138/country.svg": "89e0bc5f6d58d37b5b610af46ee513991dc7293d88d502ba8e79c253f2021196",
+    "assets/unit137-138/depend.svg": "fa1539d48119d75ea10b94ec29d2d6f0ff791d85dd7f18e0bb7a97eae2d13347",
+    "assets/unit137-138/dream.svg": "4a7fa5ffed6890f4c35f8edbb1312884b4cb6deba64c81e87ea04140f26e43b5",
+    "assets/unit137-138/fall.svg": "d903645e560690abe8d659635209d74634291e1564a87a614e8da1ac9ca0d8ec",
+    "assets/unit137-138/football.svg": "29b02542377e81c76e0bf37bb5fbbb157761867194903d80aae097a3e8f32954",
+    "assets/unit137-138/imagine.webp": "c1a5cd02f67301544a89f932e19dfa401e04041cfbefb149ea9600309124caab",
+    "assets/unit137-138/keepsake-story-v1.webp": "cf4d52de0793abe77e173bce9111136c53bfa70f44b69fb1ca921d72f9144c93",
+    "assets/unit137-138/living-room.svg": "46a53e8a40fe9aab507b7b19c14b80b5afbfd9a38e95359e41d3fe839a901dcf",
+    "assets/unit137-138/nearly.svg": "4fd08ddaf050f74ff2cd657e05f55764aa31a5f2724c40f7fc4730f7bd6cc00f",
+    "assets/unit137-138/pleasant.svg": "64bd39bb4b0d97a5c1705cfeba34b14ecc8497d92a6d1c39ff6b8f1724290dd5",
+    "assets/unit137-138/pool.svg": "5c55597a32945c7e98651cd6620d5df453c5b87bd8fa7eb6b98cc7ccba89da89",
+    "assets/unit137-138/pools.svg": "2bf2fbd30133d692bd505f2d056d3b5fe2782063b6082d9a1ac7fba9c07145b8",
+    "assets/unit137-138/poor.svg": "a6f2f42d13cc8f5cf68570d6962761b7402cb7a0f23679a639a70b260c8db354",
+    "assets/unit137-138/rain.svg": "d6bd55e74a5e21342e54da30b0c06704573126809f99195f0f5ee61bd5e255a0",
+    "assets/unit137-138/README.md": "c35eb12a1123239cf15cc73d7b386f417cdd3c9e118dd662addce81a9e99554f",
+    "assets/unit137-138/reply.webp": "ab125bfb2411b7e6e018a83cbff17e844bec93b502b56f33b1a683af1eb723bf",
+    "assets/unit137-138/spend.svg": "a9554810a56c42ce5b1ff3b5fc37171835a5e9c9d5ace698f81920d647bd2bae",
+    "assets/unit137-138/task-checked.svg": "4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729",
+    "assets/unit137-138/task-record.svg": "7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066",
+    "assets/unit137-138/train.svg": "e1b5e015f4a65648d25e4ad6e62b16fdfc2855b9cded1ca74c1651420fb461c3",
+    "assets/unit137-138/weather-record.svg": "c0b6a3c9b94433e36d4a7442fb41382219b6514fdeb58d34014d0bd92e5b410b",
+    "assets/unit137-138/win.svg": "eb7ea5796d8a9bd711a9875b701dec8980c30e759360fe405772d3f0429bc6bb",
+    "assets/unit137-138/window.svg": "89d7f3265e70345694f7c1bdde16bea2cbd3252a0b899f5d176678d266cb17c5",
+    "assets/unit137-138/world.svg": "aadeb9f4fdf5378fbcbcf93650eb3c87d4e274144bcf2b607747a67bde7336cd",
+    "assets/unit137-138/writing.webp": "3bcdf7e8fd30a2f00a59dd7a02227f88fb4ad7fc94b89fe4900f35d8288bf7fe",
+    "tests/e2e/unit137-138-story-layout.spec.js": "d8e6181f5850d59d191118d8ce0fbdc126cd08d4c3d78df8d1b0c655ee2b18e1",
+    "tests/e2e/unit137-138-word-layout.spec.js": "1acc7e5cee6d2ea7249d4b2deaf03f2e3c657d4802927aed26bf57325afd2c30",
+    "tests/e2e/unit137-138.spec.js": "8cf9cdb51cdce4e16b0757b6e322170bc6296f5e4968e3a6ca74977e0576716c",
+    "tests/login/unit137-138.spec.js": "10302ee05dca9c349b0174e8e56fe0d446b435a0c167b432e2d3e351edd247b6",
+    "tests/support/unit137138.js": "a8a65c198e145bf1c7a4ca7766b70c9e1c1c587792dac7822c3e49bc661bb80c",
+    "server/catalog.js": "81e466eb308ee048988844c9bf1d2199b7ec58559aa3a138eb63899c07701782",
+    "server/award-catalog.js": "f9a215b32fcb7175c2309d0d207f4364db22edfb10b5ac552641801fef742e34",
+    "scripts/course-packages.js": "80a0ee2fa00bbd748d181cea1924d3d5ed88b2948e96599b15e2236ee5f55292",
+    "core/award-card-layout.js": "1187c43d00f417b3b93030f5378af34134b2f66eed5ee6a69b84667a00567d22",
+    "core/story-certificate.js": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+    "core/award-gif.js": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+    "core/award-reveal.js": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+    "core/unit-awards.js": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+    "core/lesson49-practice.js": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+    "assets/awards/fonts/sources.json": "0153c3633c550474a796929399c8f8d81f0a3fe8899622d5da95f832b029d01d"
+  }
+}

@@ -1,0 +1,29 @@
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (240.3894ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (858.0839ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (515.9492ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (320.9582ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (379.357ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (464.7398ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (562.7228ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (193.1672ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (6.1611ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (2.1879ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (303.5537ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3915.0277

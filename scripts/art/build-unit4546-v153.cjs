@@ -1,0 +1,20 @@
+// Paired textbook references: both sides of each ability contrast remain visible.
+const fs=require('fs'),sharp=require('sharp');const dir='assets/unit45-46/';
+const svg=b=>'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 270" fill="none" stroke="#513b30" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="3" y="3" width="474" height="264" rx="18" fill="#fff9ed" stroke="#c9bed5"/><path d="M240 16V255" stroke="#ded3e4"/>'+b+'<circle cx="120" cy="236" r="18" fill="#edf4e8" stroke="#769866"/><path d="m109 236 8 8 15-19" stroke="#769866"/><circle cx="360" cy="236" r="18" fill="#fff0e7" stroke="#c47a69"/><path d="m352 228 16 16m0-16-16 16" stroke="#c47a69"/></svg>';
+async function art(file,x,y,w,h){const raw=fs.readFileSync('assets/'+file+'.svg','utf8'),m=raw.match(/<svg([^>]*)>([\s\S]*)<\/svg>/),{data,info}=await sharp(Buffer.from(raw)).ensureAlpha().raw().toBuffer({resolveWithObject:true});let l=info.width,t=info.height,r=0,b=0;for(let yy=0;yy<info.height;yy++)for(let xx=0;xx<info.width;xx++)if(data[(yy*info.width+xx)*4+3]>0){l=Math.min(l,xx);r=Math.max(r,xx);t=Math.min(t,yy);b=Math.max(b,yy);}const attrs=m[1].replace(/xmlns="[^"]*"/,'').replace(/viewBox="[^"]*"/,'').replace(/\s(?:width|height)="[^"]*"/g,'');return`<svg x="${x}" y="${y}" width="${w}" height="${h}" viewBox="${l-2} ${t-2} ${r-l+5} ${b-t+5}" preserveAspectRatio="xMidYMid meet" ${attrs}>${m[2]}</svg>`;}
+const up=(x,y)=>`<path d="M${x} ${y+35}V${y}m-10 10 10-10 10 10" stroke="#967baa"/>`;
+const shelf=(x,y,w)=>`<path d="M${x} ${y}H${x+w}V${y+12}H${x}Z" fill="#dfbd91"/><path d="M${x+16} ${y+12}V${y+32}M${x+w-16} ${y+12}V${y+32}"/>`;
+const putOn='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" stroke="#513b30" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M47 48V35Q80 6 113 35V48Z" fill="#ddbe73"/><ellipse cx="80" cy="53" rx="60" ry="12" fill="#ddbe73"/><path d="M51 115Q47 79 80 79Q113 79 109 115Q108 139 80 146Q52 139 51 115Z" fill="#f5e5d2"/><path d="M137 76V120m-10-11 10 11 10-11" stroke="#967baa"/></svg>';
+const chair='<path d="M70 129V43H157V129M84 153V195M145 153V195" fill="#c1cbae"/><path d="M62 129H166V151H62Z" fill="#dfbd91"/>';
+const table='<path d="M284 130H436V147H284ZM300 147V196M420 147V196" fill="#dfbd91"/>';
+(async()=>{const map={};
+fs.writeFileSync(dir+'put-on-v153.svg',putOn);
+map[1000]=await art('unit45-46/put-on-v153',47,42,146,155)+'<path d="M328 54 360 69 393 54 418 80 434 162 408 169 391 111V199H329V111L312 169 286 162 302 80Z" fill="#a0bcb0"/><path d="M360 69V199M338 65 360 98 381 65M330 142H344M377 142H389"/>';
+map[5000]=await art('unit45-46/aeroplane',40,57,162,116)+await art('unit45-46/bird',292,58,139,116);
+map[10000]=await art('unit45-46/bookcase',40,40,158,153)+'<path d="M276 41H441V198H276ZM276 41 307 70H411L441 41M307 70V175L276 198M411 70V175L441 198M307 175H411" fill="#eee3cf"/><path d="M183 94 211 51M423 126 452 82" stroke="#9578ad" stroke-width="10"/>';
+map[100000]=chair+up(185,68)+table+up(456,68);
+map[210000]=await art('unit45-46/read',48,48,140,146)+'<path d="M290 46H421V196H290Z" fill="#e9bb9a"/><path d="M306 63H406V108H306Z" fill="#a8bdc6"/><path d="M306 125H404M306 143H404M306 161H371M306 178H398"/>';
+map[350000]='<path d="M66 119 92 94H164L192 119V194H66ZM66 119H192M92 94V119" fill="#c9d5b4"/><path d="M299 43H425V194H299Z" fill="#ddc4a4"/><path d="M299 82H425M299 121H425M299 160H425M340 43V82M390 82V121M340 121V160"/><path d="M124 80Q183 18 213 170m-14-8 14 8 6-15M358 29Q449 5 456 181m-14-7 14 7 6-15" stroke="#967baa"/>';
+map[500000]=await art('unit45-46/cake',44,51,153,139)+await art('unit45-46/biscuit',288,51,153,139);
+map[1000000]=shelf(36,174,168)+await art('unit45-46/vase',85,61,72,111)+shelf(281,45,158)+await art('unit45-46/vase',324,112,72,94)+'<path d="M51 186V204M188 186V204M288 207H434"/>'+up(416,87);
+for(const [n,body]of Object.entries(map))fs.writeFileSync(dir+'reference-'+n+'-v153.svg',svg(body));console.log('8 paired ability references built');})();

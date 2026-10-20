@@ -10,7 +10,7 @@
   const fit = (value, maximum, area) => Math.min(maximum, area / Math.max(1, Array.from(value || '').length));
   // Limit the approved font study to this unit, including its album and exports.
   function fonts(unitId, roundFont = 'Award Round', latinFont = 'Baloo 2') {
-    return ['unit45-46','unit47-48','unit49-50','unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90'].includes(unitId)
+    return ['unit21-22','unit23-24','unit25-26','unit27-28','unit29-30','unit31-32','unit33-34','unit35-36','unit37-38','unit39-40','unit19-20','unit17-18','unit15-16','unit13-14','unit11-12','unit9-10','unit7-8','unit45-46','unit47-48','unit49-50','unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit91-92','unit93-94','unit95-96','unit97-98','unit99-100','unit101-102','unit103-104','unit105-106','unit107-108','unit109-110','unit111-112','unit113-114','unit115-116','unit117-118','unit119-120','unit121-122','unit123-124','unit125-126','unit127-128','unit129-130','unit131-132','unit133-134','unit135-136','unit137-138','unit139-140','unit141-142','unit143-144'].includes(unitId)
       ? { roundFont:'Award Gothic', latinFont:'Award Nunito', titleWeight:500, nameWeight:500, footWeight:600 }
       : { roundFont, latinFont, titleWeight:400, nameWeight:400, footWeight:500 };
   }
@@ -25,7 +25,7 @@
   function typography(title, name = '', unitId) {
     const faces = fonts(unitId);
     return {
-      ...(['unit45-46','unit47-48','unit49-50','unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90'].includes(unitId) ? {
+      ...(['unit21-22','unit23-24','unit25-26','unit27-28','unit29-30','unit31-32','unit33-34','unit35-36','unit37-38','unit39-40','unit19-20','unit17-18','unit15-16','unit13-14','unit11-12','unit9-10','unit7-8','unit45-46','unit47-48','unit49-50','unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit91-92','unit93-94','unit95-96','unit97-98','unit99-100','unit101-102','unit103-104','unit105-106','unit107-108','unit109-110','unit111-112','unit113-114','unit115-116','unit117-118','unit119-120','unit121-122','unit123-124','unit125-126','unit127-128','unit129-130','unit131-132','unit133-134','unit135-136','unit137-138','unit139-140','unit141-142','unit143-144'].includes(unitId) ? {
         '--award-round':'"Award Gothic","Award Round","Award Book",sans-serif',
         '--award-latin':'"Award Nunito",sans-serif',
         '--award-title-weight':faces.titleWeight,

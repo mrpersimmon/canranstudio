@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:27236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 320：14轮完整原文、三人比例、驾照唯一与中文续读 (11.8s)
+  ok  2 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 390：14轮完整原文、三人比例、驾照唯一与中文续读 (12.1s)
+  ok  3 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 768：14轮完整原文、三人比例、驾照唯一与中文续读 (12.6s)
+  ok  4 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 1280：14轮完整原文、三人比例、驾照唯一与中文续读 (12.8s)
+  ok  5 tests\e2e\unit129-130-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (2.9s)
+  ok  6 tests\e2e\unit129-130.spec.js:13:1 › 66题：未答材料、过去区间与日期图、独立迁移、帮助记录与三卡 (19.3s)
+  ok  7 tests\e2e\unit129-130.spec.js:28:1 › 18词卡、130课1–8、A6与B20完整 (2.5s)
+  ok  8 tests\e2e\unit129-130.spec.js:39:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (10.9s)
+  ok  9 tests\e2e\unit129-130.spec.js:50:1 › 错答不更新线索记录，三卡4／8／2，刷新保留原图 (4.0s)
+  ok 10 tests\e2e\unit129-130.spec.js:55:1 › 全部声音失败仍能完成五区 (15.6s)
+  ok 11 tests\e2e\unit129-130.spec.js:56:1 › 26道书写题66行打印与恢复 (1.0s)
+  ok 12 tests\e2e\unit129-130.spec.js:57:39 › 320及短屏：推测与事实材料、长句、全部题型和三卡 (21.0s)
+  ok 13 tests\e2e\unit129-130.spec.js:57:39 › 390及短屏：推测与事实材料、长句、全部题型和三卡 (20.6s)
+  ok 14 tests\e2e\unit129-130.spec.js:57:39 › 768及短屏：推测与事实材料、长句、全部题型和三卡 (22.1s)
+  ok 15 tests\e2e\unit129-130.spec.js:57:39 › 1280及短屏：推测与事实材料、长句、全部题型和三卡 (20.2s)
+
+  15 passed (3.2m)

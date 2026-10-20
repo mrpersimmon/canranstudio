@@ -1,0 +1,122 @@
+{
+  "browserCases": 127,
+  "workflowCases": 11,
+  "extraRepeatedLayoutCases": 12,
+  "runs": [
+    {
+      "job": "story-card-complete",
+      "startTime": "2026-10-19T02:45:38.357Z",
+      "duration": 43930.039,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "story-card-webkit",
+      "startTime": "2026-10-19T03:03:01.785Z",
+      "duration": 95530.338,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "story-layout-final",
+      "startTime": "2026-10-19T03:15:26.004Z",
+      "duration": 388745.928,
+      "expected": 64,
+      "skipped": 0,
+      "unexpected": 4,
+      "flaky": 0
+    },
+    {
+      "job": "story-layout-69-verified",
+      "startTime": "2026-10-19T03:28:56.729Z",
+      "duration": 14631.362,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "unit3-current-history",
+      "startTime": "2026-10-19T03:36:50.478Z",
+      "duration": 130868.65099999998,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "current-card-account",
+      "startTime": "2026-10-19T03:36:40.219Z",
+      "duration": 64420.284,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "old-certificate-complete",
+      "startTime": "2026-10-19T03:56:07.211Z",
+      "duration": 41038.77099999999,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "old-certificate-webkit-complete",
+      "startTime": "2026-10-19T03:56:17.488Z",
+      "duration": 99584.601,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    {
+      "job": "final-scene-labels",
+      "startTime": "2026-10-19T04:13:37.847Z",
+      "duration": 71694.121,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  ],
+  "firstFailures": [
+    {
+      "job": "before",
+      "startTime": "2026-10-19T02:35:04.440Z",
+      "duration": 117072.59999999999,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 18,
+      "flaky": 0
+    },
+    {
+      "job": "old-certificate-before",
+      "startTime": "2026-10-19T02:53:46.133Z",
+      "duration": 41133.746999999996,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    {
+      "job": "old-paper-type-before",
+      "startTime": "2026-10-19T03:45:28.447Z",
+      "duration": 30228.699,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    }
+  ],
+  "notes": [
+    "68 layout cases comprise 64 passes plus 4 exact affected-case reruns; 12 final label checks repeat existing coverage.",
+    "First failures and intermediate runs remain in the local output folder.",
+    "WebKit checks print controls and afterprint; actual PDFs were produced in Chromium."
+  ]
+}

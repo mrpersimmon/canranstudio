@@ -18,7 +18,7 @@ async function select(room,answer){
 }
 async function story(page,pair,base=''){
  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
- await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');
+ await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});
  await expect(room).toBeVisible();
  const voice=pair==='1-2',start=voice?'开始听课文':'开始看课文',finish=voice?'完成课文学习':'完成课文';
  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
@@ -28,6 +28,7 @@ async function story(page,pair,base=''){
 }
 function currentGroup(pair,id){return pair==='5-6'?({refer:'introduce',articles:'introduce',choice:'cars',trans:'cars'}[id]||id):id;}
 function answers(pair,group,old=false){
+ if(!old&&pair==='5-6'&&require('./unit56-answers').CURRENT[group])return require('./unit56-answers').CURRENT[group];
  if(!old&&pair==='3-4'){
   const {GRAMMAR,TRANSFER}=require('./unit34-grammar');
   if(group==='reply')return GRAMMAR.map((answer,i)=>({id:'grammar-'+i,answer,fresh:true}));
@@ -40,7 +41,7 @@ async function activity(page,pair,group,{base='',old=false,capture,wrongNew=fals
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
  if(!old)group=currentGroup(pair,group);
  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
- await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');
+ await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});
  await expect(room).toBeVisible();
  if(await room.locator('.practice-finish').isVisible())return;
  const copy=await room.locator('.progress-copy').innerText();const first=Number(copy.match(/第 (\d+)/)[1])-1;

@@ -45,18 +45,18 @@ test('班级改名即时更新标签和学生归属，保留账号及未保存�
 
 test('开放课程全选、部分选择、取消全选与保存后的重新打开保持一致', async ({ page }) => {
   const group = await createClass(page, '全选课程体验班');
-  await expect(courseBoxes(page)).toHaveCount(45);
-  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 0 / 45 门课程');
+  await expect(courseBoxes(page)).toHaveCount(72);
+  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 0 / 72 门课程');
   await page.getByRole('button', { name: '全选课程', exact: true }).click();
-  await expect(selectedCourses(page)).toHaveCount(45);
-  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 45 / 45 门课程');
+  await expect(selectedCourses(page)).toHaveCount(72);
+  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 72 / 72 门课程');
   await page.getByRole('checkbox', { name: /Lesson 13–14 / }).uncheck();
-  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 44 / 45 门课程');
+  await expect(page.locator('#courseSelectionCount')).toHaveText('已选 71 / 72 门课程');
   await page.getByRole('button', { name: '全选课程', exact: true }).click();
   await saveCourses(page);
-  expect((await state(page)).classes.find(c => c.id === group.id).courses).toHaveLength(45);
+  expect((await state(page)).classes.find(c => c.id === group.id).courses).toHaveLength(72);
   await page.reload();await page.getByRole('button', { name: '管理 全选课程体验班', exact: true }).click();
-  await expect(selectedCourses(page)).toHaveCount(45);
+  await expect(selectedCourses(page)).toHaveCount(72);
   await page.getByRole('button', { name: '取消全选', exact: true }).click();
   await expect(selectedCourses(page)).toHaveCount(0);
   await page.getByRole('button', { name: '保存开放课程', exact: true }).click();

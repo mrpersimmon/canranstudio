@@ -1,0 +1,134 @@
+{
+  "complete": true,
+  "at": "2026-10-17T20:28:05.078Z",
+  "checks": [
+    {
+      "name": "Actual prior 45-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Earlier 32-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "11 actual prior runtime files frozen byte for byte",
+      "passed": true
+    },
+    {
+      "name": "Server prior 45-question source is the actual baseline",
+      "passed": true
+    },
+    {
+      "name": "Earlier 32-question server source and fixtures unchanged",
+      "passed": true
+    },
+    {
+      "name": "45 questions: 43 unchanged and exactly 2 material revisions",
+      "passed": true
+    },
+    {
+      "name": "Three unaffected question groups and sessions unchanged",
+      "passed": true
+    },
+    {
+      "name": "Revised groups list their exact prior session first",
+      "passed": true
+    },
+    {
+      "name": "Reward identity, learning key, vocabulary, full text and written material unchanged",
+      "passed": true
+    },
+    {
+      "name": "Every inline fill has at most two related blanks",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: unit.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: typography.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: legacy.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: legacy-certificate.js",
+      "passed": true
+    },
+    {
+      "name": "All 61 original assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "Font binaries/licenses unchanged and all current glyphs covered",
+      "passed": true
+    },
+    {
+      "name": "All 416 text source hashes match final files",
+      "passed": true
+    },
+    {
+      "name": "Other 95 shared runtime files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Unified standard stays at v1.53",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /lesson/",
+      "passed": true
+    },
+    {
+      "name": "Captured original rounds and archived 32 records preserved by server",
+      "passed": true
+    },
+    {
+      "name": "Original preview records, rewards and signing key retained",
+      "passed": true
+    },
+    {
+      "name": "Changed JS parses",
+      "passed": true
+    },
+    {
+      "name": "Local links in changed documentation resolve",
+      "passed": true
+    }
+  ],
+  "packages": {
+    "/": {
+      "title": "房间寻物队",
+      "revision": "daba26261cd3e0fefe7a89f2d5a69deb8312909371a060d269ee65e7a56863e8",
+      "manifest": "/course-packages/unit23-24/daba26261cd3e0fefe7a89f2d5a69deb8312909371a060d269ee65e7a56863e8.json",
+      "sha256": "67d535df43b575444f1545fe7ad6c889415ead8536f88f46d29867ba2a1735d9"
+    },
+    "/lesson/": {
+      "title": "房间寻物队",
+      "revision": "55d796655690c63f87c75f79f921ec822b4e58479a48121fd4ed5974c5fdda6d",
+      "manifest": "/lesson/course-packages/unit23-24/55d796655690c63f87c75f79f921ec822b4e58479a48121fd4ed5974c5fdda6d.json",
+      "sha256": "b76346aef3f00e6d763f3008ef2f566348febb126121074a032d917c728b0ac0"
+    }
+  },
+  "questions": {
+    "before": 45,
+    "current": 45,
+    "unchanged": 43,
+    "revised": 2,
+    "additional": 0,
+    "legacy": 32
+  },
+  "originalAssetFiles": 61,
+  "sharedChanges": [
+    "server/progress.js",
+    "server/public/access-client.js",
+    "server/legacy/unit23-24-before-v153-content.js"
+  ]
+}

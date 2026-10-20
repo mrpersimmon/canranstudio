@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:27368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 (5.8s)
+
+
+  1) tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 ────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.stage-grammar .offline-task').locator('.reference-phonetic')
+    Expected: 7
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.stage-grammar .offline-task').locator('.reference-phonetic')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+       6 |  await expect(ref.locator('.plural-reference article')).toHaveCount(7);await expect(ref.locator('.be-reference article')).toHaveCount(8);
+       7 |  for(const text of ['handkerchiefs','handkerchieves','zeros / zeroes','the Henrys','roof → roofs','They aren’t'])await expect(ref).toContainText(text==='They aren’t'?"They aren't":text);
+    >  8 |  await expect(ref.locator('.reference-phonetic')).toHaveCount(7);
+         |                                                   ^
+       9 |  for(const span of await ref.locator('.reference-phonetic').all())expect(await span.evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Arial');
+      10 |  expect(await ref.locator('.pronunciation-note').evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Lesson Gothic');
+      11 |  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-reference.spec.js:8:51
+
+    Error Context: test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 ─────────────────

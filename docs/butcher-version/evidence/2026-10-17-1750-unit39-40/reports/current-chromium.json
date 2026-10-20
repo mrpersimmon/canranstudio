@@ -1,0 +1,1050 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit39-40-fivezones.spec.js",
+      "tests/e2e/unit39-40-fivezones-upgrade.spec.js",
+      "tests/e2e/unit39-40-fivezones-interactions.spec.js",
+      "tests/e2e/unit39-40-materials.spec.js",
+      "tests/e2e/unit39-40-reading-controls.spec.js",
+      "tests/e2e/unit39-40-print.spec.js",
+      "--output=output/unit3940-work/current-chromium",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3940-work/current-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit39-40-fivezones-interactions.spec.js",
+      "file": "unit39-40-fivezones-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "花瓶与Sam须同时正确，草稿错答刷新不交接，订正后仅原物品到手",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2248,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:00.297Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c42ab37153b9b6624ea-4807d04eddd1a71b2279",
+          "file": "unit39-40-fivezones-interactions.spec.js",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "定位完整窗前短语与选择最终落点，各自依据可见材料，键盘可订正",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2353,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:02.655Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c42ab37153b9b6624ea-70cd722f35d52cf3a614",
+          "file": "unit39-40-fivezones-interactions.spec.js",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "词块草稿可撤回和恢复；短示范计帮助，独立综合不展示示范",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1515,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:05.015Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c42ab37153b9b6624ea-fb7284195ad1c1466ecd",
+          "file": "unit39-40-fivezones-interactions.spec.js",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "320手机交接花瓶保持直立，完整人物和落点可见",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:06.538Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8c42ab37153b9b6624ea-5f481ce2131783089563",
+          "file": "unit39-40-fivezones-interactions.spec.js",
+          "line": 14,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit39-40-fivezones-upgrade.spec.js",
+      "file": "unit39-40-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "旧空白升级：不伪造作答，完整新轮可获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:08.138Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "974b718536aefdf3af43-4cc54c951a2acb083207",
+          "file": "unit39-40-fivezones-upgrade.spec.js",
+          "line": 5,
+          "column": 36
+        },
+        {
+          "title": "旧仅选未提交升级：不伪造作答，完整新轮可获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:10.862Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "974b718536aefdf3af43-cf2c4b35e538b75f8337",
+          "file": "unit39-40-fivezones-upgrade.spec.js",
+          "line": 5,
+          "column": 36
+        },
+        {
+          "title": "旧版错答、词卡、叙述和参考页保留，新语法不由旧题代答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1353,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:13.478Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "974b718536aefdf3af43-4042c1beafeb372e04f4",
+          "file": "unit39-40-fivezones-upgrade.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:14.838Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "974b718536aefdf3af43-cd045567aea02221af29",
+          "file": "unit39-40-fivezones-upgrade.spec.js",
+          "line": 15,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit39-40-fivezones.spec.js",
+      "file": "unit39-40-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "46题、13句完整对白、五区五星与逐题未答材料可完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21363,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:25.662Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-9b04ac4971b06ff9c3f6",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "连续错答、订正、刷新和重练保留实际统计与旧星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6658,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:47.033Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-7330371468c6513d6585",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 12,
+          "column": 1
+        },
+        {
+          "title": "花瓶分镜、持有者与逐句中文 320",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4016,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:53.701Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-7eda7619743a559690a8",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 17,
+          "column": 39
+        },
+        {
+          "title": "花瓶分镜、持有者与逐句中文 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3819,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:27:57.726Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-62f52dc8611c0467d7fb",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 17,
+          "column": 39
+        },
+        {
+          "title": "花瓶分镜、持有者与逐句中文 768",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4075,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:01.553Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-ede13b0d16fdf0056905",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 17,
+          "column": 39
+        },
+        {
+          "title": "花瓶分镜、持有者与逐句中文 1280",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4541,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:05.634Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-6e74c3e72f4c0bd82a5b",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 17,
+          "column": 39
+        },
+        {
+          "title": "短屏三卡、继续操作及阅读按钮 320x568",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18468,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:10.183Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-32dedf4bc003b706bb1f",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 28,
+          "column": 49
+        },
+        {
+          "title": "短屏三卡、继续操作及阅读按钮 390x500",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19244,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:28.660Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-0bc37b498cd20ee3bec6",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 28,
+          "column": 49
+        },
+        {
+          "title": "双空未齐和刷新保留草稿，订正不代选",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:47.914Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-e9d64497f0e76020a2fc",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 31,
+          "column": 1
+        },
+        {
+          "title": "9词卡、12图原编号与六页画册保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1947,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:49.385Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-0fcf222a86ce52e5c03b",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "声音全坏仍能完整学习，未出现英语声音请求",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16610,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:51.342Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "98a356c4560ab2210592-4009df257c2273d0b11d",
+          "file": "unit39-40-fivezones.spec.js",
+          "line": 38,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit39-40-materials.spec.js",
+      "file": "unit39-40-materials.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "未答材料独立完整，最终位置图不预先放花瓶 320",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6509,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:07.963Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f35bcf3c064555111e21-5e670af53733c832b029",
+          "file": "unit39-40-materials.spec.js",
+          "line": 3,
+          "column": 31
+        },
+        {
+          "title": "未答材料独立完整，最终位置图不预先放花瓶 1280",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2621,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40-materials.spec.js:6:96",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40-materials.spec.js",
+                      "column": 96,
+                      "line": 6
+                    },
+                    "snippet": "  4 |  test.setTimeout(120000);await page.setViewportSize({width,height:800});\n  5 |  for(const id of ['grammar','exam']){await page.goto('/unit39-40/#learn/'+id);const room=page.locator('.stage-'+id);for(let i=0;i<ANSWERS[id].length;i++){\n> 6 |   expect(await room.locator('img').evaluateAll(es=>es.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n    |                                                                                                ^\n  7 |   if(id==='exam'&&i===1){const img=room.locator('.scene-find-image');await expect(room).toContainText('Put it here, on this shelf.');await room.screenshot({path:info.outputPath('empty-placement-'+width+'.png')});}\n  8 |   if(id==='grammar'&&[2,3,6].includes(i))await room.screenshot({path:info.outputPath('grammar-'+(i+1)+'-'+width+'.png')});\n  9 |   await select(room,ANSWERS[id][i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');if(i<ANSWERS[id].length-1)await room.getByRole('button',{name:'下一题',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40-materials.spec.js",
+                        "column": 96,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  4 |  test.setTimeout(120000);await page.setViewportSize({width,height:800});\n  5 |  for(const id of ['grammar','exam']){await page.goto('/unit39-40/#learn/'+id);const room=page.locator('.stage-'+id);for(let i=0;i<ANSWERS[id].length;i++){\n> 6 |   expect(await room.locator('img').evaluateAll(es=>es.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n    |                                                                                                ^\n  7 |   if(id==='exam'&&i===1){const img=room.locator('.scene-find-image');await expect(room).toContainText('Put it here, on this shelf.');await room.screenshot({path:info.outputPath('empty-placement-'+width+'.png')});}\n  8 |   if(id==='grammar'&&[2,3,6].includes(i))await room.screenshot({path:info.outputPath('grammar-'+(i+1)+'-'+width+'.png')});\n  9 |   await select(room,ANSWERS[id][i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');if(i<ANSWERS[id].length-1)await room.getByRole('button',{name:'下一题',exact:true}).click();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40-materials.spec.js:6:96"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:14.479Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3940-work\\current-chromium\\unit39-40-materials-未答材料独立完整，最终位置图不预先放花瓶-1280\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3940-work\\current-chromium\\unit39-40-materials-未答材料独立完整，最终位置图不预先放花瓶-1280\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40-materials.spec.js",
+                    "column": 96,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f35bcf3c064555111e21-d186dd409bdede31e069",
+          "file": "unit39-40-materials.spec.js",
+          "line": 3,
+          "column": 31
+        }
+      ]
+    },
+    {
+      "title": "unit39-40-print.spec.js",
+      "file": "unit39-40-print.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "练习纸保留A五题、B十题及两个原例和15条书写线，实际PDF无隐藏题目",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 744,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:18.338Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3748d781756afe0ab62d-857d6500dcbe26088eb7",
+          "file": "unit39-40-print.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10416,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:19.197Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3748d781756afe0ab62d-5e68e3e97dcd33e8a982",
+          "file": "unit39-40-print.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit39-40-reading-controls.spec.js",
+      "file": "unit39-40-reading-controls.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4788,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:29.626Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac1f554f217c9c64a335-2d3a235b1c79e29df1a6",
+          "file": "unit39-40-reading-controls.spec.js",
+          "line": 4,
+          "column": 61
+        },
+        {
+          "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4105,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:34.425Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac1f554f217c9c64a335-e5d764e8002d5cc75875",
+          "file": "unit39-40-reading-controls.spec.js",
+          "line": 4,
+          "column": 61
+        },
+        {
+          "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3969,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:38.540Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ac1f554f217c9c64a335-80b7d58c20f69125f105",
+          "file": "unit39-40-reading-controls.spec.js",
+          "line": 4,
+          "column": 61
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T10:26:59.653Z",
+    "duration": 163414.158,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,62 @@
+
+Running 15 tests using 1 worker
+
+(node:12884) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit115-116-story-layout.spec.js:31:39 › 320：14轮原文、四人换景与全部姿态、按需中文和续读 (9.2s)
+  ok  2 tests\e2e\unit115-116-story-layout.spec.js:31:39 › 390：14轮原文、四人换景与全部姿态、按需中文和续读 (8.7s)
+  ok  3 tests\e2e\unit115-116-story-layout.spec.js:31:39 › 768：14轮原文、四人换景与全部姿态、按需中文和续读 (8.9s)
+  ok  4 tests\e2e\unit115-116-story-layout.spec.js:31:39 › 1280：14轮原文、四人换景与全部姿态、按需中文和续读 (9.0s)
+  ok  5 tests\e2e\unit115-116-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (4.1s)
+  ok  6 tests\e2e\unit115-116.spec.js:12:1 › 74题：未答材料、独立迁移、帮助记录、三卡与零英语配音 (20.0s)
+  x   7 tests\e2e\unit115-116.spec.js:20:1 › 31词卡、116课a–l、A4／B6／C4／D4完整 (9.0s)
+(node:12408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 tests\e2e\unit115-116.spec.js:28:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (14.4s)
+  ok  9 tests\e2e\unit115-116.spec.js:39:1 › 错答不更新任务记录，三卡7／8／2，刷新保留查找范围 (3.3s)
+  ok 10 tests\e2e\unit115-116.spec.js:43:1 › 全部声音失败仍能完成五区 (16.9s)
+  ok 11 tests\e2e\unit115-116.spec.js:44:1 › 18道书写题打印与恢复 (859ms)
+  ok 12 tests\e2e\unit115-116.spec.js:45:39 › 320及短屏：人事物与地点材料、长句、全部题型和三卡 (23.1s)
+  ok 13 tests\e2e\unit115-116.spec.js:45:39 › 390及短屏：人事物与地点材料、长句、全部题型和三卡 (24.0s)
+  ok 14 tests\e2e\unit115-116.spec.js:45:39 › 768及短屏：人事物与地点材料、长句、全部题型和三卡 (23.5s)
+  ok 15 tests\e2e\unit115-116.spec.js:45:39 › 1280及短屏：人事物与地点材料、长句、全部题型和三卡 (23.3s)
+
+
+  1) tests\e2e\unit115-116.spec.js:20:1 › 31词卡、116课a–l、A4／B6／C4／D4完整 ───────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar details')
+    Expected substring: "过去式"
+    Received string:    "语法小参考本课以导学Grammar纸页192–193为主线。用-one／-body说人、-thing说事物、-where说地点；先看语境里的对象和范围，再选some／any／no／every，不靠句末标点猜答案。someone与somebody、anyone与anybody、everyone与everybody、no one与nobody含义相应。no one按课本写成两个词；no-one也是可见的合法写法，不把它当语法错误。116课词表首行Every／None／Any／Some保留；没有人／事物／地点的复合形式用no-，不是在none后拼词尾。图鉴中的抽象图标帮助记忆，具体题目以可见事实或审定图为依据。someone、everybody、nothing、everything等作本课句子的主语时用单数谓语：Someone is…；Everybody wants…；Everything was…。地点词在本课多修饰动作，不因出现somewhere就强行把整句谓语改成单数。普通句中的名词主语仍按自己的数搭配。some-常用于肯定表达，也可用于邀请或期待肯定回答的问句；any-常用于一般询问、否定表达，还可表示无论谁或任意一个。Would you like something to drink?与Anyone can join都是合法语境，不能把常见分布写成绝对禁令。no-自带否定含义。本课标准的零数量表达用I didn’t see anyone／I saw no one，不把didn’t和no one叠在一起。改写要同时保持时态、对象、地点和范围：didn’t meet→met，didn’t buy→bought，didn’t go anywhere→went nowhere。everyone／everything／everywhere描述语境指定范围内的全体。查完两间房不等于查过全世界；从一个窗口看不见东西也不能推出整所房子无人。找遍了与没有找到分开表达，不能把结果倒推成搜索覆盖。形容词和表示用途的不定式放在复合代词后：something warm、nothing to read、something nice to eat。给出整块something nice不能算独立考过词序，所以本课会拆开这些词块再练。这些词可以在主语、宾语及be后表达不同意思，先读懂句意，不背位置标签。导学中a somebody／a nobody的“大人物／小人物”属于另一种名词义，保留在教师核对记录，不作为本课不定代词的核心判分例子。Isn’t there anyone…?按事实回应：有用Yes, there is；没有用No, there isn’t。问句本身不提供人数，也不能只凭否定形式确定人物生气或不满。There’s none left中的none承接前文所问的量，left是剩下的；不能从零杯数推成没有任何物品或任何人。原文Carol说没啤酒后，Tom说明是玩笑并提供啤酒，因此不能把Carol这句当最终库存事实。Jim开头的I’m sure是他的判断；后来大家在花园。Tom说wants to have lunch是愿望，Have some beer是邀请；正文没有确认午饭吃完或Jim喝下。Lemonade!也不能证明过敏或永久偏好。课文页面不自动显示这些理解结论。116课a–l完整保留，A4／B6／C4／D4共18题。B按练习设定作否定回答，不从问句本身推断没有；C保留原来they所指群体、动作和进行时；D按教材角色设定“答话人没有、另一角色有”，并按Sam／Jane／Alan与children选择he／she／they及has／have。"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar details')
+        14 × locator resolved to <details open="" class="offline-task">…</details>
+           - unexpected value "语法小参考本课以导学Grammar纸页192–193为主线。用-one／-body说人、-thing说事物、-where说地点；先看语境里的对象和范围，再选some／any／no／every，不靠句末标点猜答案。someone与somebody、anyone与anybody、everyone与everybody、no one与nobody含义相应。no one按课本写成两个词；no-one也是可见的合法写法，不把它当语法错误。116课词表首行Every／None／Any／Some保留；没有人／事物／地点的复合形式用no-，不是在none后拼词尾。图鉴中的抽象图标帮助记忆，具体题目以可见事实或审定图为依据。someone、everybody、nothing、everything等作本课句子的主语时用单数谓语：Someone is…；Everybody wants…；Everything was…。地点词在本课多修饰动作，不因出现somewhere就强行把整句谓语改成单数。普通句中的名词主语仍按自己的数搭配。some-常用于肯定表达，也可用于邀请或期待肯定回答的问句；any-常用于一般询问、否定表达，还可表示无论谁或任意一个。Would you like something to drink?与Anyone can join都是合法语境，不能把常见分布写成绝对禁令。no-自带否定含义。本课标准的零数量表达用I didn’t see anyone／I saw no one，不把didn’t和no one叠在一起。改写要同时保持时态、对象、地点和范围：didn’t meet→met，didn’t buy→bought，didn’t go anywhere→went nowhere。everyone／everything／everywhere描述语境指定范围内的全体。查完两间房不等于查过全世界；从一个窗口看不见东西也不能推出整所房子无人。找遍了与没有找到分开表达，不能把结果倒推成搜索覆盖。形容词和表示用途的不定式放在复合代词后：something warm、nothing to read、something nice to eat。给出整块something nice不能算独立考过词序，所以本课会拆开这些词块再练。这些词可以在主语、宾语及be后表达不同意思，先读懂句意，不背位置标签。导学中a somebody／a nobody的“大人物／小人物”属于另一种名词义，保留在教师核对记录，不作为本课不定代词的核心判分例子。Isn’t there anyone…?按事实回应：有用Yes, there is；没有用No, there isn’t。问句本身不提供人数，也不能只凭否定形式确定人物生气或不满。There’s none left中的none承接前文所问的量，left是剩下的；不能从零杯数推成没有任何物品或任何人。原文Carol说没啤酒后，Tom说明是玩笑并提供啤酒，因此不能把Carol这句当最终库存事实。Jim开头的I’m sure是他的判断；后来大家在花园。Tom说wants to have lunch是愿望，Have some beer是邀请；正文没有确认午饭吃完或Jim喝下。Lemonade!也不能证明过敏或永久偏好。课文页面不自动显示这些理解结论。116课a–l完整保留，A4／B6／C4／D4共18题。B按练习设定作否定回答，不从问句本身推断没有；C保留原来they所指群体、动作和进行时；D按教材角色设定“答话人没有、另一角色有”，并按Sam／Jane／Alan与children选择he／she／they及has／have。"
+
+
+      23 |  await expect(page.locator('.reference-card p')).toHaveText(['a · Everyone is asleep. Everybody is asleep.','b · Everything is untidy.','c · I looked for my pen everywhere.','d · Is there anyone at home? Is there anybody at home?','e · Is there anything in that box?','f · I couldn’t find my pen anywhere.','g · There’s no one at home. There’s nobody at home.','h · There’s nothing in this box.','i · Where did you go yesterday? — Nowhere. I stayed at home.','j · There’s someone in the garden. There’s somebody in the garden.','k · There’s something under that chair!','l · My glasses must be somewhere! — You’re wearing them!']);
+      24 |  for(const text of ['Every','None','No one','Anybody','Anything','Somewhere'])await expect(page.locator('.pronoun-reference')).toContainText(text);await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});await page.locator('.stage-apply details').scrollIntoViewIfNeeded();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.pronoun-mobile dd,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});await expect(page.locator('.pronoun-mobile dl:visible')).toHaveCount(4);await page.setViewportSize({width:1280,height:900});
+    > 25 |  await page.goto('/unit115-116/#learn/grammar');await page.getByText('语法小参考',{exact:true}).click();for(const text of ['some-常用于','无论谁','相应','过去式','玩笑','观察范围'])await expect(page.locator('.stage-grammar details')).toContainText(text);
+         |                                                                                                                                                                                                                     ^
+      26 |  await page.goto('/unit115-116/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();for(const[i,n]of [4,6,4,4].entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveCount(n);for(const text of ['I didn’t meet anybody.','Did you write to anybody?','They’re all hurrying to work.','What about the children?','每题三句','进行时'])await expect(page.locator('#unitWriting')).toContainText(text);
+      27 | });
+      28 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit115-116.spec.js:25:213
+
+    Error Context: output\unit115116-chromium\unit115-116-31词卡、116课a–l、A4／B6／C4／D4完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit115116-chromium\unit115-116-31词卡、116课a–l、A4／B6／C4／D4完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit115116-chromium\unit115-116-31词卡、116课a–l、A4／B6／C4／D4完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit115-116.spec.js:20:1 › 31词卡、116课a–l、A4／B6／C4／D4完整 ────────────────────────────────
+  14 passed (3.3m)

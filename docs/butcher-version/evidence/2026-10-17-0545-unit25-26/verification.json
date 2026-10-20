@@ -1,0 +1,172 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-16T22:15:08.623Z",
+  "uniqueTestConditions": 183,
+  "groups": [
+    {
+      "scope": "Chromium current course, reading, input interactions and actual predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/chromium-static.json",
+        "reports/chromium-layout.json",
+        "reports/chromium-legacy-fixed.json",
+        "reports/final-materials.json"
+      ],
+      "note": "Four-width scene/reading checks rerun after natural-height layout. Old certificate path rerun after restoring original sizing class. Final full flow and all 45 material captures rerun after improving one distractor; correct answer and input structure unchanged.",
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, reading, interactions and actual predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/webkit-static.json",
+        "reports/webkit-legacy-fixed.json"
+      ],
+      "note": "Initial 20/21 passed. Same-version PNG failure reproduced separately, then all four migration cases passed with the exact pixel assertion retained. Other paths are unaffected by the legacy image class fix; final authenticated subpath flow covers final wording.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium actual worksheet and old certificate PDFs",
+      "conditions": 2,
+      "reports": [
+        "reports/chromium-static.json",
+        "reports/chromium-legacy-fixed.json"
+      ],
+      "note": "Two worksheet pages and one final old certificate page rendered and visually inspected.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/chromium-root.json",
+        "reports/chromium-root-legacy-fixed.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/chromium-subpath.json",
+        "reports/chromium-subpath-legacy-fixed.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/webkit-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/webkit-subpath.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Four real older-account chains through the actual 27-task click edition into five zones",
+      "conditions": 4,
+      "reports": [
+        "reports/chromium-subpath.json"
+      ],
+      "note": "23-task first edition, 30-task challenge edition, 28-task scene edition and 27-task keyboard edition. Actual original UI answers and certificates; new empty questions cannot be answered by old records. Dedicated root servers, not duplicate subpath checks.",
+      "status": "passed"
+    },
+    {
+      "scope": "Updated shared authenticated exercise contract for Lesson25–26",
+      "conditions": 1,
+      "reports": [
+        "reports/chromium-subpath-legacy-fixed.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen 27-task historical pages plus current shared statistics",
+      "conditions": 43,
+      "reports": [
+        "reports/historical.json"
+      ],
+      "note": "42 frozen historical conditions and one current /lesson/ statistics condition; original current-text keyboard and 28-task transitions retained.",
+      "status": "passed"
+    },
+    {
+      "scope": "Progress, awards, learning management, catalog, public boundary, workflow and existing validator checks",
+      "conditions": 59,
+      "logs": [
+        "shared-tests.txt"
+      ],
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": "24 source/material/package/document checks and two 72-course protected builds are separate from the test-condition total.",
+  "failuresAndRecovery": [
+    {
+      "finding": "Copied print expectation still counted six blanks; the actual source and rendered A section have eight.",
+      "initial": "reports/initial.json",
+      "resolution": "Correct only the test expectation to the independently checked textbook; retain 80x32 blank size and 32px writing-line checks.",
+      "recheck": "reports/chromium-static.json"
+    },
+    {
+      "finding": "The old certificate images lost their sizing class; DOM geometry enlarged and WebKit PNG edges differed by 1065 pixels.",
+      "initial": "reports/webkit-static.json",
+      "sameVersionReproduction": "reports/webkit-certificate-repro.json",
+      "diagnostics": "before-fix-art-layout.json",
+      "resolution": "Restore original sizing hook without changing SVG, identity, date, grading or the exact-pixel assertion.",
+      "rechecks": [
+        "reports/webkit-legacy-fixed.json",
+        "reports/chromium-legacy-fixed.json",
+        "reports/chromium-root-legacy-fixed.json",
+        "reports/chromium-subpath-legacy-fixed.json"
+      ]
+    },
+    {
+      "finding": "Fixed stage height created excessive empty space above the mobile kitchen.",
+      "resolution": "Use reader height and real image aspect ratio for normal layout; four-width and three short-reading configurations passed.",
+      "recheck": "reports/chromium-layout.json"
+    }
+  ],
+  "counts": {
+    "tasks": 45,
+    "zones": [
+      7,
+      3,
+      13,
+      5,
+      17
+    ],
+    "originalTasksArchived": 27,
+    "unchangedTasks": 26,
+    "authoredOrRevisedTasks": 19,
+    "words": 36,
+    "narrativeSentences": 12,
+    "originalSvgFiles": 53,
+    "selectedImageGenWebP": 4
+  },
+  "reuse": "Reruns and initial failed attempts are not added as independent conditions. Legacy-only image sizing does not change the current question or reward contracts. Later wording refinement changed one distractor and its explanation, not the answer, type or interaction; final materials/full-flow recheck and final WebKit subpath flow verify it.",
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit25-26/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scopeBoundary": "This is scoped development validation, not a complete production release run. No claim that other old lessons have received the same legacy-image fix."
+}

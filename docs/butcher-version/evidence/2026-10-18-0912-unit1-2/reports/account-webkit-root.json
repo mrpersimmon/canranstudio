@@ -1,0 +1,379 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit1-2-v154-account.spec.js",
+      "tests/login/unit1-2-v154-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/account-webkit-root"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/account-webkit-root",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4500/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154-account.spec.js",
+      "file": "unit1-2-v154-account.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20280,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js:24:255",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js",
+                      "column": 255,
+                      "line": 24
+                    },
+                    "snippet": "  22 |   // does not allow fetch(blob:); compare the actual decoded pixels instead.\n  23 |   expect(await pixels(p.locator('#cover .unit-cover-art img'))).toBe(referencePixels);expect(await pixels(p.locator('.stage-certificate .story-award-illustration'))).toBe(referencePixels);\n> 24 |   await p.goto(base+'unit1-2/#learn/trans');const room=p.locator('.stage-trans');await room.getByRole('button',{name:'Is this your book?',exact:true}).click();await p.reload();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');\n     |                                                                                                                                                                                                                                                               ^\n  25 |   await p.getByRole('link',{name:'我的课程',exact:true}).click();await p.reload();await home.locator('.primary-button').click();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  26 |   await p.goto(base+'unit3-4/');await expect(p.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();\n  27 |   info.annotations.push({type:'actual-503',description:String(failed)});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js",
+                        "column": 255,
+                        "line": 24
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: \u001b[32m\"true\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n\n\n  22 |   // does not allow fetch(blob:); compare the actual decoded pixels instead.\n  23 |   expect(await pixels(p.locator('#cover .unit-cover-art img'))).toBe(referencePixels);expect(await pixels(p.locator('.stage-certificate .story-award-illustration'))).toBe(referencePixels);\n> 24 |   await p.goto(base+'unit1-2/#learn/trans');const room=p.locator('.stage-trans');await room.getByRole('button',{name:'Is this your book?',exact:true}).click();await p.reload();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');\n     |                                                                                                                                                                                                                                                               ^\n  25 |   await p.getByRole('link',{name:'我的课程',exact:true}).click();await p.reload();await home.locator('.primary-button').click();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  26 |   await p.goto(base+'unit3-4/');await expect(p.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();\n  27 |   info.annotations.push({type:'actual-503',description:String(failed)});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js:24:255"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:40:46.044Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-account.spec.js",
+                    "column": 255,
+                    "line": 24
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-ae47f2e6dbb058bff210",
+          "file": "unit1-2-v154-account.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "账号姓名、跨设备五星、首次日期、重开练习与学生隔离",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 8859,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-award.spec.js:27:112",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-award.spec.js",
+                      "column": 112,
+                      "line": 27
+                    },
+                    "snippet": "  25 |   const errors=[];learner.on('pageerror',error=>errors.push(error.message));\n  26 |   await learner.goto(base + '#learn/trans');\n> 27 |   await expect(learner.locator('.stage-trans').getByRole('button', { name:'Is this your book?', exact:true })).toBeVisible();\n     |                                                                                                                ^\n  28 |   await first.context.setOffline(true);\n  29 |   await finishZone(learner, 'trans', { base, keepAward: true });\n  30 |   await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-award.spec.js",
+                        "column": 112,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })\u001b[22m\n\n\n  25 |   const errors=[];learner.on('pageerror',error=>errors.push(error.message));\n  26 |   await learner.goto(base + '#learn/trans');\n> 27 |   await expect(learner.locator('.stage-trans').getByRole('button', { name:'Is this your book?', exact:true })).toBeVisible();\n     |                                                                                                                ^\n  28 |   await first.context.setOffline(true);\n  29 |   await finishZone(learner, 'trans', { base, keepAward: true });\n  30 |   await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-award.spec.js:27:112"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:41:07.688Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-award.spec.js",
+                    "column": 112,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-43db3fcd3e75d424d5c3",
+          "file": "unit1-2-award.spec.js",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "订正完成但零星，课程首页仍可继续学习",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:41:17.569Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f22b52c0aa48b738244e-0294e341cfe365e08f02",
+          "file": "unit1-2-award.spec.js",
+          "line": 142,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-v154-upgrade.spec.js",
+      "file": "unit1-2-v154-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "同库更新与跨设备：原五星全部GIF帧和精确日期保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 80073,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:7324) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:41:44.387Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9014dd4a36bee01ee736-ab8e371e233a90f664f5",
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "line": 9,
+          "column": 42
+        },
+        {
+          "title": "同库更新与跨设备：原25题证书PNG和精确日期保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12260,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: not \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"zh-CN\" data-unit=\"unit1-2\" data-course-preparing=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: not \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"zh-CN\" data-unit=\"unit1-2\" data-course-preparing=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at story (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js:30:41)\n    at Object.complete (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js:54:2)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:30:61",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js",
+                      "column": 41,
+                      "line": 30
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\fixtures\\unit1-2-before-awards\\flow.js:30\n\n  28 | async function story(page,pair,base=''){\n  29 |  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');\n> 30 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();\n     |                                         ^\n  31 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;\n  32 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();\n  33 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js",
+                        "column": 41,
+                        "line": 30
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('html')\nExpected: not \u001b[32m\"\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('html')\u001b[22m\n\u001b[2m    14 × locator resolved to <html lang=\"zh-CN\" data-unit=\"unit1-2\" data-course-preparing=\"\">…</html>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n   at ..\\fixtures\\unit1-2-before-awards\\flow.js:30\n\n  28 | async function story(page,pair,base=''){\n  29 |  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');\n> 30 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();\n     |                                         ^\n  31 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;\n  32 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();\n  33 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();\n    at story (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js:30:41)\n    at Object.complete (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js:54:2)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:30:61"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:43:04.471Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\account-webkit-root\\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\fixtures\\unit1-2-before-awards\\flow.js",
+                    "column": 41,
+                    "line": 30
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9014dd4a36bee01ee736-a465f0bd75a94b1eec38",
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "line": 9,
+          "column": 42
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:40:41.601Z",
+    "duration": 155604.211,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

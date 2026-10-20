@@ -1,0 +1,179 @@
+{
+  "unit": "unit115-116",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 74,
+  "zones": {
+    "listen": 9,
+    "roles": 9,
+    "grammar": 24,
+    "apply": 8,
+    "exam": 24
+  },
+  "words": 31,
+  "people": 4,
+  "dialogueTurns": 14,
+  "substitutions": {
+    "count": 12,
+    "labels": "a–l",
+    "fullWordTable": true
+  },
+  "writing": {
+    "items": {
+      "A": 4,
+      "B": 6,
+      "C": 4,
+      "D": 4
+    },
+    "linesPerItem": {
+      "A": 1,
+      "B": 2,
+      "C": 1,
+      "D": 3
+    },
+    "totalLines": 32
+  },
+  "browserRuns": {
+    "representative": {
+      "passed": 4,
+      "failed": 0
+    },
+    "chromium-reference": {
+      "passed": 1,
+      "failed": 0
+    },
+    "scene-final": {
+      "passed": 4,
+      "failed": 0
+    },
+    "webkit-final": {
+      "passed": 5,
+      "failed": 0
+    },
+    "map-chromium": {
+      "passed": 6,
+      "failed": 0
+    },
+    "map-webkit": {
+      "passed": 6,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 6,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 6,
+      "failed": 0
+    },
+    "login-webkit-root": {
+      "passed": 6,
+      "failed": 0
+    },
+    "login-webkit-sub": {
+      "passed": 6,
+      "failed": 0
+    },
+    "map-login-root": {
+      "passed": 1,
+      "failed": 0
+    },
+    "map-login-sub": {
+      "passed": 1,
+      "failed": 0
+    },
+    "map-login-webkit-root": {
+      "passed": 1,
+      "failed": 0
+    },
+    "map-login-webkit-sub": {
+      "passed": 1,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    },
+    "chromium": {
+      "passed": 14,
+      "failed": 1,
+      "resolvedBy": "chromium-reference"
+    },
+    "webkit": {
+      "passed": 14,
+      "failed": 1,
+      "resolvedBy": "webkit-final"
+    }
+  },
+  "browserTotalDistinctPassing": 62,
+  "additionalSceneAndMapRechecks": 20,
+  "initialIssuesRetained": {
+    "referenceAssertion": "expected generic label absent; replaced with actual visible did not meet -> met and window scope, verified in both engines",
+    "fence": "open SVG fence path filled black by default; explicit fill=none in source and generator",
+    "camera": "window moved to Jims gaze direction via a separate camera background",
+    "map": "unknown scene field ignored; switched to image and imageAlt, removed pre-solved heading, tested visible decoded material in both engines and both account mounts"
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true
+  },
+  "art": {
+    "fullBodySprites": 7,
+    "keepsake": 1,
+    "opaqueEdgePixels": 0
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13-O14": "pending; course evidence appended",
+    "newItems": 0
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit115-116/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 6",
+    "writingItems": 18,
+    "writingLines": 32
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

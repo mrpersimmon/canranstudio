@@ -1,0 +1,33 @@
+
+> canranstudio@0.0.0 test:workflow
+> node --test tests/workflow/*.test.js
+
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (237.6714ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (588.2973ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (365.7343ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (268.2942ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (322.3661ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (293.0989ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (353.6316ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (177.0124ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (4.1833ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (1.7384ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (283.3905ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2962.7405

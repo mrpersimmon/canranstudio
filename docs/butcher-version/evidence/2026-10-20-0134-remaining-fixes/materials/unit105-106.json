@@ -1,0 +1,80 @@
+{
+  "id": "unit105-106",
+  "source": {
+    "file": "tests/support/unit105106.js",
+    "sha256": "d95524d8ac6cd10458b5800fe777fc12088cc9eca7a55a0f582ce60b2e20e823"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u105106-v1-r-sandra",
+      "text": "Lesson 105\n\nThe boss: Where’s Sandra, Bob? I want her.\n\nBob: Do you want to speak to her?\n\nThe boss: Yes, I do. I want her to come to my office. Tell her to come at once."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u105106-v1-r-bob",
+      "text": "Lesson 105\n\nThe boss: Where’s Sandra, Bob? I want her.\n\nBob: Do you want to speak to her?\n\nThe boss: Yes, I do. I want her to come to my office. Tell her to come at once."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u105106-v1-r-spelling",
+      "text": "Lesson 105\n\nThe boss: Ah, yes, Sandra. How do you spell ‘intelligent’? Can you tell me?\n\nSandra: I-N-T-E-L-L-I-G-E-N-T.\n\nThe boss: That’s right. You’ve typed it with only one ‘L’. This letter’s full of mistakes. I want you to type it again."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u105106-v1-r-again",
+      "text": "Lesson 105\n\nThe boss: That’s right. You’ve typed it with only one ‘L’. This letter’s full of mistakes. I want you to type it again.\n\nSandra: Yes, I’ll do that. I’m sorry about that."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u105106-v1-r-promise",
+      "text": "Lesson 105\n\nThe boss: That’s right. You’ve typed it with only one ‘L’. This letter’s full of mistakes. I want you to type it again.\n\nSandra: Yes, I’ll do that. I’m sorry about that."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u105106-v1-r-present",
+      "text": "Lesson 105\n\nThe boss: And here’s a little present for you.\n\nSandra: What is it?\n\nThe boss: It’s a dictionary. I hope it’ll help you."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u105106-v1-r-hope",
+      "text": "Lesson 105\n\nThe boss: And here’s a little present for you.\n\nSandra: What is it?\n\nThe boss: It’s a dictionary. I hope it’ll help you."
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u105106-v1-e-spell",
+      "text": "Lesson 105\n\nThe boss: Ah, yes, Sandra. How do you spell ‘intelligent’? Can you tell me?\n\nSandra: I-N-T-E-L-L-I-G-E-N-T.\n\nThe boss: That’s right. You’ve typed it with only one ‘L’. This letter’s full of mistakes. I want you to type it again."
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u105106-v1-e-result",
+      "text": "Lesson 105\n\nThe boss: That’s right. You’ve typed it with only one ‘L’. This letter’s full of mistakes. I want you to type it again.\n\nSandra: Yes, I’ll do that. I’m sorry about that.\n\nThe boss: And here’s a little present for you.\n\nSandra: What is it?\n\nThe boss: It’s a dictionary. I hope it’ll help you."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-3",
+    "R2": "1-3",
+    "R3": "5-7",
+    "R4": "7-8",
+    "R5": "7-8",
+    "R6": "9-11",
+    "R7": "9-11",
+    "E1": "5-7",
+    "E3": "7-11"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

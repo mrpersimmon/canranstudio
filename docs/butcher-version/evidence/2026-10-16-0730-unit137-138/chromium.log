@@ -1,0 +1,62 @@
+
+Running 15 tests using 1 worker
+
+(node:35820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit137-138-story-layout.spec.js:32:39 › 320：15步完整原文、客厅三种姿态、中文续读与无剧情结论 (13.6s)
+  ok  2 tests\e2e\unit137-138-story-layout.spec.js:32:39 › 390：15步完整原文、客厅三种姿态、中文续读与无剧情结论 (13.8s)
+  ok  3 tests\e2e\unit137-138-story-layout.spec.js:32:39 › 768：15步完整原文、客厅三种姿态、中文续读与无剧情结论 (13.9s)
+  ok  4 tests\e2e\unit137-138-story-layout.spec.js:32:39 › 1280：15步完整原文、客厅三种姿态、中文续读与无剧情结论 (13.5s)
+  ok  5 tests\e2e\unit137-138-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (2.2s)
+  ok  6 tests\e2e\unit137-138.spec.js:8:1 › 54题：未答材料、条件分支与检查记录、独立表达、帮助记录与三卡 (19.5s)
+  ok  7 tests\e2e\unit137-138.spec.js:25:1 › 12词卡、138课1–6及A至C的25原题完整 (2.1s)
+  x   8 tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (6.2s)
+(node:15152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 tests\e2e\unit137-138.spec.js:48:1 › 错答不更新条件记录，三卡6／8／2，刷新保留原图 (4.8s)
+  ok 10 tests\e2e\unit137-138.spec.js:53:1 › 全部声音失败仍能完成五区 (12.5s)
+  ok 11 tests\e2e\unit137-138.spec.js:54:1 › 25道书写题25行打印与恢复 (1.3s)
+  ok 12 tests\e2e\unit137-138.spec.js:55:39 › 320及短屏：条件句与许可材料、长句、全部题型和三卡 (17.5s)
+  ok 13 tests\e2e\unit137-138.spec.js:55:39 › 390及短屏：条件句与许可材料、长句、全部题型和三卡 (17.5s)
+  ok 14 tests\e2e\unit137-138.spec.js:55:39 › 768及短屏：条件句与许可材料、长句、全部题型和三卡 (18.1s)
+  ok 15 tests\e2e\unit137-138.spec.js:55:39 › 1280及短屏：条件句与许可材料、长句、全部题型和三卡 (18.4s)
+
+
+  1) tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ────────────────────────────────────
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })
+        14 × locator resolved to <button type="button" class="btn btn-green">检查答案</button>
+           - unexpected value "enabled"
+
+
+      38 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+      39 |  test.setTimeout(180000);await page.goto('/unit137-138/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
+    > 40 |  for(let k=0;k<2;k++){await select(room,{locate:'we’ll play a game'});await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();}
+         |                                                                                                                                                                                                                                                                                                                                                                              ^
+      41 |  for(const[i,a]of ANSWERS.grammar.entries()){
+      42 |   if(i===1){await select(room,{fills:['rains']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'rains',exact:true}).click();}
+      43 |   if(i===4){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'I’ll',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 I’ll',exact:true}).click();await expect(check).toBeDisabled();}
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit137-138.spec.js:40:366
+
+    Error Context: output\unit137138-chromium\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit137138-chromium\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit137138-chromium\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ─────────────────────────────────────
+  14 passed (3.0m)

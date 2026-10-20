@@ -1,0 +1,24 @@
+{
+  "id": "unit15-16",
+  "source": {
+    "file": "tests/support/unit1516-fivezones.js",
+    "sha256": "b100e6c1e7b5debb95b5016d2318c41909e52d628fba406e868f5d503b8bf598"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u1516-v1-story-friends",
+      "text": "Lesson 15\n\n海关官员: Are your friends Danish, too?\n\n姑娘们: No, they aren't.\n\n姑娘们: They are Norwegian."
+    }
+  ],
+  "sourceLines": {
+    "R1": "4-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

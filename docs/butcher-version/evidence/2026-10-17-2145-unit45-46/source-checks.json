@@ -1,0 +1,148 @@
+{
+  "at": "2026-10-17T14:51:26.738Z",
+  "passed": 29,
+  "failed": [],
+  "checks": [
+    {
+      "name": "54 tasks in exactly five zones",
+      "passed": true,
+      "detail": {
+        "listen": 7,
+        "roles": 5,
+        "grammar": 16,
+        "apply": 5,
+        "exam": 21
+      }
+    },
+    {
+      "name": "39 original tasks unchanged; ten revisions and five new tasks",
+      "passed": true,
+      "detail": {
+        "unchanged": 39,
+        "revised": 10
+      }
+    },
+    {
+      "name": "all 54 identities unique",
+      "passed": true
+    },
+    {
+      "name": "same award edition, art, title, colours and five zones",
+      "passed": true
+    },
+    {
+      "name": "same storage key and version",
+      "passed": true
+    },
+    {
+      "name": "24 word identities and British phonetics preserved",
+      "passed": true
+    },
+    {
+      "name": "14 full source dialogue lines and speaker order preserved",
+      "passed": true
+    },
+    {
+      "name": "8 paired replacement prompts and original numbers retained",
+      "passed": true
+    },
+    {
+      "name": "A7 and B8 original prompts retained",
+      "passed": true
+    },
+    {
+      "name": "online blanks limited to two related choices",
+      "passed": true
+    },
+    {
+      "name": "unchanged listen session continues",
+      "passed": true
+    },
+    {
+      "name": "four revised sessions retain actual v1 predecessors",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen grammar.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen typography.css equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "server prior content.js unchanged",
+      "passed": true
+    },
+    {
+      "name": "all 47 original images unchanged",
+      "passed": true,
+      "detail": {
+        "svg": 46,
+        "webp": 1
+      }
+    },
+    {
+      "name": "original card renderers and catalogue unchanged",
+      "passed": true
+    },
+    {
+      "name": "11 added vectors decode: 8 paired scenes, put-on and 2 outlined numbers",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "final text hashes and font coverage recorded",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1931,
+        "inputs": 414
+      }
+    },
+    {
+      "name": "original font license bytes preserved",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "assets": [],
+  "changedSourcePaths": 55
+}

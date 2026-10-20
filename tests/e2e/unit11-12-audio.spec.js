@@ -1,6 +1,7 @@
 'use strict';
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
+require('../support/unit1112-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 for(const base of ['', '/lesson'])test(`unit11-12 词卡翻面、示范阅读和刷新都不请求英语配音 ${base||'/'}`,async({page})=>{
  const voices=[];await page.route(/\.(mp3|wav|ogg)(\?|$)/,route=>{if(!isFeedbackAudio(route.request().url()))voices.push(route.request().url());return route.abort();});

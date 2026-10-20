@@ -115,3 +115,17 @@ unit.learning.WRITING_A=['I am going to see him ___ ten o’clock.','It often ra
 unit.learning.WRITING_B=['When must she go to the library? (1:15)','When must you and Sam see the dentist? (3:45)','When must you type this letter? (2:00)','When must Sam and Penny see the boss? (1:30)','When must George take his medicine? (3:15)','When must Sophie arrive in London? (2:30)','When must I catch the bus? (3:30)','When must you arrive there? (3:00)','When must they come home? (2:15)','When must you meet Sam? (1:45)','When must he telephone you? (2:45)'];
 core.unit6566=unit;if(root.document?.documentElement?.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit6566,excerpts={"u6566-v1-r-plan":[0,1],"u6566-v1-r-first":[0,1,2,3],"u6566-v1-r-key":[4,5],"u6566-v1-r-age":[4,5,6],"u6566-v1-r-reason":[4,5,6],"u6566-v1-r-last":[6,7,8,9],"u6566-v1-r-ourselves":[0,1,10,11,12],"u6566-v1-e-plan":[0,1,2,3,4,5,6,7,8,9,10,11,12]},speakers={"father":"Father · Tom","jill":"Jill","mother":"Mother"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 65',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

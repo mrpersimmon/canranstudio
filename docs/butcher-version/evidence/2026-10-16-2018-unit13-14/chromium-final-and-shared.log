@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:20172) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\submission-statistics.spec.js:16:4 › 11-12 共用结算按提交计次，手机三卡完整，刷新保留 (7.1s)
+  ok 2 tests\e2e\submission-statistics.spec.js:16:4 › 13-14 共用结算按提交计次，手机三卡完整，刷新保留 (6.6s)
+  ok 3 tests\e2e\submission-statistics.spec.js:16:4 › 15-16 共用结算按提交计次，手机三卡完整，刷新保留 (3.5s)
+  ok 4 tests\e2e\unit13-14-fivezones.spec.js:5:1 › 53题、完整原文、五区五星及教材参考均可真实完成 (17.3s)
+  ok 5 tests\e2e\unit13-14-state.spec.js:75:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿 (2.1s)
+
+  5 passed (37.9s)

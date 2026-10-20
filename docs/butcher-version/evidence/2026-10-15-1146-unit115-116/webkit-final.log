@@ -1,0 +1,12 @@
+
+Running 5 tests using 1 worker
+
+(node:9532) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit115-116-story-layout.spec.js:33:39 › 320：14轮原文、四人换景与全部姿态、按需中文和续读 (22.3s)
+  ok 2 tests\e2e\unit115-116-story-layout.spec.js:33:39 › 390：14轮原文、四人换景与全部姿态、按需中文和续读 (21.2s)
+  ok 3 tests\e2e\unit115-116-story-layout.spec.js:33:39 › 768：14轮原文、四人换景与全部姿态、按需中文和续读 (23.1s)
+  ok 4 tests\e2e\unit115-116-story-layout.spec.js:33:39 › 1280：14轮原文、四人换景与全部姿态、按需中文和续读 (26.2s)
+  ok 5 tests\e2e\unit115-116.spec.js:20:1 › 31词卡、116课a–l、A4／B6／C4／D4完整 (9.3s)
+
+  5 passed (1.7m)

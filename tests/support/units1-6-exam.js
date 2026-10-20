@@ -48,6 +48,8 @@ EXAMS['1-2'][6]={prompt:'把这句话变成问句',answer:['Is','this','your coa
 EXAMS['1-2'][7]={prompt:'问的是哪件物品？',answer:'房子'};
 EXAMS['1-2'].push({prompt:'问自己：我准备好了吗？',answer:['Am','I','ready']},{prompt:'完成角色猜谜的一问一答',answer:{fills:['Are','am']}});
 EXAMS['1-2'].forEach((q, i) => { q.prompt = ['帮女士完成对话', '手表不是你的，你怎么回答？', '读对话，选一选', '没听清，请同学再说一遍', '想叫住同学，先说什么？', 'Is this your pencil?', '把这句话变成问句', '问的是哪件物品？', '问自己：我准备好了吗？', '你扮演学生，完成对话'][i]; });
+const prompts56=['哪份记录符合？','早晨向班里介绍 Hans','现在可以确定什么？','哪一句直接表达“很高兴见到你”？','Ben is German, too.','Hans 是男同学','继续介绍她的汽车','想先说她是法国人','What make is it?','先否定不符合的情况','三个缩写依次展开成什么？','你想知道面前这辆汽车的品牌','谁是德国人？','展牌：Ford'];
+EXAMS['5-6']=require('./unit56-answers').CURRENT.exam.map((q,i)=>({...q,prompt:prompts56[i],...(i===0?{wrong:'Hans 和汽车都是德国的'}:{})}));
 async function choose(room, question) {
   if (question.audio) {
     await room.getByRole('button', { name: '听一遍', exact: true }).click();

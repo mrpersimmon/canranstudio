@@ -1,0 +1,64 @@
+
+Running 15 tests using 1 worker
+
+(node:25720) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit135-136-story-layout.spec.js:36:39 › 320：18步完整原文、两处场景和五种姿态、中文续读与无剧情结论 (30.8s)
+  ok  2 tests\e2e\unit135-136-story-layout.spec.js:36:39 › 390：18步完整原文、两处场景和五种姿态、中文续读与无剧情结论 (31.8s)
+  ok  3 tests\e2e\unit135-136-story-layout.spec.js:36:39 › 768：18步完整原文、两处场景和五种姿态、中文续读与无剧情结论 (31.3s)
+  ok  4 tests\e2e\unit135-136-story-layout.spec.js:36:39 › 1280：18步完整原文、两处场景和五种姿态、中文续读与无剧情结论 (33.0s)
+  ok  5 tests\e2e\unit135-136-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (6.0s)
+  x   6 tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 (25.1s)
+(node:29828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 tests\e2e\unit135-136.spec.js:28:1 › 12词卡、136课1–9及A至D的25原题完整 (4.5s)
+  ok  8 tests\e2e\unit135-136.spec.js:43:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (25.6s)
+  ok  9 tests\e2e\unit135-136.spec.js:53:1 › 错答不更新介绍记录，三卡6／8／2，刷新保留原图 (9.4s)
+  ok 10 tests\e2e\unit135-136.spec.js:58:1 › 全部声音失败仍能完成五区 (35.1s)
+  ok 11 tests\e2e\unit135-136.spec.js:59:1 › 25道书写题25行打印与恢复 (1.5s)
+  ok 12 tests\e2e\unit135-136.spec.js:60:39 › 320及短屏：情态转述与许可材料、长句、全部题型和三卡 (37.0s)
+  ok 13 tests\e2e\unit135-136.spec.js:60:39 › 390及短屏：情态转述与许可材料、长句、全部题型和三卡 (37.5s)
+  ok 14 tests\e2e\unit135-136.spec.js:60:39 › 768及短屏：情态转述与许可材料、长句、全部题型和三卡 (37.3s)
+  ok 15 tests\e2e\unit135-136.spec.js:60:39 › 1280及短屏：情态转述与许可材料、长句、全部题型和三卡 (39.5s)
+
+
+  1) tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar').locator('.practice-context')
+    Expected substring: "listener"
+    Received string:    "Mia does the introduction. Ben is the person she presents. Sue is listening and meeting Ben."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar').locator('.practice-context')
+        14 × locator resolved to <div role="region" aria-label="题目材料" class="practice-context">…</div>
+           - unexpected value "Mia does the introduction. Ben is the person she presents. Sue is listening and meeting Ben."
+
+
+      16 |  for(const id of Object.keys(ANSWERS)){const room=await activity(page,id,{inspect:async(room,i,phase)=>{
+      17 |   if(phase==='before'){
+    > 18 |    for(const text of MATERIAL[id]?.[i]||[])await expect(room.locator('.practice-context')).toContainText(text);
+         |                                                                                            ^
+      19 |    if(id==='exam'||id==='apply')await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
+      20 |    if(id==='apply'){await expect(room.locator('.report-application')).toHaveAttribute('data-recorded','false');await expect(room.locator('.application-prop')).toHaveAttribute('src','/assets/unit135-136/task-record.svg');}
+      21 |    if(id==='apply'&&(i===0||i===2)){const im=room.locator('.practice-scene');await expect(im).toBeVisible();await expect(im).toHaveAttribute('src','/assets/unit135-136/'+(i===0?'week-record':'introduction-record')+'.svg');await expect(im).toHaveAttribute('alt',diagramAlt[i===0?0:1]);await im.evaluate(e=>e.decode());await room.screenshot({path:info.outputPath('material-'+i+'-before.png')});}
+        at inspect (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit135-136.spec.js:18:92)
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit135136.js:25:194)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit135-136.spec.js:16:51
+
+    Error Context: output\unit135136-webkit\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit135136-webkit\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit135136-webkit\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 ────────────────────────────
+  14 passed (6.5m)

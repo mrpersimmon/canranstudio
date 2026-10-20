@@ -1,0 +1,51 @@
+(node:35484) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (195.135ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.9608ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (105.0862ms)
+✔ handoff awards require a complete matching object and recipient from this round (1.8873ms)
+✔ handoff correctness cannot bypass errors, missing submission, signature or round identity (0.4909ms)
+✔ undeclared handoff candidates and other unsupported types stay rejected (0.3771ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (3.007ms)
+✔ landmark state URLs carry one immutable content version (0.9974ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.2275ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.1937ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (3.4929ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (3.2743ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (1.5006ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.6331ms)
+✔ every published map stage declares a child-readable growth reveal (1.2592ms)
+✔ published course registry is a compatibility view of the shared catalog (3.8953ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.3884ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.2376ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.2179ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.361ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (418.5337ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (1204.6068ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (672.6103ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (569.8557ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (558.8227ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (490.2462ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (535.7024ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (295.4499ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (8.5511ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (2.0823ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (457.648ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5478.6776

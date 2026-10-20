@@ -1,0 +1,22 @@
+
+Running 15 tests using 1 worker
+
+(node:6836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit141-142-story-layout.spec.js:16:39 › 320：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (33.3s)
+  ok  2 tests\e2e\unit141-142-story-layout.spec.js:16:39 › 390：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (34.5s)
+  ok  3 tests\e2e\unit141-142-story-layout.spec.js:16:39 › 768：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (33.6s)
+  ok  4 tests\e2e\unit141-142-story-layout.spec.js:16:39 › 1280：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (36.5s)
+  ok  5 tests\e2e\unit141-142-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (8.1s)
+  ok  6 tests\e2e\unit141-142.spec.js:8:1 › 61题：未答材料、动作与邀请记录、四种被动形式、帮助记录与三卡 (47.9s)
+  ok  7 tests\e2e\unit141-142.spec.js:24:1 › 18词卡、142课1–8及A至C的28原题完整 (5.8s)
+  ok  8 tests\e2e\unit141-142.spec.js:37:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (24.1s)
+  ok  9 tests\e2e\unit141-142.spec.js:47:1 › 错答不更新动作记录，三卡6／8／2，刷新保留原图 (9.5s)
+  ok 10 tests\e2e\unit141-142.spec.js:52:1 › 全部声音失败仍能完成五区 (36.0s)
+  ok 11 tests\e2e\unit141-142.spec.js:53:1 › 28道书写题51行打印与恢复 (1.5s)
+  ok 12 tests\e2e\unit141-142.spec.js:54:39 › 320及短屏：被动表达与动作材料、长句、全部题型和三卡 (39.6s)
+  ok 13 tests\e2e\unit141-142.spec.js:54:39 › 390及短屏：被动表达与动作材料、长句、全部题型和三卡 (39.1s)
+  ok 14 tests\e2e\unit141-142.spec.js:54:39 › 768及短屏：被动表达与动作材料、长句、全部题型和三卡 (38.7s)
+  ok 15 tests\e2e\unit141-142.spec.js:54:39 › 1280及短屏：被动表达与动作材料、长句、全部题型和三卡 (40.3s)
+
+  15 passed (7.2m)

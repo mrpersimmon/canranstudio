@@ -1,0 +1,63 @@
+
+Running 4 tests using 1 worker
+
+(node:35112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit123-124-story-layout.spec.js:33:39 › 320：17轮完整对话、现场与照片分开、按需中文续读 (12.5s)
+  ok 2 tests\e2e\unit123-124-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (3.2s)
+  x  3 tests\e2e\unit123-124.spec.js:29:1 › 24词卡、124课1–9、A6／B6／C6完整 (7.5s)
+(node:31692) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 4 tests\e2e\unit123-124.spec.js:51:1 › 错答不更新照片记录，三卡4／8／2，刷新保留原图 (4.0s)
+
+
+  1) tests\e2e\unit123-124.spec.js:29:1 › 24词卡、124课1–9、A6／B6／C6完整 ──────────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('.reference-card p')
+    Timeout: 5000ms
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -1,10 +1,10 @@
+      Array [
+        "1 · Who served you? The man standing behind the counter.",
+        "2 · Who served you? The woman standing behind the counter.",
+        "3 · Who is making that noise? The men repairing the road.",
+    -   "4 · I served him yesterday. The man I served yesterday.",
+    +   "4 · I served him yesterday. He is the man I served yesterday.",
+        "5 · I served her yesterday. She is the woman I served yesterday.",
+        "6 · I saw them yesterday. They are the men I saw yesterday.",
+        "7 · What’s this? This is the book I bought yesterday.",
+        "8 · What are these? These are the books I bought yesterday.",
+        "9 · What’s this? This is the kitten I found in the garden.",
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('.reference-card p')
+        14 × locator resolved to 9 elements
+
+
+      31 |  expect(words).toEqual(['during','trip','travel','offer','job','guess','grow','beard','kitten','photograph','Australia','ship','shave off','come home','beautiful','remember','people','on','about','decide','test','village','umbrella','medicine']);
+      32 |  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('4 / 4');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
+    > 33 |  await page.goto('/unit123-124/#learn/apply');await page.getByText('课本小参考 · 124课1–9',{exact:true}).click();await expect(page.locator('.structure-reference tr')).toHaveCount(7);await expect(page.locator('.reference-card p')).toHaveText(['1 · Who served you? The man standing behind the counter.','2 · Who served you? The woman standing behind the counter.','3 · Who is making that noise? The men repairing the road.','4 · I served him yesterday. The man I served yesterday.','5 · I served her yesterday. She is the woman I served yesterday.','6 · I saw them yesterday. They are the men I saw yesterday.','7 · What’s this? This is the book I bought yesterday.','8 · What are these? These are the books I bought yesterday.','9 · What’s this? This is the kitten I found in the garden.']);
+         |                                                                                                                                                                                                                                 ^
+      34 |  await expect(page.locator('.verb-forms strong')).toHaveText(['grow','grew','grown']);await expect(page.locator('.reference-phonetic')).toHaveText(['/ɡrəʊ/','/ɡruː/','/ɡrəʊn/']);expect(await page.locator('.reference-phonetic').evaluateAll(es=>es.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);
+      35 |  for(const text of ['the photograph I took','the man standing behind the counter','How beautifully she sings!'])await expect(page.locator('.structure-reference')).toContainText(text);
+      36 |  await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});await page.locator('.stage-apply details').scrollIntoViewIfNeeded();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.structure-mobile dd,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});await expect(page.locator('.structure-mobile dl:visible')).toHaveCount(6);await page.setViewportSize({width:1280,height:900});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit123-124.spec.js:33:225
+
+    Error Context: output\unit123124-representative\unit123-124-24词卡、124课1–9、A6／B6／C6完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit123124-representative\unit123-124-24词卡、124课1–9、A6／B6／C6完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit123124-representative\unit123-124-24词卡、124课1–9、A6／B6／C6完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit123-124.spec.js:29:1 › 24词卡、124课1–9、A6／B6／C6完整 ───────────────────────────────────
+  3 passed (29.1s)

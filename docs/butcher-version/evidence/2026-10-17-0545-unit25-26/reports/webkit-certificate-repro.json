@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit25-26-fivezones-upgrade.spec.js",
+      "--grep",
+      "旧15星",
+      "--reporter=list,json",
+      "--output=output/unit2526-webkit-certificate-repro"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2526-webkit-certificate-repro",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4312",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit25-26-fivezones-upgrade.spec.js",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18154,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-fivezones-upgrade.spec.js:19:1088",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-fivezones-upgrade.spec.js",
+                      "column": 1088,
+                      "line": 19
+                    },
+                    "snippet": "  17 | test('旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证',async({page},info)=>{\n  18 |  test.setTimeout(180000);const upgrade=await legacy(page);await completeUnit2526(page);await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小禾');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();const originalLayout=await page.locator('#certificateDialog .certificate-heroes>img').evaluateAll(xs=>xs.map(e=>({src:e.getAttribute('src'),classes:e.className,natural:[e.naturalWidth,e.naturalHeight],display:[e.getBoundingClientRect().width,e.getBoundingClientRect().height],objectFit:getComputedStyle(e).objectFit})));const beforeDownload=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();const original=info.outputPath('original-certificate.png');await(await beforeDownload).saveAs(original);await page.keyboard.press('Escape');const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')));await upgrade();await page.reload();await expect(page.locator('#starCount')).toHaveText('0');const history=page.locator('.legacy-learning');await history.locator('summary').first().click();await expect(history).toContainText('15 / 15');await expect(history.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitClassroomCertificateIssuedAt);\n> 19 |  await history.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小禾');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);const pending=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();const saved=info.outputPath('retained-old-certificate.png');await(await pending).saveAs(saved);const retainedLayout=await page.locator('#legacyCertificateDialog .certificate-heroes>img').evaluateAll(xs=>xs.map(e=>({src:e.getAttribute('src'),classes:e.className,natural:[e.naturalWidth,e.naturalHeight],display:[e.getBoundingClientRect().width,e.getBoundingClientRect().height],objectFit:getComputedStyle(e).objectFit})));require('node:fs').writeFileSync(info.outputPath('legacy-art-layout.json'),JSON.stringify({originalLayout,retainedLayout},null,2));const sharp=require('sharp'),meta=await sharp(saved).metadata();expect(meta.width).toBe(1440);expect(meta.height).toBe(1100);expect((await sharp(original).raw().toBuffer()).equals(await sharp(saved).raw().toBuffer())).toBe(true);await page.keyboard.press('Escape');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  20 |  await page.goto('/unit25-26/#learn/grammar');const room=page.locator('.stage-grammar');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 13 题');await select(room,'a');await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit25-26/#learn/listen');await expect(page.locator('.stage-listen .completion-number')).toHaveText(['—','—','—']);await page.locator('.stage-listen').getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'listen');await expect(page.locator('#starCount')).toHaveText('1');await page.goto('/unit25-26/#learn/certificate');await history.locator('summary').first().click();await history.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateDate')).toHaveText(date);await expect(page.locator('#legacyCertificateName')).toHaveText('小禾');\n  21 | });\n  22 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-fivezones-upgrade.spec.js",
+                        "column": 1088,
+                        "line": 19
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  17 | test('旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证',async({page},info)=>{\n  18 |  test.setTimeout(180000);const upgrade=await legacy(page);await completeUnit2526(page);await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('小禾');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();const originalLayout=await page.locator('#certificateDialog .certificate-heroes>img').evaluateAll(xs=>xs.map(e=>({src:e.getAttribute('src'),classes:e.className,natural:[e.naturalWidth,e.naturalHeight],display:[e.getBoundingClientRect().width,e.getBoundingClientRect().height],objectFit:getComputedStyle(e).objectFit})));const beforeDownload=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();const original=info.outputPath('original-certificate.png');await(await beforeDownload).saveAs(original);await page.keyboard.press('Escape');const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')));await upgrade();await page.reload();await expect(page.locator('#starCount')).toHaveText('0');const history=page.locator('.legacy-learning');await history.locator('summary').first().click();await expect(history).toContainText('15 / 15');await expect(history.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitClassroomCertificateIssuedAt);\n> 19 |  await history.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小禾');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);const pending=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();const saved=info.outputPath('retained-old-certificate.png');await(await pending).saveAs(saved);const retainedLayout=await page.locator('#legacyCertificateDialog .certificate-heroes>img').evaluateAll(xs=>xs.map(e=>({src:e.getAttribute('src'),classes:e.className,natural:[e.naturalWidth,e.naturalHeight],display:[e.getBoundingClientRect().width,e.getBoundingClientRect().height],objectFit:getComputedStyle(e).objectFit})));require('node:fs').writeFileSync(info.outputPath('legacy-art-layout.json'),JSON.stringify({originalLayout,retainedLayout},null,2));const sharp=require('sharp'),meta=await sharp(saved).metadata();expect(meta.width).toBe(1440);expect(meta.height).toBe(1100);expect((await sharp(original).raw().toBuffer()).equals(await sharp(saved).raw().toBuffer())).toBe(true);await page.keyboard.press('Escape');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  20 |  await page.goto('/unit25-26/#learn/grammar');const room=page.locator('.stage-grammar');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 13 题');await select(room,'a');await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit25-26/#learn/listen');await expect(page.locator('.stage-listen .completion-number')).toHaveText(['—','—','—']);await page.locator('.stage-listen').getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'listen');await expect(page.locator('#starCount')).toHaveText('1');await page.goto('/unit25-26/#learn/certificate');await history.locator('summary').first().click();await history.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateDate')).toHaveText(date);await expect(page.locator('#legacyCertificateName')).toHaveText('小禾');\n  21 | });\n  22 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-fivezones-upgrade.spec.js:19:1088"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:49:11.494Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-webkit-certificate-repro\\unit25-26-fivezones-upgrad-ea5e7-保留姓名、原始日期及实际PNG，新版错答和首星不改旧证\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-webkit-certificate-repro\\unit25-26-fivezones-upgrad-ea5e7-保留姓名、原始日期及实际PNG，新版错答和首星不改旧证\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-fivezones-upgrade.spec.js",
+                    "column": 1088,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7dd85436c2cc25bf1a21-b256a2bbfe13b225bc5d",
+          "file": "unit25-26-fivezones-upgrade.spec.js",
+          "line": 17,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T21:49:10.913Z",
+    "duration": 19474.86,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

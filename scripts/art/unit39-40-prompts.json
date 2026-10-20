@@ -1,0 +1,86 @@
+{
+  "tool": "built-in image_gen",
+  "style": "confirmed unit1-2 / unit3-4 / unit5-6",
+  "images": [
+    {
+      "id": "penny-scene",
+      "file": "assets/unit39-40/vase-penny-v1.webp",
+      "transparent": false,
+      "prompt": "Children's English lesson illustration. Reference 1 and 2 are STYLE only: thick rounded DARK BROWN outlines, warm muted flat colours, friendly rounded faces, subtle paper texture. No photorealism. Reference 3 and 4 define identities: Sam is an adult man with blond side-parted hair, pale blue jacket with one square pocket, cream shirt, brown trousers and shoes, no glasses or facial hair. Penny is an adult woman with shoulder-length dark-brown outward bob, mustard short blouse, sage green neck scarf, dusty terracotta pleated skirt, brown shoes. Reference 5 defines the vase: one dusty terracotta rounded vase with narrow neck and one cream curved band, three flowers orange/cream/pink. No text, letters, labels, border, watermark. Create a single landscape 3:2 FULL BODY room scene. Sam stands on LEFT facing Penny, Penny on middle RIGHT facing Sam. Penny securely holds the ONE upright vase at her waist with BOTH hands, flowers below chin not obscuring any face. Sam holds NOTHING, hands gently open at waist. A simple empty small table sits far left, an arched pale blue window is in central background, an empty low wooden wall shelf at far right not behind heads. Everyone's full head hair hands feet and shoes visible with comfortable margin, figures large enough for small-screen. Feet on floor. Simple spacious cream room. Exactly two people, one vase and three flowers total; table, shelf and window area empty of vases. No floating objects, no broken vase. Neutral attentive friendly expressions, neither angry nor celebrating. Preserve clear gaps between flowers and faces.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-sam.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-penny.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-cover-scene.png"
+      ],
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-130a8faa-0c3d-4b6e-8697-de13a1f85307.png"
+    },
+    {
+      "id": "sam-cutout",
+      "file": "assets/unit39-40/cast-sam-v1.webp",
+      "transparent": true,
+      "prompt": "Children's English lesson illustration. Reference 1 and 2 are STYLE only: thick rounded DARK BROWN outlines, warm muted flat colours, friendly rounded faces, subtle paper texture. No photorealism. Reference 3 and 4 define identities: Sam is an adult man with blond side-parted hair, pale blue jacket with one square pocket, cream shirt, brown trousers and shoes, no glasses or facial hair. Penny is an adult woman with shoulder-length dark-brown outward bob, mustard short blouse, sage green neck scarf, dusty terracotta pleated skirt, brown shoes. Reference 5 defines the vase: one dusty terracotta rounded vase with narrow neck and one cream curved band, three flowers orange/cream/pink. No text, letters, labels, border, watermark. Create ONE full-body Sam only on truly TRANSPARENT background, portrait 2:3. Face and torso turned slightly RIGHT toward an off-image partner. BOTH empty hands palms UP next to each other at waist height, horizontally level, ready to hold the base of an UPRIGHT vase; fingers simple anatomically coherent, two arms two hands. Do NOT draw the vase, flowers, Penny, scenery, table or floor. Full hair head fingers feet inside frame, 8 percent transparent margin. Friendly calm smile. The palm support surface should be around 58 percent down image, not chest height.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-sam.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-penny.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-cover-scene.png"
+      ],
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-27f14689-bb43-4746-845a-30eeee997c0d.png"
+    },
+    {
+      "id": "penny-cutout",
+      "file": "assets/unit39-40/cast-penny-v1.webp",
+      "transparent": true,
+      "prompt": "Children's English lesson illustration. Reference 1 and 2 are STYLE only: thick rounded DARK BROWN outlines, warm muted flat colours, friendly rounded faces, subtle paper texture. No photorealism. Reference 3 and 4 define identities: Sam is an adult man with blond side-parted hair, pale blue jacket with one square pocket, cream shirt, brown trousers and shoes, no glasses or facial hair. Penny is an adult woman with shoulder-length dark-brown outward bob, mustard short blouse, sage green neck scarf, dusty terracotta pleated skirt, brown shoes. Reference 5 defines the vase: one dusty terracotta rounded vase with narrow neck and one cream curved band, three flowers orange/cream/pink. No text, letters, labels, border, watermark. Create ONE full-body Penny only on truly TRANSPARENT background, portrait 2:3. Face and torso turned slightly LEFT toward an off-image partner. BOTH empty hands palms UP next to each other at waist height, horizontally level, ready to hold the base of an UPRIGHT vase; fingers simple anatomically coherent, two arms two hands. Do NOT draw the vase, flowers, Sam, scenery, table or floor. Full hair head fingers feet inside frame, 8 percent transparent margin. Friendly calm smile. The palm support surface should be around 58 percent down image, not chest height.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-sam.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-penny.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit39-40-refactor/old-cover-scene.png"
+      ],
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-14f68857-2b86-49e9-95bc-72568245efa5.png"
+    },
+    {
+      "id": "sam-scene",
+      "file": "assets/unit39-40/vase-sam-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-130a8faa-0c3d-4b6e-8697-de13a1f85307.png"
+      ],
+      "prompt": "Edit this children's lesson scene. Preserve the exact faces, clothes, all colours, paper texture, proportions, thick brown outlines, room furniture positions, window, shelf and full-body camera. ONLY change the held-object state: move the one terracotta vase and its three orange/cream/pink flowers from Penny to Sam. Sam on the LEFT now securely holds this upright vase with both hands at waist height; flowers below his chin, face unobscured. Penny on the RIGHT has two EMPTY hands in a gentle open conversational gesture at waist. Exactly one vase total, same cream wave band; no duplicate flowers anywhere. The table, window area and right shelf remain empty. Keep both people complete from hair to shoes and within frame, neutral friendly expressions. No text, no added objects or labels.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-403732f8-9735-47fc-9c10-740aa1f6a30a.png"
+    },
+    {
+      "id": "shelf-scene",
+      "file": "assets/unit39-40/vase-shelf-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-130a8faa-0c3d-4b6e-8697-de13a1f85307.png"
+      ],
+      "prompt": "Edit this children's lesson scene. Preserve exact faces, clothes, colour palette, paper texture, thick brown outlines, furniture layout, full-body camera. Change only final placement state: move the ONE upright terracotta vase with cream wave band and three orange/cream/pink flowers to the wooden shelf on the far RIGHT. Vase base must visibly sit on the shelf top, not floating. Penny and Sam now both have two EMPTY relaxed hands. They look with pleasant quiet smiles toward the safely placed vase. The shelf and vase must remain separated horizontally from Penny's head, all three flowers visible inside frame. Exactly one vase total; no flowers in hands or on table. All full hair, heads, hands and shoes visible. No text, no labels, no extra objects.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-becfab25-df35-4bee-875e-14c80c278f23.png"
+    },
+    {
+      "id": "keepsake",
+      "file": "assets/unit39-40/keepsake-story-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-130a8faa-0c3d-4b6e-8697-de13a1f85307.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "prompt": "Use image1 as exact character and vase identity, images2/3 as accepted keepsake style and soft transparent-edge treatment. Make one warm children's lesson keepsake illustration, landscape 3:2, genuinely transparent outside a softly feathered cream room vignette. Closer waist-up grouping: Sam on LEFT (blond hair, pale blue sleeveless jacket with cream shirt and square pocket), Penny on middle (dark bob, mustard blouse, green scarf, dusty terracotta skirt), both friendly facing toward the one vase on low wooden shelf at RIGHT. The one pink terracotta vase has narrow neck, rounded belly, cream wave band and three orange/cream/pink flowers, clearly resting flat on the shelf. Both people have EMPTY relaxed hands, all faces hair hands and flowers completely inside with margins. No gesture crossing faces, no duplicate vase, no touching the vase, no full-body tiny characters. Large expressive simple round faces, thick rounded brown outlines and subtle paper grain. This is the completed shelf placement, not a handoff. No text, no numerals, stars, frames, badges or logos.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-335afd73-66bb-4c18-bf77-e7a401280b04.png"
+    }
+  ]
+}

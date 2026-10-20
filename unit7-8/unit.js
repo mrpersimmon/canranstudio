@@ -3,7 +3,7 @@
   const core = root.CanranCore, unit = core.unit78;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
-  const scene = core.unit78Scene;
+  core.unit78Legacy.preserve(practice,unit);
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -14,19 +14,17 @@
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
-    const path = content.PEOPLE[name]?.image || word?.image;
+    const path = ['robert', 'sophie'].includes(name) ? '/assets/unit7-8/' + name + '.svg' : word?.image;
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
-  const surfaces = new Map();
+  const surfaces = new Map(), runners = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
-  const aliases = { 'learn/be': 'learn/reply', 'learn/trans': 'learn/interview' };
-  const canonical = id => aliases[id] || id;
   let active = '', certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
-    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆☆☆', 'lvl-stars')); section.append(heading);
+    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆', 'lvl-stars')); section.append(heading);
     const link = node('a', stage.title); link.href = '#' + stage.id; $('.chapter-links').append(link);
     const option = node('option', stage.title); option.value = stage.id; $('.chapter-select select').append(option);
     for (const [id, title, illustration] of stage.activities) {
@@ -38,7 +36,10 @@
     }
     $('#lessonWorkspace').append(section);
   }
+  const aliases = unit.routeAliases;
+  const normalizeRoute = id => aliases[id] || id;
   const navigate = id => {
+    id = normalizeRoute(id);
     // Scrolling back to the cover keeps the hash; resume must still reposition.
     if (location.hash === '#' + id) route();
     else location.hash = id;
@@ -57,9 +58,12 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
-    if (aliases[id]) { id = canonical(id); history.replaceState(null, '', '#' + id); }
-    if (!routes.has(id)) id = 'cover'; markLocation(id);
+    id = normalizeRoute(id);
+    if (!routes.has(id)) id = 'cover';
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    markLocation(id);
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    if(id==='learn/text'||id==='l2') log.scrollTop=log.scrollHeight;
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     const surface = event.target.closest('.shop-stage'); if (!surface) return;
@@ -67,65 +71,82 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = canonical(practice.activity('unitLocation'));
+  const resume = normalizeRoute(practice.activity('unitLocation'));
+  if (resume) practice.activity('unitLocation', resume);
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = canonical(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = normalizeRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
+
 
   const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
-  const answerReferences = new Map();
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    answerReferences.forEach((reference, id) => { reference.hidden = !passed(id); });
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '这颗星已经点亮。';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
     const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
+  function completionArt() {
+    const scene = node('div', '', 'completion-art interview-completion'); scene.setAttribute('aria-hidden', 'true');
+    const picture=node('img'); picture.src='/assets/unit7-8/keepsake-story-v1.webp'; picture.alt=''; scene.append(picture);return scene;
+  }
+  const completionTitles = {listen:'单词寻宝完成！',roles:'故事读懂啦！',grammar:'问答更清楚啦！',apply:'采访完成啦！',exam:'综合挑战完成！'};
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit78-' + id + '-practice'; surfaces.get(id).append(element);
-    const predecessors = unit.activityPredecessors[id];
-    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
-      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit78-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
-      onComplete: states => {
+    if (id === 'apply') {
+      settings.sceneView = core.unit78Scene.create({ element });
+      settings.completionDetails = settings.sceneView.completion();
+    }
+    if (id === 'grammar') settings.sceneView = core.unit78Grammar.create({ element, art });
+    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,...settings,
+      onAnswer: (question, state) => {
+        // The short model was visible before submission. Preserve that support
+        // in the shared notebook; it is not an error or an extra submission.
+        if (question.workshop?.model) { state.revealed = true; practice.record(question, state); }
+        settings.onAnswer?.(question, state);
+      },
+      onComplete: (states,round) => {
+        const { perfect, message } = settlement.complete({ id, states, round, awards, element });
         complete(id);
-        const summary = element.querySelector('.practice-finish > p');
-        const completionCopy = { roles: '朋友资料核对好了！', reply: '采访记录填好了！', interview: '采访对话完成了！' }[id];
-        if (summary && completionCopy) summary.textContent = completionCopy;
-        nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
-      } });
+        nextStation(id, element.querySelector('.practice-finish-actions'));
+        settings.onComplete?.(states);
+        core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
+          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          celebrate: round.userCompleted, awardStatus: message,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
+        const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress(); } });
+    runners.set(id, runner);
     return element;
-  }
-  function mountInterviewTask(id) {
-    const view = scene.taskView(id); surfaces.get(id).append(view.element);
-    const result = scene.records({ portraits: true, label: '完成的采访档案' }); result.showLine(15);
-    mountPractice(id, { sceneView: view, completionDetails: result.element });
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
-  const storyRecords = scene.records({ label: '随课文填写的采访档案' });
-  function actor(who, name) { const element = node('div', '', 'dialogue-actor'); element.dataset.actor = who; element.append(art(who === 'teacher' ? 'robert' : 'sophie'), node('span', name)); return element; }
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  stage.append(actor('teacher', 'Robert'), log, actor('student', 'Sophie'));
+  const props = core.unit78Scene.storyProps();
+  stage.append(props.element, log);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -133,29 +154,38 @@
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(node('p', '故事看完了！'), node('p', '两位新朋友的档案收集好了。', 'story-result'), finishActions); story.append(stage, storyRecords.element, status, controls, finish);
+  finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
-  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountInterviewTask('roles'); }
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    props.update(dialogue.i);
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
-    storyRecords.showLine(dialogue.i);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
+    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.person));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(icon('speech'), node('p', '两位新朋友见面了。'), node('small', 'Robert 做什么工作？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('job'), node('p', 'What is Robert’s job?')); log.replaceChildren(lead); }
   function appendLine(index) {
-    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
+    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.person), bubble = node('div', '', 'bubble');
+    // Keep each historic line on the side occupied by its speaker in that scene.
+    row.classList.add(line.person === 'robert' ? 'speaker-left' : 'speaker-right');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden));
+      // Expanding the current translation must reveal its button as well; only
+      // the transcript scrolls, never the page or the controls below it.
+      if (!translation.hidden) {
+        const overflow = row.getBoundingClientRect().bottom - log.getBoundingClientRect().bottom + 12;
+        if (overflow > 0) log.scrollTop += overflow;
+      }
+    }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
-    bubble.append(node('div', content.PEOPLE[line.person].name, 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
+    bubble.append(node('div', ({robert:'Robert',sophie:'Sophie'})[line.person], 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
   function advanceDialogue() {
     if (dialogue.done) return;
@@ -166,22 +196,14 @@
     if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
   }
   function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue(); }
-  const draft = practice.activity('unitDialogue');
+  const draft = core.unit78Legacy.reading(practice, unit, signatures.text);
   if (draft?.signature === signatures.text && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length) {
-    // Old voiced pages already displayed the current line, even if its audio
-    // was interrupted. Retain that reading position, not a new listening score.
-    const legacy = !Array.isArray(draft.viewed) && Array.isArray(draft.heard);
-    const source = legacy ? draft.heard : draft.viewed;
-    const viewed = Array.isArray(source) ? source.slice(0, draft.i + 1) : null;
-    if (Array.isArray(viewed)) {
-      if (legacy) viewed[draft.i] = true;
-      const gap = content.DIALOGUE.findIndex((_, index) => index <= draft.i && viewed[index] !== true);
-      const index = gap < 0 ? draft.i : gap - 1;
-      dialogue = { i: index, viewed: viewed.slice(0, index + 1), done: draft.done === true && index === content.DIALOGUE.length - 1 && content.DIALOGUE.every((_, i) => viewed[i] === true) };
-      for (let i = 0; i <= index; i++) appendLine(i);
-      if (legacy) saveDialogue();
-      if (dialogue.done) complete('text');
-    }
+    const viewed=Array.isArray(draft.viewed)?draft.viewed.slice(0,draft.i+1):[];
+    const gap=content.DIALOGUE.findIndex((_,index)=>index<=draft.i&&viewed[index]!==true);
+    const i=gap<0?draft.i:gap-1;
+    dialogue={i,viewed:viewed.slice(0,i+1),done:draft.done===true&&i===content.DIALOGUE.length-1};
+    for(let index=0;index<=i;index++)appendLine(index);
+    if(dialogue.done)complete('text');
   }
   if (dialogue.i < 0) lead();
   refreshDialogue(); unlockStory();
@@ -216,70 +238,24 @@
   renderWords();
   mountPractice('listen', { allowHints: false });
 
-  function expressionCard(expression) {
-    const picture = node('img'); picture.src = expression.image; picture.alt = '';
-    const caption = node('span', expression.cn);
-    const card = node('article', '', 'phrase-card reference-card');
-    card.append(picture, node('strong', expression.en), caption); return card;
-  }
-  const phraseGrid = node('div', '', 'phrase-grid');
-  content.PHRASES.forEach(item => phraseGrid.append(expressionCard(item)));
-  const reference = node('details', '', 'offline-task'); reference.append(node('summary', 'am、is、are 怎么选'));
-  reference.append(node('p', '本课 I 用 am；my name、人名、he、she 用 is；问 you 用 are。My name 的主语是 name，不是 my；are 也可以用于只问一个人。'));
-  const referenceGrid = node('div', '', 'phrase-grid');referenceGrid.append(expressionCard(content.REFERENCE[0]));reference.append(referenceGrid);
-  const referenceAnswers = node('details', '', 'offline-task'); referenceAnswers.append(node('summary', '采访记录参考'));
-  const answerGrid = node('div', '', 'phrase-grid'); content.REFERENCE.slice(1).forEach(item => answerGrid.append(expressionCard(item))); referenceAnswers.append(answerGrid);
-  answerReferences.set('reply', referenceAnswers);
-  const shortForms=node('details','','offline-task');shortForms.append(node('summary','一句话变短'));
-  for(const [left,right] of [['I am',"I'm"],['My name is',"My name's"],['What is',"What's"]]){
-    const row=node('p','','contraction-row');row.append(node('span',left),node('span','→'),node('span',right));shortForms.append(row);
-  }
-  const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);surfaces.get('phrases').append(phraseGrid,reference,shortForms,referenceAnswers,phraseActions);
-  const jobGrid=node('div','','phrase-grid');content.JOBS.forEach(item=>jobGrid.append(expressionCard(item)));
-  const interviews=node('details','','offline-task');interviews.append(node('summary','替图中人物问一问'));
-  interviews.append(node('p','这里谈论图中那位人物，用已标明的 he 或 she；职业本身不能决定用哪个。直接问本人用 your，向别人问他／她用 his／her。'));
-  const interviewGrid=node('div','','phrase-grid reply-models');content.INTERVIEWS.forEach(item=>interviewGrid.append(expressionCard(item)));interviews.append(interviewGrid);
-  answerReferences.set('interview', interviews);
-  const wording=node('details','','offline-task');wording.append(node('summary','这些职业词怎么用'),node('p','nurse、engineer、mechanic、taxi driver、hairdresser 不限定性别。policeman 指男警察，policewoman 指女警察；air hostess 是较旧的女空乘称呼，现在常用 flight attendant。housewife 是家庭主妇，milkman 指男送奶员。家庭照护也可以由其他家庭成员共同承担。'));
-  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);surfaces.get('models').append(jobGrid,interviews,wording,modelActions);
-  for(const id of ['reply','interview'])mountInterviewTask(id);
+  mountPractice('grammar'); mountPractice('apply');
+  mountPractice('exam');
+  certificateView=core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,
+    progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
+    restart:id=>runners.get(id)?.restart()});
 
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
-    const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
-    const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
-    const corrected = states.filter(state => !state.firstCorrect).length;
-    examResults.replaceChildren(node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
-    const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
-    if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
-  } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitClassroomCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitClassroomCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '好奇的小记者', course: '新朋友采访站 · Lesson 7–8', completion: '完成 Lesson 7–8 课堂配套练习', thanks: '问清楚，记下来，两位新朋友认识啦！' },
-      keepsakes: [{ title: 'Robert', text: 'Italian · engineer' }, { title: 'Sophie', text: 'French · keyboard operator' }],
-      characters: ['robert', 'sophie'], characterLabels: ['Robert', 'Sophie'], icon: art, defaultName: '好奇的小记者', dialogTitle: '新朋友采访站纪念', fileName: 'Lesson7-8-新朋友采访站.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'heart', l4: 'question', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
-  });
-
-  const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
-  writing.append(node('summary','和朋友再试试'),node('p','课堂上跟老师读词语和课文，再听老师说一个职业，找出对应图片。各选一张虚构角色卡，写上名字、国籍和职业，轮流采访；再向旁人打听这位角色。无需提供真实家庭信息。'));
-  writing.append(node('h4','Lesson 7–8 · 纸笔小练习'),node('p','A．填 am 或 is。例：My name is Xiaohui. I am Chinese.'));
-  const referenceWriting=node('ol','','reference-writing');
-  ['My name ___ Robert. I ___ a student. I ___ Italian.','Sophie ___ not Italian. She ___ French.','Mr. Blake ___ my teacher. He ___ not French.'].forEach(text=>referenceWriting.append(node('li',text)));writing.append(referenceWriting);
-  writing.append(node('p','B．按所给人物写三句话：问职业、确认职业、肯定回答。he／she 已写在每行，不能只从职业判断。'),node('p',"例：keyboard operator · she → What's her job? Is she a keyboard operator? Yes, she is."),node('p',"例：engineer · he → What's his job? Is he an engineer? Yes, he is."));
-  const replyWriting=node('ol','','reply-writing');content.JOBS.forEach(item=>{const row=node('li');row.append(node('span',item.job+' · '+item.pronoun),node('span','','writing-rule'),node('span','','writing-rule'));replyWriting.append(row);});writing.append(replyWriting);
-  const printActions = node('div', '', 'activity-actions');
-  printActions.append(button('打印练习纸', () => { document.body.classList.add('print-writing'); root.print(); }, 'btn btn-yellow'));
-  writing.append(printActions); surfaces.get('certificate').append(writing);
-  root.addEventListener('afterprint', () => document.body.classList.remove('print-writing'));
+  core.unit78References.mount({unit,surfaces});
+  core.unit78Legacy.show(practice, surfaces.get('certificate'));
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
   const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
+  // Cached entry keeps the body hidden until images decode. Font readiness alone
+  // can occur while the transcript has no layout and cannot restore scroll.
+  // This is the loader's document event, not a canran storage key. Keep its
+  // name intact when the /lesson/ publisher prefixes persistent storage keys.
   const readyEvent = ['canran', 'course-ready'].join(':');
   document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  root.addEventListener('resize',()=>{if(active==='learn/text'||active==='l2')requestAnimationFrame(revealSavedLine);});
   document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

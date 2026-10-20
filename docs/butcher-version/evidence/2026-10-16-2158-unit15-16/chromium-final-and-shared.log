@@ -1,0 +1,20 @@
+
+Running 13 tests using 1 worker
+
+(node:14304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\submission-statistics.spec.js:16:4 › 13-14 共用结算按提交计次，手机三卡完整，刷新保留 (8.0s)
+  ok  2 tests\e2e\submission-statistics.spec.js:16:4 › 15-16 共用结算按提交计次，手机三卡完整，刷新保留 (5.4s)
+  ok  3 tests\e2e\submission-statistics.spec.js:16:4 › 17-18 共用结算按提交计次，手机三卡完整，刷新保留 (3.2s)
+  ok  4 tests\e2e\unit15-16-fivezones.spec.js:5:1 › 55题、完整原文、五区五星及教材参考均可真实完成 (18.3s)
+  ok  5 tests\e2e\unit15-16-fivezones.spec.js:26:1 › 错误和部分填答刷新保留，完整重练才获星，已获星不扣回 (6.7s)
+  ok  6 tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 320：完整18句、中文内滚动、相向人物及旧链接 (5.4s)
+  ok  7 tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 390：完整18句、中文内滚动、相向人物及旧链接 (5.5s)
+  ok  8 tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 768：完整18句、中文内滚动、相向人物及旧链接 (5.5s)
+  ok  9 tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 1280：完整18句、中文内滚动、相向人物及旧链接 (5.5s)
+  ok 10 tests\e2e\unit15-16-fivezones.spec.js:53:50 › 短屏 320x568：五区三卡和操作完整可见 (19.1s)
+  ok 11 tests\e2e\unit15-16-fivezones.spec.js:53:50 › 短屏 390x500：五区三卡和操作完整可见 (18.4s)
+  ok 12 tests\e2e\unit15-16-print.spec.js:5:1 › 练习纸保留A六题、B十二题、原例和24条书写线与6个填空位，实际PDF无隐藏题目 (686ms)
+  ok 13 tests\e2e\unit15-16-print.spec.js:12:1 › 已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡 (8.0s)
+
+  13 passed (1.9m)

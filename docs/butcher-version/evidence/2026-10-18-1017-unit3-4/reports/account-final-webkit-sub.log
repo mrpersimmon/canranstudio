@@ -1,0 +1,55 @@
+[WebServer] (node:5060) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:29980) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:26416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit3-4-v154-account.spec.js:8:1 › 账号首页四宽、真实素材失败重试、原选择续做和权限边界 (53.2s)
+  ok 2 tests\login\unit3-4-grammar.spec.js:8:1 › 实际提交统计跨设备保留：同题两次错答计两次，重练归零且零错才获星 (1.2m)
+  x  3 tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 (1.2m)
+(node:20540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20540) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 4 tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原33题五星卡全部帧、精确时间与跨设备历史保留 (1.5m)
+  ok 5 tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原25题旧证PNG、精确时间与跨设备历史保留 (1.2m)
+
+
+  1) tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 ──────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('alertdialog', { name: '课程访问', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('alertdialog', { name: '课程访问', exact: true })
+
+
+      124 |       await second.context.setOffline(false);
+      125 |       await second.page.goto(base + 'unit3-4/#learn/reply');
+    > 126 |       await expect(second.page.getByRole('alertdialog', { name: '课程访问', exact: true })).toBeVisible();
+          |                                                                                         ^
+      127 |       expect(rejected).toBeGreaterThan(0); await expect(room).toHaveCount(0);
+      128 |       await second.page.unroute(entry);
+      129 |       await second.page.locator('#accessGate').getByRole('button', { name: '再试一次', exact: true }).click();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit3-4-grammar.spec.js:126:89
+
+    Error Context: output\unit34-review-20261018\account-final-webkit-sub\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\account-final-webkit-sub\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\account-final-webkit-sub\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 ───────────────────
+  4 passed (6.1m)

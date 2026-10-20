@@ -102,8 +102,10 @@ test('语法小工坊保留人物成果画面，恢复三张统计卡', async ({
   })), null, 2));
   await expectResults(room, [12, 12, 0]);
   await expect(room.getByRole('heading', { name: '问答练习完成！', exact: true })).toBeVisible();
-  await expect(room.locator('.completion-art .completion-man')).toBeVisible();
-  await expect(room.locator('.completion-art .completion-woman')).toBeVisible();
+  // Both approved characters now share the original keepsake scene; do not
+  // require the removed pair of legacy SVG nodes to certify a visible scene.
+  await expect(room.locator('.completion-art>img')).toBeVisible();
+  await expect(room.locator('.completion-art>img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);
 });
 
 for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整`, async ({ page }) => {

@@ -1,0 +1,78 @@
+(node:35616) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ published courses keep their independent reward totals and validate submitted question families (13.8049ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.3607ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (3.0732ms)
+✔ partial wrong submission is observable without awards or resumable completion (57.5075ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (56.3478ms)
+✔ reset isolates a new generation and preserves earlier observation history (51.8291ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (65.2177ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (57.8897ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.8376ms)
+✔ student identity, pagination and filters expose learning summaries only (771.4589ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (4504.7564ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (2.5575ms)
+✔ three learning statuses require current work, not visits, stars or old content (3.5678ms)
+✔ all published courses reach completed only with every required activity including reading (176.3008ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (176.119ms)
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (937.9943ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (134.2364ms)
+(node:28516) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (109.7831ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.4516ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (85.0519ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 18
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7326.084
+
+✖ failing tests:
+
+test at tests\unit\admin-learning.test.js:27:1
+✖ published courses keep their independent reward totals and validate submitted question families (13.8049ms)
+  AssertionError [ERR_ASSERTION]: unit7-8
+  
+  5 !== 15
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-learning.test.js:28:340)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.start (node:internal/test_runner/test:1015:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 5,
+    expected: 15,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\admin-learning.test.js:192:1
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (937.9943ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '9b160b6d-764d-499b-b68b-570fd2fe0bbc'
+  - '9c6c606e-90bc-474e-8860-5e53d97753a7'
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-learning.test.js:214:9)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '9b160b6d-764d-499b-b68b-570fd2fe0bbc',
+    expected: '9c6c606e-90bc-474e-8860-5e53d97753a7',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,872 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit41-42-v153.spec.js",
+      "tests/e2e/unit41-42-v153-upgrade.spec.js",
+      "tests/e2e/unit41-42-v153-reading.spec.js",
+      "tests/e2e/unit41-42-v153-interactions.spec.js",
+      "tests/e2e/unit41-42-v153-print.spec.js",
+      "--output=output/unit4142-work/current-chromium",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4142-work/current-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit41-42-v153-interactions.spec.js",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2169,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:42.514Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "896fc698d7a79b9cf0fa-0926648ad7f85debd66d",
+          "file": "unit41-42-v153-interactions.spec.js",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "title": "同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1318,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-interactions.spec.js:50:212",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-interactions.spec.js",
+                      "column": 212,
+                      "line": 50
+                    },
+                    "snippet": "  48 |  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);\n  49 |  await room.getByRole('button',{name:'检查答案',exact:true}).click();\n> 50 |  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img',{name:'桌上的一瓶牛奶'})).toHaveCount(1);expect(await table.locator('img').evaluate((el,original)=>el===original,milk)).toBe(true);\n     |                                                                                                                                                                                                                    ^\n  51 |  await page.reload();await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img')).toHaveCount(1);\n  52 |  await room.getByRole('button',{name:'下一题',exact:true}).click();\n  53 |  await expect(room.getByRole('heading',{name:'替 Penny 记下桌上的物品'})).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-interactions.spec.js",
+                        "column": 212,
+                        "line": 50
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  48 |  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);\n  49 |  await room.getByRole('button',{name:'检查答案',exact:true}).click();\n> 50 |  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img',{name:'桌上的一瓶牛奶'})).toHaveCount(1);expect(await table.locator('img').evaluate((el,original)=>el===original,milk)).toBe(true);\n     |                                                                                                                                                                                                                    ^\n  51 |  await page.reload();await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img')).toHaveCount(1);\n  52 |  await room.getByRole('button',{name:'下一题',exact:true}).click();\n  53 |  await expect(room.getByRole('heading',{name:'替 Penny 记下桌上的物品'})).toBeVisible();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-interactions.spec.js:50:212"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:44.810Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\current-chromium\\unit41-42-v153-interactions-同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\current-chromium\\unit41-42-v153-interactions-同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-interactions.spec.js",
+                    "column": 212,
+                    "line": 50
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "896fc698d7a79b9cf0fa-4497955a1ee003919203",
+          "file": "unit41-42-v153-interactions.spec.js",
+          "line": 36,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit41-42-v153-print.spec.js",
+      "file": "unit41-42-v153-print.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "A六题四个原例，B十组完整问答原例与26条书写线可实际打印",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 633,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:46.838Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b7ac9b989ca3986a01ca-4910accd9e1dd7a5b74e",
+          "file": "unit41-42-v153-print.spec.js",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit41-42-v153-reading.spec.js",
+      "file": "unit41-42-v153-reading.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:47.579Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d1059eb484643b49f0d-3568d385f1d5f77a6f7d",
+          "file": "unit41-42-v153-reading.spec.js",
+          "line": 4,
+          "column": 61
+        },
+        {
+          "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 739,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m564.765625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m564.765625\u001b[39m\n    at readable (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js:9:434)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js:10:129",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js",
+                      "column": 434,
+                      "line": 9
+                    },
+                    "snippet": "   7 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();\n   8 |   const line=room.locator('.bubble-row').last(),advance=room.getByRole('button',{name:i===15?'完成课文':'下一句',exact:true});\n>  9 |   const readable=async()=>{const text=await line.locator('.btext').boundingBox(),next=await advance.boundingBox(),nav=await page.locator('#topbar').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(text.y).toBeGreaterThanOrEqual(Math.max(nav.y+nav.height,log.y));expect(text.y+text.height).toBeLessThanOrEqual(log.y+log.height);expect(log.y+log.height).toBeLessThanOrEqual(next.y);expect(next.y+next.height).toBeLessThanOrEqual(height);if(await line.locator('.bcn').isVisible()){const cn=await line.locator('.bcn').boundingBox();expect(cn.y).toBeGreaterThanOrEqual(log.y);expect(cn.y+cn.height).toBeLessThanOrEqual(log.y+log.height);}};\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^\n  10 |   await readable();const scroll=await page.evaluate(()=>scrollY);await line.getByRole('button',{name:'看中文',exact:true}).click();await readable();expect(Math.abs(await page.evaluate(()=>scrollY)-scroll)).toBeLessThan(2);await expect(line.locator('.bcn')).toBeVisible();\n  11 |  }\n  12 |  await page.screenshot({path:info.outputPath(`reading-${width}x${height}.png`)});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js",
+                        "column": 434,
+                        "line": 9
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m564.765625\u001b[39m\n\n   7 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();\n   8 |   const line=room.locator('.bubble-row').last(),advance=room.getByRole('button',{name:i===15?'完成课文':'下一句',exact:true});\n>  9 |   const readable=async()=>{const text=await line.locator('.btext').boundingBox(),next=await advance.boundingBox(),nav=await page.locator('#topbar').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(text.y).toBeGreaterThanOrEqual(Math.max(nav.y+nav.height,log.y));expect(text.y+text.height).toBeLessThanOrEqual(log.y+log.height);expect(log.y+log.height).toBeLessThanOrEqual(next.y);expect(next.y+next.height).toBeLessThanOrEqual(height);if(await line.locator('.bcn').isVisible()){const cn=await line.locator('.bcn').boundingBox();expect(cn.y).toBeGreaterThanOrEqual(log.y);expect(cn.y+cn.height).toBeLessThanOrEqual(log.y+log.height);}};\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^\n  10 |   await readable();const scroll=await page.evaluate(()=>scrollY);await line.getByRole('button',{name:'看中文',exact:true}).click();await readable();expect(Math.abs(await page.evaluate(()=>scrollY)-scroll)).toBeLessThan(2);await expect(line.locator('.bcn')).toBeVisible();\n  11 |  }\n  12 |  await page.screenshot({path:info.outputPath(`reading-${width}x${height}.png`)});\n    at readable (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js:9:434)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js:10:129"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:51.487Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\current-chromium\\unit41-42-v153-reading-390x500-逐句阅读与中文展开时当前对白和推进按钮同屏\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\current-chromium\\unit41-42-v153-reading-390x500-逐句阅读与中文展开时当前对白和推进按钮同屏\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-reading.spec.js",
+                    "column": 434,
+                    "line": 9
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "0d1059eb484643b49f0d-65fa4787c1bd03f0c16e",
+          "file": "unit41-42-v153-reading.spec.js",
+          "line": 4,
+          "column": 61
+        },
+        {
+          "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4024,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:52.892Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0d1059eb484643b49f0d-6aef34f2df204109a364",
+          "file": "unit41-42-v153-reading.spec.js",
+          "line": 4,
+          "column": 61
+        }
+      ]
+    },
+    {
+      "title": "unit41-42-v153-upgrade.spec.js",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧空白升级后不虚构提交，仍可完整零错获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3431,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:41:57.032Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-a8bef36bffd1d7e79e50",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 3,
+          "column": 36
+        },
+        {
+          "title": "真实旧仅选择升级后不虚构提交，仍可完整零错获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3831,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:00.470Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-c65f8c504b4a12a0a75c",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 3,
+          "column": 36
+        },
+        {
+          "title": "原错答和双空草稿、词卡页与16句阅读游标保留，旧记录可查",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:04.309Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-0287d0e2dc5dbcb941c1",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "实际43题旧五星升级：旧星不扣，修订题不代答，原已完成轮不重开",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11856,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:05.922Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-9e7d88d2a4398365890e",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 10,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit41-42-v153.spec.js",
+      "file": "unit41-42-v153.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "47题完整材料、原文与五区五星可完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:17.798Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-5c9dd3cd3e1bd04304f1",
+          "file": "unit41-42-v153.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "完整人物、袋子与当前物品，逐句原文和中文 320",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3491,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:38.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-3873219e4ec8fa068bbc",
+          "file": "unit41-42-v153.spec.js",
+          "line": 4,
+          "column": 39
+        },
+        {
+          "title": "完整人物、袋子与当前物品，逐句原文和中文 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:42.411Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-9738587906811d733e5d",
+          "file": "unit41-42-v153.spec.js",
+          "line": 4,
+          "column": 39
+        },
+        {
+          "title": "完整人物、袋子与当前物品，逐句原文和中文 768",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3537,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:45.957Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-6ea2686f12df9eb4e737",
+          "file": "unit41-42-v153.spec.js",
+          "line": 4,
+          "column": 39
+        },
+        {
+          "title": "完整人物、袋子与当前物品，逐句原文和中文 1280",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3831,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:49.502Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-34759c8fa38441fdf0b8",
+          "file": "unit41-42-v153.spec.js",
+          "line": 4,
+          "column": 39
+        },
+        {
+          "title": "短屏三卡及操作完整 320x568",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17824,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:42:53.338Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-314b1756d83dbc5d1dd5",
+          "file": "unit41-42-v153.spec.js",
+          "line": 9,
+          "column": 49
+        },
+        {
+          "title": "短屏三卡及操作完整 390x500",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:43:11.169Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-adffaffe7ad666497c68",
+          "file": "unit41-42-v153.spec.js",
+          "line": 9,
+          "column": 49
+        },
+        {
+          "title": "连续两次错答如实计次，重练不扣原星，可见示范记录帮助",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9548,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:43:28.963Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-2c17737a1bdfae9d7880",
+          "file": "unit41-42-v153.spec.js",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "20词卡、16幅位置关系和原数字完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3033,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:43:38.518Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-5aec7c312ac73ace5013",
+          "file": "unit41-42-v153.spec.js",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "音频全部失败仍可完成，英语音频零请求",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17116,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:43:41.559Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-d43262fdc367e2f57f62",
+          "file": "unit41-42-v153.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:41:41.881Z",
+    "duration": 137639.272,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

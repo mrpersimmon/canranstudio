@@ -1,0 +1,157 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit17-18-teaching-review.spec.js",
+      "--grep",
+      "首组不规则",
+      "--reporter=json",
+      "--output=output/unit1718-review-20261018/red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit1718-review-20261018/red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit17-18-teaching-review.spec.js",
+      "file": "unit17-18-teaching-review.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首组不规则复数有错开的短示范；新词就近释义，示范使用如实入手记",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6152,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"one milkman → two milkmen\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"one milkman → two milkmen\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-teaching-review.spec.js:12:22",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-teaching-review.spec.js",
+                      "column": 22,
+                      "line": 12
+                    },
+                    "snippet": "  10 |  for(const answer of ANSWERS.grammar.slice(0,3))await answerThenNext(room,answer);\n  11 |  const model=room.getByRole('region',{name:'短示范',exact:true});\n> 12 |  await expect(model).toContainText('one milkman → two milkmen');await expect(model).toContainText('one knife → two knives');\n     |                      ^\n  13 |  await expect(model).not.toContainText('housewives');await expect(model).not.toContainText('policewomen');\n  14 |  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();\n  15 |  await room.screenshot({path:info.outputPath('grammar4-unanswered-320.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-teaching-review.spec.js",
+                        "column": 22,
+                        "line": 12
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"one milkman → two milkmen\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n  10 |  for(const answer of ANSWERS.grammar.slice(0,3))await answerThenNext(room,answer);\n  11 |  const model=room.getByRole('region',{name:'短示范',exact:true});\n> 12 |  await expect(model).toContainText('one milkman → two milkmen');await expect(model).toContainText('one knife → two knives');\n     |                      ^\n  13 |  await expect(model).not.toContainText('housewives');await expect(model).not.toContainText('policewomen');\n  14 |  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();\n  15 |  await room.screenshot({path:info.outputPath('grammar4-unanswered-320.png')});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-teaching-review.spec.js:12:22"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T17:58:52.178Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-review-20261018\\red\\unit17-18-teaching-review-首组不规则复数有错开的短示范；新词就近释义，示范使用如实入手记\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-review-20261018\\red\\unit17-18-teaching-review-首组不规则复数有错开的短示范；新词就近释义，示范使用如实入手记\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-teaching-review.spec.js",
+                    "column": 22,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "93134f9aa3423ed262af-a652e83c722d3e0ce4f2",
+          "file": "unit17-18-teaching-review.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T17:58:51.603Z",
+    "duration": 7364.022999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,1643 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit25-26.spec.js",
+      "tests/e2e/unit25-26-state.spec.js",
+      "tests/e2e/unit25-26-layout.spec.js",
+      "tests/e2e/unit-thirteen-types.spec.js",
+      "tests/e2e/common-interactions.spec.js",
+      "tests/e2e/retry-feedback.spec.js",
+      "tests/e2e/units17-30-exam.spec.js",
+      "tests/e2e/units17-30-scene.spec.js",
+      "tests/e2e/units17-30-theatre.spec.js",
+      "tests/e2e/units17-30-upgrade.spec.js",
+      "tests/e2e/submission-statistics.spec.js",
+      "--grep",
+      "25-26|25–26|中文词块|六轮故事",
+      "--reporter=list,json",
+      "--output=output/unit2526-historical"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2526-historical",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4310",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "common-interactions.spec.js",
+      "file": "common-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 原输入版满星升级保留相同题和证书纪念，新补词题须重新完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:49:57.173Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "639b6a33d836e222ae6c-cc6f0f412b66c9997f61",
+          "file": "common-interactions.spec.js",
+          "line": 71,
+          "column": 35
+        }
+      ]
+    },
+    {
+      "title": "retry-feedback.spec.js",
+      "file": "retry-feedback.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unit25-26 选择题错答只提示重试，改选后正常推进",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 492,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:03.487Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "655a3c6877ae64d9a95e-7cde00c952a09a5f4a8a",
+          "file": "retry-feedback.spec.js",
+          "line": 41,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "submission-statistics.spec.js",
+      "file": "submission-statistics.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 共用结算按提交计次，手机三卡完整，刷新保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6470,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:04.108Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be34b044db501f8e9647-1d21b3b572ba6c12c171",
+          "file": "submission-statistics.spec.js",
+          "line": 16,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "title": "unit-thirteen-types.spec.js",
+      "file": "unit-thirteen-types.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 root 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6511,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:10.592Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-e412bf57ef3a83df9668",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 6,
+          "column": 68
+        },
+        {
+          "title": "25-26 /lesson 无配音完整通关与真实证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8564,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:17.195Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-c802dc1660658c3ae30c",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 6,
+          "column": 68
+        },
+        {
+          "title": "中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 948,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:25.766Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-6e36bab3017d851dc10a",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "25-26 真实旧轮次升级保留相同题和纪念信息，新题必须亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8979,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:26.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b01d2c5195df9721fa2f-03110fed87fe1a2b6b48",
+          "file": "unit-thirteen-types.spec.js",
+          "line": 54,
+          "column": 35
+        }
+      ]
+    },
+    {
+      "title": "unit25-26-layout.spec.js",
+      "file": "unit25-26-layout.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320 各站完整、无横向溢出，手记返回焦点，所有资源加载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1118,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:35.762Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-419756f991c658a438d1",
+          "file": "unit25-26-layout.spec.js",
+          "line": 7,
+          "column": 39
+        },
+        {
+          "title": "390 各站完整、无横向溢出，手记返回焦点，所有资源加载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:36.968Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-02c84e9d3b391866a688",
+          "file": "unit25-26-layout.spec.js",
+          "line": 7,
+          "column": 39
+        },
+        {
+          "title": "768 各站完整、无横向溢出，手记返回焦点，所有资源加载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1095,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:38.315Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-7b0a266801126f3e4110",
+          "file": "unit25-26-layout.spec.js",
+          "line": 7,
+          "column": 39
+        },
+        {
+          "title": "1280 各站完整、无横向溢出，手记返回焦点，所有资源加载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1360,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:39.416Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-8dee59878f1b0eab9bc7",
+          "file": "unit25-26-layout.spec.js",
+          "line": 7,
+          "column": 39
+        },
+        {
+          "title": "320 窄屏36张词卡展开后字义和音标不裁切，图册成对对比完整可辨",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4227,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:40.782Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-245b5f3baf20f45076cc",
+          "file": "unit25-26-layout.spec.js",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "390短屏阅读内部滚动，下一句与从头看同行，展开中文不移动推进按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1019,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:45.016Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-8c516ba019802285cb25",
+          "file": "unit25-26-layout.spec.js",
+          "line": 35,
+          "column": 1
+        },
+        {
+          "title": "位置图画布上沿和尺寸一致，不因说明换行而上下错位",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2569,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:46.042Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-914c9892b32ea8a730e2",
+          "file": "unit25-26-layout.spec.js",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "四种宽度全部拼句的词块完整可见，选取与撤回不推移检查按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2888,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:48.617Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "94a5abc230174d017428-6a03cbcbc403cf8d1986",
+          "file": "unit25-26-layout.spec.js",
+          "line": 62,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit25-26-state.spec.js",
+      "file": "unit25-26-state.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "挑战错答与提示分别记账，刷新续做保留选择，不提前发证",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1971,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:51.559Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-258a274c81a74cb2d771",
+          "file": "unit25-26-state.spec.js",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "正误和完成反馈音实际播放结束，任何英语声音请求和系统朗读均未发生",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:50:53.616Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-8fbcaa934aeecb914510",
+          "file": "unit25-26-state.spec.js",
+          "line": 23,
+          "column": 1
+        },
+        {
+          "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13049,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:02.131Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-cbbdba41e24a49e83b60",
+          "file": "unit25-26-state.spec.js",
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10322,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:15.190Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-e2a5d370b4833f8b0f9e",
+          "file": "unit25-26-state.spec.js",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2816,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:25.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-6493114f7717131a0868",
+          "file": "unit25-26-state.spec.js",
+          "line": 75,
+          "column": 1
+        },
+        {
+          "title": "关闭JavaScript首页仍提供新单元真实链接",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 226,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:28.348Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-a52e9234abee7396abb1",
+          "file": "unit25-26-state.spec.js",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "保存失败如实提示，恢复存储后可重试，刷新仍保留真实作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 992,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:28.581Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d84f944192777ce385ae-46c45d043c72d600a63d",
+          "file": "unit25-26-state.spec.js",
+          "line": 93,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit25-26.spec.js",
+      "file": "unit25-26.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首页新单元从厨房小图鉴开始，音标可见",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1013,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:29.660Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-799388871c7abe449dcc",
+          "file": "unit25-26.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "全部声音失败仍完成27题和完整原文，15星后保存真实证书，刷新保留日期",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7609,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:30.800Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-432572e451dda431dc10",
+          "file": "unit25-26.spec.js",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "证书长名字在三种窄屏中完整，实际保存图片与单元主题一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8168,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:38.416Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-39422029c11edb02bfd6",
+          "file": "unit25-26.spec.js",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "证书空名字有友好称呼，插图加载失败不假保存，恢复后可重试",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6516,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:46.592Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-3ffbdd7eecc704a8cac1",
+          "file": "unit25-26.spec.js",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "7组词义练习连续错答只重试，最后三题刷新不会代答，重练不重复计星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2916,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:53.116Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-67a8023f1d7e278f5a56",
+          "file": "unit25-26.spec.js",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "原文12句逐句保留，不虚构对话，主动完成后才解锁理解",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1261,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:56.040Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-568bf4c6a452211295e3",
+          "file": "unit25-26.spec.js",
+          "line": 58,
+          "column": 1
+        },
+        {
+          "title": "36张词卡完整音标、翻义、加载、六组翻页与末组续学",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:51:57.309Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-5eb377748ba35f2238ae",
+          "file": "unit25-26.spec.js",
+          "line": 69,
+          "column": 1
+        },
+        {
+          "title": "原图八组、A四题八空、B七组两句完整，实际打印一张A4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:01.693Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-9220d40a3f8c1dc60cdf",
+          "file": "unit25-26.spec.js",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "语法支架不误教，图选同等可读，连续错误不泄露正确的双条件",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 955,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:03.239Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ff46adf8893d3323cbe3-ed6ad84a7b3ae706596c",
+          "file": "unit25-26.spec.js",
+          "line": 91,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "units17-30-exam.spec.js",
+      "file": "units17-30-exam.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 320 综合练习逐题独立作答，词块和长选项完整，按钮稳定",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:04.245Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dbea48cdd2c959bb4f5-f2527b8a730173666483",
+          "file": "units17-30-exam.spec.js",
+          "line": 8,
+          "column": 87
+        },
+        {
+          "title": "25-26 390 综合练习逐题独立作答，词块和长选项完整，按钮稳定",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5260,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:09.024Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dbea48cdd2c959bb4f5-3b5bd045e64fea747faf",
+          "file": "units17-30-exam.spec.js",
+          "line": 8,
+          "column": 87
+        },
+        {
+          "title": "25-26 768 综合练习逐题独立作答，词块和长选项完整，按钮稳定",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3583,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:14.291Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dbea48cdd2c959bb4f5-7d6d7158ea8a0430dca7",
+          "file": "units17-30-exam.spec.js",
+          "line": 8,
+          "column": 87
+        },
+        {
+          "title": "25-26 1280 综合练习逐题独立作答，词块和长选项完整，按钮稳定",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3748,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:17.880Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dbea48cdd2c959bb4f5-296817f41f79b7a3d0f1",
+          "file": "units17-30-exam.spec.js",
+          "line": 8,
+          "column": 87
+        }
+      ]
+    },
+    {
+      "title": "units17-30-scene.spec.js",
+      "file": "units17-30-scene.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:21.686Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "670f0b07893e74488850-25f039f9fc9d02dfae4c",
+          "file": "units17-30-scene.spec.js",
+          "line": 8,
+          "column": 48
+        },
+        {
+          "title": "25-26 图册翻页按钮不随内容高度跳动，刷新保留末页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1964,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:31.131Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "670f0b07893e74488850-ec1429f763895a6428c6",
+          "file": "units17-30-scene.spec.js",
+          "line": 43,
+          "column": 62
+        }
+      ]
+    },
+    {
+      "title": "units17-30-theatre.spec.js",
+      "file": "units17-30-theatre.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 连续舞台、对白与人物分层 320",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1747,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:33.152Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "151fa838c26cc615d71a-73becee564a4cdeeb9ee",
+          "file": "units17-30-theatre.spec.js",
+          "line": 10,
+          "column": 2
+        },
+        {
+          "title": "25-26 连续舞台、对白与人物分层 390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1762,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:34.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "151fa838c26cc615d71a-be193bd17cb1d524c6a3",
+          "file": "units17-30-theatre.spec.js",
+          "line": 10,
+          "column": 2
+        },
+        {
+          "title": "25-26 连续舞台、对白与人物分层 768",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1846,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:36.752Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "151fa838c26cc615d71a-035f6107db3232bd4a1d",
+          "file": "units17-30-theatre.spec.js",
+          "line": 10,
+          "column": 2
+        },
+        {
+          "title": "25-26 连续舞台、对白与人物分层 1280",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1835,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:38.605Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "151fa838c26cc615d71a-fecd27f845b4027fb657",
+          "file": "units17-30-theatre.spec.js",
+          "line": 10,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "title": "units17-30-upgrade.spec.js",
+      "file": "units17-30-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "25-26 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:40.486Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e50a8745745d6f3b3168-6eaddc97b45e4f98208e",
+          "file": "units17-30-upgrade.spec.js",
+          "line": 15,
+          "column": 2
+        },
+        {
+          "title": "25-26 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5663,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T21:52:50.921Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e50a8745745d6f3b3168-5968f1426cb3f3fc82ad",
+          "file": "units17-30-upgrade.spec.js",
+          "line": 37,
+          "column": 2
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T21:49:56.430Z",
+    "duration": 180926.318,
+    "expected": 43,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

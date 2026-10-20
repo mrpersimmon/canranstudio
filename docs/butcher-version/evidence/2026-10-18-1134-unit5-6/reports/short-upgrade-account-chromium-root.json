@@ -1,0 +1,166 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/units1-6-exam-upgrade.spec.js",
+      "--grep",
+      "5-6 旧",
+      "--reporter=list,json",
+      "--output=output/unit56-review-20261018/short-upgrade-account-chromium-root"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit56-review-20261018/short-upgrade-account-chromium-root",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4516/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "units1-6-exam-upgrade.spec.js",
+      "file": "units1-6-exam-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 149,
+                  "error": {
+                    "message": "Error: EPERM: operation not permitted, symlink 'C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\AGENTS.md' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-short-exam-upgrade-cI9oWJ\\old\\AGENTS.md'",
+                    "stack": "Error: EPERM: operation not permitted, symlink 'C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\AGENTS.md' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-short-exam-upgrade-cI9oWJ\\old\\AGENTS.md'\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\units1-6-exam-upgrade.spec.js:30:14",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\units1-6-exam-upgrade.spec.js",
+                      "column": 14,
+                      "line": 30
+                    },
+                    "snippet": "  28 |         const home=await fs.readFile(path.join(root,entry.name),'utf8');\n  29 |         await fs.writeFile(path.join(oldRoot,entry.name),home.replace(/<section[^>]+data-unit=\"unit5-6\"[\\s\\S]*?<\\/section>/,previous));\n> 30 |       } else await fs.symlink(path.join(root, entry.name), path.join(oldRoot, entry.name));\n     |              ^\n  31 |     }\n  32 |     await fs.mkdir(path.join(oldRoot, course));\n  33 |     const frozen = ['index.html', 'content.js', 'unit.js', 'unit.css', 'scene.js'];"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\units1-6-exam-upgrade.spec.js",
+                        "column": 14,
+                        "line": 30
+                      },
+                      "message": "Error: EPERM: operation not permitted, symlink 'C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\AGENTS.md' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-short-exam-upgrade-cI9oWJ\\old\\AGENTS.md'\n\n  28 |         const home=await fs.readFile(path.join(root,entry.name),'utf8');\n  29 |         await fs.writeFile(path.join(oldRoot,entry.name),home.replace(/<section[^>]+data-unit=\"unit5-6\"[\\s\\S]*?<\\/section>/,previous));\n> 30 |       } else await fs.symlink(path.join(root, entry.name), path.join(oldRoot, entry.name));\n     |              ^\n  31 |     }\n  32 |     await fs.mkdir(path.join(oldRoot, course));\n  33 |     const frozen = ['index.html', 'content.js', 'unit.js', 'unit.css', 'scene.js'];\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\units1-6-exam-upgrade.spec.js:30:14"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:3936) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:42:11.789Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\short-upgrade-account-chromium-root\\units1-6-exam-upgrade-5-6-旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\short-upgrade-account-chromium-root\\units1-6-exam-upgrade-5-6-旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\units1-6-exam-upgrade.spec.js",
+                    "column": 14,
+                    "line": 30
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "20bdd9441e5c92a2dc02-4fdef091d066a94e157f",
+          "file": "units1-6-exam-upgrade.spec.js",
+          "line": 10,
+          "column": 4
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T04:42:06.467Z",
+    "duration": 5882.976000000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

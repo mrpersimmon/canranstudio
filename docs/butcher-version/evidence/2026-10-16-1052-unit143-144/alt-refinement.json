@@ -1,0 +1,40 @@
+{
+  "reason": "Keep image alternatives limited to visible subjects and actions, without QA commentary or unprompted outcome judgements.",
+  "replacements": {
+    "作者在树林中观察告示牌背面，空废物筐旁散落着杂物；这是局部场景": "树林局部：作者、告示牌背面、空废物筐和地面杂物",
+    "戴浅色帽子、穿橄榄色外套的作者朝右散步，帽子双手双脚和挎包完整": "戴浅色帽子、穿橄榄色外套的作者背着挎包朝右散步",
+    "同一位作者停下观察，神情难过，没有清理或指认任何人": "作者停下观察，一只手放在下巴旁，神情难过",
+    "同一位作者朝右侧看，空手抬起作观察姿态，没有处罚或清理动作": "作者朝右侧看，一只手抬起，另一只手拿着挎包带",
+    "七辆独立旧汽车与三台独立旧冰箱，数量按原文排列": "七辆旧汽车和三台旧冰箱",
+    "垃圾中的告示牌背面，尚未显示文字": "垃圾中的木质告示牌背面",
+    "地面杂物仍在，未呈现清理完成": "地面散落着纸片、空瓶、旧轮胎和罐头盒"
+  },
+  "changedFiles": [
+    {
+      "file": "unit143-144/content.js",
+      "beforeSha256": "3b6f37e77e8521ebc87f100705022ca4f67275d8b4d7679c6fe37ee6cda5926e",
+      "afterSha256": "a9eec4a53623fa505de30d8385f0433171f4de62934908b7b62c150a050de14c"
+    },
+    {
+      "file": "unit143-144/index.html",
+      "beforeSha256": "e51a62bf73825786f90984a5e5b7739c79bfee196e2359e6a380541273803e2c",
+      "afterSha256": "66a8bc73811797116c3290fca983a29d70a080d4fbda31c6534ed4a540c79be1"
+    },
+    {
+      "file": "unit143-144/scene.js",
+      "beforeSha256": "2a5e7ed0877e88bd4d37efcda5809a97e2d14411d84dcf894feaa0b6d5363d0b",
+      "afterSha256": "a24d8896791dcc55c7bc6292f3fea84b7b64011da5124dd36b3db75d723a8ffb"
+    },
+    {
+      "file": "server/award-catalog.js",
+      "beforeSha256": "68d9ff6846c7111ea0628cdab76bfcc8a34c2d6e6c9f7ba525112d7370cb1a77",
+      "afterSha256": "031cf5172a51224de025f34200c46e16a9b5ca235375e6a0b4c7bcc5c8b65f20"
+    },
+    {
+      "file": "tests/e2e/unit143-144-story-layout.spec.js",
+      "beforeSha256": "2acbbb50244455d75e868f8fbd7666253b3bc030f51b35f3d3828d773cc4ab2f",
+      "afterSha256": "f0925b9aa6bf0a066055a7a170cf77b78cedf30d9c2701b8b3ca1b0b030ca6ba"
+    }
+  ],
+  "questionsAnswersScoringLayoutsAndImagesChanged": false
+}

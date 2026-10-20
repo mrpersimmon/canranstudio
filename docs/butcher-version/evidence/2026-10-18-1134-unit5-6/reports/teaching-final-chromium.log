@@ -1,0 +1,16 @@
+
+Running 7 tests using 1 worker
+
+(node:5776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154.spec.js:6:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (538ms)
+  ok 2 tests\e2e\unit5-6-v154.spec.js:28:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 (13.2s)
+  ok 3 tests\e2e\unit5-6-v154.spec.js:39:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 (12.4s)
+  ok 4 tests\e2e\unit5-6-v154.spec.js:49:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 (2.8s)
+(node:4092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 5 tests\e2e\unit5-6.spec.js:65:1 › 首页与 lesson 子目录有新单元入口，独立继续并保留资源路径 (9.7s)
+  ok 6 tests\e2e\unit5-6.spec.js:85:1 › 题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动 (986ms)
+  ok 7 tests\e2e\unit5-6.spec.js:96:1 › 首页重开包含四个单元，取消保留，确认只清除本路径的学习记录 (12.9s)
+
+  7 passed (54.5s)

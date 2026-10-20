@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:1928) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit7-8-audio.spec.js:10:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/ (1.0s)
+  ok  2 tests\e2e\unit7-8-audio.spec.js:10:37 › I 词卡保留音标和释义，翻面与刷新不请求配音：/lesson (2.8s)
+  ok  3 tests\e2e\unit7-8-classroom.spec.js:35:1 › 课文无配音也能浏览全部原文、刷新续读并主动完成 (1.7s)
+  ok  4 tests\e2e\unit7-8-classroom.spec.js:63:1 › 单词寻宝以13个新词的词义和图片作答，不需播放且末题刷新不代答 (2.7s)
+  ok  5 tests\e2e\unit7-8-classroom.spec.js:102:1 › 图鉴和示范供阅读，挑战读英文作答，正误反馈音仍正常 (6.8s)
+  ok  6 tests\e2e\unit7-8-classroom.spec.js:139:1 › lesson 路径全部声音不可用时仍能完成32题、浏览原文并领取证书 (8.5s)
+  ok  7 tests\e2e\unit7-8-classroom.spec.js:186:1 › 旧配音中断的位置可续读，未改练习与选择保留，旧听辨不代答 (4.3s)
+  ok  8 tests\e2e\unit7-8-classroom.spec.js:221:1 › 旧15星不填满新词汇和阅读挑战，其他活动保留，重做后可领新版证书 (57.4s)
+  ok  9 tests\e2e\unit7-8-classroom.spec.js:263:1 › 27题旧课堂记录升级重答新her题和七道新增挑战，保留合并题、词块、姓名，重练不能再导入 (11.0s)
+  ok 10 tests\e2e\unit7-8-classroom.spec.js:278:1 › 人物资源未齐先等待，整课准备后离线阅读与词卡换组完整且不闪加载 (3.1s)
+
+  10 passed (1.7m)

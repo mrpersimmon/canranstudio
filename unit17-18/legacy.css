@@ -1,0 +1,5 @@
+/* Only the old certificate layout survives here; former scene rules must not clip the new stage. */
+.unit1718-workspace .legacy-certificate-dialog .certificate-keepsakes{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:700px;margin:20px auto}
+.unit1718-workspace .legacy-certificate-dialog .certificate-keepsakes>div{display:grid;gap:4px;padding:14px 10px;background:#FFF9EB;border:1px solid #C9B394;border-radius:12px;font:600 17px/1.4 'Baloo 2',sans-serif}
+.unit1718-workspace .legacy-certificate-dialog .certificate-keepsakes strong{font-size:22px}
+@media(max-width:600px){.unit1718-workspace .legacy-certificate-dialog .certificate-keepsakes{grid-template-columns:1fr;gap:8px}.unit1718-workspace .legacy-certificate-dialog .certificate-keepsakes>div{padding:8px}}

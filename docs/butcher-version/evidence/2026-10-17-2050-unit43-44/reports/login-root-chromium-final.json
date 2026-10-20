@@ -1,0 +1,221 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit43-44.spec.js",
+      "--grep",
+      "同姓名同星数|缺图先拦截",
+      "--reporter=list,json",
+      "--output=output/unit4344-work/login-root-chromium-final"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4344-work/login-root-chromium-final",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4400/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit43-44.spec.js",
+      "file": "unit43-44.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1062ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "958ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5887,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:30:03.646Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1062ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "958ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a74ac86463fde2254660-eb5573d7fd0797b4a8f4",
+          "file": "unit43-44.spec.js",
+          "line": 137,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1429ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "37ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "7ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20864,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T13:30:09.651Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1429ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "37ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "7ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a74ac86463fde2254660-4d3b053237a87ef2e66b",
+          "file": "unit43-44.spec.js",
+          "line": 164,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T13:29:59.342Z",
+    "duration": 31653.072,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

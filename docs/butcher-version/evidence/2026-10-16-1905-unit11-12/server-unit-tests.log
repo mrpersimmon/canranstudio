@@ -1,0 +1,58 @@
+(node:15496) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (161.697ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.7079ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (3.2487ms)
+✔ partial wrong submission is observable without awards or resumable completion (57.5406ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (59.5379ms)
+✔ reset isolates a new generation and preserves earlier observation history (55.0454ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (64.5751ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (59.7004ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.4717ms)
+✔ student identity, pagination and filters expose learning summaries only (788.1082ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (5836.7513ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (4.0549ms)
+✔ three learning statuses require current work, not visits, stars or old content (7.137ms)
+✔ all published courses reach completed only with every required activity including reading (199.2967ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (204.4316ms)
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (956.5598ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (150.756ms)
+(node:19404) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (120.9444ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.7943ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (99.9174ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8941.0178
+
+✖ failing tests:
+
+test at tests\unit\admin-learning.test.js:192:1
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (956.5598ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '47a34895-90e0-456d-8e76-2e9c589b8e97'
+  - '61d30a29-6241-49c9-89a8-3aab3b0c02bd'
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-learning.test.js:215:9)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '47a34895-90e0-456d-8e76-2e9c589b8e97',
+    expected: '61d30a29-6241-49c9-89a8-3aab3b0c02bd',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

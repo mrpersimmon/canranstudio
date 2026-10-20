@@ -103,3 +103,15 @@
 .unit8586-workspace .story-poster img{width:130px;height:158px;object-fit:contain}.unit8586-workspace .story-memory img{width:142px;height:142px;object-fit:contain}
 .unit8586-workspace .story-poster figcaption,.unit8586-workspace .story-memory figcaption{font-size:13px;line-height:1.4;background:#fff9ed;border-radius:7px;padding:4px}
 @media(max-width:600px){.unit8586-workspace .story-poster,.unit8586-workspace .story-memory{bottom:28px;width:84px}.unit8586-workspace .story-poster img{width:68px;height:100px}.unit8586-workspace .story-memory img{width:76px;height:90px}.unit8586-workspace .story-poster figcaption,.unit8586-workspace .story-memory figcaption{font-size:10px}.unit8586-workspace .story-timeline{font-size:14px}.unit8586-workspace .story-timeline span{font-size:12px}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit8586-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit8586-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit8586-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit8586-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit8586-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit8586-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

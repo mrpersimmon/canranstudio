@@ -1,0 +1,1360 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-17T13:43:42.493Z",
+  "browserConditions": 91,
+  "nodeConditions": 35,
+  "uniqueTestConditions": 126,
+  "conditions": [
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 3198
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 3349
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 3375
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "15句课文完整历史：找到茶叶与杯子、最后水开；原文没有移动杯子",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 2379
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "场景第三题错两次：3／5／2；杯子仅检查正确后移动，刷新物品守恒",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 3134
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "Lesson44全部12组替换、10个复数和7+10书写题有入口",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 586
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-print.spec.js",
+      "title": "A七题完整改写原例，B十组完整问答原例与27条书写线可实际打印",
+      "passed": true,
+      "status": "passed",
+      "report": "current-chromium",
+      "durationMs": 763
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧空白升级：不虚构提交并可零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 3232
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧仅选择升级：不虚构提交并可零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 3405
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "原错答、双空草稿、词卡页与阅读位置保留，服务器只承接可核实历史",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 1699
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "实际44题旧五星保留；未改apply轮不重开；新增与修订题未答",
+      "passed": true,
+      "status": "passed",
+      "report": "refined-chromium",
+      "durationMs": 16705
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "46题完整流程、三卡五区五星及无配音",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 20699
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "18张词卡、音标、翻义与末组推进；不依赖配音",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 827
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": true,
+      "status": "passed",
+      "report": "dynamic-image-accepted",
+      "durationMs": 9317
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "配对部分不能检查；已配可撤销；刷新不代答",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 1500
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "320宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 14170
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "390宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 14512
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "768宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 14405
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "1280宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 13894
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 50339
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 3086
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 1527
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 37789
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium-final",
+      "durationMs": 5887
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium-final",
+      "durationMs": 20864
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 11038
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-chromium",
+      "durationMs": 13025
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "全部声音失败仍可完成五区，示范计帮助且重练不扣原星",
+      "passed": true,
+      "status": "passed",
+      "report": "final-chromium",
+      "durationMs": 16928
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "课本开场、人物全身、示范字体及12组关系图可见",
+      "passed": true,
+      "status": "passed",
+      "report": "hand-chromium",
+      "durationMs": 2917
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "同一次正确检查只移动原有两只杯子的节点，错答与改选不移动",
+      "passed": true,
+      "status": "passed",
+      "report": "hand-chromium",
+      "durationMs": 1771
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit",
+      "durationMs": 130868
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 16696
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 2636
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 112208
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-recovery",
+      "durationMs": 27020
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 74446
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 53516
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "status": "passed",
+      "report": "login-root-webkit-final",
+      "durationMs": 49104
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "44题完整流程、三卡五区五星及无配音",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 11886
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "18张词卡、音标、翻义与末组推进；不依赖配音",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 658
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "15句课文完整历史：找到茶叶与杯子、最后水开；原文没有移动杯子",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 1924
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 7789
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "场景第三题错两次：3／5／2；杯子仅检查正确后移动，刷新物品守恒",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 3299
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "配对部分不能检查；已配可撤销；刷新不代答",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 1198
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "Lesson44全部12组替换、10个复数和7+10书写题有入口",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 418
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "320宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 14088
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "390宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 14343
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "768宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 14507
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44.spec.js",
+      "title": "1280宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "old-chromium",
+      "durationMs": 13961
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧空白升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "shared-chromium",
+      "durationMs": 3423
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧仅选择升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "shared-chromium",
+      "durationMs": 3405
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "原错答和双空草稿、词卡页与16句阅读游标保留，旧记录可查",
+      "passed": true,
+      "status": "passed",
+      "report": "shared-chromium",
+      "durationMs": 1459
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "实际43题旧五星升级：旧星不扣，修订题不代答，原已完成轮不重开",
+      "passed": true,
+      "status": "passed",
+      "report": "shared-chromium",
+      "durationMs": 11381
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "更早polish前原页可直接升级，既有一星和五条原记录不丢",
+      "passed": true,
+      "status": "passed",
+      "report": "shared-chromium",
+      "durationMs": 3468
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 47653
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 3077
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 1294
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 39959
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 6168
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 20586
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 10996
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-chromium",
+      "durationMs": 13493
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "全部声音失败仍可完成五区，示范计帮助且重练不扣原星",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 37743
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "课本开场、人物全身、示范字体及12组关系图可见",
+      "passed": true,
+      "status": "passed",
+      "report": "hand-webkit",
+      "durationMs": 7778
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-materials.spec.js",
+      "title": "同一次正确检查只移动原有两只杯子的节点，错答与改选不移动",
+      "passed": true,
+      "status": "passed",
+      "report": "hand-webkit",
+      "durationMs": 3583
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 6828
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 6907
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-reading.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 9439
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧空白升级：不虚构提交并可零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 7681
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧仅选择升级：不虚构提交并可零错获星",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 7597
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "原错答、双空草稿、词卡页与阅读位置保留，服务器只承接可核实历史",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 3661
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "实际44题旧五星保留；未改apply轮不重开；新增与修订题未答",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 33365
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "46题完整流程、三卡五区五星及无配音",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 41880
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "18张词卡、音标、翻义与末组推进；不依赖配音",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 1875
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "15句课文完整历史：找到茶叶与杯子、最后水开；原文没有移动杯子",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 5242
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 22746
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "场景第三题错两次：3／5／2；杯子仅检查正确后移动，刷新物品守恒",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 8564
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "配对部分不能检查；已配可撤销；刷新不代答",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 3764
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "Lesson44全部12组替换、10个复数和7+10书写题有入口",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 1152
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "320宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 29770
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "390宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 30193
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "768宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 30310
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "1280宽及短屏：场景、题型、三卡和两按钮",
+      "passed": true,
+      "status": "passed",
+      "report": "current-webkit",
+      "durationMs": 32300
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 124740
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 16884
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 2738
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 109999
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 26153
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 74017
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 53761
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "status": "passed",
+      "report": "login-subpath-webkit",
+      "durationMs": 47687
+    }
+  ],
+  "reports": [
+    "reports/representative.json",
+    "reports/current-chromium.json",
+    "reports/login-root-chromium.json",
+    "reports/refined-chromium.json",
+    "reports/login-root-webkit.json",
+    "reports/old-chromium.json",
+    "reports/webkit-entry-isolated.json",
+    "reports/webkit-entry-ready.json",
+    "reports/final-chromium.json",
+    "reports/dynamic-image-isolated.json",
+    "reports/login-root-webkit-final.json",
+    "reports/dynamic-image-ready.json",
+    "reports/dynamic-image-accepted.json",
+    "reports/shared-chromium.json",
+    "reports/login-root-webkit-recovery.json",
+    "reports/login-subpath-chromium.json",
+    "reports/current-webkit.json",
+    "reports/login-root-chromium-final.json",
+    "reports/login-subpath-webkit.json",
+    "reports/hand-chromium.json",
+    "reports/hand-webkit.json"
+  ],
+  "failedRuns": [
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153-upgrade.spec.js",
+      "title": "原错答、双空草稿、词卡页与阅读位置保留，服务器只承接可核实历史",
+      "passed": false,
+      "status": "failed",
+      "report": "current-chromium",
+      "durationMs": 1286,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153-upgrade.spec.js",
+            "column": 222,
+            "line": 9
+          },
+          "message": "TypeError: Cannot read properties of undefined (reading 'records')\n\n   7 |  const upgrade=await legacy(page);await page.goto('/unit43-44/#learn/grammar');const room=page.locator('.stage-grammar');await fresh.select(room,'会；能够');await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();await fresh.select(room,{fills:['cans','cans']});await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'cans',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();\n   8 |  await page.goto('/unit43-44/#learn/words');for(let i=0;i<2;i++)await page.getByRole('button',{name:'下一组词卡',exact:true}).click();await page.goto('/unit43-44/#learn/text');await page.getByRole('button',{name:'开始看课文',exact:true}).click();for(let i=0;i<7;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit43-44:learning:v1')));\n>  9 |  const p=require('../../server/progress'),path=require('node:path'),unit=p.definition(path.resolve(__dirname,'../..'),'unit43-44'),n=p.normalize(before,unit,'unit43-44');expect(Object.keys(n.activity.unit4344V153Progress.records)).toHaveLength(2);\n     |                                                                                                                                                                                                                              ^\n  10 |  await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(8);await page.goto('/unit43-44/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('3 / 3');const snapshot=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit43-44:learning:v1')).activity.unit4344V153Snapshot);expect(snapshot.groups).toEqual(before.groups);expect(snapshot.records).toEqual(before.records);expect(snapshot.activity.unitDialogue).toEqual(before.activity.unitDialogue);\n  11 |  await page.goto('/unit43-44/#learn/grammar');await expect(room.locator('.progress-copy')).toHaveText('第 2 / 13 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'cans',exact:true})).toHaveAttribute('aria-pressed','true');await page.goto('/unit43-44/#learn/certificate');await page.getByText('改版前的学习记录',{exact:true}).click();await expect(page.locator('.historical-learning')).toContainText('提交1次');\n  12 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153-upgrade.spec.js:9:222"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit",
+      "durationMs": 8320,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 54,
+            "line": 19
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.unit-word')\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.unit-word')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  17 |     await learner.page.getByRole('link', { name: /开始学习/ }).click();\n  18 |     await expect(learner.page).toHaveURL(/unit43-44\\/#learn\\/words/);\n> 19 |     await expect(learner.page.locator('.unit-word')).toHaveCount(6);\n     |                                                      ^\n  20 |   } finally { await learner.context.close(); }\n  21 | });\n  22 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:19:54"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit",
+      "durationMs": 82548,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 59,
+            "line": 92
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#certificateDate')\nExpected: \u001b[32m\"2026.10.17\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#certificateDate')\u001b[22m\n\n\n  90 |     await expect(second.page.locator('.course')).toContainText('5 / 5');\n  91 |     await second.page.goto(base+'unit43-44/#learn/certificate');\n> 92 |     await expect(second.page.locator('#certificateDate')).toHaveText(date);\n     |                                                           ^\n  93 |     const download=second.page.waitForEvent('download');\n  94 |     await second.page.getByRole('button',{name:'保存动图',exact:true}).click();\n  95 |     const gif=await download;\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:92:59"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit",
+      "durationMs": 13908,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 43,
+            "line": 147
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.unit-word')\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.unit-word')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  145 |     await expect(p.locator('.unit-word')).toHaveCount(0);\n  146 |     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();\n> 147 |     await expect(p.locator('.unit-word')).toHaveCount(6);await expect(p.locator('#courseLoader')).toHaveCount(0);\n      |                                           ^\n  148 |     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);\n  149 |     await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 3');\n  150 |     await p.getByRole('link',{name:'我的课程',exact:true}).click();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:147:43"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit",
+      "durationMs": 8396,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 66,
+            "line": 165
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '保存动图', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '保存动图', exact: true })\u001b[22m\n\n\n  163 |   try{\n  164 |     await p.goto(base+'unit43-44/#learn/certificate');\n> 165 |     await expect(p.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();\n      |                                                                  ^\n  166 |     for(const pair of ['1-2','3-4','43-44']){\n  167 |       if(pair==='43-44')await activity(p,'listen',{base:prefix});\n  168 |       else if(pair==='1-2')await require('../support/unit1-2-award-flow').finishZone(p,'listen',{base:base+'unit1-2/'});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:165:66"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit",
+      "durationMs": 31885,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 303,
+            "line": 209
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: '保存动图', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: '保存动图', exact: true })\u001b[22m\n\n\n  207 |   const b=await card.boundingBox(),n=await name.boundingBox();expect(n.x).toBeGreaterThan(b.x);expect(n.x+n.width).toBeLessThan(b.x+b.width);expect(n.y+n.height).toBeLessThan(b.y+b.height);\n  208 |   expect(await name.evaluate(el=>el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1)).toBe(true);await card.screenshot({path:info.outputPath('long-name-320.png')});\n> 209 |   const second=await require('./helpers').addStudent(page,'小竹');other=await studentLogin(browser,second,base);await other.page.goto(base+'unit43-44/#learn/certificate');await expect(other.page.locator('#starCount')).toHaveText('0');await expect(other.page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();\n      |                                                                                                                                                                                                                                                                                                               ^\n  210 |   await page.goto(preview);await page.getByRole('link',{name:/茶具躲猫猫/}).click();await page.goto((await page.url()).replace(/#.*$/,'#learn/certificate'));\n  211 |   await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();\n  212 |  }finally{await first.context.close();await other?.context.close();}\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:209:303"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": false,
+      "status": "failed",
+      "report": "webkit-entry-isolated",
+      "durationMs": 8249,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 54,
+            "line": 19
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.unit-word')\nExpected: \u001b[32m6\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.unit-word')\u001b[22m\n\u001b[2m    14 × locator resolved to 0 elements\u001b[22m\n\u001b[2m       - unexpected value \"0\"\u001b[22m\n\n\n  17 |     await learner.page.getByRole('link', { name: /开始学习/ }).click();\n  18 |     await expect(learner.page).toHaveURL(/unit43-44\\/#learn\\/words/);\n> 19 |     await expect(learner.page.locator('.unit-word')).toHaveCount(6);\n     |                                                      ^\n  20 |   } finally { await learner.context.close(); }\n  21 | });\n  22 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:19:54"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": false,
+      "status": "failed",
+      "report": "final-chromium",
+      "durationMs": 3316,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js",
+            "column": 100,
+            "line": 57
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  55 |   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}\n  56 |   if(i===11)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);\n> 57 |   expect(await room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);\n     |                                                                                                    ^\n  58 |   await select(room,answer);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===12?'完成这一站':'下一题',exact:true}).click();\n  59 |  }\n  60 |  await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js:57:100"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": false,
+      "status": "failed",
+      "report": "dynamic-image-isolated",
+      "durationMs": 3422,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js",
+            "column": 100,
+            "line": 57
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  55 |   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}\n  56 |   if(i===11)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);\n> 57 |   expect(await room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);\n     |                                                                                                    ^\n  58 |   await select(room,answer);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===12?'完成这一站':'下一题',exact:true}).click();\n  59 |  }\n  60 |  await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js:57:100"
+        }
+      ],
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "kind": "login",
+      "file": "unit43-44.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": false,
+      "status": "failed",
+      "report": "login-root-webkit-final",
+      "durationMs": 22404,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js",
+            "column": 50,
+            "line": 155
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#wordPageProgress')\nExpected: \u001b[32m\"2 / 3\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#wordPageProgress')\u001b[22m\n\n\n  153 |     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});\n  154 |     await p.locator('.course').getByRole('link',{name:/学习/}).click();\n> 155 |     await expect(p.locator('#wordPageProgress')).toHaveText('2 / 3');\n      |                                                  ^\n  156 |     expect(downloads).toEqual([]);\n  157 |     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);\n  158 |   }finally{await student.context.close();}\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit43-44.spec.js:155:50"
+        }
+      ],
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "7759ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "kind": "e2e",
+      "file": "unit43-44-v153.spec.js",
+      "title": "语法反复错答、部分填空、撤回、提示与刷新；订正不发星，重练可获星",
+      "passed": false,
+      "status": "failed",
+      "report": "dynamic-image-ready",
+      "durationMs": 3958,
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js",
+            "column": 100,
+            "line": 61
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  59 |   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}\n  60 |   if(i===11)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);\n> 61 |   expect(await room.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);\n     |                                                                                                    ^\n  62 |   await select(room,answer);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===12?'完成这一站':'下一题',exact:true}).click();\n  63 |  }\n  64 |  await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['13','13','2']);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit43-44-v153.spec.js:61:100"
+        }
+      ],
+      "annotations": []
+    }
+  ],
+  "counts": {
+    "questions": 46,
+    "zones": [
+      7,
+      5,
+      13,
+      5,
+      16
+    ],
+    "oldQuestions": 44,
+    "unchangedQuestions": 39,
+    "revisedQuestions": 5,
+    "newQuestions": 2,
+    "words": 18,
+    "dialogue": 15,
+    "referenceScenes": 12,
+    "originalImagesRetained": 34,
+    "newCast": 2,
+    "reusedCast": 1,
+    "newVectors": 13
+  },
+  "historicalBoundary": {
+    "edition": "tea-can-v1",
+    "unchangedReward": true,
+    "oldCardFonts": "Award Round / Award Book 400; Baloo 2",
+    "classroomFonts": "Gothic 400/500; Nunito 400/600; IPA Arial",
+    "old15StarCertificate": false,
+    "oldCertificatePrint": false,
+    "completedHistoryRemainsAfterNewCompletion": true,
+    "unfinishedDrafts": "retained on original device, not falsely represented as prior cloud completion"
+  },
+  "recoveries": [
+    {
+      "finding": "Initial migration test expected an incomplete local round in server-validated completed history",
+      "resolution": "Correct the assertion to local snapshot preservation and no fabricated synced history; unchanged runtime validation."
+    },
+    {
+      "finding": "Windows WebKit page assertions ran while protected course was still preparing",
+      "resolution": "Retain original failing runs and isolate; explicit public readiness then the original count/name/date assertion. Observed one cold preparation was 13587ms. Subsequent test contexts also carry mobile profile. Initial run also overlapped content wording/diagram edits; not described as exact-version isolation."
+    },
+    {
+      "finding": "One later re-entry assertion still ran before ready",
+      "resolution": "Use the same public readiness phase after directory re-entry; 404 target changed to the new unique Penny asset and actual failed response must be observed."
+    },
+    {
+      "finding": "Newly mounted two-loaves.svg sampled before decode",
+      "resolution": "Same-version isolation reproduced complete=false,width=0; record the pending path and await the unchanged decode condition. An intermediate patch targeted a different identical line; final fix applied at the failing grammar step."
+    },
+    {
+      "finding": "First reference compositions placed second hammer and chocolate beside landmarks",
+      "resolution": "Create actual occlusion; inspect all 12 relation diagrams. Counter coordinate system and foreground hand also corrected."
+    },
+    {
+      "finding": "pypdf extraction inserted whitespace inside Nunito words",
+      "resolution": "Original two rendered pages reviewed; verify letters/order after whitespace normalization and retain raw extraction. No PDF content changed."
+    }
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit43-44/#learn/text",
+    "image": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "recordsCleared": false,
+    "reseeded": false,
+    "answersInjected": false
+  },
+  "pending": [
+    "teacher review",
+    "child classroom trial",
+    "physical Android/iPhone WeChat save",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not requested",
+    "push": "not requested",
+    "release": "not requested"
+  },
+  "scope": "Scoped development tests, two engines and two authenticated mounts. Original 11 frozen-page Chromium checks and adjacent 41–42 migration included. No full repository commit or release verification."
+}

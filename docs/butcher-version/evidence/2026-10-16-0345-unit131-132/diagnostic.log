@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+(node:27376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"viewport":768,"scroll":793,"elements":[{"tag":"A","id":"","cls":"","right":793,"left":675,"width":118,"scrollWidth":118,"text":"完成表达挑战","whiteSpace":"nowrap","display":"block"}]}
+  ok 1 tests\e2e\unit131-132-diagnostic.spec.js:3:1 › diagnose768layout (550ms)
+
+  1 passed (1.4s)

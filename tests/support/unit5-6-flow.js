@@ -5,9 +5,9 @@ const { EXAMS } = require('./units1-6-exam');
 // Independent expectations: textbook paper pages 10–13 and the unit manuscript.
 const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophie Dupont.','Sophie is a new student.','She is French.','Sophie, this is Hans.','He is German.','Nice to meet you.','And this is Naoko.',"She's Japanese.",'Nice to meet you.','And this is Chang-woo.',"He's South Korean.",'Nice to meet you.','And this is Luming.',"He's Chinese.",'Nice to meet you.','And this is Xiaohui.',"She's Chinese, too.",'Nice to meet you.'];
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
-const ANSWERS=Object.fromEntries(['listen','roles','introduce','cars','exam'].map(id=>[id,taskCases.answers('5-6',id).map(q=>q.answer)]));
+const ANSWERS=Object.fromEntries(Object.entries(require('./unit56-answers').CURRENT).map(([id,rows])=>[id,rows.map(q=>q.answer)]));
 async function completeStory(page, base = '') {
-  await page.goto(base + '/unit5-6/#learn/text'); const room=page.locator('.stage-text');
+  await page.goto(base + '/unit5-6/#learn/text'); await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000}); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++){
     await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
@@ -19,7 +19,7 @@ async function completeStory(page, base = '') {
 }
 async function completeActivity(page,id,{recovery=false,base=''}={}){
   await require('./reward-dialog').handleRewardDialog(page);
-  await page.goto(base + '/unit5-6/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
+  await page.goto(base + '/unit5-6/#learn/'+id);await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});const room=page.locator('.stage-'+id),answers=ANSWERS[id];
   for(let i=0;i<answers.length;i++){
     const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));

@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:15224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 (697ms)
+
+  1 passed (1.6s)

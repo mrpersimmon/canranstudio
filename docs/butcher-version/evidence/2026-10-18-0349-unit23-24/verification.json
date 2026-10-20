@@ -1,0 +1,1613 @@
+{
+  "at": "2026-10-17T20:26:51.296Z",
+  "courseVerification": "passed",
+  "baseline": "45-question five-star edition with an earlier 32-question 15-star archive",
+  "questions": {
+    "before": 45,
+    "current": 45,
+    "unchanged": 43,
+    "revised": 2,
+    "additional": 0,
+    "legacy": 32
+  },
+  "uniqueBrowserConditions": 79,
+  "uniqueNodeConditions": 40,
+  "totalCourseConditions": 119,
+  "runs": [
+    {
+      "name": "red",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:52:54.347Z",
+      "durationMs": 22827.285,
+      "unexpected": 3
+    },
+    {
+      "name": "scene-red",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:54:15.869Z",
+      "durationMs": 6949.101,
+      "unexpected": 1
+    },
+    {
+      "name": "review-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:55:42.450Z",
+      "durationMs": 16361.985999999999,
+      "unexpected": 1
+    },
+    {
+      "name": "local-upgrade-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:57:32.263Z",
+      "durationMs": 38096.873,
+      "unexpected": 0
+    },
+    {
+      "name": "draft-repro",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:58:21.178Z",
+      "durationMs": 10246.6,
+      "unexpected": 1
+    },
+    {
+      "name": "account-chain-initial",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T19:59:04.165Z",
+      "durationMs": 56145.881,
+      "unexpected": 1
+    },
+    {
+      "name": "course-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:59:35.832Z",
+      "durationMs": 181048.826,
+      "unexpected": 0
+    },
+    {
+      "name": "course-webkit",
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T19:59:46.179Z",
+      "durationMs": 373368.489,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chain-repro",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:01:44.363Z",
+      "durationMs": 64495.771,
+      "unexpected": 1
+    },
+    {
+      "name": "account-chain-provenance-fixed",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:03:55.553Z",
+      "durationMs": 67412.03899999999,
+      "unexpected": 1
+    },
+    {
+      "name": "print",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:04:05.803Z",
+      "durationMs": 11006.585,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chain-final",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:07:52.168Z",
+      "durationMs": 79044.14,
+      "unexpected": 1
+    },
+    {
+      "name": "earlier-chain-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:08:41.642Z",
+      "durationMs": 70752.959,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:08:41.645Z",
+      "durationMs": 139766.524,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chain-local-snapshot-fixed",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:11:52.762Z",
+      "durationMs": 77557.39099999999,
+      "unexpected": 0
+    },
+    {
+      "name": "account-webkit-root",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:11:52.786Z",
+      "durationMs": 291051.049,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chromium-subpath",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-17T20:12:57.922Z",
+      "durationMs": 97281.137,
+      "unexpected": 0
+    },
+    {
+      "name": "shared-regression-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:14:07.586Z",
+      "durationMs": 158574.3,
+      "unexpected": 0
+    },
+    {
+      "name": "material-mobile-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:16:04.413Z",
+      "durationMs": 6005.599,
+      "unexpected": 0
+    },
+    {
+      "name": "material-mobile-webkit",
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:18:23.024Z",
+      "durationMs": 8719.016000000001,
+      "unexpected": 0
+    },
+    {
+      "name": "account-webkit-subpath",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-17T20:18:32.796Z",
+      "durationMs": 439615.589,
+      "unexpected": 0
+    }
+  ],
+  "tests": [
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "两道继承复习题在未答时有短示范，并只向本次提交登记帮助",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2323,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "回指题在选择和提示前显示请求原文，刷新仍能据原文判断",
+      "passed": true,
+      "report": "material-mobile-chromium",
+      "durationMs": 2031,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "归属与接收者题在未答时明确递回请求，不能只给物主事实",
+      "passed": true,
+      "report": "material-mobile-chromium",
+      "durationMs": 2569,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "候选杯组先由简拿起，被否定后放回，再换拿搁板杯组",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1794,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版综合空白更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 5257,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版综合仅选未提交更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 5518,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版双空草稿、综合错答、词卡阅读与两种单图分页保留",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 11631,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星与三个未改轮次保留，两道修订题未答，完成后旧历史仍在",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 20229,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-chain-local-snapshot-fixed",
+      "durationMs": 71282,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-interactions.spec.js",
+      "title": "配对先完整选择再检查，错配和刷新保留原位，修改后才计进度",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2492,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-interactions.spec.js",
+      "title": "原文定位保留完整句子，错选只提示重试，点选不直接判分",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1554,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 4326,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧仅选择升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 4486,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1741,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 13798,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "45题、完整8句、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 21433,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 6678,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 320",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2895,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 390",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2800,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 768",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3015,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 1280",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3006,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 17028,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 17154,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "双空未齐、撤回、错答与刷新保持草稿和错误",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1597,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "30张词卡音标及完整10幅物品图、10组问答和六个书写原题",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3591,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 14401,
+      "annotations": [
+        {
+          "type": "audio-failure-reached",
+          "description": "51 actual play calls rejected"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2008,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1996,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2437,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-interactions.spec.js",
+      "title": "配对先完整选择再检查，错配和刷新保留原位，修改后才计进度",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 6674,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-interactions.spec.js",
+      "title": "原文定位保留完整句子，错选只提示重试，点选不直接判分",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3844,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 9738,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧仅选择升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 8914,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3131,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 30266,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "45题、完整8句、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 39416,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 17318,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 320",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 6556,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 390",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 7430,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 768",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 8677,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "完整场景、中文与杯组交接 1280",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 7710,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 34425,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 32517,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "双空未齐、撤回、错答与刷新保持草稿和错误",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3737,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "30张词卡音标及完整10幅物品图、10组问答和六个书写原题",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 8608,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 30714,
+      "annotations": [
+        {
+          "type": "audio-failure-reached",
+          "description": "51 actual play calls rejected"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5279,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5196,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 4696,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版综合空白更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 10529,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版综合仅选未提交更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 10565,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "45题版双空草稿、综合错答、词卡阅读与两种单图分页保留",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 23929,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星与三个未改轮次保留，两道修订题未答，完成后旧历史仍在",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 35959,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "两道继承复习题在未答时有短示范，并只向本次提交登记帮助",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5293,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "回指题在选择和提示前显示请求原文，刷新仍能据原文判断",
+      "passed": true,
+      "report": "material-mobile-webkit",
+      "durationMs": 3542,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "归属与接收者题在未答时明确递回请求，不能只给物主事实",
+      "passed": true,
+      "report": "material-mobile-webkit",
+      "durationMs": 4317,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "候选杯组先由简拿起，被否定后放回，再换拿搁板杯组",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 2992,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-print.spec.js",
+      "title": "练习纸保留A六题、B十题、原例和50条书写线与6个填空位，实际PDF无隐藏题目",
+      "passed": true,
+      "report": "print",
+      "durationMs": 841,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-print.spec.js",
+      "title": "已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡",
+      "passed": true,
+      "report": "print",
+      "durationMs": 9013,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-tasks-upgrade.spec.js",
+      "title": "23-24 新题型跨设备升级保留旧有效题，完成新题再恢复证书",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 35775,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "units17-30-upgrade.spec.js",
+      "title": "23-24 旧服务器升级换设备，保留有效两题，补完后恢复15星和原证书",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 26845,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 37935,
+      "annotations": [
+        {
+          "type": "old-course-ready",
+          "description": "1464ms; no old answers or certificate injected"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 3019,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "1381ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 1305,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 37764,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "6ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1403ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "10ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 5497,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "973ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 21381,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "1418ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "26ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "29ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "7ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "9ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 11001,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "8ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1407ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1418ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 13473,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "969ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "936ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-webkit-root",
+      "durationMs": 118614,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "20ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "13631ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "25ms after navigation"
+        },
+        {
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        },
+        {
+          "type": "course-ready",
+          "description": "8654ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-webkit-root",
+      "durationMs": 165788,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-chromium-subpath",
+      "durationMs": 38911,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "9ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "2021ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "15ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-chromium-subpath",
+      "durationMs": 50993,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit19-20-v153-upgrade.spec.js",
+      "title": "原65题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "shared-regression-chromium-root",
+      "durationMs": 87442,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 36-question 15-star certificate -> real 65-question five-star edition -> current 66-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":65}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit21-22-teaching-review.spec.js",
+      "title": "45题原五星更新：全部有效轮次、原卡全帧、姓名日期与跨设备旧证保留",
+      "passed": true,
+      "report": "shared-regression-chromium-root",
+      "durationMs": 64769,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 30-question 15-star certificate -> real 45-question five-star round -> current presentation, unchanged 45 questions"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 101267,
+      "annotations": [
+        {
+          "type": "old-course-ready",
+          "description": "11689ms; no old answers or certificate injected"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 107699,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "33ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "13541ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "7ms after navigation"
+        },
+        {
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        },
+        {
+          "type": "course-ready",
+          "description": "9012ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 77200,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "13419ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "34ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "34ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "22ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "31ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 147754,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    }
+  ],
+  "initialBrowserFailures": [
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "两道继承复习题在未答时有短示范，并只向本次提交登记帮助",
+      "passed": false,
+      "report": "red",
+      "durationMs": 7010,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 157,
+            "line": 8
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"The pens are on the table.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n   6 | test('两道继承复习题在未答时有短示范，并只向本次提交登记帮助',async({page},info)=>{\n   7 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit23-24/#learn/grammar');const room=page.locator('.stage-grammar');for(const answer of ANSWERS.grammar.slice(0,7))await next(room,answer);\n>  8 |  const model=room.getByRole('region',{name:'短示范',exact:true});await room.screenshot({path:info.outputPath('grammar-8-unanswered.png')});await expect(model).toContainText('The pens are on the table.');await expect(model).not.toContainText('甲组');await next(room,ANSWERS.grammar[7]);\n     |                                                                                                                                                             ^\n   9 |  await room.screenshot({path:info.outputPath('grammar-9-unanswered.png')});await expect(model).toContainText('Give me my book, please.');await expect(model).toContainText('Give us our pens, please.');await expect(model).not.toContainText('Give us our umbrellas');await next(room,ANSWERS.grammar[8],true);\n  10 |  const book=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit23-24:learning:v1')));for(const id of ['u2324-v1-on-contact','u2324-v1-recipient-us'])expect(book.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  11 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:8:157"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "回指题在选择和提示前显示请求原文，刷新仍能据原文判断",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6390,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 257,
+            "line": 13
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"\u001b[7mGive me some glasses please, Jane\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m男士说：The ones on the shelf\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"男士说：The ones on the shelf.\"\u001b[22m\n\n\n  11 | });\n  12 | test('回指题在选择和提示前显示请求原文，刷新仍能据原文判断',async({page},info)=>{\n> 13 |  await story(page);await page.goto('/unit23-24/#learn/roles');const room=page.locator('.stage-roles');await next(room,ANSWERS.roles[0]);await room.screenshot({path:info.outputPath('roles-2-unanswered.png')});await expect(room.locator('.practice-context')).toContainText('Give me some glasses please, Jane.');await expect(room.locator('.practice-context')).toContainText('No, not those. The ones on the shelf.');await expect(room.locator('.practice-context')).not.toContainText('ones代替');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toContainText('Give me some glasses please, Jane.');await next(room,ANSWERS.roles[1],true);\n     |                                                                                                                                                                                                                                                                 ^\n  14 | });\n  15 | test('归属与接收者题在未答时明确递回请求，不能只给物主事实',async({page},info)=>{\n  16 |  await page.goto('/unit23-24/#learn/exam');const room=page.locator('.stage-exam');for(const answer of ANSWERS.exam.slice(0,7))await next(room,answer);await room.screenshot({path:info.outputPath('exam-8-unanswered.png')});await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await select(room,{fills:['our']});await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await select(room,ANSWERS.exam[7]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:13:257"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "归属与接收者题在未答时明确递回请求，不能只给物主事实",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6729,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 270,
+            "line": 16
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"他们请简把这些盒子递回给自己。\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n\n  14 | });\n  15 | test('归属与接收者题在未答时明确递回请求，不能只给物主事实',async({page},info)=>{\n> 16 |  await page.goto('/unit23-24/#learn/exam');const room=page.locator('.stage-exam');for(const answer of ANSWERS.exam.slice(0,7))await next(room,answer);await room.screenshot({path:info.outputPath('exam-8-unanswered.png')});await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await select(room,{fills:['our']});await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await select(room,ANSWERS.exam[7]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                              ^\n  17 | });\n  18 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:16:270"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "候选杯组先由简拿起，被否定后放回，再换拿搁板杯组",
+      "passed": false,
+      "report": "scene-red",
+      "durationMs": 5853,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 84,
+            "line": 21
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-text').locator('.table-set')\nExpected: hidden\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-text').locator('.table-set')\u001b[22m\n\u001b[2m    14 × locator resolved to <g class=\"table-set is-focus\" transform=\"translate(0 0)\">…</g>\u001b[22m\n\u001b[2m       - unexpected value \"visible\"\u001b[22m\n\n\n  19 |  await page.setViewportSize({width:390,height:844});await page.goto('/unit23-24/#learn/text');const room=page.locator('.stage-text');\n  20 |  for(let i=0;i<8;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const jane=room.locator('.jane .cast-image'),man=room.locator('.man .cast-image');\n> 21 |   await expect(room.locator('.table-set'))[i===2||i===3?'toBeHidden':'toBeVisible']();await expect(room.locator('.shelf-set'))[i<4?'toBeVisible':'toBeHidden']();\n     |                                                                                    ^\n  22 |   await expect(jane).toHaveAttribute('data-holding',String(i>=2&&i<6));await expect(man).toHaveAttribute('data-holding',String(i>=6));\n  23 |   if(i===2||i===3){await expect(jane).toHaveAttribute('alt','简双手托着桌上的候选杯组');await room.screenshot({path:info.outputPath('candidate-held-'+i+'.png')});}\n  24 |   if(i===4){await expect(jane).toHaveAttribute('alt','简双手托着从搁板取下的目标杯组');await page.reload();await expect(room.locator('.btext span')).toHaveCount(5);await expect(room.locator('.table-set')).toBeVisible();await expect(room.locator('.shelf-set')).toBeHidden();await room.screenshot({path:info.outputPath('shelf-held-after-reload.png')});}\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:21:84"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "归属与接收者题在未答时明确递回请求，不能只给物主事实",
+      "passed": false,
+      "report": "review-chromium",
+      "durationMs": 9154,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 748,
+            "line": 16
+          },
+          "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  14 | });\n  15 | test('归属与接收者题在未答时明确递回请求，不能只给物主事实',async({page},info)=>{\n> 16 |  await page.goto('/unit23-24/#learn/exam');const room=page.locator('.stage-exam');for(const answer of ANSWERS.exam.slice(0,7))await next(room,answer);await room.screenshot({path:info.outputPath('exam-8-unanswered.png')});await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await select(room,{fills:['our']});await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await select(room,ANSWERS.exam[7]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^\n  17 | });\n  18 | test('候选杯组先由简拿起，被否定后放回，再换拿搁板杯组',async({page},info)=>{\n  19 |  await page.setViewportSize({width:390,height:844});await page.goto('/unit23-24/#learn/text');const room=page.locator('.stage-text');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:16:748"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit23-24-v153.spec.js",
+      "title": "归属与接收者题在未答时明确递回请求，不能只给物主事实",
+      "passed": false,
+      "report": "draft-repro",
+      "durationMs": 9149,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js",
+            "column": 748,
+            "line": 16
+          },
+          "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  14 | });\n  15 | test('归属与接收者题在未答时明确递回请求，不能只给物主事实',async({page},info)=>{\n> 16 |  await page.goto('/unit23-24/#learn/exam');const room=page.locator('.stage-exam');for(const answer of ANSWERS.exam.slice(0,7))await next(room,answer);await room.screenshot({path:info.outputPath('exam-8-unanswered.png')});await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await select(room,{fills:['our']});await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('他们请简把这些盒子递回给自己。');await select(room,ANSWERS.exam[7]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ^\n  17 | });\n  18 | test('候选杯组先由简拿起，被否定后放回，再换拿搁板杯组',async({page},info)=>{\n  19 |  await page.setViewportSize({width:390,height:844});await page.goto('/unit23-24/#learn/text');const room=page.locator('.stage-text');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit23-24-v153.spec.js:16:748"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": false,
+      "report": "account-chain-initial",
+      "durationMs": 48826,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        }
+      ],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+            "column": 230,
+            "line": 30
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m45\u001b[39m\nReceived length: \u001b[31m46\u001b[39m\nReceived array:  \u001b[31m[\"u2324-v1-vocab-on\", \"u2324-v1-vocab-shelf\", \"u2324-v1-vocab-desk\", \"u2324-v1-vocab-table\", \"u2324-tasks-v4-objects\", \"u2324-v1-vocab-cupboard\", \"u2324-v1-vocab-cigarette\", \"u2324-v1-vocab-television\", \"u2324-v1-vocab-floor\", \"u2324-v1-vocab-dressing table\", …]\u001b[39m\n\n  28 |   await old.story(p,prefix);for(const id of Object.keys(old.ANSWERS)){const room=await old.activity(p,id,{base:prefix,expectPerfect:!chain});if(chain){await room.getByRole('button',{name:'再练一轮',exact:true}).click();await old.activity(p,id,{base:prefix});}}\n  29 |   await expect(p.locator('#starCount')).toHaveText('5');await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await p.goto(base+'unit23-24/#learn/certificate');await ready(p);\n> 30 |   const date=await p.locator('#certificateDate').innerText(),before=await readLearning(p),awards=ledger();expect(awards).toHaveLength(1);expect(awards[0].edition).toBe('glasses-five-zones-v1');expect(Object.keys(before.records)).toHaveLength(45);expect(Boolean(before.records['u2324-v1-on-contact'].revealed)).toBe(false);\n     |                                                                                                                                                                                                                                      ^\n  31 |   await fs.writeFile(info.outputPath('before45-progress.json'),JSON.stringify(before));\n  32 |   const original=info.outputPath('original-five-star.gif');let download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();await(await download).saveAs(original);\n  33 |   await stop();await start(false);await p.goto(base+'unit23-24/?course-retry=1#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText('5');await expect(p.locator('#certificateDate')).toHaveText(date);await expect(p.locator('#certificateName')).toHaveText('小禾');await p.getByText('之前的五星学习记录',{exact:true}).click();await expect(p.locator('.historical-learning li')).toHaveCount(45);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:30:230"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": false,
+      "report": "account-chain-repro",
+      "durationMs": 55681,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        }
+      ],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+            "column": 315,
+            "line": 30
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoHaveLength\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected length: \u001b[32m45\u001b[39m\nReceived length: \u001b[31m46\u001b[39m\nReceived array:  \u001b[31m[\"u2324-v1-vocab-on\", \"u2324-v1-vocab-shelf\", \"u2324-v1-vocab-desk\", \"u2324-v1-vocab-table\", \"u2324-tasks-v4-objects\", \"u2324-v1-vocab-cupboard\", \"u2324-v1-vocab-cigarette\", \"u2324-v1-vocab-television\", \"u2324-v1-vocab-floor\", \"u2324-v1-vocab-dressing table\", …]\u001b[39m\n\n  28 |   await old.story(p,prefix);for(const id of Object.keys(old.ANSWERS)){const room=await old.activity(p,id,{base:prefix,expectPerfect:!chain});if(chain){await room.getByRole('button',{name:'再练一轮',exact:true}).click();await old.activity(p,id,{base:prefix});}}\n  29 |   await expect(p.locator('#starCount')).toHaveText('5');await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await p.goto(base+'unit23-24/#learn/certificate');await ready(p);\n> 30 |   const date=await p.locator('#certificateDate').innerText(),before=await readLearning(p),awards=ledger();await fs.writeFile(info.outputPath('before45-progress.json'),JSON.stringify(before));expect(awards).toHaveLength(1);expect(awards[0].edition).toBe('glasses-five-zones-v1');expect(Object.keys(before.records)).toHaveLength(45);expect(Boolean(before.records['u2324-v1-on-contact'].revealed)).toBe(false);\n     |                                                                                                                                                                                                                                                                                                                           ^\n  31 |   await fs.writeFile(info.outputPath('before45-progress.json'),JSON.stringify(before));\n  32 |   const original=info.outputPath('original-five-star.gif');let download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();await(await download).saveAs(original);\n  33 |   await stop();await start(false);await p.goto(base+'unit23-24/?course-retry=1#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText('5');await expect(p.locator('#certificateDate')).toHaveText(date);await expect(p.locator('#certificateName')).toHaveText('小禾');await p.getByText('之前的五星学习记录',{exact:true}).click();await expect(p.locator('.historical-learning li')).toHaveCount(45);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:30:315"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": false,
+      "report": "account-chain-provenance-fixed",
+      "durationMs": 60454,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+            "column": 696,
+            "line": 36
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 52\u001b[39m\n\u001b[31m+ Received  + 52\u001b[39m\n\n\u001b[33m@@ -39,22 +39,22 @@\u001b[39m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"matchOrder\": Array [\u001b[22m\n\u001b[31m+       \"1\",\u001b[39m\n\u001b[31m+       \"3\",\u001b[39m\n\u001b[2m        \"2\",\u001b[22m\n\u001b[32m-       \"3\",\u001b[39m\n\u001b[32m-       \"1\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"pairs\": Array [\u001b[22m\n\u001b[2m        \"1\",\u001b[22m\n\u001b[2m        \"2\",\u001b[22m\n\u001b[2m        \"3\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"给物品词配对。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-tasks-v4-objects\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"[\\\"1\\\",\\\"2\\\",\\\"3\\\"]\",\u001b[22m\n\u001b[2m      \"target\": \"区分餐具与两类读物\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-tasks-v4-story-place\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -62,11 +62,11 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"prompt\": \"点出说明杯子位置的词组。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-tasks-v4-story-place\",\u001b[22m\n\u001b[32m-     \"runId\": \"74a0baeb-d575-4e98-9504-1fea345ccde6\",\u001b[39m\n\u001b[31m+     \"runId\": \"d1973b73-2ca2-4403-93df-cc6a7068f92a\",\u001b[39m\n\u001b[2m      \"selection\": \"on the shelf\",\u001b[22m\n\u001b[2m      \"target\": \"原文中找到位置限制\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-build-confirm\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -74,16 +74,16 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"prompt\": \"哪些？这些吗？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-build-confirm\",\u001b[22m\n\u001b[32m-     \"runId\": \"5b83f5ce-dc5f-4b42-8336-30f7acc08b94\",\u001b[39m\n\u001b[31m+     \"runId\": \"77489527-2116-45d2-b702-9f0cbfd38193\",\u001b[39m\n\u001b[2m      \"selection\": \"Which ones? These?\",\u001b[22m\n\u001b[2m      \"target\": \"组织复数询问和确认\",\u001b[22m\n\u001b[2m      \"tokenOrder\": Array [\u001b[22m\n\u001b[32m-       2,\u001b[39m\n\u001b[2m        1,\u001b[22m\n\u001b[31m+       2,\u001b[39m\n\u001b[2m        0,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"tokens\": Array [\u001b[22m\n\u001b[2m        0,\u001b[22m\n\u001b[2m        1,\u001b[22m\n\u001b[33m@@ -96,22 +96,22 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"prompt\": \"不，不是那些。桌子上的那些。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-build-location\",\u001b[22m\n\u001b[32m-     \"runId\": \"5b83f5ce-dc5f-4b42-8336-30f7acc08b94\",\u001b[39m\n\u001b[31m+     \"runId\": \"77489527-2116-45d2-b702-9f0cbfd38193\",\u001b[39m\n\u001b[2m      \"selection\": \"No, not those. The ones on the table.\",\u001b[22m\n\u001b[2m      \"target\": \"否定当前一组并用位置限定\",\u001b[22m\n\u001b[2m      \"tokenOrder\": Array [\u001b[22m\n\u001b[2m        7,\u001b[22m\n\u001b[32m-       2,\u001b[39m\n\u001b[31m+       1,\u001b[39m\n\u001b[31m+       0,\u001b[39m\n\u001b[2m        4,\u001b[22m\n\u001b[2m        3,\u001b[22m\n\u001b[32m-       0,\u001b[39m\n\u001b[32m-       1,\u001b[39m\n\u001b[2m        6,\u001b[22m\n\u001b[2m        5,\u001b[22m\n\u001b[31m+       2,\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"tokens\": Array [\u001b[22m\n\u001b[2m        0,\u001b[22m\n\u001b[2m        1,\u001b[22m\n\u001b[2m        2,\u001b[22m\n\u001b[33m@@ -128,19 +128,19 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"prompt\": \"请给我们一些盒子。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-build-request\",\u001b[22m\n\u001b[32m-     \"runId\": \"5b83f5ce-dc5f-4b42-8336-30f7acc08b94\",\u001b[39m\n\u001b[31m+     \"runId\": \"77489527-2116-45d2-b702-9f0cbfd38193\",\u001b[39m\n\u001b[2m      \"selection\": \"Give us some boxes, please.\",\u001b[22m\n\u001b[2m      \"target\": \"组织带复数物品的请求\",\u001b[22m\n\u001b[2m      \"tokenOrder\": Array [\u001b[22m\n\u001b[2m        1,\u001b[22m\n\u001b[32m-       4,\u001b[39m\n\u001b[31m+       0,\u001b[39m\n\u001b[31m+       2,\u001b[39m\n\u001b[2m        3,\u001b[22m\n\u001b[32m-       2,\u001b[39m\n\u001b[32m-       0,\u001b[39m\n\u001b[31m+       4,\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"tokens\": Array [\u001b[22m\n\u001b[2m        0,\u001b[22m\n\u001b[2m        1,\u001b[22m\n\u001b[2m        2,\u001b[22m\n\u001b[33m@@ -310,55 +310,55 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[2m        \"丙组\",\u001b[22m\n\u001b[32m-       \"甲组\",\u001b[39m\n\u001b[2m        \"乙组\",\u001b[22m\n\u001b[31m+       \"甲组\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"The books on the desk.\u001b[22m\n\u001b[2m  应该拿哪一组书？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-on-contact\",\u001b[22m\n\u001b[32m-     \"runId\": \"dea037d0-f674-4674-a697-1996981a2de3\",\u001b[39m\n\u001b[31m+     \"runId\": \"a5270a1e-f885-447a-b808-20a220d5b673\",\u001b[39m\n\u001b[2m      \"selection\": \"甲组\",\u001b[22m\n\u001b[2m      \"target\": \"根据表面接触关系理解位置限定\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-recipient-us\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"our\",\u001b[39m\n\u001b[2m        \"us\",\u001b[22m\n\u001b[32m-       \"our\",\u001b[39m\n\u001b[2m        \"we\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"两位同学请简把雨伞递回给自己，一起说：\u001b[22m\n\u001b[2m  Those are our umbrellas.\u001b[22m\n\u001b[2m  Give ___ our umbrellas please.\u001b[22m\n\u001b[2m  空格填什么？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-recipient-us\",\u001b[22m\n\u001b[32m-     \"runId\": \"dea037d0-f674-4674-a697-1996981a2de3\",\u001b[39m\n\u001b[31m+     \"runId\": \"a5270a1e-f885-447a-b808-20a220d5b673\",\u001b[39m\n\u001b[2m      \"selection\": \"us\",\u001b[22m\n\u001b[2m      \"target\": \"为已明确的接收者选择宾格形式\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-request-plural\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"Give me some books, please.\",\u001b[39m\n\u001b[2m        \"Give me some book, please.\",\u001b[22m\n\u001b[2m        \"Give me a book, please.\",\u001b[22m\n\u001b[32m-       \"Give me some books, please.\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"原来要一本书，现在要几本。\u001b[22m\n\u001b[2m  哪句话符合新要求？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-request-plural\",\u001b[22m\n\u001b[32m-     \"runId\": \"5ffb8b22-9e9a-4f60-9c82-953b1c69c2d4\",\u001b[39m\n\u001b[31m+     \"runId\": \"77489527-2116-45d2-b702-9f0cbfd38193\",\u001b[39m\n\u001b[2m      \"selection\": \"Give me some books, please.\",\u001b[22m\n\u001b[2m      \"target\": \"数量改变时同步改变限定词与名词\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-story-ones\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -372,11 +372,11 @@\u001b[39m\n\u001b[2m        \"数字一\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"男士说：The ones on the shelf.\u001b[22m\n\u001b[2m  这里的 ones 代替什么？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-story-ones\",\u001b[22m\n\u001b[32m-     \"runId\": \"74a0baeb-d575-4e98-9504-1fea345ccde6\",\u001b[39m\n\u001b[31m+     \"runId\": \"d1973b73-2ca2-4403-93df-cc6a7068f92a\",\u001b[39m\n\u001b[2m      \"selection\": \"前面说到的那些玻璃杯\",\u001b[22m\n\u001b[2m      \"target\": \"根据前文确定复数代词指向\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-these-perspective\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -390,180 +390,180 @@\u001b[39m\n\u001b[2m        \"This one?\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"你指着自己手边的两本书问“这些吗？”\u001b[22m\n\u001b[2m  应该说什么？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-these-perspective\",\u001b[22m\n\u001b[32m-     \"runId\": \"5ffb8b22-9e9a-4f60-9c82-953b1c69c2d4\",\u001b[39m\n\u001b[31m+     \"runId\": \"77489527-2116-45d2-b702-9f0cbfd38193\",\u001b[39m\n\u001b[2m      \"selection\": \"These?\",\u001b[22m\n\u001b[2m      \"target\": \"从说话者手边的多件物品确认\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-bed\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"desk\",\u001b[39m\n\u001b[2m        \"chair\",\u001b[22m\n\u001b[31m+       \"cupboard\",\u001b[39m\n\u001b[2m        \"bed\",\u001b[22m\n\u001b[32m-       \"cupboard\",\u001b[39m\n\u001b[32m-       \"desk\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"看看图，选出英文。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-bed\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"bed\",\u001b[22m\n\u001b[2m      \"target\": \"理解 bed 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-cigarette\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[32m-       \"勺子\",\u001b[39m\n\u001b[2m        \"香烟\",\u001b[22m\n\u001b[32m-       \"粉笔\",\u001b[39m\n\u001b[31m+       \"勺子\",\u001b[39m\n\u001b[2m        \"钢笔\",\u001b[22m\n\u001b[31m+       \"粉笔\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"cigarette\u001b[22m\n\u001b[2m  选出这个词的意思。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-cigarette\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"香烟\",\u001b[22m\n\u001b[2m      \"target\": \"理解 cigarette 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-cupboard\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"橱柜\",\u001b[39m\n\u001b[2m        \"地板\",\u001b[22m\n\u001b[32m-       \"床\",\u001b[39m\n\u001b[32m-       \"橱柜\",\u001b[39m\n\u001b[2m        \"梳妆台\",\u001b[22m\n\u001b[31m+       \"床\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"cupboard\u001b[22m\n\u001b[2m  选出这个词的意思。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-cupboard\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"橱柜\",\u001b[22m\n\u001b[2m      \"target\": \"理解 cupboard 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-desk\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"床\",\u001b[39m\n\u001b[31m+       \"盘子\",\u001b[39m\n\u001b[2m        \"椅子\",\u001b[22m\n\u001b[2m        \"书桌；课桌\",\u001b[22m\n\u001b[32m-       \"盘子\",\u001b[39m\n\u001b[32m-       \"床\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"desk\u001b[22m\n\u001b[2m  选出这个词的意思。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-desk\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"书桌；课桌\",\u001b[22m\n\u001b[2m      \"target\": \"理解 desk 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-dressing table\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"shelf\",\u001b[39m\n\u001b[2m        \"bed\",\u001b[22m\n\u001b[2m        \"cupboard\",\u001b[22m\n\u001b[2m        \"dressing table\",\u001b[22m\n\u001b[32m-       \"shelf\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"看看图，选出英文。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-dressing table\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"dressing table\",\u001b[22m\n\u001b[2m      \"target\": \"理解 dressing table 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-floor\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"屋顶\",\u001b[39m\n\u001b[2m        \"地板\",\u001b[22m\n\u001b[32m-       \"屋顶\",\u001b[39m\n\u001b[31m+       \"桌面\",\u001b[39m\n\u001b[2m        \"书架\",\u001b[22m\n\u001b[32m-       \"桌面\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"on the floor\u001b[22m\n\u001b[2m  floor 在这里表示什么？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-floor\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"地板\",\u001b[22m\n\u001b[2m      \"target\": \"理解 floor 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-on\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"在……旁边\",\u001b[39m\n\u001b[2m        \"在……里面\",\u001b[22m\n\u001b[2m        \"在……上面\",\u001b[22m\n\u001b[2m        \"在……下面\",\u001b[22m\n\u001b[32m-       \"在……旁边\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"on the shelf\u001b[22m\n\u001b[2m  on 在这里表示什么？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-on\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"在……上面\",\u001b[22m\n\u001b[2m      \"target\": \"理解 on 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-shelf\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[32m-       \"架子；搁板\",\u001b[39m\n\u001b[2m        \"椅子\",\u001b[22m\n\u001b[31m+       \"架子；搁板\",\u001b[39m\n\u001b[2m        \"书\",\u001b[22m\n\u001b[2m        \"盘子\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"shelf\u001b[22m\n\u001b[2m  选出这个词的意思。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-shelf\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"架子；搁板\",\u001b[22m\n\u001b[2m      \"target\": \"理解 shelf 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-some\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[31m+       \"一副眼镜。\",\u001b[39m\n\u001b[31m+       \"正好两个玻璃杯。\",\u001b[39m\n\u001b[2m        \"一些玻璃杯，没说具体几只。\",\u001b[22m\n\u001b[2m        \"只有一个玻璃杯。\",\u001b[22m\n\u001b[32m-       \"一副眼镜。\",\u001b[39m\n\u001b[32m-       \"正好两个玻璃杯。\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"some glasses\u001b[22m\n\u001b[2m  这里表示多少？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-some\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"一些玻璃杯，没说具体几只。\",\u001b[22m\n\u001b[2m      \"target\": \"理解 some 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-stereo\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -571,37 +571,37 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[2m        \"台灯\",\u001b[22m\n\u001b[32m-       \"立体声音响\",\u001b[39m\n\u001b[2m        \"电视机\",\u001b[22m\n\u001b[2m        \"书桌\",\u001b[22m\n\u001b[31m+       \"立体声音响\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"stereo\u001b[22m\n\u001b[2m  本课说的是哪种物品？\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-stereo\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"立体声音响\",\u001b[22m\n\u001b[2m      \"target\": \"理解 stereo 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-table\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[32m-       \"bed\",\u001b[39m\n\u001b[2m        \"table\",\u001b[22m\n\u001b[2m        \"shelf\",\u001b[22m\n\u001b[2m        \"plate\",\u001b[22m\n\u001b[31m+       \"bed\",\u001b[39m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"桌子\u001b[22m\n\u001b[2m  选出对应的英文。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-table\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"table\",\u001b[22m\n\u001b[2m      \"target\": \"理解 table 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m    \"u2324-v1-vocab-television\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[33m@@ -609,17 +609,17 @@\u001b[39m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\u001b[2m      \"hintUsed\": false,\u001b[22m\n\u001b[2m      \"optionOrder\": Array [\u001b[22m\n\u001b[2m        \"cupboard\",\u001b[22m\n\u001b[32m-       \"stereo\",\u001b[39m\n\u001b[2m        \"newspaper\",\u001b[22m\n\u001b[31m+       \"stereo\",\u001b[39m\n\u001b[2m        \"television\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      \"prompt\": \"电视机\u001b[22m\n\u001b[2m  选出对应的英文。\",\u001b[22m\n\u001b[2m      \"questionId\": \"u2324-v1-vocab-television\",\u001b[22m\n\u001b[32m-     \"runId\": \"295fb0d0-ef8d-4862-8776-421b2c9ede48\",\u001b[39m\n\u001b[31m+     \"runId\": \"1e3e8cca-0f23-416d-8ab0-664bf8a4fedf\",\u001b[39m\n\u001b[2m      \"selection\": \"television\",\u001b[22m\n\u001b[2m      \"target\": \"理解 television 的本课含义\",\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  34 |   const retained=info.outputPath('retained-five-star.gif');download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();await(await download).saveAs(retained);const sharp=require('sharp');expect((await sharp(original,{animated:true}).raw().toBuffer()).equals(await sharp(retained,{animated:true}).raw().toBuffer())).toBe(true);expect(ledger()).toEqual(awards);await p.locator('.stage-certificate .story-award-paper').screenshot({path:info.outputPath('retained-five-star-card.png')});\n  35 |   second=await browser.newContext({baseURL:origin,...(process.env.UNIT2324_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit23-24/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');\n> 36 |   const after=await readLearning(other);await fs.writeFile(info.outputPath('after45-progress.json'),JSON.stringify(after));info.annotations.push({type:'history-storage',description:JSON.stringify({snapshot:Boolean(after.activity.unit2324V153Snapshot),remote:Boolean(after.activity.unit2324V153Progress),marker:after.activity.unit2324V153Migration,remoteRecords:Object.keys(after.activity.unit2324V153Progress?.records||{}).length})});expect((after.activity.unit2324V153Snapshot||after.activity.unit2324V153Progress).records).toEqual(priorRecords);if(chain){expect(Object.keys(after.activity.unit2324LegacyProgress.records)).toHaveLength(32);expect(after.activity.unit2324LegacyProgress.records).toEqual(before.activity.unit2324LegacyProgress.records);}await other.getByText('之前的五星学习记录',{exact:true}).click();await expect(other.locator('.historical-learning li')).toHaveCount(45);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ^\n  37 |   for(const id of ['listen','grammar','apply']){await other.goto(base+'unit23-24/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit2324-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}\n  38 |   await other.goto(base+'unit23-24/#learn/roles');await expect(other.locator('.stage-roles .progress-copy')).toHaveText('第 2 / 2 题');await expect(other.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await fresh.activity(other,'roles',{base:prefix,expectPerfect:false});\n  39 |   await other.goto(base+'unit23-24/#learn/exam');await expect(other.locator('.stage-exam .progress-copy')).toHaveText('第 8 / 15 题');await expect(other.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await fresh.activity(other,'exam',{base:prefix,expectPerfect:false});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:36:696"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": false,
+      "report": "account-chain-final",
+      "durationMs": 70945,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+            "column": 403,
+            "line": 42
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 18\u001b[39m\n\u001b[31m+ Received  +  0\u001b[39m\n\n\u001b[33m@@ -462,28 +462,10 @@\u001b[39m\n\u001b[2m        2,\u001b[22m\n\u001b[2m        3,\u001b[22m\n\u001b[2m        4,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[32m-   \"u2324-v1-final-v2-on\": Object {\u001b[39m\n\u001b[32m-     \"attempts\": 1,\u001b[39m\n\u001b[32m-     \"checked\": true,\u001b[39m\n\u001b[32m-     \"correct\": true,\u001b[39m\n\u001b[32m-     \"firstCorrect\": true,\u001b[39m\n\u001b[32m-     \"hintUsed\": false,\u001b[39m\n\u001b[32m-     \"optionOrder\": Array [\u001b[39m\n\u001b[32m-       \"甲组\",\u001b[39m\n\u001b[32m-       \"乙组\",\u001b[39m\n\u001b[32m-       \"丙组\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[32m-     \"prompt\": \"The books on the desk.\u001b[39m\n\u001b[32m- 哪组符合这句？\",\u001b[39m\n\u001b[32m-     \"questionId\": \"u2324-v1-final-v2-on\",\u001b[39m\n\u001b[32m-     \"runId\": \"025c8d58-f8a1-4c38-a1dc-e2dabea3314a\",\u001b[39m\n\u001b[32m-     \"selection\": \"甲组\",\u001b[39m\n\u001b[32m-     \"target\": \"on表示表面承托\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[2m    \"u2324-v1-final-v2-ones\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\n  40 |   // Re-practising unchanged questions records the new visible support without\n  41 |   // rewriting the frozen original independent submissions or old award date.\n> 42 |   await other.goto(base+'unit23-24/#learn/grammar');await other.locator('.stage-grammar').getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.activity(other,'grammar',{base:prefix});await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');expect(ledger()).toEqual(awards);await p.reload();await ready(p);expect((await readLearning(p)).activity.unit2324V153Snapshot.records).toEqual(before.records);await expect(p.locator('#certificateDate')).toHaveText(date);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                   ^\n  43 |   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit23-24/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}\n  44 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2324-v153-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}\n  45 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:42:403"
+        }
+      ]
+    }
+  ],
+  "fixes": [
+    {
+      "issue": "Missing nearby models and insufficient material for two inherited questions",
+      "evidence": "red -> review-chromium -> course-chromium / course-webkit -> material-mobile-chromium / material-mobile-webkit",
+      "resolution": "Add display-only models to G8/G9; give R2 the source request and E8 an explicit return request. Only the two material revisions get new IDs and prior sessions."
+    },
+    {
+      "issue": "Candidate glasses remained on the table while the textbook shows Jane holding them",
+      "evidence": "scene-red -> review-chromium -> both course suites",
+      "resolution": "Hide the candidate set on the table during lines 3-4; restore it when Jane takes the shelf set at lines 5-6; transfer the target at line 7. Reuse original actor images and reading positions."
+    },
+    {
+      "issue": "Draft test clicked the selected our a second time, thereby retracting it",
+      "evidence": "review-chromium -> draft-repro -> course-chromium / course-webkit",
+      "resolution": "Assert that the first slot remains selected after reload and fill only the second slot. Product retraction, scoring and timeout unchanged."
+    },
+    {
+      "issue": "Test assumed the raw local book had exactly 45 rows, although it retained one replaced 32-era question",
+      "evidence": "account-chain-initial -> account-chain-repro -> captured before45-progress.json",
+      "resolution": "Validate 46 raw local rows, 45 prior five-star rows and the 32-row archive separately. Retain all evidence; display only the matching edition in the five-star history section."
+    },
+    {
+      "issue": "Server picked a completed older vocabulary session and overwrote 22 archived 32-era records with later same-ID work",
+      "evidence": "account-chain-provenance-fixed -> normalization-before / after -> account-chain-local-snapshot-fixed",
+      "resolution": "Prefer the current definition session within the reviewed course scope; carry the validated 32-era archive and preserve its earliest validated rows while allowing later evidence to fill gaps."
+    },
+    {
+      "issue": "A validated remote archive replaced the fuller local snapshot",
+      "evidence": "account-chain-final -> account-chain-local-snapshot-fixed",
+      "resolution": "Keep the local raw snapshot and existing validated remote archive separately. Final same-device comparison preserves all 46 raw rows; another device retains the 45 and 32 validated archives."
+    }
+  ],
+  "historicalChain": {
+    "engine": "chromium",
+    "mount": "/",
+    "versions": [
+      32,
+      45,
+      45
+    ],
+    "realPagesAndSameDatabase": true,
+    "rawLocalRows": 46,
+    "priorFiveStarRows": 45,
+    "earlierArchiveRows": 32,
+    "old15StarCertificateRetained": true,
+    "allThreeUnchangedRoundsRetained": true,
+    "revisedQuestionsRequireNewAnswers": true
+  },
+  "earlierChains": {
+    "versions": [
+      [
+        26,
+        32,
+        45
+      ],
+      [
+        34,
+        32,
+        45
+      ]
+    ],
+    "engine": "chromium",
+    "mount": "/",
+    "scope": "Real earlier pages and 32-question completion on separate devices, followed by the current page showing the original 15-star certificate and original name/date. Not claimed as full current-course completion in these two checks."
+  },
+  "sharedRegression": "Lesson19-20 real 36->65->66 and Lesson21-22 real 30->45->45 account chains rerun in Chromium root; passed.",
+  "reuseBoundary": "Both engines rerun all 28 public course conditions. Full new-account course and 45-era update rerun in both engines at both mounts. Direct 32-era account migration and one-star actual GIF comparison rerun in Chromium root and WebKit subpath. Permission, real image failure, long name, isolation, export cancellation/retry and course closure rerun in Chromium root; their unchanged WebKit cells reuse v3.0 evidence without adding to this count. The later history-only refinements affect the real 45-era update, and all four final account-update conditions use the final code. Public course results with no validated remote archive, new-student results and 32-to-current results remain applicable because that later branch is not entered. Mobile material tests were rerun separately after the wording and layout checks. PDF and original assets are unchanged by the later account-only fixes.",
+  "priorUnrelatedChecks": {
+    "rerunThisTurn": false,
+    "source": "../2026-10-18-0225-unit19-20/reports/server-security-repro.tap",
+    "knownFailures": 3,
+    "scope": "Previously reproduced Windows SQLite cleanup and POSIX mode assumptions. Store/auth-throttle and those tests unchanged. Not included in course pass count; no full repository pass claimed."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit23-24/#learn/grammar",
+    "newReferenceVisible": true,
+    "normalCourseRetryUsed": true,
+    "recordsCleared": false,
+    "answersSubmitted": false,
+    "accountReseeded": false,
+    "audit": "preview-data-check.json"
+  },
+  "pending": [
+    "teacher content review",
+    "child classroom trial",
+    "physical WeChat save",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "committed": false,
+    "pushed": false,
+    "released": false
+  },
+  "checkScope": "Scoped development verification; check:plan covered cumulative worktree changes against HEAD. Commit and full release checks not requested or claimed."
+}

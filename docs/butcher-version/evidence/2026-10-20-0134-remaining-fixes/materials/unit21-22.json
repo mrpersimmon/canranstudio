@@ -1,0 +1,24 @@
+{
+  "id": "unit21-22",
+  "source": {
+    "file": "tests/support/unit2122-fivezones.js",
+    "sha256": "2786c399bf3fccbba9c54783046ab59739542b746735a21b8036b38592931d55"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u2122-v1-story-twice",
+      "text": "Lesson 21\n\n男士: Give me a book please, Jane.\n\n简（Jane）: Which book?\n\n简（Jane）: This one?\n\n男士: No, not that one. The red one.\n\n简（Jane）: This one?\n\n男士: Yes, please.\n\n简（Jane）: Here you are.\n\n男士: Thank you."
+    }
+  ],
+  "sourceLines": {
+    "R2": "1-8"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

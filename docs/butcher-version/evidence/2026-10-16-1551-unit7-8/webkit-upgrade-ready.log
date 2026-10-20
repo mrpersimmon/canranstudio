@@ -1,0 +1,50 @@
+[WebServer] (node:3160) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:13152) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:32136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:32136) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (1.5m)
+
+
+  1) tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#starCount')
+    Expected: "1"
+    Received: "0"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#starCount')
+        13 × locator resolved to <span id="starCount">0</span>
+           - unexpected value "0"
+
+
+      35 |   await other.goto(base+'unit7-8/#learn/roles');await expect(other.locator('.stage-roles .progress-copy')).toHaveText('第 3 / 4 题');await expect(other.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(other.locator('#starCount')).toHaveText('0');
+      36 |   await other.goto(base+'unit7-8/#learn/listen');await other.locator('.stage-listen').getByRole('button',{name:'再练一轮',exact:true}).click();await activity(other,'listen',{base:prefix,keepAward:true});const reward=other.getByRole('dialog',{name:/纪念卡结算/});await expect(reward.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();await reward.press('Escape');await expect(other.locator('#starCount')).toHaveText('1');await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await other.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(other.getByRole('button',{name:'放大 Lesson 7–8 新朋友小记者',exact:true}).locator('.certificate')).toHaveAttribute('data-stars','1');
+    > 37 |   await p.reload();await expect(p.locator('#starCount')).toHaveText('1');await p.locator('.legacy-learning summary').first().click();await expect(p.locator('.legacy-learning')).toContainText('15 / 15');expect((await p.locator('.legacy-issued-date').innerText()).match(/\d+/g)).toEqual(date);
+         |                                                          ^
+      38 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u78-upgrade-')))throw new Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}
+      39 | });
+      40 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit7-8-fivezones-upgrade.spec.js:37:58
+
+    Error Context: output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ─────────

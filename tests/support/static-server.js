@@ -10,7 +10,69 @@ const { TYPES, publicPath, readPreviewFile } = require('./preview-files');
 const ROOT = process.cwd();
 const PORT = Number(process.env.COURSE_TEST_PORT || 4173);
 let lessonPackages;
-const readSource = relative => readPreviewFile(ROOT, relative);
+// Historical suites need the same frozen source for raw URLs and generated
+// packages. Page routing alone cannot intercept service-worker requests.
+const unit78LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit7-8/'+name));
+const unit910LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit9-10/'+name));
+const unit1112LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit11-12/'+name));
+const unit1314LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit13-14/'+name));
+const unit1516LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit15-16/'+name));
+const unit1718LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit17-18/'+name));
+const unit1920LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit19-20/'+name));
+const unit2122LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit21-22/'+name));
+const unit2324LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit23-24/'+name));
+const unit2526LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit25-26/'+name));
+const unit2728LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit27-28/'+name));
+const unit2930LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit29-30/'+name));
+const unit3132LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit31-32/'+name));
+const unit3334LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit33-34/'+name));
+const unit3536LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit35-36/'+name));
+const unit3738LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit37-38/'+name));
+const unit3940LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js'].map(name=>'unit39-40/'+name));
+const unit4142V153LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js','grammar.js','previous-questions.js'].map(name=>'unit41-42/'+name));
+const unit4344V153LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js','grammar.js'].map(name=>'unit43-44/'+name));
+const unit4546V153LegacyFiles = new Set(['index.html','content.js','unit.js','unit.css','scene.js','grammar.js','typography.css'].map(name=>'unit45-46/'+name));
+const readSource = relative => process.env.COURSE_UNIT78_LEGACY === '1' && unit78LegacyFiles.has(relative)
+  ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit7-8-before-fivezones',path.posix.basename(relative)))
+  : process.env.COURSE_UNIT910_LEGACY === '1' && unit910LegacyFiles.has(relative)
+    ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit9-10-before-fivezones',path.posix.basename(relative)))
+    : process.env.COURSE_UNIT1112_LEGACY === '1' && unit1112LegacyFiles.has(relative)
+      ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit11-12-before-fivezones',path.posix.basename(relative)))
+      : process.env.COURSE_UNIT1314_LEGACY === '1' && unit1314LegacyFiles.has(relative)
+        ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit13-14-before-fivezones',path.posix.basename(relative)))
+        : process.env.COURSE_UNIT1516_LEGACY === '1' && unit1516LegacyFiles.has(relative)
+          ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit15-16-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT4546_V153_LEGACY === '1' && unit4546V153LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit45-46-before-v153',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT4344_V153_LEGACY === '1' && unit4344V153LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit43-44-before-v153',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT4142_V153_LEGACY === '1' && unit4142V153LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit41-42-before-v153',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT3940_LEGACY === '1' && unit3940LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit39-40-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT3738_LEGACY === '1' && unit3738LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit37-38-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT3536_LEGACY === '1' && unit3536LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit35-36-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT3334_LEGACY === '1' && unit3334LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit33-34-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT3132_LEGACY === '1' && unit3132LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit31-32-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT2930_LEGACY === '1' && unit2930LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit29-30-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT2728_LEGACY === '1' && unit2728LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit27-28-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT2526_LEGACY === '1' && unit2526LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit25-26-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT2324_LEGACY === '1' && unit2324LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit23-24-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT2122_LEGACY === '1' && unit2122LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit21-22-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT1920_LEGACY === '1' && unit1920LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit19-20-before-fivezones',path.posix.basename(relative)))
+          : process.env.COURSE_UNIT1718_LEGACY === '1' && unit1718LegacyFiles.has(relative)
+            ? require('node:fs/promises').readFile(path.join(ROOT,'tests/fixtures/unit17-18-before-fivezones',path.posix.basename(relative)))
+            : readPreviewFile(ROOT, relative);
 
 const server = http.createServer(async (request, response) => {
   const host = request.headers.host, port = server.address().port;

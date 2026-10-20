@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-17T01:52:05.068Z",
+  "passed": 29,
+  "failed": [],
+  "checks": [
+    {
+      "name": "five zones and 47 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 7,
+        "roles": 4,
+        "grammar": 10,
+        "apply": 7,
+        "exam": 19
+      }
+    },
+    {
+      "name": "33 original questions unchanged",
+      "passed": true
+    },
+    {
+      "name": "47 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "22 cards and phonetics, only with sense expanded",
+      "passed": true
+    },
+    {
+      "name": "10 original narration sentences and people",
+      "passed": true
+    },
+    {
+      "name": "12 original actions and number labels",
+      "passed": true
+    },
+    {
+      "name": "A5 and B12 retain full prompts",
+      "passed": true
+    },
+    {
+      "name": "maximum two blanks per online question",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true
+    },
+    {
+      "name": "actual old six v1 sessions mapped",
+      "passed": true
+    },
+    {
+      "name": "five new sessions and distinct reward edition",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "50 original SVG assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "five prompt records, three selected, all originals retained",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha river-wide-final",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha river-mobile",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha keepsake-final",
+      "passed": true
+    },
+    {
+      "name": "font inputs reflect final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1897,
+        "inputs": 373
+      }
+    },
+    {
+      "name": "font licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson UI captions",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit33-34/river-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "30866bd6e7e134fba282f9decad86fef2e21912eedc4b1a6a6d3d1bc6b9ab259"
+    },
+    {
+      "file": "assets/unit33-34/river-story-mobile-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "2b84eb2424af444af696f0b7797553bb7a5eb7137a13880492a9848808aeedb7"
+    },
+    {
+      "file": "assets/unit33-34/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "0c5061ff098bba37bd42f800c4b1257e39cda2dda5c886d54ff9840a11c0bc26"
+    }
+  ],
+  "changedSourcePaths": 54
+}

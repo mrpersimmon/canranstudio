@@ -1,0 +1,37 @@
+/* Lesson 5–6: reuse the approved keepsake faces, without changing
+   shared units or the card's independent typography/layout. */
+@font-face{font-family:'Lesson Nunito';src:url('../assets/awards/fonts/award-nunito.woff2') format('woff2');font-style:normal;font-weight:200 1000;font-display:block}
+@font-face{font-family:'Lesson Gothic';src:url('../assets/awards/fonts/lesson-gothic-body-400.woff2') format('woff2');font-style:normal;font-weight:400;font-display:block}
+@font-face{font-family:'Lesson Gothic';src:url('../assets/awards/fonts/award-gothic-500.woff2') format('woff2');font-style:normal;font-weight:500;font-display:block}
+/* Dynamic names and any later-added character absent from the Regular subset
+   retain the same family of shapes using the already cached complete Medium. */
+@font-face{font-family:'Lesson Gothic Fallback';src:url('../assets/awards/fonts/award-gothic-500.woff2') format('woff2');font-style:normal;font-weight:400 600;font-display:block}
+
+body.unit56-workspace{
+ --lesson-font:'Lesson Nunito','Lesson Gothic','Lesson Gothic Fallback','PingFang SC','Microsoft YaHei',sans-serif;
+ font-family:var(--lesson-font);font-weight:400;font-synthesis:none;
+}
+/* Explicit font declarations in shared exercise components must use the same
+   stack as the surrounding text. Preserve all existing sizes and geometry. */
+body.unit56-workspace :is(h1,h2,h3,h4,p,li,dt,dd,small,button,input,select,textarea,summary,label,
+ .stage-text,.claim-location,.actor-label,.reminder-sign,.page-label,.task-reference,.cloze-sentence,.match-badge,
+ .locate-sentence,.handoff-speech,.translation-slot,.translation-punctuation,.word-token-mark,
+ .write-sentence,.completion-number,.unit-word):not(.award-card *,.legacy-certificate-dialog *,.word-phonetic){
+ font-family:var(--lesson-font);
+}
+body.unit56-workspace :is(h1,h2,h3,h4,.completion-title):not(.award-card *,.legacy-certificate-dialog *){font-weight:500}
+body.unit56-workspace .practice-finish>p{font-weight:500}
+body.unit56-workspace :is(.chapter-links a,.btn,.workspace-back,summary,select,.opt-btn,.claim-location,.bname,
+ .grammar-model-title,.unit-source,.completion-label,.completion-number,.fb,strong,b,#logo){font-weight:600}
+body.unit56-workspace :is(.unit-word,.word-phonetic,.word-meaning,.bcn,.grammar-rule,
+ .grammar-model-line small,.practice-context,.practice-instruction,.progress-copy,.practice-hint-copy,
+ .completion-caption,.completion-award,.offline-task p,.offline-task li){font-weight:400}
+body.unit56-workspace :is(.btext,.grammar-model-line>p,.reference-card p,.task-reference,.cloze-sentence,
+ .locate-sentence,.handoff-speech,.write-sentence){font-weight:400}
+body.unit56-workspace .student-access-bar #studentSyncStatus{font-family:var(--lesson-font);font-weight:400}
+/* Nunito does not cover all of this lesson's IPA symbols. Keep one complete
+   phonetic face for the entire transcription, instead of mixing glyphs. */
+body.unit56-workspace .word-phonetic{font-family:Arial,'Helvetica Neue',sans-serif;font-weight:400}
+body.unit56-workspace .counter-bubble p,body.unit56-workspace .word-example{font-family:var(--lesson-font);font-weight:400}
+body.unit56-workspace .classroom-person,body.unit56-workspace .photo-people figcaption{font-family:var(--lesson-font);font-weight:600}
+body.unit56-workspace #unitWriting h4{font-family:var(--lesson-font);font-weight:600}

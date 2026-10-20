@@ -1,0 +1,230 @@
+{
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "os": "Windows",
+  "timezone": "Asia/Shanghai",
+  "runs": {
+    "representative": {
+      "start": "2026-10-16T10:11:54.0021791+08:00",
+      "end": "2026-10-16T10:12:35.9986810+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/",
+      "version": "representative-version.json",
+      "concurrency": "one representative/print runner",
+      "result": [
+        "5 passed (40.9s)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 320：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (15.5s)",
+        "  ok 2 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 1280：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (16.2s)",
+        "  ok 3 tests\\e2e\\unit141-142.spec.js:24:1 › 18词卡、142课1–8及A至C的28原题完整 (2.4s)",
+        "  ok 4 tests\\e2e\\unit141-142.spec.js:47:1 › 错答不更新动作记录，三卡6／8／2，刷新保留原图 (4.6s)",
+        "  ok 5 tests\\e2e\\unit141-142.spec.js:53:1 › 28道书写题51行打印与恢复 (1.1s)"
+      ]
+    },
+    "print-refined": {
+      "start": "2026-10-16T10:16:41.6033968+08:00",
+      "end": "2026-10-16T10:16:44.6536444+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/",
+      "version": "print-refinement-version.json",
+      "concurrency": "one representative/print runner",
+      "result": [
+        "1 passed (2.0s)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\e2e\\unit141-142.spec.js:53:1 › 28道书写题51行打印与恢复 (1.2s)"
+      ]
+    },
+    "chromium": {
+      "start": "2026-10-16T10:17:43.3237244+08:00",
+      "end": "2026-10-16T10:21:12.1666505+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/",
+      "version": "full-test-version.json",
+      "concurrency": "two independent browser runners",
+      "result": [
+        "15 passed (3.5m)"
+      ],
+      "caseDurations": [
+        "  ok  1 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 320：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (17.5s)",
+        "  ok  2 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 390：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (17.8s)",
+        "  ok  3 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 768：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (18.5s)",
+        "  ok  4 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 1280：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (18.2s)",
+        "  ok  5 tests\\e2e\\unit141-142-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (3.2s)",
+        "  ok  6 tests\\e2e\\unit141-142.spec.js:8:1 › 61题：未答材料、动作与邀请记录、四种被动形式、帮助记录与三卡 (21.8s)",
+        "  ok  7 tests\\e2e\\unit141-142.spec.js:24:1 › 18词卡、142课1–8及A至C的28原题完整 (2.5s)",
+        "  ok  8 tests\\e2e\\unit141-142.spec.js:37:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (10.0s)",
+        "  ok  9 tests\\e2e\\unit141-142.spec.js:47:1 › 错答不更新动作记录，三卡6／8／2，刷新保留原图 (4.6s)",
+        "  ok 10 tests\\e2e\\unit141-142.spec.js:52:1 › 全部声音失败仍能完成五区 (14.3s)",
+        "  ok 11 tests\\e2e\\unit141-142.spec.js:53:1 › 28道书写题51行打印与恢复 (1.3s)",
+        "  ok 12 tests\\e2e\\unit141-142.spec.js:54:39 › 320及短屏：被动表达与动作材料、长句、全部题型和三卡 (20.0s)",
+        "  ok 13 tests\\e2e\\unit141-142.spec.js:54:39 › 390及短屏：被动表达与动作材料、长句、全部题型和三卡 (18.8s)",
+        "  ok 14 tests\\e2e\\unit141-142.spec.js:54:39 › 768及短屏：被动表达与动作材料、长句、全部题型和三卡 (18.3s)",
+        "  ok 15 tests\\e2e\\unit141-142.spec.js:54:39 › 1280及短屏：被动表达与动作材料、长句、全部题型和三卡 (19.3s)"
+      ]
+    },
+    "webkit": {
+      "start": "2026-10-16T10:17:43.3236803+08:00",
+      "end": "2026-10-16T10:24:53.9427025+08:00",
+      "workers": 1,
+      "browser": "WebKit",
+      "base": "/",
+      "version": "full-test-version.json",
+      "concurrency": "two independent browser runners",
+      "result": [
+        "15 passed (7.2m)"
+      ],
+      "caseDurations": [
+        "  ok  1 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 320：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (33.3s)",
+        "  ok  2 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 390：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (34.5s)",
+        "  ok  3 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 768：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (33.6s)",
+        "  ok  4 tests\\e2e\\unit141-142-story-layout.spec.js:16:39 › 1280：17步完整叙述、三人五种姿态、粉盒去向与无剧情结论 (36.5s)",
+        "  ok  5 tests\\e2e\\unit141-142-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (8.1s)",
+        "  ok  6 tests\\e2e\\unit141-142.spec.js:8:1 › 61题：未答材料、动作与邀请记录、四种被动形式、帮助记录与三卡 (47.9s)",
+        "  ok  7 tests\\e2e\\unit141-142.spec.js:24:1 › 18词卡、142课1–8及A至C的28原题完整 (5.8s)",
+        "  ok  8 tests\\e2e\\unit141-142.spec.js:37:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (24.1s)",
+        "  ok  9 tests\\e2e\\unit141-142.spec.js:47:1 › 错答不更新动作记录，三卡6／8／2，刷新保留原图 (9.5s)",
+        "  ok 10 tests\\e2e\\unit141-142.spec.js:52:1 › 全部声音失败仍能完成五区 (36.0s)",
+        "  ok 11 tests\\e2e\\unit141-142.spec.js:53:1 › 28道书写题51行打印与恢复 (1.5s)",
+        "  ok 12 tests\\e2e\\unit141-142.spec.js:54:39 › 320及短屏：被动表达与动作材料、长句、全部题型和三卡 (39.6s)",
+        "  ok 13 tests\\e2e\\unit141-142.spec.js:54:39 › 390及短屏：被动表达与动作材料、长句、全部题型和三卡 (39.1s)",
+        "  ok 14 tests\\e2e\\unit141-142.spec.js:54:39 › 768及短屏：被动表达与动作材料、长句、全部题型和三卡 (38.7s)",
+        "  ok 15 tests\\e2e\\unit141-142.spec.js:54:39 › 1280及短屏：被动表达与动作材料、长句、全部题型和三卡 (40.3s)"
+      ]
+    },
+    "login-root": {
+      "start": "2026-10-16T10:28:07.5163005+08:00",
+      "end": "2026-10-16T10:30:15.8561181+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/",
+      "version": "account-test-version.json",
+      "concurrency": "two Chromium account runners",
+      "result": [
+        "8 passed (2.1m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit141-142.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (3.9s)",
+        "  ok 2 tests\\login\\unit141-142.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.4s)",
+        "  ok 3 tests\\login\\unit141-142.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (44.7s)",
+        "  ok 4 tests\\login\\unit141-142.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (6.9s)",
+        "  ok 5 tests\\login\\unit141-142.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (23.8s)",
+        "  ok 6 tests\\login\\unit141-142.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (13.6s)",
+        "  ok 7 tests\\login\\unit141-142.spec.js:232:1 › 动作与邀请记录图在账号中真实可见：未答读图、错答刷新与两空续做 (10.8s)",
+        "  ok 8 tests\\login\\unit141-142.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (15.7s)"
+      ]
+    },
+    "login-sub": {
+      "start": "2026-10-16T10:28:07.5270086+08:00",
+      "end": "2026-10-16T10:30:15.0449943+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "version": "account-test-version.json",
+      "concurrency": "two Chromium account runners",
+      "result": [
+        "8 passed (2.1m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit141-142.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (3.6s)",
+        "  ok 2 tests\\login\\unit141-142.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.4s)",
+        "  ok 3 tests\\login\\unit141-142.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (44.1s)",
+        "  ok 4 tests\\login\\unit141-142.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (6.6s)",
+        "  ok 5 tests\\login\\unit141-142.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (23.7s)",
+        "  ok 6 tests\\login\\unit141-142.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (14.3s)",
+        "  ok 7 tests\\login\\unit141-142.spec.js:232:1 › 动作与邀请记录图在账号中真实可见：未答读图、错答刷新与两空续做 (11.0s)",
+        "  ok 8 tests\\login\\unit141-142.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (15.4s)"
+      ]
+    },
+    "login-webkit-root": {
+      "start": "2026-10-16T10:32:38.8196910+08:00",
+      "end": "2026-10-16T10:38:52.2696064+08:00",
+      "workers": 1,
+      "browser": "WebKit mobile profile",
+      "base": "/",
+      "version": "account-test-version.json",
+      "concurrency": "WebKit account mounts sequential",
+      "result": [
+        "8 passed (6.2m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit141-142.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (14.6s)",
+        "  ok 2 tests\\login\\unit141-142.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (2.8s)",
+        "  ok 3 tests\\login\\unit141-142.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (2.0m)",
+        "  ok 4 tests\\login\\unit141-142.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (23.7s)",
+        "  ok 5 tests\\login\\unit141-142.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.2m)",
+        "  ok 6 tests\\login\\unit141-142.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (50.5s)",
+        "  ok 7 tests\\login\\unit141-142.spec.js:232:1 › 动作与邀请记录图在账号中真实可见：未答读图、错答刷新与两空续做 (36.4s)",
+        "  ok 8 tests\\login\\unit141-142.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (44.3s)"
+      ]
+    },
+    "login-webkit-sub": {
+      "start": "2026-10-16T10:38:52.2764410+08:00",
+      "end": "2026-10-16T10:45:09.5994174+08:00",
+      "workers": 1,
+      "browser": "WebKit mobile profile",
+      "base": "/lesson/",
+      "version": "account-test-version.json",
+      "concurrency": "WebKit account mounts sequential",
+      "result": [
+        "8 passed (6.3m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit141-142.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (14.6s)",
+        "  ok 2 tests\\login\\unit141-142.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (2.8s)",
+        "  ok 3 tests\\login\\unit141-142.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (2.0m)",
+        "  ok 4 tests\\login\\unit141-142.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (27.1s)",
+        "  ok 5 tests\\login\\unit141-142.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.2m)",
+        "  ok 6 tests\\login\\unit141-142.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (51.0s)",
+        "  ok 7 tests\\login\\unit141-142.spec.js:232:1 › 动作与邀请记录图在账号中真实可见：未答读图、错答刷新与两空续做 (37.4s)",
+        "  ok 8 tests\\login\\unit141-142.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (45.4s)"
+      ]
+    },
+    "catalog": {
+      "start": "2026-10-16T10:47:01.1785004+08:00",
+      "end": "2026-10-16T10:47:16.4764546+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "version": "account-test-version.json",
+      "concurrency": "two independent browser runners",
+      "result": [
+        "3 passed (14.2s)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\access.spec.js:33:1 › 管理员可以创建班级并只开放 Lesson 1–2 (671ms)",
+        "  ok 2 tests\\login\\class-settings.spec.js:46:1 › 开放课程全选、部分选择、取消全选与保存后的重新打开保持一致 (951ms)",
+        "  ok 3 tests\\login\\course-banners.spec.js:15:1 › 全部71个横幅完整加载、管理页保留71项开课选择且新班默认关闭新课 (5.5s)"
+      ]
+    },
+    "deployment": {
+      "start": "2026-10-16T10:47:01.1785008+08:00",
+      "end": "2026-10-16T10:47:15.0134760+08:00",
+      "workers": 1,
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "version": "account-test-version.json",
+      "concurrency": "two independent browser runners",
+      "result": [
+        "1 passed (12.7s)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\e2e\\lesson-deployment.spec.js:63:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除 (11.4s)"
+      ]
+    }
+  },
+  "notes": [
+    "The first representative run passed all five tests. There were no new course test failures to isolate. The original PDF was visually complete but had five pages, with two pages carrying only two remaining questions.",
+    "Only the print break before section C was removed. All 28 questions, four examples, eight example answers, 51 writing lines, 32px line height and fonts remained unchanged. The affected print test passed and the final four PDF pages were rendered and inspected. Both engines then completed the full 15-test course suite on the revised version.",
+    "Full course engines ran as two independent processes, one worker each. Unit/workflow checks and the two sequential builds overlapped the end of the WebKit full course run. Chromium account mounts ran in parallel, one worker each, after both course runs completed.",
+    "WebKit account mounts ran sequentially with one worker. No other browser test runner was active during that matrix. Normal authenticated in-app preview, cover checks and GIF file inspection took place during that account matrix; these did not submit answers or modify reward state.",
+    "All account tests use account-test-version.json. Course implementation and test files were unchanged during the matrix. Source documentation additions after full-test-version.json do not change runtime content; the account snapshot includes those files.",
+    "Catalog and deployment checks ran after the account matrix. Representative and print refinement runs are repeated conditions and are not added to the 66 distinct successful conditions.",
+    "The two real downloaded GIFs were decoded across all 60 frames. Name, title, scene and paper regions remain stable; the account tests separately verify changing star effects. Actual downloaded frame, one-star comparison and long-name mobile card were visually inspected.",
+    "The existing local demonstration account stayed at zero stars and word page 1/3. The new course was reached through the normal directory after preview restart. Four cover widths were inspected, then the default viewport restored. No learning data was cleared."
+  ]
+}

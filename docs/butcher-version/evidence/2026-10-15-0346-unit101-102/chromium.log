@@ -1,0 +1,66 @@
+
+Running 14 tests using 1 worker
+
+(node:21380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit101-102-story-layout.spec.js:7:39 › 320：12轮完整原文、作者与读者、按需中文和续读 (5.8s)
+  ok  2 tests\e2e\unit101-102-story-layout.spec.js:7:39 › 390：12轮完整原文、作者与读者、按需中文和续读 (5.6s)
+  ok  3 tests\e2e\unit101-102-story-layout.spec.js:7:39 › 768：12轮完整原文、作者与读者、按需中文和续读 (6.0s)
+  ok  4 tests\e2e\unit101-102-story-layout.spec.js:7:39 › 1280：12轮完整原文、作者与读者、按需中文和续读 (5.9s)
+  ok  5 tests\e2e\unit101-102.spec.js:7:1 › 72题：未答材料、独立迁移、帮助记录、三卡与零英语配音 (16.9s)
+  ok  6 tests\e2e\unit101-102.spec.js:15:1 › 28词卡、102课框架、16组替换和A5／B9 (3.0s)
+  x   7 tests\e2e\unit101-102.spec.js:21:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (8.3s)
+(node:23540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 tests\e2e\unit101-102.spec.js:31:1 › 错答不更新传话记录，三卡7／8／2，刷新不丢回应 (4.3s)
+  ok  9 tests\e2e\unit101-102.spec.js:35:1 › 全部声音失败仍能完成五区 (14.2s)
+  ok 10 tests\e2e\unit101-102.spec.js:36:1 › 14道书写题打印与恢复 (733ms)
+  ok 11 tests\e2e\unit101-102.spec.js:37:39 › 320及短屏：转述材料、长句、全部题型和三卡 (21.8s)
+  ok 12 tests\e2e\unit101-102.spec.js:37:39 › 390及短屏：转述材料、长句、全部题型和三卡 (21.6s)
+  ok 13 tests\e2e\unit101-102.spec.js:37:39 › 768及短屏：转述材料、长句、全部题型和三卡 (19.8s)
+  ok 14 tests\e2e\unit101-102.spec.js:37:39 › 1280及短屏：转述材料、长句、全部题型和三卡 (20.1s)
+
+
+  1) tests\e2e\unit101-102.spec.js:21:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ────────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 7000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })
+        - locator resolved to <button disabled type="button" class="btn btn-green">检查答案</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        13 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+      21 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+      22 |  test.setTimeout(180000);await page.goto('/unit101-102/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
+    > 23 |  for(let k=0;k<2;k++){if(k===0)await select(room,'正在读的Penny');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+         |                                                                           ^
+      24 |  for(const[i,a]of ANSWERS.grammar.entries()){
+      25 |   if(i===1){await select(room,{fills:['is']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'is',exact:true}).click();}
+      26 |   if(i===19){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Ann says',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 Ann says',exact:true}).click();await expect(check).toBeDisabled();}
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit101-102.spec.js:23:75
+
+    Error Context: output\unit101102-chromium\unit101-102-重复错答、两空门槛、撤回、提示、刷新与重练\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit101102-chromium\unit101-102-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit101102-chromium\unit101-102-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit101-102.spec.js:21:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ─────────────────────────────────────
+  13 passed (2.6m)

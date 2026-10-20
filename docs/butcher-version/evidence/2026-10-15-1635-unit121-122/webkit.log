@@ -1,0 +1,24 @@
+
+Running 15 tests using 1 worker
+
+(node:34136) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit121-122-story-layout.spec.js:30:39 › 320：13轮完整对话、三人身份、帽子状态与按需中文续读 (1.0m)
+  ok  2 tests\e2e\unit121-122-story-layout.spec.js:30:39 › 390：13轮完整对话、三人身份、帽子状态与按需中文续读 (1.1m)
+  ok  3 tests\e2e\unit121-122-story-layout.spec.js:30:39 › 768：13轮完整对话、三人身份、帽子状态与按需中文续读 (1.2m)
+  ok  4 tests\e2e\unit121-122-story-layout.spec.js:30:39 › 1280：13轮完整对话、三人身份、帽子状态与按需中文续读 (57.5s)
+  ok  5 tests\e2e\unit121-122-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (18.9s)
+  ok  6 tests\e2e\unit121-122.spec.js:13:1 › 70题：未答材料、位置与服务图、独立迁移、帮助记录与三卡 (1.5m)
+  ok  7 tests\e2e\unit121-122.spec.js:29:1 › 23词卡、122课1–9、A8／B8／C8完整 (13.9s)
+  ok  8 tests\e2e\unit121-122.spec.js:40:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (53.8s)
+  ok  9 tests\e2e\unit121-122.spec.js:51:1 › 错答不更新服务记录，三卡4／8／2，刷新保留原图 (13.9s)
+  ok 10 tests\e2e\unit121-122.spec.js:55:1 › 全部声音失败仍能完成五区 (50.0s)
+  ok 11 tests\e2e\unit121-122.spec.js:56:1 › 24道书写题64行打印与恢复 (1.9s)
+  ok 12 tests\e2e\unit121-122.spec.js:57:39 › 320及短屏：关系从句材料、长句、全部题型和三卡 (56.5s)
+  ok 13 tests\e2e\unit121-122.spec.js:57:39 › 390及短屏：关系从句材料、长句、全部题型和三卡 (55.5s)
+  ok 14 tests\e2e\unit121-122.spec.js:57:39 › 768及短屏：关系从句材料、长句、全部题型和三卡 (56.2s)
+  ok 15 tests\e2e\unit121-122.spec.js:57:39 › 1280及短屏：关系从句材料、长句、全部题型和三卡 (1.1m)
+
+  Slow test file: tests\e2e\unit121-122.spec.js (7.7m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  15 passed (12.4m)

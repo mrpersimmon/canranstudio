@@ -1,0 +1,44 @@
+[WebServer] (node:26536) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:29124) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28368) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (7.2s)
+
+
+  1) tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4263/lesson/admin/
+    Call log:
+      - navigating to "http://127.0.0.1:4263/lesson/admin/", waiting until "load"
+
+
+       at helpers.js:4
+
+      2 | const { expect } = require('@playwright/test');
+      3 | async function adminLogin(page, base = '/lesson/') {
+    > 4 |   await page.goto(base + 'admin/');
+        |              ^
+      5 |   await page.getByLabel('管理员账号').fill('teacher');
+      6 |   await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');
+      7 |   await page.getByRole('button', { name: '登录管理页' }).click();
+        at adminLogin (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\helpers.js:4:14)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit7-8-fivezones-upgrade.spec.js:26:9
+
+    Error Context: output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ─────────

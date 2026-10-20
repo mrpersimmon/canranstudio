@@ -1,0 +1,21 @@
+
+Running 14 tests using 1 worker
+
+(node:30892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit103-104-story-layout.spec.js:7:39 › 320：9轮完整原文、观点与结果、按需中文和续读 (13.8s)
+  ok  2 tests\e2e\unit103-104-story-layout.spec.js:7:39 › 390：9轮完整原文、观点与结果、按需中文和续读 (11.3s)
+  ok  3 tests\e2e\unit103-104-story-layout.spec.js:7:39 › 768：9轮完整原文、观点与结果、按需中文和续读 (11.1s)
+  ok  4 tests\e2e\unit103-104-story-layout.spec.js:7:39 › 1280：9轮完整原文、观点与结果、按需中文和续读 (11.2s)
+  ok  5 tests\e2e\unit103-104.spec.js:7:1 › 68题：未答材料、独立迁移、帮助记录、三卡与零英语配音 (43.3s)
+  ok  6 tests\e2e\unit103-104.spec.js:15:1 › 36词卡、104课A–P替换、A6／B12完整 (8.8s)
+  ok  7 tests\e2e\unit103-104.spec.js:21:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (25.6s)
+  ok  8 tests\e2e\unit103-104.spec.js:32:1 › 错答不更新传话记录，三卡7／8／2，刷新保留尺寸条件 (7.5s)
+  ok  9 tests\e2e\unit103-104.spec.js:36:1 › 全部声音失败仍能完成五区 (34.3s)
+  ok 10 tests\e2e\unit103-104.spec.js:37:1 › 18道书写题打印与恢复 (1.3s)
+  ok 11 tests\e2e\unit103-104.spec.js:38:39 › 320及短屏：程度材料、长句、全部题型和三卡 (40.2s)
+  ok 12 tests\e2e\unit103-104.spec.js:38:39 › 390及短屏：程度材料、长句、全部题型和三卡 (40.6s)
+  ok 13 tests\e2e\unit103-104.spec.js:38:39 › 768及短屏：程度材料、长句、全部题型和三卡 (41.8s)
+  ok 14 tests\e2e\unit103-104.spec.js:38:39 › 1280及短屏：程度材料、长句、全部题型和三卡 (43.0s)
+
+  14 passed (5.6m)

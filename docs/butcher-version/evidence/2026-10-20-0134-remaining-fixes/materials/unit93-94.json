@@ -1,0 +1,87 @@
+{
+  "id": "unit93-94",
+  "source": {
+    "file": "tests/support/unit9394.js",
+    "sha256": "c5628aa02035b42dcfe4a1bb4a166448f5b8dee34b123ef0ad31f333e3f71f95"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u9394-v1-r-job",
+      "text": "Lesson 93\n\nNigel is our new next-door neighbour. He’s a pilot.\n\nHe was in the R.A.F."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u9394-v1-r-now",
+      "text": "Lesson 93\n\nAt the moment, he’s in Madrid. He flew to Spain a week ago."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u9394-v1-r-next",
+      "text": "Lesson 93\n\nHe will fly to New York next month."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u9394-v1-r-after",
+      "text": "Lesson 93\n\nHe will fly to New York next month.\n\nThe month after next he’ll fly to Tokyo."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u9394-v1-r-return",
+      "text": "Lesson 93\n\nHe’ll return to London the week after next."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u9394-v1-r-past",
+      "text": "Lesson 93\n\nAt the moment, he’s in Madrid. He flew to Spain a week ago."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u9394-v1-r-lucky",
+      "text": "Lesson 93\n\nHe’s only forty-one years old, and he has already been to nearly every country in the world.\n\nNigel is a very lucky man. But his wife isn’t very lucky. She usually stays at home!"
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u9394-v1-r-wife",
+      "text": "Lesson 93\n\nHe’s only forty-one years old, and he has already been to nearly every country in the world.\n\nNigel is a very lucky man. But his wife isn’t very lucky. She usually stays at home!"
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u9394-v1-e-now",
+      "text": "Lesson 93\n\nNigel is our new next-door neighbour. He’s a pilot.\n\nHe was in the R.A.F.\n\nHe will fly to New York next month.\n\nThe month after next he’ll fly to Tokyo.\n\nAt the moment, he’s in Madrid. He flew to Spain a week ago.\n\nHe’ll return to London the week after next.\n\nHe’s only forty-one years old, and he has already been to nearly every country in the world.\n\nNigel is a very lucky man. But his wife isn’t very lucky. She usually stays at home!"
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u9394-v1-e-route",
+      "text": "Lesson 93\n\nHe will fly to New York next month.\n\nThe month after next he’ll fly to Tokyo.\n\nAt the moment, he’s in Madrid. He flew to Spain a week ago.\n\nHe’ll return to London the week after next."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "5",
+    "R3": "3",
+    "R4": "3-4",
+    "R5": "6",
+    "R6": "5",
+    "R7": "7-8",
+    "R8": "7-8",
+    "E1": "*",
+    "E2": "3-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

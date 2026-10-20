@@ -1,0 +1,64 @@
+{
+  "method": "built-in image_gen",
+  "styleReference": "assets/awards/unit1-2-handbag-closeup.webp",
+  "prompts": [
+    {
+      "name": "keepsake-story-v1",
+      "prompt": "Create a transparent 3:2 landscape keepsake illustration for English Lesson21–22, matching IMAGE ONE's approved simple chibi graphic style EXACTLY: thick uniform cocoa outlines, oversized rounded heads, tiny dark dots or simple curved eyes (NO white eyeballs), blush circles, simple smiles, chunky hands, flat soft colors, few hair clumps and folds. Images TWO and THREE are identity references, not line-style references. Man on LEFT: short greying hair parted to side, round brown glasses, small moustache, sage waistcoat over cream shirt, dark grey-green trousers. Jane on RIGHT: brown SIDE ponytail, slightly longer face, dusty rose tunic-dress with distinctive white pointed collar. They are facing each other. Close waist-up view with large readable faces and hands. The man now holds exactly ONE plain RED book with ivory page edge at his chest in one hand, looking gratefully to Jane. Jane has finished handing it over: both hands EMPTY, relaxed and natural; friendly smile. No duplicate book, no other items, no background, no text/names/numbers/stars, no frames. Keep heads, hands and book completely inside canvas with clear transparent margin. This is a book handover, not a handbag scene; no copied people or props from image one."
+    },
+    {
+      "name": "cast-ready-v1",
+      "prompt": "Use this approved reference as EXACT simple chibi character and style model: thick dark cocoa outlines, large rounded heads, tiny dot/curved eyes, simple smiles, NO white eyeballs (round glasses on man are okay), flat soft colors, minimal details. Man LEFT with grey side-parted hair, round glasses, moustache, cream shirt sage waistcoat and grey-green trousers. Jane RIGHT with brown SIDE ponytail, dusty rose tunic dress, white pointed collar, dark leggings and brown shoes. Full-body stage illustration, heads hair hands shoes entirely inside canvas with transparent margins, both facing each other. Landscape 3:2, genuine transparent background, no text, stars, frames or scenery. Both people standing EMPTY-HANDED, man making a mild request, Jane listening thoughtfully. Between them a LOW simple book table at knee height with exactly TWO separate closed books: ONE plain red and ONE plain muted beige. Neither book highlighted, both equally visible. This is before she picks up anything. No floating or duplicate books."
+    },
+    {
+      "name": "cast-first-v1",
+      "prompt": "Use this approved reference as EXACT simple chibi character and style model: thick dark cocoa outlines, large rounded heads, tiny dot/curved eyes, simple smiles, NO white eyeballs (round glasses on man are okay), flat soft colors, minimal details. Man LEFT with grey side-parted hair, round glasses, moustache, cream shirt sage waistcoat and grey-green trousers. Jane RIGHT with brown SIDE ponytail, dusty rose tunic dress, white pointed collar, dark leggings and brown shoes. Full-body stage illustration, heads hair hands shoes entirely inside canvas with transparent margins, both facing each other. Landscape 3:2, genuine transparent background, no text, stars, frames or scenery. Jane holds exactly ONE beige book up in one hand, showing it to the man. Man is empty-handed with a gentle open palm indicating this is not the one. Low table between them holds exactly ONE red book, and NO other books. Exactly TWO books total: beige in Jane's hand, red on table. Preserve complete full bodies, no cropped shoes."
+    },
+    {
+      "name": "cast-red-v1",
+      "prompt": "Use this approved reference as EXACT simple chibi character and style model: thick dark cocoa outlines, large rounded heads, tiny dot/curved eyes, simple smiles, NO white eyeballs (round glasses on man are okay), flat soft colors, minimal details. Man LEFT with grey side-parted hair, round glasses, moustache, cream shirt sage waistcoat and grey-green trousers. Jane RIGHT with brown SIDE ponytail, dusty rose tunic dress, white pointed collar, dark leggings and brown shoes. Full-body stage illustration, heads hair hands shoes entirely inside canvas with transparent margins, both facing each other. Landscape 3:2, genuine transparent background, no text, stars, frames or scenery. Jane now holds exactly ONE red book in one hand, showing it toward the man but has NOT handed it over. Man empty-handed politely accepts with a small open-hand gesture. Low table between them holds exactly ONE beige book. Exactly TWO books total. All hands in contact with held objects, no duplicates."
+    },
+    {
+      "name": "cast-received-v1",
+      "prompt": "Use this approved reference as EXACT simple chibi character and style model: thick dark cocoa outlines, large rounded heads, tiny dot/curved eyes, simple smiles, NO white eyeballs (round glasses on man are okay), flat soft colors, minimal details. Man LEFT with grey side-parted hair, round glasses, moustache, cream shirt sage waistcoat and grey-green trousers. Jane RIGHT with brown SIDE ponytail, dusty rose tunic dress, white pointed collar, dark leggings and brown shoes. Full-body stage illustration, heads hair hands shoes entirely inside canvas with transparent margins, both facing each other. Landscape 3:2, genuine transparent background, no text, stars, frames or scenery. Handover finished. Man now holds exactly ONE red book at chest level, Jane has BOTH hands empty in a natural relaxed pose. Both smiling at one another. Low table between them holds exactly ONE beige book. Exactly TWO books total. Same full-body scale, no duplicate red book and no fingers cut."
+    },
+    {
+      "name": "cast-man-v1",
+      "prompt": "Extract and redraw ONLY the man character from the reference as a separate full-body transparent sprite. Preserve exact simple chibi style, grey side-parted hair, round glasses, moustache, cream shirt sage waistcoat, grey-green trousers and brown shoes. He faces slightly right and smiles gently, both hands EMPTY and naturally open at lower waist height ready to receive an object. NO book, no female, no other props, no text or background. Thick uniform cocoa outline, flat colors, full head/hair/hands/feet with safe transparent margins. Portrait composition."
+    },
+    {
+      "name": "cast-jane-v1",
+      "prompt": "Extract and redraw ONLY Jane from the reference as a separate full-body transparent sprite. Preserve exact simple chibi style, brown SIDE ponytail, dusty rose tunic dress, white pointed collar, dark leggings and brown shoes. She faces slightly left and smiles gently, both hands EMPTY and naturally open at lower waist height ready to receive an object. NO book, no man, no other props, no text or background. Thick uniform cocoa outline, flat colors, full head/hair/hands/feet with safe transparent margins. Portrait composition."
+    }
+  ],
+  "selected": [
+    {
+      "file": "assets/unit21-22/keepsake-story-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-7ebc96b6-1270-4512-85be-69e4098f5bca.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-ready-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-02046eb7-11a1-4a25-a6b9-f95da6cdb54b.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-first-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-cf29a228-a5e9-4669-9386-a9d2b4fc0274.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-red-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-cf882ccf-66df-422f-af73-b87373f2b9d0.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-received-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-1a5f4614-5875-4bef-89c0-aa6666619c6f.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-man-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-da68f43d-82e5-47c4-9a4d-fb25ee1a3f80.png"
+    },
+    {
+      "file": "assets/unit21-22/cast-jane-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-3fca7c5a-36d5-4def-b94b-bea81620239a.png"
+    }
+  ]
+}

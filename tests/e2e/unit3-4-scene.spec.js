@@ -69,9 +69,10 @@ for (const width of [390, 1280]) test(width + '课文的柜台与人物、短长
     }
     if (i === 10) {
       expect((await umbrella.boundingBox()).x).toBeLessThan(waitingX - 20);
-      await expect(room.locator('.cloakroom-props')).toContainText('客人确认：是这把');
+      await expect(room.locator('.cloakroom-props')).toHaveAttribute('data-beat','returned');
+      await expect(room.locator('.scene-caption')).toHaveCount(0);
       await page.reload();
-      await expect(room.locator('.cloakroom-props')).toContainText('客人确认：是这把');
+      await expect(room.locator('.cloakroom-props')).toHaveAttribute('data-beat','returned');
       await expect(room.locator('.bubble-row').nth(i)).toBeInViewport({ ratio: 1 });
     }
     if ([1,4,10].includes(i)) {

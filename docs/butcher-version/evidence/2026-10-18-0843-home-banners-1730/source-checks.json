@@ -1,0 +1,123 @@
+{
+  "complete": true,
+  "at": "2026-10-18T01:11:33.100Z",
+  "checks": [
+    {
+      "name": "Root index differs in exactly seven artwork lines",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 17-18",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 19-20",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 21-22",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 23-24",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 25-26",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 27-28",
+      "passed": true
+    },
+    {
+      "name": "Three-page artwork for 29-30",
+      "passed": true
+    },
+    {
+      "name": "All seven course sources, keys, questions, sessions and certificate code unchanged",
+      "passed": true
+    },
+    {
+      "name": "All seven course assets and original certificate images unchanged",
+      "passed": true
+    },
+    {
+      "name": "Shared runtime, storage, scoring, rewards, typography and font files unchanged",
+      "passed": true
+    },
+    {
+      "name": "All 72 protected course packages unchanged at root",
+      "passed": true
+    },
+    {
+      "name": "All 72 protected course packages unchanged at subpath",
+      "passed": true
+    },
+    {
+      "name": "All prior substantive standard clauses retained",
+      "passed": true
+    },
+    {
+      "name": "Former standard only marked historical in its version header",
+      "passed": true
+    },
+    {
+      "name": "Active guidance points to v1.54",
+      "passed": true
+    },
+    {
+      "name": "Preview original records, rewards and key retained",
+      "passed": true
+    },
+    {
+      "name": "Changed JavaScript parses",
+      "passed": true
+    },
+    {
+      "name": "Changed documentation links resolve",
+      "passed": true
+    }
+  ],
+  "sources": [
+    {
+      "unit": "unit17-18",
+      "artwork": "/assets/unit17-18/keepsake-story-v1.webp",
+      "sha256": "8062f624d5bb351fd30b2cb2f8d087ef8d5c785f795cc0c7362b9a5aefde239c"
+    },
+    {
+      "unit": "unit19-20",
+      "artwork": "/assets/unit19-20/keepsake-story-v1.webp",
+      "sha256": "8ed2a905b04195c06b4e3ed2fe3099655e8c70b0b1f3e9e78755f3f48f2cd862"
+    },
+    {
+      "unit": "unit21-22",
+      "artwork": "/assets/unit21-22/keepsake-story-v1.webp",
+      "sha256": "a05446ae88100eda18104adcfe9128dbfff92eff08cb77a05f27ede496d20795"
+    },
+    {
+      "unit": "unit23-24",
+      "artwork": "/assets/unit23-24/keepsake-story-v1.webp",
+      "sha256": "103ddca24ea0abf3601cc2be2b16730c060033c17accfd4f79a88890973e6855"
+    },
+    {
+      "unit": "unit25-26",
+      "artwork": "/assets/unit25-26/keepsake-story-v1.webp",
+      "sha256": "83022497eae354736c7728764837f45c321a32978cc5eb35281eeba12ba9c088"
+    },
+    {
+      "unit": "unit27-28",
+      "artwork": "/assets/unit27-28/keepsake-story-v1.webp",
+      "sha256": "47aae4fc1d9195ff1c8ca8778c9aab9d44faae5ed02688837d16181381937a7a"
+    },
+    {
+      "unit": "unit29-30",
+      "artwork": "/assets/unit29-30/keepsake-story-v1.webp",
+      "sha256": "b3092fc2e27340e45d1fc7c26d397564b29bd32d5478c19e9e4de51f62a86110"
+    }
+  ],
+  "courseFiles": 89,
+  "assetFiles": 448,
+  "sharedFiles": 141,
+  "otherHomeEntriesUnchanged": 65
+}

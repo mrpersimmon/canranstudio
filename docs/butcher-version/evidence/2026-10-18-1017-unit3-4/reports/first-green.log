@@ -1,0 +1,22 @@
+
+Running 13 tests using 1 worker
+
+(node:2864) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit3-4-grammar.spec.js:9:1 › 旧锦囊入口进入语法小工坊：先示范，错答不揭底，再撤去示范 (856ms)
+  ok  2 tests\e2e\unit3-4-grammar.spec.js:30:1 › 十题完成：拼句撤回、逐空选择、配对、提示、错答和刷新均保留真实结果 (8.7s)
+  ok  3 tests\e2e\unit3-4-grammar.spec.js:83:39 › 旧空白草稿升级后，新语法首轮全对正常获星 (3.0s)
+  ok  4 tests\e2e\unit3-4-grammar.spec.js:83:39 › 旧选过但未提交升级后，新语法首轮全对正常获星 (3.1s)
+  ok  5 tests\e2e\unit3-4-grammar.spec.js:93:1 › 旧综合挑战全对升级：保留九题学习记录，新两题不代答，重练才取得新版星星 (4.8s)
+  ok  6 tests\e2e\unit3-4-grammar.spec.js:120:44 › 320 宽：示范、长选项、词块和结算完整可用 (4.3s)
+  ok  7 tests\e2e\unit3-4-grammar.spec.js:120:44 › 390 宽：示范、长选项、词块和结算完整可用 (4.3s)
+  ok  8 tests\e2e\unit3-4-grammar.spec.js:120:44 › 768 宽：示范、长选项、词块和结算完整可用 (4.3s)
+  ok  9 tests\e2e\unit3-4-grammar.spec.js:120:44 › 1280 宽：示范、长选项、词块和结算完整可用 (4.3s)
+  ok 10 tests\e2e\unit3-4-grammar.spec.js:145:1 › 真实五区完成后保留五星日期，阅读不额外计星 (8.7s)
+(node:36368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 11 tests\e2e\unit3-4-v154.spec.js:5:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 (1.3s)
+  ok 12 tests\e2e\unit3-4-v154.spec.js:12:1 › 理解题未作答时有原文依据 (1.1s)
+  ok 13 tests\e2e\unit3-4-v154.spec.js:16:1 › 真实提交记录已显示的短示范 (590ms)
+
+  13 passed (51.1s)

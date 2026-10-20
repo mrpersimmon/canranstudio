@@ -260,3 +260,82 @@ unit.questions["exam"][9],
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Five-zone edition; the unchanged predecessor above remains a migration source.
+(function(core){
+'use strict';
+const old=core.unit1718;core.unit1718LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸34–37／PDF67–70；练习册纸44–49／PDF58–63';
+const grammarSource='同步导学Grammar纸34–35／PDF48–49；'+source;
+const unit={id:'unit17-18',version:1,mode:'classroom',contentRevision:'office-five-zones-v1',legacyEdition:'unit17-18-completion-v1',title:'办公室探访记',path:'/unit17-18/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'敲开办公室',activities:[['words','职业小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'认识新同事',activities:[['text','办公室小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'身份与复数',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'介绍新同事',activities:[['apply','访客小帮手','heart']],required:['apply']},{id:'l5',title:'小小介绍员',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/refer':'learn/apply','learn/forms':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'office-five-zones-v1',title:'同事介绍小达人',lesson:'Lesson 17–18',scene:'/assets/unit17-18/keepsake-story-v1.webp',alt:'Jackson向Richards介绍Jim，Jim抱着蓝灰色文件夹微笑',color:'#586988',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','访客小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const match=pairs=>({type:'match',pairs:pairs.map(([en,cn],i)=>({id:String(i+1),en,cn})),answer:JSON.stringify(pairs.map((_,i)=>String(i+1))),leftLabel:'单数',rightLabel:'复数',instruction:'点一个单数词，再点它的复数。'});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u1718-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.learning.WORDS=unit.objects;
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,
+q('r-opinion','区分人物评价与普遍事实','这句评价是谁对谁说的？',choice(['Jackson评价Michael和Jeremy','课文说所有销售代表都懒惰','Richards评价Nicola和Claire'],'Jackson评价Michael和Jeremy',"Jackson介绍Michael和Jeremy后说：They're very lazy."),'这是Jackson对指定两个人的评价，不能推广到职业或性别，也不能只从不很忙推出懒惰。')];
+unit.questions.grammar=[
+g('who-answer','用姓名或关系回应身份询问','想知道这位女士是谁，选合适的回应。',choice(['She is Anna.','She is a nurse.','She is busy.'],'She is Anna.','访客正在核对姓名。Who is this woman?\n资料：姓名Anna；职业nurse。'),'这里Who问的是身份，按任务用姓名回答。职业和当前状态是不同信息。',[['Who is this man? He is Ben.','问眼前的人是谁，用姓名介绍。'],['What is his job? He is a teacher.','job明确询问职业。']]),
+g('job-answer','区分职业与身份回答','现在访客只登记职业，选合适的回应。',choice(["They're engineers.",'They are Tom and Jack.','They are my friends.'],"They're engineers.",'What are their jobs?\n资料：Tom和Jack；职业engineers；是我的朋友。'),'What are their jobs?明确问职业；what还可以问别的信息，不能把所有what问句都解释成问职业。',[['Who are these women? They are my sisters.','说明人物关系。'],["What are their jobs? They're nurses.",'说明职业。']]),
+g('who-be','按所问对象的单复数选be','一位男士和两位女士，分别怎样问是谁？',fill([blank('Who ',' this man?',['is','are']),blank('Who ',' those women?',['is','are'])],['is','are']),'Who is this man?问一位；Who are those women?问多位。不要把who一律搭配is。',[['Who is she? Who are they?','be跟所问的对象保持一致。']]),
+old.questions.forms[0],
+g('irregular','认识四组新的不规则复数','把单数和复数连起来。',match([['child','children'],['foot','feet'],['tooth','teeth'],['mouse','mice']]),'child、foot、tooth、mouse分别变为children、feet、teeth、mice，不直接加s。',[['man → men; woman → women','有些名词的复数要记住特殊词形。']]),
+g('compound','按真正词形区别Englishman和German','资料明确有两位英国男子和两位德国人，补好名词。',fill([blank('two ','',['Englishmen','Englishmans']),blank('two ','',['Germans','Germen'])],['Englishmen','Germans'],'Englishman：英国男子；German：德国人（本题作名词）。'),'Englishman的man变men；German不是man构成的复合词，复数是Germans。不能见到字母man就套同一变化。',[['policeman → policemen; postman → postmen','这些职业词中的man随复数变化。']]),
+g('same-form','认识单复数同形名词','为两只绵羊和三只鹿填写标签。',fill([blank('two ','',['sheep','sheeps']),blank('three ','',['deer','deers'])],['sheep','deer'],'sheep：绵羊；deer：鹿。'),'sheep和deer的单复数形式相同；数量要结合two、three等信息判断。',[['one fish; two fish','fish也常用相同形式表示一条或多条鱼。']]),
+g('fish-number','同形名词依数量使用be','分别说一条鱼和三条鱼，补好be。',fill([blank('This fish ',' small.',['is','are']),blank('These three fish ',' small.',['is','are'])],['is','are'],'fish：鱼；small：小的。'),'fish词形相同，this一条配is，these three三条配are。',[['This sheep is small. These sheep are small.','同形名词仍有单数和复数意义。']]),
+g('groups','people与police按当前含义用复数','people指人们，police指警察群体，选好be。',fill([blank('These people ',' visitors.',['are','is']),blank('The police ',' here.',['are','is'])],['are','are'],'visitors：访客；here：在这里。'),'people表示人们、police表示警察群体时搭配复数；不要把这一规则推广到所有集合名词。',[['The cattle are in the field.','cattle指牛群，作复数；field：田野。']]),
+g('one-person','用正确的单个人物表达','登记一位访客和一名警察，补好单数表达。',fill([blank('one ','',['person','people']),blank('a ','',['police officer','police'])],['person','police officer'],'本题每项都只有一人。'),'一个人可说one person；一名警察用a police officer。people表示民族时另有可数用法，这里说的是单个人。',[['one child; two children','明确说一个人时，要用相应的单数表达。']]),
+g('cattle-count','表达一头牛的数量','想用cattle这个词记录一头牛，哪种表达正确？',choice(['one head of cattle','one cattle','one cattles'],'one head of cattle','cattle指牛；head在这里是计数单位。'),'用cattle计数可说one head of cattle；不把cattle直接变成a cattle。',[['one person; a police officer','群体词与单个成员的表达可能不同。']]),
+g('national-group','国民总称作复数','补好这句欢迎名单。',fill([blank('The Chinese ',' here.',['are','is'])],['are'],'名单用The Chinese指这次到访的中国人群体。'),'the加这里的国民总称指一群人，搭配复数；不能因此对一个民族作性格概括。',[['The Japanese are here.','这里The Japanese指到访的日本人群体。']]),
+g('singular-s','不凭词尾s判断单复数','news指消息，maths指数学，补好be。',fill([blank('The news ',' good.',['is','are']),blank('Maths ',' interesting.',['is','are'])],['is','is'],'good：好的；interesting：有趣的。'),'news和表示学科的maths虽然以s结尾，这里仍用单数is。',[['Physics is interesting.','physics表示物理学科，也用单数。']]),
+g('title','把一本书的名称看作一个整体','这是一部书的书名，怎样介绍？',choice(['School Friends is a book.','School Friends are a book.','School Friends am a book.'],'School Friends is a book.','书名：School Friends；这里只介绍这一本书。'),'书名中的Friends是复数形式，整个书名指一部作品时按单数处理。',[['The United States is a country.','United States在这里是一个国家的专名，按单数处理。']]),
+g('plural-only','眼镜与裤子使用复数形式','按给定含义补好句子。',fill([blank('These glasses ',' new.',['are','is']),blank('These trousers ',' long.',['are','is'])],['are','are'],'glasses：眼镜；trousers：裤子；new：新的；long：长的。'),'glasses表示眼镜、trousers表示裤子时使用复数，不能把它们直接当a glass或a trouser。',[['These shorts are blue.','shorts表示短裤，使用复数；不是按裤子件数直接改词形。']]),
+g('pair','区分pair与glasses作为主语','仍说这一副眼镜，补好两句。',fill([blank('This pair of glasses ',' new.',['is','are']),blank('These glasses ',' new.',['is','are'])],['is','are']),'This pair以单数pair为中心，用is；These glasses用are。两句可以描述同一副眼镜。',[['A pair of trousers is on the chair.','pair：一条／一副；on the chair：在椅子上。']]),
+g('clothes','clothes不等于所有东西都有两部分','想说这些衣服很干净，选合适的句子。',choice(['These clothes are clean.','This clothes is clean.','These clothes is clean.'],'These clothes are clean.','clothes：衣服；clean：干净的。'),'clothes表示衣服，按复数使用；衣服不一定由两个部分组成，不能由这个词判断每件衣服的结构。',[['My clothes are blue.','衣服用clothes，不说a clothes。']]),
+g('meaning','按特定复数词义组织句子','货物已经备齐，选出合适的记录。',choice(['The goods are ready.','The goods is ready.','A goods is ready.'],'The goods are ready.','goods：货物；ready：准备好的。'),'goods表示货物并按复数使用，不说a goods；词形与当前含义一起核对。',[['water：水；coastal waters：沿海水域','有些复数形式表达特定含义，不能只理解成多件物品。']]),
+g('they-their','区分主语they与物主their','介绍两位同事以及他们的办公室。',fill([blank('',' are employees.',['They','Their']),blank('',' office is here.',['They','Their'])],['They','Their'],'两位同事一起使用这间办公室。'),'They说明他们是谁；Their office说明他们的办公室。一个办公室不代表只有一位物主。',[['We are teachers. Our office is here.','We是主语，Our后面接名词。']]),
+g('whole-plural','按新的复数对象改写整句','现在改为远处两位女士，按原句信息拼好介绍。',words(['Those','women','are','nurses.','a','is'],4,'Those women are nurses.','原句：That woman is a nurse.\n新情境：远处两位女士都是护士。'),'That变Those，woman变women，is变are；复数nurses前去掉a。',[['This man is a teacher. → These men are teachers.','人物、指示词、be、职业和冠词一起核对。']])
+];
+unit.questions.apply=[...old.questions.refer,...old.questions.trans];
+unit.questions.exam=[...old.questions.exam,
+q('e-body-one','独立使用children和feet','按数量填写儿童与脚的复数标签。',fill([blank('three ','',['children','childs','child']),blank('two ','',['feet','foots','foot'])],['children','feet'],'child：孩子；foot：脚。'),'child变children，foot变feet。'),
+q('e-body-two','独立使用teeth和mice','按数量填写牙齿与老鼠的复数标签。',fill([blank('two ','',['teeth','tooths','tooth']),blank('three ','',['mice','mouses','mouse'])],['teeth','mice'],'tooth：牙齿；mouse：老鼠。'),'tooth变teeth，mouse变mice。'),
+q('e-compound','独立区别复合词与普通名词','这些名词各指两个人，选正确的标签组。',choice(['Englishmen / Germans','Englishmans / Germen','Englishmen / Germen'],'Englishmen / Germans','Englishman：英国男子；German：德国人。'),'Englishman的复数是Englishmen，German的复数是Germans。'),
+q('e-same','独立保留单复数同形','动物园有五只鹿和两只绵羊，补好标签。',fill([blank('five ','',['deer','deers']),blank('two ','',['sheep','sheeps'])],['deer','sheep']),'deer与sheep的复数不加s。'),
+q('e-fish','从数量而非fish词形判断be','按这两条记录补好句子。',fill([blank('The fish in Box A ',' small.',['is','are']),blank('The fish in Box B ',' small.',['is','are'])],['is','are'],'Box A：一条鱼；Box B：四条鱼。small：小的。'),'A的一条鱼配is，B的四条鱼配are；fish本身没有显示数量。'),
+q('e-groups','独立判断群体词的be','cattle指牛群，police指警察群体，补好be。',fill([blank('The cattle ',' in the field.',['is','are']),blank('The police ',' at the gate.',['is','are'])],['are','are'],'field：田野；at the gate：在门口。'),'本题两种群体词都按复数使用。'),
+q('e-person','按单个人与多人选person和people','访客人数写得很清楚，补好记录。',fill([blank('one ','',['person','people']),blank('four ','',['people','peoples'])],['person','people'],'这里统计的是四个个人，不是民族或文化群体。'),'一人用person；这里多个人用people，不加s。'),
+q('e-nation','独立判断国民总称','名单用The Japanese指这次到访的日本人群体，补好be。',fill([blank('The Japanese ',' in the office.',['is','are'])],['are']),'国民总称在这里指一群人，用are。'),
+q('e-singular','不把s结尾的消息与专名当复数','按词的实际含义补好be。',fill([blank('This news ',' important.',['is','are']),blank('The United Nations ',' an organization.',['is','are'])],['is','is'],'news：消息；important：重要的；United Nations：联合国，指一个组织。'),'news与这里表示一个组织的United Nations都用单数is。'),
+q('e-pair','依中心词选择is或are','一副眼镜和两副眼镜，分别补好句子。',fill([blank('This pair of glasses ',' blue.',['is','are']),blank('These two pairs of glasses ',' blue.',['is','are'])],['is','are'],'glasses指眼镜，pair指一副。'),'中心词是pair或pairs：一副配is，两副配are。'),
+q('e-clothes','独立使用clothes的复数结构','清单说这些衣服是新的，哪句正确？',choice(['These clothes are new.','This clothes is new.','These clothes is new.'],'These clothes are new.','clothes：衣服；new：新的。'),'clothes表示衣服时按复数使用。'),
+q('e-meaning','独立识别复数词的语境意义','沿海介绍写着coastal waters，这里的waters表示什么？',choice(['水域','几杯饮用水','几件货物'],'水域','coastal表示沿海的；这是一份沿海地理介绍。'),'waters在这个地理语境中表示水域。'),
+q('e-who-plural','独立构成复数身份问句','访客想知道远处两位女士是谁，拼好问题。',words(['Who','are','those','women?','What','is'],4,'Who are those women?','这里只问人物身份，随后会另外询问职业。'),'问身份用Who；those women是复数，搭配are。')
+];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['forms'],apply:['refer','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit1718-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])]) ]));
+core.unit1718=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit1718,excerpts={"u1718-v1-story-jobs":[7,8,9,10,11],"u1718-v1-story-their":[2,3,4,5,6]},speakers={"jackson":"Mr. Jackson","richards":"Mr. Richards"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 17',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

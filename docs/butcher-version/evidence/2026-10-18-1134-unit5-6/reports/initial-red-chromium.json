@@ -1,0 +1,296 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit5-6-v154.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit56-review-20261018/initial-red-chromium"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit56-review-20261018/initial-red-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4512",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit5-6-v154.spec.js",
+      "file": "unit5-6-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "当前首页使用确认故事图",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5973,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-unit=\"unit5-6\"] .featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-unit=\"unit5-6\"] .featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-unit=\"unit5-6\"] .featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-unit=\"unit5-6\"] .featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:4:127",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 127,
+                      "line": 4
+                    },
+                    "snippet": "  2 | const {test,expect}=require('@playwright/test');\n  3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});\n> 4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n    |                                                                                                                               ^\n  5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n  6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n  7 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 127,
+                        "line": 4
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-unit=\"unit5-6\"] .featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-unit=\"unit5-6\"] .featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n  2 | const {test,expect}=require('@playwright/test');\n  3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});\n> 4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n    |                                                                                                                               ^\n  5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n  6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n  7 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:4:127"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:48:07.500Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-当前首页使用确认故事图\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-当前首页使用确认故事图\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 127,
+                    "line": 4
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-1a600d895e156beb210f",
+          "file": "unit5-6-v154.spec.js",
+          "line": 4,
+          "column": 1
+        },
+        {
+          "title": "Grammar先示范特殊疑问句，再立即练习信息类型",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5485,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"What make is it?\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"What make is it?\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:5:202",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 202,
+                      "line": 5
+                    },
+                    "snippet": "  3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});\n  4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n> 5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n    |                                                                                                                                                                                                          ^\n  6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n  7 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 202,
+                        "line": 5
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"What make is it?\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n  3 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});\n  4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n> 5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n    |                                                                                                                                                                                                          ^\n  6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n  7 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:5:202"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:48:14.501Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-Grammar先示范特殊疑问句，再立即练习信息类型\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-Grammar先示范特殊疑问句，再立即练习信息类型\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 202,
+                    "line": 5
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-fd014e073a409467c857",
+          "file": "unit5-6-v154.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "原文理解在未答页提供必要对白",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6802,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\nExpected substring: \u001b[32m\"Sophie is a new student.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\nExpected substring: \u001b[32m\"Sophie is a new student.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:6:229",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 229,
+                      "line": 6
+                    },
+                    "snippet": "  4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n  5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n> 6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n    |                                                                                                                                                                                                                                     ^\n  7 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 229,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\nExpected substring: \u001b[32m\"Sophie is a new student.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })\u001b[22m\n\n\n  4 | test('当前首页使用确认故事图',async({page})=>{await page.goto('/');await expect(page.locator('[data-unit=\"unit5-6\"] .featured-art img')).toHaveCount(1);});\n  5 | test('Grammar先示范特殊疑问句，再立即练习信息类型',async({page})=>{await page.goto('/unit5-6/#learn/introduce');const room=page.locator('.stage-introduce');await expect(room.getByRole('region',{name:'短示范',exact:true})).toContainText('What make is it?');await expect(room.locator('.progress-copy')).toHaveText('第 1 / 11 题');});\n> 6 | test('原文理解在未答页提供必要对白',async({page})=>{await require('../support/unit5-6-flow').completeStory(page);await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles').getByRole('region',{name:'阅读材料',exact:true})).toContainText('Sophie is a new student.');});\n    |                                                                                                                                                                                                                                     ^\n  7 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:6:229"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:48:20.610Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-原文理解在未答页提供必要对白\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\initial-red-chromium\\unit5-6-v154-原文理解在未答页提供必要对白\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 229,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-5324863e6e5dd8d9b70e",
+          "file": "unit5-6-v154.spec.js",
+          "line": 6,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T03:48:06.971Z",
+    "duration": 21004.348,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

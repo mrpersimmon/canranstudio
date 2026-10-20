@@ -1,0 +1,47 @@
+
+Running 3 tests using 1 worker
+
+(node:35756) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧25题真实领取的证书原文、姓名、日期、PNG与打印保留 (10.4s)
+  ok 2 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧37题真实领取的证书原文、姓名、日期、PNG与打印保留 (9.3s)
+  x  3 tests\e2e\unit1-2-v154-history.spec.js:37:1 › 教材七句抄写独立成页，替换例句保持十组 (877ms)
+
+
+  1) tests\e2e\unit1-2-v154-history.spec.js:37:1 › 教材七句抄写独立成页，替换例句保持十组 ─────────────────────────────
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator: locator('.story-award-paper')
+    Expected: hidden
+    Error: strict mode violation: locator('.story-award-paper') resolved to 2 elements:
+        1) <article data-stars="0" aria-label="我的纪念卡" data-unit="unit1-2" data-motion="paused" class="story-award-paper award-card">…</article> aka locator('[id="learn/certificate"]').getByLabel('我的纪念卡')
+        2) <article data-unit="unit1-2" aria-label="礼貌小帮手纪念卡" class="story-award-paper award-card">…</article> aka getByLabel('礼貌小帮手纪念卡')
+
+    Call log:
+      - Expect "toBeHidden" with timeout 5000ms
+      - waiting for locator('.story-award-paper')
+
+
+      40 |  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});
+      41 |  await expect(page.locator('#unitWriting .writing-lines li')).toHaveCount(7);for(const li of await page.locator('#unitWriting .writing-lines li').all())await expect(li).toBeVisible();
+    > 42 |  await expect(page.locator('.story-award-paper')).toBeHidden();await expect(page.locator('#topbar')).toBeHidden();
+         |                                                   ^
+      43 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:'output/pdf/lesson1-2-writing.pdf',format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);}
+      44 | });
+      45 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-v154-history.spec.js:42:51
+
+    Error Context: output\unit12-review-20261018\history-chromium\unit1-2-v154-history-教材七句抄写独立成页，替换例句保持十组\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\history-chromium\unit1-2-v154-history-教材七句抄写独立成页，替换例句保持十组\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\history-chromium\unit1-2-v154-history-教材七句抄写独立成页，替换例句保持十组\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit1-2-v154-history.spec.js:37:1 › 教材七句抄写独立成页，替换例句保持十组 ──────────────────────────────
+  2 passed (22.0s)

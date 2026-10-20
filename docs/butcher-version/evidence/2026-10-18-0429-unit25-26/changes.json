@@ -1,0 +1,579 @@
+{
+  "at": "2026-10-17T21:13:08.518Z",
+  "excludesSelfGeneratedAuditFiles": [
+    "changes.json",
+    "source-checks.json"
+  ],
+  "changes": [
+    {
+      "file": "docs/butcher-version/2026-10-15-0041-v1.0-教学单元设计与验收索引.md",
+      "status": "modified",
+      "sha256": "20f22778b140d93aa6811a4005dae23e32171a6b3348346cfac5f55520f6d93f"
+    },
+    {
+      "file": "docs/butcher-version/2026-10-18-0429-v3.1-Lesson25-26原文依据与教学支持重构.md",
+      "status": "added",
+      "sha256": "c1a345c888362b0c62b907ade07b7ded112832aef8fd99eccd8a35450f8a0bdc"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/check-plan-stderr.txt",
+      "status": "added",
+      "sha256": "01a670c35cd841f21971b3b8db2c5f9a2555dc912590ed82a153fe3db7b4ca47"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/check-plan.txt",
+      "status": "added",
+      "sha256": "f86f5168bcd1a05ffc5aacaa662792a316eb90e3518df75579b92314c1d332c0"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-chromium-root-keepsake.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-chromium-root-one-star.gif",
+      "status": "added",
+      "sha256": "04f82ff3580349222159214a9ff58ecefc5527ae9bd55ef1ee2be0f6ca55ec33"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-chromium-subpath-keepsake.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-webkit-root-keepsake.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-webkit-subpath-keepsake.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/account-webkit-subpath-one-star.gif",
+      "status": "added",
+      "sha256": "e88313056dd3f694c86df0cc156db2d33cf50871ade2ed4e3d00c6f34571d0d6"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-root/card.png",
+      "status": "added",
+      "sha256": "6cdb80d0328d0d5478ee849ccb4936b3b09b7d24b01bd99d3066fb66dcf0a995"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-root/original.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-root/retained.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-subpath/card.png",
+      "status": "added",
+      "sha256": "95519ab2fd3d12401b222607a9b5a79d702d2b8cb79d85b820191db5840f1d32"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-subpath/original.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/chromium-subpath/retained.gif",
+      "status": "added",
+      "sha256": "d4a36ac6b1331200fa05620b9190a73f08cb494d6068ebf239f9a45841218ac2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-root/card.png",
+      "status": "added",
+      "sha256": "a659aec2a8f744c2244fa55cce5b20ba263e5e30a4f296ea2c9213ebda6ac315"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-root/original.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-root/retained.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-subpath/card.png",
+      "status": "added",
+      "sha256": "e4a171b229dafc19be3974cf643b5bebe54578a3e6613e083c188dbedf779f86"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-subpath/original.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/current-card/webkit-subpath/retained.gif",
+      "status": "added",
+      "sha256": "04542f96e9e55ce6b4109e4ad5743aecf17ebd324a5d040a6586a3915aabd2d5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/exports.json",
+      "status": "added",
+      "sha256": "21e50e9a4d2b93ef8a49493cbcbbb21b42372912243edd032fde03ea61f38788"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/failures/red/0-context.md",
+      "status": "added",
+      "sha256": "c53af106b48c3d0ba987bb6c81e290cbfe1111cb111b4cabd432b14d93e91fc8"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/failures/red/1-context.md",
+      "status": "added",
+      "sha256": "1a18a92ee94a65a5dec28cc10c4817bf02bbd0ae6e72d5b3fcd2471fa2c3bc19"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/failures/red/2-context.md",
+      "status": "added",
+      "sha256": "0ca019eea9f2b007d4c1379af7eaa86869a457f25d846541e2056f61e64e4f89"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/failures/red/3-context.md",
+      "status": "added",
+      "sha256": "cbc5aaee61073ccddc1effcab041b4400ecf75c013ebf1de6ede6b83c001349e"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/failures/red/4-context.md",
+      "status": "added",
+      "sha256": "21b1f52c62a0080fdd3b8321051a5714a2bdecf6d03d13a510d7b100180c86b7"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/font-check.json",
+      "status": "added",
+      "sha256": "bfec775191c862eb3d083acde3daea19188d992e109680dd5b352b060a4a4d2d"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/historical-chain.png",
+      "status": "added",
+      "sha256": "accd05970882ade3c1f3a50cea02dbea79633bc37eef071e0f8595b84e27c053"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/history-comparison-serialization.json",
+      "status": "added",
+      "sha256": "b5a95b61edaaa3951071d7354b23c315318672e53014978d521e2cf7dcec8ae6"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/history-comparison.json",
+      "status": "added",
+      "sha256": "9aa975c0196be76730873aea751fdfe56969d6f7ca9455430eea47f3a6ed50ba"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/history/after45-progress.json",
+      "status": "added",
+      "sha256": "48f3e2fd676aa77342da542a7c1159bc061243a1333dbbc676e4bb54075d6265"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/history/before45-progress.json",
+      "status": "added",
+      "sha256": "b6eda4cdccbbd26af10a09d1f59e19bb2ad02102f795ddfe7a48301035824c32"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/index.html",
+      "status": "added",
+      "sha256": "fe91300eed85b1ab6ea5da1c06455ae8019f908608497e856a9b0c3166b9866e"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-card/chromium/original.png",
+      "status": "added",
+      "sha256": "a1840f189348a65ed3cea444156072a188b2c84346debc3ab655bee58c7556ee"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-card/chromium/retained.png",
+      "status": "added",
+      "sha256": "a1840f189348a65ed3cea444156072a188b2c84346debc3ab655bee58c7556ee"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-card/webkit/original.png",
+      "status": "added",
+      "sha256": "c7cf3e8a596a043d7b948762358d5a9dc52d8374065da392a5d3d138bb300310"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-card/webkit/retained.png",
+      "status": "added",
+      "sha256": "c7cf3e8a596a043d7b948762358d5a9dc52d8374065da392a5d3d138bb300310"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-certificate.pdf",
+      "status": "added",
+      "sha256": "749361ae936e5283ff811a3557bd18c00fc71369f0f6ff7e01d9a26864e49917"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/legacy-print.png",
+      "status": "added",
+      "sha256": "c9aa54acb893d3c94b7d0264a23d821f87876345bfc08eb415fd7c56f67c2f93"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/pdf-check-initial.txt",
+      "status": "added",
+      "sha256": "009f6a81899047104c54d942a985665423784b823b0c593c2a6c94f63fd0173c"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/pdf-check.json",
+      "status": "added",
+      "sha256": "e52bd9cc14a432d69b8b273677b8a20f6079bf36b0e426f577e96536acc4c166"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/preview-data-check.json",
+      "status": "added",
+      "sha256": "27e16650d056a70a0502eee839d29a9d4744acb7c7e5820097ba5cf803d1aad3"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/preview.png",
+      "status": "added",
+      "sha256": "9957af3e1636638339973dce9b387b6ce6a090b5d57e51426dd995d565970deb"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/account-chain-chromium-root.json",
+      "status": "added",
+      "sha256": "74b03f23df375fe53f9b7cfa738b1ed928c39316b62510086cf9aa0c860b3c38"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/account-chromium-root.json",
+      "status": "added",
+      "sha256": "b9bcda3c086c1cf5445f6aec872f3927a2641dcfe8a3ee9eb9931ef2cedacc24"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/account-chromium-subpath.json",
+      "status": "added",
+      "sha256": "86b99a28d473e5b5b2815b09e8a4a9e38430e181bf83c55fde828a9378b0e95a"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/account-webkit-root.json",
+      "status": "added",
+      "sha256": "7de90a97372ccf1b1eeca21cace1d840c6c582e1bf9f195746b7bbb013327f91"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/account-webkit-subpath.json",
+      "status": "added",
+      "sha256": "4786e8c5dfc26d1cc55ef0039e41836d61ab6953185bf12d2ce2adbea0baf21b"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/course-chromium.json",
+      "status": "added",
+      "sha256": "bf932afcc3b6d9f2ba17f5715e5925a75e7e3243ce40edea4576481700e34932"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/course-webkit.json",
+      "status": "added",
+      "sha256": "904458d84c78a779c005621b37ebc7b688f402304141af94f5b43badd1e7866b"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/earlier-chain-chromium-root.json",
+      "status": "added",
+      "sha256": "a7ed2db5d63c4e213fd2be9097f6057c4f16f9bf6311e3abbd6cb7247a358fdb"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/print.json",
+      "status": "added",
+      "sha256": "39a6842b0f1ea240f64f5caeedab8b28d030e3a95bf0e5b641bc70a0864a2571"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/red.json",
+      "status": "added",
+      "sha256": "d7e1f9b4522ddfa327f906f3962f34f70dae1564c88ba9b9e9f383a1f87cb781"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/review-chromium.json",
+      "status": "added",
+      "sha256": "caa27147015a668caedf07f67dd2b4d26fb269830fb12be2d7225a8e43b041a5"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/shared-unit2324-chromium-root.json",
+      "status": "added",
+      "sha256": "05377e9829f6c024252978f63e138ea35eb4872877a959b113f1cced25c421a1"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/reports/unit.tap",
+      "status": "added",
+      "sha256": "cdd2e8b9bc285e1dd409a9f84d85147089394f13e9dff005bd2dbfb88d56ccfa"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-exam-3.png",
+      "status": "added",
+      "sha256": "20377db8e661119db4c637f5dd08694856a9b695ddcbe0fcb0b024bae51ab830"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-exam-4.png",
+      "status": "added",
+      "sha256": "d72b24e1eb46a93d6cf3ebcf48239d9f511bd214b278991d84f3c2de4826a688"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-grammar-11.png",
+      "status": "added",
+      "sha256": "2b177fcc862b37bb38c747b28be5f59f1231f1eee86c0178c1b8b27bfd91d0ce"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-grammar-12.png",
+      "status": "added",
+      "sha256": "fec57b718cdb559168fb28f30e05d00403ae42dd493940c6d0828325c9178204"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-grammar-13.png",
+      "status": "added",
+      "sha256": "a3ded7c2054d327cc17effb646a59a9606a5e22061a84b3efa6df32d2323e124"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-inquiry.png",
+      "status": "added",
+      "sha256": "5a6f87104cd3888dfa1a4703932a430fa8b564b9b11bd52948a357dd992a4992"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-notebook.png",
+      "status": "added",
+      "sha256": "3affcae47e95e0275b53a5a63534ef7f4acd52f5ee12677d6bf353289b8357b2"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/chromium-roles-3.png",
+      "status": "added",
+      "sha256": "b0ee262e45b36e717b939d9376b593b57a8a1c6fc198af41a46c7775044d6904"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-exam-3.png",
+      "status": "added",
+      "sha256": "90ed7a8bcc37bcfcf0205faea374b87774c9a8123c9be5b41e0d2359f2ed7d24"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-exam-4.png",
+      "status": "added",
+      "sha256": "6a5639feceb56b98da76bf4a19bfd4d6830a9f547007c474e85a1e5c23b33d85"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-grammar-11.png",
+      "status": "added",
+      "sha256": "9f70fc7821c201a3bddb45243eb292c377519abc608b4eb8306110d723bfee66"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-grammar-12.png",
+      "status": "added",
+      "sha256": "59065d153af9a024116b7c741fb7a325d016cdf44fe52c7a74dd7b527a71a7b9"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-grammar-13.png",
+      "status": "added",
+      "sha256": "6d1a5210a3c9d4922e2b3b0a9b90486834ca0c4947c4f1bc67a44ace00957f74"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-inquiry.png",
+      "status": "added",
+      "sha256": "dce1e090a0abca3cd90cadcac027bfe669c71fce42687993d78b682b69ca3055"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-notebook.png",
+      "status": "added",
+      "sha256": "1a804e017be1ccfb871bfcb442ec5b8dc5c636c2959bf2514a0a19eeb6c37369"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/teaching/webkit-roles-3.png",
+      "status": "added",
+      "sha256": "8e679760033c34887fb33f65e8c9a12bea9a41286d29e65e16f03df248282c76"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/verification.json",
+      "status": "added",
+      "sha256": "b60db6fc6fad051be70d9c25a1526d9e68830b4ba996e7e4c32090e4ac5eb853"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/worksheet-1.png",
+      "status": "added",
+      "sha256": "6df728d6e00172b515dbfaf581d2572482c24c211982b879bc61cf68a3faaac6"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/worksheet-2.png",
+      "status": "added",
+      "sha256": "c319cfba1dc23ddc56e43a3a6c234fa9c947ae08cb7bb856e99141e4d1d17796"
+    },
+    {
+      "file": "docs/butcher-version/evidence/2026-10-18-0429-unit25-26/worksheet.pdf",
+      "status": "added",
+      "sha256": "166b89624c249806f89fa79966820a20978f8d9e1ae4b36036eff90b843cc7fe"
+    },
+    {
+      "file": "server/legacy/unit25-26-before-v153-content.js",
+      "status": "added",
+      "sha256": "5d294b86013de5615eab28a7b5a32249c2aea650389dd87038371453ce812fdd"
+    },
+    {
+      "file": "tests/e2e/unit25-26-fivezones.spec.js",
+      "status": "modified",
+      "sha256": "8254f75a517dce2d2e2721b35c0a07d240ea5c15aec61dc03db7c8e3d68fc27d"
+    },
+    {
+      "file": "tests/e2e/unit25-26-v153-upgrade.spec.js",
+      "status": "added",
+      "sha256": "8d534f3280c79c80ac0c191e876f2103f8af13514e39b29239602563a5ca7afb"
+    },
+    {
+      "file": "tests/e2e/unit25-26-v153.spec.js",
+      "status": "added",
+      "sha256": "0c3e19c0807a56d52332f779867ec69ddcf1210c5e81575da5dadc022b8d06fc"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/content.js",
+      "status": "added",
+      "sha256": "5d294b86013de5615eab28a7b5a32249c2aea650389dd87038371453ce812fdd"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/grammar.js",
+      "status": "added",
+      "sha256": "950aeddef3f43188ad09cc07d1b403c1ccda5aa13dea875757e0dbe48f26419e"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/index.html",
+      "status": "added",
+      "sha256": "a34fc88851279085760bd13b1479b5f11fdd5ec913fcb86ef8e00a912124906f"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/legacy-certificate.js",
+      "status": "added",
+      "sha256": "3f2f62c92b30187b6754e1e03e1ab6fbbb956fa4c2b8aabde5771a9997b0480d"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/legacy.css",
+      "status": "added",
+      "sha256": "2e514e5717502f08870ff6714939be44f5e2206f1f68d859b6c0e8429a3267d0"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/legacy.js",
+      "status": "added",
+      "sha256": "86163f6872e9eee08341de33eef7ffe634a4b88d53a6f4da730b4bc1d8ca4258"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/references.js",
+      "status": "added",
+      "sha256": "cd041900edae0491bcbbaceebfa8fc4c67a393a1b01f81d93066e76cb1a5f05a"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/scene.js",
+      "status": "added",
+      "sha256": "f86f78f95b70bf590209c3432e2cdac7c88738ba2ff504a3abc5f17480a9b278"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/typography.css",
+      "status": "added",
+      "sha256": "ded932b40fc6bc14a79e80839cd77f5e43337969ea8b097dcbbc3222f31b87b7"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/unit.css",
+      "status": "added",
+      "sha256": "6ae878c0852fa96c15766d8f26c9c879362b2c5b865393cea6eb1604de8724ae"
+    },
+    {
+      "file": "tests/fixtures/unit25-26-before-v153/unit.js",
+      "status": "added",
+      "sha256": "4b0ab346b5230612b81a45735a58ffc6fe2955f81b59c2cc1b5244e545b85e9d"
+    },
+    {
+      "file": "tests/login/unit25-26-fivezones.spec.js",
+      "status": "modified",
+      "sha256": "e33b283cc381326c3b97d443d362068dc56443eb3e859312fc758491c9d826ab"
+    },
+    {
+      "file": "tests/login/unit25-26-v153-upgrade.spec.js",
+      "status": "added",
+      "sha256": "05c72fc7109518aa5a2e2f3837266ca43269ec0006c044ca50dbd3fb65e12787"
+    },
+    {
+      "file": "tests/support/unit2526-before-v153.js",
+      "status": "added",
+      "sha256": "5b275bc39246f60f039c6bd6db329cf2353e2ac05b8c792d91d9264eecc251b4"
+    },
+    {
+      "file": "tests/support/unit2526-fivezones.js",
+      "status": "modified",
+      "sha256": "5b275bc39246f60f039c6bd6db329cf2353e2ac05b8c792d91d9264eecc251b4"
+    },
+    {
+      "file": "tests/support/unit2526-v153-legacy.js",
+      "status": "added",
+      "sha256": "2340dcd4a61fa3727b7ae21c17d92bc7f3db23f3f05d61333db68d2063c93fdd"
+    },
+    {
+      "file": "unit25-26/README.md",
+      "status": "modified",
+      "sha256": "9bae427bb42eda9eb699ccb81376211537732baf89b59fed422aea2054508a3c"
+    },
+    {
+      "file": "unit25-26/grammar.js",
+      "status": "modified",
+      "sha256": "048904ce4487b875d16fb653da5e5a6a0fdccf4560b30280de8ca4a0255fc490"
+    },
+    {
+      "file": "unit25-26/history.js",
+      "status": "added",
+      "sha256": "b91a8f802ae1bfd638c14dca43d4a936a8ed5d774362865c66116c4aadf4b4cc"
+    },
+    {
+      "file": "unit25-26/legacy.js",
+      "status": "modified",
+      "sha256": "1fda1b7b55c43b473ae5c0ddbc09fd0422e5704af3374c33d00ad5f264c111cc"
+    },
+    {
+      "file": "unit25-26/references.js",
+      "status": "modified",
+      "sha256": "1d31e4eee3e9cbbd973654678ba97c1d9dd46456513aa8c4b8d5fc1387d9dfb7"
+    },
+    {
+      "file": "assets/awards/fonts/sources.json",
+      "status": "modified",
+      "sha256": "0b3595bf44570f3f1eea108b02654334ba2f82cb2835f97f62d388a4a22a346a"
+    },
+    {
+      "file": "core/lesson49-practice.js",
+      "status": "modified",
+      "sha256": "e3bd620b401e86a63f7353c6f388357769d98d55d5ccc9f844209d42ff7f5761"
+    },
+    {
+      "file": "docs/butcher-version/2026-09-11-2306-v1.1-文档索引.md",
+      "status": "modified",
+      "sha256": "bed4eaaa5bcf8097d784ca58714e76bbcc23671f35e31dd65e3ac07ff6601399"
+    },
+    {
+      "file": "docs/butcher-version/publish/2026-10-14-0124-v1.0-统一设计标准可优化清单.md",
+      "status": "modified",
+      "sha256": "0b01aca47b2123f39b9b42438584994a8967b7974c2950ceae1376fdf64e4700"
+    },
+    {
+      "file": "docs/course-authoring.md",
+      "status": "modified",
+      "sha256": "0e4fb6c220ab3dcbfa4332465a984d5a10c04dd1d52181cd615aef040e47ab90"
+    },
+    {
+      "file": "server/progress.js",
+      "status": "modified",
+      "sha256": "05b63fc331e3bcde52a8cf797d734988d55200592ce6537333b67648cdeeedf5"
+    },
+    {
+      "file": "server/public/access-client.js",
+      "status": "modified",
+      "sha256": "2377b065efca09cec3885ebfc9f55d6a3b913ded0052048ecf4d7fe87232c52a"
+    },
+    {
+      "file": "tests/README.md",
+      "status": "modified",
+      "sha256": "4d88fcec67f671c79f022701aac93e254563d3847eee64dfb073018ccddfc44d"
+    },
+    {
+      "file": "unit25-26/content.js",
+      "status": "modified",
+      "sha256": "0d32a89dbd8050e7cdd3138f0f5aa105aa85385109d6b0bbfd41be49df0d4d0c"
+    },
+    {
+      "file": "unit25-26/index.html",
+      "status": "modified",
+      "sha256": "94c107be7fb75e309780005755710c37e7fe1968e7e5d38dd2c18e30e7bde6a2"
+    },
+    {
+      "file": "unit25-26/unit.js",
+      "status": "modified",
+      "sha256": "90c4bffc589a7919af82966d87b036f88c0e70066c7f915d2ed31e4ec06f5401"
+    }
+  ]
+}

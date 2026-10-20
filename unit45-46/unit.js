@@ -3,6 +3,7 @@
   const core = root.CanranCore, unit = core.unit4546;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
+  core.unit4546History.preserve(practice,unit);
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -119,6 +120,7 @@
     }
     if (id === 'grammar') settings.sceneView = core.unit4546Grammar.create({ element, art });
     const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,...settings,
+      onAnswer:(question,state)=>{if(question.workshop?.model){state.revealed=true;practice.record(question,state);}settings.onAnswer?.(question,state);},
       onComplete: (states,round) => {
         const { perfect, message } = settlement.complete({ id, states, round, awards, element });
         complete(id);
@@ -142,12 +144,14 @@
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
-  tools.append(button('重新上演', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
+  tools.append(button('从头看', resetDialogue, 'btn btn-yellow')); controls.append(tools, advance);
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
-  const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
+  finish.append(node('p', '课文看完了！'), finishActions);
+  const reader=node('div','','office-reader');reader.append(log,status,controls);stage.append(reader);story.append(stage,finish);
+  function alignReader(){const b=reader.getBoundingClientRect(),nav=$('#topbar').getBoundingClientRect();if(b.height>innerHeight-nav.height-16)return;if(b.top<nav.bottom+8)root.scrollBy({top:b.top-nav.bottom-8,behavior:'instant'});else if(b.bottom>innerHeight-8)root.scrollBy({top:b.bottom-innerHeight+8,behavior:'instant'});}
+  const gate = node('div', '', 'activity-actions'); gate.append(button('先看课文', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
@@ -156,12 +160,12 @@
     props.update(dialogue.i);
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
-    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.textContent = dialogue.i < 0 ? '尚未开始阅读' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('letter'), node('p', 'Pamela 为什么打不了这封信？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('letter'), node('p', 'Why can’t Pamela type the letter?')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     // Keep each historic line on the side occupied by its speaker in that scene.
@@ -183,9 +187,9 @@
     if (dialogue.done) return;
     if (dialogue.i === content.DIALOGUE.length - 1) {
       if (!content.DIALOGUE.every((_, index) => dialogue.viewed[index] === true)) return;
-      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete'); return;
+      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete');finish.scrollIntoView({block:'center',behavior:'instant'}); return;
     }
-    if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
+    if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight; alignReader();
   }
   function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue(); }
   const draft = practice.activity('unitDialogue');
@@ -236,22 +240,8 @@
     progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
     restart:id=>runners.get(id)?.restart()});
 
-  const models=node('details','','offline-task');models.append(node('summary','本领对比与数字'));
-  const modelGrid=node('div','','reference-grid');
-  for(const item of content.MODELS){
-    const card=node('article','','reference-card'),picture=node('img');picture.src=item.image;picture.alt='';
-    const en=node('p',item.en);en.lang='en';card.append(node('small',item.number),picture,en,node('span',item.cn));modelGrid.append(card);
-  }
-  models.append(modelGrid);surfaces.get('grammar').append(models);
-  const reference=node('details','','offline-task');reference.append(node('summary','否定写法小参考'),node('p','cannot 和 can’t 都表示不能；can not 也是分写形式。本单元练习采用常用的 cannot 和 can’t。'));surfaces.get('grammar').append(reference);
-  const writing=node('details','','offline-task');writing.id='unitWriting';writing.append(node('summary','课后练习纸'));
-  writing.append(node('h4','A · 把正在做改成能做'),node('p','例：He is taking his book. → He can take his book.'),node('p','She is putting on her coat. → She can put on her coat. 这里表达的意思也变了。'));
-  const a=node('ol');content.WRITING_A.forEach(text=>a.append(node('li',text+' → ______________________________')));writing.append(a);
-  writing.append(node('h4','B · 问答接力'),node('p','每组写肯定短答，再用 What can…do? 提问，最后用完整句回答。'),node('p','Can you put on your coat? → Yes, I can. → What can you do? → I can put on my coat.'),node('p','Can you and Sam listen to the radio? → Yes, we can. → What can you and Sam do? → We can listen to the radio.'));
-  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'),node('div','________________________________________________'),node('div','________________________________________________'));b.append(li);});writing.append(b);
-  const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));
-  writing.append(printActions);surfaces.get('certificate').append(writing);
-  root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
+  core.unit4546References.mount({unit,surfaces});
+  core.unit4546History.show(practice,surfaces.get('certificate'));
 
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);

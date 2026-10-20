@@ -13,6 +13,7 @@ const DIALOGUE = [
 const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['3-4'].old).map(id=>[id,taskCases.answers('3-4',id).map(q=>q.answer)]));
 async function completeStory(page, prefix = '') {
   await page.goto(prefix + '/unit3-4/#learn/text');
+  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
   const room = page.getByRole('region', { name: '衣帽间小剧场', exact: true });
   for (let i = 0; i < DIALOGUE.length; i++) {
     await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
@@ -25,6 +26,7 @@ async function completeStory(page, prefix = '') {
 async function completeActivity(page, id, { exerciseRecovery = false, prefix = '', inspect } = {}) {
   await require('./reward-dialog').handleRewardDialog(page);
   await page.goto(prefix + '/unit3-4/#learn/' + id);
+  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
   const room = page.locator('.stage-' + id), answers = ANSWERS[id];
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i], check = room.getByRole('button', { name: '检查答案', exact: true });
@@ -40,6 +42,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     if (exerciseRecovery && i === 0 && id === 'exam') {
       await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0);
       await page.reload();
+      await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
       await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
       await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
 
@@ -49,6 +52,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     if (exerciseRecovery && id === 'listen' && i === 6) {
       await page.reload();
+      await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
       await expect(room.getByRole('status')).toContainText('答对了！');
     }
     await room.getByRole('button', { name: i === answers.length - 1 ? (id === 'exam' ? '查看本次记录' : '完成这一站') : '下一题', exact: true }).click();
@@ -65,6 +69,7 @@ async function completeUnit34(page, prefix = '') {
   await completeStory(page, prefix);
   for (const id of ['roles', 'reply', 'manners', 'exam']) await completeActivity(page, id, { exerciseRecovery: true, prefix });
   await page.goto(prefix + '/unit3-4/#learn/certificate');
+  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
   await expect(page.locator('#starCount')).toHaveText('5');
 }
 module.exports = { DIALOGUE, ANSWERS, completeStory, completeActivity, completeUnit34 };

@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "generated": [
+    {
+      "name": "cast-jane-tray-v1",
+      "args": {
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit21-22/cast-jane-v1.webp"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset: transparent educational character cutout for a children's English lesson. Match the reference exactly: bold dark brown outlines, large round head, very simple smiling eyes, flat muted colors, no texture or realistic detail. Full body from entire hair to both entire shoes with clear transparent margins. Preserve outfit, identity, gaze direction and proportions. No text, no background, no shadow, no added characters. Edit target: Jane in the reference. Change only pose: Jane now uses BOTH hands to safely support one small cream-colored horizontal tray at waist height, offering it toward screen LEFT. On the tray stand exactly THREE simple handleless transparent pale mint tumblers side by side, each with its base visibly resting on the tray. Keep entire tray and both hands within frame. Her head faces left toward the recipient. No duplicate tray or cups. Jane is the only character."
+      },
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f3c91936-d15f-47a3-bda8-045ba7f79ecf.png",
+      "final": "assets/unit23-24/cast-jane-tray-v1.webp"
+    },
+    {
+      "name": "cast-man-tray-v1",
+      "args": {
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit21-22/cast-man-v1.webp"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: identity-preserve. Asset: transparent educational character cutout for a children's English lesson. Match the reference exactly: bold dark brown outlines, large round head, very simple smiling eyes, flat muted colors, no texture or realistic detail. Full body from entire hair to both entire shoes with clear transparent margins. Preserve outfit, identity, gaze direction and proportions. No text, no background, no shadow, no added characters. Edit target: the grey-haired man with round glasses and small grey moustache. Change only pose: he holds one small cream-colored horizontal tray securely in BOTH hands at waist height, body and gaze toward screen RIGHT. On tray stand exactly THREE simple handleless transparent pale mint tumblers side by side, with bases clearly touching tray. Entire hands, tray and shoes visible. No duplicate cups. He is the only character."
+      },
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-e7d39f63-80fc-4aed-8695-ec02f2cf3770.png",
+      "final": "assets/unit23-24/cast-man-tray-v1.webp"
+    },
+    {
+      "name": "keepsake-story-v1",
+      "args": {
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit21-22/keepsake-story-v1.webp"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: precise-object-edit. Reference is edit target and approved visual style. Create a wide transparent two-character keepsake illustration for Lesson23–24. Keep the same man on LEFT and Jane on RIGHT with exactly the same bold dark brown outlines, simple curved smiling eyes, round heads, same grey hair/glasses/moustache and sage waistcoat, same Jane ponytail and dusty rose dress with white collar. Remove the red book entirely. Man holds in BOTH hands one small cream horizontal tray with exactly THREE transparent pale mint handleless tumblers, all three bases resting on tray. Jane has EMPTY hands and smiles toward him. They have finished handing over glasses. Frame medium close-up from heads to lower torso, both hands and entire tray inside image. No scenery, no text, no border, no book, no extra tray/cups. Actual transparent background; no opaque colored rectangle. This card should feel as simple and friendly as reference, with no realistic shading or extra facial details."
+      },
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-931e9956-e604-4aeb-8bab-7050b6827e27.png",
+      "final": "assets/unit23-24/keepsake-story-v1.webp"
+    }
+  ],
+  "reused": [
+    {
+      "source": "assets/unit21-22/cast-man-v1.webp",
+      "final": "assets/unit23-24/cast-man-v1.webp",
+      "reason": "沿用已认可同一视觉人物身份；不推定教材未命名男士的跨课身份"
+    },
+    {
+      "source": "assets/unit21-22/cast-jane-v1.webp",
+      "final": "assets/unit23-24/cast-jane-v1.webp",
+      "reason": "沿用已认可同一视觉人物身份；不推定教材未命名男士的跨课身份"
+    }
+  ]
+}

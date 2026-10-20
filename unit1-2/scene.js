@@ -5,7 +5,7 @@
     const element = document.createElement(tag); element.className = className; element.textContent = text; return element;
   };
   const image = (name, alt = '') => {
-    const picture = node('img'); picture.src = '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg' + (name === 'handbag' ? '?v=scene-2' : ''); picture.alt = alt; return picture;
+    const picture = node('img'); picture.src = core.unit12Current?.image(name) || '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg' + (name === 'handbag' ? '?v=scene-2' : ''); picture.alt = alt; return picture;
   };
   // Selection, retry, drafts, hints and progress remain owned by the common runner.
   function create({ element }) {

@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:32772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit15-16-fivezones.spec.js:5:1 › 55题、完整原文、五区五星及教材参考均可真实完成 (13.4s)
+
+
+  1) tests\e2e\unit15-16-fivezones.spec.js:5:1 › 55题、完整原文、五区五星及教材参考均可真实完成 ──────────────────────────
+
+    Error: expect(locator).not.toBeEmpty() failed
+
+    Locator: locator('.stage-grammar').locator('.practice-context')
+    Expected: not empty
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "not toBeEmpty" with timeout 5000ms
+      - waiting for locator('.stage-grammar').locator('.practice-context')
+
+
+       8 |  for(const [id,answers]of Object.entries(ANSWERS)){
+       9 |   const room=await activity(page,id,{inspect:async(room,i,phase)=>{if(phase==='before'){
+    > 10 |    if(id==='grammar'&&[0,1,2,3,4,5,6,7,8,11,12,13,14,15].includes(i))await expect(room.locator('.practice-context')).not.toBeEmpty();
+         |                                                                                                                          ^
+      11 |    if(id==='exam'&&[2,3,4,5,7,8,11,12,13,14,16,17,18,19,20].includes(i))await expect(room.locator('.practice-context')).not.toBeEmpty();
+      12 |    if(id==='apply'&&i===0)await expect(room).toContainText('两位姑娘都是游客');
+      13 |    if(id==='apply'&&i===5)await expect(room.locator('.practice-context')).not.toBeEmpty();
+        at inspect (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-fivezones.spec.js:10:122)
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit1516-fivezones.js:24:205)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-fivezones.spec.js:9:14
+
+    Error Context: test-results\unit15-16-fivezones-55题、完整原文、五区五星及教材参考均可真实完成\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit15-16-fivezones-55题、完整原文、五区五星及教材参考均可真实完成\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit15-16-fivezones-55题、完整原文、五区五星及教材参考均可真实完成\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit15-16-fivezones.spec.js:5:1 › 55题、完整原文、五区五星及教材参考均可真实完成 ───────────────────────────

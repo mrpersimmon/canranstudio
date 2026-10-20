@@ -1,0 +1,66 @@
+{
+  "id": "unit51-52",
+  "source": {
+    "file": "tests/support/unit5152.js",
+    "sha256": "a30da95e5304e7becc1f14cbadd26875b5c97fd39e390bb22dbd1558296715ea"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u5152-v1-r-origin",
+      "text": "Lesson 51\n\nHans: Where do you come from?\n\nDimitri: I come from Greece."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u5152-v1-r-spring",
+      "text": "Lesson 51\n\nHans: What’s the weather like in spring?\n\nDimitri: It’s often windy in March. It’s always warm in April and May, but it rains sometimes."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u5152-v1-r-autumn",
+      "text": "Lesson 51\n\nHans: Is it cold or warm in autumn?\n\nDimitri: It’s always warm in September and October. It’s often cold in November and it rains sometimes."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u5152-v1-r-winter",
+      "text": "Lesson 51\n\nHans: Is it very cold in winter?\n\nDimitri: It’s often cold in December, January and February. It snows sometimes."
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u5152-v1-e-origin",
+      "text": "Lesson 51\n\nHans: Where do you come from?\n\nDimitri: I come from Greece.\n\nHans: What’s the climate like in your country?\n\nDimitri: It’s very pleasant."
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u5152-v1-e-autumn",
+      "text": "Lesson 51\n\nHans: Is it cold or warm in autumn?\n\nDimitri: It’s always warm in September and October. It’s often cold in November and it rains sometimes."
+    },
+    {
+      "zone": "exam",
+      "index": 6,
+      "questionId": "u5152-v1-e-winter",
+      "text": "Lesson 51\n\nHans: Is it very cold in winter?\n\nDimitri: It’s often cold in December, January and February. It snows sometimes."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "5-6",
+    "R4": "9-10",
+    "R5": "11-12",
+    "E4": "1-4",
+    "E5": "9-10",
+    "E6": "11-12"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "suite": "courses",
+    "tests": 2985,
+    "groups": [
+      {
+        "shard": 1,
+        "files": 46,
+        "tests": 347,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 2,
+        "files": 51,
+        "tests": 377,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 3,
+        "files": 51,
+        "tests": 419,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 4,
+        "files": 51,
+        "tests": 384,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 5,
+        "files": 50,
+        "tests": 366,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 6,
+        "files": 50,
+        "tests": 381,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 7,
+        "files": 51,
+        "tests": 343,
+        "estimatedMinutes": 35.8
+      },
+      {
+        "shard": 8,
+        "files": 50,
+        "tests": 368,
+        "estimatedMinutes": 35.8
+      }
+    ]
+  },
+  {
+    "suite": "accounts",
+    "tests": 654,
+    "groups": [
+      {
+        "shard": 1,
+        "files": 48,
+        "tests": 218,
+        "estimatedMinutes": 49.3
+      },
+      {
+        "shard": 2,
+        "files": 49,
+        "tests": 213,
+        "estimatedMinutes": 49.3
+      },
+      {
+        "shard": 3,
+        "files": 49,
+        "tests": 223,
+        "estimatedMinutes": 49.2
+      }
+    ]
+  }
+]

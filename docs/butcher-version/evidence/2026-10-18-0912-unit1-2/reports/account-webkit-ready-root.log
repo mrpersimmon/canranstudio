@@ -1,0 +1,48 @@
+[WebServer] (node:25336) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:33488) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 (45.4s)
+  x  2 tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 (12.9s)
+(node:21140) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21140) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 3 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 (1.2m)
+
+
+  1) tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ────────────────────────────
+
+    Error: page.goto: WebKit encountered an internal error
+    Call log:
+      - navigating to "http://127.0.0.1:4500/unit1-2/#learn/trans", waiting until "load"
+
+
+       at ..\support\thirteen-types-flow.js:38
+
+      36 | async function activity(page,pair,id,{base='',capture,keepAward=false}={}){
+      37 |  await require('./reward-dialog').handleRewardDialog(page,keepAward);
+    > 38 |  await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
+         |             ^
+      39 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
+      40 |  if(await room.locator('.practice-finish').isVisible())return;
+      41 |  const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\thirteen-types-flow.js:38:13)
+
+    Error Context: output\unit12-review-20261018\account-webkit-ready-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-ready-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-ready-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ─────────────────────────────
+  2 passed (2.2m)

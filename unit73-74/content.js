@@ -144,3 +144,17 @@ unit.learning.WRITING_A=['He read the phrase ____ . (slow)','He worked ____ . (l
 unit.learning.WRITING_TABLE=[['主语',['He','She','We','The bus']],['动作',['does not know','read','smiled','went','shaved','drank','greeted','worked','enjoyed ourselves']],['对象',['a glass of water','the phrase','me','London']],['程度与方式',['very hard','hurriedly','slowly','very well','thirstily','warmly','pleasantly','very much']]];
 core.unit7374=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit7374,excerpts={"u7374-v1-r-place":[0],"u7374-v1-r-lost":[0,1],"u7374-v1-r-stop":[1,2],"u7374-v1-r-thought":[0,1,2,3],"u7374-v1-r-destination":[4,5],"u7374-v1-r-language":[6,7,8,9],"u7374-v1-r-sequence":[10,11,12],"u7374-v1-r-ending":[10,11,12,13],"u7374-v1-e-trip":[0,1,2,3,4,5],"u7374-v1-e-order":[6,7,8,9,10,11,12,13],"u7374-v1-e-ending":[0,1,2,3,4,5,6,7,8,9,10,11,12,13]},speakers={"narrator":"","thought":"Mrs. Mills · 心里想","mills":"Mrs. Mills","tourist":"The tourist"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 73',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

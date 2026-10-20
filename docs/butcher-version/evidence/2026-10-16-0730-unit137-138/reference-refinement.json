@@ -1,0 +1,16 @@
+{
+  "time": "2026-10-16T08:16:35.361650",
+  "before": {
+    "unit137-138/content.js": "4d0cb437917dbb51c4ee9752b34660c2fd6ab045c5e750ac6f3f9ca64ae06f00",
+    "unit137-138/unit.js": "d8bf7ad81cc833fa5fe9fb9b53bdd10b9721a86265b19ebb258cd123d0f06948"
+  },
+  "after": {
+    "unit137-138/content.js": "2bac7d9a3b36a2b9f4e6b78cc8d79b766548d5fb44edb56482e4b220328295ee",
+    "unit137-138/unit.js": "f789ce325ba4c37d09de7da1f4d817655b6f20177e3fa85afa90786ccbde1df0"
+  },
+  "changedContent": "Only the optional reference table headings and caption; all five data rows and all six textbook models remain unchanged.",
+  "why": "The whether-if row contained a full sentence under the inaccurate main-clause heading; generic precise headings now distinguish condition or meaning and corresponding expression.",
+  "questionsOrGradesChanged": false,
+  "rewardOrAccessOrExportChanged": false,
+  "validation": "Rerun the complete reference/word/writing source check on both engines; verify new caption in authenticated preview through normal update. Reuse unaffected account and question checks with version difference recorded."
+}

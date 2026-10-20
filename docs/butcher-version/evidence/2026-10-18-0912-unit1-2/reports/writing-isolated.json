@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit1-2-v154-history.spec.js",
+      "-g",
+      "教材七句",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/writing-isolated"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/writing-isolated",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4408",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154-history.spec.js",
+      "file": "unit1-2-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "教材七句抄写独立成页，替换例句保持十组",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 894,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: hidden\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"0\" aria-label=\"我的纪念卡\" data-unit=\"unit1-2\" data-motion=\"paused\" class=\"story-award-paper award-card\">…</article> aka locator('[id=\"learn/certificate\"]').getByLabel('我的纪念卡')\n    2) <article data-unit=\"unit1-2\" aria-label=\"礼貌小帮手纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('礼貌小帮手纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: hidden\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"0\" aria-label=\"我的纪念卡\" data-unit=\"unit1-2\" data-motion=\"paused\" class=\"story-award-paper award-card\">…</article> aka locator('[id=\"learn/certificate\"]').getByLabel('我的纪念卡')\n    2) <article data-unit=\"unit1-2\" aria-label=\"礼貌小帮手纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('礼貌小帮手纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154-history.spec.js:42:51",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154-history.spec.js",
+                      "column": 51,
+                      "line": 42
+                    },
+                    "snippet": "  40 |  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  41 |  await expect(page.locator('#unitWriting .writing-lines li')).toHaveCount(7);for(const li of await page.locator('#unitWriting .writing-lines li').all())await expect(li).toBeVisible();\n> 42 |  await expect(page.locator('.story-award-paper')).toBeHidden();await expect(page.locator('#topbar')).toBeHidden();\n     |                                                   ^\n  43 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:'output/pdf/lesson1-2-writing.pdf',format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  44 | });\n  45 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154-history.spec.js",
+                        "column": 51,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: hidden\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"0\" aria-label=\"我的纪念卡\" data-unit=\"unit1-2\" data-motion=\"paused\" class=\"story-award-paper award-card\">…</article> aka locator('[id=\"learn/certificate\"]').getByLabel('我的纪念卡')\n    2) <article data-unit=\"unit1-2\" aria-label=\"礼貌小帮手纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('礼貌小帮手纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toBeHidden\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n\n\n  40 |  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  41 |  await expect(page.locator('#unitWriting .writing-lines li')).toHaveCount(7);for(const li of await page.locator('#unitWriting .writing-lines li').all())await expect(li).toBeVisible();\n> 42 |  await expect(page.locator('.story-award-paper')).toBeHidden();await expect(page.locator('#topbar')).toBeHidden();\n     |                                                   ^\n  43 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:'output/pdf/lesson1-2-writing.pdf',format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  44 | });\n  45 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154-history.spec.js:42:51"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:31:24.011Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\writing-isolated\\unit1-2-v154-history-教材七句抄写独立成页，替换例句保持十组\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\writing-isolated\\unit1-2-v154-history-教材七句抄写独立成页，替换例句保持十组\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154-history.spec.js",
+                    "column": 51,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f8a2e342ed2fa3865e54-596f6c6cb9c34b916753",
+          "file": "unit1-2-v154-history.spec.js",
+          "line": 37,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:31:23.415Z",
+    "duration": 2086.391,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

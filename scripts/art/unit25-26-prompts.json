@@ -1,0 +1,73 @@
+{
+  "tool": "built-in image_gen",
+  "jobs": [
+    {
+      "name": "cast-mrs-v1",
+      "args": {
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit25-26-refactor/Mrs.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit1-2-handbag-closeup.webp"
+        ],
+        "transparent_background": true,
+        "prompt": "Use case: style-transfer. Asset: transparent full-body Mrs Smith educational story character. Image 1 is identity and outfit reference ONLY: brown straight shoulder-length bob with a middle part, teal long-sleeve dress, cream apron with muted sage pocket, brown shoes. Image 2 is the APPROVED drawing style: bold dark-brown round outlines, simple large round head and curved smiling eyes, warm flat colors, almost no shading or texture. Redraw image1 in exactly that friendly simple style. Full body from hair to BOTH entire shoes with transparent safe margins, both arms and hands fully visible. One open hand gestures gently toward screen RIGHT as if introducing a room; other hand relaxed. No towel, no cup, no food, no kitchen backdrop, no text, no other people, no floor shadow. True transparent cutout. This is the same adult Mrs Smith visual identity, not the woman with a hat in reference2."
+      },
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-d78a2d31-e682-410d-9ee4-94b2000c0d1f.png",
+      "selected": true,
+      "file": "assets/unit25-26/cast-mrs-v1.webp"
+    },
+    {
+      "name": "kitchen-room-v1",
+      "args": {
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit25-26-refactor/scene.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit1-2-handbag-closeup.webp"
+        ],
+        "transparent_background": false,
+        "prompt": "Use case: illustration-story. Asset: a wide front-view kitchen picture for an elementary English reading lesson. Image1 is the EXACT spatial and object-count reference, image2 is STYLE ONLY (bold dark-brown rounded outline, simple friendly flat muted colors, NOT its characters). Repaint reference1 as a polished simple children's book interior. CRITICAL keep left-to-right order: one BLUE electric cooker/oven on the LEFT, one simple wooden TABLE in the MIDDLE, one WHITE two-door refrigerator on the RIGHT. All appliances, the entire table and their feet visible and stand on the same floor plane. On the tabletop stand exactly ONE empty pale-green transparent glass BOTTLE with visible empty interior, and exactly ONE spotless white handled CUP. Bottle and cup bases must physically meet table surface. Closed cooker, no flames, no steam, no pan. Small plain window centered on back wall, warm cream wall and light beige floor. No people, no text or labels, no extra bottles/cups, no food or liquid or new furniture clutter. Wide composition with small margins and correct object proportions. Bold clear silhouettes legible on phones. Do not swap left and right."
+      },
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f52c7c2a-a8f9-462c-ad8c-ee68176eea90.png",
+      "selected": true,
+      "file": "assets/unit25-26/kitchen-room-v1.webp"
+    },
+    {
+      "name": "keepsake-story-v1",
+      "args": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-d78a2d31-e682-410d-9ee4-94b2000c0d1f.png",
+          "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f52c7c2a-a8f9-462c-ad8c-ee68176eea90.png"
+        ],
+        "prompt": "Use case: illustration-story, transparent keepsake card artwork. Reference1 fixes Mrs Smith's EXACT identity and simple friendly drawing style: brown straight bob, round head, closed curved smiling eyes, teal sleeves and cream apron. Reference2 fixes kitchen objects, their colors and positions. Create a medium close-up composition: Mrs Smith in foreground slightly left of center from head to waist, one open hand gently presenting her small kitchen toward viewer's RIGHT; both hands completely visible. She is not speaking text and holds no item. Behind her, a partial blue electric cooker is on viewer's LEFT, a white refrigerator on viewer's RIGHT; in the lower foreground a small warm wooden tabletop holds exactly one EMPTY transparent pale-green bottle and one CLEAN white handled cup, with their bases touching the wood. Keep the cup and bottle fully visible, not hidden behind hands. The key scene is introducing the room, not cooking or handing over. Bold dark brown rounded outlines, warm muted flat colors, matching reference character head proportions. Transparent background around the grouped characters and furniture; no rectangular wall or floor filling the canvas. No writing, labels, speech bubbles, other people, food, flames, stove steam, liquid in the bottle, extra cups or additional kitchen gadgets. Safe outer margins around head, hands and props. Wide 3:2 composition that remains clear at small card size."
+      },
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-9ae5eadc-23e8-4398-9e71-5eaf5cfd8cec.png",
+      "selected": false,
+      "file": null
+    },
+    {
+      "name": "keepsake-story-v2",
+      "args": {
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-9ae5eadc-23e8-4398-9e71-5eaf5cfd8cec.png"
+        ],
+        "prompt": "Use case: precise-object-edit. Keep this entire transparent illustration exactly the same: Mrs Smith's face, outfit, both hands, positions, blue cooker at left, white refrigerator at right, clean white cup on the table, bold dark brown simple cartoon style. Change ONLY the bottle interior so it unmistakably looks EMPTY: remove the horizontal colored band midway up the bottle. No visible water level, no filled region, no liquid. Show clear pale-green glass containing air only, with a thin light reflection along one side and a glass base line at the very bottom. Do not draw the table back edge through the bottle; the current middle horizontal line looks like liquid and is pedagogically misleading. Bottle stays on the same tabletop with same outline and size. Preserve genuine alpha transparency. No extra objects or text."
+      },
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-e97864d1-1881-4a43-8010-0b377c913278.png",
+      "selected": true,
+      "file": "assets/unit25-26/keepsake-story-v1.webp"
+    },
+    {
+      "name": "kitchen-room-mobile-v1",
+      "selected": true,
+      "file": "assets/unit25-26/kitchen-room-mobile-v1.webp",
+      "args": {
+        "transparent_background": false,
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f52c7c2a-a8f9-462c-ad8c-ee68176eea90.png"
+        ],
+        "prompt": "Use case: precise-object-edit, mobile layout variant. Recompose this exact kitchen scene into a SQUARE, compact front-view illustration for a small phone. Keep the same bold brown outlines, colors and objects with correct natural proportions. The BLUE electric cooker remains on viewer's LEFT, WHITE refrigerator on RIGHT, wooden TABLE in the MIDDLE/foreground. On the table, exactly one EMPTY clear pale-green glass bottle and one clean white handled CUP, both bases on tabletop. No water level or horizontal interior band in bottle. ALL appliance sides and feet and table feet visible. Make objects fill the canvas much more: fridge about 55 percent of image height, cooker about 40 percent, table 40 percent of image width; bottle and cup clearly legible. A small plain window above middle, little unused wall, warm cream background and light beige floor. Arrange space in depth so all three furniture items fit without one hiding another. No people, no text, no extra objects. Do not change left/right, object number, or bottle empty/cup clean."
+      },
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-a174ddc3-98ac-410a-a107-40ae3da4cf65.png"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "unit85-86",
+  "source": {
+    "file": "tests/support/unit8586.js",
+    "sha256": "48e1bced1a37391d0df2c46eeb7c313d5f22713ec5dc2c288b0ca18d4eea76bb"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u8586-v1-r-film",
+      "text": "Lesson 85\n\nGeorge: Have you just been to the cinema?\n\nKen: Yes, I have.\n\nGeorge: What’s on?\n\nKen: Paris in the Spring."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u8586-v1-r-george",
+      "text": "Lesson 85\n\nKen: Paris is a beautiful city.\n\nGeorge: I’ve never been there. Have you ever been there, Ken?\n\nKen: Yes, I have. I was there in April."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u8586-v1-r-seen",
+      "text": "Lesson 85\n\nGeorge: What’s on?\n\nKen: Paris in the Spring.\n\nGeorge: Oh, I’ve already seen it. I saw it on television last year. It’s an old film, but it’s very good."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u8586-v1-r-month",
+      "text": "Lesson 85\n\nGeorge: I’ve never been there. Have you ever been there, Ken?\n\nKen: Yes, I have. I was there in April."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u8586-v1-r-rain",
+      "text": "Lesson 85\n\nKen: Yes, I have. I was there in April.\n\nGeorge: Paris in the spring, eh?\n\nKen: It was spring, but the weather was awful. It rained all the time."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u8586-v1-r-opinion",
+      "text": "Lesson 85\n\nGeorge: What’s on?\n\nKen: Paris in the Spring.\n\nGeorge: Oh, I’ve already seen it. I saw it on television last year. It’s an old film, but it’s very good."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u8586-v1-r-ending",
+      "text": "Lesson 85\n\nGeorge: Paris in the spring, eh?\n\nKen: It was spring, but the weather was awful. It rained all the time.\n\nGeorge: Just like London!"
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u8586-v1-e-story",
+      "text": "Lesson 85\n\nGeorge: Have you just been to the cinema?\n\nKen: Yes, I have.\n\nGeorge: What’s on?\n\nKen: Paris in the Spring.\n\nGeorge: Oh, I’ve already seen it. I saw it on television last year. It’s an old film, but it’s very good.\n\nKen: Paris is a beautiful city.\n\nGeorge: I’ve never been there. Have you ever been there, Ken?\n\nKen: Yes, I have. I was there in April.\n\nGeorge: Paris in the spring, eh?\n\nKen: It was spring, but the weather was awful. It rained all the time.\n\nGeorge: Just like London!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "3-6",
+    "R2": "8-10",
+    "R3": "5-7",
+    "R4": "9-10",
+    "R5": "10-12",
+    "R6": "5-7",
+    "R7": "11-13",
+    "E1": "3-13"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

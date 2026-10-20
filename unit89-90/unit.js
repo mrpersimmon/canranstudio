@@ -183,7 +183,7 @@
       }
     }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
-    bubble.append(node('div', content.SPEAKERS[line.who], 'bname'), speech, translation, actions); if(line.note) bubble.append(node('p',line.note,'story-note')); row.append(bubble); log.append(row);
+    bubble.append(node('div', content.SPEAKERS[line.who], 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
   function advanceDialogue() {
     if (dialogue.done) return;
@@ -249,11 +249,11 @@
   const writing=node('details','','offline-task');writing.id='unitWriting';writing.append(node('summary','课后练习纸'));
   writing.append(node('h4','A · 把句子改成一般疑问句和否定句'),node('p','保留课本原题；did和didn’t后用原形。含this morning的原句已用过去时，练习保持该事件的过去时间。','reference-note'));
   for(const text of content.WRITING_A_EXAMPLES)writing.append(node('p',text,'reference-note'));
-  const a=node('ol');for(const first of content.WRITING_A){const li=node('li',first);li.append(node('div','________________________________________________'));a.append(li);}writing.append(a);
+  const a=node('ol');for(const first of content.WRITING_A){const li=node('li',first);for(let line=0;line<2;line++)li.append(node('div','','writing-line'));a.append(li);}writing.append(a);
   writing.append(node('h4','B · 回答过去做过的事，再说另一人的情况'));
   writing.append(node('p','按课本例子，第一人肯定回答；What about后的人设定为尚未完成。这个状态来自练习约定，不是从问句本身推断。','reference-note'));
   for(const example of content.WRITING_B_EXAMPLES)writing.append(node('p',example,'reference-note'));
-  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');li.append(node('div','________________________________________________'));b.append(li);}writing.append(b);
+  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');for(let line=0;line<2;line++)li.append(node('div','','writing-line'));b.append(li);}writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

@@ -1,0 +1,66 @@
+{
+  "id": "unit75-76",
+  "source": {
+    "file": "tests/support/unit7576.js",
+    "sha256": "a9baa107ce0a06faf0a6bf73fa25302b901feb11f5158f068459a9612ace90c9"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u7576-v1-r-request",
+      "text": "Lesson 75\n\nLady: Do you have any shoes like these?\n\nShop assistant: What size?\n\nLady: Size five.\n\nShop assistant: What colour?\n\nLady: Black.\n\nShop assistant: I’m sorry. We don’t have any."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u7576-v1-r-buyer",
+      "text": "Lesson 75\n\nLady: But my sister bought this pair last month.\n\nShop assistant: Did she buy them here?\n\nLady: No, she bought them in the U.S."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u7576-v1-r-stock",
+      "text": "Lesson 75\n\nLady: But my sister bought this pair last month.\n\nShop assistant: Did she buy them here?\n\nLady: No, she bought them in the U.S.\n\nShop assistant: We had some shoes like those a month ago, but we don’t have any now."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u7576-v1-r-time",
+      "text": "Lesson 75\n\nShop assistant: We had some shoes like those a month ago, but we don’t have any now.\n\nLady: Can you get a pair for me, please?\n\nShop assistant: I’m afraid that I can’t. They were in fashion last year and the year before last. But they’re not in fashion this year."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u7576-v1-r-comfort",
+      "text": "Lesson 75\n\nShop assistant: These shoes are in fashion now.\n\nLady: They look very uncomfortable.\n\nShop assistant: They are very uncomfortable. But women always wear uncomfortable shoes!"
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u7576-v1-e-facts",
+      "text": "Lesson 75\n\nLady: But my sister bought this pair last month.\n\nShop assistant: Did she buy them here?\n\nLady: No, she bought them in the U.S.\n\nShop assistant: We had some shoes like those a month ago, but we don’t have any now."
+    },
+    {
+      "zone": "exam",
+      "index": 7,
+      "questionId": "u7576-v1-e-boundary",
+      "text": "Lesson 75\n\nLady: Do you have any shoes like these?\n\nShop assistant: What size?\n\nLady: Size five.\n\nShop assistant: What colour?\n\nLady: Black.\n\nShop assistant: I’m sorry. We don’t have any.\n\nLady: But my sister bought this pair last month.\n\nShop assistant: Did she buy them here?\n\nLady: No, she bought them in the U.S.\n\nShop assistant: We had some shoes like those a month ago, but we don’t have any now.\n\nLady: Can you get a pair for me, please?\n\nShop assistant: I’m afraid that I can’t. They were in fashion last year and the year before last. But they’re not in fashion this year.\n\nShop assistant: These shoes are in fashion now.\n\nLady: They look very uncomfortable.\n\nShop assistant: They are very uncomfortable. But women always wear uncomfortable shoes!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-6",
+    "R2": "7-9",
+    "R3": "7-10",
+    "R4": "10-12",
+    "R6": "13-15",
+    "E4": "7-10",
+    "E7": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -12,7 +12,7 @@ const beats=[
 function storyProps(){
  const element=node('div','moment-world');element.setAttribute('role','group');element.setAttribute('aria-label','索耶一家今天的场景');
  const clock=picture('clock-8','moment-clock','八点整'),location=node('p','moment-location'),cast=picture('children-walking','moment-cast','孩子们步行去学校','webp');element.append(clock,location,cast);
- function update(i){const[beat,hour,title,asset,alt]=beats[Math.max(0,Math.min(4,i))];element.dataset.beat=beat;clock.src='/assets/unit57-58/clock-'+hour+'.svg';clock.alt=hour+'点整';location.textContent=title;cast.src='/assets/unit57-58/'+asset+'.webp';cast.alt=alt;}
+ function update(i){const[beat,hour,,asset,alt]=beats[Math.max(0,Math.min(4,i))];element.dataset.beat=beat;clock.src='/assets/unit57-58/clock-'+hour+'.svg';clock.alt=hour+'点整';location.textContent={school:'上学路上',shops:'商店',tea:'花园',play:'花园',read:'索耶家'}[beat];cast.src='/assets/unit57-58/'+asset+'.webp';cast.alt=alt;}
  update(-1);return{element,update};
 }
 function create({element}){let view,heading,task;return{

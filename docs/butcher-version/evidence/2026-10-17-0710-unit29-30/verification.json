@@ -1,0 +1,177 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-17T00:05:29.739Z",
+  "uniqueTestConditions": 168,
+  "groups": [
+    {
+      "scope": "Chromium current course, inputs, reading and actual predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/first.json",
+        "reports/interactions-layout.json",
+        "reports/interactions-final.json"
+      ],
+      "note": "11 main conditions, 4 old-page states, 3 reading conditions and 3 input interaction conditions. Four scene widths rechecked after native diagram/background polish; other checks unchanged.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium actual worksheet and predecessor-certificate PDF",
+      "conditions": 2,
+      "reports": [
+        "reports/print-final.json"
+      ],
+      "note": "One full worksheet page and one original-certificate page rendered and visually reviewed after print-only spacing fix.",
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, inputs, reading and actual predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/webkit-pages.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/login-chromium-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/login-chromium-lesson.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/login-webkit-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/login-webkit-lesson.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Two older real-account chains through actual 33-task predecessor into five zones",
+      "conditions": 2,
+      "reports": [
+        "reports/historical-accounts.json"
+      ],
+      "note": "23-question classroom edition and 33-question pre-task-revision edition retain their original certificate dates across the real 33-question edition and five-zone edition.",
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen actual predecessor pages",
+      "conditions": 27,
+      "reports": [
+        "reports/frozen-pages.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen cross-course conditions plus current shared retry and statistics",
+      "conditions": 15,
+      "reports": [
+        "reports/shared-pages.json",
+        "reports/shared-retry-final.json"
+      ],
+      "note": "13 historical conditions and 2 current shared conditions. Initial shared run passed 14; the retry selector was fixed and that exact remaining condition passed. No other paths changed.",
+      "status": "passed"
+    },
+    {
+      "scope": "Learning management, reward validation, catalog and workflow",
+      "conditions": 48,
+      "logs": [
+        "admin-tests.txt",
+        "shared-checks.txt"
+      ],
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": "27 source, asset, font, package and document checks, including two protected builds of all 72 courses; separate from the test-condition total.",
+  "failuresAndRecovery": [
+    {
+      "finding": "A word-bank test enumerated only visible role buttons, treating placed-token spaces as deleted candidates.",
+      "initial": "reports/interactions-layout.json",
+      "sameVersionReproduction": "reports/interactions-isolate.json",
+      "resolution": "Check the full candidate node order, then really withdraw, refill, check and retry. Product input behavior and thresholds unchanged.",
+      "recheck": "reports/interactions-final.json"
+    },
+    {
+      "finding": "Shared choice retry excluded every option because sweep is a substring of sweeps and to sweep.",
+      "initial": "reports/shared-pages.json",
+      "sameVersionReproduction": "reports/shared-isolate.json",
+      "resolution": "Supply the reviewed wrong candidate sweeps explicitly for this course; all other shared paths unchanged.",
+      "recheck": "reports/shared-retry-final.json"
+    },
+    {
+      "finding": "Visual PDF review found the last writing line orphaned on page two despite correct DOM counts.",
+      "initial": [
+        "before-print-fix-worksheet-1.png",
+        "before-print-fix-worksheet-2.png"
+      ],
+      "resolution": "Tighten print-only explanatory text, word-bank leading and list spacing, retaining all original content and 14 lines at 32px.",
+      "recheck": "reports/print-final.json"
+    },
+    {
+      "finding": "Phone scene had a background seam; the new native mirror drawing needed a clear connection to the dresser.",
+      "resolution": "Unify the ground background and connect the native mirror. No old assets or question signatures changed.",
+      "rechecks": [
+        "reports/interactions-layout.json",
+        "reports/webkit-pages.json"
+      ]
+    }
+  ],
+  "counts": {
+    "tasks": 50,
+    "zones": [
+      10,
+      2,
+      11,
+      7,
+      20
+    ],
+    "originalTasksArchived": 33,
+    "unchangedTasks": 33,
+    "authoredTasks": 17,
+    "words": 30,
+    "textbookNewWords": 18,
+    "dialogueSentences": 9,
+    "originalSvgFiles": 65,
+    "selectedImageGenWebP": 5,
+    "newNativeSvgFiles": 2
+  },
+  "reuse": "Reruns and initial failures are not counted as independent conditions. Print-only spacing does not affect account grading, source questions, GIF or old-certificate PNG. Existing account runs and the 50 material screenshots retain those unaffected scopes. Later native scene polish was directly rechecked at four widths and in WebKit. No timeout or assertion thresholds were lowered.",
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit29-30/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scopeBoundary": "Scoped development validation. check:plan includes all pre-existing uncommitted work (5043 paths at capture); this turn uses its pre-task baseline to delimit 61 source/doc/test paths plus evidence. No whole-repository commit check or full production release is claimed."
+}

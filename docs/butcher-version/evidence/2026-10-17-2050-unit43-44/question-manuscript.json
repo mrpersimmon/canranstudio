@@ -1,0 +1,1210 @@
+{
+  "listen": [
+    {
+      "id": "u4344-v1-v-kettle",
+      "target": "区分烧水的水壶与泡茶的茶壶",
+      "prompt": "图中是什么？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "kettle",
+        "teapot",
+        "cup"
+      ],
+      "answer": "kettle",
+      "image": "/assets/unit43-44/kettle.svg",
+      "imageAlt": "带拱形提手的烧水壶",
+      "explanation": "kettle 是烧水的水壶。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-teapot",
+      "target": "从英文找到茶壶",
+      "prompt": "选出 teapot。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "茶壶",
+        "水壶",
+        "杯子"
+      ],
+      "answer": "茶壶",
+      "optionImages": {
+        "茶壶": "/assets/unit43-44/teapot.svg",
+        "水壶": "/assets/unit43-44/kettle.svg",
+        "杯子": "/assets/unit43-44/cup.svg"
+      },
+      "explanation": "teapot 是沏茶、盛茶的茶壶。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-behind",
+      "target": "区分前后方位",
+      "prompt": "“在……后面”怎么说？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "behind",
+        "in front of",
+        "in"
+      ],
+      "answer": "behind",
+      "explanation": "behind 表示在……后面。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-actions",
+      "target": "理解找到、看见和沸腾",
+      "prompt": "给词和意思配对。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "find",
+          "cn": "找到"
+        },
+        {
+          "id": "2",
+          "en": "see",
+          "cn": "看见"
+        },
+        {
+          "id": "3",
+          "en": "boil",
+          "cn": "沸腾；烧开"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "explanation": "find 是找到，see 是看见，boil 是沸腾或烧开。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-now",
+      "target": "理解时间词now",
+      "prompt": "now 是什么意思？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "现在",
+        "当然",
+        "快点"
+      ],
+      "answer": "现在",
+      "explanation": "now 表示现在、此刻。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-cupboard",
+      "target": "区分杯子与橱柜",
+      "prompt": "选出 cupboard。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "橱柜",
+        "杯子",
+        "茶叶"
+      ],
+      "answer": "橱柜",
+      "optionImages": {
+        "橱柜": "/assets/unit43-44/cupboard.svg",
+        "杯子": "/assets/unit43-44/cup.svg",
+        "茶叶": "/assets/unit43-44/tea.svg"
+      },
+      "explanation": "cupboard 是放物品的橱柜。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-v-phrases",
+      "target": "理解本课三个完整表达",
+      "prompt": "把表达与意思连起来。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "of course",
+          "cn": "当然"
+        },
+        {
+          "id": "2",
+          "en": "make the tea",
+          "cn": "沏茶"
+        },
+        {
+          "id": "3",
+          "en": "hurry up",
+          "cn": "快点"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "explanation": "短语要放在一起理解。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u4344-v1-r-place",
+      "target": "从完整原文定位茶叶的参照物",
+      "prompt": "点出 Penny 说茶叶在哪里的词组。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "locate",
+      "fragments": [
+        "Penny: It’s ",
+        {
+          "value": "over there"
+        },
+        ", ",
+        {
+          "value": "behind the teapot"
+        },
+        ".\nSam: Where are ",
+        {
+          "value": "the cups"
+        },
+        "?"
+      ],
+      "options": [
+        "over there",
+        "behind the teapot",
+        "the cups"
+      ],
+      "answer": "behind the teapot",
+      "explanation": "茶叶在茶壶后面。",
+      "hint": "找说出“哪个物品后面”的词组。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-r-pronouns",
+      "target": "根据前文理解some和them",
+      "prompt": "Sam：Where are the cups?\nPenny：There are some in the cupboard. Can you find them?\nsome 和 them 在这里都指什么？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "cups",
+        "tea",
+        "kettles"
+      ],
+      "answer": "cups",
+      "optionImages": {
+        "cups": "/assets/unit43-44/cups.svg",
+        "tea": "/assets/unit43-44/tea.svg",
+        "kettles": "/assets/unit43-44/kettles.svg"
+      },
+      "explanation": "some 指一些杯子，them 也指前面说的杯子。",
+      "hint": "回看 Sam 正在找什么。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-r-see",
+      "target": "不把没看见误判成不存在",
+      "prompt": "Sam 说：I can’t see the tea.\n这句话只告诉我们什么？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "他没有看见茶叶",
+        "厨房里没有茶叶",
+        "他不喜欢茶叶"
+      ],
+      "answer": "他没有看见茶叶",
+      "explanation": "没看见不等于没有；Penny 已经告诉他茶叶的位置。",
+      "hint": "区分“看见”与“有没有”。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-r-hurry-v153",
+      "target": "根据原文因果理解催促",
+      "prompt": "Penny 为什么说 Hurry up, Sam!？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "水壶里的水开了",
+        "杯子打碎了",
+        "他们要出门了"
+      ],
+      "answer": "水壶里的水开了",
+      "explanation": "后一句 The kettle’s boiling! 说明水开了。",
+      "hint": "看催促后紧接的一句话。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。",
+      "display": {
+        "title": "Penny为什么催促Sam？",
+        "material": "Penny: Hurry up, Sam! The kettle’s boiling!"
+      }
+    },
+    {
+      "id": "u4344-v1-r-evidence-v153",
+      "target": "根据明确细节作有限推断",
+      "prompt": "哪条线索最能说明 Sam 平时不常沏茶？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "他不断问茶叶和杯子在哪儿",
+        "他完全不会沏茶",
+        "他不喜欢喝茶"
+      ],
+      "answer": "他不断问茶叶和杯子在哪儿",
+      "explanation": "反复询问常用物品的位置，是本故事支持“不常沏茶”的线索；不能据此说他不会沏茶，也不能用来判断所有不熟悉厨房的人。",
+      "hint": "用课文中真正发生的事情作依据。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。",
+      "display": {
+        "title": "哪条线索最能说明Sam不常沏茶？",
+        "material": "Sam: Where’s the tea?\nSam: Where are the cups?\nSam: Yes, of course I can, Penny."
+      }
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u4344-v1-g-ability",
+      "target": "理解can的能力意义",
+      "prompt": "Penny can make the tea.\n这里的 can 表示什么？",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "options": [
+        "会；能够",
+        "正在",
+        "必须"
+      ],
+      "answer": "会；能够",
+      "explanation": "这里 can 表示能力。",
+      "hint": "想想这句在说本领还是正在发生的动作。",
+      "workshop": {
+        "rule": "这里 can 表示能力。",
+        "model": {
+          "lines": [
+            [
+              "I can read this book.",
+              "我能读这本书。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-person",
+      "target": "can没有人称和数的变化",
+      "prompt": "两个人都能找到杯子，补全句子。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " find the cups.",
+          "options": [
+            "can",
+            "cans"
+          ]
+        },
+        {
+          "before": "He ",
+          "after": " find the cups.",
+          "options": [
+            "can",
+            "cans"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"can\"]",
+      "explanation": "主语换成 he，can 也不加 s。",
+      "hint": "变的是说的人；检查 can 是否需要变化。",
+      "workshop": {
+        "rule": "主语换成 he，can 也不加 s。",
+        "model": {
+          "lines": [
+            [
+              "Penny can open the door.",
+              "Penny 能开门。"
+            ],
+            [
+              "They can open the door.",
+              "他们能开门；can 没变。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-verb",
+      "target": "can后接动词原形",
+      "prompt": "Sam 会沏茶，补全句子。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Sam can ",
+          "after": " the tea.",
+          "options": [
+            "make",
+            "makes",
+            "making"
+          ]
+        }
+      ],
+      "answer": "[\"make\"]",
+      "explanation": "can 后面接 make，不用 makes 或 making。",
+      "hint": "留意动作前面已经有 can。",
+      "workshop": {
+        "rule": "can 后面接 make，不用 makes 或 making。",
+        "model": {
+          "lines": [
+            [
+              "He can see the kettle.",
+              "can 后用 see。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-negative",
+      "target": "can的否定缩写",
+      "prompt": "说“我找不到茶叶”。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " find the tea.",
+          "options": [
+            "can’t",
+            "don’t",
+            "am not"
+          ]
+        }
+      ],
+      "answer": "[\"can’t\"]",
+      "explanation": "表示“不能”时用 can’t，后面的 find 仍用原形。",
+      "hint": "这是 can 的否定，不是 be 的否定。",
+      "workshop": {
+        "rule": "表示“不能”时用 can’t，后面的 find 仍用原形。",
+        "model": {
+          "lines": [
+            [
+              "I cannot see the cup. → I can’t see the cup.",
+              "cannot 可以缩写为 can’t。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-question",
+      "target": "can前置构成问句",
+      "prompt": "用词块问：Penny 能找到杯子吗？",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "wordbank",
+      "tokens": [
+        "Can",
+        "Penny",
+        "find",
+        "the cups",
+        "Does",
+        "finds"
+      ],
+      "slots": 4,
+      "answer": "Can Penny find the cups",
+      "suffix": "?",
+      "explanation": "把 can 放到主语前面提问，不再加 do 或 does。",
+      "hint": "先找提问的 can，再放人和动作。",
+      "workshop": {
+        "rule": "把 can 放到主语前面提问，不再加 do 或 does。",
+        "model": {
+          "lines": [
+            [
+              "You can see it. → Can you see it?",
+              "can 到句首，see 不变。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-reply-v153",
+      "target": "根据能力事实作can肯否短答",
+      "prompt": "你会沏茶，但现在看不见杯子。补全回答。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can you make the tea? Yes, I ",
+          "after": ".",
+          "options": [
+            "can",
+            "can’t",
+            "am"
+          ]
+        },
+        {
+          "before": "Can you see the cups? No, I ",
+          "after": ".",
+          "options": [
+            "can",
+            "can’t",
+            "am not"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"can’t\"]",
+      "explanation": "Can you…? 用 Yes, I can. 或 No, I can’t. 回答。",
+      "hint": "两句要分别按题目给的事实回答。",
+      "workshop": {
+        "rule": "Can you…?按照给出的能力或看见事实，用Yes, I can.或No, I can’t.回答。",
+        "model": {
+          "lines": [
+            [
+              "Can you open the door?",
+              "能够开门：Yes, I can.；不能开门：No, I can’t.。不能只从问句猜有无能力。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-some",
+      "target": "区分肯定some与否定any",
+      "prompt": "看得见一些杯子，看不见玻璃杯。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I can see ",
+          "after": " cups.",
+          "options": [
+            "some",
+            "any"
+          ]
+        },
+        {
+          "before": "I can’t see ",
+          "after": " glasses.",
+          "options": [
+            "some",
+            "any"
+          ]
+        }
+      ],
+      "answer": "[\"some\",\"any\"]",
+      "explanation": "本课肯定陈述用 some；否定句用 any。",
+      "hint": "先找 can 或 can’t，再看句子的意思。",
+      "workshop": {
+        "rule": "本课肯定陈述用 some；否定句用 any。",
+        "model": {
+          "lines": [
+            [
+              "I can see some spoons.",
+              "我能看见一些勺子。"
+            ],
+            [
+              "I can’t see any bread.",
+              "我看不见面包。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-there",
+      "target": "不可数与可数复数的there be提问",
+      "prompt": "问有没有水、有没有杯子。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " there any water in the kettle?",
+          "options": [
+            "Is",
+            "Are"
+          ]
+        },
+        {
+          "before": "",
+          "after": " there any cups in the cupboard?",
+          "options": [
+            "Is",
+            "Are"
+          ]
+        }
+      ],
+      "answer": "[\"Is\",\"Are\"]",
+      "explanation": "water 是不可数名词用 Is；cups 是复数用 Are。",
+      "hint": "看问的是水，还是一只只杯子。",
+      "workshop": {
+        "rule": "water 是不可数名词用 Is；cups 是复数用 Are。",
+        "model": {
+          "lines": [
+            [
+              "Is there any milk?",
+              "有牛奶吗？"
+            ],
+            [
+              "Are there any books?",
+              "有书吗？"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-es",
+      "target": "以s/x/ch/sh等结尾的名词复数",
+      "prompt": "补全：一些盒子；一些盘子。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "some ",
+          "after": " (box)",
+          "options": [
+            "boxes",
+            "boxs"
+          ]
+        },
+        {
+          "before": "some ",
+          "after": " (dish)",
+          "options": [
+            "dishes",
+            "dishs"
+          ]
+        }
+      ],
+      "answer": "[\"boxes\",\"dishes\"]",
+      "explanation": "box → boxes；dish → dishes。",
+      "hint": "对照示范里的词尾，再看 box 和 dish。",
+      "workshop": {
+        "rule": "box → boxes；dish → dishes。",
+        "model": {
+          "lines": [
+            [
+              "a bus → two buses",
+              "bus 变复数加 es。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-ves",
+      "target": "本课f/fe变ves的复数",
+      "prompt": "补全：一些刀；一些架子。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "some ",
+          "after": " (knife)",
+          "options": [
+            "knives",
+            "knifes"
+          ]
+        },
+        {
+          "before": "some ",
+          "after": " (shelf)",
+          "options": [
+            "shelves",
+            "shelfs"
+          ]
+        }
+      ],
+      "answer": "[\"knives\",\"shelves\"]",
+      "explanation": "本课 knife 和 shelf 的复数分别是 knives、shelves。",
+      "hint": "留意词尾的 f 或 fe；别把这条规则推广到所有单词。",
+      "workshop": {
+        "rule": "本课 knife 和 shelf 的复数分别是 knives、shelves。",
+        "model": {
+          "lines": [
+            [
+              "a loaf → two loaves",
+              "本课这类词的复数把 f／fe 换成 ves。"
+            ],
+            [
+              "wife → wives",
+              "wife 的复数是 wives。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-g-there-reply-v153",
+      "target": "区分can回答与there be回答",
+      "prompt": "柜里有两只杯子，没有盘子。补全符合事实的回答。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "answer": "[\"are\",\"aren’t\"]",
+      "explanation": "cups和dishes均为复数；杯子有、盘子无，分别回答there are和there aren’t。",
+      "hint": "看句首是 Are there 还是 Can you。",
+      "workshop": {
+        "rule": "复数物品用Are there…?，回答有无要看事实。",
+        "model": {
+          "lines": [
+            [
+              "Are there any books here?",
+              "有书：Yes, there are.；没有书：No, there aren’t.。这里问存在，不是问能力。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Are there any cups? Yes, there ",
+          "after": ".",
+          "options": [
+            "are",
+            "is",
+            "aren’t"
+          ]
+        },
+        {
+          "before": "Are there any dishes? No, there ",
+          "after": ".",
+          "options": [
+            "aren’t",
+            "isn’t",
+            "are"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u4344-v1-g-independent-v153",
+      "target": "撤去示范，组合can肯否和but的事实对比",
+      "prompt": "你能看见水壶，但看不见茶叶。把后半句接完整。",
+      "source": "《同步导学》Grammar纸页79／PDF93；《语法练习册》纸页119–124／PDF133–138",
+      "type": "wordbank",
+      "tokens": [
+        "but",
+        "I",
+        "can’t",
+        "see the tea",
+        "can",
+        "don’t"
+      ],
+      "slots": 4,
+      "answer": "but I can’t see the tea",
+      "suffix": ".",
+      "explanation": "but连接这里相反的看见事实；后半句用I can’t see the tea。",
+      "hint": "检查否定形式和动作形式。",
+      "workshop": {
+        "rule": "but把能够看见与不能看见的两种事实连起来。"
+      },
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。",
+      "display": {
+        "title": "按事实接上后半句。",
+        "material": "你能看见水壶，但看不见茶叶。\nI can see the kettle, …"
+      }
+    },
+    {
+      "id": "u4344-v153-g-who",
+      "target": "从能力事实回答谁能做某事",
+      "prompt": "Sam会沏茶，Tim不会。回答Penny的问题。",
+      "source": "语法练习册纸119–125／PDF133–139",
+      "options": [
+        "Sam can make the tea.",
+        "Tim can make the tea.",
+        "Sam can makes the tea."
+      ],
+      "answer": "Sam can make the tea.",
+      "display": {
+        "title": "谁会沏茶？",
+        "material": "Sam can make the tea. Tim can’t.\nPenny: Who can make the tea?"
+      },
+      "explanation": "问Who时回答能完成动作的人；Sam后面的can和make都不加s。",
+      "hint": "",
+      "distractorRationale": "由已给出的能力事实、问的人和动词形式区分，不能只凭问句猜答案。",
+      "workshop": {
+        "rule": "Who can…?问谁有这个能力，回答要有题目给出的依据。",
+        "model": {
+          "lines": [
+            [
+              "Who can open the door? — Penny can open the door.",
+              "已知Penny能开门。Who问谁；can后仍用open。"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "apply": [
+    {
+      "id": "u4344-v1-a-ready",
+      "target": "在新情境中回应能力提问",
+      "prompt": "你会沏茶，替自己回答。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "Yes, I can.",
+        "Yes, there is.",
+        "Yes, I am."
+      ],
+      "answer": "Yes, I can.",
+      "display": {
+        "title": "你会沏茶，怎样回答 Penny？",
+        "material": "Penny: Can you make the tea?"
+      },
+      "explanation": "Can you…? 的肯定回答是 Yes, I can.。",
+      "hint": "这次问的是你会不会。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-a-find",
+      "target": "按英文线索定位茶叶",
+      "prompt": "先找茶叶。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "茶壶后面",
+        "橱柜里面",
+        "水壶里面"
+      ],
+      "answer": "茶壶后面",
+      "display": {
+        "title": "帮 Sam 找茶叶",
+        "material": "Penny: The tea is behind the teapot."
+      },
+      "optionImages": {
+        "茶壶后面": "/assets/unit43-44/behind.svg",
+        "橱柜里面": "/assets/unit43-44/cupboard.svg",
+        "水壶里面": "/assets/unit43-44/water.svg"
+      },
+      "explanation": "茶叶就在茶壶后面。",
+      "hint": "看 behind 后面的参照物。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-a-cups",
+      "target": "按新情境中的实际库存回答",
+      "prompt": "柜里有两只杯子，替 Penny 回答。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "Yes, there are.",
+        "No, there aren’t.",
+        "Yes, I can."
+      ],
+      "answer": "Yes, there are.",
+      "display": {
+        "title": "柜里有两只杯子，怎样回答？",
+        "material": "Sam: Are there any cups in the cupboard?"
+      },
+      "reference": "橱柜里有两只杯子。",
+      "explanation": "两只杯子在柜里，回答 Yes, there are.。",
+      "hint": "按柜子里的物品回答“有没有”。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-a-place",
+      "target": "按指令移动同一组杯子并明确参照物",
+      "prompt": "把杯子放在哪里？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "水壶前面",
+        "茶壶后面",
+        "橱柜里面"
+      ],
+      "answer": "水壶前面",
+      "display": {
+        "title": "把两只杯子摆好",
+        "material": "Penny: Put the cups in front of the kettle."
+      },
+      "optionImages": {
+        "水壶前面": "/assets/unit43-44/cups-front.svg",
+        "茶壶后面": "/assets/unit43-44/cups-behind.svg",
+        "橱柜里面": "/assets/unit43-44/cupboard.svg"
+      },
+      "explanation": "两只杯子从柜里移到水壶前面，柜里不再有这两只杯子。",
+      "hint": "看 in front of 后面跟的是哪个物品。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-a-note",
+      "target": "根据连续操作的结果记录真实位置",
+      "prompt": "用词块说：杯子在水壶前面。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "wordbank",
+      "tokens": [
+        "The cups",
+        "are",
+        "in front of",
+        "the kettle",
+        "is",
+        "behind"
+      ],
+      "slots": 4,
+      "answer": "The cups are in front of the kettle",
+      "suffix": ".",
+      "explanation": "复数 cups 用 are；位置是 in front of the kettle。",
+      "hint": "先看刚刚摆好的位置，再选表示前后的词。",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    }
+  ],
+  "exam": [
+    {
+      "id": "u4344-v1-e-kettle",
+      "target": "独立区分两种壶",
+      "prompt": "选出 kettle。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "水壶",
+        "茶壶",
+        "杯子"
+      ],
+      "answer": "水壶",
+      "optionImages": {
+        "水壶": "/assets/unit43-44/kettle.svg",
+        "茶壶": "/assets/unit43-44/teapot.svg",
+        "杯子": "/assets/unit43-44/cup.svg"
+      },
+      "explanation": "kettle 是水壶。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-words",
+      "target": "独立理解全部动作时间回应词",
+      "prompt": "把词和意思配对。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "of course",
+          "cn": "当然"
+        },
+        {
+          "id": "2",
+          "en": "now",
+          "cn": "现在"
+        },
+        {
+          "id": "3",
+          "en": "find",
+          "cn": "找到"
+        },
+        {
+          "id": "4",
+          "en": "boil",
+          "cn": "沸腾；烧开"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+      "explanation": "按各词在本课的意思配对。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-place",
+      "target": "英语阅读确认位置和指代",
+      "prompt": "Penny: The tea is behind the teapot. Can you see it?\nit 指什么？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "茶叶",
+        "茶壶",
+        "水壶"
+      ],
+      "answer": "茶叶",
+      "explanation": "这里 it 指正在寻找的茶叶。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-some",
+      "target": "从课文前后句理解some",
+      "prompt": "Sam: Where are the cups?\nPenny: There are some in the cupboard.\n哪条记录正确？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "橱柜里有一些杯子",
+        "橱柜里有一些茶叶",
+        "杯子在橱柜前面"
+      ],
+      "answer": "橱柜里有一些杯子",
+      "explanation": "some 代替 some cups；in 表示在里面。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-inference",
+      "target": "区分原文事实与推断过度",
+      "prompt": "Sam 问了水、茶叶和杯子，又说自己会沏茶。\n哪种判断最符合课文？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "他会沏茶，但不熟悉物品位置",
+        "他完全不会沏茶",
+        "厨房里没有茶叶和杯子"
+      ],
+      "answer": "他会沏茶，但不熟悉物品位置",
+      "explanation": "反复找物说明不熟悉位置，不能推成完全不会。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-can",
+      "target": "独立同时判断can不变形与动词原形",
+      "prompt": "补全：他会沏茶。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He ",
+          "after": "",
+          "options": [
+            "can",
+            "cans",
+            "is"
+          ]
+        },
+        {
+          "before": "",
+          "after": " the tea.",
+          "options": [
+            "make",
+            "makes",
+            "making"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"make\"]",
+      "explanation": "He can make the tea. 中 can 和 make 都不加 s。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-negative",
+      "target": "独立构成can否定句",
+      "prompt": "补全：Sam 找不到杯子。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Sam ",
+          "after": " find the cups.",
+          "options": [
+            "can’t",
+            "doesn’t",
+            "isn’t"
+          ]
+        }
+      ],
+      "answer": "[\"can’t\"]",
+      "explanation": "本题表达不能找到，用 can’t find。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-question",
+      "target": "独立构成can一般疑问句",
+      "prompt": "用词块问：Sam 能看见茶壶吗？",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "wordbank",
+      "tokens": [
+        "Can",
+        "Sam",
+        "see",
+        "the teapot",
+        "Does",
+        "sees"
+      ],
+      "slots": 4,
+      "answer": "Can Sam see the teapot",
+      "suffix": "?",
+      "explanation": "Can 放到主语 Sam 前，动词用 see。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-reply",
+      "target": "按明确的看见事实回应can",
+      "prompt": "你看得见茶壶，但看不见茶叶。\nPenny: Can you see the tea?",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "No, I can’t.",
+        "Yes, I can.",
+        "No, there isn’t."
+      ],
+      "answer": "No, I can’t.",
+      "explanation": "询问你能否看见，按事实回答 No, I can’t.。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-there",
+      "target": "独立区分物质名词与可数复数",
+      "prompt": "补全两个问句。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " there any coffee on the table?",
+          "options": [
+            "Is",
+            "Are"
+          ]
+        },
+        {
+          "before": "",
+          "after": " there any teapots in the cupboard?",
+          "options": [
+            "Is",
+            "Are"
+          ]
+        }
+      ],
+      "answer": "[\"Is\",\"Are\"]",
+      "explanation": "coffee 是不可数名词；teapots 是复数。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-some-any",
+      "target": "独立选择肯定some与否定any",
+      "prompt": "补全：看见一些勺子，但看不见刀。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I can see ",
+          "after": " spoons,",
+          "options": [
+            "some",
+            "any"
+          ]
+        },
+        {
+          "before": "but I can’t see ",
+          "after": " knives.",
+          "options": [
+            "some",
+            "any"
+          ]
+        }
+      ],
+      "answer": "[\"some\",\"any\"]",
+      "explanation": "本课肯定用 some，否定用 any。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-plurals",
+      "target": "独立检查-es与-ves的必要对比",
+      "prompt": "补全：一些盘子；一些架子。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "some ",
+          "after": " (dish)",
+          "options": [
+            "dishes",
+            "dishs"
+          ]
+        },
+        {
+          "before": "some ",
+          "after": " (shelf)",
+          "options": [
+            "shelves",
+            "shelfs"
+          ]
+        }
+      ],
+      "answer": "[\"dishes\",\"shelves\"]",
+      "explanation": "dish 加 es；shelf 把 f 换成 ves。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-irregular",
+      "target": "独立检查Lesson44的wife和loaf复数",
+      "prompt": "补全：他们的妻子们；一些条形面包。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "their ",
+          "after": " (wife)",
+          "options": [
+            "wives",
+            "wifes"
+          ]
+        },
+        {
+          "before": "some ",
+          "after": " of bread (loaf)",
+          "options": [
+            "loaves",
+            "loafs"
+          ]
+        }
+      ],
+      "answer": "[\"wives\",\"loaves\"]",
+      "explanation": "wife → wives；loaf → loaves。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-position",
+      "target": "看清图片的参照物后表达前后关系",
+      "prompt": "看图补全：杯子的位置。",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The cups are ",
+          "after": " the kettle.",
+          "options": [
+            "in front of",
+            "behind",
+            "in"
+          ]
+        }
+      ],
+      "answer": "[\"in front of\"]",
+      "image": "/assets/unit43-44/cups-front.svg",
+      "imageAlt": "两只杯子在水壶的前面，杯子遮住水壶底部",
+      "explanation": "参照物是水壶，杯子在它前面。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v1-e-evidence",
+      "target": "综合区分存在与看见并使用复数肯否回答",
+      "prompt": "Penny: There are some cups in the cupboard.\nSam: I can’t see them.\nAre there any cups in the cupboard?",
+      "source": "《新概念英语智慧版1》Lesson 43–44，纸页86–89／PDF119–122",
+      "options": [
+        "Yes, there are. Sam can’t see them.",
+        "No, there aren’t. Sam can’t see them.",
+        "Yes, there is. Sam can see them."
+      ],
+      "answer": "Yes, there are. Sam can’t see them.",
+      "explanation": "杯子确实在柜里；Sam 没看见并不代表没有。",
+      "hint": "",
+      "distractorRationale": "干扰项对应词义、参照物、看见与存在、人称变化、can后动词形式或单复数的具体混淆。"
+    },
+    {
+      "id": "u4344-v153-e-who",
+      "target": "撤去示范，根据能力差异回答Who并保持动词原形",
+      "prompt": "读两个人的话，替他们回答。",
+      "source": "语法练习册纸119–125／PDF133–139",
+      "options": [
+        "Penny can make the tea.",
+        "Sam can make the tea.",
+        "Penny can makes the tea."
+      ],
+      "answer": "Penny can make the tea.",
+      "display": {
+        "title": "Who can make the tea?",
+        "material": "另一次练习：\nPenny: I can make the tea.\nSam: I can’t make the tea, but I can make the coffee."
+      },
+      "explanation": "这次练习里Penny会沏茶，Sam会冲咖啡；按本题材料作答，不沿用原文中Sam的回答。",
+      "hint": "",
+      "distractorRationale": "由已给出的能力事实、问的人和动词形式区分，不能只凭问句猜答案。"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "time": "2026-10-16T09:15:33.071019",
+  "beforeSha256": "d7ac9b0d9b8160d3f33776fd31f71646882fb80ece1dc079f7fadb19ecdcf636",
+  "afterSha256": "0d3d3d0925772511533686d48d1fb5d2d921f4cd9224ebc3b1cd586c2582d960",
+  "questionIds": [
+    "g-does",
+    "g-past",
+    "e-does"
+  ],
+  "change": "Replace emphatic does do / did leave distractors and extra non-emphasis constraints with already-taught do/does and leave/left contrasts.",
+  "answersChanged": false,
+  "countsChanged": false,
+  "why": "Do support can legitimately add emphasis; this lesson need not depend on an unintroduced emphasis contrast.",
+  "validation": "Both engines: full 60-question material flow, full retry and four viewport/short-screen flows; all account tests use refined version."
+}

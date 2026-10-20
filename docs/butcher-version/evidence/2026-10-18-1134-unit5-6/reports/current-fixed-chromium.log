@@ -1,0 +1,149 @@
+
+Running 12 tests using 1 worker
+
+(node:36100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit5-6-v154.spec.js:5:1 › 当前首页使用确认故事图 (499ms)
+  ok  2 tests\e2e\unit5-6-v154.spec.js:6:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (444ms)
+  ok  3 tests\e2e\unit5-6-v154.spec.js:7:1 › 原文理解在未答页提供必要对白 (1.7s)
+  x   4 tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 (7.4s)
+(node:19336) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   5 tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 (7.6s)
+(node:2640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   6 tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 (7.8s)
+(node:35588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   7 tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 (7.8s)
+(node:35828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 (13.2s)
+  ok  9 tests\e2e\unit5-6-v154.spec.js:34:49 › 320x568短屏三卡与推进完整 (1.8s)
+  ok 10 tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 (1.8s)
+  ok 11 tests\e2e\unit5-6-v154.spec.js:38:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 (12.3s)
+  ok 12 tests\e2e\unit5-6-v154.spec.js:48:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 (2.8s)
+
+
+  1) tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    Error: locator.screenshot: Error: strict mode violation: locator('.story-award-paper') resolved to 2 elements:
+        1) <article data-stars="1" data-motion="full" data-unit="unit5-6" aria-label="我的单元纪念卡" class="story-award-paper award-card">…</article> aka getByRole('article', { name: '我的单元纪念卡' })
+        2) <article data-stars="1" data-unit="unit5-6" aria-label="新朋友小使者纪念卡" class="story-award-paper award-card">…</article> aka getByLabel('新朋友小使者纪念卡')
+
+    Call log:
+      - waiting for locator('.story-award-paper')
+
+
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+      23 |  await flow.activity(page,'cars',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('application-'+state+'.png')});}});
+    > 24 |  await page.goto('/unit5-6/#learn/certificate');await page.locator('.story-award-paper').screenshot({path:info.outputPath('card.png')});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+         |                                                                                          ^
+      25 | });
+      26 |
+      27 | test('36题未答材料、两空上限、撤支持、真实声音故障与五星',async({page},info)=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:24:90
+
+    Error Context: output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    Error: locator.screenshot: Error: strict mode violation: locator('.story-award-paper') resolved to 2 elements:
+        1) <article data-stars="1" data-motion="full" data-unit="unit5-6" aria-label="我的单元纪念卡" class="story-award-paper award-card">…</article> aka getByRole('article', { name: '我的单元纪念卡' })
+        2) <article data-stars="1" data-unit="unit5-6" aria-label="新朋友小使者纪念卡" class="story-award-paper award-card">…</article> aka getByLabel('新朋友小使者纪念卡')
+
+    Call log:
+      - waiting for locator('.story-award-paper')
+
+
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+      23 |  await flow.activity(page,'cars',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('application-'+state+'.png')});}});
+    > 24 |  await page.goto('/unit5-6/#learn/certificate');await page.locator('.story-award-paper').screenshot({path:info.outputPath('card.png')});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+         |                                                                                          ^
+      25 | });
+      26 |
+      27 | test('36题未答材料、两空上限、撤支持、真实声音故障与五星',async({page},info)=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:24:90
+
+    Error Context: output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    Error: locator.screenshot: Error: strict mode violation: locator('.story-award-paper') resolved to 2 elements:
+        1) <article data-stars="1" data-motion="full" data-unit="unit5-6" aria-label="我的单元纪念卡" class="story-award-paper award-card">…</article> aka getByRole('article', { name: '我的单元纪念卡' })
+        2) <article data-stars="1" data-unit="unit5-6" aria-label="新朋友小使者纪念卡" class="story-award-paper award-card">…</article> aka getByLabel('新朋友小使者纪念卡')
+
+    Call log:
+      - waiting for locator('.story-award-paper')
+
+
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+      23 |  await flow.activity(page,'cars',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('application-'+state+'.png')});}});
+    > 24 |  await page.goto('/unit5-6/#learn/certificate');await page.locator('.story-award-paper').screenshot({path:info.outputPath('card.png')});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+         |                                                                                          ^
+      25 | });
+      26 |
+      27 | test('36题未答材料、两空上限、撤支持、真实声音故障与五星',async({page},info)=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:24:90
+
+    Error Context: output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 ───────────────────────────────
+
+    Error: locator.screenshot: Error: strict mode violation: locator('.story-award-paper') resolved to 2 elements:
+        1) <article data-stars="1" data-unit="unit5-6" aria-label="我的单元纪念卡" data-motion="paused" class="story-award-paper award-card">…</article> aka getByRole('article', { name: '我的单元纪念卡' })
+        2) <article data-stars="1" data-unit="unit5-6" aria-label="新朋友小使者纪念卡" class="story-award-paper award-card">…</article> aka getByLabel('新朋友小使者纪念卡')
+
+    Call log:
+      - waiting for locator('.story-award-paper')
+
+
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+      23 |  await flow.activity(page,'cars',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('application-'+state+'.png')});}});
+    > 24 |  await page.goto('/unit5-6/#learn/certificate');await page.locator('.story-award-paper').screenshot({path:info.outputPath('card.png')});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+         |                                                                                          ^
+      25 | });
+      26 |
+      27 | test('36题未答材料、两空上限、撤支持、真实声音故障与五星',async({page},info)=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:24:90
+
+    Error Context: output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-fixed-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+  8 passed (1.2m)

@@ -1,0 +1,103 @@
+{
+  "documents": 9,
+  "syntaxFiles": 18,
+  "standardSha256": "38a5102891e5b4f923bd871fbc9488286cf1582da870a3611da151205e03c74e",
+  "packages": {
+    "root": {
+      "revision": "584df5112a47466b7ea5d0667c51933403178d051f5d1a6acb45e18be6fd9f23",
+      "required": 166,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    },
+    "sub": {
+      "revision": "e67ce5ee161f8a918bed249656bb76a7497afbf74b800119d3a6b324a7c4810d",
+      "required": 166,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    }
+  },
+  "artwork": [
+    {
+      "file": "assets/unit13-14/keepsake-story-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "c281ea08de4915d923fe4e84aa96e54eb909c08b30b8ebc7892ddca414fc712a"
+    },
+    {
+      "file": "assets/unit13-14/cast-arrival-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "eddb7e8dcc7d7eb13cfcda13114a8bd6bab0686a9087ebf33428550490489526"
+    },
+    {
+      "file": "assets/unit13-14/cast-dress-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "33266107152b0aeeebbeae601c97bc5eb1cc98ddc231c08fece1643bdbd89bab"
+    },
+    {
+      "file": "assets/unit13-14/cast-reveal-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "fcab81102466f320dfa4f96cc6468d2149391a86e32ec4dee9ae9fe6dcf581c3"
+    },
+    {
+      "file": "assets/unit13-14/cast-wear-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "2bbc9c52bfd9214b5cb212c61549674314a326217784b0a38e9adc1f677e9ac9"
+    }
+  ],
+  "sources": {
+    "unit13-14/content.js": "41510eb9f6f0979fd5fd780583b2d646805c44d248a9e87a45bf81ba77915e05",
+    "unit13-14/grammar.js": "c1bdb2b564e45c56d87f3825c6ba942c963adc3ba7af8c8ee06cd4de42faeb9e",
+    "unit13-14/legacy-certificate.js": "07fa59371dfed62e8a9ac62338b354325ed3f726904f09ce024e9ccf916ccb5a",
+    "unit13-14/legacy.js": "303ce649b1a484e39acc6e46aafbb0a57e846b9fd0143ab072fb70eb74137291",
+    "unit13-14/references.js": "c53918a62ab443bf7e2d19778c8dc85468e9ed4a300296db710e17d806ee5bc8",
+    "unit13-14/scene.js": "87b38ed45d995bd4703c0842b796b369a11d4c83a938a73946740c3925cfec31",
+    "unit13-14/unit.js": "e2ac2163a9000b85602125cb2348b6b19f7608fb27a98fc3b6cd671ae341f006",
+    "server/progress.js": "82e4c0b467d3db6a3e8dc637074b9335eef1ff8f35f07d535470a9583076656e",
+    "server/award-catalog.js": "897495d1cff2bea4bb93c0e725760d775e287e271462d0b7f734dc16463c00cd",
+    "server/legacy/unit13-14-content.js": "140c95f0d77f012d4208ecd1f4af9db8afeab6901bac20ca088207c8913b9c9a",
+    "core/award-card-layout.js": "6c0e90fb4509999731a20fd0ebb8e40d4abe1a9d7a894c6048a9304e8893bfd1",
+    "scripts/check-workflow.config.js": "90c03ac3635da84ae432658bebfcc055a692e70aff1f392919bfa7aa00aa0d8b",
+    "tests/support/static-server.js": "c899c45bfa5dc5d639213f36f426c71aea9fc244ca7df4cd87a066cc01a68ea2",
+    "tests/support/unit1314-fivezones.js": "8c8e6a60e097ec5837902f9aa4b421a6d8e07ff8661d3e8da61392250239d806",
+    "tests/support/unit1314-legacy.js": "a7a5e0f7a456b11abd6298f1a0c2af63bb3b42e89d1cb50cf518a0211562fc6f",
+    "tests/support/unit13-14-flow.js": "206c237ca7bd5ff7455b019bf279a232213b5b2d60a63d2b31edc1a8c07b67fb",
+    "tests/login/unit13-14-upgrade.spec.js": "f44eb4ce5b471c2f1bc471be8b0ed385b03e3762a98d4f3047b8d78cd0349176",
+    "tests/login/course-integration.spec.js": "995827e09eef7c2a233bea1cc10db7db6b47e12f153792efce798b1e6765dc3e",
+    "unit13-14/index.html": "c15f02aa6906e50ed74fb8c42ec707e52e671ad4035760f87c30675b448aa6b2",
+    "unit13-14/legacy.css": "a7dbdb2c9e1876d14d92bd52443697579e7c7bd03d241c852a2d481dc382747c",
+    "unit13-14/typography.css": "7ea140cd3688967853dcd227f4f7e08c7f385fbc43a459f7332093136a6632f5",
+    "unit13-14/unit.css": "08bec9e3342bff51e9a21937c902e15fcc8d0c72c6e1465b818d535f7ca65f3a",
+    "assets/unit13-14/louise.svg": "351d4ed6ebebc9d2563168a6eb6fa2cde0ad6c5455dc884075c6673bf00524e9",
+    "assets/unit13-14/anna.svg": "4539fcc7d09fed6a62984e8ae79bfb0409f798532d90bce0c1a07bb12149aaba",
+    "assets/awards/fonts/lesson-gothic-body-400.woff2": "bcc4f7c1da7e900cd74df7447b18da1d26b148a31e93ddef4968803e5eadd15a",
+    "assets/awards/fonts/sources.json": "db40db5ef4ab7f6e70bc831151a78343f10727b3c253815583651bdd6459f2b5",
+    "core/story-certificate.css": "629c8661daa1c3c757aff9034ff9cec657b2ac64717e96f53ca3d60aad339618",
+    "unit1-2/completion.css": "083eca7a8733658ea80c69a2e381d5df82ba9a75f98a963ef9d40a7a41929823",
+    "index.html": "d71bc5b02bdd39190c419372399ab686b7b4c6ee4d076877a09852a800f9567d",
+    "tests/e2e/unit13-14-fivezones.spec.js": "a3176dd75b5e087bb281f877e7354edd8602773be0197e8bfe3f10d3acee1937",
+    "tests/e2e/unit13-14-fivezones-upgrade.spec.js": "709f88a31b06884b213c3c1b8309654d9ab5d0e1b4a56d12b7e05e07ed6e88cb",
+    "tests/e2e/unit13-14-print.spec.js": "64ef5a8839cfa29c09cb2230223def9fc514f8fa3f4def7c8943c6a8f2efe9f7",
+    "tests/e2e/unit13-14-state.spec.js": "e3b986fd824b3bdc12118d3112e32407db35b829ab9e965edafdf355f49611b0",
+    "tests/login/unit13-14-fivezones.spec.js": "9fe568de16c4f0fba361e0fafe1406a3db86e5a2bf5beee4f6e027a180ed4dd1",
+    "tests/login/unit13-14-fivezones-upgrade.spec.js": "8fdd8db22e84e0310ef854b6c6ff47eb98c11913fee4ebd06fa4d54309fc1233",
+    "tests/unit/admin-learning.test.js": "731c0dd2dd58be8de2bc19bc4850c587a6ee79e29f0d69a17947f553e45be419",
+    "tests/e2e/submission-statistics.spec.js": "981649ce20bbee1b70d2a131fb8603b31662ef81f9cb46b9c287953322ed4778",
+    "scripts/art/unit13-14-prompts.json": "c035f0420c0d6757d5e6a2947023358aaae40ae367522b7b64a02d47161b1867",
+    "assets/unit13-14/keepsake-story-v1.webp": "c281ea08de4915d923fe4e84aa96e54eb909c08b30b8ebc7892ddca414fc712a",
+    "assets/unit13-14/cast-arrival-v1.webp": "eddb7e8dcc7d7eb13cfcda13114a8bd6bab0686a9087ebf33428550490489526",
+    "assets/unit13-14/cast-dress-v1.webp": "33266107152b0aeeebbeae601c97bc5eb1cc98ddc231c08fece1643bdbd89bab",
+    "assets/unit13-14/cast-reveal-v1.webp": "fcab81102466f320dfa4f96cc6468d2149391a86e32ec4dee9ae9fe6dcf581c3",
+    "assets/unit13-14/cast-wear-v1.webp": "2bbc9c52bfd9214b5cb212c61549674314a326217784b0a38e9adc1f677e9ac9"
+  }
+}

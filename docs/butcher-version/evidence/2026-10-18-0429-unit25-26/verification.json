@@ -1,0 +1,1440 @@
+{
+  "at": "2026-10-17T21:11:02.733Z",
+  "courseVerification": "passed",
+  "baseline": "45-question five-star course with an earlier 27-question click edition",
+  "questions": {
+    "before": 45,
+    "current": 45,
+    "unchanged": 42,
+    "revised": 3,
+    "additional": 0,
+    "legacy": 27
+  },
+  "uniqueBrowserConditions": 84,
+  "uniqueNodeConditions": 40,
+  "totalCourseConditions": 124,
+  "runs": [
+    {
+      "name": "red",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:35:23.981Z",
+      "durationMs": 37366.943999999996,
+      "unexpected": 5
+    },
+    {
+      "name": "review-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:38:10.078Z",
+      "durationMs": 9910.073,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chain-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:40:56.871Z",
+      "durationMs": 73402.114,
+      "unexpected": 0
+    },
+    {
+      "name": "course-chromium",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:42:01.488Z",
+      "durationMs": 194457.595,
+      "unexpected": 0
+    },
+    {
+      "name": "course-webkit",
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:42:01.508Z",
+      "durationMs": 407041.53099999996,
+      "unexpected": 0
+    },
+    {
+      "name": "earlier-chain-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:43:56.083Z",
+      "durationMs": 158208.23799999998,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:43:56.102Z",
+      "durationMs": 156440.243,
+      "unexpected": 0
+    },
+    {
+      "name": "print",
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "start": "2026-10-17T20:48:00.608Z",
+      "durationMs": 8431.029,
+      "unexpected": 0
+    },
+    {
+      "name": "account-chromium-subpath",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-17T20:50:26.934Z",
+      "durationMs": 92273.9,
+      "unexpected": 0
+    },
+    {
+      "name": "shared-unit2324-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:50:26.948Z",
+      "durationMs": 76407.964,
+      "unexpected": 0
+    },
+    {
+      "name": "account-webkit-root",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-17T20:52:49.752Z",
+      "durationMs": 262536.612,
+      "unexpected": 0
+    },
+    {
+      "name": "account-webkit-subpath",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-17T20:57:13.302Z",
+      "durationMs": 429251.209,
+      "unexpected": 0
+    }
+  ],
+  "tests": [
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "三道继承语法题在未答时有短示范，新提交才登记帮助",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3755,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "roles第3题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2595,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第3题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1700,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第4题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1814,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1800,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-chain-chromium-root",
+      "durationMs": 68003,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 27-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "位置配对先配齐再检查，错配、键盘改配和刷新保留原位",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2248,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "原文定位保留完整句子，错选不泄答案，检查后才计进度",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2135,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "问位置情境保持完整材料，选中和错答不揭晓，正确检查后才显示发现",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2861,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3577,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧仅配一对升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 2973,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧版错配、词卡、叙述和参考页保留，新语法不由旧题代答",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1575,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 9924,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "45题、12句完整叙述、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 20434,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 8675,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 320",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3216,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 390",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3189,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 768",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3319,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 1280",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3447,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 16043,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 15758,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "双空未齐、错答和刷新保留草稿，不自动选择正确项",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 1394,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "36张词卡音标、8幅原图、7组双句与两个参考分页完整保留",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3736,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 16131,
+      "annotations": [
+        {
+          "type": "audio-failure-reached",
+          "description": "51 actual play calls rejected"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3381,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 3227,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 4085,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版综合空白更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 6495,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版综合仅选未提交更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 6038,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版双空草稿、综合错答、词卡叙述与八图七份参考分页保留",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 13068,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星及三个未改轮次保留，三道修订题未答，旧手记标签只改显示",
+      "passed": true,
+      "report": "course-chromium",
+      "durationMs": 23220,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "位置配对先配齐再检查，错配、键盘改配和刷新保留原位",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 4732,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "原文定位保留完整句子，错选不泄答案，检查后才计进度",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 4786,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-interactions.spec.js",
+      "title": "问位置情境保持完整材料，选中和错答不揭晓，正确检查后才显示发现",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5974,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 6423,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧仅配一对升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 6432,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧版错配、词卡、叙述和参考页保留，新语法不由旧题代答",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3744,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 24691,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "45题、12句完整叙述、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 40168,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 22440,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 320",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 7705,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 390",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 9603,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 768",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 10280,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "完整厨房、原文叙述与逐句中文 1280",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 10745,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 41238,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 37200,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "双空未齐、错答和刷新保留草稿，不自动选择正确项",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3671,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "36张词卡音标、8幅原图、7组双句与两个参考分页完整保留",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 11146,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 33408,
+      "annotations": [
+        {
+          "type": "audio-failure-reached",
+          "description": "51 actual play calls rejected"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5271,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5193,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 5599,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版综合空白更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 10732,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版综合仅选未提交更新后，完整新轮仍可获星",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 11524,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "45题版双空草稿、综合错答、词卡叙述与八图七份参考分页保留",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 23708,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星及三个未改轮次保留，三道修订题未答，旧手记标签只改显示",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 38522,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "三道继承语法题在未答时有短示范，新提交才登记帮助",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 7438,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "roles第3题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 4215,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第3题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 2467,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第4题在未选和刷新后提供完整原文依据",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 2873,
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变",
+      "passed": true,
+      "report": "course-webkit",
+      "durationMs": 3387,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-older-editions.spec.js",
+      "title": "25-26 23题初版真实账号经27题点击版再升五星，保留旧证原日期",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 43077,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-older-editions.spec.js",
+      "title": "25-26 30题综合版真实账号经27题点击版再升五星，保留旧证原日期",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 42899,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-older-editions.spec.js",
+      "title": "25-26 28题场景版真实账号经27题点击版再升五星，保留旧证原日期",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 36844,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-older-editions.spec.js",
+      "title": "25-26 27题键盘版真实账号经27题点击版再升五星，保留旧证原日期",
+      "passed": true,
+      "report": "earlier-chain-chromium-root",
+      "durationMs": 28030,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 41482,
+      "annotations": [
+        {
+          "type": "old-course-ready",
+          "description": "1530ms; no old answers or certificate injected"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 4251,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "2061ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 1769,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 44149,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "12ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "2056ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "20ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 7170,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "1541ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 22768,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "2011ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "32ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "30ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "10ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "16ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 13072,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "10ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1996ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "2084ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "account-chromium-root",
+      "durationMs": 14068,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "1062ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1112ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-print.spec.js",
+      "title": "练习纸保留A四题、B七题、原例和14条书写线与8个填空位，实际PDF无隐藏题目",
+      "passed": true,
+      "report": "print",
+      "durationMs": 803,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-print.spec.js",
+      "title": "已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡",
+      "passed": true,
+      "report": "print",
+      "durationMs": 6575,
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-chromium-subpath",
+      "durationMs": 37723,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "8ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "1412ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "15ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-chromium-subpath",
+      "durationMs": 48470,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "shared-unit2324-chromium-root",
+      "durationMs": 70231,
+      "annotations": [
+        {
+          "type": "historical-chain",
+          "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+        },
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-webkit-root",
+      "durationMs": 105968,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "6ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "12968ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "9ms after navigation"
+        },
+        {
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        },
+        {
+          "type": "course-ready",
+          "description": "8255ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-webkit-root",
+      "durationMs": 151022,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 93374,
+      "annotations": [
+        {
+          "type": "old-course-ready",
+          "description": "11229ms; no old answers or certificate injected"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 106359,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "10ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "13039ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "11ms after navigation"
+        },
+        {
+          "type": "engine-boundary",
+          "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+        },
+        {
+          "type": "course-ready",
+          "description": "8471ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 72190,
+      "annotations": [
+        {
+          "type": "course-ready",
+          "description": "12863ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "27ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "25ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "43ms after navigation"
+        },
+        {
+          "type": "course-ready",
+          "description": "32ms after navigation"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "unit25-26-v153-upgrade.spec.js",
+      "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+      "passed": true,
+      "report": "account-webkit-subpath",
+      "durationMs": 151684,
+      "annotations": [
+        {
+          "type": "history-storage",
+          "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+        }
+      ]
+    }
+  ],
+  "initialBrowserFailures": [
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "三道继承语法题在未答时有短示范，新提交才登记帮助",
+      "passed": false,
+      "report": "red",
+      "durationMs": 7564,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+            "column": 291,
+            "line": 8
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"There is a pen in the box.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n   6 | test('三道继承语法题在未答时有短示范，新提交才登记帮助',async({page},info)=>{\n   7 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit25-26/#learn/grammar');const room=page.locator('.stage-grammar');for(const a of ANSWERS.grammar.slice(0,10))await next(room,a);\n>  8 |  for(const[n,text]of [[11,'There is a pen in the box.'],[12,'The plate is clean.'],[13,'Where is the book? It is on the table.']]){const model=room.getByRole('region',{name:'短示范',exact:true});await room.screenshot({path:info.outputPath('grammar-'+n+'-unanswered.png')});await expect(model).toContainText(text);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await next(room,ANSWERS.grammar[n-1],n===13);}\n     |                                                                                                                                                                                                                                                                                                   ^\n   9 |  const b=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')));for(const id of ['u2526-types-v1-t08','u2526-clicks-v1-clean','u2526-types-v1-t10'])expect(b.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  10 | });\n  11 | for(const[area,number,lines]of [\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:8:291"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "roles第3题在未选和刷新后提供完整原文依据",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6738,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+            "column": 155,
+            "line": 17
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"\u001b[7mThe refrigerator is white\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m课文说：It is on the right\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"课文说：It is on the right.\"\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第3题在未选和刷新后提供完整原文依据",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6055,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+            "column": 155,
+            "line": 17
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"The refrigerator is white.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "exam第4题在未选和刷新后提供完整原文依据",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6195,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+            "column": 155,
+            "line": 17
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"There is a bottle on the table.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "e2e",
+      "mount": "/",
+      "file": "unit25-26-v153.spec.js",
+      "title": "五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变",
+      "passed": false,
+      "report": "red",
+      "durationMs": 6674,
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+            "column": 606,
+            "line": 20
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: '学习手记', exact: true })\nExpected substring: \u001b[32m\"整合请求、属性与位置\"\u001b[39m\nReceived string:    \u001b[31m\"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '学习手记', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <dialog open=\"\" id=\"unitNotebook\" class=\"unit-dialog\" aria-labelledby=\"notebookTitle\">…</dialog>\u001b[22m\n\u001b[2m       - unexpected value \"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[22m\n\n\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n> 20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n  21 |  const r=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')).records['u2526-five-a-cup-story']);expect(r.target).toBe('整合六轮故事中的物品条件与位置');expect(r.attempts).toBe(1);\n  22 | });\n  23 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:20:606"
+        }
+      ]
+    }
+  ],
+  "changes": [
+    {
+      "issue": "Three question pages lacked source facts needed for the question",
+      "resolution": "Add original sentences to R3/E3/E4, preserve reasoning, give only these questions new identities and exact predecessor groups.",
+      "evidence": "red -> review-chromium -> course-chromium / course-webkit"
+    },
+    {
+      "issue": "Three inherited grammar tasks lacked nearby short models",
+      "resolution": "Add display-only models for G11-G13 and record actual model help on new submissions only.",
+      "evidence": "Both full course suites and actual prior-45 upgrade conditions"
+    },
+    {
+      "issue": "Current five-turn story was still named as a six-turn target in the notebook",
+      "resolution": "Optional copy.recordTargets changes ordinary notebook display only; no question/record/round mutation. Without the mapping the prior display is retained; compact notebook is unchanged.",
+      "evidence": "Unmodified prior page plus current notebook and raw record assertions"
+    }
+  ],
+  "historicalChain": {
+    "engine": "chromium",
+    "mount": "/",
+    "versions": [
+      27,
+      45,
+      45
+    ],
+    "realPagesAndSameDatabase": true,
+    "rawLocalRows": 46,
+    "priorFiveStarRows": 45,
+    "earlierArchiveRows": 27,
+    "allThreeUnchangedRoundsRetained": true,
+    "old15StarCertificateRetained": true,
+    "allThreeRevisedQuestionsRequireNewAnswers": true
+  },
+  "earlierChains": {
+    "initialEditions": [
+      "23-question original",
+      "30-question exam edition",
+      "28-question scene edition",
+      "27-question keyboard edition"
+    ],
+    "intermediate": "27-question click edition",
+    "final": "Current 45-question edition",
+    "scope": "Each uses real old pages and accounts, completes the necessary click-edition work, and checks original certificate/name/date after device and version changes. No injected completion data."
+  },
+  "sharedRegression": "Real Lesson23-24 32->45->45 account chain rerun after the shared notebook and scoped server changes; passed. The actual prior Lesson25-26 notebook without the optional label mapping is also checked.",
+  "reuseBoundary": "Both engines rerun all 30 current public-course conditions, including actual 27-era and prior-45 upgrades. Full new-account course and prior-45 update rerun at both mounts in both engines. Direct 27-era account upgrade and one-star GIF comparison rerun in Chromium root and WebKit subpath. Permission, real resource failure/recovery, long name, isolation, closure and export cancel/retry rerun in Chromium root; their unchanged WebKit cells reuse v3.0 evidence and do not add to this count. Earlier frozen-page suites beyond the four real older account chains reuse v3.0 evidence because their code/assets and default notebook presentation are unchanged. The existing source-boundary review for unchanged grammar targets is reused explicitly; the source pages and new material/model changes are directly reviewed this turn.",
+  "diagnostics": [
+    {
+      "file": "history-comparison-serialization.json",
+      "issue": "Initial evidence helper used JSON serialization order and reported a difference.",
+      "resolution": "Original browser assertions already used structural equality. On captured data, zero differing record values were confirmed; corrected helper ignores object member order while preserving array order. Product data unchanged."
+    },
+    {
+      "file": "pdf-check-initial.txt",
+      "issue": "PDF evidence script expected a period after knife sharp although the original question ends with a question mark.",
+      "resolution": "Reproduced against the same PDF, checked source/rendered page and extraction, corrected only the expected punctuation. PDF unchanged; no punctuation-stripping workaround."
+    }
+  ],
+  "priorUnrelatedChecks": {
+    "rerunThisTurn": false,
+    "source": "../2026-10-18-0225-unit19-20/reports/server-security-repro.tap",
+    "knownFailures": 3,
+    "scope": "Prior Windows SQLite cleanup and POSIX mode assertions; store/auth-throttle and those tests untouched. No full-repository pass claimed."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit25-26/#learn/grammar",
+    "newReferenceVisible": true,
+    "normalCourseRetryUsed": true,
+    "answersSubmitted": false,
+    "recordsCleared": false,
+    "accountReseeded": false,
+    "audit": "preview-data-check.json"
+  },
+  "pending": [
+    "teacher content review",
+    "child classroom trial",
+    "physical WeChat save",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "committed": false,
+    "pushed": false,
+    "released": false
+  },
+  "checkScope": "Scoped development verification; check:plan covers cumulative workspace changes, not just this task. Commit and release acceptance not requested or claimed."
+}

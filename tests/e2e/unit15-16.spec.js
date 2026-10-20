@@ -178,3 +178,5 @@ test('教材图册蓝套装、白手提包、红汽车与可见文字相符',asy
     expect(share,label+' 的实际填色').toBeGreaterThan(.25);
   }
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

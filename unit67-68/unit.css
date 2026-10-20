@@ -86,3 +86,15 @@
  .unit6768-workspace .application-prop{width:88px;height:108px;flex-shrink:0}
  .unit6768-workspace .diary-page{padding:12px 8px;min-width:0;max-width:65%}.unit6768-workspace .diary-page strong{font-size:17px}.unit6768-workspace .diary-page>span{font-size:16px;overflow-wrap:anywhere}
 }
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit6768-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit6768-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit6768-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit6768-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit6768-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit6768-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

@@ -3,11 +3,10 @@
 const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
 function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/unit71-72/'+name+'.'+ext;e.alt=alt;return e;}
 function storyProps(){
- const element=node('div','visit-world'),location=node('p','visit-location','Jane 与 Pauline · 讲述昨天');element.setAttribute('role','group');element.setAttribute('aria-label','Jane与Pauline面对面讲述来电的场景');
+ const element=node('div','visit-world'),location=node('p','visit-location','Jane 与 Pauline');element.setAttribute('role','group');element.setAttribute('aria-label','Jane与Pauline面对面讲述来电的场景');
  for(const[key,label,side]of [['jane','Jane','left'],['pauline','Pauline','right']]){const wrap=node('div','dialogue-actor visit-actor actor-'+key+' at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+(side==='left'?'面向右侧的Pauline':'面向左侧的Jane'),'webp'),node('span','actor-label',label));element.append(wrap);}
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','Pauline回忆中的来电');const time=node('strong'),detail=node('span');timeline.append(time,detail);
- const phone=picture('phone','story-phone','桌上的电话，听筒放在底座上');element.append(location,timeline,phone);
- function update(i){const entries=[['故事开始','Ron 是怎样的人？'],['两天的来电','昨天4次 · 前天3次'],['办公室','昨天上午和下午 · 老板接听'],['回忆老板的话','What did your boss say?'],['老板的原话','Pauline 正在打信'],['昨天傍晚六点到家','来电未接听'],['昨天夜里','Did he telephone again?'],['昨天夜里九点','又一次来电'],['回忆自己的回答','What did you say?'],['Pauline 说的话','用母亲的口吻回应'],['故事快结束了','Did he telephone again?'],['故事结尾','No, he didn’t!']];const entry=i<0?['翻开昨日记录','电话为什么一次次响起？']:entries[i];time.textContent=entry[0];detail.textContent=entry[1];element.dataset.beat=i<0?'intro':i<=1?'count':i<=4?'office':i<=5?'six':i<=9?'nine':'end';}
+ const phone=picture('phone','story-phone','桌上的电话，听筒放在底座上');element.append(location,phone);
+ function update(i){element.dataset.beat=i<0?'intro':i<=1?'count':i<=4?'office':i<=5?'six':i<=9?'nine':'end';}
  update(-1);return{element,update};
 }
 function create({element}){let view,heading,task;return{

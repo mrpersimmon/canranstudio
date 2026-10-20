@@ -1,0 +1,51 @@
+[WebServer] (node:31532) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:35604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (20.1s)
+
+
+  1) tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('dialog.award-reveal[open]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('dialog.award-reveal[open]')
+        - found locator('dialog.award-reveal[open]'), intercepting action to run the handler
+        - locator handler has finished, waiting for locator('dialog.award-reveal[open]') to be hidden
+        - interception handler has finished, continuing
+
+
+       at ..\support\unit1516-fivezones.js:30
+
+      28 |   // A server-confirmed award may appear after numeric results are already in
+      29 |   // the DOM. Follow the public settlement sequence before the next activity.
+    > 30 |   if(expectPerfect){await expect(modal).toBeVisible();await page.keyboard.press('Escape');}
+         |                                         ^
+      31 |   await room.locator('.completion-stats').scrollIntoViewIfNeeded();
+      32 |   await expect(card).toHaveAttribute('data-result-motion','finished');
+      33 |  }
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit1516-fivezones.js:30:41)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit15-16-fivezones.spec.js:181:25
+
+    Error Context: output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ─────────────────────

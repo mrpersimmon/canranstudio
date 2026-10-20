@@ -1,0 +1,207 @@
+{
+  "currentFiveStar": [
+    {
+      "engineAndMount": "chromium-root",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+        "bytes": 603237
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+        "bytes": 603237
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "chromium-subpath",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+        "bytes": 603237
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+        "bytes": 603237
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "webkit-root",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+        "bytes": 544347
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+        "bytes": 544347
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "webkit-subpath",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+        "bytes": 544347
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+        "bytes": 544347
+      },
+      "allFramesUnchanged": true
+    }
+  ],
+  "freshCourseDownloads": [
+    {
+      "folder": "account-chromium-root",
+      "name": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+      "bytes": 603237
+    },
+    {
+      "folder": "account-chromium-root",
+      "name": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "5e8bbe2081ada73006c47a6c35583a25f6e75ddbbf49ab0e29cc99320fa4d8ea",
+      "bytes": 154060
+    },
+    {
+      "folder": "account-chromium-subpath",
+      "name": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "eb9a71005ddeddaea43ba6a156b6b8e92796fc8ae418bc5cac062ed5a49d9097",
+      "bytes": 603237
+    },
+    {
+      "folder": "account-webkit-root",
+      "name": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+      "bytes": 544347
+    },
+    {
+      "folder": "account-webkit-subpath",
+      "name": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "279bc23f4420e9ae6fc6cee8781b25386350b1afcdadfe64d3a99ca1d1a2c684",
+      "bytes": 544347
+    },
+    {
+      "folder": "account-webkit-subpath",
+      "name": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "e12e9a9a3036ecfd7bde36cef06e93eb57d18d5670906e3d2057e90cb6ed9267",
+      "bytes": 156880
+    }
+  ],
+  "old15Star": {
+    "chromium": {
+      "exactPixels": true,
+      "width": 1440,
+      "height": 1100,
+      "changedPixels": 0,
+      "changedOutsideCharacters": 0,
+      "files": [
+        "output\\unit1920-review-20261018\\course-chromium\\unit19-20-fivezones-upgrad-f50af-保留姓名、原始日期及实际PNG；新版错答与首星不改旧证\\original-certificate.png",
+        "output\\unit1920-review-20261018\\course-chromium\\unit19-20-fivezones-upgrad-f50af-保留姓名、原始日期及实际PNG；新版错答与首星不改旧证\\retained-old-certificate.png"
+      ]
+    },
+    "webkit": {
+      "exactPixels": false,
+      "width": 1440,
+      "height": 1100,
+      "changedPixels": 2606,
+      "changedOutsideCharacters": 0,
+      "files": [
+        "output\\unit1920-review-20261018\\course-webkit\\unit19-20-fivezones-upgrad-f50af-保留姓名、原始日期及实际PNG；新版错答与首星不改旧证\\original-certificate.png",
+        "output\\unit1920-review-20261018\\course-webkit\\unit19-20-fivezones-upgrad-f50af-保留姓名、原始日期及实际PNG；新版错答与首星不改旧证\\retained-old-certificate.png"
+      ]
+    }
+  },
+  "print": {
+    "lesson19-20-worksheet.pdf": {
+      "pages": 3,
+      "requiredText": 22,
+      "missing": [],
+      "allPagesVisuallyReviewed": true,
+      "rawText": [
+        "课后练习纸 −\nLesson 19–20 · 纸笔⼩练习\n跟老师读课文，分角色询问状态、请求和道谢。交换角色再练一遍。\nA · ⽤ am 、 is 或 are 填空\nExam ple: Those children ___ thirsty.\nThose children are thirsty.\n1. Those children 　  tired.\n2. Their m other 　  tired, too.\n3. That ice cream  m an 　  very busy.\n4. His ice cream s 　  very nice.\n5. W hat's the m atter, children? W e 　  thirsty.\n6. W hat's the m atter, Tim ? I 　  tired.\nB · 按给定的状态写问句和回答\nExam ple: his shoes / (dirty) / clean\nAre his shoes dirty or clean?\nThey're not dirty. They're clean.\n括号内的状态用于否定，最后一项用于肯定；这是每题给定的信息，不是由否定自动推断。\n1. the children / (tired) / thirsty\n2. the postm en / (cold) / hot",
+        "3. the hairdressers / (thin) / fat\n4. the shoes / (sm all) / big\n5. the shops / (shut) / open\n6. his cases / (heavy) / light\n7. grandm other and grandfather / (young) / old\n8. their hats / (old) / new",
+        "9. the policem en / (short) / tall\n10. his trousers / (short) / long"
+      ]
+    },
+    "lesson19-20-legacy-certificate-sample.pdf": {
+      "pages": 1,
+      "requiredText": 5,
+      "missing": [],
+      "allPagesVisuallyReviewed": true,
+      "rawText": [
+        "冰淇淋休息站  · Lesson 19–20\n细心的小小观察员\n送给\n小禾\n完成  Lesson 19–20 课堂配套练习\n留意小伙伴，也发现身边事物的变化！\n公园歇一歇 跟着故事走 仔细看一看 把状态说清楚 再出发\n15 颗星  · 五关完成\n领取于  2026 年 10 月 18 日"
+      ]
+    }
+  },
+  "limitations": "WebKit old PNG has 2606 differing pixels confined to unchanged SVG character boxes; other pixels identical. Original names, dates, dimensions, content and print capability retained. Physical printing and WeChat save remain pending."
+}

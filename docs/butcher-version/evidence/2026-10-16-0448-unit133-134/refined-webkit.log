@@ -1,0 +1,13 @@
+
+Running 6 tests using 1 worker
+
+(node:29796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit133-134.spec.js:13:1 › 57题：未答材料、来源与日期、独立转述、帮助记录与三卡 (43.7s)
+  ok 2 tests\e2e\unit133-134.spec.js:59:1 › 19道书写题21行打印与恢复 (1.4s)
+  ok 3 tests\e2e\unit133-134.spec.js:60:39 › 320及短屏：报道与原话材料、长句、全部题型和三卡 (36.7s)
+  ok 4 tests\e2e\unit133-134.spec.js:60:39 › 390及短屏：报道与原话材料、长句、全部题型和三卡 (35.6s)
+  ok 5 tests\e2e\unit133-134.spec.js:60:39 › 768及短屏：报道与原话材料、长句、全部题型和三卡 (34.9s)
+  ok 6 tests\e2e\unit133-134.spec.js:60:39 › 1280及短屏：报道与原话材料、长句、全部题型和三卡 (36.4s)
+
+  6 passed (3.2m)

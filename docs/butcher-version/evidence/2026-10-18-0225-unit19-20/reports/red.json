@@ -1,0 +1,227 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit19-20-v153.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit1920-review-20261018/red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit1920-review-20261018/red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit19-20-v153.spec.js",
+      "file": "unit19-20-v153.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "综合挑战每次最多两空；全部未答材料可见且保留独立作答",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 3180,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m3\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m3\u001b[39m\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:8:84)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1920-fivezones.js:26:192)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:6:26",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                      "column": 84,
+                      "line": 8
+                    },
+                    "snippet": "   6 |  test.setTimeout(120000);await activity(page,'exam',{inspect:async(room,index,state)=>{\n   7 |   if(state!=='before')return;\n>  8 |   const fills=room.getByRole('group',{name:/第\\d+处填空/});expect(await fills.count()).toBeLessThanOrEqual(2);\n     |                                                                                    ^\n   9 |   await expect(room.locator('.grammar-model')).toHaveCount(0);\n  10 |   if([3,4,7,13].includes(index))await room.screenshot({path:info.outputPath('exam-'+(index+1)+'-unanswered.png')});\n  11 |  }});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                        "column": 84,
+                        "line": 8
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m2\u001b[39m\nReceived:    \u001b[31m3\u001b[39m\n\n   6 |  test.setTimeout(120000);await activity(page,'exam',{inspect:async(room,index,state)=>{\n   7 |   if(state!=='before')return;\n>  8 |   const fills=room.getByRole('group',{name:/第\\d+处填空/});expect(await fills.count()).toBeLessThanOrEqual(2);\n     |                                                                                    ^\n   9 |   await expect(room.locator('.grammar-model')).toHaveCount(0);\n  10 |   if([3,4,7,13].includes(index))await room.screenshot({path:info.outputPath('exam-'+(index+1)+'-unanswered.png')});\n  11 |  }});\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:8:84)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1920-fivezones.js:26:192)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:6:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T18:30:24.732Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\red\\unit19-20-v153-综合挑战每次最多两空；全部未答材料可见且保留独立作答\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\red\\unit19-20-v153-综合挑战每次最多两空；全部未答材料可见且保留独立作答\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                    "column": 84,
+                    "line": 8
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8215fbbb83ed75daa7f8-c8b727b89892fefc168a",
+          "file": "unit19-20-v153.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "主语be和形容词两道旧题补短示范；实际帮助入手记",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7699,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:17:66",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                      "column": 66,
+                      "line": 17
+                    },
+                    "snippet": "  15 |  for(let i=0;i<14;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}\n  16 |  for(let i=14;i<16;i++){\n> 17 |   await expect(room.getByRole('region',{name:'短示范',exact:true})).toBeVisible();\n     |                                                                  ^\n  18 |   await room.screenshot({path:info.outputPath('grammar-'+(i+1)+'-unanswered-320.png')});\n  19 |   await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  20 |   await room.getByRole('button',{name:i===15?'完成这一站':'下一题',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                        "column": 66,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n  15 |  for(let i=0;i<14;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}\n  16 |  for(let i=14;i<16;i++){\n> 17 |   await expect(room.getByRole('region',{name:'短示范',exact:true})).toBeVisible();\n     |                                                                  ^\n  18 |   await room.screenshot({path:info.outputPath('grammar-'+(i+1)+'-unanswered-320.png')});\n  19 |   await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  20 |   await room.getByRole('button',{name:i===15?'完成这一站':'下一题',exact:true}).click();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js:17:66"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T18:30:28.801Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\red\\unit19-20-v153-主语be和形容词两道旧题补短示范；实际帮助入手记\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\red\\unit19-20-v153-主语be和形容词两道旧题补短示范；实际帮助入手记\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit19-20-v153.spec.js",
+                    "column": 66,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8215fbbb83ed75daa7f8-e3880b632d00ddd42968",
+          "file": "unit19-20-v153.spec.js",
+          "line": 13,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T18:30:24.180Z",
+    "duration": 12950.24,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

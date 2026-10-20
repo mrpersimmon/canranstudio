@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-16",
+  "branch": "codex/release-canranstudio",
+  "standard": "v1.52",
+  "unit": "unit13-14",
+  "edition": "colour-five-zones-v1",
+  "questions": {
+    "listen": 15,
+    "roles": 4,
+    "grammar": 11,
+    "apply": 6,
+    "exam": 17,
+    "total": 53
+  },
+  "words": {
+    "cards": 21,
+    "textbookNewWords": 11,
+    "vocabularyScoringTasks": 15,
+    "vocabularyMeaningTargets": 17
+  },
+  "storyLines": 13,
+  "sourcePages": {
+    "textbook": "paper26-29/pdf59-62",
+    "guide": "paper25-28/pdf39-42",
+    "grammar": "paper26-27/pdf40-41",
+    "workbook": "paper33-37/pdf47-51",
+    "workbookBoundary": "pdf52 is Lesson15, excluded"
+  },
+  "independentTestConditionsPassed": 130,
+  "checks": [
+    {
+      "scope": "Chromium current course, migration and print",
+      "passed": 14,
+      "log": "chromium-course-initial.log"
+    },
+    {
+      "scope": "WebKit current course and migration",
+      "passed": 12,
+      "log": "webkit-course.log"
+    },
+    {
+      "scope": "Chromium account root",
+      "passed": 8,
+      "log": "chromium-root-account.log"
+    },
+    {
+      "scope": "Chromium account subpath",
+      "passed": 8,
+      "log": "chromium-sub-account.log"
+    },
+    {
+      "scope": "WebKit account root",
+      "passed": 8,
+      "log": "webkit-root-account.log"
+    },
+    {
+      "scope": "WebKit account subpath",
+      "passed": 8,
+      "log": "webkit-sub-account.log"
+    },
+    {
+      "scope": "Historical unit13-14 course",
+      "passed": 36,
+      "logs": [
+        "historical-course.log",
+        "chromium-final-and-shared.log"
+      ],
+      "note": "35 initial passes; the unchanged failing assertions passed after the targeted historical-source fixture correction. The other four cases in the final log are classified separately."
+    },
+    {
+      "scope": "Shared short-screen completion 11-12, 13-14, 15-16",
+      "passed": 3,
+      "log": "chromium-final-and-shared.log"
+    },
+    {
+      "scope": "Earlier 26-to-32-to-53 account chain and current integration",
+      "passed": 2,
+      "log": "earlier-and-integration.log"
+    },
+    {
+      "scope": "Server learning and awards",
+      "passed": 20,
+      "log": "server-unit-tests.log"
+    },
+    {
+      "scope": "Check workflow",
+      "passed": 11,
+      "log": "workflow.log"
+    }
+  ],
+  "finalRevisionRechecks": {
+    "reason": "Grammar10 now has a short worked example; Exam16 now distinguishes a negative request from evidence of a later action. The reference labels distinguish original page numbers from item quantities. Explicit WebKit legacy-account contexts also receive the iPhone13 profile.",
+    "passed": true,
+    "logs": [
+      "chromium-final-and-shared.log",
+      "webkit-final-content.log",
+      "chromium-root-final-content.log",
+      "chromium-sub-final-content.log",
+      "webkit-root-account.log",
+      "webkit-sub-account.log"
+    ],
+    "countedAgain": false,
+    "reuse": "Unchanged layouts, printing, frozen legacy behavior, authorization and recovery checks reuse the earlier passing results; final full journeys use the revised content in both engines and both account paths. The two WebKit account suites are fully rerun on the final version.",
+    "earlierSources": [
+      "content-before-dedup.js",
+      "answers-before-dedup.js"
+    ]
+  },
+  "builds": [
+    {
+      "basePath": "/",
+      "courses": 72,
+      "passed": true,
+      "log": "build-root.log"
+    },
+    {
+      "basePath": "/lesson/",
+      "courses": 72,
+      "passed": true,
+      "log": "build-sub.log"
+    }
+  ],
+  "additionalChecks": {
+    "documents": 9,
+    "syntaxFiles": 18,
+    "sourceAndPackages": "source-and-package-checks.json",
+    "fontCoverage": "font-coverage.json",
+    "oldCharacterAssetsUnchanged": true,
+    "scopedDiffWhitespace": "passed",
+    "standardUnchanged": true
+  },
+  "retainedFailures": [
+    {
+      "initial": "historical-course.log",
+      "result": "35 passed, 1 failed",
+      "isolated": "historical-isolated.log",
+      "cause": "The one-question invalidation test read the live content.js from disk, bypassing the HTTP/Worker frozen source and placing the current 53-question definition in the old 32-question page.",
+      "fix": "Read the same historical snapshot and modify only the original selected question ID. Preserve the 4-star, other activity, word, reading and draft assertions; no production migration or scoring change.",
+      "verified": "chromium-final-and-shared.log"
+    }
+  ],
+  "preservation": {
+    "previousQuestions": 32,
+    "earlierQuestions": 26,
+    "learningNamespaceUnchanged": true,
+    "localDrafts": true,
+    "wrongAnswers": true,
+    "readingPosition": true,
+    "wordPage": true,
+    "galleryPage": true,
+    "modelPage": true,
+    "oldCertificateNameAndDate": true,
+    "oldCertificatePng": true,
+    "oldCertificatePrint": true,
+    "oldCertificateSize": [
+      1440,
+      1100
+    ],
+    "oldCertificateBackgroundMatches": true,
+    "oldCertificateKeepsakes": [],
+    "old15StarsIndependent": true,
+    "crossDevice": "Previously synchronized old outcomes and certificate metadata; local-only drafts remain on the original device."
+  },
+  "pdfs": {
+    "worksheet": {
+      "file": "worksheet.pdf",
+      "pages": 3,
+      "questions": 17,
+      "writingLines": 29,
+      "lineHeightPx": 32,
+      "allPagesVisuallyReviewed": true
+    },
+    "oldCertificate": {
+      "file": "legacy-certificate.pdf",
+      "pages": 1,
+      "testStudent": "小禾",
+      "allPagesVisuallyReviewed": true
+    }
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit13-14/#learn/certificate",
+    "screenshot": "preview-account.jpg",
+    "observed": "0/5; words1/4; grammar11; exam17; current keepsake and old-history entry",
+    "answersOrStarsInjected": false,
+    "learningDataCleared": false
+  },
+  "engineBoundary": "Mobile browser profiles are emulation, not physical devices. The WebKit offline test separately handles an engine-level navigation rejection and verifies data recovery after reconnecting; this does not prove that the app fallback page appears when the engine rejects navigation before the page loads.",
+  "optimizationStatus": "O01-O15 confirmed; O16 remains a pending shared-standard proposal with local implementation. Added execution notes without changing v1.52.",
+  "notVerified": [
+    "teacher review",
+    "child trial",
+    "physical-phone WeChat save",
+    "physical printing",
+    "full repository suite",
+    "formal release acceptance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "released": false
+  }
+}

@@ -1,3 +1,4 @@
+require('../support/unit2324-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
@@ -75,7 +76,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'observe');
   await page.goto('/unit23-24/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit23-24/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Give',exact:true}).click();
-  await page.route('**/unit23-24/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit23-24/content.js','utf8')).replace( '"id": "u2324-tasks-v4-story-place"','"id": "u2324-tasks-v4-story-place-v2"' )}));
+  await page.route('**/unit23-24/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit23-24-before-fivezones/content.js','utf8')).replace( '"id": "u2324-tasks-v4-story-place"','"id": "u2324-tasks-v4-story-place-v2"' )}));
   await page.goto('/unit23-24/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit23-24/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');

@@ -1,0 +1,99 @@
+{
+  "generator": "scripts/build-unit56-labels.py",
+  "sourceFonts": {
+    "gothic-medium.ttf": {
+      "url": "https://raw.githubusercontent.com/Warren2060/ChillRoundGothic/53505f0818983d2fcdda00dc66e051ad13e81ffb/ttf/ChillRoundGothic_Medium.ttf",
+      "sha256": "7aaf168681f168b9f550734d9e25058ffe73213db07d7a50152d5446dd9e7094"
+    },
+    "nunito.ttf": {
+      "url": "https://raw.githubusercontent.com/google/fonts/bd8f81ddb5c74d5c8897b36ad88b440266245103/ofl/nunito/Nunito%5Bwght%5D.ttf",
+      "sha256": "bb55a5ca5c2042335b3991af27c4d0705d0ef41cac6164ac737fd8f2a1e85207"
+    }
+  },
+  "labels": [
+    {
+      "file": "american.svg",
+      "label": "美国",
+      "font": "Gothic Medium 500",
+      "originalSha256": "aa7e9de929087954f4c1ce0da2ecac9c37d79354175771771d6c0172728241f3"
+    },
+    {
+      "file": "chinese.svg",
+      "label": "中国",
+      "font": "Gothic Medium 500",
+      "originalSha256": "402a76e75a957b7fd34b3c6398fe0fc6bdaf3dd116b1cadbc88875473a48f807"
+    },
+    {
+      "file": "english.svg",
+      "label": "英格兰",
+      "font": "Gothic Medium 500",
+      "originalSha256": "c08187fe046c672178d9ba5d158b0913e040b544be305df59a30a81abf76531a"
+    },
+    {
+      "file": "ford.svg",
+      "label": "Ford",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "aff8b5305a988c02d17f0a6b5049ebf46b14876744ca5680a475e0ff26b3d558"
+    },
+    {
+      "file": "french.svg",
+      "label": "法国",
+      "font": "Gothic Medium 500",
+      "originalSha256": "664cef4afef259cefe283b11ba7090a14765818fa607be6b41a8c73083c0c595"
+    },
+    {
+      "file": "german.svg",
+      "label": "德国",
+      "font": "Gothic Medium 500",
+      "originalSha256": "60a134f843d431816ea12e0f2f0005305f5431ba68a3885152d510177d587129"
+    },
+    {
+      "file": "japanese.svg",
+      "label": "日本",
+      "font": "Gothic Medium 500",
+      "originalSha256": "dddb4982defb4b6fa81e4fb4a0fa03206902e196f8f14b30a3f1a58f265009b5"
+    },
+    {
+      "file": "mercedes.svg",
+      "label": "Mercedes",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "092925440f8ac72994df4a96bc5825c8485d02f7ee922850277e733b4efe8710"
+    },
+    {
+      "file": "mini.svg",
+      "label": "Mini",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "9d51d79aeb8cfc5ceeeed7e0b6b46741eebd56f2ea79430ab9ce07177b0267e0"
+    },
+    {
+      "file": "peugeot.svg",
+      "label": "Peugeot",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "52013b6c80d8040f4a50b7e16c5c3a346343133f57c4291b09fc74cd562b28c0"
+    },
+    {
+      "file": "south-korean.svg",
+      "label": "韩国",
+      "font": "Gothic Medium 500",
+      "originalSha256": "ca28236c4a338203dad3029a322c95dbf81eef7a511f3e018cca7e717e94beca"
+    },
+    {
+      "file": "swedish.svg",
+      "label": "瑞典",
+      "font": "Gothic Medium 500",
+      "originalSha256": "5e6d0a39e79a72a537abadd926b165a78e0d39dd75f8dc43b703c4fe310dc276"
+    },
+    {
+      "file": "toyota.svg",
+      "label": "Toyota",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "474f750377ea65e35f636a1c58ca9fd5123052215c6fe5ff35f93ce382b29959"
+    },
+    {
+      "file": "volvo.svg",
+      "label": "Volvo",
+      "font": "Nunito SemiBold 600",
+      "originalSha256": "856bec780031c6bb70550219b060a48473dab35a102ba0ca494e6e2551b7d701"
+    }
+  ]
+}

@@ -86,3 +86,45 @@ definition.learning.FEEDBACK=root.CanranCore.courseCatalog.requireCourseDefiniti
 root.CanranCore.unit3738=definition;
 if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// The actual v1 predecessor above remains unchanged for history and certificates.
+(function(core){
+'use strict';const old=core.unit3738;core.unit3738LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119';const grammarSource='同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；'+source;
+const unit={id:'unit37-38',version:1,mode:'classroom',contentRevision:'workshop-five-zones-v1',legacyEdition:'unit37-38-completion-v1',title:'书架制作小工坊',path:'/unit37-38/',start:'learn/words',progress:old.progress,learning:old.learning,objects:old.objects,questions:{},
+stages:[{id:'l1',title:'走进小工坊',activities:[['words','工坊小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'跟上书架故事',activities:[['text','工坊小剧场','book'],['roles','工坊小侦探','question']],required:['text','roles']},{id:'l3',title:'读懂打算与用法',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'说说下一步',activities:[['apply','表达练习站','heart']],required:['apply']},{id:'l5',title:'收好工坊发现',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'workshop-five-zones-v1',title:'细心工坊发现者',lesson:'Lesson 37–38',scene:'/assets/unit37-38/keepsake-story-v1.webp',alt:'George接到大锤，Dan在旁边，木色书架旁备有粉色油漆',color:'#577B72',zones:[['listen','单词寻宝'],['roles','工坊小侦探'],['grammar','语法小工坊'],['apply','表达练习站'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});const blank=(before,after,options)=>({before,after,options});const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u3738-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,lines)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,model:{lines}}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('plan-form','be going to加原形表达打算','另一个孩子打算明天做一个书架，还没动手。替他说完整。',fill([blank('I ',' going to',['am','is','are']),blank(' ',' a bookcase.',['make','making','makes'])],['am','make']),'I搭配am，going to后用动词原形make；这里表达打算，不表示已经在做。',[['I am going to put it on the floor.','导学原例：我打算把它放在地板上。am going to后接put。']]),
+g('arrangement','计划安排也可用于事件','现在八点半，会议按计划九点开始，还未开始。这句话在说什么？',choice(['会议预计按计划在九点开始。','会议现在已经开始。','会议已经结束。'],'会议预计按计划在九点开始。','The meeting is going to begin at nine.\nmeeting：会议；begin：开始'),'be going to可谈按计划将发生的事，不要求主语一定是有意愿的人。',[['We are going to have a lesson at ten.','我们打算十点上课。说话时还没到十点，课也还没开始。']]),
+g('prediction','凭眼前迹象作预测','乌云越积越厚，地面仍是干的，还没下雨。说话人根据这些迹象说这句话，意思是？',choice(['看这些迹象，可能很快要下雨。','雨已经下完了。','现在正在下雨。'],'看这些迹象，可能很快要下雨。','It’s going to rain!\nrain：下雨'),'这里是根据现在的迹象预测，不是天气自己的打算，也不是已经发生的事实。',[['The cup is going to fall.','杯子正倾斜在桌边，还没有落下；说话人据此判断它快掉下来了。fall：落下。']]),
+g('negative','not放在be后否定打算','另设情境：Dan今天不打算刮脸。补全他的计划。',fill([blank('Dan is ',' going to shave today.',['not','no','is'])],['not']),'否定be going to结构时，在be后加not；不是所有否定句都套同一规则。',[['I am not going to swim.','我不打算游泳。not放在am后面。']]),
+g('question','一般问句的be前置和肯定回应','另设情境：Dan已经决定给一张桌子上漆。向别人核实他的计划，并按事实回答。',fill([blank('',' Dan going to paint a table?',['Is','Are','Am']),blank('Yes, ','.',['he is','he isn’t','I am'])],['Is','he is']),'单数Dan用Is放句首提问；回答谈Dan，用he。肯定回应由题目给定的计划决定。',[['Is George going to paint it pink?','导学原例：乔治打算把它刷成粉色吗？将is提到主语George前。']]),
+g('for-person','for指出动作的受益对象','这句话中的书架是给谁做的？',choice(['说话人的弟弟。','说话人的爸爸。','说话人自己。'],'说话人的弟弟。','My father is making a bookcase for my brother.\nbrother：这里指弟弟'),'for my brother说明这件事是为弟弟做的；制作人和受益人不同。',[['My mother is cooking supper for me.','导学原例：妈妈正在为我做晚饭。for me说明为谁做。']]),
+g('for-meal','for说明用作哪一餐的食物','这句话介绍哪种用餐情况？',choice(['早餐吃鸡蛋。','午餐吃鸡蛋。','早餐后去买鸡蛋。'],'早餐吃鸡蛋。','I have eggs for breakfast.\nbreakfast：早餐'),'for breakfast表示作为早餐食用，不是在给“早餐”这个人做东西。',[['I like some bread and milk for breakfast.','导学原例：我喜欢把面包和牛奶作为早餐。bread：面包；milk：牛奶。']]),
+g('for-reason','for说明感谢的原因','这句话为什么感谢对方？',choice(['对方寄来了一封信。','对方要来吃晚饭。','说话人要把信送给对方。'],'对方寄来了一封信。','Thank you for your letter.\nletter：信'),'for your letter说明感谢的原因；your letter指对方的来信。',[['Thank you for helping me with my English.','导学原例：谢谢你帮我学英语。for后说明感谢的事情。']]),
+g('for-purpose','for说明目的','孩子回到教室，指着自己的书包说这句话。他来这里是为了什么？',choice(['来取自己的书包。','来制作书包。','来洗书包。'],'来取自己的书包。','I’m here for my schoolbag.\nschoolbag：书包'),'for my schoolbag在这个情境中说明来取书包的目的，不是支持一个书包。',[['Let’s go for a walk.','导学原例：我们去散步吧。for a walk说明活动目的。']]),
+g('for-support','for可表示支持赞成','这句话是在表达什么？',choice(['我支持你的计划。','我正在替你制定计划。','我打算取消你的计划。'],'我支持你的计划。','I am for your plan.\nplan：计划'),'be for a plan表示赞成这个计划，不等于自己打算做什么。',[['No one was for my plan during the meeting.','导学原例：会议上没有人支持我的计划。这里for表示赞成；was是例句中的过去形式，本题不考时态变化。']]),
+g('fixed','for在固定表达中的用法','想说“例如，我们可以画一个书架”，补全表达。',fill([blank('For ', ', we can draw a bookcase.',['example','homework','colour'])],['example']),'For example是“例如”，用来引出例子；wait for表示等待，两者按完整搭配理解。',[['Who are you waiting for?','导学原例：你在等谁？wait for表示等候。'],['For example, you can draw a picture of a monkey.','导学原例：例如，你可以画一只猴子。monkey：猴子。']]),
+...old.questions.observe];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-for','撤去示范后区分for的对象、用餐和原因','给三句话配上对应的意思。',{type:'match',pairs:[{id:'0',en:'This cake is for Lily.',cn:'这个蛋糕是给莉莉的。'},{id:'1',en:'I have fish for lunch.',cn:'我午餐吃鱼。'},{id:'2',en:'Thank you for your help.',cn:'谢谢你的帮助。'}],answer:JSON.stringify(['0','1','2'])},'for在三句中分别连接受益对象、哪一餐、感谢原因。'),
+q('a-support','依据事实回应对计划的支持','Tom支持Dan的计划。Dan问下面的问题，Tom该怎样直接回答？',choice(['Yes, I am.','No, I’m not.','I’m making a bookcase.'],'Yes, I am.','Dan: Are you for my plan?\nTom: ___'),'问的是Tom是否支持计划；Tom用I回应，按题目支持这一事实回答Yes。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-schedule','独立理解按安排发生的事件','现在七点半，英语课按安排八点开始，还未开始。下面这句话说明什么？',choice(['英语课按安排将在八点开始。','英语课现在已经开始。','英语课已经结束。'],'英语课按安排将在八点开始。','The English lesson is going to begin at eight.\nbegin：开始'),'根据给定的安排和当前时间理解未来事件，不是主语想做某事。'),
+q('e-predict','独立根据现有迹象理解预测','盘子已经向架子边缘倾斜，尚未掉下。说话人看见它并这样说，意思是？',choice(['看样子盘子快要掉下来了。','盘子已经掉到地上了。','说话人打算把盘子放回架子。'],'看样子盘子快要掉下来了。','The dish is going to fall.\nfall：掉下'),'这是基于眼前迹象的预测，不是盘子的意愿，也不表示已经掉下。'),
+q('e-negative','独立组织否定打算','另一个情境：我不打算给这张桌子上漆。按这个意思组织句子。',{type:'order',tokens:['I','am','not','going','to','paint','this','table.'],answer:'I am not going to paint this table.'},'not在am后，going to后仍用原形paint；题目指定的是另一计划。'),
+q('e-question','独立核实计划并按事实否定回答','Lily今天不打算做蛋糕。选出正确的问答。',choice(['Is Lily going to make a cake? — No, she isn’t.','Is Lily going to make a cake? — Yes, she is.','Are Lily going to make a cake? — No, she isn’t.'],'Is Lily going to make a cake? — No, she isn’t.'),'单数Lily的问句用Is；没有这个打算，按事实回答No, she isn’t.。'),
+q('e-for-person','独立运用for表示受益对象','爸爸正在为女儿制作书架，补全句子。',fill([blank('The father is making a bookcase ',' his daughter.',['for','under','across'])],['for']),'for his daughter说明书架是为女儿制作的，不是说位置。'),
+q('e-for-meal','独立运用for表示用餐','说“我早餐喝牛奶”，补全表达。',fill([blank('I have milk ',' breakfast.',['for','under','from'])],['for']),'for breakfast表示把牛奶作为早餐饮用，不是来自早餐。'),
+q('e-for-reason','独立读懂感谢原因','这句为什么感谢对方？',choice(['对方帮助了说话人。','说话人打算让对方吃早餐。','对方支持了一个没有提到的计划。'],'对方帮助了说话人。','Thank you for helping me.\nhelping me：帮助我'),'for helping me给出感谢的原因，不能补写材料没有的计划。'),
+q('e-for-mixed','独立区分目的、支持和固定搭配','读完整表达，配上正确的意思。',{type:'match',pairs:[{id:'0',en:'They are going for a walk.',cn:'他们要去散步。'},{id:'1',en:'We are for this plan.',cn:'我们支持这个计划。'},{id:'2',en:'For example, we can draw a cup.',cn:'例如，我们可以画一个杯子。'},{id:'3',en:'Who are they waiting for?',cn:'他们在等谁？'}],answer:JSON.stringify(['0','1','2','3'])},'for的含义随完整表达变化，不能一律译成给某个人。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,ids])=>[id,ids.map(prior=>({key:'unit3738-'+prior+'-practice/v1',questions:old.questions[prior]}))]));
+core.unit3738=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

@@ -250,7 +250,7 @@
   const a=node('ol');for(const first of content.WRITING_A){const li=node('li',first);li.append(node('div','________________________________________________'));a.append(li);}writing.append(a);
   writing.append(node('h4','B · 第一种还没吃，第二种刚吃过'));
   for(const example of content.WRITING_B_EXAMPLES)writing.append(node('p',example,'reference-note'));
-  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');li.append(node('div','________________________________________________'));b.append(li);}writing.append(b);
+  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');for(let line=0;line<2;line++)li.append(node('div','','writing-line'));b.append(li);}writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

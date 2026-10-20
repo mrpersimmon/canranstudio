@@ -1,0 +1,7 @@
+
+> canranstudio@0.0.0 check:plan
+> node scripts/check-workflow.js commit --plan
+
+Scope: commit against HEAD, 6584 changed paths
+Checks: browser-completion, browser-statistics-webkit, browser-recovery-webkit, browser-login, workflow, unit, browser-changed, browser-common-interactions, browser-smoke, browser-cache-cold, browser-cache-revisit, browser-course-cache, browser-pronunciation, browser-unit12, browser-units1-6-exam, browser-unit78, browser-units9-12, browser-unit1314, browser-unit1516, browser-units17-30-review, browser-unit1718, browser-unit1920, browser-unit2122, browser-unit2324, browser-unit2526, browser-unit2728, browser-unit3132, browser-unit3334, browser-unit3536, browser-unit3738, browser-unit3940, browser-unit4546, browser-unit4344, browser-unit9394, browser-unit9596, browser-unit9798, browser-unit99100, browser-unit101102, browser-unit103104, browser-unit105106, browser-unit107108, browser-unit109110, browser-unit111112, browser-unit113114, browser-unit115116, browser-unit117118, browser-unit119120, browser-unit121122, browser-unit123124, browser-unit125126, browser-unit127128, browser-unit129130, browser-unit131132, browser-unit133134, browser-unit135136, browser-unit137138, browser-unit139140, browser-unit141142, browser-unit143144, browser-unit9192, browser-unit4142, browser-unit2930, browser-units1-30-tasks, browser-retry-feedback, browser-state, browser-layout
+This is scoped verification; complete release acceptance is a separate step.

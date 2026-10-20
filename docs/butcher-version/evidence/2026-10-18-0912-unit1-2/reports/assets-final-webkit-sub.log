@@ -1,0 +1,10 @@
+[WebServer] (node:3172) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:24872) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 (50.0s)
+
+  1 passed (55.9s)

@@ -1,0 +1,460 @@
+[
+  {
+    "callId": "call@190",
+    "startTime": 30774.881,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .fb",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "答对了！",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@192",
+    "startTime": 30787.11,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"下一题\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@194",
+    "startTime": 30956.963,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"检查答案\"s]",
+      "expression": "to.be.disabled",
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@196",
+    "startTime": 30966.575,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .progress-copy",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "第 6 / 7 题",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@198",
+    "startTime": 30976.937,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .practice-options >> internal:role=button[name=\"sugar\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@200",
+    "startTime": 31133.612,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"检查答案\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@202",
+    "startTime": 31297.281,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .fb",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "答对了！",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@204",
+    "startTime": 31310.738,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"下一题\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@206",
+    "startTime": 31446.557,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"检查答案\"s]",
+      "expression": "to.be.disabled",
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@208",
+    "startTime": 31467.456,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .progress-copy",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "第 7 / 7 题",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@210",
+    "startTime": 31478.46,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"英文\"s] >> internal:role=button[name=\"tobacco\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@212",
+    "startTime": 31611.772,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"词义\"s] >> internal:role=button[name=\"烟草；烟丝\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@214",
+    "startTime": 31775.774,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"英文\"s] >> internal:role=button[name=\"bird\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@216",
+    "startTime": 31938.728,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"词义\"s] >> internal:role=button[name=\"鸟\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@218",
+    "startTime": 32084.38,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"英文\"s] >> internal:role=button[name=\"tin\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@220",
+    "startTime": 32235.474,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=group[name=\"词义\"s] >> internal:role=button[name=\"罐\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@222",
+    "startTime": 32355.92,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"检查答案\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@224",
+    "startTime": 32524.164,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .fb",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "答对了！",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@226",
+    "startTime": 32536.24,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> internal:role=button[name=\"完成这一站\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@228",
+    "startTime": 32747.636,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-listen >> .completion-number",
+      "expression": "to.have.text.array",
+      "expectedText": [
+        {
+          "string": "7",
+          "normalizeWhiteSpace": true
+        },
+        {
+          "string": "7",
+          "normalizeWhiteSpace": true
+        },
+        {
+          "string": "0",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@230",
+    "startTime": 32764.096,
+    "method": "isVisible",
+    "apiName": null,
+    "params": {
+      "selector": "dialog.award-reveal[open]",
+      "strict": true
+    }
+  },
+  {
+    "callId": "call@232",
+    "startTime": 32771.247,
+    "method": "goto",
+    "apiName": null,
+    "params": {
+      "url": "/lesson/unit41-42/#learn/roles",
+      "waitUntil": "load"
+    }
+  },
+  {
+    "callId": "call@234",
+    "startTime": 32783.08,
+    "method": "isVisible",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> .practice-finish",
+      "strict": true
+    }
+  },
+  {
+    "callId": "call@236",
+    "startTime": 32815.399,
+    "method": "innerText",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> .progress-copy",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@238",
+    "startTime": 32823.86,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> internal:role=button[name=\"检查答案\"s]",
+      "expression": "to.be.disabled",
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@240",
+    "startTime": 32833.115,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> .progress-copy",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "第 1 / 5 题",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@242",
+    "startTime": 32841.778,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> .practice-options >> internal:role=button[name=\"不太重\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@244",
+    "startTime": 32999.217,
+    "method": "click",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> internal:role=button[name=\"检查答案\"s]",
+      "strict": true,
+      "timeout": 10000
+    }
+  },
+  {
+    "callId": "call@246",
+    "startTime": 33168.325,
+    "method": "expect",
+    "apiName": null,
+    "params": {
+      "selector": ".stage-roles >> .fb",
+      "expression": "to.have.text",
+      "expectedText": [
+        {
+          "string": "答对了！",
+          "normalizeWhiteSpace": true
+        }
+      ],
+      "expectedValue": {
+        "value": {
+          "v": "undefined"
+        },
+        "handles": []
+      },
+      "isNot": false,
+      "timeout": 5000
+    }
+  },
+  {
+    "callId": "call@248",
+    "startTime": 33173.903,
+    "method": "keyboardPress",
+    "apiName": null,
+    "params": {
+      "key": "Escape"
+    }
+  }
+]

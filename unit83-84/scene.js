@@ -7,9 +7,9 @@ function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location');element.setAttribute('role','group');element.setAttribute('aria-label','Carol和Tom收拾行李，与Sam聊起已经吃过的午餐和假期');
  const actors={};for(const[key,label]of [['carol','Carol'],['tom','Tom'],['sam','Sam']]){const wrap=node('div','dialogue-actor visit-actor');wrap.dataset.actor=key;const img=picture(key,'visit-cast','','webp');wrap.append(img,node('span','actor-label',label));element.append(wrap);actors[key]={wrap,img};}
  const suitcase=picture('pack','story-suitcase','打开的行李箱里放着折好的衣服');element.append(suitcase);
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const title=node('strong'),detail=node('span');timeline.append(title,detail);element.append(location,timeline);
- const entries=[['Sam来做客','Carol请他进门'],['Tom邀请Sam吃午饭','Tom和Carol正在吃'],['Sam已经吃过午饭','12:30吃的'],['Carol请Sam喝咖啡','Have a cup of coffee.'],['Sam刚喝过一杯','在午饭之后'],['大家去客厅','去那里喝咖啡'],['Carol解释房间为什么乱','正在打包 · 明天出发'],['Sam表示羡慕','Aren’t you lucky!'],['Tom问Sam的假期','When…?'],['Sam今年已经休过假','下一次时间还不知道'],['Carol问去了哪里','Where…?'],['Sam的假期在家度过','I stayed at home!']];
- function update(i){const[left,right]=pairFor(i);for(const[key,{wrap,img}]of Object.entries(actors)){wrap.hidden=key!==left&&key!==right;wrap.classList.toggle('at-left',key===left);wrap.classList.toggle('at-right',key===right);wrap.classList.toggle('face-flipped',key===left&&key!=='carol');img.alt=`${key}全身完整，面向${key===left?'右侧的'+right:'左侧的'+left}`;}const entry=i<0?['Sam来做客','谁要去度假，谁已经休过假？']:entries[i];title.textContent=entry[0];detail.textContent=entry[1];element.dataset.scene=i>=8?'holiday':i>=6?'packing':i>=5?'living-room':'welcome';location.textContent=i>=5?'Carol和Tom的家 · 客厅':'Carol和Tom的家 · 午餐时分';suitcase.hidden=i<5;}
+ element.append(location);
+
+ function update(i){const[left,right]=pairFor(i);for(const[key,{wrap,img}]of Object.entries(actors)){wrap.hidden=key!==left&&key!==right;wrap.classList.toggle('at-left',key===left);wrap.classList.toggle('at-right',key===right);wrap.classList.toggle('face-flipped',key===left&&key!=='carol');img.alt=`${key}全身完整，面向${key===left?'右侧的'+right:'左侧的'+left}`;}element.dataset.scene=i>=8?'holiday':i>=6?'packing':i>=5?'living-room':'welcome';location.textContent=i>=5?'Carol和Tom的家 · 客厅':'Carol和Tom的家 · 午餐时分';suitcase.hidden=i<5;}
  update(-1);return{element,update,sideFor:(i,who)=>pairFor(i)[1]===who?'right':'left'};
 }
 function create({element}){let view,heading,task;return{

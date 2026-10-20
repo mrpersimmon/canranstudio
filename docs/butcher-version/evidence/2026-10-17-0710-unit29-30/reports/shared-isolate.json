@@ -1,0 +1,165 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/retry-feedback.spec.js",
+      "-g",
+      "unit29-30",
+      "--reporter=list,json",
+      "--output=output/unit2930-shared-isolate"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2930-shared-isolate",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4360",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "retry-feedback.spec.js",
+      "file": "retry-feedback.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unit29-30 选择题错答只提示重试，改选后正常推进",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5893,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.practice-options button').filter({ hasNotText: 'sweep' }).first()\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.practice-options button').filter({ hasNotText: 'sweep' }).first()\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\retry-feedback.spec.js:43:87",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\retry-feedback.spec.js",
+                      "column": 87,
+                      "line": 43
+                    },
+                    "snippet": "  41 |   test(course+' 选择题错答只提示重试，改选后正常推进',async({page})=>{\n  42 |     await page.goto('/'+course+'/#learn/'+stage);const room=page.locator('.stage-'+stage);\n> 43 |     await room.locator('.practice-options button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();\n     |                                                                                       ^\n  44 |     await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');\n  45 |     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);\n  46 |     await room.getByRole('button',{name:'再试一次',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\retry-feedback.spec.js",
+                        "column": 87,
+                        "line": 43
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.practice-options button').filter({ hasNotText: 'sweep' }).first()\u001b[22m\n\n\n  41 |   test(course+' 选择题错答只提示重试，改选后正常推进',async({page})=>{\n  42 |     await page.goto('/'+course+'/#learn/'+stage);const room=page.locator('.stage-'+stage);\n> 43 |     await room.locator('.practice-options button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();\n     |                                                                                       ^\n  44 |     await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');\n  45 |     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);\n  46 |     await room.getByRole('button',{name:'再试一次',exact:true}).click();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\retry-feedback.spec.js:43:87"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T23:54:05.605Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-shared-isolate\\retry-feedback-unit29-30-选择题错答只提示重试，改选后正常推进\\error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-shared-isolate\\retry-feedback-unit29-30-选择题错答只提示重试，改选后正常推进\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-shared-isolate\\retry-feedback-unit29-30-选择题错答只提示重试，改选后正常推进\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\retry-feedback.spec.js",
+                    "column": 87,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "655a3c6877ae64d9a95e-4520703e441391a26528",
+          "file": "retry-feedback.spec.js",
+          "line": 41,
+          "column": 3
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T23:54:05.054Z",
+    "duration": 7272.558,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

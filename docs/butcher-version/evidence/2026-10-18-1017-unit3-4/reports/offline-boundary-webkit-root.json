@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "output/unit34-review-20261018/offline.config.cjs",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/offline-boundary-webkit-root"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline.config.cjs",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/offline-boundary-webkit-root",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018",
+        "testIgnore": [],
+        "testMatch": [
+          "offline-diagnostic.spec.cjs"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4500/",
+      "reuseExistingServer": false,
+      "timeout": 30000,
+      "cwd": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio"
+    }
+  },
+  "suites": [
+    {
+      "title": "offline-diagnostic.spec.cjs",
+      "file": "offline-diagnostic.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "WebKit actual offline navigation boundary",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 13168,
+                  "error": {
+                    "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '检查答案', exact: true }) resolved to 4 elements:\n    1) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('单词寻宝').getByRole('button', { name: '检查答案' })\n    2) <button type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('语法小工坊').getByRole('button', { name: '检查答案' })\n    3) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领柜台', { exact: true }).getByRole('button', { name: '检查答案' })\n    4) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领小挑战').getByRole('button', { name: '检查答案' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n",
+                    "stack": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '检查答案', exact: true }) resolved to 4 elements:\n    1) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('单词寻宝').getByRole('button', { name: '检查答案' })\n    2) <button type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('语法小工坊').getByRole('button', { name: '检查答案' })\n    3) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领柜台', { exact: true }).getByRole('button', { name: '检查答案' })\n    4) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领小挑战').getByRole('button', { name: '检查答案' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-diagnostic.spec.cjs:7:165",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-diagnostic.spec.cjs",
+                      "column": 165,
+                      "line": 7
+                    },
+                    "snippet": "   5 |  test.setTimeout(60000);await adminLogin(page,'/');const a=await createStudent(page,'断网边界诊断','小伞',[/Lesson 3–4/]);const s=await studentLogin(browser,a,'/');\n   6 |  try{const p=s.page;await p.goto('/unit3-4/#learn/reply');await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});const state=await p.evaluate(()=>({controlled:!!navigator.serviceWorker?.controller}));\n>  7 |  await s.context.setOffline(true);await p.getByRole('button',{name:'This is not my coat.',exact:true}).click();await p.getByRole('button',{name:'检查答案',exact:true}).click();await p.getByRole('button',{name:'下一题',exact:true}).click();await expect(p.locator('.stage-reply .progress-copy')).toHaveText('第 2 / 10 题');\n     |                                                                                                                                                                     ^\n   8 |  try{await p.reload()}catch(e){state.reloadError=String(e)}\n   9 |  state.url=p.url();state.html=await p.content();state.fallback=await p.getByRole('heading',{name:'联网后再进入',exact:true}).count();state.course=await p.locator('.stage-reply').count();await p.screenshot({path:info.outputPath('offline.png')});\n  10 |  await s.context.setOffline(false);await p.goto('/unit3-4/#learn/reply');await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(p.locator('.stage-reply .progress-copy')).toHaveText('第 2 / 10 题');state.restored=true;await fs.writeFile(info.outputPath('diagnostic.json'),JSON.stringify(state,null,2));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-diagnostic.spec.cjs",
+                        "column": 165,
+                        "line": 7
+                      },
+                      "message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: '检查答案', exact: true }) resolved to 4 elements:\n    1) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('单词寻宝').getByRole('button', { name: '检查答案' })\n    2) <button type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('语法小工坊').getByRole('button', { name: '检查答案' })\n    3) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领柜台', { exact: true }).getByRole('button', { name: '检查答案' })\n    4) <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button> aka getByLabel('认领小挑战').getByRole('button', { name: '检查答案' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\n\n   5 |  test.setTimeout(60000);await adminLogin(page,'/');const a=await createStudent(page,'断网边界诊断','小伞',[/Lesson 3–4/]);const s=await studentLogin(browser,a,'/');\n   6 |  try{const p=s.page;await p.goto('/unit3-4/#learn/reply');await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});const state=await p.evaluate(()=>({controlled:!!navigator.serviceWorker?.controller}));\n>  7 |  await s.context.setOffline(true);await p.getByRole('button',{name:'This is not my coat.',exact:true}).click();await p.getByRole('button',{name:'检查答案',exact:true}).click();await p.getByRole('button',{name:'下一题',exact:true}).click();await expect(p.locator('.stage-reply .progress-copy')).toHaveText('第 2 / 10 题');\n     |                                                                                                                                                                     ^\n   8 |  try{await p.reload()}catch(e){state.reloadError=String(e)}\n   9 |  state.url=p.url();state.html=await p.content();state.fallback=await p.getByRole('heading',{name:'联网后再进入',exact:true}).count();state.course=await p.locator('.stage-reply').count();await p.screenshot({path:info.outputPath('offline.png')});\n  10 |  await s.context.setOffline(false);await p.goto('/unit3-4/#learn/reply');await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(p.locator('.stage-reply .progress-copy')).toHaveText('第 2 / 10 题');state.restored=true;await fs.writeFile(info.outputPath('diagnostic.json'),JSON.stringify(state,null,2));\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-diagnostic.spec.cjs:7:165"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:19:52.293Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-boundary-webkit-root\\offline-diagnostic-WebKit-actual-offline-navigation-boundary\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-boundary-webkit-root\\offline-diagnostic-WebKit-actual-offline-navigation-boundary\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\offline-diagnostic.spec.cjs",
+                    "column": 165,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "faf4ed3f9e8a471fdbd9-cd1bb4625ef6a90a245d",
+          "file": "offline-diagnostic.spec.cjs",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T03:19:48.009Z",
+    "duration": 18087.194000000003,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

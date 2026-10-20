@@ -1,0 +1,73 @@
+{
+  "id": "unit57-58",
+  "source": {
+    "file": "tests/support/unit5758.js",
+    "sha256": "289d72874cf86d704e5dc8a3ca1fac8a8d2f24082cda7fd17854520c3a6e20f6"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u5758-v1-r-school",
+      "text": "Lesson 57\n\nIt is eight o’clock. The children go to school by car every day, but today, they are going to school on foot."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u5758-v1-r-shops",
+      "text": "Lesson 57\n\nIt is ten o’clock. Mrs. Sawyer usually stays at home in the morning, but this morning, she is going to the shops."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u5758-v1-r-tea",
+      "text": "Lesson 57\n\nIt is four o’clock. In the afternoon, Mrs. Sawyer usually drinks tea in the living room. But this afternoon, she is drinking tea in the garden."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u5758-v1-r-play",
+      "text": "Lesson 57\n\nIt is six o’clock. In the evening, the children usually do their homework, but this evening, they are not doing their homework. At the moment, they are playing in the garden."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u5758-v1-r-book",
+      "text": "Lesson 57\n\nIt is nine o’clock. Mr. Sawyer usually reads his newspaper at night. But he’s not reading his newspaper tonight. At the moment, he’s reading an interesting book."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u5758-v1-r-times",
+      "text": "Lesson 57\n\nIt is eight o’clock. The children go to school by car every day, but today, they are going to school on foot.\n\nIt is ten o’clock. Mrs. Sawyer usually stays at home in the morning, but this morning, she is going to the shops.\n\nIt is four o’clock. In the afternoon, Mrs. Sawyer usually drinks tea in the living room. But this afternoon, she is drinking tea in the garden.\n\nIt is six o’clock. In the evening, the children usually do their homework, but this evening, they are not doing their homework. At the moment, they are playing in the garden.\n\nIt is nine o’clock. Mr. Sawyer usually reads his newspaper at night. But he’s not reading his newspaper tonight. At the moment, he’s reading an interesting book."
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u5758-v1-e-morning",
+      "text": "Lesson 57\n\nIt is ten o’clock. Mrs. Sawyer usually stays at home in the morning, but this morning, she is going to the shops."
+    },
+    {
+      "zone": "exam",
+      "index": 6,
+      "questionId": "u5758-v1-e-night",
+      "text": "Lesson 57\n\nIt is nine o’clock. Mr. Sawyer usually reads his newspaper at night. But he’s not reading his newspaper tonight. At the moment, he’s reading an interesting book."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1",
+    "R2": "2",
+    "R3": "3",
+    "R4": "4",
+    "R5": "5",
+    "R6": "*",
+    "E4": "2",
+    "E6": "5"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "documents": 9,
+  "syntaxFiles": 18,
+  "standardSha256": "38a5102891e5b4f923bd871fbc9488286cf1582da870a3611da151205e03c74e",
+  "packages": {
+    "root": {
+      "revision": "c3581d4571f0ec2ce83894f3f500a0835dca05b9b9782cf67db454bec9f867e2",
+      "required": 159,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    },
+    "sub": {
+      "revision": "736955a399250901b4cc416652330f0cc199926471927da804271759f9936222",
+      "required": 159,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    }
+  },
+  "artwork": [
+    {
+      "file": "assets/unit9-10/keepsake-story-v1.webp",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "sha256": "24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03"
+    },
+    {
+      "file": "assets/unit9-10/cast-talk-v1.webp",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "sha256": "73ec229fced6b96a5b2f6175739c639e457081a616365a814eee5c0a88151072"
+    },
+    {
+      "file": "assets/unit9-10/cast-wave-v1.webp",
+      "width": 1024,
+      "height": 1024,
+      "alpha": true,
+      "sha256": "c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7"
+    },
+    {
+      "file": "assets/unit9-10/hot-character-v1.webp",
+      "width": 683,
+      "height": 1024,
+      "alpha": true,
+      "sha256": "588701051b6a54824b77b8bd445d64e811d6c54333dbc3b72cf3f6577b9079df"
+    }
+  ],
+  "sources": {
+    "unit9-10/content.js": "798c8e52cb453b4bac2f46d04869080f7de50e8bdf5b305db1e1db982a3cf1c3",
+    "unit9-10/grammar.js": "4fb2f8dc198e90c6aa3602d30ec44436f6fdfba36696ea199a11a8d9ed1a499f",
+    "unit9-10/legacy-certificate.js": "657c31c4b18abc1cae8595603d5186d0898f81ccf4c0eb2b3cc756bbd7dcdaa8",
+    "unit9-10/legacy.js": "4650b47d6588c4c84b2509734832c8a40ad22603387079aa0a3cd1520c013270",
+    "unit9-10/references.js": "7abe1af55dd8b20ca6898b493a2fa16a148b154478acb88241f2a5fca2a95ea1",
+    "unit9-10/scene.js": "b56dca50a61c561777d109d73a189a4bc4d35f7406d9eb0c8424cb6819856f36",
+    "unit9-10/unit.js": "27c9fa7ea79d811ef7fa49e158f71039428d3cb371f9288406c3c126f89b5996",
+    "server/progress.js": "1cb0e2ca9b28023ad2d9c4518d3b7ed86a28c9b39cd7644c4c518e29bde1fe27",
+    "server/award-catalog.js": "1f498874e821301fda5e8b047d1004c026afee7303a45b4dcad51301cb52e52f",
+    "server/legacy/unit9-10-content.js": "1db70c621cc59e835ce8737b0b6808d6c0a1d6f8b2981e74d12ebc09e9873864",
+    "core/award-card-layout.js": "1c1b43cfcd2a3dc449c3a12116e42d6e0ca4600a661a521f0e2184bf673e39f0",
+    "scripts/check-workflow.config.js": "baeb2d887fe7ceab40f35abd8aaa1a32810b2e7fb1eafb493103ab1fd5dedcae",
+    "tests/support/static-server.js": "c3cb75553a02a59c617ec72d354a38471ec7a85741118a9fdd03ad8d9d0cd311",
+    "tests/support/unit910-fivezones.js": "52004779f7b48e005645e6965551be8c9c43180b212e03e2def89b19295e9048",
+    "tests/support/unit910-legacy.js": "c39440a461431000d1c1efc03bdac7ae9281dbecbf61584a6ef33aec04127c04",
+    "tests/support/unit9-10-flow.js": "6d138615770b06d7082e9c133354534b6dadbf1e361cb14d7b9d27b5a101d656",
+    "tests/login/unit9-10-upgrade.spec.js": "cab8e08cdd7306ae90cd8363de8330b3ea5ac9b627a9bb9be6b6ee2119d67962",
+    "tests/login/course-integration.spec.js": "18c7f1a5e178af32e94d9a5fad6a78fe0f8380524d7d4d065dbee45daf5f156c",
+    "unit9-10/index.html": "4c58214b615eb8887aeb39c1ed88aa8d33a59225a92ba5cca244615dadf38648",
+    "unit9-10/legacy.css": "31937dabd71f47918270a60a10f42b0616fce27d40623546bb3eaf3790596a81",
+    "unit9-10/typography.css": "a4502cba8afad3fa476926bf5d758a112edadf3079ebab4a2c162ac26d0a1354",
+    "unit9-10/unit.css": "942f9dd1a3e0164408d2205f84ccbf1afd509cf40e887010f2e775efbbd78dd4",
+    "assets/unit9-10/hot.svg": "6ac49733a89e2affc249eff985f12139572ba3d2b6b26da059ac0544db67a419",
+    "assets/unit9-10/steven.svg": "474a0388d3f8af25aff41c71454bda8061d05dba63640f86dcb2bb48661da3d0",
+    "assets/unit9-10/helen.svg": "9a096e545347c8cceb05c551a55fc6d9a0f1fe3c614db2a04cd5164c59de5e40",
+    "assets/awards/fonts/lesson-gothic-body-400.woff2": "7da99f3cf60b901ae0c428a9992c3c9956707df9fdaf5b001ffb6f329bbf48b7",
+    "assets/awards/fonts/sources.json": "4f24822acfcc293c65c222c922aeae22fbe9c6bee1a62418f4f5993187c390ab",
+    "core/story-certificate.css": "694d118aaa38d46820d3dd6a403d280fb5d7af48de762134350672fa09ec14d3",
+    "unit1-2/completion.css": "01ffb53e58452bafabc0a347773b058fe47585e1eb2a94b6a0fc310863a08e40",
+    "index.html": "2e476d46300bcb74630a462130e8394afb7e49ce16fbd3a619c65740af94e75f",
+    "assets/unit9-10/keepsake-story-v1.webp": "24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03",
+    "assets/unit9-10/cast-talk-v1.webp": "73ec229fced6b96a5b2f6175739c639e457081a616365a814eee5c0a88151072",
+    "assets/unit9-10/cast-wave-v1.webp": "c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7",
+    "assets/unit9-10/hot-character-v1.webp": "588701051b6a54824b77b8bd445d64e811d6c54333dbc3b72cf3f6577b9079df"
+  }
+}

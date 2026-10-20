@@ -1,6 +1,7 @@
 'use strict';
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
+require('../support/unit1920-legacy').historicalSuite(test);
 const {completeActivity,completeStory,completeUnit1920}=require('../support/unit19-20-flow');
 const fs=require('node:fs/promises');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -75,7 +76,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'observe');
   await page.goto('/unit19-20/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit19-20/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Sit',exact:true}).click();
-  await page.route('**/unit19-20/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit19-20/content.js','utf8')).replace("q('story-thanks',","q('story-thanks-v2',")}));
+  await page.route('**/unit19-20/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit19-20-before-fivezones/content.js','utf8')).replace("q('story-thanks',","q('story-thanks-v2',")}));
   await page.goto('/unit19-20/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit19-20/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 6');

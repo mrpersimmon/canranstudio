@@ -1,0 +1,1106 @@
+{
+  "listen": [
+    {
+      "id": "u3536-v1-places",
+      "target": "首次区分照片、村庄和山谷",
+      "prompt": "把英文和意思配起来。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "首次区分照片、村庄和山谷",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "photograph",
+          "cn": "照片"
+        },
+        {
+          "id": "1",
+          "en": "village",
+          "cn": "村庄"
+        },
+        {
+          "id": "2",
+          "en": "valley",
+          "cn": "山谷"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "三个新概念，不再整组反向翻译。"
+    },
+    {
+      "id": "u3536-v1-landscape",
+      "target": "区分山、岸与水",
+      "prompt": "给风景里的词语配上意思。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "区分山、岸与水",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "hill",
+          "cn": "小山"
+        },
+        {
+          "id": "1",
+          "en": "bank",
+          "cn": "河岸"
+        },
+        {
+          "id": "2",
+          "en": "water",
+          "cn": "水"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "bank以本课河岸义出现，不教作银行；水不是岸。"
+    },
+    {
+      "id": "u3536-v1-more-words",
+      "target": "区分建筑、公园和游泳",
+      "prompt": "再认三个新词。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "区分建筑、公园和游泳",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "building",
+          "cn": "建筑物"
+        },
+        {
+          "id": "1",
+          "en": "park",
+          "cn": "公园"
+        },
+        {
+          "id": "2",
+          "en": "swim",
+          "cn": "游泳"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "三项不同新词义，动作与地点按本课词表介绍。"
+    },
+    {
+      "id": "u3536-v1-another",
+      "target": "理解another的新增一个",
+      "prompt": "Here is another photograph.\n这里说的是哪一张？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "理解another的新增一个",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "另一张照片",
+        "刚才那张照片",
+        "全部照片"
+      ],
+      "answer": "另一张照片",
+      "distractorRationale": "another不是again，也不是所有；本课照片语境限制含义。"
+    },
+    {
+      "id": "u3536-v1-wife",
+      "target": "从语境识别妻子关系",
+      "prompt": "My wife and I are walking.\nwife 在这里指谁？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "从语境识别妻子关系",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "说话人的妻子",
+        "说话人的女儿",
+        "说话人的妈妈"
+      ],
+      "answer": "说话人的妻子",
+      "distractorRationale": "关系来自英文，不从头像猜测；不补造姓名。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u3536-v1-on-river",
+      "target": "理解村庄临河而非在水面",
+      "prompt": "The village is on a river.\n这句介绍村庄在哪里？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "理解村庄临河而非在水面",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "在河边",
+        "浮在河面上",
+        "在河水里"
+      ],
+      "answer": "在河边",
+      "distractorRationale": "on依语境解释；与上课boats on the river明确区别。"
+    },
+    {
+      "id": "u3536-v1-we",
+      "target": "跨句定位We所指人物",
+      "prompt": "点出 We 所指的完整人物词组。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "跨句定位We所指人物",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        {
+          "value": "My wife and I"
+        },
+        " are walking along ",
+        {
+          "value": "the banks of the river"
+        },
+        ".\nWe are on ",
+        {
+          "value": "the left"
+        },
+        "."
+      ],
+      "options": [
+        "My wife and I",
+        "the banks of the river",
+        "the left"
+      ],
+      "answer": "My wife and I",
+      "distractorRationale": "完整人物词组作选区；地点与人不能混同。"
+    },
+    {
+      "id": "u3536-v1-school-map",
+      "target": "同时读懂beside与right",
+      "prompt": "The school building is beside a park.\nThe park is on the right.\n哪张照片符合介绍？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "同时读懂beside与right",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "照片一",
+        "照片二",
+        "照片三"
+      ],
+      "answer": "照片二",
+      "optionImages": {
+        "照片一": "/assets/unit35-36/school-left-park.svg",
+        "照片二": "/assets/unit35-36/school-right-park.svg",
+        "照片三": "/assets/unit35-36/school-across-park.svg"
+      },
+      "optionImageAlts": {
+        "照片一": "公园在左，学校在右，二者相邻",
+        "照片二": "学校在左，公园在右，二者相邻",
+        "照片三": "学校与右侧公园之间隔着一条宽河"
+      },
+      "distractorRationale": "三张同规格相片分别为左右反向、正确相邻、河流相隔；不能靠物品存在猜答案。"
+    },
+    {
+      "id": "u3536-v1-them",
+      "target": "跨句找到some of them的对象",
+      "prompt": "点出 them 指的那群人。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "跨句找到some of them的对象",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        {
+          "value": "Some children"
+        },
+        " are coming out of ",
+        {
+          "value": "the building"
+        },
+        ".\nSome of them are going into ",
+        {
+          "value": "the park"
+        },
+        "."
+      ],
+      "options": [
+        "Some children",
+        "the building",
+        "the park"
+      ],
+      "answer": "Some children",
+      "distractorRationale": "对象为前句孩子；不是building或park，也不推断全部都进公园。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3536-five-g-between",
+      "target": "between表示在明确参照物之间",
+      "prompt": "一只猫坐在两把椅子的中间。补全句子。",
+      "source": "同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "between",
+        "beside",
+        "under"
+      ],
+      "answer": "between",
+      "display": {
+        "title": "一只猫坐在两把椅子的中间。补全句子。",
+        "material": "The cat is sitting ___ two chairs.\nchair：椅子"
+      },
+      "explanation": "本题以两把椅子为参照，猫在它们之间，用between。不要把本课例子扩成所有语境都只能用于两者。",
+      "hint": "",
+      "workshop": {
+        "rule": "本题以两把椅子为参照，猫在它们之间，用between。不要把本课例子扩成所有语境都只能用于两者。",
+        "model": {
+          "lines": [
+            [
+              "Louise sat between Jack and Lily.",
+              "导学原例：路易丝坐在杰克和莉莉之间。两个人分别在她两侧。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3536-five-g-along",
+      "target": "along表示顺着长度方向",
+      "prompt": "这句话中的along说明怎样的路线？",
+      "source": "同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "顺着墙的长度方向跑。",
+        "从墙的一边穿到另一边。",
+        "跑到墙的下面。"
+      ],
+      "answer": "顺着墙的长度方向跑。",
+      "display": {
+        "title": "这句话中的along说明怎样的路线？",
+        "material": "The cats are running along the wall."
+      },
+      "explanation": "along沿着参照物延伸的方向；across表示从一边到另一边。",
+      "hint": "",
+      "workshop": {
+        "rule": "along沿着参照物延伸的方向；across表示从一边到另一边。",
+        "model": {
+          "lines": [
+            [
+              "They are walking along the river.",
+              "导学原例：他们正沿着河走。路线顺着河岸延伸，不是横渡河流。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3536-five-g-beside",
+      "target": "beside表示旁边",
+      "prompt": "椅子放在桌子旁边，两者并排。补全句子。",
+      "source": "同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "beside",
+        "under",
+        "into"
+      ],
+      "answer": "beside",
+      "display": {
+        "title": "椅子放在桌子旁边，两者并排。补全句子。",
+        "material": "The chair is ___ the table.\nchair：椅子"
+      },
+      "explanation": "beside表示在旁边；本题说明并排，不是桌下，也不是走进去的路线。",
+      "hint": "",
+      "workshop": {
+        "rule": "beside表示在旁边；本题说明并排，不是桌下，也不是走进去的路线。",
+        "model": {
+          "lines": [
+            [
+              "The dog is sitting beside an old man.",
+              "导学原例：狗正坐在一位老人旁边。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3536-five-g-into-in",
+      "target": "区分进入的动作与在里面的状态",
+      "prompt": "这两句分别说明什么？",
+      "source": "同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "男孩正在走进房间；女孩坐在房间里面。",
+        "男孩正在走出房间；女孩坐在房间里面。",
+        "男孩已经坐在房间里；女孩正在走进来。"
+      ],
+      "answer": "男孩正在走进房间；女孩坐在房间里面。",
+      "display": {
+        "title": "这两句分别说明什么？",
+        "material": "The boy is going into the room.\nThe girl is sitting in the room."
+      },
+      "explanation": "第一句into强调由外到内的移动，第二句in说明在里面。in有时也可表达进入，不把go in等合法表达判为普遍错误。",
+      "hint": "",
+      "workshop": {
+        "rule": "第一句into强调由外到内的移动，第二句in说明在里面。in有时也可表达进入，不把go in等合法表达判为普遍错误。",
+        "model": {
+          "lines": [
+            [
+              "He jumped into the river.",
+              "导学原例：他跳进河里，into强调进入。这里只读例句，不模仿动作。"
+            ],
+            [
+              "There are some clothes in the case.",
+              "导学原例：箱子里有一些衣服。in说明衣服在箱内。case：箱子。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3536-five-g-come-in",
+      "target": "把动词和后面的方向词一起理解",
+      "prompt": "老师已经在教室里，对站在门外的孩子说这句话。老师请孩子怎样做？",
+      "source": "同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "走进来。",
+        "走出去。",
+        "待在门口。"
+      ],
+      "answer": "走进来。",
+      "display": {
+        "title": "老师已经在教室里，对站在门外的孩子说这句话。老师请孩子怎样做？",
+        "material": "Come in."
+      },
+      "explanation": "Come in.表示进来，in和come一起表达方向；这里无需在in后补一个地点名词。",
+      "hint": "",
+      "workshop": {
+        "rule": "Come in.表示进来，in和come一起表达方向；这里无需在in后补一个地点名词。",
+        "model": {
+          "lines": [
+            [
+              "Go out.",
+              "从屋内走出去。理解动词和后面的方向词，需要看所在的位置和移动方向。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3536-v1-into",
+      "target": "读into，选择走进的方向",
+      "prompt": "The man is going into the shop.\n选择对应的照片。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "读into，选择走进的方向",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "照片一",
+        "照片二",
+        "照片三"
+      ],
+      "answer": "照片三",
+      "optionImages": {
+        "照片一": "/assets/unit35-36/man-out-scene.svg",
+        "照片二": "/assets/unit35-36/beside-scene.svg",
+        "照片三": "/assets/unit35-36/into-scene.svg"
+      },
+      "optionImageAlts": {
+        "照片一": "男士沿箭头从店内走向门外",
+        "照片二": "孩子坐在妈妈旁边",
+        "照片三": "人沿箭头从门外走向店内"
+      },
+      "distractorRationale": "相同门口图保持尺度；必须判断内外与动作方向，不能只认shop。"
+    },
+    {
+      "id": "u3536-v1-along-across",
+      "target": "区分沿着与横穿",
+      "prompt": "按图为两段路线选词。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "区分沿着与横穿",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "They are walking ",
+          "after": " the street.",
+          "options": [
+            "across",
+            "along",
+            "into"
+          ]
+        },
+        {
+          "before": "The cats are running ",
+          "after": " the wall.",
+          "options": [
+            "along",
+            "across",
+            "under"
+          ]
+        }
+      ],
+      "answer": "[\"across\",\"along\"]",
+      "image": "/assets/unit35-36/routes-compare.svg",
+      "imageAlt": "上图两人横穿街道，下图两只猫沿墙的长度方向跑",
+      "distractorRationale": "两种相反路线条件，图中箭头分别跨过宽度、顺着长度；不捆成整句选项。"
+    },
+    {
+      "id": "u3536-v1-between",
+      "target": "读between two hills找村庄",
+      "prompt": "The village is between two hills.\n选择对应的照片。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "读between two hills找村庄",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "照片一",
+        "照片二",
+        "照片三"
+      ],
+      "answer": "照片一",
+      "optionImages": {
+        "照片一": "/assets/unit35-36/village-between.svg",
+        "照片二": "/assets/unit35-36/village-beside.svg",
+        "照片三": "/assets/unit35-36/village-top.svg"
+      },
+      "optionImageAlts": {
+        "照片一": "房屋在两座小山之间的低处",
+        "照片二": "房屋在一座小山旁边",
+        "照片三": "房屋在一座小山的顶部"
+      },
+      "distractorRationale": "三个村庄分别在两山中间、单山旁、山顶；房屋与山同等待遇。"
+    },
+    {
+      "id": "u3536-v1-off",
+      "target": "理解off表示离开接触处",
+      "prompt": "The children are jumping off the branch.\n选择对应的照片。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "理解off表示离开接触处",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "照片一",
+        "照片二",
+        "照片三"
+      ],
+      "answer": "照片二",
+      "optionImages": {
+        "照片一": "/assets/unit35-36/on-scene.svg",
+        "照片二": "/assets/unit35-36/off-scene.svg",
+        "照片三": "/assets/unit35-36/near-scene.svg"
+      },
+      "optionImageAlts": {
+        "照片一": "一家人坐在草地上",
+        "照片二": "孩子沿向下箭头离开树枝",
+        "照片三": "女孩坐在树附近"
+      },
+      "distractorRationale": "树枝是出发处，离开后下降；不等于坐在草地或树旁。只观察教材动作。"
+    }
+  ],
+  "apply": [
+    {
+      "id": "u3536-v1-where-purpose",
+      "target": "辨别问去向与问动作",
+      "prompt": "想问“那个男人正在往哪里走”，该选哪一句？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "辨别问去向与问动作",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Where is the man going?",
+        "What is the man doing?",
+        "Who is the man?"
+      ],
+      "answer": "Where is the man going?",
+      "distractorRationale": "真正比较提问目的；不能用一个完整动作回答就声称唯一决定Where。"
+    },
+    {
+      "id": "u3536-v1-where-be",
+      "target": "Where问句的单复数be",
+      "prompt": "为两句问话分别选词。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "Where问句的单复数be",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Where ",
+          "after": " the boy swimming?",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        },
+        {
+          "before": "Where ",
+          "after": " the children going?",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"is\",\"are\"]",
+      "distractorRationale": "必要的单复数对比，动作已有ing，真正检验be选择。"
+    },
+    {
+      "id": "u3536-v1-place-phrase",
+      "target": "从完整回答中找地点信息",
+      "prompt": "回答里，点出表示“在哪里”的完整词组。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "从完整回答中找地点信息",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "She is ",
+        {
+          "value": "sitting"
+        },
+        " ",
+        {
+          "value": "near the tree"
+        },
+        "."
+      ],
+      "options": [
+        "sitting",
+        "near the tree"
+      ],
+      "answer": "near the tree",
+      "distractorRationale": "动作sitting与位置near the tree分开；不随意拆成near和tree。"
+    },
+    {
+      "id": "u3536-v1-double",
+      "target": "比较双写与直接加ing",
+      "prompt": "分别填入 swim 和 walk 的 -ing 形式。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "比较双写与直接加ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is ",
+          "after": " across the river.",
+          "options": [
+            "swimming",
+            "swiming",
+            "swim"
+          ]
+        },
+        {
+          "before": "They are ",
+          "after": " along the banks.",
+          "options": [
+            "walking",
+            "walkking",
+            "walk"
+          ]
+        }
+      ],
+      "answer": "[\"swimming\",\"walking\"]",
+      "distractorRationale": "swim双写m，walk不满足本课条件；不能教成所有词都双写。"
+    },
+    {
+      "id": "u3536-v1-where-single",
+      "target": "组织单数Where动作问句",
+      "prompt": "那个男孩正在什么地方游泳？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "组织单数Where动作问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "Where",
+        "is",
+        "the",
+        "boy",
+        "swimming?"
+      ],
+      "answer": "Where is the boy swimming?",
+      "distractorRationale": "撤去整句支持组织Where+is+主语+动作；不是重做What问句。"
+    },
+    {
+      "id": "u3536-v1-going-into",
+      "target": "组织复数动作与去向",
+      "prompt": "这些孩子正在走进公园。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "组织复数动作与去向",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "The",
+        "children",
+        "are",
+        "going",
+        "into",
+        "the",
+        "park."
+      ],
+      "answer": "The children are going into the park.",
+      "distractorRationale": "从照片阅读到组织描述；不要求先拼完又拆成多个更简单任务。"
+    },
+    {
+      "id": "u3536-five-a-boundary",
+      "target": "撤去示范后区别在里面、进入与出去",
+      "prompt": "为三条完整表达配上意思。",
+      "source": "课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "sit in the room",
+          "cn": "坐在房间里面"
+        },
+        {
+          "id": "1",
+          "en": "go into the room",
+          "cn": "走进房间"
+        },
+        {
+          "id": "2",
+          "en": "go out of the room",
+          "cn": "走出房间"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "explanation": "in表示所在位置，into和out of分别表示进入与离开；不是只看room就选同一个意思。",
+      "hint": ""
+    }
+  ],
+  "exam": [
+    {
+      "id": "u3536-v1-final-geography",
+      "target": "两山之间与临河的地理关系",
+      "prompt": "按原文补全村庄介绍。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "两山之间与临河的地理关系",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Our village is ",
+          "after": " two hills.",
+          "options": [
+            "between",
+            "under",
+            "into"
+          ]
+        },
+        {
+          "before": "The village is ",
+          "after": " a river.",
+          "options": [
+            "on",
+            "in",
+            "under"
+          ]
+        }
+      ],
+      "answer": "[\"between\",\"on\"]",
+      "distractorRationale": "抽样复习两个不同关系；on须和主语village一起解释，不是村庄浮在水面。"
+    },
+    {
+      "id": "u3536-v1-final-words",
+      "target": "抽样区分本课地貌与河岸词",
+      "prompt": "选出照片里绿色低处的名称。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "抽样区分本课地貌与河岸词",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "valley",
+        "hill",
+        "bank"
+      ],
+      "answer": "valley",
+      "image": "/assets/unit35-36/valley.svg",
+      "imageAlt": "两座小山之间的低处有一个中性指示点",
+      "distractorRationale": "用新视角地形图抽样词义；明确标示谷底，两侧山与岸是干扰。"
+    },
+    {
+      "id": "u3536-v1-final-we",
+      "target": "We指说话者和妻子",
+      "prompt": "My wife and I are walking along the banks. We are on the left.\n谁在照片左边？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "We指说话者和妻子",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "说话人和妻子",
+        "只有说话人",
+        "说话人和男孩"
+      ],
+      "answer": "说话人和妻子",
+      "distractorRationale": "间隔复习第一人称复数指代，不能看画中所有人就选全部。"
+    },
+    {
+      "id": "u3536-v1-final-direction-text",
+      "target": "区分出来的地点与进去的地点",
+      "prompt": "Some children are coming out of the building.\nSome of them are going into the park.\n哪条记录符合原文？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "区分出来的地点与进去的地点",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "从楼里出来，其中一些走进公园。",
+        "从公园出来，其中一些走进楼里。",
+        "从楼里出来，全都离开公园。"
+      ],
+      "answer": "从楼里出来，其中一些走进公园。",
+      "distractorRationale": "结合两句读出起点终点；不靠只认park或building。"
+    },
+    {
+      "id": "u3536-v1-final-some",
+      "target": "不把some of them扩大为全部",
+      "prompt": "Some of them are going into the park.\n这句话有没有明确说“他们全部进公园”？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "不把some of them扩大为全部",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "没有，只说了其中一些。",
+        "有，明确说了全部。",
+        "有，说所有人都离开公园。"
+      ],
+      "answer": "没有，只说了其中一些。",
+      "distractorRationale": "只问原文是否明说全部，不从some推出剩下的人一定不去。"
+    },
+    {
+      "id": "u3536-v1-final-out",
+      "target": "读out of，选择相反的门口方向",
+      "prompt": "The woman is going out of the shop.\n选择对应的照片。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "读out of，选择相反的门口方向",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "照片一",
+        "照片二",
+        "照片三"
+      ],
+      "answer": "照片二",
+      "optionImages": {
+        "照片一": "/assets/unit35-36/woman-into-scene.svg",
+        "照片二": "/assets/unit35-36/out-scene.svg",
+        "照片三": "/assets/unit35-36/beside-scene.svg"
+      },
+      "optionImageAlts": {
+        "照片一": "女士沿箭头从门外走向店内",
+        "照片二": "人沿箭头从店内走向门外",
+        "照片三": "孩子坐在妈妈旁边"
+      },
+      "distractorRationale": "从前面into反向条件到out of；同场景只改变方向，必要的语义对比。"
+    },
+    {
+      "id": "u3536-v1-final-route",
+      "target": "沿河岸与横渡河流",
+      "prompt": "按课文，分别补全夫妻和男孩的路线。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "沿河岸与横渡河流",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "My wife and I are walking ",
+          "after": " the banks of the river.",
+          "options": [
+            "along",
+            "across",
+            "into"
+          ]
+        },
+        {
+          "before": "He is swimming ",
+          "after": " the river.",
+          "options": [
+            "across",
+            "along",
+            "beside"
+          ]
+        }
+      ],
+      "answer": "[\"along\",\"across\"]",
+      "distractorRationale": "将街／墙对比迁移到岸／河；要结合每句对象。"
+    },
+    {
+      "id": "u3536-v1-final-beside-between",
+      "target": "旁边与两个对象之间",
+      "prompt": "按两幅图补全位置。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "旁边与两个对象之间",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is sitting ",
+          "after": " his mother.",
+          "options": [
+            "beside",
+            "between",
+            "under"
+          ]
+        },
+        {
+          "before": "The man is walking ",
+          "after": " two policemen.",
+          "options": [
+            "between",
+            "beside",
+            "into"
+          ]
+        }
+      ],
+      "answer": "[\"beside\",\"between\"]",
+      "image": "/assets/unit35-36/positions-compare.svg",
+      "imageAlt": "上图男孩坐在妈妈旁边，下图一个人在两个警察之间行走",
+      "distractorRationale": "两图不同参照条件，不将between绝对限定只能两者，范围限本课。"
+    },
+    {
+      "id": "u3536-v1-final-off",
+      "target": "理解离开树枝的动作",
+      "prompt": "The children are jumping off the branch.\noff 在这里表示什么？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "理解离开树枝的动作",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "从树枝上离开、向下跳",
+        "坐在树枝上不动",
+        "走进树枝里面"
+      ],
+      "answer": "从树枝上离开、向下跳",
+      "distractorRationale": "间隔抽样检验off义，不要求模仿动作。"
+    },
+    {
+      "id": "u3536-v1-final-over-under",
+      "target": "区分飞机从桥下和桥上空经过",
+      "prompt": "按图补全两架飞机的位置。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "区分飞机从桥下和桥上空经过",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "1. The aeroplane is flying ",
+          "after": " the bridge.",
+          "options": [
+            "under",
+            "over",
+            "into"
+          ]
+        },
+        {
+          "before": "2. The aeroplane is flying ",
+          "after": " the bridge.",
+          "options": [
+            "over",
+            "under",
+            "along"
+          ]
+        }
+      ],
+      "answer": "[\"under\",\"over\"]",
+      "image": "/assets/unit35-36/flights-compare.svg",
+      "imageAlt": "照片1中飞机从桥洞下方飞过；照片2中飞机在桥梁上空飞行",
+      "distractorRationale": "同型飞机、同一桥分别在拱下与上空，不能只看到plane就猜over。"
+    },
+    {
+      "id": "u3536-v1-final-on-in",
+      "target": "草地表面与客厅内部",
+      "prompt": "按图选出合适的位置词。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "草地表面与客厅内部",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "They are sitting ",
+          "after": " the grass.",
+          "options": [
+            "on",
+            "in",
+            "under"
+          ]
+        },
+        {
+          "before": "They are reading ",
+          "after": " the living room.",
+          "options": [
+            "in",
+            "on",
+            "off"
+          ]
+        }
+      ],
+      "answer": "[\"on\",\"in\"]",
+      "image": "/assets/unit35-36/rest-compare.svg",
+      "imageAlt": "上图一家人坐在草地上；下图两位成人在客厅内阅读",
+      "distractorRationale": "两种不同空间关系；与村庄on a river语境义明确区分。"
+    },
+    {
+      "id": "u3536-v1-final-near",
+      "target": "从新回答中定位near地点信息",
+      "prompt": "点出回答中表示位置的完整词组。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "从新回答中定位near地点信息",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "Where is the boy sitting?\nHe is ",
+        {
+          "value": "sitting"
+        },
+        " ",
+        {
+          "value": "near the tree"
+        },
+        "."
+      ],
+      "options": [
+        "sitting",
+        "near the tree"
+      ],
+      "answer": "near the tree",
+      "distractorRationale": "由she换成boy不称新能力，作为Where回答的间隔复习只保留一项。"
+    },
+    {
+      "id": "u3536-v1-final-question-purpose",
+      "target": "选择询问位置的问句",
+      "prompt": "你知道他们正在读书，想问“在哪里读”，该怎么问？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "选择询问位置的问句",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Where are they reading?",
+        "What are they doing?",
+        "Who are they?"
+      ],
+      "answer": "Where are they reading?",
+      "distractorRationale": "信息已知/未知决定提问，不只判断语法对错。"
+    },
+    {
+      "id": "u3536-v1-final-is-are",
+      "target": "Where问句单复数核验",
+      "prompt": "分别补全问句。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "Where问句单复数核验",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Where ",
+          "after": " the man standing?",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        },
+        {
+          "before": "Where ",
+          "after": " the cats running?",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"is\",\"are\"]",
+      "distractorRationale": "间隔复习明确单数／复数，不把现成词块算作be选择。"
+    },
+    {
+      "id": "u3536-v1-final-where-plural",
+      "target": "独立组织复数Where动作问句",
+      "prompt": "这些猫正在哪里跑？",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "独立组织复数Where动作问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "Where",
+        "are",
+        "the",
+        "cats",
+        "running?"
+      ],
+      "answer": "Where are the cats running?",
+      "distractorRationale": "从单数示范到复数组织；属于有支架的组织，不声称独立写句。"
+    },
+    {
+      "id": "u3536-v1-final-spelling",
+      "target": "双写与去不发音e的边界",
+      "prompt": "分别填入 run 和 come 的 -ing 形式。",
+      "source": "《新概念英语智慧版1》纸页70–73（PDF103–106）",
+      "decision": "双写与去不发音e的边界",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The cats are ",
+          "after": " along the wall.",
+          "options": [
+            "running",
+            "runing",
+            "run"
+          ]
+        },
+        {
+          "before": "The children are ",
+          "after": " out of the building.",
+          "options": [
+            "coming",
+            "comeing",
+            "comming"
+          ]
+        }
+      ],
+      "answer": "[\"running\",\"coming\"]",
+      "distractorRationale": "新双写规则迁移到run，与已教come删e比较，防所有词都双写。"
+    },
+    {
+      "id": "u3536-five-e-boundary",
+      "target": "独立区分容器内状态与进入容器动作",
+      "prompt": "哪条记录符合这两句？",
+      "source": "课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "猫正跳进箱子；球已经在箱子里面。",
+        "猫正跳出箱子；球已经在箱子里面。",
+        "猫已经坐在箱子里；球正跳进箱子。"
+      ],
+      "answer": "猫正跳进箱子；球已经在箱子里面。",
+      "display": {
+        "title": "哪条记录符合这两句？",
+        "material": "The cat is jumping into the box.\nThe ball is in the box."
+      },
+      "explanation": "into强调猫由外到内，in在第二句说明球已经在箱内；不把in的其他合法用法当错误。",
+      "hint": ""
+    },
+    {
+      "id": "u3536-five-e-come-out",
+      "target": "独立依据说话人位置理解动词加方向词",
+      "prompt": "妈妈已经在屋外的花园里，对仍在屋内的孩子说这句话。她请孩子怎样做？",
+      "source": "课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113",
+      "options": [
+        "从屋里出来，到花园这边。",
+        "从花园走回屋里。",
+        "一直待在屋里。"
+      ],
+      "answer": "从屋里出来，到花园这边。",
+      "display": {
+        "title": "妈妈已经在屋外的花园里，对仍在屋内的孩子说这句话。她请孩子怎样做？",
+        "material": "Come out."
+      },
+      "explanation": "妈妈在外、孩子在内，Come out.请孩子从里面出来，朝说话人这边移动。",
+      "hint": ""
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 const { test, expect } = require('@playwright/test');
 const { EXAM, selectAnswer, finishExamFrom } = require('../support/unit9-10-exam');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
+// Historical expectations run on a complete frozen HTTP course package.
+require('../support/unit910-legacy').historicalSuite(test);
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 test('9–10 十题覆盖问候、回问、告别、缩写和观察，全部声音失败仍能独立作答', async ({ page }) => {

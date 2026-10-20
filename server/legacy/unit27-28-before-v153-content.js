@@ -1,0 +1,270 @@
+(function(root){
+ 'use strict';
+ const image=name=>'/assets/unit27-28/'+name.replaceAll(' ','-').replaceAll('.','')+'.svg';
+ const source='《新概念英语智慧版1》纸页54–57（PDF87–90）';
+ const WORDS=[
+  ['living room','客厅','/ˈlɪvɪŋ ˌruːm/'],['near','靠近','/nɪr/','near the window'],['window','窗户','/ˈwɪndoʊ/'],['armchair','扶手椅','/ˈɑːrmtʃer/'],['door','门','/dɔːr/'],['picture','图画','/ˈpɪktʃɚ/'],
+  ['wall','墙','/wɑːl/'],['trousers','长裤（复数形式）','/ˈtraʊzɚz/'],['television','电视机','/ˈteləvɪʒən/'],['stereo','立体声音响','/ˈsterioʊ/'],['magazines','杂志（复数）','/ˌmæɡəˈziːnz/'],['newspapers','报纸（复数）','/ˈnuːzˌpeɪpɚz/'],
+  ['books','书（复数）','/bʊks/'],['armchairs','扶手椅（复数）','/ˈɑːrmtʃerz/'],['pictures','图画（复数）','/ˈpɪktʃɚz/'],['some','本课：一些','/sʌm/','some books'],['any','本课：用于问有没有或说没有','/ˈeni/','Are there any books?'],['there','本句用来介绍“有”','/ðer/','There are some books.'],
+  ['they','本课：它们','/ðeɪ/','They are near the table.'],['are','本句和 there 一起表示“有”','/ɑːr/','There are some pictures.'],['knife','刀','/naɪf/'],['knives','刀（复数）','/naɪvz/'],['policeman','男警察','/pəˈliːsmən/'],['policemen','男警察（复数）','/pəˈliːsmən/'],
+  ['housewife','家庭主妇','/ˈhaʊswaɪf/'],['housewives','家庭主妇（复数）','/ˈhaʊswaɪvz/'],['man','男人','/mæn/'],['men','男人（复数）','/men/'],['keyboard operator','电脑录入员','/ˈkiːbɔːrd ˌɑːpəreɪt̬ɚ/'],['office','办公室','/ˈɑːfɪs/']
+ ].map(([en,cn,ph,example=''])=>({en,cn,ph,example,image:image(en),source}));
+ const PEOPLE={Mrs:{name:'史密斯太太',image:image('Mrs.')}};
+ const DIALOGUE=[
+  ["Mrs. Smith's living room is large.",'史密斯太太的客厅很大。'],['There is a television in the room.','客厅里有台电视机。'],['The television is near the window.','电视机靠近窗户。'],['There are some magazines on the television.','电视机上有一些杂志。'],['There is a table in the room.','客厅里有张桌子。'],['There are some newspapers on the table.','桌子上有一些报纸。'],['There are some armchairs in the room.','客厅里有几把扶手椅。'],['The armchairs are near the table.','扶手椅靠近桌子。'],['There is a stereo in the room.','客厅里有台立体声音响。'],['The stereo is near the door.','音响靠近门。'],['There are some books on the stereo.','音响上有一些书。'],['There are some pictures in the room.','客厅里有几幅画。'],['The pictures are on the wall.','画挂在墙上。']
+ ].map(([text,cn],i)=>({id:'L27-N'+String(i+1).padStart(2,'0'),person:'narrator',who:'narration',text,cn,source:source+'；Lesson27原文'}));
+ const PHRASES=[
+  ['There is a television in the room.','介绍一台电视机。','television'],['There are some armchairs in the room.','介绍一些扶手椅。','armchairs'],['The armchairs are near the table.','接着说这些扶手椅的位置。','armchairs-table'],['Where are they?','它们在哪里？','they'],["They're near the table.",'They are 可以缩写为 They’re。','armchairs-table'],['a knife → some knives\na policeman → some policemen','看看这些名词怎样变为复数。','knives']
+ ].map(([en,cn,picture])=>({en,cn,image:image(picture),source:source+'；原文与句型支架'}));
+ const GALLERY=[
+  ['cigarettes-dressing-table','There are some cigarettes on the dressing table.\nThey are near that box.','香烟在梳妆台上，靠近那个盒子。','1120'],
+  ['plates-cooker','There are some plates on the cooker.\nThey are clean.','盘子在炉灶上，是干净的。','2230'],
+  ['trousers-bed','There are some trousers on the bed.\nThey are near that shirt.','长裤在床上，靠近那件衬衫。','3340'],
+  ['bottles-refrigerator','There are some bottles in the refrigerator.\nThey are empty.','瓶子在冰箱里，是空的。','4450'],
+  ['shoes-floor','There are some shoes on the floor.\nThey\'re near the bed.','鞋子在地板上，靠近床。','5560'],
+  ['knives-table','There are some knives on the table.\nThey\'re in that box.','刀在桌上那个盒子里面。','6670'],
+  ['forks-shelf','There are some forks on the shelf.\nThey\'re near those spoons.','叉子在架子上，靠近那些勺子。','7780'],
+  ['bottles-cupboard','There are some bottles on the cupboard.\nThey\'re near those tins.','瓶子在橱柜上，靠近那些罐头。','8890'],
+  ['tickets-shelf','There are some tickets on the shelf.\nThey\'re in that handbag.','票在架子上那个手提包里面。','9999'],
+  ['glasses-television','There are some glasses on the television.\nThey\'re near those bottles.','玻璃杯在电视机上，靠近那些瓶子。','10001']
+ ].map(([picture,en,cn,number])=>({en,cn,image:image(picture),source:source+'；Lesson28图'+number}));
+ const model=(asked,place,actual,location,picture)=>({asked,place,actual,location,prompt:`(${asked}) / ${place} / ${actual} / ${location}`,en:`Are there any ${asked} ${place}?\nNo, there aren't any ${asked} ${place}.\nThere are some ${actual}.\nWhere are they?\nThey're ${location}.`,cn:'另设练习场景',image:image(picture),source:source+'；Lesson28 Written B'});
+ const MODEL_EXAMPLE=model('books','on the dressing table','cigarettes','near that box','cigarettes-dressing-table');
+ const MODELS=[
+  ['books','in the room','magazines','on the television','magazines-television'],['ties','on the floor','shoes','near the bed','shoes-floor'],['glasses','on the cupboard','bottles','near those tins','bottles-cupboard'],['newspapers','on the shelf','tickets','in that handbag','tickets-shelf'],['forks','on the table','knives','in that box','knives-table'],['cups','on the stereo','glasses','near those bottles','glasses-stereo'],['cups','in the kitchen','plates','on the cooker','plates-cooker'],['glasses','in the kitchen','bottles','in the refrigerator','bottles-refrigerator'],['books','in the room','pictures','on the wall','pictures-wall'],['chairs','in the room','armchairs','near the table','armchairs-table']
+ ].map(args=>model(...args));
+ const REFERENCE=[
+  ['There is a pencil on the desk.','There are some pencils on the desk.'],['There is a knife near that tin.','There are some knives near that tin.'],['There is a policeman in the kitchen.','There are some policemen in the kitchen.'],['There is a newspaper in the living room.','There are some newspapers in the living room.'],['There is a keyboard operator in the office.','There are some keyboard operators in the office.']
+ ].map(([prompt,en])=>({prompt,en,source:source+'；Lesson28 Written A'}));
+ const q=(id,target,prompt,options,answer,explanation,hint,basis,decision,extra={})=>({id:'u2728-v1-'+id,target,prompt,options:options?.map(o=>o[0]),answer,explanation,hint,source:source+'；'+basis,decision,distractorReasons:options?Object.fromEntries(options.filter(o=>o[0]!==answer)):undefined,...extra});
+ const vocab=(id,prompt,answer,wrong,extra={})=>q('vocab-'+id,'理解 '+id+' 的本课含义',prompt,[[answer,''],...wrong],answer,'这道题认读的是 '+id+'。','','Lesson27–28词表','八个新词各一次；旧词不再整轮必做',{presentation:'vocabulary',...extra});
+ const questions={
+  listen:[
+   vocab('living room','living room\n选出这个词组的意思。','客厅',[['厨房','kitchen是厨房。'],['卧室','bedroom是卧室。'],['办公室','office是办公室。']]),
+   vocab('near','near the window\nnear 在这里表示什么？','靠近',[['在……里面','in才是里面。'],['在……上面','on表示在表面上。'],['远离','与靠近的意思不同。']]),
+   vocab('window','看看图，选出英文。','window',[['door','门有出入开口，不是这里的窗框。'],['wall','wall指墙。'],['picture','这是带窗格的窗户，不是画。']],{image:image('window'),imageAlt:'带窗格、窗台和把手的窗户'}),
+   vocab('armchair','armchair\n选出这个词的意思。','扶手椅',[['桌子','table是桌子。'],['床','bed是床。'],['橱柜','cupboard是橱柜。']]),
+   vocab('door','看看图，选出英文。','door',[['window','这是门而不是窗户。'],['wall','wall指墙。'],['table','table是桌子。']],{image:image('door'),imageAlt:'一扇带门框和门把手的门'}),
+   vocab('picture','picture\n本课指什么？','图画',[['报纸','newspaper是报纸。'],['杂志','magazine是杂志。'],['窗户','window是窗户。']]),
+   vocab('wall','on the wall\nwall 是什么？','墙',[['地板','floor是地板。'],['桌子','table是桌子。'],['架子','shelf是架子。']]),
+   vocab('trousers','trousers\n选出这个词的意思。','长裤',[['衬衫','shirt是衬衫。'],['鞋子','shoes是鞋子。'],['领带','tie是领带。']])
+  ],
+  roles:[
+   q('story-books','找出原文中书的位置','课文中，书在哪里？',[["On the stereo.",''],['On the television.','电视机上是杂志。'],['On the table.','桌上是报纸。']],"On the stereo.",'原文说书在音响上。','回看介绍音响的几句话。','Lesson27 N09–N11与读前问题','从原文获取书的位置，图片区不代答'),
+   q('story-near','区分被介绍物品和相邻参照物','课文中，扶手椅靠近什么？',[['the table',''],['the window','靠近窗户的是电视机。'],['the door','靠近门的是音响。']],'the table','The armchairs are near the table.','回看介绍扶手椅的那两句。','Lesson27 N07–N08','从表面位置推进到邻近关系，辨别同文中不同参照物')
+  ],
+  observe:[
+   q('plural-existence','让存在句与复数名词搭配','There ___ some armchairs in the room.\n空格填什么？',[['are',''],['is','本课armchairs是复数，搭配are。'],['am','am不用于这个存在句。']],'are','本课 There are 搭配复数名词 armchairs。','先看看空格后面的物品名称是什么形式。','Lesson27 N07与注释1','在前单元There is基础上处理复数，不重练单数整套'),
+   q('irregular','辨认两种已示范的不规则复数','knife 和 policeman 变成复数，分别是哪一组？',[['knives · policemen',''],['knifes · policemen','knife的复数是knives。'],['knives · policemans','policeman的复数是policemen。']],'knives · policemen','knife → knives；policeman → policemen。','回看介绍小锦囊里的词形对照。','Lesson28 Written A2–3','将两种易错变化合为一题；不机械换五个主语')
+  ],
+  be:[
+   q('ask-existence','区分问有没有与问位置','想知道房间里有没有图画，应该怎么问？',[['Are there any pictures in the room?',''],['Where are the pictures?','这在询问图画在哪里。'],['There are some pictures in the room.','这是介绍，不是提问。']],'Are there any pictures in the room?','用 Are there any…? 询问有没有。','先分清要问有没有，还是要问在哪里。','Lesson28 Written B9','从陈述推进到提问用途，对比两个已教问题'),
+   q('they-reference','找到复数代词回指的物品',"There are some tickets on the shelf.\nThey're in that handbag.\n这里的 They 指什么？",[['tickets',''],['the shelf','这里不是用They指单个架子。'],['that handbag','这里不是用They指单个手提包。']],'tickets','They 指前句介绍的那些票。','回看正在介绍的物品，而不是它们所在的容器。','Lesson28图9999','用复数代词接续物品，并理解容器在架子上的嵌套关系')
+  ],
+  trans:[
+   q('build-existence','独立组织复数存在句','墙上有一些图画。',undefined,'There are some pictures on the wall.','There are 介绍这些图画，on the wall 说明位置。','先介绍有什么，再接上位置。','Lesson27 N12–N13','撤去句框，独立组织陈述',{type:'order',tokens:['There','are','some','pictures','on','the','wall.']}),
+   q('build-question','独立组织询问有无的句子','另一个房间：\n问一问：房间里有没有书？',undefined,'Are there any books in the room?','询问有无时，本课用 Are there any…?。','问句要从提问的部分开始，留意句尾问号。','Lesson28 Written B1','由用途选择推进到问句词序；不是Lesson27现场',{type:'order',tokens:['Are','there','any','books','in','the','room?']}),
+   q('build-negative','回应同一问题并组织否定句','这个房间里没有书。\n回答刚才的问题：不，房间里没有书。',undefined,"No, there aren't any books in the room.",'否定回答用 there aren’t any…。','先作否定回答，再说清没有什么、在哪里。','Lesson28 Written B1','承接上一问题，新增否定结构而非换名词',{type:'order',tokens:['No,','there',"aren't",'any','books','in','the','room.']})
+  ],
+  exam:[
+   q('exam-picture','同时理解表面位置和邻近参照物',"There are some forks on the shelf.\nThey're near those spoons.\n哪幅图符合介绍？",[['甲图',''],['乙图','叉子与勺子相邻，但在桌上。'],['丙图','叉子在架上，但勺子放在另一个远处架子上。']],'甲图','叉子在架上，靠近那些勺子。','分开核对放在哪个表面，以及靠近什么。','Lesson28图7780综合抽样','将on与near两个关系合并；同等图片描述',{optionImages:{'甲图':image('forks-shelf'),'乙图':image('forks-table'),'丙图':image('forks-far-spoons')},optionImageAlts:{'甲图':'叉子和勺子相邻放在同一架子上','乙图':'叉子和勺子相邻放在桌子上','丙图':'叉子在左边架子上，勺子在远处的另一个架子上'}}),
+   q('exam-boundary','理解否定存在句的范围',"There aren't any cups on the table.\n只根据这句话，能确定什么？",[['桌上没有杯子。',''],['房间里没有杯子。','只说桌上没有，不能扩大到整个房间。'],['桌上什么也没有。','只排除杯子，不排除别的物品。']],'桌上没有杯子。','否定的对象是杯子，范围是桌上。','分别找出被否定的物品和句子说明的位置。','Lesson28 Written B的否定句改编','从前单元肯定边界推进到否定的对象与范围')
+  ]
+ };
+ const previousQuestions={exam:questions.exam.slice()};
+ const activityPredecessors={exam:['exam']};
+ // Coverage-driven additions; keep the two prior questions unchanged for migration.
+ questions.exam.push(
+  q("final-v2-room","从完整客厅找准三个承托物","根据课文：magazines、newspapers、books\n依次放在哪里？",[["television · table · stereo", ""], ["table · stereo · television", "三个地点与原文不符。"], ["television · stereo · table", "报纸与书的位置颠倒。"]],"television · table · stereo","本题核对：从完整客厅找准三个承托物。","把每一组物品分别与它所在的表面连起来。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查从完整客厅找准三个承托物",{}),
+  q("final-v2-plural","完整处理单数变复数","There is a knife near that tin.\n改成多把刀，哪句正确？",[["There are some knives near that tin.", ""], ["There is some knives near that tin.", "knives 复数用 are。"], ["There are some knifes near that tin.", "knife 的复数是 knives。"]],"There are some knives near that tin.","本题核对：完整处理单数变复数。","一起检查有、限定词和名词词形。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查完整处理单数变复数",{}),
+  q("final-v2-any","询问有无与否定回答","Are there ___ cups on the stereo?\nNo, there aren’t ___ cups on the stereo.",[["any · any", ""], ["some · any", "这里按本课普通有无问句用 any。"], ["any · some", "本课否定句用 any。"]],"any · any","本题核对：询问有无与否定回答。","本题是普通有无提问和否定回答。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查询问有无与否定回答",{}),
+  q("final-v2-they","复数代词与嵌套位置","There are some knives on the table.\nThey’re in that box.\nThey 指什么，盒子在哪？",[["knives · 桌上", ""], ["box · 桌上", "They 指多把刀，不是一个盒子。"], ["knives · 地板上", "句子说明刀所在的盒子在桌上。"]],"knives · 桌上","本题核对：复数代词与嵌套位置。","先找到被继续介绍的物品，再组合两层位置。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查复数代词与嵌套位置",{}),
+  q("final-v2-where","独立询问多个物品的位置","已经知道有几幅画，问它们在哪里。",undefined,"Where are they?","本题核对：独立询问多个物品的位置。","这次问地点，不是问有没有。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查独立询问多个物品的位置",{"type": "order", "tokens": ["Where", "are", "they?"]}),
+  q("final-v2-negative-reply","否定猜测后说明实际物品","另一间房没有书，有几本杂志。\n访客问：Are there any books in the room?\n哪项符合资料？",[["No, there aren't. There are some magazines.", ""], ["Yes, there are some books.", "资料明确没有书。"], ["No, there aren't any magazines.", "否定错了物品。"]],"No, there aren't. There are some magazines.","本题核对：否定猜测后说明实际物品。","先回答所问物品，再介绍实际有的。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查否定猜测后说明实际物品",{}),
+  q("final-v2-some","some不等于固定个数","There are some pictures on the wall.\n这句是否说明正好两幅？",[["没有说明确切数量。", ""], ["是，正好两幅。", "some 没有给出 two。"], ["没有图画。", "肯定存在句说明有图画。"]],"没有说明确切数量。","本题核对：some不等于固定个数。","区分有没有、多件和具体几件。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查some不等于固定个数",{}),
+  q("final-v2-two-locations","区分邻近与表面接触","A：television near the window\nB：magazines on the television\n哪项正确理解两种关系？",[["A 靠近窗户；B 放在电视机上。", ""], ["A 放在窗户上；B 靠近电视机。", "把 near 与 on 的关系交换了。"], ["A 在窗户里面；B 在电视机里面。", "两处都不是容器内部。"]],"A 靠近窗户；B 放在电视机上。","本题核对：区分邻近与表面接触。","看看是在旁边，还是由一个表面承托。","综合迁移；对应本课原文、注释与偶数课练习","撤去完整答案支架，独立检查区分邻近与表面接触",{}),
+ );
+ const stages=[
+  {id:'l1',title:'先认识客厅',activities:[['words','客厅小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
+  {id:'l2',title:'走进史密斯家',activities:[['text','客厅小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},
+  {id:'l3',title:'发现更多物品',activities:[['phrases','介绍小锦囊','speech'],['observe','复数发现站','question']],required:['observe']},
+  {id:'l4',title:'问问在哪里',activities:[['models','客厅陈列册','cards'],['be','位置问答站','cards'],['trans','词块拼装台','order']],required:['be','trans']},
+  {id:'l5',title:'我的客厅导览',activities:[['exam','客厅小挑战','star'],['certificate','我的单元证书','star']],required:['exam']}
+ ];
+ const definition={id:'unit27-28',version:1,title:'客厅发现之旅',path:'/unit27-28/',start:'learn/words',progress:{learningKey:'canran:unit27-28:learning:v1'},objects:WORDS,stages,questions,previousQuestions,activityPredecessors,
+  learning:{WORDS,PEOPLE,DIALOGUE,PHRASES,GALLERY,MODELS,MODEL_EXAMPLE,REFERENCE,FEEDBACK:root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK}};
+ root.CanranCore.unit2728=definition;
+ if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
+})(globalThis);
+
+// Task edition v4: exact prior rounds are evidence for unchanged questions only.
+(function(core){
+ const unit=core.unit2728;
+ const revised={"exam":[unit.questions["exam"][0],
+unit.questions["exam"][1],
+unit.questions["exam"][2],
+unit.questions["exam"][3],
+{
+  "id": "u2728-tasks-v4-exam-any",
+  "target": "一般存在问句和否定答句中的 any",
+  "prompt": "补好关于杯子的问答。",
+  "decision": "只说明本课普通存在问答的用法，不宣称所有问句只能用 any。",
+  "hint": "这里是询问有没有，再作否定回答；回想本课的普通存在问答。",
+  "source": "Lesson 28 普通 Are there any…? / No, there aren’t any… 存在问答",
+  "type": "cloze",
+  "reference": "",
+  "blanks": [
+    {
+      "before": "Are there ",
+      "after": " cups on the stereo?",
+      "options": [
+        "any",
+        "some"
+      ]
+    },
+    {
+      "before": "No, there aren’t ",
+      "after": " cups on the stereo.",
+      "options": [
+        "any",
+        "some"
+      ]
+    }
+  ],
+  "answer": "[\"any\",\"any\"]",
+  "distractorReasons": {
+    "any": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。",
+    "some": "须根据该空所在句子的主语、位置或交际目的选择，不能从另一句照搬。"
+  },
+  "distractorRationale": "两处在本课中均用 any；some 为肯定陈述常用形式。只考本题的普通询问和全面否定，不教成所有问句只能用 any。"
+},
+unit.questions["exam"][5],
+unit.questions["exam"][6],
+unit.questions["exam"][7],
+unit.questions["exam"][8],
+unit.questions["exam"][9]],
+"roles":[{
+  "id": "u2728-tasks-v4-story-find",
+  "target": "依据英文在房间中找到物品",
+  "prompt": "读介绍，在房间里点出对应的物品。",
+  "decision": "在原有房间中识别物体、属性与位置，移动端独立构图；固定房间位置不是正确答案高亮。",
+  "hint": "核对读物和它下面的家具，两条信息都要符合。",
+  "source": "Lesson 27 原文 There are some books on the stereo.",
+  "type": "scene-find",
+  "reference": "There are some books on the stereo.",
+  "sceneImage": "/assets/unit27-28/scene.svg",
+  "mobileScene": "/assets/unit27-28/task-room-mobile.svg",
+  "sceneDescription": "客厅里有音响、桌子和电视机，上面各有读物",
+  "spots": [
+    {
+      "id": "books",
+      "name": "音响上的书",
+      "bounds": [
+        15,
+        59,
+        18,
+        31
+      ],
+      "mobileBounds": [
+        2,
+        45,
+        25,
+        34
+      ]
+    },
+    {
+      "id": "papers",
+      "name": "桌上的报纸",
+      "bounds": [
+        42,
+        65,
+        19,
+        26
+      ],
+      "mobileBounds": [
+        38,
+        60,
+        25,
+        27
+      ]
+    },
+    {
+      "id": "magazines",
+      "name": "电视机上的杂志",
+      "bounds": [
+        78,
+        57,
+        15,
+        30
+      ],
+      "mobileBounds": [
+        76,
+        45,
+        23,
+        34
+      ]
+    }
+  ],
+  "options": [
+    "books",
+    "papers",
+    "magazines"
+  ],
+  "answer": "books",
+  "distractorRationale": "books 在音响上；报纸在桌上，杂志在电视机上。必须读懂名词和位置关系；热点不能框进旁边不相关的扶手椅。"
+},
+unit.questions["roles"][1]]};
+ unit.taskPredecessors ||= {}; unit.taskSessions ||= {};
+ for(const [id,items] of Object.entries(revised)){
+  const priorKey='unit2728-'+id+'-practice/'+(unit.taskSessions[id]||(unit.taskPredecessors[id]?'v3':unit.activityPredecessors?.[id]?'v2':'v'+unit.version));
+  const sources=[{key:priorKey,questions:unit.questions[id]},...(unit.taskPredecessors[id]||[]),...(unit.activityPredecessors?.[id]||[]).map(old=>({key:'unit2728-'+old+'-practice/v1',questions:unit.previousQuestions[old]}))];
+  unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
+ }
+})(globalThis.CanranCore);
+
+// Keep the real predecessor above intact; only the five-zone edition follows.
+(function(core){
+'use strict';
+const old=core.unit2728;core.unit2728LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸54–57／PDF87–90；语法练习册纸73–79／PDF87–93';
+const grammarSource='同步导学纸49–50／PDF63–64，Grammar同页；'+source;
+const unit={id:'unit27-28',version:1,mode:'classroom',contentRevision:'living-room-five-zones-v1',legacyEdition:'unit27-28-completion-v1',title:'客厅发现之旅',path:'/unit27-28/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'先认识客厅',activities:[['words','客厅小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'走进史密斯家',activities:[['text','客厅小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},{id:'l3',title:'学会介绍一些',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'问清物品位置',activities:[['apply','客厅小向导','heart']],required:['apply']},{id:'l5',title:'完成客厅导览',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'living-room-five-zones-v1',title:'细心客厅发现家',lesson:'Lesson 27–28',scene:'/assets/unit27-28/keepsake-story-v1.webp',alt:'史密斯太太示意音响上的三本书，扶手椅靠近桌子，桌上放着两份报纸',color:'#726082',zones:[['listen','单词寻宝'],['roles','课文小侦探'],['grammar','语法小工坊'],['apply','客厅小向导'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2728-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('some','用some介绍不确定数量的复数物品','桌上有一些报纸，补好肯定介绍。',choice(['some','any','a'],'some','There are ___ newspapers on the table.'),'肯定介绍中用some表示一些，不给出确切数量；后面可接复数名词。',[['There are some magazines on the television.','电视机上有一些杂志，没有说确切几本。']]),
+old.questions.observe[0],
+g('mass','some也可搭配不可数物质','杯子里有一些水，补好介绍。',fill([blank('There ',' ',['is','are']),blank('',' water in the glass.',['some','any','a'])],['is','some'],'water：水。在这里不按一个、两个数，不写成waters。'),'some water表示一些水；本句water作不可数名词，存在句用is，不能看到some就一律选are。',[['There is some milk in the refrigerator.','冰箱里有一些牛奶。milk：牛奶；在本句里用is。']]),
+g('any','普通有无问句与完全否定用any','先普通询问，再说明没有。按本课的中性有无问句填答。',fill([blank('Are there ',' plates in the cupboard?',['any','some']),blank('No, there aren’t ',' plates in the cupboard.',['any','some'])],['any','any'],'提问者不知道橱柜里有没有盘子，没有预期；回答者知道橱柜里没有盘子。'),'any常用于中性的有无问句和完全否定；不是看到问号就只能用any。',[['Are there any bottles on the table? No, there aren’t any bottles on the table.','不知道桌上有没有瓶子，普通询问；确认没有后否定回答。']]),
+g('expected','理解问句中some可表示肯定预期','妈妈刚买了牛奶，小朋友期待冰箱里还有一些。这个问句能用some吗？',choice(['可以，表达预期有一些牛奶。','不可以，所有问句都只能用any。','不可以，some后面只能接复数物品。'],'可以，表达预期有一些牛奶。','Is there some milk in the refrigerator?\nmilk：牛奶。'),'预期得到肯定回答时，问句也可以用some。any也能用于有无提问，语气不同，不把另一种问法判成普遍错误。',[['Are there some books in the bag?','说话者觉得包里有书，带着肯定预期核实。']]),
+g('near','区分邻近、表面和内部','把三个位置词组与含义配起来。',{type:'match',pairs:[{id:'1',en:'near the table',cn:'靠近桌子'},{id:'2',en:'on the table',cn:'在桌子表面上'},{id:'3',en:'in the box',cn:'在盒子里面'}],answer:'["1","2","3"]'},'near说明靠近，不要求接触；on在本课说明表面位置，in说明内部。',[['The stereo is near the door.','音响靠近门，不是放在门的表面或里面。']]),
+g('near-state','按搭配理解near的状态义','她很难过，眼泪快出来了。这里的near tears说明什么？',choice(['几乎要哭了。','站在几滴眼泪旁边。','已经哭完了。'],'几乎要哭了。','She is near tears.\ntears：眼泪；本题说人的状态。'),'near也可表示接近某个状态，near tears是几乎要哭了；不说明已经哭过或结束。',[['The child is near tears.','这个孩子几乎要哭了。与near the door的空间位置不同。']]),
+g('there-they','先介绍存在，再回指复数物品','先说有鞋子，再接着说它们靠近床。',fill([blank('',' are some shoes on the floor.',['There','They']),blank('',' are near the bed.',['They','There'])],['There','They']),'There are引入物品；They接着指前句的多件物品。They’re是They are。',[['There are some pictures in the room. They are on the wall.','先介绍有图画，再说明这些图画的位置。']]),
+g('plurals','在单复数改写中改变不规则名词','把一个人改成一些人，补好名词。',fill([blank('a man → some ','',['men','mans']),blank('a housewife → some ','',['housewives','housewifes'])],['men','housewives'],'man：男人；housewife：家庭主妇。本题改变数量。'),'man变men；housewife变housewives。不能把所有复数一律写成原词加s。',[['a knife → some knives; a policeman → some policemen','两种不同的不规则变化。knife：刀；policeman：男警察。']]),
+old.questions.observe[1],...old.questions.be
+];
+unit.questions.apply=[...old.questions.trans,
+q('a-facts','按有无事实给出肯定和否定回答','按两份实际情况回答，不只照抄问句。',fill([blank('Yes, there ','.',['are','aren’t']),blank('No, there ','.',['aren’t','are'])],['are','aren’t'],'房间甲有三幅画。问：Are there any pictures in Room A?\n房间乙没有扶手椅。问：Are there any armchairs in Room B?'),'有画用Yes, there are.；没有扶手椅用No, there aren’t.。'),
+q('a-reply','承接五轮问答中实际物品的位置','乙接下来怎样回答，才能告诉甲杂志在哪里？',choice(["They’re on the television.","No, there aren’t any books.","It’s on the television."],"They’re on the television.",'另一间房里没有书，电视机上有几本杂志。\n甲：Are there any books in the room?\n乙：No, there aren’t any books in the room. There are some magazines.\n甲：Where are they?'),'最后问的是杂志的位置，They指magazines；不能继续重复有没有书。')
+];
+const neutralAny={...old.questions.exam[4],id:'u2728-five-e-any',prompt:'按中性的有无提问补全问答。',display:{title:'按中性的有无提问补全问答。',material:'访客不知道音响上有没有杯子，没有肯定预期；主人确认那里没有杯子。'},source:source+'；补齐中性提问与完全否定的事实条件',decision:'旧版普通询问条件未在未答题面呈现；补清语境后作为新题，原题及答案留档'};
+unit.questions.exam=[...old.questions.exam.map((question,i)=>i===4?neutralAny:question),
+q('e-mass','独立选择some与不可数名词的存在句','瓶子里有一些牛奶，补好肯定介绍。',fill([blank('There ',' ',['is','are']),blank('',' milk in the bottle.',['some','any','a'])],['is','some'],'milk：牛奶，在本句中不按一个、两个数。'),'some可搭配不可数的milk，本句用There is。'),
+q('e-expected','独立理解肯定预期问句中的some','朋友刚把几本书装进书包，你期待书还在，问句中的some合适吗？',choice(['合适，可以带着肯定预期核实。','不合适，问句绝对不能用some。','不合适，some只能用于否定句。'],'合适，可以带着肯定预期核实。','Are there some books in the bag?\nbag：书包。'),'some可用于预期肯定回答的问句；中性询问通常用any。'),
+q('e-near-state','独立区分near的地点义与状态义','两句中的near，哪项理解符合语境？',choice(['甲说靠近桌子；乙说几乎要哭了。','甲说在桌上；乙说已经哭完。','两句都只是在说空间位置。'],'甲说靠近桌子；乙说几乎要哭了。','甲：The armchair is near the table.\n乙：He is near tears.\ntears：眼泪。乙正在形容一个很难过的人的状态。'),'near既可说明空间接近，也可在near tears中说明接近某个状态。'),
+q('e-there-they','独立选择引入存在与复数回指','先介绍有一些瓶子，再说同一批瓶子是空的。',fill([blank('',' are some bottles in the refrigerator.',['There','They']),blank('',' are empty.',['They','There'])],['There','They']),'There are介绍有瓶子，They接着指这些瓶子。'),
+q('e-positive','独立按明确事实肯定回答','架子上有三张票，选择符合事实的简短回答。',choice(['Yes, there are.','No, there aren’t.','They’re on the shelf.'],'Yes, there are.','Are there any tickets on the shelf?'),'架子上确实有票，所以回答Yes, there are.；本题问有没有，不是问位置。'),
+q('e-plurals','独立处理两个原例的不规则复数','按“一位变多位”完成句子中的名词。',fill([blank('There are some ',' in the room.',['men','mans']),blank('There are some ',' in the kitchen.',['housewives','housewifes'])],['men','housewives'],'第一句由a man变来；第二句由a housewife变来。'),'名词复数分别是men、housewives，数量变化时动词也已改为are。')
+];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe','be'],apply:['trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2728-'+prior+'-practice/'+(old.taskSessions[prior]||'v1'),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit2728=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

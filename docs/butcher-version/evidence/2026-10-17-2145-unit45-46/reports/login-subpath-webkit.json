@@ -1,0 +1,532 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit45-46.spec.js",
+      "tests/login/unit45-46-v153-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit4546-work/login-subpath-webkit"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4546-work/login-subpath-webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit45-46-v153-upgrade.spec.js",
+      "file": "unit45-46-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 140390,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:33424) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:37:04.212Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3356804e56ed422386c8-c78aa00a6c76619aee4c",
+          "file": "unit45-46-v153-upgrade.spec.js",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit45-46.spec.js",
+      "file": "unit45-46.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "13504ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16819,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:39:24.698Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "13504ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-e8ba8105f6470738014b",
+          "file": "unit45-46.spec.js",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2832,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:39:41.529Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-c2d27feca8999f973686",
+          "file": "unit45-46.spec.js",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "17ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "13743ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "engine-boundary",
+                  "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8643ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 117354,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:39:44.369Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "17ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "13743ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "engine-boundary",
+                      "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8643ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-3fa3a072a7ae4bf6a804",
+          "file": "unit45-46.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "8869ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8896ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26982,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:41:41.737Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "8869ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8896ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-3601f9957cfb70bf4c8c",
+          "file": "unit45-46.spec.js",
+          "line": 137,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "13527ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "24ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "21ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "12ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "9ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 73765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:42:08.728Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "13527ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "24ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "21ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "12ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "9ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-21dae348b5878e7b250b",
+          "file": "unit45-46.spec.js",
+          "line": 164,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "10ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "13187ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "13244ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 52680,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:43:22.504Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "10ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "13187ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "13244ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-35efb6c09cd6a3fbad57",
+          "file": "unit45-46.spec.js",
+          "line": 203,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "8376ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8359ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 48528,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:44:15.197Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "8376ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8359ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b1e7c05742781e66ca38-79d8352e6ac79fab5482",
+          "file": "unit45-46.spec.js",
+          "line": 222,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T14:36:59.837Z",
+    "duration": 484522.11100000003,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

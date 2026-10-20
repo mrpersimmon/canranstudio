@@ -1,0 +1,60 @@
+{
+  "tool": "built-in imagegen",
+  "jobs": [
+    {
+      "id": "jean",
+      "file": "assets/unit31-32/cast-jean-v1.webp",
+      "prompt": "Match the provided accepted English-learning illustration style: rounded dark brown outlines, rounded large head, tiny simple dot or curved eyes, warm peach cheeks, gentle flat warm colors and subtle paper texture. No words, letters, numbers, frames, star icons or watermark. Create ONE full-body adult woman Jean. Preserve the identity from old-Jean: dark brown side bun hairstyle, brown eyeglasses, dusty coral short button-front jacket with one pocket, sage straight trousers, brown flat shoes. Pose on LEFT facing RIGHT, head and eyes turned toward her conversation partner, one relaxed palm raised in a questioning gesture toward the right. All hair, both hands, both feet intact, 10% clear margin on all edges. Transparent background.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit31-32-refactor/old-Jean.png"
+      ],
+      "transparent": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-41b48f0d-8833-4bc0-9769-5e1810a13490.png",
+      "selected": true,
+      "reason": "人物身份、相向手势、完整四肢及花园原文动作已目视核对"
+    },
+    {
+      "id": "jack",
+      "file": "assets/unit31-32/cast-jack-v1.webp",
+      "prompt": "Match the provided accepted English-learning illustration style: rounded dark brown outlines, rounded large head, tiny simple dot or curved eyes, warm peach cheeks, gentle flat warm colors and subtle paper texture. No words, letters, numbers, frames, star icons or watermark. Create ONE full-body adult man Jack. Preserve identity from old-Jack: distinct angular short dark-brown quiff, no glasses, no mustache, teal button-front vest over cream rolled sleeve shirt, sage trousers, brown shoes. Pose on RIGHT facing LEFT, friendly gaze toward conversation partner, one open hand gestures left toward the garden. Both hands and both feet fully visible with 10% safe margins. Transparent background.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit31-32-refactor/old-Jack.png"
+      ],
+      "transparent": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-5a11c2aa-5412-483c-8b25-6bbaabc90fbd.png",
+      "selected": true,
+      "reason": "人物身份、相向手势、完整四肢及花园原文动作已目视核对"
+    },
+    {
+      "id": "garden",
+      "file": "assets/unit31-32/garden-story-v1.webp",
+      "prompt": "Match the provided accepted English-learning illustration style: rounded dark brown outlines, rounded large head, tiny simple dot or curved eyes, warm peach cheeks, gentle flat warm colors and subtle paper texture. No words, letters, numbers, frames, star icons or watermark. Create a single continuous wide garden story illustration, 3:2 landscape. ONLY TWO children and TWO animals. Sally seated cross-legged on grass LEFT beneath a broad leafy tree canopy, brown twin braids with coral ties, sage green pinafore with square yellow bib/pocket over cream shirt, tan leggings, both hands resting in lap. Tim on RIGHT climbing the same low branching tree: sandy blond angular hair, mustard yellow shirt with two cream horizontal bands, blue-gray trousers; both hands visibly gripping tree trunk/branch, bent knees, both feet supported on low branches, no floating limbs. A honey brown dog on far LEFT is running RIGHT after a ginger cat further RIGHT across the foreground grass; both animals face right, cat clearly ahead of dog, tails behind, no collisions with children. Thin low fence in distance, muted sage sky/cream pale backdrop, tree trunk and canopy visible, exact count one girl one boy one dog one cat, all whole bodies and feet inside 8% margins. No adults. Friendly airy garden, no extra objects or speech bubbles. Opaque soft background.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit31-32-refactor/old-Sally.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit31-32-refactor/old-Tim.png"
+      ],
+      "transparent": false,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-25643cd4-bda2-4a63-9ed1-57b0d8ff62ee.png",
+      "selected": true,
+      "reason": "人物身份、相向手势、完整四肢及花园原文动作已目视核对"
+    },
+    {
+      "id": "keepsake",
+      "file": "assets/unit31-32/keepsake-story-v1.webp",
+      "prompt": "Create a landscape 3:2 collectible English lesson illustration matching these reference characters exactly. Medium close composition: Jean at LEFT and Jack at RIGHT in foreground, shown waist-up, their faces large and their complete hands readable. Jean has brown side bun, rectangular glasses, coral jacket with patch pocket. Jack has angular dark hair, teal vest over cream shirt, no glasses or beard. They face and look toward one another, Jean asks with one palm up, Jack gestures toward the garden visible between them. Garden behind them small and softly colored: Sally with brown twin braids, green pinafore and yellow bib sits on ground under leafy tree; sandy blond Tim in mustard striped shirt climbs the low tree, hands grip trunk. Main focus is friendly question-and-answer gesture between adults, not a distant group portrait. Rounded dark brown outlines, simple smiling eyes, peach cheeks, warm restrained flat colors, slight paper grain exactly matching the accepted handbag illustration. Both foreground figures have intact head/hair and both hands fully inside frame; lower torsos fade gently into transparency, shoulders do not touch the edge. No text, labels, numbers, stars, frames, badges, watermark, or checkerboard. Transparent exterior background with subtle garden vignette.",
+      "refs": [
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-41b48f0d-8833-4bc0-9769-5e1810a13490.png",
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-5a11c2aa-5412-483c-8b25-6bbaabc90fbd.png",
+        "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-25643cd4-bda2-4a63-9ed1-57b0d8ff62ee.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit1-2-handbag-closeup.webp"
+      ],
+      "transparent": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-9e7d9df4-2c94-4701-b161-2bec5b42c863.png",
+      "selected": true,
+      "reason": "人物身份、相向手势、完整四肢及花园原文动作已目视核对"
+    }
+  ]
+}

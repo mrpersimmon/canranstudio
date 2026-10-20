@@ -1,5 +1,6 @@
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
+require('../support/unit2122-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('导航进入寻物交接站，先看音标词卡，整卡翻义无需配音',async({page})=>{

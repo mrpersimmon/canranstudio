@@ -1,0 +1,1078 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit3-4-v154.spec.js",
+      "tests/e2e/unit3-4-v154-history.spec.js",
+      "tests/e2e/unit3-4-scene.spec.js",
+      "tests/e2e/unit3-4-umbrella.spec.js",
+      "tests/e2e/unit3-4-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/current-final-chromium"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/current-final-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4408",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit3-4-scene.spec.js",
+      "file": "unit3-4-scene.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "390衣帽间人物站在前景，正确提交才把雨伞交到客人手边",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2346,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:29.275Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0aabaaf1e9b96ff5d678-7656e0ed7f4301527378",
+          "file": "unit3-4-scene.spec.js",
+          "line": 12,
+          "column": 34
+        },
+        {
+          "title": "1280衣帽间人物站在前景，正确提交才把雨伞交到客人手边",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2224,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:31.754Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0aabaaf1e9b96ff5d678-94c99ab9c3de7d251e9b",
+          "file": "unit3-4-scene.spec.js",
+          "line": 12,
+          "column": 34
+        },
+        {
+          "title": "390课文的柜台与人物、短长对白和领回状态可见",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2185,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:33.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0aabaaf1e9b96ff5d678-8ae6300d2e7aca392b9f",
+          "file": "unit3-4-scene.spec.js",
+          "line": 56,
+          "column": 34
+        },
+        {
+          "title": "1280课文的柜台与人物、短长对白和领回状态可见",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2314,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:36.176Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0aabaaf1e9b96ff5d678-1aab59ebb0f17657e912",
+          "file": "unit3-4-scene.spec.js",
+          "line": 56,
+          "column": 34
+        },
+        {
+          "title": "缓存入口刷新后显示已读末句，场景和阅读位置保持一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4840,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:38.496Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0aabaaf1e9b96ff5d678-ab074474ef4d0d4918aa",
+          "file": "unit3-4-scene.spec.js",
+          "line": 91,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-umbrella.spec.js",
+      "file": "unit3-4-umbrella.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "390三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3287,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:43.351Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f36dd2cabd79f48f197f-fdf03abede89498a003b",
+          "file": "unit3-4-umbrella.spec.js",
+          "line": 16,
+          "column": 34
+        },
+        {
+          "title": "1280三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3671,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:46.646Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f36dd2cabd79f48f197f-96ee819b8be2d7f8eadb",
+          "file": "unit3-4-umbrella.spec.js",
+          "line": 16,
+          "column": 34
+        },
+        {
+          "title": "柜台否认和最后确认展示不同的伞，紫色圆点伞确认后保持身份",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1505,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:50.328Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f36dd2cabd79f48f197f-bd0f4d3db36d49691612",
+          "file": "unit3-4-umbrella.spec.js",
+          "line": 52,
+          "column": 1
+        },
+        {
+          "title": "换伞动作不阻挡连续前进，重新上演会取消过期的画面动作",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2240,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:51.839Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f36dd2cabd79f48f197f-b064481c922c00423441",
+          "file": "unit3-4-umbrella.spec.js",
+          "line": 82,
+          "column": 1
+        },
+        {
+          "title": "第二把伞未准备好时不进课，准备后断网换伞和刷新均不缺图",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5276,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:54.085Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f36dd2cabd79f48f197f-8673c4639f243d31b73d",
+          "file": "unit3-4-umbrella.spec.js",
+          "line": 112,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-upgrade.spec.js",
+      "file": "unit3-4-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧录音中断后续读，不再卡住，也不伪称听完",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3675,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:59.373Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f0868257d786ce8e62d-c85e02ef85d87254bfd2",
+          "file": "unit3-4-upgrade.spec.js",
+          "line": 15,
+          "column": 1
+        },
+        {
+          "title": "真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧听辨代答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41386,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:03.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f0868257d786ce8e62d-dc662de521e445f42a0a",
+          "file": "unit3-4-upgrade.spec.js",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "旧重练的空白状态优先于历史成绩，不复活旧回合答案",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 40000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4379,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:44.449Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "0f0868257d786ce8e62d-5743181d13ed021d89fb",
+          "file": "unit3-4-upgrade.spec.js",
+          "line": 55,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-v154-history.spec.js",
+      "file": "unit3-4-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:49.523Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-785e564ef0b164cccd13",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 5,
+          "column": 49
+        },
+        {
+          "title": "voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44397,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:00.314Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-782ac2133815fbc64a45",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 5,
+          "column": 49
+        },
+        {
+          "title": "Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5783,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:21:116",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 116,
+                      "line": 21
+                    },
+                    "snippet": "  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n  20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models').filter({hasText:'换个人或物问一问'}).locator('.reference-card')).toHaveCount(15);\n> 21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n     |                                                                                                                    ^\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  24 |  await expect(page.locator('.writing-lines li')).toHaveCount(4);await expect(page.locator('.reply-writing li')).toHaveCount(10);for(const line of await page.locator('.writing-rule').all()){await expect(line).toBeVisible();expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);}await expect(page.locator('#topbar')).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 116,
+                        "line": 21
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n\n\n  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n  20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models').filter({hasText:'换个人或物问一问'}).locator('.reference-card')).toHaveCount(15);\n> 21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n     |                                                                                                                    ^\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  24 |  await expect(page.locator('.writing-lines li')).toHaveCount(4);await expect(page.locator('.reply-writing li')).toHaveCount(10);for(const line of await page.locator('.writing-rule').all()){await expect(line).toBeVisible();expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);}await expect(page.locator('#topbar')).toBeHidden();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:21:116"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:44.718Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-final-chromium\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-final-chromium\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 116,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-0e5a3c35dbc429b31686",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 19,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-v154.spec.js",
+      "file": "unit3-4-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首页入口与确认纪念卡同一故事，课文不自动显示剧情结论",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:51.280Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-146a5607694afc163e40",
+          "file": "unit3-4-v154.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "理解题未作答时有原文依据",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1190,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:52.806Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-c94d6f214fc812c800d9",
+          "file": "unit3-4-v154.spec.js",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "真实提交记录已显示的短示范",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 615,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:54.008Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e744be7c1b73a0934014",
+          "file": "unit3-4-v154.spec.js",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "title": "320宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5035,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:54.631Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e0e271c2fead55a0c5de",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "390宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4835,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:59.674Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-c06d01cebd0c9d4af210",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "768宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4876,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:04.519Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-748a04346c4cf5c799cf",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "1280宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5025,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:09.401Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-1d0571d4abe8d3b78456",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "33题逐题未答材料、撤支持、无英语音频与全部声音失败仍可完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12425,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:14.435Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-7f3140d5c2a6aff50220",
+          "file": "unit3-4-v154.spec.js",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "320x568短屏三卡与推进按钮完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1939,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:26.866Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-fc0900d7a40726effe32",
+          "file": "unit3-4-v154.spec.js",
+          "line": 46,
+          "column": 49
+        },
+        {
+          "title": "390x500短屏三卡与推进按钮完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2579,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:28.812Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-0cb9c6a41b46ccde6200",
+          "file": "unit3-4-v154.spec.js",
+          "line": 46,
+          "column": 49
+        },
+        {
+          "title": "原33题未改轮次、选择、错答及原五星保留；两道补材料题重新亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9076,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:31.398Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e91f1e3b261ad9d40efc",
+          "file": "unit3-4-v154.spec.js",
+          "line": 49,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T02:41:28.608Z",
+    "duration": 192405.37399999998,
+    "expected": 26,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

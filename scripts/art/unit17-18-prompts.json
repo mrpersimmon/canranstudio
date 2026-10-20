@@ -1,0 +1,50 @@
+{
+  "method": "Built-in image_gen; selected PNGs converted to WebP quality91 without cropping, preserving alpha. Original SVGs retained for historical certificates.",
+  "prompts": {
+    "card": "Use case: illustration-story. Asset type: transparent keepsake scene for children's English Lesson 17–18. Image 1 is ONLY the approved warm rounded storybook STYLE reference, not people or a handbag to copy. Images 2, 3, 4 define the old clothing and identity for Jackson, Richards, Jim. Create exactly THREE ADULT men, friendly medium close-up with complete heads, arms and fingertips safely within transparent margins. Jackson on LEFT, tall slim, side-parted dark brown hair, round dark spectacles, muted teal long suit jacket, white shirt, mustard tie. Richards on RIGHT, older and broader, tan flat cap, round spectacles, tan jacket over cream V-neck vest, grey hair at sides. Jim in the CENTER, younger adult with swept-up brown hair, cream shirt with sage-green collar, no glasses. Jackson faces RIGHT toward Richards and makes an open-handed introduction gesture toward Jim; Richards looks LEFT toward Jim; Jim looks toward Richards and smiles politely. Exactly one modest plain closed blue-grey file folder held against Jim's waist, with NO writing. Warm dark-brown outlines, softly rounded faces, pastel flat fills and subtle paper texture as in style reference. The interaction and faces dominate, with each person distinguishable by silhouette, clothing and age. No fantasy, no children, no implied laziness, no background furniture, no extra people, no badge or label, no stars, no text, no numbers, no card frame, no watermarks. TRUE transparent alpha background, no brown halo or colored backdrop. Wide-ish illustration within square canvas with generous margins; natural lower torso cutoff only, all arms and fingers complete.",
+    "card-clean": "Use case: background-extraction. Remove ONLY ALL background and colored halos from the three-man illustration. Preserve all three men, every face, spectacles, cap, hand, sleeve, folder, clothing color, pose and relative placement exactly. Background must be true transparent alpha outside the crisp character outlines: no brown haze, glow, colored rectangle, shadow, vignette, floor or gradient outside the figures. Increase canvas margin slightly if needed so each elbow and cap has clear transparent padding. No redraw of faces, no text, no stars, no extra people.",
+    "jackson": "Use case: illustration-story. Asset type: FULL-BODY stage character for a children's English lesson. Use the first reference for the rounded warm storybook drawing style and any matching identity; other references specify clothing and identity. Adult proportions about 3.5–4 heads tall, dot eyes and gentle natural expression, dark brown outlines, pastel flat fills, subtle texture INSIDE the character only. Every hair, finger and shoe fully visible with ample transparent margin. True transparent alpha background everywhere outside the exact character silhouette. NO glow, halo, fog, brown shading, floor, shadow, vignette, background, words, lettering, symbols, badges or watermarks. Exactly ONE tall slim adult man, Mr. Jackson, standing on the LEFT side of a conversation and facing RIGHT, eyes looking right. Side-parted dark-brown hair, round dark spectacles, muted teal long suit jacket, white shirt, mustard tie, grey-green trousers and brown shoes. His rightward hand extends in an open polite introduction gesture, other arm relaxed. Both hands EMPTY. No folder, no other people.",
+    "richards": "Use case: illustration-story. Asset type: FULL-BODY stage character for a children's English lesson. Use the first reference for the rounded warm storybook drawing style and any matching identity; other references specify clothing and identity. Adult proportions about 3.5–4 heads tall, dot eyes and gentle natural expression, dark brown outlines, pastel flat fills, subtle texture INSIDE the character only. Every hair, finger and shoe fully visible with ample transparent margin. True transparent alpha background everywhere outside the exact character silhouette. NO glow, halo, fog, brown shading, floor, shadow, vignette, background, words, lettering, symbols, badges or watermarks. Exactly ONE older, slightly broad adult visitor, Mr. Richards, standing on RIGHT of a conversation facing LEFT, eyes looking left. Tan flat cap with grey hair visible at sides, round spectacles, tan jacket over cream V-neck vest, white shirt, brown-grey trousers, brown shoes. One hand gently raised in greeting near chest and other relaxed, both hands EMPTY. No folder, no other people.",
+    "women": "Use case: illustration-story. Asset type: FULL-BODY stage character for a children's English lesson. Use the first reference for the rounded warm storybook drawing style and any matching identity; other references specify clothing and identity. Adult proportions about 3.5–4 heads tall, dot eyes and gentle natural expression, dark brown outlines, pastel flat fills, subtle texture INSIDE the character only. Every hair, finger and shoe fully visible with ample transparent margin. True transparent alpha background everywhere outside the exact character silhouette. NO glow, halo, fog, brown shading, floor, shadow, vignette, background, words, lettering, symbols, badges or watermarks. Exactly TWO adult female colleagues side by side, both turning slightly RIGHT to greet an unseen visitor. Nicola on LEFT has dark-brown hair in a high bun, coral-tan knee-length dress with cream pointed collar, dark brown trousers/leggings and brown shoes, both arms relaxed. Claire on RIGHT has straight shoulder-length light-brown bob, sage-teal jacket with cream pointed collar, blue-grey trousers, brown shoes; one EMPTY hand in a small greeting gesture. Different silhouettes and faces. All FOUR shoes and both full bodies visible, no touching/crossed limbs, no desk, no computer, no extra person.",
+    "men": "Use case: illustration-story. Asset type: FULL-BODY stage character for a children's English lesson. Use the first reference for the rounded warm storybook drawing style and any matching identity; other references specify clothing and identity. Adult proportions about 3.5–4 heads tall, dot eyes and gentle natural expression, dark brown outlines, pastel flat fills, subtle texture INSIDE the character only. Every hair, finger and shoe fully visible with ample transparent margin. True transparent alpha background everywhere outside the exact character silhouette. NO glow, halo, fog, brown shading, floor, shadow, vignette, background, words, lettering, symbols, badges or watermarks. Exactly TWO adult male colleagues side by side, both facing slightly RIGHT toward an unseen visitor. Michael on LEFT: short side-parted medium brown hair, NO glasses, rust-brown waistcoat over pale beige shirt, taupe trousers, brown shoes; arms relaxed. Jeremy on RIGHT: dark swept hair, round spectacles, light slate-blue jacket over white shirt, blue-grey trousers, brown shoes, one hand slightly lifted in greeting. Different heights and silhouettes. Both quietly attentive, neither sleeping, reclining or yawning. All FOUR shoes visible. NO objects, cups, table, papers or extra people.",
+    "jim": "Use case: illustration-story. Asset type: FULL-BODY stage character for a children's English lesson. Use the first reference for the rounded warm storybook drawing style and any matching identity; other references specify clothing and identity. Adult proportions about 3.5–4 heads tall, dot eyes and gentle natural expression, dark brown outlines, pastel flat fills, subtle texture INSIDE the character only. Every hair, finger and shoe fully visible with ample transparent margin. True transparent alpha background everywhere outside the exact character silhouette. NO glow, halo, fog, brown shading, floor, shadow, vignette, background, words, lettering, symbols, badges or watermarks. Exactly ONE young ADULT man, Jim, matching the CENTRAL man in reference one. Swept-up brown hair, no glasses, cream shirt with sage-green pointed collar and small pockets, green-grey trousers, brown shoes. Standing centrally, body and gaze slightly RIGHT to an unseen visitor; modest polite smile. BOTH HANDS EMPTY, relaxed at his sides, no folder or other objects. Full body including both shoes, no other people."
+  },
+  "selected": [
+    {
+      "prompt": "card-clean",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-453c5ff4-385d-46d4-90eb-5011f06a767f.png",
+      "file": "assets/unit17-18/keepsake-story-v1.webp"
+    },
+    {
+      "prompt": "jackson",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-8d23609e-eb69-41b7-8aef-2eca523532c1.png",
+      "file": "assets/unit17-18/cast-jackson-v1.webp"
+    },
+    {
+      "prompt": "richards",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-159ab8be-f1e0-4ed7-8722-05ec4361aa90.png",
+      "file": "assets/unit17-18/cast-richards-v1.webp"
+    },
+    {
+      "prompt": "women",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-64089fef-91b0-410b-8b34-b99216deec8e.png",
+      "file": "assets/unit17-18/cast-women-v1.webp"
+    },
+    {
+      "prompt": "men",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-3b37f7d4-028f-4524-b92b-8c758ba150e4.png",
+      "file": "assets/unit17-18/cast-men-v1.webp"
+    },
+    {
+      "prompt": "jim",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-402f2ce2-4550-4033-8798-f0a62727e925.png",
+      "file": "assets/unit17-18/cast-jim-v1.webp"
+    }
+  ],
+  "notSelected": [
+    {
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-344fcbd7-6729-4615-82cd-ac49dfae48ab.png",
+      "reason": "Initial composition; subsequent transparent-background edit selected."
+    }
+  ]
+}

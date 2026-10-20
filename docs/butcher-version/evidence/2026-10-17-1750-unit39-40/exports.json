@@ -1,0 +1,142 @@
+{
+  "oldCertificates": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "8c12d1641736df2466f71b979af0c0490fefeea836cb492b775af28d3314ce37",
+      "retainedSha256": "8c12d1641736df2466f71b979af0c0490fefeea836cb492b775af28d3314ce37",
+      "background": "#FBF8F1",
+      "nameScreenStylesComparedAt": [
+        390,
+        1280
+      ]
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "fba318f147d31be89996257a98af5e2c2ba5061f7fc3091739c986a034e2d0e6",
+      "retainedSha256": "fba318f147d31be89996257a98af5e2c2ba5061f7fc3091739c986a034e2d0e6",
+      "background": "#FBF8F1",
+      "nameScreenStylesComparedAt": [
+        390,
+        1280
+      ]
+    }
+  ],
+  "gifs": [
+    {
+      "engine": "chromium",
+      "mount": "root",
+      "file": "one-star.gif",
+      "sha256": "d487f906d7180f6644c3381f96ba50d320e12b7bb764b79fa8b72eee2d1726b5",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "root",
+      "file": "keepsake.gif",
+      "sha256": "d7587e31d25735faee5e33d6d7171da3051e4c3471a2bfaceb3839830fcb15e5",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "subpath",
+      "file": "one-star.gif",
+      "sha256": "d487f906d7180f6644c3381f96ba50d320e12b7bb764b79fa8b72eee2d1726b5",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "subpath",
+      "file": "keepsake.gif",
+      "sha256": "d7587e31d25735faee5e33d6d7171da3051e4c3471a2bfaceb3839830fcb15e5",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "root",
+      "file": "one-star.gif",
+      "sha256": "9b49c2de3d3f6078c2057b607ca8ca6a491636c9df87941a132ab0b51d08c8ee",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "root",
+      "file": "keepsake.gif",
+      "sha256": "ef9a0e6cd98a7a77cee5982ae88d391da3fa3103475407e0968da08382a8c427",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "subpath",
+      "file": "one-star.gif",
+      "sha256": "9b49c2de3d3f6078c2057b607ca8ca6a491636c9df87941a132ab0b51d08c8ee",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "subpath",
+      "file": "keepsake.gif",
+      "sha256": "ef9a0e6cd98a7a77cee5982ae88d391da3fa3103475407e0968da08382a8c427",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    }
+  ],
+  "pdfs": [
+    {
+      "file": "worksheet.pdf",
+      "pages": 2,
+      "sha256": "6961faf1013ee5c34883db625237fba7440358aeb7afcd9a7d8bfe1d2c1d4c1c",
+      "visualReview": true
+    },
+    {
+      "file": "legacy-certificate.pdf",
+      "pages": 1,
+      "sha256": "c7db468461ad8fdc303694e0006cb41ea02a1db9ba94df2bad6eafb3fd0fcc1d",
+      "visualReview": true
+    }
+  ],
+  "worksheet": {
+    "writingA": 5,
+    "writingB": 10,
+    "lines": 15,
+    "lineHeightPx": 32
+  },
+  "legacyNamePrintFontPx": 42,
+  "physicalPrintTested": false
+}

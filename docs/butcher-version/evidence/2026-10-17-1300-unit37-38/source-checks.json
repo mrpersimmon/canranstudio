@@ -1,0 +1,212 @@
+{
+  "at": "2026-10-17T06:11:16.723Z",
+  "passed": 33,
+  "failed": [],
+  "checks": [
+    {
+      "name": "five zones and 54 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 4,
+        "roles": 4,
+        "grammar": 14,
+        "apply": 8,
+        "exam": 24
+      }
+    },
+    {
+      "name": "33 original questions unchanged",
+      "passed": true
+    },
+    {
+      "name": "54 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "11 original cards and phonetics",
+      "passed": true
+    },
+    {
+      "name": "18 original dialogue sentences and people",
+      "passed": true
+    },
+    {
+      "name": "six original pairs with twelve sentence-images",
+      "passed": true
+    },
+    {
+      "name": "A4 and B5 retain full prompts",
+      "passed": true
+    },
+    {
+      "name": "maximum two blanks per online question",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true
+    },
+    {
+      "name": "actual old six v1 sessions mapped",
+      "passed": true
+    },
+    {
+      "name": "five new sessions and distinct reward edition",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "35 original SVG assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "ten prompt records, seven selected, all originals retained",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha workshop-ready",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha george-cutout",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha dan-cutout",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha workshop-small",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha workshop-delivered",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha workshop-plan",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha keepsake-received",
+      "passed": true
+    },
+    {
+      "name": "font inputs reflect final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1915,
+        "inputs": 389
+      }
+    },
+    {
+      "name": "font licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson UI captions",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit37-38/workshop-ready-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "25c9def25a821ae12c5575a7d17434d62361b50108ff2a6bb4413f07220e590b"
+    },
+    {
+      "file": "assets/unit37-38/cast-george-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "eebeef513211c93dd5c630b86b329463dc49d622a234cc01b54aff635654d2ce"
+    },
+    {
+      "file": "assets/unit37-38/cast-dan-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "443709f9d0602e3d1cec781d40aa7dfc1b2feda021b6b52e27405c698eedbab6"
+    },
+    {
+      "file": "assets/unit37-38/workshop-small-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "59996951ed095c37caea95badf42bb5a048199ab19427cda7b5a466cc2fe6573"
+    },
+    {
+      "file": "assets/unit37-38/workshop-delivered-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "48902991419fbe7c7ff6a2bda4546a47e014b9dc0fc68cafed8abbd9cadd15a2"
+    },
+    {
+      "file": "assets/unit37-38/workshop-plan-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "0020875af2dcf181240a5e6c4f3d2fc91742ae99c7323ff1f1f1d0566f882064"
+    },
+    {
+      "file": "assets/unit37-38/keepsake-story-v1.webp",
+      "width": 1386,
+      "height": 1135,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "24d3183ae588a802906bf2529f7ad965ec093f4457886ab021c3c51e1324bb88"
+    }
+  ],
+  "changedSourcePaths": 58
+}

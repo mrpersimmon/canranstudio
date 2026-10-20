@@ -1,0 +1,182 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit19-20-v153-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit1920-review-20261018/account-upgrade-chromium-root-repro"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit1920-review-20261018/account-upgrade-chromium-root-repro",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit19-20-v153-upgrade.spec.js",
+      "file": "unit19-20-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "原65题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [
+                {
+                  "type": "historical-chain",
+                  "description": "Real 36-question 15-star certificate -> real 65-question five-star edition -> current 66-question edition"
+                },
+                {
+                  "type": "history-storage",
+                  "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":65}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 70044,
+                  "error": {
+                    "message": "TypeError: Cannot read properties of undefined (reading 'records')",
+                    "stack": "TypeError: Cannot read properties of undefined (reading 'records')\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit19-20-v153-upgrade.spec.js:35:395",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit19-20-v153-upgrade.spec.js",
+                      "column": 395,
+                      "line": 35
+                    },
+                    "snippet": "  33 |   const retained=info.outputPath('retained-five-star.gif');download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();await(await download).saveAs(retained);const sharp=require('sharp');expect((await sharp(original,{animated:true}).raw().toBuffer()).equals(await sharp(retained,{animated:true}).raw().toBuffer())).toBe(true);expect(ledger()).toEqual(awards);await p.locator('.stage-certificate .story-award-paper').screenshot({path:info.outputPath('retained-five-star-card.png')});\n  34 |   second=await browser.newContext({baseURL:origin,...(process.env.UNIT1920_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit19-20/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');\n> 35 |   const after=await readLearning(other);info.annotations.push({type:'history-storage',description:JSON.stringify({snapshot:Boolean(after.activity.unit1920V153Snapshot),remote:Boolean(after.activity.unit1920V153Progress),marker:after.activity.unit1920V153Migration,remoteRecords:Object.keys(after.activity.unit1920V153Progress?.records||{}).length})});expect(after.activity.unit1920V153Snapshot.records).toEqual(before.records);\n     |                                                                                                                                                                                                                                                                                                                                                                                                           ^\n  36 |   for(const id of ['listen','roles','grammar','apply']){await other.goto(base+'unit19-20/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit1920-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}\n  37 |   await other.goto(base+'unit19-20/#learn/exam');await expect(other.locator('.stage-exam .progress-copy')).toHaveText('第 4 / 24 题');await expect(other.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await fresh.activity(other,'exam',{base:prefix,expectPerfect:false});\n  38 |   // Re-practising unchanged questions records the new visible support without"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit19-20-v153-upgrade.spec.js",
+                        "column": 395,
+                        "line": 35
+                      },
+                      "message": "TypeError: Cannot read properties of undefined (reading 'records')\n\n  33 |   const retained=info.outputPath('retained-five-star.gif');download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();await(await download).saveAs(retained);const sharp=require('sharp');expect((await sharp(original,{animated:true}).raw().toBuffer()).equals(await sharp(retained,{animated:true}).raw().toBuffer())).toBe(true);expect(ledger()).toEqual(awards);await p.locator('.stage-certificate .story-award-paper').screenshot({path:info.outputPath('retained-five-star-card.png')});\n  34 |   second=await browser.newContext({baseURL:origin,...(process.env.UNIT1920_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit19-20/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');\n> 35 |   const after=await readLearning(other);info.annotations.push({type:'history-storage',description:JSON.stringify({snapshot:Boolean(after.activity.unit1920V153Snapshot),remote:Boolean(after.activity.unit1920V153Progress),marker:after.activity.unit1920V153Migration,remoteRecords:Object.keys(after.activity.unit1920V153Progress?.records||{}).length})});expect(after.activity.unit1920V153Snapshot.records).toEqual(before.records);\n     |                                                                                                                                                                                                                                                                                                                                                                                                           ^\n  36 |   for(const id of ['listen','roles','grammar','apply']){await other.goto(base+'unit19-20/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit1920-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}\n  37 |   await other.goto(base+'unit19-20/#learn/exam');await expect(other.locator('.stage-exam .progress-copy')).toHaveText('第 4 / 24 题');await expect(other.locator('.stage-exam').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await fresh.activity(other,'exam',{base:prefix,expectPerfect:false});\n  38 |   // Re-practising unchanged questions records the new visible support without\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit19-20-v153-upgrade.spec.js:35:395"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:16844) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T18:41:42.574Z",
+                  "annotations": [
+                    {
+                      "type": "historical-chain",
+                      "description": "Real 36-question 15-star certificate -> real 65-question five-star edition -> current 66-question edition"
+                    },
+                    {
+                      "type": "history-storage",
+                      "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":65}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\account-upgrade-chromium-root-repro\\unit19-20-v153-upgrade-原65题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1920-review-20261018\\account-upgrade-chromium-root-repro\\unit19-20-v153-upgrade-原65题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit19-20-v153-upgrade.spec.js",
+                    "column": 395,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "f7b73fc761084b12d598-684feed974ee63eb2af4",
+          "file": "unit19-20-v153-upgrade.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T18:41:37.105Z",
+    "duration": 78550.57800000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

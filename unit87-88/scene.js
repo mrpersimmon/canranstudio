@@ -7,9 +7,9 @@ function storyProps(){
  for(const[key,label,side,other]of [['wood','Mr. Wood','left','接待员'],['attendant','接待员','right','Wood']]){const wrap=node('div','dialogue-actor garage-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'garage-cast',label+'全身完整，面向'+(side==='left'?'右侧':'左侧')+other,'webp'),node('span','actor-label',label));element.append(wrap);}
  const reception=node('figure','story-prop reception-note');reception.append(picture('clipboard','','接待处的维修记录'),node('figcaption','','送修登记'));element.append(reception);
  const car=node('figure','story-prop damaged-car');car.append(picture('crash','','LFZ 312 G，有凹痕，尚未修好'),node('figcaption','','LFZ 312 G'));car.hidden=true;element.append(car);
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const title=node('strong'),detail=node('span');timeline.append(title,detail);element.append(location,timeline);
- const entries=[['Wood问车修好没有','现在的完成情况'],['接待员询问车牌','先确认是哪辆车'],['LFZ 312 G','Wood的车'],['接待员询问送修时间','When did you bring it…?'],['三天前送来的','过去的时间'],['接待员想起来了','准备查看进度'],['修理工完成了吗？','Have…finished yet?'],['还在修，进去看看','准备进入车库'],['两人进入车库','接待员指认汽车'],['Wood看见受损的车','对车况感到惊讶'],['接待员问起碰撞','回顾过去的事'],['撞到了路灯柱','Wood询问能否修好'],['工人还在设法修理','接待员说需要新车']];
- function update(i){const entry=i<0?['来查看修车进度','修好了，还是仍在修？']:entries[i],inside=i>=8;title.textContent=entry[0];detail.textContent=entry[1];element.dataset.scene=inside?'garage':'reception';location.textContent=inside?'修理厂 · 车库里':'修理厂 · 接待处';car.hidden=!inside;reception.hidden=inside;}
+ element.append(location);
+
+ function update(i){const inside=i>=8;element.dataset.scene=inside?'garage':'reception';location.textContent=inside?'修理厂 · 车库里':'修理厂 · 接待处';car.hidden=!inside;reception.hidden=inside;}
  update(-1);return{element,update,sideFor:(_i,who)=>who==='attendant'?'right':'left'};
 }
 function create({element}){let view,heading,task;return{

@@ -3,33 +3,33 @@ const { test, expect } = require('@playwright/test');
 const { completeUnit56 } = require('../support/unit5-6-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
-test('纸笔练习保留四组指代与十组替换，实际打印一张 A4 并留足书写空间', async ({ page }) => {
+test('纸笔练习保留四组指代与十组替换，实际打印三页 A4 并留足书写空间', async ({ page }) => {
   await page.goto('/unit5-6/#learn/certificate');
   await page.getByText('和朋友再试试',{exact:true}).click();
   await expect(page.locator('.reference-writing li')).toHaveText([
-    'Alice 是女同学。Alice is a student. ___ isn’t German. ___ is French.',
+    'Alice is a student. ___ isn’t German. ___ is French.',
     'This is her car. ___ is a French car.',
     'Hans is a student. ___ isn’t French. ___ is German.',
     'This is his car. ___ is a German car.'
   ]);
   await expect(page.locator('.reply-writing li>span:first-child')).toHaveText([
-    'Naoko · Japanese / German','Peugeot · French / German','Hans · German / French','Xiaohui · Chinese / Japanese','Mini · English / American','Chang-woo · South Korean / Japanese','Luming · Chinese / English','Mercedes · German / French','Toyota · Japanese / Chinese','Ford · American / English'
+    'This is Naoko. Japanese/(German)','This is a Peugeot. French/(German)','This is Hans. German/(French)','This is Xiaohui. Chinese/(Japanese)','This is a Mini. English/(American)','This is Chang-woo. South Korean/(Japanese)','This is Luming. Chinese/(English)','This is a Mercedes. German/(French)','This is a Toyota. Japanese/(Chinese)','This is a Ford. American/(English)'
   ]);
-  await expect(page.locator('#unitWriting')).toContainText('先写一个 or 选择问句');
+  await expect(page.locator('#unitWriting')).toContainText('按给定事实写问句和完整回应');
   await expect(page.locator('#unitWriting')).toContainText('Is she a French student or a Swedish student?');
   await expect(page.locator('#unitWriting')).toContainText('Is it a Swedish car or a French car?');
   await page.evaluate(()=>{window.print=()=>{};});
   await page.getByRole('button',{name:'打印练习纸',exact:true}).click();
   await page.emulateMedia({media:'print',reducedMotion:'reduce'});
   for(const row of await page.locator('.reply-writing li').all()){
-    await expect(row).toBeVisible();await expect(row.locator('.writing-rule')).toHaveCount(2);
-    expect(await row.evaluate(el=>[...el.querySelectorAll('.writing-rule')].every(line=>line.getBoundingClientRect().height>=19&&line.clientWidth>=el.clientWidth*.9))).toBe(true);
+    await expect(row).toBeVisible();await expect(row.locator('.writing-rule')).toHaveCount(3);
+    expect(await row.evaluate(el=>[...el.querySelectorAll('.writing-rule')].every(line=>line.getBoundingClientRect().height>=32&&line.clientWidth>=el.clientWidth*.9))).toBe(true);
   }
   const pdf=await page.pdf({path:'output/playwright/unit5-6/writing-print.pdf',preferCSSPageSize:true,printBackground:true});
-  expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
+  expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(3);
 });
 
-test('真实完成20句和26题获得五星，日期固定、重练连续，各单元记录独立',async({page})=>{
+test('真实完成20句和36题获得五星，日期固定、重练连续，各单元记录独立',async({page})=>{
  test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));await completeUnit56(page);
  const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card.getByRole('img',{name:'布莱克先生和苏菲、汉斯在教室见面'})).toBeVisible();
  await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
@@ -70,31 +70,31 @@ test('首页与 lesson 子目录有新单元入口，独立继续并保留资源
   await expect(page.locator('#starCount')).toHaveText('0');
   await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.getByRole('link',{name:'介绍有办法',exact:true}).click();
-  await page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true}).click();
+  await page.locator('.stage-introduce').getByRole('button',{name:"It's a Toyota.",exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
   await expect(page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toHaveAttribute('href','/lesson/unit5-6/#learn/introduce');
   await expect(page.getByRole('link',{name:'开始学习：雨伞认领小帮手',exact:true})).toBeVisible();
   await page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true}).click();
-  await expect(page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('.stage-introduce').getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','true');
   await page.goto('/unit5-6/#learn/refer');
   await expect(page).toHaveURL(/#learn\/introduce$/);
-  await expect(page.locator('.stage-introduce').getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');
+  await expect(page.locator('.stage-introduce').getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','false');
   expect(bad).toEqual([]);
 });
 
 test('题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动',async({page})=>{
   await page.goto('/unit5-6/#learn/refer');const refer=page.locator('.stage-introduce');
-  await refer.getByRole('button',{name:'She',exact:true}).click();await refer.getByRole('button',{name:'检查答案',exact:true}).click();
+  await refer.getByRole('button',{name:"It's a Toyota.",exact:true}).click();await refer.getByRole('button',{name:'检查答案',exact:true}).click();
   await page.goto('/unit5-6/#learn/choice');const articles=page.locator('.stage-cars');await articles.getByRole('button',{name:"It's a Volvo.",exact:true}).click();
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(articles.getByRole('heading').first()).toBeInViewport();
   await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');
-  await page.route('**/unit5-6/content.js*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace("question('refer-she'","question('refer-she-revised'")});});
+  await page.route('**/unit5-6/content.js*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace("q('wh-meaning'","q('wh-meaning-revised'")});});
   await page.reload();await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');
-  await page.goto('/unit5-6/#learn/refer');await expect(refer.getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','false');await expect(refer.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(refer.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+  await page.goto('/unit5-6/#learn/refer');await expect(refer.getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','false');await expect(refer.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(refer.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
 });
 
 test('首页重开包含四个单元，取消保留，确认只清除本路径的学习记录',async({page})=>{
-  await page.goto('/unit5-6/#learn/refer');const root=page.locator('.stage-introduce');await root.getByRole('button',{name:'She',exact:true}).click();
+  await page.goto('/unit5-6/#learn/refer');const root=page.locator('.stage-introduce');await root.getByRole('button',{name:"It's a Toyota.",exact:true}).click();
   for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit49-50/#learn/apply']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}
   await page.goto('/lesson/');
   await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();
@@ -102,5 +102,5 @@ test('首页重开包含四个单元，取消保留，确认只清除本路径�
   await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();
   for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会'])await expect(page.getByRole('link',{name:'开始学习：'+name,exact:true})).toBeVisible();
   await expect(page.getByRole('region',{name:'晚餐采购大冒险',exact:true}).getByRole('link',{name:'开始学习',exact:true})).toBeVisible();
-  await page.goto('/unit5-6/#learn/refer');await expect(root.getByRole('button',{name:'She',exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.goto('/unit5-6/#learn/refer');await expect(root.getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','true');
 });

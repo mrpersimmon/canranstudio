@@ -1,0 +1,76 @@
+
+Running 27 tests using 1 worker
+
+(node:29100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit3-4-scene.spec.js:12:34 › 390衣帽间人物站在前景，正确提交才把雨伞交到客人手边 (2.3s)
+  ok  2 tests\e2e\unit3-4-scene.spec.js:12:34 › 1280衣帽间人物站在前景，正确提交才把雨伞交到客人手边 (2.2s)
+  ok  3 tests\e2e\unit3-4-scene.spec.js:56:34 › 390课文的柜台与人物、短长对白和领回状态可见 (2.2s)
+  ok  4 tests\e2e\unit3-4-scene.spec.js:56:34 › 1280课文的柜台与人物、短长对白和领回状态可见 (2.3s)
+  ok  5 tests\e2e\unit3-4-scene.spec.js:91:1 › 缓存入口刷新后显示已读末句，场景和阅读位置保持一致 (4.8s)
+  ok  6 tests\e2e\unit3-4-umbrella.spec.js:16:34 › 390三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品 (3.3s)
+  ok  7 tests\e2e\unit3-4-umbrella.spec.js:16:34 › 1280三次询问对应不同的雨伞，两次否认不交接，刷新和重演保留正确物品 (3.7s)
+  ok  8 tests\e2e\unit3-4-umbrella.spec.js:52:1 › 柜台否认和最后确认展示不同的伞，紫色圆点伞确认后保持身份 (1.5s)
+  ok  9 tests\e2e\unit3-4-umbrella.spec.js:82:1 › 换伞动作不阻挡连续前进，重新上演会取消过期的画面动作 (2.2s)
+  ok 10 tests\e2e\unit3-4-umbrella.spec.js:112:1 › 第二把伞未准备好时不进课，准备后断网换伞和刷新均不缺图 (5.3s)
+  ok 11 tests\e2e\unit3-4-upgrade.spec.js:15:1 › 真实旧录音中断后续读，不再卡住，也不伪称听完 (3.7s)
+  ok 12 tests\e2e\unit3-4-upgrade.spec.js:34:1 › 真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧听辨代答 (41.4s)
+  ok 13 tests\e2e\unit3-4-upgrade.spec.js:55:1 › 旧重练的空白状态优先于历史成绩，不复活旧回合答案 (4.4s)
+(node:8356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 14 tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 (10.7s)
+  ok 15 tests\e2e\unit3-4-v154-history.spec.js:5:49 › voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留 (44.4s)
+  x  16 tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 (5.8s)
+(node:23368) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 tests\e2e\unit3-4-v154.spec.js:6:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 (1.4s)
+  ok 18 tests\e2e\unit3-4-v154.spec.js:13:1 › 理解题未作答时有原文依据 (1.2s)
+  ok 19 tests\e2e\unit3-4-v154.spec.js:17:1 › 真实提交记录已显示的短示范 (615ms)
+  ok 20 tests\e2e\unit3-4-v154.spec.js:21:39 › 320宽首页、25词卡、12句课文与三把伞同框可读 (5.0s)
+  ok 21 tests\e2e\unit3-4-v154.spec.js:21:39 › 390宽首页、25词卡、12句课文与三把伞同框可读 (4.8s)
+  ok 22 tests\e2e\unit3-4-v154.spec.js:21:39 › 768宽首页、25词卡、12句课文与三把伞同框可读 (4.9s)
+  ok 23 tests\e2e\unit3-4-v154.spec.js:21:39 › 1280宽首页、25词卡、12句课文与三把伞同框可读 (5.0s)
+  ok 24 tests\e2e\unit3-4-v154.spec.js:40:1 › 33题逐题未答材料、撤支持、无英语音频与全部声音失败仍可完成 (12.4s)
+  ok 25 tests\e2e\unit3-4-v154.spec.js:46:49 › 320x568短屏三卡与推进按钮完整 (1.9s)
+  ok 26 tests\e2e\unit3-4-v154.spec.js:46:49 › 390x500短屏三卡与推进按钮完整 (2.6s)
+  ok 27 tests\e2e\unit3-4-v154.spec.js:49:1 › 原33题未改轮次、选择、错答及原五星保留；两道补材料题重新亲自作答 (9.1s)
+
+
+  1) tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 ─────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.reply-models .reference-card')
+    Expected: 11
+    Received: 10
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.reply-models .reference-card')
+        14 × locator resolved to 10 elements
+           - unexpected value "10"
+
+
+      19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{
+      20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models').filter({hasText:'换个人或物问一问'}).locator('.reference-card')).toHaveCount(15);
+    > 21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);
+         |                                                                                                                    ^
+      22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');
+      23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});
+      24 |  await expect(page.locator('.writing-lines li')).toHaveCount(4);await expect(page.locator('.reply-writing li')).toHaveCount(10);for(const line of await page.locator('.writing-rule').all()){await expect(line).toBeVisible();expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);}await expect(page.locator('#topbar')).toBeHidden();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154-history.spec.js:21:116
+
+    Error Context: output\unit34-review-20261018\current-final-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\current-final-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\current-final-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 ──────────────
+  26 passed (3.2m)

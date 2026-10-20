@@ -23,16 +23,27 @@ function reading(practice,unit,signature){
 function show(practice,surface){
  const legacy=practice.activity('unitLegacyProgress');if(!legacy)return;
  const saved=legacy.activity?.unitCompleted||{},passed=id=>typeof saved[id]==='string'&&saved[id].startsWith('v1:');
- const completed=Object.values(required).flat().filter(passed);if(!completed.length)return;
- const stars=Object.values(required).reduce((sum,ids)=>sum+Math.floor(ids.filter(passed).length/ids.length*3),0);
+ const date=legacy.activity?.unitCertificateIssuedAt;
+ const hasCertificate=typeof date==='string'&&Number.isFinite(Date.parse(date));
+ const completed=Object.values(required).flat().filter(passed);if(!completed.length&&!hasCertificate)return;
+ const stars=hasCertificate?15:Object.values(required).reduce((sum,ids)=>sum+Math.floor(ids.filter(passed).length/ids.length*3),0);
  const details=document.createElement('details');details.className='offline-task legacy-learning';
- const summary=document.createElement('summary');summary.textContent='旧版学习记录';
+ const summary=document.createElement('summary');summary.textContent='旧版学习记录与证书';
  const result=document.createElement('p');result.textContent=`旧版已获 ${stars} / 15 颗完成星。记录保留；本版五颗星分别记录五个答题区的整轮零错表现。`;
  const names=document.createElement('p');names.textContent='已完成：'+completed.map(id=>titles[id]).join('、');details.append(summary,result,names);
  const name=legacy.activity?.unitName;
  if(typeof name==='string'&&name.trim()){const label=document.createElement('p');label.className='legacy-name';label.textContent='原领证姓名：'+name;details.append(label);}
- const date=legacy.activity?.unitCertificateIssuedAt;
- if(typeof date==='string'&&Number.isFinite(Date.parse(date))){const label=document.createElement('p');label.className='legacy-issued-date';label.textContent='原领证日期：'+new Date(date).toLocaleDateString('zh-CN');details.append(label);}
+ if(hasCertificate){
+  const label=document.createElement('p');label.className='legacy-issued-date';label.dataset.issuedAt=date;label.textContent='原领证日期：'+new Date(date).toLocaleDateString('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'long',day:'numeric'});details.append(label);
+  const host=document.createElement('div');host.className='legacy-certificate-host';details.append(host);
+  const view=core.unit4950LegacyCertificate.mount({element:host,initialName:typeof name==='string'?name:'',initialIssuedAt:date,canClaim:()=>true});
+  view.update({complete:true,completedChapters:[true,true,true,true,true],next:null});
+  // The original form remains private to the preserved renderer; children only
+  // open their existing certificate, never edit or claim it for a second time.
+  host.querySelector('input').readOnly=true;host.querySelector('input').hidden=true;
+  for(const selector of ['.certificate-name-label','.certificate-greeting','.certificate-track'])host.querySelector(selector).hidden=true;
+  host.querySelector('.unit-certificate-actions button:last-child').textContent='查看旧证书';
+ }else{const pending=document.createElement('p');pending.textContent='旧版尚无有效领取日期；学习记录保留，不补造证书或领取时间。';details.append(pending);}
  surface.append(details);
 }
 core.unit4950Legacy={preserve,reading,show};

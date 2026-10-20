@@ -1,0 +1,12 @@
+[WebServer] (node:2124) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:3636) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\access.spec.js:33:1 › 管理员可以创建班级并只开放 Lesson 1–2 (592ms)
+  ok 2 tests\login\class-settings.spec.js:46:1 › 开放课程全选、部分选择、取消全选与保存后的重新打开保持一致 (844ms)
+  ok 3 tests\login\course-banners.spec.js:15:1 › 全部53个横幅完整加载、管理页保留53项开课选择且新班默认关闭新课 (3.3s)
+
+  3 passed (8.5s)

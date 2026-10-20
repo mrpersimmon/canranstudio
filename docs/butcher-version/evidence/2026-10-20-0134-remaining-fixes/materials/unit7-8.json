@@ -1,0 +1,24 @@
+{
+  "id": "unit7-8",
+  "source": {
+    "file": "tests/support/unit78-fivezones.js",
+    "sha256": "9d6b192840523c151334d6b8594f9b0f491b391903f7024dc4e7af2dd1207230"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u78-v1-story-teacher",
+      "text": "Lesson 7\n\nRobert: Are you a teacher?\n\nSophie: No, I'm not.\n\nRobert: What's your job?\n\nSophie: I'm a keyboard operator."
+    }
+  ],
+  "sourceLines": {
+    "R2": "11-14"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

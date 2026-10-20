@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit21-22-teaching-review.spec.js",
+      "--grep",
+      "当前45题版",
+      "--reporter=list,json",
+      "--output=output/unit2122-review-20261018/draft-repro"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2122-review-20261018/draft-repro",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit21-22-teaching-review.spec.js",
+      "file": "unit21-22-teaching-review.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "当前45题版交接错答和语法草稿、阅读词卡及两个分页原样续做",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7797,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('group', { name: '第1处填空', exact: true }).getByRole('button', { name: 'her', exact: true })\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('group', { name: '第1处填空', exact: true }).getByRole('button', { name: 'her', exact: true })\u001b[22m\n\n    at commonSelect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\units1-30-tasks.js:8:181)\n    at select (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2122-fivezones.js:13:42)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js:15:182",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\units1-30-tasks.js",
+                      "column": 181,
+                      "line": 8
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\units1-30-tasks.js:8\n\n   6 | async function select(room,answer){\n   7 |  if(answer?.scene)await room.getByRole('group',{name:'在场景中选择',exact:true}).getByRole('button',{name:answer.scene,exact:true}).click();\n>  8 |  else if(answer?.fills){for(let i=0;i<answer.fills.length;i++)await room.getByRole('group',{name:'第'+(i+1)+'处填空',exact:true}).getByRole('button',{name:answer.fills[i],exact:true}).click();}\n     |                                                                                                                                                                                     ^\n   9 |  else if(answer?.pairs){for(const[en,cn]of answer.pairs){await room.getByRole('group',{name:answer.leftLabel||'英文',exact:true}).getByRole('button',{name:en,exact:true}).click();await room.getByRole('group',{name:answer.rightLabel||'词义',exact:true}).getByRole('button',{name:cn,exact:true}).click();}}\n  10 |  else if(answer?.object){await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:answer.object,exact:true}).click();await room.getByRole('group',{name:'接收者',exact:true}).getByRole('button',{name:answer.recipient,exact:true}).click();}\n  11 |  else if(Array.isArray(answer)){"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\units1-30-tasks.js",
+                        "column": 181,
+                        "line": 8
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('group', { name: '第1处填空', exact: true }).getByRole('button', { name: 'her', exact: true })\u001b[22m\n\n\n   at ..\\support\\units1-30-tasks.js:8\n\n   6 | async function select(room,answer){\n   7 |  if(answer?.scene)await room.getByRole('group',{name:'在场景中选择',exact:true}).getByRole('button',{name:answer.scene,exact:true}).click();\n>  8 |  else if(answer?.fills){for(let i=0;i<answer.fills.length;i++)await room.getByRole('group',{name:'第'+(i+1)+'处填空',exact:true}).getByRole('button',{name:answer.fills[i],exact:true}).click();}\n     |                                                                                                                                                                                     ^\n   9 |  else if(answer?.pairs){for(const[en,cn]of answer.pairs){await room.getByRole('group',{name:answer.leftLabel||'英文',exact:true}).getByRole('button',{name:en,exact:true}).click();await room.getByRole('group',{name:answer.rightLabel||'词义',exact:true}).getByRole('button',{name:cn,exact:true}).click();}}\n  10 |  else if(answer?.object){await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:answer.object,exact:true}).click();await room.getByRole('group',{name:'接收者',exact:true}).getByRole('button',{name:answer.recipient,exact:true}).click();}\n  11 |  else if(Array.isArray(answer)){\n    at commonSelect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\units1-30-tasks.js:8:181)\n    at select (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2122-fivezones.js:13:42)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js:15:182"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T19:22:44.344Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\draft-repro\\unit21-22-teaching-review-当前45题版交接错答和语法草稿、阅读词卡及两个分页原样续做\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\draft-repro\\unit21-22-teaching-review-当前45题版交接错答和语法草稿、阅读词卡及两个分页原样续做\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\units1-30-tasks.js",
+                    "column": 181,
+                    "line": 8
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8e52cce97660f8615a01-acd1f87edf8f91d61f80",
+          "file": "unit21-22-teaching-review.spec.js",
+          "line": 14,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T19:22:43.850Z",
+    "duration": 8875.049,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

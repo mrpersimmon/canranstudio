@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit3-4-v154-history.spec.js",
+      "-g",
+      "Lesson4",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/references-isolated"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/references-isolated",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4408",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit3-4-v154-history.spec.js",
+      "file": "unit3-4-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5785,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.sentence-models .reference-card')\nExpected: \u001b[32m15\u001b[39m\nReceived: \u001b[31m25\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sentence-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 25 elements\u001b[22m\n\u001b[2m       - unexpected value \"25\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.sentence-models .reference-card')\nExpected: \u001b[32m15\u001b[39m\nReceived: \u001b[31m25\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sentence-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 25 elements\u001b[22m\n\u001b[2m       - unexpected value \"25\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:20:212",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 212,
+                      "line": 20
+                    },
+                    "snippet": "  18 | });\n  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n> 20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models .reference-card')).toHaveCount(15);\n     |                                                                                                                                                                                                                    ^\n  21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 212,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.sentence-models .reference-card')\nExpected: \u001b[32m15\u001b[39m\nReceived: \u001b[31m25\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.sentence-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 25 elements\u001b[22m\n\u001b[2m       - unexpected value \"25\"\u001b[22m\n\n\n  18 | });\n  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n> 20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models .reference-card')).toHaveCount(15);\n     |                                                                                                                                                                                                                    ^\n  21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:20:212"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:40:47.983Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\references-isolated\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\references-isolated\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 212,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-0e5a3c35dbc429b31686",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 19,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T02:40:47.379Z",
+    "duration": 7020.0419999999995,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -91,3 +91,11 @@
  .unit6364-workspace .page-label{font-size:21px;padding:18px}
  .unit6364-workspace .visit-model{flex-direction:column}
 }
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit6364-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit6364-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit6364-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit6364-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

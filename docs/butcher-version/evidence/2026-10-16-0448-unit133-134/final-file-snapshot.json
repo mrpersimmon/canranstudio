@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-16T05:52:43.186205",
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "declaredBrowserBundles": [
+    {
+      "name": "chromium",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome for Testing"
+    },
+    {
+      "name": "chromium-headless-shell",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome Headless Shell"
+    },
+    {
+      "name": "chromium-tip-of-tree",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary for Testing"
+    },
+    {
+      "name": "chromium-tip-of-tree-headless-shell",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary Headless Shell"
+    },
+    {
+      "name": "firefox",
+      "revision": "1538",
+      "installByDefault": true,
+      "browserVersion": "153.0",
+      "title": "Firefox"
+    },
+    {
+      "name": "firefox-beta",
+      "revision": "1526",
+      "installByDefault": false,
+      "browserVersion": "152.0b1",
+      "title": "Firefox Beta"
+    },
+    {
+      "name": "webkit",
+      "revision": "2336",
+      "installByDefault": true,
+      "revisionOverrides": {
+        "mac14": "2251",
+        "mac14-arm64": "2251",
+        "ubuntu20.04-x64": "2092",
+        "ubuntu20.04-arm64": "2092"
+      },
+      "browserVersion": "26.5",
+      "title": "WebKit"
+    },
+    {
+      "name": "ffmpeg",
+      "revision": "1011",
+      "installByDefault": true
+    },
+    {
+      "name": "winldd",
+      "revision": "1007",
+      "installByDefault": false
+    },
+    {
+      "name": "android",
+      "revision": "1001",
+      "installByDefault": false
+    }
+  ],
+  "branch": "codex/release-canranstudio",
+  "head": "d0a4382f963e36c1abd0f5a5ba9ef79b17794093",
+  "files": {
+    "unit133-134/content.js": "47a8bd81b0526491fadf07925686494d14f2fc7b8b8fdb04f010e12fb07f01e1",
+    "unit133-134/grammar.js": "456f1d330dbba5c000c63bb49d1dd8aae8b626d3ae57a83c2d83667935fd5338",
+    "unit133-134/index.html": "516baca394eb598a15c4e811a6eba08f81252d6a9ea16b882d1073e25cfeb8f8",
+    "unit133-134/README.md": "3c294d27b2476aba778a40860961ffc9aa9f9253656d88f865e0c606e2a73a0e",
+    "unit133-134/scene.js": "6bd7081dab635224303eae2a6050549dfd70b0ab8539e1fe072faa70f95c67f4",
+    "unit133-134/typography.css": "5d0c360387299a72bc5fcbd30f5cf5e450598619af52c9882fa559bfac41f620",
+    "unit133-134/unit.css": "d23844764007686a61f74609f9b6539581bdf39f8378beecb08c0312609138de",
+    "unit133-134/unit.js": "104cff3a61727a65e3a4bcf9eb6824e47ec045c3e986fe3de634f8c1a07e3044",
+    "assets/unit133-134/airport-icon.svg": "1f7e569a3d2f5d2815aaab070bd2183f0e80acd99bddaee5cd98409e47ca68d8",
+    "assets/unit133-134/airport.svg": "b927296773d9b4bfaea8708ba9d7bc5fe6058cc86246c56f643bbff4efdd18c1",
+    "assets/unit133-134/another.svg": "3d63d164cdc8234223a0004a690b72f6542e87717f792e294e32fe040366624d",
+    "assets/unit133-134/coat.svg": "827776a3228f452ec3853aac6c6382c309aa1fa736a9de63c86b18ae0447edc3",
+    "assets/unit133-134/date-record.svg": "bdea392e12a3a07080a8a80d39feeb52b7b72e9394759e762e77599c1e4f34ce",
+    "assets/unit133-134/dinner.svg": "539fa4e3144d049c553ec500cdfbc8224614d51ccf3d74246f61e40c698c3667",
+    "assets/unit133-134/dress.svg": "3842b3a97f84067d885c4b4886120ecf0ef9a79a434489d7b669ce971e56e567",
+    "assets/unit133-134/film.svg": "9f43faed9369981b2dbb2ecdb4a55072c0fb1ca535ce89649f70e96652da0dad",
+    "assets/unit133-134/finished.svg": "72bfe8c37e2e4738f1d4cc3c3e3a546c0770949efb528136665827eec6772cf3",
+    "assets/unit133-134/interview-answer.webp": "be286e16614c9ac436471c80ffdcefbebfcabacd4525b0ab6d94a3d819ff4440",
+    "assets/unit133-134/interview.webp": "5b909736bd92cf94c59a7fdbb37604272ae7eb66be943ffe4050921545fb45c0",
+    "assets/unit133-134/keepsake-story-v1.webp": "d3c7c2587c1827601bcb9c399573de26de75a51111997d9031da75169ae5c3b8",
+    "assets/unit133-134/long-time.svg": "b80e763939f32a7186bd27c381c8e6bfb70a9590485d2076a5fe6977e3868576",
+    "assets/unit133-134/newspaper.svg": "f392ea08c35de33c2cb1ea7bee45ae17ce237211677a22b4f9ac50adcf5980f0",
+    "assets/unit133-134/read.webp": "afa96541371ef8a536a116e05369c1c789ba412ef7650fbc222f36d5454a60a4",
+    "assets/unit133-134/reading.svg": "ad1bc4fdaf005377947906ab162175973961720f56a12c9816460b09cf2431c0",
+    "assets/unit133-134/README.md": "83807bcdcc6dce03c4556511df34f2ec2226f402b608248b91b8ea849840762e",
+    "assets/unit133-134/reporter.svg": "1dc9ed9c21abcfc2fb3720ef3b929abf41d2469815aaf177a8a2add1430f8628",
+    "assets/unit133-134/retire.svg": "f3a74207cb06b2fa2213e9d78676a57588562a2851e519db127be3da1fe45968",
+    "assets/unit133-134/sensational.svg": "8b7f7032098ef19aeebf2f6d04839202552b2f0767d30e47e40365f6e347eac5",
+    "assets/unit133-134/source-record.svg": "449f98a413e44d271b772a944e7a00586c06efc614cb9c48e7f5c36438327e22",
+    "assets/unit133-134/street.svg": "e6b50e556d2d7516e10a57391453d0a527c0dde35d0ff27f10de95a238f41263",
+    "assets/unit133-134/task-checked.svg": "4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729",
+    "assets/unit133-134/task-record.svg": "7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066",
+    "assets/unit133-134/tired.svg": "277119fef4567e52ab496c21cba272747717b48468e12c3e3056ebe8d8ea249e",
+    "assets/unit133-134/wonder.svg": "1907d564dae029eb3e6d085fc71335745d33eb31f607c2f5ede7ddd130d8e824",
+    "assets/unit133-134/wonder.webp": "4bb356adbcfa75d5255b06482b6f3edc5c0b9379a9f202f4fde8aebfe41b0562",
+    "tests/e2e/unit133-134-story-layout.spec.js": "14afe9b3db72eb89007b7d2ce6134216b5c65766f28cefcd050777e69a9b7a15",
+    "tests/e2e/unit133-134-word-layout.spec.js": "896ee7b2d0f671dea2d3420a77ccba68e347ab8de8d440d0fd93f9fde5da4146",
+    "tests/e2e/unit133-134.spec.js": "30085f38f59b642b7b79a7d3baff94d9857425f9ec5d1851d8546fd6ab68e9db",
+    "tests/login/unit133-134.spec.js": "faa840bc2cfd87014ae23bdc4488e794ccbd4d3f12a076de0eeafe0e0e3974da",
+    "tests/support/unit133134.js": "7adc0fb5f06391d8d73657211c92eedf52fa209cbd00aaab5cc3a5edf1238d8d",
+    "server/catalog.js": "19406a0d8ef803d6f09bdc193bcf6504094cab4eb0e750e131e46b457957f88d",
+    "server/award-catalog.js": "31dde503a3bf1beb0904c0d69674a052b71ba0b895a701703c620cf4ab771ce4",
+    "scripts/course-packages.js": "70eaf086af72ac9bb5317b38923548860ca3d05b323ae45925267f65f5ea5476",
+    "core/award-card-layout.js": "0ed1805584f1d89d55b8abd78494aea8e376d629c8c01f748f82661a38177b3b",
+    "core/story-certificate.js": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+    "core/award-gif.js": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+    "core/award-reveal.js": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+    "core/unit-awards.js": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+    "core/lesson49-practice.js": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+    "assets/awards/fonts/sources.json": "e37959ca0f2824d901b889ee48380ebe6a38c94cf7b938dbb138b9c9083d33c9"
+  }
+}

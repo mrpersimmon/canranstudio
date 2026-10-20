@@ -1,0 +1,157 @@
+{
+  "currentFiveStar": [
+    {
+      "engineAndMount": "chromium-root",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "61a5818305abc0e2e0416c75d309f5cdeb972e92554e21723e1f0c171ed55230",
+        "bytes": 600566
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "61a5818305abc0e2e0416c75d309f5cdeb972e92554e21723e1f0c171ed55230",
+        "bytes": 600566
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "chromium-subpath",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "61a5818305abc0e2e0416c75d309f5cdeb972e92554e21723e1f0c171ed55230",
+        "bytes": 600566
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "61a5818305abc0e2e0416c75d309f5cdeb972e92554e21723e1f0c171ed55230",
+        "bytes": 600566
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "webkit-root",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "9f35598706a8b9e53064989e74502812760473ea31c3d6eb58d2be1ed5dc9211",
+        "bytes": 532578
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "9f35598706a8b9e53064989e74502812760473ea31c3d6eb58d2be1ed5dc9211",
+        "bytes": 532578
+      },
+      "allFramesUnchanged": true
+    },
+    {
+      "engineAndMount": "webkit-subpath",
+      "before": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "9f35598706a8b9e53064989e74502812760473ea31c3d6eb58d2be1ed5dc9211",
+        "bytes": 532578
+      },
+      "after": {
+        "width": 984,
+        "height": 528,
+        "frames": 60,
+        "durationMs": 4800,
+        "loop": 0,
+        "rawSha256": "9f35598706a8b9e53064989e74502812760473ea31c3d6eb58d2be1ed5dc9211",
+        "bytes": 532578
+      },
+      "allFramesUnchanged": true
+    }
+  ],
+  "currentCourseGif": [
+    {
+      "folder": "account-chromium-root",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "61a5818305abc0e2e0416c75d309f5cdeb972e92554e21723e1f0c171ed55230",
+      "bytes": 600566
+    },
+    {
+      "folder": "account-webkit-subpath",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "rawSha256": "9f35598706a8b9e53064989e74502812760473ea31c3d6eb58d2be1ed5dc9211",
+      "bytes": 532578
+    }
+  ],
+  "old15Star": {
+    "chromium": {
+      "equal": true,
+      "bytes": 6336000,
+      "different": 0
+    },
+    "webkit": {
+      "width": 1440,
+      "height": 1100,
+      "pixels": 1584000,
+      "changedPixels": 2361,
+      "changedOutsideOriginalCharacterDrawBoxes": 0,
+      "maxChannelDifference": 57,
+      "meanChannelDifference": 0.0056245265151515155,
+      "exactPixelEquality": false,
+      "contentAndLayoutVisuallyReviewed": true,
+      "characterSvgFilesUnchanged": true,
+      "classification": "diagnostic comparison; no pixel-equality contract imposed on SVG rasterization; no text or badge pixel differences"
+    }
+  },
+  "print": {
+    "lesson17-18-worksheet.pdf": {
+      "pages": 3,
+      "requiredText": 26,
+      "missing": [],
+      "rawText": [
+        "课后练习纸 −\nLesson 17–18 · 纸笔⼩练习\n课堂跟老师读完整课文和职业词，交换介绍者与访客角色。先问人物身份，再询问职\n业。\nA · ⽤ He 、 She 、 We 或 They 填空\nExam ple: Those m en are lazy. ___ are sales reps.\nThose m en are lazy. They are sales reps.\n第 4 题指课文中的 Jim ，第 5 题指课文中的 Nicola Grey 。\n1. That m an is tall. 　  is a policem an.\n2. Those girls are busy. 　  are keyboard operators.\n3. Our nam es are Britt and Inge. 　  are Swedish.\n4. Look at our ofﬁce assistant. 　  is very hard-working.\n5. Look at Nicola. 　  is very pretty.\n6. Michael Baker and Jerem y Short are em ployees. 　  are sales reps.\nB · 写出职业问句、选择问句和回答\nExam ple: (m echanics) / sales reps\nW hat are their jobs?\nAre they m echanics or sales reps?\nThey aren't m echanics. They're sales reps.\n1. (keyboard operators) / air hostesses\n2. (postm en) / policem en",
+        "3. (policewom en) / nurses\n4. (custom s ofﬁcers) / hairdressers\n5. (hairdressers) / teachers\n6. (engineers) / taxi drivers\n7. (policewom en) / keyboard operators\n8. (m ilkmen) / engineers",
+        "9. (policem en) / m ilkmen\n10. (nurses) / housewives"
+      ],
+      "allPagesVisuallyReviewed": true
+    },
+    "lesson17-18-legacy-certificate-sample.pdf": {
+      "pages": 1,
+      "requiredText": 5,
+      "missing": [],
+      "rawText": [
+        "办公室探访记  · Lesson 17–18\n热心的小小介绍员\n送给\n小禾\n完成  Lesson 17–18 课堂配套练习\n认识新同事，把他们的工作介绍清楚！\n敲开办公室 认识新同事 把同事介绍清楚 职业成双 小访客出发\n15 颗星  · 五关完成\n领取于  2026 年 10 月 18 日"
+      ],
+      "allPagesVisuallyReviewed": true
+    }
+  },
+  "limitation": "WebKit old PNG differs in 2361 pixels confined to unchanged SVG character draw boxes; all other pixels equal. Assets, dimensions, text, layout and original date retained. No cross-browser pixel-equality claim."
+}

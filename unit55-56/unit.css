@@ -107,3 +107,11 @@
  .unit5556-workspace #lessonWorkspace .stage-text .actor-children{width:162px}
  .unit5556-workspace .family-world[data-beat="morning"] .actor-children,.unit5556-workspace .family-world[data-beat="early"] .actor-children{left:69%}
 }
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit5556-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit5556-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit5556-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit5556-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

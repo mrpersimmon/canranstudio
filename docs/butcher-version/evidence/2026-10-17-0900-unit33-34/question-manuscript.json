@@ -1,0 +1,1200 @@
+{
+  "listen": [
+    {
+      "id": "u3334-v1-day-words",
+      "target": "区分一天、云与天空",
+      "prompt": "把词语与意思配起来。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "区分一天、云与天空",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "day",
+          "cn": "一天"
+        },
+        {
+          "id": "1",
+          "en": "cloud",
+          "cn": "云"
+        },
+        {
+          "id": "2",
+          "en": "sky",
+          "cn": "天空"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "不同新词的首次识别，不要求反向再做一组。"
+    },
+    {
+      "id": "u3334-v1-transport",
+      "target": "区分小船、轮船与飞机",
+      "prompt": "为三种交通工具配上意思。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "区分小船、轮船与飞机",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "boat",
+          "cn": "小船"
+        },
+        {
+          "id": "1",
+          "en": "ship",
+          "cn": "轮船"
+        },
+        {
+          "id": "2",
+          "en": "aeroplane",
+          "cn": "飞机"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "保留boat与ship的教材区别；不把任何船绝对划入唯一日常用法。"
+    },
+    {
+      "id": "u3334-v1-bridge-word",
+      "target": "由桥的结构识别bridge",
+      "prompt": "图中是什么？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "由桥的结构识别bridge",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "bridge",
+        "river",
+        "sky"
+      ],
+      "answer": "bridge",
+      "image": "/assets/unit33-34/bridge.svg",
+      "imageAlt": "一座带拱洞和栏杆的桥",
+      "distractorRationale": "图像为桥的结构，河水只是背景，候选都是本课词。"
+    },
+    {
+      "id": "u3334-v1-states",
+      "target": "识别sleep、cry、wait",
+      "prompt": "给动作配上意思。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "识别sleep、cry、wait",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "sleep",
+          "cn": "睡觉"
+        },
+        {
+          "id": "1",
+          "en": "cry",
+          "cn": "哭"
+        },
+        {
+          "id": "2",
+          "en": "wait",
+          "cn": "等待"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "三种不同动作；哭不等于坏孩子，等待不等于睡觉。"
+    },
+    {
+      "id": "u3334-v1-actions",
+      "target": "识别shave、wash、jump",
+      "prompt": "再认三个动作。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "识别shave、wash、jump",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "shave",
+          "cn": "刮脸"
+        },
+        {
+          "id": "1",
+          "en": "wash",
+          "cn": "洗"
+        },
+        {
+          "id": "2",
+          "en": "jump",
+          "cn": "跳"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "分别覆盖其余三项新动作，不用换人名增加题数。"
+    },
+    {
+      "id": "u3334-v1-with-family",
+      "target": "理解with表示陪同",
+      "prompt": "Mr. Jones is with his family.\n这句话告诉我们什么？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "理解with表示陪同",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "他和家人在一起。",
+        "他在寻找家人。",
+        "家人离他很远。"
+      ],
+      "answer": "他和家人在一起。",
+      "distractorRationale": "寻找和距离都不是with的含义；不能只由人物头像推断关系。"
+    },
+    {
+      "id": "u3334-v1-shine",
+      "target": "理解本课shine的动作义",
+      "prompt": "The sun is shining.\nshining 在这里表示什么？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "理解本课shine的动作义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "发光；照耀",
+        "飞翔",
+        "行走"
+      ],
+      "answer": "发光；照耀",
+      "distractorRationale": "以完整句子限制词性和语义，不与sun名词混淆。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u3334-v1-they-reference",
+      "target": "跨句识别They指琼斯先生与家人",
+      "prompt": "Mr. Jones is with his family.\nThey are walking over the bridge.\nThey 指谁？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "跨句识别They指琼斯先生与家人",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Mr. Jones and his family",
+        "the boats",
+        "the aeroplane"
+      ],
+      "answer": "Mr. Jones and his family",
+      "distractorRationale": "须读前句，不把they一律解释为离它最近的任意名词。"
+    },
+    {
+      "id": "u3334-v1-them-boats",
+      "target": "定位them的先行词",
+      "prompt": "点出第二句 them 所指的完整词组。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "定位them的先行词",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "There are ",
+        {
+          "value": "some boats"
+        },
+        " on ",
+        {
+          "value": "the river"
+        },
+        ".\n",
+        {
+          "value": "Mr. Jones and his wife"
+        },
+        " are looking at them."
+      ],
+      "options": [
+        "some boats",
+        "the river",
+        "Mr. Jones and his wife"
+      ],
+      "answer": "some boats",
+      "distractorRationale": "问词组而非单词；river是地点，夫妻是观看者。"
+    },
+    {
+      "id": "u3334-v1-sally-tim",
+      "target": "分清不同人物正在看的对象",
+      "prompt": "Sally is looking at a big ship.\nTim is looking at an aeroplane.\n哪一份观察记录符合原文？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "分清不同人物正在看的对象",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Sally → a big ship; Tim → an aeroplane",
+        "Sally → an aeroplane; Tim → a big ship",
+        "Sally → a big ship; Tim → a big ship"
+      ],
+      "answer": "Sally → a big ship; Tim → an aeroplane",
+      "distractorRationale": "两个对象都在材料中，不能只看到某一个关键词便作答。"
+    },
+    {
+      "id": "u3334-v1-weather-picture",
+      "target": "有云和阳光可以同时成立",
+      "prompt": "There are some clouds in the sky, but the sun is shining.\n哪幅画符合这句话？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "有云和阳光可以同时成立",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "画面一",
+        "画面二",
+        "画面三"
+      ],
+      "answer": "画面二",
+      "optionImages": {
+        "画面一": "/assets/unit33-34/weather-rain.svg",
+        "画面二": "/assets/unit33-34/weather-fine.svg",
+        "画面三": "/assets/unit33-34/weather-night.svg"
+      },
+      "optionImageAlts": {
+        "画面一": "灰云下正在下雨，太阳不可见",
+        "画面二": "几朵白云与发光的太阳",
+        "画面三": "夜空里有月亮和星星"
+      },
+      "distractorRationale": "雨夜与阴天分别缺少太阳照耀；正确图须同时含云和阳光。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3334-five-g-under",
+      "target": "under表示在下方",
+      "prompt": "小船正在桥的拱洞下通过，选出表示桥下的词。",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "under",
+        "over",
+        "on"
+      ],
+      "answer": "under",
+      "display": {
+        "title": "小船正在桥的拱洞下通过，选出表示桥下的词。",
+        "material": "The boat is going ___ the bridge."
+      },
+      "explanation": "under在这里表示在桥下面；判断物体和参照物的实际关系。",
+      "hint": "",
+      "workshop": {
+        "rule": "under在这里表示在桥下面；判断物体和参照物的实际关系。",
+        "model": {
+          "lines": [
+            [
+              "There is a cat under the table.",
+              "导学原例：桌下有一只猫，under说明猫在桌子下方。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-across",
+      "target": "across表示从一边到另一边",
+      "prompt": "孩子们正在从路的一边走到另一边，across在这里说明什么？",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "横穿道路，从一边到另一边。",
+        "在道路下方。",
+        "沿着道路一直走。"
+      ],
+      "answer": "横穿道路，从一边到另一边。",
+      "display": {
+        "title": "孩子们正在从路的一边走到另一边，across在这里说明什么？",
+        "material": "The children are walking across the road.\nroad：道路"
+      },
+      "explanation": "across在这里表示横穿有边界的区域，不是沿路一直走，也不是在道路下方。",
+      "hint": "",
+      "workshop": {
+        "rule": "across在这里表示横穿有边界的区域，不是沿路一直走，也不是在道路下方。",
+        "model": {
+          "lines": [
+            [
+              "Be careful when you go across the road.",
+              "导学原例：过马路时要小心。go across说明从一边到另一边。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-over-on",
+      "target": "本题静态位置区分悬空上方和表面接触",
+      "prompt": "花瓶放在桌面上；画挂在墙上、位于桌子上方，和桌子之间有空隙。分别选词。",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The vase is ",
+          "after": " the table.",
+          "options": [
+            "on",
+            "over",
+            "under"
+          ]
+        },
+        {
+          "before": "The picture is ",
+          "after": " the table.",
+          "options": [
+            "over",
+            "on",
+            "under"
+          ]
+        }
+      ],
+      "answer": "[\"on\",\"over\"]",
+      "display": {
+        "title": "花瓶放在桌面上；画挂在墙上、位于桌子上方，和桌子之间有空隙。分别选词。",
+        "material": "vase：花瓶；picture：画。两句都以桌子为参照物。"
+      },
+      "explanation": "本题on表示在桌面上接触桌子；over表示画在桌子的上方。此处的接触对比不能套到over的所有用法。",
+      "hint": "",
+      "workshop": {
+        "rule": "本题on表示在桌面上接触桌子；over表示画在桌子的上方。此处的接触对比不能套到over的所有用法。",
+        "model": {
+          "lines": [
+            [
+              "There is a bridge over the river.",
+              "导学原例：桥在河流上方；人可以在桥面上走。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-over-crossing",
+      "target": "over也可表示从一边经过到另一边",
+      "prompt": "课文说walk over the bridge，导学练习还用walk across the bridge。哪种理解正确？",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "两种都可以表示从桥上走过。",
+        "over在这里只能表示从桥上空飞过。",
+        "across只能表示在桥下面。"
+      ],
+      "answer": "两种都可以表示从桥上走过。",
+      "display": {
+        "title": "课文说walk over the bridge，导学练习还用walk across the bridge。哪种理解正确？",
+        "material": "They are walking over the bridge.\nMr. Jones is walking across the bridge."
+      },
+      "explanation": "在过桥的语境中，over和across都可表达跨过。不能把合法的另一表达当作唯一错项。",
+      "hint": "",
+      "workshop": {
+        "rule": "在过桥的语境中，over和across都可表达跨过。不能把合法的另一表达当作唯一错项。",
+        "model": {
+          "lines": [
+            [
+              "The aeroplane is flying over the river.",
+              "飞机在河上空飞过；换成walking over the bridge时，over可表示从桥上走过。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-with-company",
+      "target": "with表达陪同",
+      "prompt": "小女孩和妈妈一起散步，这里的with表示什么？",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "和妈妈一起。",
+        "正在寻找妈妈。",
+        "在妈妈上方。"
+      ],
+      "answer": "和妈妈一起。",
+      "display": {
+        "title": "小女孩和妈妈一起散步，这里的with表示什么？",
+        "material": "The girl is walking with her mother."
+      },
+      "explanation": "with可以连接一起参与的人，表达陪同，不直接说明地点或工具。",
+      "hint": "",
+      "workshop": {
+        "rule": "with可以连接一起参与的人，表达陪同，不直接说明地点或工具。",
+        "model": {
+          "lines": [
+            [
+              "Mr. Brown is playing football with his son.",
+              "导学原例：布朗先生正和儿子一起踢球。son：儿子。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-with-feature",
+      "target": "with描述带有的特征",
+      "prompt": "这里的with是在说明什么？",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "女孩有长长的黑发。",
+        "这里在说明女孩正和谁一起。",
+        "这里在说明女孩用什么写字。"
+      ],
+      "answer": "女孩有长长的黑发。",
+      "display": {
+        "title": "这里的with是在说明什么？",
+        "material": "the girl with long black hair\nlong black hair：长长的黑发"
+      },
+      "explanation": "with还可表示带有某种特征。它不总是“和某个人一起”。",
+      "hint": "",
+      "workshop": {
+        "rule": "with还可表示带有某种特征。它不总是“和某个人一起”。",
+        "model": {
+          "lines": [
+            [
+              "a house with a red door",
+              "带有一扇红门的房子。with后的部分说明房子的特征。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-five-g-with-tool",
+      "target": "with表达使用的工具",
+      "prompt": "她用钢笔写信，这里的with指什么？",
+      "source": "同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "写信使用的工具。",
+        "和她一起写信的人。",
+        "钢笔所在的位置。"
+      ],
+      "answer": "写信使用的工具。",
+      "display": {
+        "title": "她用钢笔写信，这里的with指什么？",
+        "material": "She is writing a letter with a pen.\nwrite a letter：写信"
+      },
+      "explanation": "with可表示做事使用的工具或手段；钢笔是工具，不是陪同者。",
+      "hint": "",
+      "workshop": {
+        "rule": "with可表示做事使用的工具或手段；钢笔是工具，不是陪同者。",
+        "model": {
+          "lines": [
+            [
+              "Many people write with the right hand.",
+              "导学原例：许多人用右手写字。right hand：右手；这只是例句，不要求孩子用哪只手。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3334-v1-ship-under",
+      "target": "同时读懂船的种类与位置",
+      "prompt": "新画面：读英文，选出对应的船。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "同时读懂船的种类与位置",
+      "hint": "",
+      "explanation": "",
+      "type": "scene-find",
+      "reference": "The ship is going under the bridge.",
+      "sceneImage": "/assets/unit33-34/find-ships.svg",
+      "mobileScene": "/assets/unit33-34/find-ships-mobile.svg",
+      "sceneDescription": "一座桥横跨河流。第一艘轮船在桥下，第二艘同型轮船在右侧河面，左下有一艘小船。",
+      "options": [
+        "ship1",
+        "ship2",
+        "boat"
+      ],
+      "spots": [
+        {
+          "id": "ship1",
+          "name": "1号船",
+          "bounds": [
+            24,
+            44,
+            32,
+            37
+          ],
+          "mobileBounds": [
+            14,
+            40,
+            55,
+            31
+          ]
+        },
+        {
+          "id": "ship2",
+          "name": "2号船",
+          "bounds": [
+            63,
+            53,
+            32,
+            42
+          ],
+          "mobileBounds": [
+            41,
+            65,
+            57,
+            33
+          ]
+        },
+        {
+          "id": "boat",
+          "name": "3号船",
+          "bounds": [
+            2,
+            73,
+            20,
+            25
+          ],
+          "mobileBounds": [
+            0,
+            74,
+            35,
+            24
+          ]
+        }
+      ],
+      "answer": "ship1",
+      "distractorRationale": "两艘轮船外形相同，必须结合under/on与bridge/river判断；选区中性，不预标答案。"
+    },
+    {
+      "id": "u3334-v1-plane-over",
+      "target": "看图区分河面与河上空",
+      "prompt": "补全图中的位置。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "看图区分河面与河上空",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The aeroplane is flying ",
+          "after": " the river.",
+          "options": [
+            "over",
+            "on",
+            "under"
+          ]
+        }
+      ],
+      "answer": "[\"over\"]",
+      "image": "/assets/unit33-34/plane-over.svg",
+      "imageAlt": "飞机在河流上空飞行",
+      "distractorRationale": "三个介词词性相同，需阅读英文并对照空间。"
+    },
+    {
+      "id": "u3334-v1-walk-over",
+      "target": "同一个over在过桥语境中的含义",
+      "prompt": "They are walking over the bridge.\n这句话描述哪一种经过方式？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "同一个over在过桥语境中的含义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "从桥上走过",
+        "在桥上空飞过",
+        "从桥下经过"
+      ],
+      "answer": "从桥上走过",
+      "distractorRationale": "不能把本课over的两种语境一概教成上空；walk决定行走。"
+    }
+  ],
+  "apply": [
+    {
+      "id": "u3334-v1-singular-plural",
+      "target": "比较一个人和多个人的be形式",
+      "prompt": "为两句话分别选词。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "比较一个人和多个人的be形式",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The children ",
+          "after": " doing their homework.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        },
+        {
+          "before": "The boy ",
+          "after": " doing his homework.",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"are\",\"is\"]",
+      "distractorRationale": "真正分别选择are与is，而非直接给成块正确句；复习单数用于支持新复数对比。"
+    },
+    {
+      "id": "u3334-v1-waiting-reply",
+      "target": "复合主语用they回答正在做什么",
+      "prompt": "What are the man and the woman doing?",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "复合主语用they回答正在做什么",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "They are waiting for a bus.",
+        "They are walking over the bridge.",
+        "He is waiting for a bus."
+      ],
+      "answer": "They are waiting for a bus.",
+      "image": "/assets/unit33-34/waiting.svg",
+      "imageAlt": "一位男士和一位女士并排站在公交站牌旁等待",
+      "distractorRationale": "根据站牌与等待姿态判断动作，the man and the woman为两人，不能只答he。"
+    },
+    {
+      "id": "u3334-v1-ing-e",
+      "target": "比较直接加ing和去不发音e",
+      "prompt": "填入 walk 和 shine 的 -ing 形式。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "比较直接加ing和去不发音e",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "They are ",
+          "after": " over the bridge.",
+          "options": [
+            "walking",
+            "walk",
+            "walkeing"
+          ]
+        },
+        {
+          "before": "The sun is ",
+          "after": ".",
+          "options": [
+            "shining",
+            "shineing",
+            "shine"
+          ]
+        }
+      ],
+      "answer": "[\"walking\",\"shining\"]",
+      "distractorRationale": "前项直接加ing，后项删e；两种条件对比而不是两个同构变词。"
+    },
+    {
+      "id": "u3334-v1-ing-y",
+      "target": "fly的进行形式保留y",
+      "prompt": "用 fly 的 -ing 形式填空。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "fly的进行形式保留y",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The birds are ",
+          "after": ".",
+          "options": [
+            "flying",
+            "fling",
+            "fliing"
+          ]
+        }
+      ],
+      "answer": "[\"flying\"]",
+      "distractorRationale": "y在此不变成i，也不能删掉；不借用复数名词或三单变化规则。"
+    },
+    {
+      "id": "u3334-v1-plural-question",
+      "target": "组织复数现在动作问句",
+      "prompt": "他们正在做什么？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "组织复数现在动作问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "are",
+        "they",
+        "doing?"
+      ],
+      "answer": "What are they doing?",
+      "distractorRationale": "撤去成句支持，组织are在主语前的问句；不是单数旧题换名词。"
+    },
+    {
+      "id": "u3334-v1-plural-washing",
+      "target": "组织复数动作描述",
+      "prompt": "她们正在洗碗。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "组织复数动作描述",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "They",
+        "are",
+        "washing",
+        "dishes."
+      ],
+      "answer": "They are washing dishes.",
+      "distractorRationale": "用完整主谓结构组织描述；前面只在图册示范，不重复同句练习。"
+    },
+    {
+      "id": "u3334-five-a-with",
+      "target": "在新表达中区分with的三个用途",
+      "prompt": "给三条表达找到对应意思。",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "walk with my friend",
+          "cn": "和朋友一起走"
+        },
+        {
+          "id": "1",
+          "en": "a bag with books",
+          "cn": "装着书的包"
+        },
+        {
+          "id": "2",
+          "en": "write with a pencil",
+          "cn": "用铅笔写"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "explanation": "同一个with按对象和语境，分别表示陪同、带有和使用工具。",
+      "hint": ""
+    }
+  ],
+  "exam": [
+    {
+      "id": "u3334-v1-final-weather",
+      "target": "天气语境与but的关系",
+      "prompt": "It is a fine day today.\nThere are some clouds in the sky, but the sun is shining.\n哪一句记录符合原文？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "天气语境与but的关系",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "有云，阳光依然灿烂。",
+        "晴天，所以一朵云也没有。",
+        "有云，所以太阳没有照耀。"
+      ],
+      "answer": "有云，阳光依然灿烂。",
+      "distractorRationale": "间隔复习：fine与some clouds不矛盾；两项干扰分别抹去云或太阳。"
+    },
+    {
+      "id": "u3334-v1-final-family",
+      "target": "with与They的跨句关系",
+      "prompt": "Mr. Jones is with his family. They are walking over the bridge.\n谁正在过桥？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "with与They的跨句关系",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "琼斯先生和他的家人",
+        "只有琼斯先生",
+        "只有琼斯太太"
+      ],
+      "answer": "琼斯先生和他的家人",
+      "distractorRationale": "间隔复习：全体指代，不能缩成一个人。"
+    },
+    {
+      "id": "u3334-v1-final-them",
+      "target": "将them指代迁移到新的先行词",
+      "prompt": "新观察记录：点出 them 指的完整词组。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "将them指代迁移到新的先行词",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        {
+          "value": "The birds"
+        },
+        " are flying over ",
+        {
+          "value": "the river"
+        },
+        ".\n",
+        {
+          "value": "The children"
+        },
+        " are looking at them."
+      ],
+      "options": [
+        "The birds",
+        "the river",
+        "The children"
+      ],
+      "answer": "The birds",
+      "distractorRationale": "条件改变：先行词换成birds，观看者换children，不能死记them等于boats。"
+    },
+    {
+      "id": "u3334-v1-final-under-on",
+      "target": "区分under桥下与on水面",
+      "prompt": "按原文补全两条观察记录。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "区分under桥下与on水面",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The ship is going ",
+          "after": " the bridge.",
+          "options": [
+            "under",
+            "on",
+            "over"
+          ]
+        },
+        {
+          "before": "There are some boats ",
+          "after": " the river.",
+          "options": [
+            "on",
+            "under",
+            "in"
+          ]
+        }
+      ],
+      "answer": "[\"under\",\"on\"]",
+      "distractorRationale": "两句的物体及参照物不同，分别判断；只选一种介词不能过关。"
+    },
+    {
+      "id": "u3334-v1-final-over",
+      "target": "识别fly over的空间含义",
+      "prompt": "The aeroplane is flying over the river.\n飞机经过哪里？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "识别fly over的空间含义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "河流上空",
+        "河面上",
+        "桥下面"
+      ],
+      "answer": "河流上空",
+      "distractorRationale": "与前面walk over的桥面义对照；原文没有说飞机飞到桥下。"
+    },
+    {
+      "id": "u3334-v1-final-question",
+      "target": "独立组织带复数名词的问句",
+      "prompt": "这些男士正在做什么？",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "独立组织带复数名词的问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "are",
+        "the",
+        "men",
+        "doing?"
+      ],
+      "answer": "What are the men doing?",
+      "distractorRationale": "主语由they改为复数名词词组，仍需问句倒装；属于组织任务，不声称独立写作。"
+    },
+    {
+      "id": "u3334-v1-final-be",
+      "target": "单数与复数动作的一致关系",
+      "prompt": "分别补全两句话。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "单数与复数动作的一致关系",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The dogs ",
+          "after": " eating bones.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        },
+        {
+          "before": "The dog ",
+          "after": " eating a bone.",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"are\",\"is\"]",
+      "distractorRationale": "间隔复习：不因dogs与dog的画面相似就忽略数量；真实选择两侧be。"
+    },
+    {
+      "id": "u3334-v1-final-actions",
+      "target": "识别睡觉、哭与洗的词义",
+      "prompt": "把动作与意思配起来。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "识别睡觉、哭与洗的词义",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "sleep",
+          "cn": "睡觉"
+        },
+        {
+          "id": "1",
+          "en": "cry",
+          "cn": "哭"
+        },
+        {
+          "id": "2",
+          "en": "wash",
+          "cn": "洗"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "跨组抽样回顾三项新词，不把前面的两个词汇组整套重做。"
+    },
+    {
+      "id": "u3334-v1-final-shaving",
+      "target": "根据动作与复数主语选择描述",
+      "prompt": "What are the men doing?",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "根据动作与复数主语选择描述",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "They are shaving.",
+        "They are washing dishes.",
+        "He is shaving."
+      ],
+      "answer": "They are shaving.",
+      "image": "/assets/unit33-34/shaving.svg",
+      "imageAlt": "两位成人男士各自拿着剃须工具刮脸",
+      "distractorRationale": "成人刮脸图与两人数量必须同时匹配；不要求儿童模仿动作。"
+    },
+    {
+      "id": "u3334-v1-final-spelling-e",
+      "target": "将删不发音e规则应用于另一个已示范动词",
+      "prompt": "用 come 和 give 的 -ing 形式填空。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "将删不发音e规则应用于另一个已示范动词",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is ",
+          "after": ".",
+          "options": [
+            "coming",
+            "comeing",
+            "come"
+          ]
+        },
+        {
+          "before": "He is ",
+          "after": " me some magazines.",
+          "options": [
+            "giving",
+            "giveing",
+            "give"
+          ]
+        }
+      ],
+      "answer": "[\"coming\",\"giving\"]",
+      "distractorRationale": "教材书面A的词，已在表达参考展示；改变词根核对规则迁移，不引入未知例外。"
+    },
+    {
+      "id": "u3334-v1-final-crying",
+      "target": "cry加ing时保留y",
+      "prompt": "用 cry 的 -ing 形式填空。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "cry加ing时保留y",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The children are ",
+          "after": ".",
+          "options": [
+            "crying",
+            "criing",
+            "cring"
+          ]
+        }
+      ],
+      "answer": "[\"crying\"]",
+      "distractorRationale": "从fly示范迁移到教材cry，保留y；不能套复数名词y改ies。"
+    },
+    {
+      "id": "u3334-v1-final-waiting",
+      "target": "把复合主语问答落实到情境",
+      "prompt": "What are the man and the woman doing?",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "把复合主语问答落实到情境",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "They are waiting for a bus.",
+        "She is waiting for a bus.",
+        "They are jumping off the wall."
+      ],
+      "answer": "They are waiting for a bus.",
+      "image": "/assets/unit33-34/waiting.svg",
+      "imageAlt": "公交站牌旁站着一位男士和一位女士",
+      "distractorRationale": "间隔复习两人共同动作；不是按性别、衣服颜色猜答案。"
+    },
+    {
+      "id": "u3334-v1-final-jumping",
+      "target": "组织教材复数动作与off路线",
+      "prompt": "这些孩子正在从矮墙上跳下来。",
+      "source": "《新概念英语智慧版1》纸页66–69（PDF99–102）",
+      "decision": "组织教材复数动作与off路线",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "The",
+        "children",
+        "are",
+        "jumping",
+        "off",
+        "the",
+        "wall."
+      ],
+      "answer": "The children are jumping off the wall.",
+      "distractorRationale": "保留教材off短语与动作结构；图片或课堂模拟不等于要求真实跳墙。"
+    },
+    {
+      "id": "u3334-five-e-across",
+      "target": "独立理解横穿的起点终点",
+      "prompt": "这句话描述怎样的路线？",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "从道路一边走向另一边。",
+        "在道路下方走。",
+        "在道路上空飞。"
+      ],
+      "answer": "从道路一边走向另一边。",
+      "display": {
+        "title": "这句话描述怎样的路线？",
+        "material": "The man is walking across the road.\nroad：道路"
+      },
+      "explanation": "across说明跨过这条路，不表示下方或飞行。",
+      "hint": ""
+    },
+    {
+      "id": "u3334-five-e-over-on",
+      "target": "独立区别静态位置的接触关系",
+      "prompt": "书放在桌面上；灯悬挂在桌子上方，和桌子有空隙。补全两句。",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The book is ",
+          "after": " the table.",
+          "options": [
+            "on",
+            "over",
+            "under"
+          ]
+        },
+        {
+          "before": "The lamp is ",
+          "after": " the table.",
+          "options": [
+            "over",
+            "on",
+            "under"
+          ]
+        }
+      ],
+      "answer": "[\"on\",\"over\"]",
+      "explanation": "本题书接触桌面用on，悬空在桌上方的灯用over。",
+      "hint": ""
+    },
+    {
+      "id": "u3334-five-e-company",
+      "target": "独立识别陪同意义",
+      "prompt": "这句话说明哪种关系？",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "妈妈和爸爸在一起。",
+        "妈妈正在寻找爸爸。",
+        "妈妈在爸爸上方。"
+      ],
+      "answer": "妈妈和爸爸在一起。",
+      "display": {
+        "title": "这句话说明哪种关系？",
+        "material": "My mother is with my father."
+      },
+      "explanation": "with在这里表示与某人一起，不表示工具或空间上方。",
+      "hint": ""
+    },
+    {
+      "id": "u3334-five-e-feature",
+      "target": "独立使用with描述特征",
+      "prompt": "说“带着一个红色提包的女士”，补全表达。",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "the woman ",
+          "after": " a red handbag",
+          "options": [
+            "with",
+            "under",
+            "across"
+          ]
+        }
+      ],
+      "answer": "[\"with\"]",
+      "display": {
+        "title": "说“带着一个红色提包的女士”，补全表达。",
+        "material": "handbag：提包；这里用提包这一特征说明是哪位女士。"
+      },
+      "explanation": "with表示带有，后面的提包帮助说明这位女士。",
+      "hint": ""
+    },
+    {
+      "id": "u3334-five-e-tool",
+      "target": "独立使用with说明工具",
+      "prompt": "他用铅笔写信，补全句子。",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He is writing a letter ",
+          "after": " a pencil.",
+          "options": [
+            "with",
+            "on",
+            "in"
+          ]
+        }
+      ],
+      "answer": "[\"with\"]",
+      "explanation": "with a pencil说明使用一支铅笔；不能把在物体上面或里面的关系套到工具。",
+      "hint": ""
+    },
+    {
+      "id": "u3334-five-e-bridge",
+      "target": "独立辨别over不等于只能悬空",
+      "prompt": "下面两句都说人从桥上走过，哪项判断正确？",
+      "source": "课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108",
+      "options": [
+        "两句都能成立，不必悬空。",
+        "第一句只能说人在桥上空飞。",
+        "第二句只能说人在桥下走。"
+      ],
+      "answer": "两句都能成立，不必悬空。",
+      "display": {
+        "title": "下面两句都说人从桥上走过，哪项判断正确？",
+        "material": "They are walking over the bridge.\nThey are walking across the bridge."
+      },
+      "explanation": "over可表示越过，across可表示从一边到另一边；本课过桥语境允许两者。",
+      "hint": ""
+    }
+  ]
+}

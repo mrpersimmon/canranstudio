@@ -3,6 +3,9 @@ const { test, expect } = require('@playwright/test');
 const { EXAM, selectAnswer } = require('../support/unit7-8-exam');
 const { finishExamFrom } = require('../support/unit7-8-exam');
 const fs = require('node:fs/promises');
+// Historical 15-star behavior is exercised on its frozen edition.
+// Current five-zone and authenticated migration contracts have dedicated suites.
+require('../support/unit78-legacy').historicalSuite(test);
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 test('十一题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录', async ({ page }) => {

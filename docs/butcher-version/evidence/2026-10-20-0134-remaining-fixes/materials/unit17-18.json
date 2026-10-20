@@ -1,0 +1,31 @@
+{
+  "id": "unit17-18",
+  "source": {
+    "file": "tests/support/unit1718-fivezones.js",
+    "sha256": "0137421902398d33c59a39491c8e5e24f5ce21fc4bc28848333d73ec12c39505"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u1718-v1-story-jobs",
+      "text": "Lesson 17\n\nMr. Jackson: This is Michael Baker, and this is Jeremy Short.\n\nMr. Richards: How do you do?\n\nMr. Richards: They aren't very busy!\n\nMr. Richards: What are their jobs?\n\nMr. Jackson: They're sales reps."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u1718-v1-story-their",
+      "text": "Lesson 17\n\nMr. Jackson: This is Nicola Grey, and this is Claire Taylor.\n\nMr. Richards: How do you do?\n\nMr. Richards: Those women are very hard-working.\n\nMr. Richards: What are their jobs?\n\nMr. Jackson: They're keyboard operators."
+    }
+  ],
+  "sourceLines": {
+    "R1": "8-12",
+    "R2": "3-7"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

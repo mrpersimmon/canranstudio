@@ -183,7 +183,7 @@
       }
     }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
-    bubble.append(node('div', content.SPEAKERS[line.who], 'bname'), speech, translation, actions); if(line.note) bubble.append(node('p',line.note,'story-note')); row.append(bubble); log.append(row);
+    bubble.append(node('div', content.SPEAKERS[line.who], 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
   function advanceDialogue() {
     if (dialogue.done) return;

@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:31660) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 (5.5s)
+
+
+  1) tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 ───────────────────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 501
+    Received:    554.40625
+
+      89 |  await flow.select(room,flow.ANSWERS['1-2'].listen[0]);await room.getByRole('button',{name:'检查答案',exact:true}).focus();await page.keyboard.press('Enter');await room.getByRole('button',{name:'下一题',exact:true}).click();
+      90 |  await flow.activity(page,'1-2','listen');await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);
+    > 91 |  const stats=await room.locator('.completion-stats').boundingBox(),actions=await room.locator('.practice-finish-actions').boundingBox();expect(stats.y).toBeGreaterThan(0);expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);
+         |                                                                                                                                                                                                             ^
+      92 |  await page.screenshot({path:info.outputPath('short-completion.png')});await page.reload();await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);
+      93 | });
+      94 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-v154.spec.js:91:205
+
+    Error Context: output\unit12-review-20261018\short-isolated-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\short-isolated-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\short-isolated-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 ────────────────────────

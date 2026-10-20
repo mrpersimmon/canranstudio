@@ -334,3 +334,54 @@ unit.questions["articles"][2]]};
  unit.stages[4].activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
  unit.reward={edition:'story-card-v1',title:'新朋友小使者',lesson:'Lesson 5–6',scene:'/assets/awards/unit5-6-friends.webp',alt:'布莱克先生和苏菲、汉斯在教室见面',color:'#49785c',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['introduce','介绍小工坊'],['cars','汽车小问答'],['exam','见面小挑战']].map(([id,title])=>({id,title}))};
 })(globalThis.CanranCore);
+
+// v1.54: the original award remains a historical achievement. Only exact
+// unchanged questions may carry forward; new source-dependent tasks stay blank.
+(function(core){
+ 'use strict';const unit=core.unit56,old=unit.questions;
+ const source='同步导学Grammar纸11–12／PDF25–26；课本纸10–13／PDF43–46；另设练习条件不增加课文事实';
+ const q=(id,target,prompt,options,answer,extra={})=>({id:'u56-v154-'+id,target,prompt,options,answer,hint:'',source,...extra});
+ const cloze=(id,target,prompt,blanks,answers,extra={})=>q(id,target,prompt,undefined,JSON.stringify(answers),{type:'cloze',blanks,...extra});
+ const block=(before,after,options)=>({before,after,options});
+ const build=(id,target,prompt,tokens,answer)=>q(id,target,prompt,undefined,answer,{type:'wordbank',tokens,slots:tokens.length});
+ const lines=indexes=>indexes.map(i=>{const row=unit.learning.DIALOGUE[i];return[unit.learning.PEOPLE[row.person].name,row.text];});
+ const revised={
+  roles:old.roles.map((item,i)=>({...item,id:'u56-v154-story-'+['new','chang','too'][i],reading:lines([[2,3],[11,12],[14,15,17,18]][i]),source:'Lesson5纸10／PDF43；未作答时保留必要的连续介绍及指代依据。'})),
+  introduce:[
+   q('wh-meaning','根据所问信息作出具体回应','展牌：Toyota · Japanese\nWhat make is it?\n根据展牌回答这个问题。',["It's a Toyota.","It's Japanese.",'Yes, it is.'],"It's a Toyota."),
+   build('wh-order','用特殊疑问句询问品牌','用词块问：它是什么牌子的？',['What','make','is','it?'],'What make is it?'),
+   q('who-answer','按问题用名字介绍人物','This is Hans.\nWho is he?\n请用名字回答。',['He is Hans.','He is German.','Yes, he is.'],'He is Hans.'),
+   build('who-subject','用who询问具有某种身份的人','想问“谁是日本人？”，用词块提问。who 表示“谁”。',['Who','is','Japanese?'],'Who is Japanese?'),
+   ...old.introduce,
+   cloze('wh-independent','撤去示范后按不同问题回答','资料：Sophie 是女同学；这辆车的品牌是 Mini。\n分别回答问名字和问品牌的问题。',[
+    block('Who is she? — ', '', ['She is Sophie.','It is a Mini.','Yes, she is.']),
+    block('What make is it? — ', '', ['It is a Mini.','It is English.','She is Sophie.'])
+   ],['She is Sophie.','It is a Mini.'])
+  ],
+  cars:[...old.cars,q('choice-neither','不把选择问句的选项当作已知事实','展牌：Toyota · Japanese\nIs it a Swedish car or an English car?\n按展牌说明实际国别。',["It's a Japanese car.","It's a Swedish car.","It's an English car."],"It's a Japanese car.",{image:'/assets/unit5-6/toyota.svg',imageAlt:'Toyota汽车，国别以题中的展牌为准'})],
+  exam:[...old.exam.slice(0,5),
+   cloze('exam-people','分别指代两位人物','本练习中，Hans 是男同学，Sophie 是女同学。继续介绍他们。',[
+    block('Hans: ',' is German.',['He','She','It']),block('Sophie: ',' is French.',['She','He','It'])
+   ],['He','She']),
+   cloze('exam-car-article','分清物主和汽车并选择冠词','继续介绍她的汽车。American /əˈmerɪkən/。',[
+    block('This is her car. ',' is American.',['It','She','He']),
+    block('It is ',' American car.',['a','an'])
+   ],['It','an']),
+   q('exam-nationality','比较国籍表语和单数名词短语','想先说她是法国人，再说她是一位法国学生。哪组表达正确？',["She is French. She's a French student.","She is a French. She's a French student.","She is French. She's an French student."],"She is French. She's a French student."),
+   ...old.exam.slice(7),
+   build('exam-wh-order','独立询问汽车品牌','你想知道面前这辆汽车的品牌。用词块提出完整问题。',['What','make','is','it?'],'What make is it?'),
+   q('exam-who-subject','独立用who询问人物','新情境：Ben is German. Lily is French.\n你想问“谁是德国人？”，选完整的问题。',['Who is German?','Is who German?','Who German is?'],'Who is German?'),
+   q('exam-neither','按实际事实回应未覆盖正确情况的选择问句','展牌：Ford · American\nIs it a Japanese car or a French car?\n怎样说清展牌上的实际国别？',["It's an American car.","It's a Japanese car.","It's a French car."],"It's an American car.")
+  ]
+ };
+ for(const[id,items]of Object.entries(revised)){
+  const session=unit.taskSessions[id]||(unit.activityPredecessors[id]?'v2':'v'+unit.version);
+  unit.taskPredecessors[id]=[{key:'unit56-'+id+'-practice/'+session,questions:old[id]},...(unit.taskPredecessors[id]||[]),...(unit.voicedQuestions[id]?[{key:'unit56-'+id+'-practice/v1',questions:unit.voicedQuestions[id]}]:[]),...(unit.activityPredecessors[id]||[]).flatMap(key=>[unit.previousQuestions[key],unit.voicedQuestions[key]].map(questions=>({key:'unit56-'+key+'-practice/v1',questions})))];
+  unit.taskSessions[id]='v154';unit.questions[id]=items;
+ }
+ unit.routeAliases['learn/phrases']='learn/introduce';unit.routeAliases['learn/models']='learn/cars';
+ unit.stages[2].activities=unit.stages[2].activities.filter(x=>x[0]!=='phrases');
+ unit.stages[3].activities=unit.stages[3].activities.filter(x=>x[0]!=='models');
+ unit.typeCoverage={adopted:['E01','E05','E09','E12','E23','S01'],adaptations:{
+  E01:'V1/V3中英词义配对；不把三对计三题。',E04:'未用中文词块；阅读选择替代意义检查。',E05:'G2/G4及C12组织完整问句，保留A2/A3和C2/C10旧词块。',E09:'G7/G8/G11、C6/C7按相关信息逐空选，最多两空。',E10:'未采用图境选词填空；不将装饰汽车计为图形依据。',E11:'短对白理解归S01，不重复计段落题型。',E12:'G3按Who is he?及给定名字选择回应；G11是填空不再重复计。',E21:'未采用：本课词义配对和品牌文字资料已覆盖目标。',E23:'V2从中文国籍选South Korean。',S01:'R1/R2/R3原文理解及C1/C3/C5事实边界。',S02:'未采用：无按中文词义点英语片段。',A02:'汽车情境作教学改编，非原研究产品实测；原研究中文流程待核。'}};
+})(globalThis.CanranCore);

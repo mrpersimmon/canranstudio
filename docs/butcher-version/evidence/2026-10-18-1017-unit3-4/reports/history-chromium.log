@@ -1,0 +1,48 @@
+
+Running 3 tests using 1 worker
+
+(node:30200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 (9.4s)
+  ok 2 tests\e2e\unit3-4-v154-history.spec.js:5:49 › voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留 (43.6s)
+  x  3 tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 (5.7s)
+
+
+  1) tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 ─────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.sentence-models .reference-card')
+    Expected: 15
+    Received: 25
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.sentence-models .reference-card')
+        14 × locator resolved to 25 elements
+           - unexpected value "25"
+
+
+      18 | });
+      19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{
+    > 20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models .reference-card')).toHaveCount(15);
+         |                                                                                                                                                                                                                    ^
+      21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);
+      22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');
+      23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154-history.spec.js:20:212
+
+    Error Context: output\unit34-review-20261018\history-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\history-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\history-chromium\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit3-4-v154-history.spec.js:19:1 › Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间 ──────────────
+  2 passed (1.0m)

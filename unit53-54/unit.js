@@ -255,9 +255,9 @@
   surfaces.get('grammar').append(reference);
   const writing=node('details','','offline-task');writing.id='unitWriting';writing.append(node('summary','课后练习纸'));
   writing.append(node('h4','A · 改成问句和否定句'),node('p','每句分别写一般疑问句与否定句。例：The sun rises early. → Does the sun rise early? / The sun doesn’t rise early.'));
-  const a=node('ol');content.WRITING_A.forEach(text=>a.append(node('li',text)));writing.append(a);
+  const a=node('ol');content.WRITING_A.forEach(text=>{const li=node('li',text);for(let line=0;line<2;line++)li.append(node('div','','writing-line'));a.append(li);});writing.append(a);
   writing.append(node('h4','B · 国家与国籍问答'),node('p','按人物与国家写来源问答、国籍问答。'),node('p','he / Brazil'),node('p','Where does he come from? He comes from Brazil. Is he Brazilian? Yes, he is. He’s Brazilian.'));
-  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'),node('div','________________________________________________'));b.append(li);});writing.append(b);
+  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);for(let line=0;line<4;line++)li.append(node('div','','writing-line'));b.append(li);});writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));
   writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));

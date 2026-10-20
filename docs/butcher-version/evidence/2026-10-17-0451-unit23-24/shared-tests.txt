@@ -1,0 +1,59 @@
+✔ static course contract requires real same-origin prerecorded audio (61.6983ms)
+✔ published course page must consume progress metadata from the shared catalog (28.9847ms)
+✔ a published lesson outside V1 requires a visible V2 map notice on its direct page (12.4295ms)
+✔ published learning location contract requires every declared asset and regression file (66.4995ms)
+✔ published landmark assets are fixed 1024px transparent PNG canvases (8.9165ms)
+✔ indexing contract rejects redirects, noindex, and credential gates (3.1109ms)
+✔ runtime contract rejects application services, cookies, analytics, and hidden identity (1.6034ms)
+✔ public resources reject cross-origin runtime dependencies (0.8649ms)
+(node:10080) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (147.6327ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.4851ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (82.3544ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (1.7652ms)
+✔ landmark state URLs carry one immutable content version (0.466ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.1671ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.1263ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (1.9364ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (3.1491ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (0.9654ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.5739ms)
+✔ every published map stage declares a child-readable growth reveal (0.6377ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.5631ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.3685ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.2878ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.3386ms)
+✔ ratingFor exposes every branch including zero (0.6283ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.8639ms)
+✔ certificate predicates require every named challenge (0.2346ms)
+✔ every approved course rating table reaches zero through three stars (0.2601ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (314.3344ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (780.6006ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (471.329ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (335.8371ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (401.0033ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (356.0441ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (471.1501ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (201.2805ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (5.0994ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (1.4781ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (334.3602ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3815.2455

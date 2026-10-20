@@ -24,3 +24,14 @@ dist-login/
 
 # Local previews, reports and scratch exports; reviewed evidence lives in docs.
 /output/
+
+# Raw browser traces may contain temporary credentials and request bodies.
+# Keep reviewed summaries, screenshots and PDFs in the evidence directories.
+/docs/butcher-version/evidence/**/trace.zip
+/docs/butcher-version/evidence/**/*.trace
+/docs/butcher-version/evidence/**/*.network
+/docs/butcher-version/evidence/**/.playwright-artifacts*/
+
+# Local Python bytecode from asset tools.
+__pycache__/
+*.py[cod]

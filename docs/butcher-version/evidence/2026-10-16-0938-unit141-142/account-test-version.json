@@ -1,0 +1,138 @@
+{
+  "at": "2026-10-16T10:28:06.801827",
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "declaredBrowserBundles": [
+    {
+      "name": "chromium",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome for Testing"
+    },
+    {
+      "name": "chromium-headless-shell",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome Headless Shell"
+    },
+    {
+      "name": "chromium-tip-of-tree",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary for Testing"
+    },
+    {
+      "name": "chromium-tip-of-tree-headless-shell",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary Headless Shell"
+    },
+    {
+      "name": "firefox",
+      "revision": "1538",
+      "installByDefault": true,
+      "browserVersion": "153.0",
+      "title": "Firefox"
+    },
+    {
+      "name": "firefox-beta",
+      "revision": "1526",
+      "installByDefault": false,
+      "browserVersion": "152.0b1",
+      "title": "Firefox Beta"
+    },
+    {
+      "name": "webkit",
+      "revision": "2336",
+      "installByDefault": true,
+      "revisionOverrides": {
+        "mac14": "2251",
+        "mac14-arm64": "2251",
+        "ubuntu20.04-x64": "2092",
+        "ubuntu20.04-arm64": "2092"
+      },
+      "browserVersion": "26.5",
+      "title": "WebKit"
+    },
+    {
+      "name": "ffmpeg",
+      "revision": "1011",
+      "installByDefault": true
+    },
+    {
+      "name": "winldd",
+      "revision": "1007",
+      "installByDefault": false
+    },
+    {
+      "name": "android",
+      "revision": "1001",
+      "installByDefault": false
+    }
+  ],
+  "branch": "codex/release-canranstudio",
+  "head": "d0a4382f963e36c1abd0f5a5ba9ef79b17794093",
+  "files": {
+    "unit141-142/content.js": "3d304d4c1990bb1ff623ea3c4ac0545e4f5ad1a498f190901c17430b2ef058e7",
+    "unit141-142/grammar.js": "36eccda927e8f5f1b1fff42f139c2bd672a23891844560a5434ca62f27ef14db",
+    "unit141-142/index.html": "388437d256955ff0a21957947f873d4850fe376bd26a87769f4a518c9e89d0db",
+    "unit141-142/README.md": "d700c1d7f279b2ef6dd647d59007a3068b250da7502cb26a6d8df4f2e0aa4226",
+    "unit141-142/scene.js": "486843bbe1fdd3018877b11c6f7bfd2c898d0a1d9a965820faaf860fdbe55b95",
+    "unit141-142/typography.css": "2c5d1c7b876bf6afa8157f2d614da6f47addb528c1ea007141d06d43bf77a8df",
+    "unit141-142/unit.css": "7ed7716e27fae589282cb4a6840522204e80498de1b80ff34d5ba36eeb1a8355",
+    "unit141-142/unit.js": "0d9bde77d4441eb767110fa82d4db5820b1638ce4d5583fcc089c2f4ea19f591",
+    "assets/unit141-142/amused.svg": "23c41244a054b10e90a1102e414a681e3f4e2051e7a914a03dfbcf80489d2149",
+    "assets/unit141-142/compact.svg": "d192ce044acaffb1f3a439224dd69e40afbbfb53e423ca3542a86c2e53e7e82a",
+    "assets/unit141-142/compact.webp": "1cfd72fdb2077bed28191831b66582331085d23a137f5aa7490cf8febcdfd780",
+    "assets/unit141-142/curiously.svg": "b7e3d7c8d45da9828c0cadf79d4ceed5b25cd92f40b40bb2f4f7f3369a939454",
+    "assets/unit141-142/embarrassed.svg": "93b63e6122641b47b7672aed458e1346258df934b0e2680f0dfcc37ec3d09c2b",
+    "assets/unit141-142/ending.webp": "a20df8f366b735a08df8169a31f8afe780c8bf9256c735e00a00da39792c8c4b",
+    "assets/unit141-142/excited.svg": "b5d4ce431e5ddbb744c005a865fd906de60ddd74d1ef237a778a1bf9fd778b36",
+    "assets/unit141-142/exercise-books.svg": "dec275763842580dcb5af1197a83dc3ffb2dbccb4decfb3c33c225a0b78ce888",
+    "assets/unit141-142/funny.svg": "950ab66068963b2ce3a5ae940509abd94de0d21e4ac363e3c93060f566a07030",
+    "assets/unit141-142/get-on.svg": "00af14df4c935b2ae2cce051346c412ab9126c145af1e0ecc2fb6a87601b9b48",
+    "assets/unit141-142/greet.webp": "b95d6e02382c8b0c5b23dbda07e09a3fd3c4b3872e393c310cc3ec04e977a19c",
+    "assets/unit141-142/handbag.svg": "2178955801cc5e20286a6abf973a0a57e168b6d2a2f39b01fd39b94d9c0f6195",
+    "assets/unit141-142/invitation-record.svg": "46f09b2e1ee24bb26dc9d5a6afa9c99e8a230a68e61997e05bf56d502f6138d8",
+    "assets/unit141-142/keepsake-story-v1.webp": "e69b64a5c005b32b71529ca07266b69541fc3a7864661c6050a7264fe14c554a",
+    "assets/unit141-142/kindly.svg": "523dae04124b676702a7d1c5c03c54a66d84e0282272aba48bba0227e8f9c204",
+    "assets/unit141-142/make-up.svg": "5caa82d3b2fac90aff5986ea7863ef4b5a36e37cb2c732e79ca09c49c48ea6e0",
+    "assets/unit141-142/makeup.webp": "ad5cf5b5c846516791035ae08db528ede93c2b3c9dc6d6524c6d52bb8a9f0a0a",
+    "assets/unit141-142/middle-aged.svg": "93b4008607ade5edaf5fe8463c603bd9022d46027e10b6fbe5f5280380095dea",
+    "assets/unit141-142/opposite.svg": "8ba365eb385928f6a85827c7f03f684799516fffbaf1bc1f4e83c7efc0fe9fd2",
+    "assets/unit141-142/pair.webp": "74e049c537e40c2d9667981386ff5e96a6a6bd542e38ee0cd4e047cc4bf32fe4",
+    "assets/unit141-142/powder.svg": "e15b50005d597231d9e18b1221534aa642d537bdbd16bd587b3dd1d38022847d",
+    "assets/unit141-142/put-away.svg": "a800bfdcf61ddde32f339a5e32f47eab33e5f09796d78e968a8ce9191d1401d1",
+    "assets/unit141-142/README.md": "88e0566502dd4f4f63b6bc7ea17554aacd7184922b309687b72166a5b69987cc",
+    "assets/unit141-142/regularly.svg": "8ca2b839f271fb93a09b3ed837a50c9f14e1e620dc181b6ca99b4494be1c933e",
+    "assets/unit141-142/repair.svg": "85fe96e5301df8618920af6dd3dd4019ae462ce1997a2d5757ee3cf6c7728c95",
+    "assets/unit141-142/smile.svg": "386e4a611fd51badb630c21cd41e7e41869da5e733bf7805bc8877c2972ffe4f",
+    "assets/unit141-142/station.svg": "7bb0432eba8f3b88743fe5d7829a7808a2ad5e718daddc8142ff195c0b71dc0c",
+    "assets/unit141-142/task-checked.svg": "4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729",
+    "assets/unit141-142/task-record.svg": "7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066",
+    "assets/unit141-142/train-carriage.svg": "a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d",
+    "assets/unit141-142/train.svg": "49e1bc35a7b84a9ed441f71e2462c4c29aacceb297010c72eaa921c2cf38b15b",
+    "assets/unit141-142/ugly.svg": "b44902cbc67b7b0616f2a9e7c28ba58d82a4bde99b62c795dc9b9261646eb51a",
+    "assets/unit141-142/work-record.svg": "b97036e6dcd9e5951566a4c3e0577ad0e51e5e46b3201b6771722e19c2688975",
+    "assets/unit141-142/worried.svg": "f2a9457d2c3dec3610f9840311456d934ad15fe1a8b02d874b1893fa7f507181",
+    "tests/e2e/unit141-142-story-layout.spec.js": "fcdf5f6b7c0a8e3d1b39867106d97300b53f672bea7ff7bf972f38609a89c780",
+    "tests/e2e/unit141-142-word-layout.spec.js": "65da1ac5439f1f2a4bb35cd0bc23da0e2ae74c938f4bb2979ec4a69483467aae",
+    "tests/e2e/unit141-142.spec.js": "016d62557180191be3cc8bbef486cf434dce0859b40047e4d35d2a2ca0b930dc",
+    "tests/login/unit141-142.spec.js": "ad4c9c1e8f563998d411e741c8fdcee45f87cfd40140eef5ad0688bea45bc242",
+    "tests/support/unit141142.js": "fff99b74148822c8e164f8efc50886b52149b03c55f0adb865595be062c055da",
+    "server/catalog.js": "95d5d0fe46d138d4bffa3f4157fe73d1a9365c86141660c9f6c8f6a5bb9e8e04",
+    "server/award-catalog.js": "9aba974df01b5d040344ddae3a779a904665f31c1fdb49e32c1e70584cf22cbe",
+    "scripts/course-packages.js": "beb104ce842a77fead2c319e9a2551c71bf756d19dbfecd08fa164c045ffabc4",
+    "core/award-card-layout.js": "2997762cd489af0a80afde9aa77769c501f821aa33544a5ca8487db05d22cdc3",
+    "core/story-certificate.js": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+    "core/award-gif.js": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+    "core/award-reveal.js": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+    "core/unit-awards.js": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+    "core/lesson49-practice.js": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+    "assets/awards/fonts/sources.json": "b755288719d607e7a41fe5b49c71c6562213f4f73a3e9bec7a6d816118163bd3"
+  }
+}

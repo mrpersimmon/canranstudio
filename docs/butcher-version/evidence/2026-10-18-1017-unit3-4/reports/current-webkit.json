@@ -1,0 +1,679 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit3-4-v154.spec.js",
+      "tests/e2e/unit3-4-v154-history.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/current-webkit"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/current-webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4508",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit3-4-v154-history.spec.js",
+      "file": "unit3-4-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18530,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:13:269",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 269,
+                      "line": 13
+                    },
+                    "snippet": "  11 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  12 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 13 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                             ^\n  14 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  15 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  16 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 269,
+                        "line": 13
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  11 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  12 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 13 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                             ^\n  14 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  15 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  16 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:13:269"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:29.272Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 269,
+                    "line": 13
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-785e564ef0b164cccd13",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 5,
+          "column": 49
+        },
+        {
+          "title": "voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 54706,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:13:269",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 269,
+                      "line": 13
+                    },
+                    "snippet": "  11 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  12 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 13 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                             ^\n  14 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  15 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  16 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 269,
+                        "line": 13
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  11 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  12 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 13 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                             ^\n  14 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  15 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  16 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:13:269"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:41:48.915Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-voiced27真实旧页证书原文、姓名、精确日期、PNG与打印保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 269,
+                    "line": 13
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-782ac2133815fbc64a45",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 5,
+          "column": 49
+        },
+        {
+          "title": "Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6368,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:21:116",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 116,
+                      "line": 21
+                    },
+                    "snippet": "  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n  20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models').filter({hasText:'换个人或物问一问'}).locator('.reference-card')).toHaveCount(15);\n> 21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n     |                                                                                                                    ^\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  24 |  await expect(page.locator('.writing-lines li')).toHaveCount(4);await expect(page.locator('.reply-writing li')).toHaveCount(10);for(const line of await page.locator('.writing-rule').all()){await expect(line).toBeVisible();expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);}await expect(page.locator('#topbar')).toBeHidden();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 116,
+                        "line": 21
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.reply-models .reference-card')\nExpected: \u001b[32m11\u001b[39m\nReceived: \u001b[31m10\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.reply-models .reference-card')\u001b[22m\n\u001b[2m    14 × locator resolved to 10 elements\u001b[22m\n\u001b[2m       - unexpected value \"10\"\u001b[22m\n\n\n  19 | test('Lesson4 A/B及完整原例、15问句与11回应参考、实际打印空间',async({page,browserName},info)=>{\n  20 |  await page.goto('/unit3-4/#learn/reply');await page.getByText('认领表达参考',{exact:true}).click();await page.getByText('换个人或物问一问',{exact:true}).click();await expect(page.locator('.sentence-models').filter({hasText:'换个人或物问一问'}).locator('.reference-card')).toHaveCount(15);\n> 21 |  await page.getByText('不是我的，是你的',{exact:true}).click();await expect(page.locator('.reply-models .reference-card')).toHaveCount(11);\n     |                                                                                                                    ^\n  22 |  await page.goto('/unit3-4/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('A · Copy these sentences.');await expect(page.locator('#unitWriting')).toContainText('B · Answer these questions.');await expect(page.locator('#unitWriting')).toContainText('Example: Is this your umbrella?');\n  23 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});\n  24 |  await expect(page.locator('.writing-lines li')).toHaveCount(4);await expect(page.locator('.reply-writing li')).toHaveCount(10);for(const line of await page.locator('.writing-rule').all()){await expect(line).toBeVisible();expect((await line.boundingBox()).height).toBeGreaterThanOrEqual(30);}await expect(page.locator('#topbar')).toBeHidden();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:21:116"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:44.949Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\current-webkit\\unit3-4-v154-history-Lesson4-A-B及完整原例、15问句与11回应参考、实际打印空间\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 116,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-0e5a3c35dbc429b31686",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 19,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-v154.spec.js",
+      "file": "unit3-4-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首页入口与确认纪念卡同一故事，课文不自动显示剧情结论",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2917,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:52.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-146a5607694afc163e40",
+          "file": "unit3-4-v154.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "理解题未作答时有原文依据",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2887,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:55.072Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-c94d6f214fc812c800d9",
+          "file": "unit3-4-v154.spec.js",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "真实提交记录已显示的短示范",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1124,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:57.966Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e744be7c1b73a0934014",
+          "file": "unit3-4-v154.spec.js",
+          "line": 17,
+          "column": 1
+        },
+        {
+          "title": "320宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10735,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:42:59.101Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e0e271c2fead55a0c5de",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "390宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10066,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:09.843Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-c06d01cebd0c9d4af210",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "768宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10539,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:19.915Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-748a04346c4cf5c799cf",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "1280宽首页、25词卡、12句课文与三把伞同框可读",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11132,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:30.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-1d0571d4abe8d3b78456",
+          "file": "unit3-4-v154.spec.js",
+          "line": 21,
+          "column": 39
+        },
+        {
+          "title": "33题逐题未答材料、撤支持、无英语音频与全部声音失败仍可完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:43:41.599Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-7f3140d5c2a6aff50220",
+          "file": "unit3-4-v154.spec.js",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "320x568短屏三卡与推进按钮完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:09.875Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-fc0900d7a40726effe32",
+          "file": "unit3-4-v154.spec.js",
+          "line": 46,
+          "column": 49
+        },
+        {
+          "title": "390x500短屏三卡与推进按钮完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4823,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:14.183Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-0cb9c6a41b46ccde6200",
+          "file": "unit3-4-v154.spec.js",
+          "line": 46,
+          "column": 49
+        },
+        {
+          "title": "原33题未改轮次、选择、错答及原五星保留；两道补材料题重新亲自作答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 25081,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:44:19.014Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "04561cc037aff889680f-e91f1e3b261ad9d40efc",
+          "file": "unit3-4-v154.spec.js",
+          "line": 49,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T02:41:28.580Z",
+    "duration": 195887.779,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

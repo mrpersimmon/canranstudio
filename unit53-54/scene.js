@@ -6,10 +6,10 @@ function world({application=false}={}){
  const element=node('div','weather-world');element.setAttribute('role','group');element.setAttribute('aria-label',application?'观察站接待区':'Hans和Jim的天气观察站');
  for(const [who,label]of [['hans','Hans'],['jim','Jim']]){const person=node('div','weather-actor dialogue-actor actor-'+who);person.dataset.actor=who;person.append(image(who,'','', 'webp'),node('span','',label));element.append(person);}
  const location=node('p','weather-location',application?'观察站 · 欢迎新朋友':'花园里的天气观察站');
- const board=image('board-directions','weather-board','观察站方位板'),label=node('p','weather-board-label','方位观察');
- element.append(board,label,location);
+ const board=image('board-directions','weather-board','观察站方位板'),label=application?node('p','weather-board-label','方位观察'):null;
+ element.append(board,location);if(label)element.append(label);
  function show(page='directions',sent=false){element.dataset.observation=page;element.dataset.sent=String(sent);const file=sent?'board-complete':'board-'+page;if(board.dataset.file!==file){board.src='/assets/unit53-54/'+file+'.svg';board.dataset.file=file;}
- label.textContent=sent?'接待记录完成':({directions:'方位观察',regions:'Jim 的四方天气','long-day':'春夏 · 白天长','short-day':'秋冬 · 白天短'})[page];board.alt=label.textContent;
+ if(label)label.textContent=sent?'接待记录完成':'方位观察';board.alt=sent?'接待记录板':page==='directions'?'观察站方位板':page==='regions'?'天气图示板':'日夜长短示意板';
  }
  show();return {element,show};
 }

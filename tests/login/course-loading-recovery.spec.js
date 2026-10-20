@@ -17,10 +17,30 @@ async function learner(page, browser, label, contextOptions) {
   return studentLogin(browser, account, base, contextOptions);
 }
 
-test('不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置', async ({ page, browser }) => {
+async function observeCourseReady(page) {
+  await page.addInitScript(() => {
+    document.addEventListener('canran:course-ready', () => {
+      window.recoveryCourseReadyMs = performance.now();
+    }, { once: true });
+  });
+}
+
+async function waitForCourseReady(page, info, label) {
+  // The frozen pre-repair page also takes longer than the default assertion
+  // deadline on mobile WebKit. First observe the same real ready boundary used
+  // on initial entry, then check the original learning/date assertions below.
+  // This is state recovery coverage, not a replacement for performance budgets.
+  await page.waitForFunction(() => Number.isFinite(window.recoveryCourseReadyMs)
+    && !document.querySelector('#courseLoader'), null, { timeout: 15000 });
+  await info.attach(label + '-ready.json', { contentType: 'application/json',
+    body: Buffer.from(JSON.stringify(await page.evaluate(() => ({ readyMs: window.recoveryCourseReadyMs })))) });
+}
+
+test('不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置', async ({ page, browser }, info) => {
   const student = await learner(page, browser, '旧浏览器加载验收');
   const p = student.page;
   try {
+    await observeCourseReady(p);
     await p.addInitScript(() => { AbortSignal.any = undefined; AbortSignal.timeout = undefined; });
     await p.goto(course + '#learn/words');
     const words = p.getByRole('region', { name: '单词小图鉴', exact: true });
@@ -29,6 +49,7 @@ test('不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢
     await words.getByRole('button', { name: '下一组', exact: true }).click();
     await expect(words).toContainText('2 / 4');
     await p.reload();
+    await waitForCourseReady(p, info, 'words-reload');
     await expect(words).toContainText('2 / 4');
   } finally { await student.context.close(); }
 });
@@ -249,13 +270,14 @@ for (const fault of [
   } finally { await student.context.close(); }
 });
 
-test('满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看', async ({ page, browser }) => {
+test('满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看', async ({ page, browser }, info) => {
   // Real signup + all five answer zones + recovery + two return visits + book.
   // Mobile WebKit needs a larger total budget; individual UI deadlines remain.
   test.setTimeout(120000);
   const student = await learner(page, browser, '满星缓存恢复验收');
   const p = student.page, mount = base.replace(/\/$/, '');
   try {
+    await observeCourseReady(p);
     await flow.story(p, '1-2', mount);
     for (const id of ['listen', 'roles', 'trans', 'manners', 'exam']) {
       // Account confirmation can arrive after the completion controls render.
@@ -282,10 +304,12 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
     await expect(p.locator('#certificateName')).toHaveText('小禾');
     await expect(p.locator('#certificateDate')).toHaveText(date);
     await p.reload();
+    await waitForCourseReady(p, info, 'certificate-reload');
     await expect(p.locator('#certificateDate')).toHaveText(date);
     await p.getByRole('link', { name: '我的课程', exact: true }).click();
     await p.locator('.course[data-unit="unit1-2"]').getByRole('link').click();
     await p.goto(course + '#learn/certificate');
+    await waitForCourseReady(p, info, 'certificate-directory-return');
     await expect(p.locator('#starCount')).toHaveText('5');
     await expect(p.locator('#certificateName')).toHaveText('小禾');
     await expect(p.locator('#certificateDate')).toHaveText(date);

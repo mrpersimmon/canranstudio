@@ -1,0 +1,128 @@
+{
+  "lesson": "143–144",
+  "standard": "v1.52",
+  "branch": "codex/release-canranstudio",
+  "mode": "classroom",
+  "catalogAtValidation": 72,
+  "counts": {
+    "words": 24,
+    "sourceSentences": 10,
+    "readingSteps": 13,
+    "numberedModels": 8,
+    "titleExampleSentences": 2,
+    "writingItems": 28,
+    "writingLines": 50,
+    "writingExamples": 4,
+    "writingExampleOutputs": 8,
+    "writingPdfPages": 4,
+    "questions": [
+      8,
+      9,
+      17,
+      8,
+      23
+    ],
+    "questionTotal": 65,
+    "rasterAssets": 4,
+    "fullBodyPoses": 3,
+    "sourceObjectViews": 6
+  },
+  "courseTests": {
+    "initialChromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "initialWebkit": {
+      "passed": 15,
+      "failed": 0
+    }
+  },
+  "representative": {
+    "passed": 5,
+    "failed": 0
+  },
+  "altRefinement": {
+    "chromium": 4,
+    "webkit": 4,
+    "questionsScoringImagesAndLayoutUnchanged": true
+  },
+  "dateRefinement": {
+    "question": "u143144-v1-a-past",
+    "allAnswersAndMaterialChromium": 1,
+    "allAnswersAndMaterialWebkit": 1,
+    "affectedAccountChromiumRoot": 1,
+    "affectedAccountChromiumSub": 1,
+    "questionCountAndCorrectAnswersUnchanged": true
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8,
+    "chromiumUnaffectedPathsReusedAfterDateAddition": true,
+    "webkitRunsUseFinalVersion": true
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs141142": true
+  },
+  "font": {
+    "currentMissing": 0,
+    "oldCharactersPreserved": 1764,
+    "currentCharacters": 1786,
+    "oldAdvanceAndLineMetricDifferences": 0
+  },
+  "packages": {
+    "required": 160,
+    "narration": 0,
+    "mounts": [
+      "/",
+      "/lesson/"
+    ]
+  },
+  "gif": {
+    "source": "final-version WebKit root downloads",
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0,
+    "allFramesNameTitleScenePaperStable": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程升级",
+    "共享Worker拒写和回收的所有分支",
+    "除本课所列画布故障重试及离开取消之外的全部导出故障"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit143-144/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 4",
+    "assessmentAnswersSubmitted": false,
+    "coverCheckedAt": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "updateFlow": "Verified existing preview process and added only unit143-144 to the existing preview class; restarted and entered through My Courses. The new title, raw source opening, counts, vocabulary and revised image alternative were visible. No learning data was cleared."
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

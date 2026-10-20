@@ -79,3 +79,15 @@
  .unit5152-workspace .climate-model{gap:10px;padding:10px}.unit5152-workspace .climate-model .grammar-model-line>p{font-size:18px}.unit5152-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit5152-workspace .grammar-rule{font-size:13px}
  .unit5152-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit5152-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit5152-workspace .climate-completion{height:162px}
 }
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit5152-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit5152-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit5152-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit5152-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit5152-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit5152-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

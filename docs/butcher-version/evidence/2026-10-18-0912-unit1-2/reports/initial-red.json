@@ -1,0 +1,227 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit1-2-v154.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/initial-red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/initial-red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154.spec.js",
+      "file": "unit1-2-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首页与封面沿用已确认纪念卡故事插画",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5998,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:7:50",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                      "column": 50,
+                      "line": 7
+                    },
+                    "snippet": "   5 | test('首页与封面沿用已确认纪念卡故事插画',async({page})=>{\n   6 |  await page.goto('/');const home=page.getByRole('region',{name:'礼貌小帮手',exact:true});\n>  7 |  await expect(home.locator('.featured-art img')).toHaveCount(1);\n     |                                                  ^\n   8 |  await expect(home.locator('.featured-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);\n   9 |  await page.goto('/unit1-2/');await expect(page.locator('#cover .unit-cover-art img')).toHaveCount(1);\n  10 |  await expect(page.locator('#cover .unit-cover-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                        "column": 50,
+                        "line": 7
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n   5 | test('首页与封面沿用已确认纪念卡故事插画',async({page})=>{\n   6 |  await page.goto('/');const home=page.getByRole('region',{name:'礼貌小帮手',exact:true});\n>  7 |  await expect(home.locator('.featured-art img')).toHaveCount(1);\n     |                                                  ^\n   8 |  await expect(home.locator('.featured-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);\n   9 |  await page.goto('/unit1-2/');await expect(page.locator('#cover .unit-cover-art img')).toHaveCount(1);\n  10 |  await expect(page.locator('#cover .unit-cover-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:7:50"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:22:44.756Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\initial-red\\unit1-2-v154-首页与封面沿用已确认纪念卡故事插画\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\initial-red\\unit1-2-v154-首页与封面沿用已确认纪念卡故事插画\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                    "column": 50,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-38db512f7c280f6f8634",
+          "file": "unit1-2-v154.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "实际显示的短示范写入本次提交，独立题不补记示范",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5587,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#learningRecord')\nExpected substring: \u001b[32m\"看过示范\"\u001b[39m\nReceived string:    \u001b[31m\"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#learningRecord')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"learningRecord\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#learningRecord')\nExpected substring: \u001b[32m\"看过示范\"\u001b[39m\nReceived string:    \u001b[31m\"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#learningRecord')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"learningRecord\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:16:48",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                      "column": 48,
+                      "line": 16
+                    },
+                    "snippet": "  14 |  await flow.select(room,'Is this your book?');await room.getByRole('button',{name:'检查答案',exact:true}).click();\n  15 |  await page.getByRole('button',{name:'学习记录',exact:true}).click();\n> 16 |  await expect(page.locator('#learningRecord')).toContainText('看过示范');\n     |                                                ^\n  17 | });\n  18 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                        "column": 48,
+                        "line": 16
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#learningRecord')\nExpected substring: \u001b[32m\"看过示范\"\u001b[39m\nReceived string:    \u001b[31m\"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#learningRecord')\u001b[22m\n\u001b[2m    14 × locator resolved to <div id=\"learningRecord\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。\"\u001b[22m\n\n\n  14 |  await flow.select(room,'Is this your book?');await room.getByRole('button',{name:'检查答案',exact:true}).click();\n  15 |  await page.getByRole('button',{name:'学习记录',exact:true}).click();\n> 16 |  await expect(page.locator('#learningRecord')).toContainText('看过示范');\n     |                                                ^\n  17 | });\n  18 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:16:48"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:22:51.705Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\initial-red\\unit1-2-v154-实际显示的短示范写入本次提交，独立题不补记示范\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\initial-red\\unit1-2-v154-实际显示的短示范写入本次提交，独立题不补记示范\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                    "column": 48,
+                    "line": 16
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-8648c151d27d6c4db359",
+          "file": "unit1-2-v154.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:22:44.208Z",
+    "duration": 13585.112,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

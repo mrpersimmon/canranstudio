@@ -137,3 +137,17 @@ unit.learning.WRITING_B_EXAMPLES=['Have you had any vegetables or fruit? (I) →
 unit.learning.WRITING_B=[['Has he had any beans or peas?','He'],['Have they had any tea or coffee?','They'],['Have you had any apples or peaches?','I'],['Have you had any cabbage or lettuce?','I'],['Has she had any beer or wine?','She'],['Has he had any lamb or beef?','He'],['Have they had any tea or milk?','They'],['Has she had any meat or vegetables?','She'],['Have you had any chicken or steak?','I'],['Have they had any bananas or oranges?','They']];
 core.unit8384=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit8384,excerpts={"u8384-v1-r-lunch":[1,2],"u8384-v1-r-time":[1,2],"u8384-v1-r-coffee":[3,4],"u8384-v1-r-mess":[5,6],"u8384-v1-r-plan":[5,6],"u8384-v1-r-lucky":[5,6,7],"u8384-v1-r-ending":[8,9,10,11],"u8384-v1-e-story":[0,1,2,3,4,5,6,7,8,9,10,11]},speakers={"carol":"Carol","tom":"Tom","sam":"Sam"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 83',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

@@ -1,0 +1,162 @@
+{
+  "at": "2026-10-16T23:07:37.337Z",
+  "checks": [
+    {
+      "name": "five zones with 43 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 8,
+        "roles": 2,
+        "grammar": 12,
+        "apply": 5,
+        "exam": 16
+      }
+    },
+    {
+      "name": "26 original tasks unchanged; all 27 predecessor tasks archived",
+      "passed": true,
+      "detail": {
+        "revised": [
+          "u2728-tasks-v4-exam-any"
+        ]
+      }
+    },
+    {
+      "name": "43 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "30 words and 13 narrative lines unchanged",
+      "passed": true
+    },
+    {
+      "name": "10 pictures, 10 five-turn models, 5 written transformations and examples intact",
+      "passed": true
+    },
+    {
+      "name": "learning key and version retained",
+      "passed": true
+    },
+    {
+      "name": "frozen five sources match actual pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "all 52 original SVGs unchanged",
+      "passed": true
+    },
+    {
+      "name": "five prompts with three selected images and retained originals",
+      "passed": true
+    },
+    {
+      "name": "assets/unit27-28/living-room-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit27-28/living-room-mobile-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit27-28/keepsake-story-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "font inputs match final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1866,
+        "inputs": 349
+      }
+    },
+    {
+      "name": "font licenses preserve pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "root protected build includes all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build includes all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JavaScript parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document relative links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "new UI has no copied previous-lesson captions",
+      "passed": true
+    },
+    {
+      "name": "online cloze tasks have at most two related blanks",
+      "passed": true
+    },
+    {
+      "name": "server reward metadata agrees with course",
+      "passed": true
+    },
+    {
+      "name": "narration has no fictional speaker",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit27-28/living-room-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": false,
+      "transparentRequired": false,
+      "sha256": "ded96ece8b39f0411b5e1c1b20cc6f66e1a4eea7ce893921c3727e50dbaf6bb3"
+    },
+    {
+      "file": "assets/unit27-28/living-room-mobile-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": false,
+      "transparentRequired": false,
+      "sha256": "c086e1004bb40c9a2b190cc0ad0c049ad39bf93f3b42e315794a55dac76b9f73"
+    },
+    {
+      "file": "assets/unit27-28/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "47aae4fc1d9195ff1c8ca8778c9aab9d44faae5ed02688837d16181381937a7a"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courses": 72,
+      "unit": {
+        "title": "客厅发现之旅",
+        "revision": "7c7032d5ea345ae896a04fd1e196a8828807d6ab8e741a4a13d31c59b32f9515",
+        "manifest": "/course-packages/unit27-28/7c7032d5ea345ae896a04fd1e196a8828807d6ab8e741a4a13d31c59b32f9515.json",
+        "sha256": "51216c59f532ee05cd2e61320d274d4dbaeea635c9deaad35966a49102d95934"
+      }
+    },
+    "subpath": {
+      "courses": 72,
+      "unit": {
+        "title": "客厅发现之旅",
+        "revision": "72ff6273ee891f4e11438fed7e9f79f77bdc0520a0bc021ae88336e40051bf68",
+        "manifest": "/lesson/course-packages/unit27-28/72ff6273ee891f4e11438fed7e9f79f77bdc0520a0bc021ae88336e40051bf68.json",
+        "sha256": "51a62447d10aeaea4eea9e88a99ac44e8240b2abbba3dd14480bf7e0b70d6537"
+      }
+    }
+  }
+}

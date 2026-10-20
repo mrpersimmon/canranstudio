@@ -1,0 +1,38 @@
+(node:25852) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (147.4823ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.558ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (3.2954ms)
+✔ partial wrong submission is observable without awards or resumable completion (57.4208ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (52.1282ms)
+✔ reset isolates a new generation and preserves earlier observation history (53.0462ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (58.8184ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (52.2924ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.2805ms)
+✔ student identity, pagination and filters expose learning summaries only (719.2423ms)
+✖ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (672.1753ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (3.3216ms)
+✔ three learning statuses require current work, not visits, stars or old content (2.6667ms)
+✔ all published courses reach completed only with every required activity including reading (166.6886ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (161.5627ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (919.3232ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (122.975ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3496.593
+
+✖ failing tests:
+
+test at tests\unit\admin-learning.test.js:100:1
+✖ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (672.1753ms)
+  Error: Unknown course in publication list
+      at createCoursePackages (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\scripts\course-packages.js:91:80)
+      at async createApp (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\server\app.js:28:30)
+      at async TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-learning.test.js:115:61)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7)

@@ -1,0 +1,930 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-17T12:41:15.530Z",
+  "uniqueTestConditions": 142,
+  "browserConditions": 94,
+  "nodeConditions": 48,
+  "conditions": [
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "47题完整材料、原文与五区五星可完成",
+      "passed": true,
+      "report": "final-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 320",
+      "passed": true,
+      "report": "final-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "title": "场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2",
+      "passed": true,
+      "report": "chromium-fixes"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "title": "同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒",
+      "passed": true,
+      "report": "chromium-fixes"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-print.spec.js",
+      "title": "A六题四个原例，B十组完整问答原例与26条书写线可实际打印",
+      "passed": true,
+      "report": "print-layout-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-fixes"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-fixes"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-fixes"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧空白升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧仅选择升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "原错答和双空草稿、词卡页与16句阅读游标保留，旧记录可查",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "实际43题旧五星升级：旧星不扣，修订题不代答，原已完成轮不重开",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 390",
+      "passed": true,
+      "report": "final-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 768",
+      "passed": true,
+      "report": "final-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 1280",
+      "passed": true,
+      "report": "final-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "短屏三卡及操作完整 320x568",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "短屏三卡及操作完整 390x500",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "连续两次错答如实计次，重练不扣原星，可见示范记录帮助",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "20词卡、16幅位置关系和原数字完整",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "音频全部失败仍可完成，英语音频零请求",
+      "passed": true,
+      "report": "current-chromium"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "更早polish前原页可直接升级，既有一星和五条原记录不丢",
+      "passed": true,
+      "report": "chromium-history-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "retry-feedback.spec.js",
+      "title": "unit41-42 选择题错答只提示重试，改选后正常推进",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "submission-statistics.spec.js",
+      "title": "41-42 共用结算按提交计次，手机三卡完整，刷新保留",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "购物袋图鉴：先认物品、保留音标、点击翻义、翻页再进入练习",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "43 题完整流程：五区五星、无语音请求、所有结算三卡与图标一致",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "词块撤回、重复错答与提示：本次统计按提交，重练归零",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "320 宽：舞台、配对、长句、词块、结算和卡片可见",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "390 宽：舞台、配对、长句、词块、结算和卡片可见",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "768 宽：舞台、配对、长句、词块、结算和卡片可见",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "1280 宽：舞台、配对、长句、词块、结算和卡片可见",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "完整小剧场：袋子放上椅子，原文保留历史且阅读不发星",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "语法从 there be 和量词出发：错答不揭底，改正后才出现短规则",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "教材替换和书写保留为参考，不增加答题区",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "带图选项保持大图在上、文字在下，桌面并排且手机不溢出",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "旧页面真实获星后升级：相同题保留，改题未答，旧星不扣",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "工坊展示图不泄题；综合自行识别 loaves 与并列清单规则",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "旧空白草稿升级可正常获星，未改语法保留选项与本轮错答",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42.spec.js",
+      "title": "手机续看后切回桌面，当前对白保持在对话区内",
+      "passed": true,
+      "report": "historical-shared"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "title": "场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "title": "同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧空白升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧仅选择升级后不虚构提交，仍可完整零错获星",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "原错答和双空草稿、词卡页与16句阅读游标保留，旧记录可查",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "实际43题旧五星升级：旧星不扣，修订题不代答，原已完成轮不重开",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "更早polish前原页可直接升级，既有一星和五条原记录不丢",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "47题完整材料、原文与五区五星可完成",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 320",
+      "passed": true,
+      "report": "final-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 390",
+      "passed": true,
+      "report": "final-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 768",
+      "passed": true,
+      "report": "final-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 1280",
+      "passed": true,
+      "report": "final-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "短屏三卡及操作完整 320x568",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "短屏三卡及操作完整 390x500",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "连续两次错答如实计次，重练不扣原星，可见示范记录帮助",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "20词卡、16幅位置关系和原数字完整",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153.spec.js",
+      "title": "音频全部失败仍可完成，英语音频零请求",
+      "passed": true,
+      "report": "current-webkit"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit41-42-v153-materials.spec.js",
+      "title": "分数量图与完整肯否问答在桌面手机均可读",
+      "passed": true,
+      "report": "materials-accepted-chromium"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit41-42-v153-materials.spec.js",
+      "title": "分数量图与完整肯否问答在桌面手机均可读",
+      "passed": true,
+      "report": "final-webkit"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-chromium-subpath-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-chromium-subpath"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "report": "login-webkit-subpath-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit41-42.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-webkit-subpath"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit41-42.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-webkit-root"
+    }
+  ],
+  "reports": [
+    "reports/representative.json",
+    "reports/representative-fixed.json",
+    "reports/current-chromium.json",
+    "reports/chromium-fixes.json",
+    "reports/chromium-history-final.json",
+    "reports/print-final.json",
+    "reports/print-layout-final.json",
+    "reports/historical-shared.json",
+    "reports/current-webkit.json",
+    "reports/final-chromium.json",
+    "reports/materials-final-chromium.json",
+    "reports/materials-checked-chromium.json",
+    "reports/materials-accepted-chromium.json",
+    "reports/final-webkit.json",
+    "reports/login-chromium-subpath.json",
+    "reports/login-chromium-subpath-fix.json",
+    "reports/login-chromium-subpath-final.json",
+    "reports/login-chromium-root.json",
+    "reports/login-webkit-subpath.json",
+    "reports/login-webkit-subpath-isolated.json",
+    "reports/login-webkit-root.json",
+    "reports/login-webkit-subpath-final.json"
+  ],
+  "failedRuns": [
+    {
+      "report": "representative",
+      "file": "unit41-42-v153.spec.js",
+      "title": "47题完整材料、原文与五区五星可完成",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+      ]
+    },
+    {
+      "report": "representative",
+      "file": "unit41-42-v153.spec.js",
+      "title": "完整人物、袋子与当前物品，逐句原文和中文 320",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m1\u001b[39m\nReceived:   \u001b[31m34\u001b[39m"
+      ]
+    },
+    {
+      "report": "current-chromium",
+      "file": "unit41-42-v153-interactions.spec.js",
+      "title": "同一批物品连续整理：错答和选择不移动，一瓶移出后刷新仍守恒",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m"
+      ]
+    },
+    {
+      "report": "current-chromium",
+      "file": "unit41-42-v153-reading.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m500\u001b[39m\nReceived:    \u001b[31m564.765625\u001b[39m"
+      ]
+    },
+    {
+      "report": "materials-final-chromium",
+      "file": "unit41-42-v153-materials.spec.js",
+      "title": "分数量图与完整肯否问答在桌面手机均可读",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').locator('.grammar-example-art img')\nExpected pattern: \u001b[32m/v153\\.svg$/\u001b[39m\nError: strict mode violation: locator('.stage-grammar').locator('.grammar-example-art img') resolved to 3 elements:\n    1) <img alt=\"\" src=\"/assets/unit41-42/pound-v153.svg\"/> aka locator('.grammar-example-art > img').first()\n    2) <img alt=\"\" src=\"/assets/unit41-42/half-v153.svg\"/> aka locator('div:nth-child(2) > .grammar-example-art > img')\n    3) <img alt=\"\" src=\"/assets/unit41-42/quarter-v153.svg\"/> aka locator('div:nth-child(3) > .grammar-example-art > img')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.grammar-example-art img')\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "login-chromium-subpath",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Award Gothic\"\u001b[39m\nReceived string:    \u001b[31m\"\\\"Award Round\\\", \\\"ZCOOL KuaiLe\\\", sans-serif\"\u001b[39m"
+      ]
+    },
+    {
+      "report": "login-chromium-subpath-fix",
+      "file": "unit41-42.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Award Round\"\u001b[39m\nReceived string:    \u001b[31m\"\\\"Award Book\\\", sans-serif\"\u001b[39m"
+      ]
+    },
+    {
+      "report": "login-webkit-subpath",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-roles').locator('.fb')\nExpected: \u001b[32m\"答对了！\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.fb')\u001b[22m\n\u001b[2m    - found locator('dialog.award-reveal[open]'), intercepting action to run the handler\u001b[22m\n\u001b[2m    - locator handler has finished, waiting for locator('dialog.award-reveal[open]') to be hidden\u001b[22m\n\u001b[2m    - interception handler has finished, continuing\u001b[22m\n\u001b[2m    13 × locator resolved to <div class=\"fb \" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n"
+      ]
+    }
+  ],
+  "counts": {
+    "questions": 47,
+    "zones": [
+      7,
+      5,
+      14,
+      5,
+      16
+    ],
+    "previousQuestions": 43,
+    "unchangedQuestions": 34,
+    "revisedQuestions": 9,
+    "newQuestions": 4,
+    "words": 20,
+    "dialogueLines": 16,
+    "referenceScenes": 16,
+    "originalImages": 41,
+    "newCastImages": 3,
+    "newVectors": 22
+  },
+  "historicalBoundary": {
+    "rewardEdition": "bag-quantities-v1",
+    "sameEdition": true,
+    "originalCardTypography": "Award Round / Award Book aliases, original 400 weight retained under explicit old-certificate preservation",
+    "newClassroomTypography": "Gothic 400/500; Nunito 400/600; IPA Arial",
+    "legacy15StarCertificate": false,
+    "originalPrintCapability": false,
+    "completedHistoricalRowsRetainedAfterCurrentCompletion": true
+  },
+  "recoveries": [
+    {
+      "finding": "SVG attribute stripping also matched stroke-width",
+      "fix": "Limit to complete width/height attributes; decode all new vectors."
+    },
+    {
+      "finding": "Inherited column controls and minimum reader height pushed buttons off a short screen",
+      "fix": "Explicit row controls and responsive log height; verify original dimensions and no page movement."
+    },
+    {
+      "finding": "Print inherited hidden text; line count alone passed",
+      "fix": "Restore print text visibility and decimal numbering; keep 26 lines, use full examples and natural two-page breaks; inspect both PDF pages and extract text."
+    },
+    {
+      "finding": "A test compared a parcel node across retry remount",
+      "fix": "Check semantic conservation through retry, then compare the actual same node before and after the successful check."
+    },
+    {
+      "finding": "Copied new-course font assertions did not match the preserved old certificate aliases",
+      "fix": "Confirm actual Round/Book font source and 400 weight; retain full old GIF frame equality; do not modify original card to satisfy copied expectations."
+    },
+    {
+      "finding": "WebKit old helper began the next activity before late award confirmation",
+      "fix": "Trace shows an award dialog intercepted the feedback check. Original frozen old-page isolated run passed; wait for the public reveal/statistics sequence in subsequent runs. No timeout or product animation changed; not claimed as a fully reproduced browser root cause."
+    },
+    {
+      "finding": "Existing preview initially used its old cached package",
+      "fix": "Use normal course-retry entry to load current package; verify source opening question and 14/16 counts; preserve learning database and key."
+    }
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit41-42/#learn/text",
+    "file": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "answersInjected": false,
+    "reseeded": false
+  },
+  "pending": [
+    "teacher review",
+    "children classroom trial",
+    "physical Android/iPhone WeChat save",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scope": "Scoped development verification; check:plan describes 5982 previous/current uncommitted paths. Use pre-task baseline changed-files.json for this turn. No full repository commit check or deployment claimed."
+}

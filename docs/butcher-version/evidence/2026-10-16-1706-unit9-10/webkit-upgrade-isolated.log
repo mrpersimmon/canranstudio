@@ -1,0 +1,52 @@
+[WebServer] (node:34216) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:21044) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28120) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28120) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (28.1s)
+
+
+  1) tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ───────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-listen').getByRole('status')
+    Expected substring: "答对了！"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-listen').getByRole('status')
+
+
+       at ..\support\unit9-10-flow.js:21
+
+      19 |     else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
+      20 |   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
+    > 21 |   if(id==='listen'&&i===11){await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
+         |                                                                                        ^
+      22 |   await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+      23 |  }
+      24 |  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+        at completeActivity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit9-10-flow.js:21:88)
+        at Object.completeUnit910 (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit9-10-flow.js:26:46)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit9-10-fivezones-upgrade.spec.js:28:3
+
+    Error Context: output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ────────

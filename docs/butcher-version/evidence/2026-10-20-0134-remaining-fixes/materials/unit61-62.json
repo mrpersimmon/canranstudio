@@ -1,0 +1,59 @@
+{
+  "id": "unit61-62",
+  "source": {
+    "file": "tests/support/unit6162.js",
+    "sha256": "b9ee55a0079a8c6edc7d843f369eed896bd4f3d141c45cc613ec98f39ce8ad52"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u6162-v1-r-where",
+      "text": "Lesson 61\n\nMr. Williams: Where’s Jimmy?\n\nMrs. Williams: He’s in bed."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u6162-v1-r-phone",
+      "text": "Lesson 61\n\nMrs. Williams: We must call the doctor.\n\nMr. Williams: Yes, we must.\n\nMr. Williams: Can you remember the doctor’s telephone number?\n\nMrs. Williams: Yes. It’s 09754."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u6162-v1-r-check",
+      "text": "Lesson 61\n\nDoctor: Open your mouth, Jimmy. Show me your tongue. Say, ‘Ah’."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u6162-v1-r-cold",
+      "text": "Lesson 61\n\nMr. Williams: What’s the matter with him, doctor?\n\nDoctor: He has a bad cold, Mr. Williams, so he must stay in bed for a week."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u6162-v1-r-week",
+      "text": "Lesson 61\n\nMr. Williams: What’s the matter with him, doctor?\n\nDoctor: He has a bad cold, Mr. Williams, so he must stay in bed for a week."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u6162-v1-r-reason",
+      "text": "Lesson 61\n\nDoctor: He has a bad cold, Mr. Williams, so he must stay in bed for a week.\n\nMrs. Williams: That’s good news for Jimmy.\n\nDoctor: Good news? Why?\n\nMr. Williams: Because he doesn’t like school!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R3": "6-9",
+    "R4": "10",
+    "R5": "11-12",
+    "R6": "11-12",
+    "R8": "12-15"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "lesson": "129–130",
+  "standard": "v1.52",
+  "mode": "classroom",
+  "catalogAtValidation": 65,
+  "counts": {
+    "words": 18,
+    "dialogueTurns": 14,
+    "models": 8,
+    "writingItems": 26,
+    "writingLines": 66,
+    "questions": [
+      8,
+      10,
+      18,
+      8,
+      22
+    ],
+    "questionTotal": 66
+  },
+  "courseTests": {
+    "chromium": 15,
+    "webkit": 15
+  },
+  "accountTests": {
+    "chromiumRoot": 7,
+    "chromiumSub": 7,
+    "webkitRoot": 7,
+    "webkitSub": 7
+  },
+  "catalogTests": 3,
+  "deployment": {
+    "initial": "HTTP500 due to unregistered next-unit draft",
+    "isolated": "same failure",
+    "fixed": 1
+  },
+  "distinctSuccessfulChecks": 62,
+  "representative": {
+    "initialPass": 3,
+    "initialFail": 2,
+    "sameVersionIsolatedFail": 2,
+    "revisedPass": 5
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitBaselineReused": {
+    "source": "../2026-10-16-0139-unit127-128/unit-tests.log",
+    "pass": 126,
+    "fail": 6,
+    "reason": "unchanged shared backend/permission/storage implementation;new registration directly built and account-tested"
+  },
+  "manualPending": [
+    "teacher",
+    "children",
+    "physical iPhone WeChat saving",
+    "physical printing"
+  ],
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

@@ -257,7 +257,7 @@
   writing.append(node('h4','A · 补全来源和喜好'),node('p','根据句子选择come／comes或like／likes。'));
   const a=node('ol');content.WRITING_A.forEach(text=>a.append(node('li',text)));writing.append(a);
   writing.append(node('h4','B · 国家与国籍问答'),node('p','括号内是需要否定的国家，最后是实际来源。每组写问来源、否定、正确来源、问国籍和国籍回答。'),node('p','he / (Brazil) / the U.S.'),node('p','Where does he come from? Does he come from Brazil? No, he doesn’t come from Brazil. He comes from the U.S. What nationality is he? He’s American.'));
-  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'),node('div','________________________________________________'));b.append(li);});writing.append(b);
+  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);for(let line=0;line<6;line++)li.append(node('div','','writing-line'));b.append(li);});writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));
   writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));

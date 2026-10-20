@@ -1,0 +1,73 @@
+
+Running 26 tests using 1 worker
+
+(node:36356) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit5-6-classroom.spec.js:9:1 › 无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终在场 (1.1s)
+  ok  2 tests\e2e\unit5-6-classroom.spec.js:24:1 › 全部声音失败仍可完成36题与20句，旧重复问答不再必做 (14.2s)
+  ok  3 tests\e2e\unit5-6-classroom.spec.js:40:1 › 正误与完成反馈仍真实播放，词义题末三题没有预选或图配图泄题 (10.5s)
+  ok  4 tests\e2e\unit5-6-classroom.spec.js:79:1 › 挑战暂停与刷新保留选择及提示记录，综合题不冒认听力 (3.6s)
+  ok  5 tests\e2e\unit5-6-classroom.spec.js:99:34 › 390教室分镜、翻译、末句及合影完整，页面不随下一句跳动 (7.0s)
+  ok  6 tests\e2e\unit5-6-classroom.spec.js:99:34 › 1280教室分镜、翻译、末句及合影完整，页面不随下一句跳动 (7.7s)
+  ok  7 tests\e2e\unit5-6-classroom.spec.js:140:1 › 后段人物缺图时先等待，准备后离线可读20句并恢复最新句 (6.6s)
+  ok  8 tests\e2e\unit5-6-classroom.spec.js:183:1 › 词卡仅翻面，新的词义题在无声音时仍可检查 (908ms)
+  ok  9 tests\e2e\unit5-6-exam.spec.js:5:1 › 5–6 十四题介绍综合练习，全声音失败仍可逐题完成，末三题刷新不代答 (4.6s)
+  ok 10 tests\e2e\unit5-6-layout.spec.js:4:39 › 320 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (1.2s)
+  ok 11 tests\e2e\unit5-6-layout.spec.js:4:39 › 390 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (1.4s)
+  ok 12 tests\e2e\unit5-6-layout.spec.js:4:39 › 768 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (1.3s)
+  ok 13 tests\e2e\unit5-6-layout.spec.js:4:39 › 1280 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处 (1.4s)
+  ok 14 tests\e2e\unit5-6-layout.spec.js:16:1 › 24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁切 (3.2s)
+  ok 15 tests\e2e\unit5-6-layout.spec.js:30:31 › 320 提示位于检查左侧，错答不加绿，末题与结束按钮稳定 (2.4s)
+  ok 16 tests\e2e\unit5-6-layout.spec.js:30:31 › 1280 提示位于检查左侧，错答不加绿，末题与结束按钮稳定 (2.6s)
+  ok 17 tests\e2e\unit5-6-layout.spec.js:49:1 › 拼句可撤回与重试，刷新保留草稿，下一题无旧答案；键盘也能作答 (1.5s)
+  ok 18 tests\e2e\unit5-6-upgrade.spec.js:16:1 › 真实旧录音中断后按已显示的句子续读，词卡翻页保留 (2.2s)
+  ok 19 tests\e2e\unit5-6-upgrade.spec.js:33:1 › 配音旧15星不自动获得新版星星，未改题与姓名保留，新词义和综合题不代答 (55.9s)
+  ok 20 tests\e2e\unit5-6-upgrade.spec.js:52:1 › 旧版重练空白回合优先，删去前题不会复活品牌题的历史答案 (1.1s)
+  x  21 tests\e2e\unit5-6.spec.js:6:1 › 纸笔练习保留四组指代与十组替换，实际打印三页 A4 并留足书写空间 (5.7s)
+(node:30708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 22 tests\e2e\unit5-6.spec.js:32:1 › 真实完成20句和36题获得五星，日期固定、重练连续，各单元记录独立 (12.5s)
+  ok 23 tests\e2e\unit5-6.spec.js:45:1 › 新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义 (792ms)
+  ok 24 tests\e2e\unit5-6.spec.js:65:1 › 首页与 lesson 子目录有新单元入口，独立继续并保留资源路径 (8.4s)
+  ok 25 tests\e2e\unit5-6.spec.js:85:1 › 题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动 (1.2s)
+  ok 26 tests\e2e\unit5-6.spec.js:96:1 › 首页重开包含四个单元，取消保留，确认只清除本路径的学习记录 (14.2s)
+
+
+  1) tests\e2e\unit5-6.spec.js:6:1 › 纸笔练习保留四组指代与十组替换，实际打印三页 A4 并留足书写空间 ─────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('.reply-writing li').first().locator('.writing-rule')
+    Expected: 2
+    Received: 3
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('.reply-writing li').first().locator('.writing-rule')
+        14 × locator resolved to 3 elements
+           - unexpected value "3"
+
+
+      23 |   await page.emulateMedia({media:'print',reducedMotion:'reduce'});
+      24 |   for(const row of await page.locator('.reply-writing li').all()){
+    > 25 |     await expect(row).toBeVisible();await expect(row.locator('.writing-rule')).toHaveCount(2);
+         |                                                                                ^
+      26 |     expect(await row.evaluate(el=>[...el.querySelectorAll('.writing-rule')].every(line=>line.getBoundingClientRect().height>=32&&line.clientWidth>=el.clientWidth*.9))).toBe(true);
+      27 |   }
+      28 |   const pdf=await page.pdf({path:'output/playwright/unit5-6/writing-print.pdf',preferCSSPageSize:true,printBackground:true});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6.spec.js:25:80
+
+    Error Context: output\unit56-review-20261018\regression-chromium\unit5-6-纸笔练习保留四组指代与十组替换，实际打印三页-A4-并留足书写空间\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\regression-chromium\unit5-6-纸笔练习保留四组指代与十组替换，实际打印三页-A4-并留足书写空间\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\regression-chromium\unit5-6-纸笔练习保留四组指代与十组替换，实际打印三页-A4-并留足书写空间\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit5-6.spec.js:6:1 › 纸笔练习保留四组指代与十组替换，实际打印三页 A4 并留足书写空间 ──────────────────────────────
+  25 passed (2.9m)

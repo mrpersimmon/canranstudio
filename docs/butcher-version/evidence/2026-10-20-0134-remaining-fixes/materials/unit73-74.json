@@ -1,0 +1,94 @@
+{
+  "id": "unit73-74",
+  "source": {
+    "file": "tests/support/unit7374.js",
+    "sha256": "fc1b5d1cff4e9b2c15a5b9e7f209c404308454fb6b25d0240894b6d9c55bd675"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u7374-v1-r-place",
+      "text": "Lesson 73\n\nLast week Mrs. Mills went to London."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u7374-v1-r-lost",
+      "text": "Lesson 73\n\nLast week Mrs. Mills went to London.\n\nShe does not know London very well, and she lost her way."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u7374-v1-r-stop",
+      "text": "Lesson 73\n\nShe does not know London very well, and she lost her way.\n\nSuddenly, she saw a man near a bus stop."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u7374-v1-r-thought",
+      "text": "Lesson 73\n\nLast week Mrs. Mills went to London.\n\nShe does not know London very well, and she lost her way.\n\nSuddenly, she saw a man near a bus stop.\n\nMrs. Mills · 心里想: “I can ask him the way,” she said to herself."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u7374-v1-r-destination",
+      "text": "Lesson 73\n\nMrs. Mills: “Excuse me,” she said.\n\nMrs. Mills: “Can you tell me the way to King Street, please?”"
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u7374-v1-r-language",
+      "text": "Lesson 73\n\nThe man smiled pleasantly.\n\nHe did not understand English!\n\nHe spoke German.\n\nHe was a tourist."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u7374-v1-r-sequence",
+      "text": "Lesson 73\n\nThen he put his hand into his pocket, and took out a phrasebook.\n\nHe opened the book and found a phrase.\n\nHe read the phrase slowly."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u7374-v1-r-ending",
+      "text": "Lesson 73\n\nThen he put his hand into his pocket, and took out a phrasebook.\n\nHe opened the book and found a phrase.\n\nHe read the phrase slowly.\n\nThe tourist: “I am sorry,” he said. “I do not speak English.”"
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u7374-v1-e-trip",
+      "text": "Lesson 73\n\nLast week Mrs. Mills went to London.\n\nShe does not know London very well, and she lost her way.\n\nSuddenly, she saw a man near a bus stop.\n\nMrs. Mills · 心里想: “I can ask him the way,” she said to herself.\n\nMrs. Mills: “Excuse me,” she said.\n\nMrs. Mills: “Can you tell me the way to King Street, please?”"
+    },
+    {
+      "zone": "exam",
+      "index": 7,
+      "questionId": "u7374-v1-e-order",
+      "text": "Lesson 73\n\nThe man smiled pleasantly.\n\nHe did not understand English!\n\nHe spoke German.\n\nHe was a tourist.\n\nThen he put his hand into his pocket, and took out a phrasebook.\n\nHe opened the book and found a phrase.\n\nHe read the phrase slowly.\n\nThe tourist: “I am sorry,” he said. “I do not speak English.”"
+    },
+    {
+      "zone": "exam",
+      "index": 9,
+      "questionId": "u7374-v1-e-ending",
+      "text": "Lesson 73\n\nLast week Mrs. Mills went to London.\n\nShe does not know London very well, and she lost her way.\n\nSuddenly, she saw a man near a bus stop.\n\nMrs. Mills · 心里想: “I can ask him the way,” she said to herself.\n\nMrs. Mills: “Excuse me,” she said.\n\nMrs. Mills: “Can you tell me the way to King Street, please?”\n\nThe man smiled pleasantly.\n\nHe did not understand English!\n\nHe spoke German.\n\nHe was a tourist.\n\nThen he put his hand into his pocket, and took out a phrasebook.\n\nHe opened the book and found a phrase.\n\nHe read the phrase slowly.\n\nThe tourist: “I am sorry,” he said. “I do not speak English.”"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1",
+    "R2": "1-2",
+    "R3": "2-3",
+    "R4": "1-4",
+    "R5": "5-6",
+    "R6": "7-10",
+    "R7": "11-13",
+    "R8": "11-14",
+    "E4": "1-6",
+    "E7": "7-14",
+    "E9": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

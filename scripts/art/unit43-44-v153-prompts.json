@@ -1,0 +1,27 @@
+{
+  "tool": "built-in image_gen",
+  "jobs": [
+    {
+      "id": "sam-search",
+      "file": "assets/unit43-44/cast-sam-search-v153.webp",
+      "prompt": "Use case illustration-story. New full-body classroom character based on references. Reference 1 is the exact Sam/Penny identity and kitchen costume, reference 2 is the full-body Sam drawing style and scale. Draw ONLY Sam, blond adult man in vivid blue long sleeved lapelled jacket, cream collared shirt, brown trousers and brown shoes. Bold rounded dark BROWN outlines, clean warm muted flat colours, subtle paper grain, simple black oval eyes, rounded friendly face. Three-quarter facing RIGHT toward his partner, leaning head slightly forward to look for an object at waist height. One hand near his chin as he looks thoughtfully, the other relaxed and EMPTY. Natural anatomy, exactly two arms and hands, both feet fully visible. Full-body 2:3 portrait, eight percent clear margins including hair hands shoes. True transparent background. No furniture, floor, prop, letters, words, or extra character.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit43-44/keepsake-story-v1.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit41-42/cast-sam-v153.webp"
+      ],
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-c312f471-52d3-4a9d-8d40-cc513cf3684f.png",
+      "selected": true
+    },
+    {
+      "id": "penny-point",
+      "file": "assets/unit43-44/cast-penny-point-v153.webp",
+      "prompt": "Use case illustration-story. New full-body classroom character based on references. Reference 1 exact Penny identity and kitchen outfit; reference 2 full-body proportions and rounded drawing style. Draw ONLY Penny, adult woman with brown rounded shoulder-length bob, mustard yellow long-sleeved blouse, sage green neck scarf, cream kitchen apron tied with dusty rose bow over dusty rose skirt and brown shoes. Bold rounded dark BROWN outlines, clean warm muted flat colours, subtle paper grain, simple black oval eyes, rounded friendly face. Three-quarter facing LEFT toward Sam. Looking gently down-left at a tea table outside the image. Her near hand clearly points left-down at WAIST level; other hand rests at hip. Holds nothing. Exactly two arms, two hands and two full feet. Full-body 2:3 portrait, eight percent clear margin surrounding hair fingers and shoes. True transparent background. No counter, floor, kettle, tea, letters, labels or other people.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit43-44/keepsake-story-v1.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit41-42/cast-penny-v153.webp"
+      ],
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-3ee020bf-d78b-462c-be14-888f43cfd6d3.png",
+      "selected": true
+    }
+  ]
+}

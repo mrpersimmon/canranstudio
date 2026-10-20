@@ -18,7 +18,7 @@ async function completeActivity(page,id,base=""){
   if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
     else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-  if(id==='listen'&&i===11){await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
+  if(id==='listen'&&i===11){await page.reload();await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room.getByRole('status')).toContainText('答对了！');}
   await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);

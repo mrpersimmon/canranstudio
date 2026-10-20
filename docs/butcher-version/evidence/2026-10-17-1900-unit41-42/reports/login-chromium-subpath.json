@@ -1,0 +1,524 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit41-42.spec.js",
+      "tests/login/unit41-42-v153-upgrade.spec.js",
+      "--output=output/unit4142-work/login-chromium-subpath",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4142-work/login-chromium-subpath",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit41-42-v153-upgrade.spec.js",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 43119,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:20928) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:46:49.501Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-cf86651d6a58445eb406",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit41-42.spec.js",
+      "file": "unit41-42.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1423ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3108,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:47:32.738Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1423ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-37c520ecdd1d6acdc8d4",
+          "file": "unit41-42.spec.js",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1344,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:47:35.858Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-b5e263562aa743c348ab",
+          "file": "unit41-42.spec.js",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "9ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 29940,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Award Gothic\"\u001b[39m\nReceived string:    \u001b[31m\"\\\"Award Round\\\", \\\"ZCOOL KuaiLe\\\", sans-serif\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Award Gothic\"\u001b[39m\nReceived string:    \u001b[31m\"\\\"Award Round\\\", \\\"ZCOOL KuaiLe\\\", sans-serif\"\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42.spec.js:86:99",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42.spec.js",
+                      "column": 99,
+                      "line": 86
+                    },
+                    "snippet": "  84 |     await learner.goto(base+'unit41-42/#learn/certificate');await ready(learner);\n  85 |     await expect(learner.locator('#certificateName')).toHaveText('小禾');\n> 86 |     expect(await learner.locator('#certificateName').evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Award Gothic');\n     |                                                                                                   ^\n  87 |     expect(await learner.locator('#certificateName').evaluate(e=>getComputedStyle(e).fontWeight)).toBe('500');\n  88 |     const date=await learner.locator('#certificateDate').textContent();\n  89 |     await learner.locator('.stage-certificate').screenshot({path:info.outputPath('five-star-card.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42.spec.js",
+                        "column": 99,
+                        "line": 86
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"Award Gothic\"\u001b[39m\nReceived string:    \u001b[31m\"\\\"Award Round\\\", \\\"ZCOOL KuaiLe\\\", sans-serif\"\u001b[39m\n\n  84 |     await learner.goto(base+'unit41-42/#learn/certificate');await ready(learner);\n  85 |     await expect(learner.locator('#certificateName')).toHaveText('小禾');\n> 86 |     expect(await learner.locator('#certificateName').evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Award Gothic');\n     |                                                                                                   ^\n  87 |     expect(await learner.locator('#certificateName').evaluate(e=>getComputedStyle(e).fontWeight)).toBe('500');\n  88 |     const date=await learner.locator('#certificateDate').textContent();\n  89 |     await learner.locator('.stage-certificate').screenshot({path:info.outputPath('five-star-card.png')});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42.spec.js:86:99"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:47:37.214Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "9ms after navigation"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\login-chromium-subpath\\unit41-42-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\login-chromium-subpath\\unit41-42-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42.spec.js",
+                    "column": 99,
+                    "line": 86
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-fd022e896cea47eac572",
+          "file": "unit41-42.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "916ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6198,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:48:08.713Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "916ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-394b6f33106f5c1f6a5a",
+          "file": "unit41-42.spec.js",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1418ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "45ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "6ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21332,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:48:15.019Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1418ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "45ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "6ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-7859cc845a4ac3596e70",
+          "file": "unit41-42.spec.js",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "6ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1415ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1963ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11574,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:48:36.364Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "6ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1415ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1963ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-cb5e0d3182cdcc86d6ca",
+          "file": "unit41-42.spec.js",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1153ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1038ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15614,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:48:47.954Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1153ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1038ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-e1563587ff289dd9c849",
+          "file": "unit41-42.spec.js",
+          "line": 232,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:46:43.961Z",
+    "duration": 140189.642,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

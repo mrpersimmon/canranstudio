@@ -112,3 +112,15 @@
 
 .unit8384-workspace .story-suitcase{position:absolute;bottom:35px;left:50%;transform:translateX(-50%);width:130px;height:130px;object-fit:contain;z-index:2}
 @media(max-width:600px){.unit8384-workspace .story-suitcase{width:72px;height:85px;bottom:28px}.unit8384-workspace .story-timeline{font-size:14px}.unit8384-workspace .story-timeline span{font-size:12px}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit8384-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit8384-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit8384-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit8384-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit8384-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit8384-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

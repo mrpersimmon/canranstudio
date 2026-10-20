@@ -1,0 +1,157 @@
+{
+  "originalCards": [
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "edition": "tea-can-v1",
+      "firstFullStarAt": "2026-10-17T13:03:33.085Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 44,
+      "unchangedLedger": true,
+      "originalSha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859",
+      "retainedSha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "edition": "tea-can-v1",
+      "firstFullStarAt": "2026-10-17T13:26:59.365Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 44,
+      "unchangedLedger": true,
+      "originalSha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859",
+      "retainedSha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "edition": "tea-can-v1",
+      "firstFullStarAt": "2026-10-17T13:08:42.436Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 44,
+      "unchangedLedger": true,
+      "originalSha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f",
+      "retainedSha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "edition": "tea-can-v1",
+      "firstFullStarAt": "2026-10-17T13:34:54.364Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 44,
+      "unchangedLedger": true,
+      "originalSha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f",
+      "retainedSha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f"
+    }
+  ],
+  "currentGifs": [
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "stars": 1,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "4026589fb52c9037117c0dd705d8f91bcc7539b786cfb19d8474954dc221d753"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "stars": 5,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "stars": 1,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "4026589fb52c9037117c0dd705d8f91bcc7539b786cfb19d8474954dc221d753"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "stars": 5,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "6481be30ab27e03330a30d3ddb61500156048a977f693550c09e0e59b3c56859"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "stars": 1,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "87219bf31576bd7d7ead072161398eacea9def40b907593d8bce76f84abd2f16"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "stars": 5,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "stars": 1,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "87219bf31576bd7d7ead072161398eacea9def40b907593d8bce76f84abd2f16"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "stars": 5,
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "6a0956d7a8f168025388376ed5c635972f24809065fefd2c10937370f42d475f"
+    }
+  ],
+  "worksheet": {
+    "file": "worksheet.pdf",
+    "pages": 2,
+    "writingA": 7,
+    "writingB": 10,
+    "writingLines": 27,
+    "lineHeight": 32,
+    "allPagesVisuallyReviewed": true,
+    "sha256": "52e04f8438595d8f38939d060c234d28fcd5e28255d68e8098e8c4bdf888cd42"
+  },
+  "originalPrint": {
+    "status": "not_applicable",
+    "reason": "Previous five-star card only supported view and GIF download."
+  },
+  "physicalPrinting": false
+}

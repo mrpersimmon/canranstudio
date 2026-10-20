@@ -1,0 +1,21 @@
+
+Running 14 tests using 1 worker
+
+(node:18744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit13-14-fivezones-upgrade.spec.js:7:36 › 旧空白升级：不伪造作答，完整新轮可获星 (3.3s)
+  ok  2 tests\e2e\unit13-14-fivezones-upgrade.spec.js:7:36 › 旧仅选择升级：不伪造作答，完整新轮可获星 (3.2s)
+  ok  3 tests\e2e\unit13-14-fivezones-upgrade.spec.js:15:1 › 旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答 (1.4s)
+  ok  4 tests\e2e\unit13-14-fivezones-upgrade.spec.js:29:1 › 旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证 (11.1s)
+  ok  5 tests\e2e\unit13-14-fivezones.spec.js:5:1 › 53题、完整原文、五区五星及教材参考均可真实完成 (16.8s)
+  ok  6 tests\e2e\unit13-14-fivezones.spec.js:19:1 › 错误和部分填答刷新保留，完整重练才获星，已获星不扣回 (4.7s)
+  ok  7 tests\e2e\unit13-14-fivezones.spec.js:26:39 › 场景与词卡 320：完整13句、中文内滚动、相向人物及旧链接 (2.9s)
+  ok  8 tests\e2e\unit13-14-fivezones.spec.js:26:39 › 场景与词卡 390：完整13句、中文内滚动、相向人物及旧链接 (2.9s)
+  ok  9 tests\e2e\unit13-14-fivezones.spec.js:26:39 › 场景与词卡 768：完整13句、中文内滚动、相向人物及旧链接 (2.9s)
+  ok 10 tests\e2e\unit13-14-fivezones.spec.js:26:39 › 场景与词卡 1280：完整13句、中文内滚动、相向人物及旧链接 (3.0s)
+  ok 11 tests\e2e\unit13-14-fivezones.spec.js:38:50 › 短屏 320x568：五区三卡和操作完整可见 (17.7s)
+  ok 12 tests\e2e\unit13-14-fivezones.spec.js:38:50 › 短屏 390x500：五区三卡和操作完整可见 (17.6s)
+  ok 13 tests\e2e\unit13-14-print.spec.js:5:1 › 练习纸保留A五题、B十二题、原例和29条书写线，实际PDF无隐藏题目 (676ms)
+  ok 14 tests\e2e\unit13-14-print.spec.js:11:1 › 已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡 (6.8s)
+
+  14 passed (1.7m)

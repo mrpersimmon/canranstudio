@@ -1,0 +1,788 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit37-38.spec.js",
+      "tests/e2e/submission-statistics.spec.js",
+      "tests/e2e/retry-feedback.spec.js",
+      "--grep",
+      "37-38",
+      "--reporter=list,json",
+      "--output=output/unit3738-shared"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3738-shared",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4310",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "retry-feedback.spec.js",
+      "file": "retry-feedback.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unit37-38 选择题错答只提示重试，改选后正常推进",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 0,
+                  "error": {
+                    "message": "Error: Historical server exited 1",
+                    "stack": "Error: Historical server exited 1\n    at ChildProcess.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js:20:210)",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js",
+                      "column": 210,
+                      "line": 20
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit2526-legacy.js:20\n\n  18 |  test.beforeAll(async()=>{\n  19 |   child=spawn(process.execPath,[path.join(root,'tests/support/static-server.js')],{cwd:root,env:{...process.env,COURSE_TEST_PORT:String(port),COURSE_UNIT2526_LEGACY:'1'},windowsHide:true,stdio:['ignore','pipe','pipe']});\n> 20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n     |                                                                                                                                                                                                                  ^\n  21 |  });\n  22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n  23 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js",
+                        "column": 210,
+                        "line": 20
+                      },
+                      "message": "Error: Historical server exited 1\n\n   at ..\\support\\unit2526-legacy.js:20\n\n  18 |  test.beforeAll(async()=>{\n  19 |   child=spawn(process.execPath,[path.join(root,'tests/support/static-server.js')],{cwd:root,env:{...process.env,COURSE_TEST_PORT:String(port),COURSE_UNIT2526_LEGACY:'1'},windowsHide:true,stdio:['ignore','pipe','pipe']});\n> 20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n     |                                                                                                                                                                                                                  ^\n  21 |  });\n  22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n  23 | }\n    at ChildProcess.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js:20:210)"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js",
+                        "column": 7,
+                        "line": 22
+                      },
+                      "message": "\u001b[31m\"afterAll\" hook timeout of 30000ms exceeded.\u001b[39m\n\n   at ..\\support\\unit2526-legacy.js:22\n\n  20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n  21 |  });\n> 22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n     |       ^\n  23 | }\n  24 | module.exports={legacy,historicalSuite};\n  25 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js:22:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:36:26.923Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\retry-feedback-unit37-38-选择题错答只提示重试，改选后正常推进\\error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\retry-feedback-unit37-38-选择题错答只提示重试，改选后正常推进\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\retry-feedback-unit37-38-选择题错答只提示重试，改选后正常推进\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2526-legacy.js",
+                    "column": 210,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "655a3c6877ae64d9a95e-fb9a4e97ef06dc78d621",
+          "file": "retry-feedback.spec.js",
+          "line": 41,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "submission-statistics.spec.js",
+      "file": "submission-statistics.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "37-38 共用结算按提交计次，手机三卡完整，刷新保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7191,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:36:57.502Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be34b044db501f8e9647-3a0c893944c8db861472",
+          "file": "submission-statistics.spec.js",
+          "line": 16,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "title": "unit37-38.spec.js",
+      "file": "unit37-38.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "入口横幅、11张词卡音标与翻页恢复",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 0,
+                  "error": {
+                    "message": "Error: Historical server exited 1",
+                    "stack": "Error: Historical server exited 1\n    at ChildProcess.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js:20:210)",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js",
+                      "column": 210,
+                      "line": 20
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit3738-legacy.js:20\n\n  18 |  test.beforeAll(async()=>{\n  19 |   child=spawn(process.execPath,[path.join(root,'tests/support/static-server.js')],{cwd:root,env:{...process.env,COURSE_TEST_PORT:String(port),COURSE_UNIT3738_LEGACY:'1'},windowsHide:true,stdio:['ignore','pipe','pipe']});\n> 20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n     |                                                                                                                                                                                                                  ^\n  21 |  });\n  22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n  23 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js",
+                        "column": 210,
+                        "line": 20
+                      },
+                      "message": "Error: Historical server exited 1\n\n   at ..\\support\\unit3738-legacy.js:20\n\n  18 |  test.beforeAll(async()=>{\n  19 |   child=spawn(process.execPath,[path.join(root,'tests/support/static-server.js')],{cwd:root,env:{...process.env,COURSE_TEST_PORT:String(port),COURSE_UNIT3738_LEGACY:'1'},windowsHide:true,stdio:['ignore','pipe','pipe']});\n> 20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n     |                                                                                                                                                                                                                  ^\n  21 |  });\n  22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n  23 | }\n    at ChildProcess.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js:20:210)"
+                    },
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js",
+                        "column": 7,
+                        "line": 22
+                      },
+                      "message": "\u001b[31m\"afterAll\" hook timeout of 30000ms exceeded.\u001b[39m\n\n   at ..\\support\\unit3738-legacy.js:22\n\n  20 |   await new Promise((resolve,reject)=>{child.stdout.on('data',data=>{if(data.toString().includes('static test server listening'))resolve();});child.once('error',reject);child.once('exit',code=>{if(code)reject(new Error('Historical server exited '+code));});});\n  21 |  });\n> 22 |  test.afterAll(async()=>{if(child&&!child.killed)await new Promise(resolve=>{child.once('exit',resolve);child.kill();});});\n     |       ^\n  23 | }\n  24 | module.exports={legacy,historicalSuite};\n  25 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js:22:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:04.823Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\unit37-38-入口横幅、11张词卡音标与翻页恢复\\error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\unit37-38-入口横幅、11张词卡音标与翻页恢复\\error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\unit37-38-入口横幅、11张词卡音标与翻页恢复\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3738-shared\\unit37-38-入口横幅、11张词卡音标与翻页恢复\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit3738-legacy.js",
+                    "column": 210,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "c2aeef349c528706de69-16e547867b5b0aed5b95",
+          "file": "unit37-38.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "全部声音失败仍可完成33题18句并导出纪念证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.094Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-8e51c4ebea14681011aa",
+          "file": "unit37-38.spec.js",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "18句原文、历史中文稳定，锤子拒绝确认交接与计划分镜",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-121592fe7e2158567a8e",
+          "file": "unit37-38.spec.js",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "工具与接收者双条件，未检查和错答不交接，修正与重练",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-097cd5872fc4cc8b31b7",
+          "file": "unit37-38.spec.js",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "综合16题逐题错答再修正，自动保存与刷新与词块撤回",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-051c15a14bdb9e007215",
+          "file": "unit37-38.spec.js",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "宽度320工坊、六组12句对照、词卡与交接完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-d601f935aea4f1a0d85d",
+          "file": "unit37-38.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度390工坊、六组12句对照、词卡与交接完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-449689c5776c30955fb2",
+          "file": "unit37-38.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度768工坊、六组12句对照、词卡与交接完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-e31f257dcfcd6d94f6cc",
+          "file": "unit37-38.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度1280工坊、六组12句对照、词卡与交接完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-dc633063da126dda90ff",
+          "file": "unit37-38.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "配对部分选择不通过，错答草稿刷新后可修正",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-b02fe7842b2652fce196",
+          "file": "unit37-38.spec.js",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "正常反馈音与键盘；A4组B5组原纸笔练习打印",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-5a6036dc56f08e96d90b",
+          "file": "unit37-38.spec.js",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "完整缓存首访与离线重访保持词卡和画册",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-0d1fcee2ed22e301c57b",
+          "file": "unit37-38.spec.js",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "缺图保持准备页，重试后完整进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-dd2e7b7948e6d3135d87",
+          "file": "unit37-38.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "禁用常驻缓存仍可完成并导出完整证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-68f12ed8ffe7fa800c60",
+          "file": "unit37-38.spec.js",
+          "line": 46,
+          "column": 1
+        },
+        {
+          "title": "矮屏电脑对话、人物与下一句同时可见，连续阅读不跳动",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": -1,
+                  "parallelIndex": -1,
+                  "status": "skipped",
+                  "duration": 0,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T05:37:35.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "skipped"
+            }
+          ],
+          "id": "c2aeef349c528706de69-a2566ec832d528dab0a2",
+          "file": "unit37-38.spec.js",
+          "line": 50,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T05:36:26.170Z",
+    "duration": 69243.353,
+    "expected": 1,
+    "skipped": 14,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

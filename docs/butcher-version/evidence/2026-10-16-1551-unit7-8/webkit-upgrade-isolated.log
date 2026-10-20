@@ -1,0 +1,52 @@
+[WebServer] (node:4604) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:17676) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34512) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:34512) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (12.3s)
+
+
+  1) tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ────────
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator: locator('.stage-listen').getByRole('button', { name: '检查答案', exact: true })
+    Expected: disabled
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for locator('.stage-listen').getByRole('button', { name: '检查答案', exact: true })
+
+
+       at ..\support\unit7-8-flow.js:22
+
+      20 |  for(let i=0;i<answers.length;i++){
+      21 |   const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
+    > 22 |   await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
+         |                       ^
+      23 |   if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
+      24 |     else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}
+      25 |   else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
+        at completeActivity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit7-8-flow.js:22:23)
+        at Object.completeUnit78 (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit7-8-flow.js:33:45)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit7-8-fivezones-upgrade.spec.js:27:3
+
+    Error Context: output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit7-8-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ─────────

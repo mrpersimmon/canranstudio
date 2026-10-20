@@ -75,7 +75,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'reply');
   await page.goto('/unit15-16/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit15-16/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Are',exact:true}).click();
-  await page.route('**/unit15-16/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit15-16/content.js','utf8')).replace("q('story-friends',","q('story-friends-v2',")}));
+  await page.route('**/unit15-16/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit15-16-before-fivezones/content.js','utf8')).replace("q('story-friends',","q('story-friends-v2',")}));
   await page.goto('/unit15-16/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit15-16/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');
@@ -88,3 +88,5 @@ test('关闭JavaScript首页仍提供新单元真实链接',async({browser},test
   const context=await browser.newContext({javaScriptEnabled:false});const page=await context.newPage();
   await page.goto(new URL('/lesson/',testInfo.project.use.baseURL).href);await expect(page.getByRole('link',{name:'开始学习：护照小检查站',exact:true})).toHaveAttribute('href','/lesson/unit15-16/#learn/words');await context.close();
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

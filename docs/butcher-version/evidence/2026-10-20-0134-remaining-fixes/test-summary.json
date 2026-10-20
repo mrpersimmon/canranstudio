@@ -1,0 +1,3451 @@
+{
+  "updatedAt": "2026-10-20 01:34:58",
+  "standard": "v1.54",
+  "runs": [
+    {
+      "job": "materials-chromium",
+      "startTime": "2026-10-19T16:15:11.976Z",
+      "duration": 184619.493,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 7-8 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2387
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 9-10 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2669
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 11-12 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2631
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 15-16 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2640
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 17-18 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2543
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 19-20 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2508
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 21-22 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1811
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 31-32 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1991
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 33-34 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2285
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 35-36 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3721
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 47-48 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4057
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 49-50 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4390
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 51-52 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4905
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 53-54 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3776
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 55-56 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5430
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 57-58 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4347
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 59-60 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4291
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 61-62 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3010
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 63-64 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3954
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 65-66 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4162
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 67-68 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4500
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 69-70 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 8673
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 71-72 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5670
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 73-74 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 6972
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 75-76 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5463
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 77-78 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4746
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 79-80 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5697
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 81-82 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4943
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 83-84 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4107
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 85-86 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3825
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 87-88 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4124
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 89-90 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3744
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 91-92 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3502
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 93-94 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3984
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 95-96 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4332
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 97-98 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4771
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 99-100 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4112
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 101-102 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4090
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 103-104 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3762
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 105-106 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4259
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 107-108 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3486
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 109-110 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3823
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 111-112 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7411
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 113-114 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4940
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "materials-webkit",
+      "startTime": "2026-10-19T16:53:17.950Z",
+      "duration": 424571.255,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 7-8 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5872
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 9-10 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5907
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 11-12 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5695
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 15-16 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5376
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 17-18 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5658
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 19-20 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4915
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 21-22 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4162
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 31-32 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4914
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 33-34 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5233
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 35-36 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7274
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 47-48 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 8856
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 49-50 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9621
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 51-52 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 11333
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 53-54 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7237
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 55-56 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 11717
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 57-58 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9758
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 59-60 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9977
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 61-62 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7588
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 63-64 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 11677
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 65-66 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10158
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 67-68 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 12828
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 69-70 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 23056
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 71-72 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 14308
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 73-74 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 15144
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 75-76 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 13153
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 77-78 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9770
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 79-80 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 12322
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 81-82 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 12075
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 83-84 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10093
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 85-86 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 8659
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 87-88 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9196
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 89-90 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 8976
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 91-92 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9017
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 93-94 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9378
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 95-96 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9913
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 97-98 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10035
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 99-100 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7845
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 101-102 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9079
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 103-104 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9043
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 105-106 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9220
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 107-108 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 8403
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 109-110 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 9260
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 111-112 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 18346
+            }
+          ]
+        },
+        {
+          "file": "reading-materials-acceptance.spec.js",
+          "title": "Lesson 113-114 答前原文、未选状态与刷新续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10558
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "paper-complete",
+      "startTime": "2026-10-19T16:30:13.864Z",
+      "duration": 23254.266000000003,
+      "expected": 29,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 47-48 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 880
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 49-50 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 746
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 51-52 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 759
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 53-54 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 697
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 55-56 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 707
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 57-58 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 708
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 59-60 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 745
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 61-62 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 729
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 63-64 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 731
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 65-66 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 663
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 67-68 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 736
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 69-70 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 692
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 71-72 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 706
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 73-74 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 836
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 75-76 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 752
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 77-78 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 731
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 79-80 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 754
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 81-82 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 705
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 83-84 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 705
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 85-86 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 791
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 87-88 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 685
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 89-90 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 702
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 91-92 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 712
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 93-94 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 812
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 97-98 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 807
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 101-102 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 852
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 103-104 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 824
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 105-106 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 853
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 107-108 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 850
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "paper-wording-webkit",
+      "startTime": "2026-10-19T16:55:54.770Z",
+      "duration": 74066.154,
+      "expected": 32,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 31-32 短示范错开当前完整答案",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 14045
+            }
+          ]
+        },
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 79-80 短示范错开当前完整答案",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 12646
+            }
+          ]
+        },
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 61-62 明确评价者与评价对象，沿用原答案和旧记录",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7364
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 47-48 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1302
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 49-50 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1456
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 51-52 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1284
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 53-54 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1453
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 55-56 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1382
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 57-58 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1200
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 59-60 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1228
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 61-62 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1475
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 63-64 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1390
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 65-66 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1368
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 67-68 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1314
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 69-70 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1249
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 71-72 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1301
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 73-74 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1180
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 75-76 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1256
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 77-78 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1324
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 79-80 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1266
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 81-82 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1214
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 83-84 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1318
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 85-86 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1373
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 87-88 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1251
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 89-90 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1372
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 91-92 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1196
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 93-94 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1419
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 97-98 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1353
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 101-102 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1336
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 103-104 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1424
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 105-106 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1353
+            }
+          ]
+        },
+        {
+          "file": "worksheet-acceptance.spec.js",
+          "title": "Lesson 107-108 练习纸原题可打印且按实际产出留空间",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1271
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "wording-after",
+      "startTime": "2026-10-19T16:16:43.655Z",
+      "duration": 15396.038,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 31-32 短示范错开当前完整答案",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5888
+            }
+          ]
+        },
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 79-80 短示范错开当前完整答案",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5143
+            }
+          ]
+        },
+        {
+          "file": "lesson-wording-repairs.spec.js",
+          "title": "Lesson 61-62 明确评价者与评价对象，沿用原答案和旧记录",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2983
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-root-verified",
+      "startTime": "2026-10-19T16:55:54.759Z",
+      "duration": 13367.997,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "目录先校验共用字体，点课复用缓存且不减少姓名和旧证字库",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3203
+            }
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3038
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-prefix",
+      "startTime": "2026-10-19T16:57:18.791Z",
+      "duration": 11538.383,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "目录先校验共用字体，点课复用缓存且不减少姓名和旧证字库",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2985
+            }
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2671
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-webkit-root-verified",
+      "startTime": "2026-10-19T17:00:33.968Z",
+      "duration": 21387.934999999998,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "目录先校验共用字体，点课复用缓存且不减少姓名和旧证字库",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10871
+            }
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4672
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-webkit-prefix",
+      "startTime": "2026-10-19T17:00:55.823Z",
+      "duration": 20986.226,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "目录先校验共用字体，点课复用缓存且不减少姓名和旧证字库",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 10990
+            }
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4217
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "history-and-current-account",
+      "startTime": "2026-10-19T17:03:33.944Z",
+      "duration": 148665.85,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "unit1-2-v154-account.spec.js",
+          "title": "账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 12584
+            }
+          ]
+        },
+        {
+          "file": "unit1-2-award.spec.js",
+          "title": "账号姓名、跨设备五星、首次日期、重开练习与学生隔离",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 38063
+            }
+          ]
+        },
+        {
+          "file": "unit1-2-award.spec.js",
+          "title": "订正完成但零星，课程首页仍可继续学习",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7019
+            }
+          ]
+        },
+        {
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "title": "同库更新与跨设备：原五星全部GIF帧和精确日期保留",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 27716
+            }
+          ]
+        },
+        {
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "title": "同库更新与跨设备：原25题证书PNG和精确日期保留",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 22134
+            }
+          ]
+        },
+        {
+          "file": "unit49-50-legacy-certificate.spec.js",
+          "title": "真实旧证原件、PNG、打印与跨时区日期保留，新版获星不重写旧记录",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 32782
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "history-webkit",
+      "startTime": "2026-10-19T17:12:01.091Z",
+      "duration": 244833.619,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "title": "同库更新与跨设备：原五星全部GIF帧和精确日期保留",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 80787
+            }
+          ]
+        },
+        {
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "title": "同库更新与跨设备：原25题证书PNG和精确日期保留",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 67220
+            }
+          ]
+        },
+        {
+          "file": "unit49-50-legacy-certificate.spec.js",
+          "title": "真实旧证原件、PNG、打印与跨时区日期保留，新版获星不重写旧记录",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 90478
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "cache-contracts",
+      "startTime": "2026-10-19T17:03:33.981Z",
+      "duration": 23142.461,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "两个标签页同时准备同课，关掉一页后另一页仍能完整进入",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3148
+            }
+          ]
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "已知撤回版本不会继续推进作答，新版失败时保留位置等待更新",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 3334
+            }
+          ]
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5241
+            }
+          ]
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "损坏一张已存图片，刷新只补齐该文件并保留词卡页",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2840
+            }
+          ]
+        },
+        {
+          "file": "course-cache-updates.spec.js",
+          "title": "已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 7192
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "cache-recovery-ready",
+      "startTime": "2026-10-19T17:32:44.348Z",
+      "duration": 93250.91100000001,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 17364
+            }
+          ]
+        },
+        {
+          "file": "course-loading-recovery.spec.js",
+          "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 69944
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "draft-retention-verified",
+      "startTime": "2026-10-19T17:02:22.026Z",
+      "duration": 3376.188,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "draft-retention.spec.cjs",
+          "title": "真实旧页错答及未提交选择在补充材料后原样续做",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2200
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "material-cache-upgrade-verified",
+      "startTime": "2026-10-19T17:24:16.027Z",
+      "duration": 22998.89,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "material-upgrade.spec.cjs",
+          "title": "真实缓存旧课正常更新后保留错答、草稿、已得星及跨设备收藏",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 22150
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "performance-directory-fonts",
+      "startTime": "2026-10-19T16:45:55.511Z",
+      "duration": 33038.130000000005,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "../../tests/e2e/course-cache-cold.spec.js",
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 32032
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "performance-directory-repeat",
+      "startTime": "2026-10-19T16:51:07.657Z",
+      "duration": 32668.121000000003,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "../../tests/e2e/course-cache-cold.spec.js",
+          "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 31652
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "cache-return-performance",
+      "startTime": "2026-10-19T17:34:25.636Z",
+      "duration": 90545.10399999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "course-cache-performance.spec.js",
+          "title": "完整缓存 20 次重新打开导航并点课恢复学习位置",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 62553
+            }
+          ]
+        },
+        {
+          "file": "course-cache-performance.spec.js",
+          "title": "同一标签连续刷新 20 次仍保留位置、完整图片与可操作按钮",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 26956
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-chromium-root-final",
+      "startTime": "2026-10-19T17:36:23.767Z",
+      "duration": 7551.847,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2764
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "job": "directory-chromium-prefix-final",
+      "startTime": "2026-10-19T17:36:31.792Z",
+      "duration": 8541.128,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "cases": [
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 2739
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reusedRecoveryCases": [
+    {
+      "file": "course-loading-recovery.spec.js",
+      "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker allow）",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 41332
+        }
+      ]
+    },
+    {
+      "file": "course-loading-recovery.spec.js",
+      "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（Worker block）",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 67841
+        }
+      ]
+    },
+    {
+      "file": "course-loading-recovery.spec.js",
+      "title": "旧课包缺图后重试和再次进入保留已获星、半途题目和本轮错答（缓存拒绝写入）",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 40389
+        }
+      ]
+    }
+  ],
+  "node": {
+    "passed": 12,
+    "failed": 0,
+    "scope": "字体课包1项＋工作流11项"
+  },
+  "counting": "复测、两次同场景性能采样、Chromium最终503复核不累计为新增功能覆盖；按下列范围逐项阅读。",
+  "firstErrors": [
+    {
+      "jobs": [
+        "materials-before"
+      ],
+      "classification": "原问题复现",
+      "detail": "3个代表课在未作答区找不到原文材料；最终44课逐题核对284题。",
+      "runs": [
+        {
+          "job": "materials-before",
+          "stats": {
+            "startTime": "2026-10-19T16:12:10.458Z",
+            "duration": 23094.618,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 3,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "reading-materials-acceptance.spec.js",
+              "title": "Lesson 7-8 答前原文、未选状态与刷新续做",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 7011
+                }
+              ]
+            },
+            {
+              "file": "reading-materials-acceptance.spec.js",
+              "title": "Lesson 61-62 答前原文、未选状态与刷新续做",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 6762
+                }
+              ]
+            },
+            {
+              "file": "reading-materials-acceptance.spec.js",
+              "title": "Lesson 93-94 答前原文、未选状态与刷新续做",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 6354
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "paper-before",
+        "paper-before-corrected"
+      ],
+      "classification": "原问题与检查顺序分别记录",
+      "detail": "首次PDF导出派发afterprint，检查若放在其后会误读已恢复页面。改为打印媒体几何先检查，再生成PDF；修产品前仍27失败、2通过。91课另补实际list-item检查及PDF编号目视。",
+      "runs": [
+        {
+          "job": "paper-before",
+          "stats": {
+            "startTime": "2026-10-19T16:07:17.762Z",
+            "duration": 52139.033,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 29,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 47-48 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 884
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 49-50 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 922
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 51-52 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 849
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 53-54 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 858
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 55-56 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 876
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 57-58 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 873
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 59-60 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 860
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 61-62 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 851
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 63-64 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 866
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 65-66 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 857
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 67-68 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 901
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 69-70 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 891
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 71-72 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 879
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 73-74 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 841
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 75-76 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 868
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 77-78 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 878
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 79-80 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 882
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 81-82 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 892
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 83-84 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 907
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 85-86 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 876
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 87-88 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 836
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 89-90 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 898
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 91-92 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 966
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 93-94 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1005
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 97-98 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1011
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 101-102 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1148
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 103-104 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1024
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 105-106 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1027
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 107-108 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1074
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "job": "paper-before-corrected",
+          "stats": {
+            "startTime": "2026-10-19T16:09:05.181Z",
+            "duration": 48114.981,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 27,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 47-48 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 993
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 49-50 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 926
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 51-52 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 887
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 53-54 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 863
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 55-56 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 887
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 57-58 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 877
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 59-60 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 911
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 61-62 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 818
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 63-64 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 871
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 65-66 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 845
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 67-68 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 893
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 69-70 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 877
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 71-72 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 859
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 73-74 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 845
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 75-76 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 851
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 77-78 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 845
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 79-80 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 915
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 81-82 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 838
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 83-84 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 910
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 85-86 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 922
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 87-88 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 838
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 89-90 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 859
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 93-94 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 935
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 97-98 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1007
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 103-104 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1079
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 105-106 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1108
+                }
+              ]
+            },
+            {
+              "file": "worksheet-acceptance.spec.js",
+              "title": "Lesson 107-108 练习纸原题可打印且按实际产出留空间",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1147
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "wording-before"
+      ],
+      "classification": "原问题复现",
+      "detail": "两个短示范重复本题完整答案；61课评价者与受益对象题意混用。",
+      "runs": [
+        {
+          "job": "wording-before",
+          "stats": {
+            "startTime": "2026-10-19T16:15:34.465Z",
+            "duration": 29965.458,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 3,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "lesson-wording-repairs.spec.js",
+              "title": "Lesson 31-32 短示范错开当前完整答案",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 8980
+                }
+              ]
+            },
+            {
+              "file": "lesson-wording-repairs.spec.js",
+              "title": "Lesson 79-80 短示范错开当前完整答案",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 8075
+                }
+              ]
+            },
+            {
+              "file": "lesson-wording-repairs.spec.js",
+              "title": "Lesson 61-62 明确评价者与评价对象，沿用原答案和旧记录",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 8206
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "directory-root"
+      ],
+      "classification": "测试准备",
+      "detail": "同一context保留管理员cookie，索引按既有权限并集返回72课；学生登录前真实退出管理员后通过，产品权限未改。",
+      "runs": [
+        {
+          "job": "directory-root",
+          "stats": {
+            "startTime": "2026-10-19T16:53:17.986Z",
+            "duration": 11418.519,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "directory-font-preparation.spec.js",
+              "title": "目录先校验共用字体，点课复用缓存且不减少姓名和旧证字库",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 1651
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "directory-webkit-root"
+      ],
+      "classification": "故障注入未生效",
+      "detail": "page.route没有截获字体请求，实际HTTP200、abort命中0；改由既有HTTP故障服务返回真实503，再核对重试。",
+      "runs": [
+        {
+          "job": "directory-webkit-root",
+          "stats": {
+            "startTime": "2026-10-19T16:57:30.813Z",
+            "duration": 49704.765,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "directory-font-preparation.spec.js",
+              "title": "字体实际下载失败先留在目录，可重试且不改学习成果",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 32441
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "draft-retention"
+      ],
+      "classification": "测试准备",
+      "detail": "最初脚本选择了不存在的Sophie按钮；改用真实旧题中独立确认的错误职业句，保持错答和草稿断言。",
+      "runs": [
+        {
+          "job": "draft-retention",
+          "stats": {
+            "startTime": "2026-10-19T17:00:44.128Z",
+            "duration": 91638.297,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "draft-retention.spec.cjs",
+              "title": "真实旧页错答及未提交选择在补充材料后原样续做",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "timedOut",
+                  "duration": 90265
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "material-cache-upgrade"
+      ],
+      "classification": "清理路径校验",
+      "detail": "业务断言已通过，finally中Windows TEMP别名与realpath不一致触发保护；两边先realpath并确认同一目标、限定相对范围后复验通过。未放宽删除范围。",
+      "runs": [
+        {
+          "job": "material-cache-upgrade",
+          "stats": {
+            "startTime": "2026-10-19T17:15:47.304Z",
+            "duration": 26679.15,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "material-upgrade.spec.cjs",
+              "title": "真实缓存旧课正常更新后保留错答、草稿、已得星及跨设备收藏",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 25066
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "cache-recovery-webkit",
+        "cache-recovery-isolated",
+        "cache-recovery-baseline"
+      ],
+      "classification": "前存页面就绪边界",
+      "detail": "同两项在冻结修复前和当前版本均因5秒默认断言早于页面就绪而失败。新增语义就绪等待后执行原词卡、姓名、五星、日期断言；就绪约5.52–5.63秒，不记作性能通过。",
+      "runs": [
+        {
+          "job": "cache-recovery-webkit",
+          "stats": {
+            "startTime": "2026-10-19T17:15:47.320Z",
+            "duration": 234580.9,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 17803
+                }
+              ]
+            },
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 58662
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "job": "cache-recovery-isolated",
+          "stats": {
+            "startTime": "2026-10-19T17:21:32.616Z",
+            "duration": 82044.95899999999,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 16888
+                }
+              ]
+            },
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 57857
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "job": "cache-recovery-baseline",
+          "stats": {
+            "startTime": "2026-10-19T17:26:44.861Z",
+            "duration": 84661.001,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "不支持 AbortSignal.any 和 timeout 的浏览器仍能进入课程并恢复词卡位置",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 18046
+                }
+              ]
+            },
+            {
+              "file": "course-loading-recovery.spec.js",
+              "title": "满星后资源失效重试不改变姓名、五星和首次满星日期，纪念册仍可查看",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 59329
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "performance-before",
+        "performance-complete-resources"
+      ],
+      "classification": "性能诊断",
+      "detail": "完整课包在原路径超出5秒；不降低完整性或阈值。",
+      "runs": [
+        {
+          "job": "performance-before",
+          "stats": {
+            "startTime": "2026-10-19T16:19:09.981Z",
+            "duration": 32763.977,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "../../tests/e2e/course-cache-cold.spec.js",
+              "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 31601
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "job": "performance-complete-resources",
+          "stats": {
+            "startTime": "2026-10-19T16:41:30.691Z",
+            "duration": 32190.568,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "../../tests/e2e/course-cache-cold.spec.js",
+              "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 30657
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "performance-font-scope",
+        "performance-scheduling"
+      ],
+      "classification": "废弃试验，不作为验收通过",
+      "detail": "误删当前1／3／5卡也需要的Round字体方案已撤回；字体全部恢复。最终仅采纳大小优先调度和用户确认的真实目录共用字体准备。",
+      "runs": [
+        {
+          "job": "performance-font-scope",
+          "stats": {
+            "startTime": "2026-10-19T16:37:22.523Z",
+            "duration": 31498.562,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "../../tests/e2e/course-cache-cold.spec.js",
+              "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 30505
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "job": "performance-scheduling",
+          "stats": {
+            "startTime": "2026-10-19T16:39:18.566Z",
+            "duration": 29436.691,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "failed": [
+            {
+              "file": "../../tests/e2e/course-cache-cold.spec.js",
+              "title": "固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗时",
+              "status": "unexpected",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 28440
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "jobs": [
+        "final-source-check"
+      ],
+      "classification": "文档检查脚本准备",
+      "detail": "首次把活动路由trans／manners当作定义键，改用真实grammar／apply，并排除研究原型编号后核验189处题号引用；没有修改题库。",
+      "runs": []
+    }
+  ],
+  "coverage": {
+    "materials": {
+      "units": 44,
+      "questions": 284,
+      "chromium": "全部目标题390宽",
+      "webkit": "每课代表材料320/390/768/1280宽，全部目标题320宽；44课320截图目视"
+    },
+    "worksheets": {
+      "units": 29,
+      "pdfPages": 68,
+      "chromium": "实际PDF、正文、编号、空间与afterprint",
+      "webkit": "打印媒体、调用与恢复，无实际PDF生成"
+    },
+    "history": "当前1–2；1–2旧GIF全60帧、旧纸证、49–50旧证，原名／精确日期／跨设备；不声称所有旧版重新导出",
+    "limits": "教师、儿童、实体微信、实体打印、全课弱网与正式发布待验；仓库原Node环境失败仍单列，check:commit未执行"
+  },
+  "finalChecks": {
+    "syntaxFiles": 73,
+    "mappingReferences": 189,
+    "localDocuments": 14,
+    "reportEvidenceLinks": 958,
+    "newTrailingWhitespace": 0,
+    "existingWhitespaceFindings": 12
+  }
+}

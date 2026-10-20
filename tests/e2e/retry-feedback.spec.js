@@ -1,3 +1,4 @@
+require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs');
@@ -36,10 +37,14 @@ for(const advance of [false,true])test('旧分拣真实错答记录升级，已�
   await page.getByRole('button',{name:'学徒手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('修正后完成');await expect(page.locator('#learningRecord')).toContainText('提交 2 次');
 });
 
-for(const [course,stage,right] of [['unit1-2','trans','Is this your book?'],['unit3-4','manners','My coat and my umbrella please.'],['unit5-6','introduce','She'],['unit7-8','reply',"I'm Italian."],['unit9-10','describe',"He's"],['unit11-12','owner','her'],['unit13-14','colours',"What colour's your hat?"],['unit15-16','reply','Yes, we are.'],['unit17-18','refer','Who is this young man?'],['unit19-20','listen','累的；疲倦的'],['unit21-22','observe','说话的人和他的同伴'],['unit23-24','observe','Give me some books, please.'],['unit25-26','errands','换成橱柜里干净的杯子。'],['unit27-28','observe','are'],['unit29-30','observe','我应该做什么？'],['unit49-50','grammar','要豌豆还是豆角'],['lesson49','doare','Do you like meat?']]){
+for(const [course,stage,right,wrong] of [['unit1-2','trans','Is this your book?'],['unit3-4','manners','My coat and my umbrella please.'],['unit5-6','introduce','She'],['unit7-8','reply',"I'm Italian."],['unit9-10','describe',"He's"],['unit11-12','owner','her'],['unit13-14','colours',"What colour's your hat?"],['unit15-16','reply','Yes, we are.'],['unit17-18','refer','Who is this young man?'],['unit19-20','listen','累的；疲倦的'],['unit21-22','observe','说话的人和他的同伴'],['unit23-24','observe','Give me some books, please.'],['unit25-26','errands','换成橱柜里干净的杯子。'],['unit27-28','grammar','some'],['unit29-30','grammar','sweep','sweeps'],['unit31-32','grammar','is climbing','is climb'],['unit33-34','grammar','under','over'],['unit35-36','grammar','between','under'],['unit37-38','grammar','会议预计按计划在九点开始。','会议现在已经开始。'],['unit39-40','grammar','Don’t touch the vase.','Do touch the vase.'],['unit41-42','grammar','two loaves of bread','two loaf of bread'],['unit49-50','grammar','要豌豆还是豆角'],['lesson49','doare','Do you like meat?']]){
   test(course+' 选择题错答只提示重试，改选后正常推进',async({page})=>{
     await page.goto('/'+course+'/#learn/'+stage);const room=page.locator('.stage-'+stage);
-    await room.locator('.practice-options button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
+    if(course==='unit37-38'){await require('../support/unit3738-fivezones').select(room,{cloze:['am','make']});await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
+    if(course==='unit39-40'){const f=require('../support/unit3940-fivezones');for(let i=0;i<2;i++){await f.select(room,f.ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}}
+    if(course==='unit41-42'){const f=require('../support/unit4142-v153');for(let i=0;i<3;i++){await f.select(room,f.ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}}
+    const wrongOption=wrong?room.getByRole('button',{name:wrong,exact:true}):room.locator('.practice-options button').filter({hasNotText:right}).first();
+    await wrongOption.click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
     await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');
     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);
     await room.getByRole('button',{name:'再试一次',exact:true}).click();

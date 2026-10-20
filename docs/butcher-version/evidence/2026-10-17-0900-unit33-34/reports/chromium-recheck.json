@@ -1,0 +1,485 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit33-34-fivezones.spec.js",
+      "tests/e2e/unit33-34-fivezones-upgrade.spec.js",
+      "tests/e2e/unit33-34-fivezones-interactions.spec.js",
+      "--grep",
+      "旧|词卡|指代定位|同型轮船|with三义",
+      "--reporter=list,json",
+      "--output=output/unit3334-chromium-recheck"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3334-chromium-recheck",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit33-34-fivezones-interactions.spec.js",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "指代定位看前后两句，错选地点不泄露先行词，键盘订正才推进",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2137,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:08.626Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7c353eb262e4d0a537e5-a8df2e939e032cd54267",
+          "file": "unit33-34-fivezones-interactions.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "同型轮船须结合桥下关系，错答不移动船，刷新保留原题",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7415,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js:9:415",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                      "column": 415,
+                      "line": 9
+                    },
+                    "snippet": "   7 | });\n   8 | test('同型轮船须结合桥下关系，错答不移动船，刷新保留原题',async({page},info)=>{\n>  9 |  const room=await reach(page,'grammar',7),check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room).toContainText('The ship is going under the bridge.');await room.getByRole('button',{name:'2号船',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await room.getByRole('button',{name:'1号船',exact:true}).press('Enter');await check.press('Enter');await expect(room.locator('.fb')).toHaveText('答对了！');await room.screenshot({path:info.outputPath('ship-correct.png')});\n     |                                                                                                                                                                                                                                                                                                                                                                                                                               ^\n  10 | });\n  11 | test('with三义配对的部分草稿与订正保留；可见示范记录帮助',async({page})=>{\n  12 |  const room=await reach(page,'apply',6);await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'walk with my friend',exact:true}).click();await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'装着书的包',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room).toContainText('已配 1 / 3 对');await select(room,{match:[['walk with my friend','装着书的包'],['a bag with books','和朋友一起走'],['write with a pencil','用铅笔写']]});await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,ANSWERS.apply[6]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                        "column": 415,
+                        "line": 9
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n\n\n   7 | });\n   8 | test('同型轮船须结合桥下关系，错答不移动船，刷新保留原题',async({page},info)=>{\n>  9 |  const room=await reach(page,'grammar',7),check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room).toContainText('The ship is going under the bridge.');await room.getByRole('button',{name:'2号船',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await room.getByRole('button',{name:'1号船',exact:true}).press('Enter');await check.press('Enter');await expect(room.locator('.fb')).toHaveText('答对了！');await room.screenshot({path:info.outputPath('ship-correct.png')});\n     |                                                                                                                                                                                                                                                                                                                                                                                                                               ^\n  10 | });\n  11 | test('with三义配对的部分草稿与订正保留；可见示范记录帮助',async({page})=>{\n  12 |  const room=await reach(page,'apply',6);await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'walk with my friend',exact:true}).click();await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'装着书的包',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room).toContainText('已配 1 / 3 对');await select(room,{match:[['walk with my friend','装着书的包'],['a bag with books','和朋友一起走'],['write with a pencil','用铅笔写']]});await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,ANSWERS.apply[6]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js:9:415"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:10.887Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-chromium-recheck\\unit33-34-fivezones-interactions-同型轮船须结合桥下关系，错答不移动船，刷新保留原题\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-chromium-recheck\\unit33-34-fivezones-interactions-同型轮船须结合桥下关系，错答不移动船，刷新保留原题\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                    "column": 415,
+                    "line": 9
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7c353eb262e4d0a537e5-43ca179483d2ebba6c1e",
+          "file": "unit33-34-fivezones-interactions.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "with三义配对的部分草稿与订正保留；可见示范记录帮助",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9817,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-apply').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-apply').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js:12:593",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                      "column": 593,
+                      "line": 12
+                    },
+                    "snippet": "  10 | });\n  11 | test('with三义配对的部分草稿与订正保留；可见示范记录帮助',async({page})=>{\n> 12 |  const room=await reach(page,'apply',6);await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'walk with my friend',exact:true}).click();await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'装着书的包',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room).toContainText('已配 1 / 3 对');await select(room,{match:[['walk with my friend','装着书的包'],['a bag with books','和朋友一起走'],['write with a pencil','用铅笔写']]});await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,ANSWERS.apply[6]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^\n  13 |  const g=await reach(page,'grammar',0);await expect(g.locator('.grammar-model')).toBeVisible();await select(g,'under');await g.getByRole('button',{name:'检查答案',exact:true}).click();expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit33-34:learning:v1')).groups['unit3334-grammar-practice/five-zones-v1'].states[0].revealed)).toBe(true);await page.goto('/unit33-34/#learn/exam');await expect(page.locator('.stage-exam .grammar-model')).toHaveCount(0);\n  14 | });\n  15 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                        "column": 593,
+                        "line": 12
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-apply').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  10 | });\n  11 | test('with三义配对的部分草稿与订正保留；可见示范记录帮助',async({page})=>{\n> 12 |  const room=await reach(page,'apply',6);await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'walk with my friend',exact:true}).click();await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'装着书的包',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room).toContainText('已配 1 / 3 对');await select(room,{match:[['walk with my friend','装着书的包'],['a bag with books','和朋友一起走'],['write with a pencil','用铅笔写']]});await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,ANSWERS.apply[6]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^\n  13 |  const g=await reach(page,'grammar',0);await expect(g.locator('.grammar-model')).toBeVisible();await select(g,'under');await g.getByRole('button',{name:'检查答案',exact:true}).click();expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit33-34:learning:v1')).groups['unit3334-grammar-practice/five-zones-v1'].states[0].revealed)).toBe(true);await page.goto('/unit33-34/#learn/exam');await expect(page.locator('.stage-exam .grammar-model')).toHaveCount(0);\n  14 | });\n  15 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js:12:593"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:19.109Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-chromium-recheck\\unit33-34-fivezones-interactions-with三义配对的部分草稿与订正保留；可见示范记录帮助\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-chromium-recheck\\unit33-34-fivezones-interactions-with三义配对的部分草稿与订正保留；可见示范记录帮助\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit33-34-fivezones-interactions.spec.js",
+                    "column": 593,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7c353eb262e4d0a537e5-a7e9de6cb6c34e3d4b47",
+          "file": "unit33-34-fivezones-interactions.spec.js",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit33-34-fivezones-upgrade.spec.js",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "旧空白升级：不伪造作答，完整新轮可获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:29.824Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da7185753691650e73a9-c5cc345cf9d741c56a9b",
+          "file": "unit33-34-fivezones-upgrade.spec.js",
+          "line": 5,
+          "column": 36
+        },
+        {
+          "title": "旧仅选未提交升级：不伪造作答，完整新轮可获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3917,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:34.132Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da7185753691650e73a9-a02dd9d2d2d073dbfaa1",
+          "file": "unit33-34-fivezones-upgrade.spec.js",
+          "line": 5,
+          "column": 36
+        },
+        {
+          "title": "旧版错答、词卡、叙述和参考页保留，新语法不由旧题代答",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1800,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:38.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da7185753691650e73a9-be5186346a2db9ee8062",
+          "file": "unit33-34-fivezones-upgrade.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14766,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:39.863Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da7185753691650e73a9-ec0659dce302aaf3605d",
+          "file": "unit33-34-fivezones-upgrade.spec.js",
+          "line": 15,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit33-34-fivezones.spec.js",
+      "file": "unit33-34-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6999,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:13:54.646Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-faa758fb94d37179f508",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 12,
+          "column": 1
+        },
+        {
+          "title": "22词卡、12图数字与四页动作册保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:14:01.653Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-4b47591eed9b762356bb",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 36,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T01:13:07.951Z",
+    "duration": 57076.630000000005,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

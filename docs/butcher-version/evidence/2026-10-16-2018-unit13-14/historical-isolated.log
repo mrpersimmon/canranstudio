@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:19068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit13-14-state.spec.js:75:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿 (7.2s)
+
+
+  1) tests\e2e\unit13-14-state.spec.js:75:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿 ─────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#starCount')
+    Expected: "4"
+    Received: "1"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#starCount')
+        14 × locator resolved to <span id="starCount">1</span>
+           - unexpected value "1"
+
+
+      78 |   await page.goto('/unit13-14/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'This',exact:true}).click();
+      79 |   await page.route('**/unit13-14/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit13-14/content.js','utf8')).replace('\"id\": \"u1314-tasks-v4-story-hat\"','\"id\": \"u1314-tasks-v4-story-hat-revised\"')}));
+    > 80 |   await page.goto('/unit13-14/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
+         |                                                                                                           ^
+      81 |   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+      82 |   await page.goto('/unit13-14/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
+      83 |   await page.goto('/unit13-14/#learn/trans');await expect(page.locator('.stage-trans').getByRole('button',{name:'撤回 This',exact:true})).toBeVisible();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit13-14-state.spec.js:80:107
+
+    Error Context: test-results\unit13-14-state-更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿\error-context.md
+
+    Error Context: test-results\unit13-14-state-更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit13-14-state-更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit13-14-state-更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit13-14-state.spec.js:75:1 › 更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿 ──────────────────────

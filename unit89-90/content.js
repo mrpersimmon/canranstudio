@@ -139,3 +139,17 @@ unit.learning.WRITING_B_EXAMPLES=['Did you read this book last week? → Yes, I 
 unit.learning.WRITING_B=[['Did you do your homework last night?','What about Tom?'],['Did Mrs. Jones go to the butcher’s this morning?','What about Mrs. Williams?'],['Did you speak to him yesterday?','What about Susan?'],['Did George swim across the river an hour ago?','What about Sam?'],['Did you see that film yesterday?','What about Sam and Penny?'],['Did Tim take off his shoes a minute ago?','What about Frank?']];
 core.unit8990=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit8990,excerpts={"u8990-v1-r-purpose":[0,1,2,3],"u8990-v1-r-years":[4,5,6,7],"u8990-v1-r-reason":[8,9],"u8990-v1-r-country":[8,9],"u8990-v1-r-price":[10,11,12,13],"u8990-v1-r-decision":[14,15],"u8990-v1-e-reason":[10,11,12,13,14,15]},speakers={"nigel":"Nigel","ian":"Ian"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 89',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

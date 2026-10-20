@@ -1,0 +1,71 @@
+
+Running 24 tests using 1 worker
+
+(node:1312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit1-2-award-migration.spec.js:7:1 › 旧版只打开手提包环节，升级后五题首次全对获星且刷新保留 (2.9s)
+  ok  2 tests\e2e\unit1-2-award-migration.spec.js:26:1 › 旧25题升级语法五区，改题未答且不自动发星；新一轮全对后得星 (11.1s)
+  ok  3 tests\e2e\unit1-2-completion.spec.js:8:1 › 结算完成信号等待三张卡实际入场结束，较慢动画不提前对齐验收 (4.3s)
+  ok  4 tests\e2e\unit1-2-completion.spec.js:32:1 › 三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数 (2.4s)
+  ok  5 tests\e2e\unit1-2-completion.spec.js:79:1 › 390×500 短屏结束后从插画顶部露出，不被固定导航遮挡 (3.8s)
+  x   6 tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 (8.8s)
+(node:29064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 tests\e2e\unit1-2-completion.spec.js:109:37 › root 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (16.9s)
+  ok  8 tests\e2e\unit1-2-completion.spec.js:109:37 › /lesson 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (22.3s)
+  ok  9 tests\e2e\unit1-2-completion.spec.js:150:1 › 同题错两次各计一次，订正后刷新保留十次错误，再练重新统计 (8.6s)
+  ok 10 tests\e2e\unit1-2-five-zones.spec.js:7:1 › 五个答题环节按 5／5／12／5／10 呈现，旧找物入口转到词汇环节 (1.2s)
+  ok 11 tests\e2e\unit1-2-five-zones.spec.js:22:1 › 旧找物位置可从课程首页继续，不退回开始学习 (875ms)
+  ok 12 tests\e2e\unit1-2-five-zones.spec.js:32:39 › 六区旧版只打开，升级后五题首次全对仍可获星 (2.7s)
+  ok 13 tests\e2e\unit1-2-five-zones.spec.js:32:39 › 六区旧版选中未提交，升级后五题首次全对仍可获星 (2.6s)
+  ok 14 tests\e2e\unit1-2-five-zones.spec.js:51:1 › 六区旧记录迁入：未改题保留，改写题未答，历史结果不能拼成零错星星 (9.3s)
+  ok 15 tests\e2e\unit1-2-five-zones.spec.js:93:1 › 学习内容不发星；每区整轮首次零错得一星，改正后完成和重练不会多发或扣回 (12.7s)
+  ok 16 tests\e2e\unit1-2-five-zones.spec.js:120:1 › 迁入题各归其位，故事用原文手提包，工坊以问答配对练习 it 与 I (5.4s)
+(node:32192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 tests\e2e\unit1-2-v154.spec.js:6:1 › 首页与封面沿用已确认纪念卡故事插画 (864ms)
+  ok 18 tests\e2e\unit1-2-v154.spec.js:13:1 › 实际显示的短示范写入本次提交，独立题不补记示范 (902ms)
+  ok 19 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 320：首页、词卡、完整对白、人物与答前材料 (4.8s)
+  ok 20 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 390：首页、词卡、完整对白、人物与答前材料 (4.6s)
+  ok 21 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 768：首页、词卡、完整对白、人物与答前材料 (4.8s)
+  ok 22 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 1280：首页、词卡、完整对白、人物与答前材料 (5.2s)
+  ok 23 tests\e2e\unit1-2-v154.spec.js:55:1 › 37题未答材料逐题审查、五区与零英语声音、声音失败仍可完成 (12.9s)
+  ok 24 tests\e2e\unit1-2-v154.spec.js:71:1 › 真实前版中途错答和未提交选择升级后保留同一轮，已完成五星与精确日期不变 (12.1s)
+
+
+  1) tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 ─────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-trans').locator('.completion-art .completion-man')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-trans').locator('.completion-art .completion-man')
+
+
+      103 |   await expectResults(room, [12, 12, 0]);
+      104 |   await expect(room.getByRole('heading', { name: '问答练习完成！', exact: true })).toBeVisible();
+    > 105 |   await expect(room.locator('.completion-art .completion-man')).toBeVisible();
+          |                                                                 ^
+      106 |   await expect(room.locator('.completion-art .completion-woman')).toBeVisible();
+      107 | });
+      108 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-completion.spec.js:105:65
+
+    Error Context: output\unit12-review-20261018\current-chromium\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\current-chromium\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\current-chromium\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 ──────────────────────────────
+  23 passed (2.8m)

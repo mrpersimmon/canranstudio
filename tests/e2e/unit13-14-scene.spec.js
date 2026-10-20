@@ -1,5 +1,6 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
+require('../support/unit1314-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('13–14 上楼后展示裙子、再拿出帽子，刷新与重演恢复真实分镜',async({page})=>{
  await page.goto('/unit13-14/#learn/text');const room=page.locator('.stage-text'),scene=room.locator('.dress-cast'),dress=room.locator('.story-dress'),hat=room.locator('.story-hat');

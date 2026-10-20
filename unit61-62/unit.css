@@ -80,3 +80,11 @@
  .unit6162-workspace .mini-doctor{left:4%}.unit6162-workspace .mini-mother{right:4%}.unit6162-workspace .call-status{font-size:16px}.unit6162-workspace .unit-word>strong{font-size:19px}.unit6162-workspace .word-meaning{font-size:14px}
 }
 @media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit6162-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit6162-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit6162-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit6162-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

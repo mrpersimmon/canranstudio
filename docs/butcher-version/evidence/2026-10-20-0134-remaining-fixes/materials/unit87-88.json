@@ -1,0 +1,66 @@
+{
+  "id": "unit87-88",
+  "source": {
+    "file": "tests/support/unit8788.js",
+    "sha256": "d543cdb24b18ca07818c02a63d4661fd723c47fb20d7d2e490d47e6dc8f4076f"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u8788-v1-r-plate",
+      "text": "Lesson 87\n\nMr. Wood: Is my car ready yet?\n\n接待员: I don’t know, sir. What’s the number of your car?\n\nMr. Wood: It’s LFZ 312 G."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u8788-v1-r-when",
+      "text": "Lesson 87\n\n接待员: When did you bring it to us?\n\nMr. Wood: I brought it here three days ago.\n\n接待员: Ah yes, I remember now."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u8788-v1-r-status",
+      "text": "Lesson 87\n\nMr. Wood: Have your mechanics finished yet?\n\n接待员: No, they’re still working on it. Let’s go into the garage and have a look at it."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u8788-v1-r-where",
+      "text": "Lesson 87\n\nMr. Wood: Have your mechanics finished yet?\n\n接待员: No, they’re still working on it. Let’s go into the garage and have a look at it.\n\n接待员: Isn’t that your car?"
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u8788-v1-r-crash",
+      "text": "Lesson 87\n\n接待员: Didn’t you have a crash?\n\nMr. Wood: That’s right. I drove it into a lamp-post. Can your mechanics repair it?"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u8788-v1-r-ending",
+      "text": "Lesson 87\n\n接待员: Didn’t you have a crash?\n\nMr. Wood: That’s right. I drove it into a lamp-post. Can your mechanics repair it?\n\n接待员: Well, they’re trying to repair it, sir. But to tell you the truth, you need a new car!"
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u8788-v1-e-ending",
+      "text": "Lesson 87\n\nMr. Wood: Have your mechanics finished yet?\n\n接待员: No, they’re still working on it. Let’s go into the garage and have a look at it.\n\n接待员: Isn’t that your car?\n\nMr. Wood: Well, it was my car.\n\n接待员: Didn’t you have a crash?\n\nMr. Wood: That’s right. I drove it into a lamp-post. Can your mechanics repair it?\n\n接待员: Well, they’re trying to repair it, sir. But to tell you the truth, you need a new car!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-3",
+    "R2": "4-6",
+    "R3": "7-8",
+    "R4": "7-9",
+    "R5": "11-12",
+    "R7": "11-13",
+    "E3": "7-13"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

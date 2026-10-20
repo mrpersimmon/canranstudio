@@ -1,0 +1,49 @@
+{
+  "method": "Built-in image_gen; sharp format conversion with no crop. The hot.svg resource URL is retained to preserve existing question signatures.",
+  "card": "A finished illustration for a children's English lesson keepsake, on true transparent background, square 1024x1024. Style: simple round storybook cartoon, very clean bold DARK BROWN outlines, large round heads, small dot eyes and tiny rounded noses, cheerful open smiles, soft flat pastel fills with subtle watercolor grain; NOT realistic faces, NOT anime or 3D. Depict TWO clearly adult familiar neighbours greeting each other at a street corner. Steven stands on the LEFT looking RIGHT at Helen: small silver-gray curls beneath a moss green flat cap, forest-green buttoned jacket over cream shirt, warm brown trousers. Helen stands on the RIGHT looking LEFT at Steven: straight black bob with short fringe, plum-purple long coat over an ivory outfit, muted blue handbag hanging from one elbow. Steven lifts one open hand in greeting; Helen responds with a gentle open hand near her chest. Their full faces, hands, elbows and handbag are wholly visible and anatomically clear. Medium closeup, faces and reciprocal greeting dominate; a pale understated street-corner fence and tiny tree behind them fades softly into transparency. Lower torsos softly fade only below all hands. Generous transparent margin around all edges, no cropped fingers. Stylized adult proportions matching a warm classroom picture-book. No text, letters, speech balloons, labels, stars, certificates or frames; no occupations, no children, no assumed romance. This is Lesson 9–10, How are you today?, friendly greeting and farewell.",
+  "talk": "Use the attached keepsake illustration as the exact character and style reference. Produce a FULL BODY two-person stage cast on a transparent square 1024x1024 canvas. Steven stays on the LEFT, silver-gray curls, moss green flat cap, forest-green jacket, cream shirt, brown long trousers and brown shoes. Helen stays on the RIGHT, straight black bob with fringe, plum-purple long coat over an ivory knee-length dress, blue handbag over one elbow, flat brown shoes. Keep their distinct round faces, simple eyes, soft flat colors and thick brown outlines. They face one another, Steven looks RIGHT at Helen, Helen looks LEFT at Steven. A calm conversation: Steven opens one hand towards Helen at waist level as he asks how she is; Helen listens with a friendly smile and her free hand relaxed. Every hair, fingertip, elbow, handbag, shoe and both entire bodies must fit with generous transparent margin. Do not crop. No fence, tree, background, floor, text, labels, speech bubbles or extra people. About 3.5 heads tall, stylized adults rather than toddlers. Keep the same scale for both. This is one reusable scene cast, not a sprite sheet.",
+  "wave": "Edit this full-body cast into a greeting/farewell pose. Keep exactly the same Steven on the left and Helen on the right, their faces, hair, clothes, blue handbag, body scale, placement and shoe positions, round cartoon style and full transparency. They continue looking at one another. Steven raises the hand nearest Helen into a friendly open-palm wave at shoulder height; Helen raises her free hand nearer Steven to respond at shoulder height, keeping the handbag on her other arm. Whole bodies and every fingertip, shoe and hair remain inside generous transparent margins. No additional props, text, labels, background or people. Do not mirror clothing or move them to opposite sides.",
+  "hot": "Edit the reference cast into ONE full-body illustration of Steven only, clearly feeling hot on a warm day. Keep exactly Steven's round adult face, silver-gray curls, moss green flat cap, forest-green jacket over cream shirt, warm brown long trousers and brown shoes. Remove Helen entirely. Steven faces slightly right, with one hand using a small plain folded hand fan and a few small sweat drops near his temple, a warm but comfortable expression, no illness or fever. A small simple sun may sit clear of his head. Show every hand, all fingers, hair and both shoes entirely inside generous transparent margins. Tall portrait composition on a true transparent background, same clean bold brown outlines and soft flat picture-book colors as the reference. No words, numbers, labels, frames, scenery or extra people. This teaches the adjective hot as feeling warm, not a medical condition.",
+  "unusedRefinement": "Remove every glow, halo, haze, gradient and background shadow from this image. Keep Steven, the flat sun symbol, sweat drops, hand fan and two small blue airflow strokes exactly as drawn, preserving his entire body and all margins. The background must be completely transparent everywhere outside those objects, with clean cutout edges; no diffuse colored cloud around the person, sun or shoes. Keep the sun a flat simple yellow disk with rays and NO glow. Do not crop or change character, pose, clothing, scale, colours or objects.",
+  "output_directory": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit9-10",
+  "selected": [
+    {
+      "prompt": "card",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-94d795be-d0fe-42dc-baf8-b1bbb58c09cb.png",
+      "file": "assets/unit9-10/keepsake-story-v1.webp",
+      "sha256": "24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03"
+    },
+    {
+      "prompt": "talk",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f8fe3039-fab1-4b55-8a80-b1074d10e240.png",
+      "file": "assets/unit9-10/cast-talk-v1.webp",
+      "sha256": "73ec229fced6b96a5b2f6175739c639e457081a616365a814eee5c0a88151072"
+    },
+    {
+      "prompt": "wave",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-2bd72edf-f551-49b6-8f99-54da25ef1551.png",
+      "file": "assets/unit9-10/cast-wave-v1.webp",
+      "sha256": "c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7"
+    },
+    {
+      "prompt": "hot",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-98076db8-06af-461d-8b91-f63005ca793c.png",
+      "file": "assets/unit9-10/hot-character-v1.webp",
+      "sha256": "588701051b6a54824b77b8bd445d64e811d6c54333dbc3b72cf3f6577b9079df"
+    }
+  ],
+  "notSelected": [
+    {
+      "prompt": "unusedRefinement",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-9b84d62d-8b88-42be-a336-927478bb040a.png",
+      "reason": "Did not reliably remove the halo and changed the fill style."
+    }
+  ],
+  "preservedResources": {
+    "questionImage": "/assets/unit9-10/hot.svg",
+    "oldCertificate": [
+      "/assets/unit9-10/steven.svg",
+      "/assets/unit9-10/helen.svg"
+    ]
+  }
+}

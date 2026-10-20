@@ -1,0 +1,52 @@
+{
+  "tool": "built-in image_gen",
+  "identityReferences": [
+    "assets/unit29-30/Jones.svg",
+    "assets/unit29-30/Amy.svg"
+  ],
+  "styleReference": "assets/awards/unit1-2-handbag-closeup.webp",
+  "jobs": [
+    {
+      "file": "assets/unit29-30/cast-jones-welcome-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-0fe12a1c-0ec9-47a4-8de3-8784e66f8d84.png",
+      "prompt": "Children's English classroom storybook character, thick smooth dark chocolate brown rounded outlines, simple warm pastel shapes, very large round head, tiny curved smile eyes and rosy cheeks like the provided approved style sample. No realism, no gradients across background. Full body, complete head/hair, both hands and all fingers, both shoes visible, 7% transparent safe margin, portrait format, real transparent alpha outside character. No text, numbers, stars or frame. Mrs Jones based on the SECOND image's identity: gray hair in a high round bun, round brown spectacles, lavender knee-length dress with a broad cream pointed collar, dark brown stockings and low brown shoes. She is a mature adult woman, not Mrs Smith (no brown bob, no apron). Standing turned three quarters toward the viewer's RIGHT, friendly inviting open right palm directed to the right, left arm relaxed at her side. Reference one governs drawing style; second only preserves gray bun, glasses and lavender/cream clothing. Keep whole raised hand and body.",
+      "selected": true,
+      "transparent": true
+    },
+    {
+      "file": "assets/unit29-30/cast-amy-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f82eef91-f540-4700-bd6f-30cce072e7d7.png",
+      "prompt": "Children's English classroom storybook character, thick smooth dark chocolate brown rounded outlines, simple warm pastel shapes, very large round head, tiny curved smile eyes and rosy cheeks like the provided approved style sample. No realism, no gradients across background. Full body, complete head/hair, both hands and all fingers, both shoes visible, 7% transparent safe margin, portrait format, real transparent alpha outside character. No text, numbers, stars or frame. Amy based on the SECOND image's identity: adult young woman with long dark brown hair tied back in a low ponytail, blue-teal long sleeves, a simple cream apron with pale blue rectangular pocket over a blue skirt, dark blue stockings and brown shoes. NOT a little child and not Mrs Smith with a bob haircut. Facing three quarters to viewer's LEFT, looking attentively left to Mrs Jones. Holding ONE wooden broom vertically with both hands at separated heights, all hand fingers wrapped naturally around same handle, straw broom head resting on ground beside her own left shoe. Broom complete with 7% edge margin, no duplication, no movement or dust cloud. Reference one defines cartoon style; second preserves Amy's blue apron outfit and longer brown hair.",
+      "selected": true,
+      "transparent": true
+    },
+    {
+      "file": "assets/unit29-30/cast-jones-point-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-40103d2d-ce85-412d-990b-44dcb32bcc23.png",
+      "prompt": "Edit this exact full-body Mrs Jones image to a second instruction-giving pose. Preserve gray high bun, glasses, large round head and friendly curved eyes, lavender dress, cream pointed collar, dark brown stockings and brown shoes, body proportions, line style and all colors exactly. Facing viewer's RIGHT. Change only right arm/hand: extend hand lower, open palm angled slightly downward to direct attention to the room/floor at the right, not a raised welcome. Left hand relaxed. Entire body, both hands, hair bun and both shoes complete, 7% transparent safe margin. Real alpha background. No props, no text or labels.",
+      "selected": true,
+      "transparent": true
+    },
+    {
+      "file": "assets/unit29-30/cast-amy-ask-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-af340023-818e-4968-8f81-fc434cdb1e87.png",
+      "prompt": "Make a second pose of this exact Amy, keeping all identity, facial proportions, long brown ponytail, blue sleeves, cream apron with blue pocket and triangular pale blue bib inset, dark blue stockings, brown shoes and ONE broom identical. Face and body still turned to viewer's LEFT. She is asking a polite question: upper hand opens palm-up toward the LEFT at chest height, while the OTHER hand securely holds the same broom handle at waist height. Broom head still rests on the ground beside her shoe. No hand duplicated, no extra broom, no sweeping motion. Whole full body and full broom inside a 7% transparent margin, same warm flat style and thick brown outlines. Real transparent alpha. No text or symbols.",
+      "selected": true,
+      "transparent": true
+    },
+    {
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-b3303013-a1b3-4740-b443-238d61e12657.png",
+      "prompt": "Landscape 3:2 true transparent cutout illustration for a children's lesson keepsake card. Use the first reference as exact Mrs Jones identity: gray high bun, round spectacles, lavender dress with cream pointed collar. Use the second reference as exact Amy identity: young adult woman, long brown ponytail, teal sleeves and cream apron, ONE broom. Use the third reference as drawing style: large round friendly heads, simple curved brown smile-eyes, warm pastel flat color, thick smooth brown rounded contours. Mid-close composition with two women facing each other, Mrs Jones LEFT, Amy RIGHT. Mrs Jones gestures with one open hand toward a few little paper scraps on the floor. Amy looks attentively at Mrs Jones while holding one broom upright, straw bristles touching the floor. This is receiving instructions, NOT a completed cleaning celebration. Faces, both women's two hands, broom and its ground contact fully visible. Simple smaller messy bed with a rumpled blanket and a folded-over shirt behind them, no other broom or duplicated tools. No finished clean room, no applause, no thumbs-up, no trophy. Full transparent outer margin at least 5%, not cropped hair/hands. Background subdued to small room hints, no solid wall, no floor rectangle, no text, letters, badges, stars, names or border.",
+      "selected": false,
+      "reason": "全身构图缩小卡面人物，改为同一人物中近景",
+      "transparent": true
+    },
+    {
+      "file": "assets/unit29-30/keepsake-story-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-41c60fdf-f745-4a77-b5fb-ea18e8f0d12a.png",
+      "prompt": "Recompose this lesson card illustration into a MID-CLOSE story moment. Keep the exact two identities, gray bun and round glasses of Mrs Jones on LEFT, long brown ponytail and apron of Amy on RIGHT, facing each other. Make both faces and their hands MUCH LARGER and dominant, approximately shoulders-to-waist composition; no full-length standing people. Mrs Jones extends her complete open hand toward Amy's broom, explaining a task; Amy holds ONE complete broom with both hands. The broom can angle diagonally into foreground with its full straw head visible at bottom center among a few paper scraps. The base of both women's torsos ends naturally behind a small foreground edge of the rumpled bed; do not show legs or shoes. Small subdued wrinkled blue bed and shirt behind as room context, no other furniture. A close interaction, not cleaning completed: no polished room, no trophy, no thumbs-up. Same simple round brown smile-eyes and thick rounded dark brown outlines, warm pastel style as the SECOND reference. Entire heads, buns, ponytail, hands and broom fit inside transparent padding; no parts cut at canvas edges. True transparent alpha with no solid wall/floor rectangle, no text, no names, no stars or frame.",
+      "selected": true,
+      "transparent": true
+    }
+  ]
+}

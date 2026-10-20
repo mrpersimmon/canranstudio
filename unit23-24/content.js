@@ -257,3 +257,58 @@ unit.questions["exam"][8],
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+// Five-zone edition. Preserve the exact predecessor above for historical records.
+(function(core){
+'use strict';
+const old=core.unit2324;core.unit2324LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸46–49／PDF79–82；语法练习册纸60–66／PDF74–80';
+const grammarSource='同步导学纸43–44／PDF57–58，Grammar纸44／PDF58；'+source;
+const unit={id:'unit23-24',version:1,mode:'classroom',contentRevision:'glasses-five-zones-v1',legacyEdition:'unit23-24-completion-v1',title:'房间寻物队',path:'/unit23-24/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'认识房间物品',activities:[['words','寻物小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'帮简找对杯子',activities:[['text','找杯子小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'看清物品位置',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'说清哪一些',activities:[['apply','寻物小帮手','heart']],required:['apply']},{id:'l5',title:'完成寻物委托',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/apply','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'glasses-five-zones-v1',title:'细心寻物小达人',lesson:'Lesson 23–24',scene:'/assets/unit23-24/keepsake-story-v1.webp',alt:'男士双手托着刚接过的一组玻璃杯，简双手空着，两人相视微笑',color:'#34675B',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','寻物小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2324-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('surface','理解on表示接触表面','几本书平放在桌面上，空格选什么？',choice(['on','in','under'],'on','The books are ___ the table.\nin：在里面；under：在下面。'),'书由桌面承托，用on。不是只要在图上画得较高就用on。',[['The glasses are on the shelf.','玻璃杯放在搁板表面上，杯底与搁板相接。']]),
+g('wall','把on扩展到竖直表面','画挂在墙面上，补好句子。',fill([blank('The picture is ',' the wall.',['on','in','under'])],['on'],'picture：画；wall：墙。画贴靠着竖直墙面。'),'on也能表示在竖直表面上；不是只能用来描述桌面、地板。',[['The drawing is on the blackboard.','画画在黑板表面上。drawing：画；blackboard：黑板。']]),
+g('which-place','用介词短语缩小选择范围','按位置说明要哪一组玻璃杯。',words(['The','ones','on','the shelf.','in'],4,'The ones on the shelf.','要的是架子表面上的那组玻璃杯。'),'The ones代替那组玻璃杯，on the shelf进一步说明位置。',[['Which books? The ones on the desk.','先指出要选的一组，再用位置帮助寻找。']]),
+g('some','不把some限死在复数名词前','分别请求一些盘子和一些水。',fill([blank('Give me ',' plates, please.',['some','a']),blank('Give us ',' water, please.',['some','a'])],['some','some'],'water：水，不用复数词尾-s表示这里的一些水。'),'some可搭配可数名词复数，也可搭配不可数名词；它本身没有指定正好几个。',[['some glasses / some water','一些玻璃杯／一些水。两种说法都可以。']]),
+g('one-ones','根据被替代物品数量选择one或ones','两份请求分别要一支笔和一些笔。',fill([blank('Which ','?',['one','ones']),blank('Which ','?',['one','ones'])],['one','ones'],'第一句：Give me a pen.\n第二句：Give me some pens.'),'one代替一件可数物品，ones代替多件。它们不是在读数字。',[['a glass → Which one?','一个玻璃杯，用one。'],['some glasses → Which ones?','多个玻璃杯，用ones。']]),
+g('plural-sentence','整句变复数时同时改名词与be','把一本书改成几本书，补好完整句子。',fill([blank('The ',' on the shelf',['books','book']),blank(' ',' new.',['are','is'])],['books','are'],'原句：The book on the shelf is new.\nnew：新的。新句仍说架子上的书是新的。'),'book变books，is变are；位置短语on the shelf和形容词new不因书变多而加-s。',[['The box on the floor is big.','一个盒子用box和is。'],['The boxes on the floor are big.','多个盒子用boxes和are，big不变。']]),
+g('receivers','按明确接收者选择宾格','第一份给Tim，第二份给两个孩子。',fill([blank('Give ',' this shirt.',['him','he','his']),blank('Give ',' these books.',['them','they','their'])],['him','them'],'Tim是男孩，接收衬衫；两个孩子接收书。'),'Give后说明接收者，Tim用him，两个孩子用them；不根据衣物或名字猜性别。',[['Jane is a woman. Give her this watch.','Jane是女士；把表给她，用her。']]),
+...old.questions.be
+];
+unit.questions.apply=[...old.questions.observe,...old.questions.trans,
+q('a-meaning','同时理解否定和位置限定','用中文词块说出这份要求。',{type:'wordbank',language:'zh-CN',reading:'No, not those. The ones on the shelf.',tokens:['不，','不是那些。','架子上的那些。','就是那些。','桌子里的那些。'],slots:3,answer:'不， 不是那些。 架子上的那些。'},'先否定刚指的那组，再明确要架子上的那组。')];
+unit.questions.exam=[...old.questions.exam];
+// Replace the repeated desk image task with a new vertical-surface transfer.
+unit.questions.exam[5]=q('e-blackboard','独立把on用于新的竖直表面','黑板上画着两颗星，补好句子。',fill([blank('The stars are ',' the blackboard.',['on','in','under'])],['on'],'stars：星星；blackboard：黑板。星星画在黑板表面上。'),'画在黑板表面上也用on，不仅水平承托表面才用on。');
+unit.questions.exam.push(
+q('e-plural','独立把带位置的整句变为复数','改成几只盒子，保持位置和大小不变。',fill([blank('The ',' on the floor',['boxes','box']),blank(' ',' small.',['are','is'])],['boxes','are'],'原句：The box on the floor is small.'),'复数boxes配are，on the floor和small保持不变。'),
+q('e-one-ones','独立按名词数量替换','两份请求分别是一本杂志和一些报纸。',fill([blank('The new ','.',['one','ones']),blank('The new ','.',['one','ones'])],['one','ones'],'第一份：a magazine。第二份：some newspapers。两份都要新的。'),'一本杂志用one，一些报纸用ones。'),
+q('e-water','some既不指定数目也不限于可数名词','Give us some water, please. 这句话的意思是什么？',choice(['请给我们一些水。','请给我们正好两杯水。','句子错了，some后只能用复数名词。'],'请给我们一些水。','water：水。'),'some water表示一些水，没有指定杯数；some也可用于不可数名词。'),
+q('e-clarify','发现位置条件还不足以唯一确定一组','架子上并排放着两组玻璃杯，桌上也有一组。',choice(['继续确认架子上的哪一组。','取架子上任意一组。','取桌上的那一组。'],'继续确认架子上的哪一组。','对方说：The ones on the shelf.\n你需要选出对方要的那一组。'),'位置已经排除了桌上的一组，但架子上还有两组，需要继续确认，不能替对方随意决定。'),
+q('e-negation','不从否定某位置自动推断另一个位置','只听见 No, not those on the table. 能确定要哪组吗？',choice(['还不能，要继续询问。','一定是架子上的。','一定是地板上的。'],'还不能，要继续询问。','房间里有桌上、架子上和地板上的三组盒子。\n这句话只说不要桌上的那组。'),'否定桌上这一组不等于肯定架子上的一组；还可能要其他位置的盒子。')
+);
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['be'],apply:['observe','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2324-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit2324=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// Keep the actual first five-star edition for history; only two material
+// revisions get new identities. The other three complete rounds remain valid.
+(function(core){
+'use strict';const unit=core.unit2324,old=JSON.parse(JSON.stringify(unit));
+core.unit2324V153PreviousDefinition=old;unit.contentRevision='room-teaching-v153';
+unit.questions.roles=old.questions.roles.map(q=>q.id==='u2324-v1-story-ones'?{...q,id:q.id+'-v153',prompt:'结合这两句原文，ones代替什么？',display:{title:'结合这两句原文，ones代替什么？',material:'男士：Give me some glasses please, Jane.\n男士：No, not those. The ones on the shelf.'}}:q);
+unit.questions.exam=old.questions.exam.map(q=>q.id==='u2324-tasks-v4-exam-our-us'?{...q,id:q.id+'-v153',prompt:'两位同学请求递回自己的盒子，一起说：',reference:'',display:{title:'两位同学请求递回自己的盒子，一起说：',material:'盒子属于说话的这两位同学。他们请简把这些盒子递回给自己。'}}:q);
+unit.taskSessions={...old.taskSessions,roles:'v153',exam:'v153'};
+unit.taskPredecessors={...old.taskPredecessors};for(const id of ['roles','exam'])unit.taskPredecessors[id]=[{key:'unit2324-'+id+'-practice/five-zones-v1',questions:old.questions[id]},...(old.taskPredecessors[id]||[])];
+})(globalThis.CanranCore);

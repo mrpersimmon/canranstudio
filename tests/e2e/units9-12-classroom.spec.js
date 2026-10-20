@@ -1,6 +1,9 @@
 'use strict';
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
+// The 9–10 cases below verify the former 15-star classroom contract.
+// Freeze both units’ HTTP files and Worker packages at their 15-star versions.
+require('../support/unit1112-legacy').historicalSuite(test);
 const fs = require('node:fs/promises');
 const units = [
   { id: 'unit9-10', title: 'Lesson 9–10', ...require('../support/unit9-10-flow') },

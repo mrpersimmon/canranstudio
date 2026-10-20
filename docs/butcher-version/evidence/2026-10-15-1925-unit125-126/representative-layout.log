@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:5784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit125-126-story-layout.spec.js:26:39 › 320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 (9.6s)
+  ok 2 tests\e2e\unit125-126-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (3.2s)
+
+  2 passed (13.8s)

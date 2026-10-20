@@ -1,0 +1,11 @@
+
+Running 4 tests using 1 worker
+
+(node:26984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit115-116-story-layout.spec.js:31:39 › 320：14轮原文、四人换景与全部姿态、按需中文和续读 (9.1s)
+  ok 2 tests\e2e\unit115-116-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (4.0s)
+  ok 3 tests\e2e\unit115-116.spec.js:28:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (12.6s)
+  ok 4 tests\e2e\unit115-116.spec.js:39:1 › 错答不更新任务记录，三卡7／8／2，刷新保留查找范围 (3.1s)
+
+  4 passed (29.9s)

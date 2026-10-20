@@ -1,0 +1,296 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit29-30-v153-content.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit2930-review-20261018/red-content"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2930-review-20261018/red-content",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit29-30-v153-content.spec.js",
+      "file": "unit29-30-v153-content.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "R2在未答和刷新后提供连续原文，不靠猜测唯一家务流程",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6621,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:7:296",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                      "column": 296,
+                      "line": 7
+                    },
+                    "snippet": "   5 | async function reach(page,id,index){if(id==='roles')await story(page);await page.goto('/unit29-30/#learn/'+id);const room=page.locator('.stage-'+id);for(const answer of ANSWERS[id].slice(0,index)){await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();}return room;}\n   6 | test('R2在未答和刷新后提供连续原文，不靠猜测唯一家务流程',async({page},info)=>{\n>  7 |  const room=await reach(page,'roles',1);await room.screenshot({path:info.outputPath('roles-02-unanswered.png')});for(const line of ['Then put these clothes in the wardrobe.','Then make the bed.','Dust the dressing table.','Then sweep the floor.'])await expect(room.locator('.practice-context')).toContainText(line);\n     |                                                                                                                                                                                                                                                                                                        ^\n   8 |  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n   9 |  await select(room,['Dust the dressing table.','Then make the bed.','Then sweep the floor.']);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');\n  10 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                        "column": 296,
+                        "line": 7
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\n\n   5 | async function reach(page,id,index){if(id==='roles')await story(page);await page.goto('/unit29-30/#learn/'+id);const room=page.locator('.stage-'+id);for(const answer of ANSWERS[id].slice(0,index)){await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();}return room;}\n   6 | test('R2在未答和刷新后提供连续原文，不靠猜测唯一家务流程',async({page},info)=>{\n>  7 |  const room=await reach(page,'roles',1);await room.screenshot({path:info.outputPath('roles-02-unanswered.png')});for(const line of ['Then put these clothes in the wardrobe.','Then make the bed.','Dust the dressing table.','Then sweep the floor.'])await expect(room.locator('.practice-context')).toContainText(line);\n     |                                                                                                                                                                                                                                                                                                        ^\n   8 |  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n   9 |  await select(room,['Dust the dressing table.','Then make the bed.','Then sweep the floor.']);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');\n  10 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:7:296"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T21:51:07.785Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-R2在未答和刷新后提供连续原文，不靠猜测唯一家务流程\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-R2在未答和刷新后提供连续原文，不靠猜测唯一家务流程\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                    "column": 296,
+                    "line": 7
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3fc0697546eff913887c-9b9364d1457748e2e8fd",
+          "file": "unit29-30-v153-content.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "E4在未答和刷新后提供开窗后的原句，独立判断先后",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6339,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nReceived string:    \u001b[31m\"原文中，Open the window and air the room. 后面，\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"原文中，Open the window and air the room. 后面，\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nReceived string:    \u001b[31m\"原文中，Open the window and air the room. 后面，\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"原文中，Open the window and air the room. 后面，\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:12:279",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                      "column": 279,
+                      "line": 12
+                    },
+                    "snippet": "  10 | });\n  11 | test('E4在未答和刷新后提供开窗后的原句，独立判断先后',async({page},info)=>{\n> 12 |  const room=await reach(page,'exam',3);await room.screenshot({path:info.outputPath('exam-04-unanswered.png')});for(const line of ['Open the window and air the room.','Then put these clothes in the wardrobe.','Then make the bed.'])await expect(room.locator('.practice-context')).toContainText(line);\n     |                                                                                                                                                                                                                                                                                       ^\n  13 |  await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  14 |  await select(room,'整理床铺 · 收衣服进衣柜');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');\n  15 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                        "column": 279,
+                        "line": 12
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"Then put these clothes in the wardrobe.\"\u001b[39m\nReceived string:    \u001b[31m\"原文中，Open the window and air the room. 后面，\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"原文中，Open the window and air the room. 后面，\"\u001b[22m\n\n\n  10 | });\n  11 | test('E4在未答和刷新后提供开窗后的原句，独立判断先后',async({page},info)=>{\n> 12 |  const room=await reach(page,'exam',3);await room.screenshot({path:info.outputPath('exam-04-unanswered.png')});for(const line of ['Open the window and air the room.','Then put these clothes in the wardrobe.','Then make the bed.'])await expect(room.locator('.practice-context')).toContainText(line);\n     |                                                                                                                                                                                                                                                                                       ^\n  13 |  await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  14 |  await select(room,'整理床铺 · 收衣服进衣柜');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');\n  15 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:12:279"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T21:51:15.350Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-E4在未答和刷新后提供开窗后的原句，独立判断先后\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-E4在未答和刷新后提供开窗后的原句，独立判断先后\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                    "column": 279,
+                    "line": 12
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3fc0697546eff913887c-0dc4420938425bde099c",
+          "file": "unit29-30-v153-content.spec.js",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "G9与G11提供短示范并记录支持，G10继续撤支持练习",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7397,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:17:289)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2930-fivezones.js:27:192)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:17:26",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                      "column": 289,
+                      "line": 17
+                    },
+                    "snippet": "  15 | });\n  16 | test('G9与G11提供短示范并记录支持，G10继续撤支持练习',async({page},info)=>{\n> 17 |  test.setTimeout(120000);await activity(page,'grammar',{inspect:async(room,index,state)=>{if(state!=='before')return;if([8,10].includes(index)){await room.screenshot({path:info.outputPath('grammar-'+(index+1)+'-model.png')});await expect(room.getByRole('region',{name:'短示范',exact:true})).toBeVisible();}if(index===9)await expect(room.locator('.grammar-model')).toHaveCount(0);}});\n     |                                                                                                                                                                                                                                                                                                 ^\n  18 |  const records=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit29-30:learning:v1')).records);for(const id of ['u2930-v1-must-purpose','u2930-v1-bedroom-is'])expect(records[id].revealed).toBe(true);expect(Boolean(records['u2930-v1-base-verb'].revealed)).toBe(false);\n  19 | });\n  20 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                        "column": 289,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n  15 | });\n  16 | test('G9与G11提供短示范并记录支持，G10继续撤支持练习',async({page},info)=>{\n> 17 |  test.setTimeout(120000);await activity(page,'grammar',{inspect:async(room,index,state)=>{if(state!=='before')return;if([8,10].includes(index)){await room.screenshot({path:info.outputPath('grammar-'+(index+1)+'-model.png')});await expect(room.getByRole('region',{name:'短示范',exact:true})).toBeVisible();}if(index===9)await expect(room.locator('.grammar-model')).toHaveCount(0);}});\n     |                                                                                                                                                                                                                                                                                                 ^\n  18 |  const records=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit29-30:learning:v1')).records);for(const id of ['u2930-v1-must-purpose','u2930-v1-bedroom-is'])expect(records[id].revealed).toBe(true);expect(Boolean(records['u2930-v1-base-verb'].revealed)).toBe(false);\n  19 | });\n  20 |\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:17:289)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit2930-fivezones.js:27:192)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js:17:26"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T21:51:22.488Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-G9与G11提供短示范并记录支持，G10继续撤支持练习\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-review-20261018\\red-content\\unit29-30-v153-content-G9与G11提供短示范并记录支持，G10继续撤支持练习\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-v153-content.spec.js",
+                    "column": 289,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3fc0697546eff913887c-c772f843ef65d7af22fc",
+          "file": "unit29-30-v153-content.spec.js",
+          "line": 16,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T21:51:07.168Z",
+    "duration": 23345.207000000002,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

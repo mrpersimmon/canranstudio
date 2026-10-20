@@ -1,0 +1,518 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit27-28-fivezones.spec.js",
+      "tests/login/unit27-28-fivezones-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit2728-login-chromium-root"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2728-login-chromium-root",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4320/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit27-28-fivezones-upgrade.spec.js",
+      "file": "unit27-28-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "old-course-ready",
+                  "description": "889ms; no old answers or certificate injected"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28577,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:6516) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:38:37.660Z",
+                  "annotations": [
+                    {
+                      "type": "old-course-ready",
+                      "description": "889ms; no old answers or certificate injected"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b35c07099795d244ab11-fe8b97ac4dadff7b57fb",
+          "file": "unit27-28-fivezones-upgrade.spec.js",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit27-28-fivezones.spec.js",
+      "file": "unit27-28-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1416ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3089,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:39:06.381Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1416ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-d828f50ba2bfe68aa55f",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1341,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:39:09.482Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-0835f99b051e56adeb6f",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "11ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1430ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "10ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36691,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:39:10.832Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "11ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1430ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "10ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-12a9ee58c0ce215d0f30",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1060ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5848,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:39:47.537Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1060ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-add4a55ce6382f646e16",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1414ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "23ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "6ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "30ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20627,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:39:53.394Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1414ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "23ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "6ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "30ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-a1eb7c86177f587d6226",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "7ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1397ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1527ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10429,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:40:14.033Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "7ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1397ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1527ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-0f95dd4415e067c3a2e1",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1018ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "978ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12727,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T22:40:24.475Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1018ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "978ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "059cba3091b455d82fa5-2b443e9410d705cbdaf4",
+          "file": "unit27-28-fivezones.spec.js",
+          "line": 232,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T22:38:32.021Z",
+    "duration": 125744.21800000001,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

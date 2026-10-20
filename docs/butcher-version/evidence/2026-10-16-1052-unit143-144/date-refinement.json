@@ -1,0 +1,17 @@
+{
+  "question": "u143144-v1-a-past",
+  "reason": "The prompt says yesterday while its own record gave only 15 October. State the reporting date inside this question rather than rely on the preceding question or device date.",
+  "before": "Fictional record for 15 October 2026. Gate repair began at 08:30 and finished at 09:30.",
+  "after": "Reporting date: 16 October 2026. Fictional record for 15 October 2026. Gate repair began at 08:30 and finished at 09:30.",
+  "contentBeforeSha256": "a9eec4a53623fa505de30d8385f0433171f4de62934908b7b62c150a050de14c",
+  "contentAfterSha256": "64051be02ea6c0511d074af46f589a85b57635fa5bc7e51e83223ee4373ccf18",
+  "questionCountAndCorrectAnswersUnchanged": true,
+  "changedFields": [
+    "apply[1].display.material"
+  ],
+  "affectedChecks": [
+    "all 65 answers and visible materials on both engines",
+    "authenticated two-record wrong/refresh/partial-fill flow at both Chromium mounts",
+    "complete WebKit account matrix on final version"
+  ]
+}

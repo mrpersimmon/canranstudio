@@ -1,0 +1,45 @@
+{
+  "id": "unit47-48",
+  "source": {
+    "file": "tests/support/unit4748.js",
+    "sha256": "312e2b47923fb72ad59670a5b25cbda5c57b5c9bcc2ea1bc8aeaed7ef64ff9ce"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u4748-v1-r-coffee",
+      "text": "Lesson 47\n\nChristine: Do you want any sugar?\n\nAnn: Yes, please.\n\nChristine: Do you want any milk?\n\nAnn: No, thank you. I don’t like milk in my coffee. I like black coffee."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u4748-v1-r-additions",
+      "text": "Lesson 47\n\nChristine: Do you want any sugar?\n\nAnn: Yes, please.\n\nChristine: Do you want any milk?\n\nAnn: No, thank you. I don’t like milk in my coffee. I like black coffee."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u4748-v1-r-reference",
+      "text": "Lesson 47\n\nChristine: Do you like biscuits?\n\nAnn: Yes, I do.\n\nChristine: Do you want one?\n\nAnn: Yes, please."
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u4748-v1-e-story",
+      "text": "Lesson 47\n\nChristine: Do you like coffee, Ann?\n\nAnn: Yes, I do.\n\nChristine: Do you want a cup?\n\nAnn: Yes, please, Christine.\n\nChristine: Do you want any sugar?\n\nAnn: Yes, please.\n\nChristine: Do you want any milk?\n\nAnn: No, thank you. I don’t like milk in my coffee. I like black coffee."
+    }
+  ],
+  "sourceLines": {
+    "R1": "5-8",
+    "R2": "5-8",
+    "R3": "9-12",
+    "E4": "1-8"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

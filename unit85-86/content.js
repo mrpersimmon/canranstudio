@@ -129,3 +129,17 @@ unit.learning.WRITING_B_EXAMPLES=['Air the room! (this morning) → I’ve alrea
 unit.learning.WRITING_B=[['Clean your shoes!','last night'],['Open the window!','an hour ago'],['Sharpen your pencil!','a minute ago'],['Turn on the television!','ten minutes ago'],['Boil the milk!','yesterday morning'],['Empty the basket!','yesterday'],['Ask a question!','two minutes ago'],['Type that letter!','this morning'],['Wash your hands!','five minutes ago'],['Walk across the park!','an hour ago'],['Paint that bookcase!','a year ago'],['Dust the cupboard!','this afternoon']];
 core.unit8586=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit8586,excerpts={"u8586-v1-r-film":[2,3,4,5],"u8586-v1-r-george":[7,8,9],"u8586-v1-r-seen":[4,5,6],"u8586-v1-r-month":[8,9],"u8586-v1-r-rain":[9,10,11],"u8586-v1-r-opinion":[4,5,6],"u8586-v1-r-ending":[10,11,12],"u8586-v1-e-story":[2,3,4,5,6,7,8,9,10,11,12]},speakers={"george":"George","ken":"Ken"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 85',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

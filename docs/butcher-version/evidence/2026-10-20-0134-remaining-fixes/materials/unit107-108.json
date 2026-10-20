@@ -1,0 +1,80 @@
+{
+  "id": "unit107-108",
+  "source": {
+    "file": "tests/support/unit107108.js",
+    "sha256": "d17b00eed4221a0edfe43dcdcc26736e7d4f4141fa4ff0f2a5e085cc9d009d45"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u107108-v1-r-first",
+      "text": "Lesson 107\n\nAssistant: Do you like this dress, madam?\n\nLady: I like the colour very much. It’s a lovely dress, but it’s too small for me.\n\nAssistant: What about this one? It’s a lovely dress. It’s very smart. Short skirts are in fashion now. Would you like to try it?\n\nLady: All right.\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one.\n\nLady: I don’t like the colour either. It doesn’t suit me at all. I think the blue dress is prettier."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u107108-v1-r-invite",
+      "text": "Lesson 107\n\nAssistant: What about this one? It’s a lovely dress. It’s very smart. Short skirts are in fashion now. Would you like to try it?\n\nLady: All right."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u107108-v1-r-green",
+      "text": "Lesson 107\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u107108-v1-r-colour",
+      "text": "Lesson 107\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one.\n\nLady: I don’t like the colour either. It doesn’t suit me at all. I think the blue dress is prettier."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u107108-v1-r-view",
+      "text": "Lesson 107\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one.\n\nLady: I don’t like the colour either. It doesn’t suit me at all. I think the blue dress is prettier."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u107108-v1-r-request",
+      "text": "Lesson 107\n\nLady: Could you show me another blue dress? I want a dress like that one, but it must be my size.\n\nAssistant: I’m afraid I haven’t got a larger dress. This is the largest dress in the shop."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u107108-v1-r-largest",
+      "text": "Lesson 107\n\nLady: Could you show me another blue dress? I want a dress like that one, but it must be my size.\n\nAssistant: I’m afraid I haven’t got a larger dress. This is the largest dress in the shop."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u107108-v1-r-ending",
+      "text": "Lesson 107\n\nAssistant: Do you like this dress, madam?\n\nLady: I like the colour very much. It’s a lovely dress, but it’s too small for me.\n\nAssistant: What about this one? It’s a lovely dress. It’s very smart. Short skirts are in fashion now. Would you like to try it?\n\nLady: All right.\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one.\n\nLady: I don’t like the colour either. It doesn’t suit me at all. I think the blue dress is prettier.\n\nLady: Could you show me another blue dress? I want a dress like that one, but it must be my size.\n\nAssistant: I’m afraid I haven’t got a larger dress. This is the largest dress in the shop."
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u107108-v1-e-size",
+      "text": "Lesson 107\n\nLady: I’m afraid this green dress is too small for me as well. It’s smaller than the blue one.\n\nLady: I don’t like the colour either. It doesn’t suit me at all. I think the blue dress is prettier."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-6",
+    "R2": "3-4",
+    "R3": "5",
+    "R4": "5-6",
+    "R5": "5-6",
+    "R6": "7-8",
+    "R7": "7-8",
+    "R8": "*",
+    "E1": "5-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

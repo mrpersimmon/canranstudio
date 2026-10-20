@@ -1,3 +1,4 @@
+require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,story,activity,complete}=require('../support/thirteen-types-flow');

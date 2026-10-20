@@ -1,0 +1,87 @@
+[WebServer] (node:33096) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:31660) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16188) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 (48.9s)
+  x  2 tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 (25.4s)
+(node:36604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 tests\login\unit1-2-award.spec.js:147:1 › 订正完成但零星，课程首页仍可继续学习 (12.8s)
+(node:22092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22092) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 4 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 (1.3m)
+  ok 5 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 (1.1m)
+
+
+  1) tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ────────────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator: locator('#certificateName')
+    Expected: "小雨"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#certificateName')
+
+
+      44 |   await expect(second.page.locator('.course').filter({ hasText:'Lesson 1–2' })).toContainText('1 / 5');
+      45 |   await second.page.goto(base + '#learn/certificate');
+    > 46 |   await expect(second.page.locator('#certificateName')).toHaveText('小雨');
+         |                                                         ^
+      47 |   await expect(second.page.getByRole('group', { name:'已获得 1 / 5 颗星' })).toBeVisible();
+      48 |   await expect(second.page.getByLabel('纪念卡上的名字')).toHaveCount(0);
+      49 |   await expect(second.page.locator('#certificateDate')).toBeHidden();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-award.spec.js:46:57
+
+    Error Context: output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\login\unit1-2-award.spec.js:147:1 › 订正完成但零星，课程首页仍可继续学习 ──────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-trans').getByRole('button', { name: 'This is your book.', exact: true })
+        - locator resolved to <button type="button" class="opt-btn" aria-pressed="false">This is your book.</button>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+
+
+      151 |  try{
+      152 |   const p=student.page,base=mount+'unit1-2/';await p.goto(base+'#learn/trans');const room=p.locator('.stage-trans');
+    > 153 |   await room.getByRole('button',{name:'This is your book.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
+          |                                                                         ^
+      154 |   await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
+      155 |   await expectManagedLearning(page, account, mount, '学习中', 0);
+      156 |   await room.getByRole('button',{name:'再试一次',exact:true}).click();await finishZone(p,'trans',{base});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-award.spec.js:153:73
+
+    Error Context: output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-订正完成但零星，课程首页仍可继续学习\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-订正完成但零星，课程首页仍可继续学习\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-sub\unit1-2-v154-account-订正完成但零星，课程首页仍可继续学习\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ─────────────────────────────
+    tests\login\unit1-2-award.spec.js:147:1 › 订正完成但零星，课程首页仍可继续学习 ───────────────────────────────────
+  3 passed (4.0m)

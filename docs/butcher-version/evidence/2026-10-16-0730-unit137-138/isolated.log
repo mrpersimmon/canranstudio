@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:27608) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (6.2s)
+
+
+  1) tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ────────────────────────────────────
+
+    Error: expect(locator).toBeDisabled() failed
+
+    Locator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })
+    Expected: disabled
+    Received: enabled
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeDisabled" with timeout 5000ms
+      - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })
+        14 × locator resolved to <button type="button" class="btn btn-green">检查答案</button>
+           - unexpected value "enabled"
+
+
+      38 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+      39 |  test.setTimeout(180000);await page.goto('/unit137-138/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
+    > 40 |  for(let k=0;k<2;k++){await select(room,{locate:'we’ll play a game'});await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();}
+         |                                                                                                                                                                                                                                                                                                                                                                              ^
+      41 |  for(const[i,a]of ANSWERS.grammar.entries()){
+      42 |   if(i===1){await select(room,{fills:['rains']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'rains',exact:true}).click();}
+      43 |   if(i===4){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'I’ll',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 I’ll',exact:true}).click();await expect(check).toBeDisabled();}
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit137-138.spec.js:40:366
+
+    Error Context: output\unit137138-isolated\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit137138-isolated\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit137138-isolated\unit137-138-重复错答、两空门槛、撤回、提示、刷新与重练\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit137-138.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 ─────────────────────────────────────

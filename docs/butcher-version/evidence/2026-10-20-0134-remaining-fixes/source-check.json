@@ -1,0 +1,1333 @@
+{
+  "at": "2026-10-19T17:46:03.359Z",
+  "changedFiles": [
+    "docs/butcher-version/evidence/2026-10-18-2110-full-acceptance/README.md",
+    "unit101-102/content.js",
+    "unit101-102/unit.css",
+    "unit101-102/unit.js",
+    "unit103-104/content.js",
+    "unit103-104/unit.css",
+    "unit103-104/unit.js",
+    "unit105-106/content.js",
+    "unit105-106/unit.css",
+    "unit105-106/unit.js",
+    "unit107-108/content.js",
+    "unit107-108/unit.css",
+    "unit107-108/unit.js",
+    "unit109-110/content.js",
+    "unit111-112/content.js",
+    "unit113-114/content.js",
+    "unit31-32/grammar.js",
+    "unit91-92/content.js",
+    "unit91-92/unit.css",
+    "unit93-94/content.js",
+    "unit93-94/unit.css",
+    "unit93-94/unit.js",
+    "unit95-96/content.js",
+    "unit97-98/content.js",
+    "unit97-98/unit.css",
+    "unit97-98/unit.js",
+    "unit99-100/content.js",
+    "core/course-loader.js",
+    "docs/course-authoring.md",
+    "scripts/check-workflow.config.js",
+    "scripts/course-packages.js",
+    "server/app.js",
+    "server/public/portal.js",
+    "tests/README.md",
+    "tests/login/course-loading-recovery.spec.js",
+    "unit11-12/content.js",
+    "unit15-16/content.js",
+    "unit17-18/content.js",
+    "unit19-20/content.js",
+    "unit21-22/content.js",
+    "unit31-32/content.js",
+    "unit33-34/content.js",
+    "unit35-36/content.js",
+    "unit47-48/content.js",
+    "unit47-48/unit.css",
+    "unit49-50/content.js",
+    "unit49-50/unit.css",
+    "unit51-52/content.js",
+    "unit51-52/unit.css",
+    "unit51-52/unit.js",
+    "unit53-54/content.js",
+    "unit53-54/unit.css",
+    "unit53-54/unit.js",
+    "unit55-56/content.js",
+    "unit55-56/unit.css",
+    "unit57-58/content.js",
+    "unit57-58/unit.css",
+    "unit59-60/content.js",
+    "unit59-60/unit.css",
+    "unit61-62/content.js",
+    "unit61-62/unit.css",
+    "unit63-64/content.js",
+    "unit63-64/unit.css",
+    "unit65-66/content.js",
+    "unit65-66/unit.css",
+    "unit67-68/content.js",
+    "unit67-68/unit.css",
+    "unit67-68/unit.js",
+    "unit69-70/content.js",
+    "unit69-70/unit.css",
+    "unit69-70/unit.js",
+    "unit7-8/content.js",
+    "unit71-72/content.js",
+    "unit71-72/unit.css",
+    "unit71-72/unit.js",
+    "unit73-74/content.js",
+    "unit73-74/unit.css",
+    "unit75-76/content.js",
+    "unit75-76/unit.css",
+    "unit77-78/content.js",
+    "unit77-78/unit.css",
+    "unit79-80/content.js",
+    "unit79-80/grammar.js",
+    "unit79-80/unit.css",
+    "unit79-80/unit.js",
+    "unit81-82/content.js",
+    "unit81-82/unit.css",
+    "unit83-84/content.js",
+    "unit83-84/unit.css",
+    "unit83-84/unit.js",
+    "unit85-86/content.js",
+    "unit85-86/unit.css",
+    "unit85-86/unit.js",
+    "unit87-88/content.js",
+    "unit87-88/unit.css",
+    "unit87-88/unit.js",
+    "unit89-90/content.js",
+    "unit89-90/unit.css",
+    "unit89-90/unit.js",
+    "unit9-10/content.js"
+  ],
+  "addedFiles": [
+    "tests/e2e/reading-materials-acceptance.spec.js",
+    "tests/e2e/worksheet-acceptance.spec.js",
+    "tests/e2e/lesson-wording-repairs.spec.js",
+    "tests/login/directory-font-preparation.spec.js",
+    "tests/unit/directory-font-package.test.js",
+    "tests/support/reading-materials-acceptance.json"
+  ],
+  "syntaxPassed": [
+    "unit101-102/content.js",
+    "unit101-102/unit.js",
+    "unit103-104/content.js",
+    "unit103-104/unit.js",
+    "unit105-106/content.js",
+    "unit105-106/unit.js",
+    "unit107-108/content.js",
+    "unit107-108/unit.js",
+    "unit109-110/content.js",
+    "unit111-112/content.js",
+    "unit113-114/content.js",
+    "unit31-32/grammar.js",
+    "unit91-92/content.js",
+    "unit93-94/content.js",
+    "unit93-94/unit.js",
+    "unit95-96/content.js",
+    "unit97-98/content.js",
+    "unit97-98/unit.js",
+    "unit99-100/content.js",
+    "core/course-loader.js",
+    "scripts/check-workflow.config.js",
+    "scripts/course-packages.js",
+    "server/app.js",
+    "server/public/portal.js",
+    "tests/login/course-loading-recovery.spec.js",
+    "unit11-12/content.js",
+    "unit15-16/content.js",
+    "unit17-18/content.js",
+    "unit19-20/content.js",
+    "unit21-22/content.js",
+    "unit31-32/content.js",
+    "unit33-34/content.js",
+    "unit35-36/content.js",
+    "unit47-48/content.js",
+    "unit49-50/content.js",
+    "unit51-52/content.js",
+    "unit51-52/unit.js",
+    "unit53-54/content.js",
+    "unit53-54/unit.js",
+    "unit55-56/content.js",
+    "unit57-58/content.js",
+    "unit59-60/content.js",
+    "unit61-62/content.js",
+    "unit63-64/content.js",
+    "unit65-66/content.js",
+    "unit67-68/content.js",
+    "unit67-68/unit.js",
+    "unit69-70/content.js",
+    "unit69-70/unit.js",
+    "unit7-8/content.js",
+    "unit71-72/content.js",
+    "unit71-72/unit.js",
+    "unit73-74/content.js",
+    "unit75-76/content.js",
+    "unit77-78/content.js",
+    "unit79-80/content.js",
+    "unit79-80/grammar.js",
+    "unit79-80/unit.js",
+    "unit81-82/content.js",
+    "unit83-84/content.js",
+    "unit83-84/unit.js",
+    "unit85-86/content.js",
+    "unit85-86/unit.js",
+    "unit87-88/content.js",
+    "unit87-88/unit.js",
+    "unit89-90/content.js",
+    "unit89-90/unit.js",
+    "unit9-10/content.js",
+    "tests/e2e/reading-materials-acceptance.spec.js",
+    "tests/e2e/worksheet-acceptance.spec.js",
+    "tests/e2e/lesson-wording-repairs.spec.js",
+    "tests/login/directory-font-preparation.spec.js",
+    "tests/unit/directory-font-package.test.js"
+  ],
+  "newWhitespace": [],
+  "mappingUnits": [
+    "unit77-78",
+    "unit79-80",
+    "unit81-82",
+    "unit83-84",
+    "unit85-86"
+  ],
+  "mappingReferences": [
+    {
+      "unit": "unit77-78",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "V5",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E1",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "A3",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E4–6",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G3",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G5",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E7",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E11",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G4",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G6–7",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E9–10",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E18–20",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "A2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E18",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E25",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G8–13",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E12–15",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "E4–6",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "G1",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "A1",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit77-78",
+      "reference": "A7",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V4",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V7",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E1",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E3",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G7",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E4–6",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G2",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G5",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G8",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G11",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A8",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E7",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E11",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E15",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E24",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G3–4",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G10",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G12–14",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A4",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E8–9",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E13",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E16–18",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E21",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E23",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G6",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G9",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G15",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E10",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E14",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V3",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "E4–6",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G1",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "G16",
+      "zone": "grammar",
+      "total": 16
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A1",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit79-80",
+      "reference": "A5",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V5",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V7",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E1",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G8",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G11",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G14",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G17–18",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "A4",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E11",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E14",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E16",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E25",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G2",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G4–7",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G12–13",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G16",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E7–10",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E15",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E17",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E19",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E21",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E24",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V4",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G5",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "A1–3",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G10",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E13",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V4",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V3",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V6",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V5",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "V7",
+      "zone": "listen",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E3–5",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G1",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "G9",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "E12",
+      "zone": "exam",
+      "total": 26
+    },
+    {
+      "unit": "unit81-82",
+      "reference": "A1–3",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V5",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E1",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V3–4",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G7",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G10",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G21",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A3",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E12",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E14",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G3",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G5–6",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G9",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G13–16",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A4",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E8–9",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E11",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E16–17",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E20",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E22",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E25",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V6",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G3",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A1–8",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G11–12",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A5–6",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E23–24",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V6",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "V3–4",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E3–5",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G4",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "G17",
+      "zone": "grammar",
+      "total": 22
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E10",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E18",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "E26",
+      "zone": "exam",
+      "total": 28
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A1–2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit83-84",
+      "reference": "A4",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "V3",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "V7",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G1–3",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G7",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G10",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E12",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E15",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G4–6",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G11",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G13–14",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A3",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A6",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A8",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E9",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E11",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E16",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E18–19",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E21–22",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G4–6",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A1",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A7",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E20",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "V1",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "V2",
+      "zone": "listen",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "R1–7",
+      "zone": "roles",
+      "total": 7
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E1–3",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "G8–9",
+      "zone": "grammar",
+      "total": 18
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "E13–14",
+      "zone": "exam",
+      "total": 24
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A2",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A1",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A4",
+      "zone": "apply",
+      "total": 8
+    },
+    {
+      "unit": "unit85-86",
+      "reference": "A7",
+      "zone": "apply",
+      "total": 8
+    }
+  ],
+  "scope": "Compared against this repair round baseline; unrelated existing dirty files are retained."
+}

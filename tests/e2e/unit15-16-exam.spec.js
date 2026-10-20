@@ -31,3 +31,5 @@ for(const width of [320,390,768,1280])test(`${width} 挑战十一题选项与五
  for(const option of await finish.getByRole('button').all()){const b=await option.boundingBox();expect(b.x).toBeGreaterThanOrEqual(0);expect(b.x+b.width).toBeLessThanOrEqual(width);expect(b.height).toBeGreaterThanOrEqual(44);}
  await capture(page,room,`output/playwright/unit15-16/challenge-finish-${width}.png`);
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

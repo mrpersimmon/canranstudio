@@ -1,0 +1,155 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit41-42-v153-materials.spec.js",
+      "--output=output/unit4142-work/materials-final-chromium",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4142-work/materials-final-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4508",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit41-42-v153-materials.spec.js",
+      "file": "unit41-42-v153-materials.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "分数量图与完整肯否问答在桌面手机均可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1545,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').locator('.grammar-example-art img')\nExpected pattern: \u001b[32m/v153\\.svg$/\u001b[39m\nError: strict mode violation: locator('.stage-grammar').locator('.grammar-example-art img') resolved to 3 elements:\n    1) <img alt=\"\" src=\"/assets/unit41-42/pound-v153.svg\"/> aka locator('.grammar-example-art > img').first()\n    2) <img alt=\"\" src=\"/assets/unit41-42/half-v153.svg\"/> aka locator('div:nth-child(2) > .grammar-example-art > img')\n    3) <img alt=\"\" src=\"/assets/unit41-42/quarter-v153.svg\"/> aka locator('div:nth-child(3) > .grammar-example-art > img')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.grammar-example-art img')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').locator('.grammar-example-art img')\nExpected pattern: \u001b[32m/v153\\.svg$/\u001b[39m\nError: strict mode violation: locator('.stage-grammar').locator('.grammar-example-art img') resolved to 3 elements:\n    1) <img alt=\"\" src=\"/assets/unit41-42/pound-v153.svg\"/> aka locator('.grammar-example-art > img').first()\n    2) <img alt=\"\" src=\"/assets/unit41-42/half-v153.svg\"/> aka locator('div:nth-child(2) > .grammar-example-art > img')\n    3) <img alt=\"\" src=\"/assets/unit41-42/quarter-v153.svg\"/> aka locator('div:nth-child(3) > .grammar-example-art > img')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.grammar-example-art img')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-materials.spec.js:3:407",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-materials.spec.js",
+                      "column": 407,
+                      "line": 3
+                    },
+                    "snippet": "  1 | 'use strict';const{test,expect}=require('@playwright/test');const{ANSWERS,select}=require('../support/unit4142-v153');test.use({actionTimeout:7000,...(process.env.UNIT4142_BROWSER==='webkit'?{browserName:'webkit'}:{})});\n  2 | test('分数量图与完整肯否问答在桌面手机均可读',async({page},info)=>{test.setTimeout(90000);\n> 3 |  await page.goto('/unit41-42/#learn/grammar');let room=page.locator('.stage-grammar');for(let i=0;i<4;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}for(const width of [320,1280]){await page.setViewportSize({width,height:900});await expect(room.locator('.grammar-example-art img')).toHaveAttribute('src',/v153\\.svg$/);await room.screenshot({path:info.outputPath('fraction-'+width+'.png')});}\n    |                                                                                                                                                                                                                                                                                                                                                                                                                       ^\n  4 |  await page.goto('/unit41-42/#learn/exam');room=page.locator('.stage-exam');for(let i=0;i<14;i++){await select(room,ANSWERS.exam[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}for(const width of [320,1280]){await page.setViewportSize({width,height:900});expect(await room.locator('.practice-options button').evaluateAll(es=>es.every(e=>getComputedStyle(e).whiteSpace==='pre-line'&&e.scrollWidth<=e.clientWidth+1))).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await room.screenshot({path:info.outputPath('plural-dialogues-'+width+'.png')});}await select(room,ANSWERS.exam[14]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  5 | });\n  6 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-materials.spec.js",
+                        "column": 407,
+                        "line": 3
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').locator('.grammar-example-art img')\nExpected pattern: \u001b[32m/v153\\.svg$/\u001b[39m\nError: strict mode violation: locator('.stage-grammar').locator('.grammar-example-art img') resolved to 3 elements:\n    1) <img alt=\"\" src=\"/assets/unit41-42/pound-v153.svg\"/> aka locator('.grammar-example-art > img').first()\n    2) <img alt=\"\" src=\"/assets/unit41-42/half-v153.svg\"/> aka locator('div:nth-child(2) > .grammar-example-art > img')\n    3) <img alt=\"\" src=\"/assets/unit41-42/quarter-v153.svg\"/> aka locator('div:nth-child(3) > .grammar-example-art > img')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').locator('.grammar-example-art img')\u001b[22m\n\n\n  1 | 'use strict';const{test,expect}=require('@playwright/test');const{ANSWERS,select}=require('../support/unit4142-v153');test.use({actionTimeout:7000,...(process.env.UNIT4142_BROWSER==='webkit'?{browserName:'webkit'}:{})});\n  2 | test('分数量图与完整肯否问答在桌面手机均可读',async({page},info)=>{test.setTimeout(90000);\n> 3 |  await page.goto('/unit41-42/#learn/grammar');let room=page.locator('.stage-grammar');for(let i=0;i<4;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}for(const width of [320,1280]){await page.setViewportSize({width,height:900});await expect(room.locator('.grammar-example-art img')).toHaveAttribute('src',/v153\\.svg$/);await room.screenshot({path:info.outputPath('fraction-'+width+'.png')});}\n    |                                                                                                                                                                                                                                                                                                                                                                                                                       ^\n  4 |  await page.goto('/unit41-42/#learn/exam');room=page.locator('.stage-exam');for(let i=0;i<14;i++){await select(room,ANSWERS.exam[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}for(const width of [320,1280]){await page.setViewportSize({width,height:900});expect(await room.locator('.practice-options button').evaluateAll(es=>es.every(e=>getComputedStyle(e).whiteSpace==='pre-line'&&e.scrollWidth<=e.clientWidth+1))).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await room.screenshot({path:info.outputPath('plural-dialogues-'+width+'.png')});}await select(room,ANSWERS.exam[14]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');\n  5 | });\n  6 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-materials.spec.js:3:407"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:07:52.471Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\materials-final-chromium\\unit41-42-v153-materials-分数量图与完整肯否问答在桌面手机均可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\materials-final-chromium\\unit41-42-v153-materials-分数量图与完整肯否问答在桌面手机均可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153-materials.spec.js",
+                    "column": 407,
+                    "line": 3
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a18dcd2df1699cc939cd-5e3dd16a5b9f4633e29c",
+          "file": "unit41-42-v153-materials.spec.js",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T12:07:51.913Z",
+    "duration": 2732.898,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

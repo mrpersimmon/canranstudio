@@ -278,3 +278,96 @@ unit.questions["exam"][9],
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Frozen predecessor retained for exact draft/history compatibility.
+CanranCore.unit78LegacyDefinition=CanranCore.unit78;
+(function(core){
+'use strict';
+const old=core.unit78LegacyDefinition;
+const source='《新概念英语智慧版1》纸页14–17／PDF47–50';
+const grammarSource='《同步导学》Grammar纸页14／PDF28；《语法练习册》纸页16–22／PDF30–36';
+const unit={id:'unit7-8',version:1,mode:'classroom',contentRevision:'interview-five-zones-v1',legacyEdition:'unit7-8-completion-v1',title:'新朋友采访站',path:'/unit7-8/',start:'learn/words',progress:old.progress,
+ learning:{...old.learning},objects:old.objects,questions:{},
+ stages:[
+ {id:'l1',title:'采访前准备',activities:[['words','采访小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},
+ {id:'l2',title:'认识两位朋友',activities:[['text','会客角小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},
+ {id:'l3',title:'说清谁和谁',activities:[['grammar','语法小工坊','speech']],required:['grammar']},
+ {id:'l4',title:'完成新采访',activities:[['apply','采访小帮手','cards']],required:['apply']},
+ {id:'l5',title:'采访小达人',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+ routeAliases:{'learn/be':'learn/grammar','learn/reply':'learn/grammar','learn/phrases':'learn/grammar','learn/models':'learn/apply','learn/interview':'learn/apply','learn/trans':'learn/apply'},
+ reward:{edition:'interview-five-zones-v1',title:'新朋友小记者',lesson:'Lesson 7–8',scene:'/assets/unit7-8/keepsake-story-v1.webp',alt:'Robert拿着笔记本，Sophie抬手与他交谈',color:'#876140',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','采访小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}
+};
+const choice=(options,answer,extra={})=>({options,answer,...extra});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,reference)=>({type:'cloze',blanks,answer:JSON.stringify(answers),...(reference?{reference}:{})});
+const bank=(tokens,answer,slots,suffix='.')=>({type:'wordbank',tokens,answer,slots,suffix});
+const match=pairs=>({type:'match',pairs:pairs.map(([en,cn],i)=>({id:String(i+1),en,cn})),answer:JSON.stringify(pairs.map((_,i)=>String(i+1)))});
+const q=(id,target,prompt,input,explanation,hint='')=>({id:'u78-five-'+id,target,prompt,source,...input,explanation,hint});
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule,'先找说话人、谈论的人和句中的位置。'),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+// Identical questions retain their original ids and active drafts. This is
+// learning continuity only: a predecessor round never claims a new star.
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,
+ q('r-identities','区分学习身份和职业','Robert的两句话说明什么？',choice(['他既是新学生，也是一名工程师','他先说错了，后来改成工程师','他已经不再是学生'], '他既是新学生，也是一名工程师',{reference:'I am a new student.\nI\'m an engineer.'}),'两种身份可以同时存在；原文没有说他离开学校。'),
+ q('r-turns','追踪两次相同问句的说话人','两次 What’s your job? 是谁问谁？',choice(['两人各问对方一次','只有Robert在问','只有Sophie在问'],'两人各问对方一次',{reference:"Robert: What's your job?\nSophie: I'm a keyboard operator.\nSophie: What's your job?\nRobert: I'm an engineer."}),'相同问句出自不同说话人，回答中的I也指不同的人。')];
+unit.questions.grammar=[
+ {...old.questions.reply[1],workshop:{rule:'I后用am；My name的主语是name，用is。',model:{lines:[['My name is May. I am a nurse.','名字用is，介绍自己用am。']]}}},
+ g('subject','主格用于主语','Ben在介绍另一位男士，选合适的代词。',fill([blank('',' is a mechanic.',['He','Him','His'])],['He'],'The man is Tom. Ben is talking about Tom.'),'作主语用He；不是Him，也不是表示所属的His。',[['She is a teacher.','这句在说她是谁，She是主语。']]),
+ g('object','meet后的宾格','你刚认识May，向旁人说很高兴认识她。',fill([blank('Nice to meet ','.',['her','she','he'])],['her'],'May is a new friend. May uses she/her.'),'meet后用宾格her。',[['Nice to meet him.','认识他，meet后用him。']]),
+ g('forms','主宾格形式对应','把同一人称的两种形式连起来。',match([['I','me'],['he','him'],['she','her'],['they','them']]),'形式随句中位置变化；you和it的两种形式相同。'),
+ g('we','说话人所在群体','你和朋友一起介绍自己，补全句子。',fill([blank('',' are new students.',['We','Us','They'])],['We'],'You and your friend are introducing yourselves together.'),'包括说话人的我们，作主语用We。',[['They are friends.','谈论他们，作主语用They。']]),
+ g('us','宾格us','你和朋友对老师说：很高兴您认识我们。',fill([blank('Nice to meet ','.',['us','we','they'])],['us'],'The teacher says: Nice to meet both of you.\nComplete the teacher’s words about you and your friend.'),'老师说认识我们，对应宾格us。'),
+ g('same-form','you不分单复数','把两种情境中的问句补完整。',fill([blank('一位新同学：Are ',' a student?',['you','we','they']),blank('一组新同学：Are ',' students?',['you','we','they'])],['you','you'],'You speak directly to one new student, then to a group of new students.'),'当面问一人或一组人都可以用you，不把are限定为复数。'),
+ g('it','it的指代','这是一台电脑键盘，用代词接着说。',fill([blank('',' is a keyboard.',['It','He','Him'])],['It'],'This object is a keyboard.'),'谈论这个物品用It；it的主格和宾格形式相同。'),
+ g('what','按信息选择问句','想知道对方的国籍，选哪个问句？',choice(["What nationality are you?","What's your name?","What's your job?"],'What nationality are you?'),'nationality问国籍，name问名字，job问职业。',[['What’s your name? — My name’s May.','问名字，答名字。']]),
+ g('short','缩写与主语','把这一处缩写展开，意思不变。',fill([blank('What’s your job? → What ',' your job?',['is','are','am'])],['is']),'本句What’s是What is的缩写。',[['I’m a student. → I am a student.','缩写展开后，含义不变。']]),
+ g('negative','本人否定回应','你扮演May，按资料回答朋友。',choice(["No, I'm not.",'Yes, I am.',"No, she isn't."],"No, I'm not.",{reference:'May: I am a nurse. I am not a teacher.\nFriend: Are you a teacher?'}),'当面回答自己的情况用I；否定事实回答No。'),
+ g('positive','本人肯定回应','你扮演Tom，按资料回答朋友。',choice(['Yes, I am.',"No, I'm not.",'Yes, he is.'],'Yes, I am.',{reference:'Tom: I am an engineer.\nFriend: Are you an engineer?'}),'事实相符，用Yes；回答自己仍用I。'),
+ g('ownership','人称和所属不同','向Ben打听May的职业，补好问句。',fill([blank("What's ",' job?',['her','she','your'])],['her'],'You are talking to Ben about May (she/her), who is not here.'),'job前的her表示她的；不是主语she，也不是问Ben本人的your。'),
+ g('article','按起始音选冠词','补全两位朋友的职业介绍。',fill([blank('I’m ',' engineer.',['a','an']),blank('I’m ',' mechanic.',['a','an'])],['an','a']),'engineer以元音音素开头用an；mechanic以辅音音素开头用a。')
+];
+// Natural learner wording: the teacher addresses the pair, then they report it.
+unit.questions.grammar[5].prompt='你和同伴想从人群中经过，礼貌地为你们两人打招呼。';
+unit.questions.grammar[5].reference='你代表自己和同伴说：“劳驾，让我们过去一下。”';
+unit.questions.grammar[5].blanks=[blank('Excuse ', '.',['us','we','they'])];
+unit.questions.grammar[5].explanation='这里包括你和同伴，excuse后用宾格us。';
+unit.questions.grammar[5].workshop={rule:'包括说话人的我们，作主语用we；excuse后用us。',model:{lines:[['Excuse me.','一个人说劳驾，用me。']]}};
+unit.questions.apply=[...old.questions.interview,
+ q('a-subject-object','在介绍中切换主宾格','你和May介绍自己，再礼貌地请别人让你们两人经过。',fill([blank('',' are students.',['We','Us','Them']),blank('Excuse ','.',['us','we','they'])],['We','us'],'你代表自己和May说：“我们是学生。劳驾，让我们过去一下。”'),'同一组人，作主语用We，excuse后用us。'),
+ q('a-purpose','按采访目的组织问句','已经知道名字和国籍，现在只问职业。',bank(["What's",'your','job','name','nationality'],"What's your job",3,'?'),'job问职业，不重复已知的姓名或国籍。')];
+unit.questions.exam=[...old.questions.exam];
+// Replace three-position bundles with actual individual selections, at most two blanks.
+unit.questions.exam[5]=q('e-owner','分别确认被谈论的人','向Ben打听两位不在场朋友的职业。',fill([blank('Robert（他）：What’s ',' job?',['his','her','your']),blank('Sophie（她）：What’s ',' job?',['his','her','your'])],['his','her'],'You are talking to Ben. Robert and Sophie are not here.'),'问Robert用his；问Sophie用her。');
+unit.questions.exam[6]=q('e-be','主语决定be形式','补好Ben的自我介绍。',fill([blank('I ',' an engineer.',['am','is','are']),blank('My name ',' Ben.',['am','is','are'])],['am','is']),'I am；My name is。');
+unit.questions.exam[8]=q('e-article','独立选择a/an','两人各自介绍职业，补好冠词。',fill([blank('I’m ',' engineer.',['a','an']),blank('I’m ',' nurse.',['a','an'])],['an','a']),'根据起始音选择an或a。');
+unit.questions.exam[9]=q('e-short','理解缩写含义','把三处缩写与完整形式连起来。',match([["name’s（My name’s Ben.）",'name is'],["I’m（I’m a nurse.）",'I am'],["What’s（What’s your job?）",'What is']]),'这三处展开后都保持原句意思。');
+unit.questions.exam.push(
+ q('e-pronouns','在新情境区分主宾格','按人物关系补好介绍和问候。',fill([blank('',' is a nurse.',['She','Her','Him']),blank('Nice to meet ','.',['her','she','he'])],['She','her'],'Ann uses she/her. You tell Ben that Ann is a nurse, then say it is nice to meet Ann.'),'作主语用She，meet后用her。'),
+ q('e-group','说话人与被谈论群体','你和朋友看着另外两位学生，谈论他们。',fill([blank('',' are students.',['They','We','Them']),blank('Nice to meet ','.',['them','they','us'])],['They','them'],'You and May are talking about Ben and Tom, two other students.'),'他们是They；认识他们用meet them。'),
+ q('e-you','当面确认职业的be形式','你走到一位工程师面前，确认职业。',fill([blank('',' you an engineer?',['Are','Is','Am'])],['Are']),'you作主语时用are；一位听者也一样。'),
+ q('e-me','保留导学的日常身份回应','门外的你回答朋友“是谁？”，选本课日常回应。',choice(["It's me.","Me is a nurse.","I are here."],"It's me.",{reference:'Your friend asks: Who is it?\nYou identify yourself.'}),'It’s me是常见日常回应；不能把宾格只能作动词宾语当成绝对规则。')
+);
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:'listen',roles:'roles',grammar:'reply',apply:'interview',exam:'exam'};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,prior])=>[id,[{key:'unit78-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])]]));
+unit.learning.PRONOUNS=[['I','me'],['we','us'],['you（单数／复数）','you'],['he','him'],['she','her'],['it','it'],['they','them']];
+unit.learning.WRITING_A=['My name ___ Robert. I ___ a student. I ___ Italian.','Sophie ___ not Italian. She ___ French.','Mr. Blake ___ my teacher. He ___ not French.'];
+// The generic runner consumes display.material for all question types.
+for(const qs of Object.values(unit.questions))for(const item of qs)if(item.id.startsWith('u78-five-')&&item.reference){item.display={title:item.prompt,material:item.reference};delete item.reference;}
+core.unit78=unit;
+if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit78,excerpts={"u78-v1-story-teacher":[10,11,12,13]},speakers={"robert":"Robert","sophie":"Sophie"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 7',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

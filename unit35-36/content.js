@@ -95,3 +95,51 @@ definition.learning.FEEDBACK=root.CanranCore.courseCatalog.requireCourseDefiniti
 root.CanranCore.unit3536=definition;
 if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Keep the actual v1 predecessor above intact for migration and old certificates.
+(function(core){
+'use strict';
+const old=core.unit3536;core.unit3536LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸70–73／PDF103–106；语法练习册纸95–99／PDF109–113';
+const grammarSource='同步导学纸63–66／PDF77–80，Grammar纸64–65／PDF78–79；'+source;
+const unit={id:'unit35-36',version:1,mode:'classroom',contentRevision:'village-five-zones-v1',legacyEdition:'unit35-36-completion-v1',title:'村庄相册探险',path:'/unit35-36/',start:'learn/words',progress:old.progress,learning:old.learning,objects:old.objects,questions:{},
+stages:[{id:'l1',title:'翻开村庄相册',activities:[['words','村庄小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'三张照片的故事',activities:[['text','村庄故事相册','book'],['roles','相册小侦探','question']],required:['text','roles']},{id:'l3',title:'看懂位置与路线',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'问问在哪里',activities:[['apply','去向问答站','heart']],required:['apply']},{id:'l5',title:'收好村庄发现',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'village-five-zones-v1',title:'细心村庄观察员',lesson:'Lesson 35–36',scene:'/assets/unit35-36/keepsake-story-v1.webp',alt:'夫妻翻看村庄、河岸和学校的三张照片',color:'#57734D',zones:[['listen','单词寻宝'],['roles','相册小侦探'],['grammar','语法小工坊'],['apply','去向问答站'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u3536-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,model:{lines:demo}}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('between','between表示在明确参照物之间','一只猫坐在两把椅子的中间。补全句子。',choice(['between','beside','under'],'between','The cat is sitting ___ two chairs.\nchair：椅子'),'本题以两把椅子为参照，猫在它们之间，用between。不要把本课例子扩成所有语境都只能用于两者。',[['Louise sat between Jack and Lily.','导学原例：路易丝坐在杰克和莉莉之间。两个人分别在她两侧。']]),
+g('along','along表示顺着长度方向','这句话中的along说明怎样的路线？',choice(['顺着墙的长度方向跑。','从墙的一边穿到另一边。','跑到墙的下面。'],'顺着墙的长度方向跑。','The cats are running along the wall.'),'along沿着参照物延伸的方向；across表示从一边到另一边。',[['They are walking along the river.','导学原例：他们正沿着河走。路线顺着河岸延伸，不是横渡河流。']]),
+g('beside','beside表示旁边','椅子放在桌子旁边，两者并排。补全句子。',choice(['beside','under','into'],'beside','The chair is ___ the table.\nchair：椅子'),'beside表示在旁边；本题说明并排，不是桌下，也不是走进去的路线。',[['The dog is sitting beside an old man.','导学原例：狗正坐在一位老人旁边。']]),
+g('into-in','区分进入的动作与在里面的状态','这两句分别说明什么？',choice(['男孩正在走进房间；女孩坐在房间里面。','男孩正在走出房间；女孩坐在房间里面。','男孩已经坐在房间里；女孩正在走进来。'],'男孩正在走进房间；女孩坐在房间里面。','The boy is going into the room.\nThe girl is sitting in the room.'),'第一句into强调由外到内的移动，第二句in说明在里面。in有时也可表达进入，不把go in等合法表达判为普遍错误。',[['He jumped into the river.','导学原例：他跳进河里，into强调进入。这里只读例句，不模仿动作。'],['There are some clothes in the case.','导学原例：箱子里有一些衣服。in说明衣服在箱内。case：箱子。']]),
+g('come-in','把动词和后面的方向词一起理解','老师已经在教室里，对站在门外的孩子说这句话。老师请孩子怎样做？',choice(['走进来。','走出去。','待在门口。'],'走进来。','Come in.'),'Come in.表示进来，in和come一起表达方向；这里无需在in后补一个地点名词。',[['Go out.','从屋内走出去。理解动词和后面的方向词，需要看所在的位置和移动方向。']]),
+...old.questions.observe];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-boundary','撤去示范后区别在里面、进入与出去','为三条完整表达配上意思。',{type:'match',pairs:[{id:'0',en:'sit in the room',cn:'坐在房间里面'},{id:'1',en:'go into the room',cn:'走进房间'},{id:'2',en:'go out of the room',cn:'走出房间'}],answer:JSON.stringify(['0','1','2'])},'in表示所在位置，into和out of分别表示进入与离开；不是只看room就选同一个意思。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-boundary','独立区分容器内状态与进入容器动作','哪条记录符合这两句？',choice(['猫正跳进箱子；球已经在箱子里面。','猫正跳出箱子；球已经在箱子里面。','猫已经坐在箱子里；球正跳进箱子。'],'猫正跳进箱子；球已经在箱子里面。','The cat is jumping into the box.\nThe ball is in the box.'),'into强调猫由外到内，in在第二句说明球已经在箱内；不把in的其他合法用法当错误。'),
+q('e-come-out','独立依据说话人位置理解动词加方向词','妈妈已经在屋外的花园里，对仍在屋内的孩子说这句话。她请孩子怎样做？',choice(['从屋里出来，到花园这边。','从花园走回屋里。','一直待在屋里。'],'从屋里出来，到花园这边。','Come out.'),'妈妈在外、孩子在内，Come out.请孩子从里面出来，朝说话人这边移动。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,ids])=>[id,ids.map(prior=>({key:'unit3536-'+prior+'-practice/v1',questions:old.questions[prior]}))]));
+core.unit3536=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit3536,excerpts={"u3536-v1-final-geography":[0,1,2,3],"u3536-v1-final-route":[4,5,6,7,8]},speakers={"narrator":""};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 35',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

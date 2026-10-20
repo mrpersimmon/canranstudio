@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:21380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 390：完整18句、中文内滚动、相向人物及旧链接 (944ms)
+
+
+  1) tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 390：完整18句、中文内滚动、相向人物及旧链接 ──────────────────
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 1
+    Received:   107.921875
+
+      42 |   if(i<10)await expect(room.locator('.travel-own-cases')).toBeHidden();else await expect(room.locator('.travel-own-cases')).toBeVisible();
+      43 |   const bounds=await room.locator('.travel-world').boundingBox(),actors=await room.locator('.cast-image').all(),log=await room.locator('.dialogue-log').boundingBox(),frame=await room.locator('.dialogue-stage').boundingBox();
+    > 44 |   for(const image of actors){const actor=await image.boundingBox(),parent=await image.locator('..').boundingBox();expect(Math.abs(actor.width-parent.width)).toBeLessThan(1);expect(actor.x).toBeGreaterThanOrEqual(bounds.x);expect(actor.x+actor.width).toBeLessThanOrEqual(bounds.x+bounds.width+1);expect(log.y+log.height).toBeLessThan(actor.y+1);expect(actor.y+actor.height).toBeLessThanOrEqual(bounds.y+bounds.height);}
+         |                                                                                                                                                              ^
+      45 |   expect(bounds.y+bounds.height).toBeLessThanOrEqual(frame.y+frame.height+1);expect(await room.locator('.travel-cast .officer').evaluate(e=>getComputedStyle(e).transform)).toBe('none');
+      46 |   if([0,6,7,10,11,17].includes(i))await room.screenshot({path:info.outputPath('pose-'+i+'-'+width+'.png')});
+      47 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-fivezones.spec.js:44:158
+
+    Error Context: test-results\unit15-16-fivezones-场景与词卡-390：完整18句、中文内滚动、相向人物及旧链接\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit15-16-fivezones-场景与词卡-390：完整18句、中文内滚动、相向人物及旧链接\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit15-16-fivezones-场景与词卡-390：完整18句、中文内滚动、相向人物及旧链接\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit15-16-fivezones.spec.js:33:39 › 场景与词卡 390：完整18句、中文内滚动、相向人物及旧链接 ───────────────────

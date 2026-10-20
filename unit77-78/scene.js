@@ -5,10 +5,10 @@ function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/
 function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location','牙科诊所前台');element.setAttribute('role','group');element.setAttribute('aria-label','克罗夫特先生与护士面对面交谈的诊所场景');
  for(const[key,label,side,alt]of [['croft','Mr. Croft','left','克罗夫特先生扶着面颊，面向右侧护士'],['nurse','Nurse','right','护士拿着预约本，面向左侧的克罗夫特先生']]){const wrap=node('div','dialogue-actor visit-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',alt,'webp'),node('span','actor-label',label));element.append(wrap);}
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const time=node('strong'),detail=node('span');timeline.append(time,detail);element.append(location,timeline);
+ element.append(location);
  function update(i){
-  const entries=[['早晨的问候','Good morning'],['来访目的','see the dentist'],['询问预约','an appointment?'],['还没有预约','No, I don’t'],['询问是否急迫','Is it urgent?'],['说明感受','a terrible toothache'],['护士的首次提议','10 a.m. · Monday, April 24th'],['希望马上就诊','now'],['护士的再次提议','2 p.m.'],['再次询问','see me now?'],['请他等待','till this afternoon'],['故事结尾','没有交代是否约好或就诊']];
-  const entry=i<0?['故事即将开始','他为什么急着来？']:entries[i];time.textContent=entry[0];detail.textContent=entry[1];element.dataset.proposal=i>=8?'afternoon':i>=6?'morning':'none';
+
+  element.dataset.proposal=i>=8?'afternoon':i>=6?'morning':'none';
  }
  update(-1);return{element,update};
 }

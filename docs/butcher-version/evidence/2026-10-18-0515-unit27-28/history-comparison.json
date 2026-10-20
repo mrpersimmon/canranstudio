@@ -1,0 +1,25 @@
+{
+  "rawLocalRecords": 44,
+  "priorFiveStarRecords": 43,
+  "legacyRecords": 27,
+  "priorRecordsRetained": true,
+  "legacyRecordsRetained": true,
+  "rounds": [
+    {
+      "id": "listen",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "grammar",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "apply",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    }
+  ],
+  "comparison": "Structural object equality; array order remains strict; source browser assertions also check raw local snapshot and both dates after later practice."
+}

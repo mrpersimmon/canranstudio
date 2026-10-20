@@ -1,0 +1,213 @@
+[WebServer] (node:7088) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:29868) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit113-114.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (32.1s)
+(node:30372) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\login\unit113-114.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.7s)
+  x  3 tests\login\unit113-114.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (32.0s)
+(node:29108) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  4 tests\login\unit113-114.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (10.3s)
+(node:32100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  5 tests\login\unit113-114.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (32.1s)
+(node:12548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  6 tests\login\unit113-114.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (32.1s)
+
+
+  1) tests\login\unit113-114.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 ─────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('#wordPageProgress')
+    Expected: visible
+    Received: hidden
+    Timeout:  30000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('#wordPageProgress')
+        56 × locator resolved to <span class="" id="wordPageProgress">1 / 5</span>
+           - unexpected value "hidden"
+
+
+       9 | // Wait for real course readiness before examining content. Windows WebKit can
+      10 | // spend more than five seconds preparing the complete protected package.
+    > 11 | async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+         |                                                                                                   ^
+      12 |
+      13 | test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
+      14 | test.use({actionTimeout:10000,...(process.env.UNIT113_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
+        at ready (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:11:99)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:25:78
+
+    Error Context: output\unit113114-login-root\unit113-114-课程入口保持班级授权：新课可单独开放\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-login-root\unit113-114-课程入口保持班级授权：新课可单独开放\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-login-root\unit113-114-课程入口保持班级授权：新课可单独开放\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\login\unit113-114.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 ───────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.stage-text')
+    Expected: visible
+    Received: hidden
+    Timeout:  30000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('.stage-text')
+        55 × locator resolved to <section role="region" id="learn/text" aria-label="公共汽车小剧场" class="shop-stage stage-text">…</section>
+           - unexpected value "hidden"
+
+
+       at ..\support\unit113114.js:15
+
+      13 | async function select(room,answer){if(answer?.locate)await room.locator('.locate-sentence').getByRole('button',{name:answer.locate,exact:true}).click();else await commonSelect(room,answer);}
+      14 | async function story(page,base=''){
+    > 15 |  await page.goto(base+'/unit113-114/#learn/text');const room=page.locator('.stage-text');await expect(room).toBeVisible({timeout:30000});
+         |                                                                                                             ^
+      16 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
+      17 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+      18 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
+        at story (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit113114.js:15:109)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:69:5
+
+    Error Context: output\unit113114-login-root\unit113-114-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-login-root\unit113-114-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-login-root\unit113-114-真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\login\unit113-114.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 ────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('#courseLoader')
+    Expected: 0
+    Received: 1
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('#courseLoader')
+        14 × locator resolved to 1 element
+           - unexpected value "1"
+
+
+      159 |     await expect(p.locator('.unit-word')).toHaveCount(0);
+      160 |     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();
+    > 161 |     await expect(p.locator('.unit-word')).toHaveCount(6,{timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
+          |                                                                                                                   ^
+      162 |     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+      163 |     await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 5');
+      164 |     await p.getByRole('link',{name:'我的课程',exact:true}).click();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:161:115
+
+    Error Context: output\unit113114-login-root\unit113-114-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-login-root\unit113-114-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-login-root\unit113-114-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests\login\unit113-114.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('#wordPageProgress')
+    Expected: visible
+    Received: hidden
+    Timeout:  30000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('#wordPageProgress')
+        56 × locator resolved to <span class="" id="wordPageProgress">1 / 5</span>
+           - unexpected value "hidden"
+
+
+       9 | // Wait for real course readiness before examining content. Windows WebKit can
+      10 | // spend more than five seconds preparing the complete protected package.
+    > 11 | async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+         |                                                                                                   ^
+      12 |
+      13 | test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
+      14 | test.use({actionTimeout:10000,...(process.env.UNIT113_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
+        at ready (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:11:99)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:178:63
+
+    Error Context: output\unit113114-login-root\unit113-114-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-login-root\unit113-114-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-login-root\unit113-114-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests\login\unit113-114.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 ────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.stage-listen')
+    Expected: visible
+    Received: hidden
+    Timeout:  30000ms
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('.stage-listen')
+        56 × locator resolved to <section role="region" id="learn/listen" aria-label="单词寻宝" class="shop-stage stage-listen">…</section>
+           - unexpected value "hidden"
+
+
+       at ..\support\unit113114.js:22
+
+      20 | }
+      21 | async function activity(page,id,{base='',inspect,keepAward=false}={}){
+    > 22 |  await page.goto(base+'/unit113-114/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];await expect(room).toBeVisible({timeout:30000});
+         |                                                                                                                               ^
+      23 |  if(await room.locator('.practice-finish').isVisible())return room;
+      24 |  const index=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+      25 |  for(let i=index;i<answers.length;i++){
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit113114.js:22:127)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit113-114.spec.js:218:3
+
+    Error Context: output\unit113114-login-root\unit113-114-长姓名手机卡、另一学生隔离、教师预览不能保存个人成果\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-login-root\unit113-114-长姓名手机卡、另一学生隔离、教师预览不能保存个人成果\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-login-root\unit113-114-长姓名手机卡、另一学生隔离、教师预览不能保存个人成果\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    tests\login\unit113-114.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 ──────────────────────────────────────
+    tests\login\unit113-114.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 ────────────────────────
+    tests\login\unit113-114.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 ─────────────────────────────
+    tests\login\unit113-114.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ─────────────────────────────
+    tests\login\unit113-114.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 ─────────────────────────────
+  1 passed (2.5m)

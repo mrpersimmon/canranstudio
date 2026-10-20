@@ -12,11 +12,17 @@ for (const [pair, count] of [
   ['3-4', 5], ['5-6', 4], ['7-8', 11], ['9-10', 13], ['11-12', 10],
   ['13-14', 15], ['15-16', 8], ['17-18', 8], ['19-20', 15], ['21-22', 10],
   ['23-24', 13], ['25-26', 7], ['27-28', 8], ['29-30', 10],
-  ['31-32', 8], ['33-34', 7], ['35-36', 5], ['37-38', 4], ['39-40', 4]
+  ['31-32', 8], ['33-34', 7], ['35-36', 5], ['37-38', 4], ['39-40', 4], ['41-42', 7]
 ]) test(`${pair} 共用结算按提交计次，手机三卡完整，刷新保留`, async ({ page }) => {
   test.setTimeout(60000);
   await page.setViewportSize({ width: 320, height: 568 });
-  if (Number(pair.split('-')[0]) >= 31) await require('../support/unit' + pair + '-flow').activity(page, 'listen', '/lesson');
+  if (pair === '41-42') await require('../support/unit4142-v153').activity(page, 'listen', {base:'/lesson'});
+  else if (pair === '39-40') await require('../support/unit3940-fivezones').activity(page, 'listen', {base:'/lesson'});
+  else if (pair === '37-38') await require('../support/unit3738-fivezones').activity(page, 'listen', {base:'/lesson'});
+  else if (pair === '35-36') await require('../support/unit3536-fivezones').activity(page, 'listen', {base:'/lesson'});
+  else if (pair === '33-34') await require('../support/unit3334-fivezones').activity(page, 'listen', {base:'/lesson'});
+  else if (pair === '31-32') await require('../support/unit3132-fivezones').activity(page, 'listen', {base:'/lesson'});
+  else if (Number(pair.split('-')[0]) >= 31) await require('../support/unit' + pair + '-flow').activity(page, 'listen', '/lesson');
   else await (pair === '25-26' ? flow : tasks).activity(page, pair, 'listen', { base: '/lesson' });
   const room = page.locator('.stage-listen'), results = room.getByRole('list', { name: '本轮成果', exact: true });
   await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
@@ -25,11 +31,13 @@ for (const [pair, count] of [
   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  await expectCompactCompletion(page, room, { illustrated: pair === '3-4' });
+  // These units use an illustrated story result; the standard permits scrolling
+  // while still requiring all three metrics and both actions together on screen.
+  await expectCompactCompletion(page, room, { illustrated: ['3-4','5-6','7-8','9-10','11-12','13-14','15-16','17-18','19-20','21-22','23-24','25-26','27-28','29-30','31-32','33-34','35-36','37-38','39-40','41-42'].includes(pair) });
   if (['3-4', '5-6', '25-26', '39-40'].includes(pair)) await room.screenshot({ path: `output/playwright/submission-statistics/${pair}-320.png` });
   await page.reload();
   await expect(results.locator('.completion-number')).toHaveText([String(count), String(count), '0']);
-  await expectCompactCompletion(page, room, { illustrated: pair === '3-4' });
+  await expectCompactCompletion(page, room, { illustrated: ['3-4','5-6','7-8','9-10','11-12','13-14','15-16','17-18','19-20','21-22','23-24','25-26','27-28','29-30','31-32','33-34','35-36','37-38','39-40','41-42'].includes(pair) });
   await expect(page.locator('.stage-words, .stage-text').getByRole('list', { name: '本轮成果' })).toHaveCount(0);
 });
 

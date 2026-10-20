@@ -1,0 +1,31 @@
+
+Running 22 tests using 1 worker
+
+(node:17376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit1-2-award-grammar-upgrade.spec.js:8:1 › 已发布纪念卡升级语法版：旧五星日期保留，旧问句入口可续学，新星须独立赢得 (7.6s)
+  ok  2 tests\e2e\unit1-2-award.spec.js:5:1 › 新纪念卡显示五个答题区，未获星时没有满星日期 (535ms)
+  ok  3 tests\e2e\unit1-2-award.spec.js:19:1 › 错答订正、刷新不获星；重练整区零错才获星，已获星不会被新错答撤回 (6.6s)
+  ok  4 tests\e2e\unit1-2-award.spec.js:43:1 › 线索单独记录，整轮首次提交全对仍可获星 (1.9s)
+  ok  5 tests\e2e\unit1-2-completion.spec.js:8:1 › 结算完成信号等待三张卡实际入场结束，较慢动画不提前对齐验收 (4.4s)
+  ok  6 tests\e2e\unit1-2-completion.spec.js:32:1 › 三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数 (2.7s)
+  ok  7 tests\e2e\unit1-2-completion.spec.js:79:1 › 390×500 短屏结束后从插画顶部露出，不被固定导航遮挡 (4.1s)
+  ok  8 tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 (3.9s)
+  ok  9 tests\e2e\unit1-2-completion.spec.js:111:37 › root 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (18.1s)
+  ok 10 tests\e2e\unit1-2-completion.spec.js:111:37 › /lesson 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (23.7s)
+  ok 11 tests\e2e\unit1-2-completion.spec.js:152:1 › 同题错两次各计一次，订正后刷新保留十次错误，再练重新统计 (8.5s)
+(node:36596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 12 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧25题真实领取的证书原文、姓名、日期、PNG与打印保留 (9.6s)
+  ok 13 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧37题真实领取的证书原文、姓名、日期、PNG与打印保留 (9.1s)
+  ok 14 tests\e2e\unit1-2-v154-history.spec.js:37:1 › 教材七句抄写独立成页，替换例句保持十组 (715ms)
+  ok 15 tests\e2e\unit1-2-v154.spec.js:6:1 › 首页与封面沿用已确认纪念卡故事插画 (822ms)
+  ok 16 tests\e2e\unit1-2-v154.spec.js:13:1 › 实际显示的短示范写入本次提交，独立题不补记示范 (788ms)
+  ok 17 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 320：首页、词卡、完整对白、人物与答前材料 (4.7s)
+  ok 18 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 390：首页、词卡、完整对白、人物与答前材料 (4.7s)
+  ok 19 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 768：首页、词卡、完整对白、人物与答前材料 (4.8s)
+  ok 20 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 1280：首页、词卡、完整对白、人物与答前材料 (4.8s)
+  ok 21 tests\e2e\unit1-2-v154.spec.js:55:1 › 37题未答材料逐题审查、五区与零英语声音、声音失败仍可完成 (11.9s)
+  ok 22 tests\e2e\unit1-2-v154.spec.js:71:1 › 真实前版中途错答和未提交选择升级后保留同一轮，已完成五星与精确日期不变 (11.4s)
+
+  22 passed (2.5m)

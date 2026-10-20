@@ -109,3 +109,17 @@ unit.source={text:textSource,grammar:grammarSource};
 core.unit4748=unit;
 if(root.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit4748,excerpts={"u4748-v1-r-coffee":[4,5,6,7],"u4748-v1-r-additions":[4,5,6,7],"u4748-v1-r-reference":[8,9,10,11],"u4748-v1-e-story":[0,1,2,3,4,5,6,7]},speakers={"christine":"Christine","ann":"Ann"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 47',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

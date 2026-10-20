@@ -1,0 +1,109 @@
+{
+  "unit": "unit101-102",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 72,
+  "zones": {
+    "listen": 8,
+    "roles": 8,
+    "grammar": 23,
+    "apply": 8,
+    "exam": 25
+  },
+  "words": 28,
+  "dialogueTurns": 12,
+  "substitutions": 16,
+  "writing": {
+    "A": 5,
+    "B": 9,
+    "completeBBank": true
+  },
+  "browserRuns": {
+    "chromium": {
+      "pass": 13,
+      "fail": 1
+    },
+    "chromium-recheck": {
+      "pass": 3,
+      "fail": 0
+    },
+    "chromium-final": {
+      "pass": 1,
+      "fail": 0
+    },
+    "webkit": {
+      "pass": 14,
+      "fail": 0
+    },
+    "login-root": {
+      "pass": 6,
+      "fail": 0
+    },
+    "login-sub": {
+      "pass": 6,
+      "fail": 0
+    },
+    "login-webkit-root": {
+      "pass": 6,
+      "fail": 0
+    },
+    "login-webkit-sub": {
+      "pass": 6,
+      "fail": 0
+    },
+    "catalog": {
+      "pass": 3,
+      "fail": 0
+    },
+    "deployment": {
+      "pass": 1,
+      "fail": 0
+    }
+  },
+  "browserTotalDistinctPassingAfterFix": 56,
+  "initialFailure": "single-choice retry clears selection; copied cloze test did not reselect; test corrected without altering product rules",
+  "lastWordingCheck": "72-question Chromium full flow after intonation distractor refinement",
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "knownWindowsFailures": [
+      "POSIX modes x2",
+      "symlink EPERM x2",
+      "database test cleanup EPERM x2"
+    ]
+  },
+  "fonts": {
+    "inputHashesMatch": true,
+    "missingChinese": 0
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13": "pending; new course evidence",
+    "O14": "new pending suggestion; this course fixes verified"
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit101-102/#learn/words",
+  "testIdentityNote": "小禾与欧阳小禾同学为虚构测试账号"
+}

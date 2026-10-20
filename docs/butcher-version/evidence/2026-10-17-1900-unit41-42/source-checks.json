@@ -1,0 +1,190 @@
+{
+  "at": "2026-10-17T12:43:36.634Z",
+  "passed": 34,
+  "failed": [],
+  "checks": [
+    {
+      "name": "47 tasks in exactly five zones",
+      "passed": true,
+      "detail": {
+        "listen": 7,
+        "roles": 5,
+        "grammar": 14,
+        "apply": 5,
+        "exam": 16
+      }
+    },
+    {
+      "name": "34 original tasks unchanged; nine revisions and four new tasks",
+      "passed": true,
+      "detail": {
+        "unchanged": 34,
+        "revised": 9
+      }
+    },
+    {
+      "name": "all 47 identities unique",
+      "passed": true
+    },
+    {
+      "name": "same award edition, art, title, colours and five zones",
+      "passed": true
+    },
+    {
+      "name": "same storage key and version",
+      "passed": true
+    },
+    {
+      "name": "20 word identities and British phonetics preserved",
+      "passed": true
+    },
+    {
+      "name": "16 full source dialogue lines and speaker order preserved",
+      "passed": true
+    },
+    {
+      "name": "16 replacement prompts and original numbers retained",
+      "passed": true
+    },
+    {
+      "name": "A6 and B10 original prompts retained",
+      "passed": true
+    },
+    {
+      "name": "online blanks limited to two related choices",
+      "passed": true
+    },
+    {
+      "name": "unchanged listen and apply sessions continue",
+      "passed": true
+    },
+    {
+      "name": "revised sessions retain actual current and earlier predecessors",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen previous-questions.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen grammar.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "server prior content.js unchanged",
+      "passed": true
+    },
+    {
+      "name": "server prior previous-questions.js unchanged",
+      "passed": true
+    },
+    {
+      "name": "all 41 original images unchanged",
+      "passed": true,
+      "detail": {
+        "svg": 37,
+        "webp": 4
+      }
+    },
+    {
+      "name": "original card renderers and catalogue unchanged",
+      "passed": true
+    },
+    {
+      "name": "three accepted generated cast assets trace to original prompts",
+      "passed": true
+    },
+    {
+      "name": "transparent full-size cast sam",
+      "passed": true
+    },
+    {
+      "name": "transparent full-size cast penny",
+      "passed": true
+    },
+    {
+      "name": "transparent full-size cast penny-bag",
+      "passed": true
+    },
+    {
+      "name": "22 added vectors decode, including 16 position scenes and 3 numeric labels",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "final text hashes and font coverage recorded",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1925,
+        "inputs": 405
+      }
+    },
+    {
+      "name": "original font license bytes preserved",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit41-42/cast-sam-v153.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "4acb10b08d2ee78442ae0e7ec499d39c08c38e1e396b031de546bdf1b44a3d80"
+    },
+    {
+      "file": "assets/unit41-42/cast-penny-v153.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "12bbcdfe5cd280e80e1fcbf91842c15fecd3450d0843e770b3ef5486d4ae7d94"
+    },
+    {
+      "file": "assets/unit41-42/cast-penny-bag-v153.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "1b49f5c207ffee75770245f1bf22c283cd76e08efcd3ad2e58a7a21000d89b26"
+    }
+  ],
+  "changedSourcePaths": 73
+}

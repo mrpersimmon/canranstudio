@@ -1,0 +1,10 @@
+{
+  "unchanged": {
+    "tests/unit/server-security.test.js": true,
+    "server/store.js": true,
+    "server/auth-throttle.js": true
+  },
+  "platform": "win32",
+  "failures": 3,
+  "meaning": "Two cleanup failures with open SQLite handles; one POSIX mode-bit assertion on Windows. Same failures reproduced without product changes; outside course edit scope."
+}

@@ -1,0 +1,38 @@
+
+Running 1 test using 1 worker
+
+(node:7396) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit111-112-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (1.3s)
+
+
+  1) tests\e2e\unit111-112-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 ──────────────────────────
+
+    Error: {"screen":320,"word":"comfortable","width":108,"font":"20px","rects":[{"width":99.71875,"y":344.84375},{"width":10.75,"y":369.84375}]}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      12 |    for(const label of await room.locator('.unit-word strong:visible').all()){
+      13 |     const data=await label.evaluate(el=>{const range=document.createRange();range.selectNodeContents(el);const cs=getComputedStyle(el);return{word:el.textContent,width:el.clientWidth,font:cs.fontSize,rects:[...range.getClientRects()].filter(r=>r.width>0).map(r=>({width:r.width,y:r.y}))};});
+    > 14 |     if(/^[A-Za-z]+$/.test(data.word))expect(data.rects.length,JSON.stringify({screen:width,...data})).toBe(1);
+         |                                                                                                       ^
+      15 |    }
+      16 |    if(group<5)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+      17 |   }
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit111-112-word-layout.spec.js:14:103
+
+    Error Context: output\unit111112-words-initial\unit111-112-word-layout-四宽词卡正面：完整英文词形与实际可用宽度\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit111112-words-initial\unit111-112-word-layout-四宽词卡正面：完整英文词形与实际可用宽度\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit111112-words-initial\unit111-112-word-layout-四宽词卡正面：完整英文词形与实际可用宽度\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit111-112-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 ───────────────────────────

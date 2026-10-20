@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "reference": "assets/awards/unit1-2-handbag-closeup.webp",
+  "generatedAt": "2026-10-18",
+  "assets": [
+    {
+      "file": "assets/unit1-2-current/man-v154.webp",
+      "prompt": "Use case: illustration-story. Asset type: one isolated transparent full body character for an educational web lesson. Reference image only: match EXACTLY the left man's face, proportions, thick dark brown soft outlines, subtle painted grain, brown side-swept hair, round brown spectacles, teal jacket, white collar and golden yellow tie from the reference. Draw this same friendly round chibi adult man standing full length, dark trousers and brown shoes, THREE-QUARTER facing RIGHT toward a conversation partner; friendly attentive open eyes. Rightward hand lightly open at waist level, other arm relaxed. No objects in hands, no bag. All fingers, hair, feet fully visible with generous transparent margins. Only ONE man, no other people, no background, no scenery, no ground, no text or symbols. True alpha transparency, not checkerboard artwork. Keep reference style; do not redesign face or use a generic vector stick figure.",
+      "processing": "Sharp resize to height 768 and WebP quality 92; original alpha retained. No manual repaint or background removal."
+    },
+    {
+      "file": "assets/unit1-2-current/woman-v154.webp",
+      "prompt": "Use case: illustration-story. Asset type: one isolated transparent full body character for an educational web lesson. Reference image only: match EXACTLY the right woman's round face, friendly rounded features, brown curled shoulder length hair, yellow hat with coral ribbon, salmon pink jacket and yellow scarf, thick dark brown soft outlines, subtle painted grain. Draw this same friendly round chibi adult woman standing full length, dark warm brown skirt and brown shoes, THREE-QUARTER facing LEFT toward a conversation partner; friendly attentive open eyes. Hands lightly open in front at waist ready to receive an object, but EMPTY. No handbag or other props. All fingers, hat, feet fully visible with generous transparent margins. Only ONE woman, no other people, no background, no scenery, no ground, no text or symbols. True alpha transparency, not checkerboard artwork. Keep reference style and head/body proportions, do not redesign as a generic vector figure.",
+      "processing": "Sharp resize to height 768 and WebP quality 92; original alpha retained. No manual repaint or background removal."
+    }
+  ]
+}

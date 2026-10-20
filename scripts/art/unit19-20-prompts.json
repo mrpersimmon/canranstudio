@@ -1,0 +1,114 @@
+{
+  "method": "built-in image_gen",
+  "styleReference": "assets/awards/unit1-2-handbag-closeup.webp",
+  "prompts": [
+    {
+      "name": "keepsake-story-v1",
+      "prompt": "Redraw IMAGE TWO (mother and two children with two ice creams) to EXACTLY MATCH the simple graphic children's illustration style in IMAGE ONE (handbag scene). Image one is STYLE ONLY: thick uniform dark cocoa strokes, oversized circular heads, minimal tiny dot or curved-line eyes, NO white eyeballs, small simple noses, blush circles, very simple mouths, chunky mitten-like hands, soft flat fills, minimal hair clumps and folds. Image two is COMPOSITION AND IDENTITY: mother left leaning to seated girl and boy right, terracotta jacket and short curly dark hair, mustard dress/pigtails girl, teal striped shirt/dark hair boy. Keep exactly TWO cones, one in each child's hands, mother empty hands visible, all three looking warmly at each other. Retain waist-up close composition, large faces at 340px card size, full heads/hands/cones inside image. NO man in suit, hat, glasses, handbag, text, stars or background scenery from image one. No Disney/anime style, no detailed hair strands, no realistic eyes or anatomy. Genuine transparent background and transparent margins, wide landscape 3:2. This is a unified simple chibi course illustration, as if drawn by the artist of image one."
+    },
+    {
+      "name": "cast-standing-v1",
+      "prompt": "IMAGE ONE is the approved character and STYLE reference: thick uniform cocoa outlines, circular oversized heads, tiny black dots or simple curved-line eyes, NO whites of eyes, blush circles, simple mouths and chunky hands, few hair clumps, flat soft colors, minimal folds. IMAGE TWO is ONLY the pose, placement and props to redraw. Convert image two fully into the SAME simple chibi style as image one, preserving mother's dark curly short hair terracotta jacket pale-yellow top grey-blue trousers, girl's pigtails mustard dress, boy's dark hair teal striped shirt blue shorts. All full heads hands and feet inside canvas with transparent margin, whole bodies. 3:2 landscape, real transparent background. No text, labels, frame or scenery. No realistic eyes, detailed hair strands or Disney features. Mother left, two children standing right with bench behind. Children tired and thirsty, tired drooping shoulders and slightly downturned mouths. Mother concerned, looking right toward children. All hands EMPTY. Absolutely NO ice cream or cones."
+    },
+    {
+      "name": "cast-resting-v1",
+      "prompt": "IMAGE ONE is the approved character and STYLE reference: thick uniform cocoa outlines, circular oversized heads, tiny black dots or simple curved-line eyes, NO whites of eyes, blush circles, simple mouths and chunky hands, few hair clumps, flat soft colors, minimal folds. IMAGE TWO is ONLY the pose, placement and props to redraw. Convert image two fully into the SAME simple chibi style as image one, preserving mother's dark curly short hair terracotta jacket pale-yellow top grey-blue trousers, girl's pigtails mustard dress, boy's dark hair teal striped shirt blue shorts. All full heads hands and feet inside canvas with transparent margin, whole bodies. 3:2 landscape, real transparent background. No text, labels, frame or scenery. No realistic eyes, detailed hair strands or Disney features. Mother standing left, children SEATED right on bench with empty hands resting on knees, still tired, slightly downturned mouths. Mother concerned looking at children. Absolutely NO ice cream or cones."
+    },
+    {
+      "name": "cast-offer-v1",
+      "prompt": "IMAGE ONE is the approved character and STYLE reference: thick uniform cocoa outlines, circular oversized heads, tiny black dots or simple curved-line eyes, NO whites of eyes, blush circles, simple mouths and chunky hands, few hair clumps, flat soft colors, minimal folds. IMAGE TWO is ONLY the pose, placement and props to redraw. Convert image two fully into the SAME simple chibi style as image one, preserving mother's dark curly short hair terracotta jacket pale-yellow top grey-blue trousers, girl's pigtails mustard dress, boy's dark hair teal striped shirt blue shorts. All full heads hands and feet inside canvas with transparent margin, whole bodies. 3:2 landscape, real transparent background. No text, labels, frame or scenery. No realistic eyes, detailed hair strands or Disney features. Mother standing left holding EXACTLY TWO cones reaching toward seated children right on bench; children extending empty hands. Exactly TWO cones in entire image, BOTH still in mother's hands. The children are happy to receive them but have NONE yet."
+    },
+    {
+      "name": "cast-received-v1",
+      "prompt": "IMAGE ONE is the approved character and STYLE reference: thick uniform cocoa outlines, circular oversized heads, tiny black dots or simple curved-line eyes, NO whites of eyes, blush circles, simple mouths and chunky hands, few hair clumps, flat soft colors, minimal folds. IMAGE TWO is ONLY the pose, placement and props to redraw. Convert image two fully into the SAME simple chibi style as image one, preserving mother's dark curly short hair terracotta jacket pale-yellow top grey-blue trousers, girl's pigtails mustard dress, boy's dark hair teal striped shirt blue shorts. All full heads hands and feet inside canvas with transparent margin, whole bodies. 3:2 landscape, real transparent background. No text, labels, frame or scenery. No realistic eyes, detailed hair strands or Disney features. Mother standing left with both hands empty, children seated on bench right each holding exactly ONE cone, exactly TWO total. Family smiling at each other. Match approved image one's simplified faces. Full-body scene including shoes and bench legs."
+    },
+    {
+      "name": "cast-vendor-v1",
+      "prompt": "Redraw IMAGE TWO (vendor with cart) in EXACTLY the simple chibi style of IMAGE ONE. Thick uniform cocoa outlines, circular oversized head, tiny black dot eyes with NO white eyeballs, blush circles, simple smile, chunky hands, minimal flat shading. Preserve ONE vendor man with moustache, cream cap and apron behind sage green wheeled cart, looking right. Full head/hands/feet/wheels inside frame with transparent margins. Cart icon is a simple pink scoop emblem, NO real cones or food in hands. No extra family, no text or background, 3:2 landscape transparent. Remove realistic anatomy, complex folds, individual hair strands and Disney-like details."
+    }
+  ],
+  "selected": [
+    {
+      "file": "assets/unit19-20/keepsake-story-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-810ca2f6-8224-4900-a1ab-e95db008af96.png"
+    },
+    {
+      "file": "assets/unit19-20/cast-standing-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-29d1d9d1-de08-4a95-b1a4-14d47a88faa3.png"
+    },
+    {
+      "file": "assets/unit19-20/cast-resting-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-5238c439-99e6-497b-bf37-c71358213f15.png"
+    },
+    {
+      "file": "assets/unit19-20/cast-offer-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-39c80da9-94f2-476f-8b22-423a15894a00.png"
+    },
+    {
+      "file": "assets/unit19-20/cast-received-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f0dba62b-5ece-4f6a-89e5-f5c838c2afae.png"
+    },
+    {
+      "file": "assets/unit19-20/cast-vendor-v1.webp",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-56acc179-1397-4e8e-a3e9-3160a766e48c.png"
+    }
+  ],
+  "iterations": [
+    {
+      "stage": "initial detailed artwork and close-up refinement",
+      "prompts": [
+        {
+          "name": "keepsake-story-v1",
+          "prompt": "Create a warm children's English course keepsake illustration, wide 3:2, genuine transparent background. Story: a mother with short dark curly hair, broad friendly face, rust terracotta short jacket, pale yellow shirt, blue-grey trousers, and her two children. Girl has brown pigtails, mustard yellow dress, boy has dark tousled hair, teal striped shirt and blue shorts. Both children are seated together on a simple small wooden park bench on the right, each holding exactly ONE pink ice-cream cone (exactly TWO cones total). Mother at left stands turned toward them, smiling, empty hands open gently. Full bodies, complete heads hands and feet, leave transparent margins around entire group. Express affectionate everyday gratitude, no moral slogans. Rounded friendly 2D picture-book forms, thick clean cocoa outlines, flat soft cream, sage, mustard, terracotta and teal colors, light restrained shading, polished like modern preschool illustrations, no realistic painting, no text, letters, numbers, labels, stars, trophy, frame, watermark, floating decoration, ground rectangle or background scenery. Keep silhouettes clear at small size. Not the office characters. Keep mother recognizably an adult parent, not elderly. No extra people or cones."
+        },
+        {
+          "name": "cast-standing-v1",
+          "prompt": "Use this reference ONLY for identical character designs, clothing, scale and drawing style. Make a single wide 3:2 transparent illustration for a children's English story stage. Preserve full heads, hands, feet and transparent margins. Mother left facing right; girl and boy on right facing toward mother. Mother curly dark hair, terracotta short jacket, yellow shirt and blue grey trousers; girl brown pigtails mustard dress; boy tousled dark hair striped teal shirt blue shorts. No text, labels, speech bubbles, decorations, frames, backgrounds or cropped bodies. Earlier moment BEFORE receiving any ice cream. Both children STANDING next to each other on right, shoulders tired, eyes open looking to mother. Mother concerned and caring, open empty hand. Empty wooden bench just behind children. ALL hands empty, no food, no cones, no vendor. Match overall character arrangement of reference."
+        },
+        {
+          "name": "cast-resting-v1",
+          "prompt": "Use this reference ONLY for identical character designs, clothing, scale and drawing style. Make a single wide 3:2 transparent illustration for a children's English story stage. Preserve full heads, hands, feet and transparent margins. Mother left facing right; girl and boy on right facing toward mother. Mother curly dark hair, terracotta short jacket, yellow shirt and blue grey trousers; girl brown pigtails mustard dress; boy tousled dark hair striped teal shirt blue shorts. No text, labels, speech bubbles, decorations, frames, backgrounds or cropped bodies. Earlier moment AFTER sitting down but BEFORE receiving any ice cream. Both children SEATED on wooden bench on right, still tired and thirsty, hands resting empty on knees, looking at mother, no smiling in relief yet. Mother standing left gently asking how they feel. ALL hands empty, no food, no cones, no vendor. Keep arrangement and bench exactly matching reference."
+        },
+        {
+          "name": "cast-offer-v1",
+          "prompt": "Use this reference ONLY for identical character designs, clothing, scale and drawing style. Make a single wide 3:2 transparent illustration for a children's English story stage. Preserve full heads, hands, feet and transparent margins. Mother left facing right; girl and boy on right facing toward mother. Mother curly dark hair, terracotta short jacket, yellow shirt and blue grey trousers; girl brown pigtails mustard dress; boy tousled dark hair striped teal shirt blue shorts. No text, labels, speech bubbles, decorations, frames, backgrounds or cropped bodies. Moment of offering two ice creams. Mother on left holds EXACTLY TWO pink ice-cream cones in her hands, reaching toward children. Children remain SEATED on bench at right, look at mother and begin to reach out with EMPTY hands; they have not yet received the cones. Exactly TWO cones in the entire illustration, both in mother's hands. Match reference bench and character arrangement."
+        },
+        {
+          "name": "cast-vendor-v1",
+          "prompt": "Use the provided illustration only as visual style reference: warm clean cocoa outlines, rounded 2D children's book characters, soft cream/sage/terracotta colors and light shading. A single friendly ice-cream vendor man in cream cap and apron standing BEHIND a small sage green wheeled ice-cream cart. Full composition including feet and wheels, face looking right toward customers offscreen, empty hands at cart edge. The cart has a simple pink scoop icon (not a real cone), no visible real food or cones. Genuine transparent background, no other people, no setting, no text, no letters, no labels, no square backdrop. Compact 3:2 composition."
+        },
+        {
+          "name": "keepsake-story-v1-closeup",
+          "prompt": "Use the attached family picture as exact character/style reference. Create the CLOSER-FRAMED keepsake version for a small landscape English course card. Genuine transparent background, wide 3:2. Same mother on the left with dark curls, terracotta jacket and pale yellow shirt, girl with brown pigtails mustard dress and boy dark hair teal striped shirt on the right. Frame them waist-up or mid-thigh, three large readable faces, close together. Mother gently leaning to children, smiling, both empty hands visible. Each child holds exactly one pink ice-cream cone, two cones total, looking back happily at mother. Faces, complete heads, all hands and cones entirely inside frame with generous transparent edge; only lower bodies can naturally end at bottom. Bench only a small subtle backrest behind children, no full bench legs, no vendor, no scenery, no text or stars, no rectangles or frame, no unnecessary space around figures. Same warm rounded 2D clean cocoa outlines, restrained shading, color consistency as reference. It should read affectionate thanks at 340 pixel card size."
+        }
+      ],
+      "selected": [
+        {
+          "file": "assets/unit19-20/cast-received-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-bee8ef52-a41b-4300-b66a-36015eb3dcfe.png"
+        },
+        {
+          "file": "assets/unit19-20/cast-standing-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-cf96bd65-a91d-4a6c-96c5-c7452a04596e.png"
+        },
+        {
+          "file": "assets/unit19-20/cast-resting-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-6890d91f-a8b5-4b38-9859-51ed8a9c6cc2.png"
+        },
+        {
+          "file": "assets/unit19-20/cast-offer-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-90d4c558-6cbd-4afc-95da-ed93e1f285fd.png"
+        },
+        {
+          "file": "assets/unit19-20/cast-vendor-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-8f56bb42-4df2-4d35-8105-a1f9c644b378.png"
+        },
+        {
+          "file": "assets/unit19-20/keepsake-story-v1.webp",
+          "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-d8dbe5eb-62b5-4ef4-b039-d958b56fdd16.png"
+        }
+      ],
+      "reason": "Side-by-side card review found figures too detailed; redrawn to approved simplified line and facial style."
+    }
+  ]
+}

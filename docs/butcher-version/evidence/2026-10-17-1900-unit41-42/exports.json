@@ -1,0 +1,158 @@
+{
+  "originalCards": [
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "edition": "bag-quantities-v1",
+      "firstFullStarAt": "2026-10-17T11:47:08.511Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 43,
+      "unchangedLedger": true,
+      "originalSha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2",
+      "retainedSha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "edition": "bag-quantities-v1",
+      "firstFullStarAt": "2026-10-17T12:03:33.596Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 43,
+      "unchangedLedger": true,
+      "originalSha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2",
+      "retainedSha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "edition": "bag-quantities-v1",
+      "firstFullStarAt": "2026-10-17T12:37:28.296Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 43,
+      "unchangedLedger": true,
+      "originalSha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492",
+      "retainedSha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "edition": "bag-quantities-v1",
+      "firstFullStarAt": "2026-10-17T12:28:44.184Z",
+      "stars": 5,
+      "identicalAllGifFrames": true,
+      "oldRecordCount": 43,
+      "unchangedLedger": true,
+      "originalSha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492",
+      "retainedSha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492"
+    }
+  ],
+  "currentExports": [
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "bd2916ccfa30a3eb5d8091f2fbf46e48f619ebd2245f2538429258f493b0e20f"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "bd2916ccfa30a3eb5d8091f2fbf46e48f619ebd2245f2538429258f493b0e20f"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "4337c8dda2abfff637eefafb3f280b5a380bdfb2dd209843ef02a93d98ff27c2"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "5c3b54a6434fccdf98d7b35b9250bab0611e9f46484c3c39d2b0738729789094"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "one-star.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "5c3b54a6434fccdf98d7b35b9250bab0611e9f46484c3c39d2b0738729789094"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "keepsake.gif",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0,
+      "sha256": "91aa8581f8e30293386d6033490afe423c4543c0fc9784ddc9170cfc0187f492"
+    }
+  ],
+  "worksheet": {
+    "file": "worksheet.pdf",
+    "pages": 2,
+    "writingA": 6,
+    "writingB": 10,
+    "writingLines": 26,
+    "lineHeightPx": 32,
+    "textExtracted": true,
+    "allPagesVisuallyReviewed": true,
+    "sha256": "338ae7259ba38eab557de2a64bea4e38d27a377b6d054e7faa14fddfa9724b63"
+  },
+  "originalCertificatePrint": {
+    "status": "not_applicable",
+    "reason": "Actual previous five-star card offered GIF saving, not certificate printing."
+  },
+  "physicalPrinting": false
+}

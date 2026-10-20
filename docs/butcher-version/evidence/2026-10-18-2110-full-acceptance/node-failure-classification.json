@@ -1,0 +1,146 @@
+[
+  {
+    "location": "tests\\deploy\\nginx-config.test.js:224:1",
+    "name": "Nginx contract rejects legal directives that alter redirect semantics (0.4413ms)",
+    "category": "CRLF使测试替换没有实际改动配置",
+    "error": "  AssertionError [ERR_ASSERTION]: Missing expected exception.\n      at TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\nginx-config.test.js:230:10)\n      at Test.runInAsyncScope (node:async_hooks:228:14)\n      at Test.run (node:internal/test_runner/test:1118:25)"
+  },
+  {
+    "location": "tests\\deploy\\publication-contract.test.js:52:1",
+    "name": "README describes the course home and preserves the internal growth artwork contract (3.337ms)",
+    "category": "文档断言仍期待旧课程入口文案",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /原 Lesson 49、50 在“单课练习”中/. Input:\n  \n  '# 灿然工作室 · 儿童英语课件\\n' +\n    '\\n' +"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:208:1",
+    "name": "archived public builder emits only its fixture route tree plus a hash manifest (1266.2451ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  Error: missing public input: unit91-92\n      at validateDirectory (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\build-static.js:162:11)\n      at async buildStatic (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\build-static.js:432:48)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:218:3)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:352:1",
+    "name": "buildStatic rejects application services in the public V1 runtime (1256.3232ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /core\\/audio-player\\.js: forbidden application service request/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:388:1",
+    "name": "buildStatic refuses an output alias that resolves to its repository (9.0697ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-build-alias-mJrpIJ' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-build-alias-mJrpIJ\\alias'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:396:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:403:1",
+    "name": "buildStatic rejects symbolic links in allowlisted input directories (792.4758ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\outside.mp3' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-public-root-GZdJr8\\core\\outside-link'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:408:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:414:1",
+    "name": "buildStatic rechecks a source file before copying after preflight (916.3796ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /symbolic link/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:447:1",
+    "name": "buildStatic rejects a directory replaced by a link after preflight (855.0237ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /symbolic link/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:496:1",
+    "name": "buildStatic rejects a child path that escapes after directory enumeration (882.5715ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /outside repository/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:535:1",
+    "name": "buildStatic rejects non-regular files in allowlisted input directories (696.0497ms)",
+    "category": "Windows缺少POSIX mkfifo",
+    "error": "  Error: spawnSync mkfifo ENOENT\n      at Object.spawnSync (node:internal/child_process:1119:20)\n      at spawnSync (node:child_process:911:24)\n      at execFileSync (node:child_process:954:15)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:546:1",
+    "name": "buildStatic only clears empty or previously verified build outputs (798.77ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /unowned build output/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:567:1",
+    "name": "buildStatic refuses outputs that overlap public inputs before cleanup (701.3059ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-output-overlap-iIFYZS\\repo' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-output-overlap-iIFYZS\\root-alias'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:582:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:591:1",
+    "name": "buildStatic binds a manifest to a clean public Git tree only (829.6072ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /public inputs differ from HEAD/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:627:1",
+    "name": "buildStatic rejects incomplete or expanded old artifact ownership claims (709.0462ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /unowned build output/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:679:1",
+    "name": "buildStatic rejects ignored public files absent from HEAD (668.2524ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /public inputs differ from HEAD/. Input:\n  \n  'Error: missing public input: unit91-92'\n  "
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:693:1",
+    "name": "buildStatic rejects outputs overlapping absent optional inputs (674.1164ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-absent-assets-xrOsx3\\repo' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-absent-assets-xrOsx3\\root-alias'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:707:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\deploy\\static-build.test.js:712:1",
+    "name": "buildStatic recognizes a valid artifact regardless of directory traversal order (828.0938ms)",
+    "category": "旧静态构建夹具缺少unit91-92",
+    "error": "  Error: missing public input: unit91-92\n      at validateDirectory (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\build-static.js:162:11)\n      at async buildStatic (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\build-static.js:432:48)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\deploy\\static-build.test.js:726:3)"
+  },
+  {
+    "location": "tests\\deploy\\workflow-contract.test.js:13:1",
+    "name": "workflow uses read-only permissions and immutable dependencies (22.5726ms)",
+    "category": "CRLF与LF正则不一致",
+    "error": "  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /^permissions:\\n  contents: read$/m. Input:\n  \n  'name: verify\\r\\n' +\n    '\\r\\n' +"
+  },
+  {
+    "location": "tests\\unit\\admin-accounts.test.js:84:1",
+    "name": "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials (693.7567ms)",
+    "category": "Windows与POSIX文件权限模式不同",
+    "error": "  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  438 !== 384\n  "
+  },
+  {
+    "location": "tests\\unit\\preview-security.test.js:12:1",
+    "name": "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts (42.2905ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-preview-boundary-Is2Q8H\\.data\\lesson-access\\private.json' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-preview-boundary-Is2Q8H\\assets\\inside.json'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\unit\\preview-security.test.js:25:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\unit\\preview-security.test.js:54:1",
+    "name": "preview package construction rejects private symlinks before hash resource aliases are published (24.4673ms)",
+    "category": "Windows符号链接权限",
+    "error": "  Error: EPERM: operation not permitted, symlink 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-package-boundary-S5qkrt\\.data\\private.svg' -> 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-package-boundary-S5qkrt\\assets\\unit13-14\\probe.svg'\n      at async Object.symlink (node:internal/fs/promises:999:10)\n      at async TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\unit\\preview-security.test.js:65:3)\n      at async Test.run (node:internal/test_runner/test:1125:7)"
+  },
+  {
+    "location": "tests\\unit\\server-security.test.js:11:1",
+    "name": "grant renewal bounds allocation, preserves old IDs and isolates devices/courses (312.2458ms)",
+    "category": "Windows测试清理仍打开的SQLite目录",
+    "error": "  Error: EPERM, Permission denied: \\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-grant-test-ifuEP3 '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-grant-test-ifuEP3'\n      at Object.rmSync (node:fs:1221:18)\n      at TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\unit\\server-security.test.js:13:20)\n      at TestHook.runInAsyncScope (node:async_hooks:228:14)"
+  },
+  {
+    "location": "tests\\unit\\server-security.test.js:49:1",
+    "name": "persistent failure windows survive reopen, expire without extension, and never clear source budgets (1537.1039ms)",
+    "category": "Windows测试清理仍打开的SQLite目录",
+    "error": "  Error: EPERM, Permission denied: \\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-throttle-test-3C9dli '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-throttle-test-3C9dli'\n      at Object.rmSync (node:fs:1221:18)\n      at TestContext.<anonymous> (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\unit\\server-security.test.js:51:20)\n      at TestHook.runInAsyncScope (node:async_hooks:228:14)"
+  },
+  {
+    "location": "tests\\unit\\server-security.test.js:79:1",
+    "name": "opening an existing data directory restores private directory and key modes (38.726ms)",
+    "category": "Windows与POSIX文件权限模式不同",
+    "error": "  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  438 !== 448\n  "
+  }
+]

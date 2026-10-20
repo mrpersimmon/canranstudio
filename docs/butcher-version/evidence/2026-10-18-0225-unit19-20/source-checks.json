@@ -1,0 +1,140 @@
+{
+  "complete": true,
+  "at": "2026-10-17T19:12:49.662Z",
+  "checks": [
+    {
+      "name": "True previous 65-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Earlier 36-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Frozen server 65-question source exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "Earlier server 36-question source exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "11 actual prior runtime files frozen",
+      "passed": true
+    },
+    {
+      "name": "Four unaffected question groups and sessions unchanged",
+      "passed": true
+    },
+    {
+      "name": "66 questions: 62 unchanged, 3 revised and 1 additional",
+      "passed": true
+    },
+    {
+      "name": "Each actual fill question has at most two blanks",
+      "passed": true
+    },
+    {
+      "name": "Original reward and learning key unchanged",
+      "passed": true
+    },
+    {
+      "name": "Vocabulary, complete dialogue, comparisons, written tasks unchanged",
+      "passed": true
+    },
+    {
+      "name": "Exact previous exam session first in migration list",
+      "passed": true
+    },
+    {
+      "name": "Preserved scene.js",
+      "passed": true
+    },
+    {
+      "name": "Preserved unit.css",
+      "passed": true
+    },
+    {
+      "name": "Preserved typography.css",
+      "passed": true
+    },
+    {
+      "name": "Preserved references.js",
+      "passed": true
+    },
+    {
+      "name": "Preserved legacy.css",
+      "passed": true
+    },
+    {
+      "name": "Preserved legacy-certificate.js",
+      "passed": true
+    },
+    {
+      "name": "All 70 original asset files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Font binaries and licenses unchanged; all current glyphs covered",
+      "passed": true
+    },
+    {
+      "name": "Other 94 shared runtime/server files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Supplementary failing tests and dependencies unchanged at baseline",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages /",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages /lesson/",
+      "passed": true
+    },
+    {
+      "name": "Actual captured four valid rounds survive normalization",
+      "passed": true
+    },
+    {
+      "name": "Changed JS parses",
+      "passed": true
+    },
+    {
+      "name": "Local links in changed repository documentation resolve",
+      "passed": true
+    }
+  ],
+  "packages": {
+    "/": {
+      "title": "冰淇淋休息站",
+      "revision": "7db9a3bb37c5a5ccf15cee02c222596ab8a38d40ac262c08192162290fa195a5",
+      "manifest": "/course-packages/unit19-20/7db9a3bb37c5a5ccf15cee02c222596ab8a38d40ac262c08192162290fa195a5.json",
+      "sha256": "fa54cf0ff061a702da148f38c6fd9432d1745155a2364e189ac01977c8a8d30a"
+    },
+    "/lesson/": {
+      "title": "冰淇淋休息站",
+      "revision": "5afc4fcf2ae8b7db37497b28c64dfcdee3cb4c418c70d261fbf673b8f1a7c770",
+      "manifest": "/lesson/course-packages/unit19-20/5afc4fcf2ae8b7db37497b28c64dfcdee3cb4c418c70d261fbf673b8f1a7c770.json",
+      "sha256": "acccab53498a083d598eb8bf0829a9be8ce0dbf127cc204ee5b94fb935893275"
+    }
+  },
+  "questions": {
+    "before": 65,
+    "current": 66,
+    "unchanged": 62,
+    "revisedIds": [
+      "u1920-v1-final-v2-be",
+      "u1920-v1-final-v2-short",
+      "u1920-five-e-number"
+    ],
+    "addedId": "u1920-v153-e-singular-centre"
+  },
+  "originalAssetFiles": 70,
+  "commonExceptions": [
+    "server/progress.js",
+    "server/public/access-client.js"
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "unit": "unit121-122",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 70,
+  "zones": {
+    "listen": 8,
+    "roles": 9,
+    "grammar": 22,
+    "apply": 8,
+    "exam": 23
+  },
+  "words": 23,
+  "dialogueTurns": 13,
+  "speakers": [
+    "Customer",
+    "Manager",
+    "Caroline"
+  ],
+  "models": {
+    "count": 9,
+    "labels": "1–9",
+    "forgetFormsAndIPA": true
+  },
+  "writing": {
+    "items": {
+      "A": 8,
+      "B": 8,
+      "C": 8
+    },
+    "linesPerItem": {
+      "A": 2,
+      "B": 3,
+      "C": 3
+    },
+    "totalLines": 64
+  },
+  "browserRuns": {
+    "representative": {
+      "passed": 4,
+      "failed": 0
+    },
+    "chromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "webkit": {
+      "passed": 15,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "webkit-isolated-root": {
+      "passed": 2,
+      "failed": 0
+    },
+    "webkit-isolated-sub": {
+      "passed": 2,
+      "failed": 0
+    },
+    "reference-chromium": {
+      "passed": 1,
+      "failed": 0
+    },
+    "reference-webkit": {
+      "passed": 1,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    },
+    "login-webkit-root-initial": {
+      "passed": 5,
+      "failed": 2,
+      "resolvedBy": "webkit-isolated-root"
+    },
+    "login-webkit-sub-initial": {
+      "passed": 5,
+      "failed": 2,
+      "resolvedBy": "webkit-isolated-sub"
+    }
+  },
+  "browserTotalDistinctPassingAfterRecheck": 62,
+  "targetedRechecks": 6,
+  "representativeChecks": 4,
+  "initialFailuresRetained": {
+    "count": 4,
+    "context": "Parallel WebKit account runs sampled only 3 distinct flying-star positions and exceeded the 70s identity-flow deadline. The same code and assertions passed in isolated sequential runs on both mounts. No claim of a unique CPU/GPU cause; no timing or assertion threshold changed."
+  },
+  "visualRefinement": {
+    "issues": [
+      "SVG inner padding left dictionaries floating above the counter",
+      "three separate sprites were small on mobile"
+    ],
+    "fix": [
+      "single-coordinate counter and two-book asset",
+      "two full-body trio states, questioning then recognizing"
+    ],
+    "initialScreenshotsRetained": true
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true,
+    "diagramEnglish": "outlined local Nunito400",
+    "IPA": "Arial"
+  },
+  "art": {
+    "individualSprites": 6,
+    "trioScenes": 2,
+    "keepsake": 1,
+    "opaqueEdgePixels": 0
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; current standard implemented",
+    "O13-O14": "pending; course evidence appended",
+    "O15": "new pending proposal; isolated verification implemented in this course only"
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance and load profiling"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit121-122/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 4"
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

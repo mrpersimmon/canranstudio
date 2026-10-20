@@ -7,9 +7,9 @@ function storyProps(){
  for(const[key,label,side]of [['george','George','left'],['ken','Ken','right']]){const wrap=node('div','dialogue-actor visit-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+'全身完整，面向'+(side==='left'?'右侧Ken':'左侧George'),'webp'),node('span','actor-label',label));element.append(wrap);}
  const poster=node('figure','story-poster');poster.append(picture('poster','','电影海报中的巴黎'),node('figcaption','','电影海报'));element.append(poster);
  const memory=node('figure','story-memory');memory.append(picture('paris-memory','','Ken回忆四月的巴黎一直下雨'),node('figcaption','','Ken的旅行回忆'));memory.hidden=true;element.append(memory);
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const title=node('strong'),detail=node('span');timeline.append(title,detail);element.append(location,timeline);
- const entries=[['George遇到Ken','在电影院外'],['Ken打招呼','Hi, George.'],['George问刚才的去向','Have you just been…?'],['Ken刚去过电影院','现在已出来'],['George问上映的电影','What’s on?'],['《巴黎之春》','这是电影名'],['George去年看过电影','在电视上'],['Ken说巴黎很美','一座美丽的城市'],['George从没去过巴黎','看过电影 ≠ 去过巴黎'],['Ken四月去过巴黎','回忆那次旅行'],['春天的巴黎','George接着询问'],['Ken回忆那次天气','一直在下雨'],['George想到伦敦','比较刚聊到的雨天']];
- function update(i){const entry=i<0?['电影院外的相遇','看过电影，也去过巴黎吗？']:entries[i];title.textContent=entry[0];detail.textContent=entry[1];element.dataset.scene=i>=9?'travel-memory':i>=6?'film-experience':'cinema';memory.hidden=i<11;poster.hidden=i>=11;}
+ element.append(location);
+
+ function update(i){element.dataset.scene=i>=9?'travel-memory':i>=6?'film-experience':'cinema';memory.hidden=i<11;poster.hidden=i>=11;}
  update(-1);return{element,update,sideFor:(_i,who)=>who==='ken'?'right':'left'};
 }
 function create({element}){let view,heading,task;return{

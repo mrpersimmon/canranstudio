@@ -1,0 +1,39 @@
+{
+  "oldCertificate": {
+    "width": 1440,
+    "height": 1100,
+    "identicalDecodedPixels": true,
+    "originalSha256": "61b24e149807036bc2410e686cfce5da4ba1ac230e60bc184403cbfc53c12fac",
+    "retainedSha256": "61b24e149807036bc2410e686cfce5da4ba1ac230e60bc184403cbfc53c12fac",
+    "background": "#F4FAF8",
+    "viewedOriginalAndRetained": true
+  },
+  "gifs": [
+    {
+      "file": "one-star.gif",
+      "sha256": "251c34535a14f9dbf13417866bad513ff649a87c1928cd31f9e3330fffa58ba5",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "file": "keepsake.gif",
+      "sha256": "983b59190099de915896d8f9cbe31e502ce8aedafa533a65d831a43736772a98",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    }
+  ],
+  "pdfVisualReview": {
+    "worksheetPages": 3,
+    "legacyCertificatePages": 1,
+    "writingA": 6,
+    "writingB": 10,
+    "writingLines": 50,
+    "physicalPrintTested": false
+  }
+}

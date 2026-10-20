@@ -2,8 +2,8 @@
   'use strict';
   const core = root.CanranCore, unit = core.unit1314;
   const { stages, questions, learning: content } = unit;
-  const practice = core.lesson49Practice, scene = core.unit1314Scene;
-  history.scrollRestoration = 'manual';
+  const practice = core.lesson49Practice;
+  core.unit1314Legacy.preserve(practice,unit);
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -14,17 +14,17 @@
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
-    const path = content.PEOPLE[name]?.image || word?.image;
+    const path = ['louise', 'anna'].includes(name) ? '/assets/unit13-14/' + name + '.svg' : word?.image;
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
-  const surfaces = new Map();
+  const surfaces = new Map(), runners = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
   let active = '', certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
-    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆☆☆', 'lvl-stars')); section.append(heading);
+    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆', 'lvl-stars')); section.append(heading);
     const link = node('a', stage.title); link.href = '#' + stage.id; $('.chapter-links').append(link);
     const option = node('option', stage.title); option.value = stage.id; $('.chapter-select select').append(option);
     for (const [id, title, illustration] of stage.activities) {
@@ -36,7 +36,10 @@
     }
     $('#lessonWorkspace').append(section);
   }
+  const aliases = unit.routeAliases;
+  const normalizeRoute = id => aliases[id] || id;
   const navigate = id => {
+    id = normalizeRoute(id);
     // Scrolling back to the cover keeps the hash; resume must still reposition.
     if (location.hash === '#' + id) route();
     else location.hash = id;
@@ -55,8 +58,12 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
-    if (!routes.has(id)) id = 'cover'; markLocation(id);
+    id = normalizeRoute(id);
+    if (!routes.has(id)) id = 'cover';
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    markLocation(id);
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    if(id==='learn/text'||id==='l2') log.scrollTop=log.scrollHeight;
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     const surface = event.target.closest('.shop-stage'); if (!surface) return;
@@ -64,51 +71,82 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = practice.activity('unitLocation');
+  const resume = normalizeRoute(practice.activity('unitLocation'));
+  if (resume) practice.activity('unitLocation', resume);
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = normalizeRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
+
 
   const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '这颗星已经点亮。';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
     const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
+  function completionArt() {
+    const scene = node('div', '', 'completion-art colour-completion'); scene.setAttribute('aria-hidden', 'true');
+    const picture=node('img'); picture.src='/assets/unit13-14/keepsake-story-v1.webp'; picture.alt=''; scene.append(picture);return scene;
+  }
+  const completionTitles = {listen:'单词寻宝完成！',roles:'故事读懂啦！',grammar:'问色与邀请学会啦！',apply:'配色表达完成啦！',exam:'综合挑战完成！'};
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit1314-' + id + '-practice'; surfaces.get(id).append(element);
-    const predecessors = unit.activityPredecessors?.[id];
-    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
-      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit1314-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
-      onComplete: states => { complete(id); const summary=element.querySelector('.practice-finish > p'); if(summary) summary.textContent=id==='exam'?'挑战完成！':'这一站完成了！'; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    if (id === 'apply' || id === 'exam') {
+      settings.sceneView = core.unit1314Scene.create({ element });
+      settings.completionDetails = settings.sceneView.completion();
+    }
+    if (id === 'grammar') settings.sceneView = core.unit1314Grammar.create({ element, art });
+    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,...settings,
+      onAnswer: (question, state) => {
+        // The short model was visible before submission. Preserve that support
+        // in the shared notebook; it is not an error or an extra submission.
+        if (question.workshop?.model) { state.revealed = true; practice.record(question, state); }
+        settings.onAnswer?.(question, state);
+      },
+      onComplete: (states,round) => {
+        const { perfect, message } = settlement.complete({ id, states, round, awards, element });
+        complete(id);
+        nextStation(id, element.querySelector('.practice-finish-actions'));
+        settings.onComplete?.(states);
+        core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
+          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          celebrate: round.userCompleted, awardStatus: message,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
+        const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress(); } });
+    runners.set(id, runner);
     return element;
   }
 
-  function mountDressTask(id) { const view=scene.taskView(); surfaces.get(id).append(view.element); mountPractice(id,{sceneView:view,completionDetails:scene.result(id)}); }
-  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage'), cast=scene.cast();
+  const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  stage.append(log, cast.element);
+  const props = core.unit1314Scene.storyProps();
+  stage.append(props.element, log);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -119,25 +157,33 @@
   finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
-  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountDressTask('roles'); }
+  function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    props.update(dialogue.i);
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    cast.showLine(dialogue.i);
-    stage.dataset.floor = dialogue.i < 3 ? 'stairs' : 'room';
+    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.person));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('colour'), node('p', 'Anna 的帽子是什么颜色？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('colour'), node('p', 'What colour is Anna’s hat?')); log.replaceChildren(lead); }
   function appendLine(index) {
-    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
+    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.person), bubble = node('div', '', 'bubble');
+    // Keep each historic line on the side occupied by its speaker in that scene.
+    row.classList.add(line.person === 'louise' ? 'speaker-left' : 'speaker-right');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
     const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden));
-      if (!translation.hidden && row.offsetTop + row.offsetHeight > log.scrollTop + log.clientHeight) log.scrollTop = row.offsetTop + row.offsetHeight - log.clientHeight + 12; }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+      // Expanding the current translation must reveal its button as well; only
+      // the transcript scrolls, never the page or the controls below it.
+      if (!translation.hidden) {
+        const overflow = row.getBoundingClientRect().bottom - log.getBoundingClientRect().bottom + 12;
+        if (overflow > 0) log.scrollTop += overflow;
+      }
+    }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
     bubble.append(node('div', content.PEOPLE[line.person].name, 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
@@ -150,17 +196,14 @@
     if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
   }
   function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue(); }
-  const draft = practice.activity('unitDialogue');
+  const draft = core.unit1314Legacy.reading(practice, unit, signatures.text);
   if (draft?.signature === signatures.text && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length) {
-    const source = draft.viewed;
-    const viewed = Array.isArray(source) ? source.slice(0, draft.i + 1) : null;
-    if (Array.isArray(viewed)) {
-      const gap = content.DIALOGUE.findIndex((_, index) => index <= draft.i && viewed[index] !== true);
-      const index = gap < 0 ? draft.i : gap - 1;
-      dialogue = { i: index, viewed: viewed.slice(0, index + 1), done: draft.done === true && index === content.DIALOGUE.length - 1 && content.DIALOGUE.every((_, i) => viewed[i] === true) };
-      for (let i = 0; i <= index; i++) appendLine(i);
-      if (dialogue.done) complete('text');
-    }
+    const viewed=Array.isArray(draft.viewed)?draft.viewed.slice(0,draft.i+1):[];
+    const gap=content.DIALOGUE.findIndex((_,index)=>index<=draft.i&&viewed[index]!==true);
+    const i=gap<0?draft.i:gap-1;
+    dialogue={i,viewed:viewed.slice(0,i+1),done:draft.done===true&&i===content.DIALOGUE.length-1};
+    for(let index=0;index<=i;index++)appendLine(index);
+    if(dialogue.done)complete('text');
   }
   if (dialogue.i < 0) lead();
   refreshDialogue(); unlockStory();
@@ -195,77 +238,24 @@
   renderWords();
   mountPractice('listen', { allowHints: false });
 
-  function expressionCard(expression) {
-    const picture = node('img'); picture.src = expression.image; picture.alt = '';
-    const caption = node('span', expression.cn);
-    const card = node('article', '', 'phrase-card reference-card');
-    card.append(picture, node('strong', expression.en), caption); return card;
-  }
-  const phraseGrid=node('div','','phrase-grid');content.PHRASES.forEach(item=>phraseGrid.append(expressionCard(item)));
-  const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);
-  const contractions=node('details','','offline-task');contractions.append(node('summary','缩写里藏着什么？'),
-    node('p',"What colour's = What colour is。"),node('p',"Steven's umbrella's black. → Steven's umbrella is black."),
-    node('p',"这句中，Steven's 表示“Steven 的”；umbrella's 表示 umbrella is。要放回句子里分清。"));
-  surfaces.get('phrases').append(phraseGrid,contractions,phraseActions);
-  function referencePager(items, className, label, nouns, key) {
-    const group=node('div','',className),card=expressionCard(items[0]);group.setAttribute('role','group');group.setAttribute('aria-label',label);group.append(card);
-    const controls=node('div','','album-controls'),count=node('span');count.setAttribute('aria-live','polite');
-    const savedIndex=practice.activity(key);let index=Number.isInteger(savedIndex)?Math.max(0,Math.min(items.length-1,savedIndex)):0;
-    const previous=button('上一'+nouns,()=>{index--;render();},'btn btn-yellow'),next=button('下一'+nouns,()=>{index++;render();});controls.append(previous,count,next);
-    function render(){const item=items[index];card.querySelector('img').src=item.image;card.querySelector('strong').textContent=item.en;card.querySelector('span').textContent=item.cn;previous.disabled=index===0;next.disabled=index===items.length-1;count.textContent=(index+1)+' / '+items.length;practice.activity(key,index);}
-    render();return{group,controls};
-  }
-  const gallery=referencePager(content.GALLERY,'colour-gallery','当前配色图','幅配色图','unitGalleryPage');
-  const modelExample=node('div','','model-example');modelExample.append(expressionCard(content.MODEL_EXAMPLE));
-  const models=node('details','','offline-task');models.append(node('summary','看看完整问答'));
-  const modelPages=referencePager(content.MODELS,'reply-models','当前配色问答','份问答','unitModelPage');models.append(modelPages.group,modelPages.controls);
-  const reference=node('details','','offline-task');reference.append(node('summary','两句合一句'),
-    node('p',"This is Stella. This is her handbag. → This is Stella's handbag."));
-  const mergeGrid=node('div','','phrase-grid merge-models');content.REFERENCE.forEach(item=>{
-    const card=expressionCard(item);card.insertBefore(card.lastElementChild,card.querySelector('strong'));mergeGrid.append(card);
-  });reference.append(mergeGrid);
-  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);
-  surfaces.get('models').append(gallery.group,gallery.controls,modelExample,models,reference,modelActions);
-  for (const id of ['colours','trans']) mountDressTask(id);
-  const examResults = node('div', '', 'unit-results'), examScene=scene.taskView(); surfaces.get('exam').append(examScene.element);
-  mountPractice('exam', { sceneView:examScene, chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
-    const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
-    const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
-    const corrected = states.filter(state => !state.firstCorrect).length;
-    examResults.replaceChildren(scene.result('exam'),node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
-    const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
-    if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
-  } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitClassroomCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitClassroomCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '细心的配色小达人', course: '新衣配色屋 · Lesson 13–14', completion: '完成 Lesson 13–14 课堂配套练习', thanks: '把颜色看清楚，把新发现说清楚！' },
-      characters: ['louise', 'anna'], characterLabels: ['Louise', 'Anna'], icon: art, defaultName: '细心的配色小达人', dialogTitle: '新衣配色屋纪念', fileName: 'Lesson13-14-新衣配色屋.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'question', l4: 'order', l5: 'star' }[stage.id], color: ['#FFF0BC', '#FBE2CD', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
-  });
+  mountPractice('grammar'); mountPractice('apply');
+  mountPractice('exam');
+  certificateView=core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,
+    progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
+    restart:id=>runners.get(id)?.restart()});
 
-  const writing=node('details','','offline-task');writing.id='unitWriting';
-  writing.append(node('summary','和朋友再试试'),node('p','课堂上跟老师读词语和课文，再听老师说颜色、找图卡。用虚构人物和物品卡两人问答：先问颜色，再介绍一件有两种颜色的物品。交换角色，试着说 same colour；不用介绍自己的衣物。'));
-  writing.append(node('h4','Lesson 13–14 · 纸笔小练习'),node('p',"A．把两句合成一句。例：This is Stella. This is her handbag. → This is Stella's handbag."));
-  const referenceWriting=node('ol','','reference-writing');content.REFERENCE.forEach(item=>{const row=node('li');row.append(node('span',item.cn),node('span','','writing-rule'));referenceWriting.append(row);});writing.append(referenceWriting);
-  writing.append(node('p','B．问颜色，再用 His／Her 回答。人物按 he／she 物主卡判断。'),node('p',"例：Steven / umbrella / black · he → What colour's Steven's umbrella? His umbrella's black."));
-  const replyWriting=node('ol','','reply-writing');content.MODELS.forEach(item=>{const row=node('li');row.append(node('span',item.owner+' / '+item.object+' / '+item.colour+' · '+(item.possessive==='his'?'he':'she')),node('span','','writing-rule'),node('span','','writing-rule'));replyWriting.append(row);});writing.append(replyWriting);
-  const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));
-  writing.append(printActions);surfaces.get('certificate').append(writing);
-  root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
+  core.unit1314References.mount({unit,surfaces});
+  core.unit1314Legacy.show(practice, surfaces.get('certificate'));
+
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  const restoreView = () => requestAnimationFrame(() => { route(); log.scrollTop = log.scrollHeight; });
-  // Cached entry hides the lesson while images decode; hidden logs have no scroll range.
-  document.fonts.ready.then(() => {
-    const preparing = () => document.documentElement.hasAttribute('data-course-preparing');
-    if (!preparing()) { restoreView(); return; }
-    const ready = new MutationObserver(() => {
-      if (preparing()) return;
-      ready.disconnect(); restoreView();
-    });
-    ready.observe(document.documentElement, { attributes: true, attributeFilter: ['data-course-preparing'] });
-  });
+  const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
+  // Cached entry keeps the body hidden until images decode. Font readiness alone
+  // can occur while the transcript has no layout and cannot restore scroll.
+  // This is the loader's document event, not a canran storage key. Keep its
+  // name intact when the /lesson/ publisher prefixes persistent storage keys.
+  const readyEvent = ['canran', 'course-ready'].join(':');
+  document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  root.addEventListener('resize',()=>{if(active==='learn/text'||active==='l2')requestAnimationFrame(revealSavedLine);});
+  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

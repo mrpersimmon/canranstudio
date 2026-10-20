@@ -1,6 +1,7 @@
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
+require('../support/unit1920-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('导航进入冰淇淋休息站，先看音标词卡，整卡翻义无需配音',async({page})=>{
   const audio=[],errors=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});page.on('pageerror',e=>errors.push(e.message));

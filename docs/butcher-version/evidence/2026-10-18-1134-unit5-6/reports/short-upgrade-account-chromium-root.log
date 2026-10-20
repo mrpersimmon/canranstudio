@@ -1,0 +1,36 @@
+[WebServer] (node:29064) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:3936) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:3936) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\units1-6-exam-upgrade.spec.js:10:4 › 5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星 (149ms)
+
+
+  1) tests\login\units1-6-exam-upgrade.spec.js:10:4 › 5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星 ────────────
+
+    Error: EPERM: operation not permitted, symlink 'C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\AGENTS.md' -> 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-short-exam-upgrade-cI9oWJ\old\AGENTS.md'
+
+      28 |         const home=await fs.readFile(path.join(root,entry.name),'utf8');
+      29 |         await fs.writeFile(path.join(oldRoot,entry.name),home.replace(/<section[^>]+data-unit="unit5-6"[\s\S]*?<\/section>/,previous));
+    > 30 |       } else await fs.symlink(path.join(root, entry.name), path.join(oldRoot, entry.name));
+         |              ^
+      31 |     }
+      32 |     await fs.mkdir(path.join(oldRoot, course));
+      33 |     const frozen = ['index.html', 'content.js', 'unit.js', 'unit.css', 'scene.js'];
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\units1-6-exam-upgrade.spec.js:30:14
+
+    Error Context: output\unit56-review-20261018\short-upgrade-account-chromium-root\units1-6-exam-upgrade-5-6-旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\short-upgrade-account-chromium-root\units1-6-exam-upgrade-5-6-旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\short-upgrade-account-chromium-root\units1-6-exam-upgrade-5-6-旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\units1-6-exam-upgrade.spec.js:10:4 › 5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星 ─────────────

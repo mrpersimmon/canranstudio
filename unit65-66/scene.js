@@ -5,12 +5,11 @@ function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/
 function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location','Jill 家 · 晚间门厅');element.setAttribute('role','group');element.setAttribute('aria-label','Jill一家在门厅商量出门的场景');const actors={};
  for(const[key,label]of [['father','Father · Tom'],['mother','Mother'],['jill','Jill']]){const wrap=node('div','dialogue-actor visit-actor actor-'+key);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+'完整人物','webp'),node('span','actor-label',label));element.append(wrap);actors[key]=wrap;}
- const key=node('div','story-key');key.append(picture('key','key-object','唯一一枚前门钥匙'),node('span','key-owner','爸爸保管'));element.append(location,key);
+ const key=node('div','story-key');key.append(picture('key','key-object','唯一一枚前门钥匙'));element.append(location,key);
  function update(i){
   const parents=i===6||i===7,mumDaughter=i>=10;const left=parents||mumDaughter?'mother':'father',right=parents?'father':'jill';
   element.dataset.beat=parents?'parents':mumDaughter?'goodbye':i>=8?'handover':'before';element.dataset.keyOwner=i>=8?'jill':'father';
   for(const[name,wrap]of Object.entries(actors)){wrap.hidden=name!==left&&name!==right;wrap.classList.toggle('at-left',name===left);wrap.classList.toggle('at-right',name===right);const flip=name==='father'&&name===right;wrap.querySelector('img').style.transform=flip?'scaleX(-1)':'';wrap.querySelector('img').alt={father:'爸爸',mother:'妈妈',jill:'Jill'}[name]+(name===left?'朝向右侧交谈者':'朝向左侧交谈者')+'，头发、双手、衣服与鞋子完整';}
-  key.querySelector('.key-owner').textContent=i>=8?'Jill 已接过':'爸爸保管';
  }
  update(-1);return{element,update};
 }

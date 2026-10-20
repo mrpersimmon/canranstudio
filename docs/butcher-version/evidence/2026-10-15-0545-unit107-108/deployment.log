@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:13032) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\lesson-deployment.spec.js:63:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除 (10.6s)
+
+  1 passed (11.9s)

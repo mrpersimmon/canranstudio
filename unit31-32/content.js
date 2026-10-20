@@ -1631,3 +1631,62 @@ definition.learning.FEEDBACK=root.CanranCore.courseCatalog.requireCourseDefiniti
 root.CanranCore.unit3132=definition;
 if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+// Actual 33-question predecessor remains above, including its original signatures.
+(function(core){
+'use strict';
+const old=core.unit3132;core.unit3132LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸62–65／PDF95–98；语法练习册纸85–90／PDF99–104';
+const grammarSource='同步导学纸55–58／PDF69–72，Grammar纸56–57／PDF70–71；'+source;
+const unit={id:'unit31-32',version:1,mode:'classroom',contentRevision:'garden-five-zones-v1',legacyEdition:'unit31-32-completion-v1',title:'花园观察小队',path:'/unit31-32/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'走进花园',activities:[['words','花园小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'寻找萨莉',activities:[['text','花园小剧场','book'],['roles','课文小侦探','people']],required:['text','roles']},{id:'l3',title:'正在做什么',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'捕捉正在做的事',activities:[['apply','动作观察站','heart']],required:['apply']},{id:'l5',title:'我的花园发现',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'garden-five-zones-v1',title:'细心花园观察员',lesson:'Lesson 31–32',scene:'/assets/unit31-32/keepsake-story-v1.webp',alt:'琼与杰克谈论花园里的萨莉和蒂姆',color:'#55773C',zones:[['listen','单词寻宝'],['roles','课文小侦探'],['grammar','语法小工坊'],['apply','动作观察站'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u3132-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('form','现在进行时由be和动作-ing组成','眼前的蒂姆正在爬树，补全描述。',choice(['is climbing','climbing','is climb'],'is climbing','Tim ___ the tree.'),'说现在正在做的动作，用am/is/are加动作-ing；Tim是一个人，用is。',[['Sally is sitting under the tree.','萨莉正坐在树下。is和sitting一起表示正在做。']]),
+g('agreement','am/is/are随主语变化','我正在读书，孩子们正在跑步，分别补好be。',fill([blank('I ',' reading a book.',['am','is','are']),blank('The children ',' running.',['are','is','am'])],['am','are']),'I用am，he/she/it或单个人名用is，you/we/they和复数主语用are。',[['I am watching TV now. / They are playing football.','导学原例：I am；They are。']]),
+g('negative','not放在be后','孩子们没有在打扫房间。用aren’t组织否定句。',words(['The children','aren’t','cleaning','the room.','not'],4,'The children aren’t cleaning the room.'),'否定在be后加not，are not可以缩写为aren’t；后面的动作-ing不变。',[['Sarah is singing. → Sarah is not singing.','否定动作时not放在is后面。sing：唱歌。']]),
+g('question','一般疑问句把be提前','把“她正在打信”改成一般疑问句。',words(['Is','she','typing','a letter?','Does'],4,'Is she typing a letter?','She is typing a letter.'),'把is放在she前面，typing不变，不另加does。',[['They are playing football. → Are they playing football?','一般问句把are放在they前。']]),
+g('yes','肯定简答的人称与be','朋友问你是否在读书。你确实正在读，怎样回答？',choice(['Yes, I am.','Yes, you are.','Yes, I do.'],'Yes, I am.','Friend: Are you reading?\nYou: ___'),'别人问的you指我，我回答自己用I am；简答回应be，不换成do。',[['Is Sally sitting under the tree? — Yes, she is.','已经确认萨莉坐在树下，再作肯定简答。']]),
+g('no','根据事实作否定简答','小猫正在喝奶，没有在啃骨头。补好回答。',fill([blank('No, ','.',['it isn’t','it is','he isn’t'])],['it isn’t'],'Is the cat eating a bone?'),'事实与猜测不符，回答No, it isn’t.；沿用题目中的小猫用it。',[['Is Tim sitting? — No, he isn’t. He is climbing the tree.','蒂姆实际在爬树，先否定错误猜测，再说真实动作。']]),
+g('period','现在进行时也可表示现阶段活动','这周我正在读一本书，现在暂时合上它休息。哪种理解合适？',choice(['表示这周正在进行的阅读，不要求此刻正翻书。','只能表示说话这一秒正翻书。','表示每周固定读同一本书。'],'表示这周正在进行的阅读，不要求此刻正翻书。','I am reading a book this week.\nthis week：这周'),'现在进行时还可以表示现阶段正在进行的活动，不要求每一秒都做。',[['The farmers are working on the farm day and night.','导学原例用农民这段时间的活动说明用法。farmer：农民；day and night：日夜。']]),
+g('state','区分所在地点与正在做','句子只说萨莉在哪里，哪种形式合适？',choice(['She is in the garden.','She is being in the garden.','She in the garden.'],'She is in the garden.'),'说明所在地点用be加地点，不把每个带is的句子都看成现在进行时，也不机械添加being。',[['She is in the garden. / She is sitting in the garden.','前句说地点，后句的is sitting说正在做的动作。']]),
+g('spelling','区别直接加ing与双写','把open和put变成动作-ing形式。',fill([blank('He is ',' the window. (open)',['opening','openning','open']),blank('She is ',' on her coat. (put)',['putting','puting','put'])],['opening','putting']),'open → opening，不双写；put → putting。重读短元音后单辅音结尾的本课短词sit/run/shut/put双写；不能一见辅音结尾就双写。',[['look → looking；make → making；run → running','通常直接加ing；不发音e结尾如make去e；run双写n。']]),
+...old.questions.observe];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-location','按回答区分地点与动作','萨莉正在花园里坐着，你只想问她在哪里。',fill([blank('',' Sally sitting?',['Where is','What is','Who is'])],['Where is'],'Sally is sitting in the garden.\n— ___ Sally sitting? — In the garden.'),'问正在坐的地点用Where is…sitting，不用What is…doing问动作。'),
+q('a-plural','用are描述复数人物的动作','两位朋友此刻正在一起读杂志，选出描述。',choice(['They are reading a magazine.','They is reading a magazine.','They are read a magazine.'],'They are reading a magazine.'),'They是复数主语，用are reading。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-be','独立选择am/is/are','补全“我在打信，他们在做饭”的正在进行描述。',fill([blank('I ',' typing a letter.',['am','is','are']),blank('They ',' cooking a meal.',['are','is','am'])],['am','are']),'I am，They are，后接typing和cooking。'),
+q('e-negative','独立组织否定句','两位孩子没有在读书。用aren’t组织句子。',words(['The children','aren’t','reading','a book.','don’t'],4,'The children aren’t reading a book.'),'现在进行时的否定用be not加动作-ing。'),
+q('e-question','独立组织进行时问句','用Is开头问“他正在开窗吗？”',words(['Is','he','opening','the window?','Does'],4,'Is he opening the window?'),'把is放到主语he前，opening不变。'),
+q('e-reply','独立按事实和人称简答','同学问你是否正在写信，你确实正在写。',choice(['Yes, I am.','Yes, you are.','No, I’m not.'],'Yes, I am.','Classmate: Are you writing a letter?\nYou: ___\nwrite a letter：写信'),'回应自己的动作，用Yes, I am.，不照抄问句you。'),
+q('e-period','独立理解现阶段正在进行','这周的阅读还在继续，但我此刻正在休息。这句话是否仍可描述这周的活动？',choice(['可以，它也能说现阶段正在进行的活动。','不可以，它只能说这一秒手上正在做的事。','可以，但它只表示每天的习惯。'],'可以，它也能说现阶段正在进行的活动。','I am reading a book this week.\nthis week：这周'),'现在进行时可以说现阶段的暂时活动；不能把它限制为每一秒。'),
+q('e-place','独立区别地点与动作表达','只有“狗在花园里”这个地点信息，选出对应句子。',choice(['The dog is in the garden.','The dog is running in the garden.','The dog is being in the garden.'],'The dog is in the garden.'),'地点信息没有说明狗在跑，不能增加动作，也不机械加being。'),
+q('e-open','独立迁移拼写规则','用open与take的动作-ing形式补空。',fill([blank('He is ',' the window. (open)',['opening','openning','open']),blank('She is ',' off her coat. (take)',['taking','takeing','take'])],['opening','taking']),'open直接加ing，take去不发音e再加ing。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+const oldSession=id=>old.taskSessions?.[id]||(old.activityPredecessors?.[id]?'v2':'v'+old.version);
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,ids])=>[id,ids.flatMap(prior=>[{key:'unit3132-'+prior+'-practice/'+oldSession(prior),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[]),...(old.activityPredecessors?.[prior]||[]).map(p=>({key:'unit3132-'+p+'-practice/v1',questions:old.previousQuestions[p]}))])]));
+core.unit3132=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit3132,excerpts={"u3132-v1-tim":[4,5,6,7,8,9]},speakers={"Jean":"琼","Jack":"杰克"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 31',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

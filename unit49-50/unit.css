@@ -106,3 +106,11 @@
  .certificate-paper,.certificate-paper *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 @media(prefers-reduced-motion:reduce){.unit-workspace *{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit4950-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit4950-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit4950-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit4950-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

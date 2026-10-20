@@ -1,0 +1,20 @@
+/* O16: preserve the original paper and its typography, independent of the new
+   five-star card. Only this old dialog and its own print action are affected. */
+.unit4950-workspace #legacyCertificateDialog{--unit-page:#FFF9F4;--unit-wash:#FCEBDD;--unit-line:#E6C4AC;--unit-accent:#98513E;--paper:#FFFDF8;font-family:'Baloo 2','PingFang SC','Microsoft YaHei',sans-serif;font-weight:400;font-synthesis:weight}
+.unit4950-workspace #legacyCertificateDialog :is(.certificate-course,.certificate-completion,.certificate-to,.certificate-date,.certificate-reward){font-family:'Baloo 2','PingFang SC','Microsoft YaHei',sans-serif;font-weight:400}
+.unit4950-workspace #legacyCertificateDialog .certificate-reward{font-weight:800}
+.unit4950-workspace #legacyCertificateDialog #legacyCertificateDate{font-weight:700}
+.unit4950-workspace #legacyCertificateDialog :is(.certificate-award,.certificate-thanks,.certificate-badge,.certificate-badge>span){font-family:'ZCOOL KuaiLe',sans-serif;font-weight:400}
+.unit4950-workspace #legacyCertificateName{font:48px/1.25 'ZCOOL KuaiLe',sans-serif;color:var(--brown);overflow-wrap:anywhere;border-bottom:5px solid var(--yellow);padding:8px 4px 10px;margin:0}
+.unit4950-workspace #legacyCertificateName.is-long{font-size:30px}
+.unit4950-workspace .legacy-certificate-host [hidden]{display:none!important}
+@media(max-width:600px){.unit4950-workspace #legacyCertificateName{font-size:30px;padding:6px 0 8px}.unit4950-workspace #legacyCertificateName.is-long{font-size:23px}}
+@media print{
+ body.unit4950-workspace.print-legacy-certificate>*{display:none!important}
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateDialog,
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateDialog *{visibility:visible!important}
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateDialog[open]{display:block!important;position:static;border:0;padding:0;max-height:none;width:100%;max-width:none}
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateDialog>*:not(.certificate-paper){display:none!important}
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateDialog::backdrop{display:none}
+ body.unit4950-workspace.print-legacy-certificate #legacyCertificateName{font-size:42px}
+}

@@ -1,0 +1,206 @@
+{
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "os": "Windows",
+  "timezone": "Asia/Shanghai",
+  "runs": {
+    "chromium": {
+      "start": "2026-10-16T03:46:56.8615645+08:00",
+      "end": "2026-10-16T03:50:00.8307577+08:00",
+      "worker": 1,
+      "concurrency": "two course runners",
+      "result": [
+        "2 failed",
+        "13 passed (3.0m)"
+      ],
+      "caseDurations": [
+        "  ok  1 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 320：16步完整原文、三种同场姿态、中文续读与无剧情结论 (13.8s)",
+        "  ok  2 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 390：16步完整原文、三种同场姿态、中文续读与无剧情结论 (13.8s)",
+        "  x   3 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 768：16步完整原文、三种同场姿态、中文续读与无剧情结论 (14.9s)",
+        "  ok  4 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 1280：16步完整原文、三种同场姿态、中文续读与无剧情结论 (15.1s)",
+        "  ok  5 tests\\e2e\\unit131-132-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (2.7s)",
+        "  ok  6 tests\\e2e\\unit131-132.spec.js:13:1 › 65题：未答材料、行程与照看记录、独立迁移、帮助记录与三卡 (18.3s)",
+        "  ok  7 tests\\e2e\\unit131-132.spec.js:28:1 › 18词卡、132课1–6、A7与B20完整 (2.6s)",
+        "  ok  8 tests\\e2e\\unit131-132.spec.js:39:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (12.3s)",
+        "  ok  9 tests\\e2e\\unit131-132.spec.js:49:1 › 错答不更新线索记录，三卡6／8／2，刷新保留原图 (4.6s)",
+        "  ok 10 tests\\e2e\\unit131-132.spec.js:54:1 › 全部声音失败仍能完成五区 (15.6s)",
+        "  ok 11 tests\\e2e\\unit131-132.spec.js:55:1 › 27道书写题48行打印与恢复 (1.2s)",
+        "  ok 12 tests\\e2e\\unit131-132.spec.js:56:39 › 320及短屏：推测与事实材料、长句、全部题型和三卡 (20.6s)",
+        "  ok 13 tests\\e2e\\unit131-132.spec.js:56:39 › 390及短屏：推测与事实材料、长句、全部题型和三卡 (21.0s)",
+        "  x  14 tests\\e2e\\unit131-132.spec.js:56:39 › 768及短屏：推测与事实材料、长句、全部题型和三卡 (764ms)",
+        "  ok 15 tests\\e2e\\unit131-132.spec.js:56:39 › 1280及短屏：推测与事实材料、长句、全部题型和三卡 (22.0s)"
+      ]
+    },
+    "webkit": {
+      "start": "2026-10-16T03:46:56.8798819+08:00",
+      "end": "2026-10-16T03:53:20.9534851+08:00",
+      "worker": 1,
+      "concurrency": "two course runners",
+      "result": [
+        "2 failed",
+        "13 passed (6.4m)"
+      ],
+      "caseDurations": [
+        "  ok  1 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 320：16步完整原文、三种同场姿态、中文续读与无剧情结论 (25.8s)",
+        "  ok  2 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 390：16步完整原文、三种同场姿态、中文续读与无剧情结论 (27.7s)",
+        "  x   3 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 768：16步完整原文、三种同场姿态、中文续读与无剧情结论 (27.2s)",
+        "  ok  4 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 1280：16步完整原文、三种同场姿态、中文续读与无剧情结论 (28.9s)",
+        "  ok  5 tests\\e2e\\unit131-132-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (8.1s)",
+        "  ok  6 tests\\e2e\\unit131-132.spec.js:13:1 › 65题：未答材料、行程与照看记录、独立迁移、帮助记录与三卡 (46.9s)",
+        "  ok  7 tests\\e2e\\unit131-132.spec.js:28:1 › 18词卡、132课1–6、A7与B20完整 (5.9s)",
+        "  ok  8 tests\\e2e\\unit131-132.spec.js:39:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (28.8s)",
+        "  ok  9 tests\\e2e\\unit131-132.spec.js:49:1 › 错答不更新线索记录，三卡6／8／2，刷新保留原图 (9.2s)",
+        "  ok 10 tests\\e2e\\unit131-132.spec.js:54:1 › 全部声音失败仍能完成五区 (39.1s)",
+        "  ok 11 tests\\e2e\\unit131-132.spec.js:55:1 › 27道书写题48行打印与恢复 (1.5s)",
+        "  ok 12 tests\\e2e\\unit131-132.spec.js:56:39 › 320及短屏：推测与事实材料、长句、全部题型和三卡 (42.8s)",
+        "  ok 13 tests\\e2e\\unit131-132.spec.js:56:39 › 390及短屏：推测与事实材料、长句、全部题型和三卡 (43.3s)",
+        "  x  14 tests\\e2e\\unit131-132.spec.js:56:39 › 768及短屏：推测与事实材料、长句、全部题型和三卡 (901ms)",
+        "  ok 15 tests\\e2e\\unit131-132.spec.js:56:39 › 1280及短屏：推测与事实材料、长句、全部题型和三卡 (44.0s)"
+      ]
+    },
+    "refined-chromium": {
+      "start": "2026-10-16T03:56:39.7248001+08:00",
+      "end": "2026-10-16T03:57:54.1030736+08:00",
+      "worker": 1,
+      "concurrency": "two course runners",
+      "result": [
+        "5 passed (1.2m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 768：16步完整原文、三种同场姿态、中文续读与无剧情结论 (13.8s)",
+        "  ok 2 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 1280：16步完整原文、三种同场姿态、中文续读与无剧情结论 (14.5s)",
+        "  ok 3 tests\\e2e\\unit131-132.spec.js:55:1 › 27道书写题48行打印与恢复 (1.1s)",
+        "  ok 4 tests\\e2e\\unit131-132.spec.js:56:39 › 768及短屏：推测与事实材料、长句、全部题型和三卡 (21.5s)",
+        "  ok 5 tests\\e2e\\unit131-132.spec.js:56:39 › 1280及短屏：推测与事实材料、长句、全部题型和三卡 (21.2s)"
+      ]
+    },
+    "refined-webkit": {
+      "start": "2026-10-16T03:56:39.7384937+08:00",
+      "end": "2026-10-16T03:59:05.4265668+08:00",
+      "worker": 1,
+      "concurrency": "two course runners",
+      "result": [
+        "5 passed (2.4m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 768：16步完整原文、三种同场姿态、中文续读与无剧情结论 (27.9s)",
+        "  ok 2 tests\\e2e\\unit131-132-story-layout.spec.js:31:39 › 1280：16步完整原文、三种同场姿态、中文续读与无剧情结论 (27.2s)",
+        "  ok 3 tests\\e2e\\unit131-132.spec.js:55:1 › 27道书写题48行打印与恢复 (1.7s)",
+        "  ok 4 tests\\e2e\\unit131-132.spec.js:56:39 › 768及短屏：推测与事实材料、长句、全部题型和三卡 (42.8s)",
+        "  ok 5 tests\\e2e\\unit131-132.spec.js:56:39 › 1280及短屏：推测与事实材料、长句、全部题型和三卡 (43.9s)"
+      ]
+    },
+    "login-root": {
+      "start": "2026-10-16T04:11:04.3172691+08:00",
+      "end": "2026-10-16T04:12:49.6891855+08:00",
+      "worker": 1,
+      "concurrency": "two Chromium account runners",
+      "result": [
+        "7 passed (1.7m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (3.4s)",
+        "  ok 2 tests\\login\\unit131-132.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.6s)",
+        "  ok 3 tests\\login\\unit131-132.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (45.6s)",
+        "  ok 4 tests\\login\\unit131-132.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (6.4s)",
+        "  ok 5 tests\\login\\unit131-132.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (21.3s)",
+        "  ok 6 tests\\login\\unit131-132.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (12.0s)",
+        "  ok 7 tests\\login\\unit131-132.spec.js:232:1 › 行程比较与照看状态图在账号中真实可见：未答读图、错答刷新与两空续做 (8.6s)"
+      ]
+    },
+    "login-sub": {
+      "start": "2026-10-16T04:11:04.3149241+08:00",
+      "end": "2026-10-16T04:12:51.6908872+08:00",
+      "worker": 1,
+      "concurrency": "two Chromium account runners",
+      "result": [
+        "7 passed (1.8m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (3.4s)",
+        "  ok 2 tests\\login\\unit131-132.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (1.7s)",
+        "  ok 3 tests\\login\\unit131-132.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (46.2s)",
+        "  ok 4 tests\\login\\unit131-132.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (6.5s)",
+        "  ok 5 tests\\login\\unit131-132.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (22.1s)",
+        "  ok 6 tests\\login\\unit131-132.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (12.1s)",
+        "  ok 7 tests\\login\\unit131-132.spec.js:232:1 › 行程比较与照看状态图在账号中真实可见：未答读图、错答刷新与两空续做 (9.2s)"
+      ]
+    },
+    "login-webkit-root": {
+      "start": "2026-10-16T04:14:34.4647139+08:00",
+      "end": "2026-10-16T04:20:00.8495234+08:00",
+      "worker": 1,
+      "concurrency": "one WebKit account runner;paths sequential",
+      "result": [
+        "7 passed (5.4m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (14.8s)",
+        "  ok 2 tests\\login\\unit131-132.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (2.9s)",
+        "  ok 3 tests\\login\\unit131-132.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (2.1m)",
+        "  ok 4 tests\\login\\unit131-132.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (23.1s)",
+        "  ok 5 tests\\login\\unit131-132.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.2m)",
+        "  ok 6 tests\\login\\unit131-132.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (47.4s)",
+        "  ok 7 tests\\login\\unit131-132.spec.js:232:1 › 行程比较与照看状态图在账号中真实可见：未答读图、错答刷新与两空续做 (36.8s)"
+      ]
+    },
+    "login-webkit-sub": {
+      "start": "2026-10-16T04:20:00.8507985+08:00",
+      "end": "2026-10-16T04:25:26.7674058+08:00",
+      "worker": 1,
+      "concurrency": "one WebKit account runner;paths sequential",
+      "result": [
+        "7 passed (5.4m)"
+      ],
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (14.8s)",
+        "  ok 2 tests\\login\\unit131-132.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (2.9s)",
+        "  ok 3 tests\\login\\unit131-132.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (2.1m)",
+        "  ok 4 tests\\login\\unit131-132.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (23.0s)",
+        "  ok 5 tests\\login\\unit131-132.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.2m)",
+        "  ok 6 tests\\login\\unit131-132.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (47.5s)",
+        "  ok 7 tests\\login\\unit131-132.spec.js:232:1 › 行程比较与照看状态图在账号中真实可见：未答读图、错答刷新与两空续做 (36.6s)"
+      ]
+    },
+    "retention-root": {
+      "start": "2026-10-16T04:26:57.5602193+08:00",
+      "end": "2026-10-16T04:27:17.1126946+08:00",
+      "worker": 1,
+      "concurrency": "two Chromium runners",
+      "result": "1 passed",
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (13.5s)"
+      ]
+    },
+    "retention-sub": {
+      "start": "2026-10-16T04:26:57.5575064+08:00",
+      "end": "2026-10-16T04:27:18.0384244+08:00",
+      "worker": 1,
+      "concurrency": "two Chromium runners",
+      "result": "1 passed",
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (14.5s)"
+      ]
+    },
+    "retention-webkit-root": {
+      "start": "2026-10-16T04:32:17.7964766+08:00",
+      "end": "2026-10-16T04:33:07.0357746+08:00",
+      "worker": 1,
+      "concurrency": "one WebKit runner;paths sequential",
+      "result": "1 passed",
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (43.6s)"
+      ]
+    },
+    "retention-webkit-sub": {
+      "start": "2026-10-16T04:33:07.0370342+08:00",
+      "end": "2026-10-16T04:33:56.1299320+08:00",
+      "worker": 1,
+      "concurrency": "one WebKit runner;paths sequential",
+      "result": "1 passed",
+      "caseDurations": [
+        "  ok 1 tests\\login\\unit131-132.spec.js:257:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (43.5s)"
+      ]
+    }
+  }
+}

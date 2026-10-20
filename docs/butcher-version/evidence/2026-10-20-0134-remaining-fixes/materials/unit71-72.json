@@ -1,0 +1,80 @@
+{
+  "id": "unit71-72",
+  "source": {
+    "file": "tests/support/unit7172.js",
+    "sha256": "78ecf11e2ceb2015d92c24d6a161573498fb70c5727205ff787ed8dbe82d11fb"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u7172-v1-r-count",
+      "text": "Lesson 71\n\nJane: What’s Ron Marston like, Pauline?\n\nPauline: He’s awful! He telephoned me four times yesterday, and three times the day before yesterday."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u7172-v1-r-office",
+      "text": "Lesson 71\n\nPauline: He telephoned the office yesterday morning and yesterday afternoon. My boss answered the telephone.\n\nJane: What did your boss say to him?\n\nPauline: He said, “Pauline is typing letters. She can’t speak to you now!”"
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u7172-v1-r-typing",
+      "text": "Lesson 71\n\nPauline: He telephoned the office yesterday morning and yesterday afternoon. My boss answered the telephone.\n\nJane: What did your boss say to him?\n\nPauline: He said, “Pauline is typing letters. She can’t speak to you now!”"
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u7172-v1-r-six",
+      "text": "Lesson 71\n\nPauline: Then I arrived home at six o’clock yesterday evening. He telephoned again. But I didn’t answer the phone!"
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u7172-v1-r-nine",
+      "text": "Lesson 71\n\nJane: Did he telephone again last night?\n\nPauline: Yes, he did. He telephoned at nine o’clock."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u7172-v1-r-who",
+      "text": "Lesson 71\n\nJane: Did he telephone again last night?\n\nPauline: Yes, he did. He telephoned at nine o’clock.\n\nJane: What did you say to him?\n\nPauline: I said, “This is Pauline’s mother. Please don’t telephone my daughter again!”"
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u7172-v1-r-end",
+      "text": "Lesson 71\n\nJane: What did you say to him?\n\nPauline: I said, “This is Pauline’s mother. Please don’t telephone my daughter again!”\n\nJane: Did he telephone again?\n\nPauline: No, he didn’t!"
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u7172-v1-e-days",
+      "text": "Lesson 71\n\nJane: What’s Ron Marston like, Pauline?\n\nPauline: He’s awful! He telephoned me four times yesterday, and three times the day before yesterday.\n\nPauline: He telephoned the office yesterday morning and yesterday afternoon. My boss answered the telephone.\n\nJane: What did your boss say to him?\n\nPauline: He said, “Pauline is typing letters. She can’t speak to you now!”\n\nPauline: Then I arrived home at six o’clock yesterday evening. He telephoned again. But I didn’t answer the phone!\n\nJane: Did he telephone again last night?\n\nPauline: Yes, he did. He telephoned at nine o’clock.\n\nJane: What did you say to him?\n\nPauline: I said, “This is Pauline’s mother. Please don’t telephone my daughter again!”\n\nJane: Did he telephone again?\n\nPauline: No, he didn’t!"
+    },
+    {
+      "zone": "exam",
+      "index": 8,
+      "questionId": "u7172-v1-e-identity",
+      "text": "Lesson 71\n\nJane: What did you say to him?\n\nPauline: I said, “This is Pauline’s mother. Please don’t telephone my daughter again!”"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-5",
+    "R3": "3-5",
+    "R4": "6",
+    "R5": "7-8",
+    "R6": "7-10",
+    "R8": "9-12",
+    "E5": "*",
+    "E8": "9-10"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

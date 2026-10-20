@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit3-4-v154-history.spec.js",
+      "-g",
+      "classroom25",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/legacy-canvas-diagnostic"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/legacy-canvas-diagnostic",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4508",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit3-4-v154-history.spec.js",
+      "file": "unit3-4-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 18253,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:14:464",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                      "column": 464,
+                      "line": 14
+                    },
+                    "snippet": "  12 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  13 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 14 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);await fs.writeFile(info.outputPath('font-diagnostic.json'),JSON.stringify({before:oldMetrics,after:await fontMetrics(page),oldDraws,newDraws:await page.evaluate(()=>window.legacyDraws)},null,2));expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  15 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  16 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  17 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                        "column": 464,
+                        "line": 14
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  12 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);\n  13 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);\n> 14 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);await fs.writeFile(info.outputPath('font-diagnostic.json'),JSON.stringify({before:oldMetrics,after:await fontMetrics(page),oldDraws,newDraws:await page.evaluate(()=>window.legacyDraws)},null,2));expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^\n  15 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();\n  16 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\\/Type \\/Page\\b/g)).toHaveLength(1);}\n  17 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js:14:464"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T02:51:56.678Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\legacy-canvas-diagnostic\\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\legacy-canvas-diagnostic\\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit3-4-v154-history.spec.js",
+                    "column": 464,
+                    "line": 14
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1894b9e42c6846666bb6-785e564ef0b164cccd13",
+          "file": "unit3-4-v154-history.spec.js",
+          "line": 6,
+          "column": 49
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T02:51:56.024Z",
+    "duration": 19813.109,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

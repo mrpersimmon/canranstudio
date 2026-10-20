@@ -2,6 +2,7 @@
 const {test,expect}=require('@playwright/test');
 
 test.use({actionTimeout:6000});
+require('../support/unit4546-v153-legacy').historicalSuite(test);
 
 async function assertBobFacesPartner(world){
  const facing=await world.evaluate(el=>{

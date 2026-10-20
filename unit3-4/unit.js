@@ -3,6 +3,8 @@
   const core = root.CanranCore, unit = core.unit34;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
+  core.unit34History.preserve(practice,unit);
+  const runners=new Map();
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -13,7 +15,7 @@
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
-    const path = ['visitor', 'attendant'].includes(name) ? '/assets/unit3-4/' + name + '.svg' : word?.image;
+    const path = ['visitor', 'attendant'].includes(name) ? core.unit34Current.image(name) : word?.image;
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
@@ -120,30 +122,32 @@
       settings.sceneView = core.unit34Scene.create({ element });
       settings.completionDetails = settings.sceneView.completion();
     }
-    if (id === 'reply') settings.sceneView = core.unit12Grammar.create({ element, art });
+    if (id === 'reply') settings.sceneView = core.unit34Current.grammar({ element, art });
     const predecessors = unit.activityPredecessors[id];
-    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+    const runner=practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
       inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit34-' + old + '-practice/v1', questions: prior }))), ...settings,
+      onAnswer:(question,state)=>{if(settings.sceneView?.hasVisibleModel?.()){state.revealed=true;practice.record(question,state);}settings.onAnswer?.(question,state);},
       onComplete: (states,round) => {
         const { perfect, message } = settlement.complete({ id, states, round, awards, element });
         complete(id);
         nextStation(id, element.querySelector('.practice-finish-actions'));
         settings.onComplete?.(states);
         core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
-          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          theme: { title: completionTitles[id] }, artwork: core.unit34Current.completion(), details: id === 'exam' ? settings.completionDetails : null,
           celebrate: round.userCompleted, awardStatus: message,
           waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
         const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
         result.dataset.perfect = String(perfect); result.dataset.zone = id;
         updateProgress(); } });
+    runners.set(id,runner);
     return element;
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
   const props = core.unit34Scene.storyProps();
-  stage.append(props.element, log);
+  props.element.append(log);stage.append(props.element);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -166,7 +170,7 @@
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.who));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('umbrella'), node('p', '客人能找回自己的雨伞吗？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'), question=node('p','Does the man get his umbrella back?','story-question');question.lang='en';lead.append(question,node('p','这位男士拿回自己的雨伞了吗？','story-question-translation')); log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
@@ -279,16 +283,17 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href});
+  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,progress:id=>runners.get(id)?.progress(),restart:id=>runners.get(id)?.restart()});
+  core.unit34History.show(practice,surfaces.get('certificate'));
 
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
-  writing.append(node('summary', '和家人再试试'), node('p', '各拿一件自己和家人的物品。先确定主人，再用 Is this your…? 问答，交换角色后留意 my 和 your 跟着说话人变化。只有明确知道是对方的，才能说 It’s your…。'), node('p', '纸笔小练习：抄写下列四句；再按“不是我的，是你的”的已知条件完成问答。'));
+  writing.append(node('summary', '和家人再试试'),node('h3','Lesson 4 · 书面练习'), node('p', '各拿一件自己和家人的物品。先确定主人，再用 Is this your…? 问答，交换角色后留意 my 和 your 跟着说话人变化。只有明确知道是对方的，才能说 It’s your…。'), node('h4','A · Copy these sentences.'),node('p','抄写下面四句。'));
   const writingLines = node('ol', '', 'writing-lines'); ['This is not my umbrella.', 'Sorry, sir.', 'Is this your umbrella?', "No, it isn’t!"].forEach(text => writingLines.append(node('li', text))); writing.append(writingLines);
   const replyWriting = node('ol', '', 'reply-writing');
   content.SENTENCE_MODELS.slice(0, 10).forEach(item => {
     const line = node('li'); line.append(node('span', item.en), node('span', '', 'writing-rule'), node('span', '', 'writing-rule')); replyWriting.append(line);
   });
-  writing.append(node('p', '下面每题都已知物品属于提问的家人。你来回答：不是我的，是你的。'), node('p', '例：No. It isn’t my umbrella. It’s your umbrella.'), replyWriting);
+  writing.append(node('h4','B · Answer these questions.'),node('p', '下面每题都已知物品属于提问的家人。你来回答：不是我的，是你的。'), node('p', 'Example: Is this your umbrella?'),node('p', 'No. It isn’t my umbrella. It’s your umbrella.'), replyWriting);
   const printActions = node('div', '', 'activity-actions'); printActions.append(button('打印练习纸', () => {
     document.body.classList.add('print-writing'); root.print();
   }, 'btn btn-yellow')); writing.append(printActions); surfaces.get('certificate').append(writing);
@@ -302,6 +307,6 @@
   // This is the loader's document event, not a canran storage key. Keep its
   // name intact when the /lesson/ publisher prefixes persistent storage keys.
   const readyEvent = ['canran', 'course-ready'].join(':');
-  document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  document.addEventListener(readyEvent,()=>{route();revealSavedLine();},{once:true});
   document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

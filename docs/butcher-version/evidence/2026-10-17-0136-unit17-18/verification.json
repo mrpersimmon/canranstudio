@@ -1,0 +1,192 @@
+{
+  "completedAt": "2026-10-16T18:35:13.184Z",
+  "status": "passed",
+  "uniqueTestConditions": 163,
+  "groups": [
+    {
+      "scope": "Chromium current course, real predecessor migration and reading controls",
+      "conditions": 18,
+      "status": "passed",
+      "evidence": "Initial run: 16 passed, 2 failed. Original-button-name correction and original PNG page-colour fix passed both affected cases; final two short-screen cases rechecked after completion-art sizing.",
+      "commands": [
+        "npx playwright test tests/e2e/unit17-18-fivezones.spec.js tests/e2e/unit17-18-fivezones-upgrade.spec.js tests/e2e/unit17-18-reading-controls.spec.js"
+      ],
+      "outputDirectories": [
+        "output/unit1718-chromium",
+        "output/unit1718-upgrade-refined"
+      ],
+      "reports": [
+        "reports/completion-chromium-final.json"
+      ]
+    },
+    {
+      "scope": "WebKit current course, real predecessor migration and reading controls",
+      "conditions": 18,
+      "status": "passed",
+      "reports": [
+        "reports/webkit.json",
+        "reports/completion-webkit-final.json"
+      ],
+      "note": "The final two short-screen cases supersede their earlier runs; no duplicate count."
+    },
+    {
+      "scope": "Chromium worksheet and original certificate PDF",
+      "conditions": 2,
+      "status": "passed",
+      "outputDirectory": "output/unit1718-print",
+      "artifacts": [
+        "worksheet.pdf",
+        "legacy-certificate.pdf"
+      ]
+    },
+    {
+      "scope": "Chromium authenticated root mount",
+      "conditions": 8,
+      "status": "passed",
+      "reports": [
+        "reports/login-root.json",
+        "reports/login-root-refined.json"
+      ],
+      "note": "Initial 7 passed and 1 failed due to a copied bare 15-16 test target. Corrected comparison target passed; app authorization was unchanged."
+    },
+    {
+      "scope": "Chromium authenticated /lesson/ mount",
+      "conditions": 8,
+      "status": "passed",
+      "reports": [
+        "reports/login-subpath.json"
+      ],
+      "note": "The report also includes the separate earlier-version chain below."
+    },
+    {
+      "scope": "WebKit authenticated root mount",
+      "conditions": 8,
+      "status": "passed",
+      "reports": [
+        "reports/login-webkit-root.json"
+      ]
+    },
+    {
+      "scope": "WebKit authenticated /lesson/ mount",
+      "conditions": 8,
+      "status": "passed",
+      "reports": [
+        "reports/login-webkit-subpath.json"
+      ]
+    },
+    {
+      "scope": "22-task predecessor -> 29-task predecessor -> five-zone account migration",
+      "conditions": 1,
+      "status": "passed",
+      "reports": [
+        "reports/login-subpath.json"
+      ],
+      "note": "This independent old-server chain uses its own root-mounted server; it is not a second subpath migration count."
+    },
+    {
+      "scope": "Frozen 29-task historical course regressions, including earlier upgrade and cache",
+      "conditions": 35,
+      "status": "passed",
+      "reports": [
+        "reports/historical.json",
+        "reports/historical-refined.json"
+      ],
+      "note": "Initial 34 passed and 1 failed. A direct fs read bypassed the frozen version; reading that same frozen source made the original 4-star/draft/other-activity assertions pass."
+    },
+    {
+      "scope": "Shared 17-18 three-statistic completion, refresh and mobile layout",
+      "conditions": 1,
+      "status": "passed",
+      "reports": [
+        "reports/shared-and-short-refined.json"
+      ],
+      "note": "The initial natural-size illustration overflow is retained in reports/shared-and-short.json and overflow-diagnosis.json."
+    },
+    {
+      "scope": "Progress, award collection, learning management and catalog unit checks",
+      "conditions": 37,
+      "status": "passed",
+      "command": "node --test tests/unit/progress.test.js tests/unit/award-collection.test.js tests/unit/admin-learning.test.js tests/unit/home-catalog.test.js tests/unit/course-catalog.test.js",
+      "note": "Initial 36 passed/1 failed because the explicit maximum-star inventory still expected 15 for 17-18. Updated that curriculum expectation; sorting uses an unchanged 15-star 19-20 fixture. Final 37 passed."
+    },
+    {
+      "scope": "Catalog/public resource contract tests",
+      "conditions": 8,
+      "status": "passed",
+      "command": "node --test tests/deploy/course-catalog-contract.test.js tests/deploy/public-v1-boundary.test.js"
+    },
+    {
+      "scope": "Scoped test-plan and evidence-reuse workflow",
+      "conditions": 11,
+      "status": "passed",
+      "command": "npm run test:workflow"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courses": 72,
+      "status": "passed"
+    },
+    "subpath": {
+      "courses": 72,
+      "status": "passed"
+    },
+    "evidence": "source-and-package-checks.json"
+  },
+  "independentArtifactChecks": "source-and-package-checks.json; these 23 checks and the builds are separate from the test-condition total.",
+  "failuresAndRecovery": [
+    {
+      "finding": "Mobile reader controls covered host heads.",
+      "reproduction": "output/unit1718-layout-repro",
+      "resolution": "The whole reader/control boundary is asserted. Mobile scene space and floor were adjusted; four widths and three reading viewports passed."
+    },
+    {
+      "finding": "Old certificate PNG used the previous lesson page colour.",
+      "reproduction": "output/unit1718-certificate-repro",
+      "resolution": "Restored original #F6F7FC; kept source certificate identity, date, dimensions and colour comparisons."
+    },
+    {
+      "finding": "Natural 1536px completion art overflowed the 320px document.",
+      "evidence": "overflow-diagnosis.json",
+      "resolution": "Constrain only this lesson completion image to its container; global width, all five completion views and shared metrics rechecked."
+    },
+    {
+      "finding": "One Chromium navigation failed with ERR_NO_BUFFER_SPACE before loading the app while another browser suite was running.",
+      "evidence": "reports/shared-and-short.json",
+      "resolution": "Original assertions rerun separately; no navigation-error bypass, increased timeout or changed product animation."
+    },
+    {
+      "finding": "Centering a single action button hid metric tops behind the sticky navigation in the added short-screen test.",
+      "evidence": "short-scroll-diagnosis.json",
+      "resolution": "Use the existing completion-layout helper to scroll the whole action row to the end; retain full metrics/buttons/44px/readability assertions. No product layout change for this test issue."
+    },
+    {
+      "finding": "Font regeneration reintroduced two upstream trailing spaces in license files.",
+      "evidence": "whitespace-check-initial.json",
+      "resolution": "Verified whitespace-normalized candidates exactly match pre-task hashes, then restored both baseline files byte-for-byte. License wording and prior user changes retained."
+    }
+  ],
+  "versionAndReuse": {
+    "finalSource": "source-and-package-checks.json",
+    "changes": "changes.json",
+    "note": "Final runtime refinement after the initial full-course runs affected only completion-image sizing. Both engines directly rechecked all five completion pages at both short widths, and the shared completion check passed. Other already-passed content, original certificate, account, authorization and export conditions were reused by impact; reruns are not added to the total. Historical test-source changes and current runtime changes are distinguished above."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit17-18/#learn/certificate",
+    "actualUI": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone/WeChat",
+    "physical printing"
+  ],
+  "git": {
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  }
+}

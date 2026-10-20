@@ -1,0 +1,49 @@
+
+Running 13 tests using 1 worker
+
+(node:7552) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧25题真实领取的证书原文、姓名、日期、PNG与打印保留 (24.9s)
+  ok  2 tests\e2e\unit1-2-v154-history.spec.js:8:30 › 旧37题真实领取的证书原文、姓名、日期、PNG与打印保留 (23.3s)
+  ok  3 tests\e2e\unit1-2-v154-history.spec.js:37:1 › 教材七句抄写独立成页，替换例句保持十组 (1.3s)
+  ok  4 tests\e2e\unit1-2-v154.spec.js:6:1 › 首页与封面沿用已确认纪念卡故事插画 (1.5s)
+  ok  5 tests\e2e\unit1-2-v154.spec.js:13:1 › 实际显示的短示范写入本次提交，独立题不补记示范 (2.5s)
+  ok  6 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 320：首页、词卡、完整对白、人物与答前材料 (10.9s)
+  ok  7 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 390：首页、词卡、完整对白、人物与答前材料 (10.9s)
+  ok  8 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 768：首页、词卡、完整对白、人物与答前材料 (11.5s)
+  ok  9 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 1280：首页、词卡、完整对白、人物与答前材料 (11.9s)
+  ok 10 tests\e2e\unit1-2-v154.spec.js:55:1 › 37题未答材料逐题审查、五区与零英语声音、声音失败仍可完成 (30.4s)
+  ok 11 tests\e2e\unit1-2-v154.spec.js:71:1 › 真实前版中途错答和未提交选择升级后保留同一轮，已完成五星与精确日期不变 (29.9s)
+  ok 12 tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 320x568 三卡与两个操作完整，键盘提交和错误次数保留 (5.1s)
+  x  13 tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 (4.8s)
+
+
+  1) tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 ───────────────────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 501
+    Received:    554.40625
+
+      89 |  await flow.select(room,flow.ANSWERS['1-2'].listen[0]);await room.getByRole('button',{name:'检查答案',exact:true}).focus();await page.keyboard.press('Enter');await room.getByRole('button',{name:'下一题',exact:true}).click();
+      90 |  await flow.activity(page,'1-2','listen');await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);
+    > 91 |  const stats=await room.locator('.completion-stats').boundingBox(),actions=await room.locator('.practice-finish-actions').boundingBox();expect(stats.y).toBeGreaterThan(0);expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);
+         |                                                                                                                                                                                                             ^
+      92 |  await page.screenshot({path:info.outputPath('short-completion.png')});await page.reload();await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);
+      93 | });
+      94 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-v154.spec.js:91:205
+
+    Error Context: output\unit12-review-20261018\current-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\current-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\current-webkit\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit1-2-v154.spec.js:87:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 ────────────────────────
+  12 passed (2.8m)

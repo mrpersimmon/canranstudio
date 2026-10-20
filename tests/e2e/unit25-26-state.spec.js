@@ -1,3 +1,4 @@
+require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
@@ -75,7 +76,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'observe');
   await page.goto('/unit25-26/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit25-26/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:"There's",exact:true}).click();
-  await page.route('**/unit25-26/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit25-26/content.js','utf8')).replace("make('t05','locate'","make('t05-revised','locate'")}));
+  await page.route('**/unit25-26/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit25-26-before-fivezones/content.js','utf8')).replace("make('t05','locate'","make('t05-revised','locate'")}));
   await page.goto('/unit25-26/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit25-26/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 6');

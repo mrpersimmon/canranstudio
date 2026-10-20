@@ -1,0 +1,66 @@
+{
+  "id": "unit59-60",
+  "source": {
+    "file": "tests/support/unit5960.js",
+    "sha256": "c2ef0abd4206e35344a1a2d91bbd5a101e904fe67c4e463e5cbdfb3999b0811e"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u5960-v1-r-size",
+      "text": "Lesson 59\n\nLady: I want some envelopes, please.\n\nAssistant: Do you want the large size or the small size?\n\nLady: The large size, please."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u5960-v1-r-pads",
+      "text": "Lesson 59\n\nLady: Do you have any writing paper?\n\nAssistant: Yes, we do.\n\nAssistant: I don’t have any small pads. I only have large ones. Do you want a pad?\n\nLady: Yes, please."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u5960-v1-r-ones",
+      "text": "Lesson 59\n\nLady: Do you have any writing paper?\n\nAssistant: Yes, we do.\n\nAssistant: I don’t have any small pads. I only have large ones. Do you want a pad?\n\nLady: Yes, please."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u5960-v1-r-glue",
+      "text": "Lesson 59\n\nLady: And I want some glue.\n\nAssistant: A bottle of glue."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u5960-v1-r-chalk",
+      "text": "Lesson 59\n\nLady: And I want a large box of chalk, too.\n\nAssistant: I only have small boxes. Do you want one?\n\nLady: No, thank you."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u5960-v1-r-change",
+      "text": "Lesson 59\n\nAssistant: Is that all?\n\nLady: That’s all, thank you.\n\nAssistant: What else do you want?\n\nLady: I want my change."
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u5960-v1-e-story",
+      "text": "Lesson 59\n\nLady: I want some envelopes, please.\n\nAssistant: Do you want the large size or the small size?\n\nLady: The large size, please.\n\nLady: Do you have any writing paper?\n\nAssistant: Yes, we do.\n\nAssistant: I don’t have any small pads. I only have large ones. Do you want a pad?\n\nLady: Yes, please.\n\nLady: And I want some glue.\n\nAssistant: A bottle of glue.\n\nLady: And I want a large box of chalk, too.\n\nAssistant: I only have small boxes. Do you want one?\n\nLady: No, thank you."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-3",
+    "R2": "4-7",
+    "R3": "4-7",
+    "R4": "8-9",
+    "R5": "10-12",
+    "R7": "13-16",
+    "E3": "1-12"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

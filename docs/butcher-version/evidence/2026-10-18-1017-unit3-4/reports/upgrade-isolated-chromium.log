@@ -1,0 +1,51 @@
+[WebServer] (node:34272) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:8744) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20100) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原25题旧证PNG、精确时间与跨设备历史保留 (11.0s)
+
+
+  1) tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原25题旧证PNG、精确时间与跨设备历史保留 ───────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.course').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.course').first()
+
+
+       at helpers.js:59
+
+      57 |     await setPassword(page); account.password = 'Learning-journey-2026!'; account.fresh = false;
+      58 |   }
+    > 59 |   await expect(page.locator('.course').first()).toBeVisible();
+         |                                                 ^
+      60 | }
+      61 | async function studentLogin(browser, account, base = '/lesson/', contextOptions = {}) {
+      62 |   const context = await browser.newContext(contextOptions); const page = await context.newPage();
+        at signIn (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\helpers.js:59:49)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit3-4-v154-upgrade.spec.js:20:196
+
+    Error Context: output\unit34-review-20261018\upgrade-isolated-chromium\unit3-4-v154-upgrade-同库升级：原25题旧证PNG、精确时间与跨设备历史保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\upgrade-isolated-chromium\unit3-4-v154-upgrade-同库升级：原25题旧证PNG、精确时间与跨设备历史保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\upgrade-isolated-chromium\unit3-4-v154-upgrade-同库升级：原25题旧证PNG、精确时间与跨设备历史保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原25题旧证PNG、精确时间与跨设备历史保留 ────────────────────

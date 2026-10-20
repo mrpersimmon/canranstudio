@@ -1,5 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+// Historical expectations run on a complete frozen HTTP course package.
+require('../support/unit910-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function capture(page,name){
  await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));

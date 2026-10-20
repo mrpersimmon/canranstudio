@@ -1,10 +1,12 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, studentLogin } = require('./helpers');
-const { activity, story } = require('../support/unit4546');
+const { adminLogin, createStudent, studentLogin: loginStudent } = require('./helpers');
+const {defaultBrowserType,...mobileProfile}=require('@playwright/test').devices['iPhone 13'];
+const studentLogin=(browser,account,base)=>loginStudent(browser,account,base,process.env.UNIT4546_BROWSER==='webkit'?mobileProfile:{});
+const { activity, story } = require('../support/unit4546-v153');
 const {courseResponse}=require('../support/course-response-faults');
 test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
-test.use({actionTimeout:10000,...(process.env.UNIT45_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
+test.use({actionTimeout:10000,...(process.env.UNIT4546_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
 
 test('课程入口保持班级授权：新课可单独开放', async ({ page, browser }) => {
   const base = process.env.AWARD_TEST_BASE || '/lesson/';
@@ -16,7 +18,7 @@ test('课程入口保持班级授权：新课可单独开放', async ({ page, br
     await expect(learner.page.locator('.course')).toContainText('一封难读的信');
     await learner.page.getByRole('link', { name: /开始学习/ }).click();
     await expect(learner.page).toHaveURL(/unit45-46\/#learn\/words/);
-    await expect(learner.page.locator('.unit-word')).toHaveCount(6);
+    await ready(learner.page);await expect(learner.page.locator('.unit-word')).toHaveCount(6);
   } finally { await learner.context.close(); }
 });
 
@@ -74,7 +76,7 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
     }
     await expect(learner.locator('#starCount')).toHaveText('5');
     await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    await learner.goto(base+'unit45-46/#learn/certificate');
+    await learner.goto(base+'unit45-46/#learn/certificate');await ready(learner);
     await expect(learner.locator('#certificateName')).toHaveText('小禾');
     const date=await learner.locator('#certificateDate').textContent();
     await learner.locator('.stage-certificate').screenshot({path:info.outputPath('five-star-card.png')});
@@ -88,7 +90,7 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
     await learner.getByRole('button',{name:'关闭纪念卡',exact:true}).click();
     second=await studentLogin(browser,account,base);
     await expect(second.page.locator('.course')).toContainText('5 / 5');
-    await second.page.goto(base+'unit45-46/#learn/certificate');
+    await second.page.goto(base+'unit45-46/#learn/certificate');await ready(second.page);
     await expect(second.page.locator('#certificateDate')).toHaveText(date);
     const download=second.page.waitForEvent('download');
     await second.page.getByRole('button',{name:'保存动图',exact:true}).click();
@@ -110,8 +112,8 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
       await second.page.locator('.stage-certificate').screenshot({path:info.outputPath(`card-${width}.png`)});
     }
     await second.page.setViewportSize({width:1280,height:900});
-    await second.page.goto(base+'unit45-46/#learn/grammar');
-    await expect(second.page.locator('.stage-grammar .completion-number')).toHaveText(['14','14','0']);
+    await second.page.goto(base+'unit45-46/#learn/grammar');await ready(second.page);
+    await expect(second.page.locator('.stage-grammar .completion-number')).toHaveText(['16','16','0']);
     await second.page.locator('.stage-grammar').getByRole('button',{name:'再练一轮',exact:true}).click();
     await second.context.setOffline(true);
     await require('../support/units1-30-tasks').select(second.page.locator('.stage-grammar'),'I can’t type.');
@@ -122,9 +124,9 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
       if(browserName!=='webkit'||!/WebKit encountered an internal error/.test(error.message))throw error;
       navigationFailed=true;info.annotations.push({type:'engine-boundary',description:'WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately.'});
     }
-    if(navigationFailed){await second.context.setOffline(false);await second.page.goto(base+'unit45-46/#learn/grammar');}
+    if(navigationFailed){await second.context.setOffline(false);await second.page.goto(base+'unit45-46/#learn/grammar');await ready(second.page);}
     else{await expect(second.page.getByRole('heading',{name:'联网后再进入',exact:true})).toBeVisible();await second.context.setOffline(false);await second.page.getByRole('button',{name:'再试一次',exact:true}).click();}
-    await expect(second.page.locator('.stage-grammar .progress-copy')).toHaveText('第 2 / 14 题');
+    await expect(second.page.locator('.stage-grammar .progress-copy')).toHaveText('第 2 / 16 题');
     await expect(second.page.locator('#starCount')).toHaveText('5');
     expect(await second.page.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     expect(errors).toEqual([]);expect(voices).toEqual([]);
@@ -137,19 +139,22 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
   await adminLogin(page,base);const account=await createStudent(page,'办公室加载验收班','小林',[/Lesson 45–46/]);
   const student=await studentLogin(browser,account,base);const p=student.page;
   try{
-    const pattern=base+'resources/*/letter.svg';
+    const pattern=base+'resources/*/keepsake-story-v1.webp',missing=[];
+    p.on('response',r=>{if(r.url().includes('/resources/')&&r.url().endsWith('/keepsake-story-v1.webp')&&r.status()===404)missing.push(r.url());});
     await courseResponse(p,pattern,{status:404,body:'missing illustration'});
     await p.goto(base+'unit45-46/#learn/words');
     const loader=p.getByRole('region',{name:'课程加载',exact:true});
     await expect(loader.getByRole('button',{name:'再试一次',exact:true})).toBeVisible({timeout:20000});
+    expect(missing.length).toBeGreaterThan(0);
     await expect(p.locator('.unit-word')).toHaveCount(0);
     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();
-    await expect(p.locator('.unit-word')).toHaveCount(6);await expect(p.locator('#courseLoader')).toHaveCount(0);
+    await ready(p);await expect(p.locator('.unit-word')).toHaveCount(6);await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
     await p.getByRole('link',{name:'我的课程',exact:true}).click();
     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
     await p.locator('.course').getByRole('link',{name:/学习/}).click();
+    await ready(p);
     await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
     expect(downloads).toEqual([]);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
@@ -158,16 +163,16 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
 
 test('同姓名同星数对照认可卡：新卡、书页和一星动图显示一致',async({page,browser},info)=>{
   test.setTimeout(120000);const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1);
-  await adminLogin(page,base);const account=await createStudent(page,'办公室视觉对照班','小禾',[/Lesson 1–2/,/Lesson 3–4/,/Lesson 45–46/]);
+  await adminLogin(page,base);const account=await createStudent(page,'办公室视觉对照班','小禾',[/Lesson 1–2/,/Lesson 3–4/,/Lesson 5–6/,/Lesson 45–46/]);
   const student=await studentLogin(browser,account,base),p=student.page;
   try{
-    await p.goto(base+'unit45-46/#learn/certificate');
+    await p.goto(base+'unit45-46/#learn/certificate');await ready(p);
     await expect(p.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
-    for(const pair of ['1-2','3-4','45-46']){
+    for(const pair of ['1-2','3-4','5-6','45-46']){
       if(pair==='45-46')await activity(p,'listen',{base:prefix});
       else if(pair==='1-2')await require('../support/unit1-2-award-flow').finishZone(p,'listen',{base:base+'unit1-2/'});
       else await require('../support/units1-30-tasks').activity(p,pair,'listen',{base:prefix});
-      await p.goto(base+'unit'+pair+'/#learn/certificate');
+      await p.goto(base+'unit'+pair+'/#learn/certificate');await ready(p);
       await expect(p.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','1');
       await expect(p.locator('#certificateName')).toHaveText('小禾');
       await p.locator('.stage-certificate .story-award-paper').screenshot({path:info.outputPath('compare-'+pair+'.png')});
@@ -201,13 +206,37 @@ test('长姓名手机卡、另一学生隔离、教师预览不能保存个人�
  const preview=await page.getByRole('link',{name:'预览这个班',exact:true}).getAttribute('href');
  const first=await studentLogin(browser,account,base);let other;
  try{
-  await activity(first.page,'listen',{base:prefix});await first.page.setViewportSize({width:320,height:568});await first.page.goto(base+'unit45-46/#learn/certificate');
+  await activity(first.page,'listen',{base:prefix});await first.page.setViewportSize({width:320,height:568});await first.page.goto(base+'unit45-46/#learn/certificate');await ready(first.page);
   await expect(first.page.locator('#certificateName')).toHaveText('欧阳小禾同学');
   const card=first.page.locator('.stage-certificate .story-award-paper'),name=first.page.locator('#certificateName');
   const b=await card.boundingBox(),n=await name.boundingBox();expect(n.x).toBeGreaterThan(b.x);expect(n.x+n.width).toBeLessThan(b.x+b.width);expect(n.y+n.height).toBeLessThan(b.y+b.height);
   expect(await name.evaluate(el=>el.scrollWidth<=el.clientWidth+1&&el.scrollHeight<=el.clientHeight+1)).toBe(true);await card.screenshot({path:info.outputPath('long-name-320.png')});
-  const second=await require('./helpers').addStudent(page,'小竹');other=await studentLogin(browser,second,base);await other.page.goto(base+'unit45-46/#learn/certificate');await expect(other.page.locator('#starCount')).toHaveText('0');await expect(other.page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
-  await page.goto(preview);await page.getByRole('link',{name:/一封难读的信/}).click();await page.goto((await page.url()).replace(/#.*$/,'#learn/certificate'));
+  const second=await require('./helpers').addStudent(page,'小竹');other=await studentLogin(browser,second,base);await other.page.goto(base+'unit45-46/#learn/certificate');await ready(other.page);await expect(other.page.locator('#starCount')).toHaveText('0');await expect(other.page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
+  await page.goto(preview);await page.getByRole('link',{name:/一封难读的信/}).click();await page.goto((await page.url()).replace(/#.*$/,'#learn/certificate'));await ready(page);
   await expect(page.locator('#starCount')).toHaveText('0');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
  }finally{await first.context.close();await other?.context.close();}
+});
+
+// Course preparation and the content assertion have separate contracts.
+async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+test('关课重开保留收藏，导出故障可重试且离开取消下载',async({page,browser},info)=>{
+ test.setTimeout(150000);const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1);
+ const {saveCourses}=require('./helpers');await adminLogin(page,base);const account=await createStudent(page,'消息成果保留班','小溪',[/Lesson 45–46/]);
+ const student=await studentLogin(browser,account,base),p=student.page,downloads=[];p.on('download',d=>downloads.push(d));
+ try{
+  await activity(p,'listen',{base:prefix});await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+  await page.getByRole('checkbox',{name:/Lesson 45–46/}).uncheck();await saveCourses(page);
+  await p.goto(base);await expect(p.locator('.course')).toHaveCount(0);
+  await p.getByRole('link',{name:'我的纪念册',exact:true}).click();const oldCard=p.getByRole('button',{name:'放大 Lesson 45–46 沟通小能手',exact:true});
+  await expect(oldCard.locator('.certificate')).toHaveAttribute('data-stars','1',{timeout:30000});await oldCard.screenshot({path:info.outputPath('closed-course-collection.png')});
+  await page.getByRole('checkbox',{name:/Lesson 45–46/}).check();await saveCourses(page);
+  await p.goto(base+'unit45-46/#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText('1');await expect(p.locator('#certificateName')).toHaveText('小溪');
+  // Inject a failure at the browser canvas boundary, not in learning or award data.
+  await p.evaluate(()=>{window.originalGifRead=CanvasRenderingContext2D.prototype.getImageData;window.failedGifReads=0;CanvasRenderingContext2D.prototype.getImageData=function(...args){if(this.canvas.width===984&&this.canvas.height===528){window.failedGifReads++;throw new DOMException('Simulated export canvas failure','InvalidStateError');}return Reflect.apply(window.originalGifRead,this,args);};});
+  await p.getByRole('button',{name:'保存动图',exact:true}).click();await expect(p.locator('.story-award-status')).toHaveText('暂时没能保存，请再试一次。');expect(await p.evaluate(()=>window.failedGifReads)).toBeGreaterThan(0);expect(downloads).toHaveLength(0);
+  await p.evaluate(()=>{CanvasRenderingContext2D.prototype.getImageData=window.originalGifRead;});const download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();const gif=await download;await gif.saveAs(info.outputPath('export-recovered.gif'));
+  const meta=await require('sharp')(info.outputPath('export-recovered.gif'),{animated:true}).metadata();expect(meta.pages).toBe(60);expect(meta.width).toBe(984);expect(meta.pageHeight).toBe(528);await expect(p.locator('.story-award-status')).toHaveText('动图已生成');expect(downloads).toHaveLength(1);
+  await p.getByRole('button',{name:'保存动图',exact:true}).click();await expect(p.locator('.story-award-status')).toHaveText('正在保存…');await p.getByRole('link',{name:'我的课程',exact:true}).click();await expect(p.locator('.course')).toHaveCount(1);await expect(p.locator('.course')).toContainText('1 / 5');expect(downloads).toHaveLength(1);
+  await p.goto(base+'unit45-46/#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText('1');await expect(p.locator('.story-award-status')).toBeEmpty();expect(downloads).toHaveLength(1);
+ }finally{await student.context.close();}
 });

@@ -1,0 +1,174 @@
+{
+  "completedAt": "2026-10-16T19:32:40.332Z",
+  "status": "passed",
+  "uniqueTestConditions": 206,
+  "groups": [
+    {
+      "scope": "Chromium current course, real predecessor migration and reading controls",
+      "conditions": 18,
+      "reports": [
+        "reports/static-first.json",
+        "reports/refined-and-print.json",
+        "reports/art-static-chromium.json"
+      ],
+      "note": "Initial 16 pass / 2 script failures; same-version isolation reproduced both. Corrected step counts passed. Final illustration-only change directly rechecked four story widths and both compact completion viewports.",
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, real predecessor migration and reading controls",
+      "conditions": 18,
+      "reports": [
+        "reports/static-webkit.json",
+        "reports/art-static-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium actual worksheet and original certificate PDFs",
+      "conditions": 2,
+      "reports": [
+        "reports/refined-and-print.json"
+      ],
+      "artifacts": [
+        "worksheet.pdf",
+        "legacy-certificate.pdf"
+      ],
+      "note": "Three worksheet pages and one certificate page rendered and visually inspected.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-root-chromium.json",
+        "reports/login-root-final-art.json",
+        "reports/art-login-chromium.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-subpath-chromium.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-root-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-subpath-webkit.json",
+        "reports/art-login-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "28 -> 36 -> five-zone historical account chain",
+      "conditions": 1,
+      "reports": [
+        "reports/login-subpath-chromium.json"
+      ],
+      "note": "Separate root-mounted former-server chain; not a duplicate subpath count.",
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen course history and affected shared completion/scene/cache paths",
+      "conditions": 76,
+      "reports": [
+        "reports/historical.json"
+      ],
+      "note": "Includes 19 shared completion cases, actual 36-question 19-20 regression, and adjacent 17-30 scene/cache regressions. No full-site release claim.",
+      "status": "passed"
+    },
+    {
+      "scope": "Progress, learning management, award collection and home unit checks",
+      "conditions": 28,
+      "command": "node --test tests/unit/progress.test.js tests/unit/award*.test.js tests/unit/admin-learning.test.js tests/unit/home*.test.js tests/unit/catalog*.test.js",
+      "status": "passed"
+    },
+    {
+      "scope": "Course catalog and public resource contract unit/deploy checks",
+      "conditions": 17,
+      "command": "node --test tests/unit/course-catalog.test.js tests/deploy/course-catalog-contract.test.js tests/deploy/public-v1-boundary.test.js",
+      "status": "passed"
+    },
+    {
+      "scope": "Scoped test-plan and reuse workflow",
+      "conditions": 11,
+      "command": "npm run test:workflow",
+      "status": "passed"
+    },
+    {
+      "scope": "Shared actual-submission examples and correction statistics",
+      "conditions": 3,
+      "reports": [
+        "reports/shared-stat-example.json"
+      ],
+      "note": "Includes actual 3/5/2 and ten repeated errors, refresh and replay.",
+      "status": "passed"
+    }
+  ],
+  "independentChecks": "23 source/package/document checks in source-and-package-checks.json; separate from test totals. Root and /lesson/ builds each include 72 courses.",
+  "failuresAndRecovery": [
+    {
+      "kind": "test-parse",
+      "finding": "A copied English apostrophe in a single-quoted assertion prevented test parsing.",
+      "resolution": "Fixed the quote; no product ran during that attempt."
+    },
+    {
+      "kind": "test-steps",
+      "finding": "A broad loop-count edit reduced the repeated-error sequence to one, while the double-blank case advanced one extra task.",
+      "reproduction": "reports/repro.json",
+      "resolution": "Same-version original assertions reproduced both. Restored two wrong submissions; stop at the actual two-blank question. Scores and timing unchanged."
+    },
+    {
+      "kind": "source-inventory",
+      "finding": "Early document said 59 art files, but actual pre-change inventory contains 63 SVGs.",
+      "evidence": "source-audit-initial.json",
+      "resolution": "All 63 originals verified byte-for-byte. No original image overwritten."
+    },
+    {
+      "kind": "visual-review",
+      "finding": "Initial generated family was too detailed relative to the approved simple card illustrations.",
+      "evidence": "art-before-style-review/",
+      "resolution": "Six assets redrawn using approved style reference; same characters, poses and cone counts. Final two-engine four-width story/short-screen checks and representative root/subpath account, GIF and actual missing-resource checks passed."
+    }
+  ],
+  "reuse": {
+    "scope": "Only six generated raster assets changed after full functional verification; lesson definitions, task/award versions, original SVGs, migration, old certificate, fonts and page geometry unchanged.",
+    "directFinalEvidence": [
+      "reports/art-static-chromium.json",
+      "reports/art-static-webkit.json",
+      "reports/art-login-chromium.json",
+      "reports/art-login-webkit.json"
+    ],
+    "note": "Final image checks reuse matching unchanged score/migration/authorization conditions. Reruns are not counted twice. Full-account root/subpath both browsers passed before the illustration-only refinement; final root Chromium and subpath WebKit directly verify the new art and decoded GIF. No arbitrary-load performance claim."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit19-20/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  }
+}

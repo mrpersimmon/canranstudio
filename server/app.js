@@ -258,7 +258,8 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       const allowed = [...new Set([...(admin ? management.courses(admin) : []), ...(auth ? [...store.allowed(auth.subject), ...store.activeCourses(auth, Date.now())] : [])])];
       if (relative === 'course-index.json') {
         if (!auth && !admin) throw fail(401, '请先登录');
-        return json(response, { ...packages.index, courses: Object.fromEntries(Object.entries(packages.index.courses).filter(([id]) => allowed.includes(id))) });
+        const sharedFonts=(packages.index.sharedFonts||[]).filter(item=>[...(owners.get(item.url)||[])].some(id=>allowed.includes(id)));
+        return json(response, { ...packages.index, sharedFonts, courses: Object.fromEntries(Object.entries(packages.index.courses).filter(([id]) => allowed.includes(id))) });
       }
       const infrastructure = ['core/course-cache.js','core/course-loader.js'];
       if (relative === 'core/course-catalog.js') throw fail(403, '请使用本课程的教学定义');

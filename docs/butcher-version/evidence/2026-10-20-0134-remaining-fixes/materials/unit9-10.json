@@ -1,0 +1,31 @@
+{
+  "id": "unit9-10",
+  "source": {
+    "file": "tests/support/unit910-fivezones.js",
+    "sha256": "52004779f7b48e005645e6965551be8c9c43180b212e03e2def89b19295e9048"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u910-v1-story-emma",
+      "text": "Lesson 9\n\nHelen: How's Emma?\n\nSteven: She's very well, too, Helen."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u910-v1-story-he",
+      "text": "Lesson 9\n\nSteven: How is Tony?\n\nHelen: He's fine, thanks."
+    }
+  ],
+  "sourceLines": {
+    "R1": "9-10",
+    "R3": "7-8"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

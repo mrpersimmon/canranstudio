@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:28280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154-history.spec.js:4:49 › classroom26真实旧证书原内容、姓名、精确日期、PNG与打印保留 (10.5s)
+  ok 2 tests\e2e\unit5-6-v154-history.spec.js:4:49 › voiced27真实旧证书原内容、姓名、精确日期、PNG与打印保留 (58.3s)
+  ok 3 tests\e2e\unit5-6-v154-history.spec.js:16:1 › 原编号8至13、12组选择问答、Written A4与B10及全部原例实际打印 (1.2s)
+
+  3 passed (1.2m)

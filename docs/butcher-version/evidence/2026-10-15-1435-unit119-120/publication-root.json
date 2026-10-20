@@ -1,0 +1,371 @@
+{
+  "access": "class-v1",
+  "courses": {
+    "unit1-2": {
+      "title": "礼貌小帮手",
+      "revision": "7377bdf6cc447ff8ce48cd236212d7448348125722edda0c714546e846adb8dd",
+      "manifest": "/course-packages/unit1-2/7377bdf6cc447ff8ce48cd236212d7448348125722edda0c714546e846adb8dd.json",
+      "sha256": "877bb01e5ae3e3df1ec0b17c4d569d9a82b83b83fe390a9add292afd22ffe09c"
+    },
+    "unit3-4": {
+      "title": "雨伞认领小帮手",
+      "revision": "33cbbba7a62fe31122efa3ee83384b9f8ad827c7d8033ab158c4d0b858e48f26",
+      "manifest": "/course-packages/unit3-4/33cbbba7a62fe31122efa3ee83384b9f8ad827c7d8033ab158c4d0b858e48f26.json",
+      "sha256": "916bee2ae604b7949ab7df5777ac77127a200b4a8542f0e074d320c252ca7a49"
+    },
+    "unit5-6": {
+      "title": "新朋友见面会",
+      "revision": "d9b8ff79cbba956afa7bd770c3f70b158a41b54ef2db5f8a841e88d5e589c41a",
+      "manifest": "/course-packages/unit5-6/d9b8ff79cbba956afa7bd770c3f70b158a41b54ef2db5f8a841e88d5e589c41a.json",
+      "sha256": "cbbdca517f6e95503fd0c7b4b8174fcddb07cc4193cfd747360653213236703e"
+    },
+    "unit7-8": {
+      "title": "新朋友采访站",
+      "revision": "e6782899544cfd92bea973e983b1cff02996073b1f491fca4cb0254543150ee2",
+      "manifest": "/course-packages/unit7-8/e6782899544cfd92bea973e983b1cff02996073b1f491fca4cb0254543150ee2.json",
+      "sha256": "5f23a0f245f7f4e1c0e32cde38c6a21dcfe97f5e2de0b835487c5fc69bab2d3a"
+    },
+    "unit9-10": {
+      "title": "街角问候站",
+      "revision": "7044424e1716d462532c21c03b42517a7ad6beb5c146e676c8e21327e3154f86",
+      "manifest": "/course-packages/unit9-10/7044424e1716d462532c21c03b42517a7ad6beb5c146e676c8e21327e3154f86.json",
+      "sha256": "7701404b78fc061565fdae4c8c85dfbd4f1703ce2b24f7b497519d0e1002bcc0"
+    },
+    "unit11-12": {
+      "title": "失物招领小侦探",
+      "revision": "1463e5799250d0f2de9e786b0169cbce06abfad582341c01fb84583a273a9401",
+      "manifest": "/course-packages/unit11-12/1463e5799250d0f2de9e786b0169cbce06abfad582341c01fb84583a273a9401.json",
+      "sha256": "24b6f0a310c48c45a25cb2f90d622d78a429a454c24222d17f070c393805f350"
+    },
+    "unit13-14": {
+      "title": "新衣配色屋",
+      "revision": "b33e167afe49b9689d7e9bb4217e363825bb541850c85834a03900f6df616746",
+      "manifest": "/course-packages/unit13-14/b33e167afe49b9689d7e9bb4217e363825bb541850c85834a03900f6df616746.json",
+      "sha256": "8d3f03e8ceb53f708ef531245117469bc486e57dfbd139bad6be4f7ccea9c7ad"
+    },
+    "unit15-16": {
+      "title": "护照小检查站",
+      "revision": "0ee8203e724eb503e993fc01bd668e688e0520ef4a0c018aea51256bbe94adcb",
+      "manifest": "/course-packages/unit15-16/0ee8203e724eb503e993fc01bd668e688e0520ef4a0c018aea51256bbe94adcb.json",
+      "sha256": "02188801b3a8f15e95a73ec41852f15e49823bca1bf48292e92944c2d00f41dd"
+    },
+    "unit17-18": {
+      "title": "办公室探访记",
+      "revision": "7254569f49ee051ff6816fa4ccbfdead35527a5b077bcd28bd519f35f87f3cd3",
+      "manifest": "/course-packages/unit17-18/7254569f49ee051ff6816fa4ccbfdead35527a5b077bcd28bd519f35f87f3cd3.json",
+      "sha256": "0de94e766d09333805acc76887f944fa0c8dfa4aa00a38fd988b095d06adb216"
+    },
+    "unit19-20": {
+      "title": "冰淇淋休息站",
+      "revision": "ea72d11f66dd9e330a1af1f85620ba01dd48504a07a362bcc9affdcd966654d2",
+      "manifest": "/course-packages/unit19-20/ea72d11f66dd9e330a1af1f85620ba01dd48504a07a362bcc9affdcd966654d2.json",
+      "sha256": "488118e89b090727037ca51c990d387820c09cbfc0343db187a03934093ac6ac"
+    },
+    "unit21-22": {
+      "title": "寻物交接站",
+      "revision": "e041d1e7360f5ba5065bb93a8765dd62d3748e8faf515c689f840d31f59312fb",
+      "manifest": "/course-packages/unit21-22/e041d1e7360f5ba5065bb93a8765dd62d3748e8faf515c689f840d31f59312fb.json",
+      "sha256": "645e515b6de9af67fccf221ffe1119dcbc958d6fa618c58f831de6bd91cd2c15"
+    },
+    "unit23-24": {
+      "title": "房间寻物队",
+      "revision": "2701b0e973c0089066b759dad4ec7c66858938def96523f00655b973aa312543",
+      "manifest": "/course-packages/unit23-24/2701b0e973c0089066b759dad4ec7c66858938def96523f00655b973aa312543.json",
+      "sha256": "328c5974f0e8ccb4cf76769e3b0df33dde59bb9e3fbf226ef6229fa786e0e204"
+    },
+    "unit25-26": {
+      "title": "厨房探访记",
+      "revision": "62459e1a8d5c06de94859cc6830602b7c0a6204ab16ea5799c25618d78526a9e",
+      "manifest": "/course-packages/unit25-26/62459e1a8d5c06de94859cc6830602b7c0a6204ab16ea5799c25618d78526a9e.json",
+      "sha256": "c7080e2bc1fbe995ea0186711415cef3fd8fd0aaedc5c4ba4ccdd398f91a523c"
+    },
+    "unit27-28": {
+      "title": "客厅发现之旅",
+      "revision": "45b1bae89662423cfe4b66704d2161c20db4fa6f60ad6ac77a295de0453bc164",
+      "manifest": "/course-packages/unit27-28/45b1bae89662423cfe4b66704d2161c20db4fa6f60ad6ac77a295de0453bc164.json",
+      "sha256": "378a15e2da2d4a24f975745cce36b2cb45f0e93065e102a37bf5246d85212d7c"
+    },
+    "unit29-30": {
+      "title": "房间整理行动",
+      "revision": "b2f334355a82a70b9b15d98fa9d6213917d0a8b46fa01bb9baedf12c41a6cf19",
+      "manifest": "/course-packages/unit29-30/b2f334355a82a70b9b15d98fa9d6213917d0a8b46fa01bb9baedf12c41a6cf19.json",
+      "sha256": "926d22369a92b0e47019c2137a225b9b4a7fd46b3cbfad50dd6073f1dd0831a9"
+    },
+    "unit31-32": {
+      "title": "花园观察小队",
+      "revision": "0e6de7317815d92445f4361f3df2ced2d82c8f3369a0390cc41d9f0adc4fe189",
+      "manifest": "/course-packages/unit31-32/0e6de7317815d92445f4361f3df2ced2d82c8f3369a0390cc41d9f0adc4fe189.json",
+      "sha256": "39ea465cf7ab25305d1b4b0d6a61684660987b96341824023537d4f077e1f3b3"
+    },
+    "unit33-34": {
+      "title": "晴天河畔发现之旅",
+      "revision": "0d1ed4d08d0cc766a13bd8e7acf0191a31bc849e460f690a0474404eb085e976",
+      "manifest": "/course-packages/unit33-34/0d1ed4d08d0cc766a13bd8e7acf0191a31bc849e460f690a0474404eb085e976.json",
+      "sha256": "cdb2f9d6b82373e8f3cf468b4e736b5fb50bfef62a4bd37d6d6ba390b004f305"
+    },
+    "unit35-36": {
+      "title": "村庄相册探险",
+      "revision": "8595ed8d42185a2555c5aecc2641436a1f5728bc11dff81f8c3b6175b319832d",
+      "manifest": "/course-packages/unit35-36/8595ed8d42185a2555c5aecc2641436a1f5728bc11dff81f8c3b6175b319832d.json",
+      "sha256": "ae99c9a83284bc878162083fc02863abe257b329e3c57412b145a77fbcb9fa70"
+    },
+    "unit37-38": {
+      "title": "书架制作小工坊",
+      "revision": "e49eca2280092b77730cef888ebd8858eedc090cd179fa82eff31e12d11b6534",
+      "manifest": "/course-packages/unit37-38/e49eca2280092b77730cef888ebd8858eedc090cd179fa82eff31e12d11b6534.json",
+      "sha256": "40dc901c97ed01451df4fd47b47fd9a3bab481c42f46b6e1728f03aa6897e68e"
+    },
+    "unit39-40": {
+      "title": "花瓶安放小帮手",
+      "revision": "e763421a7709cea3d1816b7d39a28229686cb07b93c4af036f5261334c1406da",
+      "manifest": "/course-packages/unit39-40/e763421a7709cea3d1816b7d39a28229686cb07b93c4af036f5261334c1406da.json",
+      "sha256": "4259ccb61cdcd9afb72fd1f80cafac15f9018ade3f77459647f0f71e1e1e4fb6"
+    },
+    "unit41-42": {
+      "title": "购物袋里的发现",
+      "revision": "852eb1fe2aa85f0188dc77ca89eeecc8695afe8a28d5dc90d86c9633232db77f",
+      "manifest": "/course-packages/unit41-42/852eb1fe2aa85f0188dc77ca89eeecc8695afe8a28d5dc90d86c9633232db77f.json",
+      "sha256": "5b373a28b31a1ce3c5f48de3cfda23fab9a1dce8c842789a22d106936901d6ad"
+    },
+    "unit43-44": {
+      "title": "茶具躲猫猫",
+      "revision": "535795c16caf60ae96e03bb38297f5cc1724e0f44f24bed945f5160b9490d1ff",
+      "manifest": "/course-packages/unit43-44/535795c16caf60ae96e03bb38297f5cc1724e0f44f24bed945f5160b9490d1ff.json",
+      "sha256": "d527a5e7e7e2cf2ef6d467520055d059ea7b3163b61167edd2d755357df67c9b"
+    },
+    "unit45-46": {
+      "title": "一封难读的信",
+      "revision": "966f44beb12613552b9e342a02d51cb8fedfb36fe09e3fc0fbec4fc1cd1e3afb",
+      "manifest": "/course-packages/unit45-46/966f44beb12613552b9e342a02d51cb8fedfb36fe09e3fc0fbec4fc1cd1e3afb.json",
+      "sha256": "209a0b21f2dc679b928440539bf27bbcafb97027fbf437f62f643573a1761fba"
+    },
+    "unit47-48": {
+      "title": "一杯咖啡的心意",
+      "revision": "794cb251b49bd9febc9c5c8e468b80f9ec94dcb71fd5a627c3edf91e115a2f7e",
+      "manifest": "/course-packages/unit47-48/794cb251b49bd9febc9c5c8e468b80f9ec94dcb71fd5a627c3edf91e115a2f7e.json",
+      "sha256": "1ef23e65d82831db5b9ae85ec3b2fa09a5264021ce1959f99f39c8e283a305a9"
+    },
+    "unit49-50": {
+      "title": "晚餐采购大冒险",
+      "revision": "fdc15b20230b46d46e0a4aecc64cfd7e8c868997b17aad0deffe09b9f9cd31f5",
+      "manifest": "/course-packages/unit49-50/fdc15b20230b46d46e0a4aecc64cfd7e8c868997b17aad0deffe09b9f9cd31f5.json",
+      "sha256": "b03b64bfa458b1968f9483610fe7b4f4d9fb8262b48eedf9fd2d051cc1445edf"
+    },
+    "unit51-52": {
+      "title": "希腊四季明信片",
+      "revision": "a15a9cd08d05edf5e97f5657243b35dc0e685a485dd4d34fdd5f44aa0220295a",
+      "manifest": "/course-packages/unit51-52/a15a9cd08d05edf5e97f5657243b35dc0e685a485dd4d34fdd5f44aa0220295a.json",
+      "sha256": "a8991fa498a14de5a34a629a29f44de842816ec13b8294583a99df12b22f04a3"
+    },
+    "unit53-54": {
+      "title": "天气观察站",
+      "revision": "ce8ab3f7534177fcefa37dffdf306a93816a4ab3994be14647b59c16f1c9b63c",
+      "manifest": "/course-packages/unit53-54/ce8ab3f7534177fcefa37dffdf306a93816a4ab3994be14647b59c16f1c9b63c.json",
+      "sha256": "9d9fec3913aca185787c45b23b3d2ab5def79a137d195b62e17faa29139f4280"
+    },
+    "unit55-56": {
+      "title": "索耶家的一天",
+      "revision": "8020c959ba06f404a8c384f33919f5780e3939629ba84794f2e59a56a7ae387f",
+      "manifest": "/course-packages/unit55-56/8020c959ba06f404a8c384f33919f5780e3939629ba84794f2e59a56a7ae387f.json",
+      "sha256": "3762fcfe47129d3b9547d0fe43819e8f965dd9e4b3a2aa5087c8ac1678a7289d"
+    },
+    "unit57-58": {
+      "title": "今天不一样",
+      "revision": "dc0068b4962311e3dbb782508e1bfc6cea5a1de35bfcce0530fa1c8e6edd2ba1",
+      "manifest": "/course-packages/unit57-58/dc0068b4962311e3dbb782508e1bfc6cea5a1de35bfcce0530fa1c8e6edd2ba1.json",
+      "sha256": "7c70016a39b9798b9e24772e16dbf5f4aaf8e1d3f22be2302c1be25bb21eb375"
+    },
+    "unit59-60": {
+      "title": "别忘了找零",
+      "revision": "a7c64608f04d48a24401082710a759bb8910ea359a856ce2bac5661b8f30e689",
+      "manifest": "/course-packages/unit59-60/a7c64608f04d48a24401082710a759bb8910ea359a856ce2bac5661b8f30e689.json",
+      "sha256": "a4818b8ed381c22fcc3140bcf118e6fdd6711bf38b1ded85cf14173b4e3ee7d5"
+    },
+    "unit61-62": {
+      "title": "给 Jimmy 请医生",
+      "revision": "0b2843e72610de2bd716044c16bd1567f2a3047f376d23b03ecf27c81fa81a28",
+      "manifest": "/course-packages/unit61-62/0b2843e72610de2bd716044c16bd1567f2a3047f376d23b03ecf27c81fa81a28.json",
+      "sha256": "95381d936d536379db1d00a3717b453f79316a3605f3ec3d2ca15e1bb07c521e"
+    },
+    "unit63-64": {
+      "title": "Jimmy 好些了",
+      "revision": "a859906441a63cc0818863a932b421d65bbc6d5d92d36cd5c4df72b4fbed9e6a",
+      "manifest": "/course-packages/unit63-64/a859906441a63cc0818863a932b421d65bbc6d5d92d36cd5c4df72b4fbed9e6a.json",
+      "sha256": "f4a7a240078a0fde0f63d08820d43ae6752b8eb4464b18a9f56afe32f8b775c4"
+    },
+    "unit65-66": {
+      "title": "Jill 的晚间约定",
+      "revision": "ba0814fd75bac8b5b277e2d101ccea7c5fb047fbd0944784c0374a95e375f368",
+      "manifest": "/course-packages/unit65-66/ba0814fd75bac8b5b277e2d101ccea7c5fb047fbd0944784c0374a95e375f368.json",
+      "sha256": "bfd43e484916c4d93af566906a766f167257741e5799a6ad8bbb6a2f9ced6e1b"
+    },
+    "unit67-68": {
+      "title": "街角的周末消息",
+      "revision": "1e502a357588cee0c1bdd9fa387a93f9b960c911b40ee6548071d47701202771",
+      "manifest": "/course-packages/unit67-68/1e502a357588cee0c1bdd9fa387a93f9b960c911b40ee6548071d47701202771.json",
+      "sha256": "499b93f6c154c5acfa36dd252b35a783f7a63610a814cd7d8f5e02cc6c96ede7"
+    },
+    "unit69-70": {
+      "title": "赛车日的时光相册",
+      "revision": "d9afb6003b00bab2beaa3de780a517fab861eb33dc328b6864f148f4637a2220",
+      "manifest": "/course-packages/unit69-70/d9afb6003b00bab2beaa3de780a517fab861eb33dc328b6864f148f4637a2220.json",
+      "sha256": "90baef1c19666f679d9168d3adacb8b73a570a3ef64f25e9191c92e85976f048"
+    },
+    "unit71-72": {
+      "title": "电话里的昨天",
+      "revision": "cc006a6083a43f1f87285d4fa37d784cd513b7187c47a91528f6bec139d208c1",
+      "manifest": "/course-packages/unit71-72/cc006a6083a43f1f87285d4fa37d784cd513b7187c47a91528f6bec139d208c1.json",
+      "sha256": "b5232a79e2c5d6b3aa89675fddf3edb008cfeeaa4c45f8300dc7dd12eb558261"
+    },
+    "unit73-74": {
+      "title": "街角的短语手册",
+      "revision": "e97c46e576495e82c38e3d72c80a19e762aea06dbcfc98a61b5ff1444497a8c5",
+      "manifest": "/course-packages/unit73-74/e97c46e576495e82c38e3d72c80a19e762aea06dbcfc98a61b5ff1444497a8c5.json",
+      "sha256": "c876a1e5217f7fb4f8ca27e86ef5c4362cadd83de8c4682724c81cb497f7b2d4"
+    },
+    "unit75-76": {
+      "title": "鞋店里的时间线索",
+      "revision": "b1019bf3bb952021ebc9ef3c3b943ccf0c2dea3ae78fe0d9959aa90ac4ae1b14",
+      "manifest": "/course-packages/unit75-76/b1019bf3bb952021ebc9ef3c3b943ccf0c2dea3ae78fe0d9959aa90ac4ae1b14.json",
+      "sha256": "2fd041fbea9b7cecfb619e6a79ce94cbb21e74409a22701770b477ad9b0a81a3"
+    },
+    "unit77-78": {
+      "title": "诊所里的预约时间",
+      "revision": "9499fc01174ed7d7e10a7ca00c6256da377ef2c0899d97a2fc376c0a38473159",
+      "manifest": "/course-packages/unit77-78/9499fc01174ed7d7e10a7ca00c6256da377ef2c0899d97a2fc376c0a38473159.json",
+      "sha256": "83392312e40694928c15cab9eb8a000d7183112a3286214ad4935954de79f873"
+    },
+    "unit79-80": {
+      "title": "一起写购物清单",
+      "revision": "8821df3891a67911ca82a6a965cd59eca76fbe9ffacd62d69b9376acc56b0929",
+      "manifest": "/course-packages/unit79-80/8821df3891a67911ca82a6a965cd59eca76fbe9ffacd62d69b9376acc56b0929.json",
+      "sha256": "1d28bbccce2f4681341133a75014ac7b9f730f01501118bd576987dce16a0755"
+    },
+    "unit81-82": {
+      "title": "晚餐前的小意外",
+      "revision": "695fb6017c6eb40074063fab6d938a5c919698b2778bd0290a082641d31d90ca",
+      "manifest": "/course-packages/unit81-82/695fb6017c6eb40074063fab6d938a5c919698b2778bd0290a082641d31d90ca.json",
+      "sha256": "f46314af3cc9d5f10e60458f92ca09d77267d6646409a3980d8410d3d2eab3de"
+    },
+    "unit83-84": {
+      "title": "出发前的行李箱",
+      "revision": "597c066c0aab28f4e035a76bd8ad8de9c56f39b5d474cc818598d31f1bb12fc9",
+      "manifest": "/course-packages/unit83-84/597c066c0aab28f4e035a76bd8ad8de9c56f39b5d474cc818598d31f1bb12fc9.json",
+      "sha256": "cf799016b5c7d4495027cee1f454c667b25849e3ade5b3ae4bf82d6b41df1566"
+    },
+    "unit85-86": {
+      "title": "电影院外聊巴黎",
+      "revision": "59850b79a1e1b7ed54d22891a08691bd1524c1fc0cdb65f7328080e4cfe76cca",
+      "manifest": "/course-packages/unit85-86/59850b79a1e1b7ed54d22891a08691bd1524c1fc0cdb65f7328080e4cfe76cca.json",
+      "sha256": "88dc187967ac2682b0f3dca8e77d3fb623087ed5bd5adf3f353ab64f117bb892"
+    },
+    "unit87-88": {
+      "title": "修理厂里的进度单",
+      "revision": "d6676c8751bbe1fb9dd2052b87f152e0c3d5fdb03513bc4a5c75356da0079862",
+      "manifest": "/course-packages/unit87-88/d6676c8751bbe1fb9dd2052b87f152e0c3d5fdb03513bc4a5c75356da0079862.json",
+      "sha256": "454cd8b9c134c3196c59bbca6455276acc9a951bbdfed03d69d9193cd0504888"
+    },
+    "unit89-90": {
+      "title": "看房时的时间线索",
+      "revision": "94870307cef8fae1343f7499c96b2a0fdbe6734a93f7875ecfffd433acc3414a",
+      "manifest": "/course-packages/unit89-90/94870307cef8fae1343f7499c96b2a0fdbe6734a93f7875ecfffd433acc3414a.json",
+      "sha256": "e99bdce8ddbfadb07c39afa916be3f75ae0603186b7540346078d74cefd85ecc"
+    },
+    "unit91-92": {
+      "title": "邻居们的明日约定",
+      "revision": "2901b12eab95c4dccb7e1b890000680c2f36538e3f27f7e6db6968031d1c9444",
+      "manifest": "/course-packages/unit91-92/2901b12eab95c4dccb7e1b890000680c2f36538e3f27f7e6db6968031d1c9444.json",
+      "sha256": "a80f16347fd648140a370b04ff0fe7f2226e94347f142c8d804b06c4e1a0f22f"
+    },
+    "unit93-94": {
+      "title": "新邻居的飞行手记",
+      "revision": "abdfaa865c88a5743c91fdb04f345383c748f7a6a756b3e672098afee1d7e112",
+      "manifest": "/course-packages/unit93-94/abdfaa865c88a5743c91fdb04f345383c748f7a6a756b3e672098afee1d7e112.json",
+      "sha256": "e2bee8da7ea021471bb0a7088651bf3cc842f3fbe46caa7156829177fab3ae0b"
+    },
+    "unit95-96": {
+      "title": "车站里的时间谜题",
+      "revision": "09eea5d4159c838d8d63a3713039a8539137c49f97cff9f32a5d9ab2ec1e40b4",
+      "manifest": "/course-packages/unit95-96/09eea5d4159c838d8d63a3713039a8539137c49f97cff9f32a5d9ab2ec1e40b4.json",
+      "sha256": "996ca8ce07c6df7238bf5d06559306e1993b0e80b7a59d4079c430d7f8180a4d"
+    },
+    "unit97-98": {
+      "title": "蓝色箱子的归属",
+      "revision": "8ee0813c8ffe753cf20c4716de41ca36181c62e4901a2432e14a43f174caabec",
+      "manifest": "/course-packages/unit97-98/8ee0813c8ffe753cf20c4716de41ca36181c62e4901a2432e14a43f174caabec.json",
+      "sha256": "c22f70b21c815933eb8bac616b8f1e865213ead0074faedabde8a7d2f190e1de"
+    },
+    "unit99-100": {
+      "title": "把话传清楚",
+      "revision": "175e2cf3aae44e5ce789efa31fb55d6887c9e92b16ba7d6a7f687f3ec1d45551",
+      "manifest": "/course-packages/unit99-100/175e2cf3aae44e5ce789efa31fb55d6887c9e92b16ba7d6a7f687f3ec1d45551.json",
+      "sha256": "a408022af52985cb845bedc5ca1f9dff1a83619aee1e058f1b723f71d1ebb78c"
+    },
+    "unit101-102": {
+      "title": "来自Jimmy的明信片",
+      "revision": "55e3b0f09b5f6023bcb2007976f06663ea61d55109be46411d9f093c8be88c7f",
+      "manifest": "/course-packages/unit101-102/55e3b0f09b5f6023bcb2007976f06663ea61d55109be46411d9f093c8be88c7f.json",
+      "sha256": "b27a7c017f11f9cbfe0b76f10eafc857cbc9344b2a004084a99d7d4de24f2910"
+    },
+    "unit103-104": {
+      "title": "考场外的对话",
+      "revision": "c2299ff812861e4db5edd7e2edbb496b96fb1afd8af841b42156d97a618c4cf5",
+      "manifest": "/course-packages/unit103-104/c2299ff812861e4db5edd7e2edbb496b96fb1afd8af841b42156d97a618c4cf5.json",
+      "sha256": "2022ed5eb8bdd486a903abf5a67dc530e70c47ee31aa49d877c9f7c888c477ca"
+    },
+    "unit105-106": {
+      "title": "办公室的小礼物",
+      "revision": "494cce27bb28905d2047cba06b2cc1c3a3e0e7d67ca7c4129c2e4ce621f1b661",
+      "manifest": "/course-packages/unit105-106/494cce27bb28905d2047cba06b2cc1c3a3e0e7d67ca7c4129c2e4ce621f1b661.json",
+      "sha256": "8ff4b01099b5833525b20152b03eeaf7ff582f6ab4a13d61b12315991fe26feb"
+    },
+    "unit107-108": {
+      "title": "服装店里的比较",
+      "revision": "ba208e0a52255bc5a2d67522ef9b5acd2ace3d6e5df8e38e9179b06688a7a40a",
+      "manifest": "/course-packages/unit107-108/ba208e0a52255bc5a2d67522ef9b5acd2ace3d6e5df8e38e9179b06688a7a40a.json",
+      "sha256": "f6b2acffeb9b950dd3342f10e3e66e2c3b01a40c3a095bb59e06eb614fb063a3"
+    },
+    "unit109-110": {
+      "title": "咖啡桌上的数量",
+      "revision": "73e046d88d35628b1d9af0a92f240b826fa2946ebdd5926a69d70e455593cf10",
+      "manifest": "/course-packages/unit109-110/73e046d88d35628b1d9af0a92f240b826fa2946ebdd5926a69d70e455593cf10.json",
+      "sha256": "1b458b142dbd8799a3b522ac5ad238319e31bd0c21991cc57e5625416ea0ad2d"
+    },
+    "unit111-112": {
+      "title": "电视机店里的比较",
+      "revision": "e7b5e9efd63c03dfd59ec3f5dc9c55f9f19e4c020dd2b5bb63b81481c4e40856",
+      "manifest": "/course-packages/unit111-112/e7b5e9efd63c03dfd59ec3f5dc9c55f9f19e4c020dd2b5bb63b81481c4e40856.json",
+      "sha256": "6cb9e566873a27aad7c6f6afba19b3bf776804ef4aedfa12441a736a2bbacc52"
+    },
+    "unit113-114": {
+      "title": "公共汽车上的零钱",
+      "revision": "ca9edd719e0edc35c9947fb616ca789df10a726be66daffc337c7c07ad7fb756",
+      "manifest": "/course-packages/unit113-114/ca9edd719e0edc35c9947fb616ca789df10a726be66daffc337c7c07ad7fb756.json",
+      "sha256": "7edeae337b954f919c4c890c2d2f5c51353b58c20077e437174c0856b02704a5"
+    },
+    "unit115-116": {
+      "title": "敲门后的花园聚会",
+      "revision": "2f1af1a54966200f5814aabdc791c9c116ef3f0c43e405c3230abdf74e5844a6",
+      "manifest": "/course-packages/unit115-116/2f1af1a54966200f5814aabdc791c9c116ef3f0c43e405c3230abdf74e5844a6.json",
+      "sha256": "b0d6e06b0b6217bcd2f59ff9c4cd33df953dce8fd129426398422f9dea1398e2"
+    },
+    "unit117-118": {
+      "title": "早餐时的意外",
+      "revision": "e20a0efeb0316a3f852cb24d2c456b04fadd21cb8d732fde020964f5dd37233a",
+      "manifest": "/course-packages/unit117-118/e20a0efeb0316a3f852cb24d2c456b04fadd21cb8d732fde020964f5dd37233a.json",
+      "sha256": "8adebb1268160b08dc69b0abb8f2fb9c8cc137a966f5126f279cb65448a9f48e"
+    },
+    "unit119-120": {
+      "title": "夜里的声音",
+      "revision": "00afebf5525cbbabb7d4998ce40b3568d2d13297b13bbb05db982abca7cacbb5",
+      "manifest": "/course-packages/unit119-120/00afebf5525cbbabb7d4998ce40b3568d2d13297b13bbb05db982abca7cacbb5.json",
+      "sha256": "c7566cfe4f96dc5525e1f7e80f607c6fc214a9e8f50076ea5d4248137aee5900"
+    }
+  },
+  "resourceFiles": 2930,
+  "awardBook": {
+    "route": "awards/",
+    "resources": 56,
+    "bytes": 13612548
+  }
+}

@@ -1,0 +1,40 @@
+[WebServer] (node:26864) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:33324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit3-4-grammar.spec.js:8:1 › 实际提交统计跨设备保留：同题两次错答计两次，重练归零且零错才获星 (1.2m)
+  x  2 tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 (1.1m)
+
+
+  1) tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 ──────────────────
+
+    Error: page.reload: WebKit encountered an internal error
+    Call log:
+      - waiting for navigation until "load"
+
+
+      100 |     await expect(room.locator('.progress-copy')).toHaveText('第 2 / 10 题');
+      101 |     await expect(second.page.locator('#studentSyncStatus')).toContainText('本机');
+    > 102 |     await second.page.reload();
+          |                       ^
+      103 |     await expect(second.page.getByRole('heading', { name: '联网后再进入', exact: true })).toBeVisible();
+      104 |     await expect(room).toHaveCount(0);
+      105 |     await second.context.setOffline(false);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit3-4-grammar.spec.js:102:23
+
+    Error Context: output\unit34-review-20261018\account-ready-webkit-root\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\account-ready-webkit-root\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\account-ready-webkit-root\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit3-4-grammar.spec.js:61:1 › 语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验 ───────────────────
+  1 passed (2.4m)

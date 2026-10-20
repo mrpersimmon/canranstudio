@@ -1,0 +1,49 @@
+{
+  "cold": [
+    {
+      "browser": "151.0.7922.34",
+      "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+      "downMbps": 10,
+      "latencyMs": 150,
+      "from": "prepared navigation",
+      "target": "unit1-2",
+      "trace": false,
+      "timing": "actual click to fully usable rendered frame",
+      "elapsedMs": 4294.300048828125,
+      "driverElapsedMs": 4470
+    },
+    {
+      "browser": "151.0.7922.34",
+      "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+      "downMbps": 10,
+      "latencyMs": 150,
+      "from": "prepared navigation",
+      "target": "unit1-2",
+      "trace": false,
+      "timing": "actual click to fully usable rendered frame",
+      "elapsedMs": 4227.39990234375,
+      "driverElapsedMs": 4477
+    }
+  ],
+  "warm": {
+    "p95": 827.199951171875,
+    "samples": 20
+  },
+  "directoryReadyMs": 26957.30000001192,
+  "readyRecovery": [
+    {
+      "name": "words-reload-ready.json",
+      "readyMs": 5519
+    },
+    {
+      "name": "certificate-reload-ready.json",
+      "readyMs": 5602
+    },
+    {
+      "name": "certificate-directory-return-ready.json",
+      "readyMs": 5625
+    }
+  ],
+  "scope": "Windows／Chromium151／i7-12700；静态参考课包。共用字体是真实目录准备，不删除字体、不减少原课包资源、不放宽5秒和1.5秒阈值。",
+  "boundary": "目录首访成本单列；非全站首次5秒、非72课弱网、非账号或真机性能结论。WebKit就绪资料只用于状态断言。"
+}

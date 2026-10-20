@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-16T22:17:17.160Z",
+  "checks": [
+    {
+      "name": "five zones with 45 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 7,
+        "roles": 3,
+        "grammar": 13,
+        "apply": 5,
+        "exam": 17
+      }
+    },
+    {
+      "name": "26 original tasks unchanged; original 27-task edition archived",
+      "passed": true,
+      "detail": {
+        "revised": [
+          "u2526-types-v1-t11"
+        ]
+      }
+    },
+    {
+      "name": "45 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "36 words and 12 full narrative lines unchanged",
+      "passed": true
+    },
+    {
+      "name": "8 pictures, 7 models and A4 with 8 blanks remain intact",
+      "passed": true
+    },
+    {
+      "name": "learning key and content version retained",
+      "passed": true
+    },
+    {
+      "name": "five frozen sources match actual pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "all 53 original SVGs unchanged",
+      "passed": true,
+      "detail": {
+        "count": 53
+      }
+    },
+    {
+      "name": "five complete prompts with four selected assets and retained originals",
+      "passed": true
+    },
+    {
+      "name": "cast-mrs-v1 source framing and transparency policy retained",
+      "passed": true
+    },
+    {
+      "name": "kitchen-room-v1 source framing and transparency policy retained",
+      "passed": true
+    },
+    {
+      "name": "keepsake-story-v2 source framing and transparency policy retained",
+      "passed": true
+    },
+    {
+      "name": "kitchen-room-mobile-v1 source framing and transparency policy retained",
+      "passed": true
+    },
+    {
+      "name": "font inputs match final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1864,
+        "inputs": 341
+      }
+    },
+    {
+      "name": "original font license bytes retained",
+      "passed": true
+    },
+    {
+      "name": "root protected build has 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build has 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JavaScript parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document relative links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson identifiers or captions in new UI",
+      "passed": true
+    },
+    {
+      "name": "all online cloze tasks have at most two related blanks",
+      "passed": true
+    },
+    {
+      "name": "server reward edition matches current definition",
+      "passed": true
+    },
+    {
+      "name": "original narration never gains fictional speakers",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit25-26/cast-mrs-v1.webp",
+      "width": 1065,
+      "height": 1477,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "a5b4bd8179cfff10c01d00dc78266f836ee129a8402b1da73587cd6631b809bd"
+    },
+    {
+      "file": "assets/unit25-26/kitchen-room-v1.webp",
+      "width": 1810,
+      "height": 869,
+      "hasAlpha": false,
+      "transparentRequired": false,
+      "sha256": "dc1db635f4cc53ba7353f1afea0f888f7a83fcb58468e394f36e6f5148dee05e"
+    },
+    {
+      "file": "assets/unit25-26/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "83022497eae354736c7728764837f45c321a32978cc5eb35281eeba12ba9c088"
+    },
+    {
+      "file": "assets/unit25-26/kitchen-room-mobile-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": false,
+      "transparentRequired": false,
+      "sha256": "88ff6feafa8318c479b78a4216c1f0902758ab01e7c3cef22299a9793323bd0b"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courses": 72,
+      "unit": {
+        "title": "厨房探访记",
+        "revision": "a1dae4d2fb61e4cf4f77021c068fe99b795dcfe2f4be70edbf185f62725a90e5",
+        "manifest": "/course-packages/unit25-26/a1dae4d2fb61e4cf4f77021c068fe99b795dcfe2f4be70edbf185f62725a90e5.json",
+        "sha256": "48bdc188e94811a70fd56a1ac94d161b22ff8f9a311304d7a5727f3d00d12023"
+      }
+    },
+    "subpath": {
+      "courses": 72,
+      "unit": {
+        "title": "厨房探访记",
+        "revision": "fc859e076337d85e2088973b907946236c0e3cf0ef9ede4b6132f21f1e0156a4",
+        "manifest": "/lesson/course-packages/unit25-26/fc859e076337d85e2088973b907946236c0e3cf0ef9ede4b6132f21f1e0156a4.json",
+        "sha256": "1db5ee10f25c9ed44a9b12d2a0651332651ffab5c8f2fc9cfc4acd331f73d10f"
+      }
+    }
+  }
+}

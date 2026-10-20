@@ -1,0 +1,1160 @@
+{
+  "listen": [
+    {
+      "id": "u3940-v1-objects",
+      "target": "认识花瓶、花与front",
+      "prompt": "把英文和意思配起来。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "认识花瓶、花与front",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "vase",
+          "cn": "花瓶"
+        },
+        {
+          "id": "1",
+          "en": "flower",
+          "cn": "花"
+        },
+        {
+          "id": "2",
+          "en": "front",
+          "cn": "前面"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "首次覆盖三种新词，不重复反向配对。"
+    },
+    {
+      "id": "u3940-v1-actions",
+      "target": "分清展示、寄送与带给",
+      "prompt": "再认三个动作。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "分清展示、寄送与带给",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "show",
+          "cn": "给……看"
+        },
+        {
+          "id": "1",
+          "en": "send",
+          "cn": "寄送"
+        },
+        {
+          "id": "2",
+          "en": "take",
+          "cn": "带给"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "同课三个不同动作；实际语境后续再用，不把这些词都教成give。"
+    },
+    {
+      "id": "u3940-v1-careful",
+      "target": "理解提醒Be careful",
+      "prompt": "Be careful!\n这是在提醒对方什么？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "理解提醒Be careful",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "小心一点",
+        "快一点",
+        "坐下吧"
+      ],
+      "answer": "小心一点",
+      "distractorRationale": "本课careful是防止意外的提醒，不表示动作快慢。"
+    },
+    {
+      "id": "u3940-v1-drop",
+      "target": "否定句中drop的词义",
+      "prompt": "Don’t drop it!\ndrop 表示什么？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "否定句中drop的词义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "掉下",
+        "拿稳",
+        "摆好"
+      ],
+      "answer": "掉下",
+      "distractorRationale": "区分动词意思和整句禁止的行为，不能把drop教成拿稳。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u3940-v1-penny-plan",
+      "target": "区分Penny最初的计划",
+      "prompt": "Penny: I’m going to put it on this table, Sam.\nPenny 最初打算把花瓶放在哪儿？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "区分Penny最初的计划",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "桌子上",
+        "窗户前面",
+        "架子上"
+      ],
+      "answer": "桌子上",
+      "distractorRationale": "最初计划不等于Sam的新建议或最终位置。"
+    },
+    {
+      "id": "u3940-v1-vase-handoff",
+      "target": "it所指物和me的说话者",
+      "prompt": "选好要递的东西和接收者。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "it所指物和me的说话者",
+      "hint": "先找 it 指什么，再看是谁说 me。",
+      "explanation": "",
+      "type": "handoff",
+      "speaker": {
+        "name": "Sam",
+        "image": "/assets/unit39-40/sam.svg"
+      },
+      "request": "Sam: What are you going to do with that vase, Penny?\nSam: Give it to me.",
+      "objects": [
+        {
+          "id": "vase",
+          "name": "花瓶",
+          "image": "/assets/unit39-40/vase-flowers.svg"
+        },
+        {
+          "id": "flowers",
+          "name": "花束",
+          "image": "/assets/unit39-40/flowers.svg"
+        }
+      ],
+      "recipients": [
+        {
+          "id": "penny",
+          "name": "Penny",
+          "images": [
+            "/assets/unit39-40/penny-receive.svg"
+          ]
+        },
+        {
+          "id": "sam",
+          "name": "Sam",
+          "images": [
+            "/assets/unit39-40/sam-receive.svg"
+          ]
+        }
+      ],
+      "answer": "[\"vase\",\"sam\"]",
+      "distractorRationale": "物品与说话者两条件；未检查和错答均不交接。"
+    },
+    {
+      "id": "u3940-v1-window-plan",
+      "target": "定位窗前这一位置短语",
+      "prompt": "点出表示“在窗户前面”的完整词组。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "定位窗前这一位置短语",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "I’m going to put ",
+        {
+          "value": "it"
+        },
+        {
+          "value": " here"
+        },
+        ", ",
+        {
+          "value": "in front of the window"
+        },
+        "."
+      ],
+      "options": [
+        "it",
+        " here",
+        "in front of the window"
+      ],
+      "answer": "in front of the window",
+      "distractorRationale": "it是物品、here是此处，只有完整介词词组明确窗前。"
+    },
+    {
+      "id": "u3940-v1-flowers-too",
+      "target": "理解too连接花瓶与花的评价",
+      "prompt": "Sam: It’s a lovely vase.\nPenny: Those flowers are lovely, too.\n除了花瓶，Penny 还说什么很漂亮？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "理解too连接花瓶与花的评价",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "花",
+        "窗户",
+        "架子"
+      ],
+      "answer": "花",
+      "distractorRationale": "too补充另一对象，不让孩子只凭装饰图作答。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3940-five-g-negative",
+      "target": "否定祈使句用don’t加动词原形",
+      "prompt": "妈妈提醒孩子不要关窗。补全她的话。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Don’t ",
+          "after": " the window.",
+          "options": [
+            "close",
+            "closes",
+            "closing"
+          ]
+        }
+      ],
+      "answer": "[\"close\"]",
+      "explanation": "Don’t后接动词原形close，表示不要关窗；这句话没有说窗户已经关上。",
+      "hint": "",
+      "workshop": {
+        "rule": "Don’t后接动词原形close，表示不要关窗；这句话没有说窗户已经关上。",
+        "model": {
+          "lines": [
+            [
+              "Don’t speak to your mother like that!",
+              "导学原例：不要那样对你妈妈说话！Don’t后用原形speak。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-be",
+      "target": "形容词前使用be构成肯否祈使句",
+      "prompt": "要安静，不要吵闹。补全两句提醒。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " quiet.",
+          "options": [
+            "Be",
+            "Are",
+            "Is"
+          ]
+        },
+        {
+          "before": "Don’t ",
+          "after": " noisy.",
+          "options": [
+            "be",
+            "are",
+            "is"
+          ]
+        }
+      ],
+      "answer": "[\"Be\",\"be\"]",
+      "display": {
+        "title": "要安静，不要吵闹。补全两句提醒。",
+        "material": "quiet：安静的；noisy：吵闹的"
+      },
+      "explanation": "形容词前用Be构成祈使句，否定用Don’t be。不是直接把形容词放在Don’t后。",
+      "hint": "",
+      "workshop": {
+        "rule": "形容词前用Be构成祈使句，否定用Don’t be。不是直接把形容词放在Don’t后。",
+        "model": {
+          "lines": [
+            [
+              "Be careful! / Be patient.",
+              "课文和导学原例：小心！／耐心点。careful、patient都是形容词，前面用Be。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-do-not",
+      "target": "don’t与do not的否定意义一致",
+      "prompt": "保持意思不变，给告示换一种说法。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "Don’t touch the vase.",
+        "Do touch the vase.",
+        "Don’t move the vase."
+      ],
+      "answer": "Don’t touch the vase.",
+      "display": {
+        "title": "保持意思不变，给告示换一种说法。",
+        "material": "Do not touch the vase.\ntouch：触碰；move：移动"
+      },
+      "explanation": "Do not与Don’t都表示不要；完整形式常用于正式文体，但不是只能书面使用。把Do not变成Do就改变了肯否意思。",
+      "hint": "",
+      "workshop": {
+        "rule": "Do not与Don’t都表示不要；完整形式常用于正式文体，但不是只能书面使用。把Do not变成Do就改变了肯否意思。",
+        "model": {
+          "lines": [
+            [
+              "Do not open the door. = Don’t open the door.",
+              "这两句都要求不要开门；open：打开。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-front",
+      "target": "区分车外前方与车内前部",
+      "prompt": "两人都在车外的前方，用第一种说法；两人都在车内前排，用第二种。补全位置短语。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "车外：He’s sitting ",
+          "after": " the car with the driver.",
+          "options": [
+            "in front of",
+            "in the front of"
+          ]
+        },
+        {
+          "before": "车内：He’s sitting ",
+          "after": " the car with the driver.",
+          "options": [
+            "in the front of",
+            "in front of"
+          ]
+        }
+      ],
+      "answer": "[\"in front of\",\"in the front of\"]",
+      "display": {
+        "title": "两人都在车外的前方，用第一种说法；两人都在车内前排，用第二种。补全位置短语。",
+        "material": "driver：司机"
+      },
+      "explanation": "in front of在这个例子中是车外前方，in the front of是车内前部；不能把两处位置混为一处。",
+      "hint": "",
+      "workshop": {
+        "rule": "in front of在这个例子中是车外前方，in the front of是车内前部；不能把两处位置混为一处。",
+        "model": {
+          "lines": [
+            [
+              "in front of the window",
+              "课文中的窗前，不是窗户内部。"
+            ],
+            [
+              "in the front of the car",
+              "导学对照中的车内前部；the把这个位置说成车的内部前部。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-recipient",
+      "target": "用物品加to加人保持原意",
+      "prompt": "保持意思不变，换一种说法。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Show me that picture. → Show that picture ",
+          "after": " me.",
+          "options": [
+            "to",
+            "with",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"to\"]",
+      "explanation": "原句的人是me，物品是that picture。先说物品后，用to引出接收展示的人；show仍是给人看。",
+      "hint": "",
+      "workshop": {
+        "rule": "原句的人是me，物品是that picture。先说物品后，用to引出接收展示的人；show仍是给人看。",
+        "model": {
+          "lines": [
+            [
+              "Give me that vase. → Give that vase to me.",
+              "课本Written A原例：两句都要求把那只花瓶给我。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-pronoun",
+      "target": "可分短语动词的代词放在中间",
+      "prompt": "这些灯要关掉。用them替换the lights，补全句子。",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Turn ",
+          "after": ".",
+          "options": [
+            "them off",
+            "off them",
+            "it off"
+          ]
+        }
+      ],
+      "answer": "[\"them off\"]",
+      "explanation": "本课turn off、put on、take off中，代词it／them在动词和on／off中间。名词可有两种位置；不把此规则推广到所有动词加介词。",
+      "hint": "",
+      "workshop": {
+        "rule": "本课turn off、put on、take off中，代词it／them在动词和on／off中间。名词可有两种位置；不把此规则推广到所有动词加介词。",
+        "model": {
+          "lines": [
+            [
+              "Take off your hat. / Take your hat off. → Take it off.",
+              "名词your hat可放两处；换成代词it后放在take与off之间。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-five-g-tone",
+      "target": "结合情境判断祈使句的语气",
+      "prompt": "另设情境：老师轻声微笑，示意孩子把杯子拿稳，再说这句话。这里是在做什么？",
+      "source": "同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "温和地提醒小心。",
+        "宣布杯子已经摔碎。",
+        "要求把杯子扔掉。"
+      ],
+      "answer": "温和地提醒小心。",
+      "display": {
+        "title": "另设情境：老师轻声微笑，示意孩子把杯子拿稳，再说这句话。这里是在做什么？",
+        "material": "Don’t drop it!"
+      },
+      "explanation": "根据轻声、表情、手势与上下文理解提醒，不能仅凭Don’t或叹号判断生气或粗鲁。",
+      "hint": "",
+      "workshop": {
+        "rule": "根据轻声、表情、手势与上下文理解提醒，不能仅凭Don’t或叹号判断生气或粗鲁。",
+        "model": {
+          "lines": [
+            [
+              "Be careful!",
+              "相同形式可用于不同语气。判断时还要听语调、看手势表情和上下文。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3940-v1-warning",
+      "target": "提醒不代表事件已经发生",
+      "prompt": "Penny: Be careful! Don’t drop it!\n能从这两句话确定什么？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "提醒不代表事件已经发生",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Penny 在提醒 Sam 小心。",
+        "花瓶已经摔碎了。",
+        "Sam 已经把花瓶放到架子上。"
+      ],
+      "answer": "Penny 在提醒 Sam 小心。",
+      "distractorRationale": "禁止或提醒不等于已经出事故；图不画破碎结果。"
+    },
+    {
+      "id": "u3940-v1-not-there",
+      "target": "否定位置与肯定位置要合读",
+      "prompt": "Don’t put it there. Put it here, on this shelf.\n按这两句话，应该怎么做？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "否定位置与肯定位置要合读",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "换到架子上",
+        "仍放在原来那里",
+        "把花瓶扔掉"
+      ],
+      "answer": "换到架子上",
+      "distractorRationale": "要读完整否定与肯定要求，不能从单独否定推断任意地点。"
+    },
+    {
+      "id": "u3940-v1-show-meaning",
+      "target": "展示不等于交出物品",
+      "prompt": "Show me that picture.\n哪种做法符合这句话？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "展示不等于交出物品",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "把那张画给我看",
+        "把那张画寄走",
+        "把那张画放进箱子"
+      ],
+      "answer": "把那张画给我看",
+      "distractorRationale": "以英文动作决定行为；show不是send，也未要求改变归属。"
+    }
+  ],
+  "apply": [
+    {
+      "id": "u3940-v1-it-them",
+      "target": "根据物品单复数选it或them",
+      "prompt": "用代词替换物品。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "根据物品单复数选it或them",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Put on your hat. → I’m going to put ",
+          "after": " on.",
+          "options": [
+            "it",
+            "them"
+          ]
+        },
+        {
+          "before": "Take off your shoes. → I’m going to take ",
+          "after": " off.",
+          "options": [
+            "them",
+            "it"
+          ]
+        }
+      ],
+      "answer": "[\"it\",\"them\"]",
+      "distractorRationale": "hat单数、shoes复数，明确完整先行词。"
+    },
+    {
+      "id": "u3940-v1-to",
+      "target": "在物品之后说接收者",
+      "prompt": "换一种说法，意思保持不变。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "在物品之后说接收者",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Send George that letter. → Send that letter ",
+          "after": " George.",
+          "options": [
+            "to",
+            "for",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"to\"]",
+      "distractorRationale": "教send物品to人；for不是本题教材等值改写。"
+    },
+    {
+      "id": "u3940-v1-negative",
+      "target": "Don’t后的动词原形",
+      "prompt": "提醒别人别这样做。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "Don’t后的动词原形",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Don’t ",
+          "after": " that.",
+          "options": [
+            "do",
+            "does",
+            "doing"
+          ]
+        }
+      ],
+      "answer": "[\"do\"]",
+      "distractorRationale": "本课否定祈使句，不能套用三单或ing。"
+    },
+    {
+      "id": "u3940-v1-with",
+      "target": "询问怎样处理物品",
+      "prompt": "你打算怎么处理那只花瓶？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "询问怎样处理物品",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "What are you going to do ",
+          "after": " that vase?",
+          "options": [
+            "with",
+            "to",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"with\"]",
+      "distractorRationale": "do with问处理物品，区别把东西给某人的to。"
+    },
+    {
+      "id": "u3940-v1-give-it",
+      "target": "代词物品在前、to加接收者",
+      "prompt": "把它给我。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "代词物品在前、to加接收者",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "Give",
+        "it",
+        "to",
+        "me."
+      ],
+      "answer": "Give it to me.",
+      "distractorRationale": "有支架组织give it to me，不教授give me it作为本课模式。"
+    },
+    {
+      "id": "u3940-v1-turn-them",
+      "target": "代词放在turn和off中间",
+      "prompt": "这些灯要关掉：我打算把它们关掉。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "代词放在turn和off中间",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "I’m",
+        "going",
+        "to",
+        "turn",
+        "them",
+        "off."
+      ],
+      "answer": "I’m going to turn them off.",
+      "distractorRationale": "them对应lights，词块组织实际位置，不拆成单个词形机械凑题。"
+    },
+    {
+      "id": "u3940-five-a-writing-intent",
+      "target": "分清原意改写与指令转为自己打算",
+      "prompt": "读这组课本B原例。后一句相对前一句，表达意图怎样改变？",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "从要求对方穿，改成自己说打算穿。",
+        "两句都在命令对方穿。",
+        "后一句表示自己已经穿好了。"
+      ],
+      "answer": "从要求对方穿，改成自己说打算穿。",
+      "display": {
+        "title": "读这组课本B原例。后一句相对前一句，表达意图怎样改变？",
+        "material": "Put on your coat! → I’m going to put it on."
+      },
+      "explanation": "前句是给对方的指令，后句是自己表达打算。与A的双宾语换说法不同，B不是保持同一说话意图的同义转换。",
+      "hint": ""
+    }
+  ],
+  "exam": [
+    {
+      "id": "u3940-v1-final-vase",
+      "target": "重点名词辨认",
+      "prompt": "选出图中物品的英文。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "重点名词辨认",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "vase",
+        "flower",
+        "shelf"
+      ],
+      "answer": "vase",
+      "image": "/assets/unit39-40/vase.svg",
+      "imageAlt": "一只完整的陶瓷容器，有细颈和开口",
+      "distractorRationale": "词义配对后的图片抽样，不重做全词表。"
+    },
+    {
+      "id": "u3940-v1-final-place",
+      "target": "根据课文最后的要求确定落点",
+      "prompt": "按 Penny 最后的要求，选出花瓶的落点。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "根据课文最后的要求确定落点",
+      "hint": "",
+      "explanation": "",
+      "type": "scene-find",
+      "reference": "Don’t put it there, Sam. Put it here, on this shelf.",
+      "sceneImage": "/assets/unit39-40/placement-room.svg",
+      "mobileScene": "/assets/unit39-40/placement-room-mobile.svg",
+      "sceneDescription": "房间里的桌子、窗前空位和壁架；都还没有摆上花瓶。",
+      "spots": [
+        {
+          "id": "table",
+          "name": "桌子上",
+          "bounds": [
+            4,
+            47,
+            25,
+            45
+          ],
+          "mobileBounds": [
+            4,
+            52,
+            29,
+            41
+          ]
+        },
+        {
+          "id": "window",
+          "name": "窗户前面",
+          "bounds": [
+            36,
+            34,
+            25,
+            58
+          ],
+          "mobileBounds": [
+            37,
+            43,
+            25,
+            50
+          ]
+        },
+        {
+          "id": "shelf",
+          "name": "架子上",
+          "bounds": [
+            69,
+            21,
+            27,
+            40
+          ],
+          "mobileBounds": [
+            68,
+            20,
+            29,
+            40
+          ]
+        }
+      ],
+      "options": [
+        "table",
+        "window",
+        "shelf"
+      ],
+      "answer": "shelf",
+      "distractorRationale": "场景同等标记，无花瓶提前摆上正确位置；英文on this shelf才给出目标。"
+    },
+    {
+      "id": "u3940-v1-final-plan",
+      "target": "将窗前计划与最终落点区分",
+      "prompt": "Sam: I’m going to put it here, in front of the window.\n这句话本身说明什么？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "将窗前计划与最终落点区分",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Sam 打算把它放在窗前。",
+        "Sam 已经把它放好了。",
+        "Penny 把花瓶打碎了。"
+      ],
+      "answer": "Sam 打算把它放在窗前。",
+      "distractorRationale": "计划并不说明动作已完成，保留in front of的语境复习。"
+    },
+    {
+      "id": "u3940-v1-final-care",
+      "target": "理解禁止摔落",
+      "prompt": "Don’t drop it!\n这句话要求对方怎么做？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "理解禁止摔落",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "别让它掉下去",
+        "把它扔到地上",
+        "已经放好了"
+      ],
+      "answer": "别让它掉下去",
+      "distractorRationale": "整句禁止意义，不再孤立翻译drop。"
+    },
+    {
+      "id": "u3940-v1-final-negative",
+      "target": "否定祈使句动词形式",
+      "prompt": "补全“别把它放在那里”。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "否定祈使句动词形式",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Don’t ",
+          "after": " it there.",
+          "options": [
+            "put",
+            "puts",
+            "putting"
+          ]
+        }
+      ],
+      "answer": "[\"put\"]",
+      "distractorRationale": "从do迁到put，必要形式抽样。"
+    },
+    {
+      "id": "u3940-v1-final-with",
+      "target": "完整询问打算处理什么",
+      "prompt": "补全 Sam 的问题。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "完整询问打算处理什么",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "What are you going to do ",
+          "after": " that vase?",
+          "options": [
+            "with",
+            "for",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"with\"]",
+      "distractorRationale": "检查教材do with搭配，未把现成整块问句算作该能力。"
+    },
+    {
+      "id": "u3940-v1-final-recipient",
+      "target": "换说话者后me跟随变化",
+      "prompt": "新的委托——Penny 对 Sam 说：Give it to me.\n这次接收者是谁？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "换说话者后me跟随变化",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Penny",
+        "Sam"
+      ],
+      "answer": "Penny",
+      "distractorRationale": "明确新委托；与课文Sam说me不同，不能记住me永远是Sam。"
+    },
+    {
+      "id": "u3940-v1-final-person",
+      "target": "定位双宾语中的完整接收者",
+      "prompt": "点出要接收书的人。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "定位双宾语中的完整接收者",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "Give ",
+        {
+          "value": "Mrs. Jones"
+        },
+        " ",
+        {
+          "value": "these books"
+        },
+        "."
+      ],
+      "options": [
+        "Mrs. Jones",
+        "these books"
+      ],
+      "answer": "Mrs. Jones",
+      "distractorRationale": "按WrittenA原句找人，不把these books当接收者。"
+    },
+    {
+      "id": "u3940-v1-final-rewrite",
+      "target": "物品加to加人保持原意",
+      "prompt": "保持意思不变。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "物品加to加人保持原意",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Take her those flowers. → Take those flowers ",
+          "after": " her.",
+          "options": [
+            "to",
+            "with",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"to\"]",
+      "distractorRationale": "send规则迁到take；不将her替换成she。"
+    },
+    {
+      "id": "u3940-v1-final-show-send",
+      "target": "在真实目的里分清show与send",
+      "prompt": "补全两个人的不同打算。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "在真实目的里分清show与send",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "给朋友看一张画：I’m going to ",
+          "after": " it to my friend.",
+          "options": [
+            "show",
+            "send"
+          ]
+        },
+        {
+          "before": "给外公寄一封信：I’m going to ",
+          "after": " it to my grandfather.",
+          "options": [
+            "send",
+            "show"
+          ]
+        }
+      ],
+      "answer": "[\"show\",\"send\"]",
+      "distractorRationale": "明确看与寄的目的，不让give/show都成立；译意用于选择动作。"
+    },
+    {
+      "id": "u3940-v1-final-take",
+      "target": "take的带给义",
+      "prompt": "Take these flowers to my wife.\n这句话要对方做什么？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "take的带给义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "把这些花带给我的妻子",
+        "把这些花给我看",
+        "把这些花拿回来给我"
+      ],
+      "answer": "把这些花带给我的妻子",
+      "distractorRationale": "本课take带给的方向；不能凭人物外表猜妻子。"
+    },
+    {
+      "id": "u3940-v1-final-number",
+      "target": "it与them分别回指单复数",
+      "prompt": "用代词替换物品。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "it与them分别回指单复数",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Put on your suit. → I’m going to put ",
+          "after": " on.",
+          "options": [
+            "it",
+            "them"
+          ]
+        },
+        {
+          "before": "Turn on the taps. → I’m going to turn ",
+          "after": " on.",
+          "options": [
+            "them",
+            "it"
+          ]
+        }
+      ],
+      "answer": "[\"it\",\"them\"]",
+      "distractorRationale": "suit和taps是新的数对比，完整先行词与WrittenB一致。"
+    },
+    {
+      "id": "u3940-v1-final-position",
+      "target": "纠正短语动词的代词位置",
+      "prompt": "指一顶帽子时，哪句话的词序正确？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "纠正短语动词的代词位置",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Put it on.",
+        "Put on it.",
+        "Put them on."
+      ],
+      "answer": "Put it on.",
+      "distractorRationale": "it必须夹在put和on之间；第三项数不符合一顶。"
+    },
+    {
+      "id": "u3940-v1-final-on-off",
+      "target": "开和关、穿和脱的必要对比",
+      "prompt": "按意思补全。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "开和关、穿和脱的必要对比",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "打开音响：Turn it ",
+          "after": ".",
+          "options": [
+            "on",
+            "off"
+          ]
+        },
+        {
+          "before": "脱掉帽子：Take it ",
+          "after": ".",
+          "options": [
+            "off",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"on\",\"off\"]",
+      "distractorRationale": "on/off两侧都独立选择，不能只凭给定词块声称已识别方向。"
+    },
+    {
+      "id": "u3940-v1-final-plan-sentence",
+      "target": "组织处理复数物品的打算",
+      "prompt": "我打算把它们给孩子们。",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "组织处理复数物品的打算",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "I’m",
+        "going",
+        "to",
+        "give",
+        "them",
+        "to",
+        "the",
+        "children."
+      ],
+      "answer": "I’m going to give them to the children.",
+      "distractorRationale": "计划+物品代词+接收者的有支架整合，不等于自由写作。"
+    },
+    {
+      "id": "u3940-v1-final-question",
+      "target": "组织处理物品的计划问句",
+      "prompt": "你打算怎么处理它？",
+      "source": "《新概念英语智慧版1》纸页78–81（PDF111–114）",
+      "decision": "组织处理物品的计划问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "are",
+        "you",
+        "going",
+        "to",
+        "do",
+        "with",
+        "it?"
+      ],
+      "answer": "What are you going to do with it?",
+      "distractorRationale": "在最后组织完整问句，区别前面陈述和祈使，不额外塞未教结构。"
+    },
+    {
+      "id": "u3940-five-e-be",
+      "target": "独立运用don’t be加形容词",
+      "prompt": "提醒别人不要迟到。补全句子。",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Don’t ",
+          "after": " late.",
+          "options": [
+            "be",
+            "are",
+            "is"
+          ]
+        }
+      ],
+      "answer": "[\"be\"]",
+      "display": {
+        "title": "提醒别人不要迟到。补全句子。",
+        "material": "late：迟到的"
+      },
+      "explanation": "否定祈使句Don’t后用原形be，再接形容词late。",
+      "hint": ""
+    },
+    {
+      "id": "u3940-five-e-do-not",
+      "target": "独立识别完整否定与缩写",
+      "prompt": "哪句话与Do not open the box.意思相同？",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "Don’t open the box.",
+        "Do open the box.",
+        "Don’t close the box."
+      ],
+      "answer": "Don’t open the box.",
+      "display": {
+        "title": "哪句话与Do not open the box.意思相同？",
+        "material": "open：打开；close：关上"
+      },
+      "explanation": "Do not与Don’t都是否定；换成肯定Do或另一动作close都改变了原意。",
+      "hint": ""
+    },
+    {
+      "id": "u3940-five-e-front",
+      "target": "独立区分车内前部与车外前方",
+      "prompt": "Lily坐在公共汽车内部的最前一排，Tom站在车外的前方。分别补全。",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Lily is ",
+          "after": " the bus.",
+          "options": [
+            "in the front of",
+            "in front of"
+          ]
+        },
+        {
+          "before": "Tom is ",
+          "after": " the bus.",
+          "options": [
+            "in front of",
+            "in the front of"
+          ]
+        }
+      ],
+      "answer": "[\"in the front of\",\"in front of\"]",
+      "explanation": "本题明确给出内部和外部条件；不是凭人物、车的朝向或背过某个名字选词。",
+      "hint": ""
+    },
+    {
+      "id": "u3940-five-e-tone",
+      "target": "不凭祈使形式或标点猜情绪",
+      "prompt": "只看到这句话，没有听到声音，也不知道当时的表情和情境。能确定说话人生气了吗？",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "不能，还需要语气和上下文。",
+        "能，只要有叹号就是生气。",
+        "能，只要有Don’t就是粗鲁。"
+      ],
+      "answer": "不能，还需要语气和上下文。",
+      "display": {
+        "title": "只看到这句话，没有听到声音，也不知道当时的表情和情境。能确定说话人生气了吗？",
+        "material": "Don’t touch it!\ntouch：触碰"
+      },
+      "explanation": "句式和叹号不足以确定生气或粗鲁；不要添加材料没有的情绪和剧情。",
+      "hint": ""
+    },
+    {
+      "id": "u3940-five-e-intention",
+      "target": "根据给定目标选择否定指令",
+      "prompt": "窗户现在关着，老师希望它保持关闭。她应怎样直接提醒想开窗的孩子？",
+      "source": "课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127",
+      "options": [
+        "Don’t open the window.",
+        "Open the window.",
+        "Don’t close the window."
+      ],
+      "answer": "Don’t open the window.",
+      "explanation": "目标是保持关闭，因此不要打开。完整条件决定要求，不是单看某个动作词。",
+      "hint": ""
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "method": "Built-in image_gen; format conversion without cropping (WebP quality 91); original SVG characters retained for historical certificates.",
+  "card": "Use case: illustration-story. Create a finished illustration for a children's English lesson keepsake on a true transparent background, square canvas. Rounded picture-book cartoon, confident dark-brown outlines, simple dot eyes, friendly expressive faces, soft flat pastel colors with very light paper texture; not realistic, anime or 3D. Scene from Lesson 11 Is this your shirt?: an unnamed male teacher returns one white collared button-up shirt to schoolboy Tim after confirming ownership. Teacher LEFT, gray-brown neatly parted hair, rounded rectangular glasses, sage-green blazer, white shirt and muted golden tie. Tim RIGHT, short spiky dark-brown hair, terracotta sweater with two broad pale-yellow horizontal stripes, olive trousers. They face each other smiling, teacher's hands offering the SAME white shirt toward Tim's open receiving hands, all fingers and sleeve edges clearly visible; not two white shirts. Dave is a smaller supporting schoolboy in the center behind the exchange, curly light-brown hair, yellow top under slate-blue overalls, holding his separate BLUE collared shirt. Keep all three faces, hair, hands and both garments fully inside generous transparent margins. A subtle pale classroom coat rail in the background fades away, no text or labels. Medium close-up so the main two faces and the white-shirt exchange dominate, lower torsos may fade only below every hand and garment. No names, letters, stars, certificate frames or watermark. This is a friendly classroom, not a shop or a gift celebration.",
+  "ask": "Use the attached keepsake as character and drawing-style reference. Create a full-body THREE-person classroom cast on a transparent square canvas, with no background or props except ONE white collared shirt held by the teacher. Keep the SAME teacher LEFT (gray-brown side-part hair, rectangular glasses, sage blazer, gold tie, gray-blue trousers, brown shoes), Dave CENTER (curly light-brown hair, yellow shirt, slate-blue overalls, brown shoes) and Tim RIGHT (short spiky dark hair, terracotta sweater with two broad pale-yellow stripes, olive trousers, brown shoes). The adult is taller than the two boys. Put Dave slightly behind the front teacher/Tim line; no body overlaps another face or hand. Teacher turns right towards the boys and holds the SINGLE white button-up shirt by its shoulders at his own waist/chest. Both boys look left towards the teacher. Dave's hands relaxed and EMPTY; Tim's hands relaxed and EMPTY. They are discussing who owns the white shirt; no transfer yet. Do NOT show a blue garment, do NOT place the white shirt in Tim's hands. Clean warm rounded cartoon with brown outlines. Show the entire hair, every finger and all six shoes within generous transparent safety margins, aligned on a common baseline. No floor, chair, furniture, other people, words, letters, labels, bubbles, numbers or stars.",
+  "blue": "Edit the attached full-body three-person cast. Preserve their exact appearances, clothing, positions, scale, facial styles, full bodies, all shoes and transparent margins. The teacher on LEFT still holds exactly one WHITE collared shirt in both hands. Change ONLY Dave in CENTER: he now raises and displays a separate BLUE collared shirt by its shoulders with both hands in front of his overalls. Tim on RIGHT keeps his hands EMPTY and looks towards the teacher. Do not transfer the white shirt yet. No backgrounds, words, labels, extra limbs or extra garments.",
+  "catch": "Edit the attached full-body three-person cast for the words 'Catch!' after ownership is confirmed. Preserve the exact teacher left, curly-haired Dave center, spiky-haired Tim right, their clothing, full bodies, all shoes and scale. Teacher has just gently tossed the SINGLE WHITE shirt towards Tim; show one white collared shirt in the air just above and to the left of Tim's open receiving hands, below his face. Teacher extends his EMPTY rightward hand; no white shirt remains at teacher. Dave stands slightly behind this exchange, holding his separate BLUE collared shirt at his chest; do not cover Dave's face. Tim looks towards the approaching shirt, hands raised ready to catch but not holding it yet. No duplicate shirt, no airborne person, no text, no motion symbols, no background, true transparent background with generous safety margins.",
+  "returned": "Edit the attached full-body three-person cast to the final moment after the shirt is returned. Preserve the same teacher LEFT, curly-haired Dave CENTER, spiky-haired Tim RIGHT, their clothing, scale and full bodies; all six shoes and every finger remain visible with generous transparent margins. Teacher now has EMPTY hands, one relaxed open gesture towards Tim. Dave holds his separate BLUE collared shirt in both hands against his overalls. Tim is now holding the SINGLE WHITE collared shirt in both hands against his sweater and smiles towards the teacher, thanking him. There must be exactly one white shirt and one blue shirt, none still at the teacher. No background, labels, letters, symbols or extra people; keep true transparency and the same brown-outline pastel picture-book style.",
+  "selected": [
+    {
+      "prompt": "card",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-b19fa75a-3ee2-4adb-be17-697935e5b857.png",
+      "file": "assets/unit11-12/keepsake-story-v1.webp"
+    },
+    {
+      "prompt": "ask",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-c0d27fc5-178e-4be2-a8b9-6f208da2939f.png",
+      "file": "assets/unit11-12/cast-asking-v1.webp"
+    },
+    {
+      "prompt": "blue",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-5d18dcc6-2a87-4d4c-8a70-f6928c7520fc.png",
+      "file": "assets/unit11-12/cast-blue-v1.webp"
+    },
+    {
+      "prompt": "catch",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-4bca7da9-e2e0-4464-ab6f-d90c864a4751.png",
+      "file": "assets/unit11-12/cast-catch-v1.webp"
+    },
+    {
+      "prompt": "returned",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-498f8b9c-08bc-4cf5-91ec-c6f0c877a668.png",
+      "file": "assets/unit11-12/cast-returned-v1.webp"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+
+Running 1 test using 1 worker
+
+(node:23216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 (9.8s)
+
+
+  1) tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 ─────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-reply')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-reply')
+
+
+      45 |
+      46 | test('重开冒险包含新单元；取消保留，确认仅清理本网站路径记录',async({page})=>{
+    > 47 |  await page.goto('/unit9-10/#learn/describe');const room=page.locator('.stage-describe');await room.getByRole('button',{name:"He's",exact:true}).click();for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit7-8/#learn/reply','unit9-10/#learn/describe','unit49-50/#learn/apply']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}await page.goto('/lesson/');await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();await expect(page.getByRole('link',{name:'继续学习：街角问候站',exact:true})).toBeVisible();
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      48 |  await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会','新朋友采访站','街角问候站'])await expect(page.getByRole('link',{name:'开始学习：'+name,exact:true})).toBeVisible();await page.goto('/unit9-10/#learn/describe');await expect(room.getByRole('button',{name:"He's",exact:true})).toHaveAttribute('aria-pressed','true');
+      49 | });
+      50 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit9-10.spec.js:47:420
+
+    Error Context: test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\error-context.md
+
+    Error Context: test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 ──────────────────────────────────

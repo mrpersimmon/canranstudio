@@ -136,3 +136,61 @@
  root.CanranCore.unit2122=definition;
  if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Five-zone edition. The unchanged predecessor remains the migration source.
+(function(core){
+'use strict';
+const old=core.unit2122;core.unit2122LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸42–45／PDF75–78；语法练习册纸55–59／PDF69–73';
+const grammarSource='同步导学纸41–42／PDF55–56，Grammar纸42／PDF56；'+source;
+const unit={id:'unit21-22',version:1,mode:'classroom',contentRevision:'books-five-zones-v1',legacyEdition:'unit21-22-completion-v1',title:'寻物交接站',path:'/unit21-22/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'先认识物品',activities:[['words','寻物小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'帮简找对书',activities:[['text','找书小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'看清递给谁',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'把要求说清楚',activities:[['apply','交接小帮手','heart']],required:['apply']},{id:'l5',title:'完成小委托',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/apply','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'books-five-zones-v1',title:'细心交接小达人',lesson:'Lesson 21–22',scene:'/assets/unit21-22/keepsake-story-v1.webp',alt:'男士拿着刚接过的红书，简双手空着，两人相视微笑',color:'#735789',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','交接小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2122-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.learning.WORDS=unit.objects;
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('me','分清I作主语与me作接收者','Ben想请Jane把书递给自己，空格选什么？',choice(['me','I','my'],'me','Ben说：Give ___ a book, please.\nBen是说这句话的人。'),'这里“我”是接收者，用me。I用来作主语，my后面接名词表示“我的”。',[['I am Anna. Give me a cup, please.','I说明谁在说话；me表示请把杯子递给我。']]),
+g('him-her','根据明确的人物选择him与her','分别把物品递给Ben和Anna。',fill([blank('Give ',' a box, please.',['him','he','his']),blank('Give ',' a cup, please.',['her','she','his'])],['him','her'],'第一句：Ben是男士，接收盒子。\n第二句：Anna是女士，接收杯子。'),'本题明确Ben为男士、Anna为女士，作接收者分别用him、her；不能从职业猜人称。',[['He is Tom. Give him a book.','把书递给他，he变成him。'],['She is Jane. Give her a book.','把书递给她，she变成her。']]),
+g('us-them','区分包含说话者和其他接收群体','按每句说话人的情况补好请求。',fill([blank('Give ',' a book, please.',['us','them','we']),blank('Give ',' a box, please.',['them','us','they'])],['us','them'],'第一句：我和Ben共同要一本书，我向Jane提出请求。\n第二句：我请Jane把盒子给另外两位孩子，接收者不包含我。'),'us是“我们”，包含说话者；them在这里指另外两位孩子。二者都可在Give后作接收者。',[['We are here. Give us a cup.','我们自己提出请求，用us。'],['They are here. Give them a cup.','说的是前面提到的其他人，用them。']]),
+g('you-it','认识you与it的宾格同形','按括号里的所指对象补好句子。',fill([blank('I see ','.',['you','your']),blank('Look at ','.',['it','its'])],['you','it'],'第一句：我看见你。see：看见。\n第二句：看看它，it指刚提到的一本书。'),'you和it作宾语时仍是you、it；your和its表示所属，后面通常还要接物品名。',[['You are here. I see you.','同一个you既可作主语，也可作宾语。'],['It is a book. Look at it.','同一个it指这本书，Look at是“看看”。']]),
+g('give-order','组织Give加接收者和物品','按“Give＋人＋物”的顺序，请把书递给她。',words(['Give','her','the book,','please.','she'],4,'Give her the book, please.'),'这里按指定顺序先说接收者her，再说the book。Give the book to her.也是合法表达，本题练另一种顺序。',[['Give him the cup, please.','先说递给谁，再说递什么。']]),
+g('which-question','在明确范围里用which询问选择','眼前有红、蓝两本书，用Which开头问对方想要哪本。',words(['Which','book','do','you','want?','Whose'],5,'Which book do you want?','want：想要。这里只问选哪本，不询问主人是谁。'),'Which book do you want?询问限定范围里的选择；which可和单数或复数名词一起使用。',[['Which cup do you want? The full one.','眼前有两只杯子，询问想要哪一只。']]),
+g('one-ones','按代替对象的数量选择one与ones','不重复物品名称，补好这两份回答。',fill([blank('The red ','.',['one','ones']),blank('The blue ','.',['one','ones'])],['one','ones'],'第一份请求：Give me a book. 要一本红书。\n第二份请求：Give us two cups. 要两只蓝杯子。'),'one替代一个可数物品，ones替代多个；不是看颜色词决定数量。',[['Which shirt? The new one.','用one代替一件shirt。'],['Which shirts? The new ones.','用ones代替多件shirts。']]),
+g('receiver-owner','分清接收者him与物主his','Ben接收自己的书，把句子补完整。',fill([blank('Give ','',['him','he','his']),blank('',' book, please.',['his','him','he'])],['him','his'],'Ben是男士；这本书属于Ben。两个空共同组成一句话。'),'Give him his book, please.第一个词him说给谁，第二个his说明书是谁的。',[['Give her her cup, please.','第一个her指接收者她，第二个her表示她的。']]),
+...old.questions.be
+];
+unit.questions.apply=[...old.questions.observe,...old.questions.trans,
+q('a-which-plural','撤去示范组织复数选择问句','眼前有几只杯子，请问对方想要哪几只。',words(['Which','cups','do','you','want?','cup'],5,'Which cups do you want?','用Which开头；want表示想要。'),'想选择几只杯子，用复数cups；问句是Which cups do you want?。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-first-person','独立区分I与me','Anna正在介绍自己并向Jane请求一只杯子。',fill([blank('',' am Anna.',['I','me','my']),blank('Give ',' a cup, please.',['me','I','my'])],['I','me']),'自我介绍用I作主语；请求递给自己用me作接收者。'),
+q('e-groups','独立核对us与them的范围','两份委托分别交给谁？补好英文。',fill([blank('Give ',' two books, please.',['us','them','we']),blank('Give ',' a bottle, please.',['them','us','they'])],['us','them'],'第一句由Jane代表自己和男士提出请求，书给他们两人。\n第二句由Jane提出请求，瓶子给另外两位孩子。'),'第一句包含说话的Jane，用us；第二句说另外两位孩子，用them。'),
+q('e-same-forms','独立使用you与it作宾语','补好两条简短的话。',fill([blank('I see ','.',['you','your']),blank('Look at ','.',['it','its'])],['you','it'],'第一句说“我看见你”，see表示看见。\n第二句说“看看它”，所指是一只刚提到的杯子。'),'you与it作宾语仍用原形，不能换成表示所属的your或its。'),
+q('e-one-ones','独立根据新的数量使用one与ones','两份清单分别要一只盒子和两把勺子，补好回复。',fill([blank('The small ','.',['one','ones']),blank('The new ','.',['one','ones'])],['one','ones'],'第一份：一只小盒子。第二份：两把新勺子。'),'一只盒子用one；两把勺子用ones。'),
+q('e-which-plural','独立组织which复数问句','书架上有几本书，问对方想要哪几本。',words(['Which','books','do','you','want?','book','Whose'],5,'Which books do you want?','want：想要。这里只询问选择。'),'问哪几本书，用Which books do you want?，不是询问归属。'),
+q('e-object-owner','独立区分them与their','两位孩子接收自己的书，把一句话补完整。',fill([blank('Give ','',['them','they','their']),blank('',' books, please.',['their','them','they'])],['them','their'],'这两位孩子是接收者，书也属于这两位孩子。'),'them说明递给谁；their books说明他们的书。两个词承担不同作用。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['be'],apply:['observe','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2122-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit2122=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit2122,excerpts={"u2122-v1-story-twice":[0,1,2,3,4,5,6,7]},speakers={"man":"男士","jane":"简（Jane）"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 21',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

@@ -1,0 +1,24 @@
+{
+  "id": "unit31-32",
+  "source": {
+    "file": "tests/support/unit3132-fivezones.js",
+    "sha256": "5f43d0fcf2fea7e98015a639c71fe8aa6ec5a9228a51e9b005913566b54bf8b0"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u3132-v1-tim",
+      "text": "Lesson 31\n\n琼: Is Tim in the garden, too?\n\n杰克: Yes, he is.\n\n杰克: He’s climbing the tree.\n\n琼: I beg your pardon?\n\n琼: Who’s climbing the tree?\n\n杰克: Tim is."
+    }
+  ],
+  "sourceLines": {
+    "R1": "5-10"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

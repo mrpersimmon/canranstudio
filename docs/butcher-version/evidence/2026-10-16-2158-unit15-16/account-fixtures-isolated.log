@@ -1,0 +1,85 @@
+[WebServer] (node:35320) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:25360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit15-16-fivezones.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (10.2s)
+(node:32488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (44.3s)
+
+
+  1) tests\login\unit15-16-fivezones.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 ────────────────────
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#wordPageProgress')
+    Expected: "2 / 4"
+    Received: "2 / 5"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveText" with timeout 5000ms
+      - waiting for locator('#wordPageProgress')
+        14 × locator resolved to <span class="" id="wordPageProgress">2 / 5</span>
+           - unexpected value "2 / 5"
+
+
+      161 |     await expect(p.locator('.unit-word')).toHaveCount(6,{timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
+      162 |     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+    > 163 |     await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
+          |                                                                                                                ^
+      164 |     await p.getByRole('link',{name:'我的课程',exact:true}).click();
+      165 |     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
+      166 |     await p.locator('.course').getByRole('link',{name:/学习/}).click();await ready(p);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit15-16-fivezones.spec.js:163:112
+
+    Error Context: output\test-login\unit15-16-fivezones-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit15-16-fivezones-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit15-16-fivezones-缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('#wordPageProgress')
+    Expected: visible
+    Timeout: 30000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 30000ms
+      - waiting for locator('#wordPageProgress')
+
+
+       9 | // Wait for real course readiness before examining content. Windows WebKit can
+      10 | // spend more than five seconds preparing the complete protected package.
+    > 11 | async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+         |                                                                                                   ^
+      12 |
+      13 | test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
+      14 | test.use({actionTimeout:10000,...(process.env.UNIT1516_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
+        at ready (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit15-16-fivezones.spec.js:11:99)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit15-16-fivezones.spec.js:184:66
+
+    Error Context: output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit15-16-fivezones-同姓名同星数对照认可卡：新卡、书页和一星动图显示一致\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\login\unit15-16-fivezones.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 ─────────────────────
+    tests\login\unit15-16-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 ─────────────────────

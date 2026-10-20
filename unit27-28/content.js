@@ -221,3 +221,67 @@ unit.questions["roles"][1]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Keep the real predecessor above intact; only the five-zone edition follows.
+(function(core){
+'use strict';
+const old=core.unit2728;core.unit2728LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸54–57／PDF87–90；语法练习册纸73–79／PDF87–93';
+const grammarSource='同步导学纸49–50／PDF63–64，Grammar同页；'+source;
+const unit={id:'unit27-28',version:1,mode:'classroom',contentRevision:'living-room-five-zones-v1',legacyEdition:'unit27-28-completion-v1',title:'客厅发现之旅',path:'/unit27-28/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'先认识客厅',activities:[['words','客厅小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'走进史密斯家',activities:[['text','客厅小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},{id:'l3',title:'学会介绍一些',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'问清物品位置',activities:[['apply','客厅小向导','heart']],required:['apply']},{id:'l5',title:'完成客厅导览',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'living-room-five-zones-v1',title:'细心客厅发现家',lesson:'Lesson 27–28',scene:'/assets/unit27-28/keepsake-story-v1.webp',alt:'史密斯太太示意音响上的三本书，扶手椅靠近桌子，桌上放着两份报纸',color:'#726082',zones:[['listen','单词寻宝'],['roles','课文小侦探'],['grammar','语法小工坊'],['apply','客厅小向导'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2728-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('some','用some介绍不确定数量的复数物品','桌上有一些报纸，补好肯定介绍。',choice(['some','any','a'],'some','There are ___ newspapers on the table.'),'肯定介绍中用some表示一些，不给出确切数量；后面可接复数名词。',[['There are some magazines on the television.','电视机上有一些杂志，没有说确切几本。']]),
+old.questions.observe[0],
+g('mass','some也可搭配不可数物质','杯子里有一些水，补好介绍。',fill([blank('There ',' ',['is','are']),blank('',' water in the glass.',['some','any','a'])],['is','some'],'water：水。在这里不按一个、两个数，不写成waters。'),'some water表示一些水；本句water作不可数名词，存在句用is，不能看到some就一律选are。',[['There is some milk in the refrigerator.','冰箱里有一些牛奶。milk：牛奶；在本句里用is。']]),
+g('any','普通有无问句与完全否定用any','先普通询问，再说明没有。按本课的中性有无问句填答。',fill([blank('Are there ',' plates in the cupboard?',['any','some']),blank('No, there aren’t ',' plates in the cupboard.',['any','some'])],['any','any'],'提问者不知道橱柜里有没有盘子，没有预期；回答者知道橱柜里没有盘子。'),'any常用于中性的有无问句和完全否定；不是看到问号就只能用any。',[['Are there any bottles on the table? No, there aren’t any bottles on the table.','不知道桌上有没有瓶子，普通询问；确认没有后否定回答。']]),
+g('expected','理解问句中some可表示肯定预期','妈妈刚买了牛奶，小朋友期待冰箱里还有一些。这个问句能用some吗？',choice(['可以，表达预期有一些牛奶。','不可以，所有问句都只能用any。','不可以，some后面只能接复数物品。'],'可以，表达预期有一些牛奶。','Is there some milk in the refrigerator?\nmilk：牛奶。'),'预期得到肯定回答时，问句也可以用some。any也能用于有无提问，语气不同，不把另一种问法判成普遍错误。',[['Are there some books in the bag?','说话者觉得包里有书，带着肯定预期核实。']]),
+g('near','区分邻近、表面和内部','把三个位置词组与含义配起来。',{type:'match',pairs:[{id:'1',en:'near the table',cn:'靠近桌子'},{id:'2',en:'on the table',cn:'在桌子表面上'},{id:'3',en:'in the box',cn:'在盒子里面'}],answer:'["1","2","3"]'},'near说明靠近，不要求接触；on在本课说明表面位置，in说明内部。',[['The stereo is near the door.','音响靠近门，不是放在门的表面或里面。']]),
+g('near-state','按搭配理解near的状态义','她很难过，眼泪快出来了。这里的near tears说明什么？',choice(['几乎要哭了。','站在几滴眼泪旁边。','已经哭完了。'],'几乎要哭了。','She is near tears.\ntears：眼泪；本题说人的状态。'),'near也可表示接近某个状态，near tears是几乎要哭了；不说明已经哭过或结束。',[['The child is near tears.','这个孩子几乎要哭了。与near the door的空间位置不同。']]),
+g('there-they','先介绍存在，再回指复数物品','先说有鞋子，再接着说它们靠近床。',fill([blank('',' are some shoes on the floor.',['There','They']),blank('',' are near the bed.',['They','There'])],['There','They']),'There are引入物品；They接着指前句的多件物品。They’re是They are。',[['There are some pictures in the room. They are on the wall.','先介绍有图画，再说明这些图画的位置。']]),
+g('plurals','在单复数改写中改变不规则名词','把一个人改成一些人，补好名词。',fill([blank('a man → some ','',['men','mans']),blank('a housewife → some ','',['housewives','housewifes'])],['men','housewives'],'man：男人；housewife：家庭主妇。本题改变数量。'),'man变men；housewife变housewives。不能把所有复数一律写成原词加s。',[['a knife → some knives; a policeman → some policemen','两种不同的不规则变化。knife：刀；policeman：男警察。']]),
+old.questions.observe[1],...old.questions.be
+];
+unit.questions.apply=[...old.questions.trans,
+q('a-facts','按有无事实给出肯定和否定回答','按两份实际情况回答，不只照抄问句。',fill([blank('Yes, there ','.',['are','aren’t']),blank('No, there ','.',['aren’t','are'])],['are','aren’t'],'房间甲有三幅画。问：Are there any pictures in Room A?\n房间乙没有扶手椅。问：Are there any armchairs in Room B?'),'有画用Yes, there are.；没有扶手椅用No, there aren’t.。'),
+q('a-reply','承接五轮问答中实际物品的位置','乙接下来怎样回答，才能告诉甲杂志在哪里？',choice(["They’re on the television.","No, there aren’t any books.","It’s on the television."],"They’re on the television.",'另一间房里没有书，电视机上有几本杂志。\n甲：Are there any books in the room?\n乙：No, there aren’t any books in the room. There are some magazines.\n甲：Where are they?'),'最后问的是杂志的位置，They指magazines；不能继续重复有没有书。')
+];
+const neutralAny={...old.questions.exam[4],id:'u2728-five-e-any',prompt:'按中性的有无提问补全问答。',display:{title:'按中性的有无提问补全问答。',material:'访客不知道音响上有没有杯子，没有肯定预期；主人确认那里没有杯子。'},source:source+'；补齐中性提问与完全否定的事实条件',decision:'旧版普通询问条件未在未答题面呈现；补清语境后作为新题，原题及答案留档'};
+unit.questions.exam=[...old.questions.exam.map((question,i)=>i===4?neutralAny:question),
+q('e-mass','独立选择some与不可数名词的存在句','瓶子里有一些牛奶，补好肯定介绍。',fill([blank('There ',' ',['is','are']),blank('',' milk in the bottle.',['some','any','a'])],['is','some'],'milk：牛奶，在本句中不按一个、两个数。'),'some可搭配不可数的milk，本句用There is。'),
+q('e-expected','独立理解肯定预期问句中的some','朋友刚把几本书装进书包，你期待书还在，问句中的some合适吗？',choice(['合适，可以带着肯定预期核实。','不合适，问句绝对不能用some。','不合适，some只能用于否定句。'],'合适，可以带着肯定预期核实。','Are there some books in the bag?\nbag：书包。'),'some可用于预期肯定回答的问句；中性询问通常用any。'),
+q('e-near-state','独立区分near的地点义与状态义','两句中的near，哪项理解符合语境？',choice(['甲说靠近桌子；乙说几乎要哭了。','甲说在桌上；乙说已经哭完。','两句都只是在说空间位置。'],'甲说靠近桌子；乙说几乎要哭了。','甲：The armchair is near the table.\n乙：He is near tears.\ntears：眼泪。乙正在形容一个很难过的人的状态。'),'near既可说明空间接近，也可在near tears中说明接近某个状态。'),
+q('e-there-they','独立选择引入存在与复数回指','先介绍有一些瓶子，再说同一批瓶子是空的。',fill([blank('',' are some bottles in the refrigerator.',['There','They']),blank('',' are empty.',['They','There'])],['There','They']),'There are介绍有瓶子，They接着指这些瓶子。'),
+q('e-positive','独立按明确事实肯定回答','架子上有三张票，选择符合事实的简短回答。',choice(['Yes, there are.','No, there aren’t.','They’re on the shelf.'],'Yes, there are.','Are there any tickets on the shelf?'),'架子上确实有票，所以回答Yes, there are.；本题问有没有，不是问位置。'),
+q('e-plurals','独立处理两个原例的不规则复数','按“一位变多位”完成句子中的名词。',fill([blank('There are some ',' in the room.',['men','mans']),blank('There are some ',' in the kitchen.',['housewives','housewifes'])],['men','housewives'],'第一句由a man变来；第二句由a housewife变来。'),'名词复数分别是men、housewives，数量变化时动词也已改为are。')
+];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe','be'],apply:['trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2728-'+prior+'-practice/'+(old.taskSessions[prior]||'v1'),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit2728=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// v1.53 review: keep every original record; revised material has its own identity.
+(function(core){
+'use strict';
+const unit=core.unit2728,old=JSON.parse(JSON.stringify(unit));
+core.unit2728V153PreviousDefinition=old;
+unit.contentRevision='living-room-teaching-v153';
+const materials={
+ 'u2728-v1-story-near':'There are some armchairs in the room.\nThe armchairs are near the table.',
+ 'u2728-v1-final-v2-room':'There are some magazines on the television.\nThere are some newspapers on the table.\nThere are some books on the stereo.'
+};
+for(const area of ['roles','exam']){
+ unit.taskPredecessors[area]=[{key:'unit2728-'+area+'-practice/'+old.taskSessions[area],questions:old.questions[area]},...(old.taskPredecessors[area]||[])];
+ unit.taskSessions[area]='v153';
+ unit.questions[area]=old.questions[area].map(q=>materials[q.id]?{...q,id:q.id+'-v153',display:{title:q.prompt,material:materials[q.id]},decision:'未答页直接提供所需原句；独立辨别参照物或整合位置，不用记忆上一页代替阅读依据。旧题及作答独立保留。'}:q);
+}
+})(globalThis.CanranCore);

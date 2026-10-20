@@ -1,0 +1,52 @@
+(node:32944) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (171.3932ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.688ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (2.6803ms)
+✔ partial wrong submission is observable without awards or resumable completion (56.6449ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (56.7887ms)
+✔ reset isolates a new generation and preserves earlier observation history (54.4967ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (63.0629ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (59.5684ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.9764ms)
+✔ student identity, pagination and filters expose learning summaries only (810.4756ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (8485.7688ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (2.343ms)
+✔ three learning statuses require current work, not visits, stars or old content (2.4044ms)
+✔ all published courses reach completed only with every required activity including reading (240.9299ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (219.8532ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (1170.9093ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (142.1124ms)
+(node:24900) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (166.373ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.518ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (91.4717ms)
+✔ handoff awards require a complete matching object and recipient from this round (1.2425ms)
+✔ handoff correctness cannot bypass errors, missing submission, signature or round identity (0.4132ms)
+✔ undeclared handoff candidates and other unsupported types stay rejected (0.2692ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (2.0293ms)
+✔ landmark state URLs carry one immutable content version (0.474ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.1638ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.1253ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (2.1537ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (2.2613ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (0.8144ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.3804ms)
+✔ every published map stage declares a child-readable growth reveal (0.8823ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.3746ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.2005ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.1226ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.2437ms)
+✔ ratingFor exposes every branch including zero (0.6058ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.5575ms)
+✔ certificate predicates require every named challenge (0.1743ms)
+✔ every approved course rating table reaches zero through three stars (0.168ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11929.4067

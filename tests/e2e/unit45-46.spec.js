@@ -3,6 +3,7 @@ const {test,expect}=require('@playwright/test');
 const {activity,story,ANSWERS}=require('../support/unit4546');
 const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:6000});
+require('../support/unit4546-v153-legacy').historicalSuite(test);
 test('49题完整流程、三卡五区五星及无配音',async({page},info)=>{
  test.setTimeout(120000);const errors=[],voices=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\/audio\/|\/tts(?:\/|\?)/.test(r.url()))voices.push(r.url());});
  await story(page);await expect(page.locator('.bubble-row')).toHaveCount(14);await expect(page.locator('#starCount')).toHaveText('0');

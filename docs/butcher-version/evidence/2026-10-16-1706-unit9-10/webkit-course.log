@@ -1,0 +1,19 @@
+
+Running 12 tests using 1 worker
+
+(node:24752) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit9-10-fivezones-upgrade.spec.js:7:36 › 旧空白升级：不伪造作答，完整新轮可获星 (7.1s)
+  ok  2 tests\e2e\unit9-10-fivezones-upgrade.spec.js:7:36 › 旧仅选择升级：不伪造作答，完整新轮可获星 (7.3s)
+  ok  3 tests\e2e\unit9-10-fivezones-upgrade.spec.js:15:1 › 旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答 (2.2s)
+  ok  4 tests\e2e\unit9-10-fivezones-upgrade.spec.js:27:1 › 旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证 (30.2s)
+  ok  5 tests\e2e\unit9-10-fivezones.spec.js:5:1 › 54题、完整原文、五区五星及教材参考均可真实完成 (39.5s)
+  ok  6 tests\e2e\unit9-10-fivezones.spec.js:18:1 › 错误和部分填答刷新保留，完整重练才获星，已获星不扣回 (20.7s)
+  ok  7 tests\e2e\unit9-10-fivezones.spec.js:25:39 › 场景与词卡 320：完整14句、中文内滚动、相向人物及旧链接 (6.2s)
+  ok  8 tests\e2e\unit9-10-fivezones.spec.js:25:39 › 场景与词卡 390：完整14句、中文内滚动、相向人物及旧链接 (6.0s)
+  ok  9 tests\e2e\unit9-10-fivezones.spec.js:25:39 › 场景与词卡 768：完整14句、中文内滚动、相向人物及旧链接 (6.6s)
+  ok 10 tests\e2e\unit9-10-fivezones.spec.js:25:39 › 场景与词卡 1280：完整14句、中文内滚动、相向人物及旧链接 (7.1s)
+  ok 11 tests\e2e\unit9-10-fivezones.spec.js:37:50 › 短屏 320x568：五区三卡和操作完整可见 (34.5s)
+  ok 12 tests\e2e\unit9-10-fivezones.spec.js:37:50 › 短屏 390x500：五区三卡和操作完整可见 (34.5s)
+
+  12 passed (3.4m)

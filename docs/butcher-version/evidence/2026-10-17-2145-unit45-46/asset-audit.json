@@ -1,0 +1,41 @@
+{
+  "embeddedPNGs": 3,
+  "repeatedEmbeddedGroups": [
+    {
+      "pngBytes": 374365,
+      "occurrences": 8,
+      "files": [
+        "ask.svg",
+        "bob-point.svg",
+        "bob-read.svg",
+        "bob.svg",
+        "can.svg",
+        "completion-scene.svg",
+        "cover-scene.svg",
+        "who.svg"
+      ]
+    },
+    {
+      "pngBytes": 195650,
+      "occurrences": 3,
+      "files": [
+        "boss-point.svg",
+        "boss-read.svg",
+        "boss.svg"
+      ]
+    },
+    {
+      "pngBytes": 278720,
+      "occurrences": 6,
+      "files": [
+        "completion-scene.svg",
+        "cover-scene.svg",
+        "pamela-hold.svg",
+        "pamela-point.svg",
+        "pamela-read.svg",
+        "pamela.svg"
+      ]
+    }
+  ],
+  "note": "Raw repeated embedding only; compression, deduplication and measured startup cost must be assessed separately. Original artwork retained."
+}

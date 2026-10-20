@@ -255,3 +255,100 @@ unit.questions["exam"][9],
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Five-zone edition; the actual predecessor above is retained for migration.
+(function(core){
+'use strict';
+const old=core.unit1920;core.unit1920LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸38–41／PDF71–74；语法练习册纸50–54／PDF64–68';
+const grammarSource='同步导学Grammar纸38–39／PDF52–53；'+source;
+const unit={id:'unit19-20',version:1,mode:'classroom',contentRevision:'park-five-zones-v1',legacyEdition:'unit19-20-completion-v1',title:'冰淇淋休息站',path:'/unit19-20/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'公园歇一歇',activities:[['words','公园小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'跟着故事走',activities:[['text','公园小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'发现身边的事物',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'把情况说清楚',activities:[['apply','公园小帮手','heart']],required:['apply']},{id:'l5',title:'再出发',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/apply','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'park-five-zones-v1',title:'公园观察小达人',lesson:'Lesson 19–20',scene:'/assets/unit19-20/keepsake-story-v1.webp',alt:'妈妈和两个孩子相视微笑，孩子们各拿着一份冰淇淋',color:'#738359',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','公园小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u1920-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.learning.WORDS=unit.objects;
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('exists','理解there be表示存在','这条记录说明了什么？',choice(['长椅旁有两个孩子。','两个孩子拥有一张长椅。','长椅旁没有孩子。'],'长椅旁有两个孩子。','There are two children by the bench.\nby the bench：在长椅旁。'),'There are说明某处有谁或什么，不表示谁拥有某物。',[['There is a cat in the park.','公园里有一只猫。there be说明某处存在什么。']]),
+g('number','按单数与复数选is或are','把看到的一位妈妈和两个孩子记下来。',fill([blank('There ',' a mother in the park.',['is','are']),blank('There ',' two children in the park.',['is','are'])],['is','are']),'一个人用There is；多个人用There are。',[['There is a shop. There are two shops.','一间店用is，两间店用are。']]),
+g('uncountable','不可数名词与is搭配','瓶里有一些水，补好记录。',fill([blank('There ',' some water in the bottle.',['is','are'])],['is'],'water：水；bottle：瓶子。'),'water在这里是不可数名词，用is；some不等于复数。',[['There is some juice in the glass.','杯里有一些果汁。juice是不可数名词。']]),
+g('contraction','识别there is的缩写','把原句中的There is换成缩写。',choice(["There's","They're","That's"],"There's",'There is an ice cream man.\n只缩写There is这两个词。'),"There's就是There is；They’re是They are，That’s是That is。",[["There's a boy here. = There is a boy here.",'缩写不改变句子的意思。']]),
+g('negative-one','单数存在句用is not否定','空袋里没有橙子，补好否定句。',fill([blank('There ',' an orange in the bag.',['is not','are not','not is'])],['is not'],'orange：橙子；bag：袋子。'),'not放在is后面；an orange是单数。',[['There is a book. → There is not a book.','is not也可以缩写成isn’t。']]),
+g('negative-many','复数否定句用arent any','盒里没有鞋子，选出正确记录。',choice(["There aren't any shoes in the box.","There isn't any shoes in the box.",'There are any shoes in the box.'],"There aren't any shoes in the box.",'box：盒子；这里要说一只鞋也没有。'),'shoes是复数，用aren’t；本题的否定存在句用any。',[["There are some hats. → There aren't any hats.",'把一些帽子都没有的情况写成否定句。']]),
+g('no','用no替换not a或not any','保持“完全没有”的意思，补好两句。',fill([blank('There are ',' children in the room.',['no','not','a']),blank('There is ',' juice in the bottle.',['no','not','an'])],['no','no'],'原句：There aren’t any children in the room.\nThere isn’t any juice in the bottle.\nroom：房间；juice：果汁。'),'no可以直接放在名词前；不写not children或not juice来替代这里的not any。',[['There is not an orange. → There is no orange.','no替代not a／an；no也可替代这里的not any。']]),
+g('question-one','一般疑问句把is提前','想确认公园里有没有卖冰淇淋的人，拼好问句。',words(['Is','there','an','ice cream man?','There','are'],4,'Is there an ice cream man?'),'Is there…?询问有没有一个人或物，不用There is…?作为本题的普通书面问句。',[['There is a shop. → Is there a shop?','把is放到there前面，句末用问号。']]),
+g('question-many','复数与不可数的一般疑问句','不知道有没有，分别询问椅子和水。',fill([blank('',' there any chairs?',['Are','Is']),blank('',' there any water?',['Are','Is'])],['Are','Is'],'chairs：椅子；water：水。'),'复数chairs用Are there；不可数water用Is there。这里是中性询问，使用any。',[['Are there any books? Is there any milk?','问复数物品用Are there，问不可数内容用Is there。']]),
+g('short-answer','根据事实和数量简短回应','按现场记录完成回答。',fill([blank('Is there a shop? Yes, there ','.',['is','are']),blank('Are there any chairs? No, there ','.',["aren't","isn't"])],['is',"aren't"],'现场：有一间店，没有椅子。'),'简短回答保留there，单数配is，复数配are；Yes, there is.句尾不缩写成Yes, there’s。',[['Is there a cat? No, there isn’t.','没有猫，否定回答。'],['Are there any birds? Yes, there are.','有鸟，肯定回答。']]),
+g('anything','在否定和中性询问中使用anything','盒子没有新东西；再问另一个盒子里有没有新东西。',fill([blank("There isn't ",' new in this box.',['anything','something']),blank('Is there ',' new in that box?',['anything','nothing'])],['anything','anything'],'something new：新的东西；anything new：任何新的东西。第二句不知道有没有。'),'本题否定句和中性询问用anything；不能把任何疑问句都强制改成any／anything。',[['There is something new. → There isn’t anything new.','明确说没有时，something在这里变为anything。']]),
+g('who-what','分别询问某处的人和物','一个问题问谁，另一个问题问是什么。',fill([blank('',' is in the room?',['Who','What']),blank('',' is in the box?',['Who','What'])],['Who','What'],'第一句：想知道房间里的人是谁。\n第二句：想知道盒子里的物品是什么。'),'本题问人用Who，问物用What；这种问法不必保留there。',[['Who is at the door? What is in the bag?','谁在门口？袋子里有什么？']]),
+g('where','询问已知人物的位置','已经知道有两个孩子，只问他们在哪里。',choice(['Where are the two children?','Who is in the park?','How many children are there?'],'Where are the two children?','记录：There are two children in the park.\n现在要问的是地点。'),'问地点用Where，the two children是复数，配are。',[['There is a cat in the room. → Where is the cat?','问这只猫在哪里，不再问有没有猫。']]),
+g('quantity','区别how many和how much','一题问鞋子数量，一题问水的多少。',fill([blank('How ',' shoes are there in the box?',['many','much']),blank('How ',' water is there in the bottle?',['many','much'])],['many','much']),'可数名词复数shoes配How many…are there；不可数water配How much…is there。',[['How many books are there? How much juice is there?','即使答案只有一本，询问数量仍用books are there。']]),
+...old.questions.be
+];
+unit.questions.apply=[...old.questions.observe,...old.questions.trans,
+q('a-article','用a或an介绍看到的对象','按空后读音填好冠词。',fill([blank("There's ",' open shop.',['a','an']),blank("There's ",' postman.',['a','an'])],['an','a'],'open shop：开着的商店；postman：邮递员。'),'open以元音音素开头，用an；postman以辅音音素开头，用a。'),
+q('a-many','独立组织可数数量问句','询问公园里有几个孩子。',words(['How many','children','are','there','in the park?','is'],5,'How many children are there in the park?'),'问可数数量用How many和复数名词，再接are there。'),
+q('a-much','独立组织不可数数量问句','询问瓶里有多少水。',words(['How much','water','is','there','in the bottle?','are'],5,'How much water is there in the bottle?','water：水；bottle：瓶子。'),'water是不可数名词，问多少用How much…is there。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-exists','独立理解存在与状态的信息','哪条记录与英文完全一致？',choice(['花园里有三位女士。','三位女士拥有这个花园。','花园里没有女士。'],'花园里有三位女士。','There are three women in the garden.\ngarden：花园。'),'There are说明花园里有谁，不说明花园属于谁。'),
+q('e-number','独立区分可数单复数与不可数','把清单上的物品记录下来。',fill([blank('There ',' a hat on the chair.',['is','are']),blank('There ',' two bags on the floor.',['is','are']),blank('There ',' some milk in the glass.',['is','are'])],['is','are','is'],'清单：椅子上一顶帽子，地板上两个袋子，杯里一些牛奶。\nfloor：地板；milk：牛奶。'),'a hat用is，two bags用are，milk是不可数名词，用is。'),
+q('e-contraction','独立展开there is缩写','这句的There’s是哪两个词的缩写？',choice(['There is','They are','There are'],'There is',"There's an open shop near the park.\nnear the park：在公园附近。"),'There’s展开为There is。'),
+q('e-negation','独立构造单数与复数否定','房间里没有男孩，也没有箱子，补好记录。',fill([blank('There ',' a boy in the room.',['is not','are not']),blank('There ',' any cases in the room.',['are not','is not'])],['is not','are not']),'a boy是单数，cases是复数；not跟在相应be后面。'),
+q('e-no','独立等义改写no结构','与“杯里没有水”意思相同的是哪句？',choice(['There is no water in the glass.','There is not water in the glass.','There are no water in the glass.'],'There is no water in the glass.',"There isn't any water in the glass."),'no可替代这里的not any；water按不可数使用is。'),
+q('e-question','独立构造存在问句','询问有没有帽子以及有没有果汁。',fill([blank('',' there any hats?',['Are','Is']),blank('',' there any juice?',['Is','Are'])],['Are','Is'],'hats：帽子；juice：果汁。'),'复数hats用Are there；不可数juice用Is there。'),
+q('e-answer','独立给出肯定与否定简答','按已核实的清单回答。',fill([blank('Are there any bags? Yes, there ','.',['are','is']),blank('Is there a book? No, there ','.',["isn't","aren't"])],['are',"isn't"],'清单：两个袋子；没有书。'),'bags是复数，用Yes, there are.；a book用No, there isn’t.。'),
+q('e-anything','独立使用否定存在句anything','背包里没有新的东西，补好记录。',fill([blank("There isn't ",' new in the bag.',['anything','something'])],['anything']),'这里明确说完全没有新的东西，用anything。'),
+q('e-who-what','独立区分问人和问物','给这两个回答配上合适的问题。',fill([blank('',' is at the gate?',['Who','What']),blank('',' is in the case?',['Who','What'])],['Who','What'],'第一句回答：一位邮递员。第二句回答：一双鞋子。\nat the gate：在门口；case：箱子。'),'第一句问人用Who，第二句问物用What。'),
+q('e-where','独立询问单数物品的位置','只想知道这只箱子在哪里，哪句合适？',choice(['Where is the case?','What is in the case?','Is there a case?'],'Where is the case?','记录：There is a case by the bench.\nby the bench：在长椅旁。'),'Where is the case?问箱子所在的地点；另两句分别问箱内物品和有没有箱子。'),
+q('e-quantity','独立区分两种数量问法','分别询问店铺的数量和果汁的多少。',fill([blank('How ',' shops are there?',['many','much']),blank('How ',' juice is there?',['many','much'])],['many','much'],'shop：商店；juice：果汁。'),'shops可数复数，用many；juice不可数，用much。'),
+q('e-build','独立组织复数存在句','描述新公园：“这里有两张长椅。”',words(['There','are','two','benches','here.','is','a'],5,'There are two benches here.','bench的复数是benches。'),'two benches是复数，用There are；不同时保留a。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['be'],apply:['observe','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit1920-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[]),...(old.activityPredecessors?.[prior]||[]).map(p=>({key:'unit1920-'+p+'-practice/v1',questions:old.previousQuestions[p]}))])]));
+core.unit1920=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// v1.53 review: preserve the existing five-star award and all unchanged rounds.
+(function(core){
+'use strict';const unit=core.unit1920,old=JSON.parse(JSON.stringify(unit));
+core.unit1920V153PreviousDefinition=old;
+unit.contentRevision='park-teaching-v153';
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers)=>({type:'cloze',blanks,answer:JSON.stringify(answers)});
+const source='课本纸38–41／PDF71–74；同步导学Grammar纸38–39／PDF52–53';
+const q=(id,target,prompt,input,explanation,material='')=>({id:'u1920-v153-'+id,target,prompt,source,...input,explanation,hint:'',...(material?{display:{title:prompt,material}}:{}),distractorRationale:'按本句主语和给定事实作答，不把their或some当作复数开关。'});
+unit.questions.exam=old.questions.exam.flatMap(item=>{
+ if(item.id==='u1920-v1-final-v2-be')return[
+  q('e-person','独立选择I与复数children的be','Tim说自己累了，妈妈说孩子们口渴。补好两句。',fill([blank('I ',' tired.',['am','is','are']),blank('The children ',' thirsty.',['am','is','are'])],['am','are']),'I配am；复数children配are。'),
+  q('e-singular-centre','不由their或some误判be的单复数','孩子们的妈妈也累了，杯里有一些牛奶。补好两句。',fill([blank('Their mother ',' tired, too.',['is','are']),blank('There ',' some milk in the glass.',['is','are'])],['is','is']),'their mother的中心词是单数mother；milk在这里是不可数名词，都用is。','mother：妈妈；milk：牛奶。这里说的是孩子们的一位妈妈。')
+ ];
+ if(item.id==='u1920-five-e-number')return q('e-countable','独立对照可数单数与复数的there be','把帽子和袋子的数量记录下来。',fill([blank('There ',' a hat on the chair.',['is','are']),blank('There ',' two bags on the floor.',['is','are'])],['is','are']),'一顶帽子配There is；两个袋子配There are。','清单：椅子上一顶帽子，地板上两个袋子。floor：地板。');
+ if(item.id==='u1920-v1-final-v2-short')return{...item,id:item.id+'-v153',prompt:'分别描述高个警察们和长裤子，选合适的形容词。'};
+ return item;
+});
+unit.taskSessions={...old.taskSessions,exam:'v153'};
+unit.taskPredecessors={...old.taskPredecessors,exam:[{key:'unit1920-exam-practice/five-zones-v1',questions:old.questions.exam},...(old.taskPredecessors.exam||[])]};
+if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit1920,excerpts={"u1920-v1-story-thanks":[6,7,8,9,10],"u1920-v1-story-first":[3,4,5]},speakers={"mother":"妈妈","girl":"女孩","boy":"男孩","children":"孩子们"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 19',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

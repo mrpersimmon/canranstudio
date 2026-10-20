@@ -1,0 +1,176 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-16T23:06:52.667Z",
+  "uniqueTestConditions": 174,
+  "groups": [
+    {
+      "scope": "Chromium current course, interactions, reading and actual predecessor upgrade",
+      "conditions": 24,
+      "reports": [
+        "reports/first.json",
+        "reports/final-materials.json",
+        "reports/materials-final-chromium.json"
+      ],
+      "note": "11 complete-course conditions, 4 predecessor states, 3 reading conditions, 3 input interactions and 3 targeted material/identity conditions. Full 43-question run repeated after material changes; initial reading and legacy PNG paths unaffected and retained.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium actual worksheet and predecessor certificate PDF",
+      "conditions": 2,
+      "reports": [
+        "reports/first.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, interactions, reading and actual predecessor upgrade",
+      "conditions": 24,
+      "reports": [
+        "reports/webkit-pages.json",
+        "reports/materials-final-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/login-chromium-root.json",
+        "reports/login-chromium-root-final.json"
+      ],
+      "note": "Final 43-question account flow rerun after E5 identity and visible-material changes. Other authorization, legacy-certificate, album, export-failure and one-star checks unchanged.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/login-chromium-lesson.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root",
+      "conditions": 8,
+      "reports": [
+        "reports/login-webkit-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/",
+      "conditions": 8,
+      "reports": [
+        "reports/login-webkit-lesson.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Two older real-account three-device chains through actual 27-question predecessor into five zones",
+      "conditions": 2,
+      "reports": [
+        "reports/historical-accounts.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen actual predecessor pages",
+      "conditions": 28,
+      "reports": [
+        "reports/frozen-pages.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen cross-course coverage plus current shared retry and statistics",
+      "conditions": 14,
+      "reports": [
+        "reports/shared-pages.json"
+      ],
+      "note": "12 historical conditions and 2 current-course shared conditions; no previous assertions removed.",
+      "status": "passed"
+    },
+    {
+      "scope": "Learning management, reward validation, catalog and workflow",
+      "conditions": 48,
+      "logs": [
+        "unit-tests.txt",
+        "shared-checks.txt"
+      ],
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": "23 source, asset, package and document checks, including two protected builds of all 72 courses; separate from test-condition total.",
+  "failuresAndRecovery": [
+    {
+      "finding": "Management legacy sample moved from a two-question to a three-question activity; one rejection assertion still expected one remaining record.",
+      "sameVersionReproduction": "admin-initial-failure.txt",
+      "resolution": "Correct expected count from 1 to 2 after rejecting one of three submissions. Preserve all rejection, privacy, sorting and timestamp checks.",
+      "recheck": "unit-tests.txt"
+    },
+    {
+      "finding": "Token withdrawal test searched visible token text instead of its actual accessible name.",
+      "initial": "reports/interactions-chromium.json",
+      "sameVersionReproduction": "reports/interactions-isolate.json",
+      "resolution": "Use accessible name 撤回 There; no product changes or relaxed timing.",
+      "recheck": "reports/final-materials.json"
+    },
+    {
+      "finding": "Upgrade material test removed old resource interception then changed only hash, leaving the old application running.",
+      "initial": "reports/materials-chromium.json",
+      "sameVersionReproduction": "reports/materials-isolate.json",
+      "resolution": "Normally reload after removing interception. Verify updated course identity before asserting old record remains and revised E5 is unanswered. No storage clearing.",
+      "rechecks": [
+        "reports/materials-final-chromium.json",
+        "reports/materials-final-webkit.json"
+      ]
+    },
+    {
+      "finding": "Visual review found diagrams too small and neutral-question premise hidden in authoring metadata.",
+      "resolution": "Enlarge only current diagram display; provide visible conditions under a new task identity, keep predecessor original. E15 now uses complete responses.",
+      "rechecks": [
+        "reports/final-materials.json",
+        "reports/materials-final-chromium.json",
+        "reports/materials-final-webkit.json"
+      ]
+    }
+  ],
+  "counts": {
+    "tasks": 43,
+    "zones": [
+      8,
+      2,
+      12,
+      5,
+      16
+    ],
+    "originalTasksArchived": 27,
+    "unchangedTasks": 26,
+    "authoredOrRevisedTasks": 17,
+    "words": 30,
+    "narrativeSentences": 13,
+    "originalSvgFiles": 52,
+    "selectedImageGenWebP": 3
+  },
+  "reuse": "Reruns and initial failures are not added to independent coverage. The pre-material-change reading, original-certificate PNG/print and unrelated account behaviors are retained with their scope; final full flows cover revised content. No assertion thresholds were lowered.",
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit27-28/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scopeBoundary": "Scoped development validation. check:plan covers all pre-existing uncommitted work (4895 paths at capture); this turn uses its pre-task baseline to delimit 58 source/doc/test paths plus generated evidence. No full production release or whole-repository commit check is claimed."
+}

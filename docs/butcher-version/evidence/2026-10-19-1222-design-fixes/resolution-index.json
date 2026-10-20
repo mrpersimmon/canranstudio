@@ -1,0 +1,942 @@
+{
+  "updatedAt": "2026-10-19 12:22:46",
+  "fixed": 46,
+  "open": 82,
+  "openUnits": 45,
+  "courses": [
+    {
+      "id": "unit1-2",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit3-4",
+      "open": 0,
+      "fixed": [
+        {
+          "category": "历史与功能",
+          "title": "纪念卡进度与重练入口未接通",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "练习实例已登记，纪念卡显示真实进度；可从错答结算开始新一轮，旧记录和已得星保留。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/unit3-4/card-progress.png",
+            "fixes/unit3-4/new-round-from-card.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit5-6",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit7-8",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit7-8.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit9-10",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit11-12",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit13-14",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit15-16",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit15-16.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit17-18",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit19-20",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit21-22",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit23-24",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit25-26",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit27-28",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit29-30",
+      "open": 0,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit29-30.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit31-32",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit33-34",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit35-36",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit35-36.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit37-38",
+      "open": 0,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit37-38.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit39-40",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit41-42",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit43-44",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit45-46",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit47-48",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit49-50",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "历史与功能",
+          "title": "旧证书查看和导出能力未保留",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "恢复原证卡面、查看、保存PNG及打印；沿用原姓名、字体、图案和ISO领取时间。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/unit49-50/old-certificate.png",
+            "fixes/unit49-50/preserved.png",
+            "fixes/unit49-50/preserved.pdf",
+            "fixes/unit49-50/preservation.json"
+          ]
+        },
+        {
+          "category": "历史与功能",
+          "title": "旧领取日期随设备时区改变",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "固定按Asia/Shanghai显示原始ISO领取时间；查看和新版获星均不回写旧日期。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/unit49-50/old-certificate.png",
+            "fixes/unit49-50/preserved.png",
+            "fixes/unit49-50/preserved.pdf",
+            "fixes/unit49-50/preservation.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit51-52",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit51-52.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit53-54",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit53-54.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit55-56",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit55-56.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit57-58",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit57-58.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit57-58.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit59-60",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit59-60.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit59-60.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit61-62",
+      "open": 3,
+      "fixed": []
+    },
+    {
+      "id": "unit63-64",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit65-66",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit65-66.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit65-66.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit67-68",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit67-68.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit67-68.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit69-70",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit69-70.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit69-70.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit71-72",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit71-72.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit71-72.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit73-74",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit73-74.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit75-76",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit75-76.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit75-76.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit77-78",
+      "open": 3,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit77-78.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit77-78.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit79-80",
+      "open": 4,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit79-80.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit81-82",
+      "open": 3,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit81-82.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit83-84",
+      "open": 3,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit83-84.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit85-86",
+      "open": 3,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit85-86.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit85-86.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit87-88",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit87-88.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit89-90",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "课文提示",
+          "title": "课文默认附加剧情摘要或理解结论",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "移除自动剧情摘要、结论时间线和段后解释；保留原文、按需中文、必要标识、安全边界与场景动作。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/story/unit89-90.png"
+          ]
+        },
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit89-90.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit91-92",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit93-94",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit95-96",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit95-96.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit97-98",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit97-98.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit99-100",
+      "open": 1,
+      "fixed": []
+    },
+    {
+      "id": "unit101-102",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit101-102.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit103-104",
+      "open": 2,
+      "fixed": []
+    },
+    {
+      "id": "unit105-106",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit105-106.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit107-108",
+      "open": 2,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit107-108.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit109-110",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit109-110.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit111-112",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit111-112.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit113-114",
+      "open": 1,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit113-114.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit115-116",
+      "open": 0,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit115-116.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit117-118",
+      "open": 0,
+      "fixed": [
+        {
+          "category": "图内字体",
+          "title": "当前自绘图片仍使用通用字体",
+          "status": "fixed",
+          "updatedAt": "2026-10-19 12:22:46",
+          "summary": "现行图中文字统一为本地寒蝉圆黑／Nunito轮廓；保留标签内容、数值、图形与资源路径。",
+          "document": "docs/butcher-version/2026-10-19-1222-v1.0-剧情提示图内字体与历史成果修复.md",
+          "evidence": [
+            "fixes/fonts/unit117-118.png",
+            "fixes/fonts-verification.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "unit119-120",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit121-122",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit123-124",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit125-126",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit127-128",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit129-130",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit131-132",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit133-134",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit135-136",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit137-138",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit139-140",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit141-142",
+      "open": 0,
+      "fixed": []
+    },
+    {
+      "id": "unit143-144",
+      "open": 0,
+      "fixed": []
+    }
+  ]
+}

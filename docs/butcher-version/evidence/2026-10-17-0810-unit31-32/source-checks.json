@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-17T00:52:11.154Z",
+  "passed": 30,
+  "failed": [],
+  "checks": [
+    {
+      "name": "five zones and 51 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 8,
+        "roles": 3,
+        "grammar": 12,
+        "apply": 9,
+        "exam": 19
+      }
+    },
+    {
+      "name": "33 original questions unchanged",
+      "passed": true
+    },
+    {
+      "name": "51 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "24 original cards and phonetics",
+      "passed": true
+    },
+    {
+      "name": "14 original dialogue sentences and people",
+      "passed": true
+    },
+    {
+      "name": "18 original actions and number labels",
+      "passed": true
+    },
+    {
+      "name": "A5 and B10 retain full prompts",
+      "passed": true
+    },
+    {
+      "name": "maximum two blanks per online question",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true
+    },
+    {
+      "name": "actual old six v1 sessions mapped",
+      "passed": true
+    },
+    {
+      "name": "five new sessions and distinct reward edition",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "60 original SVG assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "four prompt records and retained originals",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha jean",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha jack",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha garden",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha keepsake",
+      "passed": true
+    },
+    {
+      "name": "font inputs reflect final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1885,
+        "inputs": 365
+      }
+    },
+    {
+      "name": "font licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson UI captions",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit31-32/cast-jean-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "1f161d6a44175783d837895f05d16999a4b29c27c62551a5dce67e934d6fec1b"
+    },
+    {
+      "file": "assets/unit31-32/cast-jack-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "66b446083f1e4ebf7dbc17bca00f3657f67188cfde13e7639b22ea49068338eb"
+    },
+    {
+      "file": "assets/unit31-32/garden-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "504f3db466d24ab8140e110a1426e55ffa5b1ec8a2be6281abf2ec24f498cde0"
+    },
+    {
+      "file": "assets/unit31-32/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "d6540a8e6ec875313502f97e1009c447392a4af9fda14a59b52fc6b657a35eff"
+    }
+  ],
+  "changedSourcePaths": 55
+}

@@ -1,0 +1,73 @@
+{
+  "id": "unit81-82",
+  "source": {
+    "file": "tests/support/unit8182.js",
+    "sha256": "2edd5bbe94569dc892b4d383a4541e50215248350958ab47257c3f18a9014419"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u8182-v1-r-visitor",
+      "text": "Lesson 81\n\nSam: Hi, Carol! Where’s Tom?\n\nCarol: He’s upstairs. He’s having a bath.\n\nCarol: Tom!\n\nTom: Yes?\n\nCarol: Sam’s here."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u8182-v1-r-now",
+      "text": "Lesson 81\n\nSam: Hi, Carol! Where’s Tom?\n\nCarol: He’s upstairs. He’s having a bath."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u8182-v1-r-refusal",
+      "text": "Lesson 81\n\nTom: Hello, Sam. Have a cigarette.\n\nSam: No, thanks, Tom."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u8182-v1-r-time",
+      "text": "Lesson 81\n\nTom: Is dinner ready, Carol?\n\nCarol: It’s nearly ready. We can have dinner at seven o’clock."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u8182-v1-r-past",
+      "text": "Lesson 81\n\nTom: Sam and I had lunch together today. We went to a restaurant.\n\nCarol: What did you have?\n\nTom: We had roast beef and potatoes."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u8182-v1-r-ending",
+      "text": "Lesson 81\n\nTom: Sam and I had lunch together today. We went to a restaurant.\n\nCarol: What did you have?\n\nTom: We had roast beef and potatoes.\n\nCarol: Oh!\n\nTom: What’s the matter, Carol?\n\nCarol: Well, you’re going to have roast beef and potatoes again tonight!"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u8182-v1-r-boundary",
+      "text": "Lesson 81\n\nTom: Is dinner ready, Carol?\n\nCarol: It’s nearly ready. We can have dinner at seven o’clock.\n\nTom: Sam and I had lunch together today. We went to a restaurant.\n\nCarol: What did you have?\n\nTom: We had roast beef and potatoes.\n\nCarol: Oh!\n\nTom: What’s the matter, Carol?\n\nCarol: Well, you’re going to have roast beef and potatoes again tonight!"
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u8182-v1-e-time",
+      "text": "Lesson 81\n\nTom: Is dinner ready, Carol?\n\nCarol: It’s nearly ready. We can have dinner at seven o’clock.\n\nTom: Sam and I had lunch together today. We went to a restaurant.\n\nCarol: What did you have?\n\nTom: We had roast beef and potatoes.\n\nCarol: Oh!\n\nTom: What’s the matter, Carol?\n\nCarol: Well, you’re going to have roast beef and potatoes again tonight!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-5",
+    "R2": "1-2",
+    "R3": "7-8",
+    "R4": "11-12",
+    "R5": "13-15",
+    "R6": "13-18",
+    "R7": "11-18",
+    "E5": "11-18"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

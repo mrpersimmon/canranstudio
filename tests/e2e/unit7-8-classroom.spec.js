@@ -4,6 +4,9 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { DIALOGUE, SPEAKERS, completeActivity, completeUnit78 } = require('../support/unit7-8-flow');
 const { ANSWERS } = require('../fixtures/unit7-8-classroom-before/flow');
+// Historical 15-star behavior is exercised on its frozen edition.
+// Current five-zone and authenticated migration contracts have dedicated suites.
+require('../support/unit78-legacy').historicalSuite(test);
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 async function blockVoices(page) {

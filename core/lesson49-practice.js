@@ -122,7 +122,9 @@
     records.forEach(record => {
       const item = document.createElement('li');
       const rule = typeof record.ruleUsed === 'boolean' ? `，查看规则${record.ruleUsed ? '已用' : '未用'}` : '';
-      item.textContent = `${record.target} · ${record.prompt}：${outcome(record)}（首次${record.firstCorrect ? '答对' : '未答对'}，额外提示${record.hintUsed ? '已用' : '未用'}${rule}，提交 ${record.attempts} 次）`;
+      // Optional display wording never rewrites an earned record or its identity.
+      const target = context.copy?.recordTargets?.[record.questionId] || record.target;
+      item.textContent = `${target} · ${record.prompt}：${outcome(record)}（首次${record.firstCorrect ? '答对' : '未答对'}，额外提示${record.hintUsed ? '已用' : '未用'}${rule}，提交 ${record.attempts} 次）`;
       list.append(item);
     });
     box.append(list);

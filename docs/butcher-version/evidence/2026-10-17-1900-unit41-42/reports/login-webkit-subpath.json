@@ -1,0 +1,556 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit41-42.spec.js",
+      "tests/login/unit41-42-v153-upgrade.spec.js",
+      "--output=output/unit4142-work/login-webkit-subpath",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4142-work/login-webkit-subpath",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit41-42-v153-upgrade.spec.js",
+      "file": "unit41-42-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 34146,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-roles').locator('.fb')\nExpected: \u001b[32m\"答对了！\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.fb')\u001b[22m\n\u001b[2m    - found locator('dialog.award-reveal[open]'), intercepting action to run the handler\u001b[22m\n\u001b[2m    - locator handler has finished, waiting for locator('dialog.award-reveal[open]') to be hidden\u001b[22m\n\u001b[2m    - interception handler has finished, continuing\u001b[22m\n\u001b[2m    13 × locator resolved to <div class=\"fb \" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-roles').locator('.fb')\nExpected: \u001b[32m\"答对了！\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.fb')\u001b[22m\n\u001b[2m    - found locator('dialog.award-reveal[open]'), intercepting action to run the handler\u001b[22m\n\u001b[2m    - locator handler has finished, waiting for locator('dialog.award-reveal[open]') to be hidden\u001b[22m\n\u001b[2m    - interception handler has finished, continuing\u001b[22m\n\u001b[2m    13 × locator resolved to <div class=\"fb \" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142.js:29:37)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42-v153-upgrade.spec.js:13:458",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142.js",
+                      "column": 37,
+                      "line": 29
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit4142.js:29\n\n  27 |   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);\n  28 |   await inspect?.(room,i,'before');await select(room,answers[i]);await check.click();\n> 29 |   await expect(room.locator('.fb')).toHaveText('答对了！');await inspect?.(room,i,'correct');\n     |                                     ^\n  30 |   await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();\n  31 |  }\n  32 |  await expect(room.locator('.completion-number')).toHaveText([String(answers.length),String(answers.length),'0']);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142.js",
+                        "column": 37,
+                        "line": 29
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-roles').locator('.fb')\nExpected: \u001b[32m\"答对了！\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.fb')\u001b[22m\n\u001b[2m    - found locator('dialog.award-reveal[open]'), intercepting action to run the handler\u001b[22m\n\u001b[2m    - locator handler has finished, waiting for locator('dialog.award-reveal[open]') to be hidden\u001b[22m\n\u001b[2m    - interception handler has finished, continuing\u001b[22m\n\u001b[2m    13 × locator resolved to <div class=\"fb \" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></div>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n\n\n   at ..\\support\\unit4142.js:29\n\n  27 |   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);\n  28 |   await inspect?.(room,i,'before');await select(room,answers[i]);await check.click();\n> 29 |   await expect(room.locator('.fb')).toHaveText('答对了！');await inspect?.(room,i,'correct');\n     |                                     ^\n  30 |   await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();\n  31 |  }\n  32 |  await expect(room.locator('.completion-number')).toHaveText([String(answers.length),String(answers.length),'0']);\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142.js:29:37)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit41-42-v153-upgrade.spec.js:13:458"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:32116) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:08:49.580Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\login-webkit-subpath\\unit41-42-v153-upgrade-真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\login-webkit-subpath\\unit41-42-v153-upgrade-真实旧五星账号同库升级：原卡GIF、姓名日期和跨设备历史全部保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142.js",
+                    "column": 37,
+                    "line": 29
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "2e4dff1b5b8e4177b952-cf86651d6a58445eb406",
+          "file": "unit41-42-v153-upgrade.spec.js",
+          "line": 4,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit41-42.spec.js",
+      "file": "unit41-42.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "14386ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 17624,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:09:24.508Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "14386ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-37c520ecdd1d6acdc8d4",
+          "file": "unit41-42.spec.js",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2781,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:09:42.215Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-b5e263562aa743c348ab",
+          "file": "unit41-42.spec.js",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "20ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "14644ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "22ms after navigation"
+                },
+                {
+                  "type": "engine-boundary",
+                  "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                },
+                {
+                  "type": "course-ready",
+                  "description": "9379ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 121295,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:09:45.003Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "20ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "14644ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "22ms after navigation"
+                    },
+                    {
+                      "type": "engine-boundary",
+                      "description": "WebKit offline navigation rejected before app fallback; reconnect and record recovery checked separately."
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "9379ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-fd022e896cea47eac572",
+          "file": "unit41-42.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "9236ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27832,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:11:46.309Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "9236ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-394b6f33106f5c1f6a5a",
+          "file": "unit41-42.spec.js",
+          "line": 149,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "14423ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "16ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "26ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "21ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "25ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 75791,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:12:14.150Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "14423ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "16ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "26ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "21ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "25ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-7859cc845a4ac3596e70",
+          "file": "unit41-42.spec.js",
+          "line": 176,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "14270ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "14770ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 57477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:13:29.950Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "14270ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "14770ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-cb5e0d3182cdcc86d6ca",
+          "file": "unit41-42.spec.js",
+          "line": 215,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "9214ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "9038ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 50990,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T12:14:27.439Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "9214ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "9038ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a3c697355b224b12ad6c-e1563587ff289dd9c849",
+          "file": "unit41-42.spec.js",
+          "line": 235,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T12:08:45.212Z",
+    "duration": 393709.568,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

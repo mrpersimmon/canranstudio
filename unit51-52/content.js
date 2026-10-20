@@ -120,3 +120,17 @@ unit.learning.WRITING_B=['she / (England) / the U.S.','they / (France) / England
 unit.source={text:textSource,grammar:grammarSource};core.unit5152=unit;
 if(root.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit5152,excerpts={"u5152-v1-r-origin":[0,1],"u5152-v1-r-spring":[4,5],"u5152-v1-r-autumn":[8,9],"u5152-v1-r-winter":[10,11],"u5152-v1-e-origin":[0,1,2,3],"u5152-v1-e-autumn":[8,9],"u5152-v1-e-winter":[10,11]},speakers={"hans":"Hans","dimitri":"Dimitri"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 51',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

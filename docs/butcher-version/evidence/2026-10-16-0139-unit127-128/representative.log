@@ -1,0 +1,42 @@
+
+Running 4 tests using 1 worker
+
+(node:14424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit127-128-story-layout.spec.js:27:39 › 1280：12轮完整原文、双方朝向、四种姿态和中文续读 (1.3s)
+(node:12596) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\unit127-128.spec.js:28:1 › 18词卡、128课1–8、A7与B20完整 (2.5s)
+  ok 3 tests\e2e\unit127-128.spec.js:50:1 › 错答不更新线索记录，三卡5／8／2，刷新保留原图 (3.7s)
+  ok 4 tests\e2e\unit127-128.spec.js:56:1 › 27道书写题67行打印与恢复 (998ms)
+
+
+  1) tests\e2e\unit127-128-story-layout.spec.js:27:39 › 1280：12轮完整原文、双方朝向、四种姿态和中文续读 ────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 600.796875
+    Received:    593.296875
+
+      37 |   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+      38 |   const guests=world.locator('.cafe-guests');await uncut(guests);const g=await guests.boundingBox();expect(g.y).toBeGreaterThanOrEqual(b.y+b.height);const materialBottom=g.y+g.height;
+    > 39 |   for(const img of await world.locator('.cafe-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+         |                                                                                                                                  ^
+      40 |   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}));expect(labels[0].x+labels[0].width<=labels[1].x||labels[1].x+labels[1].width<=labels[0].x).toBe(true);
+      41 |   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
+      42 |   if([3,4,6,7,8,9,10].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<11)await next.click();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit127-128-story-layout.spec.js:39:130
+
+    Error Context: output\unit127128-representative\unit127-128-story-layout-1280：12轮完整原文、双方朝向、四种姿态和中文续读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit127128-representative\unit127-128-story-layout-1280：12轮完整原文、双方朝向、四种姿态和中文续读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit127128-representative\unit127-128-story-layout-1280：12轮完整原文、双方朝向、四种姿态和中文续读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit127-128-story-layout.spec.js:27:39 › 1280：12轮完整原文、双方朝向、四种姿态和中文续读 ─────────────────
+  3 passed (10.2s)

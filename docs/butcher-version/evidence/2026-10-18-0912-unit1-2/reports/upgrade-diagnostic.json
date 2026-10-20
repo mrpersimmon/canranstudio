@@ -1,0 +1,176 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit1-2-v154-upgrade.spec.js",
+      "-g",
+      "五星",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/upgrade-diagnostic"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/upgrade-diagnostic",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154-upgrade.spec.js",
+      "file": "unit1-2-v154-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "同库更新与跨设备：原五星全部GIF帧和精确日期保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [
+                {
+                  "type": "temporary-cleanup",
+                  "description": "C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-unit12-v154-KhnisW EBUSY"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 605,
+                  "error": {
+                    "message": "Error: Unknown course in publication list",
+                    "stack": "Error: Unknown course in publication list\n    at createCoursePackages (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\course-packages.js:91:80)\n    at createApp (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\server\\app.js:28:30)\n    at start (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:16:33)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:24:3",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\course-packages.js",
+                      "column": 80,
+                      "line": 91
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\scripts\\course-packages.js:91\n\n  89 |   for (const item of require('./course-registry').PUBLISHED_COURSES) if (!courses.some(course => course.id === item.id)) courses.push({ id: item.id, entry: item.entry });\n  90 |   if (courseIds) {\n> 91 |     if (courseIds.some(id => !courses.some(course => course.id === id))) throw new Error('Unknown course in publication list');\n     |                                                                                ^\n  92 |     for (let i = courses.length - 1; i >= 0; i--) if (!courseIds.includes(courses[i].id)) courses.splice(i, 1);\n  93 |   }\n  94 |   const withdrawn = JSON.parse((await readSource('core/course-withdrawals.json')).toString());"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\course-packages.js",
+                        "column": 80,
+                        "line": 91
+                      },
+                      "message": "Error: Unknown course in publication list\n\n   at ..\\..\\scripts\\course-packages.js:91\n\n  89 |   for (const item of require('./course-registry').PUBLISHED_COURSES) if (!courses.some(course => course.id === item.id)) courses.push({ id: item.id, entry: item.entry });\n  90 |   if (courseIds) {\n> 91 |     if (courseIds.some(id => !courses.some(course => course.id === id))) throw new Error('Unknown course in publication list');\n     |                                                                                ^\n  92 |     for (let i = courses.length - 1; i >= 0; i--) if (!courseIds.includes(courses[i].id)) courses.splice(i, 1);\n  93 |   }\n  94 |   const withdrawn = JSON.parse((await readSource('core/course-withdrawals.json')).toString());\n    at createCoursePackages (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\course-packages.js:91:80)\n    at createApp (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\server\\app.js:28:30)\n    at start (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:16:33)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit1-2-v154-upgrade.spec.js:24:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:36308) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:32:03.780Z",
+                  "annotations": [
+                    {
+                      "type": "temporary-cleanup",
+                      "description": "C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-unit12-v154-KhnisW EBUSY"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\upgrade-diagnostic\\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\upgrade-diagnostic\\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\course-packages.js",
+                    "column": 80,
+                    "line": 91
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9014dd4a36bee01ee736-ab8e371e233a90f664f5",
+          "file": "unit1-2-v154-upgrade.spec.js",
+          "line": 9,
+          "column": 42
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:31:59.268Z",
+    "duration": 5564.115,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

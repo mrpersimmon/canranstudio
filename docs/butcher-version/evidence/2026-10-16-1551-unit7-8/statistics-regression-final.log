@@ -1,0 +1,51 @@
+
+Running 3 tests using 1 worker
+
+(node:28004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\submission-statistics.spec.js:16:4 › 3-4 共用结算按提交计次，手机三卡完整，刷新保留 (5.2s)
+  ok 2 tests\e2e\submission-statistics.spec.js:16:4 › 5-6 共用结算按提交计次，手机三卡完整，刷新保留 (2.8s)
+  x  3 tests\e2e\submission-statistics.spec.js:16:4 › 7-8 共用结算按提交计次，手机三卡完整，刷新保留 (10.0s)
+
+
+  1) tests\e2e\submission-statistics.spec.js:16:4 › 7-8 共用结算按提交计次，手机三卡完整，刷新保留 ──────────────────────
+
+    Error: expect(locator).toBeInViewport() failed
+
+    Locator:  locator('.stage-listen').getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button').first()
+    Expected: in viewport
+    Received: viewport ratio 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeInViewport" with timeout 5000ms
+      - waiting for locator('.stage-listen').getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button').first()
+        14 × locator resolved to <button type="button" class="btn btn-mini btn-yellow">再练一轮</button>
+           - unexpected value "viewport ratio 0"
+
+
+       at ..\support\completion-layout.js:44
+
+      42 |   await expect(buttons).toHaveCount(2);
+      43 |   for (const button of await buttons.all()) {
+    > 44 |     await expect(button).toBeInViewport({ ratio: 1 });
+         |                          ^
+      45 |     const box = await button.boundingBox();
+      46 |     expect(box.height).toBeGreaterThanOrEqual(44);
+      47 |     expect(box.y).toBeGreaterThanOrEqual(cards[0].bottom);
+        at expectCompactCompletion (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\completion-layout.js:44:26)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\submission-statistics.spec.js:28:3
+
+    Error Context: test-results\submission-statistics-7-8-共用结算按提交计次，手机三卡完整，刷新保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\submission-statistics-7-8-共用结算按提交计次，手机三卡完整，刷新保留\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\submission-statistics-7-8-共用结算按提交计次，手机三卡完整，刷新保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\submission-statistics.spec.js:16:4 › 7-8 共用结算按提交计次，手机三卡完整，刷新保留 ───────────────────────
+  2 passed (19.4s)

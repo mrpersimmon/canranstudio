@@ -147,3 +147,39 @@
   ];
   unit.learning.WRITING_B=['spoon / on the plate','tie / on the chair','milk / on the table','hammer / on the bookcase','tea / on the table','vase / on the radio','suit / in the wardrobe','tobacco / in the tin','chocolate / on the desk','cheese / on the plate'];
 })(globalThis.CanranCore);
+
+// v1.53 teaching revision: the original award edition and its issue date survive.
+(function(core){
+'use strict';const unit=core.unit4142,old=JSON.parse(JSON.stringify(unit));core.unit4142BeforeV153=old;
+unit.contentRevision='bag-teaching-v153';
+unit.objects=old.objects.map(w=>({...w,cn:['some','any'].includes(w.en)?'一些':w.cn}));unit.objects=unit.objects.map(w=>({...w,image:['pound','half','quarter'].includes(w.en)?'/assets/unit41-42/'+w.en+'-v153.svg':w.image}));unit.learning.WORDS=unit.objects;
+const textSource='课本纸82–85／PDF115–118';const grammarSource='同步导学纸75–76／PDF89–90，Grammar纸76／PDF90；语法练习册纸114–118／PDF128–132';
+function revise(group,id,changes){const i=unit.questions[group].findIndex(q=>q.id===id);if(i<0)throw Error(id);unit.questions[group][i]={...unit.questions[group][i],...changes,id:id+'-v153'};}
+function material(title,material){return{title,material};}
+revise('roles','u4142-v1-r-heavy',{display:material('Penny觉得袋子怎样？','Sam: Is that bag heavy, Penny?\nPenny: Not very.')});
+revise('roles','u4142-v1-r-weights',{display:material('根据这段原文，给物品和重量配对。','Penny: A pound of sugar.\nHalf a pound of coffee.\nA quarter of a pound of tea.')});
+revise('roles','u4142-v1-r-bars',{display:material('哪一张清单与这段原文一致？','Penny: A bar of soap.\nA bar of chocolate.')});
+revise('grammar','u4142-v1-g-ask-any',{tokens:['Is there','any tea','in that tin','There is'],prompt:'不知道罐里有没有茶，组织一句有无问句。',explanation:'本题用Is there any…?普通询问；some也可出现在有所期待的问句中，不能只凭问号判错。',workshop:{rule:'本题用Is there any…?普通询问；不是先断言已经有茶。',model:{lines:[['Is there any milk in that bottle?','课本句式：那个瓶里有牛奶吗？说话人还不知道有没有。']]}}});
+revise('grammar','u4142-v1-g-ask-a',{tokens:['Is there','a bird','in that tree','There is'],target:'组织询问一个可数物品的有无问句',explanation:'问有没有一只鸟，用Is there a bird…?；There is a bird…是在陈述。'});
+revise('grammar','u4142-v1-g-first-item',{prompt:'按导学“先报第一项，再接其余物品”的列举句式，补全两句。',explanation:'本项采用导学的列举句式：先报a bottle用is，先报two bars用are。这是本项指定练习方式，不把其他语境的并列结构一概判错。',workshop:{rule:'在本项指定的导学列举句式中，按紧接be的第一项选择。实际英语还会随语体和组织方式变化。',model:{lines:[['There is a pen, two pencils and a book on the desk.','导学原例：第一项a pen是单数。'],['There are two apples, an orange and a banana on the table.','导学练习中的清单：第一项two apples是复数。']]}}});
+revise('exam','u4142-v1-e-weights',{display:material('根据这段原文补全采购记录。','Penny: Half a pound of coffee.\nA quarter of a pound of tea.')});
+const eAny=unit.questions.exam.findIndex(q=>q.id==='u4142-v1-e-any');
+unit.questions.exam[eAny]={id:'u4142-v1-e-any-v153',target:'独立区分有无询问与肯否陈述',prompt:'你还不知道那个袋子里有没有糖。应怎样向Penny核实？',source:textSource,options:['Is there any sugar in that bag?','There is some sugar in that bag.','There isn’t any sugar in that bag.'],answer:'Is there any sugar in that bag?',explanation:'先询问是否有，不能在材料不足时直接断言有或没有。some并非在所有问句中禁用。',hint:'',distractorRationale:'两个干扰项分别直接断言有糖、没有糖，与核实有无的意图不同。'};
+revise('exam','u4142-v1-e-agreement-v2',{prompt:'用本课导学的列举句式补全两张物品清单。',explanation:'本题采用导学先报第一项的列举句式，a loaf配is，two bottles配are；不把本题方式扩大为所有英语并列句的唯一形式。'});
+const q=(id,target,prompt,input,explanation)=>({id:'u4142-v153-'+id,target,prompt,source:grammarSource,...input,explanation,hint:'',distractorRationale:'按未答题面给出的语境、物品和数量区分，不从问号或未知事实猜答案。'});
+unit.questions.grammar.push(
+ {...q('g-expectation','some也可用于有肯定预期的问句','Penny刚说买了牛奶。Sam觉得袋里应该有牛奶，再这样问，可以吗？',{options:['可以，some也能用于这种问句。','不可以，问句绝不能用some。','这句话是在说袋里没有牛奶。'],answer:'可以，some也能用于这种问句。',display:material('在这个情境中，下面的问法可以吗？','Penny刚说买了牛奶；Sam觉得袋里应该有牛奶，想再核实。\nSam: Is there some milk in the bag?')},'有肯定预期时问句可以用some；普通开放式有无询问常用any，不能把some／any当作问号开关。'),workshop:{rule:'some常见于肯定句，也可以用于期待肯定回答的问句。',model:{lines:[['Is there some tea in the cup?','看见杯里像是有茶，想再核实；这种问句可以用some，不是说any从此不能用。']]}}},
+ {...q('g-plural-question','复数有无问句与否定回应','墙上没有图片。补全问题及符合事实的回答。',{type:'cloze',blanks:[{before:'',after:' there any pictures on the wall?',options:['Are','Is']},{before:'No, there ',after:' any pictures on the wall.',options:['aren’t','isn’t']}],answer:JSON.stringify(['Are','aren’t'])},'pictures是复数，用Are there；题目说明没有，回答No, there aren’t。'),workshop:{rule:'复数物品用Are there…?；有则Yes, there are.，没有则No, there aren’t.。',model:{lines:[['Are there any books on the shelf?','有书：Yes, there are. 没有书：No, there aren’t. 回答要由现场事实决定。']]}}}
+);
+unit.questions.exam.push(
+ q('e-plural-replies','独立按复数物品和事实完成肯否问答','柜里有两只杯子，没有盘子。哪组问答既问对，也答对？',{options:['Are there any cups? — Yes, there are.\nAre there any plates? — No, there aren’t.','Is there any cups? — Yes, there is.\nAre there any plates? — No, there aren’t.','Are there any cups? — No, there aren’t.\nAre there any plates? — Yes, there are.'],answer:'Are there any cups? — Yes, there are.\nAre there any plates? — No, there aren’t.'},'cups／plates均为复数；杯子有、盘子无，肯否回应分别由清单决定。'),
+ q('e-some-question','独立判断some问句是否符合给定语境','妈妈说买了乳酪。孩子觉得袋里应该有，想再核实。这种问法可以吗？',{options:['可以，问句在这种情境中也能用some。','不可以，只要是问句就不能用some。','这句话表示袋里没有乳酪。'],answer:'可以，问句在这种情境中也能用some。',display:material('这种问法符合给定情境吗？','妈妈说买了乳酪；孩子觉得袋里应该有，想再核实。\nIs there some cheese in the bag?')},'这是一种有肯定预期的核实问法；不把问号或some当成自动判错的线索。')
+);
+// Preserve exact v1 and polish-v2 predecessors, including their earlier sources.
+for(const id of ['roles','grammar','exam']){
+ const previous=unit.taskPredecessors[id]||[];
+ unit.taskPredecessors[id]=[{key:'unit4142-'+id+'-practice/'+(old.taskSessions[id]||'v1'),questions:old.questions[id]},...previous];
+ unit.taskSessions[id]='v153';
+}
+core.unit4142=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

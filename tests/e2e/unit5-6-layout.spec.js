@@ -4,7 +4,7 @@ test.use({reducedMotion:'reduce',actionTimeout:5000});
 for(const width of [320,390,768,1280])test(`${width} 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处`,async({page})=>{
   test.setTimeout(60000);await page.setViewportSize({width,height:740});const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const activity of ['words','listen','text','roles','phrases','introduce','models','cars','exam','certificate']){
-    await page.goto('/unit5-6/#learn/'+activity);const room=page.locator('.stage-'+activity);
+    await page.goto('/unit5-6/#learn/'+activity);const room=page.locator('.stage-'+({phrases:'introduce',models:'cars'}[activity]||activity));
     await expect(room.getByRole('heading').first()).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     await expect.poll(()=>room.locator('img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);await page.locator('#notebookButton').click();await page.keyboard.press('Escape');await expect(page.locator('#notebookButton')).toBeFocused();
@@ -29,13 +29,14 @@ test('24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁�
 
 for(const width of [320,1280])test(`${width} 提示位于检查左侧，错答不加绿，末题与结束按钮稳定`,async({page})=>{
   await page.setViewportSize({width,height:740});await page.goto('/unit5-6/#learn/introduce');await page.evaluate(()=>document.fonts.ready);
-  const room=page.locator('.stage-introduce'),actions=room.getByRole('group',{name:'作答操作',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true}),hint=room.getByRole('button',{name:'给点线索',exact:true});
+  const room=page.locator('.stage-introduce');for(const q of require('../support/unit56-answers').CURRENT.introduce.slice(0,4)){await require('../support/units1-30-tasks').select(room,q.answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}const actions=room.getByRole('group',{name:'作答操作',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true}),hint=room.getByRole('button',{name:'给点线索',exact:true});
   const y=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await y(),h=await hint.boundingBox(),c=await check.boundingBox();expect(h.x+h.width).toBeLessThan(c.x);
   await hint.click();expect(await y()).toBeCloseTo(before,0);await room.getByRole('button',{name:'He',exact:true}).click();await check.click();
-  expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','4');await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   const answers=require('../support/unit5-6-flow').ANSWERS.introduce;
   for(const [i,answer] of answers.entries()){
+    if(i<4)continue;
     await require('../support/units1-30-tasks').select(room,answer);await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
     await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();
   }

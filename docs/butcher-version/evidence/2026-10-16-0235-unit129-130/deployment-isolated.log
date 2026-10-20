@@ -1,0 +1,38 @@
+
+Running 1 test using 1 worker
+
+(node:30652) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\lesson-deployment.spec.js:63:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除 (30.0s)
+
+
+  1) tests\e2e\lesson-deployment.spec.js:63:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除 ─────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByText('单课练习', { exact: true })
+
+
+      70 |   await page.goto('/lesson/');
+      71 |   await page.evaluate(() => localStorage.setItem('canran:unit49-50:learning:v1', 'original-app-record'));
+    > 72 |   await page.getByText('单课练习', { exact: true }).click();
+         |                                                 ^
+      73 |   const entries = await page.locator('main a').evaluateAll(links => links.map(link => ({ href: link.href, text: link.textContent })));
+      74 |   expect(entries.map(entry => new URL(entry.href).pathname)).toEqual([
+      75 |     ...Array.from({ length: 65 }, (_, i) => `/lesson/unit${i * 2 + 1}-${i * 2 + 2}/`),
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\lesson-deployment.spec.js:72:49
+
+    Error Context: output\unit129130-deployment-isolated\lesson-deployment-每个课程入口和资源都留在-lesson-下，原版记录不被重开操作删除\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit129130-deployment-isolated\lesson-deployment-每个课程入口和资源都留在-lesson-下，原版记录不被重开操作删除\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit129130-deployment-isolated\lesson-deployment-每个课程入口和资源都留在-lesson-下，原版记录不被重开操作删除\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\lesson-deployment.spec.js:63:1 › 每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除 ──────────────────

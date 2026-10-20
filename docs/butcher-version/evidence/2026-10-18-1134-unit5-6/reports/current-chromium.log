@@ -1,0 +1,348 @@
+
+Running 12 tests using 1 worker
+
+(node:33640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit5-6-v154.spec.js:5:1 › 当前首页使用确认故事图 (538ms)
+  ok  2 tests\e2e\unit5-6-v154.spec.js:6:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (447ms)
+  ok  3 tests\e2e\unit5-6-v154.spec.js:7:1 › 原文理解在未答页提供必要对白 (1.7s)
+  x   4 tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 (12.2s)
+(node:7888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   5 tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 (12.3s)
+(node:27440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   6 tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 (2.3s)
+(node:12888) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   7 tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 (2.3s)
+(node:27100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   8 tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 (15.0s)
+(node:28992) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 tests\e2e\unit5-6-v154.spec.js:34:49 › 320x568短屏三卡与推进完整 (2.9s)
+  x  10 tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 (2.6s)
+(node:1640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 tests\e2e\unit5-6-v154.spec.js:38:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 (20.2s)
+(node:33004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  12 tests\e2e\unit5-6-v154.spec.js:48:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 (11.1s)
+
+
+  1) tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })
+        - locator resolved to <button type="button" aria-expanded="false" class="btn btn-mini btn-yellow">看中文</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div class="dialogue-stage">…</div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div class="dialogue-stage">…</div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div class="dialogue-stage">…</div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);
+      18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}
+    > 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
+         |                                                                                                                            ^
+      20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}
+      21 |  }
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:19:124
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })
+        - locator resolved to <button type="button" aria-expanded="false" class="btn btn-mini btn-yellow">看中文</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div class="dialogue-stage">…</div> intercepts pointer events
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is visible, enabled and stable
+          - scrolling into view if needed
+          - done scrolling
+          - <div class="dialogue-stage">…</div> intercepts pointer events
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is visible, enabled and stable
+           - scrolling into view if needed
+           - done scrolling
+           - <div class="dialogue-stage">…</div> intercepts pointer events
+         - retrying click action
+           - waiting 500ms
+
+
+      17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);
+      18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}
+    > 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
+         |                                                                                                                            ^
+      20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}
+      21 |  }
+      22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:19:124
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 479.078125
+    Received:    452.078125
+
+      16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);
+      17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);
+    > 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}
+         |                                                                                                                                                                                                                                ^
+      19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
+      20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}
+      21 |  }
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:18:224
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 ───────────────────────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 479.078125
+    Received:    452.078125
+
+      16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);
+      17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);
+    > 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}
+         |                                                                                                                                                                                                                                ^
+      19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
+      20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}
+      21 |  }
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:18:224
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 ──────────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })
+        - locator resolved to <button disabled type="button" class="btn btn-green">检查答案</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+       at ..\support\unit56-v154.js:21
+
+      19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});
+      20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();
+    > 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}
+         |                                                                                                                         ^
+      22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
+      23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
+      24 |  }
+        at Object.activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit56-v154.js:21:121)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:30:86
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 ───────────────────────────────────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 501
+    Received:    518.40625
+
+      33 |
+      34 | for(const[width,height]of [[320,568],[390,500]])test(`${width}x${height}短屏三卡与推进完整`,async({page},info)=>{
+    > 35 |  await page.setViewportSize({width,height});await flow.activity(page,'listen');const room=page.locator('.stage-listen');await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);const actions=await room.locator('.practice-finish-actions').boundingBox();expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);await page.screenshot({path:info.outputPath('completion.png')});await page.reload();await flow.ready(page);await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);
+         |                                                                                                                                                                                                                                                                                                                ^
+      36 | });
+      37 |
+      38 | test('原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写',async({page})=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:35:304
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-390x500短屏三卡与推进完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-390x500短屏三卡与推进完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-390x500短屏三卡与推进完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) tests\e2e\unit5-6-v154.spec.js:38:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 ───────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })
+        - locator resolved to <button disabled type="button" class="btn btn-green">检查答案</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+       at ..\support\unit56-v154.js:21
+
+      19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});
+      20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();
+    > 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}
+         |                                                                                                                         ^
+      22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
+      23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
+      24 |  }
+        at Object.activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit56-v154.js:21:121)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:44:124
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) tests\e2e\unit5-6-v154.spec.js:48:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 ───────────────────────────
+
+    TimeoutError: locator.click: Timeout 10000ms exceeded.
+    Call log:
+      - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })
+        - locator resolved to <button disabled type="button" class="btn btn-green">检查答案</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not enabled
+        - retrying click action
+          - waiting 100ms
+        19 × waiting for element to be visible, enabled and stable
+           - element is not enabled
+         - retrying click action
+           - waiting 500ms
+
+
+       at ..\support\unit56-v154.js:21
+
+      19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});
+      20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();
+    > 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}
+         |                                                                                                                         ^
+      22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
+      23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
+      24 |  }
+        at Object.activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit56-v154.js:21:121)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:49:2
+
+    Error Context: output\unit56-review-20261018\current-chromium\unit5-6-v154-显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-chromium\unit5-6-v154-显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-chromium\unit5-6-v154-显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 ─────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 ────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 ───────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 ────────────────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:38:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 ────────────────────────────
+    tests\e2e\unit5-6-v154.spec.js:48:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 ────────────────────────────
+  4 passed (1.5m)

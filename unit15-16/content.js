@@ -306,3 +306,85 @@ unit.questions["reply"][2]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+
+// Current five-zone edition. The exact previous course remains available for
+// historical progress, certificate rendering and same-question migration.
+(function(core){
+'use strict';
+const old=core.unit1516;core.unit1516LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸30–33／PDF63–66；练习册纸38–43／PDF52–57';
+const grammarSource='同步导学Grammar纸30–31／PDF44–45；'+source;
+const unit={id:'unit15-16',version:1,mode:'classroom',contentRevision:'travel-five-zones-v1',legacyEdition:'unit15-16-completion-v1',title:'护照小检查站',path:'/unit15-16/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'结伴出发',activities:[['words','出行小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'护照小故事',activities:[['text','海关小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'把复数说清楚',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'一起做介绍',activities:[['apply','出行小帮手','heart']],required:['apply']},{id:'l5',title:'出行小伙伴',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/reply':'learn/grammar','learn/forms':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'travel-five-zones-v1',title:'结伴出行小达人',lesson:'Lesson 15–16',scene:'/assets/unit15-16/keepsake-story-v1.webp',alt:'两位姑娘向海关官员出示两本护照，身边放着棕色行李',color:'#567568',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','出行小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u1516-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+const personArt={officer:'officer','customs officer':'officer',girl:'girl',tourist:'girl',friend:'friends',we:'girls',our:'girls',they:'friends'};
+unit.objects=old.objects.map(word=>personArt[word.en]?{...word,image:'/assets/unit15-16/cast-'+personArt[word.en]+'-v1.webp'}:word);
+unit.learning.WORDS=unit.objects;
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,
+q('r-cases','否认归属不等于确定另一位物主','只看这段原文，能知道被问到的箱子属于谁吗？',choice(['不能确定，只知道不属于姑娘们','一定属于海关官员','一定属于她们的朋友'],'不能确定，只知道不属于姑娘们',"Officer: Are these your cases?\nGirls: No, they aren't. Our cases are brown."),'姑娘们否认了这些箱子是自己的，没有说明它们的主人。')];
+unit.questions.grammar=[
+g('regular','普通可数名词加s','给两位官员选复数标签。',fill([blank('two ','',['officers','officer','officeres'])],['officers'],'officer：官员。这里共有两位。'),'本组普通名词的复数直接加s。',[['one passport → two passports','一本护照变成两本，passport加s。']]),
+g('final-e','区分已有e与另加es','给两只箱子选复数标签。',fill([blank('two ','',['cases','casees','case'])],['cases'],'case：箱子。这里共有两只。'),'case已经以e结尾，只加s，写成cases。',[['one house → two houses','house（房屋）已有e，只加s。']]),
+g('es','按本组ch和x结尾形成复数','为手表和盒子选复数标签。',fill([blank('two ','',['watches','watchs','watch']),blank('two ','',['boxes','boxs','box'])],['watches','boxes'],'watch：手表；box：盒子。每种都有两件。'),'本组watch和box加es；复数不能仍用单数。',[['dress → dresses; brush → brushes','连衣裙dress和刷子brush的复数都加es。']]),
+g('y','区分辅音字母加y和元音字母加y','每组不止一个，补好标签。',fill([blank('two ','',['babies','babys','baby']),blank('two ','',['boys','boies','boy'])],['babies','boys'],'baby：婴儿；boy：男孩。'),'baby变y为i加es；boy的y前是元音字母o，直接加s。',[['city → cities; key → keys','city（城市）与key（钥匙）的y前字母不同。']]),
+g('name-y','保留专有名字中的y','两位同学都叫Henry，怎样写“两个Henry”？',fill([blank('two ','',['Henrys','Henries','Henry'])],['Henrys'],'Henry是这两位同学的名字。'),'表示不止一个叫Henry的人，专有名字直接加s，不按baby改变y。',[['the Henrys','用作一家人的称呼时，专有名词Henry也保留y。']]),
+g('o','区分o结尾名词的具体词形','照片和土豆的复数怎样写？',fill([blank('two ','',['photos','photoes','photo']),blank('two ','',['potatoes','potatos','potato'])],['photos','potatoes'],'photo：照片；potato：土豆。'),'photo加s，potato加es；不能把所有o结尾的名词当作同一种变化。',[['radio → radios; tomato → tomatoes','收音机radio加s，西红柿tomato加es。']]),
+g('f','按具体词形变化f或fe','为刀和叶子选复数标签。',fill([blank('two ','',['knives','knifes','knife']),blank('two ','',['leaves','leafs','leaf'])],['knives','leaves'],'knife：刀；leaf：叶子。'),'本组knife和leaf的复数为knives和leaves；并非所有f结尾的词都这样变。',[['wife → wives; roof → roofs','wife（妻子）变ves；roof（屋顶）只加s。']]),
+g('variants','读懂词典中的合法复数变体','按词形卡，哪份记录保留了两种可用写法？',choice(['handkerchiefs；英式也可用handkerchieves','只有handkerchieves可以，handkerchiefs一定错','两个词形都不能表示复数'],'handkerchiefs；英式也可用handkerchieves','手帕的词形卡：handkerchief → handkerchiefs；英式也可写handkerchieves。'),'词典标明的合法变体不能互作错项；不只凭词尾猜唯一写法。',[['zero → zeros / zeroes','zero（零）有两种可接受的复数写法。']]),
+g('be','按主语使用am和is','看清每句介绍谁，再填空。',fill([blank('I ',' a tourist.',['am','is','are']),blank('She ',' an officer.',['am','is','are'])],['am','is'],'第一句是一个人介绍自己；第二句介绍一位女官员。'),'I用am；she用is。职业不能决定性别，本题已明确人物。',[['He is a tourist. We are tourists.','he搭配is，we搭配are。']]),
+g('short','构成be的常见缩写','保持原意，选出缩写。',fill([blank('They are tourists. → ',' tourists.',["They're","They's","They'm"]),blank('I am not an officer. → ',' an officer.',["I'm not","I amn't","I isn't"])],["They're","I'm not"]),'They are缩成They’re；I am not常写I’m not，不写I amn’t。',[['You are → You’re; You are not → You’re not / You aren’t','肯定与否定都要保留原来的意思。']]),
+g('negative','识别两种合法否定缩写','哪一组都表示“我们不是游客”？',choice(["We aren't tourists. / We're not tourists.","We're tourists. / We aren't tourists.","We isn't tourists. / We're not tourists."],"We aren't tourists. / We're not tourists."),'We aren’t与We’re not都可表示We are not，不能将一种合法缩写判错。',[['He isn’t an officer. = He’s not an officer.','两句都表示他不是官员。']]),
+g('these','按复数构成确认问句','指着身边两张车票，补好问题。',fill([blank('',' ',['Are','Is','Am']),blank('',' your tickets?',['these','this','it'])],['Are','these'],'这里有两张车票；ticket：车票。'),'问这些物品用Are these；these表示这些。',[['This is my book. These are my books.','从一本变为多本时，this is变为these are。']]),
+g('we-our','区分主语we与物主our','两位姑娘一起介绍自己和自己的箱子。',fill([blank('',' are tourists.',['We','Our','Your']),blank('',' cases are brown.',['Our','We','They'])],['We','Our']),'We指我们；Our cases表示我们的箱子，our后接物品。',[['I am a tourist. My case is brown.','I介绍我，My case介绍我的箱子。']]),
+g('articles','按紧随词的首音选a或an','每句说一辆车，用a或an填空。',fill([blank('It is ',' English car.',['a','an']),blank('It is ',' French car.',['a','an'])],['an','a'],'English以/ɪ/开头；French以/fr/开头。'),'看紧随的English或French的首音，不由后面的car决定。',[['an American car; a Japanese car','American以元音音素开头；Japanese以辅音音素开头。']]),
+g('your','根据说话对象辨认your','这句话中，your指谁的？',choice(['只指小林一个人的','一定指两个人的','一定指说话人的'],'只指小林一个人的','老师只对小林一人说：Your books, please.\n小林拿着自己的两本书。'),'your可指你的或你们的；这里由听话人小林确定，不由books的数量确定。',[['对一人：your case；对两人：your cases','your的对象要看交谈情境；物品数量不是物主人数。']]),
+g('sentence-plural','把整句改为复数并去掉单数冠词','把一辆车改成两辆车，补好描述。',fill([blank('They ',' ',['are','is','am']),blank('','.',['cars','a cars','car'])],['are','cars'],'原来指一辆：It is a car.\n现在指两辆车，仍只说明它们是汽车。'),'多辆车用They are cars，不把a留在复数cars前。',[['It is a book. → They are books.','代词、be和名词一起变化，复数前去掉a。']])
+];
+unit.questions.apply=[old.questions.reply[0],old.questions.reply[1],...old.questions.trans,
+q('a-request','在完整对话中提出恰当请求','官员需要查看护照，接下来该说什么？',choice(['Your passports, please.','Are you Swedish?','Our cases are brown.'],'Your passports, please.','两位旅客正在等待。官员现在要请她们出示护照。'),'索要护照用Your passports, please.，不是询问国籍或介绍行李颜色。')];
+unit.questions.exam=[old.questions.exam[0],old.questions.exam[1],
+q('e-deny-we','根据明确事实否定本人身份猜测','两位旅客一起回答，补好回应。',fill([blank('No, ',' Swedish.',["we aren't","they aren't","we are"])],["we aren't"],'两位旅客的登记卡明确写着：Swedish ✕；Danish ✓。\n官员问：Are you Swedish?'),'本题已明确她们不是Swedish；本人一起回答用we。'),
+q('e-nationality','复数主语和国籍形容词保持一致','按登记资料补好一句介绍。',fill([blank('They ',' ',['are','is','am']),blank('','.',['Dutch','Dutches','Dutchen'])],['are','Dutch'],'登记卡上两位朋友都是Dutch。这里用Dutch说明国籍，不是把它当可数名词。'),'复数they搭配are；作国籍形容词的Dutch不因多人而加s。'),
+q('e-these','独立构成复数确认问句','确认这两把伞是否属于对方。',fill([blank('',' ',['Are','Is','Am']),blank('',' your umbrellas?',['these','this','it'])],['Are','these'],'两把伞就在说话人旁边。'),'两把伞用these；问句用Are。'),
+q('e-colour','结合数量和回答者视角问颜色','按情境补好问答。',fill([blank('What colour ',' your coats?',['are','is','am']),blank('',' coats are grey.',['Our','We','Your'])],['are','Our'],'你问两位同伴的外套颜色。他们穿着自己的灰色外套，一起回答。'),'多件coats用are；本人一起介绍所属，用Our。'),
+old.questions.exam[6],
+q('e-labels','独立对比s和es','为多位朋友和两条连衣裙补标签。',fill([blank('two ','',['friends','friend','friendes']),blank('two ','',['dresses','dresss','dress'])],['friends','dresses'],'friend：朋友；dress：连衣裙。'),'friend加s；dress加es。'),
+q('e-articles','独立对比元音和辅音起始词','各介绍一辆车，用a或an填空。',fill([blank('It is ',' Italian car.',['a','an']),blank('It is ',' Japanese car.',['a','an'])],['an','a'],'Italian以/ɪ/开头；Japanese以/dʒ/开头。'),'紧随词的首音不同：an Italian car；a Japanese car。'),
+old.questions.exam[9],old.questions.exam[10],
+q('e-y','撤去示范后对比两种y结尾','为城市和钥匙选复数标签。',fill([blank('two ','',['cities','citys','city']),blank('two ','',['keys','keies','key'])],['cities','keys'],'city：城市；key：钥匙。'),'city的y前是辅音字母，变为cities；key的y前是元音字母，直接加s。'),
+q('e-o','撤去示范后按具体词形处理o','两件收音机和两个西红柿的标签怎样写？',fill([blank('two ','',['radios','radioes','radio']),blank('two ','',['tomatoes','tomatos','tomato'])],['radios','tomatoes'],'radio：收音机；tomato：西红柿。'),'radio加s；tomato加es，不能只凭o统一变化。'),
+q('e-f','区分变ves和只加s','两片叶子和两处屋顶的标签怎样写？',fill([blank('two ','',['leaves','leafs','leaf']),blank('two ','',['roofs','roofes','roof'])],['leaves','roofs'],'leaf：叶子；roof：屋顶。本课采用常用标准拼写。'),'本课标准拼写leaf→leaves，roof→roofs。'),
+q('e-name','区分名字与普通名词的y','旅行名单上两位同学都叫Henry，选正确记录。',choice(['two Henrys','two Henries','two Henry'],'two Henrys','Henry是两个人共同的名字，不是普通物品名称。'),'专有名字保留y，写成Henrys。'),
+q('e-variants','不把合法变体误当错误','一份记录写two zeros，另一份写two zeroes，怎样核对？',choice(['两种复数写法都可以','o结尾只能加es，所以zeros一定错','o结尾只能加s，所以zeroes一定错'],'两种复数写法都可以'),'zero的这两种复数都可接受；不能只按结尾排除一种。'),
+q('e-contract','理解缩写中的主语和肯否','保持意思不变，选出完整表达。',choice(['We are not tourists.','They are not tourists.','We are tourists.'],'We are not tourists.',"We're not tourists."),'We’re not表示We are not，不能改变说话人或删掉否定。'),
+q('e-be','独立按I与he选be','按人物资料补好介绍。',fill([blank('I ',' a tourist.',['am','is','are']),blank('He ',' an officer.',['am','is','are'])],['am','is'],'第一句是一位旅客介绍自己；He指旁边一位男官员。'),'I用am，He用is；职业与身份信息来自资料。'),
+q('e-your','不从物品数量推断听话人数','仅凭这句话，能确定听话人有几个吗？',choice(['不能，your可能指一人或多人','能，tickets是复数，所以一定有两人','能，your一定只指一人'],'不能，your可能指一人或多人','Your tickets, please.\n没有人物图，也没有说明对谁说。'),'多张车票不说明它们属于几个听话人，your的对象需要上下文。'),
+q('e-owner-count','物品变多不改变已知物主','仍是小林一个人介绍自己的东西，哪句符合新情境？',choice(['These are my passports.','These are our passports.','This is my passports.'],'These are my passports.','原来一本：This is my passport.\n现在小林指着自己的两本护照，物主仍只有小林。'),'数量变为复数要改These are和passports；物主仍是本人，用my，不自动改our。'),
+q('e-plural-sentence','按明确的新人数改写整句','现在你和同伴一起介绍自己，两人都是游客。',choice(['We are tourists.','We are a tourists.','We is tourists.'],'We are tourists.','原来一人自述：I am a tourist.\n现在说的是你和同伴两人。'),'多人自述用We are，tourist变复数并去掉a。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['reply','forms'],apply:['reply','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit1516-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])]) ]));
+core.unit1516=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit1516,excerpts={"u1516-v1-story-friends":[3,4,5]},speakers={"officer":"海关官员","girls":"姑娘们"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 15',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

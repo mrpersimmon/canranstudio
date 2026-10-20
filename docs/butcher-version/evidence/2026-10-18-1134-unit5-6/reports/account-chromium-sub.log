@@ -1,0 +1,18 @@
+[WebServer] (node:31480) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:8556) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22664) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit5-6-v154-account.spec.js:7:1 › 账号首页四宽、真实人物503、无Worker恢复与原选择续做 (9.9s)
+  ok 2 tests\login\unit5-6-v154-account.spec.js:20:1 › 真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离 (30.9s)
+(node:31796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31796) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 3 tests\login\unit5-6-v154-upgrade.spec.js:8:42 › 同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留 (30.1s)
+  ok 4 tests\login\unit5-6-v154-upgrade.spec.js:8:42 › 同库升级：原26题旧证PNG、精确时间与跨设备历史保留 (28.3s)
+
+  4 passed (1.8m)

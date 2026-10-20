@@ -3,6 +3,8 @@
   const core = root.CanranCore, unit = core.unit56;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
+  core.unit56History.preserve(practice,unit);
+  const runners=new Map();
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -13,7 +15,7 @@
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
-    const path = content.PEOPLE[name]?.image || word?.image;
+    const path = core.unit56Current.image(name) || content.PEOPLE[name]?.image || word?.image;
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
@@ -57,6 +59,7 @@
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
     id=canonicalRoute(id);if (!routes.has(id)) id = 'cover';if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);markLocation(id);
+    document.documentElement.style.scrollPaddingTop=($('#topbar').getBoundingClientRect().height+12)+'px';
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   $('#lessonWorkspace').addEventListener('click', event => {
@@ -111,24 +114,27 @@
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit56-' + id + '-practice'; surfaces.get(id).append(element);
+    if(['roles','introduce','cars'].includes(id))settings.sceneView=core.unit56Current.view({element,art,zone:id});
     const predecessors = unit.activityPredecessors[id];
-    practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
+    const runner=practice.mount({ element, questions: questions[id], previousQuestionSets: [unit.voicedQuestions[id]], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
       inputViews:core.lesson49TaskInputs, roundPolicy:unit.reward.edition,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.flatMap(old => [unit.previousQuestions[old], unit.voicedQuestions[old]].map(prior => ({ key: 'unit56-' + old + '-practice/v1', questions: prior }))), ...settings,
+      onAnswer:(question,state)=>{if(settings.sceneView?.hasVisibleModel?.()){state.revealed=true;practice.record(question,state);}settings.onAnswer?.(question,state);},
       onComplete: (states,round) => {
         const { perfect, message } = settlement.complete({ id, states, round, awards, element });
-        const result = node('p', message, 'award-round-result');
-        result.dataset.perfect = String(perfect); result.dataset.zone = id;
-        element.querySelector('.practice-finish-actions').before(result);
-        complete(id);
-        nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+        complete(id);nextStation(id,element.querySelector('.practice-finish-actions'));settings.onComplete?.(states);
+        const titles={listen:'单词寻宝完成！',roles:'课文理解完成！',introduce:'介绍练习完成！',cars:'汽车问答完成！',exam:'综合挑战完成！'};
+        core.unit12Completion.render({finish:element.querySelector('.practice-finish'),activity:id,theme:{title:titles[id]},artwork:core.unit56Current.completion(),details:id==='exam'?settings.completionDetails:null,celebrate:round.userCompleted,awardStatus:message,waitForCelebration:()=>settlement.isPresenting()||(awards.state().pendingZones.includes(id)&&navigator.onLine!==false&&document.getElementById('studentSyncStatus')?.dataset.syncState!=='retry')});
+        const result=element.querySelector('.completion-award');result.classList.add('award-round-result');result.dataset.perfect=String(perfect);result.dataset.zone=id;updateProgress();
+      } });
+    runners.set(id,runner);
     return element;
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文对话'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
   const props = core.unit56Scene.storyProps(content);
-  stage.append(props.element, log);
+  props.element.append(log);stage.append(props.element);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -150,7 +156,7 @@
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(art('chang'), node('p', 'Chang-woo 是中国人吗？')); log.replaceChildren(lead); }
+  function lead() { const lead=node('div','','story-lead');const en=node('p','Is Chang-woo Chinese?','story-question');en.lang='en';lead.append(en,node('p','昌宇是中国人吗？'));log.replaceChildren(lead); }
   function appendLine(index) {
     const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
@@ -206,7 +212,7 @@
   function renderWords() {
     wordGrid.replaceChildren(); practice.activity('unitWordPage', wordPage);
     for (const word of content.WORDS.slice(wordPage * 6, wordPage * 6 + 6)) {
-      const picture = node('img'); picture.src = word.image; picture.alt = '';
+      const picture = node('img'); picture.src = core.unit56Current.image(word.en)||word.image; picture.alt = '';
       const pronunciation = node('small', word.ph, 'word-phonetic'); pronunciation.lang = 'en-US';
       const meaning = node('span', word.cn, 'word-meaning'); meaning.hidden = true;
       const example = node('small', word.example || '', 'word-example'); example.hidden = !word.example;
@@ -226,7 +232,7 @@
   mountPractice('listen', { allowHints: false });
 
   function expressionCard(expression) {
-    const picture = node('img'); picture.src = expression.image; picture.alt = '';
+    const picture = node('img');const person=Object.entries(content.PEOPLE).find(([,value])=>value.image===expression.image),word=content.WORDS.find(value=>value.image===expression.image);picture.src=(person&&core.unit56Current.image(person[0]))||(word&&core.unit56Current.image(word.en))||expression.image;picture.alt='';if(expression.en.startsWith('Alice '))picture.hidden=true;
     const caption = node('span', expression.cn);
     const card = node('article', '', 'phrase-card reference-card');
     card.append(picture, node('strong', expression.en), caption); return card;
@@ -243,19 +249,18 @@
   for (const [left, right] of [['He is', "He's"], ['She is', "She's"], ['It is', "It's"], ['is not', "isn't"]]) {
     const row = node('p', '', 'contraction-row'); row.append(node('span', left), node('span', '→'), node('span', right)); shortForms.append(row);
   }
-  const phraseActions = node('div', '', 'activity-actions'); nextStation('phrases', phraseActions);
-  surfaces.get('phrases').append(phraseGrid, reference, articleGuide, shortForms, phraseActions);
-  const carGrid = node('div', '', 'phrase-grid car-showroom'); content.CARS.forEach(item => carGrid.append(expressionCard(item)));
+
+  const referenceHost=node('details','','offline-task grammar-reference');referenceHost.append(node('summary','介绍表达参考'),phraseGrid,reference,articleGuide,shortForms);
+  mountPractice('introduce');surfaces.get('introduce').append(referenceHost);
+  const carGrid=node('div','','phrase-grid car-showroom');content.CARS.forEach((item,i)=>{const card=expressionCard(item);card.prepend(node('span',String(i+8),'reference-number'));carGrid.append(card);});
   const makeGuide = expressionCard({en:'What make is it?',cn:'问汽车品牌',image:'/assets/unit5-6/make.svg'});
   const choices = node('details', '', 'offline-task'); choices.append(node('summary', '换个朋友或汽车问一问'));
-  choices.append(node('p', 'or 给出两种选择，回答要说清是哪一种。下面都先否定不符合的情况，再说明正确情况。'));
+  choices.append(node('p','下面依据给定资料回答。两项中有符合事实的一项时，说清是哪一种；两项都不符合时，可以说明实际情况，不被选项限制。原例要求先否定括号内的一项，再说明括号外的正确情况。'));
   for (const item of content.CHOICE_MODELS) {
     const pair=node('div','','model-pair'); pair.append(node('p',item.name+' · '+item.right));
     const grid=node('div','','phrase-grid'); grid.append(expressionCard({en:item.question,cn:'问一问',image:item.image}),expressionCard({en:item.answer,cn:'答一答',image:item.image}));pair.append(grid);choices.append(pair);
   }
-  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);
-  surfaces.get('models').append(makeGuide,carGrid,choices,modelActions);
-  for(const id of ['introduce','cars'])mountPractice(id);
+  const modelReference=node('details','','offline-task car-reference');modelReference.append(node('summary','汽车与选择问答参考'),node('p','以下国别沿用教材展牌，不用它推断车主国籍或现在的生产地。'),makeGuide,carGrid,choices);mountPractice('cars');surfaces.get('cars').append(modelReference);
 
   const examResults = node('div', '', 'unit-results');
   mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
@@ -266,18 +271,17 @@
     const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
     if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
   } });
-  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href});
+  certificateView = core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,progress:id=>runners.get(id)?.progress(),restart:id=>runners.get(id)?.restart()});
+  core.unit56History.show(practice,surfaces.get('certificate'));
 
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
   writing.append(node('summary', '和朋友再试试'), node('p', '各选一张课文人物卡，轮流问好、介绍对方，再交换角色。用卡片上明确写出的信息，不猜真实朋友的国籍。'));
-  writing.append(node('h4', 'Lesson 5–6 · 纸笔小练习'), node('p', 'A．填 he、she 或 it。句首字母大写。Stella 是女同学；Spanish 是“西班牙的”。'), node('p', '例：Stella is a student. She isn’t German. She is Spanish.'));
-  const referenceWriting = node('ol', '', 'reference-writing');
-  ['Alice 是女同学。Alice is a student. ___ isn’t German. ___ is French.', 'This is her car. ___ is a French car.', 'Hans is a student. ___ isn’t French. ___ is German.', 'This is his car. ___ is a German car.'].forEach(text => referenceWriting.append(node('li', text)));
-  writing.append(referenceWriting, node('p', 'B．按所给条件，先写一个 or 选择问句，再回答：否定斜线后的一项，说明斜线前的正确情况。Naoko、Xiaohui 用 she；Hans、Chang-woo、Luming 用 he；汽车用 it。'), node('p', '例：Sophie · French / Swedish → Is she a French student or a Swedish student? She isn’t a Swedish student. She’s a French student.'), node('p', '例：Volvo · Swedish / French → Is it a Swedish car or a French car? It isn’t a French car. It’s a Swedish car.'));
-  const replyWriting = node('ol', '', 'reply-writing');
-  content.CHOICE_MODELS.slice(2).forEach(item => {
-    const row = node('li'); row.append(node('span', `${item.name} · ${item.right} / ${item.wrong}`), node('span', '', 'writing-rule'), node('span', '', 'writing-rule')); replyWriting.append(row);
-  });
+  writing.append(node('h3','Lesson 6 · 书面练习'),node('h4','A · Complete these sentences using He, She or It.'),node('p','用He、She或It填空。Stella、Alice是女同学；Spanish是西班牙的。'),node('p','Example: Stella is a student. ___ isn’t German. ___ is Spanish.'),node('p','Stella is a student. She isn’t German. She is Spanish.'));
+  const referenceWriting=node('ol','','reference-writing');
+  ['Alice is a student. ___ isn’t German. ___ is French.','This is her car. ___ is a French car.','Hans is a student. ___ isn’t French. ___ is German.','This is his car. ___ is a German car.'].forEach(text=>referenceWriting.append(node('li',text)));
+  writing.append(referenceWriting,node('h4','B · Write questions and answers using He, She, It, a or an.'),node('p','按给定事实写问句和完整回应。先否定括号内的一项，再说明括号外的正确情况。Naoko、Xiaohui用she；Hans、Chang-woo、Luming用he；汽车用it。'),node('p','Example: This is Miss Sophie Dupont. French/(Swedish)'),node('p','Is she a French student or a Swedish student?'),node('p','She isn’t a Swedish student. She’s a French student.'),node('p','Example: This is a Volvo. Swedish/(French)'),node('p','Is it a Swedish car or a French car?'),node('p','It isn’t a French car. It’s a Swedish car.'));
+  const replyWriting=node('ol','','reply-writing');
+  content.CHOICE_MODELS.slice(2).forEach(item=>{const row=node('li');row.append(node('span','This is '+(item.pronoun==='it'?'a ':'')+item.name+'. '+item.right+'/('+item.wrong+')'));for(let i=0;i<3;i++)row.append(node('span','','writing-rule'));replyWriting.append(row);});
   writing.append(replyWriting);
   const printActions = node('div', '', 'activity-actions');
   printActions.append(button('打印练习纸', () => { document.body.classList.add('print-writing'); root.print(); }, 'btn btn-yellow'));
@@ -287,6 +291,6 @@
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
   const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
-  document.addEventListener(['canran', 'course-ready'].join(':'), revealSavedLine, { once: true });
+  document.addEventListener(['canran','course-ready'].join(':'),()=>{route();revealSavedLine();},{once:true});
   document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

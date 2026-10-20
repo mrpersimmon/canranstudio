@@ -52,3 +52,5 @@ test('护照题选择、线索和错答不递交，检查正确才出现结果',
  await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:'Yes, we are.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(scene).toHaveAttribute('data-phase','waiting');await expect(scene.locator('.customs-task-result')).toBeEmpty();await expect(picture).toHaveCSS('transform','matrix(1, 0, 0, 1, 48, 0)');
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'Yes, they are.',exact:true}).click();await expect(scene).toHaveAttribute('data-phase','waiting');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(scene).toHaveAttribute('data-phase','checked');await expect(scene.locator('.customs-task-result')).toContainText('确认的是两本护照');await expect(picture).toHaveCSS('transform','matrix(1, 0, 0, 1, -48, 0)');
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

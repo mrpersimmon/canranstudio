@@ -1,0 +1,80 @@
+{
+  "id": "unit67-68",
+  "source": {
+    "file": "tests/support/unit6768.js",
+    "sha256": "31e350d4f42549bd5efcdf24782373c9009fe2258aecea232601fdd3a7383a72"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u6768-v1-r-shops",
+      "text": "Lesson 67\n\nMrs. Johnson: Hello. Were you at the butcher’s?\n\nMrs. Williams: Yes, I was. Were you at the butcher’s, too?\n\nMrs. Johnson: No, I wasn’t. I was at the greengrocer’s. How’s Jimmy today?"
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u6768-v1-r-today",
+      "text": "Lesson 67\n\nMrs. Johnson: No, I wasn’t. I was at the greengrocer’s. How’s Jimmy today?\n\nMrs. Williams: He’s very well, thank you."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u6768-v1-r-days",
+      "text": "Lesson 67\n\nMrs. Johnson: Was he absent from school last week?\n\nMrs. Williams: Yes, he was. He was absent on Monday, Tuesday, Wednesday and Thursday. How are you all keeping?"
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u6768-v1-r-keeping",
+      "text": "Lesson 67\n\nMrs. Williams: Yes, he was. He was absent on Monday, Tuesday, Wednesday and Thursday. How are you all keeping?\n\nMrs. Johnson: Very well, thank you. We’re going to spend three days in the country. We’re going to stay at my mother’s for the weekend."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u6768-v1-r-plan",
+      "text": "Lesson 67\n\nMrs. Johnson: Very well, thank you. We’re going to spend three days in the country. We’re going to stay at my mother’s for the weekend.\n\nMrs. Williams: Friday, Saturday and Sunday in the country! Aren’t you lucky!"
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u6768-v1-r-mother",
+      "text": "Lesson 67\n\nMrs. Johnson: Very well, thank you. We’re going to spend three days in the country. We’re going to stay at my mother’s for the weekend.\n\nMrs. Williams: Friday, Saturday and Sunday in the country! Aren’t you lucky!"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u6768-v1-r-lucky",
+      "text": "Lesson 67\n\nMrs. Johnson: Very well, thank you. We’re going to spend three days in the country. We’re going to stay at my mother’s for the weekend.\n\nMrs. Williams: Friday, Saturday and Sunday in the country! Aren’t you lucky!"
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u6768-v1-e-shops",
+      "text": "Lesson 67\n\nMrs. Johnson: Hello. Were you at the butcher’s?\n\nMrs. Williams: Yes, I was. Were you at the butcher’s, too?\n\nMrs. Johnson: No, I wasn’t. I was at the greengrocer’s. How’s Jimmy today?"
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u6768-v1-e-jimmy",
+      "text": "Lesson 67\n\nMrs. Johnson: No, I wasn’t. I was at the greengrocer’s. How’s Jimmy today?\n\nMrs. Williams: He’s very well, thank you.\n\nMrs. Johnson: Was he absent from school last week?\n\nMrs. Williams: Yes, he was. He was absent on Monday, Tuesday, Wednesday and Thursday. How are you all keeping?"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-3",
+    "R2": "3-4",
+    "R3": "5-6",
+    "R4": "6-7",
+    "R5": "7-8",
+    "R6": "7-8",
+    "R7": "7-8",
+    "E4": "1-3",
+    "E5": "3-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

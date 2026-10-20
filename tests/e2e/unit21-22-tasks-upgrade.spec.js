@@ -1,4 +1,5 @@
 'use strict';
+require('../support/unit2122-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {finishRemainingActivity}=require('../support/unit21-22-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});

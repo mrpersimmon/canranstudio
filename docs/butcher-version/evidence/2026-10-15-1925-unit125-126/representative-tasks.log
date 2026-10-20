@@ -1,0 +1,49 @@
+
+Running 2 tests using 1 worker
+
+(node:28192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit125-126.spec.js:29:1 › 24词卡、126课1–6、A4／B4／C4完整 (8.0s)
+(node:29848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\unit125-126.spec.js:51:1 › 错答不更新安排记录，三卡4／8／2，刷新保留原图 (4.0s)
+
+
+  1) tests\e2e\unit125-126.spec.js:29:1 › 24词卡、126课1–6、A4／B4／C4完整 ──────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar details')
+    Expected substring: "原肯定句"
+    Received string:    "语法小参考must和have to在本课都能表达必要性。must常突出说话人或规则制定者的要求，have to常说明外部情况；这是常见侧重，不是两者绝不能互换的分类。have to随人称和时间变化：I have to、she has to、yesterday I had to、tomorrow I will have to。Do／Does／Did提问后仍用have；否定用don’t／doesn’t／didn’t have to。must不随he／she变形，后接动词原形，提问把Must放主语前，不加do。普通过去需要用had to；must也可谈将来的需要，不能笼统说它只指现在。指定will形式时用will have to，不写will must。126课第2例Do you have to get up early tomorrow morning?用现在形式询问明天已经安排好的需要，是教材保留的合法表达；回答I’ll have to…也合法。时间不能只凭一个词机械选择。126课第4例I’ve had to wait for two hours说明到现在的等候需要。have／has had to中的第一个have随主语变化；had to不代表后面的动词也改成过去式。持续时间要有开始、现在和期间未中断的依据。mustn’t表示禁止；needn’t、don’t have to、don’t need to表示没有必要。Must I…?的“不必”回应可用No, you needn’t，也可用No, you don’t have to／don’t need to；不把教材示范误读成只允许一种。needn’t后直接用动词原形：You needn’t wait。作为普通动词，need后接动作时有to：You don’t need to wait；第三人称She doesn’t need to wait。过去不必可说didn’t need to／didn’t have to；将来可用won’t have to。单说“不必”不证明实际没做或已经做完，也不自动说明过去、现在、未来都不需要。126A由must改为needn’t是在把“必须”改成“不必”，不是保持原意，也不是机械改成mustn’t。B假定另一个人也有相同需要，What about…?本身不证明这一事实；C改为询问时保留人物、动作对象及时间。by myself／yourself／himself／herself／itself／ourselves／yourselves／themselves随所指的人变化。喝茶情境中by myself指独自；需要帮助与是否独自是不同信息。Can’t you come in…?在课文场景中是邀请。回答先看实际能否：能用Yes, I can；不能用No, I can’t。语气来自情境，不因否定形式就断定生气。water在water the garden中是浇水的动词，也可作水的名词；terribly dry中的terribly表示程度很高，不是“恐怖地”；surprise本身可好可坏，pleasant才表达愉快。mean—meant—meant的两个过去词形相同。Susan说by myself是当时打算；下雨后Peter说可以改喝茶。Yes回答结束了浇水，不证明花园每一处都由他亲手浇完；本课不补茶量、准确分钟数、两人关系或以后天气。What a nuisance!是人物对当前处境的感叹，不给真实同学贴标签。课堂记录里的规则只适用于给定情境。下雨不自动证明所有遮蔽处都湿，车站有公交车也不自动保证任意时间都赶得上；判断时以当前题目给出的状态、路线与安排为准。"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar details')
+        14 × locator resolved to <details open="" class="offline-task">…</details>
+           - unexpected value "语法小参考must和have to在本课都能表达必要性。must常突出说话人或规则制定者的要求，have to常说明外部情况；这是常见侧重，不是两者绝不能互换的分类。have to随人称和时间变化：I have to、she has to、yesterday I had to、tomorrow I will have to。Do／Does／Did提问后仍用have；否定用don’t／doesn’t／didn’t have to。must不随he／she变形，后接动词原形，提问把Must放主语前，不加do。普通过去需要用had to；must也可谈将来的需要，不能笼统说它只指现在。指定will形式时用will have to，不写will must。126课第2例Do you have to get up early tomorrow morning?用现在形式询问明天已经安排好的需要，是教材保留的合法表达；回答I’ll have to…也合法。时间不能只凭一个词机械选择。126课第4例I’ve had to wait for two hours说明到现在的等候需要。have／has had to中的第一个have随主语变化；had to不代表后面的动词也改成过去式。持续时间要有开始、现在和期间未中断的依据。mustn’t表示禁止；needn’t、don’t have to、don’t need to表示没有必要。Must I…?的“不必”回应可用No, you needn’t，也可用No, you don’t have to／don’t need to；不把教材示范误读成只允许一种。needn’t后直接用动词原形：You needn’t wait。作为普通动词，need后接动作时有to：You don’t need to wait；第三人称She doesn’t need to wait。过去不必可说didn’t need to／didn’t have to；将来可用won’t have to。单说“不必”不证明实际没做或已经做完，也不自动说明过去、现在、未来都不需要。126A由must改为needn’t是在把“必须”改成“不必”，不是保持原意，也不是机械改成mustn’t。B假定另一个人也有相同需要，What about…?本身不证明这一事实；C改为询问时保留人物、动作对象及时间。by myself／yourself／himself／herself／itself／ourselves／yourselves／themselves随所指的人变化。喝茶情境中by myself指独自；需要帮助与是否独自是不同信息。Can’t you come in…?在课文场景中是邀请。回答先看实际能否：能用Yes, I can；不能用No, I can’t。语气来自情境，不因否定形式就断定生气。water在water the garden中是浇水的动词，也可作水的名词；terribly dry中的terribly表示程度很高，不是“恐怖地”；surprise本身可好可坏，pleasant才表达愉快。mean—meant—meant的两个过去词形相同。Susan说by myself是当时打算；下雨后Peter说可以改喝茶。Yes回答结束了浇水，不证明花园每一处都由他亲手浇完；本课不补茶量、准确分钟数、两人关系或以后天气。What a nuisance!是人物对当前处境的感叹，不给真实同学贴标签。课堂记录里的规则只适用于给定情境。下雨不自动证明所有遮蔽处都湿，车站有公交车也不自动保证任意时间都赶得上；判断时以当前题目给出的状态、路线与安排为准。"
+
+
+      35 |  for(const text of ['She has to go now.','I have had to wait.','You mustn’t open it.'])await expect(page.locator('.structure-reference')).toContainText(text);
+      36 |  await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});await page.locator('.stage-apply details').scrollIntoViewIfNeeded();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.structure-mobile dd,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});await expect(page.locator('.structure-mobile dl:visible')).toHaveCount(6);await page.setViewportSize({width:1280,height:900});
+    > 37 |  await page.goto('/unit125-126/#learn/grammar');await page.getByText('语法小参考',{exact:true}).click();for(const text of ['不是两者绝不能互换','must也可谈将来','will must','have／has had to','didn’t need to／didn’t have to','原肯定句','ourselves／yourselves／themselves'])await expect(page.locator('.stage-grammar details')).toContainText(text);
+         |                                                                                                                                                                                                                                                                                                            ^
+      38 |  await page.goto('/unit125-126/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();for(const[i,n]of [4,4,4].entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveCount(n);for(const text of ['She has to decide immediately.','We must take a taxi.','She needn’t leave early.','What about Mary?','What about Tom and Mary?','Do you really have to go now?','也有相同需要','不是同义改写'])await expect(page.locator('#unitWriting')).toContainText(text);
+      39 | });
+      40 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit125-126.spec.js:37:300
+
+    Error Context: output\unit125126-representative-tasks\unit125-126-24词卡、126课1–6、A4／B4／C4完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit125126-representative-tasks\unit125-126-24词卡、126课1–6、A4／B4／C4完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit125126-representative-tasks\unit125-126-24词卡、126课1–6、A4／B4／C4完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit125-126.spec.js:29:1 › 24词卡、126课1–6、A4／B4／C4完整 ───────────────────────────────────
+  1 passed (13.7s)

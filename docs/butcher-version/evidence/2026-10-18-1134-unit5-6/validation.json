@@ -1,0 +1,878 @@
+{
+  "at": "2026-10-18T05:21:03.740Z",
+  "browserConditions": 77,
+  "passed": 77,
+  "unresolved": [],
+  "nodeChecks": 40,
+  "workflowChecks": 11,
+  "sourceChecks": 32,
+  "results": [
+    {
+      "engine": "chromium",
+      "base": "/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "账号首页四宽、真实人物503、无Worker恢复与原选择续做",
+      "status": "passed",
+      "at": "2026-10-18T05:12:08.119Z",
+      "durationMs": 11325,
+      "report": "teaching-account-chromium-root.json",
+      "annotations": [
+        {
+          "type": "actual-503",
+          "description": "3"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "base": "/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离",
+      "status": "passed",
+      "at": "2026-10-18T05:12:19.547Z",
+      "durationMs": 30347,
+      "report": "teaching-account-chromium-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:18:10.305Z",
+      "durationMs": 33512,
+      "report": "account-chromium-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题旧证PNG、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:18:43.921Z",
+      "durationMs": 28776,
+      "report": "account-chromium-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "账号首页四宽、真实人物503、无Worker恢复与原选择续做",
+      "status": "passed",
+      "at": "2026-10-18T04:24:45.498Z",
+      "durationMs": 9904,
+      "report": "account-chromium-sub.json",
+      "annotations": [
+        {
+          "type": "actual-503",
+          "description": "3"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离",
+      "status": "passed",
+      "at": "2026-10-18T04:24:55.503Z",
+      "durationMs": 30898,
+      "report": "account-chromium-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:25:27.071Z",
+      "durationMs": 30123,
+      "report": "account-chromium-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题旧证PNG、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:25:57.298Z",
+      "durationMs": 28314,
+      "report": "account-chromium-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "账号首页四宽、真实人物503、无Worker恢复与原选择续做",
+      "status": "passed",
+      "at": "2026-10-18T04:26:17.636Z",
+      "durationMs": 55513,
+      "report": "account-webkit-root.json",
+      "annotations": [
+        {
+          "type": "actual-503",
+          "description": "3"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "base": "/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离",
+      "status": "passed",
+      "at": "2026-10-18T04:27:13.233Z",
+      "durationMs": 116375,
+      "report": "account-webkit-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:29:09.668Z",
+      "durationMs": 113732,
+      "report": "account-webkit-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题旧证PNG、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:31:03.413Z",
+      "durationMs": 96310,
+      "report": "account-webkit-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "账号首页四宽、真实人物503、无Worker恢复与原选择续做",
+      "status": "passed",
+      "at": "2026-10-18T05:12:18.393Z",
+      "durationMs": 59825,
+      "report": "teaching-account-webkit-sub.json",
+      "annotations": [
+        {
+          "type": "actual-503",
+          "description": "3"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-account.spec.js",
+      "title": "真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离",
+      "status": "passed",
+      "at": "2026-10-18T05:13:18.297Z",
+      "durationMs": 118242,
+      "report": "teaching-account-webkit-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:37:26.245Z",
+      "durationMs": 111110,
+      "report": "account-webkit-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "/lesson/",
+      "file": "unit5-6-v154-upgrade.spec.js",
+      "title": "同库升级：原26题旧证PNG、精确时间与跨设备历史保留",
+      "status": "passed",
+      "at": "2026-10-18T04:39:17.366Z",
+      "durationMs": 96621,
+      "report": "account-webkit-sub.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "正文字体实际加载Nunito，图内标签采用本课字体轮廓",
+      "status": "passed",
+      "at": "2026-10-18T04:32:48.268Z",
+      "durationMs": 529,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "320宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:32:48.895Z",
+      "durationMs": 7045,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "390宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:32:55.947Z",
+      "durationMs": 7328,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "768宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:33:03.281Z",
+      "durationMs": 7500,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "1280宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:33:10.788Z",
+      "durationMs": 7852,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "纸笔练习保留四组指代与十组替换，实际打印三页 A4 并留足书写空间",
+      "status": "passed",
+      "at": "2026-10-18T04:33:19.284Z",
+      "durationMs": 1114,
+      "report": "assets-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "正文字体实际加载Nunito，图内标签采用本课字体轮廓",
+      "status": "passed",
+      "at": "2026-10-18T04:32:58.423Z",
+      "durationMs": 856,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "320宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:32:59.380Z",
+      "durationMs": 17053,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "390宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:33:16.439Z",
+      "durationMs": 15195,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "768宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:33:31.640Z",
+      "durationMs": 14952,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "1280宽首页、24词卡、20句及七名人物同场可读",
+      "status": "passed",
+      "at": "2026-10-18T04:33:46.597Z",
+      "durationMs": 15701,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "320x568短屏三卡与推进完整",
+      "status": "passed",
+      "at": "2026-10-18T04:34:02.304Z",
+      "durationMs": 4343,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "390x500短屏三卡与推进完整",
+      "status": "passed",
+      "at": "2026-10-18T04:34:06.652Z",
+      "durationMs": 4215,
+      "report": "assets-fonts-final-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "当前首页使用确认故事图",
+      "status": "passed",
+      "at": "2026-10-18T04:24:53.457Z",
+      "durationMs": 448,
+      "report": "fonts-layout-print-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "Grammar先示范特殊疑问句，再立即练习信息类型",
+      "status": "passed",
+      "at": "2026-10-18T05:09:58.978Z",
+      "durationMs": 538,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "原文理解在未答页提供必要对白",
+      "status": "passed",
+      "at": "2026-10-18T04:05:34.395Z",
+      "durationMs": 1732,
+      "report": "current-fixed-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "36题未答材料、两空上限、撤支持、真实声音故障与五星",
+      "status": "passed",
+      "at": "2026-10-18T05:09:59.615Z",
+      "durationMs": 13212,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "320x568短屏三卡与推进完整",
+      "status": "passed",
+      "at": "2026-10-18T04:25:22.949Z",
+      "durationMs": 2788,
+      "report": "fonts-layout-print-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "390x500短屏三卡与推进完整",
+      "status": "passed",
+      "at": "2026-10-18T04:25:25.744Z",
+      "durationMs": 2910,
+      "report": "fonts-layout-print-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写",
+      "status": "passed",
+      "at": "2026-10-18T05:10:12.834Z",
+      "durationMs": 12375,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做",
+      "status": "passed",
+      "at": "2026-10-18T05:10:25.215Z",
+      "durationMs": 2779,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "classroom26真实旧证书原内容、姓名、精确日期、PNG与打印保留",
+      "status": "passed",
+      "at": "2026-10-18T04:15:03.373Z",
+      "durationMs": 26057,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "voiced27真实旧证书原内容、姓名、精确日期、PNG与打印保留",
+      "status": "passed",
+      "at": "2026-10-18T04:15:29.503Z",
+      "durationMs": 73017,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "原编号8至13、12组选择问答、Written A4与B10及全部原例实际打印",
+      "status": "passed",
+      "at": "2026-10-18T04:16:42.530Z",
+      "durationMs": 1969,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "当前首页使用确认故事图",
+      "status": "passed",
+      "at": "2026-10-18T04:16:44.515Z",
+      "durationMs": 733,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "Grammar先示范特殊疑问句，再立即练习信息类型",
+      "status": "passed",
+      "at": "2026-10-18T04:16:45.254Z",
+      "durationMs": 624,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "原文理解在未答页提供必要对白",
+      "status": "passed",
+      "at": "2026-10-18T04:16:45.885Z",
+      "durationMs": 4113,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "36题未答材料、两空上限、撤支持、真实声音故障与五星",
+      "status": "passed",
+      "at": "2026-10-18T04:22:23.954Z",
+      "durationMs": 32995,
+      "report": "sound-fixed-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写",
+      "status": "passed",
+      "at": "2026-10-18T04:18:39.576Z",
+      "durationMs": 36236,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "base": "static",
+      "file": "unit5-6-v154.spec.js",
+      "title": "显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做",
+      "status": "passed",
+      "at": "2026-10-18T04:19:15.819Z",
+      "durationMs": 7173,
+      "report": "current-history-webkit.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "原编号8至13、12组选择问答、Written A4与B10及全部原例实际打印",
+      "status": "passed",
+      "at": "2026-10-18T04:24:51.879Z",
+      "durationMs": 1474,
+      "report": "fonts-layout-print-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "classroom26真实旧证书原内容、姓名、精确日期、PNG与打印保留",
+      "status": "passed",
+      "at": "2026-10-18T04:06:44.238Z",
+      "durationMs": 10465,
+      "report": "history-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-v154-history.spec.js",
+      "title": "voiced27真实旧证书原内容、姓名、精确日期、PNG与打印保留",
+      "status": "passed",
+      "at": "2026-10-18T04:06:54.826Z",
+      "durationMs": 58267,
+      "report": "history-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终在场",
+      "status": "passed",
+      "at": "2026-10-18T04:27:36.501Z",
+      "durationMs": 1055,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "全部声音失败仍可完成36题与20句，旧重复问答不再必做",
+      "status": "passed",
+      "at": "2026-10-18T04:27:37.656Z",
+      "durationMs": 14153,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "正误与完成反馈仍真实播放，词义题末三题没有预选或图配图泄题",
+      "status": "passed",
+      "at": "2026-10-18T04:27:51.819Z",
+      "durationMs": 10477,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "挑战暂停与刷新保留选择及提示记录，综合题不冒认听力",
+      "status": "passed",
+      "at": "2026-10-18T04:28:02.307Z",
+      "durationMs": 3630,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "390教室分镜、翻译、末句及合影完整，页面不随下一句跳动",
+      "status": "passed",
+      "at": "2026-10-18T04:28:05.946Z",
+      "durationMs": 6977,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "1280教室分镜、翻译、末句及合影完整，页面不随下一句跳动",
+      "status": "passed",
+      "at": "2026-10-18T04:28:12.932Z",
+      "durationMs": 7708,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "后段人物缺图时先等待，准备后离线可读20句并恢复最新句",
+      "status": "passed",
+      "at": "2026-10-18T04:28:20.647Z",
+      "durationMs": 6573,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-classroom.spec.js",
+      "title": "词卡仅翻面，新的词义题在无声音时仍可检查",
+      "status": "passed",
+      "at": "2026-10-18T04:28:27.232Z",
+      "durationMs": 908,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-exam.spec.js",
+      "title": "5–6 十四题介绍综合练习，全声音失败仍可逐题完成，末三题刷新不代答",
+      "status": "passed",
+      "at": "2026-10-18T04:28:28.161Z",
+      "durationMs": 4614,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "320 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处",
+      "status": "passed",
+      "at": "2026-10-18T04:28:32.787Z",
+      "durationMs": 1217,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "390 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处",
+      "status": "passed",
+      "at": "2026-10-18T04:28:34.011Z",
+      "durationMs": 1414,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "768 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处",
+      "status": "passed",
+      "at": "2026-10-18T04:28:35.431Z",
+      "durationMs": 1294,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "1280 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处",
+      "status": "passed",
+      "at": "2026-10-18T04:28:36.731Z",
+      "durationMs": 1445,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁切",
+      "status": "passed",
+      "at": "2026-10-18T04:28:38.184Z",
+      "durationMs": 3231,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "320 提示位于检查左侧，错答不加绿，末题与结束按钮稳定",
+      "status": "passed",
+      "at": "2026-10-18T04:28:41.422Z",
+      "durationMs": 2421,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "1280 提示位于检查左侧，错答不加绿，末题与结束按钮稳定",
+      "status": "passed",
+      "at": "2026-10-18T04:28:43.850Z",
+      "durationMs": 2621,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-layout.spec.js",
+      "title": "拼句可撤回与重试，刷新保留草稿，下一题无旧答案；键盘也能作答",
+      "status": "passed",
+      "at": "2026-10-18T04:28:46.478Z",
+      "durationMs": 1536,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-upgrade.spec.js",
+      "title": "真实旧录音中断后按已显示的句子续读，词卡翻页保留",
+      "status": "passed",
+      "at": "2026-10-18T04:28:48.026Z",
+      "durationMs": 2183,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-upgrade.spec.js",
+      "title": "配音旧15星不自动获得新版星星，未改题与姓名保留，新词义和综合题不代答",
+      "status": "passed",
+      "at": "2026-10-18T04:28:50.217Z",
+      "durationMs": 55877,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6-upgrade.spec.js",
+      "title": "旧版重练空白回合优先，删去前题不会复活品牌题的历史答案",
+      "status": "passed",
+      "at": "2026-10-18T04:29:46.102Z",
+      "durationMs": 1101,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "真实完成20句和36题获得五星，日期固定、重练连续，各单元记录独立",
+      "status": "passed",
+      "at": "2026-10-18T04:29:53.773Z",
+      "durationMs": 12503,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "新单元从图鉴开始，24 个词的音标与翻面可见，末组主动进入八词辨义",
+      "status": "passed",
+      "at": "2026-10-18T04:30:06.389Z",
+      "durationMs": 792,
+      "report": "regression-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "首页与 lesson 子目录有新单元入口，独立继续并保留资源路径",
+      "status": "passed",
+      "at": "2026-10-18T05:10:28.525Z",
+      "durationMs": 9697,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "题目升版不承接旧选择，未改活动保留；同地址继续仍滚回原活动",
+      "status": "passed",
+      "at": "2026-10-18T05:10:38.323Z",
+      "durationMs": 986,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "unit5-6.spec.js",
+      "title": "首页重开包含四个单元，取消保留，确认只清除本路径的学习记录",
+      "status": "passed",
+      "at": "2026-10-18T05:10:39.316Z",
+      "durationMs": 12942,
+      "report": "teaching-final-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "/",
+      "file": "units1-6-exam-upgrade.spec.js",
+      "title": "5-6 旧短挑战服务器升级换设备，保留历史；新版重练零错后同步五星",
+      "status": "passed",
+      "at": "2026-10-18T04:43:57.209Z",
+      "durationMs": 36791,
+      "report": "short-upgrade-account-fixed-chromium-root.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "units1-6-exam-upgrade.spec.js",
+      "title": "5-6 旧课真实通关升级保留前题与姓名，新增题答完才重新领证，重练不复活旧答案",
+      "status": "passed",
+      "at": "2026-10-18T04:41:56.645Z",
+      "durationMs": 13272,
+      "report": "short-upgrade-chromium.json",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "base": "static",
+      "file": "units1-6-exam-upgrade.spec.js",
+      "title": "5-6 旧未提交选择升级仍为草稿，刷新续做保持选择但不计正确",
+      "status": "passed",
+      "at": "2026-10-18T04:42:10.026Z",
+      "durationMs": 1360,
+      "report": "short-upgrade-chromium.json",
+      "annotations": []
+    }
+  ]
+}

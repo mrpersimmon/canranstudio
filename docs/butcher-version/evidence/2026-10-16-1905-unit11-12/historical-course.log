@@ -1,0 +1,23 @@
+
+Running 16 tests using 1 worker
+
+(node:22524) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\units9-12-classroom.spec.js:38:27 › Lesson 9–10 无配音可逐句看完原文，刷新续读，中文独立展开 (1.8s)
+  ok  2 tests\e2e\units9-12-classroom.spec.js:38:27 › Lesson 11–12 无配音可逐句看完原文，刷新续读，中文独立展开 (1.8s)
+  ok  3 tests\e2e\units9-12-classroom.spec.js:66:27 › Lesson 9–10 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留 (4.5s)
+  ok  4 tests\e2e\units9-12-classroom.spec.js:66:27 › Lesson 11–12 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留 (4.4s)
+  ok  5 tests\e2e\units9-12-classroom.spec.js:90:27 › Lesson 9–10 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择 (3.1s)
+  ok  6 tests\e2e\units9-12-classroom.spec.js:90:27 › Lesson 11–12 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择 (3.0s)
+  ok  7 tests\e2e\units9-12-classroom.spec.js:118:27 › Lesson 9–10 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立 (12.0s)
+  ok  8 tests\e2e\units9-12-classroom.spec.js:118:27 › Lesson 11–12 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立 (8.8s)
+  ok  9 tests\e2e\units9-12-classroom.spec.js:139:27 › Lesson 9–10 旧录音中断可续读，保留词卡页、原练习与词块草稿 (3.7s)
+  ok 10 tests\e2e\units9-12-classroom.spec.js:139:27 › Lesson 11–12 旧录音中断可续读，保留词卡页、原练习与词块草稿 (4.4s)
+  ok 11 tests\e2e\units9-12-classroom.spec.js:174:27 › Lesson 9–10 旧15星升级保留9星，新题独立完成后再领课堂配套证书 (50.4s)
+  ok 12 tests\e2e\units9-12-classroom.spec.js:174:27 › Lesson 11–12 旧15星升级保留9星，新题独立完成后再领课堂配套证书 (52.9s)
+  ok 13 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 9–10 320 阅读控件不跳动，图片题和长词义选项完整 (3.5s)
+  ok 14 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 9–10 1280 阅读控件不跳动，图片题和长词义选项完整 (3.3s)
+  ok 15 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 11–12 320 阅读控件不跳动，图片题和长词义选项完整 (3.1s)
+  ok 16 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 11–12 1280 阅读控件不跳动，图片题和长词义选项完整 (3.1s)
+
+  16 passed (2.8m)

@@ -1,0 +1,117 @@
+{
+  "lesson": "141–142",
+  "standard": "v1.52",
+  "branch": "codex/release-canranstudio",
+  "mode": "classroom",
+  "catalogAtValidation": 71,
+  "counts": {
+    "words": 18,
+    "sourceSentences": 15,
+    "readingSteps": 17,
+    "models": 8,
+    "writingItems": 28,
+    "writingLines": 51,
+    "writingExamples": 4,
+    "writingExampleOutputs": 8,
+    "writingPdfPages": 4,
+    "questions": [
+      8,
+      8,
+      16,
+      8,
+      21
+    ],
+    "questionTotal": 61,
+    "rasterAssets": 6,
+    "fullBodyPoses": 5
+  },
+  "courseTests": {
+    "chromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "webkit": {
+      "passed": 15,
+      "failed": 0
+    }
+  },
+  "representative": {
+    "passed": 5,
+    "failed": 0
+  },
+  "printRefinement": {
+    "passed": 1,
+    "failed": 0,
+    "initialPages": 5,
+    "finalPages": 4,
+    "writingLinesAndTextUnchanged": true
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs139140": true
+  },
+  "font": {
+    "currentMissing": 0,
+    "oldCharactersPreserved": 1748,
+    "currentCharacters": 1764,
+    "oldAdvanceAndLineMetricDifferences": 0
+  },
+  "packages": {
+    "required": 149,
+    "narration": 0,
+    "mounts": [
+      "/",
+      "/lesson/"
+    ]
+  },
+  "gif": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0,
+    "allFramesNameTitleScenePaperStable": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程升级",
+    "共享Worker拒写和回收的所有分支",
+    "除本课所列画布故障重试及离开取消之外的全部导出故障"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit141-142/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 3",
+    "assessmentAnswersSubmitted": false,
+    "coverCheckedAt": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "updateFlow": "Verified the existing local preview process, added only unit141-142 to the preview class, restarted it, then entered through My Courses. The title, original opening, visible question counts and vocabulary were checked without clearing any learning records."
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

@@ -1,0 +1,44 @@
+{
+  "tool": "built-in image_gen",
+  "jobs": [
+    {
+      "id": "sam",
+      "file": "assets/unit41-42/cast-sam-v153.webp",
+      "prompt": "Children's English classroom illustration, match reference1 EXACT Sam/Penny identity and references2/3 rounded keepsake drawing style. Bold rounded dark BROWN outlines, clean flat warm muted colours, subtle paper grain, simple black oval eyes, friendly rounded faces. Truly transparent background, no halo, no floor, no scenery, no labels or text. Full body portrait 2:3 with 8 percent safe clear margin around complete hair hands fingers feet. Natural anatomy, exactly two arms and two hands. Only Sam, adult man, blond wavy side-swept hair, vivid blue LONG-SLEEVED lapelled jacket over cream collared shirt, brown trousers and brown shoes. No glasses or beard. Standing stable, three-quarter facing RIGHT toward partner. Head slightly looking toward right at waist height. One empty open hand gesturing gently to the right at waist height, other hand relaxed at side. Hold nothing. No bag, food or other people.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit41-42/keepsake-story-v4.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent": true,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-c757bbaa-2264-4fc1-b956-25427f7a43bd.png"
+    },
+    {
+      "id": "penny",
+      "file": "assets/unit41-42/cast-penny-v153.webp",
+      "prompt": "Children's English classroom illustration, match reference1 EXACT Sam/Penny identity and references2/3 rounded keepsake drawing style. Bold rounded dark BROWN outlines, clean flat warm muted colours, subtle paper grain, simple black oval eyes, friendly rounded faces. Truly transparent background, no halo, no floor, no scenery, no labels or text. Full body portrait 2:3 with 8 percent safe clear margin around complete hair hands fingers feet. Natural anatomy, exactly two arms and two hands. Only Penny, adult woman, brown rounded shoulder-length bob, pearl earring, mustard yellow long-sleeved blouse, sage green scarf, dusty rose pleated skirt and brown shoes. Three-quarter facing LEFT toward partner. Her LEFT-facing extended forearm at WAIST height ends in one clearly EMPTY flat open PALM UP, ready to show a small object later; the other hand relaxed close to her hip. Keep the open palm fully visible well below face around 54 percent image height and a clear gap above it. Hold nothing, no bag, no cheese or other people.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit41-42/keepsake-story-v4.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent": true,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-b65a4d9c-f335-4e13-8bcc-f33e4c4d8550.png"
+    },
+    {
+      "id": "penny-bag",
+      "file": "assets/unit41-42/cast-penny-bag-v153.webp",
+      "prompt": "Children's English classroom illustration, match reference1 EXACT Sam/Penny identity and references2/3 rounded keepsake drawing style. Bold rounded dark BROWN outlines, clean flat warm muted colours, subtle paper grain, simple black oval eyes, friendly rounded faces. Truly transparent background, no halo, no floor, no scenery, no labels or text. Full body portrait 2:3 with 8 percent safe clear margin around complete hair hands fingers feet. Natural anatomy, exactly two arms and two hands. Only Penny, same adult woman with brown rounded shoulder-length bob, pearl earring, mustard yellow long-sleeved blouse, sage green scarf, dusty rose pleated skirt and brown shoes. Three-quarter facing LEFT toward partner. She carries ONE closed-to-view wide burnt-orange/terracotta shopping bag with two rounded handles and a small gold rectangular clasp, exact bag identity from reference1. Her nearer hand grips the top of BOTH handles securely in front of her hip, bag hangs naturally BELOW that grip. Other hand relaxed. Contents NOT visible, no bread milk or cheese shown. Keep bag off the ground, full shoes hair hands bag all inside margins. No chair, no other people.",
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/unit41-42/keepsake-story-v4.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent": true,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-562b3bfe-82e0-49a2-861b-4383650f5e65.png"
+    }
+  ]
+}

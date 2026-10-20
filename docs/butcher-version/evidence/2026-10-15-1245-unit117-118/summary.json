@@ -1,0 +1,182 @@
+{
+  "unit": "unit117-118",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 74,
+  "zones": {
+    "listen": 8,
+    "roles": 9,
+    "grammar": 25,
+    "apply": 8,
+    "exam": 24
+  },
+  "words": 28,
+  "people": 3,
+  "narrator": "mother",
+  "narrativeParagraphs": 6,
+  "quotedSpeakers": [
+    "mother",
+    "father"
+  ],
+  "substitutions": {
+    "count": 6,
+    "labels": "m–r",
+    "ringFormsAndIPA": true
+  },
+  "writing": {
+    "items": {
+      "A": 6,
+      "B": 8,
+      "C": 8
+    },
+    "linesPerItem": {
+      "A": 2,
+      "B": 2,
+      "C": 2
+    },
+    "totalLines": 44
+  },
+  "browserRuns": {
+    "representative": {
+      "passed": 4,
+      "failed": 0
+    },
+    "chromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "webkit": {
+      "passed": 15,
+      "failed": 0
+    },
+    "diagram-chromium": {
+      "passed": 4,
+      "failed": 0
+    },
+    "diagram-webkit": {
+      "passed": 4,
+      "failed": 0
+    },
+    "reference-chromium": {
+      "passed": 1,
+      "failed": 0
+    },
+    "reference-webkit": {
+      "passed": 1,
+      "failed": 0
+    },
+    "diagram-font-chromium": {
+      "passed": 1,
+      "failed": 0
+    },
+    "diagram-font-webkit": {
+      "passed": 1,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "browserTotalDistinctPassing": 62,
+  "relatedRechecks": 12,
+  "representativeChecks": 4,
+  "initialFailureRetained": {
+    "issue": "Shared max-height120px shrank a teaching diagram despite successful loading. The unit now removes the icon height cap, verifies actual painted width, and uses outlined local Nunito400 inside diagrams.",
+    "before": {
+      "allocatedWidth": 260,
+      "allocatedHeight": 120,
+      "renderedWidth": 222.4,
+      "renderedHeight": 120,
+      "maxHeight": "120px"
+    },
+    "after": {
+      "allocatedWidth": 260,
+      "allocatedHeight": 140.109375,
+      "renderedWidth": 259.669375,
+      "renderedHeight": 140.109375,
+      "maxHeight": "none"
+    }
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true,
+    "diagramEnglish": "outlined local Nunito400",
+    "IPA": "Arial"
+  },
+  "art": {
+    "fullBodySprites": 7,
+    "keepsake": 1,
+    "opaqueEdgePixels": 0
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13-O14": "pending; course evidence appended",
+    "newItems": 0
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit117-118/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 5",
+    "writingItems": 22,
+    "writingLines": 44
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

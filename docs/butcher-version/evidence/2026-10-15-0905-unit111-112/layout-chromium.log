@@ -1,0 +1,41 @@
+
+Running 4 tests using 1 worker
+
+(node:30536) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit111-112.spec.js:38:39 › 320及短屏：比较材料、长句、全部题型和三卡 (25.9s)
+(node:11460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\unit111-112.spec.js:38:39 › 390及短屏：比较材料、长句、全部题型和三卡 (26.1s)
+  ok 3 tests\e2e\unit111-112.spec.js:38:39 › 768及短屏：比较材料、长句、全部题型和三卡 (25.3s)
+  ok 4 tests\e2e\unit111-112.spec.js:38:39 › 1280及短屏：比较材料、长句、全部题型和三卡 (26.0s)
+
+
+  1) tests\e2e\unit111-112.spec.js:38:39 › 320及短屏：比较材料、长句、全部题型和三卡 ──────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      38 | for(const width of [320,390,768,1280])test(`${width}及短屏：比较材料、长句、全部题型和三卡`,async({page},info)=>{
+      39 |  test.setTimeout(240000);await page.setViewportSize({width,height:width===320?568:width===390?500:900});for(const id of ['grammar','apply','exam']){const room=await activity(page,id,{inspect:async(room,i,phase)=>{if(phase!=='before')return;if(width<600)expect((await page.locator('.chapter-select select').boundingBox()).height).toBeGreaterThanOrEqual(44);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);for(const btn of await room.locator('button:visible').all())expect((await btn.boundingBox()).height).toBeGreaterThanOrEqual(43);if((id==='grammar'&&[0,3,5,7,8,9,12,16,17,18,19].includes(i))||(id==='apply'&&[0,1,5,6].includes(i)))await room.screenshot({path:info.outputPath(`${id}-${i+1}.png`)});}});await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');await room.screenshot({path:info.outputPath(id+'-completed.png')});const ys=await room.locator('.completion-stat').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().y));expect(Math.max(...ys)-Math.min(...ys)).toBeLessThan(2);for(const btn of await room.getByRole('group',{name:'完成后的操作'}).getByRole('button').all())await btn.scrollIntoViewIfNeeded();expect(await room.locator('.completion-stat,.practice-finish-actions button').evaluateAll(es=>es.every(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight;}))).toBe(true);}
+    > 40 |  await page.goto('/unit111-112/#learn/words');const room=page.locator('.stage-words');for(let i=0;i<6;i++){for(const card of await room.locator('.unit-word').all()){const label=card.locator('strong');const word=await label.textContent();if(/^[A-Za-z]+$/.test(word))expect(await label.evaluate(el=>{const range=document.createRange();range.selectNodeContents(el);return [...range.getClientRects()].filter(r=>r.width>0).length;})).toBe(1);await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}if(i===5)await room.screenshot({path:info.outputPath('comparison-words.png')});if(i<5)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(await room.locator('.word-phonetic').evaluateAll(es=>es.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+      41 | });
+      42 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit111-112.spec.js:40:430
+
+    Error Context: output\unit111112-layout-chromium\unit111-112-320及短屏：比较材料、长句、全部题型和三卡\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit111112-layout-chromium\unit111-112-320及短屏：比较材料、长句、全部题型和三卡\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit111112-layout-chromium\unit111-112-320及短屏：比较材料、长句、全部题型和三卡\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit111-112.spec.js:38:39 › 320及短屏：比较材料、长句、全部题型和三卡 ───────────────────────────────────
+  3 passed (1.8m)

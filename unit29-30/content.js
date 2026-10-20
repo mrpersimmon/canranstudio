@@ -184,3 +184,67 @@ unit.questions["be"][2]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Five-zone edition. Preserve the actual 33-task predecessor above.
+(function(core){
+'use strict';
+const old=core.unit2930;core.unit2930LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸58–61／PDF91–94；语法练习册纸80–84／PDF94–98';
+const grammarSource='同步导学纸51–54／PDF65–68，Grammar纸53／PDF67；'+source;
+const unit={id:'unit29-30',version:1,mode:'classroom',contentRevision:'tidying-five-zones-v1',legacyEdition:'unit29-30-completion-v1',title:'房间整理行动',path:'/unit29-30/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'认识整理动作',activities:[['words','整理小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'艾米的整理任务',activities:[['text','房间小剧场','book'],['roles','课文小侦探','people']],required:['text','roles']},{id:'l3',title:'读懂任务要求',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'把动作说清楚',activities:[['apply','整理小帮手','heart']],required:['apply']},{id:'l5',title:'我的整理行动',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'tidying-five-zones-v1',title:'能干整理小帮手',lesson:'Lesson 29–30',scene:'/assets/unit29-30/keepsake-story-v1.webp',alt:'琼斯太太向艾米说明整理任务，艾米拿着一把扫帚，床铺和地面仍待整理',color:'#8B7044',zones:[['listen','单词寻宝'],['roles','课文小侦探'],['grammar','语法小工坊'],['apply','整理小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2930-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('base','must后接动词原形','用must说明她必须扫地，选出合适的动作词。',choice(['sweep','sweeps','to sweep'],'sweep','She must ___ the floor.'),'must后接动词原形，不加to，不因主语是she而把动作加s。',[['We must clean the room.','我们必须打扫房间。must后接clean的原形。']]),
+g('person','must不随人称加s','同一项必须完成的任务，换了说话对象，补好must。',fill([blank('I ',' make the bed.',['must','musts']),blank('She ',' make the bed.',['must','musts'])],['must','must'],'我和她都必须整理各自的床铺。本题指定用must表达要求。'),'I must与She must都用must；must本身不随第三人称变成musts。',[['You must dust the table. / He must dust the table.','换成he，must也不加s，后面的dust仍用原形。']]),
+g('not-needed','区分不准与不必','根据两张任务卡选择不同的要求。',fill([blank('You ',' open this box.',['mustn’t','needn’t','must']),blank('You ',' clean the cup again.',['needn’t','mustn’t','must'])],['mustn’t','needn’t'],'甲：这个盒子不准打开。\n乙：杯子已经干净，可以不再洗；如果想再洗也允许。'),'mustn’t表示不准、一定不要；needn’t表示不必，没有这个必要，但不等于禁止。',[['You mustn’t open the door.','规则不准开门。'],['You needn’t sweep the floor now.','现在不必扫地，但并非不准扫。']]),
+g('question','must一般问句不用do或be','用Must开头问“我必须擦窗户吗？”',words(['Must','I','clean','the window?','Do'],4,'Must I clean the window?'),'一般问句把must放在主语前，后面动作仍用原形；不另加do或are。',[['Must we make the bed?','我们必须整理床铺吗？Must放在we前面。']]),
+g('yes','肯定回答按说话人选择人称','艾米问自己是否必须整理床铺，琼斯太太明确说必须。太太应怎样回答？',choice(['Yes, you must.','Yes, I must.','No, you needn’t.'],'Yes, you must.','Amy: Must I make the bed?\nMrs. Jones: ___'),'艾米的I在太太回应时对应you；Yes, you must.说明艾米必须做。不能机械照抄问句人称。',[['Must you go soon? — Yes, I must.','别人问我是否必须走，我回答自己时用I。这是导学原例。']]),
+g('no','否定必要性而不是禁止','汤姆问今天是否必须擦窗，老师说今天不必，但愿意做也可以。补好老师的回应。',fill([blank('No, ','.',['you needn’t','I needn’t','you mustn’t'])],['you needn’t'],'Tom: Must I clean the window today?\nTeacher: No, ___ ___.'),'老师回答Tom，用you；说没有必要用needn’t，不用表示禁止的mustn’t。',[['Must I come over tonight? — No, you needn’t.','导学原例：今晚不必过来。come over：过来。']]),
+g('negative-form','独立组织mustn’t禁止句','牌子明确要求：不准打开这扇门。用You开头组织句子。',words(['You','mustn’t','open','the door.','needn’t'],4,'You mustn’t open the door.'),'禁止句用mustn’t加动词原形，不能用needn’t改变成没有必要。',[['You mustn’t turn on the lamp.','不准开灯。mustn’t后仍接turn on的原形。']]),
+g('pronouns','行动指令用it或them承接物品','给一个杯子和几支铅笔分别下指令。',fill([blank('Empty ','!',['it','them']),blank('Sharpen ','!',['them','it'])],['it','them'],'第一件事：The cup isn’t empty. 要把这个杯子倒空。\n第二件事：The pencils are blunt. 要把这些铅笔削尖。'),'it承接单数杯子，them承接复数铅笔；动作与对象都要保持。课堂用图片练表达。',[['The window isn’t clean. Clean it!','用动作原形发出指令，it指前面的窗户。']]),
+...old.questions.observe
+];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-reply','在问答中回应当前任务是否必要','老师已经确认地板干净，今天可以不再扫，愿意扫也允许。老师接下来怎样回答？',choice(['No, you needn’t.','No, you mustn’t.','Yes, you must.'],'No, you needn’t.','Amy: Must I sweep the floor now?\nTeacher: ___'),'这里没有必须扫地的要求，也没有禁止扫地，用No, you needn’t.。')
+];
+unit.questions.exam=[...old.questions.exam,
+q('e-form','独立检查第三人称must与动作原形','用must表达“她必须擦窗户”，哪一句形式正确？',choice(['She must clean the window.','She musts clean the window.','She must to clean the window.'],'She must clean the window.'),'must不加s，后接clean原形而不加to。'),
+q('e-prohibition','独立识别禁止而非没有必要','柜门旁的规则写明“不准打开衣柜”，补好对应的要求。',fill([blank('You ',' open the wardrobe.',['mustn’t','needn’t','must'])],['mustn’t']),'mustn’t表示禁止，不能换成不必或必须。'),
+q('e-unnecessary','独立按事实表达不必','杯子已倒空，任务卡说不必再倒，愿意检查也允许。',fill([blank('You ',' empty the cup again.',['needn’t','mustn’t','must'])],['needn’t']),'needn’t表示没有必要再做，不是禁止。'),
+q('e-question','独立组织must一般问句','用Must开头问“我们必须打扫房间吗？”',words(['Must','we','clean','the room?','Do'],4,'Must we clean the room?'),'Must放在主语we之前，不加do；clean用原形。'),
+q('e-yes','独立按必要性和回答者选择肯定答句','艾米问自己是否必须掸梳妆台，太太要求她必须做。太太怎样回答？',choice(['Yes, you must.','Yes, I must.','No, you needn’t.'],'Yes, you must.','Amy: Must I dust the dressing table?\nMrs. Jones: ___'),'太太对艾米说you，要求必须做，用Yes, you must.。'),
+q('e-no','独立回答对自己的必要性提问','朋友问你是否必须整理床铺。你的任务已完成，现在不必再做，怎样回答？',choice(['No, I needn’t.','No, you needn’t.','No, I mustn’t.'],'No, I needn’t.','Friend: Must you make the bed now?\nYou: ___'),'对方的you指我，回答用I；不必用needn’t，不把未要求做误作禁止。'),
+q('e-meaning','不把mustn’t与needn’t解释成相同','两张卡分别说明什么？',choice(['甲：不准开窗；乙：不必开窗。','两张卡都表示不准开窗。','甲：不必开窗；乙：不准开窗。'],'甲：不准开窗；乙：不必开窗。','甲：You mustn’t open the window.\n乙：You needn’t open the window.'),'mustn’t是否定允许做这件事；needn’t否定做它的必要性。'),
+q('e-them','在动作指令中独立回指复数衣服','这些衣服要收进衣柜，用一个代词接着说。',fill([blank('Put ',' in the wardrobe.',['them','it'])],['them'],'These clothes are on the bed.\n本题指整批衣服，不是单件物品。'),'clothes是复数形式，回指这些衣服用them。')
+];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+const oldSession=id=>old.taskSessions?.[id]||(old.activityPredecessors?.[id]?'v2':'v'+old.version);
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2930-'+prior+'-practice/'+oldSession(prior),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[]),...(old.activityPredecessors?.[prior]||[]).map(p=>({key:'unit2930-'+p+'-practice/v1',questions:old.previousQuestions[p]}))])]));
+core.unit2930=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// Preserve the actual five-star edition before revising source material.
+(function(core){
+'use strict';
+const unit=core.unit2930,old=JSON.parse(JSON.stringify(unit));core.unit2930V153PreviousDefinition=old;
+unit.contentRevision='tidying-teaching-v153';
+const materials={
+ 'u2930-tasks-v4-story-sequence':'Then put these clothes in the wardrobe.\nThen make the bed.\nDust the dressing table.\nThen sweep the floor.',
+ 'u2930-v1-final-v2-sequence':'Open the window and air the room.\nThen put these clothes in the wardrobe.\nThen make the bed.'
+};
+for(const area of ['roles','exam']){
+ unit.taskPredecessors[area]=[{key:'unit2930-'+area+'-practice/'+old.taskSessions[area],questions:old.questions[area]},...(old.taskPredecessors[area]||[])];
+ unit.taskSessions[area]='v153';
+ unit.questions[area]=old.questions[area].map(q=>materials[q.id]?{...q,id:q.id+'-v153',display:{title:q.prompt,material:materials[q.id]},decision:'在未答页提供连续原文，按课文判断指令先后；不把家务常识或记忆上一页当作材料。旧题与原作答独立保留。'}:q);
+}
+})(globalThis.CanranCore);

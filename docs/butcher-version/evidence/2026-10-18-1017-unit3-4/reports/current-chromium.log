@@ -1,0 +1,18 @@
+
+Running 11 tests using 1 worker
+
+(node:12408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit3-4-v154.spec.js:6:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 (1.4s)
+  ok  2 tests\e2e\unit3-4-v154.spec.js:13:1 › 理解题未作答时有原文依据 (1.1s)
+  ok  3 tests\e2e\unit3-4-v154.spec.js:17:1 › 真实提交记录已显示的短示范 (556ms)
+  ok  4 tests\e2e\unit3-4-v154.spec.js:21:39 › 320宽首页、25词卡、12句课文与三把伞同框可读 (4.7s)
+  ok  5 tests\e2e\unit3-4-v154.spec.js:21:39 › 390宽首页、25词卡、12句课文与三把伞同框可读 (4.5s)
+  ok  6 tests\e2e\unit3-4-v154.spec.js:21:39 › 768宽首页、25词卡、12句课文与三把伞同框可读 (4.6s)
+  ok  7 tests\e2e\unit3-4-v154.spec.js:21:39 › 1280宽首页、25词卡、12句课文与三把伞同框可读 (4.8s)
+  ok  8 tests\e2e\unit3-4-v154.spec.js:40:1 › 33题逐题未答材料、撤支持、无英语音频与全部声音失败仍可完成 (10.7s)
+  ok  9 tests\e2e\unit3-4-v154.spec.js:46:49 › 320x568短屏三卡与推进按钮完整 (2.5s)
+  ok 10 tests\e2e\unit3-4-v154.spec.js:46:49 › 390x500短屏三卡与推进按钮完整 (2.3s)
+  ok 11 tests\e2e\unit3-4-v154.spec.js:49:1 › 原33题未改轮次、选择、错答及原五星保留；两道补材料题重新亲自作答 (8.2s)
+
+  11 passed (46.8s)

@@ -1,0 +1,41 @@
+{
+  "lesson": "97–98",
+  "standard": "v1.51",
+  "questions": 68,
+  "wordCards": 32,
+  "dialogueTurns": 16,
+  "ownershipModels": 7,
+  "objectModels": 12,
+  "writingTasks": {
+    "A": 6,
+    "B": 9
+  },
+  "browserChecksPassed": 56,
+  "workflowChecksPassed": 11,
+  "unitTests": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "boundary": "Windows filesystem modes, symlinks, database cleanup"
+  },
+  "optimizationLog": {
+    "existingItemsUpdated": [
+      "O01",
+      "O02",
+      "O04",
+      "O07",
+      "O08",
+      "O09",
+      "O10",
+      "O11",
+      "O12",
+      "O13"
+    ],
+    "newItems": [],
+    "confirmedStatusRetained": "O01–O12",
+    "pendingStatusRetained": "O13"
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

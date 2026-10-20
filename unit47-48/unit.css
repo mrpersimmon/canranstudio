@@ -88,3 +88,11 @@
  .unit4748-workspace .coffee-model{gap:10px;padding:10px}.unit4748-workspace .coffee-model .grammar-model-line>p{font-size:18px}.unit4748-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit4748-workspace .grammar-rule{font-size:13px}
  .unit4748-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit4748-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit4748-workspace .coffee-completion{height:162px}
 }
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit4748-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit4748-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit4748-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit4748-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

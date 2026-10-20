@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-18T13:12:16.848Z",
+  "dataDir": "output/login/unit91-92-preview-data",
+  "keyHash": "9eceed1ad1d3f2e93e341781e8b47aedc13e4ed197692be6b45b4652e7e2a9f5",
+  "integrity": {
+    "integrity_check": "ok"
+  },
+  "tables": {
+    "progress": {
+      "count": 14,
+      "hash": "a2ce7583b6778eb3c6fec874e98c23d69a23c1967bbcacd60e7653931d0a89b4"
+    },
+    "unit_awards": {
+      "count": 14,
+      "hash": "94857d8ab271aaf8273ec66f5858bcd71f9da7cbebd88ee19879b5eb62003afb"
+    },
+    "students": {
+      "count": 1,
+      "hash": "bd891aa1a978e86ad874a0a95744042c33b9cadf72d46ba9f4f6dd8ae9aa03a4"
+    },
+    "classes": {
+      "count": 1,
+      "hash": "7996203413b8747bffd1c1a1ed7e685035e412269fb206b5f251b895d7e6c0aa"
+    }
+  }
+}

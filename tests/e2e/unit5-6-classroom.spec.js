@@ -21,10 +21,10 @@ test('无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终
   await expect(story.locator('[data-person="hans"]')).toHaveClass(/is-speaking/);
 });
 
-test('全部声音失败仍可完成26题与20句，旧重复问答不再必做', async ({ page }) => {
+test('全部声音失败仍可完成36题与20句，旧重复问答不再必做', async ({ page }) => {
   test.setTimeout(120000); const voices = [], errors = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.addInitScript(() => { window.speechCalls = 0; speechSynthesis.speak = () => { window.speechCalls++; }; });
+  await page.addInitScript(() => { window.speechCalls = 0; if('speechSynthesis' in window)window.speechSynthesis.speak = () => { window.speechCalls++; }; });
   await page.route(/\.(mp3|ogg|wav)(\?|$)/, route => { if (!isFeedbackAudio(route.request().url())) voices.push(route.request().url()); return route.abort(); });
   await page.goto('/lesson/unit5-6/#learn/certificate');
   await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
@@ -92,7 +92,7 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   await room.getByRole('button', { name: ANSWERS.exam[2], exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await room.getByRole('button', { name: '下一题', exact: true }).click();
   await finishExam(page, '5-6', 3);
-  await expect(room).toContainText('首次独立答对 8 / 10'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await expect(room).toContainText('首次独立答对 12 / 14'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
 });
 
@@ -114,7 +114,7 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
       const bubble = await last.boundingBox(), log = await room.locator('.dialogue-log').boundingBox();
       expect(bubble.y + bubble.height).toBeLessThanOrEqual(log.y + log.height);
       const cast = await room.locator('.classroom-cast').boundingBox();
-      if (width === 390) expect(cast.y + cast.height).toBeLessThan(log.y);
+      expect(log.y).toBeGreaterThanOrEqual(cast.y);expect(log.y+log.height).toBeLessThanOrEqual(cast.y+cast.height);
       await room.screenshot({ path: `output/playwright/unit5-6-classroom/story-${i + 1}-${width}.png` });
       await page.reload(); await expect(room.locator('.bubble-row').last()).toBeInViewport({ ratio: 1 });
     }
@@ -132,15 +132,15 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
   const restart = await room.getByRole('button', { name: '重新上演', exact: true }).boundingBox(), start = await room.getByRole('button', { name: '下一句', exact: true }).boundingBox();
   expect(restart.x + restart.width).toBeLessThan(start.x); expect(restart.y).toBeCloseTo(start.y, 0);
   await page.goto('/unit5-6/#learn/models');
-  await expect(page.locator('.car-showroom article')).toHaveCount(6);
-  await expect(page.locator('.stage-models button').filter({ hasText: 'What make' })).toHaveCount(0);
-  await page.locator('.stage-models').screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
+  await page.getByText('汽车与选择问答参考',{exact:true}).click();await expect(page.locator('.car-showroom article')).toHaveCount(6);
+  await expect(page.locator('.stage-cars .car-reference button').filter({ hasText: 'What make' })).toHaveCount(0);
+  await page.locator('.stage-cars .car-reference').screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
 });
 
 test('后段人物缺图时先等待，准备后离线可读20句并恢复最新句', async ({ page, context }) => {
   const voices = []; page.on('request', request => { if (/\.mp3/.test(request.url()) && !isFeedbackAudio(request.url())) voices.push(request.url()); });
   let release; const held = new Promise(resolve => { release = resolve; });
-  await page.route(/xiaohui\.svg(?:\?|$)/, async route => { await held; await route.continue(); });
+  await page.route(/xiaohui-v154\.webp(?:\?|$)/, async route => { await held; await route.continue(); });
   try {
     await page.goto('/lesson/unit5-6/#learn/text', { waitUntil: 'domcontentloaded' });
     await expect(page.getByRole('status', { name: '课程准备状态', exact: true })).toContainText('准备');

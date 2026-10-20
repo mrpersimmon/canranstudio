@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-16T20:27:45.441Z",
+  "uniqueTestConditions": 189,
+  "groups": [
+    {
+      "scope": "Chromium current course, controls, specific interactions and real predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/static-first.json",
+        "reports/static-fixed.json",
+        "reports/handoff-visual.json"
+      ],
+      "note": "Initial 16/18 passed; the full-flow and all-audio-failed cases exposed unsupported handoff awards. After same-version reproduction and validator fix, 11 current cases and 3 input interaction cases passed. Four migration cases and three reading cases reused; their behavior is unaffected by adding the handoff claim branch.",
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, controls, interactions and real predecessor migration",
+      "conditions": 21,
+      "reports": [
+        "reports/static-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium original certificate and worksheet PDFs",
+      "conditions": 2,
+      "reports": [
+        "reports/print.json"
+      ],
+      "artifacts": [
+        "worksheet.pdf",
+        "legacy-certificate.pdf"
+      ],
+      "note": "Three worksheet pages and one old certificate page rendered and visually inspected.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-root-chromium.json",
+        "reports/login-root-fixed.json"
+      ],
+      "note": "Initial full-account flow stopped at the fourth star; other seven cases passed. The same full-account assertions passed after the shared validator fix.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-subpath-chromium.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-root-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/login-subpath-webkit.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "26 -> 30 -> 45 and 34 -> 30 -> 45 actual older-server account chains",
+      "conditions": 2,
+      "reports": [
+        "reports/login-subpath-chromium.json"
+      ],
+      "note": "Both chains run their own root-mounted servers, not duplicate subpath cases.",
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen 30-task historical course and shared current submission statistics",
+      "conditions": 52,
+      "reports": [
+        "reports/historical.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Progress, award collection, learning management, catalog and public boundary",
+      "conditions": 45,
+      "command": "node --test tests/unit/progress.test.js tests/unit/award-collection.test.js tests/unit/admin-learning.test.js tests/unit/home-catalog.test.js tests/unit/course-catalog.test.js tests/deploy/course-catalog-contract.test.js tests/deploy/public-v1-boundary.test.js",
+      "note": "23-test rerun after the validator fix includes the affected learning/award checks and the three handoff checks below; overlapping cases are not counted twice.",
+      "status": "passed"
+    },
+    {
+      "scope": "Handoff proof validator acceptance and rejection boundaries",
+      "conditions": 3,
+      "command": "node --test tests/unit/award-handoff.test.js",
+      "note": "Initially 2 pass/1 fail, then all 3 pass. Malformed candidates, mismatch, errors, legacy and unknown types remain rejected.",
+      "status": "passed"
+    },
+    {
+      "scope": "Scoped test planning and evidence reuse workflow",
+      "conditions": 11,
+      "command": "npm run test:workflow",
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": "24 source/package/document checks and two 72-course authenticated builds are separate from test-condition totals.",
+  "failuresAndRecovery": [
+    {
+      "finding": "Handoff exercises could be completed but valid zero-error rounds were refused by shared award validation, leaving only three stars.",
+      "sameVersionReproduction": "reports/star-repro.json",
+      "initialEvidence": [
+        "reports/static-first.json",
+        "reports/login-root-chromium.json"
+      ],
+      "resolution": "Validate both canonical candidate IDs and the stored answer in the same full first-correct round; keep all existing reward proof checks.",
+      "impact": "handoff-impact.json"
+    }
+  ],
+  "reuse": {
+    "unaffected": "Original question data, first-star non-handoff migration, reading positions, original SVGs and old certificate behavior were unaffected by the added award-validator branch. Direct two-engine/full-account coverage verifies the fixed handoff paths.",
+    "changedTests": "A screenshot capture was added after the input assertions passed; rerun saved handoff-correct.png with the same behavioral assertions.",
+    "counts": "Reruns and failed attempts are not added as unique conditions. This is not a complete production-release test run."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit21-22/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  }
+}

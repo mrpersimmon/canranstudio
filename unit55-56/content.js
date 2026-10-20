@@ -131,3 +131,17 @@ unit.learning.WRITING_B=['she / morning — always / make / the bed','he / morni
 core.unit5556=unit;
 if(root.document?.documentElement?.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit5556,excerpts={"u5556-v1-r-morning":[0,1],"u5556-v1-r-noon":[2,3],"u5556-v1-r-friends":[2,3,4],"u5556-v1-r-arrival":[5,6],"u5556-v1-r-order":[7],"u5556-v1-r-night":[7],"u5556-v1-e-family":[0,1],"u5556-v1-e-order":[1,5,7],"u5556-v1-e-facts":[0,1,2,3,4,5,6,7]},speakers={"narrator":""};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 55',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

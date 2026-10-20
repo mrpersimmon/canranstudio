@@ -282,3 +282,54 @@ unit.questions["exam"][9]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+CanranCore.unit1314LegacyDefinition=CanranCore.unit1314;
+(function(core){
+'use strict';
+const old=core.unit1314LegacyDefinition,source='《新概念英语智慧版1》纸26–29／PDF59–62',grammarSource='《同步导学》Grammar纸26–27／PDF40–41；《语法练习册》纸33–37／PDF47–51';
+const unit={id:'unit13-14',version:1,mode:'classroom',contentRevision:'colour-five-zones-v1',legacyEdition:'unit13-14-completion-v1',title:'新衣配色屋',path:'/unit13-14/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'准备看新衣',activities:[['words','配色小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'一件新连衣裙',activities:[['text','新衣小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'问色与邀请',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'说清新发现',activities:[['apply','配色小帮手','heart']],required:['apply']},{id:'l5',title:'配色小达人',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/colours':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'colour-five-zones-v1',title:'新衣配色小达人',lesson:'Lesson 13–14',scene:'/assets/unit13-14/keepsake-story-v1.webp',alt:'Anna展示绿色连衣裙并戴着同色花帽，Louise欣赏新衣',color:'#65734f',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','配色小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const bank=(tokens,answer,slots,suffix='.')=>({type:'wordbank',tokens,answer,slots,suffix});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u1314-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,
+q('r-it','结合前文辨认it','Anna邀请Louise去楼上看什么？',choice(['Anna的新连衣裙','Louise的汽车','一只狗'],'Anna的新连衣裙',"Louise: What colour’s your new dress?\nAnna: It’s green. Come upstairs and see it."),'这里的it承接刚谈到的新连衣裙。'),
+q('r-same','区分相同颜色与相同物品','原文明确说帽子和连衣裙哪一点相同？',choice(['颜色相同，都是绿色','其实是同一件物品','款式和价格都相同'],'颜色相同，都是绿色',"Anna谈帽子：It’s the same colour. It’s green, too.\n前面已经说新连衣裙是绿色。"),'same colour只说明颜色相同，不证明款式、价格或物品身份相同。')];
+unit.questions.grammar=[
+g('single-be','询问单个物品的颜色','问这一个箱子的颜色，补好问句。',fill([blank('What colour ',' your case?',['is','are','am'])],['is'],'这里说的是一个箱子：one case。'),'问单个case用is。',[['What colour is your hat?','问一顶帽子的颜色，用is。']]),
+old.questions.colours[0],
+g('plural-be','询问多个物品的颜色','现在有两个箱子，补好询问它们颜色的问句。',fill([blank('What colours ',' these cases?',['is','are','am'])],['are'],'两个箱子：two cases。这里用cases表示多个箱子。'),'these cases指多个箱子，本句用are。',[['two hats → What colours are the hats?','这里用hats表示多顶帽子；问句用are。']]),
+old.questions.colours[1],
+g('same','在the same colour中使用the','按“相同的颜色”补好描述。',fill([blank('The hat is ',' same colour.',['the','a','an'])],['the'],'The dress is green. The hat is green, too.'),'本课用the same colour表示相同颜色。',[['My case is blue. My coat is the same colour.','箱子和外套的颜色相同。']]),
+old.questions.exam[3],
+g('base','用动词原形发出指令','请朋友看这只箱子，补好指令。',fill([blank('',' at this case.',['Look','Looks','Looking'])],['Look']),'本课这类祈使句用动词原形，不加第三人称s或-ing。',[['Come upstairs.','邀请对方到楼上来，句首用Come。']]),
+g('negative','使用否定祈使句','请提醒朋友不要打开门。',fill([blank('',' open the door.',['Don’t','Not','Doesn’t'])],['Don’t'],'open the door表示打开门；你希望门保持关闭。'),'Don’t后接动词原形，表示不要做这件事。',[['Don’t go.','不要走。Don’t后接go。']]),
+g('and','按本课and连接两个动作','按课文的and连接方式补好邀请。',fill([blank('Come upstairs ',' ',['and','to','are']),blank('',' it.',['see','sees','seeing'])],['and','see']),'本题按课文用and连接Come和see两个动作。',[['Come and look at this hat.','用and连接来与看两个动作。']]),
+g('intention','祈使句可以用于邀请','朋友微笑着展示新衣，这句话在做什么？',choice(['邀请对方过来看看','报告对方已经看过','一定是在生气斥责'],'邀请对方过来看看','朋友友好地说：Please come and see my new dress.'),'结合这个友好场景，这是邀请；不能只凭祈使形式判断生气。',[['Look at this hat, please.','请看帽子，是请对方做一件事。']]),
+g('owner','结合所属和颜色补全介绍','按资料补全颜色说明。',fill([blank('',' dress ',['Her','His','Your']),blank('',' green.',['is','are','am'])],['Her','is'],'连衣裙属于Anna（she），颜色是green；你在向Louise介绍。'),'物主是Anna（she），用Her；单数dress用is。')];
+unit.questions.apply=[...old.questions.trans,
+q('a-invite','用英语邀请朋友上楼看物品','用Come开头和and连接，邀请朋友到楼上看你的箱子。',bank(['Come upstairs','and','see','my case.','sees'],"Come upstairs and see my case.",4,''),'说清来哪里、看什么，and连接两个动作。'),
+q('a-remind','根据要求给出否定提醒','箱子需要保持关闭，你怎样礼貌地提醒朋友？',choice(['Please don’t open this case.','Please open this case.','This case is green.'],'Please don’t open this case.','请先保持这只箱子关闭。open表示打开。'),'这里要说不要打开，用Please don’t open。'),
+q('a-evidence','新旧相同不等于颜色相同','要记录帽子的颜色，你还需要做什么？',choice(['再问帽子是什么颜色','直接记录帽子一定是绿色','记录帽子一定不是新的'],'再问帽子是什么颜色',"Anna: My dress is new. It’s green. My hat’s new, too."),'帽子也是新的，不等于已经说明它的颜色。')];
+unit.questions.exam=[...old.questions.exam];
+unit.questions.exam[3]=q('e-too','将too用于相同颜色的承接','两件物品都是红色，补好第二句。',fill([blank('My case is red, ','.',['too','very','same'])],['too'],'My coat is red. 我的箱子也是红色。'),'too承接这里相同的颜色，不只用于new。');
+unit.questions.exam.push(
+q('e-same','独立使用the same colour','根据记录补好描述。',fill([blank('The tie is ',' same colour.',['the','a','an'])],['the'],'My hat is black. My tie is black, too.'),'这里用the same colour说领带和帽子同色。'),
+q('e-be','按物品数量选择is或are','两组问题的物品数量不同，补好问句。',fill([blank('What colour ',' this hat?',['is','are','am']),blank('What colours ',' these cases?',['is','are','am'])],['is','are'],'第一组：一顶帽子（one hat）。第二组：两个箱子（two cases）。'),'this hat用is；these cases用are。'),
+q('e-base','独立使用祈使句原形','朋友就在门口，你想请她到楼上来。',fill([blank('',' upstairs, please.',['Come','Comes','Coming'])],['Come']),'祈使句的常见形式以动词原形开始，这里用Come。'),
+q('e-negative','完整构成否定祈使句','你希望箱子保持关闭，用Don’t开头补好提醒。',fill([blank('',' ',['Don’t','Doesn’t','Not']),blank('',' this case, please.',['open','opens','opening'])],['Don’t','open'],'open表示打开；这只箱子现在不应被打开。'),'Don’t后接动词原形open。'),
+q('e-and','用and连接完整邀请','按课文的and表达方式，哪句能邀请朋友来看帽子？',choice(['Come and see my hat.','Comes and see my hat.','Come and seeing my hat.'],'Come and see my hat.'),'Come与see都用原形，由and连接。'),
+q('e-purpose','区分请求与实际结果','只凭这句提醒，能确定什么？',choice(['请求先别开箱，不能确定后来是否打开','箱子已经被打开了','说话人一定在生气'],'请求先别开箱，不能确定后来是否打开','朋友友好地提醒：Please don’t open this case.\n没有后续动作记录。'),'这是一句请求，不是动作已经完成的报告；不能仅凭祈使形式判断生气。'),
+q('e-reference','相同颜色仍需要具体参照','只凭这句话，能确认什么？',choice(['两件物品颜色相同，但具体颜色未给出','两件物品一定都是绿色','两件物品一定都是新的'],'两件物品颜色相同，但具体颜色未给出','The dress and the hat are the same colour.\n没有配图，也没有给出具体色名。'),'same colour说明关系，不能在没有参照时补出green或new。')
+);
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['colours','exam'],apply:['trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit1314-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit1314=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

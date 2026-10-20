@@ -227,6 +227,7 @@ unit.questions["exam"][7]]};
  }
 })(globalThis.CanranCore);
 
+
 // Text-only task edition. Keep exact predecessors for current-round migration.
 (function(core){
  'use strict';
@@ -589,4 +590,21 @@ unit.questions["exam"][7]]};
     'u12-grammar-v4-exam-self-guess': { title: '问自己：我准备好了吗？', material: 'ready：准备好的' },
     'u12-grammar-v4-exam-person-exchange': { title: '你扮演学生，完成对话', material: 'student：学生' }
   };
+})(globalThis.CanranCore);
+
+// Authoring evidence only. Correct the old taxonomy without changing question
+// manuscripts, session identities, completion signatures or reward editions.
+(function(core){
+ const unit=core.unit12;
+ unit.typeCoverage={
+  adopted:['E01','E04','E05','E09','E12','E23','S01','S02'],
+  actual:['E01','E04','E05','E09','E12','E23','S01','S02'],
+  adaptations:{
+   E10:'V5 看图判断问句缺少的物品词；本课选择式改编，原报告中文题图仍待核。',
+   E11:'未另设英语段落选择；本课是短对话，R2/R4/R5归S01，不重复计数。',
+   E21:'V2 仅看图选英文，没有中文词义条件，不声称完整E21；词义识别由V3/V4的E23补足。',
+   A02:'A3 按已给归属事实选择英语回应；教学场景改编，原报告中文流程仍待核。',
+   E07:'无键盘拼写；点击填空归E09。'
+  }
+ };
 })(globalThis.CanranCore);

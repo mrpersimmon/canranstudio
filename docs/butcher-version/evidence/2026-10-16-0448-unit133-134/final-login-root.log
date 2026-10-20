@@ -1,0 +1,12 @@
+[WebServer] (node:35436) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 3 tests using 1 worker
+
+(node:25892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit133-134.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (41.6s)
+  ok 2 tests\login\unit133-134.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (20.9s)
+  ok 3 tests\login\unit133-134.spec.js:232:1 › 报道来源与日期图在账号中真实可见：未答读图、错答刷新与两空续做 (8.7s)
+
+  3 passed (1.3m)

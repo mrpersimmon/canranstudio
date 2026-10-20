@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-16",
+  "branch": "codex/release-canranstudio",
+  "currentCourse": {
+    "words": 22,
+    "dialogueLines": 16,
+    "questions": [
+      11,
+      4,
+      14,
+      6,
+      15
+    ],
+    "total": 50,
+    "stars": 5,
+    "worksheetPages": 3,
+    "worksheetLines": 33
+  },
+  "passedConditions": {
+    "chromiumCourseAndPrint": 14,
+    "webkitCourse": 12,
+    "chromiumAccountsRoot": 8,
+    "chromiumAccountsSubpath": 8,
+    "webkitAccountsRoot": 8,
+    "webkitAccountsSubpath": 8,
+    "sharedStatistics": 3,
+    "serverLearningAndAwards": 20,
+    "workflow": 11,
+    "legacyCourse": 27,
+    "legacyMode": 10
+  },
+  "sumDistinctConditions": 129,
+  "limitations": [
+    "教师审阅、儿童试用、实体打印和真机微信另验",
+    "原未同步草稿保留在原设备，不追称此前已经云同步",
+    "仅列本次适用检查，不宣称整库所有测试重新通过"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "published": false
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit7-8/#learn/certificate",
+    "student": "体验同学",
+    "stars": "0/5",
+    "wordPage": "1/4",
+    "clearedLearningData": false
+  },
+  "optimization": {
+    "O01-O15": "确认项状态保留",
+    "O16": "本课已实施并验证，共用规范待确认"
+  }
+}

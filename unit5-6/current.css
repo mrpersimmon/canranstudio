@@ -1,0 +1,66 @@
+/* Current lesson presentation; original certificate artwork remains isolated. */
+.unit56-workspace .current-cover{height:360px;display:flex;align-items:center;justify-content:center;padding:20px;background:#e7f3ed}
+.unit56-workspace .current-cover>img{width:100%;height:100%;object-fit:contain}
+.unit56-workspace #lessonWorkspace .stage-text .dialogue-stage{height:650px;background-size:cover;background-position:center}
+.unit56-workspace #lessonWorkspace .stage-text .classroom-cast{position:relative;inset:auto;width:100%;height:100%}
+.unit56-workspace #lessonWorkspace .stage-text .dialogue-log{inset:12px 9% auto;height:285px;padding:12px;background:transparent;pointer-events:auto}
+.unit56-workspace .classroom-hosts{left:4%;bottom:40px;width:46%;justify-content:space-between}
+.unit56-workspace .classroom-classmate{right:5%;bottom:40px;width:28%}
+.unit56-workspace .classroom-hosts .classroom-person{width:45%}
+.unit56-workspace .classroom-classmate .classroom-person{max-width:170px}
+.unit56-workspace .classroom-person>img{height:250px;width:100%;object-fit:contain}
+.unit56-workspace .classroom-hosts [data-person=blake]>img{height:280px}
+.unit56-workspace .students-group{height:195px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:3px;justify-items:center}
+.unit56-workspace .students-group>img{display:block;width:100%;height:88px;object-fit:contain;object-position:bottom}
+.unit56-workspace .story-question{font-size:23px;line-height:1.4}
+.unit56-workspace .current-photo{max-width:850px;margin:16px auto;padding:20px 8px;background:#edf3e8;border:2px solid #bdd1bb;border-radius:18px}
+.unit56-workspace .photo-people{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;align-items:end}
+.unit56-workspace .photo-people>figure{margin:0;text-align:center;min-width:0}
+.unit56-workspace .photo-people img{display:block;width:100%;height:160px;object-fit:contain;object-position:bottom}
+.unit56-workspace .photo-people figcaption{font-size:13px;margin:4px 0;overflow-wrap:normal}
+.unit56-workspace .application-figure{margin:12px auto;text-align:center}
+.unit56-workspace .application-figure>img{height:130px;width:150px;object-fit:contain}
+.unit56-workspace .application-figure>figcaption{font-size:16px}
+.unit56-workspace .reference-number{align-self:flex-start;font-size:16px;color:#736344}
+.unit56-workspace .current-completion{height:135px;display:flex;justify-content:center}
+.unit56-workspace .current-completion>img{position:static;height:100%;width:100%;object-fit:contain}
+.unit56-workspace .legacy-learning{background:#f8f3ea}
+.unit56-workspace .legacy-records{padding-left:20px;font-size:15px;line-height:1.6}
+.unit56-workspace .legacy-certificate-dialog{font-family:'Baloo 2','ZCOOL KuaiLe',sans-serif;font-synthesis:weight;--unit-page:#F6FAF6;--unit-wash:#E7F3ED;--unit-line:#B9D4C2;--unit-accent:#3E7865}
+.unit56-workspace .legacy-certificate-dialog .certificate-paper{overflow:visible}
+.unit56-workspace .legacy-certificate-dialog :is(h2,h3,p,li,button){font-family:'Baloo 2','ZCOOL KuaiLe',sans-serif}
+@media(max-width:760px){
+ .unit56-workspace .current-cover{height:290px}
+ .unit56-workspace #lessonWorkspace .stage-text .dialogue-stage{height:570px;background-size:cover}
+ .unit56-workspace #lessonWorkspace .stage-text .dialogue-log{inset:10px 4px auto;height:305px;padding:10px}
+ .unit56-workspace .classroom-hosts{left:12%;width:52%;bottom:40px}
+ .unit56-workspace .classroom-classmate{right:8%;width:28%;bottom:40px}
+ .unit56-workspace .classroom-person>img{height:170px;width:112px;max-width:none;position:relative;left:50%;transform:translateX(-50%)}
+ .unit56-workspace .classroom-hosts [data-person=blake]>img{height:180px;width:118px}
+ .unit56-workspace .classroom-person>span{font-size:12px;padding:2px 3px}
+ .unit56-workspace .students-group{height:160px;gap:1px}
+ .unit56-workspace .students-group>img{height:70px}
+ .unit56-workspace .photo-people{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .unit56-workspace .photo-people img{height:125px}
+ .unit56-workspace .current-completion{height:95px}
+ .unit56-workspace .unit-word>strong{font-size:20px;word-break:normal;overflow-wrap:normal}
+ .unit56-workspace .unit-word{padding-inline:5px;min-width:0}
+ .unit56-workspace .grammar-model-line>p{font-size:20px}
+}
+@media(max-width:360px){.unit56-workspace .unit-word>strong{font-size:18px}.unit56-workspace .unit-word .word-phonetic{font-size:14px}.unit56-workspace .classroom-person>span{font-size:11px}}
+@media(max-width:600px) and (max-height:600px){.unit56-workspace .current-completion{height:30px;margin:0}.unit56-workspace .completion-card .practice-finish-actions{margin-top:10px}.unit56-workspace .completion-card>p.completion-award{margin-top:6px}}
+@media print{
+ body.unit56-workspace.print-writing #unitWriting>p{font-size:14px;line-height:1.5}
+ body.unit56-workspace.print-writing #unitWriting h4{font-size:17px;break-after:avoid}
+ body.unit56-workspace.print-writing .reference-writing{font-size:16px;line-height:1.7}
+ body.unit56-workspace.print-writing .reference-writing li{padding:10px 0;break-inside:avoid}
+ body.unit56-workspace.print-writing .reply-writing{font-size:16px;line-height:1.5;overflow:visible!important;padding-left:36px!important;break-before:page}
+ body.unit56-workspace.print-writing .reply-writing li:nth-child(6){break-before:page}
+ body.unit56-workspace.print-writing .reply-writing li{font-size:16px;padding:8px 0;break-inside:avoid;overflow:visible!important}
+ body.unit56-workspace.print-writing .writing-rule{display:block!important;visibility:visible!important;height:32px!important;border-bottom:1px solid #999!important}
+ body.print-legacy-certificate>*{display:none!important}
+ body.print-legacy-certificate #legacyCertificateDialog{display:block!important;position:static!important;max-width:none!important;max-height:none!important;width:100%!important;border:0!important;padding:0!important;overflow:visible!important}
+ body.print-legacy-certificate #legacyCertificateDialog *{visibility:visible!important}
+ body.print-legacy-certificate #legacyCertificateDialog .unit-dialog-heading,body.print-legacy-certificate #legacyCertificateDialog .certificate-export-area{display:none!important}
+ body.print-legacy-certificate #legacyCertificateDialog .certificate-paper{display:block!important;width:100%!important;margin:0!important;break-inside:avoid}
+}

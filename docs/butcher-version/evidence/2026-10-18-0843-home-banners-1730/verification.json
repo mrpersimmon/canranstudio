@@ -1,0 +1,317 @@
+{
+  "at": "2026-10-18T01:09:03.654Z",
+  "status": "passed",
+  "browserConditions": 12,
+  "runs": [
+    {
+      "name": "red-login-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-18T00:50:19.414Z",
+      "durationMs": 11684.412,
+      "unexpected": 1
+    },
+    {
+      "name": "static-chromium",
+      "engine": "chromium",
+      "kind": "static",
+      "mount": "/",
+      "start": "2026-10-18T00:51:16.317Z",
+      "durationMs": 4140.918000000001,
+      "unexpected": 0
+    },
+    {
+      "name": "login-chromium-root",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-18T00:51:16.323Z",
+      "durationMs": 28124.756999999998,
+      "unexpected": 0
+    },
+    {
+      "name": "login-webkit-root",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "start": "2026-10-18T00:54:15.650Z",
+      "durationMs": 107398.715,
+      "unexpected": 0
+    },
+    {
+      "name": "static-webkit",
+      "engine": "webkit",
+      "kind": "static",
+      "mount": "/",
+      "start": "2026-10-18T00:54:15.677Z",
+      "durationMs": 7464.768,
+      "unexpected": 0
+    },
+    {
+      "name": "login-chromium-subpath",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-18T00:54:15.707Z",
+      "durationMs": 31368.287,
+      "unexpected": 0
+    },
+    {
+      "name": "shared-directory",
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-18T00:54:48.196Z",
+      "durationMs": 17614.456000000002,
+      "unexpected": 0
+    },
+    {
+      "name": "login-webkit-subpath",
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "start": "2026-10-18T00:56:04.062Z",
+      "durationMs": 103897.871,
+      "unexpected": 0
+    }
+  ],
+  "tests": [
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "登录首页七个入口与课内封面、纪念卡使用同一现行插画，刷新和权限保留",
+      "passed": true,
+      "report": "login-chromium-root",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "static",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "静态首页17–30入口使用现行插画，四宽不裁切且正确链接课程",
+      "passed": true,
+      "report": "static-chromium",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "新首页插画实际加载失败时不显示残缺入口，重试后恢复七个横幅",
+      "passed": true,
+      "report": "login-chromium-root",
+      "annotations": [
+        {
+          "type": "actual-image-failures",
+          "description": "1"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "登录首页七个入口与课内封面、纪念卡使用同一现行插画，刷新和权限保留",
+      "passed": true,
+      "report": "login-webkit-root",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "新首页插画实际加载失败时不显示残缺入口，重试后恢复七个横幅",
+      "passed": true,
+      "report": "login-webkit-root",
+      "annotations": [
+        {
+          "type": "actual-image-failures",
+          "description": "1"
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "kind": "static",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "静态首页17–30入口使用现行插画，四宽不裁切且正确链接课程",
+      "passed": true,
+      "report": "static-webkit",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "home-banners-1730.spec.js",
+      "title": "登录首页七个入口与课内封面、纪念卡使用同一现行插画，刷新和权限保留",
+      "passed": true,
+      "report": "login-chromium-subpath",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "home-banners-1730.spec.js",
+      "title": "新首页插画实际加载失败时不显示残缺入口，重试后恢复七个横幅",
+      "passed": true,
+      "report": "login-chromium-subpath",
+      "annotations": [
+        {
+          "type": "actual-image-failures",
+          "description": "1"
+        }
+      ]
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "course-banners.spec.js",
+      "title": "登录后每单元一横幅、只列班级课程，图鉴入口、进度与跨设备继续保留",
+      "passed": true,
+      "report": "shared-directory",
+      "annotations": []
+    },
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "course-banners.spec.js",
+      "title": "全部72个横幅完整加载、管理页保留72项开课选择且新班默认关闭新课",
+      "passed": true,
+      "report": "shared-directory",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "home-banners-1730.spec.js",
+      "title": "登录首页七个入口与课内封面、纪念卡使用同一现行插画，刷新和权限保留",
+      "passed": true,
+      "report": "login-webkit-subpath",
+      "annotations": []
+    },
+    {
+      "engine": "webkit",
+      "kind": "login",
+      "mount": "/lesson/",
+      "file": "home-banners-1730.spec.js",
+      "title": "新首页插画实际加载失败时不显示残缺入口，重试后恢复七个横幅",
+      "passed": true,
+      "report": "login-webkit-subpath",
+      "annotations": [
+        {
+          "type": "actual-image-failures",
+          "description": "1"
+        }
+      ]
+    }
+  ],
+  "initialFailures": [
+    {
+      "engine": "chromium",
+      "kind": "login",
+      "mount": "/",
+      "file": "home-banners-1730.spec.js",
+      "title": "登录首页七个入口与课内封面、纪念卡使用同一现行插画，刷新和权限保留",
+      "passed": false,
+      "report": "red-login-root",
+      "annotations": [],
+      "errors": [
+        {
+          "location": {
+            "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\home-banners-1730.js",
+            "column": 26,
+            "line": 15
+          },
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('[data-unit=\"unit17-18\"]').locator('.featured-art img')\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m5\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-unit=\"unit17-18\"]').locator('.featured-art img')\u001b[22m\n\u001b[2m    14 × locator resolved to 5 elements\u001b[22m\n\u001b[2m       - unexpected value \"5\"\u001b[22m\n\n\n   at ..\\support\\home-banners-1730.js:15\n\n  13 |   for(const pair of PAIRS){\n  14 |    const card=page.locator(`[data-unit=\"unit${pair}\"]`),picture=card.locator('.featured-art img');\n> 15 |    await expect(picture).toHaveCount(1);await expect(picture).toHaveAttribute('src',base+ART[pair]);await expect(picture).toBeVisible();\n     |                          ^\n  16 |    await expect.poll(()=>picture.evaluate(im=>im.complete&&im.naturalWidth>0)).toBe(true);\n  17 |    const bounds=await picture.evaluate(im=>{const a=im.getBoundingClientRect(),b=im.closest('.featured-art').getBoundingClientRect(),c=im.closest('.featured-course').querySelector('.featured-copy').getBoundingClientRect();return{image:{x:a.x,y:a.y,w:a.width,h:a.height},art:{x:b.x,y:b.y,w:b.width,h:b.height},copy:{x:c.x,y:c.y,w:c.width,h:c.height},fit:getComputedStyle(im).objectFit};});\n  18 |    expect(bounds.fit).toBe('contain');expect(bounds.image.w).toBeGreaterThan(150);expect(bounds.image.h).toBeGreaterThan(100);\n    at banners (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\home-banners-1730.js:15:26)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\home-banners-1730.spec.js:9:73"
+        }
+      ]
+    }
+  ],
+  "changedCourses": [
+    "17-18",
+    "19-20",
+    "21-22",
+    "23-24",
+    "25-26",
+    "27-28",
+    "29-30"
+  ],
+  "productionChanges": [
+    "index.html: seven artwork references only"
+  ],
+  "standard": {
+    "current": "1.54",
+    "previous": "1.53",
+    "newClauses": [
+      "section 4: home entrance as visual deliverable",
+      "section 7: actual independent artwork source",
+      "section 8: standalone home-banner acceptance"
+    ],
+    "allPriorSubstantiveRulesRetained": true,
+    "requiresSameFileForAllCourses": false,
+    "requiresNewImageGeneration": false,
+    "requiresGlobalMigration": false
+  },
+  "visualReview": {
+    "mobile": [
+      "17-18",
+      "19-20",
+      "21-22",
+      "23-24",
+      "25-26",
+      "27-28",
+      "29-30"
+    ],
+    "desktop": [
+      "17-18",
+      "19-20",
+      "21-22",
+      "23-24",
+      "25-26",
+      "27-28",
+      "29-30"
+    ],
+    "actualBrowsers": [
+      "chromium",
+      "webkit"
+    ],
+    "widths": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "imageByteComparison": "Each authenticated home, actual cover and actual current keepsake illustration resolves to the adopted per-course artwork; this is source verification alongside screenshot review."
+  },
+  "reuseBoundary": "Seven course files, existing image assets, font files, shared runtime and reward/storage implementation are byte-identical to the start baseline. Earlier course, migration, old-certificate PNG/print and GIF evidence is reused by that boundary, not counted as new tests. Current courses and packages are unchanged; no all-course visual or release pass claimed.",
+  "preview": {
+    "url": "http://127.0.0.1:4295/",
+    "existingData": "preview-data-check.json",
+    "normalReload": true,
+    "answersSubmitted": false,
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher/child acceptance and physical WeChat/print retain their per-course pending status"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "committed": false,
+    "pushed": false,
+    "released": false
+  }
+}

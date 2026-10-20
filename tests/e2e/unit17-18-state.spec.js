@@ -1,4 +1,6 @@
 'use strict';
+// Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
+require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
 const {completeActivity,completeStory,completeUnit1718}=require('../support/unit17-18-flow');
@@ -75,7 +77,7 @@ test('更新一道理解题只失效对应活动，不清除词卡位置、其�
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'refer');
   await page.goto('/unit17-18/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
   await page.goto('/unit17-18/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'What',exact:true}).click();
-  await page.route('**/unit17-18/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('unit17-18/content.js','utf8')).replace("q('story-jobs',","q('story-jobs-v2',")}));
+  await page.route('**/unit17-18/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit17-18-before-fivezones/content.js','utf8')).replace("q('story-jobs',","q('story-jobs-v2',")}));
   await page.goto('/unit17-18/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
   await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await page.goto('/unit17-18/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');

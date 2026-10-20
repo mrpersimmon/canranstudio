@@ -1,0 +1,60 @@
+{
+  "method": "Built-in image_gen; selected assets converted to WebP quality91 without cropping. Original SVGs retained for old certificates.",
+  "prompts": {
+    "card": "Use case: illustration-story. Asset type: transparent keepsake illustration for children's English Lesson 15–16. Use Image 1 only as the approved warm rounded picture-book STYLE reference. Images 2 and 3 show the old character identities and clothing, not the target drawing quality. Create exactly THREE adult characters in a medium close-up: a friendly male customs officer on the LEFT, in muted teal uniform and teal peaked cap with a simple gold diamond badge, dark short hair, no weapon; TWO young adult women together on the RIGHT. First woman has straight shoulder-length dark-brown hair, coral long coat with pale yellow collar and a small yellow cross-body bag; second woman has blonde hair in a side ponytail with coral tie, green jacket with cream collar, blue trousers. Their faces and clothes must clearly differ. Both women look LEFT at the officer and he looks RIGHT at them. The brunette offers TWO small plain green passport booklets as a visible fanned pair to the officer, who receives the SAME two booklets with an open hand. No duplicate books in anyone else's hands. All three smiling naturally. One or two warm brown suitcase tops may appear subtly at the lower edge, without distracting from the two passports and friendly interaction. Warm dark-brown outlines, soft pastel flat colors, subtle paper texture, dot eyes and rounded cheeks, matching the approved story style. Close faces, hands and the two green booklets dominate; generous transparent safety margins around every face, fingertip, cap and shoulder. No real passport details, national flags, nationality cues, text, lettering, digits, stars, card frame, watermarks or background. TRUE transparent alpha background.",
+    "cardRepair": "Use case: precise-object-edit. Repair the composition of this children's lesson keepsake only. Make a SQUARE transparent canvas and scale the entire three-person illustration down slightly to fit with clear transparent safety margins on LEFT and RIGHT and ABOVE. The blonde woman's entire ponytail and every jacket sleeve must be inside the canvas with at least 6% margin; the officer's cap and elbow also fully inside margins. Preserve exact identities, teal uniform/cap, brown-haired woman's coral coat and yellow cross-body bag, blonde woman's green jacket and blue trousers, friendly eye directions and SAME two green passports being passed from brunette to officer. Keep exactly three people, two passports, two brown suitcases. The lower torsos and suitcase bottoms may softly fade into transparency, as a medium-closeup composition, but DO NOT crop fingers or arms. Remove any dark brown background or halo: the background must be genuinely transparent alpha, without a colored rectangle or vignette. Keep warm brown linework, pastel fills and paper texture on the characters. No text, letters, symbols, watermark, stars or frame.",
+    "officer": "Use case: illustration-story. Generate a new FULL-BODY stage cast on a true transparent background. Use reference 1 for warm rounded storybook drawing style and clothing identities; reference 2 for the exact older character identity details. Adult proportions about 3.5 to 4 heads tall, friendly dot eyes, rounded cheeks, warm dark brown outlines, pastel colors, subtle paper texture. Every hair, hand, finger and shoe completely inside generous transparent margins; no floor, no background, no brown halo, no words, no letters, flags, passport details or watermarks. Exactly ONE adult male customs officer, standing at LEFT of a conversation, body slightly turned RIGHT, eyes looking RIGHT. Muted teal uniform jacket and trousers, white collar and dark tie, teal peaked cap with simple gold diamond badge, dark short hair, brown shoes, NO weapon. His rightward-facing hand is open and extended at waist height to politely receive documents, but both hands are EMPTY. No booklets, no luggage, no other people.",
+    "girls": "Use case: illustration-story. Generate a new FULL-BODY stage cast on a true transparent background. Use reference 1 for warm rounded storybook drawing style and clothing identities; reference 2 for the exact older character identity details. Adult proportions about 3.5 to 4 heads tall, friendly dot eyes, rounded cheeks, warm dark brown outlines, pastel colors, subtle paper texture. Every hair, hand, finger and shoe completely inside generous transparent margins; no floor, no background, no brown halo, no words, no letters, flags, passport details or watermarks. Exactly TWO young adult female travellers standing together, facing LEFT toward the officer who is outside this image. Woman on LEFT: straight shoulder-length dark brown hair, coral knee-length coat with pale yellow collar, small yellow crossbody bag, brown flats. Woman on RIGHT: blonde side ponytail with coral tie, green jacket with cream collar, blue trousers, brown flats. Both looking LEFT. Brunette has one EMPTY hand gently extended leftward at waist height, blonde's hands relaxed. NO passports, NO suitcases, NO extra people. All four shoes, both entire full bodies and ponytail visible.",
+    "friends": "Use case: illustration-story. Generate a new FULL-BODY stage cast on a true transparent background. Use reference 1 for warm rounded storybook drawing style and clothing identities; reference 2 for the exact older character identity details. Adult proportions about 3.5 to 4 heads tall, friendly dot eyes, rounded cheeks, warm dark brown outlines, pastel colors, subtle paper texture. Every hair, hand, finger and shoe completely inside generous transparent margins; no floor, no background, no brown halo, no words, no letters, flags, passport details or watermarks. Exactly TWO adult travel friends standing together, looking LEFT toward the conversation outside this image. Person LEFT: short dark brown hair, mustard yellow V-neck cardigan with cream collar, tan trousers, dark brown shoes. Person RIGHT: pale tan cap, muted teal sweater with two broad cream horizontal stripes, blue-grey trousers, brown shoes. Both friendly and quietly listening, hands relaxed and EMPTY. The attached older friend-pair image defines their identity. NO passports, NO bags, NO national stereotypes; no other people.",
+    "officer-clean": "Use case: background-extraction. Remove ONLY the brown hazy halo and all background from this full-body customs officer. Keep the officer's cap, hair, skin, fingers, teal uniform, white shirt, dark tie, shoes, friendly rightward gaze and outstretched EMPTY hand exactly the same. Do not redraw, crop or resize the character. True transparent alpha outside the crisp dark-brown character outline, with NO shadow, glow, vignette, colored pixels or floor outside the silhouette. Preserve all fingers and shoes and existing clear margins.",
+    "girl": "Use case: identity-preserve. Produce a clean transparent FULL-BODY cutout of ONLY the brunette woman on the LEFT in the reference. Keep her exact friendly face, shoulder-length brown hair, coral knee-length coat, pale yellow collar, yellow cross-body bag, brown shoes, adult 3.5–4 heads proportions and warm brown cartoon outlines. Her leftward-facing EMPTY hand is open in greeting as shown. Remove the blonde woman completely. Center the brunette with generous fully transparent margins around the fingertips, hair and both full shoes. No other people, no passports, no suitcases, no shadow, no halo, floor, background, text or flags."
+  },
+  "selected": [
+    {
+      "prompt": "cardRepair",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-9a869ac6-bbb1-4973-996b-9d7e3a941bd1.png",
+      "file": "assets/unit15-16/keepsake-story-v1.webp"
+    },
+    {
+      "prompt": "officer-clean",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f0f8b2ad-d4b6-4e69-a347-f80f41e68c2e.png",
+      "file": "assets/unit15-16/cast-officer-v1.webp"
+    },
+    {
+      "prompt": "girls",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-4d9ae943-4c96-4140-a8ab-e7bd624b9d86.png",
+      "file": "assets/unit15-16/cast-girls-v1.webp"
+    },
+    {
+      "prompt": "friends",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-2d1c8827-848a-410d-ac86-fbdff534e902.png",
+      "file": "assets/unit15-16/cast-friends-v1.webp"
+    },
+    {
+      "prompt": "girl",
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-5f3d5241-5edb-4c84-bebc-ff0c63442c9f.png",
+      "file": "assets/unit15-16/cast-girl-v1.webp"
+    }
+  ],
+  "notSelected": [
+    {
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f348f46a-8a10-4e33-871b-ce15d9f7cdaa.png",
+      "reason": "Right ponytail touches the canvas; repaired composition selected."
+    },
+    {
+      "original": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-ede8d1de-c24e-402f-8d42-cc560c6183b1.png",
+      "reason": "Background extraction variant created after dark preview suggested a halo; alpha samples and white-background review confirm the selected sprite is transparent."
+    }
+  ],
+  "references": {
+    "approvedStyle": "assets/awards/unit1-2-handbag-closeup.webp",
+    "identity": [
+      "assets/unit15-16/officer.svg",
+      "assets/unit15-16/girls.svg",
+      "assets/unit15-16/friend.svg"
+    ],
+    "cardRepair": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-f348f46a-8a10-4e33-871b-ce15d9f7cdaa.png",
+    "officerClean": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-ede8d1de-c24e-402f-8d42-cc560c6183b1.png",
+    "girl": "C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-4d9ae943-4c96-4140-a8ab-e7bd624b9d86.png"
+  }
+}

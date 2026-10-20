@@ -1,0 +1,434 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit25-26-v153.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit2526-review-20261018/red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2526-review-20261018/red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit25-26-v153.spec.js",
+      "file": "unit25-26-v153.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "三道继承语法题在未答时有短示范，新提交才登记帮助",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7564,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"There is a pen in the box.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"There is a pen in the box.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:8:291",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                      "column": 291,
+                      "line": 8
+                    },
+                    "snippet": "   6 | test('三道继承语法题在未答时有短示范，新提交才登记帮助',async({page},info)=>{\n   7 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit25-26/#learn/grammar');const room=page.locator('.stage-grammar');for(const a of ANSWERS.grammar.slice(0,10))await next(room,a);\n>  8 |  for(const[n,text]of [[11,'There is a pen in the box.'],[12,'The plate is clean.'],[13,'Where is the book? It is on the table.']]){const model=room.getByRole('region',{name:'短示范',exact:true});await room.screenshot({path:info.outputPath('grammar-'+n+'-unanswered.png')});await expect(model).toContainText(text);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await next(room,ANSWERS.grammar[n-1],n===13);}\n     |                                                                                                                                                                                                                                                                                                   ^\n   9 |  const b=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')));for(const id of ['u2526-types-v1-t08','u2526-clicks-v1-clean','u2526-types-v1-t10'])expect(b.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  10 | });\n  11 | for(const[area,number,lines]of ["
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                        "column": 291,
+                        "line": 8
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"There is a pen in the box.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n   6 | test('三道继承语法题在未答时有短示范，新提交才登记帮助',async({page},info)=>{\n   7 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit25-26/#learn/grammar');const room=page.locator('.stage-grammar');for(const a of ANSWERS.grammar.slice(0,10))await next(room,a);\n>  8 |  for(const[n,text]of [[11,'There is a pen in the box.'],[12,'The plate is clean.'],[13,'Where is the book? It is on the table.']]){const model=room.getByRole('region',{name:'短示范',exact:true});await room.screenshot({path:info.outputPath('grammar-'+n+'-unanswered.png')});await expect(model).toContainText(text);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await next(room,ANSWERS.grammar[n-1],n===13);}\n     |                                                                                                                                                                                                                                                                                                   ^\n   9 |  const b=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')));for(const id of ['u2526-types-v1-t08','u2526-clicks-v1-clean','u2526-types-v1-t10'])expect(b.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  10 | });\n  11 | for(const[area,number,lines]of [\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:8:291"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:35:24.537Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-三道继承语法题在未答时有短示范，新提交才登记帮助\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-三道继承语法题在未答时有短示范，新提交才登记帮助\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                    "column": 291,
+                    "line": 8
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a25ad54b4b178baa804d-305c78dcd7b640695a28",
+          "file": "unit25-26-v153.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "roles第3题在未选和刷新后提供完整原文依据",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6738,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"\u001b[7mThe refrigerator is white\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m课文说：It is on the right\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"课文说：It is on the right.\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"\u001b[7mThe refrigerator is white\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m课文说：It is on the right\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"课文说：It is on the right.\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                      "column": 155,
+                      "line": 17
+                    },
+                    "snippet": "  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                        "column": 155,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-roles').locator('.practice-context')\nExpected substring: \u001b[32m\"\u001b[7mThe refrigerator is white\u001b[27m.\"\u001b[39m\nReceived string:    \u001b[31m\"\u001b[7m课文说：It is on the right\u001b[27m.\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-roles').locator('.practice-context')\u001b[22m\n\u001b[2m    14 × locator resolved to <div role=\"region\" aria-label=\"题目材料\" class=\"practice-context\">…</div>\u001b[22m\n\u001b[2m       - unexpected value \"课文说：It is on the right.\"\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:35:32.873Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-roles第3题在未选和刷新后提供完整原文依据\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-roles第3题在未选和刷新后提供完整原文依据\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                    "column": 155,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a25ad54b4b178baa804d-21b11b782f0b559557ff",
+          "file": "unit25-26-v153.spec.js",
+          "line": 15,
+          "column": 3
+        },
+        {
+          "title": "exam第3题在未选和刷新后提供完整原文依据",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6055,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"The refrigerator is white.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"The refrigerator is white.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                      "column": 155,
+                      "line": 17
+                    },
+                    "snippet": "  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                        "column": 155,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"The refrigerator is white.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:35:40.362Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-exam第3题在未选和刷新后提供完整原文依据\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-exam第3题在未选和刷新后提供完整原文依据\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                    "column": 155,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a25ad54b4b178baa804d-845befcf329f631d31f8",
+          "file": "unit25-26-v153.spec.js",
+          "line": 15,
+          "column": 3
+        },
+        {
+          "title": "exam第4题在未选和刷新后提供完整原文依据",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6195,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"There is a bottle on the table.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"There is a bottle on the table.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                      "column": 155,
+                      "line": 17
+                    },
+                    "snippet": "  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                        "column": 155,
+                        "line": 17
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-exam').locator('.practice-context')\nExpected substring: \u001b[32m\"There is a bottle on the table.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-exam').locator('.practice-context')\u001b[22m\n\n\n  15 | ])test(`${area}第${number}题在未选和刷新后提供完整原文依据`,async({page},info)=>{\n  16 |  await page.setViewportSize({width:320,height:568});if(area==='roles')await story(page);await page.goto('/unit25-26/#learn/'+area);const room=page.locator('.stage-'+area);for(const a of ANSWERS[area].slice(0,number-1))await next(room,a);\n> 17 |  await room.screenshot({path:info.outputPath(area+'-'+number+'-unanswered.png')});for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();for(const line of lines)await expect(room.locator('.practice-context')).toContainText(line);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await next(room,ANSWERS[area][number-1],number===ANSWERS[area].length);\n     |                                                                                                                                                           ^\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n  20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:17:155"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:35:47.148Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-exam第4题在未选和刷新后提供完整原文依据\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-exam第4题在未选和刷新后提供完整原文依据\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                    "column": 155,
+                    "line": 17
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a25ad54b4b178baa804d-3457a4220397cdc19ac8",
+          "file": "unit25-26-v153.spec.js",
+          "line": 15,
+          "column": 3
+        },
+        {
+          "title": "五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6674,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: '学习手记', exact: true })\nExpected substring: \u001b[32m\"整合请求、属性与位置\"\u001b[39m\nReceived string:    \u001b[31m\"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '学习手记', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <dialog open=\"\" id=\"unitNotebook\" class=\"unit-dialog\" aria-labelledby=\"notebookTitle\">…</dialog>\u001b[22m\n\u001b[2m       - unexpected value \"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: '学习手记', exact: true })\nExpected substring: \u001b[32m\"整合请求、属性与位置\"\u001b[39m\nReceived string:    \u001b[31m\"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '学习手记', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <dialog open=\"\" id=\"unitNotebook\" class=\"unit-dialog\" aria-labelledby=\"notebookTitle\">…</dialog>\u001b[22m\n\u001b[2m       - unexpected value \"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:20:606",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                      "column": 606,
+                      "line": 20
+                    },
+                    "snippet": "  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n> 20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n  21 |  const r=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')).records['u2526-five-a-cup-story']);expect(r.target).toBe('整合六轮故事中的物品条件与位置');expect(r.attempts).toBe(1);\n  22 | });\n  23 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                        "column": 606,
+                        "line": 20
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('dialog', { name: '学习手记', exact: true })\nExpected substring: \u001b[32m\"整合请求、属性与位置\"\u001b[39m\nReceived string:    \u001b[31m\"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '学习手记', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <dialog open=\"\" id=\"unitNotebook\" class=\"unit-dialog\" aria-labelledby=\"notebookTitle\">…</dialog>\u001b[22m\n\u001b[2m       - unexpected value \"学习手记关闭每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。读懂存在与位置 · 用中文词块说出这句话的意思。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）首提的 an 与再指的 The · 先介绍一台电炉，再说同一台。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）用缩写介绍表面位置 · 用 There's 开头说：罐子上有一把叉子。：未用额外提示答对（首次答对，额外提示未用，提交 1 次）整合六轮故事中的物品条件与位置 · 读到这里，乙接下来应该怎么做？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）学徒手记已保存在这台设备。重试保存\"\u001b[22m\n\n\n  18 | });\n  19 | test('五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变',async({page},info)=>{\n> 20 |  await page.goto('/unit25-26/#learn/apply');const room=page.locator('.stage-apply');for(const a of ANSWERS.apply.slice(0,3))await next(room,a);await expect(room.locator('.task-reading-turn')).toHaveCount(5);await expect(room.locator('.task-reading')).not.toContainText('Here you are.');await select(room,ANSWERS.apply[3]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.getByRole('button',{name:'学习手记',exact:true}).click();const note=page.getByRole('dialog',{name:'学习手记',exact:true});await note.screenshot({path:info.outputPath('notebook-story-target.png')});await expect(note).toContainText('整合请求、属性与位置');await expect(note).not.toContainText('整合六轮故事');\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^\n  21 |  const r=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit25-26:learning:v1')).records['u2526-five-a-cup-story']);expect(r.target).toBe('整合六轮故事中的物品条件与位置');expect(r.attempts).toBe(1);\n  22 | });\n  23 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js:20:606"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:35:54.071Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2526-review-20261018\\red\\unit25-26-v153-五轮故事的手记说明准确，原题身份和已存目标不因标签修正改变\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit25-26-v153.spec.js",
+                    "column": 606,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a25ad54b4b178baa804d-89a717aa67b14a114ef8",
+          "file": "unit25-26-v153.spec.js",
+          "line": 19,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T20:35:23.981Z",
+    "duration": 37366.943999999996,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0
+  }
+}

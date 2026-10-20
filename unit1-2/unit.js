@@ -3,6 +3,7 @@
   const core = root.CanranCore, unit = core.unit12;
   const { stages, questions, learning: content } = unit;
   const practice = core.lesson49Practice;
+  core.unit12History.preserve(practice,unit);
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -13,7 +14,7 @@
   }
   function art(name, label = '') {
     if (!['man', 'woman', ...unit.objects.map(word => word.en)].includes(name)) return icon(name, label);
-    const picture = node('img', '', 'shop-icon'); picture.src = '/assets/unit1-2/' + (['man', 'woman'].includes(name) ? 'scene/' : '') + name + '.svg' + (name === 'handbag' ? '?v=scene-2' : ''); picture.alt = label; return picture;
+    const picture = node('img', '', 'shop-icon'); picture.src = core.unit12Current.image(name); picture.alt = label; return picture;
   }
   const surfaces = new Map();
   const runners = new Map();
@@ -109,17 +110,21 @@
     if (questions[id].some(question => question.scene)) {
       settings.sceneView = core.unit12Scene.create({ element });
     }
-    if (id === 'trans') settings.sceneView = core.unit12Grammar.create({ element, art });
+    if (id === 'trans') settings.sceneView = core.unit12Current.grammar({ element, art });
     const predecessors = unit.activityPredecessors[id];
     const runner = practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
       inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition, finalLabel: '完成这一组',
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
+      onAnswer: (question,state) => {
+        if(settings.sceneView?.hasVisibleModel?.()){state.revealed=true;practice.record(question,state);}
+        settings.onAnswer?.(question,state);
+      },
       onComplete: (states, round) => {
         const { perfect, message: awardStatus } = settlement.complete({ id, states, round, awards, element });
         complete(id);
         nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states);
         core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
-          details: settings.completionDetails, celebrate: round.userCompleted, awardStatus,
+          artwork: core.unit12Current.completion(), details: settings.completionDetails, celebrate: round.userCompleted, awardStatus,
           waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) &&
             navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
         const result = element.querySelector('.completion-award');
@@ -246,8 +251,9 @@
     progress: id => runners.get(id)?.progress() || { started: false, completed: false },
     restart: id => runners.get(id)?.restart()
   });
+  core.unit12History.show(practice,surfaces.get('certificate'));
   const writing = node('details', '', 'offline-task'); writing.id = 'unitWriting';
-  writing.append(node('summary', '和家人再试试'), node('p', '拿一件自己的物品，和家人轮流问答：Is this your…? / Yes, it is. 没听清时，可以说 Pardon?'), node('p', '选 1–2 句抄写，注意大小写和标点。'));
+  writing.append(node('summary', '和家人再试试'), node('p', '拿一件自己的物品，和家人轮流问答：Is this your…? / Yes, it is. 没听清时，可以说 Pardon?'), node('h4', 'Lesson 2 · 书面练习'), node('p', 'Copy these sentences. 抄写下面七句，注意大小写和标点。'));
   const writingLines = node('ol', '', 'writing-lines'); content.DIALOGUE.forEach(line => writingLines.append(node('li', line.text))); writing.append(writingLines);
   const printActions = node('div', '', 'activity-actions'); printActions.append(button('打印练习纸', () => {
     document.body.classList.add('print-writing'); root.print();

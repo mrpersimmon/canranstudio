@@ -1,0 +1,354 @@
+[
+  {
+    "base": "/",
+    "revision": "89d1a6d24f84feb195a8f2359f5b608eae8350f8619b919bac9def5ae73b0cef",
+    "mode": "classroom",
+    "required": 149,
+    "narration": 0,
+    "missingTarget": {
+      "key": "/assets/unit141-142/train-carriage.svg",
+      "url": "/resources/a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d/train-carriage.svg",
+      "sha256": "a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d",
+      "bytes": 575,
+      "type": "image/svg+xml"
+    },
+    "assets": [
+      {
+        "key": "/assets/unit141-142/amused.svg",
+        "url": "/resources/23c41244a054b10e90a1102e414a681e3f4e2051e7a914a03dfbcf80489d2149/amused.svg"
+      },
+      {
+        "key": "/assets/unit141-142/compact.svg",
+        "url": "/resources/d192ce044acaffb1f3a439224dd69e40afbbfb53e423ca3542a86c2e53e7e82a/compact.svg"
+      },
+      {
+        "key": "/assets/unit141-142/compact.webp",
+        "url": "/resources/1cfd72fdb2077bed28191831b66582331085d23a137f5aa7490cf8febcdfd780/compact.webp"
+      },
+      {
+        "key": "/assets/unit141-142/curiously.svg",
+        "url": "/resources/b7e3d7c8d45da9828c0cadf79d4ceed5b25cd92f40b40bb2f4f7f3369a939454/curiously.svg"
+      },
+      {
+        "key": "/assets/unit141-142/embarrassed.svg",
+        "url": "/resources/93b63e6122641b47b7672aed458e1346258df934b0e2680f0dfcc37ec3d09c2b/embarrassed.svg"
+      },
+      {
+        "key": "/assets/unit141-142/ending.webp",
+        "url": "/resources/a20df8f366b735a08df8169a31f8afe780c8bf9256c735e00a00da39792c8c4b/ending.webp"
+      },
+      {
+        "key": "/assets/unit141-142/excited.svg",
+        "url": "/resources/b5d4ce431e5ddbb744c005a865fd906de60ddd74d1ef237a778a1bf9fd778b36/excited.svg"
+      },
+      {
+        "key": "/assets/unit141-142/exercise-books.svg",
+        "url": "/resources/dec275763842580dcb5af1197a83dc3ffb2dbccb4decfb3c33c225a0b78ce888/exercise-books.svg"
+      },
+      {
+        "key": "/assets/unit141-142/funny.svg",
+        "url": "/resources/950ab66068963b2ce3a5ae940509abd94de0d21e4ac363e3c93060f566a07030/funny.svg"
+      },
+      {
+        "key": "/assets/unit141-142/get-on.svg",
+        "url": "/resources/00af14df4c935b2ae2cce051346c412ab9126c145af1e0ecc2fb6a87601b9b48/get-on.svg"
+      },
+      {
+        "key": "/assets/unit141-142/greet.webp",
+        "url": "/resources/b95d6e02382c8b0c5b23dbda07e09a3fd3c4b3872e393c310cc3ec04e977a19c/greet.webp"
+      },
+      {
+        "key": "/assets/unit141-142/handbag.svg",
+        "url": "/resources/2178955801cc5e20286a6abf973a0a57e168b6d2a2f39b01fd39b94d9c0f6195/handbag.svg"
+      },
+      {
+        "key": "/assets/unit141-142/invitation-record.svg",
+        "url": "/resources/46f09b2e1ee24bb26dc9d5a6afa9c99e8a230a68e61997e05bf56d502f6138d8/invitation-record.svg"
+      },
+      {
+        "key": "/assets/unit141-142/keepsake-story-v1.webp",
+        "url": "/resources/e69b64a5c005b32b71529ca07266b69541fc3a7864661c6050a7264fe14c554a/keepsake-story-v1.webp"
+      },
+      {
+        "key": "/assets/unit141-142/kindly.svg",
+        "url": "/resources/523dae04124b676702a7d1c5c03c54a66d84e0282272aba48bba0227e8f9c204/kindly.svg"
+      },
+      {
+        "key": "/assets/unit141-142/make-up.svg",
+        "url": "/resources/5caa82d3b2fac90aff5986ea7863ef4b5a36e37cb2c732e79ca09c49c48ea6e0/make-up.svg"
+      },
+      {
+        "key": "/assets/unit141-142/makeup.webp",
+        "url": "/resources/ad5cf5b5c846516791035ae08db528ede93c2b3c9dc6d6524c6d52bb8a9f0a0a/makeup.webp"
+      },
+      {
+        "key": "/assets/unit141-142/middle-aged.svg",
+        "url": "/resources/93b4008607ade5edaf5fe8463c603bd9022d46027e10b6fbe5f5280380095dea/middle-aged.svg"
+      },
+      {
+        "key": "/assets/unit141-142/opposite.svg",
+        "url": "/resources/8ba365eb385928f6a85827c7f03f684799516fffbaf1bc1f4e83c7efc0fe9fd2/opposite.svg"
+      },
+      {
+        "key": "/assets/unit141-142/pair.webp",
+        "url": "/resources/74e049c537e40c2d9667981386ff5e96a6a6bd542e38ee0cd4e047cc4bf32fe4/pair.webp"
+      },
+      {
+        "key": "/assets/unit141-142/powder.svg",
+        "url": "/resources/e15b50005d597231d9e18b1221534aa642d537bdbd16bd587b3dd1d38022847d/powder.svg"
+      },
+      {
+        "key": "/assets/unit141-142/put-away.svg",
+        "url": "/resources/a800bfdcf61ddde32f339a5e32f47eab33e5f09796d78e968a8ce9191d1401d1/put-away.svg"
+      },
+      {
+        "key": "/assets/unit141-142/regularly.svg",
+        "url": "/resources/8ca2b839f271fb93a09b3ed837a50c9f14e1e620dc181b6ca99b4494be1c933e/regularly.svg"
+      },
+      {
+        "key": "/assets/unit141-142/repair.svg",
+        "url": "/resources/85fe96e5301df8618920af6dd3dd4019ae462ce1997a2d5757ee3cf6c7728c95/repair.svg"
+      },
+      {
+        "key": "/assets/unit141-142/smile.svg",
+        "url": "/resources/386e4a611fd51badb630c21cd41e7e41869da5e733bf7805bc8877c2972ffe4f/smile.svg"
+      },
+      {
+        "key": "/assets/unit141-142/station.svg",
+        "url": "/resources/7bb0432eba8f3b88743fe5d7829a7808a2ad5e718daddc8142ff195c0b71dc0c/station.svg"
+      },
+      {
+        "key": "/assets/unit141-142/task-checked.svg",
+        "url": "/resources/4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729/task-checked.svg"
+      },
+      {
+        "key": "/assets/unit141-142/task-record.svg",
+        "url": "/resources/7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066/task-record.svg"
+      },
+      {
+        "key": "/assets/unit141-142/train-carriage.svg",
+        "url": "/resources/a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d/train-carriage.svg"
+      },
+      {
+        "key": "/assets/unit141-142/train.svg",
+        "url": "/resources/49e1bc35a7b84a9ed441f71e2462c4c29aacceb297010c72eaa921c2cf38b15b/train.svg"
+      },
+      {
+        "key": "/assets/unit141-142/ugly.svg",
+        "url": "/resources/b44902cbc67b7b0616f2a9e7c28ba58d82a4bde99b62c795dc9b9261646eb51a/ugly.svg"
+      },
+      {
+        "key": "/assets/unit141-142/work-record.svg",
+        "url": "/resources/b97036e6dcd9e5951566a4c3e0577ad0e51e5e46b3201b6771722e19c2688975/work-record.svg"
+      },
+      {
+        "key": "/assets/unit141-142/worried.svg",
+        "url": "/resources/f2a9457d2c3dec3610f9840311456d934ad15fe1a8b02d874b1893fa7f507181/worried.svg"
+      },
+      {
+        "key": "/unit141-142/content.js",
+        "url": "/resources/9a3613924873944116cbab5f638d0f09e6b0631b2223293731e8541904731b38/content.js"
+      },
+      {
+        "key": "/unit141-142/grammar.js",
+        "url": "/resources/36eccda927e8f5f1b1fff42f139c2bd672a23891844560a5434ca62f27ef14db/grammar.js"
+      },
+      {
+        "key": "/unit141-142/index.html",
+        "url": "/resources/388437d256955ff0a21957947f873d4850fe376bd26a87769f4a518c9e89d0db/index.html"
+      },
+      {
+        "key": "/unit141-142/scene.js",
+        "url": "/resources/486843bbe1fdd3018877b11c6f7bfd2c898d0a1d9a965820faaf860fdbe55b95/scene.js"
+      },
+      {
+        "key": "/unit141-142/typography.css",
+        "url": "/resources/2c5d1c7b876bf6afa8157f2d614da6f47addb528c1ea007141d06d43bf77a8df/typography.css"
+      },
+      {
+        "key": "/unit141-142/unit.css",
+        "url": "/resources/7ed7716e27fae589282cb4a6840522204e80498de1b80ff34d5ba36eeb1a8355/unit.css"
+      },
+      {
+        "key": "/unit141-142/unit.js",
+        "url": "/resources/0d9bde77d4441eb767110fa82d4db5820b1638ce4d5583fcc089c2f4ea19f591/unit.js"
+      }
+    ]
+  },
+  {
+    "base": "/lesson/",
+    "revision": "c6d2faa76d012a3848c152513a77d61cb0c89f2a7b9547f8ce043bc8d7a6fcfe",
+    "mode": "classroom",
+    "required": 149,
+    "narration": 0,
+    "missingTarget": {
+      "key": "/lesson/assets/unit141-142/train-carriage.svg",
+      "url": "/lesson/resources/a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d/train-carriage.svg",
+      "sha256": "a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d",
+      "bytes": 575,
+      "type": "image/svg+xml"
+    },
+    "assets": [
+      {
+        "key": "/lesson/assets/unit141-142/amused.svg",
+        "url": "/lesson/resources/23c41244a054b10e90a1102e414a681e3f4e2051e7a914a03dfbcf80489d2149/amused.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/compact.svg",
+        "url": "/lesson/resources/d192ce044acaffb1f3a439224dd69e40afbbfb53e423ca3542a86c2e53e7e82a/compact.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/compact.webp",
+        "url": "/lesson/resources/1cfd72fdb2077bed28191831b66582331085d23a137f5aa7490cf8febcdfd780/compact.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/curiously.svg",
+        "url": "/lesson/resources/b7e3d7c8d45da9828c0cadf79d4ceed5b25cd92f40b40bb2f4f7f3369a939454/curiously.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/embarrassed.svg",
+        "url": "/lesson/resources/93b63e6122641b47b7672aed458e1346258df934b0e2680f0dfcc37ec3d09c2b/embarrassed.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/ending.webp",
+        "url": "/lesson/resources/a20df8f366b735a08df8169a31f8afe780c8bf9256c735e00a00da39792c8c4b/ending.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/excited.svg",
+        "url": "/lesson/resources/b5d4ce431e5ddbb744c005a865fd906de60ddd74d1ef237a778a1bf9fd778b36/excited.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/exercise-books.svg",
+        "url": "/lesson/resources/dec275763842580dcb5af1197a83dc3ffb2dbccb4decfb3c33c225a0b78ce888/exercise-books.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/funny.svg",
+        "url": "/lesson/resources/950ab66068963b2ce3a5ae940509abd94de0d21e4ac363e3c93060f566a07030/funny.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/get-on.svg",
+        "url": "/lesson/resources/00af14df4c935b2ae2cce051346c412ab9126c145af1e0ecc2fb6a87601b9b48/get-on.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/greet.webp",
+        "url": "/lesson/resources/b95d6e02382c8b0c5b23dbda07e09a3fd3c4b3872e393c310cc3ec04e977a19c/greet.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/handbag.svg",
+        "url": "/lesson/resources/2178955801cc5e20286a6abf973a0a57e168b6d2a2f39b01fd39b94d9c0f6195/handbag.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/invitation-record.svg",
+        "url": "/lesson/resources/46f09b2e1ee24bb26dc9d5a6afa9c99e8a230a68e61997e05bf56d502f6138d8/invitation-record.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/keepsake-story-v1.webp",
+        "url": "/lesson/resources/e69b64a5c005b32b71529ca07266b69541fc3a7864661c6050a7264fe14c554a/keepsake-story-v1.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/kindly.svg",
+        "url": "/lesson/resources/523dae04124b676702a7d1c5c03c54a66d84e0282272aba48bba0227e8f9c204/kindly.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/make-up.svg",
+        "url": "/lesson/resources/5caa82d3b2fac90aff5986ea7863ef4b5a36e37cb2c732e79ca09c49c48ea6e0/make-up.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/makeup.webp",
+        "url": "/lesson/resources/ad5cf5b5c846516791035ae08db528ede93c2b3c9dc6d6524c6d52bb8a9f0a0a/makeup.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/middle-aged.svg",
+        "url": "/lesson/resources/93b4008607ade5edaf5fe8463c603bd9022d46027e10b6fbe5f5280380095dea/middle-aged.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/opposite.svg",
+        "url": "/lesson/resources/8ba365eb385928f6a85827c7f03f684799516fffbaf1bc1f4e83c7efc0fe9fd2/opposite.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/pair.webp",
+        "url": "/lesson/resources/74e049c537e40c2d9667981386ff5e96a6a6bd542e38ee0cd4e047cc4bf32fe4/pair.webp"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/powder.svg",
+        "url": "/lesson/resources/e15b50005d597231d9e18b1221534aa642d537bdbd16bd587b3dd1d38022847d/powder.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/put-away.svg",
+        "url": "/lesson/resources/a800bfdcf61ddde32f339a5e32f47eab33e5f09796d78e968a8ce9191d1401d1/put-away.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/regularly.svg",
+        "url": "/lesson/resources/8ca2b839f271fb93a09b3ed837a50c9f14e1e620dc181b6ca99b4494be1c933e/regularly.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/repair.svg",
+        "url": "/lesson/resources/85fe96e5301df8618920af6dd3dd4019ae462ce1997a2d5757ee3cf6c7728c95/repair.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/smile.svg",
+        "url": "/lesson/resources/386e4a611fd51badb630c21cd41e7e41869da5e733bf7805bc8877c2972ffe4f/smile.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/station.svg",
+        "url": "/lesson/resources/7bb0432eba8f3b88743fe5d7829a7808a2ad5e718daddc8142ff195c0b71dc0c/station.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/task-checked.svg",
+        "url": "/lesson/resources/4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729/task-checked.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/task-record.svg",
+        "url": "/lesson/resources/7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066/task-record.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/train-carriage.svg",
+        "url": "/lesson/resources/a8565151bfab64e901bc91bdc196cef49eeff79898e6bc7a030ccde660b6803d/train-carriage.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/train.svg",
+        "url": "/lesson/resources/49e1bc35a7b84a9ed441f71e2462c4c29aacceb297010c72eaa921c2cf38b15b/train.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/ugly.svg",
+        "url": "/lesson/resources/b44902cbc67b7b0616f2a9e7c28ba58d82a4bde99b62c795dc9b9261646eb51a/ugly.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/work-record.svg",
+        "url": "/lesson/resources/b97036e6dcd9e5951566a4c3e0577ad0e51e5e46b3201b6771722e19c2688975/work-record.svg"
+      },
+      {
+        "key": "/lesson/assets/unit141-142/worried.svg",
+        "url": "/lesson/resources/f2a9457d2c3dec3610f9840311456d934ad15fe1a8b02d874b1893fa7f507181/worried.svg"
+      },
+      {
+        "key": "/lesson/unit141-142/content.js",
+        "url": "/lesson/resources/2dfdcc121b5a548e269fad5ca9c17414e614be583d215bd41f3bd4c522c93a17/content.js"
+      },
+      {
+        "key": "/lesson/unit141-142/grammar.js",
+        "url": "/lesson/resources/36eccda927e8f5f1b1fff42f139c2bd672a23891844560a5434ca62f27ef14db/grammar.js"
+      },
+      {
+        "key": "/lesson/unit141-142/index.html",
+        "url": "/lesson/resources/dcf26282bf4e89e42975521fda1f10b6ab88c19e32a403b7c0fd91f5f71bac1b/index.html"
+      },
+      {
+        "key": "/lesson/unit141-142/scene.js",
+        "url": "/lesson/resources/e01f647e9a1568bf8cc4921ec33a84659e00b60e044b372d498a2ed8ecc9b6af/scene.js"
+      },
+      {
+        "key": "/lesson/unit141-142/typography.css",
+        "url": "/lesson/resources/2c5d1c7b876bf6afa8157f2d614da6f47addb528c1ea007141d06d43bf77a8df/typography.css"
+      },
+      {
+        "key": "/lesson/unit141-142/unit.css",
+        "url": "/lesson/resources/7ed7716e27fae589282cb4a6840522204e80498de1b80ff34d5ba36eeb1a8355/unit.css"
+      },
+      {
+        "key": "/lesson/unit141-142/unit.js",
+        "url": "/lesson/resources/08121c0e289786e528428222b558fad7c789d7d19b12b713fc3f605704777e7c/unit.js"
+      }
+    ]
+  }
+]

@@ -1,0 +1,24 @@
+
+Running 15 tests using 1 worker
+
+(node:29100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit117-118-story-layout.spec.js:24:39 › 320：六段完整叙述、三人身份、电话两端与按需中文续读 (15.9s)
+  ok  2 tests\e2e\unit117-118-story-layout.spec.js:24:39 › 390：六段完整叙述、三人身份、电话两端与按需中文续读 (14.2s)
+  ok  3 tests\e2e\unit117-118-story-layout.spec.js:24:39 › 768：六段完整叙述、三人身份、电话两端与按需中文续读 (13.3s)
+  ok  4 tests\e2e\unit117-118-story-layout.spec.js:24:39 › 1280：六段完整叙述、三人身份、电话两端与按需中文续读 (13.6s)
+  ok  5 tests\e2e\unit117-118-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (10.9s)
+  ok  6 tests\e2e\unit117-118.spec.js:12:1 › 74题：未答材料、两张时间图、独立迁移、帮助记录与三卡 (46.1s)
+  ok  7 tests\e2e\unit117-118.spec.js:28:1 › 28词卡、118课m–r、A6／B8／C8完整 (7.4s)
+  ok  8 tests\e2e\unit117-118.spec.js:38:1 › 重复错答、两空门槛、撤回、提示、刷新与重练 (33.4s)
+  ok  9 tests\e2e\unit117-118.spec.js:49:1 › 错答不更新任务记录，三卡7／8／2，刷新保留重叠时段 (8.5s)
+  ok 10 tests\e2e\unit117-118.spec.js:53:1 › 全部声音失败仍能完成五区 (40.6s)
+  ok 11 tests\e2e\unit117-118.spec.js:54:1 › 22道书写题打印与恢复 (1.4s)
+  ok 12 tests\e2e\unit117-118.spec.js:55:39 › 320及短屏：过去动作与时间材料、长句、全部题型和三卡 (46.8s)
+  ok 13 tests\e2e\unit117-118.spec.js:55:39 › 390及短屏：过去动作与时间材料、长句、全部题型和三卡 (45.7s)
+  ok 14 tests\e2e\unit117-118.spec.js:55:39 › 768及短屏：过去动作与时间材料、长句、全部题型和三卡 (45.6s)
+  ok 15 tests\e2e\unit117-118.spec.js:55:39 › 1280及短屏：过去动作与时间材料、长句、全部题型和三卡 (47.6s)
+
+  Slow test file: tests\e2e\unit117-118.spec.js (5.4m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  15 passed (6.5m)

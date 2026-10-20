@@ -74,7 +74,7 @@ test('柜台否认和最后确认展示不同的伞，紫色圆点伞确认后�
     await room.getByRole('button', { name: i === 3 ? '完成这一站' : '下一题', exact: true }).click();
   }
   // Finishing now uses the shared result card; the same purple umbrella stays in its artwork.
-  await expect(room.locator('.completion-object')).toHaveAttribute('src', '/assets/unit3-4/umbrella-held.svg');
+  await expect(room.locator('.current-completion>img')).toHaveAttribute('src', '/assets/awards/unit3-4-umbrella.webp');
   await expect(room.getByRole('heading', { name: '雨伞领回来了！', exact: true })).toBeVisible();
   await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
 });

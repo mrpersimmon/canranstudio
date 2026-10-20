@@ -1,0 +1,211 @@
+
+Running 27 tests using 1 worker
+
+(node:31628) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit7-8-exam.spec.js:11:1 › 十一题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 (3.2s)
+  x   2 tests\e2e\unit7-8-exam.spec.js:58:1 › 三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书 (13.5s)
+(node:25920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  3 tests\e2e\unit7-8-exam.spec.js:87:1 › 旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代答 (1.6s)
+  ok  4 tests\e2e\unit7-8-exam.spec.js:107:44 › 320 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (4.9s)
+  ok  5 tests\e2e\unit7-8-exam.spec.js:107:44 › 390 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (3.5s)
+  ok  6 tests\e2e\unit7-8-exam.spec.js:107:44 › 768 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (3.7s)
+  ok  7 tests\e2e\unit7-8-exam.spec.js:107:44 › 1280 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (3.7s)
+  x   8 tests\e2e\unit7-8-exam.spec.js:150:1 › 整课包离线刷新仍是十一题，当前新题未提交不计分 (912ms)
+(node:9472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  9 tests\e2e\unit7-8-layout.spec.js:7:31 › 320 无配音课文翻句时按钮稳定，看图选词完整可见 (1.3s)
+  ok 10 tests\e2e\unit7-8-layout.spec.js:7:31 › 1280 无配音课文翻句时按钮稳定，看图选词完整可见 (1.2s)
+  ok 11 tests\e2e\unit7-8-layout.spec.js:24:39 › 320 各站无横向溢出、图标完整，双人人名不挤入对白 (1.0s)
+  ok 12 tests\e2e\unit7-8-layout.spec.js:24:39 › 390 各站无横向溢出、图标完整，双人人名不挤入对白 (1.2s)
+  ok 13 tests\e2e\unit7-8-layout.spec.js:24:39 › 768 各站无横向溢出、图标完整，双人人名不挤入对白 (961ms)
+  ok 14 tests\e2e\unit7-8-layout.spec.js:24:39 › 1280 各站无横向溢出、图标完整，双人人名不挤入对白 (1.2s)
+  ok 15 tests\e2e\unit7-8-layout.spec.js:35:1 › 22 张词卡窄屏正反面不裁切音标或解释，最后一组主动进入单词寻宝 (2.8s)
+  ok 16 tests\e2e\unit7-8-layout.spec.js:49:31 › 320 灯泡在检查左边，错答、提示和结束操作不乱跳 (984ms)
+  ok 17 tests\e2e\unit7-8-layout.spec.js:49:31 › 1280 灯泡在检查左边，错答、提示和结束操作不乱跳 (1.0s)
+  ok 18 tests\e2e\unit7-8-layout.spec.js:59:1 › 词块可撤回、键盘重组，刷新保留草稿，下一题不继承答案 (1.1s)
+  ok 19 tests\e2e\unit7-8-layout.spec.js:65:31 › 390 档案跟随原文、人物与对白错开、完成前不提前填职业 (1.4s)
+  ok 20 tests\e2e\unit7-8-layout.spec.js:65:31 › 1280 档案跟随原文、人物与对白错开、完成前不提前填职业 (1.4s)
+  ok 21 tests\e2e\unit7-8-layout.spec.js:79:1 › 参考答案在对应活动完成后才展示，her题的选择对象准确 (1.9s)
+  ok 22 tests\e2e\unit7-8.spec.js:8:1 › 从词卡开始，浏览16句并完成31题后才获得15星课堂配套证书 (9.0s)
+  x  23 tests\e2e\unit7-8.spec.js:27:1 › 首页继续定位与旧 be、trans 书签衔接到合并活动 (8.7s)
+(node:27312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 24 tests\e2e\unit7-8.spec.js:35:1 › 纸笔练习保留 Written A 三组与 B 十组，明确人物并实际打印一张 A4 (819ms)
+  ok 25 tests\e2e\unit7-8.spec.js:41:1 › 挑战暂停保留选择，记录区分独立、提示和修正；不提前发证 (2.4s)
+  x  26 tests\e2e\unit7-8.spec.js:46:1 › 内容升版只重置变动活动，不从旧题或历史成绩重新填答案 (5.5s)
+(node:33012) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  27 tests\e2e\unit7-8.spec.js:53:1 › 首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录 (8.4s)
+
+
+  1) tests\e2e\unit7-8-exam.spec.js:58:1 › 三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书 ─────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-reply')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-reply')
+
+
+       at ..\support\units1-30-tasks.js:44
+
+      42 |  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
+      43 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});
+    > 44 |  await expect(room).toBeVisible();
+         |                     ^
+      45 |  if(await room.locator('.practice-finish').isVisible())return;
+      46 |  const copy=await room.locator('.progress-copy').innerText();const first=Number(copy.match(/第 (\d+)/)[1])-1;
+      47 |  for(let i=first;i<items.length;i++){
+        at Object.activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\units1-30-tasks.js:44:21)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit7-8-exam.spec.js:66:38
+
+    Error Context: test-results\unit7-8-exam-三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit7-8-exam-三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit7-8-exam-三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit7-8-exam.spec.js:150:1 › 整课包离线刷新仍是十一题，当前新题未提交不计分 ────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "1"
+    Received: undefined
+
+      156 |   }
+      157 |   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'What nationality', exact: true }).click();
+    > 158 |   await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
+          |                                                                                                                        ^
+      159 |   await expect(room).toContainText('第 4 / 11 题'); await expect(room.getByRole('button', { name: '撤回 What nationality', exact: true })).toBeVisible();
+      160 |   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
+      161 |   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit7-8-exam.spec.js:158:120
+
+    Error Context: test-results\unit7-8-exam-整课包离线刷新仍是十一题，当前新题未提交不计分\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit7-8-exam-整课包离线刷新仍是十一题，当前新题未提交不计分\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit7-8-exam-整课包离线刷新仍是十一题，当前新题未提交不计分\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\e2e\unit7-8.spec.js:27:1 › 首页继续定位与旧 be、trans 书签衔接到合并活动 ──────────────────────────────────
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /#learn\/reply$/
+    Received string:  "http://127.0.0.1:4173/lesson/unit7-8/#learn/grammar"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        6 × locator resolved to <html lang="zh-CN" data-unit="unit7-8" data-course-preparing="">…</html>
+          - unexpected value "http://127.0.0.1:4173/lesson/unit7-8/#learn/be"
+        8 × locator resolved to <html lang="zh-CN" data-unit="unit7-8">…</html>
+          - unexpected value "http://127.0.0.1:4173/lesson/unit7-8/#learn/grammar"
+
+
+      27 | test('首页继续定位与旧 be、trans 书签衔接到合并活动',async({page})=>{
+      28 |  await page.goto('/lesson/');await page.getByRole('link',{name:'开始学习：新朋友采访站',exact:true}).click();await expect(page).toHaveURL(/\/lesson\/unit7-8\/#learn\/words$/);
+    > 29 |  await page.goto('/lesson/unit7-8/#learn/be');await expect(page).toHaveURL(/#learn\/reply$/);const room=page.locator('.stage-reply');
+         |                                                                  ^
+      30 |  await room.getByRole('button',{name:"I'm Italian.",exact:true}).click();await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(room.getByRole('heading').first()).toBeInViewport();
+      31 |  await page.getByRole('link',{name:'我的课程',exact:true}).click();const resume=page.getByRole('link',{name:'继续学习：新朋友采访站',exact:true});await expect(resume).toHaveAttribute('href','/lesson/unit7-8/#learn/reply');await resume.click();await expect(room.getByRole('button',{name:"I'm Italian.",exact:true})).toHaveAttribute('aria-pressed','true');
+      32 |  await page.goto('/unit7-8/#learn/trans');await expect(page).toHaveURL(/#learn\/interview$/);await expect(page.locator('.stage-interview .interview-task-prompt')).toContainText('Robert');await expect(page.locator('.shop-stage')).toHaveCount(10);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit7-8.spec.js:29:66
+
+    Error Context: test-results\unit7-8-首页继续定位与旧-be、trans-书签衔接到合并活动\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit7-8-首页继续定位与旧-be、trans-书签衔接到合并活动\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit7-8-首页继续定位与旧-be、trans-书签衔接到合并活动\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) tests\e2e\unit7-8.spec.js:46:1 › 内容升版只重置变动活动，不从旧题或历史成绩重新填答案 ───────────────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.stage-interview').getByRole('button', { name: 'What\'s his job?', exact: true })
+    Expected: "true"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-interview').getByRole('button', { name: 'What\'s his job?', exact: true })
+
+
+      47 |  await page.goto('/unit7-8/#learn/reply');const reply=page.locator('.stage-reply');await reply.getByRole('button',{name:"I'm Italian.",exact:true}).click();await reply.getByRole('button',{name:'检查答案',exact:true}).click();
+      48 |  await page.goto('/unit7-8/#learn/interview');const interview=page.locator('.stage-interview');await interview.getByRole('button',{name:"What's his job?",exact:true}).click();
+    > 49 |  await page.route('**/unit7-8/content.js*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace("q('reply-nationality'","q('reply-nationality-revised'")});});await page.reload();await expect(interview.getByRole('button',{name:"What's his job?",exact:true})).toHaveAttribute('aria-pressed','true');
+         |                                                                                                                                                                                                                                                                                                                                  ^
+      50 |  await page.goto('/unit7-8/#learn/reply');await expect(reply.getByRole('button',{name:"I'm Italian.",exact:true})).toHaveAttribute('aria-pressed','false');await expect(reply.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(reply.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+      51 | });
+      52 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit7-8.spec.js:49:322
+
+    Error Context: test-results\unit7-8-内容升版只重置变动活动，不从旧题或历史成绩重新填答案\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit7-8-内容升版只重置变动活动，不从旧题或历史成绩重新填答案\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit7-8-内容升版只重置变动活动，不从旧题或历史成绩重新填答案\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) tests\e2e\unit7-8.spec.js:53:1 › 首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录 ─────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-reply')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-reply')
+
+
+      52 |
+      53 | test('首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录',async({page})=>{
+    > 54 |  await page.goto('/unit7-8/#learn/reply');const root=page.locator('.stage-reply');await root.getByRole('button',{name:"I'm Italian.",exact:true}).click();for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit7-8/#learn/reply','unit49-50/#learn/apply']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}await page.goto('/lesson/');await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();await expect(page.getByRole('link',{name:'继续学习：新朋友采访站',exact:true})).toBeVisible();await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会','新朋友采访站'])await expect(page.getByRole('link',{name:'开始学习：'+name,exact:true})).toBeVisible();await page.goto('/unit7-8/#learn/reply');await expect(root.getByRole('button',{name:"I'm Italian.",exact:true})).toHaveAttribute('aria-pressed','true');
+         |                                                                                                                                                                                                                                                                                                                                                                                                          ^
+      55 | });
+      56 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit7-8.spec.js:54:394
+
+    Error Context: test-results\unit7-8-首页重开包含新单元，取消保留、确认仅清除-lesson-路径记录\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit7-8-首页重开包含新单元，取消保留、确认仅清除-lesson-路径记录\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit7-8-首页重开包含新单元，取消保留、确认仅清除-lesson-路径记录\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    tests\e2e\unit7-8-exam.spec.js:58:1 › 三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书 ──────────────────────────
+    tests\e2e\unit7-8-exam.spec.js:150:1 › 整课包离线刷新仍是十一题，当前新题未提交不计分 ─────────────────────────────────
+    tests\e2e\unit7-8.spec.js:27:1 › 首页继续定位与旧 be、trans 书签衔接到合并活动 ───────────────────────────────────
+    tests\e2e\unit7-8.spec.js:46:1 › 内容升版只重置变动活动，不从旧题或历史成绩重新填答案 ────────────────────────────────────
+    tests\e2e\unit7-8.spec.js:53:1 › 首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录 ──────────────────────────────
+  22 passed (1.5m)

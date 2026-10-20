@@ -147,9 +147,12 @@
   async function prepare(pack, foreground = true) {
     await store.maintain(() => store.put('meta', leaseKey(pack), { pack: pack.id + '@' + pack.revision, expires: Date.now() + 30 * 60 * 1000, resources: [...pack.required, ...pack.audio].map(item => item.sha256) })).catch(() => {});
     let done = 0;
-    const resources = new Map(), queue = [...pack.required];
+    // Start the large fonts/images first, allowing small files to finish while
+    // those transfers are in flight. Every declared resource is still checked
+    // and decoded before entry; nothing is deferred or removed from readiness.
+    const resources = new Map(), queue = [...pack.required].sort((a,b)=>b.bytes-a.bytes);
     const total = queue.reduce((sum, item) => sum + item.bytes, 0);
-    await Promise.all(Array.from({ length: foreground ? 4 : 2 }, async () => {
+    await Promise.all(Array.from({ length: foreground ? 6 : 2 }, async () => {
       while (queue.length) {
         const item = queue.shift(), buffer = await store.obtain(item, { signal: cancellation.signal });
         resources.set(item.key, { item, buffer });

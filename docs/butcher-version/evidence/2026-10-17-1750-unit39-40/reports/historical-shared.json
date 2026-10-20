@@ -1,0 +1,902 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit39-40.spec.js",
+      "tests/e2e/retry-feedback.spec.js",
+      "tests/e2e/submission-statistics.spec.js",
+      "--grep",
+      "39",
+      "--output=output/unit3940-work/historical-shared",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3940-work/historical-shared",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4508",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "retry-feedback.spec.js",
+      "file": "retry-feedback.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "unit39-40 选择题错答只提示重试，改选后正常推进",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1207,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:15.592Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "655a3c6877ae64d9a95e-a9884772a1edad1305d5",
+          "file": "retry-feedback.spec.js",
+          "line": 41,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "submission-statistics.spec.js",
+      "file": "submission-statistics.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "39-40 共用结算按提交计次，手机三卡完整，刷新保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7026,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:17.067Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be34b044db501f8e9647-f0555eb59af026f36700",
+          "file": "submission-statistics.spec.js",
+          "line": 16,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "title": "unit39-40.spec.js",
+      "file": "unit39-40.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "入口横幅、9张词卡音标与翻页恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2629,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:24.114Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-b5751d99487ab211871e",
+          "file": "unit39-40.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "全部声音失败仍可完成33题13句并导出纪念证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10251,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:26.865Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-6195d74230e020870a12",
+          "file": "unit39-40.spec.js",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "13句原文、中文与逐句花瓶身份：计划不提前落位，刷新与重演",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3588,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:37.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-0cab597d921ad0501e7d",
+          "file": "unit39-40.spec.js",
+          "line": 14,
+          "column": 1
+        },
+        {
+          "title": "花瓶与接收者双条件，未检查和错答不交接，修正后才交接",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2055,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:40.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-988f5cde5e4517186b23",
+          "file": "unit39-40.spec.js",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "综合16题逐题错答再修正，自动保存与刷新与词块撤回",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:42.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-28200d81c85868c9e62a",
+          "file": "unit39-40.spec.js",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "宽度320人物、花瓶、十二幅材料与场景找位置完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4378,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:52.031Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-aacf068f17e19c274b36",
+          "file": "unit39-40.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度390人物、花瓶、十二幅材料与场景找位置完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4427,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:28:56.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-89dfb1e29dddbe592897",
+          "file": "unit39-40.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度768人物、花瓶、十二幅材料与场景找位置完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4667,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:00.854Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-203cf464d5c287df5abd",
+          "file": "unit39-40.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "宽度1280人物、花瓶、十二幅材料与场景找位置完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4628,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:05.530Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-d6cf861bb0e99f2843d6",
+          "file": "unit39-40.spec.js",
+          "line": 27,
+          "column": 39
+        },
+        {
+          "title": "配对部分选择不通过，错答草稿刷新后可修正",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 933,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:10.166Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-84ae2cb7ef521ebb6e91",
+          "file": "unit39-40.spec.js",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "正常反馈音与键盘；A5组B10组原纸笔练习打印",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11592,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:11.109Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-084d8b1c3cdb2c674c93",
+          "file": "unit39-40.spec.js",
+          "line": 37,
+          "column": 1
+        },
+        {
+          "title": "完整缓存首访与离线重访保持词卡和画册",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:22.708Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-0efa924865c59741e58e",
+          "file": "unit39-40.spec.js",
+          "line": 40,
+          "column": 1
+        },
+        {
+          "title": "缺图保持准备页，重试后完整进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3180,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:28.085Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-e7c7ff99c841504dbeb0",
+          "file": "unit39-40.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "禁用常驻缓存仍可完成并导出完整证书",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11746,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:31.279Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-c2b09339c5ffd9ab70fa",
+          "file": "unit39-40.spec.js",
+          "line": 46,
+          "column": 1
+        },
+        {
+          "title": "矮屏电脑对话、人物与下一句同时可见，连续阅读不跳动",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1284,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:43.037Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-bdd7c1de6227e884ff09",
+          "file": "unit39-40.spec.js",
+          "line": 50,
+          "column": 1
+        },
+        {
+          "title": "词卡390首访与离线往返逐帧不闪烁",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2326,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:44.329Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "next-0.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDY4MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNjgxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA2ODEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDY4MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNjgxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiAxMjMxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiAxMjMxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDEyMzEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    },
+                    {
+                      "name": "previous-0.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "next-1.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDY4MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNjgxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA2ODEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDY4MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogMTIzMSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogMTIzMSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiAxMjMxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJtdXRhdGlvbiIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0KXQ=="
+                    },
+                    {
+                      "name": "previous-1.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDc5NywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiA3OTcsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogNzk3LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5MSwKICAgICJoZWlnaHQiOiAxMDk1LAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTkxLAogICAgImhlaWdodCI6IDEwOTUsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTEsCiAgICAiaGVpZ2h0IjogMTA5NSwKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-8c2653748d2edd836837",
+          "file": "unit39-40.spec.js",
+          "line": 87,
+          "column": 31
+        },
+        {
+          "title": "词卡1280首访与离线往返逐帧不闪烁",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:46.660Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "next-0.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTk3LAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTk3LAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJtdXRhdGlvbiIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    },
+                    {
+                      "name": "previous-0.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJtdXRhdGlvbiIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJtdXRhdGlvbiIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    },
+                    {
+                      "name": "next-1.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTk3LAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTk3LAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJtdXRhdGlvbiIsCiAgICAieSI6IDU5NywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1OTcsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    },
+                    {
+                      "name": "previous-1.json",
+                      "contentType": "application/json",
+                      "body": "WwogIHsKICAgICJraW5kIjogImJlZm9yZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDQ4MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA0ODMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAibXV0YXRpb24iLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNDgzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogIm11dGF0aW9uIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfSwKICB7CiAgICAia2luZCI6ICJmcmFtZSIsCiAgICAieSI6IDUxMywKICAgICJoZWlnaHQiOiA3NTMsCiAgICAicGFpbnRpbmciOiBmYWxzZSwKICAgICJsb2FkZXIiOiBmYWxzZSwKICAgICJ2aXNpYmlsaXR5IjogInZpc2libGUiLAogICAgImJsYW5rSW1hZ2VzIjogMAogIH0sCiAgewogICAgImtpbmQiOiAiZnJhbWUiLAogICAgInkiOiA1MTMsCiAgICAiaGVpZ2h0IjogNzUzLAogICAgInBhaW50aW5nIjogZmFsc2UsCiAgICAibG9hZGVyIjogZmFsc2UsCiAgICAidmlzaWJpbGl0eSI6ICJ2aXNpYmxlIiwKICAgICJibGFua0ltYWdlcyI6IDAKICB9LAogIHsKICAgICJraW5kIjogImZyYW1lIiwKICAgICJ5IjogNTEzLAogICAgImhlaWdodCI6IDc1MywKICAgICJwYWludGluZyI6IGZhbHNlLAogICAgImxvYWRlciI6IGZhbHNlLAogICAgInZpc2liaWxpdHkiOiAidmlzaWJsZSIsCiAgICAiYmxhbmtJbWFnZXMiOiAwCiAgfQpd"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-cad3586c975073a3a29a",
+          "file": "unit39-40.spec.js",
+          "line": 87,
+          "column": 31
+        },
+        {
+          "title": "两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 6398,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40.spec.js:96:257",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40.spec.js",
+                      "column": 257,
+                      "line": 96
+                    },
+                    "snippet": "  94 | test('两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离',async({page})=>{\n  95 |  await page.goto('/unit39-40/#learn/be');const r=page.locator('.stage-be');await select(r,{cloze:['them']});await expect(r.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await r.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'it',exact:true}).click();await r.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(r.getByRole('status')).toHaveText('再看看，试一次。');await r.getByRole('button',{name:'再试一次',exact:true}).click();await select(r,{cloze:['it','them']});await r.getByRole('button',{name:'检查答案',exact:true}).click();await expect(r.getByRole('status')).toHaveText('答对了！');\n> 96 |  await page.goto('/unit39-40/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await page.goto('/unit37-38/#learn/be');await expect(page.locator('.stage-be').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit39-40/#learn/be');await expect(r.getByRole('status')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                 ^\n  97 | });\n  98 | test('对照已确认样板与相邻单元，保留同尺寸视觉证据',async({page})=>{\n  99 |  await page.setViewportSize({width:1280,height:1200});await page.goto('/unit1-2/#learn/manners');await page.locator('.stage-manners').screenshot({path:OUT+'/reference-unit1-2.png'});await page.goto('/unit37-38/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit37-38.png'});await page.goto('/unit39-40/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit39-40.png'});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40.spec.js",
+                        "column": 257,
+                        "line": 96
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-be').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\n\n  94 | test('两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离',async({page})=>{\n  95 |  await page.goto('/unit39-40/#learn/be');const r=page.locator('.stage-be');await select(r,{cloze:['them']});await expect(r.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await r.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'it',exact:true}).click();await r.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(r.getByRole('status')).toHaveText('再看看，试一次。');await r.getByRole('button',{name:'再试一次',exact:true}).click();await select(r,{cloze:['it','them']});await r.getByRole('button',{name:'检查答案',exact:true}).click();await expect(r.getByRole('status')).toHaveText('答对了！');\n> 96 |  await page.goto('/unit39-40/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await page.goto('/unit37-38/#learn/be');await expect(page.locator('.stage-be').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit39-40/#learn/be');await expect(r.getByRole('status')).toHaveText('答对了！');\n     |                                                                                                                                                                                                                                                                 ^\n  97 | });\n  98 | test('对照已确认样板与相邻单元，保留同尺寸视觉证据',async({page})=>{\n  99 |  await page.setViewportSize({width:1280,height:1200});await page.goto('/unit1-2/#learn/manners');await page.locator('.stage-manners').screenshot({path:OUT+'/reference-unit1-2.png'});await page.goto('/unit37-38/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit37-38.png'});await page.goto('/unit39-40/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit39-40.png'});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40.spec.js:96:257"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:49.051Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3940-work\\historical-shared\\unit39-40-两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离\\error-context.md"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3940-work\\historical-shared\\unit39-40-两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3940-work\\historical-shared\\unit39-40-两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit39-40.spec.js",
+                    "column": 257,
+                    "line": 96
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-3c71853ed4febaa1bb04",
+          "file": "unit39-40.spec.js",
+          "line": 94,
+          "column": 1
+        },
+        {
+          "title": "对照已确认样板与相邻单元，保留同尺寸视觉证据",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1362,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T10:29:56.452Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7a1e793e413a1cd10ce9-364be7ed96f272cceee3",
+          "file": "unit39-40.spec.js",
+          "line": 98,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T10:28:14.911Z",
+    "duration": 103477.45700000001,
+    "expected": 20,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

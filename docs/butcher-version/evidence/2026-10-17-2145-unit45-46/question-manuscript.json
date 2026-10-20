@@ -1,0 +1,1329 @@
+{
+  "listen": [
+    {
+      "id": "u4546-v1-v-boss",
+      "target": "识别角色称呼",
+      "prompt": "boss 是谁？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "老板",
+        "同学",
+        "客人"
+      ],
+      "answer": "老板",
+      "image": "/assets/unit45-46/boss.svg",
+      "imageAlt": "故事里的老板",
+      "explanation": "boss 是老板或上司。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-minute",
+      "target": "时间词词义",
+      "prompt": "“分钟”用哪个词？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "minute",
+        "letter",
+        "office"
+      ],
+      "answer": "minute",
+      "explanation": "minute 是分钟；课文 a minute 表示一会儿。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-handwriting",
+      "target": "识别字迹而不是纸张物品",
+      "prompt": "handwriting 指信上的什么？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "写出来的字迹",
+        "纸的颜色",
+        "信封的大小"
+      ],
+      "answer": "写出来的字迹",
+      "image": "/assets/unit45-46/letter.svg",
+      "imageAlt": "一封带潦草手写线条的信",
+      "explanation": "handwriting 是字迹、书写。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-actions",
+      "target": "区别问、打字与举起",
+      "prompt": "把动作与意思连起来。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "ask",
+          "cn": "问；请求"
+        },
+        {
+          "id": "2",
+          "en": "type",
+          "cn": "打字"
+        },
+        {
+          "id": "3",
+          "en": "lift",
+          "cn": "举起"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "explanation": "三个动作分别是问、打字和举起。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-food",
+      "target": "区分cake与biscuit",
+      "prompt": "选出 biscuit。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "饼干",
+        "蛋糕",
+        "面包"
+      ],
+      "answer": "饼干",
+      "optionImages": {
+        "饼干": "/assets/unit45-46/biscuit.svg",
+        "蛋糕": "/assets/unit45-46/cake.svg",
+        "面包": "/assets/unit41-42/bread.svg"
+      },
+      "explanation": "biscuit 是饼干，cake 是蛋糕。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-place",
+      "target": "next door语境词义",
+      "prompt": "She’s next door.\n她在哪里？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "在隔壁",
+        "在门上",
+        "在楼下"
+      ],
+      "answer": "在隔壁",
+      "explanation": "next door 表示在隔壁。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-v-meaning",
+      "target": "联系字迹理解terrible",
+      "prompt": "The handwriting is terrible.\n字迹怎么样？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "很糟糕",
+        "很整齐",
+        "很小"
+      ],
+      "answer": "很糟糕",
+      "explanation": "terrible 表示糟糕的；不是评价这个人不好。",
+      "hint": ""
+    }
+  ],
+  "roles": [
+    {
+      "id": "u4546-v1-r-place-v153",
+      "target": "根据原文找人物地点",
+      "prompt": "Bob 说 Pamela 在哪里？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "隔壁的办公室",
+        "老板的办公室",
+        "家里"
+      ],
+      "answer": "隔壁的办公室",
+      "explanation": "She’s next door. She’s in her office.",
+      "hint": "回想 Bob 紧接 Where’s Pamela? 的回答。",
+      "display": {
+        "title": "Bob说Pamela在哪里？",
+        "material": "The boss: Where’s Pamela?\nBob: She’s next door. She’s in her office, sir."
+      }
+    },
+    {
+      "id": "u4546-v1-r-reference",
+      "target": "用说话人确定代词指向",
+      "prompt": "老板说：Can she type this letter for me?\n点出指老板自己的词。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "locate",
+      "fragments": [
+        "Can ",
+        {
+          "value": "she"
+        },
+        " type ",
+        {
+          "value": "this letter"
+        },
+        " for ",
+        {
+          "value": "me"
+        },
+        "?"
+      ],
+      "options": [
+        "she",
+        "this letter",
+        "me"
+      ],
+      "answer": "me",
+      "explanation": "说话人是老板，me 指老板自己。",
+      "hint": "先确认这句话是谁说的。"
+    },
+    {
+      "id": "u4546-v1-r-handoff-v153",
+      "target": "理解递信行为",
+      "prompt": "Bob 说 Here you are. 时，把信给谁？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "Pamela",
+        "老板",
+        "Bob 自己"
+      ],
+      "answer": "Pamela",
+      "optionImages": {
+        "Pamela": "/assets/unit45-46/pamela.svg",
+        "老板": "/assets/unit45-46/boss.svg",
+        "Bob 自己": "/assets/unit45-46/bob.svg"
+      },
+      "explanation": "Pamela接过信后说 Thank you, Bob.。",
+      "hint": "看接下来是谁在道谢。",
+      "display": {
+        "title": "Bob把信给谁？",
+        "material": "Bob: Here you are.\nPamela: Thank you, Bob."
+      }
+    },
+    {
+      "id": "u4546-v1-r-cause-v153",
+      "target": "根据原文因果而非猜测",
+      "prompt": "Pamela 为什么打不了这封信？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "她看不懂老板的字迹",
+        "她找不到打字机",
+        "她不想帮助老板"
+      ],
+      "answer": "她看不懂老板的字迹",
+      "explanation": "原文原因是 I can’t read it!。",
+      "hint": "她在最后一段自己说明了原因。",
+      "display": {
+        "title": "Pamela为什么打不了这封信？",
+        "material": "Pamela: I can’t type this letter.\nI can’t read it! The boss’s handwriting is terrible!"
+      }
+    },
+    {
+      "id": "u4546-v1-r-ability-v153",
+      "target": "区分一般能力与当前障碍",
+      "prompt": "Pamela 先说 I can，后来又说 I can’t type this letter。\n哪种理解对？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "她会打字，但这封信的字迹难读",
+        "她完全不会打字",
+        "她看不懂所有的书"
+      ],
+      "answer": "她会打字，但这封信的字迹难读",
+      "explanation": "this letter 限定的是这封信，不能扩大成不会打字。",
+      "hint": "注意后来那句话里 this letter 的范围。",
+      "display": {
+        "title": "哪种理解符合这两段话？",
+        "material": "Pamela: Yes, of course I can.\n后来：I can’t read it! The boss’s handwriting is terrible!"
+      }
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u4546-v1-g-negative",
+      "target": "cannot和can’t表达否定",
+      "prompt": "选择与 I cannot type. 意思相同的一句。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "options": [
+        "I can’t type.",
+        "I can type.",
+        "I am typing."
+      ],
+      "answer": "I can’t type.",
+      "explanation": "cannot 可以缩写成 can’t，表示不能或不会。",
+      "hint": "寻找否定形式。",
+      "workshop": {
+        "rule": "cannot 可以缩写成 can’t，表示不能或不会。",
+        "model": {
+          "lines": [
+            [
+              "I cannot read it. → I can’t read it.",
+              "cannot → can’t；否定意思不变。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-form",
+      "target": "否定can后仍接原形",
+      "prompt": "说“她不能举起这个箱子”。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "She ",
+          "after": "",
+          "options": [
+            "can’t",
+            "isn’t"
+          ]
+        },
+        {
+          "before": "",
+          "after": " this box.",
+          "options": [
+            "lift",
+            "lifts",
+            "lifting"
+          ]
+        }
+      ],
+      "answer": "[\"can’t\",\"lift\"]",
+      "explanation": "can’t 后面也用动词原形 lift。",
+      "hint": "不能在 can’t 后加动词-ing 或-s。",
+      "workshop": {
+        "rule": "can’t 后面也用动词原形 lift。"
+      }
+    },
+    {
+      "id": "u4546-v1-g-question",
+      "target": "can前置的一般疑问句",
+      "prompt": "用词块问：Bob 能读这封信吗？",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "wordbank",
+      "tokens": [
+        "Can",
+        "Bob",
+        "read",
+        "this letter",
+        "Does",
+        "reads"
+      ],
+      "slots": 4,
+      "answer": "Can Bob read this letter",
+      "suffix": "?",
+      "explanation": "Can 放在主语 Bob 前面，read 用原形。",
+      "hint": "先放 can，再放人和动作。",
+      "workshop": {
+        "rule": "Can 放在主语 Bob 前面，read 用原形。",
+        "model": {
+          "lines": [
+            [
+              "She can see it. → Can she see it?",
+              "can 到主语前，动作不变。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-reply-v153",
+      "target": "根据明确事实选择can肯否短答",
+      "prompt": "你会打字，但不能举起这个箱子。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can you type? Yes, I ",
+          "after": ".",
+          "options": [
+            "can",
+            "can’t",
+            "am"
+          ]
+        },
+        {
+          "before": "Can you lift this box? No, I ",
+          "after": ".",
+          "options": [
+            "can",
+            "can’t",
+            "am not"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"can’t\"]",
+      "explanation": "Can you…? 按事实用 Yes, I can. 或 No, I can’t.。",
+      "hint": "分清这两个本领，分别回答。",
+      "workshop": {
+        "rule": "Can you…?的肯否短答由给出的事实决定，can本身不随人称变化。",
+        "model": {
+          "lines": [
+            [
+              "Can you write in English?",
+              "导学原例：会写，Yes, I can.；不会写，No, I can’t.。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-pronoun-v153",
+      "target": "we与they随回答视角变化",
+      "prompt": "你和Bob都能读这封信；Pamela和Jane也都能读。\n由你回答：",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can you and Bob read it? Yes, ",
+          "after": " can.",
+          "options": [
+            "we",
+            "they",
+            "I"
+          ]
+        },
+        {
+          "before": "Can Pamela and Jane read it? Yes, ",
+          "after": " can.",
+          "options": [
+            "we",
+            "they",
+            "she"
+          ]
+        }
+      ],
+      "answer": "[\"we\",\"they\"]",
+      "explanation": "包含我用 we；另外两个人用 they。",
+      "hint": "第一句问到你自己，第二句问另外两个人。",
+      "workshop": {
+        "rule": "回答包含自己的两个人用we，另外两个人用they。",
+        "model": {
+          "lines": [
+            [
+              "Can you and Jane see the bird? — Yes, we can.",
+              "假设你和Jane都看得见，回答包含自己。"
+            ],
+            [
+              "Can Bob and Sam see the bird? — Yes, they can.",
+              "假设Bob和Sam都看得见，回答另外两个人。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-who",
+      "target": "who作主语不再加另一主语",
+      "prompt": "想问“谁会打字？”，选哪句？",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "options": [
+        "Who can type?",
+        "Who can she type?",
+        "Who does can type?"
+      ],
+      "answer": "Who can type?",
+      "explanation": "Who 就是要找的那个人；后面直接接 can 和动作。",
+      "hint": "这一句还不知道谁来做，不需要再塞入 she。",
+      "workshop": {
+        "rule": "Who 就是要找的那个人；后面直接接 can 和动作。",
+        "model": {
+          "lines": [
+            [
+              "Who can open the door? — Bob can.",
+              "who 问谁，回答一个人。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-what",
+      "target": "what询问能做的事情",
+      "prompt": "用词块问：她能做什么？",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "wordbank",
+      "tokens": [
+        "What",
+        "can",
+        "she",
+        "do",
+        "does"
+      ],
+      "slots": 4,
+      "answer": "What can she do",
+      "suffix": "?",
+      "explanation": "What can she do? 问她能做的事情。",
+      "hint": "what 在前，然后是 can、主语和动词。",
+      "workshop": {
+        "rule": "What can she do? 问她能做的事情。",
+        "model": {
+          "lines": [
+            [
+              "What can you see? — A bird.",
+              "what 问看见什么。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-where",
+      "target": "where询问地点",
+      "prompt": "想知道在哪里能找到Pamela，选哪句？",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "options": [
+        "Where can I find Pamela?",
+        "When can I find Pamela?",
+        "Who can find Pamela?"
+      ],
+      "answer": "Where can I find Pamela?",
+      "explanation": "where 问地点。",
+      "hint": "你要的信息是一个地方。",
+      "workshop": {
+        "rule": "where 问地点。",
+        "model": {
+          "lines": [
+            [
+              "Where can I put the book? — On the desk.",
+              "where 问在哪里。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-when",
+      "target": "when询问时间",
+      "prompt": "想知道Bob什么时候能来，补全问句。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " can Bob come?",
+          "options": [
+            "When",
+            "Where",
+            "Who"
+          ]
+        }
+      ],
+      "answer": "[\"When\"]",
+      "explanation": "when 问什么时候。",
+      "hint": "你在等一个时间，而不是地点。",
+      "workshop": {
+        "rule": "when 问什么时候。",
+        "model": {
+          "lines": [
+            [
+              "When can I read it? — Now.",
+              "when 问什么时候；now 是现在。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-how",
+      "target": "how询问方法",
+      "prompt": "你不知道怎样打开箱子，补全问句。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " can I open this box?",
+          "options": [
+            "How",
+            "Who",
+            "When"
+          ]
+        }
+      ],
+      "answer": "[\"How\"]",
+      "explanation": "how 问怎样做。",
+      "hint": "想知道方法，就找问“怎样”的词。",
+      "workshop": {
+        "rule": "how 问怎样做。",
+        "model": {
+          "lines": [
+            [
+              "How can I open the door? — With this key.",
+              "how 问方法；with this key 意为用这把钥匙。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-many",
+      "target": "how many与可数复数构成问句",
+      "prompt": "用词块问：你能看见几封信？",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "wordbank",
+      "tokens": [
+        "How many",
+        "letters",
+        "can",
+        "you",
+        "see",
+        "letter"
+      ],
+      "slots": 5,
+      "answer": "How many letters can you see",
+      "suffix": "?",
+      "explanation": "How many 后面接可数名词复数，再接 can you see。",
+      "hint": "信可以一封封数；先把问数量的部分放好。",
+      "workshop": {
+        "rule": "How many 后面接可数名词复数，再接 can you see。",
+        "model": {
+          "lines": [
+            [
+              "How many books can you see? — Three.",
+              "how many＋可数名词复数。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-much",
+      "target": "how much询问不可数的量",
+      "prompt": "问“你能看见多少牛奶？”",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " milk can you see?",
+          "options": [
+            "How much",
+            "How many",
+            "Who"
+          ]
+        }
+      ],
+      "answer": "[\"How much\"]",
+      "explanation": "问牛奶的量用 how much，不把 milk 变成可数复数。",
+      "hint": "比较牛奶和一封封的信。",
+      "workshop": {
+        "rule": "问牛奶的量用 how much，不把 milk 变成可数复数。",
+        "model": {
+          "lines": [
+            [
+              "How much water can you see?",
+              "how much＋不可数名词，问有多少。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-change",
+      "target": "正在做与能够做的表达区别",
+      "prompt": "They are typing these letters. 是“正在打”。\n改成“他们能打这些信”。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "They ",
+          "after": "",
+          "options": [
+            "can",
+            "are"
+          ]
+        },
+        {
+          "before": "",
+          "after": " these letters.",
+          "options": [
+            "type",
+            "typing",
+            "types"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"type\"]",
+      "explanation": "can type 表示能打字；are typing 表示正在打，意思不同。",
+      "hint": "改为本领时，要把正在进行的表达一起换掉。",
+      "workshop": {
+        "rule": "can type 表示能打字；are typing 表示正在打，意思不同。",
+        "model": {
+          "lines": [
+            [
+              "He is taking his book. → He can take his book.",
+              "正在拿书 → 能拿书；这不是同义改写。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v153-g-third-person",
+      "target": "用she与it回答明确对象的can问句",
+      "prompt": "Pamela会读这本书；这只猫能喝碟子里的奶。分别作肯定回答。",
+      "source": "课本纸90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can Pamela read this book? Yes, ",
+          "after": " can.",
+          "options": [
+            "she",
+            "he",
+            "it"
+          ]
+        },
+        {
+          "before": "Can the cat drink its milk? Yes, ",
+          "after": " can.",
+          "options": [
+            "it",
+            "she",
+            "they"
+          ]
+        }
+      ],
+      "answer": "[\"she\",\"it\"]",
+      "explanation": "这里Pamela用she；这只猫沿用课本it的称呼。",
+      "hint": "",
+      "distractorRationale": "按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。",
+      "workshop": {
+        "rule": "回答时，代词要指回题目中的对象。",
+        "model": {
+          "lines": [
+            [
+              "Can Bob see it? — Yes, he can.",
+              "假设Bob看得见，Bob用he。"
+            ],
+            [
+              "Can Jane see the book? — Yes, she can.",
+              "假设Jane看得见。"
+            ],
+            [
+              "Can the bird see it? — Yes, it can.",
+              "假设这只鸟看得见；这里用it指它。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v153-g-request",
+      "target": "区分能力询问与请对方做事",
+      "prompt": "Bob对Pamela说下面的话，想得到什么帮助？",
+      "source": "课本纸90–93／PDF123–126",
+      "options": [
+        "把书递给他",
+        "说出书在哪里",
+        "判断书是什么颜色"
+      ],
+      "answer": "把书递给他",
+      "display": {
+        "title": "Bob想得到什么帮助？",
+        "material": "书在Pamela手边。\nBob: Can you give me the book, please?"
+      },
+      "explanation": "在这个情境中，Can you…please?是请求对方做事。",
+      "hint": "",
+      "distractorRationale": "按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。",
+      "workshop": {
+        "rule": "同样是can问句，要结合语境判断是在问能力，还是请对方做事。",
+        "model": {
+          "lines": [
+            [
+              "Can you swim?",
+              "问有没有游泳的本领。"
+            ],
+            [
+              "Can you open the door, please?",
+              "门关着，请对方帮忙开门。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4546-v1-g-independent",
+      "target": "撤去示范后表达能力对比",
+      "prompt": "用词块说：我会做蛋糕，但不会做饼干。",
+      "source": "《同步导学》Grammar纸页82／PDF96；《语法练习册》纸页126–130／PDF140–144",
+      "type": "wordbank",
+      "tokens": [
+        "I can",
+        "make cakes",
+        "but",
+        "I can’t",
+        "make biscuits",
+        "I am"
+      ],
+      "slots": 5,
+      "answer": "I can make cakes but I can’t make biscuits",
+      "suffix": ".",
+      "explanation": "but 连接两种不同的能力情况；不能把后半句改成正在做。",
+      "hint": "两边分别说能做和不能做。",
+      "workshop": {
+        "rule": "but 连接两种不同的能力情况；不能把后半句改成正在做。"
+      }
+    }
+  ],
+  "apply": [
+    {
+      "id": "u4546-v1-a-request-v153",
+      "target": "在办公室礼貌请求帮忙",
+      "prompt": "请Bob来一下，哪句合适？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "Can you come here, please?",
+        "Where can you come?",
+        "I can’t come here."
+      ],
+      "answer": "Can you come here, please?",
+      "display": {
+        "title": "请Bob来帮忙，怎样说？",
+        "material": "The boss is here. Bob is over there.\n老板想请Bob过来帮忙。"
+      },
+      "explanation": "Can you…please? 可以用来礼貌请求。",
+      "hint": "这次是请他做一件事，不是在问地点。"
+    },
+    {
+      "id": "u4546-v1-a-person-v153",
+      "target": "根据明确能力材料选择帮手",
+      "prompt": "给这封信找一位打字帮手。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "Pamela",
+        "Bob",
+        "老板"
+      ],
+      "answer": "Pamela",
+      "display": {
+        "title": "谁能帮忙打字？",
+        "material": "新任务：Bob已经拿到老板的这封信。\nPamela: I can type.\nBob: I can’t type.\nThe boss: I can’t type."
+      },
+      "optionImages": {
+        "Pamela": "/assets/unit45-46/pamela.svg",
+        "Bob": "/assets/unit45-46/bob.svg",
+        "老板": "/assets/unit45-46/boss.svg"
+      },
+      "explanation": "这段新情境明确说 Pamela 会打字。",
+      "hint": "根据这一次提供的三个人的话选择。"
+    },
+    {
+      "id": "u4546-v1-a-handoff",
+      "target": "按英文指令交接唯一物品",
+      "prompt": "Bob 应该把信给谁？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "Pamela",
+        "老板",
+        "Bob 自己"
+      ],
+      "answer": "Pamela",
+      "display": {
+        "title": "把同一封信递过去",
+        "material": "The boss: Give the letter to Pamela, please."
+      },
+      "optionImages": {
+        "Pamela": "/assets/unit45-46/pamela.svg",
+        "老板": "/assets/unit45-46/boss.svg",
+        "Bob 自己": "/assets/unit45-46/bob.svg"
+      },
+      "explanation": "信从Bob手里交到Pamela手里。",
+      "hint": "看 to 后面的人。"
+    },
+    {
+      "id": "u4546-v1-a-problem-v153",
+      "target": "回应实际困难而非泛化能力",
+      "prompt": "Pamela拿到信后说了什么？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "I can type, but I can’t read this letter.",
+        "I can’t type any letters.",
+        "I can read this letter."
+      ],
+      "answer": "I can type, but I can’t read this letter.",
+      "display": {
+        "title": "哪句话把她的本领和这次困难说清楚？",
+        "material": "Pamela: I can type.\nI can’t read this letter."
+      },
+      "explanation": "她的困难是这封信的字迹；不是完全不会打字。",
+      "hint": "保留两条事实：会打字，这封信却读不清。"
+    },
+    {
+      "id": "u4546-v1-a-help",
+      "target": "用who问题寻找读信帮助",
+      "prompt": "用词块问：谁能读这封信？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "wordbank",
+      "tokens": [
+        "Who",
+        "can",
+        "read",
+        "this letter",
+        "he",
+        "does"
+      ],
+      "slots": 4,
+      "answer": "Who can read this letter",
+      "suffix": "?",
+      "explanation": "Who can read this letter? 用一个问题寻找能帮忙的人。",
+      "hint": "问谁时，who 本身就在主语的位置。"
+    }
+  ],
+  "exam": [
+    {
+      "id": "u4546-v1-e-words",
+      "target": "独立识别核心新词",
+      "prompt": "给词和意思配对。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "boss",
+          "cn": "老板"
+        },
+        {
+          "id": "2",
+          "en": "minute",
+          "cn": "分钟"
+        },
+        {
+          "id": "3",
+          "en": "ask",
+          "cn": "问；请求"
+        },
+        {
+          "id": "4",
+          "en": "handwriting",
+          "cn": "字迹"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+      "explanation": "按本课词义配对。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-food",
+      "target": "独立辨认两类点心",
+      "prompt": "图中是什么？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "cake",
+        "biscuit",
+        "bread"
+      ],
+      "answer": "cake",
+      "image": "/assets/unit45-46/cake.svg",
+      "imageAlt": "一块有奶油和樱桃的蛋糕",
+      "explanation": "cake 是蛋糕。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-story",
+      "target": "整合能力与本次因果",
+      "prompt": "Pamela: Yes, of course I can.\nLater: I can’t read it! The boss’s handwriting is terrible!\n她遇到了什么问题？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "会打字，但读不懂这封信",
+        "完全不会打字",
+        "老板不允许她打字"
+      ],
+      "answer": "会打字，但读不懂这封信",
+      "explanation": "障碍是老板的字迹，不是不会打字。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-owner",
+      "target": "所属关系与代词语境",
+      "prompt": "Bob: Can you type this letter for the boss please, Pamela?\n这封信是为谁打的？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "老板",
+        "Bob",
+        "Pamela"
+      ],
+      "answer": "老板",
+      "explanation": "for the boss 表示为老板。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-negative",
+      "target": "独立使用否定和动词原形",
+      "prompt": "说“他不能举起这张桌子”。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "He ",
+          "after": "",
+          "options": [
+            "can’t",
+            "isn’t",
+            "doesn’t"
+          ]
+        },
+        {
+          "before": "",
+          "after": " this table.",
+          "options": [
+            "lift",
+            "lifts",
+            "lifting"
+          ]
+        }
+      ],
+      "answer": "[\"can’t\",\"lift\"]",
+      "explanation": "He can’t lift this table.。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-question",
+      "target": "独立提出can一般疑问句",
+      "prompt": "用词块问：Pamela 能读这本书吗？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "wordbank",
+      "tokens": [
+        "Can",
+        "Pamela",
+        "read",
+        "this book",
+        "Does",
+        "reads"
+      ],
+      "slots": 4,
+      "answer": "Can Pamela read this book",
+      "suffix": "?",
+      "explanation": "Can 前置，read 保持原形。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-reply",
+      "target": "肯否短答由事实决定",
+      "prompt": "你看得见飞机，但看不见鸟。\nCan you see a bird?",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "No, I can’t.",
+        "Yes, I can.",
+        "No, I am not."
+      ],
+      "answer": "No, I can’t.",
+      "explanation": "题目说看不见鸟，回答 No, I can’t.。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-pronoun",
+      "target": "问答视角独立判断",
+      "prompt": "你和Sam会刷书架，Penny和Jane会洗盘子。由你回答：",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can you and Sam paint the bookcase? Yes, ",
+          "after": " can.",
+          "options": [
+            "we",
+            "they",
+            "he"
+          ]
+        },
+        {
+          "before": "Can Penny and Jane wash the dishes? Yes, ",
+          "after": " can.",
+          "options": [
+            "we",
+            "they",
+            "she"
+          ]
+        }
+      ],
+      "answer": "[\"we\",\"they\"]",
+      "explanation": "包含自己用 we；另外两人用 they。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-who",
+      "target": "who作主语独立组句",
+      "prompt": "用词块问：谁会做饼干？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "wordbank",
+      "tokens": [
+        "Who",
+        "can",
+        "make biscuits",
+        "she",
+        "does"
+      ],
+      "slots": 3,
+      "answer": "Who can make biscuits",
+      "suffix": "?",
+      "explanation": "Who can make biscuits? 不再加she。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-what",
+      "target": "what特殊疑问独立组句",
+      "prompt": "用词块问：他们能做什么？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "wordbank",
+      "tokens": [
+        "What",
+        "can",
+        "they",
+        "do",
+        "are"
+      ],
+      "slots": 4,
+      "answer": "What can they do",
+      "suffix": "?",
+      "explanation": "What can they do?。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-details",
+      "target": "从回答区分地点与时间",
+      "prompt": "分别补上问地点、问时间的词。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " can I find Bob? — In his office.",
+          "options": [
+            "Where",
+            "When",
+            "Who"
+          ]
+        },
+        {
+          "before": "",
+          "after": " can he come? — Now.",
+          "options": [
+            "Where",
+            "When",
+            "How"
+          ]
+        }
+      ],
+      "answer": "[\"Where\",\"When\"]",
+      "explanation": "in his office 是地点，now 是时间。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-how",
+      "target": "依据方法回答构成how问句",
+      "prompt": "答句是 With this key.（用这把钥匙。）\n补全问句。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " can I open the door?",
+          "options": [
+            "How",
+            "When",
+            "Who"
+          ]
+        }
+      ],
+      "answer": "[\"How\"]",
+      "explanation": "用钥匙是方法，所以问 How。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-many-v153",
+      "target": "看图独立组织数量问句",
+      "prompt": "问能看见几封信，补全问句。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " ",
+          "options": [
+            "How many",
+            "How much",
+            "Who"
+          ]
+        },
+        {
+          "before": "",
+          "after": " can you see?",
+          "options": [
+            "letters",
+            "letter"
+          ]
+        }
+      ],
+      "answer": "[\"How many\",\"letters\"]",
+      "image": "/assets/unit45-46/letters.svg",
+      "imageAlt": "三封可以分别数出的信",
+      "explanation": "一封封的信可数，用How many加复数letters，再接can you see。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-much",
+      "target": "独立询问不可数物质的量",
+      "prompt": "用词块问：你能看见多少水？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "wordbank",
+      "tokens": [
+        "How much",
+        "water",
+        "can",
+        "you",
+        "see",
+        "How many"
+      ],
+      "slots": 5,
+      "answer": "How much water can you see",
+      "suffix": "?",
+      "explanation": "water 是不可数名词，问它的量用 How much。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-change",
+      "target": "区分正在做与能做并正确改写",
+      "prompt": "She is making the bed.（正在铺床）\n改成“她能铺床”。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "She ",
+          "after": "",
+          "options": [
+            "can",
+            "is"
+          ]
+        },
+        {
+          "before": "",
+          "after": " the bed.",
+          "options": [
+            "make",
+            "making",
+            "makes"
+          ]
+        }
+      ],
+      "answer": "[\"can\",\"make\"]",
+      "explanation": "She can make the bed. 改说能力，含义也变了。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-but",
+      "target": "独立表达本领对比并理解but",
+      "prompt": "你能举起椅子，但举不起桌子。",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I can lift the chair, ",
+          "after": "",
+          "options": [
+            "but",
+            "and"
+          ]
+        },
+        {
+          "before": "I ",
+          "after": " lift the table.",
+          "options": [
+            "can’t",
+            "can"
+          ]
+        }
+      ],
+      "answer": "[\"but\",\"can’t\"]",
+      "explanation": "but 表示转折，can’t 说明不能举起桌子。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-request",
+      "target": "礼貌请求与递物回应",
+      "prompt": "老板说：Can you give me that letter, please?\n你递给他时怎样说？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "Here you are.",
+        "What’s the matter?",
+        "No, I can’t."
+      ],
+      "answer": "Here you are.",
+      "explanation": "递东西给对方时，可以说 Here you are.。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v1-e-number",
+      "target": "独立辨认教材千位数词",
+      "prompt": "a thousand 是哪个数？",
+      "source": "《新概念英语智慧版1》Lesson45–46，纸页90–93／PDF123–126",
+      "options": [
+        "1,000",
+        "100,000",
+        "1,000,000"
+      ],
+      "answer": "1,000",
+      "explanation": "a thousand 是一千；a million 是一百万。",
+      "hint": ""
+    },
+    {
+      "id": "u4546-v153-e-third-person",
+      "target": "独立按he与it完成第三人称短答",
+      "prompt": "George先生能举起椅子；这只猫能喝奶。分别回答。",
+      "source": "课本纸90–93／PDF123–126",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Can George lift the chair? Yes, ",
+          "after": " can.",
+          "options": [
+            "he",
+            "she",
+            "they"
+          ]
+        },
+        {
+          "before": "Can the cat drink its milk? Yes, ",
+          "after": " can.",
+          "options": [
+            "it",
+            "we",
+            "they"
+          ]
+        }
+      ],
+      "answer": "[\"he\",\"it\"]",
+      "explanation": "George用he，这只猫按课本称呼用it。",
+      "hint": "",
+      "distractorRationale": "按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。"
+    },
+    {
+      "id": "u4546-v153-e-she",
+      "target": "独立用she保留否定事实",
+      "prompt": "这次Pamela读不懂这封信。Bob问：Can Pamela read this letter? 应怎样回答？",
+      "source": "课本纸90–93／PDF123–126",
+      "options": [
+        "No, she can’t.",
+        "Yes, she can.",
+        "No, he can’t."
+      ],
+      "answer": "No, she can’t.",
+      "explanation": "按题目事实否定，Pamela用she；不把不能读这封信变成不会打字。",
+      "hint": "",
+      "distractorRationale": "按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。"
+    },
+    {
+      "id": "u4546-v153-e-request-minute",
+      "target": "独立理解原文请求及a minute的语境意义",
+      "prompt": "老板想请Bob过来商量一件事。这句话想请他做什么？",
+      "source": "课本纸90–93／PDF123–126",
+      "options": [
+        "过来一会儿",
+        "必须坐满六十秒",
+        "告诉老板Pamela在哪儿"
+      ],
+      "answer": "过来一会儿",
+      "display": {
+        "title": "这句话想请Bob做什么？",
+        "material": "老板想请Bob过来商量一件事。\nCan you come here a minute please, Bob?"
+      },
+      "explanation": "这里是请Bob过来一下；a minute表示一会儿，并非要求计时六十秒。",
+      "hint": "",
+      "distractorRationale": "按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。"
+    }
+  ]
+}

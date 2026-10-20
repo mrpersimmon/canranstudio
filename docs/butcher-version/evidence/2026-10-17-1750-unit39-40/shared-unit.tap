@@ -1,0 +1,51 @@
+(node:27736) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (153.2269ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.4829ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (84.1718ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (1.7936ms)
+✔ landmark state URLs carry one immutable content version (0.4312ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.1491ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.1223ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (2.1632ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (2.1647ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (1.309ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.7371ms)
+✔ every published map stage declares a child-readable growth reveal (0.7872ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.0857ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.193ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.1167ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.2216ms)
+✔ ratingFor exposes every branch including zero (0.5843ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.5476ms)
+✔ certificate predicates require every named challenge (0.1496ms)
+✔ every approved course rating table reaches zero through three stars (0.2207ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (329.2018ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (850.7124ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (573.2966ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (354.6912ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (461.2507ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (634.2316ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (411.8863ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (193.4281ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (5.0695ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (1.5912ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (336.1456ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4289.9689

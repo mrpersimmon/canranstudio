@@ -1,0 +1,64 @@
+[WebServer] (node:3612) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 8 tests using 1 worker
+
+(node:26980) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29788) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (29.7s)
+(node:30880) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\login\unit9-10-fivezones.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (15.5s)
+  ok 3 tests\login\unit9-10-fivezones.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (3.2s)
+  ok 4 tests\login\unit9-10-fivezones.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (1.9m)
+  ok 5 tests\login\unit9-10-fivezones.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (24.6s)
+  ok 6 tests\login\unit9-10-fivezones.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.2m)
+  ok 7 tests\login\unit9-10-fivezones.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (51.6s)
+  ok 8 tests\login\unit9-10-fivezones.spec.js:232:1 › 关课重开保留收藏，导出故障可重试且离开取消下载 (45.9s)
+
+
+  1) tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ───────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-listen').getByRole('status')
+    Expected substring: "答对了！"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-listen').getByRole('status')
+
+
+       at ..\support\unit9-10-flow.js:21
+
+      19 |     else if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
+      20 |   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
+    > 21 |   if(id==='listen'&&i===11){await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
+         |                                                                                        ^
+      22 |   await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+      23 |  }
+      24 |  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+        at completeActivity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit9-10-flow.js:21:88)
+        at Object.completeUnit910 (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit9-10-flow.js:26:46)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit9-10-fivezones-upgrade.spec.js:28:3
+
+    Error Context: output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit9-10-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: tests\login\unit9-10-fivezones.spec.js (5.5m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    tests\login\unit9-10-fivezones-upgrade.spec.js:10:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ────────
+  7 passed (6.1m)

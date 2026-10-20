@@ -1,9 +1,13 @@
+// Lesson23–24's same three-device contract now includes 34 -> 32 -> five zones; see unit23-24-tasks-upgrade.spec.js.
 'use strict';
 const{test,expect}=require('@playwright/test');
 const{adminLogin,createStudent,signIn}=require('./helpers');
 const{CASES,story,activity,answers,currentGroup}=require('../support/units1-30-tasks');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
-for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length))test(`${pair} 账号在三台设备间升级题目，保留历史并独立完成新任务`,async({browser})=>{
+// Lesson27–28 is covered by unit27-28-tasks-upgrade.spec.js through its real predecessor.
+// Lesson25–26 now has four actual historical editions plus five zones; its
+// complete three-device chains live in unit25-26-older-editions.spec.js.
+for(const pair of Object.keys(CASES).filter(x=>CASES[x].changes.length&&!['23-24','25-26','27-28','29-30'].includes(x)))test(`${pair} 账号在三台设备间升级题目，保留历史并独立完成新任务`,async({browser})=>{
  test.setTimeout(150000);
  const{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
  const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-tasks-v4-account-'));

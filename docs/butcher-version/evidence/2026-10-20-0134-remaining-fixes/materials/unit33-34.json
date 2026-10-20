@@ -1,0 +1,24 @@
+{
+  "id": "unit33-34",
+  "source": {
+    "file": "tests/support/unit3334-fivezones.js",
+    "sha256": "a7dfb5d06e7ba5760ffd6d43553bd73cea336ec127633d6ed421adbee76bce2e"
+  },
+  "questions": [
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u3334-v1-final-under-on",
+      "text": "Lesson 33\n\nIt is a fine day today.\n\nThere are some clouds in the sky, but the sun is shining.\n\nMr. Jones is with his family.\n\nThey are walking over the bridge.\n\nThere are some boats on the river.\n\nMr. Jones and his wife are looking at them.\n\nSally is looking at a big ship.\n\nThe ship is going under the bridge.\n\nTim is looking at an aeroplane.\n\nThe aeroplane is flying over the river."
+    }
+  ],
+  "sourceLines": {
+    "E4": "1-10"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

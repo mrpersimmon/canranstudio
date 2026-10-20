@@ -1,0 +1,14 @@
+
+Running 7 tests using 1 worker
+
+(node:21552) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\submission-statistics.spec.js:16:4 › 7-8 共用结算按提交计次，手机三卡完整，刷新保留 (7.4s)
+  ok 2 tests\e2e\submission-statistics.spec.js:16:4 › 9-10 共用结算按提交计次，手机三卡完整，刷新保留 (5.9s)
+  ok 3 tests\e2e\submission-statistics.spec.js:16:4 › 11-12 共用结算按提交计次，手机三卡完整，刷新保留 (5.8s)
+  ok 4 tests\e2e\unit11-12-fivezones.spec.js:25:39 › 场景与词卡 320：完整16句、中文内滚动、相向人物及旧链接 (3.2s)
+  ok 5 tests\e2e\unit11-12-fivezones.spec.js:25:39 › 场景与词卡 390：完整16句、中文内滚动、相向人物及旧链接 (3.3s)
+  ok 6 tests\e2e\unit11-12-fivezones.spec.js:25:39 › 场景与词卡 768：完整16句、中文内滚动、相向人物及旧链接 (3.5s)
+  ok 7 tests\e2e\unit11-12-fivezones.spec.js:25:39 › 场景与词卡 1280：完整16句、中文内滚动、相向人物及旧链接 (3.4s)
+
+  7 passed (33.7s)

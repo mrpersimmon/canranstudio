@@ -1,0 +1,16 @@
+
+Running 9 tests using 1 worker
+
+(node:25048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit125-126-story-layout.spec.js:26:39 › 768：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 (23.7s)
+  ok 2 tests\e2e\unit125-126-story-layout.spec.js:26:39 › 1280：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 (25.5s)
+  ok 3 tests\e2e\unit125-126.spec.js:29:1 › 24词卡、126课1–6、A4／B4／C4完整 (6.9s)
+  ok 4 tests\e2e\unit125-126.spec.js:51:1 › 错答不更新安排记录，三卡4／8／2，刷新保留原图 (10.5s)
+  ok 5 tests\e2e\unit125-126.spec.js:56:1 › 12道书写题16行打印与恢复 (1.5s)
+  ok 6 tests\e2e\unit125-126.spec.js:57:39 › 320及短屏：必须与不必材料、长句、全部题型和三卡 (48.5s)
+  ok 7 tests\e2e\unit125-126.spec.js:57:39 › 390及短屏：必须与不必材料、长句、全部题型和三卡 (47.8s)
+  ok 8 tests\e2e\unit125-126.spec.js:57:39 › 768及短屏：必须与不必材料、长句、全部题型和三卡 (47.5s)
+  ok 9 tests\e2e\unit125-126.spec.js:57:39 › 1280及短屏：必须与不必材料、长句、全部题型和三卡 (51.8s)
+
+  9 passed (4.4m)

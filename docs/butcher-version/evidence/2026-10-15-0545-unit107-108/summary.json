@@ -1,0 +1,83 @@
+{
+  "unit": "unit107-108",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 68,
+  "zones": {
+    "listen": 8,
+    "roles": 8,
+    "grammar": 20,
+    "apply": 8,
+    "exam": 24
+  },
+  "words": 29,
+  "dialogueTurns": 8,
+  "substitutions": {
+    "count": 12,
+    "labels": "A–L"
+  },
+  "writing": {
+    "A": 5,
+    "B": 8,
+    "C": 6
+  },
+  "browserRuns": {
+    "chromium": 14,
+    "webkit": 14,
+    "login-root": 6,
+    "login-sub": 6,
+    "login-webkit-root": 6,
+    "login-webkit-sub": 6,
+    "catalog": 3,
+    "deployment": 1,
+    "reference-chromium": 1,
+    "reference-webkit": 1
+  },
+  "browserTotalDistinctPassing": 56,
+  "additionalReferenceRechecks": 2,
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "POSIX modes x2",
+      "symlink EPERM x2",
+      "database test cleanup EPERM x2"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreservedFromStart": true
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13-O14": "pending suggestions; course evidence added",
+    "newItems": 0
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit107-108/#learn/words",
+  "testIdentityNote": "小禾和欧阳小禾同学为虚构测试账号"
+}

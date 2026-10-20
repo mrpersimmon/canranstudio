@@ -1,0 +1,48 @@
+
+Running 1 test using 1 worker
+
+(node:1488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit15-16-fivezones.spec.js:53:50 › 短屏 390x500：五区三卡和操作完整可见 (18.0s)
+
+
+  1) tests\e2e\unit15-16-fivezones.spec.js:53:50 › 短屏 390x500：五区三卡和操作完整可见 ──────────────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.stage-apply').locator('.completion-card')
+    Expected: "finished"
+    Received: "pending"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-apply').locator('.completion-card')
+        14 × locator resolved to <div data-activity="apply" data-result-motion="pending" class="practice-finish completion-card">…</div>
+           - unexpected value "pending"
+
+
+       at ..\support\unit1516-fivezones.js:32
+
+      30 |   await expect.poll(async()=>await modal.isVisible()?'award':await card.getAttribute('data-result-motion')).toMatch(/^(award|finished)$/);
+      31 |   if(await modal.isVisible())await page.keyboard.press('Escape');
+    > 32 |   await expect(card).toHaveAttribute('data-result-motion','finished');
+         |                      ^
+      33 |  }
+      34 |  return room;
+      35 | }
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit1516-fivezones.js:32:22)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-fivezones.spec.js:55:51
+
+    Error Context: test-results\unit15-16-fivezones-短屏-390x500：五区三卡和操作完整可见\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit15-16-fivezones-短屏-390x500：五区三卡和操作完整可见\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit15-16-fivezones-短屏-390x500：五区三卡和操作完整可见\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit15-16-fivezones.spec.js:53:50 › 短屏 390x500：五区三卡和操作完整可见 ───────────────────────────

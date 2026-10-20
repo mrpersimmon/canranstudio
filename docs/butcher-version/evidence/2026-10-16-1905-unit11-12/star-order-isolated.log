@@ -1,0 +1,35 @@
+(node:18612) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (962.8313ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1244.8208
+
+✖ failing tests:
+
+test at tests\unit\admin-learning.test.js:192:1
+✖ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (962.8313ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + '4db0c7fb-a9e3-44d3-a728-2a65ca2faed6'
+  - 'a4c1bfb9-df2c-4f5f-8461-e93e5f317788'
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-learning.test.js:215:9)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.start (node:internal/test_runner/test:1015:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '4db0c7fb-a9e3-44d3-a728-2a65ca2faed6',
+    expected: 'a4c1bfb9-df2c-4f5f-8461-e93e5f317788',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

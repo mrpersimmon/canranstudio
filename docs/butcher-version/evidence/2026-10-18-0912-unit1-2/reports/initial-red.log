@@ -1,0 +1,83 @@
+
+Running 2 tests using 1 worker
+
+(node:1708) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit1-2-v154.spec.js:5:1 › 首页与封面沿用已确认纪念卡故事插画 (6.0s)
+(node:28808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\unit1-2-v154.spec.js:12:1 › 实际显示的短示范写入本次提交，独立题不补记示范 (5.6s)
+
+
+  1) tests\e2e\unit1-2-v154.spec.js:5:1 › 首页与封面沿用已确认纪念卡故事插画 ────────────────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')
+    Expected: 1
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('region', { name: '礼貌小帮手', exact: true }).locator('.featured-art img')
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+       5 | test('首页与封面沿用已确认纪念卡故事插画',async({page})=>{
+       6 |  await page.goto('/');const home=page.getByRole('region',{name:'礼貌小帮手',exact:true});
+    >  7 |  await expect(home.locator('.featured-art img')).toHaveCount(1);
+         |                                                  ^
+       8 |  await expect(home.locator('.featured-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);
+       9 |  await page.goto('/unit1-2/');await expect(page.locator('#cover .unit-cover-art img')).toHaveCount(1);
+      10 |  await expect(page.locator('#cover .unit-cover-art img')).toHaveAttribute('src',/unit1-2-handbag-closeup.webp/);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-v154.spec.js:7:50
+
+    Error Context: output\unit12-review-20261018\initial-red\unit1-2-v154-首页与封面沿用已确认纪念卡故事插画\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\initial-red\unit1-2-v154-首页与封面沿用已确认纪念卡故事插画\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\initial-red\unit1-2-v154-首页与封面沿用已确认纪念卡故事插画\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit1-2-v154.spec.js:12:1 › 实际显示的短示范写入本次提交，独立题不补记示范 ─────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#learningRecord')
+    Expected substring: "看过示范"
+    Received string:    "语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#learningRecord')
+        14 × locator resolved to <div id="learningRecord">…</div>
+           - unexpected value "语法小工坊第 1 题 · 陈述与询问首次答对想确认书的主人，选哪一句？提交 1 次本轮详情连续答对 1 次 · 本次答对 1 次 · 本次答错 0 次家长说明记录反映选项、词块和句式支持下的作答，不评价自由口语或独立写作。"
+
+
+      14 |  await flow.select(room,'Is this your book?');await room.getByRole('button',{name:'检查答案',exact:true}).click();
+      15 |  await page.getByRole('button',{name:'学习记录',exact:true}).click();
+    > 16 |  await expect(page.locator('#learningRecord')).toContainText('看过示范');
+         |                                                ^
+      17 | });
+      18 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-v154.spec.js:16:48
+
+    Error Context: output\unit12-review-20261018\initial-red\unit1-2-v154-实际显示的短示范写入本次提交，独立题不补记示范\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\initial-red\unit1-2-v154-实际显示的短示范写入本次提交，独立题不补记示范\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\initial-red\unit1-2-v154-实际显示的短示范写入本次提交，独立题不补记示范\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\unit1-2-v154.spec.js:5:1 › 首页与封面沿用已确认纪念卡故事插画 ─────────────────────────────────────────
+    tests\e2e\unit1-2-v154.spec.js:12:1 › 实际显示的短示范写入本次提交，独立题不补记示范 ──────────────────────────────────

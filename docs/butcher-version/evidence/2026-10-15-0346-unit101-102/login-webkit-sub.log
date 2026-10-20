@@ -1,0 +1,17 @@
+[WebServer] (node:31308) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:29896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\login\unit101-102.spec.js:16:1 › 课程入口保持班级授权：新课可单独开放 (16.9s)
+  ok 2 tests\login\unit101-102.spec.js:30:1 › 未开放本课的班级看不到入口，直接链接也不能进入 (3.0s)
+  ok 3 tests\login\unit101-102.spec.js:43:1 › 真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复 (2.2m)
+  ok 4 tests\login\unit101-102.spec.js:146:1 › 缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页 (24.6s)
+  ok 5 tests\login\unit101-102.spec.js:173:1 › 同姓名同星数对照认可卡：新卡、书页和一星动图显示一致 (1.3m)
+  ok 6 tests\login\unit101-102.spec.js:212:1 › 长姓名手机卡、另一学生隔离、教师预览不能保存个人成果 (51.7s)
+
+  Slow test file: tests\login\unit101-102.spec.js (5.0m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  6 passed (5.1m)

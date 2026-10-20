@@ -41,7 +41,7 @@ test('管理员可以创建班级并只开放 Lesson 1–2', async ({ page }) =>
   await page.getByRole('checkbox', { name: /Lesson 1–2 / }).check();
   await saveCourses(page);
   await expect(page.getByRole('status')).toContainText('已保存');
-  await expect(page.locator('#courses').getByRole('checkbox')).toHaveCount(45);
+  await expect(page.locator('#courses').getByRole('checkbox')).toHaveCount(72);
   await expect(page.getByRole('checkbox', { name: /Lesson 1–2 / })).toBeChecked();
 });
 

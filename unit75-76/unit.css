@@ -102,3 +102,11 @@
 .unit7576-workspace .speaker-left .bubble{background:#edf4f5;border-color:#a9bfc5}
 .unit7576-workspace .speaker-right .bubble{background:#fbf0e7;border-color:#d5b79b}
 @media(max-width:600px){.unit7576-workspace .writing-bank{grid-template-columns:1fr}.unit7576-workspace .actor-label{font-size:13px}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit7576-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit7576-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit7576-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit7576-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

@@ -1,0 +1,42 @@
+
+Running 4 tests using 1 worker
+
+(node:27520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit125-126-story-layout.spec.js:26:39 › 320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 (6.0s)
+(node:29060) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\e2e\unit125-126-word-layout.spec.js:4:1 › 四宽词卡正面：完整英文词形与实际可用宽度 (3.3s)
+  ok 3 tests\e2e\unit125-126.spec.js:29:1 › 24词卡、126课1–6、A4／B4／C4完整 (2.9s)
+  ok 4 tests\e2e\unit125-126.spec.js:51:1 › 错答不更新安排记录，三卡4／8／2，刷新保留原图 (3.9s)
+
+
+  1) tests\e2e\unit125-126-story-layout.spec.js:26:39 › 320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 ──────────────
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 607.78125
+    Received:    605.78125
+
+      36 |   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+      37 |   let materialBottom=b.y+b.height;if(i>=7){const rain=await world.locator('.rain-window').boundingBox();expect(rain.y).toBeGreaterThanOrEqual(materialBottom);materialBottom=rain.y+rain.height;}
+    > 38 |   for(const img of await world.locator('.garden-cast:visible,.garden-group-image:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+         |                                                                                                                                                                ^
+      39 |   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}));expect(labels[0].x+labels[0].width<=labels[1].x||labels[1].x+labels[1].width<=labels[0].x).toBe(true);
+      40 |   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
+      41 |   if([3,4,6,7,8,9,10].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<10)await next.click();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit125-126-story-layout.spec.js:38:160
+
+    Error Context: output\unit125126-representative-final\unit125-126-story-layout-320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit125126-representative-final\unit125-126-story-layout-320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit125126-representative-final\unit125-126-story-layout-320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit125-126-story-layout.spec.js:26:39 › 320：11轮完整原文、浇水与看雨切景、双人茶桌和中文续读 ───────────────
+  3 passed (17.8s)

@@ -1,0 +1,31 @@
+{
+  "id": "unit19-20",
+  "source": {
+    "file": "tests/support/unit1920-fivezones.js",
+    "sha256": "225589499778963a112539b41105fa5f96346a850e80c47db68d6fae968ef6f8"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u1920-v1-story-thanks",
+      "text": "Lesson 19\n\n妈妈: Look! There's an ice cream man.\n\n妈妈: Two ice creams please.\n\n妈妈: Here you are, children.\n\n孩子们: Thanks, Mum.\n\n女孩: These ice creams are nice."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u1920-v1-story-first",
+      "text": "Lesson 19\n\n妈妈: Sit down here.\n\n妈妈: Are you all right now?\n\n男孩: No, we aren't."
+    }
+  ],
+  "sourceLines": {
+    "R1": "7-11",
+    "R2": "4-6"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

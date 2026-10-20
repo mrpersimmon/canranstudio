@@ -359,3 +359,76 @@ unit.questions["describe"][3]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+// Freeze the exact predecessor before selecting the current edition.
+CanranCore.unit910LegacyDefinition=CanranCore.unit910;
+(function(core){
+'use strict';
+const old=core.unit910LegacyDefinition,source='《新概念英语智慧版1》纸18–21／PDF51–54',grammarSource='《同步导学》Grammar纸18–19／PDF32–33；《语法练习册》纸23–27／PDF37–41';
+const unit={id:'unit9-10',version:1,mode:'classroom',contentRevision:'greeting-five-zones-v1',legacyEdition:'unit9-10-completion-v1',title:'街角问候站',path:'/unit9-10/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+ stages:[{id:'l1',title:'准备打招呼',activities:[['words','问候小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'街角遇见朋友',activities:[['text','街角小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'问候与描述',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'友好交流',activities:[['apply','街角小帮手','heart']],required:['apply']},{id:'l5',title:'暖心小伙伴',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+ routeAliases:{'learn/phrases':'learn/grammar','learn/reply':'learn/grammar','learn/greet':'learn/grammar','learn/trans':'learn/apply','learn/describe':'learn/apply','learn/models':'learn/apply','learn/observe':'learn/apply'},
+ reward:{edition:'greeting-five-zones-v1',title:'暖心问候小伙伴',lesson:'Lesson 9–10',scene:'/assets/unit9-10/keepsake-story-v1.webp',alt:'戴绿帽的Steven与提蓝包的Helen在街角挥手问候',color:'#636e55',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','街角小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}
+};
+const choice=(options,answer,reference='')=>({options,answer,reference});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,reference='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),reference});
+const bank=(tokens,answer,slots,suffix='.')=>({type:'wordbank',tokens,answer,slots,suffix});
+const match=pairs=>({type:'match',pairs:pairs.map(([en,cn],i)=>({id:String(i+1),en,cn})),answer:JSON.stringify(pairs.map((_,i)=>String(i+1)))});
+const q=(id,target,prompt,input,explanation,hint='')=>{const {reference,...fields}=input;return{id:'u910-five-'+id,target,prompt,source,...fields,...(reference?{display:{title:prompt,material:reference}}:{}),explanation,hint};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule,'先看询问对象、当前情境和句子的位置。'),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,q('r-people','区分在场交谈与谈论对象','谁在交谈，谁只是被问起？',choice(['Steven和Helen交谈，问起Tony和Emma','Tony和Emma在交谈','四个人都在逐句回答'],'Steven和Helen交谈，问起Tony和Emma','Steven: How is Tony?\nHelen: He’s fine, thanks. How’s Emma?\nSteven: She’s very well, too, Helen.'),'说话人只有Steven和Helen；谈到朋友不等于朋友已经到场。')];
+unit.questions.grammar=[
+ g('how-be','根据主语使用is/are','补好对本人和另一位朋友的问候。',fill([blank('How ',' you today?',['are','is','am']),blank('How ',' Tony?',['are','is','am'])],['are','is']),'问you用are；问Tony用is。',[['How is May? — She’s fine.','问另一位朋友的近况，用is。']]),
+ g('how-what','区分近况与职业','你只想关心朋友今天身体怎么样，选哪个问题？',choice(['How are you today?',"What's your job?","What's your name?"],'How are you today?'),'How are you?关心近况，job问职业，name问名字。'),
+ old.questions.reply[0],
+ g('formal','理解正式见面的问候','这两句话在这个场景中主要用来做什么？',choice(['初次正式见面时相互问候','说明两个人正在忙工作','回答两个人的身体都不好'],'初次正式见面时相互问候','Two people meet for the first time in a formal introduction.\nA: How do you do?\nB: How do you do?'),'此处How do you do?是固定的正式问候，不逐词当作健康问题。'),
+ g('appearance','区分外观描述与健康问候','下面的问答在描述什么？',choice(['看起来的外观','今天身体是否舒服','做什么工作'],'看起来的外观','How does the man look?\nHe looks tall.'),'这里look表示看起来，tall说的是身高，不是健康或职业。'),
+ g('before-noun','形容词放在名词前','用词块说“一件干净的衬衫”。',bank(['a','clean','shirt','is'],'a clean shirt',3,''),'描述词clean放在名词shirt前。',[['a dirty umbrella','dirty在名词umbrella前。']]),
+ g('after-be','用be后形容词描述状态','保持原意，用另一句话描述这把伞。',fill([blank('The umbrella ',' ',['is','are','am']),blank('','.', ['clean','dirty','hot'])],['is','clean'],'This is a clean umbrella.'),'形容词也能在be后描述状态；换表达不能把clean变成dirty。',[['The shirt is dirty.','is后用dirty说明状态。']]),
+ g('order','两个形容词的常用顺序','按本课“评价→新旧→名词”的常用顺序，组成“一辆不错的旧汽车”。',bank(['a','nice','old','car'],'a nice old car',4,''),'通常先说评价，再说新旧，最后是名词；这不是任意语境下不可改变的绝对顺序。',[['a nice young nurse','先评价nice，再说年龄young，最后是nurse。']]),
+ g('he-she','明确人物后使用缩写','按两位人物补全第二句。',fill([blank('Mr. Blake isn’t a student. ',' a teacher.',["He's","She's","It's"]),blank('Naoko isn’t Chinese. ',' Japanese.',["He's","She's","It's"])],["He's","She's"],'Mr. Blake uses he/him. Naoko uses she/her.'),'He’s是He is；She’s是She is。否定前句不改变人物指代。'),
+ old.questions.describe[1],
+ g('well-fine','健康问候中的合法变体','朋友身体很好，哪一组两句话都适合本课问候？',choice(["I'm fine, thanks. / I'm very well, thank you.","I'm a nurse. / I'm Italian.","She's cold. / It's dirty."],"I'm fine, thanks. / I'm very well, thank you."),'fine和well在本课都能回应身体很好，不把其中一种误判为错。'),
+ g('look-see','区分看某物与见到某人','补好观察指令和问候。',fill([blank('Look ',' that man.',['at','is','are']),blank('Nice to ',' you.',['see','fine','well'])],['at','see']),'Look at后接看的对象；Nice to see you表达见到对方很高兴。'),
+ old.questions.exam[1],
+ g('condition','询问物品的一般状况','你想知道汽车目前状况怎么样，不是问品牌，选哪个问题？',choice(['How is your car?','What make is it?',"What's your job?"],'How is your car?','You are asking about the condition of the car, not its make.'),'How也可询问事物目前的状况；What make问品牌。',[['How’s work?','这是在问工作的近况。']])
+];
+unit.questions.apply=[old.questions.reply[1],old.questions.reply[2],old.questions.describe[0],old.questions.describe[2],old.questions.describe[3],q('a-umbrella','观察对象与描述','请朋友看这把伞，再用缩写说它是干净的。',bank(['Look at','this umbrella.',"It's",'clean.','dirty.'],"Look at this umbrella. It's clean.",4,''),'it指这把伞；clean与给定状态一致。')];
+unit.questions.apply[5].display={title:unit.questions.apply[5].prompt,material:'这把伞刚刚清洁完毕，伞面没有污渍。'};
+unit.questions.apply[5].image='/assets/unit3-4/umbrella.svg';unit.questions.apply[5].imageAlt='一把紫色雨伞';
+unit.questions.exam=[...old.questions.exam];
+unit.questions.exam[1]=q('e-evidence','否定描述的事实边界','只知道这一句，能确定什么？',choice(['不能确定他的具体年龄或是否年老','他一定已经年老','他一定很懒惰'],'不能确定他的具体年龄或是否年老','The man is not young. No age or other information is given.'),'not young不提供具体年龄，也不证明性格；不把描述词当穷尽的二选一。');
+unit.questions.exam[3]=q('e-how','独立判断is/are','补好两句健康问候。',fill([blank('How ',' you today?',['am','is','are']),blank('How ',' Emma?',['am','is','are'])],['are','is']),'you用are，Emma用is。');
+unit.questions.exam[6]=q('e-people','代词缩写与人物','根据明确人物补好两句介绍。',fill([blank('Mr. Blake isn’t a student. ',' a teacher.',["He's","She's","It's"]),blank('Sophie isn’t a teacher. ',' a keyboard operator.',["He's","She's","It's"])],["He's","She's"],'Mr. Blake: he/him. Sophie: she/her.'),'分别指向给定人物，不从职业猜性别。');
+unit.questions.exam[9]=q('e-expand','理解缩写的完整形式','把这两处缩写与完整形式配对。',match([["How’s（How’s Emma?）",'How is'],["She’s（She’s very well.）",'She is']]),'展开保持原句意思。');
+unit.questions.exam.push(
+ q('e-object','独立使用It’s','第二句继续说同一辆车，补好缩写。',fill([blank('This isn’t a German car. ',' a Swedish car.',["He's","She's","It's"])],["It's"]),'It’s是It is，这里指同一辆车。'),
+ q('e-formal','按社交场景判断问候用途','初次正式介绍中，两人都说How do you do?，这说明什么？',choice(['他们在相互问候，不能据此判断健康状态','他们明确说自己身体很好','他们在询问对方职业'],'他们在相互问候，不能据此判断健康状态'),'固定问候不等于一次健康状态报告。'),
+ q('e-appearance','外观与状态不同','这句回答提供的是哪种信息？',choice(['外观：看起来个子高','性格：很友善','健康：身体很好'],'外观：看起来个子高','How does she look?\nShe looks tall.'),'looks tall描述外观，不等于身体好或性格好。'),
+ q('e-order','形容词常用顺序迁移','用全部词块，按本课练习的常用顺序说“一位友善的年轻女子”。',bank(['a','nice','young','woman'],'a nice young woman',4,''),'通常评价nice在年龄young前，名词woman在最后。'),
+ q('e-adjective','形容词位置转换','保持状态不变，补全新的描述。',fill([blank('The shirt ',' ',['is','am','are']),blank('','.', ['dirty','clean','cold'])],['is','dirty'],'This is a dirty shirt.'),'从名词前移到be后，仍描述同一件脏衬衫。'),
+ q('e-alternatives','接受相同语境的合理表达','两位朋友都表示身体很好，哪组记录正确？',choice(['A用fine，B用well，两句在这里都合适','只有fine能回答问候','只有well能回答问候'],'A用fine，B用well，两句在这里都合适','A: I’m fine, thanks.\nB: I’m very well, thank you.'),'本课健康问候中两种表达均可用。'),
+ q('e-condition','理解一般状态问答','从这组问答能够确认什么？',choice(['回答者说车的状况不错','回答者说车是瑞典品牌','回答者说明自己是工程师'],'回答者说车的状况不错','A: How is your car?\nB: It’s fine, thanks.'),'这里的How问车的状况；回答没有提供品牌或职业。')
+);
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['reply','describe','exam'],apply:['reply','describe'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit910-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+unit.learning.WRITING_A=["Mr. Blake isn't a student. ___ a teacher.","This isn't my umbrella. ___ your umbrella.","Sophie isn't a teacher. ___ a keyboard operator.","Steven isn't cold. ___ hot.","Naoko isn't Chinese. ___ Japanese.","This isn't a German car. ___ a Swedish car."];
+core.unit910=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit910,excerpts={"u910-v1-story-emma":[8,9],"u910-v1-story-he":[6,7]},speakers={"steven":"Steven","helen":"Helen"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 9',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

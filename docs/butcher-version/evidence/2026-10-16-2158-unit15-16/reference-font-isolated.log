@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:21852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 (862ms)
+
+
+  1) tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 ────────────────
+
+    Error: expect(received).toContain(expected) // indexOf
+
+    Expected substring: "Arial"
+    Received string:    "\"Award Nunito\", \"Lesson Gothic\", \"Lesson Gothic Fallback\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif"
+
+       7 |  for(const text of ['handkerchiefs','handkerchieves','zeros / zeroes','the Henrys','roof → roofs','They aren’t'])await expect(ref).toContainText(text==='They aren’t'?"They aren't":text);
+       8 |  const fonts=await ref.evaluate(root=>{const terms=['/bʊks/','/frendz/','/ˈkeɪsɪz/','/ˈdresɪz/','/s/','/z/','/ɪz/','拼写与读音分别看'],walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);return terms.map(term=>({term,font:getComputedStyle(nodes.find(n=>n.textContent.includes(term)).parentElement).fontFamily}));});
+    >  9 |  for(const item of fonts)expect(item.font).toContain(item.term.startsWith('/')?'Arial':'Lesson Gothic');
+         |                                            ^
+      10 |  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      11 |  await ref.getByText(/拼写与读音分别看/).scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath('reference-fonts-320.png')});
+      12 | });
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit15-16-reference.spec.js:9:44
+
+    Error Context: test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit15-16-reference-320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit15-16-reference.spec.js:4:1 › 320px语法参考保留完整词形与be表，音标独立字体，展开不横向溢出 ─────────────────

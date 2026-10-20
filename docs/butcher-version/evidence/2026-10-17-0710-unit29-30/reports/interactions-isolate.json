@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit29-30-fivezones-interactions.spec.js",
+      "-g",
+      "Must词块",
+      "--reporter=list,json",
+      "--output=output/unit2930-interactions-isolate"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2930-interactions-isolate",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit29-30-fivezones-interactions.spec.js",
+      "file": "unit29-30-fivezones-interactions.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Must词块保留未选干扰项、撤回和刷新，错答不排除Do",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1904,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"Must\",\u001b[22m\n\u001b[32m-   \"clean\",\u001b[39m\n\u001b[32m-   \"the window?\",\u001b[39m\n\u001b[32m-   \"I\",\u001b[39m\n\u001b[32m-   \"Do\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"Must\",\u001b[22m\n\u001b[32m-   \"clean\",\u001b[39m\n\u001b[32m-   \"the window?\",\u001b[39m\n\u001b[32m-   \"I\",\u001b[39m\n\u001b[32m-   \"Do\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-fivezones-interactions.spec.js:9:783",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-fivezones-interactions.spec.js",
+                      "column": 783,
+                      "line": 9
+                    },
+                    "snippet": "   7 | });\n   8 | test('Must词块保留未选干扰项、撤回和刷新，错答不排除Do',async({page})=>{\n>  9 |  const room=await reach(page,'grammar',3),bank=room.getByRole('group',{name:'待选词块',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});const original=await bank.getByRole('button').allTextContents();await bank.getByRole('button',{name:'Do',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(selected.getByRole('button',{name:'撤回 Do',exact:true})).toBeVisible();for(const token of ['I','clean','the window?'])await bank.getByRole('button',{name:token,exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();expect(await bank.getByRole('button').allTextContents()).toEqual(original);await selected.getByRole('button',{name:'撤回 Do',exact:true}).press('Enter');await selected.getByRole('button',{name:'撤回 I',exact:true}).click();await selected.getByRole('button',{name:'撤回 clean',exact:true}).click();await selected.getByRole('button',{name:'撤回 the window?',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[3]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await expect(bank.getByRole('button',{name:'Do',exact:true})).toBeDisabled();\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^\n  10 | });\n  11 | test('Must I的否定回应必须结合可见事实，刷新后仍可区分不必与禁止',async({page},info)=>{\n  12 |  const room=await reach(page,'apply',6),check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room).toContainText('今天可以不再扫');await expect(room).toContainText('愿意扫也允许');await expect(room.locator('.practice-context')).toContainText('Must I sweep the floor now?');await select(room,'No, you mustn’t.');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await page.reload();await expect(room.locator('.practice-context')).toBeVisible();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'No, you needn’t.');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.screenshot({path:info.outputPath('no-obligation-correct.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-fivezones-interactions.spec.js",
+                        "column": 783,
+                        "line": 9
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[2m    \"Must\",\u001b[22m\n\u001b[32m-   \"clean\",\u001b[39m\n\u001b[32m-   \"the window?\",\u001b[39m\n\u001b[32m-   \"I\",\u001b[39m\n\u001b[32m-   \"Do\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n   7 | });\n   8 | test('Must词块保留未选干扰项、撤回和刷新，错答不排除Do',async({page})=>{\n>  9 |  const room=await reach(page,'grammar',3),bank=room.getByRole('group',{name:'待选词块',exact:true}),selected=room.getByRole('group',{name:'已选词块',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});const original=await bank.getByRole('button').allTextContents();await bank.getByRole('button',{name:'Do',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(selected.getByRole('button',{name:'撤回 Do',exact:true})).toBeVisible();for(const token of ['I','clean','the window?'])await bank.getByRole('button',{name:token,exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();expect(await bank.getByRole('button').allTextContents()).toEqual(original);await selected.getByRole('button',{name:'撤回 Do',exact:true}).press('Enter');await selected.getByRole('button',{name:'撤回 I',exact:true}).click();await selected.getByRole('button',{name:'撤回 clean',exact:true}).click();await selected.getByRole('button',{name:'撤回 the window?',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[3]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await expect(bank.getByRole('button',{name:'Do',exact:true})).toBeDisabled();\n     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^\n  10 | });\n  11 | test('Must I的否定回应必须结合可见事实，刷新后仍可区分不必与禁止',async({page},info)=>{\n  12 |  const room=await reach(page,'apply',6),check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room).toContainText('今天可以不再扫');await expect(room).toContainText('愿意扫也允许');await expect(room.locator('.practice-context')).toContainText('Must I sweep the floor now?');await select(room,'No, you mustn’t.');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await page.reload();await expect(room.locator('.practice-context')).toBeVisible();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'No, you needn’t.');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.screenshot({path:info.outputPath('no-obligation-correct.png')});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-fivezones-interactions.spec.js:9:783"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T23:37:14.827Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-interactions-isolate\\unit29-30-fivezones-interactions-Must词块保留未选干扰项、撤回和刷新，错答不排除Do\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2930-interactions-isolate\\unit29-30-fivezones-interactions-Must词块保留未选干扰项、撤回和刷新，错答不排除Do\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit29-30-fivezones-interactions.spec.js",
+                    "column": 783,
+                    "line": 9
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "d544232093afa64c1c0e-1b7e27ac9b69f621eff4",
+          "file": "unit29-30-fivezones-interactions.spec.js",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T23:37:14.292Z",
+    "duration": 3090.629,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

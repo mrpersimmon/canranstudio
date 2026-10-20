@@ -2,13 +2,13 @@
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
-test('5–6 十题介绍综合练习，全声音失败仍可逐题完成，末三题刷新不代答', async ({ page }) => {
+test('5–6 十四题介绍综合练习，全声音失败仍可逐题完成，末三题刷新不代答', async ({ page }) => {
   test.setTimeout(60000);
   const voices = [], errors = []; page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => { if (/unit5-6\/audio\//.test(request.url())) voices.push(request.url()); });
   await page.route(/\.mp3(?:\?|$)/, route => route.abort());
   await page.goto('/unit5-6/#learn/exam'); const room = page.locator('.stage-exam');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '14');
   for (const [i, question] of EXAMS['5-6'].entries()) {
     await expect(room.locator('.practice-content')).toContainText(question.prompt.replace(/。$/u,''));
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
@@ -19,12 +19,12 @@ test('5–6 十题介绍综合练习，全声音失败仍可逐题完成，末�
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
     if (i === 3) await room.getByRole('button', { name: '给点线索', exact: true }).click();
-    if (i >= 7) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
+    if (i >= 11) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
     await choose(room, question); await check.click(); await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 13 ? '查看本次记录' : '下一题', exact: true }).click();
   }
-  await expect(room).toContainText('首次独立答对 8 / 10');
+  await expect(room).toContainText('首次独立答对 12 / 14');
   await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click(); await page.reload();

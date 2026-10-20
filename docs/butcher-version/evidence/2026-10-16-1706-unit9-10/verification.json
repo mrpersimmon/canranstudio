@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-16",
+  "branch": "codex/release-canranstudio",
+  "standard": "v1.52",
+  "unit": "unit9-10",
+  "revision": "greeting-five-zones-v1",
+  "questions": {"listen":13,"roles":4,"grammar":14,"apply":6,"exam":17,"total":54},
+  "sourcePages": {"textbook":"paper18-21/pdf51-54","guide":"paper17-20/pdf31-34","guideGrammar":"paper18-19/pdf32-33","workbook":"paper23-27/pdf37-41","workbookBoundary":"pdf42 is Lesson11, not included"},
+  "independentTestConditionsPassed": 164,
+  "checks": [
+    {"scope":"Chromium current course, migration and print","passed":14,"log":"chromium-course-final.log","reuse":"Final source page label correction does not change questions, rendering or behavior."},
+    {"scope":"WebKit current course and migration","passed":12,"log":"webkit-final-and-shared.log","note":"12 of 35 in the mixed run; the other 23 are classified separately."},
+    {"scope":"Chromium account root","passed":8,"log":"chromium-root-account.log"},
+    {"scope":"Chromium account subpath","passed":8,"log":"chromium-sub-account.log","affectedCasesRechecked":"chromium-sub-final-assets.log: final 54-question journey, five stars, cross-device and same-name card/GIF comparison; two repeats not counted again"},
+    {"scope":"WebKit account root","passed":8,"log":"webkit-root-account.log"},
+    {"scope":"WebKit account subpath","passed":8,"logs":["webkit-sub-account.log","webkit-sub-upgrade-final.log"],"note":"Seven current-account cases plus the separately repaired and passed legacy migration."},
+    {"scope":"Historical classroom course contracts","passed":52,"logs":["historical-course.log","webkit-final-and-shared.log"],"note":"51 initial passes and repaired reset case; all historical/shared cases run in Chromium even when UNIT910_BROWSER selects WebKit for current five-zone files. Includes 44 unit9-10 and 8 unit11-12 cases."},
+    {"scope":"Shared completion statistics","passed":20,"log":"webkit-final-and-shared.log","note":"Chromium: 19 paired vocabulary completions and one old 49-50 submission-count case."},
+    {"scope":"Earlier account chains and current integration","passed":3,"log":"earlier-account-upgrade.log","note":"Two original 26-question versions -> frozen 33-question version -> current five-zone course, plus current unit9-10 integration."},
+    {"scope":"Server learning and award regression","passed":20,"log":"server-unit-tests.log"},
+    {"scope":"Check workflow","passed":11,"log":"workflow.log"}
+  ],
+  "builds": [
+    {"basePath":"/","courses":72,"passed":true,"log":"build-root.log","manifest":"manifest-root.json"},
+    {"basePath":"/lesson/","courses":72,"passed":true,"log":"build-sub.log","manifest":"manifest-sub.json"}
+  ],
+  "failuresRetained": [
+    {"case":"WebKit old course reload after vocabulary question 12","initial":"webkit-sub-account.log","sameVersionReproduction":"webkit-upgrade-isolated.log","cause":"Assertion ran while course preparation screen was active.","fix":"Wait for actual preparation to finish, retaining the original correct-state assertion.","verified":["webkit-root-account.log","webkit-sub-upgrade-final.log"]},
+    {"case":"Historical adventure reset entering unit7-8 old reply route","initial":"historical-course.log","sameVersionReproduction":"historical-reset-isolated.log","cause":"Old selector expected stage-reply, while the current unit7-8 alias leads to grammar.","fix":"Assert actual alias target; preserve cancellation, reset, path isolation and other-path draft assertions.","verified":["webkit-final-and-shared.log"]}
+  ],
+  "preservation": {"learningNamespaceUnchanged":true,"previousQuestions":33,"oldCertificateNameAndDate":true,"oldCertificatePng":true,"oldCertificatePrint":true,"oldStarsConvertedToNew":false,"wordPage":true,"readingPosition":true,"selectedReferenceTheme":true,"crossDevice":"Previously synchronized historical outcomes and certificate metadata; local-only drafts remain on the original device."},
+  "pdfs": {"worksheet":{"file":"worksheet.pdf","pages":3,"questions":18,"writingLines":30,"lineHeightPx":32,"allPagesVisuallyReviewed":true},"oldCertificate":{"file":"legacy-certificate.pdf","pages":1,"testStudent":"小禾","allPagesVisuallyReviewed":true}},
+  "preview": {"url":"http://127.0.0.1:4295/unit9-10/#learn/certificate","screenshot":"preview-account.jpg","observed":"0/5; words1/4; grammar14; exam17; new card and old-history entry","learningDataCleared":false,"answersOrStarsInjected":false},
+  "optimizationList":"O01/O02/O04/O07/O11/O13/O14/O15/O16; O01-O15 remain confirmed, O16 shared-standard proposal pending confirmation and implemented locally",
+  "notVerified": ["teacher review","child trial","physical phone WeChat save","physical printing","full repository suite","formal release acceptance"],
+  "git": {"committed":false,"pushed":false,"released":false}
+}

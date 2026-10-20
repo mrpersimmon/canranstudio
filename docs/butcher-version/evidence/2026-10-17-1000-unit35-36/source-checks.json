@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-17T02:42:23.315Z",
+  "passed": 30,
+  "failed": [],
+  "checks": [
+    {
+      "name": "five zones and 43 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 5,
+        "roles": 4,
+        "grammar": 9,
+        "apply": 7,
+        "exam": 18
+      }
+    },
+    {
+      "name": "35 original questions unchanged",
+      "passed": true
+    },
+    {
+      "name": "43 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "16 original cards and phonetics",
+      "passed": true
+    },
+    {
+      "name": "15 original narration sentences and people",
+      "passed": true
+    },
+    {
+      "name": "12 original actions and number labels",
+      "passed": true
+    },
+    {
+      "name": "A3 and B12 retain full prompts",
+      "passed": true
+    },
+    {
+      "name": "maximum two blanks per online question",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true
+    },
+    {
+      "name": "actual old six v1 sessions mapped",
+      "passed": true
+    },
+    {
+      "name": "five new sessions and distinct reward edition",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "55 original SVG assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "six prompt records, four selected, all originals retained",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha photo-village",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha photo-river",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha photo-school-final",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha keepsake-final",
+      "passed": true
+    },
+    {
+      "name": "font inputs reflect final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1907,
+        "inputs": 381
+      }
+    },
+    {
+      "name": "font licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson UI captions",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit35-36/photo-village-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "1422f2c0aa49ae30cfd6a70361794b0b7147691ae4392ef5e97713e45ba454c7"
+    },
+    {
+      "file": "assets/unit35-36/photo-river-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "039945f14e25cd2a2ca50d52994a1936d70f181a37175b58c6a1add707f119dc"
+    },
+    {
+      "file": "assets/unit35-36/photo-school-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "5de2df1ccb42c010a98de0a5256cac2b7b775adb97ffd80401dee2f46ffde255"
+    },
+    {
+      "file": "assets/unit35-36/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "37d3a0e633a713e3615dbdc0518a814c7c0495a93690c3d022e474d5b70cff4a"
+    }
+  ],
+  "changedSourcePaths": 55
+}

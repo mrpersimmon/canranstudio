@@ -1,0 +1,76 @@
+(node:34204) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ grant renewal bounds allocation, preserves old IDs and isolates devices/courses (191.25ms)
+✖ persistent failure windows survive reopen, expire without extension, and never clear source budgets (863.4174ms)
+✔ throttle state stays bounded and refuses new identities without evicting active budgets (17.6144ms)
+✖ opening an existing data directory restores private directory and key modes (23.7117ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1246.1003
+
+✖ failing tests:
+
+test at tests\unit\server-security.test.js:11:1
+✖ grant renewal bounds allocation, preserves old IDs and isolates devices/courses (191.25ms)
+  Error: EPERM, Permission denied: \\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-grant-test-M4irs7 '\\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-grant-test-M4irs7'
+      at Object.rmSync (node:fs:1221:18)
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:13:20)
+      at TestHook.runInAsyncScope (node:async_hooks:228:14)
+      at TestHook.run (node:internal/test_runner/test:1118:25)
+      at TestHook.run (node:internal/test_runner/test:1442:18)
+      at TestHook.run (node:internal/util:602:20)
+      at Test.runHook (node:internal/test_runner/test:1036:20)
+      at after (node:internal/test_runner/test:1076:20)
+      at Test.run (node:internal/test_runner/test:1144:13)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    errno: 1,
+    code: 'EPERM',
+    path: '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-grant-test-M4irs7',
+    syscall: 'rm'
+  }
+
+test at tests\unit\server-security.test.js:49:1
+✖ persistent failure windows survive reopen, expire without extension, and never clear source budgets (863.4174ms)
+  Error: EPERM, Permission denied: \\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-throttle-test-Sg6KbB '\\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-throttle-test-Sg6KbB'
+      at Object.rmSync (node:fs:1221:18)
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:51:20)
+      at TestHook.runInAsyncScope (node:async_hooks:228:14)
+      at TestHook.run (node:internal/test_runner/test:1118:25)
+      at TestHook.run (node:internal/test_runner/test:1442:18)
+      at TestHook.run (node:internal/util:602:20)
+      at Test.runHook (node:internal/test_runner/test:1036:20)
+      at after (node:internal/test_runner/test:1076:20)
+      at Test.run (node:internal/test_runner/test:1144:13)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    errno: 1,
+    code: 'EPERM',
+    path: '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-throttle-test-Sg6KbB',
+    syscall: 'rm'
+  }
+
+test at tests\unit\server-security.test.js:79:1
+✖ opening an existing data directory restores private directory and key modes (23.7117ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  438 !== 448
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:85:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 438,
+    expected: 448,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

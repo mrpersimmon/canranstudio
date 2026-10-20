@@ -2,7 +2,8 @@
   'use strict';
   const core = root.CanranCore, unit = core.unit3334;
   const { stages, questions, learning: content } = unit;
-  const practice = core.lesson49Practice, scene = core.unit3334Scene;
+  const practice = core.lesson49Practice;
+  core.unit3334Legacy.preserve(practice,unit);
   const $ = selector => document.querySelector(selector);
   const icon = core.lesson49Icons.create;
   const node = (tag, text = '', className = '') => {
@@ -12,19 +13,18 @@
     const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action); return element;
   }
   function art(name, label = '') {
-    if(name==='keepsake')return scene.art();
     const word = unit.objects.find(word => word.en === name);
     const path = content.PEOPLE[name]?.image || word?.image;
     if (!path) return icon(name, label);
     const picture = node('img', '', 'shop-icon'); picture.src = path; picture.alt = label; return picture;
   }
-  const surfaces = new Map();
+  const surfaces = new Map(), runners = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
   let active = '', certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
-    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆☆☆', 'lvl-stars')); section.append(heading);
+    const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆', 'lvl-stars')); section.append(heading);
     const link = node('a', stage.title); link.href = '#' + stage.id; $('.chapter-links').append(link);
     const option = node('option', stage.title); option.value = stage.id; $('.chapter-select select').append(option);
     for (const [id, title, illustration] of stage.activities) {
@@ -36,7 +36,10 @@
     }
     $('#lessonWorkspace').append(section);
   }
+  const aliases = unit.routeAliases;
+  const normalizeRoute = id => aliases[id] || id;
   const navigate = id => {
+    id = normalizeRoute(id);
     // Scrolling back to the cover keeps the hash; resume must still reposition.
     if (location.hash === '#' + id) route();
     else location.hash = id;
@@ -55,8 +58,12 @@
   }
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
-    if (!routes.has(id)) id = 'cover'; markLocation(id);
+    id = normalizeRoute(id);
+    if (!routes.has(id)) id = 'cover';
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    markLocation(id);
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    if(id==='learn/text'||id==='l2') log.scrollTop=log.scrollHeight;
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     const surface = event.target.closest('.shop-stage'); if (!surface) return;
@@ -64,51 +71,82 @@
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
   }, true);
   $('.chapter-select select').addEventListener('change', event => navigate(event.target.value));
-  const resume = practice.activity('unitLocation');
+  const resume = normalizeRoute(practice.activity('unitLocation'));
+  if (resume) practice.activity('unitLocation', resume);
   if (resume && routes.has(resume) && resume !== 'cover') $('#startBtn').textContent = '继续冒险';
   $('#startBtn').addEventListener('click', () => {
-    const saved = practice.activity('unitLocation'); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
+    const saved = normalizeRoute(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
   $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
+
 
   const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
   const saved = practice.activity('unitCompleted');
   const completed = saved && typeof saved === 'object' && !Array.isArray(saved) ? { ...saved } : {};
   const passed = id => practice.sameContentSignature(completed[id], signatures[id]);
-  const fullyComplete = () => stages.every(stage => stage.required.every(passed));
+  let awardState = { stars: 0, zones: {}, firstFullStarAt: null };
   function updateProgress() {
-    let total = 0;
     for (const stage of stages) {
-      const count = stage.required.filter(passed).length, stars = Math.floor(count / stage.required.length * 3);
-      total += stars;
-      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = '★'.repeat(stars) + '☆'.repeat(3 - stars); label.setAttribute('aria-label', '本关 ' + stars + ' / 3 颗星');
+      const zone = unit.reward.zones.find(zone => stage.required.includes(zone.id));
+      const earned = Boolean(awardState.zones[zone.id]);
+      const label = $('#' + stage.id + ' .lvl-stars'); label.textContent = earned ? '★' : '☆';
+      label.setAttribute('aria-label', '本关 ' + (earned ? '1' : '0') + ' / 1 颗星');
     }
-    $('#starCount').textContent = String(total);
-    const next = activities.find(item => stages.find(stage => stage.id === item.chapter).required.includes(item.id) && !passed(item.id));
-    certificateView?.update({ complete: fullyComplete(), completedChapters: stages.map(stage => stage.required.every(passed)), next: next ? { title: next.title, go: () => navigate('learn/' + next.id) } : null });
+    $('#starCount').textContent = String(awardState.stars);
+    document.querySelectorAll('.award-round-result[data-perfect="true"]').forEach(result => {
+      result.textContent = awardState.pendingZones?.includes(result.dataset.zone) ? '整轮零错！联网同步后点亮星星。' : '这颗星已经点亮。';
+    });
+    certificateView?.update(awardState);
   }
   function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const settlement = core.awardReveal.create({ unit });
+  const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
     const group = node('div', '', 'station-actions'); group.append(button('下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
+  function completionArt() {
+    const scene = node('div', '', 'completion-art desk-completion'); scene.setAttribute('aria-hidden', 'true');
+    const picture=node('img'); picture.src='/assets/unit33-34/keepsake-story-v1.webp'; picture.alt=''; scene.append(picture);return scene;
+  }
+  const completionTitles = {listen:'单词寻宝完成！',roles:'故事读懂啦！',grammar:'河畔关系说清啦！',apply:'大家的动作说清啦！',exam:'综合挑战完成！'};
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit3334-' + id + '-practice'; surfaces.get(id).append(element);
-    const predecessors=unit.activityPredecessors?.[id];
-    practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs,
-      previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old=>({key:'unit3334-'+old+'-practice/v1',questions:unit.previousQuestions[old]})),
-      completionDetails:id==='listen'?null:scene.result(id), ...settings,
-      onComplete: states => { complete(id); const label=element.querySelector('.practice-finish>p');if(label)label.textContent=id==='exam'?'挑战完成！':'这一站完成了！'; nextStation(id, element.querySelector('.practice-finish-actions')); settings.onComplete?.(states); } });
+    if (id === 'apply' || id === 'exam') {
+      settings.sceneView = core.unit3334Scene.create({ element });
+      settings.completionDetails = settings.sceneView.completion();
+    }
+    if (id === 'grammar') settings.sceneView = core.unit3334Grammar.create({ element, art });
+    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:{...core.lesson49TaskInputs,mount(args){const view=core.lesson49TaskInputs.mount(args);core.unit3334Scene.restyle(args.element);return view;}},roundPolicy:unit.reward.edition,...settings,
+      onAnswer: (question, state) => {
+        // The short model was visible before submission. Preserve that support
+        // in the shared notebook; it is not an error or an extra submission.
+        if (question.workshop?.model) { state.revealed = true; practice.record(question, state); }
+        settings.onAnswer?.(question, state);
+      },
+      onComplete: (states,round) => {
+        const { perfect, message } = settlement.complete({ id, states, round, awards, element });
+        complete(id);
+        nextStation(id, element.querySelector('.practice-finish-actions'));
+        settings.onComplete?.(states);
+        core.unit12Completion.render({ finish: element.querySelector('.practice-finish'), activity: id, states,
+          theme: { title: completionTitles[id] }, artwork: completionArt(), details: id === 'exam' ? settings.completionDetails : null,
+          celebrate: round.userCompleted, awardStatus: message,
+          waitForCelebration: () => settlement.isPresenting() || (awards.state().pendingZones.includes(id) && navigator.onLine !== false && document.getElementById('studentSyncStatus')?.dataset.syncState !== 'retry') });
+        const result = element.querySelector('.completion-award'); result.classList.add('award-round-result');
+        result.dataset.perfect = String(perfect); result.dataset.zone = id;
+        updateProgress(); } });
+    runners.set(id, runner);
     return element;
   }
 
   const story = surfaces.get('text'), stage = node('div', '', 'dialogue-stage');
   const log = node('div', '', 'dialogue-log'); log.setAttribute('role', 'log'); log.setAttribute('aria-label', '课文原文'); log.setAttribute('aria-live', 'off'); log.tabIndex = 0;
-  const storyScene=scene.mount(stage,log);
+  const props = core.unit3334Scene.storyProps();
+  stage.append(props.element, log);
   const status = node('p', '', 'dialogue-status'); status.setAttribute('role', 'status');
   const controls = node('div', '', 'stage-ctrl'), tools = node('div', '', 'stage-tools');
   const advance = button('开始看课文', advanceDialogue);
@@ -116,49 +154,63 @@
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(scene.result('text'),node('p', '课文看完了！'), finishActions); story.append(stage, status, controls, finish);
+  finish.append(node('p', '课文看完了！'), finishActions);
+  const reader=node('div','','desk-reader');reader.append(log,status,controls);stage.append(reader);story.append(stage,finish);
+  function alignReader(){
+    const box=reader.getBoundingClientRect(),nav=$('#topbar').getBoundingClientRect();
+    if(box.height>innerHeight-nav.height-16)return;
+    if(box.top<nav.bottom+8)root.scrollBy({top:box.top-nav.bottom-8,behavior:'instant'});
+    else if(box.bottom>innerHeight-8)root.scrollBy({top:box.bottom-innerHeight+8,behavior:'instant'});
+  }
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看课文', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
     advance.textContent = dialogue.i < 0 ? '开始看课文' : dialogue.i === content.DIALOGUE.length - 1 ? '完成课文' : '下一句';
+    props.update(dialogue.i);
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
     status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
-    storyScene.showLine(dialogue.i);
+    stage.querySelectorAll('.dialogue-actor').forEach(person => person.classList.toggle('is-current', person.dataset.actor === content.DIALOGUE[dialogue.i]?.person));
   }
-  function lead() { const lead = node('div', '', 'story-lead'); lead.append(icon('book'), node('p', '琼斯一家人看到了什么？')); log.replaceChildren(lead); }
+  function lead() { const lead = node('div', '', 'story-lead'); lead.append(icon('book'), node('p', "Where is the Jones family?")); log.replaceChildren(lead); }
   function appendLine(index) {
-    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.who), bubble = node('div', '', 'bubble');
+    const line = content.DIALOGUE[index], row = node('div', '', 'bubble-row ' + line.person), bubble = node('div', '', 'bubble');
+    // Keep each historic line on the side occupied by its speaker in that scene.
+    row.classList.add('narration-line');
     const speech = node('p', '', 'btext'); speech.append(node('span', line.text)); speech.lang = 'en';
     const translation = node('p', line.cn, 'bcn'); translation.hidden = true;
-    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden)); if(!translation.hidden)requestAnimationFrame(()=>{log.scrollTop=Math.max(0,row.offsetTop+row.offsetHeight-log.clientHeight);}); }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
+    const translate = button('看中文', () => { translation.hidden = !translation.hidden; translate.textContent = translation.hidden ? '看中文' : '收起中文'; translate.setAttribute('aria-expanded', String(!translation.hidden));
+      // Expanding the current translation must reveal its button as well; only
+      // the transcript scrolls, never the page or the controls below it.
+      if (!translation.hidden) {
+        const overflow = row.getBoundingClientRect().bottom - log.getBoundingClientRect().bottom + 12;
+        if (overflow > 0) log.scrollTop += overflow;
+      }
+    }, 'btn btn-mini btn-yellow'); translate.setAttribute('aria-expanded', 'false');
     const actions = node('div', '', 'bbtns'); actions.append(translate);
-    bubble.append(node('div', content.PEOPLE[line.person].name, 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
+    bubble.append(node('div', String(index + 1).padStart(2, '0'), 'bname'), speech, translation, actions); row.append(bubble); log.append(row);
   }
   function advanceDialogue() {
     if (dialogue.done) return;
     if (dialogue.i === content.DIALOGUE.length - 1) {
       if (!content.DIALOGUE.every((_, index) => dialogue.viewed[index] === true)) return;
-      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete'); return;
+      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete');finish.scrollIntoView({block:'nearest',behavior:'instant'});return;
     }
-    if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
+    if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;alignReader();
   }
-  function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue(); }
-  const draft = practice.activity('unitDialogue');
+  function resetDialogue() { dialogue = { i: -1, viewed: [], done: false }; saveDialogue(); lead(); refreshDialogue();alignReader(); }
+  const draft = core.unit3334Legacy.reading(practice, unit, signatures.text);
   if (draft?.signature === signatures.text && Number.isInteger(draft.i) && draft.i >= 0 && draft.i < content.DIALOGUE.length) {
-    const source = draft.viewed;
-    const viewed = Array.isArray(source) ? source.slice(0, draft.i + 1) : null;
-    if (Array.isArray(viewed)) {
-      const gap = content.DIALOGUE.findIndex((_, index) => index <= draft.i && viewed[index] !== true);
-      const index = gap < 0 ? draft.i : gap - 1;
-      dialogue = { i: index, viewed: viewed.slice(0, index + 1), done: draft.done === true && index === content.DIALOGUE.length - 1 && content.DIALOGUE.every((_, i) => viewed[i] === true) };
-      for (let i = 0; i <= index; i++) appendLine(i);
-      if (dialogue.done) complete('text');
-    }
+    const viewed=Array.isArray(draft.viewed)?draft.viewed.slice(0,draft.i+1):[];
+    const gap=content.DIALOGUE.findIndex((_,index)=>index<=draft.i&&viewed[index]!==true);
+    const i=gap<0?draft.i:gap-1;
+    dialogue={i,viewed:viewed.slice(0,i+1),done:draft.done===true&&i===content.DIALOGUE.length-1};
+    for(let index=0;index<=i;index++)appendLine(index);
+    if(dialogue.done)complete('text');
   }
   if (dialogue.i < 0) lead();
   refreshDialogue(); unlockStory();
@@ -175,18 +227,14 @@
     wordGrid.replaceChildren(); practice.activity('unitWordPage', wordPage);
     for (const word of content.WORDS.slice(wordPage * 6, wordPage * 6 + 6)) {
       const picture = node('img'); picture.src = word.image; picture.alt = '';
-      const pronunciation = node('small', word.ph, 'word-phonetic'); pronunciation.lang = 'en-GB';
+      const pronunciation = node('small', word.ph, 'word-phonetic'); pronunciation.lang = 'en-US';
       const meaning = node('span', word.cn, 'word-meaning'); meaning.hidden = true;
-      pronunciation.id = 'u3334-' + word.en.replaceAll(' ', '-') + '-phonetic';
-      meaning.id = 'u3334-' + word.en.replaceAll(' ', '-') + '-meaning';
       const example = node('small', word.example || '', 'word-example'); example.hidden = !word.example;
       const card = button('', () => {
         const expanded = card.getAttribute('aria-expanded') !== 'true';
         card.setAttribute('aria-expanded', String(expanded)); meaning.hidden = !expanded;
-        card.setAttribute('aria-describedby', expanded ? meaning.id : pronunciation.id);
       }, 'opt-btn unit-word');
       card.setAttribute('aria-label', word.en); card.setAttribute('aria-expanded', 'false');
-      card.setAttribute('aria-describedby', pronunciation.id);
       card.append(picture, node('strong', word.en), pronunciation, meaning, example); wordGrid.append(card);
     }
     previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
@@ -197,68 +245,24 @@
   renderWords();
   mountPractice('listen', { allowHints: false });
 
-  function expressionCard(expression) {
-    const picture = node('img'); picture.src = expression.image; picture.alt = '';
-    const caption = node('span', expression.cn);
-    const card = node('article', '', 'phrase-card reference-card');
-    card.append(picture, node('strong', expression.en), caption); return card;
-  }
-  const phraseGrid=node('div','','phrase-grid');content.PHRASES.forEach(item=>phraseGrid.append(expressionCard(item)));
-  const usage=node('details','','offline-task');usage.append(node('summary','从一个，到他们'),
-    node('p','Sally is looking at a ship. → They are looking at a ship. 描述现在正在做的事，要有 be 和动作的 -ing 形式。they、the children、the men 等复数主语用 are。'),
-    node('p','What are they doing? → They are washing dishes. 问句把 are 放在主语前；They’re = They are。the man and the woman 指两个人，也用 are。'),
-    node('p','There are some boats on the river. 是说河上有什么，不是在问这些船正在做什么。It is a fine day today. 里的 it 用来谈天气，不是某个人或物品。'));
-  const spelling=node('details','','offline-task');spelling.append(node('summary','给动作加上 -ing'),
-    node('p','walk → walking，wash → washing。type → typing，make → making，come → coming，shine → shining，give → giving，shave → shaving：这些词去掉不发音的 e，再加 ing。'),
-    node('p','fly → flying，cry → crying：这里保留 y，直接加 ing。不能套用名词复数或动词第三人称单数的 y 变化。更多例外由老师以后介绍。'),
-    node('p','walk over the bridge 是从桥上走过；fly over the river 是从河流上空飞过。under the bridge 在桥下，on the river 在河面。look at 表示看。'));
-  const phraseActions=node('div','','activity-actions');nextStation('phrases',phraseActions);
-  surfaces.get('phrases').append(phraseGrid,usage,spelling,phraseActions);
-  const gallery=node('div','','action-pages');surfaces.get('models').append(gallery);
-  core.classroomScene.paginate(gallery,{items:content.GALLERY,size:3,key:'unitActionPage',label:'动作',render(item){const card=expressionCard(item);card.prepend(node('small',item.numberLabel,'number-label'));return card;}});
-  const example=node('details','','offline-task');example.append(node('summary','先问一问，再描述'),
-    node('p','What are the women doing?'),node('p','They are washing dishes. / They’re washing dishes.'),
-    node('p','他们、她们、它们在本课都可以用 they，但具体指谁必须看前文。The birds are flying. 里的 they 可以回指鸟。'));
-  const note=node('details','','offline-task');note.append(node('summary','和老师一起看'),
-    node('p','完整的12组动作都在画册中。跟老师读数字：220,231 到 2,000,000，再用 What are … doing? 轮流问答。'),
-    node('p','fine 在本课说天气晴好，天空仍然可以有云。boat 与 ship 按本课小船和大轮船的图景区分，日常使用有重叠。'),
-    node('p','词卡采用英式音标，发音由老师示范。人物衣服和发型是画面设计，不是课文事实。shaving、jumping off the wall 只观察图片和描述，不做危险动作。'));
-  const modelActions=node('div','','activity-actions');nextStation('models',modelActions);surfaces.get('models').append(example,note,modelActions);
-  for (const id of ['observe','be','trans']) mountPractice(id);
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '查看本次记录', completionDetails: examResults, onComplete: states => {
-    const independent = states.filter(state => state.firstCorrect && !state.hintUsed && !state.ruleUsed && !state.revealed).length;
-    const assisted = states.filter(state => state.firstCorrect && (state.hintUsed || state.ruleUsed || state.revealed)).length;
-    const corrected = states.filter(state => !state.firstCorrect).length;
-    examResults.replaceChildren(scene.result('exam'),node('p', `首次独立答对 ${independent} / ${questions.exam.length}`), node('p', `提示后完成 ${assisted} 题 · 修正后完成 ${corrected} 题`));
-    const targets = questions.exam.filter((_, index) => !states[index].firstCorrect || states[index].hintUsed || states[index].ruleUsed || states[index].revealed).map(q => q.target);
-    if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
-  } });
-  certificateView = core.unitCertificate.mount({
-    element: surfaces.get('certificate'), initialName: practice.activity('unitName'), initialIssuedAt: practice.activity('unitClassroomCertificateIssuedAt'), canClaim: fullyComplete,
-    onClaim: ({ name, issuedAt }) => { practice.activity('unitName', name); practice.activity('unitClassroomCertificateIssuedAt', issuedAt); },
-    design: {
-      copy: { title: '细心的河畔发现家', course: '晴天河畔发现之旅 · Lesson 33–34', completion: '完成 Lesson 33–34 课堂配套练习', thanks: '一起过桥，读懂大家的动作，留下河畔的新发现！' },
-      characters: ['MrJones', 'MrsJones'], characterLabels: ['琼斯先生', '琼斯太太'], icon: art, defaultName: '细心的河畔发现家', dialogTitle: '河畔发现纪念', fileName: 'Lesson33-34-晴天河畔发现之旅.png',
-      badges: stages.map((stage, index) => ({ title: stage.title, icon: { l1: 'cards', l2: 'book', l3: 'question', l4: 'order', l5: 'star' }[stage.id], color: ['#FFF0BC', '#F1E5CF', '#E1EDD5', '#DFEAF1', '#F8DCD4'][index] }))
-    }
-  });
+  mountPractice('grammar'); mountPractice('apply');
+  mountPractice('exam');
+  certificateView=core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,
+    progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
+    restart:id=>runners.get(id)?.restart()});
 
-  const writing=node('details','','offline-task');writing.id='unitWriting';
-  writing.append(node('summary','和朋友再试试'),node('p','跟老师读课文，用动作图问 What are they doing?。发音、听辨和口头交流由老师安排；在课堂只用图片或安全的模拟动作。'));
-  writing.append(node('h4','Lesson 33–34 · 纸笔小练习'),node('p','A．用动作的 -ing 形式补全句子。'),node('p','例：Take … He is taking his book.'));
-  const aList=node('ol','','reference-writing');content.WRITING_A.forEach(([command,subject])=>{const row=node('li');row.append(node('span',command+' … '+subject),node('span','','writing-rule'));aList.append(row);});writing.append(aList);
-  const writingB=node('section','','writing-b');
-  writingB.append(node('h4','B．提问与回答'),node('p','根据词组，用现在进行时提问并回答。'),node('p','例：the children / looking at the boats on the river'),node('p','What are the children doing? They’re looking at the boats on the river.'));
-  const bList=node('ol','','reply-writing');content.WRITING_B.forEach(([person,action])=>{const row=node('li');row.append(node('span',person+' / '+action));for(let line=0;line<2;line++)row.append(node('span','','writing-rule'));bList.append(row);});writingB.append(bList);writing.append(writingB);
-  const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
-  root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
+  core.unit3334References.mount({unit,surfaces});
+  core.unit3334Legacy.show(practice, surfaces.get('certificate'));
+
   updateProgress(); practice.initializeNotebook();
   root.addEventListener('hashchange', route);
-  document.fonts.ready.then(() => {
-    const restore=()=>requestAnimationFrame(()=>{route();log.scrollTop=log.scrollHeight;});
-    if(!document.documentElement.hasAttribute('data-course-preparing'))return restore();
-    const ready=new MutationObserver(()=>{if(!document.documentElement.hasAttribute('data-course-preparing')){ready.disconnect();restore();}});
-    ready.observe(document.documentElement,{attributes:true,attributeFilter:['data-course-preparing']});
-  });
+  const revealSavedLine = () => { if (dialogue.i >= 0) log.scrollTop = log.scrollHeight; };
+  // Cached entry keeps the body hidden until images decode. Font readiness alone
+  // can occur while the transcript has no layout and cannot restore scroll.
+  // This is the loader's document event, not a canran storage key. Keep its
+  // name intact when the /lesson/ publisher prefixes persistent storage keys.
+  const readyEvent = ['canran', 'course-ready'].join(':');
+  document.addEventListener(readyEvent, revealSavedLine, { once: true });
+  root.addEventListener('resize',()=>{if(active==='learn/text'||active==='l2')requestAnimationFrame(revealSavedLine);});
+  document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

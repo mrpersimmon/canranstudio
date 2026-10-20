@@ -105,3 +105,15 @@
 .unit8990-workspace .story-prop img{width:155px;height:155px;object-fit:contain}.unit8990-workspace .story-prop figcaption{font-size:13px;line-height:1.4;background:#fff9ed;border-radius:7px;padding:4px}
 .unit8990-workspace .verb-reference{width:100%;margin-top:18px;border-collapse:separate;border-spacing:0;text-align:center;font-size:19px}.unit8990-workspace .verb-reference caption{font-size:17px;padding:10px}.unit8990-workspace .verb-reference :is(th,td){padding:10px 5px;border-bottom:1px solid var(--unit-line)}.unit8990-workspace .verb-reference th{background:#e9f0eb}
 @media(max-width:600px){.unit8990-workspace .story-prop{bottom:32px;width:82px}.unit8990-workspace .story-prop img{width:80px;height:100px}.unit8990-workspace .story-prop figcaption{font-size:10px}.unit8990-workspace .story-timeline{font-size:14px}.unit8990-workspace .story-timeline span{font-size:12px}.unit8990-workspace .verb-reference{font-size:16px}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit8990-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit8990-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit8990-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit8990-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit8990-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit8990-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

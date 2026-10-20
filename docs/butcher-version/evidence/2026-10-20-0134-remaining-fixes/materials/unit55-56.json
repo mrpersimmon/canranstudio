@@ -1,0 +1,80 @@
+{
+  "id": "unit55-56",
+  "source": {
+    "file": "tests/support/unit5556.js",
+    "sha256": "67da77ddb8f00c5aa68ce519acdc06b1ccc6c8aede178ee9bf97dd46124a499e"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u5556-v1-r-morning",
+      "text": "Lesson 55\n\nThe Sawyers live at 87 King Street.\n\nIn the morning, Mr. Sawyer goes to work and the children go to school. Their father takes them to school every day."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u5556-v1-r-noon",
+      "text": "Lesson 55\n\nMrs. Sawyer stays at home every day. She does the housework.\n\nShe always eats her lunch at noon."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u5556-v1-r-friends",
+      "text": "Lesson 55\n\nMrs. Sawyer stays at home every day. She does the housework.\n\nShe always eats her lunch at noon.\n\nIn the afternoon, she usually sees her friends. They often drink tea together."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u5556-v1-r-arrival",
+      "text": "Lesson 55\n\nIn the evening, the children come home from school. They arrive home early.\n\nMr. Sawyer comes home from work. He arrives home late."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u5556-v1-r-order",
+      "text": "Lesson 55\n\nAt night, the children always do their homework. Then they go to bed. Mr. Sawyer usually reads his newspaper, but sometimes he and his wife watch television."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u5556-v1-r-night",
+      "text": "Lesson 55\n\nAt night, the children always do their homework. Then they go to bed. Mr. Sawyer usually reads his newspaper, but sometimes he and his wife watch television."
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u5556-v1-e-family",
+      "text": "Lesson 55\n\nThe Sawyers live at 87 King Street.\n\nIn the morning, Mr. Sawyer goes to work and the children go to school. Their father takes them to school every day."
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u5556-v1-e-order",
+      "text": "Lesson 55\n\nIn the morning, Mr. Sawyer goes to work and the children go to school. Their father takes them to school every day.\n\nIn the evening, the children come home from school. They arrive home early.\n\nAt night, the children always do their homework. Then they go to bed. Mr. Sawyer usually reads his newspaper, but sometimes he and his wife watch television."
+    },
+    {
+      "zone": "exam",
+      "index": 6,
+      "questionId": "u5556-v1-e-facts",
+      "text": "Lesson 55\n\nThe Sawyers live at 87 King Street.\n\nIn the morning, Mr. Sawyer goes to work and the children go to school. Their father takes them to school every day.\n\nMrs. Sawyer stays at home every day. She does the housework.\n\nShe always eats her lunch at noon.\n\nIn the afternoon, she usually sees her friends. They often drink tea together.\n\nIn the evening, the children come home from school. They arrive home early.\n\nMr. Sawyer comes home from work. He arrives home late.\n\nAt night, the children always do their homework. Then they go to bed. Mr. Sawyer usually reads his newspaper, but sometimes he and his wife watch television."
+    }
+  ],
+  "sourceLines": {
+    "R2": "1-2",
+    "R4": "3-4",
+    "R5": "3-5",
+    "R6": "6-7",
+    "R7": "8",
+    "R8": "8",
+    "E4": "1-2",
+    "E5": "2,6,8",
+    "E6": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

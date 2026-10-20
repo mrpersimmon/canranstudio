@@ -1,0 +1,171 @@
+{
+  "at": "2026-10-17T13:44:36.957Z",
+  "passed": 31,
+  "failed": [],
+  "checks": [
+    {
+      "name": "46 tasks in exactly five zones",
+      "passed": true,
+      "detail": {
+        "listen": 7,
+        "roles": 5,
+        "grammar": 13,
+        "apply": 5,
+        "exam": 16
+      }
+    },
+    {
+      "name": "39 original tasks unchanged; five revisions and two new tasks",
+      "passed": true,
+      "detail": {
+        "unchanged": 39,
+        "revised": 5
+      }
+    },
+    {
+      "name": "all 46 identities unique",
+      "passed": true
+    },
+    {
+      "name": "same award edition, art, title, colours and five zones",
+      "passed": true
+    },
+    {
+      "name": "same storage key and version",
+      "passed": true
+    },
+    {
+      "name": "18 word identities and British phonetics preserved",
+      "passed": true
+    },
+    {
+      "name": "15 full source dialogue lines and speaker order preserved",
+      "passed": true
+    },
+    {
+      "name": "12 replacement prompts and original numbers retained",
+      "passed": true
+    },
+    {
+      "name": "A7 and B10 original prompts retained",
+      "passed": true
+    },
+    {
+      "name": "online blanks limited to two related choices",
+      "passed": true
+    },
+    {
+      "name": "unchanged listen and apply sessions continue",
+      "passed": true
+    },
+    {
+      "name": "three revised sessions retain actual v1 predecessors",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "frozen grammar.js equals actual pre-task file",
+      "passed": true
+    },
+    {
+      "name": "server prior content.js unchanged",
+      "passed": true
+    },
+    {
+      "name": "all 34 original images unchanged",
+      "passed": true,
+      "detail": {
+        "svg": 33,
+        "webp": 1
+      }
+    },
+    {
+      "name": "original card renderers and catalogue unchanged",
+      "passed": true
+    },
+    {
+      "name": "two accepted generated cast assets trace to original prompts",
+      "passed": true
+    },
+    {
+      "name": "transparent full-size cast sam-search",
+      "passed": true
+    },
+    {
+      "name": "transparent full-size cast penny-point",
+      "passed": true
+    },
+    {
+      "name": "13 added vectors decode, including 12 position scenes",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "final text hashes and font coverage recorded",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1931,
+        "inputs": 412
+      }
+    },
+    {
+      "name": "original font license bytes preserved",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit43-44/cast-sam-search-v153.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "25afae3516c5893909a38633cdb26351cc1738eac49647d65aadbc00240395fe"
+    },
+    {
+      "file": "assets/unit43-44/cast-penny-point-v153.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "118a20403b30447fe54f5cf7168c2e0548463d72b074dd753c112a0570bd5b18"
+    }
+  ],
+  "changedSourcePaths": 59
+}

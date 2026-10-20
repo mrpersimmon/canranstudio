@@ -251,7 +251,7 @@
   const a=node('ol');content.WRITING_A.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'));a.append(li);});writing.append(a);
   writing.append(node('h4','B · 先说需要，再说去哪里做什么'));
   for(const example of content.WRITING_B_EXAMPLES)writing.append(node('p',example,'reference-note'));
-  const b=node('ol');for(const text of content.WRITING_B){const li=node('li',text);li.append(node('div','________________________________________________'),node('div','________________________________________________'));b.append(li);}writing.append(b);
+  const b=node('ol');for(const text of content.WRITING_B){const li=node('li',text);for(let line=0;line<3;line++)li.append(node('div','','writing-line'));b.append(li);}writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

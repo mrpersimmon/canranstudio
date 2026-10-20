@@ -319,3 +319,65 @@ unit.questions["roles"][1]]};
  unit.typeCoverage.adaptations={E07:'键盘拼写已移除；点击补全归入 E09，不计为 E07。'};
  unit.experienceVersion='classroom-clicks-1';
 })(globalThis.CanranCore);
+// Five-zone edition. Keep the exact predecessor above for migration and old certificates.
+(function(core){
+'use strict';
+const old=core.unit2526;core.unit2526LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸50–53／PDF83–86；语法练习册纸67–72／PDF81–86';
+const grammarSource='同步导学纸45–48／PDF59–62，Grammar纸46–47／PDF60–61；'+source;
+const unit={id:'unit25-26',version:1,mode:'classroom',contentRevision:'kitchen-five-zones-v1',legacyEdition:'unit25-26-completion-v1',title:'厨房探访记',path:'/unit25-26/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'先认识厨房',activities:[['words','厨房小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'走进史密斯家',activities:[['text','厨房小导览','book'],['roles','课文小侦探','people']],required:['text','roles']},{id:'l3',title:'学会介绍物品',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'说清物品位置',activities:[['apply','厨房小帮手','heart']],required:['apply']},{id:'l5',title:'完成厨房探访',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/apply','learn/be':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply','learn/errands':'learn/apply'},
+reward:{edition:'kitchen-five-zones-v1',title:'细心厨房小向导',lesson:'Lesson 25–26',scene:'/assets/unit25-26/keepsake-story-v1.webp',alt:'史密斯太太介绍厨房，蓝电炉在左，白冰箱在右，桌上放着空瓶子与干净杯子',color:'#875A3D',zones:[['listen','单词寻宝'],['roles','课文小侦探'],['grammar','语法小工坊'],['apply','厨房小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const words=(tokens,slots,answer,material='')=>({type:'wordbank',language:'en',tokens,slots,answer,material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u2526-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('shared','第一次提到也可用the指双方明确的物品','两人都看着房间里唯一的门，补好请求。',choice(['the','a','an'],'the','Please close ___ door.\nclose：关上；door：门。这是他们第一次谈到这扇门。'),'听者已经知道具体哪扇门，就可用the；不必等到第二次提到。',[['Please open the window.','两人都看着同一扇窗，第一次提到也能用the。open：打开；window：窗。']]),
+g('specific','用位置限定指清具体物品','房间有几只杯子，其中只有一只在桌上。',fill([blank('Give me ',' cup on the table, please.',['the','a','an'])],['the'],'说话者要的正是桌上那只，位置使双方能确定是哪一只。'),'the cup on the table指位置已经限定清楚的那只杯子。',[['Give me the book on the shelf.','几本书中，位置说明指向架子上那一本。']]),
+g('unique','识别语境中唯一的天体','谈论地球天空中的太阳和月亮，补好词组。',fill([blank('',' sun',['the','a','an']),blank('',' moon',['the','a','an'])],['the','the'],'sun：太阳；moon：月亮。这次说的是我们共同知道的太阳和月亮。'),'本语境里太阳、月亮指向明确，用the sun、the moon；不是把所有天体名称都套同一规则。',[['the earth','这里指我们生活的地球，指向明确。earth：地球。']]),
+g('directions','保留方位搭配中的the','补好“在左边”和“在中间”。',fill([blank('on ',' left',['the','a','an']),blank('in ',' middle',['the','a','an'])],['the','the']),'本课搭配是on the left／right、in the middle，介词与the一起记。',[['on the right','在右边，不能丢掉本搭配中的the。']]),
+g('rank','在给定最高级和序数词前使用the','补好“最好的书”和“第一本书”。',fill([blank('',' best book',['the','a','an']),blank('',' first book',['the','a','an'])],['the','the'],'best：最好的；first：第一。词形已给出，本题只选冠词。'),'这里用the best book、the first book。my first book也正确，不能再叠加the。',[['the biggest box / the second box','最大的盒子／第二只盒子。本题不要求自己变化形容词或序数词。']]),
+g('fixed','按活动含义理解固定搭配','说“去睡觉”和“弹钢琴”，选本课常见表达。',choice(['go to bed · play the piano','go to the bed · play piano','go bed · play the piano'],'go to bed · play the piano','go to bed说睡觉这件事，不是走到某张床边。play the piano：弹钢琴。'),'活动含义下说go to bed；本课采用play the piano的常见搭配。the不能见到名词就加。',[['go to school','说去上学这项活动时用go to school；谈具体学校建筑是另一种语境。']]),
+g('where','用Where询问单个物品的位置','桌上的勺子不见了，用Where开头问它在哪里。',words(['Where','is','the spoon?','What'],3,'Where is the spoon?','本题说一把勺子，询问位置，不问颜色或种类。'),'Where is the spoon?询问位置；回答可用完整句或清楚的位置短语。',[['Where is the cup? It is in the cupboard.','也可简答In the cupboard.，不能把短语回答一概判错。']]),
+g('there-it','区分介绍存在与回指同一物品','先介绍厨房有一个瓶子，再说同一个瓶子是空的。',fill([blank('',' is a bottle in the kitchen.',['There','It']),blank('',' is empty.',['It','There'])],['There','It']),'There is引入物品的存在；It接着回指刚介绍的瓶子。这里there不译成“那里”。',[['There is a cup on the table. It is clean.','先说有什么，再说同一只杯子怎么样。']]),
+g('there-answers','按实际有无回答Is there','根据两份情况补全简短回答。',fill([blank('Yes, there ','.',['is','isn’t']),blank('No, there ','.',['isn’t','is'])],['is','isn’t'],'第一份：盒子里有一支笔。问Is there a pen in the box?\n第二份：杯子是空的，里面没有勺子。问Is there a spoon in the cup?'),'有就回答Yes, there is.；没有就回答No, there isn’t.，答案跟事实一致。',[['Is there a book on the desk? Yes, there is.','桌上确实有书。'],['Is there a cup in the box? No, there isn’t.','盒子里没有杯子。']]),
+g('in-meanings','不把in的不同用法全译成里面','给三个in词组配上合适的含义。',{type:'match',pairs:[{id:'1',en:'in the kitchen',cn:'在厨房里'},{id:'2',en:'in a blue coat',cn:'穿着蓝色外套'},{id:'3',en:'in English',cn:'用英语'}],answer:'["1","2","3"]'},'in可说明地点，也可配衣着或语言；不能把每个in都机械译成“在里面”。',[['in the room / in a red dress / in Chinese','在房间里／穿红色连衣裙／用中文。根据搭配确定含义。']]),
+...old.questions.be
+];
+const cupStory={...old.questions.errands[0],id:'u2526-five-a-cup-story',prompt:'读到这里，乙接下来应该怎么做？',reading:old.questions.errands[0].reading.slice(0,5),source:source+'；独立练习情境，停在位置说明后再决定下一步',decision:'不在Here you are已经说出后再问下一步交接；原六轮任务完整留档'};
+unit.questions.apply=[...old.questions.observe,...old.questions.trans,cupStory,old.questions.errands[1]];
+unit.questions.exam=[...old.questions.exam,
+q('e-shared','独立识别双方已知且首次提到的物品','你们面前只有一扇窗，第一次谈到它，请朋友打开。',fill([blank('Please open ',' window.',['the','a','an'])],['the'],'open：打开；window：窗。双方都明确是哪扇窗。'),'双方明确知道具体哪扇窗，第一次提到也可用the。'),
+q('e-specific','独立用位置限定选择the','只有一只盒子在地板上，其余都在架子上。',fill([blank('Give me ',' box on the floor, please.',['the','a','an'])],['the'],'说话者指定地板上的那一只盒子。'),'位置已经限定具体对象，用the box on the floor。'),
+q('e-earth','独立使用唯一对象的the','我们谈论自己生活的地球，补好英文。',fill([blank('',' earth',['the','a','an'])],['the'],'earth：地球。'),'本语境指我们共同生活的地球，使用the earth。'),
+q('e-rank','独立识别给定序数词与最高级搭配','第二幅图被评为最好的一幅，补好介绍。',fill([blank('This is ',' second picture.',['the','a','an']),blank('It is ',' best one.',['the','a','an'])],['the','the'],'second：第二；picture：图画；best：最好的。本题词形已给出，只选冠词。'),'本题中用the second picture和the best one，不考序数词或最高级的构成。'),
+q('e-fixed','撤去示范识别活动搭配','说“去上学”和“弹钢琴”，选择本课常见的活动表达。',choice(['go to school · play the piano','go to the school · play piano','go school · play the piano'],'go to school · play the piano','这里只说上学、弹琴这两项活动，不指走到某一学校建筑旁。'),'活动表达用go to school；本课采用play the piano。具体建筑的说法不在本题条件里。'),
+q('e-in-clothes','独立按搭配理解in','The woman in a blue coat is my teacher. 其中in a blue coat说明什么？',choice(['她穿着蓝色外套。','她在一个蓝色房间里。','她正在用英语说话。'],'她穿着蓝色外套。','woman：女士；coat：外套；teacher：老师。'),'这里in加衣着说明穿着，不是房间内的位置，也不是in English所说的语言。'),
+q('e-there-question','独立组织存在问句并按事实否定回答','杯子是空的，里面没有勺子，补全问答。',fill([blank('',' there a spoon in the cup?',['Is','Are']),blank('No, there ','.',['isn’t','is'])],['Is','isn’t']),'问是否有一把勺子用Is there；材料明确没有，用No, there isn’t.。'),
+q('e-directions','独立补齐方位搭配','补好“在右边”和“在房间中间”。',fill([blank('on ',' right',['the','a','an']),blank('in ',' middle of the room',['the','a','an'])],['the','the']),'这两个固定位置表达都保留the；不是按物品出现次数决定。')
+];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['be'],apply:['observe','trans','errands'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit2526-'+prior+'-practice/'+old.taskSessions[prior],questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit2526=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// Preserve the actual five-star edition; only the three revised material
+// questions acquire new identities. Display labels do not change scored work.
+(function(core){
+'use strict';const unit=core.unit2526,old=JSON.parse(JSON.stringify(unit));core.unit2526V153PreviousDefinition=old;
+unit.contentRevision='kitchen-teaching-v153';
+unit.questions.roles=old.questions.roles.map(q=>q.id==='u2526-v1-story-it'?{...q,id:q.id+'-v153',prompt:'结合这两句原文，It指什么？',display:{title:'结合这两句原文，It指什么？',material:'The refrigerator is white.\nIt is on the right.'}}:q);
+const materials={
+ 'u2526-v1-final-v2-room':{title:'根据这些原文，电炉、冰箱、桌子分别在哪里？',material:'The refrigerator is white.\nIt is on the right.\nThe cooker is blue.\nIt is on the left.\nThere is a table in the middle of the room.'},
+ 'u2526-v1-final-v2-states':{title:'原文分别用empty和clean描述哪两个物品？',material:'There is a bottle on the table.\nThe bottle is empty.\nThere is a cup on the table, too.\nThe cup is clean.'}
+};
+unit.questions.exam=old.questions.exam.map(q=>materials[q.id]?{...q,id:q.id+'-v153',prompt:materials[q.id].title,display:materials[q.id]}:q);
+unit.taskSessions={...old.taskSessions,roles:'v153',exam:'v153'};unit.taskPredecessors={...old.taskPredecessors};for(const id of ['roles','exam'])unit.taskPredecessors[id]=[{key:'unit2526-'+id+'-practice/five-zones-v1',questions:old.questions[id]},...(old.taskPredecessors[id]||[])];
+unit.copy={...old.copy,recordTargets:{...old.copy?.recordTargets,'u2526-five-a-cup-story':'整合请求、属性与位置'}};
+})(globalThis.CanranCore);

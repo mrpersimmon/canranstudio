@@ -1,0 +1,24 @@
+[WebServer] (node:29740) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] node:events:486
+[WebServer]       throw er; // Unhandled 'error' event
+[WebServer]       ^
+[WebServer] 
+[WebServer] Error: listen EADDRINUSE: address already in use 127.0.0.1:4500
+[WebServer]     at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+[WebServer]     at listenInCluster (node:net:2005:12)
+[WebServer]     at node:net:2214:7
+[WebServer]     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[WebServer] Emitted 'error' event on Server instance at:
+[WebServer]     at emitErrorNT (node:net:1984:8)
+[WebServer]     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+[WebServer]   code: 'EADDRINUSE',
+[WebServer]   errno: -4091,
+[WebServer]   syscall: 'listen',
+[WebServer]   address: '127.0.0.1',
+[WebServer]   port: 4500
+[WebServer] }
+[WebServer] 
+[WebServer] Node.js v24.14.0
+Error: Process from config.webServer was not able to start. Exit code: 1
+

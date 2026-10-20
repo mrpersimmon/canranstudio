@@ -1,0 +1,42 @@
+{
+  "missingTerms": [
+    {
+      "file": "docs/butcher-version/publish/2026-10-17-0031-v1.53-教学单元设计标准与验收清单.md",
+      "missing": [
+        "全量旧课"
+      ]
+    },
+    {
+      "file": "docs/course-authoring.md",
+      "missing": [
+        "跨设备"
+      ]
+    },
+    {
+      "file": "tests/README.md",
+      "missing": [
+        "原领取"
+      ]
+    }
+  ],
+  "gitNoIndex": [
+    {
+      "case": "before",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "case": "clean",
+      "exitCode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "case": "space",
+      "exitCode": 3,
+      "stdout": "output/standard-v153/diagnosis/space.txt:1: trailing whitespace.\n+after",
+      "stderr": ""
+    }
+  ]
+}

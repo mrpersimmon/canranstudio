@@ -1,0 +1,52 @@
+{
+  "id": "unit49-50",
+  "source": {
+    "file": "tests/support/unit4950.js",
+    "sha256": "e5cf0385c55b2a3303659266e144c6e35ccc61f5434188333590eb4b32e085e2"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u4950-v2-r-husband",
+      "text": "Lesson 49\n\nButcher: Do you want a chicken, Mrs. Bird? They’re very nice.\n\nMrs. Bird: No, thank you. My husband likes steak, but he doesn’t like chicken."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u4950-v2-r-bird",
+      "text": "Lesson 49\n\nButcher: This lamb’s very good.\n\nMrs. Bird: I like lamb, but my husband doesn’t."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u4950-v2-r-order",
+      "text": "Lesson 49\n\nButcher: What about some steak? This is a nice piece.\n\nMrs. Bird: Give me that piece, please. And a pound of mince, too."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u4950-v2-r-shared",
+      "text": "Lesson 49\n\nButcher: Do you want a chicken, Mrs. Bird? They’re very nice.\n\nMrs. Bird: No, thank you. My husband likes steak, but he doesn’t like chicken.\n\nButcher: To tell you the truth, Mrs. Bird, I don’t like chicken either!"
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u4950-v2-e-story",
+      "text": "Lesson 49\n\nButcher: This lamb’s very good.\n\nMrs. Bird: I like lamb, but my husband doesn’t.\n\nButcher: What about some steak? This is a nice piece.\n\nMrs. Bird: Give me that piece, please. And a pound of mince, too.\n\nButcher: Do you want a chicken, Mrs. Bird? They’re very nice.\n\nMrs. Bird: No, thank you. My husband likes steak, but he doesn’t like chicken.\n\nButcher: To tell you the truth, Mrs. Bird, I don’t like chicken either!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "9-10",
+    "R2": "5-6",
+    "R3": "7-8",
+    "R5": "9-11",
+    "E3": "5-11"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

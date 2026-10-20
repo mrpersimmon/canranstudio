@@ -1,5 +1,6 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+require('../support/unit1314-legacy').historicalSuite(test);
 const {ANSWERS}=require('../support/unit13-14-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 

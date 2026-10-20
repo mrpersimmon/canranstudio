@@ -1,0 +1,120 @@
+
+Running 3 tests using 1 worker
+
+(node:34860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit3-4-v154.spec.js:5:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 (5.9s)
+(node:26616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\e2e\unit3-4-v154.spec.js:12:1 › 理解题未作答时有原文依据 (6.1s)
+(node:28332) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 tests\e2e\unit3-4-v154.spec.js:16:1 › 真实提交记录已显示的短示范 (5.6s)
+
+
+  1) tests\e2e\unit3-4-v154.spec.js:5:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 ───────────────────────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  locator('[data-unit="unit3-4"] .featured-art img')
+    Expected: 1
+    Received: 5
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for locator('[data-unit="unit3-4"] .featured-art img')
+        14 × locator resolved to 5 elements
+           - unexpected value "5"
+
+
+      4 | test.use({browserName:process.env.UNIT34_REVIEW_BROWSER||'chromium',actionTimeout:8000,reducedMotion:'reduce'});
+      5 | test('首页入口与确认纪念卡同一故事，课文不自动显示剧情结论',async({page})=>{
+    > 6 |  await page.goto('/');await expect(page.locator('[data-unit="unit3-4"] .featured-art img')).toHaveCount(1);
+        |                                                                                             ^
+      7 |  await page.goto('/unit3-4/#learn/text');const room=page.locator('.stage-text');
+      8 |  for(let i=0;i<11;i++)await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+      9 |  await expect(room.locator('.scene-caption')).toHaveCount(0);
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154.spec.js:6:93
+
+    Error Context: output\unit34-review-20261018\initial-red\unit3-4-v154-首页入口与确认纪念卡同一故事，课文不自动显示剧情结论\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\initial-red\unit3-4-v154-首页入口与确认纪念卡同一故事，课文不自动显示剧情结论\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\initial-red\unit3-4-v154-首页入口与确认纪念卡同一故事，课文不自动显示剧情结论\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit3-4-v154.spec.js:12:1 › 理解题未作答时有原文依据 ────────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })
+    Expected substring: "This is not my umbrella."
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-roles').getByRole('region', { name: '阅读材料', exact: true })
+
+
+      12 | test('理解题未作答时有原文依据',async({page})=>{
+      13 |  await completeStory(page);await page.goto('/unit3-4/#learn/roles');const room=page.locator('.stage-roles');
+    > 14 |  await expect(room.getByRole('region',{name:'阅读材料',exact:true})).toContainText('This is not my umbrella.');
+         |                                                                  ^
+      15 | });
+      16 | test('真实提交记录已显示的短示范',async({page})=>{
+      17 |  await page.goto('/unit3-4/#learn/reply');const room=page.locator('.stage-reply');await room.getByRole('button',{name:'This is not my coat.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154.spec.js:14:66
+
+    Error Context: output\unit34-review-20261018\initial-red\unit3-4-v154-理解题未作答时有原文依据\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\initial-red\unit3-4-v154-理解题未作答时有原文依据\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\initial-red\unit3-4-v154-理解题未作答时有原文依据\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\e2e\unit3-4-v154.spec.js:16:1 › 真实提交记录已显示的短示范 ───────────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('#learningRecord')
+    Expected substring: "看过示范"
+    Received string:    "每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。理解否定句表示不是 · 这件外套不是你的，怎样说明？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('#learningRecord')
+        14 × locator resolved to <div id="learningRecord">…</div>
+           - unexpected value "每个答题区整轮零错获一颗星；用过线索会单独记录。这份小记不评价自由口语或独立写作。理解否定句表示不是 · 这件外套不是你的，怎样说明？：未用额外提示答对（首次答对，额外提示未用，提交 1 次）"
+
+
+      16 | test('真实提交记录已显示的短示范',async({page})=>{
+      17 |  await page.goto('/unit3-4/#learn/reply');const room=page.locator('.stage-reply');await room.getByRole('button',{name:'This is not my coat.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
+    > 18 |  await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('看过示范');
+         |                                                                                                                ^
+      19 | });
+      20 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154.spec.js:18:112
+
+    Error Context: output\unit34-review-20261018\initial-red\unit3-4-v154-真实提交记录已显示的短示范\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\initial-red\unit3-4-v154-真实提交记录已显示的短示范\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\initial-red\unit3-4-v154-真实提交记录已显示的短示范\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests\e2e\unit3-4-v154.spec.js:5:1 › 首页入口与确认纪念卡同一故事，课文不自动显示剧情结论 ────────────────────────────────
+    tests\e2e\unit3-4-v154.spec.js:12:1 › 理解题未作答时有原文依据 ─────────────────────────────────────────────
+    tests\e2e\unit3-4-v154.spec.js:16:1 › 真实提交记录已显示的短示范 ────────────────────────────────────────────

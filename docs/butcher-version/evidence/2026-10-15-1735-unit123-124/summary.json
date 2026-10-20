@@ -1,0 +1,159 @@
+{
+  "unit": "unit123-124",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 73,
+  "zones": {
+    "listen": 8,
+    "roles": 10,
+    "grammar": 23,
+    "apply": 8,
+    "exam": 24
+  },
+  "words": 24,
+  "dialogueTurns": 17,
+  "speakers": [
+    "Mike",
+    "Scott"
+  ],
+  "models": {
+    "count": 9,
+    "labels": "1–9",
+    "growFormsAndIPA": true
+  },
+  "writing": {
+    "items": {
+      "A": 6,
+      "B": 6,
+      "C": 6
+    },
+    "linesPerItem": {
+      "A": 2,
+      "B": 3,
+      "C": 2
+    },
+    "totalLines": 42
+  },
+  "browserRuns": {
+    "chromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "webkit": {
+      "passed": 15,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "reference-chromium": {
+      "passed": 2,
+      "failed": 0
+    },
+    "reference-webkit": {
+      "passed": 2,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    },
+    "representative-initial": {
+      "passed": 3,
+      "failed": 1,
+      "cause": "Test replacement removed He is from independently transcribed model 4; application model already matched source. Restrict replacement to bank button labels; course and targeted checks then passed."
+    }
+  },
+  "browserTotalDistinctPassing": 62,
+  "targetedReferenceAndPrintRechecks": 4,
+  "initialRepresentativeChecks": 4,
+  "initialFailuresRetained": 1,
+  "visualRefinement": {
+    "issues": [
+      "Opaque photograph contained a painted checkerboard",
+      "Hat top too close to photograph edge"
+    ],
+    "fix": [
+      "Regenerated photo with full opaque sky",
+      "Regenerated full hat with safe top margin"
+    ],
+    "initialImagesRetained": true
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true,
+    "diagramEnglish": "outlined local Nunito400",
+    "IPA": "Arial"
+  },
+  "art": {
+    "individualSprites": 4,
+    "photographs": 3,
+    "keepsake": 1,
+    "transparentArtEdgeCheck": true,
+    "opaquePhotographsNotMisclassifiedAsCutouts": true
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; current standard implemented",
+    "O13-O15": "pending; course evidence appended; no global rule change"
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance and load profiling"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit123-124/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 4"
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

@@ -1,6 +1,9 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const {completeUnit78}=require('../support/unit7-8-flow');
+// Historical 15-star behavior is exercised on its frozen edition.
+// Current five-zone and authenticated migration contracts have dedicated suites.
+require('../support/unit78-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('从词卡开始，浏览16句并完成31题后才获得15星课堂配套证书',async({page})=>{
  test.setTimeout(210000);const errors=[];page.on('pageerror',e=>errors.push(e.message));

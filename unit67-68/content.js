@@ -110,3 +110,17 @@ unit.learning.WRITING_A=['I was at ___ church on Sunday.','I was at ___ office o
 unit.learning.WRITING_B=['Tom / the hairdresser’s / Thursday','Mrs. Jones / the butcher’s / Wednesday','he / home / Sunday','Penny / the baker’s / Friday','Mrs. Williams / the grocer’s / Monday','Nicola / the office / Tuesday'];
 core.unit6768=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit6768,excerpts={"u6768-v1-r-shops":[0,1,2],"u6768-v1-r-today":[2,3],"u6768-v1-r-days":[4,5],"u6768-v1-r-keeping":[5,6],"u6768-v1-r-plan":[6,7],"u6768-v1-r-mother":[6,7],"u6768-v1-r-lucky":[6,7],"u6768-v1-e-shops":[0,1,2],"u6768-v1-e-jimmy":[2,3,4,5]},speakers={"johnson":"Mrs. Johnson","williams":"Mrs. Williams"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 67',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

@@ -1,5 +1,14 @@
 # Keep captured test output verbatim; source and documentation still use normal whitespace checks.
 docs/butcher-version/evidence/**/*.log -whitespace
+# Preserve captured failure contexts and frozen source snapshots verbatim.
+docs/butcher-version/evidence/**/*context.md -whitespace
+docs/butcher-version/evidence/**/*.tap -whitespace
+docs/butcher-version/evidence/**/*failure*.txt -whitespace
+docs/butcher-version/evidence/**/*before*.js -whitespace
+docs/butcher-version/evidence/**/*.pdf binary
+tests/fixtures/**/*.js whitespace=-blank-at-eof
+server/legacy/*.js whitespace=-blank-at-eof
+unit*/history.js whitespace=-blank-at-eof
 # CSV audit exports use CRLF line endings; retain the other whitespace checks.
 docs/butcher-version/evidence/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Imported research sources and captured browser logs retain their original bytes.

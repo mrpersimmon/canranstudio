@@ -1,0 +1,143 @@
+/* Lesson 93–94: shared interaction geometry; lesson-specific scene assets. */
+.unit9394-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit9394-workspace .unit-cover>div:last-child{padding:32px}
+.unit9394-workspace .unit-cover h1>span{display:inline-block}
+.unit9394-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit9394-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit9394-workspace .unit-word{height:242px;gap:7px}
+.unit9394-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit9394-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit9394-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit9394-workspace .unit-cover{grid-template-columns:1fr}.unit9394-workspace .unit-cover>div:last-child{padding:24px}.unit9394-workspace .unit-word{height:234px}}
+.unit9394-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit9394-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit9394-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit9394-workspace .offline-task summary::after{content:'＋'}.unit9394-workspace .offline-task[open] summary::after{content:'−'}
+.unit9394-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit9394-workspace .reference-card{padding:14px;border-radius:16px;background:#eef4ee;text-align:center;font-size:16px}
+.unit9394-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit9394-workspace .reference-card p{font-size:22px;line-height:1.4;margin:8px 0}
+.unit9394-workspace .offline-task li,.unit9394-workspace .offline-task p{overflow-wrap:anywhere;font-size:19px;line-height:1.7}
+.unit9394-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit9394-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit9394-workspace .grammar-model{background:#fff4e5;border-color:#ddc4a8}
+.unit9394-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit9394-workspace .grammar-rule{color:var(--brown)}
+
+.unit9394-workspace{--unit-page:#f8f6ee;--unit-wash:#ece6d9;--unit-line:#cfc2aa;--unit-accent:#9a8665}
+.unit9394-workspace .unit-word>strong{font-size:22px;line-height:1.25;overflow-wrap:anywhere}
+.unit9394-workspace .word-phonetic{font-size:14px;overflow-wrap:anywhere;max-width:100%}
+.unit9394-workspace .reference-note{background:#fff5e6;border-radius:12px;padding:12px;font-size:15px!important;line-height:1.6}
+.unit9394-workspace .travel-world{position:relative;isolation:isolate;overflow:hidden;height:670px;border:1px solid var(--unit-line);border-radius:20px;background:#f6efdf url('../assets/unit93-94/airport.svg') center/100% 100% no-repeat}
+.unit9394-workspace .travel-location{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:max-content;max-width:94%;font-size:15px;line-height:1.4;margin:0;padding:5px 12px;border:1px solid var(--unit-line);border-radius:9px;background:#fffdf5}
+.unit9394-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:none;position:relative}
+.unit9394-workspace .stage-text .travel-world{grid-area:1/1}
+.unit9394-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:12px;width:min(660px,calc(100% - 54px));height:275px;margin:58px auto 0;padding:8px 12px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#9fb5be transparent}
+.unit9394-workspace #lessonWorkspace .stage-text .dialogue-log:has(.story-lead){justify-content:center}
+.unit9394-workspace .story-lead{display:flex;align-items:center;justify-content:center;align-self:center;gap:12px;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit9394-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit9394-workspace .story-lead>p{font-size:22px;line-height:1.45}
+.unit9394-workspace #lessonWorkspace .stage-text .travel-actor{position:absolute;bottom:16px;width:29%;max-width:250px;height:305px;grid-row:auto;align-self:auto;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:end}
+.unit9394-workspace #lessonWorkspace .stage-text .travel-cast{display:block;width:100%;height:280px;object-fit:contain}
+.unit9394-workspace .actor-label{display:block;font-size:15px;line-height:1.3;padding:4px 8px;border:1px solid transparent;border-radius:8px;background:#fffaf0;white-space:nowrap}
+.unit9394-workspace .dialogue-actor.is-current .actor-label{border-color:#88a578;background:#fff5d7}
+.unit9394-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit9394-workspace .speaker-left{justify-content:flex-start}.unit9394-workspace .speaker-right{justify-content:flex-end}
+.unit9394-workspace .bubble{position:relative;width:fit-content;max-width:88%;min-height:0;flex:none;margin:0;padding:10px 14px;border:1px solid #b7caaa;background:#f5faee;border-radius:17px;box-shadow:0 3px 0 #dfe7db}
+.unit9394-workspace .speaker-right .bubble{background:#fff5e6;border-color:#d5b79b;box-shadow:0 3px 0 #eee0cd}
+.unit9394-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit9394-workspace .bubble .btext{font-size:22px;line-height:1.4;white-space:normal}.unit9394-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit9394-workspace .bubble .bbtns{margin-top:8px}
+.unit9394-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit9394-workspace .travel-runner{max-width:880px;margin:auto}.unit9394-workspace .travel-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.5;white-space:pre-line}
+.unit9394-workspace .travel-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit9394-workspace .travel-application{position:relative;display:flex;align-items:center;justify-content:center;gap:20px;height:190px;margin:14px auto 18px;border:1px solid var(--unit-line);border-radius:18px;background:linear-gradient(#f6efdf 76%,#f0e4d3 76%);overflow:hidden}
+.unit9394-workspace .travel-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin:12px auto;border-radius:16px;background:#fff4df;border:1px solid #dcc6a3}
+.unit9394-workspace .travel-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}.unit9394-workspace .travel-model .grammar-model-line>p{font-size:20px;line-height:1.4}.unit9394-workspace .travel-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit9394-workspace .grammar-intro h3{font-size:21px;line-height:1.5;white-space:pre-line;margin:12px auto 14px}.unit9394-workspace .grammar-runner .practice-answer-note{height:90px!important}.unit9394-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit9394-workspace .travel-completion{width:min(440px,100%);height:208px;max-width:440px}.unit9394-workspace .travel-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+.unit9394-workspace [hidden]{display:none!important}
+
+@media(max-width:600px){
+ .unit9394-workspace .reference-grid{grid-template-columns:1fr}
+ .unit9394-workspace .stage-text .travel-world{height:680px}
+ .unit9394-workspace #lessonWorkspace .stage-text .dialogue-log{width:calc(100% - 16px);height:330px;margin-top:55px;padding:8px}
+ .unit9394-workspace #lessonWorkspace .stage-text .travel-actor{height:250px;width:42%;bottom:20px;max-width:210px}.unit9394-workspace #lessonWorkspace .stage-text .travel-cast{height:218px}
+ .unit9394-workspace .story-lead{flex-direction:column;padding:14px}.unit9394-workspace .story-lead>p{font-size:20px}.unit9394-workspace .bubble{max-width:96%;padding:10px}.unit9394-workspace .bubble .btext{font-size:20px}
+ .unit9394-workspace .travel-model{gap:10px;padding:10px}.unit9394-workspace .travel-model .grammar-model-line>p{font-size:18px}.unit9394-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit9394-workspace .grammar-rule{font-size:13px}
+ .unit9394-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit9394-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}.unit9394-workspace .travel-completion{height:162px}
+}
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}
+
+.unit9394-workspace #lessonWorkspace .stage-text .travel-actor.at-left{left:7%;right:auto}
+.unit9394-workspace #lessonWorkspace .stage-text .travel-actor.at-right{right:7%;left:auto}
+.unit9394-workspace .application-prop{width:140px;height:140px;object-fit:contain}
+
+
+.unit9394-workspace .travel-application{height:190px;background:#e9f0eb;gap:20px}
+.unit9394-workspace .record-page{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#fffaf0;border:2px solid #bca786;border-radius:10px;padding:18px 24px;box-shadow:5px 5px #e1d6bf}
+@media(max-width:600px){
+ .unit9394-workspace #lessonWorkspace .stage-text .travel-actor.at-left{left:1%}.unit9394-workspace #lessonWorkspace .stage-text .travel-actor.at-right{right:1%}
+ .unit9394-workspace .actor-label{font-size:13px;padding:4px 5px}
+
+ .unit9394-workspace .travel-application{gap:10px;padding:10px;height:174px}
+ .unit9394-workspace .application-prop{width:88px;height:108px;flex-shrink:0}
+ .unit9394-workspace .record-page{padding:12px 8px;min-width:0;max-width:65%}.unit9394-workspace .record-page strong{font-size:17px}.unit9394-workspace .record-page>span{font-size:16px;overflow-wrap:anywhere}
+}
+
+.unit9394-workspace .unit-word{height:268px}.unit9394-workspace .unit-word>strong{max-width:100%;font-size:21px}.unit9394-workspace .unit-word>img{height:96px}
+
+.unit9394-workspace .travel-application[data-recorded="true"]{border:3px solid #739e7c;background:#edf5e6}
+
+@media(max-width:600px){.unit9394-workspace .past-reference,.unit9394-workspace .writing-bank{grid-template-columns:repeat(2,minmax(0,1fr))}.unit9394-workspace .past-reference p{font-size:14px}}
+
+.unit9394-workspace .story-note{font-size:14px;line-height:1.5;margin:10px 0 0;padding-top:8px;border-top:1px solid #dcc9b6;color:#624b40}
+.unit9394-workspace .writing-bank{grid-template-columns:repeat(3,minmax(0,1fr))}
+.unit9394-workspace .speaker-left .bubble{background:#edf4f5;border-color:#a9bfc5}
+.unit9394-workspace .speaker-right .bubble{background:#fbf0e7;border-color:#d5b79b}
+@media(max-width:600px){.unit9394-workspace .writing-bank{grid-template-columns:1fr}.unit9394-workspace .actor-label{font-size:13px}}
+
+.unit9394-workspace .record-page strong{text-wrap:balance;text-align:center;font-size:21px;line-height:1.4;overflow-wrap:anywhere}
+.unit9394-workspace .travel-application[data-task="has"] .record-page strong{font-size:20px}
+.unit9394-workspace .reference-card h4{font-size:22px;font-weight:600;margin:8px 0}
+@media(max-width:600px){.unit9394-workspace .travel-application[data-task="has"] .record-page strong{font-size:17px}.unit9394-workspace .record-page strong{font-size:18px}}
+
+.unit9394-workspace .travel-world[data-scene="living"]{background-image:url('../assets/unit93-94/airport.svg')}
+.unit9394-workspace .story-prop{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:170px;margin:0;text-align:center;z-index:2}
+.unit9394-workspace .story-prop img{width:155px;height:155px;object-fit:contain}.unit9394-workspace .story-prop figcaption{font-size:13px;line-height:1.4;background:#fff9ed;border-radius:7px;padding:4px}
+.unit9394-workspace .verb-reference{width:100%;margin-top:18px;border-collapse:separate;border-spacing:0;text-align:center;font-size:19px}.unit9394-workspace .verb-reference caption{font-size:17px;padding:10px}.unit9394-workspace .verb-reference :is(th,td){padding:10px 5px;border-bottom:1px solid var(--unit-line)}.unit9394-workspace .verb-reference th{background:#e9f0eb}
+@media(max-width:600px){.unit9394-workspace .story-prop{bottom:32px;width:82px}.unit9394-workspace .story-prop img{width:80px;height:100px}.unit9394-workspace .story-prop figcaption{font-size:10px}.unit9394-workspace .verb-reference{font-size:16px}}
+
+.unit9394-workspace{--unit-page:#f8f7ef;--unit-wash:#eaf1e9;--unit-line:#b9c8ba;--unit-accent:#537d76}
+.unit9394-workspace .travel-world{background-image:url('../assets/unit93-94/airport.svg')}
+
+.unit9394-workspace .time-reference{table-layout:fixed;width:100%;border-collapse:collapse;font-size:17px;line-height:1.5;margin:20px 0}
+.unit9394-workspace .time-reference :is(th,td){border:1px solid var(--unit-line);padding:10px 7px;overflow-wrap:anywhere;text-align:center}
+.unit9394-workspace .time-reference th{background:var(--unit-wash);font-size:14px}
+.unit9394-workspace .reference-card small{font-size:17px}
+.unit9394-workspace .travel-application{height:auto;min-height:190px;padding:12px}
+.unit9394-workspace .record-page{flex:1;max-width:65%;min-width:0}
+@media(max-width:600px){.unit9394-workspace .time-reference{font-size:14px}.unit9394-workspace .time-reference :is(th,td){padding:8px 4px}.unit9394-workspace .time-reference th{font-size:11px}.unit9394-workspace .travel-application{min-height:174px}}
+/* The inherited certificate print sheet hides body descendants with visibility.
+   A worksheet must restore visibility as well as display, within this unit only. */
+@media print{
+ body.unit9394-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit9394-workspace.print-writing .stage-certificate{max-width:none;width:100%}
+ body.unit9394-workspace.print-writing #unitWriting li{break-inside:avoid}
+ body.unit9394-workspace.print-writing #unitWriting h4{break-after:avoid}
+}
+
+/* A narrated illustrated album: no invented dialogue or automatic conclusions. */
+.unit9394-workspace{--unit-page:#f3f7fa;--unit-wash:#e3edf2;--unit-line:#b6c8d3;--unit-accent:#537d99}
+.unit9394-workspace .speaker-narrator{justify-content:center}
+.unit9394-workspace .speaker-narrator .bubble{max-width:100%;background:#fff9ec;border-color:#c7b99f;box-shadow:0 3px #e4dfd2}
+.unit9394-workspace .travel-world[data-scene="home"]{background-image:url('../assets/unit93-94/home-room.svg')}
+.unit9394-workspace .travel-illustration{position:absolute;right:9%;bottom:72px;width:35%;max-width:270px;margin:0;padding:16px;background:#fff9ed;border:3px solid #bea98b;border-radius:20px;box-shadow:7px 7px #cbd7db}
+.unit9394-workspace .travel-illustration img{display:block;width:100%;height:200px;object-fit:contain}
+.unit9394-workspace .state-reference{width:100%;table-layout:fixed;border-collapse:collapse;margin:18px 0;font-size:17px;line-height:1.5}
+.unit9394-workspace .state-reference :is(th,td){padding:10px 6px;border:1px solid var(--unit-line);overflow-wrap:anywhere}
+.unit9394-workspace .state-reference th{background:var(--unit-wash)}
+.unit9394-workspace #unitWriting ol{padding-left:1.5em;list-style:decimal}
+.unit9394-workspace #unitWriting li{list-style:decimal}
+.unit9394-workspace .unit-word[aria-label="pilot"]>img{width:100%;max-width:140px;height:132px}
+@media(max-width:600px){.unit9394-workspace .travel-illustration{right:3%;bottom:76px;padding:8px;width:39%;box-shadow:4px 4px #cbd7db}.unit9394-workspace .travel-illustration img{height:120px}.unit9394-workspace .state-reference{font-size:14px}.unit9394-workspace .state-reference :is(th,td){padding:8px 4px}}
+
+/* Handwriting space follows the number of sentences requested by this group. */
+.unit9394-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit9394-workspace.print-writing #unitWriting li{break-inside:avoid}body.unit9394-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

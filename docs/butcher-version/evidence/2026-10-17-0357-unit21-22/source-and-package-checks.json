@@ -1,0 +1,188 @@
+{
+  "at": "2026-10-16T20:27:51.454Z",
+  "checks": [
+    {
+      "name": "five zones with 45 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 10,
+        "roles": 2,
+        "grammar": 10,
+        "apply": 7,
+        "exam": 16
+      }
+    },
+    {
+      "name": "30 original questions retained exactly",
+      "passed": true
+    },
+    {
+      "name": "45 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "36 original word cards and 8 dialogue lines unchanged",
+      "passed": true
+    },
+    {
+      "name": "16 gallery entries, 8 models and 6 writing tasks retained",
+      "passed": true
+    },
+    {
+      "name": "original learning key and content version retained",
+      "passed": true
+    },
+    {
+      "name": "frozen five sources match pre-task hashes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "all original 62 images unchanged",
+      "passed": true,
+      "detail": {
+        "count": 62
+      }
+    },
+    {
+      "name": "seven generated assets have complete prompts and original paths",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/keepsake-story-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-ready-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-first-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-red-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-received-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-man-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit21-22/cast-jane-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "font inputs match final content",
+      "passed": true,
+      "detail": {
+        "mismatches": [],
+        "characters": 1852
+      }
+    },
+    {
+      "name": "both license files preserve pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "root authenticated build includes all 72 units",
+      "passed": true
+    },
+    {
+      "name": "subpath authenticated build includes all 72 units",
+      "passed": true
+    },
+    {
+      "name": "all changed JavaScript parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document relative links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "current lesson has no previous lesson identifiers or theme copy",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit21-22/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "a05446ae88100eda18104adcfe9128dbfff92eff08cb77a05f27ede496d20795"
+    },
+    {
+      "file": "assets/unit21-22/cast-ready-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "fa5cc6ff4e56cb5d8e76da04da49e3cb970d3770d23563c2ea3b182ac33fe419"
+    },
+    {
+      "file": "assets/unit21-22/cast-first-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "40262e3a65a13058851472327c7bd5dd9929447f23834f85d4e3d7d66242aac4"
+    },
+    {
+      "file": "assets/unit21-22/cast-red-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "6ad7402efb1143b330cb8a1ff2e00183fefea8055f014737c274835a7d4f0639"
+    },
+    {
+      "file": "assets/unit21-22/cast-received-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "8db535efb29dc419f678aa6be94a8624660be6c673322bf6f940fb5acdaa7ae2"
+    },
+    {
+      "file": "assets/unit21-22/cast-man-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true,
+      "sha256": "61bf1118857437b236e4a0a19c7187f00e940b455c212f774b71f0f37e2bcfd0"
+    },
+    {
+      "file": "assets/unit21-22/cast-jane-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true,
+      "sha256": "5c4571853e5d6757486a171c82f83d3e93561e23a2da64e7b42d660d64620282"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courseCount": 72,
+      "unit": {
+        "title": "寻物交接站",
+        "revision": "07dd30c31779fd3e3599f42c74d057c3b7eafc28a927e7b4a5efea51fe48b31a",
+        "manifest": "/course-packages/unit21-22/07dd30c31779fd3e3599f42c74d057c3b7eafc28a927e7b4a5efea51fe48b31a.json",
+        "sha256": "5d1a3d9760b41e47a7654760c3338e2fa7cb7d7fee6d59ce276b021e6db01f6e"
+      }
+    },
+    "subpath": {
+      "courseCount": 72,
+      "unit": {
+        "title": "寻物交接站",
+        "revision": "1e90b2e8c8075102fd36fddebfabdec52c8b05dd5518e221e86d87b200e8d851",
+        "manifest": "/lesson/course-packages/unit21-22/1e90b2e8c8075102fd36fddebfabdec52c8b05dd5518e221e86d87b200e8d851.json",
+        "sha256": "ebc57df56a5fd19e1df85d41b20013a68c6e9c3aee3f8d1066592eb0749bdbd6"
+      }
+    }
+  }
+}

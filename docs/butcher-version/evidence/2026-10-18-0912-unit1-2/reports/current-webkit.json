@@ -1,0 +1,575 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit1-2-v154.spec.js",
+      "tests/e2e/unit1-2-v154-history.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit12-review-20261018/current-webkit"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit12-review-20261018/current-webkit",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4508",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit1-2-v154-history.spec.js",
+      "file": "unit1-2-v154-history.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "旧25题真实领取的证书原文、姓名、日期、PNG与打印保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24941,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:35:18.889Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f8a2e342ed2fa3865e54-cb9fde290ba10d6ef124",
+          "file": "unit1-2-v154-history.spec.js",
+          "line": 8,
+          "column": 30
+        },
+        {
+          "title": "旧37题真实领取的证书原文、姓名、日期、PNG与打印保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 23298,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:35:43.914Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f8a2e342ed2fa3865e54-259ff5db7ae685256727",
+          "file": "unit1-2-v154-history.spec.js",
+          "line": 8,
+          "column": 30
+        },
+        {
+          "title": "教材七句抄写独立成页，替换例句保持十组",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1323,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:07.221Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "f8a2e342ed2fa3865e54-596f6c6cb9c34b916753",
+          "file": "unit1-2-v154-history.spec.js",
+          "line": 37,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit1-2-v154.spec.js",
+      "file": "unit1-2-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "首页与封面沿用已确认纪念卡故事插画",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1459,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:08.566Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-38db512f7c280f6f8634",
+          "file": "unit1-2-v154.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "实际显示的短示范写入本次提交，独立题不补记示范",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:10.034Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-8648c151d27d6c4db359",
+          "file": "unit1-2-v154.spec.js",
+          "line": 13,
+          "column": 1
+        },
+        {
+          "title": "四宽 320：首页、词卡、完整对白、人物与答前材料",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10911,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:12.550Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-34a862fb8d8cb0908fda",
+          "file": "unit1-2-v154.spec.js",
+          "line": 25,
+          "column": 39
+        },
+        {
+          "title": "四宽 390：首页、词卡、完整对白、人物与答前材料",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10905,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:23.467Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-2fad2620220888659470",
+          "file": "unit1-2-v154.spec.js",
+          "line": 25,
+          "column": 39
+        },
+        {
+          "title": "四宽 768：首页、词卡、完整对白、人物与答前材料",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11460,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:34.377Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-6c14ba4b6fe0d8b90516",
+          "file": "unit1-2-v154.spec.js",
+          "line": 25,
+          "column": 39
+        },
+        {
+          "title": "四宽 1280：首页、词卡、完整对白、人物与答前材料",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11895,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:45.846Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-0876b53105dd609b0c63",
+          "file": "unit1-2-v154.spec.js",
+          "line": 25,
+          "column": 39
+        },
+        {
+          "title": "37题未答材料逐题审查、五区与零英语声音、声音失败仍可完成",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 30377,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:36:57.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-514f0f8d78aadaf51e79",
+          "file": "unit1-2-v154.spec.js",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "真实前版中途错答和未提交选择升级后保留同一轮，已完成五星与精确日期不变",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 29866,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:37:28.134Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-1c49915738ab77dcb7c8",
+          "file": "unit1-2-v154.spec.js",
+          "line": 71,
+          "column": 1
+        },
+        {
+          "title": "短屏 320x568 三卡与两个操作完整，键盘提交和错误次数保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5148,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:37:58.006Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-d387e22185fe30727bf9",
+          "file": "unit1-2-v154.spec.js",
+          "line": 87,
+          "column": 50
+        },
+        {
+          "title": "短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 4825,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m554.40625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m554.40625\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:91:205",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                      "column": 205,
+                      "line": 91
+                    },
+                    "snippet": "  89 |  await flow.select(room,flow.ANSWERS['1-2'].listen[0]);await room.getByRole('button',{name:'检查答案',exact:true}).focus();await page.keyboard.press('Enter');await room.getByRole('button',{name:'下一题',exact:true}).click();\n  90 |  await flow.activity(page,'1-2','listen');await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);\n> 91 |  const stats=await room.locator('.completion-stats').boundingBox(),actions=await room.locator('.practice-finish-actions').boundingBox();expect(stats.y).toBeGreaterThan(0);expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);\n     |                                                                                                                                                                                                             ^\n  92 |  await page.screenshot({path:info.outputPath('short-completion.png')});await page.reload();await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);\n  93 | });\n  94 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                        "column": 205,
+                        "line": 91
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m554.40625\u001b[39m\n\n  89 |  await flow.select(room,flow.ANSWERS['1-2'].listen[0]);await room.getByRole('button',{name:'检查答案',exact:true}).focus();await page.keyboard.press('Enter');await room.getByRole('button',{name:'下一题',exact:true}).click();\n  90 |  await flow.activity(page,'1-2','listen');await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);\n> 91 |  const stats=await room.locator('.completion-stats').boundingBox(),actions=await room.locator('.practice-finish-actions').boundingBox();expect(stats.y).toBeGreaterThan(0);expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);\n     |                                                                                                                                                                                                             ^\n  92 |  await page.screenshot({path:info.outputPath('short-completion.png')});await page.reload();await expect(room.locator('.completion-number')).toHaveText(['5','5','0']);\n  93 | });\n  94 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js:91:205"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T01:38:03.161Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\current-webkit\\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit12-review-20261018\\current-webkit\\unit1-2-v154-短屏-390x500-三卡与两个操作完整，键盘提交和错误次数保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit1-2-v154.spec.js",
+                    "column": 205,
+                    "line": 91
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "6737ae452a0cc0f10bd6-04a1e381ec80cbff3207",
+          "file": "unit1-2-v154.spec.js",
+          "line": 87,
+          "column": 50
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T01:35:18.106Z",
+    "duration": 170656.823,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

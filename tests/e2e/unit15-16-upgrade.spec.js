@@ -108,3 +108,5 @@ test('15–16 完成整课加载后，刷新对白仍展示已读的最后一句
   await expect(room.locator('.dialogue-status')).toHaveText('18 / 18');
   await expect(log.locator('.bubble-row').last()).toBeInViewport({ ratio:1 });
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

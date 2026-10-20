@@ -1,0 +1,131 @@
+[WebServer] (node:29256) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:34364) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:2424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 (20.3s)
+(node:20568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  2 tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 (8.9s)
+(node:7324) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 3 tests\login\unit1-2-award.spec.js:142:1 › 订正完成但零星，课程首页仍可继续学习 (26.7s)
+(node:7324) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 4 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 (1.3m)
+  x  5 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 (12.3s)
+
+
+  1) tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 ─────────────────
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })
+    Expected: "true"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 5000ms
+      - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })
+
+
+      22 |   // does not allow fetch(blob:); compare the actual decoded pixels instead.
+      23 |   expect(await pixels(p.locator('#cover .unit-cover-art img'))).toBe(referencePixels);expect(await pixels(p.locator('.stage-certificate .story-award-illustration'))).toBe(referencePixels);
+    > 24 |   await p.goto(base+'unit1-2/#learn/trans');const room=p.locator('.stage-trans');await room.getByRole('button',{name:'Is this your book?',exact:true}).click();await p.reload();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');
+         |                                                                                                                                                                                                                                                               ^
+      25 |   await p.getByRole('link',{name:'我的课程',exact:true}).click();await p.reload();await home.locator('.primary-button').click();await expect(room.getByRole('button',{name:'Is this your book?',exact:true})).toHaveAttribute('aria-pressed','true');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
+      26 |   await p.goto(base+'unit3-4/');await expect(p.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();
+      27 |   info.annotations.push({type:'actual-503',description:String(failed)});
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-v154-account.spec.js:24:255
+
+    Error Context: output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-trans').getByRole('button', { name: 'Is this your book?', exact: true })
+
+
+      25 |   const errors=[];learner.on('pageerror',error=>errors.push(error.message));
+      26 |   await learner.goto(base + '#learn/trans');
+    > 27 |   await expect(learner.locator('.stage-trans').getByRole('button', { name:'Is this your book?', exact:true })).toBeVisible();
+         |                                                                                                                ^
+      28 |   await first.context.setOffline(true);
+      29 |   await finishZone(learner, 'trans', { base, keepAward: true });
+      30 |   await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-award.spec.js:27:112
+
+    Error Context: output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-root\unit1-2-v154-account-账号姓名、跨设备五星、首次日期、重开练习与学生隔离\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 ─────────────────────
+
+    Error: expect(locator).not.toHaveAttribute(expected) failed
+
+    Locator:  locator('html')
+    Expected: not ""
+    Received: ""
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toHaveAttribute" with timeout 5000ms
+      - waiting for locator('html')
+        14 × locator resolved to <html lang="zh-CN" data-unit="unit1-2" data-course-preparing="">…</html>
+           - unexpected value ""
+
+
+       at ..\fixtures\unit1-2-before-awards\flow.js:30
+
+      28 | async function story(page,pair,base=''){
+      29 |  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
+    > 30 |  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();
+         |                                         ^
+      31 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
+      32 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+      33 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
+        at story (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\fixtures\unit1-2-before-awards\flow.js:30:41)
+        at Object.complete (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\fixtures\unit1-2-before-awards\flow.js:54:2)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-v154-upgrade.spec.js:30:61
+
+    Error Context: output\unit12-review-20261018\account-webkit-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\account-webkit-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\account-webkit-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    tests\login\unit1-2-v154-account.spec.js:9:1 › 账号首页四宽与课内封面、纪念卡一致，图片故障命中后可重试续做 ──────────────────
+    tests\login\unit1-2-award.spec.js:15:1 › 账号姓名、跨设备五星、首次日期、重开练习与学生隔离 ─────────────────────────────
+    tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 ──────────────────────
+  2 passed (2.6m)

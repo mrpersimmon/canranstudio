@@ -137,3 +137,17 @@ unit.learning.WRITING_B_EXAMPLES=['What is he going to do? (a glass of whisky) â
 unit.learning.WRITING_B=[['What are they going to do?','breakfast'],['What are they doing?','lunch'],['What must they do?','tea'],['What did they do?','dinner'],['What must they do?','a meal'],['What is he going to do?','a swim'],['What is he doing?','a bath'],['What did he do?','a haircut'],['What are they doing?','a lesson'],['What did they do?','a party'],['What must they do?','a holiday'],['What are they going to do?','a good time']];
 core.unit8182=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit8182,excerpts={"u8182-v1-r-visitor":[0,1,2,3,4],"u8182-v1-r-now":[0,1],"u8182-v1-r-refusal":[6,7],"u8182-v1-r-time":[10,11],"u8182-v1-r-past":[12,13,14],"u8182-v1-r-ending":[12,13,14,15,16,17],"u8182-v1-r-boundary":[10,11,12,13,14,15,16,17],"u8182-v1-e-time":[10,11,12,13,14,15,16,17]},speakers={"sam":"Sam","carol":"Carol","tom":"Tom"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 81',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

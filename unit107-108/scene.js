@@ -1,0 +1,18 @@
+(function(core){
+'use strict';
+const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
+function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/unit107-108/'+name+'.'+ext;e.alt=alt;return e;}
+function storyProps(){
+ const element=node('div','fitting-world');element.setAttribute('role','group');element.setAttribute('aria-label','服装店：店员与女士交谈');
+ for(const[key,label,side,poses]of [['assistant','Assistant','left',[['assistant','assistant-blue-pose','店员持蓝裙，面向右侧'],['assistant-green','assistant-green-pose','店员持绿裙，面向右侧']]],['lady','Lady','right',[['lady','lady-empty-pose','女士面向左侧店员'],['lady-green','lady-green-pose','女士持绿裙，面向左侧店员']]]]){
+  const wrap=node('div','dialogue-actor fitting-actor at-'+side);wrap.dataset.actor=key;
+  for(const[name,cls,alt]of poses){const img=picture(name,'fitting-cast '+cls,alt+'，全身完整','webp');img.hidden=true;wrap.append(img);}
+  wrap.append(node('span','actor-label',label));element.append(wrap);
+ }
+ element.append(node('p','fitting-location','服装店'));
+ return{element,update(i){const offered=i>=2&&i<4,reviewing=i>=4;element.querySelector('.assistant-blue-pose').hidden=offered;element.querySelector('.assistant-green-pose').hidden=!offered;element.querySelector('.lady-empty-pose').hidden=reviewing;element.querySelector('.lady-green-pose').hidden=!reviewing;element.dataset.reading=String(i>=0);},sideFor:(_i,who)=>who==='assistant'?'left':'right'};
+}
+const tasks={weight:['Compare two cases','Use the recorded weights.','The blue case is heavier.'],heaviest:['Compare three cases','Check every recorded weight.','The green case is the heaviest.'],price:['Compare two prices','Use the requested expression.','The blue hat is less expensive.'],label:['Match a request','Check both requested labels.','B matches blue and size M.'],range:['Keep the comparison range','Use only the stated group.','C is the largest box in Shop A.'],view:['Record a preference','Keep the speaker’s point of view.','Mia thinks the blue dress is prettier.'],evidence:['Check the evidence','Find what else must be known.','Compare the other bags in the same group.'],request:['Ask to see another one','Use a polite request.','Could you show me a larger one, please?']};
+function create({element}){let view,heading,task;return{present(question,progress){element.classList.remove('role-runner');element.classList.add('fitting-runner');const content=element.querySelector('.practice-content'),intro=node('div','fitting-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const material=content.querySelector('.practice-context');if(material)intro.append(material);task=question.id.replace('u107108-v1-a-','');const[title,detail]=tasks[task];view=node('div','fitting-application');view.dataset.task=task;view.dataset.recorded='false';view.setAttribute('role','group');view.setAttribute('aria-label','比较任务记录');view.append(picture('task-record','application-prop',''));const card=node('div','record-page');card.append(node('strong','',title),node('span','',detail));view.append(card);intro.append(view);content.prepend(intro);},answer(value){const checked=value!==null;view.dataset.recorded=String(checked);view.querySelector('.record-page strong').textContent=tasks[task][checked?2:0];view.querySelector('.application-prop').src='/assets/unit107-108/'+(checked?'task-checked':'task-record')+'.svg';},finish(){},completion(){return null;},heading(){return element.querySelector('.fitting-intro .practice-progress')||heading;}};}
+core.unit107108Scene={storyProps,create};
+})(globalThis.CanranCore);

@@ -1,0 +1,12 @@
+{
+  "priorVersion": "1.53",
+  "currentVersion": "1.54",
+  "allPriorSubstantiveLinesRetained": true,
+  "additions": [
+    "- **首页课程横幅也是本单元的视觉交付。** 首页入口、课内封面和当前纪念卡须对照同一角色与故事基准，核对人物身份、画风、关键物品和构图；三处可以因比例不同采用不同构图，不强制同一个文件。已有合格插画可以复用，不要求每次重新生成。旧证书保留原图与日期，不等于现行入口必须继续使用旧画风。",
+    "**首页图片引用要单独核对。** 首页入口可能使用独立于课内封面的图片来源。新建或改造单元时，应核对实际运行的静态首页（如有）与登录首页加载的当前图片、返回和复访后的显示；不能以课内封面已更新、目录可进入或图片成功解码代替首页视觉通过。只更新受影响的入口；未变且已有对应证据的部分可注明依据后复用。",
+    "| 首页课程横幅 | 将本次涉及的首页入口、课内封面和当前纪念卡并排对照，核对真实引用、人物画风、关键物品及构图。按本表尺寸项检查窄屏／桌面裁切、拉伸、遮挡和入口操作；静态首页（如有）与登录首页分别检查，账号服务核对根路径与测试子路径。保存当次引用及代表截图。三处允许合适的不同构图，文件相同或图片加载成功都不能代替目视；缺少首页证据时不得标为完整视觉验收通过。 |"
+  ],
+  "onlyPriorHeaderMarkedHistorical": true,
+  "scope": "New or modified unit entrances; unchanged approved evidence may be reused; no fixed file format, redraw, question count, or global migration prerequisite."
+}

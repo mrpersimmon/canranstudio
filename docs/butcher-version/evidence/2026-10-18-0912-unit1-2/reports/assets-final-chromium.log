@@ -1,0 +1,17 @@
+
+Running 10 tests using 1 worker
+
+(node:18452) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit1-2-v154.spec.js:6:1 › 首页与封面沿用已确认纪念卡故事插画 (737ms)
+  ok  2 tests\e2e\unit1-2-v154.spec.js:13:1 › 实际显示的短示范写入本次提交，独立题不补记示范 (954ms)
+  ok  3 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 320：首页、词卡、完整对白、人物与答前材料 (5.1s)
+  ok  4 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 390：首页、词卡、完整对白、人物与答前材料 (4.8s)
+  ok  5 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 768：首页、词卡、完整对白、人物与答前材料 (4.9s)
+  ok  6 tests\e2e\unit1-2-v154.spec.js:25:39 › 四宽 1280：首页、词卡、完整对白、人物与答前材料 (4.9s)
+  ok  7 tests\e2e\unit1-2-v154.spec.js:55:1 › 37题未答材料逐题审查、五区与零英语声音、声音失败仍可完成 (12.1s)
+  ok  8 tests\e2e\unit1-2-v154.spec.js:73:1 › 真实前版中途错答和未提交选择升级后保留同一轮，已完成五星与精确日期不变 (11.8s)
+  ok  9 tests\e2e\unit1-2-v154.spec.js:89:50 › 短屏 320x568 三卡与两个操作完整，键盘提交和错误次数保留 (2.6s)
+  ok 10 tests\e2e\unit1-2-v154.spec.js:89:50 › 短屏 390x500 三卡与两个操作完整，键盘提交和错误次数保留 (2.7s)
+
+  10 passed (51.9s)

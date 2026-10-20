@@ -1,66 +1,22 @@
 (function(core){
-  'use strict';
-  const node=(tag,cls='',text='')=>{const el=document.createElement(tag);el.className=cls;el.textContent=text;return el;};
-  const image=(name,cls='',alt='')=>{const el=node('img',cls);el.src='/assets/unit41-42/'+name+'.svg';el.alt=alt;return el;};
-  function world(){
-    const element=node('div','pantry-world');element.setAttribute('role','group');element.setAttribute('aria-label','Sam、Penny 与购物袋');
-    const actors={};
-    for(const who of ['sam','penny']){const actor=node('div','pantry-actor dialogue-actor actor-'+who);actor.dataset.actor=who;const picture=image(who);actors[who]=picture;actor.append(picture,node('span','',who==='sam'?'Sam':'Penny'));element.append(actor);}
-    element.append(image('chair','pantry-chair'),image('table','pantry-table'));
-    const pack=node('div','pantry-pack'),contents=node('div','bag-contents');pack.append(contents,image('bag','pantry-bag','Penny 的购物袋'));element.append(pack);
-    const item=node('div','pantry-item');element.append(item);
-    function pose(who,name){if(actors[who].dataset.pose===name)return;actors[who].dataset.pose=name;actors[who].src='/assets/unit41-42/'+name+'.svg';}
-    function inventory({bread=0,bagMilk=0,tableMilk=0}){
-      contents.replaceChildren();item.replaceChildren();
-      if(bread)contents.append(image('bread','packed-bread','袋里的一条面包'));
-      for(let i=0;i<bagMilk;i++)contents.append(image('milk','packed-milk','袋里的第'+(i+1)+'瓶牛奶'));
-      if(tableMilk)item.append(image('milk','','桌上的一瓶牛奶'));
-      element.dataset.bagMilk=String(bagMilk);element.dataset.tableMilk=String(tableMilk);
-    }
-    return {element,item,pose,inventory};
-  }
-  const revealed=['cheese','bread','soap','chocolate','milk','sugar','coffee','tea','tobacco'];
-  const names=['一块乳酪','一条面包','一块肥皂','一块巧克力','一瓶牛奶','一磅糖','半磅咖啡','四分之一磅茶','一罐烟丝'];
-  function storyProps(){
-    const {element,item,pose}=world();let previous='';
-    return {element,update(index){
-      element.dataset.bag=index<3?'carried':'chair';
-      const beat=index<2?'arriving':index<4?'placing':index===4?'looking':index<14?'unpacking':'ending';element.dataset.beat=beat;
-      pose('sam',beat==='placing'?'sam-point':beat==='looking'||beat==='unpacking'?'sam-look':'sam');
-      pose('penny',beat==='placing'?'penny-place':beat==='unpacking'?'penny-show':'penny');
-      const selected=index<5?'':revealed[Math.min(8,index-5)];
-      if(previous!==selected){item.replaceChildren();if(selected)item.append(image(selected,'',names[Math.min(8,index-5)]));previous=selected;}
-    }};
-  }
-  function create({element}){
-    let scene,heading,receipt,display,beat;
-    const before={bread:{bread:0,bagMilk:0,tableMilk:0},bottles:{bread:1,bagMilk:0,tableMilk:0},check:{bread:1,bagMilk:2,tableMilk:0},place:{bread:1,bagMilk:2,tableMilk:0},note:{bread:1,bagMilk:1,tableMilk:1}};
-    function update(state){
-      display.inventory(state);
-      const parts=[];if(state.bread)parts.push('一条面包');if(state.bagMilk)parts.push(state.bagMilk===2?'两瓶牛奶':'一瓶牛奶');
-      receipt.textContent='袋子里：'+(parts.join('、')||'空');
-      const table=node('span','table-inventory','桌上：'+(state.tableMilk?'一瓶牛奶':'空'));receipt.append(table);
-    }
-    return {
-      present(question,progress){
-        element.classList.remove('role-runner');element.classList.add('pantry-runner');
-        const content=element.querySelector('.practice-content'),intro=node('div','pantry-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);
-        const material=content.querySelector('.practice-context');if(material)intro.append(material);
-        display=world();scene=display.element;scene.classList.add('pantry-application');scene.dataset.bag='chair';scene.dataset.confirmed='false';
-        beat=question.id.match(/-a-(bread|bottles|check|place|note)/)[1];scene.dataset.task=beat;
-        display.pose('sam',beat==='place'?'sam-point':'sam-look');display.pose('penny',beat==='place'?'penny-place':'penny');
-        receipt=node('p','bag-inventory');scene.append(receipt);update(before[beat]);intro.append(scene);content.prepend(intro);
-      },
-      answer(value){
-        const success=value!==null;scene.dataset.confirmed=String(success);
-        // Presenting a draft, selecting or failing never moves any object.
-        if(!success)return;
-        const after=beat==='bread'?before.bottles:beat==='bottles'?before.check:beat==='place'?before.note:before[beat];
-        update(after);
-        if(beat==='place'){scene.dataset.moved='true';display.pose('penny','penny-show');}
-      },
-      finish(){},completion(){return null;},heading(){return heading;}
-    };
-  }
-  core.unit4142Scene={storyProps,create};
+'use strict';const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;},base='/assets/unit41-42/';
+const image=(name,cls='',alt='')=>{const im=node('img',cls);im.src=base+name;im.alt=alt;return im;};
+function world(){
+ const element=node('div','pantry-world'),visual=node('div','pantry-visual');element.setAttribute('role','group');element.setAttribute('aria-label','Sam、Penny与购物袋');element.append(visual);
+ const actors={};for(const who of ['sam','penny']){const actor=node('div','pantry-actor dialogue-actor actor-'+who),person=node('div','pantry-person'),picture=image('cast-'+who+'-v153.webp');actor.dataset.actor=who;actors[who]={picture,person};person.append(picture);actor.append(person,node('span','actor-label',who==='sam'?'Sam':'Penny'));visual.append(actor);}
+ const seat=node('div','pantry-seat'),chair=image('chair-v153.svg','pantry-chair'),pack=node('div','pantry-pack'),contents=node('div','bag-contents');pack.append(contents,image('bag-v153.svg','pantry-bag','Penny的购物袋'));seat.append(chair,pack);visual.append(seat);
+ const table=node('div','pantry-table-unit'),item=node('div','pantry-item');table.append(image('table-v153.svg','pantry-table'),item);visual.append(table);
+ const held=node('div','pantry-held');actors.penny.person.append(held);
+ const bread=image('bread.svg','packed-bread','袋里的一条面包'),milk1=image('milk.svg','packed-milk','袋里的第1瓶牛奶'),milk2=image('milk.svg','packed-milk','袋里的第2瓶牛奶');milk1.dataset.item='milk-1';milk2.dataset.item='milk-2';
+ function inventory({bread:hasBread=0,bagMilk=0,tableMilk=0}){for(const n of [bread,milk1,milk2])n.remove();if(hasBread)contents.append(bread);if(bagMilk)contents.append(milk1);if(bagMilk===2)contents.append(milk2);if(tableMilk){milk2.alt='桌上的一瓶牛奶';item.append(milk2);}else milk2.alt='袋里的第2瓶牛奶';element.dataset.bagMilk=String(bagMilk);element.dataset.tableMilk=String(tableMilk);}
+ function pose(carry){actors.penny.picture.src=base+(carry?'cast-penny-bag-v153.webp':'cast-penny-v153.webp');pack.hidden=carry;}
+ return{element,held,item,contents,pose,inventory};
+}
+const items=['cheese','bread','soap','chocolate','milk','sugar','coffee','tea','tobacco'],names=['一块乳酪','一条面包','一块肥皂','一块巧克力','一瓶牛奶','一磅糖','半磅咖啡','四分之一磅茶','一罐烟丝'];
+function storyProps(){const w=world();w.element.classList.add('pantry-story');let selected='';return{element:w.element,update(i){w.element.dataset.bag=i<5?'carried':'chair';w.element.dataset.readingLine=String(i+1);w.element.dataset.beat=i<3?'arriving':i<5?'looking':i<14?'unpacking':'ending';w.pose(i<5);const id=i<5?'':items[Math.min(8,i-5)];if(id!==selected){w.held.replaceChildren();if(id)w.held.append(image(id+'.svg','',names[Math.min(8,i-5)]));selected=id;}}};}
+function create({element}){let display,receipt,beat,heading;const before={bread:{bread:0,bagMilk:0,tableMilk:0},bottles:{bread:1,bagMilk:0,tableMilk:0},check:{bread:1,bagMilk:2,tableMilk:0},place:{bread:1,bagMilk:2,tableMilk:0},note:{bread:1,bagMilk:1,tableMilk:1}};
+function update(state){display.inventory(state);const parts=[];if(state.bread)parts.push('一条面包');if(state.bagMilk)parts.push(state.bagMilk===2?'两瓶牛奶':'一瓶牛奶');receipt.textContent='袋子里：'+(parts.join('、')||'空');receipt.append(node('span','table-inventory','桌上：'+(state.tableMilk?'一瓶牛奶':'空')));}
+return{present(question,progress){element.classList.add('pantry-runner');const content=element.querySelector('.practice-content'),intro=node('div','pantry-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const material=content.querySelector('.practice-context');if(material)intro.append(material);display=world();display.element.classList.add('pantry-application');display.element.dataset.bag='chair';display.element.dataset.confirmed='false';beat=question.id.match(/-a-(bread|bottles|check|place|note)/)[1];display.element.dataset.task=beat;receipt=node('p','bag-inventory');display.element.prepend(receipt);update(before[beat]);intro.append(display.element);content.prepend(intro);},answer(value){const success=value!==null;display.element.dataset.confirmed=String(success);if(!success)return;update(beat==='bread'?before.bottles:beat==='bottles'?before.check:beat==='place'?before.note:before[beat]);if(beat==='place')display.element.dataset.moved='true';},finish(){},completion(){return null;},heading(){return element.querySelector('.pantry-intro .practice-progress')||heading;}};}
+function restyle(element){for(const im of element.querySelectorAll('.practice-options img')){const id=(im.getAttribute('src')||'').match(/\/(sam|penny)\.svg(?:\?.*)?$/)?.[1];if(id){im.src=base+'cast-'+id+'-v153.webp';im.dataset.cast=id;}}}
+core.unit4142Scene={storyProps,create,restyle};
 })(globalThis.CanranCore);

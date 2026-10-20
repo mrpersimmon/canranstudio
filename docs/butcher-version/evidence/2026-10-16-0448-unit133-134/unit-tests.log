@@ -1,0 +1,265 @@
+
+> canranstudio@0.0.0 test:unit
+> node --test tests/unit/*.test.js
+
+(node:15508) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ new students receive verified pinyin plus three digits, with leading zeros and distinct namesake credentials (407.75ms)
+✔ batch resets only selected students, revokes sessions and retains identities, status and progress (434.6806ms)
+✔ invalid, duplicate and stale batches never partially reset passwords (342.6352ms)
+✔ single reset uses verified spelling and exactly three digits, including leading zeros (240.4995ms)
+✖ custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials (520.6922ms)
+✔ batch API enforces admin and origin, returns only requested accounts and accepts long reset passwords (7664.1039ms)
+(node:11744) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (198.0891ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (1.1837ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (7.8779ms)
+✔ partial wrong submission is observable without awards or resumable completion (78.2215ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (78.4012ms)
+✔ reset isolates a new generation and preserves earlier observation history (73.7299ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (90.1007ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (81.0733ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.8613ms)
+✔ student identity, pagination and filters expose learning summaries only (909.5971ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (7420.3119ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (3.3453ms)
+✔ three learning statuses require current work, not visits, stars or old content (6.0833ms)
+✔ all published courses reach completed only with every required activity including reading (243.5787ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (238.1378ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (1219.8588ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (207.7605ms)
+✔ only complete publication contracts become visible single-state landmarks (2.5133ms)
+✔ soundmark remains a four-stage side quest without a fabricated fifth stamp (0.5257ms)
+✔ recommendation uses last unfinished visit, then earliest unstarted, and none after completion (1.1425ms)
+✔ the approved golden route page contains exactly Lessons 49–52 in curriculum order (0.9725ms)
+✔ the internal review contract adds one isolated Lesson 53–56 route page (0.2616ms)
+✔ route pages resolve locations, fixed spreads, and non-looping neighbours (0.393ms)
+✔ current route-page selection follows focus, recent work, curriculum, and completed fallback (5.5249ms)
+✔ the explorer cat follows a focused course, then the next adventure, then the route exit (1.1611ms)
+✔ pending map changes collapse into one child-readable summary (0.669ms)
+✔ a wrong answer followed by a correct retry solves without scoring (0.964ms)
+✔ a first-try correct answer scores exactly once (0.1767ms)
+✔ shuffleOptions keeps semantic identity independent of output position (0.3147ms)
+✔ slugify keeps the repository audio filename convention (1.5705ms)
+✔ prerecorded audio finishes on ended, not on play promise fulfillment (2.6845ms)
+✔ audio error falls back to speech and finishes once when speech ends (0.6542ms)
+✔ rejected play promise falls back and caches the failed source (0.6132ms)
+✔ starting a new playback cancels the old playback exactly once (0.5513ms)
+✔ speech error and timeout are terminal and idempotent (0.5379ms)
+✔ unsupported playback still completes exactly once (0.3265ms)
+✔ a reentrant latest play supersedes its outer request without orphaning media (0.5796ms)
+✔ a superseded request can reenter from its own finish callback safely (0.8374ms)
+✔ explicit stop and later handle cancellation clean audio exactly once (0.5057ms)
+✔ an active audio handle cancels and ignores captured late handlers (0.3484ms)
+✔ audio timeout falls back with source failure and ignores late audio events (0.2945ms)
+✔ audio construction and synchronous play failures cache the source before fallback (1.6083ms)
+✔ synchronous speech failure and late captured utterance handlers are terminal once (0.3915ms)
+(node:30184) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (128.2055ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.983ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (140.5159ms)
+✔ numbered lesson requires fifteen stars and reports the first incomplete target (1.1134ms)
+✔ only three stars in every numbered target is eligible (0.342ms)
+✔ soundmark requires twelve stars (0.3393ms)
+✔ missing and malformed ratings safely normalize to zero through three (0.1804ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (2.5901ms)
+✔ landmark state URLs carry one immutable content version (1.5902ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.6614ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.5229ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (4.3135ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (4.4425ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (1.4186ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.4851ms)
+✔ every published map stage declares a child-readable growth reveal (1.2984ms)
+✔ published course registry is a compatibility view of the shared catalog (4.696ms)
+✔ first device profile initialization inherits only proven stages and is idempotent (4.0231ms)
+✔ restart clears every catalog-owned record and preserves unrelated storage (0.5353ms)
+✔ legacy and corrupt course records initialize without inventing completed stages (0.5217ms)
+✔ a proven device stage never regresses when a later course rating is lower (0.499ms)
+✔ a completed map course awards its known souvenir once and never regresses (0.6859ms)
+✔ an older completed profile backfills a missing souvenir field (0.3012ms)
+✔ visiting the launch district becomes the device return view without changing progress (0.5246ms)
+✔ v1 profile migrates to v2 without replaying historical growth reveals (0.2914ms)
+✔ only a persisted zero-to-positive stage transition creates one pending reveal (0.9545ms)
+✔ map changes merge in course order and are consumed once without losing progress (1.3675ms)
+✔ unwritable storage never claims permanent landmark growth (0.6727ms)
+✔ reveal model switches between two complete snapshots without movable layers (1.2168ms)
+✔ final-stage reveal includes the permanent souvenir and completion state (0.2665ms)
+✔ controller can be imported and created without touching a global document (0.3597ms)
+✔ next-state preloading decodes the nearest responsive AVIF with its content version (1.3543ms)
+✔ next-state preloading falls back from AVIF to WebP without requesting every size (0.436ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (2.0499ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.4212ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.2302ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.4509ms)
+✔ review locations come from every complete published map contract (2.0529ms)
+✔ query state restores a valid review and safely normalizes invalid values (0.7363ms)
+✔ student preview state is shareable across five viewports and three progress scenarios (0.4644ms)
+✔ placement review resolves the page that owns the selected landmark (0.2351ms)
+✔ stage labels and serialized URLs adapt to each location contract (0.4398ms)
+✔ placement review changes only the selected location and never invents new placements (0.6216ms)
+✔ student preview scenarios deterministically stage every published route landmark (1.0205ms)
+✔ Lesson 51 publishes six complete responsive snapshots from one fixed composition (23.533ms)
+✔ the authored atlas background has responsive high-quality AVIF and WebP derivatives (12.1901ms)
+✔ the approved V4 route page ships a fixed-ratio background and transparent mascot assets (20.6544ms)
+✔ the review-only Lesson 53–56 page ships a fixed-ratio responsive background (8.978ms)
+✔ adjacent Lesson 51 snapshots keep the temple anchor aligned instead of moving loose layers (77.2952ms)
+✔ the Lesson 51 weather instrument stays physically attached at one fixed anchor (41.2786ms)
+✔ the retired Lesson 51 layer-composition review path cannot show a stale six-state sheet (64.8148ms)
+✔ every published landmark is a progressive locked-mother state chain with responsive derivatives (78.2611ms)
+✔ every published landmark keeps its primary building anchor stable between adjacent states (242.0264ms)
+✔ Lesson 50 has a complete standalone opening without any souvenir (1.1736ms)
+✔ the food basket adds a brief optional Lesson 49 bridge without changing the lesson (1.0091ms)
+✔ unknown or malformed souvenir data never invents the connected opening (0.2245ms)
+✖ static preview serves public files but denies private paths, aliases, symlinks and foreign hosts (43.0391ms)
+✖ preview package construction rejects private symlinks before hash resource aliases are published (21.0299ms)
+✔ ratingFor exposes every branch including zero (0.9801ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.946ms)
+✔ certificate predicates require every named challenge (0.3115ms)
+✔ every approved course rating table reaches zero through three stars (0.3802ms)
+(node:35076) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ grant renewal bounds allocation, preserves old IDs and isolates devices/courses (273.2962ms)
+✖ persistent failure windows survive reopen, expire without extension, and never clear source budgets (1231.5957ms)
+✔ throttle state stays bounded and refuses new identities without evicting active budgets (22.1474ms)
+✖ opening an existing data directory restores private directory and key modes (32.0019ms)
+✔ normalizeProgress accepts only primitive finite number ratings in range (1.7177ms)
+✔ normalizeProgress rejects every non-number and non-finite v2 rating (0.3691ms)
+✔ normalizeProgress does not treat an unversioned v2 payload as legacy ratings (0.2102ms)
+✔ loadProgress migrates and removes legacy level ratings only after v2 write (0.5792ms)
+✔ legacy migration accepts numeric strings without coercing other legacy types (1.7471ms)
+✔ loadProgress repairs corrupt v2 types and persists the strict result (0.3677ms)
+✔ loadProgress resets soundmark legacy totals without inferring achievements (0.2987ms)
+✔ invalid JSON is repaired instead of escaping to page initialization (0.4188ms)
+✔ storage write failure returns normalized in-memory progress and preserves legacy (0.2785ms)
+✔ saveProgress never persists out-of-range ratings (0.4151ms)
+(node:34064) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ teacher examples use a global 1-prefixed sequence independent of 0-prefixed students, immutable after edits and restart (356.9301ms)
+✔ both namespaces stop before crossing their fixed leading digit (293.1382ms)
+✔ teacher initial/reset secrets preserve three digits, redemption, deadlines, and revocation through backup/restart (440.0958ms)
+✔ teacher and class assignment revisions reject stale writes; disabling preserves peer permissions and student learning; audit omits secrets (251.692ms)
+✔ HTTP teacher permissions cover setup, many-to-many scope, search/detail, batch, transfer, previews/resources and revocation (7654.1009ms)
+✔ async batch rechecks teacher assignment and student transfer before committing any password (5571.8997ms)
+✔ teacher login cooldown normalizes case and spaces, persists across restart, and administrator reset restores login (6361.5899ms)
+ℹ tests 132
+ℹ suites 0
+ℹ pass 126
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21442.6856
+
+✖ failing tests:
+
+test at tests\unit\admin-accounts.test.js:84:1
+✖ custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials (520.6922ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  438 !== 384
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\admin-accounts.test.js:98:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 438,
+    expected: 384,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\unit\preview-security.test.js:12:1
+✖ static preview serves public files but denies private paths, aliases, symlinks and foreign hosts (43.0391ms)
+  Error: EPERM: operation not permitted, symlink 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-preview-boundary-qqqyKD\.data\lesson-access\private.json' -> 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-preview-boundary-qqqyKD\assets\inside.json'
+      at async Object.symlink (node:internal/fs/promises:999:10)
+      at async TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\preview-security.test.js:25:3)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'symlink',
+    path: 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-preview-boundary-qqqyKD\\.data\\lesson-access\\private.json',
+    dest: 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-preview-boundary-qqqyKD\\assets\\inside.json'
+  }
+
+test at tests\unit\preview-security.test.js:54:1
+✖ preview package construction rejects private symlinks before hash resource aliases are published (21.0299ms)
+  Error: EPERM: operation not permitted, symlink 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-package-boundary-6AlhdM\.data\private.svg' -> 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-package-boundary-6AlhdM\assets\unit13-14\probe.svg'
+      at async Object.symlink (node:internal/fs/promises:999:10)
+      at async TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\preview-security.test.js:65:3)
+      at async Test.run (node:internal/test_runner/test:1125:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'symlink',
+    path: 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-package-boundary-6AlhdM\\.data\\private.svg',
+    dest: 'C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-package-boundary-6AlhdM\\assets\\unit13-14\\probe.svg'
+  }
+
+test at tests\unit\server-security.test.js:11:1
+✖ grant renewal bounds allocation, preserves old IDs and isolates devices/courses (273.2962ms)
+  Error: EPERM, Permission denied: \\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-grant-test-egT908 '\\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-grant-test-egT908'
+      at Object.rmSync (node:fs:1221:18)
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:13:20)
+      at TestHook.runInAsyncScope (node:async_hooks:228:14)
+      at TestHook.run (node:internal/test_runner/test:1118:25)
+      at TestHook.run (node:internal/test_runner/test:1442:18)
+      at TestHook.run (node:internal/util:602:20)
+      at Test.runHook (node:internal/test_runner/test:1036:20)
+      at after (node:internal/test_runner/test:1076:20)
+      at Test.run (node:internal/test_runner/test:1144:13)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    errno: 1,
+    code: 'EPERM',
+    path: '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-grant-test-egT908',
+    syscall: 'rm'
+  }
+
+test at tests\unit\server-security.test.js:49:1
+✖ persistent failure windows survive reopen, expire without extension, and never clear source budgets (1231.5957ms)
+  Error: EPERM, Permission denied: \\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-throttle-test-HP7UFe '\\?\C:\Users\DUANXI~1\AppData\Local\Temp\canran-throttle-test-HP7UFe'
+      at Object.rmSync (node:fs:1221:18)
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:51:20)
+      at TestHook.runInAsyncScope (node:async_hooks:228:14)
+      at TestHook.run (node:internal/test_runner/test:1118:25)
+      at TestHook.run (node:internal/test_runner/test:1442:18)
+      at TestHook.run (node:internal/util:602:20)
+      at Test.runHook (node:internal/test_runner/test:1036:20)
+      at after (node:internal/test_runner/test:1076:20)
+      at Test.run (node:internal/test_runner/test:1144:13)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    errno: 1,
+    code: 'EPERM',
+    path: '\\\\?\\C:\\Users\\DUANXI~1\\AppData\\Local\\Temp\\canran-throttle-test-HP7UFe',
+    syscall: 'rm'
+  }
+
+test at tests\unit\server-security.test.js:79:1
+✖ opening an existing data directory restores private directory and key modes (32.0019ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  438 !== 448
+  
+      at TestContext.<anonymous> (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\unit\server-security.test.js:85:10)
+      at Test.runInAsyncScope (node:async_hooks:228:14)
+      at Test.run (node:internal/test_runner/test:1118:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:787:18)
+      at Test.postRun (node:internal/test_runner/test:1247:19)
+      at Test.run (node:internal/test_runner/test:1175:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:787:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 438,
+    expected: 448,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

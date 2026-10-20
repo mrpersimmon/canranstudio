@@ -1,0 +1,182 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit23-24-v153-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit2324-review-20261018/account-chain-final"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2324-review-20261018/account-chain-final",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4340/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit23-24-v153-upgrade.spec.js",
+      "file": "unit23-24-v153-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [
+                {
+                  "type": "historical-chain",
+                  "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+                },
+                {
+                  "type": "history-storage",
+                  "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 70945,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 18\u001b[39m\n\u001b[31m+ Received  +  0\u001b[39m\n\n\u001b[33m@@ -462,28 +462,10 @@\u001b[39m\n\u001b[2m        2,\u001b[22m\n\u001b[2m        3,\u001b[22m\n\u001b[2m        4,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[32m-   \"u2324-v1-final-v2-on\": Object {\u001b[39m\n\u001b[32m-     \"attempts\": 1,\u001b[39m\n\u001b[32m-     \"checked\": true,\u001b[39m\n\u001b[32m-     \"correct\": true,\u001b[39m\n\u001b[32m-     \"firstCorrect\": true,\u001b[39m\n\u001b[32m-     \"hintUsed\": false,\u001b[39m\n\u001b[32m-     \"optionOrder\": Array [\u001b[39m\n\u001b[32m-       \"甲组\",\u001b[39m\n\u001b[32m-       \"乙组\",\u001b[39m\n\u001b[32m-       \"丙组\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[32m-     \"prompt\": \"The books on the desk.\u001b[39m\n\u001b[32m- 哪组符合这句？\",\u001b[39m\n\u001b[32m-     \"questionId\": \"u2324-v1-final-v2-on\",\u001b[39m\n\u001b[32m-     \"runId\": \"025c8d58-f8a1-4c38-a1dc-e2dabea3314a\",\u001b[39m\n\u001b[32m-     \"selection\": \"甲组\",\u001b[39m\n\u001b[32m-     \"target\": \"on表示表面承托\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[2m    \"u2324-v1-final-v2-ones\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 18\u001b[39m\n\u001b[31m+ Received  +  0\u001b[39m\n\n\u001b[33m@@ -462,28 +462,10 @@\u001b[39m\n\u001b[2m        2,\u001b[22m\n\u001b[2m        3,\u001b[22m\n\u001b[2m        4,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[32m-   \"u2324-v1-final-v2-on\": Object {\u001b[39m\n\u001b[32m-     \"attempts\": 1,\u001b[39m\n\u001b[32m-     \"checked\": true,\u001b[39m\n\u001b[32m-     \"correct\": true,\u001b[39m\n\u001b[32m-     \"firstCorrect\": true,\u001b[39m\n\u001b[32m-     \"hintUsed\": false,\u001b[39m\n\u001b[32m-     \"optionOrder\": Array [\u001b[39m\n\u001b[32m-       \"甲组\",\u001b[39m\n\u001b[32m-       \"乙组\",\u001b[39m\n\u001b[32m-       \"丙组\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[32m-     \"prompt\": \"The books on the desk.\u001b[39m\n\u001b[32m- 哪组符合这句？\",\u001b[39m\n\u001b[32m-     \"questionId\": \"u2324-v1-final-v2-on\",\u001b[39m\n\u001b[32m-     \"runId\": \"025c8d58-f8a1-4c38-a1dc-e2dabea3314a\",\u001b[39m\n\u001b[32m-     \"selection\": \"甲组\",\u001b[39m\n\u001b[32m-     \"target\": \"on表示表面承托\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[2m    \"u2324-v1-final-v2-ones\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:42:403",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+                      "column": 403,
+                      "line": 42
+                    },
+                    "snippet": "  40 |   // Re-practising unchanged questions records the new visible support without\n  41 |   // rewriting the frozen original independent submissions or old award date.\n> 42 |   await other.goto(base+'unit23-24/#learn/grammar');await other.locator('.stage-grammar').getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.activity(other,'grammar',{base:prefix});await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');expect(ledger()).toEqual(awards);await p.reload();await ready(p);expect((await readLearning(p)).activity.unit2324V153Snapshot.records).toEqual(before.records);await expect(p.locator('#certificateDate')).toHaveText(date);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                   ^\n  43 |   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit23-24/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}\n  44 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2324-v153-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}\n  45 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+                        "column": 403,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 18\u001b[39m\n\u001b[31m+ Received  +  0\u001b[39m\n\n\u001b[33m@@ -462,28 +462,10 @@\u001b[39m\n\u001b[2m        2,\u001b[22m\n\u001b[2m        3,\u001b[22m\n\u001b[2m        4,\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    },\u001b[22m\n\u001b[32m-   \"u2324-v1-final-v2-on\": Object {\u001b[39m\n\u001b[32m-     \"attempts\": 1,\u001b[39m\n\u001b[32m-     \"checked\": true,\u001b[39m\n\u001b[32m-     \"correct\": true,\u001b[39m\n\u001b[32m-     \"firstCorrect\": true,\u001b[39m\n\u001b[32m-     \"hintUsed\": false,\u001b[39m\n\u001b[32m-     \"optionOrder\": Array [\u001b[39m\n\u001b[32m-       \"甲组\",\u001b[39m\n\u001b[32m-       \"乙组\",\u001b[39m\n\u001b[32m-       \"丙组\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[32m-     \"prompt\": \"The books on the desk.\u001b[39m\n\u001b[32m- 哪组符合这句？\",\u001b[39m\n\u001b[32m-     \"questionId\": \"u2324-v1-final-v2-on\",\u001b[39m\n\u001b[32m-     \"runId\": \"025c8d58-f8a1-4c38-a1dc-e2dabea3314a\",\u001b[39m\n\u001b[32m-     \"selection\": \"甲组\",\u001b[39m\n\u001b[32m-     \"target\": \"on表示表面承托\",\u001b[39m\n\u001b[32m-   },\u001b[39m\n\u001b[2m    \"u2324-v1-final-v2-ones\": Object {\u001b[22m\n\u001b[2m      \"attempts\": 1,\u001b[22m\n\u001b[2m      \"checked\": true,\u001b[22m\n\u001b[2m      \"correct\": true,\u001b[22m\n\u001b[2m      \"firstCorrect\": true,\u001b[22m\n\n  40 |   // Re-practising unchanged questions records the new visible support without\n  41 |   // rewriting the frozen original independent submissions or old award date.\n> 42 |   await other.goto(base+'unit23-24/#learn/grammar');await other.locator('.stage-grammar').getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.activity(other,'grammar',{base:prefix});await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');expect(ledger()).toEqual(awards);await p.reload();await ready(p);expect((await readLearning(p)).activity.unit2324V153Snapshot.records).toEqual(before.records);await expect(p.locator('#certificateDate')).toHaveText(date);\n     |                                                                                                                                                                                                                                                                                                                                                                                                                   ^\n  43 |   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit23-24/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}\n  44 |  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2324-v153-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}\n  45 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js:42:403"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:17744) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T20:07:56.650Z",
+                  "annotations": [
+                    {
+                      "type": "historical-chain",
+                      "description": "Real 32-question 15-star certificate -> real 45-question five-star edition -> current 45-question edition"
+                    },
+                    {
+                      "type": "history-storage",
+                      "description": "{\"snapshot\":false,\"remote\":true,\"marker\":true,\"remoteRecords\":45}"
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2324-review-20261018\\account-chain-final\\unit23-24-v153-upgrade-原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2324-review-20261018\\account-chain-final\\unit23-24-v153-upgrade-原45题五星同库更新：原卡全部帧、日期、未改轮次和跨设备历史保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit23-24-v153-upgrade.spec.js",
+                    "column": 403,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3b5c6b810e4b5984841a-b7adcdde09a9d7869041",
+          "file": "unit23-24-v153-upgrade.spec.js",
+          "line": 12,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T20:07:52.168Z",
+    "duration": 79044.14,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

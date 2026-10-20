@@ -1,0 +1,31 @@
+{
+  "id": "unit35-36",
+  "source": {
+    "file": "tests/support/unit3536-fivezones.js",
+    "sha256": "1b84b8aaf2a668d769f1099e872a3b5c9283bc07b3c07f5e78f8a1998ae54ea3"
+  },
+  "questions": [
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u3536-v1-final-geography",
+      "text": "Lesson 35\n\nThis is a photograph of our village.\n\nOur village is in a valley.\n\nIt is between two hills.\n\nThe village is on a river."
+    },
+    {
+      "zone": "exam",
+      "index": 7,
+      "questionId": "u3536-v1-final-route",
+      "text": "Lesson 35\n\nHere is another photograph of the village.\n\nMy wife and I are walking along the banks of the river.\n\nWe are on the left.\n\nThere is a boy in the water.\n\nHe is swimming across the river."
+    }
+  ],
+  "sourceLines": {
+    "E1": "1-4",
+    "E7": "5-9"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

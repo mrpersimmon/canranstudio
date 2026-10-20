@@ -1,0 +1,37 @@
+[WebServer] (node:34784) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:34496) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\course-integration.spec.js:59:4 › 15–16 登录后无配音通关，证书与真实成果跨设备保留 (2.5m)
+
+
+  1) tests\login\course-integration.spec.js:59:4 › 15–16 登录后无配音通关，证书与真实成果跨设备保留 ─────────────────────
+
+    Test timeout of 150000ms exceeded.
+
+    Error: browserContext.close: Target page, context or browser has been closed
+
+      102 |     }
+      103 |     expect(voices).toEqual([]); expect(spoken).toEqual([]); expect(errors).toEqual([]);
+    > 104 |   } finally { await student.context.close(); await second?.context.close(); }
+          |               ^
+      105 | });
+      106 |
+      107 | test('登录后的词卡首访与复访换组不闪屏，授权课程内断网仍能翻卡', async ({ page, browser }, testInfo) => {
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\course-integration.spec.js:104:15
+
+    Error Context: output\test-login\course-integration-15–16-登录后无配音通关，证书与真实成果跨设备保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\course-integration-15–16-登录后无配音通关，证书与真实成果跨设备保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\course-integration-15–16-登录后无配音通关，证书与真实成果跨设备保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\course-integration.spec.js:59:4 › 15–16 登录后无配音通关，证书与真实成果跨设备保留 ──────────────────────

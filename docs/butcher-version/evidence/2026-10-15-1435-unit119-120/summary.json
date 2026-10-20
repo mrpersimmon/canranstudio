@@ -1,0 +1,211 @@
+{
+  "unit": "unit119-120",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 71,
+  "zones": {
+    "listen": 8,
+    "roles": 9,
+    "grammar": 23,
+    "apply": 8,
+    "exam": 23
+  },
+  "words": 23,
+  "narrativeParagraphs": 7,
+  "narrator": "unnamed friend of George",
+  "quotedSpeakers": [
+    "George",
+    "Henry"
+  ],
+  "substitutions": {
+    "count": 6,
+    "labels": "s–x",
+    "thiefFormsAndIPA": true
+  },
+  "writing": {
+    "items": {
+      "A": 6,
+      "B": 6,
+      "C": 6,
+      "D": 6
+    },
+    "linesPerItem": 2,
+    "totalLines": 48
+  },
+  "browserRuns": {
+    "representative": {
+      "passed": 4,
+      "failed": 0
+    },
+    "chromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "recheck-chromium": {
+      "passed": 5,
+      "failed": 0
+    },
+    "recheck-webkit": {
+      "passed": 5,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "diagram-login-root": {
+      "passed": 1,
+      "failed": 0
+    },
+    "diagram-login-sub": {
+      "passed": 1,
+      "failed": 0
+    },
+    "diagram-login-webkit-root": {
+      "passed": 1,
+      "failed": 0
+    },
+    "diagram-login-webkit-sub": {
+      "passed": 1,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    },
+    "webkit-initial": {
+      "passed": 13,
+      "failed": 2,
+      "resolvedBy": "recheck-webkit"
+    }
+  },
+  "browserTotalDistinctPassingAfterFix": 62,
+  "targetedRechecks": 14,
+  "representativeChecks": 4,
+  "initialFailureRetained": {
+    "count": 2,
+    "cause": "Browser fallback SVG intrinsic dimensions rounded differently; the derived painted-width estimate was inaccurate. Both diagrams now declare exact 360x204 dimensions, without relaxing the assertion.",
+    "diagnosis": [
+      {
+        "engine": "chromium",
+        "explicit": false,
+        "naturalWidth": 265,
+        "naturalHeight": 150,
+        "allocatedWidth": 460,
+        "allocatedHeight": 260.65625,
+        "viewBoxRatio": 1.7647058823529411
+      },
+      {
+        "engine": "chromium",
+        "explicit": true,
+        "naturalWidth": 360,
+        "naturalHeight": 204,
+        "allocatedWidth": 460,
+        "allocatedHeight": 260.65625,
+        "viewBoxRatio": 1.7647058823529411
+      },
+      {
+        "engine": "webkit",
+        "explicit": false,
+        "naturalWidth": 264,
+        "naturalHeight": 150,
+        "allocatedWidth": 460,
+        "allocatedHeight": 260.65625,
+        "viewBoxRatio": 1.7647058823529411
+      },
+      {
+        "engine": "webkit",
+        "explicit": true,
+        "naturalWidth": 360,
+        "naturalHeight": 204,
+        "allocatedWidth": 460,
+        "allocatedHeight": 260.65625,
+        "viewBoxRatio": 1.7647058823529411
+      }
+    ],
+    "after": {
+      "naturalWidth": 360,
+      "naturalHeight": 204,
+      "allocatedWidth": 460,
+      "allocatedHeight": 260.65625,
+      "renderedWidth": 459.98161764705884,
+      "renderedHeight": 260.65625,
+      "maxHeight": "none"
+    }
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true,
+    "diagramEnglish": "outlined local Nunito400",
+    "IPA": "Arial"
+  },
+  "art": {
+    "identityAndPoseSprites": 8,
+    "keepsake": 1,
+    "opaqueEdgePixels": 0
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13-O14": "pending; course evidence appended",
+    "newItems": 0
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit119-120/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 4"
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

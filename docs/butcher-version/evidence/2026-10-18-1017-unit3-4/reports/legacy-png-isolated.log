@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:21280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 (16.5s)
+
+
+  1) tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 ────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      11 |  await restore();await page.reload();await flow.ready(page);await page.getByText('之前的学习记录与证书',{exact:true}).click();await expect(page.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);
+      12 |  await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateName')).toHaveText('小伞');await expect(page.locator('#legacyCertificateDate')).toHaveText(date);expect(await page.locator('#legacyCertificateDialog .certificate-paper').innerText()).toBe(copy);
+    > 13 |  const current=info.outputPath('after.png');dl=page.waitForEvent('download');await page.getByRole('button',{name:'保存图片',exact:true}).click();await(await dl).saveAs(current);expect((await sharp(original).raw().toBuffer()).equals(await sharp(current).raw().toBuffer())).toBe(true);
+         |                                                                                                                                                                                                                                                                             ^
+      14 |  await page.evaluate(()=>window.print=()=>{});await page.getByRole('button',{name:'打印证书',exact:true}).click();await page.emulateMedia({media:'print'});await expect(page.locator('#legacyCertificateDialog .certificate-paper')).toBeVisible();await expect(page.locator('#topbar')).toBeHidden();
+      15 |  if(browserName==='chromium'){await fs.mkdir('output/pdf',{recursive:true});const pdf=await page.pdf({path:`output/pdf/lesson3-4-${version}-certificate.pdf`,format:'A4',printBackground:true});expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);}
+      16 |  await page.emulateMedia({media:'screen'});await page.evaluate(()=>window.dispatchEvent(new Event('afterprint')));await page.keyboard.press('Escape');
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit3-4-v154-history.spec.js:13:269
+
+    Error Context: output\unit34-review-20261018\legacy-png-isolated\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit34-review-20261018\legacy-png-isolated\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit34-review-20261018\legacy-png-isolated\unit3-4-v154-history-classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit3-4-v154-history.spec.js:5:49 › classroom25真实旧页证书原文、姓名、精确日期、PNG与打印保留 ─────────────

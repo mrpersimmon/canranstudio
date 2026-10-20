@@ -1,0 +1,192 @@
+{
+  "at": "2026-10-17T00:06:57.538Z",
+  "checks": [
+    {
+      "name": "five zones with 50 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 10,
+        "roles": 2,
+        "grammar": 11,
+        "apply": 7,
+        "exam": 20
+      }
+    },
+    {
+      "name": "33 original tasks unchanged and archived",
+      "passed": true,
+      "detail": {
+        "revised": []
+      }
+    },
+    {
+      "name": "50 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "30 words and 9 complete dialogue lines unchanged",
+      "passed": true
+    },
+    {
+      "name": "35 pictures in 9 groups, A3 and B11 with complete word banks",
+      "passed": true
+    },
+    {
+      "name": "learning key and version retained",
+      "passed": true
+    },
+    {
+      "name": "frozen five sources match actual pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "all 65 original SVGs unchanged",
+      "passed": true
+    },
+    {
+      "name": "six prompts with five selected images and retained originals",
+      "passed": true
+    },
+    {
+      "name": "assets/unit29-30/cast-jones-welcome-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit29-30/cast-amy-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit29-30/cast-jones-point-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit29-30/cast-amy-ask-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "assets/unit29-30/keepsake-story-v1.webp framing and alpha preserved",
+      "passed": true
+    },
+    {
+      "name": "font inputs match final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1874,
+        "inputs": 357
+      }
+    },
+    {
+      "name": "font licenses preserve pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "root protected build includes all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build includes all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JavaScript parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document relative links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "new UI has no copied previous-lesson captions",
+      "passed": true
+    },
+    {
+      "name": "online cloze tasks have at most two related blanks",
+      "passed": true
+    },
+    {
+      "name": "server reward metadata agrees with course",
+      "passed": true
+    },
+    {
+      "name": "exact nine speakers retained",
+      "passed": true
+    },
+    {
+      "name": "derived v2 exam and earlier v1 predecessor both preserved",
+      "passed": true
+    },
+    {
+      "name": "two native furniture diagrams have dedicated desktop and phone canvases",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit29-30/cast-jones-welcome-v1.webp",
+      "width": 1065,
+      "height": 1477,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "2fabc93436ab49ec51ebd1d2a5130631da540c5fdcd71858fcf63a72f51c654c"
+    },
+    {
+      "file": "assets/unit29-30/cast-amy-v1.webp",
+      "width": 1065,
+      "height": 1477,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "06ac4ad0ef153c1132444ffc802c9de4a47c7dd7dfbfc6fd3a267bc04670a0ef"
+    },
+    {
+      "file": "assets/unit29-30/cast-jones-point-v1.webp",
+      "width": 1065,
+      "height": 1477,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "4fb6150106950a3bd12ea151333c876c4d879fc026ca06bfc82750cb16abed67"
+    },
+    {
+      "file": "assets/unit29-30/cast-amy-ask-v1.webp",
+      "width": 1065,
+      "height": 1477,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "afd30344d84a8dc4f5adc1538b7f9e1de4f0e942b7f65937b2f25969a0288942"
+    },
+    {
+      "file": "assets/unit29-30/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "transparentRequired": true,
+      "sha256": "b3092fc2e27340e45d1fc7c26d397564b29bd32d5478c19e9e4de51f62a86110"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courses": 72,
+      "unit": {
+        "title": "房间整理行动",
+        "revision": "ab675bd51ac70144c56cd194e1f138e271c2617b6813472192380a62a4a7d062",
+        "manifest": "/course-packages/unit29-30/ab675bd51ac70144c56cd194e1f138e271c2617b6813472192380a62a4a7d062.json",
+        "sha256": "0ccc4e5399bf4b272fac175d995468b167461e4b3cd136dd350ffa31d3700d88"
+      }
+    },
+    "subpath": {
+      "courses": 72,
+      "unit": {
+        "title": "房间整理行动",
+        "revision": "cd960fad89d629d058867a73c1a700067eb51bc1db4277e41787b3ea8cc4c95f",
+        "manifest": "/lesson/course-packages/unit29-30/cd960fad89d629d058867a73c1a700067eb51bc1db4277e41787b3ea8cc4c95f.json",
+        "sha256": "2d914410f269e20e2f393f7879769dbe9b4b15e417612cd6524cebc1219cafe1"
+      }
+    }
+  }
+}

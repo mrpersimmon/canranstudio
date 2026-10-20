@@ -1,0 +1,129 @@
+{
+  "tool": "built-in imagegen",
+  "jobs": [
+    {
+      "id": "workshop-ready",
+      "file": "assets/unit37-38/workshop-ready-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-george.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-dan.png"
+      ],
+      "prompt": "Illustration for children learning English. Match the accepted references with thick rounded dark BROWN outlines, clean simple dot or arc eyes, rounded cheerful faces, warm flat muted colours, very subtle paper grain. No gradients in faces, no realistic rendering. George: adult man, dark brown wavy short hair, no glasses or beard, warm terracotta long-sleeve shirt, cream yellow carpenter apron with ONE large square pocket divided in two, blue-grey trousers, brown shoes. Dan: older adult man, neatly side-parted GREY hair, clean shaven, light grey-green cardigan with cream collared shirt, grey trousers, brown shoes. No hat, no glasses. Landscape 3:2 composition, simple small workshop. George stands on LEFT facing RIGHT toward Dan, Dan stands on RIGHT facing LEFT. One large unfinished light NATURAL WOOD bookcase stands between them in background; it has shelves and absolutely NO paint on it. Both men WHOLE bodies, both hands and both feet all fully in frame with 8 percent safe margin; feet rest on floor, foreground unobstructed. They are at either end of one low narrow workbench, bench sits in middle gap, never in front of their bodies. On workbench in middle, exactly TWO separate hammers lying flat: a visibly BIG hammer with large dark grey steel head and long brown handle, and a SMALL hammer with much smaller grey head and shorter handle. Both hammers completely visible and clearly distinct size, not behind people. George has one open hand gesturing toward tools and other empty hand relaxed visibly at side. Dan has both hands open and empty in front of waist, prepared to choose, not holding any tool. One closed unlabelled grey paint tin and clean unused brush at BACK beside bookcase. No pink paint or swatch yet. Simple cream wall and pale muted green accents, no unnecessary tools on walls, no text, captions, labels, signs, names, stars or speech bubbles. Keep characters roughly half image height, readable faces and hands. This is before Dan picks up any hammer.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+    },
+    {
+      "id": "george-cutout",
+      "file": "assets/unit37-38/cast-george-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-george.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-dan.png"
+      ],
+      "prompt": "Illustration for children learning English. Match the accepted references with thick rounded dark BROWN outlines, clean simple dot or arc eyes, rounded cheerful faces, warm flat muted colours, very subtle paper grain. No gradients in faces, no realistic rendering. George: adult man, dark brown wavy short hair, no glasses or beard, warm terracotta long-sleeve shirt, cream yellow carpenter apron with ONE large square pocket divided in two, blue-grey trousers, brown shoes. Exactly ONE adult full-body George on transparent background, 2:3 portrait. Facing slightly RIGHT toward an off-image partner, both feet stable, head all hair fingers and shoes fully inside with 8 percent transparent margin. Both elbows bent and forearms in front of lower chest at same height; two empty open hands PALMS UP near each other with a clear small gap for receiving a horizontal tool. Do not hold any hammer or other object. Simple readable smile. No scenery, shadows shaped like background, text, checkerboard texture, floor, frame or extra people. Exact identity from reference but more rounded accepted keepsake rendering.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-18bc110c-6813-4a9f-ab7d-443ab236a2d3.png"
+    },
+    {
+      "id": "dan-cutout",
+      "file": "assets/unit37-38/cast-dan-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit3-4-umbrella.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-george.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit37-38-refactor/old-dan.png"
+      ],
+      "prompt": "Illustration for children learning English. Match the accepted references with thick rounded dark BROWN outlines, clean simple dot or arc eyes, rounded cheerful faces, warm flat muted colours, very subtle paper grain. No gradients in faces, no realistic rendering. Dan: older adult man, neatly side-parted GREY hair, clean shaven, light grey-green cardigan with cream collared shirt, grey trousers, brown shoes. No hat, no glasses. Exactly ONE adult full-body Dan on transparent background, 2:3 portrait. Facing slightly LEFT toward an off-image partner, both feet stable, head hair fingers and shoes fully inside with 8 percent transparent margin. Both elbows bent and forearms in front of lower chest at same height; two empty open hands PALMS UP near each other with a clear small gap for receiving a horizontal tool. Do not hold any hammer or other object. Simple readable smile. No scenery, shadows shaped like background, text, checkerboard texture, floor, frame or extra people. Exact identity from reference but more rounded accepted keepsake rendering.",
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-39a00fe4-bc64-4f31-b620-18fe3beb9ec1.png"
+    },
+    {
+      "id": "workshop-small",
+      "file": "assets/unit37-38/workshop-small-v1.webp",
+      "prompt": "Edit the reference workshop image, preserving its 3:2 framing, camera, characters, faces, hair, clothing, bookcase and floor. George on LEFT facing Dan on RIGHT. Keep FULL bodies, all hair, all hands and all shoes visible with margins. The bookcase must remain completely NATURAL WOOD, absolutely no pink paint on its surface. Exactly TWO hammers TOTAL: one large dark steel head long brown handle and one distinctly smaller hammer. Never duplicate a hammer. No words, labels, arrows, dialogue, names or stars. Dan has picked up the SMALL hammer and holds it visibly by its handle in his hand nearest the centre at chest height, looking at George as if asking about this tool. The BIG hammer remains lying on the workbench in its original left spot. The small hammer is REMOVED from workbench. George keeps hands empty, gently gestures no with one open palm. No actual tool handover yet. Keep clean brush and closed grey paint tin at back untouched.",
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+      ],
+      "transparent": false,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-c1741fe8-05eb-4d75-b9b6-3dad9cee1ca4.png"
+    },
+    {
+      "id": "workshop-handoff",
+      "file": "assets/unit37-38/workshop-handoff-v1.webp",
+      "prompt": "Edit the reference workshop image, preserving its 3:2 framing, camera, characters, faces, hair, clothing, bookcase and floor. George on LEFT facing Dan on RIGHT. Keep FULL bodies, all hair, all hands and all shoes visible with margins. The bookcase must remain completely NATURAL WOOD, absolutely no pink paint on its surface. Exactly TWO hammers TOTAL: one large dark steel head long brown handle and one distinctly smaller hammer. Never duplicate a hammer. No words, labels, arrows, dialogue, names or stars. Moment of successful handover: Dan at right reaches toward left, passing the BIG hammer by its long horizontal wooden handle toward George at left. George reaches with his hand nearest centre and grasps middle of the SAME handle; Dan holds far-right end. One hammer between them, head safely to left away from faces, both grips anatomically coherent. Their free hands also visible. The BIG hammer has been removed from workbench; SMALL hammer lies alone in original right-side spot. George and Dan look warmly toward each other and tool. Clean brush and CLOSED grey paint tin in background untouched.",
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+      ],
+      "transparent": false,
+      "selected": false,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-76f02efc-0378-4ac7-a091-e61095d3bf45.png",
+      "reason": "交接瞬间把大锤的柄拉长，比例不稳定；课文改用原文Here you are后的已交付状态，保持物件数量。"
+    },
+    {
+      "id": "workshop-delivered",
+      "file": "assets/unit37-38/workshop-delivered-v1.webp",
+      "prompt": "Edit the reference workshop image, preserving its 3:2 framing, camera, characters, faces, hair, clothing, bookcase and floor. George on LEFT facing Dan on RIGHT. Keep FULL bodies, all hair, all hands and all shoes visible with margins. The bookcase must remain completely NATURAL WOOD, absolutely no pink paint on its surface. Exactly TWO hammers TOTAL: one large dark steel head long brown handle and one distinctly smaller hammer. Never duplicate a hammer. No words, labels, arrows, dialogue, names or stars. The BIG hammer has been received: George at left holds the single BIG hammer in his hand nearest centre, elbow bent, tool clearly in his possession, not touching bookcase. Dan at right has BOTH hands visibly empty, relaxed in front of waist. Workbench has ONLY the SMALL hammer at its original right-side spot. No big hammer on bench or in Dan hands. Both look at each other. Clean brush and CLOSED grey paint tin at back untouched.",
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+      ],
+      "transparent": false,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-61cb484e-8461-4ec2-9981-5eb17a6b2e9b.png"
+    },
+    {
+      "id": "workshop-plan",
+      "file": "assets/unit37-38/workshop-plan-v1.webp",
+      "prompt": "Edit the reference workshop image, preserving its 3:2 framing, camera, characters, faces, hair, clothing, bookcase and floor. George on LEFT facing Dan on RIGHT. Keep FULL bodies, all hair, all hands and all shoes visible with margins. The bookcase must remain completely NATURAL WOOD, absolutely no pink paint on its surface. Exactly TWO hammers TOTAL: one large dark steel head long brown handle and one distinctly smaller hammer. Never duplicate a hammer. No words, labels, arrows, dialogue, names or stars. George at left now holds the BIG hammer in his hand nearest centre, no hammer on workbench except the SMALL hammer in original right spot. Dan hands empty. Show the proposed colour ONLY inside an OPEN paint tin at the back near bookcase: clearly pink paint surface visible in tin; lid beside it; clean unused brush leaning beside tin, not touching bookcase. The bookcase is completely unpainted natural wood, not even a pink patch. No other pink object, thought bubble or symbol. Both characters converse gently, not actively painting.",
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+      ],
+      "transparent": false,
+      "selected": true,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-dc21526f-0efd-492f-8cbc-953c05e7a2ad.png"
+    },
+    {
+      "id": "keepsake",
+      "file": "assets/unit37-38/keepsake-story-v1.webp",
+      "prompt": "Create a medium CLOSE-UP keepsake illustration from the workshop reference, same George (left, brown wavy hair, terracotta shirt, cream apron) and Dan (right, side-parted grey hair, green cardigan, cream collar), same warm rounded dark brown outline style. Both face each other smiling. Exactly ONE BIG hammer is being passed from Dan on RIGHT to George on LEFT across foreground, both hands clearly grip different parts of the SAME horizontal long brown HANDLE, steel head at far left. Both complete heads, all four hands and the whole hammer fit with generous margins. Free hands naturally visible. Intentional waist-up composition, no accidental cut hands/head. In softly receding background show the NATURAL WOOD BOOKCASE and a small OPEN pink paint tin with a clean unused brush nearby: bookcase completely UNPAINTED, no pink marks, no brush contact. A SMALL hammer lies alone on lower bench, visibly smaller than the large one. No extra hammers, people or machinery. Transparent background with soft incomplete hints of workshop, like accepted keepsake references, not a hard rectangular room. No text, name, stars, labels, numbers or speech bubbles.",
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-bf5a911e-21bc-49b4-a4a6-9309e0681b08.png"
+      ],
+      "transparent": true,
+      "selected": false,
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-1bf81a6a-6a6e-4eed-9d9f-b667c941cc12.png",
+      "reason": "大锤过长且George抓在锤头上，需改为双方握木柄。"
+    },
+    {
+      "id": "keepsake-final",
+      "file": "assets/unit37-38/keepsake-story-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-1bf81a6a-6a6e-4eed-9d9f-b667c941cc12.png",
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-61cb484e-8461-4ec2-9981-5eb17a6b2e9b.png"
+      ],
+      "selected": false,
+      "prompt": "Edit FIRST image (keepsake), keep transparent background, warm simple brown outlines, George left and Dan right, full heads and all four hands inside frame. Fix the BIG hammer handoff: shorten its long wooden handle by about 30 percent so the whole hammer is a plausible carpenter tool, like SECOND reference. Bring the two men a little closer together to make handoff natural. George left must hold the WOODEN HANDLE immediately below the head, NOT touch or grip the grey metal head. Dan right holds the far end of the same wooden handle, with visible separate grip. A single big hammer, complete, horizontal between them. Keep the small hammer alone on bench, clearly smaller. Preserve unpainted natural wood bookcase and open pink paint tin with unused brush in soft background; no pink marks on bookcase. Keep both free hands complete and visible, no added fingers. Near scene with faces large, no labels or text, no stars or badges.",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-081348b1-06a5-494f-a54e-2d6966d92a26.png",
+      "reason": "修订稿仍把George的手画在锤头上，改用已接到大锤的近景表现，避免错误握持。"
+    },
+    {
+      "id": "keepsake-received",
+      "file": "assets/unit37-38/keepsake-story-v1.webp",
+      "transparent": true,
+      "selected": true,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-61cb484e-8461-4ec2-9981-5eb17a6b2e9b.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "prompt": "Create a new medium CLOSE-UP keepsake composition based on FIRST reference workshop, use rounded warm dark brown outlines like SECOND approved keepsake. George at LEFT (brown wavy hair, terracotta crew-neck shirt, cream apron), Dan at RIGHT (side-parted grey hair, cream collar, sage cardigan). They smile and face each other. Show the moment AFTER delivery: George alone holds exactly ONE big carpenter hammer UPRIGHT by its BROWN WOODEN HANDLE with hand at the MIDDLE of the handle, like first reference. Grey steel head is well ABOVE his hand, fully visible, no hand touching metal. Dan has BOTH hands completely EMPTY, one open hand gently presenting toward George, other at waist. George free hand also visible. Absolutely no simultaneous two-person grip, no long horizontal handle, no hammer in Dan hands. Big hammer normal proportion and fully visible. ONE small hammer rests on a small hint of bench foreground, clearly smaller. Receding background natural WOOD bookcase, NEVER painted pink, plus small OPEN pink paint tin and unused brush on side shelf. Intentional waist-up scene with both full heads, full hands, complete big hammer all inside generous 6% margin. Soft irregular transparent background like accepted keepsake, not a full rectangular room. Do not draw any text, names, stars, dates, letters, signs or speech bubbles.",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-4b2c2424-862b-4678-a6fd-bfbdd9613419.png"
+    }
+  ]
+}

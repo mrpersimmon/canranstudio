@@ -1,0 +1,80 @@
+{
+  "id": "unit95-96",
+  "source": {
+    "file": "tests/support/unit9596.js",
+    "sha256": "e6f1ef9df1a690f456aac116ad103e774f4829ba07d96401759b089b52857f14"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u9596-v1-r-tickets",
+      "text": "Lesson 95\n\nGeorge: Two return tickets to London, please. What time will the next train leave?\n\n售票员: At nineteen minutes past eight."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u9596-v1-r-leave",
+      "text": "Lesson 95\n\nGeorge: Two return tickets to London, please. What time will the next train leave?\n\n售票员: At nineteen minutes past eight."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u9596-v1-r-route",
+      "text": "Lesson 95\n\nGeorge: Which platform?\n\n售票员: Platform Two. Over the bridge."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u9596-v1-r-belief",
+      "text": "Lesson 95\n\nKen: What time will the next train leave?\n\nGeorge: At eight nineteen.\n\nKen: We’ve got plenty of time.\n\nGeorge: It’s only three minutes to eight."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u9596-v1-r-place",
+      "text": "Lesson 95\n\nKen: We’ve got plenty of time.\n\nGeorge: It’s only three minutes to eight.\n\nKen: Let’s go and have a drink. There’s a bar next door to the station."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u9596-v1-r-advice",
+      "text": "Lesson 95\n\nKen: Let’s go and have a drink. There’s a bar next door to the station.\n\nGeorge: We had better go back to the station now, Ken."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u9596-v1-r-why",
+      "text": "Lesson 95\n\n乘务员: Tickets, please.\n\nGeorge: We want to catch the eight nineteen to London.\n\n乘务员: You’ve just missed it!\n\nGeorge: What! It’s only eight fifteen.\n\n乘务员: I’m sorry, sir. That clock’s ten minutes slow."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u9596-v1-r-next",
+      "text": "Lesson 95\n\n乘务员: You’ve just missed it!\n\nGeorge: What! It’s only eight fifteen.\n\n乘务员: I’m sorry, sir. That clock’s ten minutes slow.\n\nGeorge: When’s the next train?\n\n乘务员: In five hours’ time!"
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u9596-v1-e-story",
+      "text": "Lesson 95\n\n乘务员: Tickets, please.\n\nGeorge: We want to catch the eight nineteen to London.\n\n乘务员: You’ve just missed it!\n\nGeorge: What! It’s only eight fifteen.\n\n乘务员: I’m sorry, sir. That clock’s ten minutes slow.\n\nGeorge: When’s the next train?\n\n乘务员: In five hours’ time!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "1-2",
+    "R3": "3-4",
+    "R4": "5-8",
+    "R5": "7-9",
+    "R6": "9-10",
+    "R7": "11-15",
+    "R8": "13-17",
+    "E1": "11-17"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

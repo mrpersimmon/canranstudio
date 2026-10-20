@@ -52,10 +52,10 @@ for (const { id, lesson, complete } of [
   { id: 'unit3-4', lesson: '3–4', complete: completeUnit34 },
   { id: 'unit5-6', lesson: '5–6', complete: completeUnit56 },
   { id: 'unit7-8', lesson: '7–8', complete: completeUnit78 },
-  { id: 'unit9-10', lesson: '9–10', complete: completeUnit910 },
-  { id: 'unit11-12', lesson: '11–12', complete: completeUnit1112 },
-  { id: 'unit13-14', lesson: '13–14', complete: completeUnit1314 },
-  { id: 'unit15-16', lesson: '15–16', complete: completeUnit1516 }
+  { id: 'unit9-10', lesson: '9–10', complete: async(page,base)=>{const flow=require('../support/unit910-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit9-10/#learn/certificate');} },
+  { id: 'unit11-12', lesson: '11–12', complete: async(page,base)=>{const flow=require('../support/unit1112-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit11-12/#learn/certificate');} },
+  { id: 'unit13-14', lesson: '13–14', complete: async(page,base)=>{const flow=require('../support/unit1314-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit13-14/#learn/certificate');} },
+  { id: 'unit15-16', lesson: '15–16', complete: async(page,base)=>{const flow=require('../support/unit1516-fivezones');await flow.story(page,base);for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base});await page.goto(base+'/unit15-16/#learn/certificate');} }
 ]) test(`${lesson} 登录后无配音通关，证书与真实成果跨设备保留`, async ({ page, browser }) => {
   test.setTimeout(150000);
   await adminLogin(page);
@@ -75,7 +75,7 @@ for (const { id, lesson, complete } of [
       HTMLMediaElement.prototype.play = () => Promise.reject(new DOMException('Audio unavailable', 'NotSupportedError'));
     });
     await student.page.goto(`/lesson/${id}/#learn/certificate`);
-    const keepsake=['unit3-4','unit5-6'].includes(id);
+    const keepsake=['unit3-4','unit5-6','unit9-10','unit11-12','unit13-14','unit15-16'].includes(id);
     await expect(student.page.getByRole('button', { name: keepsake?'保存动图':'领取单元证书', exact: true })).toBeDisabled();
     await complete(student.page, '/lesson');
     if(keepsake){

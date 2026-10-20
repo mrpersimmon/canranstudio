@@ -1,0 +1,87 @@
+{
+  "id": "unit97-98",
+  "source": {
+    "file": "tests/support/unit9798.js",
+    "sha256": "b6af9b6e3309ea3a2a40255aef7ff894f421be5bf4c8dd2828bdf674c88a4a7f"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u9798-v1-r-left",
+      "text": "Lesson 97\n\nMr. Hall: I left a suitcase on the train to London the other day."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u9798-v1-r-description",
+      "text": "Lesson 97\n\n服务员: Can you describe it, sir?\n\nMr. Hall: It’s a small blue case and it’s got a zip. There’s a label on the handle with my name and address on it."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u9798-v1-r-first",
+      "text": "Lesson 97\n\n服务员: Is this case yours?\n\nMr. Hall: No, that’s not mine."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u9798-v1-r-label",
+      "text": "Lesson 97\n\n服务员: Can you describe it, sir?\n\nMr. Hall: It’s a small blue case and it’s got a zip. There’s a label on the handle with my name and address on it."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u9798-v1-r-name",
+      "text": "Lesson 97\n\n服务员: What’s your name and address?\n\nMr. Hall: David Hall, 83, Bridge Street.\n\n服务员: That’s right. D. N. Hall, 83, Bridge Street."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u9798-v1-r-fee",
+      "text": "Lesson 97\n\n服务员: Three pounds fifty pence, please.\n\nMr. Hall: Here you are.\n\n服务员: Thank you."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u9798-v1-r-ending",
+      "text": "Lesson 97\n\nMr. Hall: Hey!\n\n服务员: What’s the matter?\n\nMr. Hall: This case doesn’t belong to me! You’ve given me the wrong case!"
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u9798-v1-r-question",
+      "text": "Lesson 97\n\nMr. Hall: Hey!\n\n服务员: What’s the matter?\n\nMr. Hall: This case doesn’t belong to me! You’ve given me the wrong case!"
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u9798-v1-e-ending",
+      "text": "Lesson 97\n\nMr. Hall: Hey!\n\n服务员: What’s the matter?\n\nMr. Hall: This case doesn’t belong to me! You’ve given me the wrong case!"
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u9798-v1-e-label",
+      "text": "Lesson 97\n\n服务员: What’s your name and address?\n\nMr. Hall: David Hall, 83, Bridge Street.\n\n服务员: That’s right. D. N. Hall, 83, Bridge Street.\n\n服务员: Three pounds fifty pence, please.\n\nMr. Hall: Here you are.\n\n服务员: Thank you.\n\nMr. Hall: Hey!\n\n服务员: What’s the matter?\n\nMr. Hall: This case doesn’t belong to me! You’ve given me the wrong case!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1",
+    "R2": "2-3",
+    "R3": "4-5",
+    "R4": "2-3",
+    "R5": "8-10",
+    "R6": "11-13",
+    "R7": "14-16",
+    "R8": "14-16",
+    "E1": "14-16",
+    "E2": "8-16"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

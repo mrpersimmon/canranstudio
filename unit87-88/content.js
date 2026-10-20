@@ -137,3 +137,17 @@ unit.learning.WRITING_B_EXAMPLES=['they / buy a new house / two weeks ago → Ha
 unit.learning.WRITING_B=[['he / meet Mrs. Jones','two weeks ago'],['the boss / leave','ten minutes ago'],['he / have breakfast','at half past seven'],['she / find her pen','an hour ago'],['he / get a television','two weeks ago'],['she / hear the news','yesterday'],['she / make the bed','this morning'],['he / send the letter','the day before yesterday'],['she / sweep the floor','yesterday morning'],['she / tell him the truth','last night']];
 core.unit8788=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit8788,excerpts={"u8788-v1-r-plate":[0,1,2],"u8788-v1-r-when":[3,4,5],"u8788-v1-r-status":[6,7],"u8788-v1-r-where":[6,7,8],"u8788-v1-r-crash":[10,11],"u8788-v1-r-ending":[10,11,12],"u8788-v1-e-ending":[6,7,8,9,10,11,12]},speakers={"wood":"Mr. Wood","attendant":"接待员"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 87',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

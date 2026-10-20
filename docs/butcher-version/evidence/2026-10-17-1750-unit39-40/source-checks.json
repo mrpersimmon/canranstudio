@@ -1,0 +1,200 @@
+{
+  "at": "2026-10-17T10:55:04.970Z",
+  "passed": 32,
+  "failed": [],
+  "checks": [
+    {
+      "name": "five zones and 46 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 4,
+        "roles": 4,
+        "grammar": 10,
+        "apply": 7,
+        "exam": 21
+      }
+    },
+    {
+      "name": "33 original questions unchanged",
+      "passed": true
+    },
+    {
+      "name": "46 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "9 original cards and phonetics",
+      "passed": true
+    },
+    {
+      "name": "13 original dialogue sentences and people",
+      "passed": true
+    },
+    {
+      "name": "twelve original numbered picture prompts",
+      "passed": true
+    },
+    {
+      "name": "A5 and B10 retain full prompts",
+      "passed": true
+    },
+    {
+      "name": "maximum two blanks per online question",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true
+    },
+    {
+      "name": "actual old six v1 sessions mapped",
+      "passed": true
+    },
+    {
+      "name": "five new sessions and distinct reward edition",
+      "passed": true
+    },
+    {
+      "name": "frozen index.html matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen content.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen unit.css matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "frozen scene.js matches pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "44 original SVG assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "six prompt records, six selected, all originals retained",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha penny-scene",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha sam-cutout",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha penny-cutout",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha sam-scene",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha shelf-scene",
+      "passed": true
+    },
+    {
+      "name": "image dimensions and alpha keepsake",
+      "passed": true
+    },
+    {
+      "name": "font inputs reflect final source",
+      "passed": true,
+      "detail": {
+        "mismatch": [],
+        "characters": 1923,
+        "inputs": 397
+      }
+    },
+    {
+      "name": "font licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "root protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build retains all 72 courses",
+      "passed": true
+    },
+    {
+      "name": "all changed JS parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "no previous lesson UI captions",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit39-40/vase-penny-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "4b12c0f9503df876c103ac8dca33b8303fba9823606fe3b930dafcdf17ad92d5"
+    },
+    {
+      "file": "assets/unit39-40/cast-sam-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "59c53a2bfbe9c43c8ab9999e8cf09bf491680fe9fe15fdea183869e1498505fd"
+    },
+    {
+      "file": "assets/unit39-40/cast-penny-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "6f2e8107175fc5dd318e6d34964f816898711aa9649e0fe80727cef4c654cb38"
+    },
+    {
+      "file": "assets/unit39-40/vase-sam-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "e4534467beeed621ba1b0a3e35150c332a8485f5deb6d8929c212472645f10d8"
+    },
+    {
+      "file": "assets/unit39-40/vase-shelf-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "transparentRequired": false,
+      "sha256": "8d0d65c5dd022d9fc66950b0c4896fd36befe2e87a7b313c6ef9879a92bce623"
+    },
+    {
+      "file": "assets/unit39-40/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "transparentRequired": true,
+      "sha256": "dc5105e915aa2257980da9b062856b1ca438f1b58648cbd8e4098b509e65f0de"
+    }
+  ],
+  "changedSourcePaths": 58
+}

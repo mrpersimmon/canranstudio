@@ -1,0 +1,14 @@
+
+Running 7 tests using 1 worker
+
+(node:27164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154.spec.js:8:1 › 正文字体实际加载Nunito，图内标签采用本课字体轮廓 (856ms)
+  ok 2 tests\e2e\unit5-6-v154.spec.js:10:39 › 320宽首页、24词卡、20句及七名人物同场可读 (17.1s)
+  ok 3 tests\e2e\unit5-6-v154.spec.js:10:39 › 390宽首页、24词卡、20句及七名人物同场可读 (15.2s)
+  ok 4 tests\e2e\unit5-6-v154.spec.js:10:39 › 768宽首页、24词卡、20句及七名人物同场可读 (15.0s)
+  ok 5 tests\e2e\unit5-6-v154.spec.js:10:39 › 1280宽首页、24词卡、20句及七名人物同场可读 (15.7s)
+  ok 6 tests\e2e\unit5-6-v154.spec.js:35:49 › 320x568短屏三卡与推进完整 (4.3s)
+  ok 7 tests\e2e\unit5-6-v154.spec.js:35:49 › 390x500短屏三卡与推进完整 (4.2s)
+
+  7 passed (1.2m)

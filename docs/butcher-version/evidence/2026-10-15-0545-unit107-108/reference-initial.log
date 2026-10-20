@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:22268) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit107-108.spec.js:15:1 › 29词卡、108课A–L、A5／B8／C6完整 (3.3s)
+
+
+  1) tests\e2e\unit107-108.spec.js:15:1 › 29词卡、108课A–L、A5／B8／C6完整 ──────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+      15 | test('29词卡、108课A–L、A5／B8／C6完整',async({page},info)=>{
+      16 |  await page.goto('/unit107-108/#learn/words');const room=page.locator('.stage-words'),words=[];for(let i=0;i<5;i++){await expect(room.locator('.unit-word')).toHaveCount(i===4?5:6);words.push(...await room.locator('.unit-word strong').allTextContents());for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(i<4)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(words).toEqual(['madam','smart','as well','suit','pretty','dress','colour','size','try','in fashion','not…at all','either','another','small','large','tall','short','hot','heavy','thin','wet','easy','nice','more','most','less','least','good','bad']);await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('5 / 5');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
+    > 17 |  await page.goto('/unit107-108/#learn/apply');await page.getByText('课本小参考 · 108课A–L比较',{exact:true}).click();await expect(page.locator('.comparison-reference tr')).toHaveCount(9);await expect(page.locator('.reference-card')).toHaveCount(12);await expect(page.locator('.reference-card p')).toHaveText(['A · Sophie is tall.','B · Paul is taller than Sophie.','C · Hans is the tallest student in our class.','D · It is hot today.','E · It was hotter yesterday.','F · The day before yesterday was the hottest day in the year.','G · There was a large crowd at the race last year.','H · This year the crowd is larger.','I · It is the largest crowd I have ever seen.','J · The brown suitcase is heavy.','K · The blue suitcase is heavier than the brown one.','L · The green suitcase is the heaviest of them all.']);for(const text of ['less expensive','least expensive','better','worst'])await expect(page.locator('.comparison-reference')).toContainText(text);await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});await page.locator('.stage-apply details').scrollIntoViewIfNeeded();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.comparison-reference th,.comparison-reference td,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});const wholeWord=page.locator('.comparison-reference td:visible,.comparison-mobile dd:visible').filter({hasText:/^heaviest$/});expect(await wholeWord.evaluate(el=>{const range=document.createRange();range.selectNodeContents(el);return [...range.getClientRects()].filter(r=>r.width>0).length;})).toBe(1);await page.setViewportSize({width:1280,height:900});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ^
+      18 |  await page.goto('/unit107-108/#learn/grammar');await page.getByText('语法小参考',{exact:true}).click();for(const text of ['my best friend','不同表达任务','不作为今天的流行资讯','不是所有词都双写'])await expect(page.locator('.stage-grammar details')).toContainText(text);
+      19 |  await page.goto('/unit107-108/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();for(const[i,n]of [5,8,6].entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveCount(n);for(const text of ['cold—colder','He’s late again today','This bookcase is large','I am very lucky.','I am very fat.','This knife is blunt.','This car is cheap.','不是与原句同义'])await expect(page.locator('#unitWriting')).toContainText(text);
+      20 | });
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit107-108.spec.js:17:1831
+
+    Error Context: output\unit107108-reference-initial\unit107-108-29词卡、108课A–L、A5／B8／C6完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit107108-reference-initial\unit107-108-29词卡、108课A–L、A5／B8／C6完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit107108-reference-initial\unit107-108-29词卡、108课A–L、A5／B8／C6完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit107-108.spec.js:15:1 › 29词卡、108课A–L、A5／B8／C6完整 ───────────────────────────────────

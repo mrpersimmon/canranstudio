@@ -1,0 +1,66 @@
+{
+  "id": "unit63-64",
+  "source": {
+    "file": "tests/support/unit6364.js",
+    "sha256": "a1524b71a0973a64aa9785a1b9b334ad7a7b28b2065ac2f49838686e52d42d13"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u6364-v1-r-better",
+      "text": "Lesson 63\n\nDoctor: How’s Jimmy today?\n\nMrs. Williams: Better. Thank you, doctor."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u6364-v1-r-upstairs",
+      "text": "Lesson 63\n\nDoctor: Can I see him please, Mrs. Williams?\n\nMrs. Williams: Certainly, doctor. Come upstairs."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u6364-v1-r-temperature",
+      "text": "Lesson 63\n\nMrs. Williams: Does he have a temperature, doctor?\n\nDoctor: No, he doesn’t."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u6364-v1-r-condition",
+      "text": "Lesson 63\n\nMrs. Williams: Must he stay in bed?\n\nDoctor: Yes. He must remain in bed for another two days. He can get up for about two hours each day, but you must keep the room warm."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u6364-v1-r-rich",
+      "text": "Lesson 63\n\nDoctor: You look very well, Jimmy. You are better now, but you mustn’t get up yet. You must stay in bed for another two days.\n\nDoctor: The boy mustn’t go to school yet, Mrs. Williams. And he mustn’t eat rich food."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u6364-v1-r-father",
+      "text": "Lesson 63\n\nDoctor: Where’s Mr. Williams this evening?\n\nMrs. Williams: He’s in bed, doctor. Can you see him please? He has a bad cold, too!"
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u6364-v1-e-condition",
+      "text": "Lesson 63\n\nMrs. Williams: Must he stay in bed?\n\nDoctor: Yes. He must remain in bed for another two days. He can get up for about two hours each day, but you must keep the room warm."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-4",
+    "R4": "7-8",
+    "R5": "9-10",
+    "R6": "5-6",
+    "R7": "11-12",
+    "E5": "9-10"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

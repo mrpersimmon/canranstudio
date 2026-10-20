@@ -1,0 +1,32 @@
+(node:20504) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (151.8978ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.5815ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (2.6475ms)
+✔ partial wrong submission is observable without awards or resumable completion (59.2113ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (56.5948ms)
+✔ reset isolates a new generation and preserves earlier observation history (57.9043ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (66.0211ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (62.8661ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.4996ms)
+✔ student identity, pagination and filters expose learning summaries only (799.1907ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (5690.2262ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (3.0868ms)
+✔ three learning statuses require current work, not visits, stars or old content (4.4462ms)
+✔ all published courses reach completed only with every required activity including reading (251.9214ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (240.9284ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (982.146ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (145.8036ms)
+(node:31184) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (122.3094ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.6653ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (86.8626ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8897.1377

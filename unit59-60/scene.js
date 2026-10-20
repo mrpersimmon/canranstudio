@@ -4,17 +4,16 @@ const node=(tag,cls='',text='')=>{const el=document.createElement(tag);el.classN
 const picture=(name,cls,alt,format='svg')=>{const el=node('img',cls);el.src='/assets/unit59-60/'+name+'.'+format;el.alt=alt;return el;};
 function storyProps(){
  const element=node('div','stationery-world');element.setAttribute('role','group');element.setAttribute('aria-label','女士与售货员的文具店场景');
- const location=node('p','stationery-location','文具店 · Is that all?'),actors={};
+ const location=node('p','stationery-location','文具店'),actors={};
  for(const[who,label]of [['lady','Lady'],['assistant','Shop assistant']]){const actor=node('div','stationery-actor dialogue-actor actor-'+who);actor.dataset.actor=who;const img=picture(who,'stationery-cast',who==='lady'?'女士朝向右侧售货员':'售货员朝向左侧女士','webp');actor.append(img,node('span','actor-label',label));element.append(actor);actors[who]=img;}
- const desk=node('div','stationery-desk');const props={};for(const[key,alt]of [['large','大号信封'],['pad','大本信笺簿'],['glue','一瓶胶水'],['chalk','店里仅有的小盒粉笔']]){props[key]=picture(key,'counter-prop prop-'+key,alt);desk.append(props[key]);}
- const note=node('p','counter-note');element.append(desk,location,note);
+ const desk=node('div','stationery-desk');const props={};for(const[key,alt]of [['large','大号信封'],['pad','大本信笺簿'],['glue','一瓶胶水'],['chalk','一小盒粉笔']]){props[key]=picture(key,'counter-prop prop-'+key,alt);desk.append(props[key]);}
+ element.append(desk,location);
  const setPose=(who,name)=>{const src='/assets/unit59-60/'+name+'.webp';if(actors[who].getAttribute('src')!==src)actors[who].src=src;actors[who].dataset.pose=name;};
  function update(i){
   const bag=i>=12,showPad=i>=5&&i<=6;
   setPose('lady',bag?'lady-change':'lady');setPose('assistant',showPad?'assistant-pad':'assistant');
   props.large.hidden=bag;props.pad.hidden=bag||i<4||showPad;props.glue.hidden=bag||i<8;props.chalk.hidden=i<9;
   element.dataset.beat=i<3?'envelopes':i<7?'paper':i<9?'glue':i<12?'chalk':'change';
-  note.textContent=i>=12?'买好文具，等找零':i>=9?'只有小盒粉笔':i>=5&&i<7?'没有小本，只有大本':'';
  }
  update(-1);return{element,update};
 }

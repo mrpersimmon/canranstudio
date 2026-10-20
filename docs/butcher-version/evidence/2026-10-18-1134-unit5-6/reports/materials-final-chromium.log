@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:31100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154.spec.js:28:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 (13.5s)
+  ok 2 tests\e2e\unit5-6-v154.spec.js:39:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 (12.3s)
+  ok 3 tests\e2e\unit5-6-v154.spec.js:49:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 (2.7s)
+
+  3 passed (29.6s)

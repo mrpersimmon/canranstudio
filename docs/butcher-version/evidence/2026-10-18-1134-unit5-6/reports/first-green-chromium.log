@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:29276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154.spec.js:4:1 › 当前首页使用确认故事图 (527ms)
+  ok 2 tests\e2e\unit5-6-v154.spec.js:5:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (429ms)
+  ok 3 tests\e2e\unit5-6-v154.spec.js:6:1 › 原文理解在未答页提供必要对白 (1.8s)
+
+  3 passed (3.6s)

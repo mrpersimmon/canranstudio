@@ -1,5 +1,8 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+// Historical 15-star behavior is exercised on its frozen edition.
+// Current five-zone and authenticated migration contracts have dedicated suites.
+require('../support/unit78-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 for(const width of [320,1280])test(`${width} 无配音课文翻句时按钮稳定，看图选词完整可见`,async({page})=>{
  await page.setViewportSize({width,height:800});await page.goto('/unit7-8/#learn/text');await page.evaluate(()=>document.fonts.ready);

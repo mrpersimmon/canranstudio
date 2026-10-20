@@ -1,0 +1,71 @@
+{
+  "tool": "built-in imagegen",
+  "jobs": [
+    {
+      "id": "river-wide",
+      "file": "assets/unit33-34/river-story-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit33-34-refactor/old-MrJones.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit33-34-refactor/old-MrsJones.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit33-34-refactor/old-Sally.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tmp/unit33-34-refactor/old-Tim.png"
+      ],
+      "prompt": "Create one wide landscape 3:2 children English-learning story scene. Style matches accepted friends illustration: bold rounded dark brown outlines, simple smiling dot/arc eyes, rounded heads, warm soft flat colors, very subtle paper texture. Identity refs are the four separate simple old characters; upgrade their rendering to the accepted style while keeping identity. Exactly four family members walking on the DECK of a stone arched bridge: Mr Jones on left (receding gray side hair, brown moustache, sage cardigan, cream scarf, blue-gray trousers); Mrs Jones next to him (short dark curly hair, dusty peach jacket with triangular lapels, beige wide trousers, brown crossbody bag); Sally (brown twin braids with coral ties, sage pinafore with yellow square bib/pocket, gray trousers); Tim right (sandy angular hair, yellow shirt with two cream stripes, blue-gray trousers). All four WHOLE bodies, both hands and feet are visible and entirely within picture. Feet physically touch the top deck of the bridge. Keep the bridge parapet low, below their ankles, to show whole bodies; a rear railing can sit behind them. Parents glance down toward TWO small rowing boats on water beside the arch. Sally looks downward toward a single larger cream and terracotta passenger ship, clearly passing through the OPEN arch UNDER the bridge, with water below its hull and generous visible space above its smokestack; do not place ship on deck or overlap it with stone. Tim looks UP and gestures to one aeroplane in sky ABOVE THE RIVER. No flight path arrows. A bright sun AND several soft white clouds share pale sky. Balanced spacious illustration, figures take enough space to read their different faces and whole poses, ship is clearly larger than small boats, gentle shore silhouettes. No captions, words, names, labels, numbers, speech bubbles, text panels, stars, badges or decorative frame. Opaque pale cream blue and river blue background. Family, ship, plane and both boats all fully visible with 6% edge margin.",
+      "selected": false,
+      "reason": "父亲手部遮藏且新增眼镜，修订后替代。",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-c6a39205-6e14-47c3-a2fb-3fcb14c58dfa.png"
+    },
+    {
+      "id": "river-wide-final",
+      "file": "assets/unit33-34/river-story-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-c6a39205-6e14-47c3-a2fb-3fcb14c58dfa.png"
+      ],
+      "prompt": "Edit this exact landscape illustration, preserving the four family identities, all spatial relations, bridge deck, ship under the arch, two small boats, plane above river, sun and clouds and colors. Correct only Mr Jones at far left: remove his eyeglasses; give him the simple tiny eyes used by the other characters and the accepted style. Make BOTH his hands clearly visible in front of or beside his body, one hand gently indicating the small boat at lower left and the other relaxed by his cardigan. Do not hide either hand behind his back. Keep his gray side hair, brown moustache, green cardigan and cream scarf, trousers and feet unchanged. Retain the full bodies and safe framing of all four people. No words or labels. Opaque background.",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-0671ad5e-ab48-400f-adde-3c8aead01ceb.png",
+      "selected": true,
+      "reason": "身份、主要人物完整取景及桥上／桥下／河面／上空关系目视核对。"
+    },
+    {
+      "id": "river-mobile",
+      "file": "assets/unit33-34/river-story-mobile-v1.webp",
+      "transparent": false,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-0671ad5e-ab48-400f-adde-3c8aead01ceb.png"
+      ],
+      "prompt": "Recompose this exact English lesson scene as a PORTRAIT 2:3 illustration for a phone. Match all four family identities, clothes, colors and simple faces from reference. Show all four whole bodies with both hands and feet, standing/walking together ON the bridge deck, large enough to see at phone width. Father gray side hair and moustache no glasses, green cardigan cream scarf; mother dark short curls peach lapel jacket beige trousers brown crossbody bag; Sally twin brown braids green pinafore yellow square bib; Tim sandy hair yellow stripe shirt. Parents glance down toward small boats, Sally looks down toward big ship, Tim points UP at aeroplane above river. Sky with sun and clouds at top; bridge deck across middle; single large cream/terracotta ship in open arch UNDER the bridge in lower middle, leave clearance above smokestack; TWO small rowing boats on water near bottom. Family feet firmly on top surface and all intact, no ship intersects stone, no plane touches bridge. Keep calm blue river and pale sky, reduce distant architectural details. No letters, words, captions, arrows, numbers, frame, stars or badges. Opaque scene, safe margins around every person and vehicle.",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-a7efebe6-4f34-4235-b271-f10495e0b8e9.png",
+      "selected": true,
+      "reason": "身份、主要人物完整取景及桥上／桥下／河面／上空关系目视核对。"
+    },
+    {
+      "id": "keepsake",
+      "file": "assets/unit33-34/keepsake-story-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-0671ad5e-ab48-400f-adde-3c8aead01ceb.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "prompt": "Create a landscape 3:2 English lesson collectible illustration using EXACTLY the FOUR family members and their identities/colors from first reference, in the rounded dark brown outline style of the second accepted reference. Medium close framing: large readable family faces, arms and complete hands; parents stand behind the two children at a low stone bridge railing. Father gray side hair, brown moustache, green cardigan cream scarf, NO glasses; mother short dark curls peach lapel jacket brown crossbody bag; Sally twin braids, green pinafore and yellow square bib leans looking DOWN; Tim sandy angular hair, yellow two cream stripe shirt smiles and points UP toward one small aeroplane. Father and mother look down toward a pair of small boats; include a small but recognizable stone bridge arch below/behind the railing with a cream terracotta ship UNDER it in the river. Convey different looking directions, not everyone waving to viewer. Large faces and hand gestures are main focus, background stays soft pale river blue with one sun and clouds. Use warm flat colors and very light paper grain; simplified background, no village or towers. Keep complete heads and hands well within frame; lower torsos fade softly into transparent exterior, no abrupt cut hands. No text, words, numbers, stars, badges, borders, speech bubbles or checkerboard.",
+      "selected": false,
+      "reason": "首稿是不透明矩形背景且缺两艘小船；改为透明近景稿。",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-105ae744-91e9-428a-b7be-6909d61ea394.png"
+    },
+    {
+      "id": "keepsake-final",
+      "file": "assets/unit33-34/keepsake-story-v1.webp",
+      "transparent": true,
+      "refs": [
+        "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-105ae744-91e9-428a-b7be-6909d61ea394.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "prompt": "Edit the first image into a SOFT-EDGED TRANSPARENT VIGNETTE for a collectible card, like the second accepted reference, NOT a solid rectangular scenic picture. Preserve the four recognizable large family faces, exact clothing, intact visible hands on the railing, and Tim pointing up to plane, and the ship clearly under the arch. Pull camera back slightly so the plane, sun and every hand have safe space. Remove the solid rectangular outer blue sky and river/background to genuine alpha transparency, fading the peripheral sky/river edges softly into transparency. The central river and supporting bridge arch remain visible. Add exactly TWO small simple rowing boats on the water to left and right of the big ship, both safely inside vignette edges; they remain smaller than the ship. Reduce background texture/detail and use the rounded bold brown outline style of second reference. No text, no stars, no labels, no card frame, no checkerboard. Do not alter character identities. Both mother hands visible resting on railing, do not hide one behind handbag. Final image true transparent exterior, landscape 3:2.",
+      "original": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a13a06-86fc-7732-8d58-ede86462cfa9\\exec-8bf60c76-c078-4947-9717-f93ba777df69.png",
+      "selected": true,
+      "reason": "身份、主要人物完整取景及桥上／桥下／河面／上空关系目视核对。"
+    }
+  ]
+}

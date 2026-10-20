@@ -388,3 +388,22 @@ unit.questions["reply"][3]]};
  unit.stages[4].activities.find(item=>item[0]==='certificate')[1]='我的单元纪念卡';
  unit.reward={edition:'grammar-negatives-v1',title:'认领小达人',lesson:'Lesson 3–4',scene:'/assets/awards/unit3-4-umbrella.webp',alt:'客人从柜台领回紫色雨伞',color:'#74376f',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['reply','语法小工坊'],['manners','认领柜台'],['exam','认领小挑战']].map(([id,title])=>({id,title}))};
 })(globalThis.CanranCore);
+
+// Only the two material changes own new identities. All other manuscripts,
+// sessions and existing stars stay intact; historical rounds remain exact.
+(function(core){
+ const unit=core.unit34,prior=unit.questions.roles;
+ unit.taskPredecessors.roles=[{key:'unit34-roles-practice/'+unit.taskSessions.roles,questions:prior},...unit.taskPredecessors.roles];
+ const lines=indexes=>indexes.map(i=>{const line=unit.learning.DIALOGUE[i];return [line.who==='visitor'?'客人':'工作人员',line.text];});
+ unit.questions.roles=prior.map((q,i)=>i<2?{...q,id:'u34-v154-'+(i?'story-it':'story-wrong'),reading:lines(i?[7,8,9]:[4,5]),source:'Lesson 3 纸6／PDF39；原文对白提供未答判断依据。'}:q);
+ unit.taskSessions.roles='v154';
+ unit.typeCoverage={adopted:['E01','E05','E09','E12','E21','S01'],adaptations:{
+  E04:'未用中文词块译文；由R1/R2的原文理解与G/C表达任务承接目标。',
+  E10:'未设置图境选词填空；V1/V3为图词辨认，不冒称填空。',
+  E11:'短对话理解归S01，不重复计为段落阅读。原报告中文题图仍待核。',
+  E21:'V3在“一套衣服”的中文条件下看图选suit；V1没有中文词义条件，不算完整E21。',
+  E23:'未设中文词义到英文单选；人物词由V5配对承担。V4为英文到中文辨义。',
+  S02:'R3按信息任务定位寄存牌号码，不是按给定中文词义找英语片段；归S01。',
+  A02:'A3/A4为按归属事实选择回应的场景改编，与E12同题不重复计数；原报告中文流程仍待核。'
+ }};
+})(globalThis.CanranCore);

@@ -1,0 +1,53 @@
+[WebServer] (node:30380) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:16820) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4264) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\unit5-6-v154-account.spec.js:7:1 › 账号首页四宽、真实人物503、无Worker恢复与原选择续做 (1.4s)
+(node:29640) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 tests\login\unit5-6-v154-account.spec.js:20:1 › 真实36题账号：错两次三卡、五星同步、两次GIF、跨设备、离线与身份隔离 (30.5s)
+(node:8612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8612) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 3 tests\login\unit5-6-v154-upgrade.spec.js:8:42 › 同库升级：原26题五星卡全部帧、精确时间与跨设备历史保留 (33.5s)
+  ok 4 tests\login\unit5-6-v154-upgrade.spec.js:8:42 › 同库升级：原26题旧证PNG、精确时间与跨设备历史保留 (28.8s)
+
+
+  1) tests\login\unit5-6-v154-account.spec.js:7:1 › 账号首页四宽、真实人物503、无Worker恢复与原选择续做 ─────────────────
+
+    Error: locator.evaluate: Error: strict mode violation: locator('[data-unit="unit5-6"]').locator('.featured-art img') resolved to 2 elements:
+        1) <img alt="" class="featured-scene" src="/assets/awards/unit5-6-friends.webp"/> aka locator('img').nth(1)
+        2) <img alt="" class="featured-scene" src="/assets/unit5-6/sophie.svg"/> aka locator('img').nth(2)
+
+    Call log:
+      - waiting for locator('[data-unit="unit5-6"]').locator('.featured-art img')
+
+
+      2 | const {test,expect}=require('@playwright/test'),fs=require('fs'),crypto=require('crypto'),sharp=require('sharp');
+      3 | const {adminLogin,createStudent,addStudent,studentLogin}=require('./helpers'),flow=require('../support/unit56-v154'),{courseResponse}=require('../support/course-response-faults'),{imageHash}=require('../support/home-banners-1730');
+    > 4 | const pixels=locator=>locator.evaluate(async im=>{await im.decode();const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(im,0,0);return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',ctx.getImageData(0,0,c.width,c.height).data)),v=>v.toString(16).padStart(2,'0')).join('');});
+        |                               ^
+      5 | test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',actionTimeout:10000});
+      6 |
+      7 | test('账号首页四宽、真实人物503、无Worker恢复与原选择续做',async({page,browser},info)=>{
+        at pixels (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit5-6-v154-account.spec.js:4:31)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit5-6-v154-account.spec.js:9:176
+
+    Error Context: output\unit56-review-20261018\account-chromium-root\unit5-6-v154-account-账号首页四宽、真实人物503、无Worker恢复与原选择续做\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\account-chromium-root\unit5-6-v154-account-账号首页四宽、真实人物503、无Worker恢复与原选择续做\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\account-chromium-root\unit5-6-v154-account-账号首页四宽、真实人物503、无Worker恢复与原选择续做\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit5-6-v154-account.spec.js:7:1 › 账号首页四宽、真实人物503、无Worker恢复与原选择续做 ──────────────────
+  3 passed (1.7m)

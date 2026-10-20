@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:30236) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit131-132.spec.js:55:1 › 27道书写题48行打印与恢复 (1.1s)
+
+  1 passed (1.9s)

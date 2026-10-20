@@ -1,0 +1,80 @@
+{
+  "id": "unit101-102",
+  "source": {
+    "file": "tests/support/unit101102.js",
+    "sha256": "fc51d045d710d55056d730a6b86eb1925644b6d54b23195b5f4c0b184dbef5ba"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u101102-v1-r-roles",
+      "text": "Lesson 101\n\nGrandmother: Read Jimmy’s card to me please, Penny.\n\nPenny: ‘I have just arrived in Scotland and I’m staying at a Youth Hostel.’"
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u101102-v1-r-place",
+      "text": "Lesson 101\n\nGrandmother: Read Jimmy’s card to me please, Penny.\n\nPenny: ‘I have just arrived in Scotland and I’m staying at a Youth Hostel.’\n\nGrandmother: Eh?\n\nPenny: He says he’s just arrived in Scotland. He says he’s staying at a Youth Hostel. You know he’s a member of the Y.H.A."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u101102-v1-r-association",
+      "text": "Lesson 101\n\nPenny: He says he’s just arrived in Scotland. He says he’s staying at a Youth Hostel. You know he’s a member of the Y.H.A.\n\nGrandmother: The what?\n\nPenny: The Y.H.A., Mum. The Youth Hostels Association."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u101102-v1-r-hope",
+      "text": "Lesson 101\n\nGrandmother: What else does he say?\n\nPenny: ‘I’ll write a letter soon. I hope you are all well.’\n\nGrandmother: What? Speak up, Penny. I’m afraid I can’t hear you.\n\nPenny: He says he’ll write a letter soon. He hopes we are all well. ‘Love, Jimmy.’"
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u101102-v1-r-hear",
+      "text": "Lesson 101\n\nPenny: ‘I’ll write a letter soon. I hope you are all well.’\n\nGrandmother: What? Speak up, Penny. I’m afraid I can’t hear you."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u101102-v1-r-future",
+      "text": "Lesson 101\n\nGrandmother: What else does he say?\n\nPenny: ‘I’ll write a letter soon. I hope you are all well.’\n\nGrandmother: What? Speak up, Penny. I’m afraid I can’t hear you.\n\nPenny: He says he’ll write a letter soon. He hopes we are all well. ‘Love, Jimmy.’"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u101102-v1-r-reaction",
+      "text": "Lesson 101\n\nGrandmother: Is that all? He doesn’t say very much, does he?\n\nPenny: He can’t write very much on a card, Mum."
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u101102-v1-r-card",
+      "text": "Lesson 101\n\nGrandmother: Is that all? He doesn’t say very much, does he?\n\nPenny: He can’t write very much on a card, Mum."
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u101102-v1-e-ending",
+      "text": "Lesson 101\n\nGrandmother: Is that all? He doesn’t say very much, does he?\n\nPenny: He can’t write very much on a card, Mum."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "1-4",
+    "R3": "4-6",
+    "R4": "7-10",
+    "R5": "8-9",
+    "R6": "7-10",
+    "R7": "11-12",
+    "R8": "11-12",
+    "E2": "11-12"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

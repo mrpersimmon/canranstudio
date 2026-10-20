@@ -1,0 +1,14 @@
+[WebServer] (node:15512) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:25552) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33428) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:33428) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 1 tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原33题五星卡全部帧、精确时间与跨设备历史保留 (26.7s)
+  ok 2 tests\login\unit3-4-v154-upgrade.spec.js:8:42 › 同库升级：原25题旧证PNG、精确时间与跨设备历史保留 (21.0s)
+
+  2 passed (53.9s)

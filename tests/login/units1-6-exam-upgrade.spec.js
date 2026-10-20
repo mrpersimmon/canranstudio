@@ -15,6 +15,7 @@ for (const [unit, title, oldCount, complete] of [
   const oldRoot = path.join(directory, 'old'), dataDir = path.join(directory, 'data');
   const root = path.resolve(__dirname, '../..'), origin = require('../support/login-test-ports').origin(4199), course = 'unit' + unit;
   let server, first, second, third;
+  const mirror=async(a,b)=>{if((await fs.stat(a)).isDirectory())await fs.symlink(a,b,process.platform==='win32'?'junction':'dir');else await fs.copyFile(a,b);};
   const start = async source => { server = await createApp({ root: source, dataDir, origin, basePath: '/' }); await new Promise(resolve => server.listen(require('../support/login-test-ports').port(4199), '127.0.0.1', resolve)); };
   try {
     await fs.mkdir(oldRoot);
@@ -22,14 +23,18 @@ for (const [unit, title, oldCount, complete] of [
       if (entry.name.startsWith('.') || entry.name === course) continue;
       if (entry.isDirectory() && /^unit\d+-\d+$/.test(entry.name)) {
         await fs.mkdir(path.join(oldRoot, entry.name));
-        for (const name of await fs.readdir(path.join(root, entry.name))) await fs.symlink(path.join(root, entry.name, name), path.join(oldRoot, entry.name, name));
-      } else await fs.symlink(path.join(root, entry.name), path.join(oldRoot, entry.name));
+        for (const name of await fs.readdir(path.join(root, entry.name))) await mirror(path.join(root, entry.name, name), path.join(oldRoot, entry.name, name));
+      } else if(entry.name==='index.html'&&unit==='5-6'){
+        const previous=await fs.readFile(path.join(root,'tests/fixtures/unit5-6-before-v154/home-section.html'),'utf8');
+        const home=await fs.readFile(path.join(root,entry.name),'utf8');
+        await fs.writeFile(path.join(oldRoot,entry.name),home.replace(/<section[^>]+data-unit="unit5-6"[\s\S]*?<\/section>/,previous));
+      } else await mirror(path.join(root, entry.name), path.join(oldRoot, entry.name));
     }
     await fs.mkdir(path.join(oldRoot, course));
     const frozen = ['index.html', 'content.js', 'unit.js', 'unit.css', 'scene.js'];
     for (const name of await fs.readdir(path.join(root, course))) {
       if (frozen.includes(name)) await fs.copyFile(path.join(root, `tests/fixtures/${course}-short-exam-before`, name), path.join(oldRoot, course, name));
-      else await fs.symlink(path.join(root, course, name), path.join(oldRoot, course, name));
+      else await mirror(path.join(root, course, name), path.join(oldRoot, course, name));
     }
     const store = openStore(dataDir); store.setAdmin('teacher', 'Test-only-classroom-2026!'); store.close(); await start(oldRoot);
     first = await browser.newContext({ baseURL: origin, reducedMotion: 'reduce' }); const old = await first.newPage(); await adminLogin(old, '/');
@@ -45,9 +50,9 @@ for (const [unit, title, oldCount, complete] of [
       await current.goto('/unit5-6/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('0');await expect(current.locator('#certificateName')).toHaveText('课程升级班');await expect(current.locator('#certificateDate')).toBeHidden();
       await current.goto('/unit5-6/#learn/exam');const room=current.locator('.stage-exam');
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(oldCount));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
-      const flow=require('../support/units1-30-tasks'),ids=['listen','roles','introduce','cars','exam'];
-      for(const id of ids)await flow.activity(current,unit,id);
-      for(const id of ids){await current.goto('/unit5-6/#learn/'+id);await current.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await flow.activity(current,unit,id);}
+      const flow=require('../support/unit56-v154'),ids=['listen','roles','introduce','cars','exam'];
+      for(const id of ids)await flow.activity(current,id);
+      for(const id of ids){await current.goto('/unit5-6/#learn/'+id);await flow.ready(current);await current.locator('.stage-'+id).getByRole('button',{name:'再练一轮',exact:true}).click();await flow.activity(current,id);}
       await current.goto('/unit5-6/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('5');const fullDate=await current.locator('#certificateDate').innerText();
       await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
       third=await browser.newContext({baseURL:origin,reducedMotion:'reduce'});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('5 / 5');await restored.goto('/unit5-6/#learn/certificate');await expect(restored.locator('#certificateDate')).toHaveText(fullDate);await expect(restored.locator('#certificateName')).toHaveText('课程升级班');
@@ -69,6 +74,8 @@ for (const [unit, title, oldCount, complete] of [
     await restored.goto(`/${course}/#learn/certificate`); await expect(restored.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小达人');
   } finally {
     await first?.close(); await second?.close(); await third?.close();
-    if (server) await new Promise(resolve => server.close(resolve)); await fs.rm(directory, { recursive: true, force: true });
+    if (server) await new Promise(resolve => {server.close(resolve);server.closeAllConnections();});
+    if(!path.resolve(directory).startsWith(path.join(path.resolve(os.tmpdir()),'canran-short-exam-upgrade-')))throw Error('Invalid temporary path');
+    await fs.rm(directory, { recursive: true, force: true });
   }
 });

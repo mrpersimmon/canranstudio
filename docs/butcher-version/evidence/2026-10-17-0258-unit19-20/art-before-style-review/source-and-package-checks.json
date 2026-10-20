@@ -1,0 +1,177 @@
+{
+  "at": "2026-10-16T19:09:41.769Z",
+  "checks": [
+    {
+      "name": "five zones with 65 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 15,
+        "roles": 3,
+        "grammar": 16,
+        "apply": 8,
+        "exam": 23
+      }
+    },
+    {
+      "name": "36 original questions retained exactly",
+      "passed": true
+    },
+    {
+      "name": "65 unique task identities",
+      "passed": true
+    },
+    {
+      "name": "34 original word cards and 13 dialogue lines unchanged",
+      "passed": true
+    },
+    {
+      "name": "20 gallery entries, 10 models and 6 writing tasks retained",
+      "passed": true
+    },
+    {
+      "name": "original learning key and content version retained",
+      "passed": true
+    },
+    {
+      "name": "frozen five sources match pre-task hashes",
+      "passed": true
+    },
+    {
+      "name": "server predecessor matches actual old content",
+      "passed": true
+    },
+    {
+      "name": "all original 63 images unchanged",
+      "passed": true,
+      "detail": {
+        "count": 63
+      }
+    },
+    {
+      "name": "six generated assets have complete prompts and original paths",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/cast-received-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/cast-standing-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/cast-resting-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/cast-offer-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/cast-vendor-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit19-20/keepsake-story-v1.webp preserves source frame and alpha",
+      "passed": true
+    },
+    {
+      "name": "font inputs match final content",
+      "passed": true,
+      "detail": {
+        "mismatches": [],
+        "characters": 1848
+      }
+    },
+    {
+      "name": "both license files preserve pre-task bytes",
+      "passed": true
+    },
+    {
+      "name": "root authenticated build includes all 72 units",
+      "passed": true
+    },
+    {
+      "name": "subpath authenticated build includes all 72 units",
+      "passed": true
+    },
+    {
+      "name": "all changed JavaScript parses",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "changed document relative links resolve",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "current lesson has no copied office names",
+      "passed": true
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/unit19-20/cast-received-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "d486e28a6335f4feb16a11ed5f9d7389b3c92ad31b584ef49d75def348f3db0d"
+    },
+    {
+      "file": "assets/unit19-20/cast-standing-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "1e0cf0c9cf272648d8b598cb68a2c27904ce6b68cb4d94bfa130ec3e2743a660"
+    },
+    {
+      "file": "assets/unit19-20/cast-resting-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "451692177cefb53373e4b74d0a00c5c0cbd12fda6b2f7c654dc6b1ce12f1b478"
+    },
+    {
+      "file": "assets/unit19-20/cast-offer-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "565b200183238ab2ed05fc4d1f5775d908616b12c4f23104fd7ddd0edcf84e93"
+    },
+    {
+      "file": "assets/unit19-20/cast-vendor-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "0283a25e859f7dfbaeedd6f2c1dd97b19455c70d18bdcafad04fc764564aeb65"
+    },
+    {
+      "file": "assets/unit19-20/keepsake-story-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true,
+      "sha256": "52c73c981a2a18d0ec99c245a4837f2195008e4015e45aa5fc47b257b0bcb392"
+    }
+  ],
+  "builds": {
+    "root": {
+      "courseCount": 72,
+      "unit": {
+        "title": "冰淇淋休息站",
+        "revision": "327c635d655c77cf1b47c37c636de1ee6d96750b364dc5c90ceb9eb40487cfce",
+        "manifest": "/course-packages/unit19-20/327c635d655c77cf1b47c37c636de1ee6d96750b364dc5c90ceb9eb40487cfce.json",
+        "sha256": "93f797e34454fc0fd823d857d90714a6ff9bece61a1b12a0a9b525bedd3c4b10"
+      }
+    },
+    "subpath": {
+      "courseCount": 72,
+      "unit": {
+        "title": "冰淇淋休息站",
+        "revision": "636db7dbf4afd6e280ea69f90e5ce7c7f51df883857c78e8bc726df53e28f0a1",
+        "manifest": "/lesson/course-packages/unit19-20/636db7dbf4afd6e280ea69f90e5ce7c7f51df883857c78e8bc726df53e28f0a1.json",
+        "sha256": "f15a03f9f8fb18eb626d9167fa0975c5d9a91795cd42484bb08095a901452b11"
+      }
+    }
+  }
+}

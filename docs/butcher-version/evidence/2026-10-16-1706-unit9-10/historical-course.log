@@ -1,0 +1,99 @@
+
+Running 52 tests using 1 worker
+
+(node:32816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit9-10-audio.spec.js:7:35 › unit9-10 词卡翻面、示范阅读和刷新都不请求英语配音 / (2.9s)
+  ok  2 tests\e2e\unit9-10-audio.spec.js:7:35 › unit9-10 词卡翻面、示范阅读和刷新都不请求英语配音 /lesson (4.5s)
+  ok  3 tests\e2e\unit9-10-exam-upgrade.spec.js:19:1 › 9–10 三题旧挑战完成后保留有效题，新增题亲自补完才重新领证 (9.0s)
+  ok  4 tests\e2e\unit9-10-exam-upgrade.spec.js:41:1 › 9–10 旧草稿只是选择，升级、返回与刷新都不代为判对 (905ms)
+  ok  5 tests\e2e\unit9-10-exam-upgrade.spec.js:54:1 › 9–10 缓存版断网刷新保留新增题的未提交词块，下一题仍为空 (4.1s)
+  ok  6 tests\e2e\unit9-10-exam.spec.js:9:1 › 9–10 十题覆盖问候、回问、告别、缩写和观察，全部声音失败仍能独立作答 (2.8s)
+  ok  7 tests\e2e\unit9-10-exam.spec.js:56:44 › 320 十题的题面、长选项与词块完整，作答操作和结束按钮稳定 (5.2s)
+  ok  8 tests\e2e\unit9-10-exam.spec.js:56:44 › 390 十题的题面、长选项与词块完整，作答操作和结束按钮稳定 (3.9s)
+  ok  9 tests\e2e\unit9-10-exam.spec.js:56:44 › 768 十题的题面、长选项与词块完整，作答操作和结束按钮稳定 (3.9s)
+  ok 10 tests\e2e\unit9-10-exam.spec.js:56:44 › 1280 十题的题面、长选项与词块完整，作答操作和结束按钮稳定 (4.4s)
+  ok 11 tests\e2e\unit9-10-layout.spec.js:6:1 › 单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度 (517ms)
+  ok 12 tests\e2e\unit9-10-layout.spec.js:10:39 › 320 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点 (1.0s)
+  ok 13 tests\e2e\unit9-10-layout.spec.js:10:39 › 390 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点 (1.2s)
+  ok 14 tests\e2e\unit9-10-layout.spec.js:10:39 › 768 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点 (1.0s)
+  ok 15 tests\e2e\unit9-10-layout.spec.js:10:39 › 1280 各站无横向溢出，图标和双人舞台完整，帮助关闭后返回焦点 (1.2s)
+  ok 16 tests\e2e\unit9-10-layout.spec.js:20:1 › 22 张词卡在窄屏可翻面、读音标，末组刷新后仍有下一站 (2.8s)
+  ok 17 tests\e2e\unit9-10-layout.spec.js:26:31 › 320 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算 (1.3s)
+  ok 18 tests\e2e\unit9-10-layout.spec.js:26:31 › 1280 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算 (1.3s)
+  ok 19 tests\e2e\unit9-10-layout.spec.js:35:1 › 词块支持撤回和键盘；错序刷新不获正确，换题不继承已选词块 (975ms)
+  ok 20 tests\e2e\unit9-10-scene.spec.js:12:1 › 聊到的朋友按原文出现，不把 Tony 和 Emma 放进对话角色 (815ms)
+  ok 21 tests\e2e\unit9-10-scene.spec.js:27:1 › 手机对白占整行，人物在下方；桌面人物落在同一地面 (3.4s)
+  ok 22 tests\e2e\unit9-10-scene.spec.js:54:1 › 问候接力包含选答和拼句，只有正确检查后才出现回应 (668ms)
+  ok 23 tests\e2e\unit9-10-scene.spec.js:65:1 › 观察窗六个主题每次只展示一对，冷热另一个画面不改写故事 (1.2s)
+  ok 24 tests\e2e\unit9-10-scene.spec.js:77:35 › 320 问候正确回应出现后操作区不被推移，拼句与结束状态完整 (1.2s)
+  ok 25 tests\e2e\unit9-10-scene.spec.js:77:35 › 390 问候正确回应出现后操作区不被推移，拼句与结束状态完整 (1.1s)
+  ok 26 tests\e2e\unit9-10-scene.spec.js:77:35 › 1280 问候正确回应出现后操作区不被推移，拼句与结束状态完整 (1.2s)
+  ok 27 tests\e2e\unit9-10-upgrade.spec.js:19:1 › 26题旧课堂升级保留未改活动、姓名与日期，新增综合题完成后恢复15星 (9.1s)
+  ok 28 tests\e2e\unit9-10-upgrade.spec.js:27:1 › 旧拼句草稿跟随原题进入问候接力，未答题与未提交的选择绝不自动判对 (1.2s)
+  ok 29 tests\e2e\unit9-10-upgrade.spec.js:37:1 › 人物未齐不显示课件，整课加载后断网换主题、翻词卡与刷新续读都完整 (3.3s)
+  ok 30 tests\e2e\unit9-10.spec.js:8:1 › 从带音标词卡开始，浏览14句并完成33题才取得15星课堂配套证书 (10.2s)
+  ok 31 tests\e2e\unit9-10.spec.js:22:1 › 首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址 (7.6s)
+  ok 32 tests\e2e\unit9-10.spec.js:30:1 › 纸笔保留教材 A 六题与 B 十二题，真实输出一张有足够书写空间的 A4 (715ms)
+  ok 33 tests\e2e\unit9-10.spec.js:37:1 › 挑战错答、提示、刷新续做与独立拼句分别记录，不提前发证 (2.2s)
+  ok 34 tests\e2e\unit9-10.spec.js:42:1 › 内容升版使被改活动失效，其他活动草稿保留；不会套用旧答案 (539ms)
+  x  35 tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 (8.4s)
+(node:32952) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 36 tests\e2e\unit9-10.spec.js:51:1 › 短屏单词练习末题与重练都能操作，重练清本轮答案并保留已得星星 (2.8s)
+  ok 37 tests\e2e\units9-12-classroom.spec.js:38:27 › Lesson 9–10 无配音可逐句看完原文，刷新续读，中文独立展开 (1.6s)
+  ok 38 tests\e2e\units9-12-classroom.spec.js:38:27 › Lesson 11–12 无配音可逐句看完原文，刷新续读，中文独立展开 (1.7s)
+  ok 39 tests\e2e\units9-12-classroom.spec.js:66:27 › Lesson 9–10 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留 (4.4s)
+  ok 40 tests\e2e\units9-12-classroom.spec.js:66:27 › Lesson 11–12 图鉴只展开释义、图册供阅读，挑战读英文，正误音独立保留 (4.5s)
+  ok 41 tests\e2e\units9-12-classroom.spec.js:90:27 › Lesson 9–10 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择 (2.8s)
+  ok 42 tests\e2e\units9-12-classroom.spec.js:90:27 › Lesson 11–12 单词寻宝覆盖13个新词，读词义或看图作答，末题不自动选择 (2.6s)
+  ok 43 tests\e2e\units9-12-classroom.spec.js:118:27 › Lesson 9–10 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立 (10.4s)
+  ok 44 tests\e2e\units9-12-classroom.spec.js:118:27 › Lesson 11–12 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立 (8.1s)
+  ok 45 tests\e2e\units9-12-classroom.spec.js:139:27 › Lesson 9–10 旧录音中断可续读，保留词卡页、原练习与词块草稿 (3.7s)
+  ok 46 tests\e2e\units9-12-classroom.spec.js:139:27 › Lesson 11–12 旧录音中断可续读，保留词卡页、原练习与词块草稿 (4.1s)
+  ok 47 tests\e2e\units9-12-classroom.spec.js:174:27 › Lesson 9–10 旧15星升级保留9星，新题独立完成后再领课堂配套证书 (48.8s)
+  ok 48 tests\e2e\units9-12-classroom.spec.js:174:27 › Lesson 11–12 旧15星升级保留9星，新题独立完成后再领课堂配套证书 (51.7s)
+  ok 49 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 9–10 320 阅读控件不跳动，图片题和长词义选项完整 (3.1s)
+  ok 50 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 9–10 1280 阅读控件不跳动，图片题和长词义选项完整 (2.9s)
+  ok 51 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 11–12 320 阅读控件不跳动，图片题和长词义选项完整 (2.8s)
+  ok 52 tests\e2e\units9-12-classroom.spec.js:194:59 › Lesson 11–12 1280 阅读控件不跳动，图片题和长词义选项完整 (3.1s)
+
+
+  1) tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 ─────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-reply')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-reply')
+
+
+      45 |
+      46 | test('重开冒险包含新单元；取消保留，确认仅清理本网站路径记录',async({page})=>{
+    > 47 |  await page.goto('/unit9-10/#learn/describe');const room=page.locator('.stage-describe');await room.getByRole('button',{name:"He's",exact:true}).click();for(const path of ['unit1-2/#learn/listen','unit3-4/#learn/reply','unit5-6/#learn/introduce','unit7-8/#learn/reply','unit9-10/#learn/describe','unit49-50/#learn/apply']){await page.goto('/lesson/'+path);await expect(page.locator('.stage-'+path.split('#learn/')[1])).toBeVisible();}await page.goto('/lesson/');await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'取消重开',exact:true}).click();await page.getByRole('button',{name:'返回课程',exact:true}).click();await expect(page.getByRole('link',{name:'继续学习：街角问候站',exact:true})).toBeVisible();
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      48 |  await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();await page.getByRole('button',{name:'确认重开',exact:true}).click();for(const name of ['礼貌小帮手','雨伞认领小帮手','新朋友见面会','新朋友采访站','街角问候站'])await expect(page.getByRole('link',{name:'开始学习：'+name,exact:true})).toBeVisible();await page.goto('/unit9-10/#learn/describe');await expect(room.getByRole('button',{name:"He's",exact:true})).toHaveAttribute('aria-pressed','true');
+      49 | });
+      50 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit9-10.spec.js:47:420
+
+    Error Context: test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\error-context.md
+
+    Error Context: test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\unit9-10-重开冒险包含新单元；取消保留，确认仅清理本网站路径记录\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit9-10.spec.js:46:1 › 重开冒险包含新单元；取消保留，确认仅清理本网站路径记录 ──────────────────────────────────
+  51 passed (4.5m)

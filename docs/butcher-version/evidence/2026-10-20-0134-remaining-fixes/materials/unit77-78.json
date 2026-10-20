@@ -1,0 +1,66 @@
+{
+  "id": "unit77-78",
+  "source": {
+    "file": "tests/support/unit7778.js",
+    "sha256": "4f094c2e35883050c001e7ebffb180205f779da5111a08ccc1116674f88e53ba"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u7778-v1-r-morning",
+      "text": "Lesson 77\n\nNurse: Good morning, Mr. Croft.\n\nMr. Croft: Good morning, nurse. I want to see the dentist, please."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u7778-v1-r-appointment",
+      "text": "Lesson 77\n\nNurse: Do you have an appointment?\n\nMr. Croft: No, I don’t."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u7778-v1-r-urgent",
+      "text": "Lesson 77\n\nNurse: Is it urgent?\n\nMr. Croft: Yes, it is. It’s very urgent. I feel awful. I have a terrible toothache."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u7778-v1-r-first",
+      "text": "Lesson 77\n\nNurse: Can you come at 10 a.m. on Monday, April 24th?\n\nMr. Croft: I must see the dentist now, nurse."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u7778-v1-r-second",
+      "text": "Lesson 77\n\nNurse: The dentist is very busy at the moment. Can you come at 2 p.m.?\n\nMr. Croft: That’s very late. Can the dentist see me now?"
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u7778-v1-r-refusal",
+      "text": "Lesson 77\n\nNurse: The dentist is very busy at the moment. Can you come at 2 p.m.?\n\nMr. Croft: That’s very late. Can the dentist see me now?\n\nNurse: I’m afraid that he can’t, Mr. Croft. Can’t you wait till this afternoon?\n\nMr. Croft: I can wait, but my toothache can’t!"
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u7778-v1-e-appointment",
+      "text": "Lesson 77\n\nNurse: Good morning, Mr. Croft.\n\nMr. Croft: Good morning, nurse. I want to see the dentist, please.\n\nNurse: Do you have an appointment?\n\nMr. Croft: No, I don’t.\n\nNurse: Is it urgent?\n\nMr. Croft: Yes, it is. It’s very urgent. I feel awful. I have a terrible toothache.\n\nNurse: Can you come at 10 a.m. on Monday, April 24th?\n\nMr. Croft: I must see the dentist now, nurse.\n\nNurse: The dentist is very busy at the moment. Can you come at 2 p.m.?\n\nMr. Croft: That’s very late. Can the dentist see me now?\n\nNurse: I’m afraid that he can’t, Mr. Croft. Can’t you wait till this afternoon?\n\nMr. Croft: I can wait, but my toothache can’t!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-4",
+    "R3": "5-6",
+    "R4": "7-8",
+    "R5": "9-10",
+    "R6": "9-12",
+    "E4": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

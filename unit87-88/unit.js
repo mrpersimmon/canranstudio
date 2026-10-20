@@ -249,10 +249,10 @@
   const writing=node('details','','offline-task');writing.id='unitWriting';writing.append(node('summary','课后练习纸'));
   writing.append(node('h4','A · 把句子改成一般疑问句和否定句'),node('p','保留课本原题；did和didn’t后用原形。含this morning的原句已用过去时，练习保持该事件的过去时间。','reference-note'));
   for(const text of content.WRITING_A_EXAMPLES)writing.append(node('p',text,'reference-note'));
-  const a=node('ol');for(const first of content.WRITING_A){const li=node('li',first);li.append(node('div','________________________________________________'));a.append(li);}writing.append(a);
+  const a=node('ol');for(const first of content.WRITING_A){const li=node('li',first);for(let line=0;line<2;line++)li.append(node('div','','writing-line'));a.append(li);}writing.append(a);
   writing.append(node('h4','B · 先问做过没有，再追问过去何时做的'));
   for(const example of content.WRITING_B_EXAMPLES)writing.append(node('p',example,'reference-note'));
-  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');li.append(node('div','________________________________________________'));b.append(li);}writing.append(b);
+  const b=node('ol');for(const[question,cue]of content.WRITING_B){const li=node('li',question+' ('+cue+')');for(let line=0;line<4;line++)li.append(node('div','','writing-line'));b.append(li);}writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

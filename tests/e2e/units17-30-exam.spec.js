@@ -1,4 +1,6 @@
 'use strict';
+// Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
+require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
 const {EXAMS,selectAnswer}=require('../support/units17-30-exam');
 test.use({reducedMotion:'reduce',actionTimeout:5000});

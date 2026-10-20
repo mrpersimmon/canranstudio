@@ -37,6 +37,10 @@
       if (q.type === 'match') return Array.isArray(state.pairs) && state.pairs.length === q.pairs.length &&
         new Set(state.pairs).size === q.pairs.length && state.pairs.every(id => q.pairs.some(pair => pair.id === id)) &&
         JSON.stringify(state.pairs) === q.answer;
+      if (q.type === 'handoff') return record(state.handoff) && Array.isArray(q.objects) && Array.isArray(q.recipients) &&
+        q.objects.some(item => item.id === state.handoff.object) &&
+        q.recipients.some(person => person.id === state.handoff.recipient) &&
+        JSON.stringify([state.handoff.object, state.handoff.recipient]) === q.answer;
       // Unsupported input types must not throw or earn unverified rewards.
       return ['choice', 'locate', 'scene-find'].includes(q.type || 'choice') && Array.isArray(q.options) && q.options.includes(state.selection);
     });

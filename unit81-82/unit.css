@@ -109,3 +109,11 @@
 @media(max-width:600px){.unit8182-workspace .visit-application[data-task="has"] .diary-page strong{font-size:17px}.unit8182-workspace .diary-page strong{font-size:18px}}
 
 .unit8182-workspace .face-flipped .visit-cast{transform:scaleX(-1)}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit8182-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit8182-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit8182-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit8182-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

@@ -1,0 +1,73 @@
+{
+  "id": "unit83-84",
+  "source": {
+    "file": "tests/support/unit8384.js",
+    "sha256": "4235e4ce89bd03b05274bf55403e3db2529fa58514b24d586113f387d072af21"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u8384-v1-r-lunch",
+      "text": "Lesson 83\n\nTom: Hi, Sam. We’re having lunch. Do you want to have lunch with us?\n\nSam: No, thank you, Tom. I’ve already had lunch. I had lunch at half past twelve."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u8384-v1-r-time",
+      "text": "Lesson 83\n\nTom: Hi, Sam. We’re having lunch. Do you want to have lunch with us?\n\nSam: No, thank you, Tom. I’ve already had lunch. I had lunch at half past twelve."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u8384-v1-r-coffee",
+      "text": "Lesson 83\n\nCarol: Have a cup of coffee then.\n\nSam: I’ve just had a cup, thank you. I had one after my lunch."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u8384-v1-r-mess",
+      "text": "Lesson 83\n\nTom: Let’s go into the living room, Carol. We can have our coffee there.\n\nCarol: Excuse the mess, Sam. This room’s very untidy. We’re packing our suitcases. We’re going to leave tomorrow. Tom and I are going to have a holiday."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u8384-v1-r-plan",
+      "text": "Lesson 83\n\nTom: Let’s go into the living room, Carol. We can have our coffee there.\n\nCarol: Excuse the mess, Sam. This room’s very untidy. We’re packing our suitcases. We’re going to leave tomorrow. Tom and I are going to have a holiday."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u8384-v1-r-lucky",
+      "text": "Lesson 83\n\nTom: Let’s go into the living room, Carol. We can have our coffee there.\n\nCarol: Excuse the mess, Sam. This room’s very untidy. We’re packing our suitcases. We’re going to leave tomorrow. Tom and I are going to have a holiday.\n\nSam: Aren’t you lucky!"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u8384-v1-r-ending",
+      "text": "Lesson 83\n\nTom: When are you going to have a holiday, Sam?\n\nSam: I don’t know. I’ve already had my holiday this year.\n\nCarol: Where did you go?\n\nSam: I stayed at home!"
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u8384-v1-e-story",
+      "text": "Lesson 83\n\nCarol: Hello, Sam. Come in.\n\nTom: Hi, Sam. We’re having lunch. Do you want to have lunch with us?\n\nSam: No, thank you, Tom. I’ve already had lunch. I had lunch at half past twelve.\n\nCarol: Have a cup of coffee then.\n\nSam: I’ve just had a cup, thank you. I had one after my lunch.\n\nTom: Let’s go into the living room, Carol. We can have our coffee there.\n\nCarol: Excuse the mess, Sam. This room’s very untidy. We’re packing our suitcases. We’re going to leave tomorrow. Tom and I are going to have a holiday.\n\nSam: Aren’t you lucky!\n\nTom: When are you going to have a holiday, Sam?\n\nSam: I don’t know. I’ve already had my holiday this year.\n\nCarol: Where did you go?\n\nSam: I stayed at home!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "2-3",
+    "R2": "2-3",
+    "R3": "4-5",
+    "R4": "6-7",
+    "R5": "6-7",
+    "R6": "6-8",
+    "R7": "9-12",
+    "E3": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

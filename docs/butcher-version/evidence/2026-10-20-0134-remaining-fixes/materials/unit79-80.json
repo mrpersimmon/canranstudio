@@ -1,0 +1,73 @@
+{
+  "id": "unit79-80",
+  "source": {
+    "file": "tests/support/unit7980.js",
+    "sha256": "82723fe4ece454fd22c695968dfb323b96b6b410b30d54f677501f383dd9e5fb"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u7980-v1-r-action",
+      "text": "Lesson 79\n\nTom: What are you doing, Carol?\n\nCarol: I’m making a shopping list, Tom."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u7980-v1-r-grocer",
+      "text": "Lesson 79\n\nTom: What do we need?\n\nCarol: We need a lot of things this week.\n\nCarol: I must go to the grocer’s. We haven’t got much tea or coffee, and we haven’t got any sugar or jam."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u7980-v1-r-vegetable",
+      "text": "Lesson 79\n\nTom: What about vegetables?\n\nCarol: I must go to the greengrocer’s. We haven’t got many tomatoes, but we’ve got a lot of potatoes."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u7980-v1-r-plan",
+      "text": "Lesson 79\n\nTom: Have we got any beer and wine?\n\nCarol: No, we haven’t. And I’m not going to get any!"
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u7980-v1-r-reference",
+      "text": "Lesson 79\n\nTom: I hope that you’ve got some money.\n\nCarol: I haven’t got much.\n\nTom: Well, I haven’t got much either!"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u7980-v1-r-boundary",
+      "text": "Lesson 79\n\nTom: What are you doing, Carol?\n\nCarol: I’m making a shopping list, Tom.\n\nTom: What do we need?\n\nCarol: We need a lot of things this week.\n\nCarol: I must go to the grocer’s. We haven’t got much tea or coffee, and we haven’t got any sugar or jam.\n\nTom: What about vegetables?\n\nCarol: I must go to the greengrocer’s. We haven’t got many tomatoes, but we’ve got a lot of potatoes.\n\nCarol: I must go to the butcher’s, too. We need some meat. We haven’t got any meat at all.\n\nTom: Have we got any beer and wine?\n\nCarol: No, we haven’t. And I’m not going to get any!\n\nTom: I hope that you’ve got some money.\n\nCarol: I haven’t got much.\n\nTom: Well, I haven’t got much either!"
+    },
+    {
+      "zone": "exam",
+      "index": 4,
+      "questionId": "u7980-v1-e-story",
+      "text": "Lesson 79\n\nTom: What about vegetables?\n\nCarol: I must go to the greengrocer’s. We haven’t got many tomatoes, but we’ve got a lot of potatoes."
+    },
+    {
+      "zone": "exam",
+      "index": 6,
+      "questionId": "u7980-v1-e-ending",
+      "text": "Lesson 79\n\nTom: What are you doing, Carol?\n\nCarol: I’m making a shopping list, Tom.\n\nTom: What do we need?\n\nCarol: We need a lot of things this week.\n\nCarol: I must go to the grocer’s. We haven’t got much tea or coffee, and we haven’t got any sugar or jam.\n\nTom: What about vegetables?\n\nCarol: I must go to the greengrocer’s. We haven’t got many tomatoes, but we’ve got a lot of potatoes.\n\nCarol: I must go to the butcher’s, too. We need some meat. We haven’t got any meat at all.\n\nTom: Have we got any beer and wine?\n\nCarol: No, we haven’t. And I’m not going to get any!\n\nTom: I hope that you’ve got some money.\n\nCarol: I haven’t got much.\n\nTom: Well, I haven’t got much either!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-5",
+    "R3": "6-7",
+    "R5": "9-10",
+    "R6": "11-13",
+    "R7": "*",
+    "E4": "6-7",
+    "E6": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

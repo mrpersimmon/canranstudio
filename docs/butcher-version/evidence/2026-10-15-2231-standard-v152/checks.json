@@ -1,0 +1,92 @@
+{
+  "checkedAt": "2026-10-15T23:05:40.275376+08:00",
+  "timezone": "Asia/Shanghai",
+  "branch": "codex/release-canranstudio",
+  "standard": "v1.52",
+  "optimizationItems": {
+    "confirmed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "originalContentAndSourceColumnsPreserved": true,
+    "historicalEvidencePreserved": true
+  },
+  "previousStandardSha256": "c9b8e4dfd8517fff74856410a73918071bcef4e4e19ea79afa226d66896f97c6",
+  "previousStandardUnchanged": true,
+  "normativeRetention": {
+    "1": {
+      "originalNonemptyLinesRetainedInOrder": 13,
+      "exactSectionMatch": false
+    },
+    "2": {
+      "originalNonemptyLinesRetainedInOrder": 5,
+      "exactSectionMatch": false
+    },
+    "3": {
+      "originalNonemptyLinesRetainedInOrder": 15,
+      "exactSectionMatch": true
+    },
+    "4": {
+      "originalNonemptyLinesRetainedInOrder": 12,
+      "exactSectionMatch": false
+    },
+    "5": {
+      "originalNonemptyLinesRetainedInOrder": 11,
+      "exactSectionMatch": true
+    },
+    "6": {
+      "originalNonemptyLinesRetainedInOrder": 24,
+      "exactSectionMatch": true
+    },
+    "7": {
+      "originalNonemptyLinesRetainedInOrder": 8,
+      "exactSectionMatch": false
+    },
+    "8": {
+      "originalNonemptyLinesRetainedInOrder": 24,
+      "exactSectionMatch": false
+    }
+  },
+  "acceptanceRows": {
+    "before": 16,
+    "after": 19,
+    "allOriginalRowsRetainedVerbatim": true
+  },
+  "indexPairs": 63,
+  "indexRowsUnchanged": true,
+  "currentEntryPoints": 20,
+  "historicalReadmesWithMaintenanceEntry": 19,
+  "localLinksChecked": 718,
+  "localAnchorsChecked": 31,
+  "missingPaths": [],
+  "missingAnchors": [],
+  "formatErrors": [],
+  "modifiedMarkdownFiles": 42,
+  "protectedNonMarkdownFiles": 9618,
+  "protectedFilesUnchanged": true,
+  "historicalDatedMarkdownFilesUnchanged": 254,
+  "unexpectedChanges": [],
+  "diffCheck": "passed",
+  "runtimeTestsRun": false,
+  "engineeringNotImplemented": [
+    "central course configuration",
+    "global test scheduling rewrite"
+  ],
+  "manualAcceptanceUnchanged": true,
+  "committed": false,
+  "pushed": false,
+  "deployed": false
+}

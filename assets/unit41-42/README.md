@@ -1,3 +1,17 @@
+# Lesson41–42现行课堂素材（2026-10-17）
+
+本轮新增三张透明全身人物`cast-sam-v153.webp`、`cast-penny-v153.webp`、`cast-penny-bag-v153.webp`，使用内置imagegen；[完整提示词、参考图与原稿](../../scripts/art/unit41-42-v153-prompts.json)保留。原纪念卡v4及所有旧图片不覆盖。
+
+`bag-v153.svg`、`chair-v153.svg`、`table-v153.svg`是课堂分层道具；16个`reference-编号-v153.svg`恢复原图位置关系。`pound-v153.svg`、`half-v153.svg`、`quarter-v153.svg`仅把原标签转为本地Nunito轮廓，[生成脚本](../../scripts/art/unit41-42-quantity-labels.py)保留原比例与1／2、1／4含义。
+
+前五句按课本首图保持手提袋，进入物品展示后袋子放在椅上。整理任务中两瓶奶总数不变，同一次正确检查只移动原节点；重试或刷新后按实际记录恢复。所有人物头手脚完整，物品和支撑面按可见轮廓对齐。
+
+原卡及其Round／Book字体按用户旧证保护要求保持，不将其重新宣布为新课通用字体。详见[重构与验收](../../docs/butcher-version/2026-10-17-1900-v2.0-Lesson41-42统一标准重构与验收.md)。
+
+---
+
+以下保留此前素材说明：
+
 # Lesson 41–42 图形素材
 
 原生SVG，沿用深棕描边、圆角和抽象人物画风。Sam、Penny延续相邻教材中的身份，重新安排指椅子／提购物袋的姿态；储物间、购物袋、椅子与本课物品单独绘制。

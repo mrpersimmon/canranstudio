@@ -1,0 +1,521 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit45-46-v153-reading.spec.js",
+      "tests/e2e/unit45-46-v153-layout.spec.js",
+      "tests/e2e/unit45-46-v153.spec.js",
+      "--grep",
+      "320|390|14句",
+      "--reporter=list,json",
+      "--output=output/unit4546-work/representative"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4546-work/representative",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit45-46-v153-layout.spec.js",
+      "file": "unit45-46-v153-layout.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320宽：对白在场景内、14句全程无重叠，翻译与推进不跳动",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1042,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                      "column": 14,
+                      "line": 20
+                    },
+                    "snippet": "  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                        "column": 14,
+                        "line": 20
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n\n  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:01:54.094Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-320宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-320宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                    "column": 14,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "93e71af37208c319d4fe-56a67160707ee8a35253",
+          "file": "unit45-46-v153-layout.spec.js",
+          "line": 57,
+          "column": 39
+        },
+        {
+          "title": "390宽：对白在场景内、14句全程无重叠，翻译与推进不跳动",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1075,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                      "column": 14,
+                      "line": 20
+                    },
+                    "snippet": "  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                        "column": 14,
+                        "line": 20
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n\n  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:01:55.913Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-390宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-390宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                    "column": 14,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "93e71af37208c319d4fe-3a7ef82a29c34b537334",
+          "file": "unit45-46-v153-layout.spec.js",
+          "line": 57,
+          "column": 39
+        },
+        {
+          "title": "768宽：对白在场景内、14句全程无重叠，翻译与推进不跳动",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1052,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                      "column": 14,
+                      "line": 20
+                    },
+                    "snippet": "  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                        "column": 14,
+                        "line": 20
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n\n  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:01:57.768Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-768宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-768宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                    "column": 14,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "93e71af37208c319d4fe-d29bacdc5bfb9c22d585",
+          "file": "unit45-46-v153-layout.spec.js",
+          "line": 57,
+          "column": 39
+        },
+        {
+          "title": "1280宽：对白在场景内、14句全程无重叠，翻译与推进不跳动",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1098,
+                  "error": {
+                    "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n",
+                    "stack": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                      "column": 14,
+                      "line": 20
+                    },
+                    "snippet": "  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                        "column": 14,
+                        "line": 20
+                      },
+                      "message": "Error: locator.evaluate: Error: strict mode violation: locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img') resolved to 2 elements:\n    1) <img alt=\"\" class=\"\" data-pose=\"boss-read\" src=\"/assets/unit45-46/boss-read.svg\"/> aka locator('.office-person > img').first()\n    2) <img alt=\"老板手里的信\" class=\"office-letter office-held\" src=\"/assets/unit45-46/letter.svg\"/> aka getByLabel('办公室小剧场').getByRole('img', { name: '老板手里的信' })\n\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.office-world').locator('.office-actor:visible').first().locator('.office-person>img')\u001b[22m\n\n\n  18 |\n  19 | async function assertUncut(image){\n> 20 |  await image.evaluate(img=>img.decode());\n     |              ^\n  21 |  // Inspect pixels of the actual browser-rendered asset, not its SVG source.\n  22 |  const edgePixels=await image.evaluate(img=>{\n  23 |   const c=document.createElement('canvas');c.width=img.naturalWidth;c.height=img.naturalHeight;\n    at assertUncut (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:20:14)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js:88:10"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:01:59.617Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-1280宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4546-work\\representative\\unit45-46-v153-layout-1280宽：对白在场景内、14句全程无重叠，翻译与推进不跳动\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit45-46-v153-layout.spec.js",
+                    "column": 14,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "93e71af37208c319d4fe-f068b7b07d0adba9fbab",
+          "file": "unit45-46-v153-layout.spec.js",
+          "line": 57,
+          "column": 39
+        }
+      ]
+    },
+    {
+      "title": "unit45-46-v153-reading.spec.js",
+      "file": "unit45-46-v153-reading.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3247,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:02:01.505Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "31624976f5ce0b082284-e9133d7a5eca054e7aed",
+          "file": "unit45-46-v153-reading.spec.js",
+          "line": 4,
+          "column": 61
+        },
+        {
+          "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3158,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:02:04.854Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "31624976f5ce0b082284-add6521eee1500cf09e9",
+          "file": "unit45-46-v153-reading.spec.js",
+          "line": 4,
+          "column": 61
+        }
+      ]
+    },
+    {
+      "title": "unit45-46-v153.spec.js",
+      "file": "unit45-46-v153.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "320宽及短屏：场景、题型、三卡和两按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16755,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:02:08.029Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a189385fbdba426b2bd-6936772f382f49cc4e18",
+          "file": "unit45-46-v153.spec.js",
+          "line": 108,
+          "column": 39
+        },
+        {
+          "title": "390宽及短屏：场景、题型、三卡和两按钮",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16711,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T14:02:24.790Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4a189385fbdba426b2bd-aa4ce7fad3b419cc4492",
+          "file": "unit45-46-v153.spec.js",
+          "line": 108,
+          "column": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T14:01:53.464Z",
+    "duration": 48461.604,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

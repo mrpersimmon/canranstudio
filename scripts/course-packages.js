@@ -13,7 +13,7 @@ const RESOURCE = /\.(?:js|css|woff2|svg|png|webp|avif|jpe?g|mp3)(?:[?#].*)?$/i;
 const IMAGE = /\.(?:svg|png|webp|avif|jpe?g)$/i;
 // Explicit teaching mode: adding a course requires a deliberate audio decision.
 const VOICED = new Set([ 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']);
-const CLASSROOM = new Set(['unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit49-50','unit1-2', 'unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48']);
+const CLASSROOM = new Set(['unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit91-92','unit93-94','unit95-96','unit97-98','unit99-100','unit101-102','unit103-104','unit105-106','unit107-108','unit109-110','unit111-112','unit113-114','unit115-116','unit117-118','unit119-120','unit121-122','unit123-124','unit125-126','unit127-128','unit129-130','unit131-132','unit133-134','unit135-136','unit137-138','unit139-140','unit141-142','unit143-144','unit49-50','unit1-2', 'unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48']);
 
 function scopeSource(source, relative, basePath) {
   return relocateSource(source, relative, basePath).replace(new RegExp('<script src="' + basePath + 'core/subpath-entry\\.js"></script>\\s*'), '');
@@ -168,6 +168,26 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
     generated.set(manifestPath, { body: manifestBody, type: TYPES['.json'], immutable: true });
     generated.set(course.entry, { body: entry, type: TYPES['.html'] });
     index.courses[course.id] = { title: course.title, revision, manifest: basePath + manifestPath, sha256: digest(manifestBody) };
+  }
+  // Directory preparation shares the exact font bytes needed by the published
+  // courses. No glyph subset, certificate face or course requirement is removed.
+  // Derive this list from actual course dependencies so small fixture sites and
+  // separately published course sets do not acquire unrelated requirements.
+  index.sharedFonts=[
+    'assets/awards/fonts/award-gothic-500.woff2',
+    'assets/awards/fonts/lesson-gothic-body-400.woff2',
+    'assets/awards/fonts/award-gothic-brand-400.woff2',
+    'assets/awards/fonts/award-nunito.woff2',
+    'assets/awards/award-round.woff2'
+  ].map(file=>resourceEntries.get(file)).filter(Boolean);
+  if(index.courses.home&&index.sharedFonts.length){
+    const previous=index.courses.home,oldPath=previous.manifest.slice(basePath.length);
+    const pack=JSON.parse(generated.get(oldPath).body),keys=new Set(pack.required.map(item=>item.key));
+    pack.required.push(...index.sharedFonts.filter(item=>!keys.has(item.key)));
+    pack.revision=digest(JSON.stringify([pack.mode,[...pack.required,...pack.audio].map(item=>[item.key,item.sha256])]));
+    const manifestPath='course-packages/home/'+pack.revision+'.json',body=Buffer.from(JSON.stringify(pack));
+    generated.set(manifestPath,{body,type:TYPES['.json'],immutable:true});
+    index.courses.home={...previous,revision:pack.revision,manifest:basePath+manifestPath,sha256:digest(body)};
   }
   generated.set('course-index.json', { body: Buffer.from(JSON.stringify(index)), type: TYPES['.json'] });
   for (const relative of ['core/course-cache.js', 'core/course-loader.js']) generated.set(relative, { body: await bytes(relative), type: TYPES['.js'] });

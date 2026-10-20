@@ -1,0 +1,66 @@
+{
+  "id": "unit109-110",
+  "source": {
+    "file": "tests/support/unit109110.js",
+    "sha256": "dd533792a021fa69da2dff87f910fb92a1598c16e5db80788b50eac0ebf2fef5"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u109110-v1-r-offer",
+      "text": "Lesson 109\n\nCharlotte: Shall I make some coffee, Jane?\n\nJane: That’s a good idea, Charlotte."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u109110-v1-r-milk",
+      "text": "Lesson 109\n\nCharlotte: It’s ready. Do you want any milk?\n\nJane: Just a little, please."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u109110-v1-r-sugar",
+      "text": "Lesson 109\n\nCharlotte: What about some sugar? Two teaspoonfuls?\n\nJane: No, less than that. One and a half teaspoonfuls, please. That’s enough for me."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u109110-v1-r-more",
+      "text": "Lesson 109\n\nJane: That was very nice.\n\nCharlotte: Would you like some more?\n\nJane: Yes, please."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u109110-v1-r-empty",
+      "text": "Lesson 109\n\nJane: I’d like a cigarette, too. May I have one?\n\nCharlotte: Of course. I think there are a few in that box.\n\nJane: I’m afraid it’s empty.\n\nCharlotte: What a pity!\n\nJane: It doesn’t matter."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u109110-v1-r-biscuit",
+      "text": "Lesson 109\n\nCharlotte: Have a biscuit instead. Eat more and smoke less!\n\nJane: That’s very good advice!"
+    },
+    {
+      "zone": "exam",
+      "index": 1,
+      "questionId": "u109110-v1-e-milk",
+      "text": "Lesson 109\n\nCharlotte: It’s ready. Do you want any milk?\n\nJane: Just a little, please."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-4",
+    "R3": "5-6",
+    "R4": "7-9",
+    "R6": "10-14",
+    "R7": "15-16",
+    "E1": "3-4"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

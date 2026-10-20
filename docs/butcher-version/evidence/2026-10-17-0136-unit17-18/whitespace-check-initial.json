@@ -1,0 +1,234 @@
+{
+  "checkedAt": "2026-10-16T18:23:19.321Z",
+  "passed": false,
+  "checks": [
+    {
+      "name": "five answer zones and 62 reviewed tasks",
+      "passed": true,
+      "detail": {
+        "listen": 8,
+        "roles": 4,
+        "grammar": 20,
+        "apply": 6,
+        "exam": 24
+      }
+    },
+    {
+      "name": "all 29 original questions remain verbatim",
+      "passed": true,
+      "detail": {
+        "previous": 29,
+        "current": 62
+      }
+    },
+    {
+      "name": "all task identities unique",
+      "passed": true
+    },
+    {
+      "name": "30 word cards and all 16 original lines preserved",
+      "passed": true
+    },
+    {
+      "name": "learning key and version preserved",
+      "passed": true,
+      "detail": {
+        "key": "canran:unit17-18:learning:v1",
+        "version": 1
+      }
+    },
+    {
+      "name": "15 reference images and 10 models preserved",
+      "passed": true
+    },
+    {
+      "name": "five frozen sources equal actual pre-change files",
+      "passed": true
+    },
+    {
+      "name": "server predecessor equals page predecessor",
+      "passed": true
+    },
+    {
+      "name": "all original lesson assets unchanged",
+      "passed": true,
+      "detail": {
+        "count": 56
+      }
+    },
+    {
+      "name": "assets/unit17-18/keepsake-story-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit17-18/cast-jackson-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit17-18/cast-richards-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit17-18/cast-women-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit17-18/cast-men-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "assets/unit17-18/cast-jim-v1.webp preserves framing and alpha",
+      "passed": true
+    },
+    {
+      "name": "declared local art exists",
+      "passed": true,
+      "detail": {
+        "count": 48
+      }
+    },
+    {
+      "name": "font source fingerprints match",
+      "passed": true,
+      "detail": {
+        "mismatches": [],
+        "characters": 1842
+      }
+    },
+    {
+      "name": "root protected build covers 72 units",
+      "passed": true
+    },
+    {
+      "name": "subpath protected build covers 72 units",
+      "passed": true
+    },
+    {
+      "name": "changed Markdown local links resolve",
+      "passed": true,
+      "detail": {
+        "files": [
+          "docs/butcher-version/2026-10-15-0041-v1.0-教学单元设计与验收索引.md",
+          "docs/butcher-version/publish/2026-10-17-0031-v1.53-教学单元设计标准与验收清单.md",
+          "README.md",
+          "docs/README.md",
+          "docs/butcher-version/publish/2026-10-14-0124-v1.0-统一设计标准可优化清单.md",
+          "tests/README.md",
+          "docs/butcher-version/2026-10-17-0136-v3.0-Lesson17-18五星重构与验收.md",
+          "tests/fixtures/unit17-18-before-fivezones/README.md",
+          "unit17-18/README.md"
+        ]
+      }
+    },
+    {
+      "name": "changed JavaScript syntax",
+      "passed": true,
+      "detail": {
+        "files": 34
+      }
+    },
+    {
+      "name": "tracked diff whitespace",
+      "passed": false,
+      "detail": {
+        "output": "assets/awards/fonts/LICENSE-ChillRoundGothic.txt:21: trailing whitespace.\n+fonts, including any derivative works, can be bundled, embedded, \nassets/awards/fonts/LICENSE-Nunito.txt:21: trailing whitespace.\n+fonts, including any derivative works, can be bundled, embedded,"
+      }
+    },
+    {
+      "name": "O01-O16 confirmed and new course findings recorded",
+      "passed": true
+    }
+  ],
+  "builds": {
+    "root": {
+      "courseCount": 72,
+      "unit": {
+        "title": "办公室探访记",
+        "revision": "4d52c8db7daa5ff421700662578c3718ddfa46adc0b532bfa84c81439bef3932",
+        "manifest": "/course-packages/unit17-18/4d52c8db7daa5ff421700662578c3718ddfa46adc0b532bfa84c81439bef3932.json",
+        "sha256": "09c9161665509bf377aac30b2e3a13c3f95529e56fdc6f514cdc48f1f5f448d8"
+      }
+    },
+    "subpath": {
+      "courseCount": 72,
+      "unit": {
+        "title": "办公室探访记",
+        "revision": "3e921eb857a992307548f624420ca5a5465771b17d1b65fe177bf3543d9c07d5",
+        "manifest": "/lesson/course-packages/unit17-18/3e921eb857a992307548f624420ca5a5465771b17d1b65fe177bf3543d9c07d5.json",
+        "sha256": "7e948630b5dc2998d3e8e17e041909e1b40a2d14868fddfd78f632eef4bf873f"
+      }
+    }
+  },
+  "assets": [
+    {
+      "file": "assets/unit17-18/keepsake-story-v1.webp",
+      "sha256": "8062f624d5bb351fd30b2cb2f8d087ef8d5c785f795cc0c7362b9a5aefde239c",
+      "width": 1536,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "file": "assets/unit17-18/cast-jackson-v1.webp",
+      "sha256": "d6fa9bccef93333dd9cf1c34190e61e9f40f821096d3832e5e5ce206f92628e4",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true
+    },
+    {
+      "file": "assets/unit17-18/cast-richards-v1.webp",
+      "sha256": "53ecfe4a9e4c77c4b96ea92983e0bbb338859cc206c98fead3bb5478e923a719",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true
+    },
+    {
+      "file": "assets/unit17-18/cast-women-v1.webp",
+      "sha256": "89c2dcd03c501f1db275645f712d9ddf19289f0ebc28f05d4e92808827297a50",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": true
+    },
+    {
+      "file": "assets/unit17-18/cast-men-v1.webp",
+      "sha256": "e055bd36616ac7be1b13dd28f3b3dc321f9d863d321ea11bcf01ca82711b55b5",
+      "width": 1312,
+      "height": 1199,
+      "hasAlpha": true
+    },
+    {
+      "file": "assets/unit17-18/cast-jim-v1.webp",
+      "sha256": "c8860afba7f79ef286af666658cd1662617a523268ccaae7a40b3b318dd29c63",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": true
+    }
+  ],
+  "sourceHashes": {
+    "unit17-18/content.js": "8e5859ec0f1cd6b5892b8c95e5ee1926d14d2c4090d19931130d0af83199bb36",
+    "unit17-18/grammar.js": "5e0f6b3c51536a9eb52c6db55760fd27da70de61158fac365036a4fb1f979ecb",
+    "unit17-18/index.html": "f661d45d562e6e3837cbe7b36a32e2771f425c1051afac6ce1a29cffea2aed7c",
+    "unit17-18/legacy-certificate.js": "a1fbe7a5d990de7df44a307c1bc44c4e52d97294bf869caf9deb7dfe1402204d",
+    "unit17-18/legacy.css": "9f035caa01db2361e9dd347454784db8c593e4dee2882ecacb4ec0a0b933f56e",
+    "unit17-18/legacy.js": "02b05ce1031e67d768492ee9f5f521ac008a3606b77dca3f9b1fed06310d0812",
+    "unit17-18/README.md": "7d51fdb3b62a3c6306e62f84c1c5d56726c0b3886a799bc2e8d36eeb0615c88f",
+    "unit17-18/references.js": "69439b486a30dda612e49cbac9ae3d3c0a8d572442b80a32620208463681cf03",
+    "unit17-18/scene.js": "fa619643bc81d1bacffec4411c688c2e57caa4aad99ee442692d19797131115a",
+    "unit17-18/typography.css": "1084f9c5c4ec4d1574861bd1a20a584a05860e9dd0c901b6dd6c309c4dad5f59",
+    "unit17-18/unit.css": "03a686bd07080fe3cc6003a1e22b8abfbbd8d6adb106756188747550ec2f62e2",
+    "unit17-18/unit.js": "0b4168dd9008989129301b901d241056b1ead2cc7c764c105698a71eed1dd236",
+    "assets/unit17-18/keepsake-story-v1.webp": "8062f624d5bb351fd30b2cb2f8d087ef8d5c785f795cc0c7362b9a5aefde239c",
+    "assets/unit17-18/cast-jackson-v1.webp": "d6fa9bccef93333dd9cf1c34190e61e9f40f821096d3832e5e5ce206f92628e4",
+    "assets/unit17-18/cast-richards-v1.webp": "53ecfe4a9e4c77c4b96ea92983e0bbb338859cc206c98fead3bb5478e923a719",
+    "assets/unit17-18/cast-women-v1.webp": "89c2dcd03c501f1db275645f712d9ddf19289f0ebc28f05d4e92808827297a50",
+    "assets/unit17-18/cast-men-v1.webp": "e055bd36616ac7be1b13dd28f3b3dc321f9d863d321ea11bcf01ca82711b55b5",
+    "assets/unit17-18/cast-jim-v1.webp": "c8860afba7f79ef286af666658cd1662617a523268ccaae7a40b3b318dd29c63",
+    "assets/unit17-18/office-room.svg": "160ad06068ee7a4d1882747377c1eb59c972666f4ba364fe70c9dafc9dabc30a",
+    "server/progress.js": "02bc12f60b217ce75030e5148367b33b8204ae706b977352bc5f0df9a5b56a72",
+    "server/award-catalog.js": "e14aafaa06dd5765222772f2eabf7258a6360dc5190bfad4cd1f190e45bf9bda",
+    "core/award-card-layout.js": "4d401bd87a1d1bf58d6340e4a75ce3cc580118ada8a2b85330666d57b03f2dd3",
+    "core/story-certificate.css": "71865633ff5fc4a4063e23d3729adffbc726d74fa82186ca7c55a403420045a1",
+    "unit1-2/completion.css": "dbfe043e3b1e02154e535be9dcafc5071aeb70659ee87d747ed12c7370d12359",
+    "assets/awards/fonts/lesson-gothic-body-400.woff2": "00c16ebc937ae366751a3ad2c1126da5ef3c25dd5979d3f86b10a8b25437b7ed"
+  },
+  "testScope": "Automated browser results and limitations are recorded separately in verification.json."
+}

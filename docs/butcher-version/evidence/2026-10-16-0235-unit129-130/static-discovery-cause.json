@@ -1,0 +1,1 @@
+{"cause":"createCoursePackages scans root unit directories when courseIds is omitted","unregistered":"unit131-132","error":"Declare the teaching mode for unit131-132","surface":"static /lesson/ home HTTP500","fix":"stage unfinished unit outside root discovery before the 65-unit compatibility check; register fully before restoring it","assertionsChanged":false}

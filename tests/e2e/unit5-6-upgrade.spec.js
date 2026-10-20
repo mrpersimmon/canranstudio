@@ -54,7 +54,7 @@ test('旧版重练空白回合优先，删去前题不会复活品牌题的历�
   await legacy.completeActivity(page, 'choice');
   const previousRoom = page.locator('.stage-choice'); await previousRoom.getByRole('button', { name: '再练一轮', exact: true }).click();
   upgrade(); await page.reload();
-  const room=page.locator('.stage-cars');await expect(room).toContainText('第 1 / 3 题');
+  const room=page.locator('.stage-cars');await expect(room).toContainText('第 1 / 4 题');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('button', { name: "It's a Volvo.", exact: true })).toHaveAttribute('aria-pressed', 'false');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

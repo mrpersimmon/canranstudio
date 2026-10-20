@@ -1,0 +1,329 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit3-4-v154-account.spec.js",
+      "tests/login/unit3-4-v154-upgrade.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit34-review-20261018/account-final-webkit-sub"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit34-review-20261018/account-final-webkit-sub",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4500/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit3-4-v154-account.spec.js",
+      "file": "unit3-4-v154-account.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "账号首页四宽、真实素材失败重试、原选择续做和权限边界",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "actual-503",
+                  "description": "3"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 53247,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:23:16.168Z",
+                  "annotations": [
+                    {
+                      "type": "actual-503",
+                      "description": "3"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dea81bbf49f02592dd6f-a8d9999bd887c7fc6e23",
+          "file": "unit3-4-v154-account.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "实际提交统计跨设备保留：同题两次错答计两次，重练归零且零错才获星",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 71369,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:24:09.490Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "dea81bbf49f02592dd6f-0662b94a137e3ef5c4d9",
+          "file": "unit3-4-grammar.spec.js",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "offline-navigation",
+                  "description": "WebKit native navigation rejected; existing document retained; Worker fallback page not verified."
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 71251,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alertdialog', { name: '课程访问', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alertdialog', { name: '课程访问', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alertdialog', { name: '课程访问', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alertdialog', { name: '课程访问', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit3-4-grammar.spec.js:126:89",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit3-4-grammar.spec.js",
+                      "column": 89,
+                      "line": 126
+                    },
+                    "snippet": "  124 |       await second.context.setOffline(false);\n  125 |       await second.page.goto(base + 'unit3-4/#learn/reply');\n> 126 |       await expect(second.page.getByRole('alertdialog', { name: '课程访问', exact: true })).toBeVisible();\n      |                                                                                         ^\n  127 |       expect(rejected).toBeGreaterThan(0); await expect(room).toHaveCount(0);\n  128 |       await second.page.unroute(entry);\n  129 |       await second.page.locator('#accessGate').getByRole('button', { name: '再试一次', exact: true }).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit3-4-grammar.spec.js",
+                        "column": 89,
+                        "line": 126
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('alertdialog', { name: '课程访问', exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('alertdialog', { name: '课程访问', exact: true })\u001b[22m\n\n\n  124 |       await second.context.setOffline(false);\n  125 |       await second.page.goto(base + 'unit3-4/#learn/reply');\n> 126 |       await expect(second.page.getByRole('alertdialog', { name: '课程访问', exact: true })).toBeVisible();\n      |                                                                                         ^\n  127 |       expect(rejected).toBeGreaterThan(0); await expect(room).toHaveCount(0);\n  128 |       await second.page.unroute(entry);\n  129 |       await second.page.locator('#accessGate').getByRole('button', { name: '再试一次', exact: true }).click();\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit3-4-grammar.spec.js:126:89"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:25:20.870Z",
+                  "annotations": [
+                    {
+                      "type": "offline-navigation",
+                      "description": "WebKit native navigation rejected; existing document retained; Worker fallback page not verified."
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\account-final-webkit-sub\\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit34-review-20261018\\account-final-webkit-sub\\unit3-4-v154-account-语法新版真实账号全程：五星同步、跨设备、纪念册、离线续练与重进核验\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit3-4-grammar.spec.js",
+                    "column": 89,
+                    "line": 126
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "dea81bbf49f02592dd6f-17d62671904056bc66c5",
+          "file": "unit3-4-grammar.spec.js",
+          "line": 61,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit3-4-v154-upgrade.spec.js",
+      "file": "unit3-4-v154-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "同库升级：原33题五星卡全部帧、精确时间与跨设备历史保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 91462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:20540) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:26:33.720Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "135edef648773f9385ad-d85bf26570d83b5a0fc5",
+          "file": "unit3-4-v154-upgrade.spec.js",
+          "line": 8,
+          "column": 42
+        },
+        {
+          "title": "同库升级：原25题旧证PNG、精确时间与跨设备历史保留",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 72304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T03:28:05.277Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "135edef648773f9385ad-51a5f367330b9a507d92",
+          "file": "unit3-4-v154-upgrade.spec.js",
+          "line": 8,
+          "column": 42
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T03:23:11.740Z",
+    "duration": 366403.255,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -96,3 +96,11 @@
 .unit7374-workspace .visit-application[data-opened="true"]{border:3px solid #739e7c;background:#edf5e6}
 .unit7374-workspace .story-timeline{border-color:#b7c5c9}
 @media(max-width:600px){.unit7374-workspace .past-reference,.unit7374-workspace .writing-bank{grid-template-columns:repeat(2,minmax(0,1fr))}.unit7374-workspace .past-reference p{font-size:14px}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit7374-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit7374-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit7374-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit7374-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}

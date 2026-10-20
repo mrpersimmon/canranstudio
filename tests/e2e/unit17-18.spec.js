@@ -1,5 +1,7 @@
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
+// Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
+require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('导航进入办公室探访记，先看音标词卡，整卡翻义无需配音',async({page})=>{

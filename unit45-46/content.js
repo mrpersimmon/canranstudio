@@ -124,3 +124,36 @@
   core.unit4546=unit;
   if(root.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// v1.53: retain the approved five-star identity, artwork and original date.
+(function(core){
+'use strict';const unit=core.unit4546,old=JSON.parse(JSON.stringify(unit));core.unit4546BeforeV153=old;
+unit.contentRevision='office-teaching-v153';
+unit.sources={text:'课本纸90–93／PDF123–126',guide:'同步导学纸81–83／PDF95–97；Grammar纸82／PDF96',workbook:'语法练习册纸126–130／PDF140–144'};
+unit.objects=old.objects.map(w=>({...w,image:w.en==='put on'?'/assets/unit45-46/put-on-v153.svg':['thousand','million'].includes(w.en)?'/assets/unit45-46/'+w.en+'-v153.svg':w.image}));unit.learning.WORDS=unit.objects;
+const material=(title,material)=>({title,material});
+function revise(group,id,changes){const i=unit.questions[group].findIndex(q=>q.id===id);if(i<0)throw Error(id);unit.questions[group][i]={...unit.questions[group][i],...changes,id:id+'-v153'};}
+revise('roles','u4546-v1-r-place',{display:material('Bob说Pamela在哪里？','The boss: Where’s Pamela?\nBob: She’s next door. She’s in her office, sir.')});
+revise('roles','u4546-v1-r-handoff',{display:material('Bob把信给谁？','Bob: Here you are.\nPamela: Thank you, Bob.')});
+revise('roles','u4546-v1-r-cause',{display:material('Pamela为什么打不了这封信？','Pamela: I can’t type this letter.\nI can’t read it! The boss’s handwriting is terrible!')});
+revise('roles','u4546-v1-r-ability',{display:material('哪种理解符合这两段话？','Pamela: Yes, of course I can.\n后来：I can’t read it! The boss’s handwriting is terrible!')});
+revise('grammar','u4546-v1-g-reply',{workshop:{rule:'Can you…?的肯否短答由给出的事实决定，can本身不随人称变化。',model:{lines:[['Can you write in English?','导学原例：会写，Yes, I can.；不会写，No, I can’t.。']]}}});
+revise('grammar','u4546-v1-g-pronoun',{workshop:{rule:'回答包含自己的两个人用we，另外两个人用they。',model:{lines:[['Can you and Jane see the bird? — Yes, we can.','假设你和Jane都看得见，回答包含自己。'],['Can Bob and Sam see the bird? — Yes, they can.','假设Bob和Sam都看得见，回答另外两个人。']]}}});
+revise('apply','u4546-v1-a-request',{display:material('请Bob来帮忙，怎样说？','The boss is here. Bob is over there.\n老板想请Bob过来帮忙。')});
+revise('apply','u4546-v1-a-person',{display:material('谁能帮忙打字？','新任务：Bob已经拿到老板的这封信。\nPamela: I can type.\nBob: I can’t type.\nThe boss: I can’t type.')});
+revise('apply','u4546-v1-a-problem',{display:material('哪句话把她的本领和这次困难说清楚？','Pamela: I can type.\nI can’t read this letter.')});
+revise('exam','u4546-v1-e-many',{prompt:'问能看见几封信，补全问句。',blanks:[{before:'',after:' ',options:['How many','How much','Who']},{before:'',after:' can you see?',options:['letters','letter']}],answer:JSON.stringify(['How many','letters']),explanation:'一封封的信可数，用How many加复数letters，再接can you see。'});
+const q=(id,target,prompt,input,explanation)=>({id:'u4546-v153-'+id,target,prompt,source:unit.sources.text,...input,explanation,hint:'',distractorRationale:'按明确给出的能力、人物与说话意图判断，不从职业、问号或原文记忆猜答案。'});
+const fill=(blanks,answers)=>({type:'cloze',blanks,answer:JSON.stringify(answers)}),blank=(before,after,options)=>({before,after,options});
+unit.questions.grammar.splice(13,0,
+ {...q('g-third-person','用she与it回答明确对象的can问句','Pamela会读这本书；这只猫能喝碟子里的奶。分别作肯定回答。',fill([blank('Can Pamela read this book? Yes, ',' can.',['she','he','it']),blank('Can the cat drink its milk? Yes, ',' can.',['it','she','they'])],['she','it']),'这里Pamela用she；这只猫沿用课本it的称呼。'),workshop:{rule:'回答时，代词要指回题目中的对象。',model:{lines:[['Can Bob see it? — Yes, he can.','假设Bob看得见，Bob用he。'],['Can Jane see the book? — Yes, she can.','假设Jane看得见。'],['Can the bird see it? — Yes, it can.','假设这只鸟看得见；这里用it指它。']]}}},
+ {...q('g-request','区分能力询问与请对方做事','Bob对Pamela说下面的话，想得到什么帮助？',{options:['把书递给他','说出书在哪里','判断书是什么颜色'],answer:'把书递给他',display:material('Bob想得到什么帮助？','书在Pamela手边。\nBob: Can you give me the book, please?')},'在这个情境中，Can you…please?是请求对方做事。'),workshop:{rule:'同样是can问句，要结合语境判断是在问能力，还是请对方做事。',model:{lines:[['Can you swim?','问有没有游泳的本领。'],['Can you open the door, please?','门关着，请对方帮忙开门。']]}}}
+);
+unit.questions.exam.push(
+ q('e-third-person','独立按he与it完成第三人称短答','George先生能举起椅子；这只猫能喝奶。分别回答。',fill([blank('Can George lift the chair? Yes, ',' can.',['he','she','they']),blank('Can the cat drink its milk? Yes, ',' can.',['it','we','they'])],['he','it']),'George用he，这只猫按课本称呼用it。'),
+ q('e-she','独立用she保留否定事实','这次Pamela读不懂这封信。Bob问：Can Pamela read this letter? 应怎样回答？',{options:['No, she can’t.','Yes, she can.','No, he can’t.'],answer:'No, she can’t.'},'按题目事实否定，Pamela用she；不把不能读这封信变成不会打字。'),
+ q('e-request-minute','独立理解原文请求及a minute的语境意义','老板想请Bob过来商量一件事。这句话想请他做什么？',{options:['过来一会儿','必须坐满六十秒','告诉老板Pamela在哪儿'],answer:'过来一会儿',display:material('这句话想请Bob做什么？','老板想请Bob过来商量一件事。\nCan you come here a minute please, Bob?')},'这里是请Bob过来一下；a minute表示一会儿，并非要求计时六十秒。')
+);
+unit.taskSessions={};unit.taskPredecessors={};for(const id of ['roles','grammar','apply','exam']){unit.taskSessions[id]='v153';unit.taskPredecessors[id]=[{key:'unit4546-'+id+'-practice/v1',questions:old.questions[id]}];}
+core.unit4546=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

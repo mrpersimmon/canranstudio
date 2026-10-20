@@ -1,0 +1,26 @@
+{
+  "method": "deep structural equality; object key order ignored, array order retained",
+  "rawLocalRecords": 46,
+  "priorFiveStarRecords": 45,
+  "legacyRecords": 27,
+  "priorRecordsRetained": true,
+  "legacyRecordsRetained": true,
+  "differentRecords": [],
+  "rounds": [
+    {
+      "id": "listen",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "grammar",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "apply",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    }
+  ]
+}

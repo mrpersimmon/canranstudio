@@ -1,5 +1,6 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
+require('../support/unit1314-legacy').historicalSuite(test);
 const{EXAM,selectAnswer}=require('../support/unit13-14-exam');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('13–14 十题综合覆盖，声音不可用、重试与提示不代答，末三题刷新仍需本人完成',async({page})=>{

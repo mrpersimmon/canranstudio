@@ -1,0 +1,42 @@
+✔ course catalog is the complete immutable contract for lessons and special courses (4.1749ms)
+✔ landmark state URLs carry one immutable content version (1.4503ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.545ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.3296ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (4.431ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (5.0358ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (2.1051ms)
+✔ lesson map creation and directory status keep future courses outside V1 (1.082ms)
+✔ every published map stage declares a child-readable growth reveal (1.5993ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.5888ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.4233ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.2827ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.5031ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (383.6244ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (1205.1888ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (738.6903ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (678.0463ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (606.6701ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (380.9725ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (450.795ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (220.6456ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (5.2171ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (1.5914ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (377.4954ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5192.3952

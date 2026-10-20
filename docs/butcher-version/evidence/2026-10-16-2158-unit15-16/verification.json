@@ -1,0 +1,333 @@
+{
+  "date": "2026-10-17",
+  "startedDate": "2026-10-16",
+  "branch": "codex/release-canranstudio",
+  "standard": "v1.52",
+  "unit": "unit15-16",
+  "edition": "travel-five-zones-v1",
+  "questions": {
+    "listen": 8,
+    "roles": 4,
+    "grammar": 16,
+    "apply": 6,
+    "exam": 21,
+    "total": 55
+  },
+  "words": {
+    "cards": 25,
+    "textbookNewWords": 17,
+    "vocabularyScoringTasks": 8,
+    "vocabularyMeaningTargets": 11
+  },
+  "storyLines": 18,
+  "sourcePages": {
+    "textbook": "paper30-33/pdf63-66",
+    "guide": "paper29-32/pdf43-46",
+    "grammar": "paper30-31/pdf44-45",
+    "workbook": "paper38-43/pdf52-57",
+    "boundaries": "guide pdf47 and workbook pdf58 are Lesson17-18, excluded"
+  },
+  "independentTestConditionsPassed": 142,
+  "checks": [
+    {
+      "scope": "Chromium current course, migration, reading controls, references and print",
+      "passed": 18,
+      "logs": [
+        "chromium-reading-final.log",
+        "chromium-final-and-shared.log"
+      ],
+      "note": "Final 16 course, upgrade, reading-control and reference cases passed. Two print cases reuse the passing two-page worksheet and unchanged old certificate. Three shared cases in the 13-case earlier final log are classified separately."
+    },
+    {
+      "scope": "WebKit current course, migration, reading controls and references",
+      "passed": 16,
+      "log": "webkit-reading-final.log"
+    },
+    {
+      "scope": "Chromium account root",
+      "passed": 8,
+      "logs": [
+        "chromium-root-account.log",
+        "account-fixtures-final.log"
+      ],
+      "note": "Six initial passes plus two corrected fixture checks. No production code changed for those two corrections."
+    },
+    {
+      "scope": "Chromium account subpath",
+      "passed": 8,
+      "log": "chromium-sub-account.log"
+    },
+    {
+      "scope": "WebKit account root",
+      "passed": 8,
+      "log": "webkit-root-account.log"
+    },
+    {
+      "scope": "WebKit account subpath",
+      "passed": 8,
+      "log": "webkit-sub-account.log"
+    },
+    {
+      "scope": "Historical unit15-16 course",
+      "passed": 40,
+      "log": "historical-course.log"
+    },
+    {
+      "scope": "Shared short-screen completion 13-14, 15-16, 17-18",
+      "passed": 3,
+      "log": "chromium-final-and-shared.log"
+    },
+    {
+      "scope": "Earlier 25-to-31-to-55 account chain and current integration",
+      "passed": 2,
+      "log": "earlier-and-integration-final.log"
+    },
+    {
+      "scope": "Server learning and awards",
+      "passed": 20,
+      "log": "server-unit-tests.log"
+    },
+    {
+      "scope": "Check workflow",
+      "passed": 11,
+      "log": "workflow.log"
+    }
+  ],
+  "finalRevisionRechecks": {
+    "reason": "Exam18 changed from another is/are check to I/he am/is, closing an uncovered independent target without adding questions. Worksheet B no longer has a forced page break. Reading controls now sit inside the scene next to the transcript, and reference IPA spans use Arial while Chinese stays Gothic.",
+    "countedAgain": false,
+    "earlierSources": [
+      "content-before-be-review.js",
+      "answers-before-be-review.js"
+    ],
+    "finalContentEvidence": [
+      "chromium-final-and-shared.log",
+      "webkit-course.log",
+      "chromium-root-account.log",
+      "chromium-sub-account.log",
+      "webkit-root-account.log",
+      "webkit-sub-account.log",
+      "chromium-reading-final.log",
+      "webkit-reading-final.log",
+      "chromium-root-reading-final.log",
+      "chromium-sub-reading-final.log",
+      "webkit-root-reading-final.log",
+      "webkit-sub-reading-final.log"
+    ]
+  },
+  "builds": [
+    {
+      "basePath": "/",
+      "courses": 72,
+      "passed": true,
+      "log": "build-root.log"
+    },
+    {
+      "basePath": "/lesson/",
+      "courses": 72,
+      "passed": true,
+      "log": "build-sub.log"
+    }
+  ],
+  "additionalChecks": {
+    "documents": 9,
+    "syntaxFiles": 18,
+    "sourceAndPackages": "source-and-package-checks.json",
+    "fontCoverage": "font-coverage.json",
+    "oldCharacterAssetsUnchanged": true,
+    "scopedDiffWhitespace": "passed",
+    "standardUnchanged": true
+  },
+  "retainedFailures": [
+    {
+      "initial": "representative-initial.log",
+      "result": "4 passed, 1 failed",
+      "isolated": "representative-isolated.log",
+      "cause": "Grammar13 supplies its complete context in the prompt; the copied check incorrectly demanded a separate practice-context node.",
+      "fix": "Assert the visible prompt for that question, retaining all other material, full-flow and scoring checks.",
+      "verified": [
+        "representative-final.log",
+        "chromium-course.log",
+        "webkit-course.log",
+        "chromium-final-and-shared.log"
+      ]
+    },
+    {
+      "initial": "actor-size-red.log",
+      "cause": "Visual review found tiny main actors despite containment checks passing. A shared img selector overrode the new image sizing, including a 42px mobile width.",
+      "evidence": "css-before-actor-fix.css and the failed allocated-width assertion in actor-size-red.log",
+      "fix": "Increase only this unit image selector specificity; retain the full-width assertion and recheck all four sizes. Source-sprite hand anchors then place the same passport pair without floating.",
+      "verified": [
+        "actor-size-green.log",
+        "chromium-course.log",
+        "webkit-course.log",
+        "chromium-final-and-shared.log"
+      ]
+    },
+    {
+      "initial": "chromium-root-account.log",
+      "result": "6 passed, 2 failed",
+      "isolated": "account-fixtures-isolated.log",
+      "cause": "A copied words assertion expected four pages instead of five; the comparison loop used a bare 13-14 ID although the isolated class correctly authorized 15-16.",
+      "fix": "Use five word pages and the intended 15-16 comparison target. Preserve actual 404, caching, revisit, same-name/star visual comparison and GIF assertions; do not broaden class permissions.",
+      "verified": [
+        "account-fixtures-final.log",
+        "chromium-sub-account.log",
+        "webkit-root-account.log",
+        "webkit-sub-account.log"
+      ]
+    }
+  ],
+  "lateScopedRechecks": {
+    "logs": [
+      "chromium-dialog-walkthrough.log",
+      "webkit-dialog-walkthrough.log",
+      "comparison-handler-final.log",
+      "chromium-reading-final.log",
+      "webkit-reading-final.log",
+      "chromium-root-reading-final.log",
+      "chromium-sub-reading-final.log",
+      "webkit-root-reading-final.log",
+      "webkit-sub-reading-final.log",
+      "earlier-and-integration-final.log"
+    ],
+    "boundary": "Reading layout and reference typography changed, not authorization, caching, certificate metadata or GIF encoding. Both engines rerun all current course/upgrade cases plus three viewport reading cases and one reference typography case. Both account paths rerun the full journey and reference-card comparison in both engines; unaffected account cases reuse their previous passing results. The earlier account chain and all-sound-failure integration are also rerun. The 16-case course suites used the same final product code with the previous test-only modal wait; after switching to the existing shared handler, both engines rechecked the affected short-screen walkthrough and both account paths rechecked full journeys and comparisons.",
+    "countedAgain": false
+  },
+  "lateFindings": [
+    {
+      "log": "reading-controls-red.log",
+      "observed": "At 390x500 the current English line was above the viewport after clicking Next.",
+      "fix": "Place the fixed transcript, reading status and controls together inside the scene, retain full actors below, align only if the reader is outside the viewport, and reveal the next station on completion.",
+      "evidence": [
+        "unit-before-reading-controls.js",
+        "css-before-reading-controls.css",
+        "chromium-reading-final.log",
+        "webkit-reading-final.log"
+      ]
+    },
+    {
+      "logs": [
+        "earlier-and-integration.log",
+        "integration-isolated-reading-update.log"
+      ],
+      "observed": "The integration click was intercepted by an asynchronous award modal. The first isolated rerun already had the reading layout update; reward logic and assertions were unchanged.",
+      "fix": "The test helper reuses the shared reward-dialog handler: ordinary walkthroughs acknowledge the real modal normally, while keepAward removes the automatic handler for animation inspection. It then scrolls the statistics into view before waiting for completion.",
+      "followUpFailure": [
+        "chromium-reading-initial.log",
+        "settlement-offscreen-isolated.log"
+      ],
+      "followUpCause": "The first helper revision waited for an intentionally paused offscreen animation; production IntersectionObserver behavior was correct.",
+      "verified": [
+        "settlement-offscreen-final.log",
+        "chromium-reading-final.log",
+        "webkit-reading-final.log",
+        "earlier-and-integration-final.log"
+      ]
+    },
+    {
+      "logs": [
+        "comparison-handler-initial.log",
+        "comparison-handler-isolated.log"
+      ],
+      "observed": "A retained auto-dismiss handler from the reference lesson conflicted with the local manual visibility assertion.",
+      "fix": "Reuse tests/support/reward-dialog.js as the single handler owner, preserving keepAward for manual animation checks.",
+      "verified": [
+        "comparison-handler-final.log",
+        "chromium-dialog-walkthrough.log",
+        "webkit-dialog-walkthrough.log",
+        "chromium-root-reading-final.log",
+        "chromium-sub-reading-final.log",
+        "webkit-root-reading-final.log",
+        "webkit-sub-reading-final.log"
+      ]
+    },
+    {
+      "logs": [
+        "reference-font-red.log",
+        "reference-font-isolated.log"
+      ],
+      "observed": "A paragraph-wide class did not give IPA its required font; computed text-node parent fonts confirmed the body stack.",
+      "fix": "Wrap only phonetic fragments; keep Chinese in Gothic. Diagnostic assertions inspect fonts of the actual text instead of prescribing a wrapper count.",
+      "verified": [
+        "reference-font-green.log",
+        "chromium-reading-final.log",
+        "webkit-reading-final.log"
+      ]
+    }
+  ],
+  "commandCorrections": [
+    {
+      "log": "workflow-command-path.log",
+      "cause": "Wrong test file path under tests/unit; no tests ran.",
+      "actual": "tests/workflow/check-workflow.test.js",
+      "verified": "workflow.log"
+    }
+  ],
+  "preservation": {
+    "previousQuestions": 31,
+    "earlierQuestions": 25,
+    "learningNamespaceUnchanged": true,
+    "localDrafts": true,
+    "wrongAnswers": true,
+    "readingPosition": true,
+    "wordPage": true,
+    "galleryPage": true,
+    "modelPage": true,
+    "oldCertificateNameAndDate": true,
+    "oldCertificatePng": true,
+    "oldCertificatePrint": true,
+    "oldCertificateSize": [
+      1440,
+      1100
+    ],
+    "oldCertificateBackgroundMatches": true,
+    "oldCertificateKeepsakes": [],
+    "old15StarsIndependent": true,
+    "crossDevice": "Previously synchronized old outcomes and certificate metadata; local-only drafts remain on the original device."
+  },
+  "pdfs": {
+    "worksheet": {
+      "file": "worksheet.pdf",
+      "pages": 2,
+      "questions": 18,
+      "writingLines": 24,
+      "lineHeightPx": 32,
+      "articleBlanks": 6,
+      "articleBlankMinimumSize": [
+        70,
+        32
+      ],
+      "allPagesVisuallyReviewed": true,
+      "previousPagination": "Three pages before removing B forced-page-break; no examples, questions or writing space removed."
+    },
+    "oldCertificate": {
+      "file": "legacy-certificate.pdf",
+      "pages": 1,
+      "testStudent": "小禾",
+      "allPagesVisuallyReviewed": true
+    }
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit15-16/#learn/certificate",
+    "screenshot": "preview-account.jpg",
+    "observed": "0/5; words1/5; grammar16; exam21; current keepsake and old-history entry",
+    "answersOrStarsInjected": false,
+    "learningDataCleared": false
+  },
+  "engineBoundary": "Mobile profiles are emulation, not physical devices. The WebKit offline test separately handles engine-level navigation rejection and verifies recovery after reconnecting; this does not prove that the app fallback page appears when the engine rejects navigation before the page loads.",
+  "optimizationStatus": "O01-O15 confirmed; O16 remains a pending shared-standard proposal with local implementation. Execution notes added; v1.52 unchanged.",
+  "notVerified": [
+    "teacher review",
+    "child trial",
+    "physical-phone WeChat save",
+    "physical printing",
+    "full repository suite",
+    "formal release acceptance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "released": false
+  }
+}

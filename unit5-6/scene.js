@@ -4,6 +4,7 @@
     const element = document.createElement(tag); element.className = className; element.textContent = text; return element;
   };
   function picture(name, label = '') {
+    if(root.CanranCore.unit56Current)return root.CanranCore.unit56Current.picture(name,label);
     const image = node('img'); image.src = '/assets/unit5-6/' + name + '.svg'; image.alt = label; return image;
   }
   function actor(id, people) {
@@ -31,6 +32,7 @@
     } };
   }
   function classPhoto() {
+    if(root.CanranCore.unit56Current)return root.CanranCore.unit56Current.photo();
     const figure = node('figure', 'classroom-photo');
     figure.append(picture('class-photo', 'Mr. Blake 和 Sophie、Hans、Naoko、Chang-woo、Luming、Xiaohui 的教室合影'), node('figcaption', '', 'Nice to meet you!'));
     return figure;

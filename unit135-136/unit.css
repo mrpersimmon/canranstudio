@@ -1,0 +1,202 @@
+/* Lesson 135–136: shared interaction geometry; lesson-specific scene assets. */
+.unit135136-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit135136-workspace .unit-cover>div:last-child{padding:32px}
+.unit135136-workspace .unit-cover h1>span{display:inline-block}
+.unit135136-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit135136-workspace .unit-cover-art>img{display:block;width:100%;height:auto}
+.unit135136-workspace .unit-word{height:242px;gap:7px}
+.unit135136-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit135136-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795e4b}
+.unit135136-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+@media(max-width:760px){.unit135136-workspace .unit-cover{grid-template-columns:1fr}.unit135136-workspace .unit-cover>div:last-child{padding:24px}.unit135136-workspace .unit-word{height:234px}}
+.unit135136-workspace .practice-scene{display:block;width:132px;height:132px;object-fit:contain;margin:16px auto}
+.unit135136-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit135136-workspace .offline-task summary{font-weight:700;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.unit135136-workspace .offline-task summary::after{content:'＋'}.unit135136-workspace .offline-task[open] summary::after{content:'−'}
+.unit135136-workspace .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.unit135136-workspace .reference-card{padding:14px;border-radius:16px;background:#eef4ee;text-align:center;font-size:16px}
+.unit135136-workspace .reference-card img{display:block;width:65px;height:65px;object-fit:contain;margin:8px auto}
+.unit135136-workspace .reference-card p{font-size:22px;line-height:1.4;margin:8px 0}
+.unit135136-workspace .offline-task li,.unit135136-workspace .offline-task p{overflow-wrap:anywhere;font-size:19px;line-height:1.7}
+.unit135136-workspace .activity-actions{display:flex;justify-content:center;margin:20px auto}
+.unit135136-workspace .grammar-runner{max-width:740px;margin-inline:auto}
+.unit135136-workspace .grammar-model{background:#fff4e5;border-color:#ddc4a8}
+.unit135136-workspace .grammar-model-line+.grammar-model-line{border-color:#d4dcc5}
+.unit135136-workspace .grammar-rule{color:var(--brown)}
+
+.unit135136-workspace{--unit-page:#f8f6ee;--unit-wash:#ece6d9;--unit-line:#cfc2aa;--unit-accent:#9a8665}
+.unit135136-workspace .unit-word>strong{font-size:22px;line-height:1.25;overflow-wrap:anywhere}
+.unit135136-workspace .word-phonetic{font-size:14px;overflow-wrap:anywhere;max-width:100%}
+.unit135136-workspace .reference-note{background:#fff5e6;border-radius:12px;padding:12px;font-size:15px!important;line-height:1.6}
+.unit135136-workspace .report-runner{max-width:880px;margin:auto}.unit135136-workspace .report-intro h3{text-align:center;margin:10px auto;font-size:21px;line-height:1.5;white-space:pre-line}
+.unit135136-workspace .report-intro .practice-context{margin:8px auto 14px;white-space:pre-line}
+.unit135136-workspace .report-application{position:relative;display:flex;align-items:center;justify-content:center;gap:20px;height:190px;margin:14px auto 18px;border:1px solid var(--unit-line);border-radius:18px;background:linear-gradient(#f6efdf 76%,#f0e4d3 76%);overflow:hidden}
+.unit135136-workspace .report-model{display:flex;justify-content:center;align-items:stretch;gap:14px;max-width:680px;padding:12px 16px;margin:12px auto;border-radius:16px;background:#fff4df;border:1px solid #dcc6a3}
+.unit135136-workspace .report-model .grammar-model-line{flex:1;min-width:0;padding:0;border:0;text-align:center}.unit135136-workspace .report-model .grammar-model-line>p{font-size:20px;line-height:1.4}.unit135136-workspace .report-model .grammar-model-line>small{font-size:13px;line-height:1.4}
+.unit135136-workspace .grammar-intro h3{font-size:21px;line-height:1.5;white-space:pre-line;margin:12px auto 14px}.unit135136-workspace .grammar-runner .practice-answer-note{height:90px!important}.unit135136-workspace .grammar-runner .cloze-row{padding:10px 12px;margin-bottom:10px}
+.unit135136-workspace .report-completion{width:min(440px,100%);height:208px;max-width:440px}.unit135136-workspace .report-completion>img{position:static;display:block;width:100%;height:100%;object-fit:contain}
+.unit135136-workspace [hidden]{display:none!important}
+
+@media print{body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}body.print-writing #unitWriting{max-width:none}body.print-writing #unitWriting li{margin:12px 0}}
+
+.unit135136-workspace .application-prop{width:140px;height:140px;object-fit:contain}
+
+
+.unit135136-workspace .report-application{height:190px;background:#e9f0eb;gap:20px}
+.unit135136-workspace .record-page{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;background:#fffaf0;border:2px solid #bca786;border-radius:10px;padding:18px 24px;box-shadow:5px 5px #e1d6bf}
+@media(max-width:600px){
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor.at-left{left:1%}.unit135136-workspace #lessonWorkspace .stage-text .report-actor.at-right{right:1%}
+ .unit135136-workspace .actor-label{font-size:13px;padding:4px 5px}
+
+ .unit135136-workspace .report-application{gap:10px;padding:10px;height:174px}
+ .unit135136-workspace .application-prop{width:88px;height:108px;flex-shrink:0}
+ .unit135136-workspace .record-page{padding:12px 8px;min-width:0;max-width:65%}.unit135136-workspace .record-page strong{font-size:17px}.unit135136-workspace .record-page>span{font-size:16px;overflow-wrap:anywhere}
+}
+
+.unit135136-workspace .unit-word{height:268px}.unit135136-workspace .unit-word>strong{max-width:100%;font-size:21px}.unit135136-workspace .unit-word>img{height:96px}
+
+.unit135136-workspace .report-application[data-recorded="true"]{border:3px solid #739e7c;background:#edf5e6}
+
+
+.unit135136-workspace .structure-reference{table-layout:fixed;width:100%;border-collapse:collapse;font-size:18px;line-height:1.5;margin:16px 0}.unit135136-workspace .structure-reference :is(th,td){padding:10px 7px;border:1px solid var(--unit-line);overflow-wrap:anywhere}.unit135136-workspace .structure-reference th{background:var(--unit-wash);font-size:15px}
+.unit135136-workspace .structure-mobile{display:none}
+@media(max-width:600px){
+ .unit135136-workspace .structure-reference{display:none}
+ .unit135136-workspace .structure-mobile{display:grid;gap:12px;margin:16px 0}
+ .unit135136-workspace .structure-mobile h4{font-size:18px;line-height:1.5;margin:0}
+ .unit135136-workspace .structure-mobile dl{display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px;margin:0;padding:10px;border:1px solid var(--unit-line);border-radius:12px;background:#fff8ed}
+ .unit135136-workspace .structure-mobile dt{font-size:15px;font-weight:500;line-height:1.5}
+ .unit135136-workspace .structure-mobile dd{margin:0;font-size:18px;line-height:1.5;overflow-wrap:normal;word-break:normal}
+}
+
+.unit135136-workspace{--unit-page:#f1f5e9;--unit-wash:#e7edda;--unit-line:#c4cdb2;--unit-accent:#739b99}
+.unit135136-workspace [hidden]{display:none!important}
+.unit135136-workspace .report-world{position:relative;isolation:isolate;overflow:hidden;height:900px;border:1px solid var(--unit-line);border-radius:20px;background:#edf1e3 url('../assets/unit135-136/hotel-room.svg') center/100% 100% no-repeat}
+.unit135136-workspace .report-world[data-phase="rain"],.unit135136-workspace .report-world[data-phase="tea"]{background-image:url('../assets/unit135-136/hotel-room.svg')}
+.unit135136-workspace .report-location{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:max-content;max-width:94%;font-size:15px;line-height:1.4;margin:0;padding:5px 12px;border:1px solid var(--unit-line);border-radius:9px;background:#fffdf5}
+.unit135136-workspace #lessonWorkspace .stage-text .dialogue-stage{display:grid;grid-template-columns:minmax(0,1fr);padding:0;gap:0;background:none;position:relative}
+.unit135136-workspace .stage-text .report-world{grid-area:1/1}
+.unit135136-workspace #lessonWorkspace .stage-text .dialogue-log{grid-area:1/1;align-self:start;position:relative;z-index:5;display:flex;flex-direction:column;gap:12px;width:min(660px,calc(100% - 54px));height:285px;margin:58px auto 0;padding:8px 12px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#a6b69b transparent}
+.unit135136-workspace #lessonWorkspace .stage-text .dialogue-log:has(.story-lead){justify-content:center}
+.unit135136-workspace .story-lead{display:flex;align-items:center;justify-content:center;align-self:center;gap:12px;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit135136-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit135136-workspace .story-lead>p{font-size:22px;line-height:1.45;margin:0}
+.unit135136-workspace #lessonWorkspace .stage-text .report-actor{position:absolute;bottom:28px;width:36%;max-width:330px;height:330px;grid-row:auto;align-self:auto;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:end}
+.unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="left"]{left:4%;right:auto}.unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="right"]{right:4%;left:auto}
+.unit135136-workspace #lessonWorkspace .stage-text .report-cast{display:block;width:100%;height:302px;object-fit:contain}
+.unit135136-workspace .actor-label{display:block;font-size:15px;line-height:1.3;padding:4px 8px;border:1px solid transparent;border-radius:8px;background:#fffaf0;white-space:nowrap}
+.unit135136-workspace .dialogue-actor.is-current .actor-label{border-color:#88a578;background:#fff5d7}
+.unit135136-workspace .report-door{position:absolute;right:6%;bottom:55px;width:225px;height:350px;object-fit:contain;z-index:1}
+.unit135136-workspace .report-planter{position:absolute;left:23%;bottom:45px;width:180px;height:120px;object-fit:contain;z-index:2}
+.unit135136-workspace .rain-window{position:absolute;width:260px;height:156px;left:50%;top:367px;transform:translateX(-50%);object-fit:contain}
+.unit135136-workspace .report-group{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);width:min(500px,94%);height:325px}
+.unit135136-workspace .report-group-image{display:block;width:100%;height:100%;object-fit:contain}
+.unit135136-workspace .group-actor{position:absolute;bottom:-27px;transform:translateX(-50%)}.unit135136-workspace .group-actor[data-position="left"]{left:30%}.unit135136-workspace .group-actor[data-position="right"]{left:70%}
+.unit135136-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit135136-workspace .speaker-left{justify-content:flex-start}.unit135136-workspace .speaker-right{justify-content:flex-end}
+.unit135136-workspace .bubble{position:relative;width:fit-content;max-width:88%;min-height:0;flex:none;margin:0;padding:10px 14px;border:1px solid #bdcba9;background:#f4f8e9;border-radius:17px;box-shadow:0 3px 0 #dfe7db}
+.unit135136-workspace .speaker-right .bubble{background:#fff4e8;border-color:#d5b79b;box-shadow:0 3px 0 #eee0cd}
+.unit135136-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit135136-workspace .bubble .btext{font-size:22px;line-height:1.4;white-space:normal}.unit135136-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit135136-workspace .bubble .bbtns{margin-top:8px}
+.unit135136-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:12px auto}
+.unit135136-workspace .stage-apply .practice-scene{width:min(460px,100%);height:auto;max-height:none}
+.unit135136-workspace .verb-forms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}.unit135136-workspace .verb-forms>div{display:flex;flex-direction:column;gap:6px;padding:10px 5px;text-align:center;border:1px solid var(--unit-line);border-radius:10px;background:#fff6e6}.unit135136-workspace .verb-forms strong{font-size:20px;font-weight:600}.unit135136-workspace .verb-forms small{font-size:13px}.unit135136-workspace .reference-phonetic{font:15px/1.4 Arial,sans-serif}
+@media(max-width:600px){
+ .unit135136-workspace .reference-grid{grid-template-columns:1fr}
+ .unit135136-workspace .report-world{height:880px}
+ .unit135136-workspace #lessonWorkspace .stage-text .dialogue-log{width:calc(100% - 16px);height:340px;margin-top:55px;padding:8px}
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor{width:48%;height:290px;max-width:none;bottom:34px}.unit135136-workspace #lessonWorkspace .stage-text .report-cast{height:262px}
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="left"]{left:1%}.unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="right"]{right:1%}
+ .unit135136-workspace .report-door{right:0;bottom:65px;width:145px;height:245px}
+ .unit135136-workspace .report-planter{left:38%;bottom:64px;width:100px;height:67px}
+ .unit135136-workspace .rain-window{top:414px;width:220px;height:132px}
+ .unit135136-workspace .report-group{bottom:45px;height:270px}.unit135136-workspace .group-actor[data-position="left"]{left:26%}.unit135136-workspace .group-actor[data-position="right"]{left:74%}
+ .unit135136-workspace .story-lead{flex-direction:column;padding:14px}.unit135136-workspace .story-lead>p{font-size:20px}.unit135136-workspace .bubble{max-width:96%;padding:10px}.unit135136-workspace .bubble .btext{font-size:20px}
+ .unit135136-workspace .report-model{gap:10px;padding:10px}.unit135136-workspace .report-model .grammar-model-line>p{font-size:18px}.unit135136-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit135136-workspace .grammar-rule{font-size:13px}
+ .unit135136-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit135136-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}
+ .unit135136-workspace .unit-word>strong{font-size:20px}.unit135136-workspace .actor-label{font-size:14px;padding-inline:4px}
+}
+@media(max-width:360px){.unit135136-workspace .unit-word{padding-inline:4px}}
+
+/* Keep shared touch, worksheet and record geometry when changing scene style. */
+.unit135136-workspace .chapter-select select{min-height:44px}
+.unit135136-workspace #unitWriting ol,.unit135136-workspace #unitWriting li{list-style:decimal}.unit135136-workspace #unitWriting ol{padding-left:1.5em}
+.unit135136-workspace .writing-line{min-height:32px;width:100%;max-width:760px;border-bottom:1px solid #739b99}
+.unit135136-workspace .reference-card small{font-size:17px}
+.unit135136-workspace .report-application{height:auto;min-height:190px;padding:12px}
+.unit135136-workspace .record-page{flex:1;max-width:65%;min-width:0}
+@media print{
+ body.unit135136-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit135136-workspace.print-writing .stage-certificate{max-width:none;width:100%}
+ body.unit135136-workspace.print-writing #unitWriting li{break-inside:avoid}
+ body.unit135136-workspace.print-writing #unitWriting h4{break-after:avoid}
+}
+
+/* Lesson 135–136: dialogue and all figures occupy separate vertical bands. */
+.unit135136-workspace{--unit-page:#eef4ed;--unit-wash:#dfebe4;--unit-line:#bacbc3;--unit-accent:#739b99}
+.unit135136-workspace .report-world{height:860px;background-image:url('../assets/unit135-136/hotel-room.svg')}
+.unit135136-workspace .report-guests{position:absolute;left:50%;top:354px;transform:translateX(-50%);width:245px;height:150px;object-fit:contain;z-index:1}
+.unit135136-workspace #lessonWorkspace .stage-text .report-actor{width:37%;height:280px;bottom:30px;max-width:320px}
+.unit135136-workspace #lessonWorkspace .stage-text .report-cast{height:252px}
+.unit135136-workspace .report-table{position:absolute;left:50%;bottom:67px;transform:translateX(-50%);width:190px;height:147px;object-fit:contain;z-index:2}
+.unit135136-workspace .unit-word>strong{overflow-wrap:normal;word-break:normal}
+@media(max-width:600px){
+ .unit135136-workspace .report-world{height:900px}
+ .unit135136-workspace .report-guests{top:413px;width:220px;height:159px}
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor{width:48%;height:280px;bottom:34px}
+ .unit135136-workspace #lessonWorkspace .stage-text .report-cast{height:252px}
+ .unit135136-workspace .report-table{width:94px;height:73px;bottom:72px}
+ .unit135136-workspace .unit-word>strong{font-size:20px}
+}
+
+@media(min-width:601px){
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="left"]{left:14%}
+ .unit135136-workspace #lessonWorkspace .stage-text .report-actor[data-position="right"]{right:14%}
+}
+
+/* Keep long phrases and per-item writing space readable. */
+.unit135136-workspace{--unit-page:#f3f1e7;--unit-wash:#e9e5d2;--unit-line:#cbc5aa;--unit-accent:#9b9168}
+.unit135136-workspace .unit-word{height:auto;min-height:264px}
+.unit135136-workspace .report-world{height:760px;background-image:url('../assets/unit135-136/hotel-room.svg')}
+.unit135136-workspace .report-group{position:absolute;left:50%;bottom:42px;transform:translateX(-50%);width:min(560px,94%);height:350px}
+.unit135136-workspace #lessonWorkspace .stage-text .report-group .report-cast{display:block;width:100%;height:100%;object-fit:contain}
+.unit135136-workspace #lessonWorkspace .stage-text .report-label{position:absolute;bottom:-23px;width:max-content;min-width:0;height:auto;transform:translateX(-50%)}
+.unit135136-workspace .report-label[data-actor="martin"]{left:34%}.unit135136-workspace .report-label[data-actor="gary"]{left:66%}
+@media(max-width:600px){
+ .unit135136-workspace .report-world{height:800px}
+ .unit135136-workspace .report-group{width:calc(100% - 14px);height:300px;bottom:42px}
+ .unit135136-workspace .report-label[data-actor="martin"]{left:24%}.unit135136-workspace .report-label[data-actor="gary"]{left:76%}
+ .unit135136-workspace .verb-forms{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .unit135136-workspace .verb-forms strong{font-size:18px;overflow-wrap:normal}
+}
+
+/* Longer chapter names must fit the tablet navigation without shrinking text. */
+.unit135136-workspace .chapter-links a{min-width:0;white-space:normal}
+@media print{
+ body.unit135136-workspace.print-writing .stage-certificate,
+ body.unit135136-workspace.print-writing #unitWriting{overflow:visible!important}
+ body.unit135136-workspace.print-writing #unitWriting ol{padding-left:2em!important;overflow:visible!important}
+
+}
+
+/* Lesson 135–136: two locations, same actors and one newspaper throughout. */
+.unit135136-workspace{--unit-page:#f1f3ed;--unit-wash:#e1e8e8;--unit-line:#bac9ca;--unit-accent:#6b5b7d}
+.unit135136-workspace .report-world{background-image:url('../assets/unit135-136/hotel-room.svg')}
+.unit135136-workspace .report-world[data-scene="street"]{background-image:url('../assets/unit135-136/street.svg')}
+.unit135136-workspace .report-label[data-position="left"]{left:30%}
+.unit135136-workspace .report-label[data-position="right"]{left:70%}
+@media(max-width:600px){.unit135136-workspace .report-label[data-position="left"]{left:25%}.unit135136-workspace .report-label[data-position="right"]{left:75%}}
+@media print{
+ body.unit135136-workspace.print-writing #unitWriting h4{font-size:17px;line-height:1.45;margin:12px 0 6px}
+ body.unit135136-workspace.print-writing #unitWriting li{font-size:17px;line-height:1.45;margin:4px 0}
+ body.unit135136-workspace.print-writing #unitWriting .reference-note{font-size:14px!important;line-height:1.45;padding:6px;margin:6px 0}
+}
+
+/* Square groups preserve adult scale for both pair and three-person scenes. */
+.unit135136-workspace{--unit-page:#f2eff3;--unit-wash:#e8e0eb;--unit-line:#cbbfd0;--unit-accent:#6b5b7d}
+.unit135136-workspace .report-world{background-image:url('../assets/unit135-136/hotel-room.svg')}
+.unit135136-workspace .report-world[data-scene="street"]{background-image:url('../assets/unit135-136/street.svg')}
+.unit135136-workspace .report-group{width:min(350px,calc(100% - 14px));height:auto;aspect-ratio:1;bottom:48px}
+.unit135136-workspace .report-label[data-position="left"]{left:25%}
+.unit135136-workspace .report-label[data-position="middle"]{left:50%}
+.unit135136-workspace .report-label[data-position="right"]{left:75%}
+.unit135136-workspace .report-group[data-cast="trio"] .report-label[data-position="left"]{left:20%}
+.unit135136-workspace .report-group[data-cast="trio"] .report-label[data-position="right"]{left:80%}
+.unit135136-workspace .speaker-center{justify-content:center}

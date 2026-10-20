@@ -1,0 +1,160 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit21-22-teaching-review.spec.js",
+      "--grep",
+      "Our与",
+      "--reporter=list,json",
+      "--output=output/unit2122-review-20261018/red"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit2122-review-20261018/red",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit21-22-teaching-review.spec.js",
+      "file": "unit21-22-teaching-review.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Our与a/an复习题先有短示范，示范与当前完整答案错开并如实记录",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7276,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"My books are red.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"My books are red.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js:10:83",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js",
+                      "column": 83,
+                      "line": 10
+                    },
+                    "snippet": "   8 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit21-22/#learn/grammar');const room=page.locator('.stage-grammar');\n   9 |  for(const answer of ANSWERS.grammar.slice(0,8))await answerNext(room,answer);\n> 10 |  const model=room.getByRole('region',{name:'短示范',exact:true});await expect(model).toContainText('My books are red.');await expect(model).toContainText('Our book is blue.');await expect(model).not.toContainText('Our pens are blue.');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await room.screenshot({path:info.outputPath('grammar-9-unanswered-320.png')});await answerNext(room,ANSWERS.grammar[8]);\n     |                                                                                   ^\n  11 |  await expect(model).toContainText('a full bottle');await expect(model).toContainText('an old bottle');await expect(model).not.toContainText('an empty glass');await room.screenshot({path:info.outputPath('grammar-10-unanswered-320.png')});await answerNext(room,ANSWERS.grammar[9],true);\n  12 |  const book=await readLearning(page);for(const id of ['u2122-v1-owner-our','u2122-v1-article-empty'])expect(book.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  13 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js",
+                        "column": 83,
+                        "line": 10
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\nExpected substring: \u001b[32m\"My books are red.\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toContainText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('region', { name: '短示范', exact: true })\u001b[22m\n\n\n   8 |  await page.setViewportSize({width:320,height:568});await page.goto('/unit21-22/#learn/grammar');const room=page.locator('.stage-grammar');\n   9 |  for(const answer of ANSWERS.grammar.slice(0,8))await answerNext(room,answer);\n> 10 |  const model=room.getByRole('region',{name:'短示范',exact:true});await expect(model).toContainText('My books are red.');await expect(model).toContainText('Our book is blue.');await expect(model).not.toContainText('Our pens are blue.');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await room.screenshot({path:info.outputPath('grammar-9-unanswered-320.png')});await answerNext(room,ANSWERS.grammar[8]);\n     |                                                                                   ^\n  11 |  await expect(model).toContainText('a full bottle');await expect(model).toContainText('an old bottle');await expect(model).not.toContainText('an empty glass');await room.screenshot({path:info.outputPath('grammar-10-unanswered-320.png')});await answerNext(room,ANSWERS.grammar[9],true);\n  12 |  const book=await readLearning(page);for(const id of ['u2122-v1-owner-our','u2122-v1-article-empty'])expect(book.records[id].revealed).toBe(true);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);\n  13 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js:10:83"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T19:18:43.938Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\red\\unit21-22-teaching-review-Our与a-an复习题先有短示范，示范与当前完整答案错开并如实记录\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit2122-review-20261018\\red\\unit21-22-teaching-review-Our与a-an复习题先有短示范，示范与当前完整答案错开并如实记录\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit21-22-teaching-review.spec.js",
+                    "column": 83,
+                    "line": 10
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8e52cce97660f8615a01-5bc07ac39ca8f0e3ce53",
+          "file": "unit21-22-teaching-review.spec.js",
+          "line": 7,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T19:18:43.369Z",
+    "duration": 8504.422999999999,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

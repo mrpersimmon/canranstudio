@@ -254,7 +254,7 @@
   writing.append(node('h4','A · 必要时填 the，不需要时留空'));
   const a=node('ol');content.WRITING_A.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'));a.append(li);});writing.append(a);
   writing.append(node('h4','B · 用 When 提问，再用 he 或 she 回答'),node('p','例：he / church / Sunday → When was he at church? — He was at church on Sunday.'));
-  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'));b.append(li);});writing.append(b);
+  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);for(let line=0;line<2;line++)li.append(node('div','','writing-line'));b.append(li);});writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

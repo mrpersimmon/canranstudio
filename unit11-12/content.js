@@ -387,3 +387,74 @@ unit.questions["exam"][9]]};
   unit.taskPredecessors[id]=sources; unit.taskSessions[id]='tasks-v4'; unit.questions[id]=items;
  }
 })(globalThis.CanranCore);
+
+CanranCore.unit1112LegacyDefinition=CanranCore.unit1112;
+(function(core){
+'use strict';
+const old=core.unit1112LegacyDefinition,source='《新概念英语智慧版1》纸22–25／PDF55–58',grammarSource='《同步导学》Grammar纸22–23／PDF36–37；《语法练习册》纸28–32／PDF42–46';
+const unit={id:'unit11-12',version:1,mode:'classroom',contentRevision:'ownership-five-zones-v1',legacyEdition:'unit11-12-completion-v1',title:'失物招领小侦探',path:'/unit11-12/',start:'learn/words',progress:old.progress,learning:{...old.learning},objects:old.objects,questions:{},
+stages:[{id:'l1',title:'准备找主人',activities:[['words','认领小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'一件白衬衫',activities:[['text','认领小剧场','book'],['roles','故事小侦探','people']],required:['text','roles']},{id:'l3',title:'谁的说清楚',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'确认再归还',activities:[['apply','认领小帮手','heart']],required:['apply']},{id:'l5',title:'归还小能手',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/owner':'learn/grammar','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'ownership-five-zones-v1',title:'归还物品小能手',lesson:'Lesson 11–12',scene:'/assets/unit11-12/keepsake-story-v1.webp',alt:'老师把白衬衫交给Tim，Dave拿着自己的蓝衬衫',color:'#536f82',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','认领小帮手'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const bank=(tokens,answer,slots,suffix='.')=>({type:'wordbank',tokens,answer,slots,suffix});
+const q=(id,target,prompt,input,explanation)=>{const {material,...fields}=input;return{id:'u1112-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;
+unit.questions.roles=[...old.questions.roles,
+q('r-confirm','区分猜测与本人确认','哪句话明确确认白衬衫属于Tim？',choice(['Tim: Yes, sir.','Dave: Perhaps it is, sir.','老师: Tim!'],'Tim: Yes, sir.','老师问Tim：Is this your shirt?\nTim：Yes, sir.'),'Tim在回答归属问题时确认；Dave之前只是猜测。'),
+q('r-call','结合上下文理解Yes','第一次被叫到时，Tim的这句回应表示什么？',choice(['回应老师叫自己，等老师说什么事','已经确认白衬衫是自己的','让老师接住衬衫'],'回应老师叫自己，等老师说什么事','Teacher: Tim!\nTim: Yes, sir?'),'这时老师还没有向Tim询问衬衫，不能提前当作认领。')];
+unit.questions.grammar=[
+g('whose-who','区分询问身份与归属','按回答补好问题。',fill([blank('',' is that man? — He’s our teacher.',['Who','Whose']),blank('',' coat is this? — It’s May’s.',['Who','Whose'])],['Who','Whose']),'Who问是谁；Whose问是谁的。',[['Whose pen is this? — It’s Jo’s.','Whose询问物主。']]),
+g('two-forms','识别两种Whose问句','哪一组两句话都在询问这本书的主人？',choice(['Whose book is this? / Whose is this book?','Who is this? / How are you?','What is this? / Is it blue?'],'Whose book is this? / Whose is this book?'),'本课两种Whose语序都可以，不能把其中一种当伪错项。'),
+old.questions.owner[0],old.questions.owner[1],
+g('our-their','按多人所属使用our和their','两个小组各说自己的车，补好介绍。',fill([blank('We are Jo and May. This is ',' car.',['our','their','your']),blank('They are Tim and Dave. That is ',' car.',['our','their','my'])],['our','their'],'Jo和May共同拥有近处的车；Tim和Dave共同拥有远处的车。'),'we对应our；they对应their。',[['We are friends. This is our room.','我们说自己的房间，用our。']]),
+g('its','区分its与It’s','介绍一只叫Pip的小猫，补好两句。',fill([blank('',' a cat.',['It’s','Its']),blank('',' name is Pip.',['It’s','Its'])],['It’s','Its']),'本题It’s是It is；Its表示它的，不加撇号。',[['It’s a dog. Its name is Bo.','It’s说它是什么；Its放在name前。']]),
+g('my-mine','区分名词前的my与独立使用的mine','笔已确认是你自己的，用两种方式回答。',fill([blank('It’s ',' pen.',['my','mine']),blank('It’s ','.',['my','mine'])],['my','mine']),'my后接名词；mine可以替代my pen。',[['This is my bag. The bag is mine.','物主没有改变；mine后不再重复bag。']]),
+old.questions.owner[2],
+g('single','单个物主的所有格','钢笔属于一位女孩，补全标签。',fill([blank('the ',' pen', ["girl’s","girls’",'girl'])],["girl’s"],'这支笔属于一位女孩，a girl。'),'单数girl后加’s表示所属。',[['a boy → the boy’s coat','一个男孩的外套。']]),
+g('plural','以s结尾复数的所有格','两位男孩共同拥有这间房，补全标签。',fill([blank('the ',' room',["boy’s","boys’",'boys'])],["boys’"],'两位男孩，two boys；同一间房属于他们。'),'boys是以s结尾的复数，表示所属在s后加撇号。',[['two girls → the girls’ room','两位女孩的房间，撇号放在复数s后。']]),
+g('joint','表达共同所有','按“共同拥有”写法补好标签。',fill([blank('',' car',["Jo and May’s","Jo’s and May’s","Jo’s and May"])],["Jo and May’s"],'Jo和May共同拥有同一辆车。'),'本题同一辆车共同拥有，只在最后一个名字后加’s。',[['Ann and Ben’s room','Ann与Ben共同拥有同一间房。']]),
+g('separate','表达各自所有','按“各自拥有”写法补好标签。',fill([blank('',' pens',["Jo and May’s","Jo’s and May’s","Jo’s and May"])],["Jo’s and May’s"],'两支不同的笔：Jo独有一支，May独有另一支。'),'本题分别所属，在两个名字后各加’s。',[['Ann’s and Ben’s coats','Ann有一件，Ben有另一件。']]),
+g('omit','省略已知物品仍保留所属','不再重复coat，保持原意补完句子。',fill([blank('This coat is ','.',["my brother’s",'my brother',"my brothers"])],["my brother’s"],'This is my brother’s coat.'),'物品已经明确，可以省略coat；物主后的’s保留。',[['This is May’s pen. This pen is May’s.','两句说的是同一归属。']]),
+g('not-mine','否认不能确定另一物主','只知道这句，能确定什么？',choice(['不是Dave的，真正主人还不确定','一定是Tim的','一定是老师的'],'不是Dave的，真正主人还不确定','另设情境：Dave: It’s not my pen.\n没有其他归属信息。'),'否认自己的所有权，不等于确认别人的。')];
+unit.questions.apply=[...old.questions.trans,
+q('a-deny','按明确归属回应询问','Ann面对这只包，应该怎样回答？',choice(['No, it isn’t. It’s May’s.','Yes, it is. It’s my bag.','Perhaps it’s May’s.'],'No, it isn’t. It’s May’s.','这只包已确认只属于May，不属于Ann。\nTeacher to Ann: Is this your bag?'),'已知事实支持否认并说明真正物主。'),
+q('a-return','确认后归还的回应','May已认领，归还时你该说哪一句？',choice(['Here you are.','Is this your bag?','No, it isn’t.'],'Here you are.','You: Is this your bag?\nMay: Yes, it is.\n你现在把这只包交给May。'),'确认后递物，说Here you are。'),
+q('a-check','不确定时先核实','你只收到这条消息，下一步怎么做？',choice(['向Jo核实是不是他的','直接归还给Jo','确认一定不属于Jo'],'向Jo核实是不是他的','May: Perhaps this is Jo’s coat.'),'perhaps是也许，不是已经确认。'),
+q('a-pronoun','用物主词转述虚构资料','不用重复my brother’s，说明同一支笔是谁的。',bank(['It’s','his','pen.','her'],"It’s his pen.",3,''),'brother在这份资料中用he，换用his不改变物主。')];
+unit.questions.apply[5].display={title:unit.questions.apply[5].prompt,material:'虚构资料：This is my brother’s pen.\nmy brother uses he/him.'};
+unit.questions.exam=[...old.questions.exam];
+unit.questions.exam[4]=q('e-viewpoint','换说话人保留归属','补好认领对话。',fill([blank('Dave: This is ',' shirt.',['my','your','his']),blank('Teacher to Dave: Yes, it’s ',' shirt.',['my','your','his'])],['my','your'],'蓝衬衫已确认属于Dave；老师当面对Dave说话。'),'Dave说my，面对Dave的老师说your，物主相同。');
+unit.questions.exam[5]=q('e-family','称谓所有格与物主词','用两种方式说明这件西服的主人。',fill([blank('It’s my ','.',["father’s",'father',"fathers"]),blank('It’s ',' suit.',['his','her','your'])],["father’s",'his'],'西服属于虚构人物“我的父亲”（he/him）。'),'father’s表示父亲的；his与这位物主对应。');
+unit.questions.exam.push(
+q('e-plural-pronouns','独立使用our与their','按两组的介绍补好物主词。',fill([blank('They are May and Ann. That is ',' room.',['our','their','her']),blank('We are Tim and Jo. This is ',' room.',['our','their','his'])],['their','our'],'May和Ann共同拥有第一间房；Tim和Jo共同拥有另一间。'),'they用their；we用our。'),
+q('e-its','区分所属与It is','介绍一只叫Momo的狗。',fill([blank('',' name is Momo.',['Its','It’s']),blank('',' a dog.',['Its','It’s'])],['Its','It’s']),'Its说明它的名字；It’s在这里是It is。'),
+q('e-mine','独立使用my与mine','你的伞已找到，用两种方式认领。',fill([blank('This umbrella is ','.',['my','mine']),blank('It’s ',' umbrella.',['my','mine'])],['mine','my']),'mine独立使用，my后接umbrella。'),
+q('e-noun-number','按物主数量选所有格','两件物品的物主数量不同，补好标签。',fill([blank('the ',' bag',["girl’s","girls’"]),blank('the ',' car',["boy’s","boys’"])],["girls’","boy’s"],'包由两位女孩共同拥有（two girls）；车只属于一位男孩（a boy）。'),'复数girls加撇号；单数boy加’s。'),
+q('e-joint-separate','区分共同所有与各自所有','按两份资料分别补好标签。',fill([blank('',' room',["Ann and Ben’s","Ann’s and Ben’s"]),blank('',' coats',["Ann and Ben’s","Ann’s and Ben’s"])],["Ann and Ben’s","Ann’s and Ben’s"],'同一间房由Ann和Ben共同拥有；两件不同的外套分别属于Ann、Ben。'),'共同所有只在最后名字后加’s；各自所有分别加’s。'),
+q('e-whose-who','根据回答独立选择疑问词','补好这两组问答。',fill([blank('',' tie is that? — It’s Jo’s.',['Who','Whose']),blank('',' is Jo? — He’s my brother.',['Who','Whose'])],['Whose','Who']),'Whose问归属；Who问身份。'),
+q('e-not-yours','没有认领不能推出另一个物主','只知道这段话，哪份记录准确？',choice(['不是Ann的，真正主人尚待确认','一定是May的','老师已确认属于Jo'],'不是Ann的，真正主人尚待确认','Teacher: Is this your coat, Ann?\nAnn: No, it isn’t.\n没有其他信息。'),'没有足够信息确认另一个物主。'),
+q('e-two-forms','两种Whose语序保持同一提问','哪一组都在询问那支钢笔的主人？',choice(['Whose pen is that? / Whose is that pen?','Who is that? / Whose pen is that?','Is that a pen? / Whose is that pen?'],'Whose pen is that? / Whose is that pen?'),'两种Whose语序都询问同一物品归属。')
+);
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['owner'],apply:['trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,priorIds])=>[id,priorIds.flatMap(prior=>[{key:'unit1112-'+prior+'-practice/'+(old.taskSessions?.[prior]||(old.taskPredecessors?.[prior]?'v3':old.activityPredecessors?.[prior]?'v2':'v'+old.version)),questions:old.questions[prior]},...(old.taskPredecessors?.[prior]||[])])]));
+core.unit1112=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit1112,excerpts={"u1112-v1-story-owner":[6,7,8],"u1112-v1-story-it":[0,1,2,3,4,5]},speakers={"teacher":"老师","dave":"Dave","tim":"Tim"};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 11',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

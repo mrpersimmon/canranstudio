@@ -1,0 +1,48 @@
+{
+  "rounds": [
+    {
+      "key": "unit2324-listen-practice/five-zones-v1",
+      "expectedRun": "1e3e8cca-0f23-416d-8ab0-664bf8a4fedf",
+      "statesRetained": false
+    },
+    {
+      "key": "unit2324-grammar-practice/five-zones-v1",
+      "expectedRun": "a5270a1e-f885-447a-b808-20a220d5b673",
+      "actualRun": "a5270a1e-f885-447a-b808-20a220d5b673",
+      "statesRetained": true
+    },
+    {
+      "key": "unit2324-apply-practice/five-zones-v1",
+      "expectedRun": "77489527-2116-45d2-b702-9f0cbfd38193",
+      "actualRun": "77489527-2116-45d2-b702-9f0cbfd38193",
+      "statesRetained": true
+    }
+  ],
+  "allThreeRunIdsAndStatesRetained": false,
+  "legacy32ChangedByLaterWork": [
+    "u2324-v1-vocab-on",
+    "u2324-v1-vocab-shelf",
+    "u2324-v1-vocab-desk",
+    "u2324-v1-vocab-table",
+    "u2324-tasks-v4-objects",
+    "u2324-v1-vocab-cupboard",
+    "u2324-v1-vocab-cigarette",
+    "u2324-v1-vocab-television",
+    "u2324-v1-vocab-floor",
+    "u2324-v1-vocab-dressing table",
+    "u2324-v1-vocab-bed",
+    "u2324-v1-vocab-stereo",
+    "u2324-v1-vocab-some",
+    "u2324-tasks-v4-story-place",
+    "u2324-v1-story-ones",
+    "u2324-v1-request-plural",
+    "u2324-v1-these-perspective",
+    "u2324-v1-on-contact",
+    "u2324-v1-recipient-us",
+    "u2324-v1-build-request",
+    "u2324-v1-build-confirm",
+    "u2324-v1-build-location"
+  ],
+  "currentArchiveRecords": 45,
+  "legacyArchiveRecords": 32
+}

@@ -1,0 +1,131 @@
+{
+  "lesson": "139–140",
+  "standard": "v1.52",
+  "branch": "codex/release-canranstudio",
+  "mode": "classroom",
+  "catalogAtValidation": 70,
+  "counts": {
+    "words": 12,
+    "originalSpeakerTurns": 12,
+    "readingSteps": 19,
+    "models": 9,
+    "writingItems": 18,
+    "writingLines": 54,
+    "writingExamples": 3,
+    "writingExampleOutputs": 12,
+    "writingPdfPages": 4,
+    "questions": [
+      6,
+      8,
+      17,
+      8,
+      21
+    ],
+    "questionTotal": 60,
+    "rasterAssets": 4,
+    "fullBodyPoses": 3
+  },
+  "courseTests": {
+    "initialChromium": {
+      "passed": 15,
+      "failed": 0
+    },
+    "initialWebkit": {
+      "passed": 15,
+      "failed": 0
+    },
+    "distinctSuccessfulConditionsPerEngine": 15
+  },
+  "representative": {
+    "passed": 4,
+    "failed": 1,
+    "sameVersionOriginalAssertionIsolation": {
+      "passed": 0,
+      "failed": 1
+    },
+    "correctedReferenceTextExpectation": {
+      "passed": 1,
+      "failed": 0
+    },
+    "applicationChangedForThisFailure": false
+  },
+  "distractorRefinement": {
+    "affectedItems": [
+      "g-does",
+      "g-past",
+      "e-does"
+    ],
+    "chromium": 6,
+    "webkit": 6,
+    "questionCountAndCorrectAnswersUnchanged": true,
+    "reason": "Avoid relying on an untaught emphatic construction to reject a distractor."
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs137138": true
+  },
+  "font": {
+    "currentMissing": 0,
+    "oldCharactersPreserved": 1743,
+    "currentCharacters": 1748,
+    "oldAdvanceAndLineMetricDifferences": 0
+  },
+  "packages": {
+    "required": 141,
+    "narration": 0,
+    "mounts": [
+      "/",
+      "/lesson/"
+    ]
+  },
+  "gif": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0,
+    "allFramesNameTitleScenePaperStable": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程升级",
+    "共享Worker拒写和回收的所有分支",
+    "除本课所列画布故障重试及离开取消之外的全部导出故障"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit139-140/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 2",
+    "assessmentAnswersSubmitted": false,
+    "coverCheckedAt": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "updateFlow": "Verified the local preview process, added only unit139-140 to the existing preview class, restarted it, then entered the new course through My Courses. The new title, source opening, counts and vocabulary were visible without clearing learning data."
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

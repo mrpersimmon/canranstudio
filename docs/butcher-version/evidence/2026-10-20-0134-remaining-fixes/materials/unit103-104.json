@@ -1,0 +1,80 @@
+{
+  "id": "unit103-104",
+  "source": {
+    "file": "tests/support/unit103104.js",
+    "sha256": "4f2b7d59a1470fabf1a5d1328f1114d2c7277d2ac72993c782d67f4f1acd8aef"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u103104-v1-r-english",
+      "text": "Lesson 103\n\nGary: How was the exam, Richard?\n\nRichard: Not too bad. I think I passed in English and Mathematics. The questions were very easy. How about you, Gary?"
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u103104-v1-r-gary",
+      "text": "Lesson 103\n\nRichard: Not too bad. I think I passed in English and Mathematics. The questions were very easy. How about you, Gary?\n\nGary: The English and Maths papers weren’t easy enough for me. I hope I haven’t failed."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u103104-v1-r-sixteen",
+      "text": "Lesson 103\n\nRichard: I think I failed the French paper. I could answer sixteen of the questions. They were very easy. But I couldn’t answer the rest. They were too difficult for me."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u103104-v1-r-rest",
+      "text": "Lesson 103\n\nRichard: I think I failed the French paper. I could answer sixteen of the questions. They were very easy. But I couldn’t answer the rest. They were too difficult for me."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u103104-v1-r-name",
+      "text": "Lesson 103\n\nGary: Oh, cheer up! Perhaps we didn’t do too badly. The guy next to me wrote his name at the top of the paper.\n\nRichard: Yes?\n\nGary: Then he sat there and looked at it for three hours! He didn’t write a word!"
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u103104-v1-r-duration",
+      "text": "Lesson 103\n\nGary: Oh, cheer up! Perhaps we didn’t do too badly. The guy next to me wrote his name at the top of the paper.\n\nRichard: Yes?\n\nGary: Then he sat there and looked at it for three hours! He didn’t write a word!"
+    },
+    {
+      "zone": "roles",
+      "index": 8,
+      "questionId": "u103104-v1-r-outcome",
+      "text": "Lesson 103\n\nGary: How was the exam, Richard?\n\nRichard: Not too bad. I think I passed in English and Mathematics. The questions were very easy. How about you, Gary?\n\nGary: The English and Maths papers weren’t easy enough for me. I hope I haven’t failed.\n\nRichard: I think I failed the French paper. I could answer sixteen of the questions. They were very easy. But I couldn’t answer the rest. They were too difficult for me.\n\nGary: French tests are awful, aren’t they?\n\nRichard: I hate them. I’m sure I’ve got a low mark.\n\nGary: Oh, cheer up! Perhaps we didn’t do too badly. The guy next to me wrote his name at the top of the paper.\n\nRichard: Yes?\n\nGary: Then he sat there and looked at it for three hours! He didn’t write a word!"
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u103104-v1-e-sixteen",
+      "text": "Lesson 103\n\nRichard: I think I failed the French paper. I could answer sixteen of the questions. They were very easy. But I couldn’t answer the rest. They were too difficult for me."
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u103104-v1-e-time",
+      "text": "Lesson 103\n\nGary: Oh, cheer up! Perhaps we didn’t do too badly. The guy next to me wrote his name at the top of the paper.\n\nRichard: Yes?\n\nGary: Then he sat there and looked at it for three hours! He didn’t write a word!"
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "2-3",
+    "R3": "4",
+    "R4": "4",
+    "R6": "7-9",
+    "R7": "7-9",
+    "R8": "*",
+    "E2": "4",
+    "E3": "7-9"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

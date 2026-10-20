@@ -1,0 +1,38 @@
+[WebServer] (node:28280) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:32228) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:28200) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit7-8-fivezones-upgrade.spec.js:8:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (110ms)
+
+
+  1) tests\login\unit7-8-fivezones-upgrade.spec.js:8:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ─────────
+
+    Error: EPERM: operation not permitted, symlink 'C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\.gitattributes' -> 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-u4950-upgrade-CNw4kO\old-site\.gitattributes'
+
+      13 |  try{
+      14 |   // A real predecessor application and database, not injected completion JSON.
+    > 15 |   await fs.mkdir(oldRoot);for(const entry of await fs.readdir(root,{withFileTypes:true})){if(['.git','unit7-8'].includes(entry.name))continue;if(/^unit\d+-\d+$/.test(entry.name)){await fs.mkdir(path.join(oldRoot,entry.name));for(const name of await fs.readdir(path.join(root,entry.name)))await fs.symlink(path.join(root,entry.name,name),path.join(oldRoot,entry.name,name));}else await fs.symlink(path.join(root,entry.name),path.join(oldRoot,entry.name));}
+         |                                                                                                                                                                                                                                                                                                                                                                                            ^
+      16 |   await fs.mkdir(path.join(oldRoot,'unit7-8'));for(const name of await fs.readdir(path.join(root,'unit7-8'))){if(['index.html','content.js','unit.js','unit.css','scene.js'].includes(name))await fs.copyFile(path.join(root,'tests/fixtures/unit7-8-before-fivezones',name),path.join(oldRoot,'unit7-8',name));else await fs.symlink(path.join(root,'unit7-8',name),path.join(oldRoot,'unit7-8',name));}
+      17 |   // The former unit depended on the full Lesson49 definition, whereas current
+      18 |   // protected units receive only feedback sounds. Freeze that old dependency.
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit7-8-fivezones-upgrade.spec.js:15:380
+
+    Error Context: output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+    Usage:
+
+        npx playwright show-trace output\test-login\unit7-8-fivezones-upgrade-真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit7-8-fivezones-upgrade.spec.js:8:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 ──────────

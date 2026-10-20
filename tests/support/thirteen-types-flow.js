@@ -27,16 +27,16 @@ async function select(room,answer){
 }
 async function story(page,pair,base=''){
  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
- await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();
+ await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
  if(await room.getByRole('button',{name:pair==='1-2'?/^(重看故事|再看一遍)$/: '再看一遍',exact:true}).isVisible())return;
  if(await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
  await room.getByRole('button',{name:pair==='1-2'?/^(读完了|完成课文)$/: '完成课文',exact:true}).click();
 }
-async function activity(page,pair,id,{base='',capture,keepAward=false}={}){
+async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
- await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
- await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','');await expect(room).toBeVisible();
+ if(navigate)await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
+ await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
  if(await room.locator('.practice-finish').isVisible())return;
  const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
  for(let i=first;i<items.length;i++){

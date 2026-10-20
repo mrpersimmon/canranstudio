@@ -1,0 +1,50 @@
+# Lesson 115–116 视觉素材
+
+使用内置 imagegen 工具，透明背景，等比缩小为WebP；原稿保留。主卡、课内人物与导出使用相同身份。Carol、Tom承接79–84课的发型和衣着结构，Helen和Jim按本课建立；同名本身不是复用依据。所有人是原文成人角色，未画饮酒或用餐完成。
+
+参考画风为Lesson1–2、3–4、5–6认可卡；人物身份参考83–84的Carol与Tom。主卡中近景，角色全身素材保留头、手、脚和持物；不裁人物。只翻转Jim无文字的空手交谈姿态，让他在花园面向右侧人物；敲门、看窗与持瓶姿态不镜像。图标、门口／花园背景和判断用图由原生SVG维护，入口为 scripts/art/build-unit115116-assets.py。
+
+| 网页文件 | 原稿绝对路径 |
+| --- | --- |
+| keepsake-story-v1.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-8fb5b6eb-8d7a-4610-8e48-a75b496951ed.png |
+| jim.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-ea97179e-1944-4326-a99a-198aeb2c3fa7.png |
+| helen.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-d3ee677d-0e51-4e00-857b-d8b087513e0b.png |
+| carol.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-33e1fa1f-1e8f-4686-a1c4-e8db986bd836.png |
+| tom.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-41472ef9-d44e-40c1-ac46-f5d05618225c.png |
+| jim-knock.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-c154e89c-d988-4782-ae21-03b649236d1b.png |
+| jim-look.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-8f029297-4719-4d5e-bd66-24d09691503f.png |
+| tom-beer.webp | C:/Users/duanxiaodong/.codex/generated_images/01a13a06-86fc-7732-8d58-ede86462cfa9/exec-e199d365-804f-4fe0-b603-c3633f920d8b.png |
+
+## 完整生成提示词
+
+### keepsake-story-v1
+
+Use case: illustration-story. Create a NEW transparent story illustration for New Concept English Lessons 115–116, garden visit and a friendly joke, to be placed inside a student keepsake card. The attached first reference is ONLY the approved warm rounded brown-outline art style, not its handbag story; the second reference defines returning adult Carol (short wavy chestnut bob, mustard hairband, coral dress, cream apron) and Tom (short dark curly hair, pale blue shirt and oatmeal V-neck knit vest). Keep their identities. New Jim: adult man with a slim face, smooth side-parted medium brown hair, no glasses, sage green jacket, cream shirt, narrow rust tie. New Helen: adult woman with straight dark chin-length bob, small lilac hair clip, lavender cardigan and ivory blouse. Medium close-up, wide 3:2 composition, about three-and-a-half-head stylized adult proportions, clear faces and complete hands. Jim at left and Carol near center face Tom at right; Helen slightly behind Jim at the far left, face visible. The friends have just found one another in a sunny garden. Tom gently offers one small unbranded brown beer bottle with a plain cream label toward Jim, holding it himself; Jim has empty hands and a mildly surprised friendly expression, Carol smiles at her own harmless joke. No drinking, pouring, clinking, handoff, or completed lunch. A small lemonade jug with lemon slices on a low foreground garden table recalls Carol's offer. Faint sage foliage and a hint of back doorway behind them, restrained muted lavender, sage and warm cream palette; the people and offered bottle are large and legible, background subordinate. Actual transparent alpha outside the vignette with generous safe margins. Soft matte warm-paper texture, simple round eyes, rounded deep-brown contours, flat gentle colours matching references. No wording, no letters or numbers, no captions, no stars, no title, no learner name, no date, no decorative badge or border. Do not clone the reference people other than Carol and Tom; no Sam, no child. Intentional waist-up framing with all faces, fingers and the bottle fully inside the canvas.
+
+### jim
+
+Use case: identity-preserve. From the attached garden illustration take ONLY the specified adult as identity and style reference. Generate one independent FULL BODY game character sprite, portrait 2:3, true transparent alpha background, centered with at least 10% transparent margin on all sides. Preserve warm matte texture, thick soft brown outline, friendly simple face and adult three-and-a-half-head proportions. Full head hair hands all fingers skirt/trousers both legs and shoes clearly inside canvas. No background, furniture, scenery, another person, text, marks, stars, border or floor shadow. Jim, the straight side-parted medium-brown-haired adult man in sage jacket, cream shirt and rust narrow tie, no glasses. Complete with dark teal trousers and brown leather shoes. Three-quarter body and gaze FACE LEFT, one hand open in friendly conversation at waist, the other relaxed, hands EMPTY. Match same face and jacket.
+
+### helen
+
+Use case: identity-preserve. From the attached garden illustration take ONLY the specified adult as identity and style reference. Generate one independent FULL BODY game character sprite, portrait 2:3, true transparent alpha background, centered with at least 10% transparent margin on all sides. Preserve warm matte texture, thick soft brown outline, friendly simple face and adult three-and-a-half-head proportions. Full head hair hands all fingers skirt/trousers both legs and shoes clearly inside canvas. No background, furniture, scenery, another person, text, marks, stars, border or floor shadow. Helen, the dark straight bob-haired adult woman with lilac hairclip and lavender cardigan over ivory blouse, at far left in reference. Full body with warm taupe calf-length skirt and dark lavender low shoes. Three-quarter body and gaze FACE RIGHT, one hand lightly open as she speaks, other at side. Empty hands, mild curious expression. Do not hold a jug or glass.
+
+### carol
+
+Use case: identity-preserve. From the attached garden illustration take ONLY the specified adult as identity and style reference. Generate one independent FULL BODY game character sprite, portrait 2:3, true transparent alpha background, centered with at least 10% transparent margin on all sides. Preserve warm matte texture, thick soft brown outline, friendly simple face and adult three-and-a-half-head proportions. Full head hair hands all fingers skirt/trousers both legs and shoes clearly inside canvas. No background, furniture, scenery, another person, text, marks, stars, border or floor shadow. Carol, the short wavy chestnut-haired adult woman with mustard hairband, coral dress and cream apron. Full body calf-length dress and brown low shoes. Three-quarter body and gaze FACE LEFT, one hand open welcoming a friend, other naturally at waist. Empty hands, warm friendly smile; match original hairstyle and apron.
+
+### tom
+
+Use case: identity-preserve. From the attached garden illustration take ONLY the specified adult as identity and style reference. Generate one independent FULL BODY game character sprite, portrait 2:3, true transparent alpha background, centered with at least 10% transparent margin on all sides. Preserve warm matte texture, thick soft brown outline, friendly simple face and adult three-and-a-half-head proportions. Full head hair hands all fingers skirt/trousers both legs and shoes clearly inside canvas. No background, furniture, scenery, another person, text, marks, stars, border or floor shadow. Tom, the dark curly-haired adult man with oatmeal V-neck vest over pale blue shirt. Full body dark grey trousers and brown shoes. Three-quarter body and gaze FACE LEFT, relaxed conversational gesture, both hands EMPTY, cheerful gentle expression. Preserve same distinct curly hairstyle and vest.
+
+### jim-knock
+
+Use case: identity-preserve. Edit the attached adult full-body sprite into a new pose, keeping exactly the same face, hairstyle, clothing, body proportions, palette and warm rounded brown-outline art style. Jim is turned three-quarter RIGHT, looking toward the right as he raises one closed hand at shoulder level to knock on a door that will be placed to his right by the webpage. His other hand rests at his side. No door or wall in this sprite. Keep the arm and knuckles fully inside canvas; do not put the hand over his face. Portrait 2:3 standalone FULL BODY transparent-alpha sprite. All hair, fingers, legs, shoes and held objects must be fully inside the canvas with generous transparent margins on every side. Do not crop any body part. No text, names, stars, captions, shadow, coloured background, scenery or furniture. Keep actual transparency.
+
+### jim-look
+
+Use case: identity-preserve. Edit the attached adult full-body sprite into a new pose, keeping exactly the same face, hairstyle, clothing, body proportions, palette and warm rounded brown-outline art style. Jim is turned three-quarter RIGHT, very slightly leaning to peer through a window that will be placed on his right by the webpage, one open hand held near his brow but not covering his eyes, his other hand at his side. Mildly puzzled friendly expression. No window or wall in this sprite. Portrait 2:3 standalone FULL BODY transparent-alpha sprite. All hair, fingers, legs, shoes and held objects must be fully inside the canvas with generous transparent margins on every side. Do not crop any body part. No text, names, stars, captions, shadow, coloured background, scenery or furniture. Keep actual transparency.
+
+### tom-beer
+
+Use case: identity-preserve. Edit the attached adult full-body sprite into a new pose, keeping exactly the same face, hairstyle, clothing, body proportions, palette and warm rounded brown-outline art style. Tom continues facing LEFT, holding ONE small brown unbranded beer bottle upright at waist/chest height in his LEFTWARD extended hand, cream blank paper label on bottle. Other hand is naturally open as he explains a friendly joke. Preserve adult identity and happy expression. Bottle stays in his own hand; no glass, no drinking or pouring, no other person. Portrait 2:3 standalone FULL BODY transparent-alpha sprite. All hair, fingers, legs, shoes and held objects must be fully inside the canvas with generous transparent margins on every side. Do not crop any body part. No text, names, stars, captions, shadow, coloured background, scenery or furniture. Keep actual transparency.

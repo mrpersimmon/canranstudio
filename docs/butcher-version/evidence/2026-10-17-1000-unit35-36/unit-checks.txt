@@ -1,0 +1,70 @@
+(node:15956) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (169.5179ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.7121ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (3.4012ms)
+✔ partial wrong submission is observable without awards or resumable completion (66.5259ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (56.2843ms)
+✔ reset isolates a new generation and preserves earlier observation history (54.1605ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (64.6236ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (60.3811ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.5603ms)
+✔ student identity, pagination and filters expose learning summaries only (801.4508ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (5859.5468ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (2.0064ms)
+✔ three learning statuses require current work, not visits, stars or old content (2.3997ms)
+✔ all published courses reach completed only with every required activity including reading (189.4261ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (173.6401ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (946.3462ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (144.6597ms)
+(node:22264) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (167.8739ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.5985ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (87.2616ms)
+✔ course catalog is the complete immutable contract for lessons and special courses (2.6235ms)
+✔ landmark state URLs carry one immutable content version (0.6989ms)
+✔ world atlas declares twelve immutable districts with one V1 entrance (0.1782ms)
+✔ published course pages resolve their progress contract from the shared catalog (0.2013ms)
+✔ learning locations stay drawing and non-navigable until the full publication contract is met (3.3083ms)
+✔ catalog validation rejects duplicate routes and incomplete published locations (4.0814ms)
+✔ map consumers receive only V1 learning locations from the shared catalog (1.4346ms)
+✔ lesson map creation and directory status keep future courses outside V1 (0.4686ms)
+✔ every published map stage declares a child-readable growth reveal (1.1348ms)
+✔ rangeForLesson maps the 1–144 boundaries and rejects other input (1.4209ms)
+✔ pickContinueCourse prefers the most progressed unfinished numbered lesson (0.3182ms)
+✔ pickContinueCourse falls back to first unfinished then latest completed lesson (0.1478ms)
+✔ resolveLessonSearch distinguishes available, placeholder, missing, and invalid lessons (0.2993ms)
+✔ ratingFor exposes every branch including zero (0.8468ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.7951ms)
+✔ certificate predicates require every named challenge (0.2613ms)
+✔ every approved course rating table reaches zero through three stars (0.2417ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (351.607ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (888.0522ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (572.0882ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (458.5653ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (486.6948ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (435.7545ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (465.3673ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (236.7086ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (7.0296ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (2.4613ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (413.1434ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8976.8882

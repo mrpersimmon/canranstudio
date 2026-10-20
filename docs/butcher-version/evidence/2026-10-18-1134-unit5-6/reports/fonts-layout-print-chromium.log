@@ -1,0 +1,15 @@
+
+Running 8 tests using 1 worker
+
+(node:19684) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit5-6-v154-history.spec.js:16:1 › 原编号8至13、12组选择问答、Written A4与B10及全部原例实际打印 (1.5s)
+  ok 2 tests\e2e\unit5-6-v154.spec.js:5:1 › 当前首页使用确认故事图 (448ms)
+  ok 3 tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 (7.7s)
+  ok 4 tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 (7.1s)
+  ok 5 tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 (6.9s)
+  ok 6 tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 (7.4s)
+  ok 7 tests\e2e\unit5-6-v154.spec.js:34:49 › 320x568短屏三卡与推进完整 (2.8s)
+  ok 8 tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 (2.9s)
+
+  8 passed (37.9s)

@@ -5,11 +5,11 @@ function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/
 function storyProps(){
  const element=node('div','house-world'),location=node('p','house-location');element.setAttribute('role','group');element.setAttribute('aria-label','Nigel与Ian面向彼此，从门前进入屋内看房');
  for(const[key,label,side,other]of [['nigel','Nigel','left','Ian'],['ian','Ian','right','Nigel']]){const wrap=node('div','dialogue-actor house-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'house-cast',label+'全身完整，面向'+(side==='left'?'右侧':'左侧')+other,'webp'),node('span','actor-label',label));element.append(wrap);}
- const sign=node('figure','story-prop sale-sign');sign.append(picture('sale','','待售房屋，未显示成交'),node('figcaption','','For sale'));element.append(sign);
- const note=node('figure','story-prop viewing-note');note.append(picture('book','','看房笔记，尚未决定购买'),node('figcaption','','Viewing notes'));note.hidden=true;element.append(note);
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const title=node('strong'),detail=node('span');timeline.append(title,detail);element.append(location,timeline);
- const entries=[['Nigel来看看房子','房子正在待售'],['Ian确认正在出售','还没有成交'],['Nigel请求进屋看看','May I have a look?'],['Ian邀请Nigel进屋','Come in.'],['两人来到客厅','询问居住多久'],['已经住了二十年','for twenty years'],['Nigel感叹时间很长','二十年'],['从1976年起住在这里','since 1976'],['Nigel询问出售原因','Why…?'],['Ian刚退休','想在乡下买小房子'],['Nigel询问房价','How much…?'],['原文报价','£68,500'],['Nigel觉得价格很高','That’s a lot of money!'],['Ian认为值这个价','这是他的看法'],['Nigel仍未决定','妻子必须先来看'],['故事到这里结束','没有说房子已售出']];
- function update(i){const entry=i<0?['来看看待售房子','住了多久，从何时起？']:entries[i],inside=i>=4;title.textContent=entry[0];detail.textContent=entry[1];element.dataset.scene=inside?'living':'outside';location.textContent=inside?'Ian的家 · 客厅':'Ian的家 · 门前';sign.hidden=inside;note.hidden=!inside;}
+ const sign=node('figure','story-prop sale-sign');sign.append(picture('sale','','房屋前的待售牌'),node('figcaption','','For sale'));element.append(sign);
+ const note=node('figure','story-prop viewing-note');note.append(picture('book','','打开的看房笔记'),node('figcaption','','Viewing notes'));note.hidden=true;element.append(note);
+ element.append(location);
+
+ function update(i){const inside=i>=4;element.dataset.scene=inside?'living':'outside';location.textContent=inside?'Ian的家 · 客厅':'Ian的家 · 门前';sign.hidden=inside;note.hidden=!inside;}
  update(-1);return{element,update,sideFor:(_i,who)=>who==='ian'?'right':'left'};
 }
 function create({element}){let view,heading,task;return{

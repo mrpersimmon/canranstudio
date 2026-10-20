@@ -1,0 +1,114 @@
+{
+  "unit": "unit113-114",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 76,
+  "zones": {
+    "listen": 8,
+    "roles": 8,
+    "grammar": 26,
+    "apply": 8,
+    "exam": 26
+  },
+  "words": 28,
+  "people": 8,
+  "dialogueTurns": 15,
+  "jointUtterance": {
+    "people": [
+      "1st Tramp",
+      "2nd Tramp"
+    ],
+    "turns": 1
+  },
+  "substitutions": {
+    "count": 12,
+    "labels": "o–z"
+  },
+  "writing": {
+    "items": {
+      "A": 4,
+      "B": 4,
+      "C": 6,
+      "D": 6
+    },
+    "linesPerItem": {
+      "A": 1,
+      "B": 3,
+      "C": 2,
+      "D": 2
+    },
+    "totalLines": 40
+  },
+  "browserRuns": {
+    "chromium": 15,
+    "webkit": 15,
+    "story-chromium": 4,
+    "story-webkit": 4,
+    "login-root": 6,
+    "login-sub": 6,
+    "login-webkit-root": 6,
+    "login-webkit-sub": 6,
+    "catalog": 3,
+    "deployment": 1
+  },
+  "browserTotalDistinctPassing": 58,
+  "additionalStoryRechecks": 8,
+  "initialFailuresRetained": {
+    "loading": "storyIcon used filename coins instead of word key small change; fallback missing asset returned409 and L05; key corrected and real decode checked",
+    "labels": "320px three-person long passenger labels overlapped; natural wrapping at preserved12px; every turn checked"
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true
+  },
+  "art": {
+    "fullBodySprites": 12,
+    "fullBodyOpaqueEdgePixels": 0,
+    "keepsakeFraming": "intentional medium close-up; face/hands/coins complete"
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; existing standard implemented",
+    "O13-O14": "pending; course evidence appended",
+    "newItems": 0
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit113-114/#learn/words",
+  "previewStars": 0,
+  "testIdentityNote": "小禾与欧阳小禾同学为虚构测试账号"
+}

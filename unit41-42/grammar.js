@@ -6,7 +6,7 @@
     is:[['/assets/lesson49/icons/book.svg'],['/assets/unit41-42/coffee.svg']],
     bottles:[['/assets/unit41-42/cup.svg','/assets/unit41-42/cup.svg','/assets/unit41-42/cup.svg']],
     loaves:[['/assets/unit41-42/soap.svg','/assets/unit41-42/three-bars.svg'],['/assets/unit41-42/bread.svg','/assets/unit41-42/two-loaves.svg']],
-    fraction:[['/assets/unit41-42/pound.svg'],['/assets/unit41-42/half.svg'],['/assets/unit41-42/quarter.svg']],
+    fraction:[['/assets/unit41-42/pound-v153.svg'],['/assets/unit41-42/half-v153.svg'],['/assets/unit41-42/quarter-v153.svg']],
     'some-a':[['/assets/unit41-42/sugar.svg'],['/assets/unit41-42/tin.svg']],
     'ask-any':[['/assets/unit41-42/milk.svg']],
     'one-some':[['/assets/unit39-40/vase.svg'],['/assets/unit41-42/milk.svg']]
@@ -15,7 +15,7 @@
     const base=core.unit12Grammar.create({element,art});
     return {...base,present(question,progress){
       base.present(question,progress);
-      const key=question.id.replace('u4142-v1-g-',''),demo=element.querySelector('.grammar-model');
+      const key=question.id.replace('u4142-v1-g-','').replace(/-v153$/,''),demo=element.querySelector('.grammar-model');
       if(!demo)return;
       demo.classList.add('pantry-model');
       const visual=pictures[key];if(!visual)return;

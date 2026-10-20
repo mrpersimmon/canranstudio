@@ -1,0 +1,82 @@
+{
+  "lesson": "131–132",
+  "standard": "v1.52",
+  "mode": "classroom",
+  "catalogAtValidation": 66,
+  "counts": {
+    "words": 18,
+    "originalSpeakerTurns": 8,
+    "readingSteps": 16,
+    "models": 6,
+    "writingItems": 27,
+    "writingLines": 48,
+    "writingPdfPages": 4,
+    "questions": [
+      7,
+      10,
+      18,
+      8,
+      22
+    ],
+    "questionTotal": 65
+  },
+  "courseTests": {
+    "chromium": {
+      "initialPassed": 13,
+      "initialFailed": 2,
+      "sameVersionIsolatedFailed": 2,
+      "affectedRechecksPassed": 5
+    },
+    "webkit": {
+      "initialPassed": 13,
+      "initialFailed": 2,
+      "sameVersionIsolatedFailed": 2,
+      "affectedRechecksPassed": 5
+    }
+  },
+  "finalPrintChecks": {
+    "chromium": 1,
+    "webkit": 1
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8,
+    "method": "7main scenarios plus1separately-added retention/export scenario per engine and mount;application unchanged"
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "representativePassed": 5,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameNamesAs127": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程迁移",
+    "共享Worker及拒写所有分支",
+    "除所列画布故障和离开取消之外的全部导出故障分支"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit131-132/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 3",
+    "assessmentAnswersSubmitted": false
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

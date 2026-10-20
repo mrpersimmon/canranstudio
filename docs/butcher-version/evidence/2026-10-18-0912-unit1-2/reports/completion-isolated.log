@@ -1,0 +1,43 @@
+
+Running 1 test using 1 worker
+
+(node:12632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 (9.3s)
+
+
+  1) tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 ─────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('.stage-trans').locator('.completion-art .completion-man')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-trans').locator('.completion-art .completion-man')
+
+
+      103 |   await expectResults(room, [12, 12, 0]);
+      104 |   await expect(room.getByRole('heading', { name: '问答练习完成！', exact: true })).toBeVisible();
+    > 105 |   await expect(room.locator('.completion-art .completion-man')).toBeVisible();
+          |                                                                 ^
+      106 |   await expect(room.locator('.completion-art .completion-woman')).toBeVisible();
+      107 | });
+      108 |
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit1-2-completion.spec.js:105:65
+
+    Error Context: output\unit12-review-20261018\completion-isolated\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\completion-isolated\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\completion-isolated\unit1-2-completion-语法小工坊保留人物成果画面，恢复三张统计卡\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 ──────────────────────────────

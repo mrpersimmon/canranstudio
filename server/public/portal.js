@@ -45,6 +45,26 @@
     for(const key of keys){try{const pending=JSON.parse(localStorage.getItem(key));if(pending.studentId!==studentId)continue;const result=await api('progress',pending);if(result.stale){localStorage.removeItem(prefix+'canran:lesson:'+pending.course+':learning:v1');localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}localStorage.removeItem(key);}catch{remaining++;}}
     return remaining;
   }
+  async function prepareSharedFonts(){
+    if(!window.CanranCourseCache){
+      await new Promise((resolve,reject)=>{
+        const script=document.createElement('script');script.src='/lesson/core/course-cache.js';
+        const failed=()=>{clearTimeout(timer);script.remove();reject(Error('课程资源尚未就绪'));};
+        const timer=setTimeout(failed,15000);script.onload=()=>{clearTimeout(timer);resolve();};script.onerror=failed;document.head.append(script);
+      });
+    }
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);let index;
+    try{const response=await fetch('/lesson/course-index.json',{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('课程资源尚未就绪');index=await response.json();}finally{clearTimeout(timer);}
+    const fonts=index.sharedFonts||[];
+    if(!Array.isArray(fonts)||fonts.some(item=>item.type!=='font/woff2'||!item.url.startsWith('/lesson/resources/')||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isSafeInteger(item.bytes)||item.bytes<=0))throw Error('课程资源尚未就绪');
+    const queue=[...fonts];
+    const store=CanranCourseCache.open('/lesson/');
+    // A short lease protects prepared public font bytes from quota cleanup;
+    // it contains no student identity, answers, awards or certificate dates.
+    await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)})).catch(()=>{});
+    await Promise.all(Array.from({length:4},async()=>{while(queue.length)await store.obtain(queue.shift());}));
+    document.documentElement.dataset.sharedFontsReady=String(fonts.length);
+  }
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
     if(who.mustChangePassword)return passwordForm(who,true);
@@ -57,7 +77,7 @@
     try {
       const fontLink = document.getElementById('courseFonts') || Object.assign(document.createElement('link'), {id:'courseFonts', rel:'stylesheet', href:'/lesson/assets/fonts/fonts.css'});
       if (!fontLink.isConnected) await new Promise((resolve,reject)=>{fontLink.onload=resolve;fontLink.onerror=()=>{fontLink.remove();reject(Error('字体尚未就绪'));};document.head.append(fontLink);});
-      await Promise.all([document.fonts.load('600 20px "Baloo 2"'),document.fonts.load('24px "ZCOOL KuaiLe"'),...new Set(who.courses.flatMap(c=>c.artwork?.length?c.artwork:[c.image]).filter(Boolean))].map(value=>typeof value==='string'?new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>image.decode().then(resolve,reject);image.onerror=reject;image.src=value;}):value));
+      await Promise.all([...(who.courses.length?[prepareSharedFonts()]:[]),document.fonts.load('600 20px "Baloo 2"'),document.fonts.load('24px "ZCOOL KuaiLe"'),...new Set(who.courses.flatMap(c=>c.artwork?.length?c.artwork:[c.image]).filter(Boolean))].map(value=>typeof value==='string'?new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>image.decode().then(resolve,reject);image.onerror=reject;image.src=value;}):value));
     } catch {app.innerHTML='<section class="login panel"><h1>画面还没准备好</h1><button id="retry">再试一次</button></section>';document.getElementById('retry').onclick=home;return;}
     const banners=who.courses.map(c=>{
       const pictures=c.artwork?.length?c.artwork:[c.image];

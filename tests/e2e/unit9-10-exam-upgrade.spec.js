@@ -3,6 +3,8 @@ const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { EXAM, selectAnswer, finishExamFrom } = require('../support/unit9-10-exam');
 const oldFlow = require('../fixtures/unit9-10-short-exam-before/flow');
+// Historical expectations run on a complete frozen HTTP course package.
+require('../support/unit910-legacy').historicalSuite(test);
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 async function oldEdition(page) {
   let old = true;

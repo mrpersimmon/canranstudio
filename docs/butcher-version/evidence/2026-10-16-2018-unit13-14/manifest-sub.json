@@ -1,0 +1,1224 @@
+{
+  "accessPolicy": "class-v1",
+  "schema": 1,
+  "protocol": 1,
+  "basePath": "/lesson/",
+  "id": "unit13-14",
+  "title": "新衣配色屋",
+  "entry": "/lesson/unit13-14/index.html",
+  "shell": "/lesson/course-shells/unit13-14.html",
+  "route": "/lesson/unit13-14/",
+  "revision": "e67ce5ee161f8a918bed249656bb76a7497afbf74b800119d3a6b324a7c4810d",
+  "mode": "classroom",
+  "required": [
+    {
+      "key": "/lesson/assets/awards/award-round.woff2",
+      "url": "/lesson/resources/9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28/award-round.woff2",
+      "sha256": "9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28",
+      "bytes": 1296316,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/awards/download.svg",
+      "url": "/lesson/resources/3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3/download.svg",
+      "sha256": "3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3",
+      "bytes": 316,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/awards/fonts/award-gothic-500.woff2",
+      "url": "/lesson/resources/8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f/award-gothic-500.woff2",
+      "sha256": "8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f",
+      "bytes": 4456656,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/awards/fonts/award-gothic-brand-400.woff2",
+      "url": "/lesson/resources/29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237/award-gothic-brand-400.woff2",
+      "sha256": "29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237",
+      "bytes": 1948,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/awards/fonts/award-nunito.woff2",
+      "url": "/lesson/resources/69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279/award-nunito.woff2",
+      "sha256": "69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279",
+      "bytes": 101104,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/awards/fonts/lesson-gothic-body-400.woff2",
+      "url": "/lesson/resources/bcc4f7c1da7e900cd74df7447b18da1d26b148a31e93ddef4968803e5eadd15a/lesson-gothic-body-400.woff2",
+      "sha256": "bcc4f7c1da7e900cd74df7447b18da1d26b148a31e93ddef4968803e5eadd15a",
+      "bytes": 303376,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/awards/paper.webp",
+      "url": "/lesson/resources/2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce/paper.webp",
+      "sha256": "2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce",
+      "bytes": 1254,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/awards/return.svg",
+      "url": "/lesson/resources/1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306/return.svg",
+      "sha256": "1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306",
+      "bytes": 290,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/awards/star-earned.webp",
+      "url": "/lesson/resources/7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107/star-earned.webp",
+      "sha256": "7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107",
+      "bytes": 11876,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/awards/star-empty.webp",
+      "url": "/lesson/resources/269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c/star-empty.webp",
+      "sha256": "269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c",
+      "bytes": 13200,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/awards/typography-45-46.css",
+      "url": "/lesson/resources/1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17/typography-45-46.css",
+      "sha256": "1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17",
+      "bytes": 585,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/assets/awards/unit1-2-handbag-closeup.webp",
+      "url": "/lesson/resources/db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826/unit1-2-handbag-closeup.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+      "bytes": 177460,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/brand/starflower-apple-touch.png",
+      "url": "/lesson/resources/c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e/starflower-apple-touch.png",
+      "sha256": "c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e",
+      "bytes": 14833,
+      "type": "image/png"
+    },
+    {
+      "key": "/lesson/assets/brand/starflower-favicon.png",
+      "url": "/lesson/resources/0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28/starflower-favicon.png",
+      "sha256": "0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28",
+      "bytes": 2694,
+      "type": "image/png"
+    },
+    {
+      "key": "/lesson/assets/fonts/baloo-2-latin-500.woff2",
+      "url": "/lesson/resources/b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36/baloo-2-latin-500.woff2",
+      "sha256": "b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36",
+      "bytes": 19556,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/baloo-2-latin-700.woff2",
+      "url": "/lesson/resources/8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0/baloo-2-latin-700.woff2",
+      "sha256": "8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0",
+      "bytes": 19436,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/baloo-2-latin-800.woff2",
+      "url": "/lesson/resources/3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7/baloo-2-latin-800.woff2",
+      "sha256": "3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7",
+      "bytes": 18632,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/fonts.css",
+      "url": "/lesson/resources/4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f/fonts.css",
+      "sha256": "4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f",
+      "bytes": 3061,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/assets/fonts/fredoka-latin-400.woff2",
+      "url": "/lesson/resources/9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f/fredoka-latin-400.woff2",
+      "sha256": "9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f",
+      "bytes": 16076,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/fredoka-latin-500.woff2",
+      "url": "/lesson/resources/7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620/fredoka-latin-500.woff2",
+      "sha256": "7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620",
+      "bytes": 16248,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/fredoka-latin-600.woff2",
+      "url": "/lesson/resources/b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294/fredoka-latin-600.woff2",
+      "sha256": "b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294",
+      "bytes": 16468,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/fredoka-latin-700.woff2",
+      "url": "/lesson/resources/ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16/fredoka-latin-700.woff2",
+      "sha256": "ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16",
+      "bytes": 15900,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+      "url": "/lesson/resources/843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd/zcool-kuaile-chinese-simplified-400.woff2",
+      "sha256": "843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd",
+      "bytes": 726052,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/fonts/zcool-kuaile-latin-400.woff2",
+      "url": "/lesson/resources/8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93/zcool-kuaile-latin-400.woff2",
+      "sha256": "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93",
+      "bytes": 5344,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/audio.svg",
+      "url": "/lesson/resources/379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1/audio.svg",
+      "sha256": "379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1",
+      "bytes": 291,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/back.svg",
+      "url": "/lesson/resources/3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6/back.svg",
+      "sha256": "3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6",
+      "bytes": 215,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/beef.svg",
+      "url": "/lesson/resources/690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb/beef.svg",
+      "sha256": "690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb",
+      "bytes": 702,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/bird.svg",
+      "url": "/lesson/resources/31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1/bird.svg",
+      "sha256": "31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1",
+      "bytes": 2042,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/book.svg",
+      "url": "/lesson/resources/2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6/book.svg",
+      "sha256": "2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6",
+      "bytes": 350,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/butcher.svg",
+      "url": "/lesson/resources/5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419/butcher.svg",
+      "sha256": "5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419",
+      "bytes": 2094,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/cards.svg",
+      "url": "/lesson/resources/c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af/cards.svg",
+      "sha256": "c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af",
+      "bytes": 389,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/check.svg",
+      "url": "/lesson/resources/6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0/check.svg",
+      "sha256": "6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0",
+      "bytes": 231,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/chicken.svg",
+      "url": "/lesson/resources/a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88/chicken.svg",
+      "sha256": "a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/close.svg",
+      "url": "/lesson/resources/65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37/close.svg",
+      "sha256": "65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37",
+      "bytes": 213,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/dog.svg",
+      "url": "/lesson/resources/a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d/dog.svg",
+      "sha256": "a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d",
+      "bytes": 868,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/either.svg",
+      "url": "/lesson/resources/b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689/either.svg",
+      "sha256": "b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689",
+      "bytes": 1078,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/fish.svg",
+      "url": "/lesson/resources/d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b/fish.svg",
+      "sha256": "d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b",
+      "bytes": 364,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/give.svg",
+      "url": "/lesson/resources/09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2/give.svg",
+      "sha256": "09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/heart.svg",
+      "url": "/lesson/resources/cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f/heart.svg",
+      "sha256": "cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f",
+      "bytes": 255,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/hint.svg",
+      "url": "/lesson/resources/72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e/hint.svg",
+      "sha256": "72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e",
+      "bytes": 658,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/hotpot.svg",
+      "url": "/lesson/resources/51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06/hotpot.svg",
+      "sha256": "51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06",
+      "bytes": 502,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/husband.svg",
+      "url": "/lesson/resources/8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a/husband.svg",
+      "sha256": "8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/lamb.svg",
+      "url": "/lesson/resources/3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051/lamb.svg",
+      "sha256": "3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051",
+      "bytes": 873,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/lily.svg",
+      "url": "/lesson/resources/aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121/lily.svg",
+      "sha256": "aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121",
+      "bytes": 548,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/map.svg",
+      "url": "/lesson/resources/4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6/map.svg",
+      "sha256": "4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6",
+      "bytes": 294,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/meat.svg",
+      "url": "/lesson/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/meat.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/mince.svg",
+      "url": "/lesson/resources/d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec/mince.svg",
+      "sha256": "d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec",
+      "bytes": 1356,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/mutton.svg",
+      "url": "/lesson/resources/9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd/mutton.svg",
+      "sha256": "9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd",
+      "bytes": 612,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/order.svg",
+      "url": "/lesson/resources/4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469/order.svg",
+      "sha256": "4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469",
+      "bytes": 381,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/people.svg",
+      "url": "/lesson/resources/3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3/people.svg",
+      "sha256": "3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3",
+      "bytes": 1027,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/piece.svg",
+      "url": "/lesson/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/piece.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/pork.svg",
+      "url": "/lesson/resources/edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732/pork.svg",
+      "sha256": "edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732",
+      "bytes": 527,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/pound.svg",
+      "url": "/lesson/resources/0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a/pound.svg",
+      "sha256": "0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a",
+      "bytes": 616,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/question.svg",
+      "url": "/lesson/resources/e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694/question.svg",
+      "sha256": "e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694",
+      "bytes": 320,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/retry.svg",
+      "url": "/lesson/resources/de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692/retry.svg",
+      "sha256": "de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692",
+      "bytes": 281,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/speech.svg",
+      "url": "/lesson/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/speech.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/star.svg",
+      "url": "/lesson/resources/d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672/star.svg",
+      "sha256": "d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672",
+      "bytes": 262,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/steak.svg",
+      "url": "/lesson/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/steak.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/tell.svg",
+      "url": "/lesson/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/tell.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/tom.svg",
+      "url": "/lesson/resources/049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750/tom.svg",
+      "sha256": "049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/lesson49/icons/truth.svg",
+      "url": "/lesson/resources/078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b/truth.svg",
+      "sha256": "078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b",
+      "bytes": 1137,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/book.svg",
+      "url": "/lesson/resources/5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f/book.svg",
+      "sha256": "5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f",
+      "bytes": 398,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/car.svg",
+      "url": "/lesson/resources/0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9/car.svg",
+      "sha256": "0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9",
+      "bytes": 522,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/coat.svg",
+      "url": "/lesson/resources/2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5/coat.svg",
+      "sha256": "2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5",
+      "bytes": 450,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/completion/correct-v1.png",
+      "url": "/lesson/resources/c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b/correct-v1.png",
+      "sha256": "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+      "bytes": 5381,
+      "type": "image/png"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/completion/incorrect-v1.png",
+      "url": "/lesson/resources/c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415/incorrect-v1.png",
+      "sha256": "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+      "bytes": 7692,
+      "type": "image/png"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/completion/streak-v1.png",
+      "url": "/lesson/resources/191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9/streak-v1.png",
+      "sha256": "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+      "bytes": 7317,
+      "type": "image/png"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/dress.svg",
+      "url": "/lesson/resources/0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67/dress.svg",
+      "sha256": "0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67",
+      "bytes": 368,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/handbag.svg",
+      "url": "/lesson/resources/84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4/handbag.svg",
+      "sha256": "84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4",
+      "bytes": 441,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/house.svg",
+      "url": "/lesson/resources/df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497/house.svg",
+      "sha256": "df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497",
+      "bytes": 471,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/man.svg",
+      "url": "/lesson/resources/2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839/man.svg",
+      "sha256": "2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839",
+      "bytes": 842,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/pen.svg",
+      "url": "/lesson/resources/42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b/pen.svg",
+      "sha256": "42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b",
+      "bytes": 428,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/pencil.svg",
+      "url": "/lesson/resources/38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0/pencil.svg",
+      "sha256": "38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0",
+      "bytes": 410,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/scene/man.svg",
+      "url": "/lesson/resources/0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed/man.svg",
+      "sha256": "0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed",
+      "bytes": 1599,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/scene/woman.svg",
+      "url": "/lesson/resources/79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399/woman.svg",
+      "sha256": "79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399",
+      "bytes": 1741,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/shirt.svg",
+      "url": "/lesson/resources/7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9/shirt.svg",
+      "sha256": "7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9",
+      "bytes": 416,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/skirt.svg",
+      "url": "/lesson/resources/c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf/skirt.svg",
+      "sha256": "c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf",
+      "bytes": 323,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/story-background.webp",
+      "url": "/lesson/resources/5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73/story-background.webp",
+      "sha256": "5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73",
+      "bytes": 12446,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/street.svg",
+      "url": "/lesson/resources/37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff/street.svg",
+      "sha256": "37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff",
+      "bytes": 1082,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/watch.svg",
+      "url": "/lesson/resources/197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e/watch.svg",
+      "sha256": "197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e",
+      "bytes": 390,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit1-2/woman.svg",
+      "url": "/lesson/resources/07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9/woman.svg",
+      "sha256": "07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9",
+      "bytes": 870,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/anna.svg",
+      "url": "/lesson/resources/4539fcc7d09fed6a62984e8ae79bfb0409f798532d90bce0c1a07bb12149aaba/anna.svg",
+      "sha256": "4539fcc7d09fed6a62984e8ae79bfb0409f798532d90bce0c1a07bb12149aaba",
+      "bytes": 1158,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/black.svg",
+      "url": "/lesson/resources/8bd34c2290e06a5f1598b9e43f91a1f09c12c51e804d09395f02cfbcec23113d/black.svg",
+      "sha256": "8bd34c2290e06a5f1598b9e43f91a1f09c12c51e804d09395f02cfbcec23113d",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/blouse-yellow.svg",
+      "url": "/lesson/resources/c6007bef4e25367e160680f4ad9591d12e372a3990d51b2f7ed3c5864345d30d/blouse-yellow.svg",
+      "sha256": "c6007bef4e25367e160680f4ad9591d12e372a3990d51b2f7ed3c5864345d30d",
+      "bytes": 564,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/blue.svg",
+      "url": "/lesson/resources/d2cb7cd17d3e0af0dfd43cb2826b6e2aed1791df5cd5204ea97658c5a9c1e6ef/blue.svg",
+      "sha256": "d2cb7cd17d3e0af0dfd43cb2826b6e2aed1791df5cd5204ea97658c5a9c1e6ef",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/brown.svg",
+      "url": "/lesson/resources/c83920507a197365d2a1249e3968400ffd36184e1111901a2ba3cdf32441953f/brown.svg",
+      "sha256": "c83920507a197365d2a1249e3968400ffd36184e1111901a2ba3cdf32441953f",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/car-blue.svg",
+      "url": "/lesson/resources/7bee35d629f1ddb486a6988450aa5e8aaa2ca5134209279cafd360e22e34cdac/car-blue.svg",
+      "sha256": "7bee35d629f1ddb486a6988450aa5e8aaa2ca5134209279cafd360e22e34cdac",
+      "bytes": 522,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/carpet.svg",
+      "url": "/lesson/resources/94a8b919b382a483b726bfc27182eda12930ab5fcab084c6bc7c0c11d6d3adce/carpet.svg",
+      "sha256": "94a8b919b382a483b726bfc27182eda12930ab5fcab084c6bc7c0c11d6d3adce",
+      "bytes": 403,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/case-yellow.svg",
+      "url": "/lesson/resources/148ba562723818c4fad274574d20ec40c207472285da8536dc141c8582ab1683/case-yellow.svg",
+      "sha256": "148ba562723818c4fad274574d20ec40c207472285da8536dc141c8582ab1683",
+      "bytes": 439,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/case.svg",
+      "url": "/lesson/resources/fbc78ed1d32a0f932c02b16bc86f2e97b2dba7d981cc02ffb941a566b0cf2ed8/case.svg",
+      "sha256": "fbc78ed1d32a0f932c02b16bc86f2e97b2dba7d981cc02ffb941a566b0cf2ed8",
+      "bytes": 439,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/cast-arrival-v1.webp",
+      "url": "/lesson/resources/eddb7e8dcc7d7eb13cfcda13114a8bd6bab0686a9087ebf33428550490489526/cast-arrival-v1.webp",
+      "sha256": "eddb7e8dcc7d7eb13cfcda13114a8bd6bab0686a9087ebf33428550490489526",
+      "bytes": 223722,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/cast-dress-v1.webp",
+      "url": "/lesson/resources/33266107152b0aeeebbeae601c97bc5eb1cc98ddc231c08fece1643bdbd89bab/cast-dress-v1.webp",
+      "sha256": "33266107152b0aeeebbeae601c97bc5eb1cc98ddc231c08fece1643bdbd89bab",
+      "bytes": 261254,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/cast-reveal-v1.webp",
+      "url": "/lesson/resources/fcab81102466f320dfa4f96cc6468d2149391a86e32ec4dee9ae9fe6dcf581c3/cast-reveal-v1.webp",
+      "sha256": "fcab81102466f320dfa4f96cc6468d2149391a86e32ec4dee9ae9fe6dcf581c3",
+      "bytes": 266684,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/cast-wear-v1.webp",
+      "url": "/lesson/resources/2bbc9c52bfd9214b5cb212c61549674314a326217784b0a38e9adc1f677e9ac9/cast-wear-v1.webp",
+      "sha256": "2bbc9c52bfd9214b5cb212c61549674314a326217784b0a38e9adc1f677e9ac9",
+      "bytes": 309546,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/coat-grey.svg",
+      "url": "/lesson/resources/8a89a40114545b15a36d5192c08430fbfd0b254ad6ba3f5a099a24be2a0f24ee/coat-grey.svg",
+      "sha256": "8a89a40114545b15a36d5192c08430fbfd0b254ad6ba3f5a099a24be2a0f24ee",
+      "bytes": 450,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/colour.svg",
+      "url": "/lesson/resources/bf1b9f611bba8e30a558ccfc430bfbb1326a5e2a9f92ac95ddb478026cd8d593/colour.svg",
+      "sha256": "bf1b9f611bba8e30a558ccfc430bfbb1326a5e2a9f92ac95ddb478026cd8d593",
+      "bytes": 507,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/come.svg",
+      "url": "/lesson/resources/1acb512e21fb58bbdfd78ca95a402ee7c42ebb1aa4ca9b4c9d83e014659a6b91/come.svg",
+      "sha256": "1acb512e21fb58bbdfd78ca95a402ee7c42ebb1aa4ca9b4c9d83e014659a6b91",
+      "bytes": 553,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/dog.svg",
+      "url": "/lesson/resources/5bc9ef244c23c03866604da505604fe9da8351a8d681352929b323bfc7efa920/dog.svg",
+      "sha256": "5bc9ef244c23c03866604da505604fe9da8351a8d681352929b323bfc7efa920",
+      "bytes": 700,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/dress.svg",
+      "url": "/lesson/resources/9477989d8aa9d3934ecade59134cd946118345f954cf38a239060f6f8f2fb3df/dress.svg",
+      "sha256": "9477989d8aa9d3934ecade59134cd946118345f954cf38a239060f6f8f2fb3df",
+      "bytes": 368,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/green.svg",
+      "url": "/lesson/resources/3adeefa86fd472c30281f70086e14b693fff63a97affe0d7c24c48abd69dbaa6/green.svg",
+      "sha256": "3adeefa86fd472c30281f70086e14b693fff63a97affe0d7c24c48abd69dbaa6",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/grey.svg",
+      "url": "/lesson/resources/4f3027cb6959681cc7cf3e641335ad955914943f942fcef83175c2cfbab73979/grey.svg",
+      "sha256": "4f3027cb6959681cc7cf3e641335ad955914943f942fcef83175c2cfbab73979",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/handbag-brown.svg",
+      "url": "/lesson/resources/a775937a1999efd362a58beb62c643356585b4f01b77d967090b93f658ef7d25/handbag-brown.svg",
+      "sha256": "a775937a1999efd362a58beb62c643356585b4f01b77d967090b93f658ef7d25",
+      "bytes": 366,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hanger.svg",
+      "url": "/lesson/resources/0da22d4620f151a92fb70624938be1c6bb80d47f1ada8c0c246aa7741e73c13e/hanger.svg",
+      "sha256": "0da22d4620f151a92fb70624938be1c6bb80d47f1ada8c0c246aa7741e73c13e",
+      "bytes": 253,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hat-box-open.svg",
+      "url": "/lesson/resources/3084404d4cbb788210b4533a0bb2477b56522ff82ae41c6c2ee4f44c6c04dcaf/hat-box-open.svg",
+      "sha256": "3084404d4cbb788210b4533a0bb2477b56522ff82ae41c6c2ee4f44c6c04dcaf",
+      "bytes": 478,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hat-box.svg",
+      "url": "/lesson/resources/44d6b32594c182db20ea1d1c2f0a3d76712ce280c32c2a37ad0c9c9156ca8c1f/hat-box.svg",
+      "sha256": "44d6b32594c182db20ea1d1c2f0a3d76712ce280c32c2a37ad0c9c9156ca8c1f",
+      "bytes": 458,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hat-grey-black.svg",
+      "url": "/lesson/resources/7d23c6b67d74cb46f0dedc24652929d7dfad96d44f9f5c1d1099e75925ed375e/hat-grey-black.svg",
+      "sha256": "7d23c6b67d74cb46f0dedc24652929d7dfad96d44f9f5c1d1099e75925ed375e",
+      "bytes": 396,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hat-yellow.svg",
+      "url": "/lesson/resources/96b49eecce318f682f5537c297ad3e637e80d5ba57cd908a14fa73916e96a30b/hat-yellow.svg",
+      "sha256": "96b49eecce318f682f5537c297ad3e637e80d5ba57cd908a14fa73916e96a30b",
+      "bytes": 396,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/hat.svg",
+      "url": "/lesson/resources/463d3f7cf6bd4425ac1f938bdb9c109ce642ffe4626cc35270a1b3463a9d49f3/hat.svg",
+      "sha256": "463d3f7cf6bd4425ac1f938bdb9c109ce642ffe4626cc35270a1b3463a9d49f3",
+      "bytes": 396,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/keepsake-story-v1.webp",
+      "url": "/lesson/resources/c281ea08de4915d923fe4e84aa96e54eb909c08b30b8ebc7892ddca414fc712a/keepsake-story-v1.webp",
+      "sha256": "c281ea08de4915d923fe4e84aa96e54eb909c08b30b8ebc7892ddca414fc712a",
+      "bytes": 341180,
+      "type": "image/webp"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/louise.svg",
+      "url": "/lesson/resources/351d4ed6ebebc9d2563168a6eb6fa2cde0ad6c5455dc884075c6673bf00524e9/louise.svg",
+      "sha256": "351d4ed6ebebc9d2563168a6eb6fa2cde0ad6c5455dc884075c6673bf00524e9",
+      "bytes": 1383,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/lovely.svg",
+      "url": "/lesson/resources/75e7895363800882a8d7479ee57a6215803c6fa82b321bb4661811501c65be4c/lovely.svg",
+      "sha256": "75e7895363800882a8d7479ee57a6215803c6fa82b321bb4661811501c65be4c",
+      "bytes": 475,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/new.svg",
+      "url": "/lesson/resources/3fd7821fd14bcc7a365dd063f021e549f2bedea1db20f1e51b604b370aab3e5a/new.svg",
+      "sha256": "3fd7821fd14bcc7a365dd063f021e549f2bedea1db20f1e51b604b370aab3e5a",
+      "bytes": 388,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/orange.svg",
+      "url": "/lesson/resources/b24052fa7c9019346f98b9372155c371e51e918814c800fe4f562b46163631be/orange.svg",
+      "sha256": "b24052fa7c9019346f98b9372155c371e51e918814c800fe4f562b46163631be",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/pen-green.svg",
+      "url": "/lesson/resources/b3c7a4a3d4b41d20265ae2daf4f80bf58994cb8b18504c5f7cf221e70032c127/pen-green.svg",
+      "sha256": "b3c7a4a3d4b41d20265ae2daf4f80bf58994cb8b18504c5f7cf221e70032c127",
+      "bytes": 428,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/pencil-blue.svg",
+      "url": "/lesson/resources/7834ea5ecd73982258c4b03382f0210d3f6cccd7cc5b9c46e7f5f0c0c0309a14/pencil-blue.svg",
+      "sha256": "7834ea5ecd73982258c4b03382f0210d3f6cccd7cc5b9c46e7f5f0c0c0309a14",
+      "bytes": 410,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/red.svg",
+      "url": "/lesson/resources/d1358e10212b37857bc8b928ed7688600b3860e972d8459c0e76a0686d890bea/red.svg",
+      "sha256": "d1358e10212b37857bc8b928ed7688600b3860e972d8459c0e76a0686d890bea",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/same.svg",
+      "url": "/lesson/resources/a407252598d9f6c64a08374ab8f99ceae6c0b1301bacb65acb7ac4c46a9d4e86/same.svg",
+      "sha256": "a407252598d9f6c64a08374ab8f99ceae6c0b1301bacb65acb7ac4c46a9d4e86",
+      "bytes": 332,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/shirt-white.svg",
+      "url": "/lesson/resources/05b03669b9f89947cfe7747cc342fae099ae7764261fbea5459f84873b84980f/shirt-white.svg",
+      "sha256": "05b03669b9f89947cfe7747cc342fae099ae7764261fbea5459f84873b84980f",
+      "bytes": 487,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/skirt-yellow.svg",
+      "url": "/lesson/resources/2f10f625c7da8a0767b1c112c29107560248dd66f8af94a58eeba2dc1987e2ea/skirt-yellow.svg",
+      "sha256": "2f10f625c7da8a0767b1c112c29107560248dd66f8af94a58eeba2dc1987e2ea",
+      "bytes": 323,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/smart.svg",
+      "url": "/lesson/resources/c3d165c44e5b147388c3560b45182371b7a226a87f8f99b4cfb3f63000577ae7/smart.svg",
+      "sha256": "c3d165c44e5b147388c3560b45182371b7a226a87f8f99b4cfb3f63000577ae7",
+      "bytes": 437,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/stairs-background.svg",
+      "url": "/lesson/resources/9ea3902cbfbde784c212a6643a361476015cb014143d4265adecc64330480714/stairs-background.svg",
+      "sha256": "9ea3902cbfbde784c212a6643a361476015cb014143d4265adecc64330480714",
+      "bytes": 922,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/story-background.svg",
+      "url": "/lesson/resources/013b82ea1eb5910ffa8291c9be4d8d584fcf7fcfd1072dfd418b996a423e40d6/story-background.svg",
+      "sha256": "013b82ea1eb5910ffa8291c9be4d8d584fcf7fcfd1072dfd418b996a423e40d6",
+      "bytes": 976,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/suit-grey.svg",
+      "url": "/lesson/resources/d6278430a20c460ac7a0be8335095b9abbe2eed8225bf8d4db733f43efd8b620/suit-grey.svg",
+      "sha256": "d6278430a20c460ac7a0be8335095b9abbe2eed8225bf8d4db733f43efd8b620",
+      "bytes": 428,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/tie-orange.svg",
+      "url": "/lesson/resources/c2ce697c605751b34d40dab3beb8d74b2d0bc0d8e0ec7849d2fde674fa1efa2e/tie-orange.svg",
+      "sha256": "c2ce697c605751b34d40dab3beb8d74b2d0bc0d8e0ec7849d2fde674fa1efa2e",
+      "bytes": 285,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/umbrella-black.svg",
+      "url": "/lesson/resources/1cd0ca437d6a81a522cde129d7c4d7eb6afde6c454038f4c1bad2e28a20613da/umbrella-black.svg",
+      "sha256": "1cd0ca437d6a81a522cde129d7c4d7eb6afde6c454038f4c1bad2e28a20613da",
+      "bytes": 367,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/upstairs.svg",
+      "url": "/lesson/resources/e42efa4566838fcf5b52c8a2bc4943883e3e2bf5aa7b4f29306c7ce4113df91b/upstairs.svg",
+      "sha256": "e42efa4566838fcf5b52c8a2bc4943883e3e2bf5aa7b4f29306c7ce4113df91b",
+      "bytes": 304,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/white.svg",
+      "url": "/lesson/resources/1c05dc872ac491dcf607c1470350ef20641a6e45eab78520d2edf66fd8b4f9a8/white.svg",
+      "sha256": "1c05dc872ac491dcf607c1470350ef20641a6e45eab78520d2edf66fd8b4f9a8",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/assets/unit13-14/yellow.svg",
+      "url": "/lesson/resources/9064b3524f2746c893c3c121a5cf26abb771b7a5ea01881559b4b11bd390368a/yellow.svg",
+      "sha256": "9064b3524f2746c893c3c121a5cf26abb771b7a5ea01881559b4b11bd390368a",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/lesson/core/award-card-layout.css",
+      "url": "/lesson/resources/d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af/award-card-layout.css",
+      "sha256": "d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af",
+      "bytes": 3233,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/award-card-layout.js",
+      "url": "/lesson/resources/6c0e90fb4509999731a20fd0ebb8e40d4abe1a9d7a894c6048a9304e8893bfd1/award-card-layout.js",
+      "sha256": "6c0e90fb4509999731a20fd0ebb8e40d4abe1a9d7a894c6048a9304e8893bfd1",
+      "bytes": 6006,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/award-gif.js",
+      "url": "/lesson/resources/8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765/award-gif.js",
+      "sha256": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+      "bytes": 5908,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/award-reveal.css",
+      "url": "/lesson/resources/88b964f02751b9ac147a39ad12af5429a1059ff313993f25b9804ee1acb791f4/award-reveal.css",
+      "sha256": "88b964f02751b9ac147a39ad12af5429a1059ff313993f25b9804ee1acb791f4",
+      "bytes": 6589,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/award-reveal.js",
+      "url": "/lesson/resources/0ab2e61e4b8a3612080fc5aebb2d01e55d0417ab17cbcf11de2afae94b3918a7/award-reveal.js",
+      "sha256": "0ab2e61e4b8a3612080fc5aebb2d01e55d0417ab17cbcf11de2afae94b3918a7",
+      "bytes": 12890,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/award-rules.js",
+      "url": "/lesson/resources/4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a/award-rules.js",
+      "sha256": "4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a",
+      "bytes": 2931,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/course-cache.js",
+      "url": "/lesson/resources/6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b/course-cache.js",
+      "sha256": "6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b",
+      "bytes": 11446,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/course-catalog.js",
+      "url": "/lesson/resources/aa854868b2a2625812f5365c56ad7fa1da8b8f7cc01866afe82bded06d023684/course-catalog.js",
+      "sha256": "aa854868b2a2625812f5365c56ad7fa1da8b8f7cc01866afe82bded06d023684",
+      "bytes": 536,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/course-loader.js",
+      "url": "/lesson/resources/995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb/course-loader.js",
+      "sha256": "995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb",
+      "bytes": 23868,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-base.css",
+      "url": "/lesson/resources/8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d/lesson49-base.css",
+      "sha256": "8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d",
+      "bytes": 25459,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-experience.css",
+      "url": "/lesson/resources/c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e/lesson49-experience.css",
+      "sha256": "c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e",
+      "bytes": 38910,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-feedback.js",
+      "url": "/lesson/resources/1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1/lesson49-feedback.js",
+      "sha256": "1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1",
+      "bytes": 1053,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-icons.js",
+      "url": "/lesson/resources/34522e57dd3440429da5e6861b96bc9cf44d9de8d2136e7e52de7a8a209be37c/lesson49-icons.js",
+      "sha256": "34522e57dd3440429da5e6861b96bc9cf44d9de8d2136e7e52de7a8a209be37c",
+      "bytes": 376,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-practice.js",
+      "url": "/lesson/resources/09b022e879ad7e974c3b0db50290217225873d68dbf435231bc7c578ed04eb33/lesson49-practice.js",
+      "sha256": "09b022e879ad7e974c3b0db50290217225873d68dbf435231bc7c578ed04eb33",
+      "bytes": 50591,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-task-inputs.css",
+      "url": "/lesson/resources/9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede/lesson49-task-inputs.css",
+      "sha256": "9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede",
+      "bytes": 10729,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/lesson49-task-inputs.js",
+      "url": "/lesson/resources/2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09/lesson49-task-inputs.js",
+      "sha256": "2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09",
+      "bytes": 14735,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/story-certificate.css",
+      "url": "/lesson/resources/89838f9f9b8d802c51fb3a9dcd94f2b658de5d3439ab4d3e728bcd35157e0e22/story-certificate.css",
+      "sha256": "89838f9f9b8d802c51fb3a9dcd94f2b658de5d3439ab4d3e728bcd35157e0e22",
+      "bytes": 10128,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/story-certificate.js",
+      "url": "/lesson/resources/81125c62cdaf20616f41fd49260aecfbb58993a0f037223d24665d5391e95636/story-certificate.js",
+      "sha256": "81125c62cdaf20616f41fd49260aecfbb58993a0f037223d24665d5391e95636",
+      "bytes": 10184,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/unit-awards.js",
+      "url": "/lesson/resources/0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f/unit-awards.js",
+      "sha256": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+      "bytes": 3432,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/unit-theme.css",
+      "url": "/lesson/resources/4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249/unit-theme.css",
+      "sha256": "4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249",
+      "bytes": 8921,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/core/vendor/gifenc.js",
+      "url": "/lesson/resources/cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d/gifenc.js",
+      "sha256": "cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d",
+      "bytes": 9709,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit1-2/completion.css",
+      "url": "/lesson/resources/083eca7a8733658ea80c69a2e381d5df82ba9a75f98a963ef9d40a7a41929823/completion.css",
+      "sha256": "083eca7a8733658ea80c69a2e381d5df82ba9a75f98a963ef9d40a7a41929823",
+      "bytes": 46791,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit1-2/completion.js",
+      "url": "/lesson/resources/1ae3c946d2f33f6584301dd236c4d3e003cb01f7d1b9cde5b9afa624c2291d26/completion.js",
+      "sha256": "1ae3c946d2f33f6584301dd236c4d3e003cb01f7d1b9cde5b9afa624c2291d26",
+      "bytes": 6283,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit1-2/grammar.css",
+      "url": "/lesson/resources/82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e/grammar.css",
+      "sha256": "82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e",
+      "bytes": 2186,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit1-2/grammar.js",
+      "url": "/lesson/resources/08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912/grammar.js",
+      "sha256": "08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912",
+      "bytes": 3727,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/content.js",
+      "url": "/lesson/resources/2b8324e2e9f8071c9abaa8ea301f8f43dc7cb3125b4a3017e1ec60d3a63cfc24/content.js",
+      "sha256": "2b8324e2e9f8071c9abaa8ea301f8f43dc7cb3125b4a3017e1ec60d3a63cfc24",
+      "bytes": 33856,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/grammar.js",
+      "url": "/lesson/resources/c1bdb2b564e45c56d87f3825c6ba942c963adc3ba7af8c8ee06cd4de42faeb9e/grammar.js",
+      "sha256": "c1bdb2b564e45c56d87f3825c6ba942c963adc3ba7af8c8ee06cd4de42faeb9e",
+      "bytes": 383,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/index.html",
+      "url": "/lesson/resources/f999d95efaae485f329f6e2525cda539f8ffae0cd3d2d108d2b4b09a1ca5081a/index.html",
+      "sha256": "f999d95efaae485f329f6e2525cda539f8ffae0cd3d2d108d2b4b09a1ca5081a",
+      "bytes": 4447,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/legacy-certificate.js",
+      "url": "/lesson/resources/07fa59371dfed62e8a9ac62338b354325ed3f726904f09ce024e9ccf916ccb5a/legacy-certificate.js",
+      "sha256": "07fa59371dfed62e8a9ac62338b354325ed3f726904f09ce024e9ccf916ccb5a",
+      "bytes": 13309,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/legacy.css",
+      "url": "/lesson/resources/a7dbdb2c9e1876d14d92bd52443697579e7c7bd03d241c852a2d481dc382747c/legacy.css",
+      "sha256": "a7dbdb2c9e1876d14d92bd52443697579e7c7bd03d241c852a2d481dc382747c",
+      "bytes": 782,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/legacy.js",
+      "url": "/lesson/resources/5290a8c6b4829f0da09b6eec45c78b07bbd3c81fab7d027d489b68258f5da062/legacy.js",
+      "sha256": "5290a8c6b4829f0da09b6eec45c78b07bbd3c81fab7d027d489b68258f5da062",
+      "bytes": 5467,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/references.js",
+      "url": "/lesson/resources/c53918a62ab443bf7e2d19778c8dc85468e9ed4a300296db710e17d806ee5bc8/references.js",
+      "sha256": "c53918a62ab443bf7e2d19778c8dc85468e9ed4a300296db710e17d806ee5bc8",
+      "bytes": 5341,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/scene.js",
+      "url": "/lesson/resources/cf8233bbc27714beb91efd14f0d9defa27bf5119c1d90bf53aef5e7aafeaf522/scene.js",
+      "sha256": "cf8233bbc27714beb91efd14f0d9defa27bf5119c1d90bf53aef5e7aafeaf522",
+      "bytes": 2577,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/typography.css",
+      "url": "/lesson/resources/7ea140cd3688967853dcd227f4f7e08c7f385fbc43a459f7332093136a6632f5/typography.css",
+      "sha256": "7ea140cd3688967853dcd227f4f7e08c7f385fbc43a459f7332093136a6632f5",
+      "bytes": 2868,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/unit.css",
+      "url": "/lesson/resources/08bec9e3342bff51e9a21937c902e15fcc8d0c72c6e1465b818d535f7ca65f3a/unit.css",
+      "sha256": "08bec9e3342bff51e9a21937c902e15fcc8d0c72c6e1465b818d535f7ca65f3a",
+      "bytes": 17847,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit13-14/unit.js",
+      "url": "/lesson/resources/8d1c64e4b869a08b86d1d5077dcbcf61df7fa9cf8ff3145b20e3677ef9dee0a2/unit.js",
+      "sha256": "8d1c64e4b869a08b86d1d5077dcbcf61df7fa9cf8ff3145b20e3677ef9dee0a2",
+      "bytes": 18487,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/lesson/unit49-50/unit.css",
+      "url": "/lesson/resources/b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d/unit.css",
+      "sha256": "b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d",
+      "bytes": 11611,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/lesson/course-shells/unit13-14.html",
+      "url": "/lesson/resources/9b9d50e1ece9bcae59157c96c9a46ebeebca40c9bdd24dd450fc3c96fe8e0e71/unit13-14.html",
+      "sha256": "9b9d50e1ece9bcae59157c96c9a46ebeebca40c9bdd24dd450fc3c96fe8e0e71",
+      "bytes": 47962,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "audio": [
+    {
+      "key": "/lesson/assets/feedback/duolingo-complete.mp3",
+      "url": "/lesson/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/lesson/assets/feedback/duolingo-correct.mp3",
+      "url": "/lesson/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/lesson/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/lesson/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ],
+  "narration": [],
+  "feedback": [
+    {
+      "key": "/lesson/assets/feedback/duolingo-complete.mp3",
+      "url": "/lesson/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/lesson/assets/feedback/duolingo-correct.mp3",
+      "url": "/lesson/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/lesson/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/lesson/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ]
+}

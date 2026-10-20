@@ -1,0 +1,18 @@
+(function(core){
+'use strict';
+const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
+function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/unit97-98/'+name+'.'+ext;e.alt=alt;return e;}
+function storyProps(){
+ const element=node('div','claim-world');element.setAttribute('role','group');element.setAttribute('aria-label','失物招领处：Mr. Hall与服务员核对箱子');
+ for(const[key,label,side]of [['hall','Mr. Hall','left'],['attendant','服务员','right']]){const wrap=node('div','dialogue-actor claim-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'claim-cast',label+'全身完整，面向'+(side==='left'?'右侧':'左侧')+'交谈者','webp'),node('span','actor-label',label));element.append(wrap);}
+ const location=node('p','claim-location','失物招领处'),prop=node('figure','claim-display'),caseImage=picture('blue-case','','蓝色小箱子，有拉链和把手标签'),label=node('figcaption','case-label');label.append(node('span','','D. N. Hall'),node('span','','83, Bridge Street'));prop.append(caseImage,label);element.append(location,prop);
+ function update(i){const state=i<2?'opening':i===2?'description':i<5?'first':i<9?'second':i<15?'label':'opened';element.dataset.scene=state;prop.hidden=i<2;caseImage.src='/assets/unit97-98/'+(i===3||i===4?'brown-case':i===15?'open-case':'blue-case')+'.svg';caseImage.alt=i===3||i===4?'服务员第一次出示的候选箱':i===15?'打开的蓝色箱子':'蓝色小箱子，有拉链和把手标签';label.hidden=i<9;}
+ update(-1);return{element,update,sideFor:(_i,who)=>who==='hall'?'left':'right'};
+}
+const tasks={features:['counter-record','Lost-property description','Compare every detail.','描述相符 · 继续核对归属'],speaker:['keys','Who is speaking?','You are Ben.','They’re mine. They belong to me.'],label:['label','Check the label','Compare the two addresses.','地址不同 · 继续核对'],joint:['boat','One shared boat','Eva and Tom share it.','Eva and Tom’s boat'],group:['car','One owner group','You are Ann, speaking to Ben.','It’s ours. It belongs to us.'],negative:['blue-case','An unknown owner','Say only what you know.','This case doesn’t belong to me.'],of:['handle','Where is the label?','Read the location carefully.','on the handle of the blue case'],double:['phrasebook','One of Ella’s books','Use the ownership record.','a book of Ella’s']};
+function create({element}){let view,heading,task;return{
+ present(question,progress){element.classList.remove('role-runner');element.classList.add('claim-runner');const content=element.querySelector('.practice-content'),intro=node('div','claim-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const material=content.querySelector('.practice-context');if(material)intro.append(material);task=question.id.replace('u9798-v1-a-','');const[art,title,detail]=tasks[task];view=node('div','claim-application');view.dataset.task=task;view.dataset.recorded='false';view.setAttribute('role','group');view.setAttribute('aria-label','认领核对记录');view.append(picture(art,'application-prop',''));const card=node('div','record-page');card.append(node('strong','',title),node('span','',detail));view.append(card);intro.append(view);content.prepend(intro);},
+ answer(value){const checked=value!==null;view.dataset.recorded=String(checked);view.querySelector('.record-page strong').textContent=tasks[task][checked?3:1];if(task==='features')view.querySelector('.application-prop').src='/assets/unit97-98/'+(checked?'blue-case':'counter-record')+'.svg';},finish(){},completion(){return null;},heading(){return element.querySelector('.claim-intro .practice-progress')||heading;}
+};}
+core.unit9798Scene={storyProps,create};
+})(globalThis.CanranCore);

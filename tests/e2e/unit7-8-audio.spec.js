@@ -1,5 +1,8 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+// Historical 15-star behavior is exercised on its frozen edition.
+// Current five-zone and authenticated migration contracts have dedicated suites.
+require('../support/unit78-legacy').historicalSuite(test);
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 // The voiced contract is archived under fixtures/unit7-8-voiced-before.

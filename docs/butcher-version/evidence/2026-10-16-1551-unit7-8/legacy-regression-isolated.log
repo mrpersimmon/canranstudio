@@ -1,0 +1,47 @@
+
+Running 27 tests using 1 worker
+
+(node:7548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   1 tests\e2e\unit7-8-exam.spec.js:11:1 › 十一题综合挑战逐项作答，冠词与缩写确实需要选择，错答和线索保留独立记录 (5.2s)
+(node:8920) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   2 tests\e2e\unit7-8-exam.spec.js:58:1 › 三题旧挑战通关升级只保留真实三题，新增八题未答，补完才恢复证书 (5.3s)
+(node:24528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   3 tests\e2e\unit7-8-exam.spec.js:87:1 › 旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代答 (5.2s)
+(node:15484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   4 tests\e2e\unit7-8-exam.spec.js:107:44 › 320 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (5.2s)
+(node:33340) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   5 tests\e2e\unit7-8-exam.spec.js:107:44 › 390 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (5.1s)
+(node:29892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   6 tests\e2e\unit7-8-exam.spec.js:107:44 › 768 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (5.1s)
+(node:27464) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   7 tests\e2e\unit7-8-exam.spec.js:107:44 › 1280 十一题长题干、词块和末题操作完整，灯泡与检查区稳定 (5.2s)
+(node:30300) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   8 tests\e2e\unit7-8-exam.spec.js:150:1 › 整课包离线刷新仍是十一题，当前新题未提交不计分 (5.2s)
+(node:8892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x   9 tests\e2e\unit7-8-layout.spec.js:7:31 › 320 无配音课文翻句时按钮稳定，看图选词完整可见 (5.2s)
+(node:29808) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  10 tests\e2e\unit7-8-layout.spec.js:7:31 › 1280 无配音课文翻句时按钮稳定，看图选词完整可见 (5.2s)
+(node:35412) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  11 tests\e2e\unit7-8-layout.spec.js:24:39 › 320 各站无横向溢出、图标完整，双人人名不挤入对白 (5.2s)
+(node:12076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  12 tests\e2e\unit7-8-layout.spec.js:24:39 › 390 各站无横向溢出、图标完整，双人人名不挤入对白 (5.2s)
+(node:27312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  13 tests\e2e\unit7-8-layout.spec.js:24:39 › 768 各站无横向溢出、图标完整，双人人名不挤入对白 (5.2s)
+(node:6588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  14 tests\e2e\unit7-8-layout.spec.js:24:39 › 1280 各站无横向溢出、图标完整，双人人名不挤入对白 (5.2s)
+(node:516) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -1,0 +1,185 @@
+{
+  "unit": "unit125-126",
+  "standard": "v1.51",
+  "branch": "codex/release-canranstudio",
+  "questions": 73,
+  "zones": {
+    "listen": 8,
+    "roles": 10,
+    "grammar": 22,
+    "apply": 8,
+    "exam": 25
+  },
+  "words": 24,
+  "dialogueTurns": 11,
+  "speakers": [
+    "Susan",
+    "Peter"
+  ],
+  "models": {
+    "count": 6,
+    "labels": "1–6",
+    "meanFormsAndIPA": true
+  },
+  "writing": {
+    "items": {
+      "A": 4,
+      "B": 4,
+      "C": 4
+    },
+    "linesPerItem": {
+      "A": 2,
+      "B": 1,
+      "C": 1
+    },
+    "totalLines": 16
+  },
+  "browserRuns": {
+    "refined-chromium": {
+      "passed": 9,
+      "failed": 0
+    },
+    "refined-webkit": {
+      "passed": 9,
+      "failed": 0
+    },
+    "sound-isolated": {
+      "passed": 1,
+      "failed": 0
+    },
+    "login-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-root": {
+      "passed": 7,
+      "failed": 0
+    },
+    "login-webkit-sub": {
+      "passed": 7,
+      "failed": 0
+    },
+    "catalog": {
+      "passed": 3,
+      "failed": 0
+    },
+    "deployment": {
+      "passed": 1,
+      "failed": 0
+    },
+    "representative-layout": {
+      "passed": 2,
+      "failed": 0
+    },
+    "layout-refined": {
+      "passed": 1,
+      "failed": 0
+    },
+    "chromium-initial": {
+      "passed": 10,
+      "failed": 5,
+      "retained": true
+    },
+    "webkit-initial": {
+      "passed": 11,
+      "failed": 4,
+      "retained": true
+    },
+    "representative-tasks-initial": {
+      "passed": 1,
+      "failed": 1,
+      "retained": true
+    },
+    "representative-final-initial": {
+      "passed": 3,
+      "failed": 1,
+      "retained": true
+    }
+  },
+  "browserTotalDistinctPassingAfterRecheck": 62,
+  "targetedAffectedScopeRechecks": 19,
+  "representativeDistinctChecks": 4,
+  "representativeExecutions": 9,
+  "initialFailuresRetained": 11,
+  "initialFailureResolution": {
+    "representativeReference": "Test expected a phrase from a single-question explanation in the reference pane; matched the same intended meaning in its actual text. No content altered to satisfy wrong test.",
+    "representativeLayout": "Mobile image rectangle overlapped rain window by 2px; restored 10px clearance without relaxing assertion.",
+    "courseDesktopLayout": "Tea group image rectangle overlapped the window by 8px; its height adjusted from 335px to 325px, mobile override preserved.",
+    "coursePrintAndTouch": "Restored inherited print visibility, worksheet lines, decimal numbering and 44px selector minimum that scene-style extraction omitted. Both engines and four widths rechecked.",
+    "webkitSound": "One 7000ms wait for visible/enabled/stable exam option failed. Isolated run passed in 42.7s with the same assertion and action timeout. No click force, timeout increase or application workaround; underlying cause not proven."
+  },
+  "visualRefinement": {
+    "issues": [
+      "Keepsake vignette touched bottom edge",
+      "Stretched background deformed planter and placed its edge near Peter’s feet"
+    ],
+    "fix": [
+      "Built-in imagegen recomposition with clear alpha margins",
+      "Separate proportional door and planter assets; tighten mobile blank space while keeping all characters complete"
+    ],
+    "initialImagesRetained": true
+  },
+  "workflow": {
+    "pass": 11,
+    "fail": 0
+  },
+  "unitTests": {
+    "pass": 126,
+    "fail": 6,
+    "total": 132,
+    "sameFailureNamesAsPreviousLesson": true,
+    "knownWindowsFailures": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "fonts": {
+    "inputAndOutputHashesMatch": true,
+    "missingChinese": 0,
+    "licenseBytesPreserved": true,
+    "diagramEnglish": "outlined local Nunito400",
+    "IPA": "Arial"
+  },
+  "art": {
+    "individualSprites": 5,
+    "teaPair": 1,
+    "keepsake": 1,
+    "transparentArtEdgeCheck": true
+  },
+  "newDocLinksMissing": [],
+  "standardChanged": false,
+  "optimizationStatus": {
+    "O01-O12": "confirmed; current standard implemented",
+    "O13-O15": "pending; course evidence appended; no global rule change"
+  },
+  "manualPending": [
+    "teacher review",
+    "child trial",
+    "physical WeChat GIF save",
+    "physical print"
+  ],
+  "notRunCompletely": [
+    "all legacy course flows and migrations",
+    "all shared cache and export failure branches",
+    "production performance and load profiling"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  },
+  "preview": "http://127.0.0.1:4295/unit125-126/#learn/words",
+  "previewState": {
+    "stars": 0,
+    "wordPage": "1 / 4"
+  },
+  "testIdentityNote": "小禾、欧阳小禾同学、小图为虚构测试账号"
+}

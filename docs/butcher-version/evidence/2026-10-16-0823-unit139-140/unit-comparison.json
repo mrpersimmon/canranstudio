@@ -1,0 +1,19 @@
+{
+  "sameFailureNamesAs137138": true,
+  "currentFailures": [
+    "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+    "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+    "opening an existing data directory restores private directory and key modes",
+    "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+    "preview package construction rejects private symlinks before hash resource aliases are published",
+    "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+  ],
+  "baselineFailures": [
+    "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+    "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+    "opening an existing data directory restores private directory and key modes",
+    "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+    "preview package construction rejects private symlinks before hash resource aliases are published",
+    "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+  ]
+}

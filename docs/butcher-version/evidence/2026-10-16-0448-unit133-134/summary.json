@@ -1,0 +1,108 @@
+{
+  "lesson": "133–134",
+  "standard": "v1.52",
+  "branch": "codex/release-canranstudio",
+  "mode": "classroom",
+  "catalogAtValidation": 67,
+  "counts": {
+    "words": 12,
+    "originalSpeakerTurns": 6,
+    "readingSteps": 14,
+    "models": 12,
+    "writingItems": 19,
+    "writingLines": 21,
+    "writingPdfPages": 2,
+    "questions": [
+      6,
+      9,
+      15,
+      8,
+      19
+    ],
+    "questionTotal": 57
+  },
+  "courseTests": {
+    "chromium": 15,
+    "webkit": 15
+  },
+  "affectedRechecks": {
+    "pronounPremisesAndPrint": {
+      "chromium": 6,
+      "webkit": 6
+    },
+    "sourceContrastSelfReportingAndColor": {
+      "chromium": 5,
+      "webkit": 5
+    },
+    "finalAccountMaterialCardsAndGifs": {
+      "chromiumRoot": 3,
+      "chromiumSub": 3,
+      "webkitRoot": 3,
+      "webkitSub": 3
+    }
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "representativePassed": 4,
+  "printRefinementRuns": 2,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs131132": true
+  },
+  "font": {
+    "initialMissingBodyCharacter": "摘",
+    "addedCodepoint": "U+6458",
+    "currentMissing": 0,
+    "oldCharactersPreserved": 1729,
+    "currentCharacters": 1730,
+    "oldAdvanceAndLineMetricDifferences": 0
+  },
+  "gif": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0,
+    "allFramesNameTitleScenePaperStable": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程升级",
+    "共享Worker拒写和回收的所有分支",
+    "除本课所列画布故障重试及离开取消之外的全部导出故障"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit133-134/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 2",
+    "assessmentAnswersSubmitted": false,
+    "finalCoverCheckedAt": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "updateFlow": "reload alone kept old cover; home, reload directory, reenter obtained two title groups; no learning-data clearing"
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

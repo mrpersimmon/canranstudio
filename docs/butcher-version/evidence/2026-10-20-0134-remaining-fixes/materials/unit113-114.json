@@ -1,0 +1,59 @@
+{
+  "id": "unit113-114",
+  "source": {
+    "file": "tests/support/unit113114.js",
+    "sha256": "8a07fa994068835f8ac0e6982237b7e540475b53b19b8e479d70708d00ab9cc7"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u113114-v1-r-destination",
+      "text": "Lesson 113\n\nConductor: Fares, please!\n\nMan: Trafalgar Square, please."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u113114-v1-r-note",
+      "text": "Lesson 113\n\nConductor: I’m sorry, sir. I can’t change a ten-pound note. Haven’t you got any small change?\n\nMan: I’ve got no small change, I’m afraid."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u113114-v1-r-first-pair",
+      "text": "Lesson 113\n\nConductor: I’ll ask some of the passengers.\n\nConductor: Have you any small change, sir?\n\n1st Passenger: I’m sorry. I’ve got none.\n\n2nd Passenger: I haven’t got any either."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u113114-v1-r-second-pair",
+      "text": "Lesson 113\n\nConductor: Can you change this ten-pound note, madam?\n\n3rd Passenger: I’m afraid I can’t.\n\n4th Passenger: Neither can I."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u113114-v1-r-tramps",
+      "text": "Lesson 113\n\nConductor: I’m very sorry, sir. You must get off the bus. None of our passengers can change this note. They’re all millionaires!\n\nTwo Tramps: Except us.\n\n1st Tramp: I’ve got some small change.\n\n2nd Tramp: So have I."
+    },
+    {
+      "zone": "exam",
+      "index": 5,
+      "questionId": "u113114-v1-e-outcome",
+      "text": "Lesson 113\n\nConductor: Fares, please!\n\nMan: Trafalgar Square, please.\n\nConductor: I’m sorry, sir. I can’t change a ten-pound note. Haven’t you got any small change?\n\nMan: I’ve got no small change, I’m afraid.\n\nConductor: I’ll ask some of the passengers.\n\nConductor: Have you any small change, sir?\n\n1st Passenger: I’m sorry. I’ve got none.\n\n2nd Passenger: I haven’t got any either.\n\nConductor: Can you change this ten-pound note, madam?\n\n3rd Passenger: I’m afraid I can’t.\n\n4th Passenger: Neither can I.\n\nConductor: I’m very sorry, sir. You must get off the bus. None of our passengers can change this note. They’re all millionaires!\n\nTwo Tramps: Except us.\n\n1st Tramp: I’ve got some small change.\n\n2nd Tramp: So have I."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "3-4",
+    "R3": "5-8",
+    "R4": "9-11",
+    "R5": "12-15",
+    "E5": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "oldCertificates": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "631c70236389b2df974ef3e94f8656fba5854f61487b179957d4bc8cf67520da",
+      "retainedSha256": "631c70236389b2df974ef3e94f8656fba5854f61487b179957d4bc8cf67520da",
+      "background": "#FCF5EF"
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "e0fa7c605a76696c57ee333adbd27dbd6cd4f1535bbcd1cc00535871b8eaba91",
+      "retainedSha256": "e0fa7c605a76696c57ee333adbd27dbd6cd4f1535bbcd1cc00535871b8eaba91",
+      "background": "#FCF5EF"
+    }
+  ],
+  "gifs": [
+    {
+      "file": "one-star.gif",
+      "sha256": "04f82ff3580349222159214a9ff58ecefc5527ae9bd55ef1ee2be0f6ca55ec33",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "file": "keepsake.gif",
+      "sha256": "c484ceaf7e07f481778b87016cc43f6a7417bb6ebe4a218933e573c144ec48bb",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    }
+  ],
+  "pdfVisualReview": {
+    "worksheetPages": 2,
+    "legacyCertificatePages": 1,
+    "writingA": 4,
+    "writingBlanks": 8,
+    "writingB": 7,
+    "writingLines": 14,
+    "physicalPrintTested": false
+  }
+}

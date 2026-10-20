@@ -1,0 +1,47 @@
+
+Running 1 test using 1 worker
+
+(node:35772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 (13.9s)
+
+
+  1) tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 ───────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar').locator('.practice-context')
+    Expected substring: "listener"
+    Received string:    "Mia does the introduction. Ben is the person she presents. Sue is listening and meeting Ben."
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar').locator('.practice-context')
+        14 × locator resolved to <div role="region" aria-label="题目材料" class="practice-context">…</div>
+           - unexpected value "Mia does the introduction. Ben is the person she presents. Sue is listening and meeting Ben."
+
+
+      16 |  for(const id of Object.keys(ANSWERS)){const room=await activity(page,id,{inspect:async(room,i,phase)=>{
+      17 |   if(phase==='before'){
+    > 18 |    for(const text of MATERIAL[id]?.[i]||[])await expect(room.locator('.practice-context')).toContainText(text);
+         |                                                                                            ^
+      19 |    if(id==='exam'||id==='apply')await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
+      20 |    if(id==='apply'){await expect(room.locator('.report-application')).toHaveAttribute('data-recorded','false');await expect(room.locator('.application-prop')).toHaveAttribute('src','/assets/unit135-136/task-record.svg');}
+      21 |    if(id==='apply'&&(i===0||i===2)){const im=room.locator('.practice-scene');await expect(im).toBeVisible();await expect(im).toHaveAttribute('src','/assets/unit135-136/'+(i===0?'week-record':'introduction-record')+'.svg');await expect(im).toHaveAttribute('alt',diagramAlt[i===0?0:1]);await im.evaluate(e=>e.decode());await room.screenshot({path:info.outputPath('material-'+i+'-before.png')});}
+        at inspect (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit135-136.spec.js:18:92)
+        at activity (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\support\unit135136.js:25:194)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit135-136.spec.js:16:51
+
+    Error Context: output\unit135136-isolated\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit135136-isolated\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit135136-isolated\unit135-136-60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit135-136.spec.js:13:1 › 60题：未答材料、周范围与介绍方向、独立转述、帮助记录与三卡 ────────────────────────────

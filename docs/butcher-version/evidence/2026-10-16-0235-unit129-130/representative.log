@@ -1,0 +1,81 @@
+
+Running 5 tests using 1 worker
+
+(node:30200) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 320：14轮完整原文、三人比例、驾照唯一与中文续读 (11.2s)
+  x  2 tests\e2e\unit129-130-story-layout.spec.js:31:39 › 1280：14轮完整原文、三人比例、驾照唯一与中文续读 (1.2s)
+(node:29280) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 tests\e2e\unit129-130.spec.js:28:1 › 18词卡、130课1–8、A6与B20完整 (7.6s)
+(node:10376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 4 tests\e2e\unit129-130.spec.js:50:1 › 错答不更新线索记录，三卡4／8／2，刷新保留原图 (3.9s)
+  ok 5 tests\e2e\unit129-130.spec.js:56:1 › 26道书写题66行打印与恢复 (876ms)
+
+
+  1) tests\e2e\unit129-130-story-layout.spec.js:31:39 › 1280：14轮完整原文、三人比例、驾照唯一与中文续读 ────────────────
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 576
+    Received:    576.390625
+
+      42 |   const car=world.locator('.parked-car');await car.evaluate(e=>e.decode());const c=await car.boundingBox();expect(c.y).toBeGreaterThanOrEqual(b.y+b.height);const materialBottom=c.y+c.height;
+      43 |   for(const img of await world.locator('.road-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+    > 44 |   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}).sort((a,b)=>a.x-b.x));for(let k=1;k<labels.length;k++)expect(labels[k-1].x+labels[k-1].width).toBeLessThanOrEqual(labels[k].x);
+         |                                                                                                                                                                                                                                                                      ^
+      45 |   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
+      46 |   if([3,4,6,7,8,9,10].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<13)await next.click();
+      47 |  }
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit129-130-story-layout.spec.js:44:262
+
+    Error Context: output\unit129130-representative\unit129-130-story-layout-1280：14轮完整原文、三人比例、驾照唯一与中文续读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit129130-representative\unit129-130-story-layout-1280：14轮完整原文、三人比例、驾照唯一与中文续读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit129130-representative\unit129-130-story-layout-1280：14轮完整原文、三人比例、驾照唯一与中文续读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\e2e\unit129-130.spec.js:28:1 › 18词卡、130课1–8、A6与B20完整 ────────────────────────────────────
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.stage-grammar details')
+    Expected substring: "过去的必要"
+    Received string:    "语法小参考对过去作很有把握的推测用must have + 过去分词；否定推测按本课用can’t have + 过去分词。它们表达判断，不自动成为已经核实的事实。过去身份、状态或地点用must／can’t have been，例如must have been tired。have不随he／she改成has，been不是was或were。推测过去那时正在做，用must／can’t have been + -ing。原文must have been driving和dreaming都有been；不能写成must have driving，也不表示一直持续到现在。现在must be doing与过去must have been doing按线索所指的时刻区别。130课8组原例是过去推测，128课相似插图是现在推测，不能因为图一样就沿用句子。had to说明过去必须做；must have done是对过去已发生动作的推断，不是must的过去义务形式。130A的had to和must have been要结合动作、状态及给定用途。130A中没来工作或没接电话不在现实中自动证明生病或睡觉；书写按教材给定的推测练形式，线上材料补明判断前提或允许“不足以确定”。130B的开头保留I don’t think she was／they were，再写can’t have been和must have been。括号是练习前提，不是从排除一个国籍就自动证明另一个；也不凭外貌猜身份。You’d better中的’d是had。had better + 原形表达对当前或接下来具体情境的建议，语气较强；否定用had better not + 原形，不加to，不用don’t had better。这里的had不表示过去义务。Where do you think he is?在do you think后用he is顺序；不重复倒装成is he。原文Where do you think you are?也保留you are。Didn’t you see…?仍按事实回应：看见Yes, I did；没看见No, I didn’t。Gary的I’m afraid I didn’t承接see，不证明限速牌不存在。overtake—overtook—overtaken；dream—dreamed／dreamt—dreamed／dreamt，两种dream词形都合法。dream在原文是走神的说法，不必是睡觉做梦；charge在本课按罚款理解，也有其他词义。70英里每小时是警察对Gary的推测；80是警察自述超车时自己的速度；教材插图限速牌是40。三个数字用途不同，不把警察车速当成Gary车速或推算一份不存在的测量记录。this time只指这次；Gary说会更小心是承诺，Ann结尾是建议，均不证明后来已经做到。驾照查看要求不等于核验已通过。原文That’s why保留为Gary的解释，不附加作者认证的唯一原因或责任。"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.stage-grammar details')
+        14 × locator resolved to <details open="" class="offline-task">…</details>
+           - unexpected value "语法小参考对过去作很有把握的推测用must have + 过去分词；否定推测按本课用can’t have + 过去分词。它们表达判断，不自动成为已经核实的事实。过去身份、状态或地点用must／can’t have been，例如must have been tired。have不随he／she改成has，been不是was或were。推测过去那时正在做，用must／can’t have been + -ing。原文must have been driving和dreaming都有been；不能写成must have driving，也不表示一直持续到现在。现在must be doing与过去must have been doing按线索所指的时刻区别。130课8组原例是过去推测，128课相似插图是现在推测，不能因为图一样就沿用句子。had to说明过去必须做；must have done是对过去已发生动作的推断，不是must的过去义务形式。130A的had to和must have been要结合动作、状态及给定用途。130A中没来工作或没接电话不在现实中自动证明生病或睡觉；书写按教材给定的推测练形式，线上材料补明判断前提或允许“不足以确定”。130B的开头保留I don’t think she was／they were，再写can’t have been和must have been。括号是练习前提，不是从排除一个国籍就自动证明另一个；也不凭外貌猜身份。You’d better中的’d是had。had better + 原形表达对当前或接下来具体情境的建议，语气较强；否定用had better not + 原形，不加to，不用don’t had better。这里的had不表示过去义务。Where do you think he is?在do you think后用he is顺序；不重复倒装成is he。原文Where do you think you are?也保留you are。Didn’t you see…?仍按事实回应：看见Yes, I did；没看见No, I didn’t。Gary的I’m afraid I didn’t承接see，不证明限速牌不存在。overtake—overtook—overtaken；dream—dreamed／dreamt—dreamed／dreamt，两种dream词形都合法。dream在原文是走神的说法，不必是睡觉做梦；charge在本课按罚款理解，也有其他词义。70英里每小时是警察对Gary的推测；80是警察自述超车时自己的速度；教材插图限速牌是40。三个数字用途不同，不把警察车速当成Gary车速或推算一份不存在的测量记录。this time只指这次；Gary说会更小心是承诺，Ann结尾是建议，均不证明后来已经做到。驾照查看要求不等于核验已通过。原文That’s why保留为Gary的解释，不附加作者认证的唯一原因或责任。"
+
+
+      34 |  await expect(page.locator('.verb-forms strong')).toHaveText(['overtake','overtook','overtaken','dream','dreamed / dreamt','dreamed / dreamt']);await expect(page.locator('.reference-phonetic')).toHaveText(['/ˌəʊvəˈteɪk/','/ˌəʊvəˈtʊk/','/ˌəʊvəˈteɪkən/','/driːm/','/driːmd/ /dremt/','/driːmd/ /dremt/']);expect(await page.locator('.reference-phonetic').evaluateAll(es=>es.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);
+      35 |  await page.locator('.stage-apply details').screenshot({path:info.outputPath('textbook-reference.png')});await page.setViewportSize({width:320,height:568});await page.locator('.stage-apply details').scrollIntoViewIfNeeded();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await page.locator('.structure-mobile dd,.reference-card p').evaluateAll(es=>es.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await page.locator('.stage-apply details').screenshot({path:info.outputPath('reference-320.png')});await expect(page.locator('.structure-mobile dl:visible')).toHaveCount(6);await page.setViewportSize({width:1280,height:900});
+    > 36 |  await page.goto('/unit129-130/#learn/grammar');await page.getByText('语法小参考',{exact:true}).click();for(const text of ['不自动成为已经核实的事实','过去的必要','不能因为图一样','不加to','Gary的解释'])await expect(page.locator('.stage-grammar details')).toContainText(text);
+         |                                                                                                                                                                                                                               ^
+      37 |  await page.goto('/unit129-130/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();for(const[i,n]of [6,20].entries())await expect(page.locator('#unitWriting ol').nth(i).locator('li')).toHaveCount(n);for(const text of ['He didn’t come to work yesterday.','I think he was a sales rep. (the boss)','I think they were listening to the radio. (watching television)','I think they were sitting. (standing)','每题三句','新推测前提'])await expect(page.locator('#unitWriting')).toContainText(text);
+      38 | });
+      39 | test('重复错答、两空门槛、撤回、提示、刷新与重练',async({page})=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit129-130.spec.js:36:223
+
+    Error Context: output\unit129130-representative\unit129-130-18词卡、130课1–8、A6与B20完整\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit129130-representative\unit129-130-18词卡、130课1–8、A6与B20完整\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit129130-representative\unit129-130-18词卡、130课1–8、A6与B20完整\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\e2e\unit129-130-story-layout.spec.js:31:39 › 1280：14轮完整原文、三人比例、驾照唯一与中文续读 ─────────────────
+    tests\e2e\unit129-130.spec.js:28:1 › 18词卡、130课1–8、A6与B20完整 ─────────────────────────────────────
+  3 passed (27.1s)

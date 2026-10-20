@@ -1,0 +1,29 @@
+{
+  "lesson": "95–96",
+  "standard": "v1.51",
+  "questions": 64,
+  "wordCards": 36,
+  "dialogueTurns": 17,
+  "textbookClocks": 12,
+  "cities": 15,
+  "writingTasks": {
+    "A": 6,
+    "B": 4
+  },
+  "browserChecksPassed": 56,
+  "workflowChecksPassed": 11,
+  "unitTests": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "boundary": "Windows filesystem modes, symlinks, database cleanup"
+  },
+  "optimizationLog": {
+    "confirmedItemsRetained": "O01–O12",
+    "newProposal": "O13",
+    "newProposalStatus": "pending confirmation; local test corrected"
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

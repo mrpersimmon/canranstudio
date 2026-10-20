@@ -79,3 +79,37 @@ const definition={id:'unit39-40',version:1,mode:'classroom',title:'花瓶安放�
 definition.learning.FEEDBACK=root.CanranCore.courseCatalog.requireCourseDefinition('lesson49').learning.FEEDBACK;
 root.CanranCore.unit3940=definition;if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+
+// Frozen v1 data above remains the source for history and the original certificate.
+(function(core){
+'use strict';const old=core.unit3940;core.unit3940LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸78–81／PDF111–114；语法练习册纸106–113／PDF120–127';const grammarSource='同步导学纸71–73／PDF85–87，Grammar纸72／PDF86；'+source;
+const unit={id:'unit39-40',version:1,mode:'classroom',contentRevision:'vase-five-zones-v1',legacyEdition:'unit39-40-completion-v1',title:'花瓶安放小帮手',path:'/unit39-40/',start:'learn/words',progress:old.progress,learning:old.learning,objects:old.objects,questions:{},
+stages:[{id:'l1',title:'认识花瓶与新词',activities:[['words','花瓶小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'跟着花瓶走',activities:[['text','花瓶小剧场','book'],['roles','摆放小侦探','question']],required:['text','roles']},{id:'l3',title:'读懂动作与提醒',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'把打算说清楚',activities:[['apply','表达练习站','heart']],required:['apply']},{id:'l5',title:'收好花瓶故事',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'vase-five-zones-v1',title:'细心花瓶小帮手',lesson:'Lesson 39–40',scene:'/assets/unit39-40/keepsake-story-v1.webp',alt:'Sam和Penny欣赏架上的花瓶与鲜花',color:'#8D6B56',zones:[['listen','单词寻宝'],['roles','摆放小侦探'],['grammar','语法小工坊'],['apply','表达练习站'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});const blank=(before,after,options)=>({before,after,options});const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u3940-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,lines)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,model:{lines}}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('negative','否定祈使句用don’t加动词原形','妈妈提醒孩子不要关窗。补全她的话。',fill([blank('Don’t ',' the window.',['close','closes','closing'])],['close']),'Don’t后接动词原形close，表示不要关窗；这句话没有说窗户已经关上。',[['Don’t speak to your mother like that!','导学原例：不要那样对你妈妈说话！Don’t后用原形speak。']]),
+g('be','形容词前使用be构成肯否祈使句','要安静，不要吵闹。补全两句提醒。',fill([blank('',' quiet.',['Be','Are','Is']),blank('Don’t ',' noisy.',['be','are','is'])],['Be','be'],'quiet：安静的；noisy：吵闹的'),'形容词前用Be构成祈使句，否定用Don’t be。不是直接把形容词放在Don’t后。',[['Be careful! / Be patient.','课文和导学原例：小心！／耐心点。careful、patient都是形容词，前面用Be。']]),
+g('do-not','don’t与do not的否定意义一致','保持意思不变，给告示换一种说法。',choice(['Don’t touch the vase.','Do touch the vase.','Don’t move the vase.'],'Don’t touch the vase.','Do not touch the vase.\ntouch：触碰；move：移动'),'Do not与Don’t都表示不要；完整形式常用于正式文体，但不是只能书面使用。把Do not变成Do就改变了肯否意思。',[['Do not open the door. = Don’t open the door.','这两句都要求不要开门；open：打开。']]),
+g('front','区分车外前方与车内前部','两人都在车外的前方，用第一种说法；两人都在车内前排，用第二种。补全位置短语。',fill([blank('车外：He’s sitting ',' the car with the driver.',['in front of','in the front of']),blank('车内：He’s sitting ',' the car with the driver.',['in the front of','in front of'])],['in front of','in the front of'],'driver：司机'),'in front of在这个例子中是车外前方，in the front of是车内前部；不能把两处位置混为一处。',[['in front of the window','课文中的窗前，不是窗户内部。'],['in the front of the car','导学对照中的车内前部；the把这个位置说成车的内部前部。']]),
+g('recipient','用物品加to加人保持原意','保持意思不变，换一种说法。',fill([blank('Show me that picture. → Show that picture ',' me.',['to','with','on'])],['to']),'原句的人是me，物品是that picture。先说物品后，用to引出接收展示的人；show仍是给人看。',[['Give me that vase. → Give that vase to me.','课本Written A原例：两句都要求把那只花瓶给我。']]),
+g('pronoun','可分短语动词的代词放在中间','这些灯要关掉。用them替换the lights，补全句子。',fill([blank('Turn ','.',['them off','off them','it off'])],['them off']),'本课turn off、put on、take off中，代词it／them在动词和on／off中间。名词可有两种位置；不把此规则推广到所有动词加介词。',[['Take off your hat. / Take your hat off. → Take it off.','名词your hat可放两处；换成代词it后放在take与off之间。']]),
+g('tone','结合情境判断祈使句的语气','另设情境：老师轻声微笑，示意孩子把杯子拿稳，再说这句话。这里是在做什么？',choice(['温和地提醒小心。','宣布杯子已经摔碎。','要求把杯子扔掉。'],'温和地提醒小心。','Don’t drop it!'),'根据轻声、表情、手势与上下文理解提醒，不能仅凭Don’t或叹号判断生气或粗鲁。',[['Be careful!','相同形式可用于不同语气。判断时还要听语调、看手势表情和上下文。']]),
+...old.questions.observe];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-writing-intent','分清原意改写与指令转为自己打算','读这组课本B原例。后一句相对前一句，表达意图怎样改变？',choice(['从要求对方穿，改成自己说打算穿。','两句都在命令对方穿。','后一句表示自己已经穿好了。'],'从要求对方穿，改成自己说打算穿。','Put on your coat! → I’m going to put it on.'),'前句是给对方的指令，后句是自己表达打算。与A的双宾语换说法不同，B不是保持同一说话意图的同义转换。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-be','独立运用don’t be加形容词','提醒别人不要迟到。补全句子。',fill([blank('Don’t ',' late.',['be','are','is'])],['be'],'late：迟到的'),'否定祈使句Don’t后用原形be，再接形容词late。'),
+q('e-do-not','独立识别完整否定与缩写','哪句话与Do not open the box.意思相同？',choice(['Don’t open the box.','Do open the box.','Don’t close the box.'],'Don’t open the box.','open：打开；close：关上'),'Do not与Don’t都是否定；换成肯定Do或另一动作close都改变了原意。'),
+q('e-front','独立区分车内前部与车外前方','Lily坐在公共汽车内部的最前一排，Tom站在车外的前方。分别补全。',fill([blank('Lily is ',' the bus.',['in the front of','in front of']),blank('Tom is ',' the bus.',['in front of','in the front of'])],['in the front of','in front of']),'本题明确给出内部和外部条件；不是凭人物、车的朝向或背过某个名字选词。'),
+q('e-tone','不凭祈使形式或标点猜情绪','只看到这句话，没有听到声音，也不知道当时的表情和情境。能确定说话人生气了吗？',choice(['不能，还需要语气和上下文。','能，只要有叹号就是生气。','能，只要有Don’t就是粗鲁。'],'不能，还需要语气和上下文。','Don’t touch it!\ntouch：触碰'),'句式和叹号不足以确定生气或粗鲁；不要添加材料没有的情绪和剧情。'),
+q('e-intention','根据给定目标选择否定指令','窗户现在关着，老师希望它保持关闭。她应怎样直接提醒想开窗的孩子？',choice(['Don’t open the window.','Open the window.','Don’t close the window.'],'Don’t open the window.'),'目标是保持关闭，因此不要打开。完整条件决定要求，不是单看某个动作词。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,ids])=>[id,ids.map(prior=>({key:'unit3940-'+prior+'-practice/v1',questions:old.questions[prior]}))]));
+core.unit3940=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);

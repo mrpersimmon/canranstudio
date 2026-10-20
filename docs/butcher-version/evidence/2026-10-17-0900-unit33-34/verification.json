@@ -1,0 +1,899 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-17T01:50:56.972Z",
+  "uniqueTestConditions": 143,
+  "browserConditions": 92,
+  "nodeConditions": 51,
+  "conditions": [
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧仅选未提交升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧版错答、词卡、叙述和参考页保留，新语法不由旧题代答",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "47题、10句完整对白、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "materials-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 320",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 390",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 768",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 1280",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "双空未齐和刷新保留草稿，订正不代选",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "22词卡、12图数字与四页动作册保留",
+      "passed": true,
+      "report": "chromium-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-print.spec.js",
+      "title": "练习纸保留A五题、B十二题、原例和29条书写线，实际PDF无隐藏题目",
+      "passed": true,
+      "report": "print-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-print.spec.js",
+      "title": "已领旧证书升级后仍能打印原姓名和日期，打印不变成新版空卡",
+      "passed": true,
+      "report": "print-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "chromium-first"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "指代定位看前后两句，错选地点不泄露先行词，键盘订正才推进",
+      "passed": true,
+      "report": "chromium-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "同型轮船须结合桥下关系，错答不移动船，刷新保留原题",
+      "passed": true,
+      "report": "chromium-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "with三义配对的部分草稿与订正保留；可见示范记录帮助",
+      "passed": true,
+      "report": "chromium-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "指代定位看前后两句，错选地点不泄露先行词，键盘订正才推进",
+      "passed": true,
+      "report": "webkit-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "同型轮船须结合桥下关系，错答不移动船，刷新保留原题",
+      "passed": true,
+      "report": "webkit-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "with三义配对的部分草稿与订正保留；可见示范记录帮助",
+      "passed": true,
+      "report": "webkit-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧空白升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧仅选未提交升级：不伪造作答，完整新轮可获星",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧版错答、词卡、叙述和参考页保留，新语法不由旧题代答",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧15星证书保留姓名、原始日期及实际PNG，新版错答和首星不改旧证",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "47题、10句完整对白、五区五星与逐题未答材料可完成",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "单选连续错答、订正、刷新和重练保留实际统计与旧星",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 320",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 390",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 768",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "完整河畔、叙述原文与逐句中文 1280",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 320x568",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "短屏三卡、继续操作及阅读按钮 390x500",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "双空未齐和刷新保留草稿，订正不代选",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "22词卡、12图数字与四页动作册保留",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "声音全坏仍能完整学习，未出现英语声音请求",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "320x568 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "390x500 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "webkit",
+      "mount": "static",
+      "file": "unit33-34-reading-controls.spec.js",
+      "title": "1280x720 逐句阅读与中文展开时当前对白和推进按钮同屏",
+      "passed": true,
+      "report": "webkit"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "retry-feedback.spec.js",
+      "title": "unit33-34 选择题错答只提示重试，改选后正常推进",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "submission-statistics.spec.js",
+      "title": "33-34 共用结算按提交计次，手机三卡完整，刷新保留",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "横幅入口、22张词卡音标与释义完整，刷新与回首页继续",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "断音完整33题与10句原文得到15星，纪念证书PNG与打印",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "部分配对不能提交、错答不揭底，刷新后可原题修正",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "叙述历史、最长句和翻译内部滚动，按钮稳定；末句不自动完成",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "综合13题逐题答错和修正，刷新续答、撤回词块、末题确认与重练",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "宽度320画卷、找船未选错误正确、动作册词卡无溢出",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "宽度390画卷、找船未选错误正确、动作册词卡无溢出",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "宽度768画卷、找船未选错误正确、动作册词卡无溢出",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "宽度1280画卷、找船未选错误正确、动作册词卡无溢出",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "缓存首次准备、热重访离线翻卡及画册图片就绪",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "正常反馈音与键盘作答；教材A5/B12纸笔练习完整打印",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "static",
+      "file": "unit33-34.spec.js",
+      "title": "新插图题逐幅核对未选、错误、修正状态；长选项和按句翻译可读",
+      "passed": true,
+      "report": "shared"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-root-recheck"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-chromium-root"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "account-lesson-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-chromium-lesson"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/lesson/",
+      "file": "unit33-34.spec.js",
+      "title": "33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝",
+      "passed": true,
+      "report": "account-lesson-final"
+    },
+    {
+      "engine": "chromium",
+      "mount": "/",
+      "file": "unit33-34.spec.js",
+      "title": "根目录真实登录通关、刷新恢复，旧lesson入口不恢复",
+      "passed": true,
+      "report": "account-lesson-final"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-webkit-root"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "课程入口保持班级授权：新课可单独开放",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    },
+    {
+      "engine": "webkit",
+      "mount": "/lesson/",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+      "passed": true,
+      "report": "login-webkit-lesson"
+    }
+  ],
+  "reports": [
+    "reports/chromium-first.json",
+    "reports/chromium-recheck.json",
+    "reports/chromium-final.json",
+    "reports/materials-final.json",
+    "reports/print-final.json",
+    "reports/webkit.json",
+    "reports/webkit-final.json",
+    "reports/shared.json",
+    "reports/login-chromium-root.json",
+    "reports/login-chromium-lesson.json",
+    "reports/account-root-recheck.json",
+    "reports/account-lesson-final.json",
+    "reports/login-webkit-root.json",
+    "reports/login-webkit-lesson.json"
+  ],
+  "failedRuns": [
+    {
+      "report": "chromium-first",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "title": "旧版错答、词卡、叙述和参考页保留，新语法不由旧题代答",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.action-picture small')\nTimeout: 5000ms\n\u001b[32m- Expected  - 3\u001b[39m\n\u001b[31m+ Received  + 3\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"图 10 · 1,100,000\",\u001b[39m\n\u001b[32m-   \"图 11 · 1,500,000\",\u001b[39m\n\u001b[32m-   \"图 12 · 2,000,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 1,100,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 1,500,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 2,000,000\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.action-picture small')\u001b[22m\n\u001b[2m    14 × locator resolved to 3 elements\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "chromium-first",
+      "file": "unit33-34-fivezones.spec.js",
+      "title": "22词卡、12图数字与四页动作册保留",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 12\u001b[39m\n\u001b[31m+ Received  + 12\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"图 1 · 220,231\",\u001b[39m\n\u001b[32m-   \"图 2 · 331,342\",\u001b[39m\n\u001b[32m-   \"图 3 · 442,453\",\u001b[39m\n\u001b[32m-   \"图 4 · 553,564\",\u001b[39m\n\u001b[32m-   \"图 5 · 664,675\",\u001b[39m\n\u001b[32m-   \"图 6 · 775,786\",\u001b[39m\n\u001b[32m-   \"图 7 · 886,897\",\u001b[39m\n\u001b[32m-   \"图 8 · 997,998\",\u001b[39m\n\u001b[32m-   \"图 9 · 1,000,001\",\u001b[39m\n\u001b[32m-   \"图 10 · 1,100,000\",\u001b[39m\n\u001b[32m-   \"图 11 · 1,500,000\",\u001b[39m\n\u001b[32m-   \"图 12 · 2,000,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 220,231\",\u001b[39m\n\u001b[31m+   \"图 undefined · 331,342\",\u001b[39m\n\u001b[31m+   \"图 undefined · 442,453\",\u001b[39m\n\u001b[31m+   \"图 undefined · 553,564\",\u001b[39m\n\u001b[31m+   \"图 undefined · 664,675\",\u001b[39m\n\u001b[31m+   \"图 undefined · 775,786\",\u001b[39m\n\u001b[31m+   \"图 undefined · 886,897\",\u001b[39m\n\u001b[31m+   \"图 undefined · 997,998\",\u001b[39m\n\u001b[31m+   \"图 undefined · 1,000,001\",\u001b[39m\n\u001b[31m+   \"图 undefined · 1,100,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 1,500,000\",\u001b[39m\n\u001b[31m+   \"图 undefined · 2,000,000\",\u001b[39m\n\u001b[2m  ]\u001b[22m"
+      ]
+    },
+    {
+      "report": "chromium-recheck",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "同型轮船须结合桥下关系，错答不移动船，刷新保留原题",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "chromium-recheck",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "with三义配对的部分草稿与订正保留；可见示范记录帮助",
+      "error": [
+        "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-apply').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    13 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "webkit",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "同型轮船须结合桥下关系，错答不移动船，刷新保留原题",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeDisabled\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\nExpected: disabled\nReceived: enabled\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeDisabled\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.stage-grammar').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    14 × locator resolved to <button type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m       - unexpected value \"enabled\"\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "webkit",
+      "file": "unit33-34-fivezones-interactions.spec.js",
+      "title": "with三义配对的部分草稿与订正保留；可见示范记录帮助",
+      "error": [
+        "TimeoutError: locator.click: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-apply').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    11 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "login-chromium-lesson",
+      "file": "unit33-34.spec.js",
+      "title": "33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: \u001b[32m\"5\"\u001b[39m\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"5\" data-motion=\"full\" aria-label=\"我的单元纪念卡\" data-unit=\"unit33-34\" class=\"story-award-paper award-card\">…</article> aka getByRole('article', { name: '我的单元纪念卡' })\n    2) <article data-unit=\"unit33-34\" aria-label=\"细心河畔发现家纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('细心河畔发现家纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "login-chromium-lesson",
+      "file": "unit33-34.spec.js",
+      "title": "根目录真实登录通关、刷新恢复，旧lesson入口不恢复",
+      "error": [
+        "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#starCount')\nExpected: \u001b[32m\"\u001b[7m1\u001b[27m5\"\u001b[39m\nReceived: \u001b[31m\"5\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#starCount')\u001b[22m\n\u001b[2m    5 × locator resolved to <span id=\"starCount\">0</span>\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\u001b[2m    8 × locator resolved to <span id=\"starCount\">5</span>\u001b[22m\n\u001b[2m      - unexpected value \"5\"\u001b[22m\n"
+      ]
+    },
+    {
+      "report": "account-root-recheck",
+      "file": "unit33-34.spec.js",
+      "title": "33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝",
+      "error": [
+        "\u001b[31mTest timeout of 180000ms exceeded.\u001b[39m"
+      ]
+    }
+  ],
+  "failuresAndRecovery": [
+    {
+      "finding": "Gallery objects contain numberLabel but no number field",
+      "resolution": "Render ordinal from preserved array order; original labels and page meaning remain unchanged; both engines pass gallery and upgrade checks."
+    },
+    {
+      "finding": "Scene retry assertion assumed selection was cleared; matching helper clicked an existing pair twice and unintentionally removed it",
+      "resolution": "Observe real widget contract, retain selected ship and relative geometry, explicitly withdraw a pair, fill missing pairs and correct only wrong pairs. No product or timeout relaxation."
+    },
+    {
+      "finding": "Older login suite retained 15-star assertion and queried both course and settlement cards",
+      "resolution": "Use five-star expectation and the actual stage-certificate container. Preserve original frozen 15-star coverage independently."
+    },
+    {
+      "finding": "Fixed /lesson/ login test was accidentally batched with a root-mounted service",
+      "resolution": "Keep failed report; rerun fixed entry tests under /lesson/ while their dedicated root server continues to verify root mounting. Do not restore retired production routes."
+    },
+    {
+      "finding": "Inherited writing-B page break wasted space",
+      "resolution": "Remove section page break, retaining all 29 lines at 32px and complete A5/B12; two-page actual PDF visually reviewed."
+    }
+  ],
+  "counts": {
+    "tasks": 47,
+    "zones": [
+      7,
+      4,
+      10,
+      7,
+      19
+    ],
+    "originalTasksArchived": 33,
+    "unchangedTasks": 33,
+    "authoredTasks": 14,
+    "words": 22,
+    "textbookNewWords": 21,
+    "dialogueSentences": 10,
+    "originalSvgFiles": 50,
+    "selectedImageGenWebP": 3,
+    "prompts": 5
+  },
+  "sourceChecks": "source-checks.json",
+  "exports": "exports.json",
+  "reuse": "Tests deduplicated by engine, actual intended mount, source file and title. Final 47 unanswered screenshots use final wording. Print pagination affects no task identity or grade. The changed account-name/old-name separation case is rerun in both engines and both mounts. Initial failures retained; no grading, timeout or assertion thresholds loosened.",
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit33-34/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher review",
+    "children classroom trial",
+    "physical Android and iPhone WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scopeBoundary": "Scoped development checks. check:plan captured 5332 existing uncommitted paths; pre-task baseline limits this turn to 54 source/asset/doc/test paths plus evidence. No full repository commit check or production release claimed."
+}

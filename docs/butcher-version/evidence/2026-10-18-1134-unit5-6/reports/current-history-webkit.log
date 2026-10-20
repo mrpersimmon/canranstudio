@@ -1,0 +1,58 @@
+
+Running 15 tests using 1 worker
+
+(node:18876) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit5-6-v154-history.spec.js:4:49 › classroom26真实旧证书原内容、姓名、精确日期、PNG与打印保留 (26.1s)
+  ok  2 tests\e2e\unit5-6-v154-history.spec.js:4:49 › voiced27真实旧证书原内容、姓名、精确日期、PNG与打印保留 (1.2m)
+  ok  3 tests\e2e\unit5-6-v154-history.spec.js:16:1 › 原编号8至13、12组选择问答、Written A4与B10及全部原例实际打印 (2.0s)
+  ok  4 tests\e2e\unit5-6-v154.spec.js:5:1 › 当前首页使用确认故事图 (733ms)
+  ok  5 tests\e2e\unit5-6-v154.spec.js:6:1 › Grammar先示范特殊疑问句，再立即练习信息类型 (624ms)
+  ok  6 tests\e2e\unit5-6-v154.spec.js:7:1 › 原文理解在未答页提供必要对白 (4.1s)
+  ok  7 tests\e2e\unit5-6-v154.spec.js:9:39 › 320宽首页、24词卡、20句及七名人物同场可读 (14.8s)
+  ok  8 tests\e2e\unit5-6-v154.spec.js:9:39 › 390宽首页、24词卡、20句及七名人物同场可读 (14.7s)
+  ok  9 tests\e2e\unit5-6-v154.spec.js:9:39 › 768宽首页、24词卡、20句及七名人物同场可读 (15.4s)
+  ok 10 tests\e2e\unit5-6-v154.spec.js:9:39 › 1280宽首页、24词卡、20句及七名人物同场可读 (17.5s)
+  x  11 tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 (35.4s)
+(node:23904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 12 tests\e2e\unit5-6-v154.spec.js:34:49 › 320x568短屏三卡与推进完整 (5.7s)
+  ok 13 tests\e2e\unit5-6-v154.spec.js:34:49 › 390x500短屏三卡与推进完整 (4.7s)
+  ok 14 tests\e2e\unit5-6-v154.spec.js:38:1 › 原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写 (36.2s)
+  ok 15 tests\e2e\unit5-6-v154.spec.js:48:1 › 显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做 (7.2s)
+
+
+  1) tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 ──────────────────────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "Can't find variable: speechSynthesis",
+    + ]
+
+      29 |  await page.addInitScript(()=>{window.soundFailures=0;window.speechCalls=0;HTMLMediaElement.prototype.play=function(){window.soundFailures++;return Promise.reject(new Error('sound unavailable'));};speechSynthesis.speak=()=>window.speechCalls++;});
+      30 |  await flow.story(page);for(const id of ['listen','roles','introduce','cars','exam'])await flow.activity(page,id,{capture:async(room,i,state)=>{if(state!=='blank')return;await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();expect(await room.locator('.cloze-row').count()).toBeLessThanOrEqual(2);materials.push({zone:id,number:i+1,text:await room.innerText()});await room.screenshot({path:info.outputPath(id+'-'+(i+1)+'-blank.png')});if(id==='roles')await expect(room.locator('.task-reading')).toBeVisible();if(id==='introduce'&&i===10||id==='cars'&&i===3||id==='exam')await expect(room.locator('.grammar-model')).toHaveCount(0);}});
+    > 31 |  expect(materials).toHaveLength(36);await require('fs/promises').writeFile(info.outputPath('unanswered-materials.json'),JSON.stringify(materials,null,2));expect(voices).toEqual([]);expect(errors).toEqual([]);expect(await page.evaluate(()=>window.soundFailures)).toBeGreaterThan(0);expect(await page.evaluate(()=>window.speechCalls)).toBe(0);await expect(page.locator('#starCount')).toHaveText('5');
+         |                                                                                                                                                                                                     ^
+      32 | });
+      33 |
+      34 | for(const[width,height]of [[320,568],[390,500]])test(`${width}x${height}短屏三卡与推进完整`,async({page},info)=>{
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit5-6-v154.spec.js:31:197
+
+    Error Context: output\unit56-review-20261018\current-history-webkit\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit56-review-20261018\current-history-webkit\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit56-review-20261018\current-history-webkit\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit5-6-v154.spec.js:27:1 › 36题未答材料、两空上限、撤支持、真实声音故障与五星 ───────────────────────────────
+  14 passed (4.3m)

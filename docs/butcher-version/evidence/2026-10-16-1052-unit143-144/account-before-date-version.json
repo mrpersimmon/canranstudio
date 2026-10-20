@@ -1,0 +1,149 @@
+{
+  "at": "2026-10-16T12:02:45.396649",
+  "node": "v24.14.0",
+  "playwright": "1.62.0",
+  "declaredBrowserBundles": [
+    {
+      "name": "chromium",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome for Testing"
+    },
+    {
+      "name": "chromium-headless-shell",
+      "revision": "1234",
+      "installByDefault": true,
+      "browserVersion": "151.0.7922.34",
+      "title": "Chrome Headless Shell"
+    },
+    {
+      "name": "chromium-tip-of-tree",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary for Testing"
+    },
+    {
+      "name": "chromium-tip-of-tree-headless-shell",
+      "revision": "1433",
+      "installByDefault": false,
+      "browserVersion": "151.0.7893.0",
+      "title": "Chrome Canary Headless Shell"
+    },
+    {
+      "name": "firefox",
+      "revision": "1538",
+      "installByDefault": true,
+      "browserVersion": "153.0",
+      "title": "Firefox"
+    },
+    {
+      "name": "firefox-beta",
+      "revision": "1526",
+      "installByDefault": false,
+      "browserVersion": "152.0b1",
+      "title": "Firefox Beta"
+    },
+    {
+      "name": "webkit",
+      "revision": "2336",
+      "installByDefault": true,
+      "revisionOverrides": {
+        "mac14": "2251",
+        "mac14-arm64": "2251",
+        "ubuntu20.04-x64": "2092",
+        "ubuntu20.04-arm64": "2092"
+      },
+      "browserVersion": "26.5",
+      "title": "WebKit"
+    },
+    {
+      "name": "ffmpeg",
+      "revision": "1011",
+      "installByDefault": true
+    },
+    {
+      "name": "winldd",
+      "revision": "1007",
+      "installByDefault": false
+    },
+    {
+      "name": "android",
+      "revision": "1001",
+      "installByDefault": false
+    }
+  ],
+  "branch": "codex/release-canranstudio",
+  "head": "d0a4382f963e36c1abd0f5a5ba9ef79b17794093",
+  "files": {
+    "unit143-144/content.js": "a9eec4a53623fa505de30d8385f0433171f4de62934908b7b62c150a050de14c",
+    "unit143-144/grammar.js": "b7e23f1cbdc295341acec7d69bdf8ba734dd44c231188b860d5f44c4af166b8a",
+    "unit143-144/index.html": "66a8bc73811797116c3290fca983a29d70a080d4fbda31c6534ed4a540c79be1",
+    "unit143-144/README.md": "c4c793f44ab0cb58155db3eb75dce73b5fe8a58e2bc83d5a88daa1126f150fef",
+    "unit143-144/scene.js": "a24d8896791dcc55c7bc6292f3fea84b7b64011da5124dd36b3db75d723a8ffb",
+    "unit143-144/typography.css": "64656bebbf45ead2f845f1b37774c3f396609b28fb6f162438d3658f609984af",
+    "unit143-144/unit.css": "d2de66b5d3dd83f345feb8c9cae31e867dd8a29ba302ec653d70f8bb1f821fc1",
+    "unit143-144/unit.js": "367f3d5c309afa90e09ff4ff06386da7ee7cd7d1183654105ddaf3b953eb7067",
+    "assets/unit143-144/among.svg": "70f91a4926e553194112c6ff903b08360d8133cb3cd6dcd2786b5cd7cb29982a",
+    "assets/unit143-144/baskets-view.svg": "e62208f250332849d2ee117c6376da5dac2d1e7c6df2db267d075acd16074258",
+    "assets/unit143-144/beauty-spot.svg": "9159ccaea1c849fde2066ebb5115c4819cb4c9fd5e72505dec9d755c1257eb30",
+    "assets/unit143-144/city.svg": "58f18ee4ec87eba59a6529f42e7a9a9e878d51ffa750116c19bf106c7c53551b",
+    "assets/unit143-144/count.svg": "36ed5721722468f13489476bca7dd36eadfe614779f057662d97527aa2d03562",
+    "assets/unit143-144/cover.svg": "b438d6d3ad0be203cec613a6fe4a272d6a74559a4eb765a28d8d784687ecb851",
+    "assets/unit143-144/exercise-books.svg": "dec275763842580dcb5af1197a83dc3ffb2dbccb4decfb3c33c225a0b78ce888",
+    "assets/unit143-144/ground-litter.svg": "fd28be1a187fc38f55b5e17a189436c24b25c8bd1f3ceb783d5d79244a059d6e",
+    "assets/unit143-144/hundred.svg": "63dc819ebba098b4094b6135131f0c35b73b608913e3f5bdcdfa27c7b0332a59",
+    "assets/unit143-144/inspection-record.svg": "b8e58b5712bc5fbce184d2f76c90d573f904984766b212767cc66f496c969af6",
+    "assets/unit143-144/inventory-view.svg": "7aa223f834bdfba6d32e214b03ef9d1ace3bbe0e5a957ab59e6a5158692de8b2",
+    "assets/unit143-144/keepsake-story-v1.webp": "bc15a8cad3db93f67f6038e10b924967ded6dc6c433619a205b9b97c19c9f03b",
+    "assets/unit143-144/litter-basket.svg": "baf530b5a83fecf52eff4666c06f924be22a437e3e013ba4e46e5550a186daeb",
+    "assets/unit143-144/litter-view.svg": "c152c7b75327350baee7f06ff77a7f024484e991c7a66d0fb57c1ee1296e5fe1",
+    "assets/unit143-144/litter.svg": "ff656c1cb8265d4ca3dfbf0f7fd7291f091d42e0bc658c60381094a21830cbe0",
+    "assets/unit143-144/notice-back.svg": "0de6b6c492a600acf03e6a39da2f03dca51ad706096bf4a1e90199f105d40481",
+    "assets/unit143-144/notice-front.svg": "0a53eba278299c949963e1023adbb223c81d98a983c3b7c5f251def2318c0911",
+    "assets/unit143-144/observe.webp": "207d3acd2b69182cd2b1d468abff6aa47364662fd3e8503223632ec8a6129d0e",
+    "assets/unit143-144/piece.svg": "184e290f340d54f1fdd4224b408acb43fcfc5c120238954851207962fb5aafbb",
+    "assets/unit143-144/place.svg": "ef037d50aa2dcefc6b7cde71b2441d3ca08aa19c105143b3702e3ad1766fe85d",
+    "assets/unit143-144/placement-record.svg": "d589a5bec3923252469e147b5052cb5f4a5c49303b6b4fda98950a4d6dab8393",
+    "assets/unit143-144/prosecute.svg": "6b67dfc99fbc2629f950e4e8c652d735eec9609f474a3f4b01df257468727294",
+    "assets/unit143-144/read.webp": "bc059627719491b72ef2292f61d958346a797fd18957ee80a75d92a9759eb0cd",
+    "assets/unit143-144/README.md": "1a4ff798174cd1791f2626705c261777106afac8a1c908372d2d4fdd637b14b2",
+    "assets/unit143-144/refrigerator.svg": "4293978b3d2160c7e378fb93244e527275cb16c5927df9473bf02e6cb5a27b04",
+    "assets/unit143-144/repair.svg": "85fe96e5301df8618920af6dd3dd4019ae462ce1997a2d5757ee3cf6c7728c95",
+    "assets/unit143-144/rubbish.svg": "bfc322b612108083a61598d25b608679493c75d8aa91f259948f736c3f2cbc21",
+    "assets/unit143-144/rusty.svg": "ebf47c7903a6ecad9c31328b601c20828320272e0bfaeeb75b34df8d647aefff",
+    "assets/unit143-144/serve.svg": "6869b8b82dd28c6930593a2c38fe5a9864eea9a3e4d7667e88e7ba45fc3a7796",
+    "assets/unit143-144/sign.svg": "13a29fb23df4eb5d79d7f179fcd64bd17a0c4bac51c1247403a05d158ba6a237",
+    "assets/unit143-144/surround.svg": "8dc627b98d6a3093aa0b52d1827ad98d1a766b893ba13144d00ab7f50d6a66a3",
+    "assets/unit143-144/task-checked.svg": "4c767b5880654ca661d74a2cf476f7b4ee30695e5360e9ad8e1d32f138318729",
+    "assets/unit143-144/task-record.svg": "7b4d8eefe607632aaf400c10a96f8ba64a5f4031442295cfde3dc80ab6085066",
+    "assets/unit143-144/thief.svg": "244ec22113b7b3eade705d14cbccca93deaabf9927742bee92cf43cb5bd72927",
+    "assets/unit143-144/thieves.svg": "2a5c409f1fc342e82acd783ecd19e76945cfd450d28303384060df7b5dd39191",
+    "assets/unit143-144/through.svg": "3cc3e13e39bb40dc5da451fa17697ca15297e965ea140f46f8dd518f0e4ae5aa",
+    "assets/unit143-144/throw.svg": "f1aefb2b9ac6392c65662ede61bbaca8f24e2ed592bf236b42d3432ada19d0dd",
+    "assets/unit143-144/tidy.svg": "afb878c5bf121f49b4519464f7951862d14c5c83c31653d5c2c973b589010c85",
+    "assets/unit143-144/tin.svg": "2ea2eb161bc6effaddb04653e67461fe8c767cb8c209bd81701290cd10caaf8b",
+    "assets/unit143-144/town-view.svg": "38841d8c81152228c3376a9d67749bb04159066c5b8a7c757a5d01b442bbbca6",
+    "assets/unit143-144/tyre.svg": "90a4cd62e9bd6f0ecc9ed96f723b9c9cb46ee8bc501f438aa90c777686a934d5",
+    "assets/unit143-144/visitor.svg": "ab3c891325cd660c2b2a495880080b2b34c0671a2ed4ae2752a2326f0c3fb026",
+    "assets/unit143-144/walk.webp": "5e60abe972df069ccf8685dc1823885b6a6a723d36c2e0f9088bded17da6859b",
+    "assets/unit143-144/wood.svg": "629ecf9ec4790814b9ef51165ba0c1791f7dfffc5194ed24c9dfa9fcbc04cc79",
+    "assets/unit143-144/woods-world.svg": "026552e6474ade8500aa8a91ba62eb6648222f1e071d7f46e6e64d70be4db57e",
+    "tests/e2e/unit143-144-story-layout.spec.js": "f0925b9aa6bf0a066055a7a170cf77b78cedf30d9c2701b8b3ca1b0b030ca6ba",
+    "tests/e2e/unit143-144-word-layout.spec.js": "460c86b2fb0d6e7e6c967e0496d73ee672de61bd3478ef433b2e86120c4c3dd4",
+    "tests/e2e/unit143-144.spec.js": "c53d07504c78e9aa7a6ef981cd9ff593c50a10050670ea2c601d991f2779dc5b",
+    "tests/login/unit143-144.spec.js": "ca64b928b43dd56cc1d7e39f8b1d327a81fa7358677e107407dc0569254c6a6f",
+    "tests/support/unit143144.js": "6e5a07ff9bcb5106a39188cece934268dfb9ffb4c4ede8a4a44172a134ee247d",
+    "server/catalog.js": "9b7d8f1eebafe22d7802b0d89f11b66d68f1c5dc9b8c7861c5644429f0d65b31",
+    "server/award-catalog.js": "031cf5172a51224de025f34200c46e16a9b5ca235375e6a0b4c7bcc5c8b65f20",
+    "scripts/course-packages.js": "2e29b86b16465d8aed74c8f7ea239a523f3a5c09be933eb7e3218d245126ece1",
+    "core/award-card-layout.js": "37accc4e22d3bb48730d4abb42a94fe88c39e375a818b30dce2afae7b2506f3f",
+    "core/story-certificate.js": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+    "core/award-gif.js": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+    "core/award-reveal.js": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+    "core/unit-awards.js": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+    "core/lesson49-practice.js": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+    "assets/awards/fonts/sources.json": "1b001dbe6fdb9fe9ea74ad361b294231bbe8ebe3f785e973578d4c913ec57cab"
+  }
+}

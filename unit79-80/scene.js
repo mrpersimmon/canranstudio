@@ -5,9 +5,9 @@ function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/
 function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location','家里的备物台');element.setAttribute('role','group');element.setAttribute('aria-label','Carol与Tom面对面讨论购物清单的厨房场景');
  for(const[key,label,side,alt]of [['carol','Carol','left','Carol拿清单与笔，面向右侧的Tom'],['tom','Tom','right','Tom张开手与Carol交谈，面向左侧的Carol']]){const wrap=node('div','dialogue-actor visit-actor at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',alt,'webp'),node('span','actor-label',label));element.append(wrap);}
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事进展');const title=node('strong'),detail=node('span');timeline.append(title,detail);element.append(location,timeline);
- const entries=[['关心她在做什么','What are you doing?'],['正在写清单','a shopping list'],['一起核对需要','What do we need?'],['这周需要许多东西','a lot of things'],['食品杂货','茶、咖啡不多；糖、果酱没有'],['接着看蔬菜','What about vegetables?'],['蔬菜库存','番茄不多；土豆很多'],['肉的库存','一点儿肉也没有'],['询问还有什么','Have we got any…?'],['说明购买计划','她不打算买酒'],['希望还有钱','some money'],['Carol的钱不多','not much'],['Tom的钱也不多','两人的钱都不多']];
- function update(i){const entry=i<0?['一起计划购物','先看看家里缺什么']:entries[i];title.textContent=entry[0];detail.textContent=entry[1];element.dataset.stock=i>=10?'money':i>=9?'plan':i>=7?'meat':i>=6?'vegetables':i>=4?'groceries':'start';}
+ element.append(location);
+
+ function update(i){element.dataset.stock=i>=10?'money':i>=9?'plan':i>=7?'meat':i>=6?'vegetables':i>=4?'groceries':'start';}
  update(-1);return{element,update};
 }
 function create({element}){let view,heading,task;return{

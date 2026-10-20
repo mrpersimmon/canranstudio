@@ -27,9 +27,47 @@ function completedSnapshot(book){
  for(const id of ['unitDialogue','subjectRound'])if(book.activity?.[id]?.done)activity[id]=book.activity[id];
  for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
  if(book.activity?.unitAwardClaims)activity.unitAwardClaims=book.activity.unitAwardClaims;
+ if(course==='unit1-2'){
+  if(book.activity?.unit12HistoryProgress)activity.unit12HistoryProgress=book.activity.unit12HistoryProgress;
+  if(book.activity?.unit12V154Seen===true)activity.unit12V154Seen=true;
+ }
+ if(course==='unit3-4'){
+  if(book.activity?.unit34HistoryProgress)activity.unit34HistoryProgress=book.activity.unit34HistoryProgress;
+  if(book.activity?.unit34V154Seen===true)activity.unit34V154Seen=true;
+ }
+ if(course==='unit5-6'){
+  if(book.activity?.unit56HistoryProgress)activity.unit56HistoryProgress=book.activity.unit56HistoryProgress;
+  if(book.activity?.unit56V154Seen===true)activity.unit56V154Seen=true;
+ }
  // The reading edition replaces unitDialogue. Carry the separately frozen
  // predecessor proof too, so its completed story survives another device.
  if(course==='unit49-50'&&book.activity?.unitLegacyProgress)activity.unitLegacyProgress=book.activity.unitLegacyProgress;
+ // This course already had a five-star edition before the scoped review.
+ // Carry its frozen evidence, and distinguish fresh current work from it.
+ if(course==='unit19-20'){
+  if(book.activity?.unit1920V153Progress)activity.unit1920V153Progress=book.activity.unit1920V153Progress;
+  if(book.activity?.unit1920V153Migration===true)activity.unit1920V153Migration=true;
+ }
+ if(course==='unit23-24'){
+  if(book.activity?.unit2324LegacyProgress)activity.unit2324LegacyProgress=book.activity.unit2324LegacyProgress;
+  if(book.activity?.unit2324V153Progress)activity.unit2324V153Progress=book.activity.unit2324V153Progress;
+  if(book.activity?.unit2324V153Migration===true)activity.unit2324V153Migration=true;
+ }
+ if(course==='unit25-26'){
+  if(book.activity?.unit2526LegacyProgress)activity.unit2526LegacyProgress=book.activity.unit2526LegacyProgress;
+  if(book.activity?.unit2526V153Progress)activity.unit2526V153Progress=book.activity.unit2526V153Progress;
+  if(book.activity?.unit2526V153Migration===true)activity.unit2526V153Migration=true;
+ }
+ if(course==='unit27-28'){
+  if(book.activity?.unit2728LegacyProgress)activity.unit2728LegacyProgress=book.activity.unit2728LegacyProgress;
+  if(book.activity?.unit2728V153Progress)activity.unit2728V153Progress=book.activity.unit2728V153Progress;
+  if(book.activity?.unit2728V153Migration===true)activity.unit2728V153Migration=true;
+ }
+ if(course==='unit29-30'){
+  if(book.activity?.unit2930LegacyProgress)activity.unit2930LegacyProgress=book.activity.unit2930LegacyProgress;
+  if(book.activity?.unit2930V153Progress)activity.unit2930V153Progress=book.activity.unit2930V153Progress;
+  if(book.activity?.unit2930V153Migration===true)activity.unit2930V153Migration=true;
+ }
  return {version:1,groups,records,activity};
 }
 function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}

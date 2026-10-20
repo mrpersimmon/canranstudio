@@ -1,0 +1,147 @@
+{
+  "checkedAt": "2026-10-16T16:40:09.712Z",
+  "scope": "Documentation only; no course, browser, migration, or manual acceptance rerun.",
+  "branch": "codex/release-canranstudio",
+  "passed": false,
+  "checks": [
+    {
+      "name": "v1.52 snapshot unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 1 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 2 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 3 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 4 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 5 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 7 unchanged",
+      "passed": true
+    },
+    {
+      "name": "section 6 all original lines preserved in order",
+      "passed": true
+    },
+    {
+      "name": "section 8 all original lines preserved in order",
+      "passed": true
+    },
+    {
+      "name": "original 19 acceptance rows plus O16",
+      "passed": true,
+      "detail": {
+        "old": 19,
+        "current": 20
+      }
+    },
+    {
+      "name": "O01-O16 confirmed and normative implementation recorded",
+      "passed": true,
+      "detail": {
+        "count": 16
+      }
+    },
+    {
+      "name": "O01-O15 original implementation rows unchanged",
+      "passed": true
+    },
+    {
+      "name": "optimization historical evidence unchanged",
+      "passed": true
+    },
+    {
+      "name": "72 unit index entries unchanged",
+      "passed": true,
+      "detail": {
+        "count": 72
+      }
+    },
+    {
+      "name": "14 course development bases preserved",
+      "passed": true
+    },
+    {
+      "name": "all updated current entry points point to v1.53",
+      "passed": true
+    },
+    {
+      "name": "standard scope",
+      "passed": true
+    },
+    {
+      "name": "standard historical facts",
+      "passed": true
+    },
+    {
+      "name": "standard development boundaries",
+      "passed": false
+    },
+    {
+      "name": "authoring and test instructions include implementation and scope",
+      "passed": false
+    },
+    {
+      "name": "only intended Markdown and new evidence changed",
+      "passed": true,
+      "detail": {
+        "unexpected": [],
+        "unchangedNonMarkdown": 11789,
+        "unchangedOtherMarkdown": 544
+      }
+    },
+    {
+      "name": "all intended Markdown files updated",
+      "passed": true,
+      "detail": {
+        "count": 53
+      }
+    },
+    {
+      "name": "local links and anchors",
+      "passed": true,
+      "detail": {
+        "local": 889,
+        "anchors": 37,
+        "errors": []
+      }
+    },
+    {
+      "name": "Markdown table columns",
+      "passed": true,
+      "detail": {
+        "rows": 361,
+        "errors": []
+      }
+    },
+    {
+      "name": "this-turn diff whitespace",
+      "passed": false,
+      "detail": {
+        "exitCode": 1,
+        "output": ""
+      }
+    }
+  ],
+  "summary": {
+    "changedMarkdown": 53,
+    "localLinks": 889,
+    "anchors": 37,
+    "tableRows": 361,
+    "unchangedNonMarkdown": 11789,
+    "unchangedOtherMarkdown": 544
+  }
+}

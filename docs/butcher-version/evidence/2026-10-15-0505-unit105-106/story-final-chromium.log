@@ -1,0 +1,11 @@
+
+Running 4 tests using 1 worker
+
+(node:11424) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit105-106-story-layout.spec.js:7:39 › 320：11轮完整原文、人物交替和礼物时机、按需中文和续读 (6.6s)
+  ok 2 tests\e2e\unit105-106-story-layout.spec.js:7:39 › 390：11轮完整原文、人物交替和礼物时机、按需中文和续读 (6.3s)
+  ok 3 tests\e2e\unit105-106-story-layout.spec.js:7:39 › 768：11轮完整原文、人物交替和礼物时机、按需中文和续读 (6.8s)
+  ok 4 tests\e2e\unit105-106-story-layout.spec.js:7:39 › 1280：11轮完整原文、人物交替和礼物时机、按需中文和续读 (6.5s)
+
+  4 passed (27.2s)

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\output\unit2526-review-20261018\pdf-check.py", line 11, in <module>
+    assert len(text)==pages and not missing,(name,len(text),missing)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('lesson25-26-worksheet.pdf', 2, ['knife sharp.'])

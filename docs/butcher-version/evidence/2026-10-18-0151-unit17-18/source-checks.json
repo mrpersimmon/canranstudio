@@ -1,0 +1,113 @@
+{
+  "at": "2026-10-17T18:24:53.954Z",
+  "complete": true,
+  "checks": [
+    {
+      "name": "All 62 questions, dialogue, vocabulary, sessions, reward and predecessor definitions unchanged",
+      "passed": true
+    },
+    {
+      "name": "Earlier 29-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Original and retained legacy canvas draw function unchanged",
+      "passed": true
+    },
+    {
+      "name": "content.js exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "index.html exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "scene.js exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "unit.css exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "typography.css exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "legacy.js exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "legacy.css exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "legacy-certificate.js exact baseline bytes",
+      "passed": true
+    },
+    {
+      "name": "Actual prior presentation frozen: unit.js",
+      "passed": true
+    },
+    {
+      "name": "Actual prior presentation frozen: grammar.js",
+      "passed": true
+    },
+    {
+      "name": "Actual prior presentation frozen: references.js",
+      "passed": true
+    },
+    {
+      "name": "All 63 existing asset files unchanged",
+      "passed": true
+    },
+    {
+      "name": "All 96 shared runtime and server files unchanged this turn",
+      "passed": true
+    },
+    {
+      "name": "All font binaries and licenses unchanged",
+      "passed": true
+    },
+    {
+      "name": "No missing current text glyphs",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /lesson/",
+      "passed": true
+    },
+    {
+      "name": "Changed JavaScript parses",
+      "passed": true
+    },
+    {
+      "name": "Changed documentation local links resolve",
+      "passed": true
+    }
+  ],
+  "packages": {
+    "/": {
+      "title": "办公室探访记",
+      "revision": "8cd03dce8b32cc8857d63dd8f2432ffc832e94d67eb6f7ee2a48fa466ce9984d",
+      "manifest": "/course-packages/unit17-18/8cd03dce8b32cc8857d63dd8f2432ffc832e94d67eb6f7ee2a48fa466ce9984d.json",
+      "sha256": "0abe39cf9e759c6b43c3e3af16eae038d4dca930948399391bc239105be2a1f0"
+    },
+    "/lesson/": {
+      "title": "办公室探访记",
+      "revision": "db9aa5f2d83593938a34a73bb73333da5f9f6ee84da7dd4af13890479093623a",
+      "manifest": "/lesson/course-packages/unit17-18/db9aa5f2d83593938a34a73bb73333da5f9f6ee84da7dd4af13890479093623a.json",
+      "sha256": "fc7e0238b98e8dee9200955695e6435a6930c27a04a72c3234712a0639613a5f"
+    }
+  },
+  "unchangedCurrentQuestions": 62,
+  "unchangedLegacyQuestions": 29,
+  "assetFiles": 63,
+  "commonRuntimeFiles": 96,
+  "fontFiles": 6
+}

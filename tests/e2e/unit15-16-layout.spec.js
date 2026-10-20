@@ -74,3 +74,5 @@ test('词块可撤回、键盘操作、刷新续填；错序不能过关，新�
   await room.getByRole('button',{name:'检查答案',exact:true}).press('Enter');await expect(room.getByRole('status')).toContainText('答对了！');
   await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(selected.getByRole('button')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
+
+require('../support/unit1516-legacy').historicalSuite(test);

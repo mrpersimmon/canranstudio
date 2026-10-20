@@ -1,92 +1,114 @@
-/* Village photo album composition. Shared controls, feedback and colors of state stay unchanged. */
-.unit3536-workspace{--unit-page:#F8F9F2;--unit-wash:#EAF0E1;--unit-line:#C2CEAF;--unit-accent:#57734D;--unit-scene:none}
-.unit3536-workspace .unit-word{height:254px;gap:6px}
-.unit3536-workspace .unit-word img{width:126px;height:110px;object-fit:contain}
-.unit3536-workspace .unit-word strong{font-size:24px;line-height:1.2;max-width:100%;overflow-wrap:normal}
-.unit3536-workspace .word-phonetic{font:15px/1.4 Arial,sans-serif;color:#795E4B;overflow-wrap:anywhere}
-.unit3536-workspace .word-meaning{font-size:16px;line-height:1.45;padding:0 7px}
-.unit3536-workspace .word-example{font-size:13px;line-height:1.4;padding:0 4px;color:#795E4B}
-.unit3536-workspace .unit-word[aria-expanded=true] img{height:65px}
-.unit3536-workspace .practice-scene{display:block;width:320px;height:auto;max-height:none;max-width:100%;object-fit:contain;margin:12px auto}
-.unit3536-workspace .practice-options:has(.picture-option){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.unit3536-workspace .picture-option{flex-direction:column;min-height:182px;padding:10px;gap:8px}
-.unit3536-workspace .picture-option img{width:100%;height:130px;object-fit:contain}
-.unit3536-workspace .stage-listen .practice-options:not(:has(.picture-option)){max-width:680px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:20px auto}
-.unit3536-workspace .stage-listen .opt-btn{min-height:76px;line-height:1.4}
-.unit3536-workspace .dialogue-status{min-height:26px;text-align:center;font-size:16px;margin:4px auto 10px}
-.unit3536-workspace .dialogue-log{overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:620px;max-width:1000px;background:#ECF3EC}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .dialogue-log{left:4%;width:92%;top:14px;height:205px;padding:6px 12px}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble-row{justify-content:flex-start}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{position:relative;max-width:100%;border-color:#B5CDCC;background:#FFFDF6}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{font-size:23px;overflow-wrap:normal;word-break:normal}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bcn[hidden]{display:none}
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .story-lead>p{font-size:23px;border-color:#B5CDCC}
-.unit3536-workspace .phrase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px auto}
-.unit3536-workspace .phrase-card{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;padding:16px;text-align:center}
-.unit3536-workspace .reference-card{border:2px solid var(--shelf-line);border-radius:18px;background:var(--surface-paper,#FFFDF6)}
-.unit3536-workspace .phrase-card>img{width:180px;height:122px;max-width:100%;object-fit:contain}
-.unit3536-workspace .phrase-card>strong{font-size:22px;line-height:1.4;overflow-wrap:normal}
-.unit3536-workspace .phrase-card>span{font-size:16px;line-height:1.5}
-.unit3536-workspace .number-label{font:700 17px 'Baloo 2',sans-serif;color:#795E4B}
-.unit3536-workspace #lessonWorkspace .action-pages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));max-width:900px;gap:12px;min-height:365px}
-.unit3536-workspace #lessonWorkspace .action-pages .reference-card{min-height:365px}
-.unit3536-workspace #lessonWorkspace .action-pages img{width:100%;height:175px}
-.unit3536-workspace .activity-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:22px auto 0}
-.unit3536-workspace .offline-task{max-width:740px;margin:24px auto 0;padding:16px;border:2px solid var(--unit-line);border-radius:16px;background:#FFFDF6}
-.unit3536-workspace .offline-task summary{font-weight:700;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.unit3536-workspace .offline-task summary::after{content:'＋'}
-.unit3536-workspace .offline-task[open] summary::after{content:'−'}
-.unit3536-workspace .offline-task p{font-size:16px;line-height:1.6;margin:12px 0}
-.unit3536-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:144px}
-.unit3536-workspace .reference-writing,.unit3536-workspace .reply-writing{font:17px/1.7 'Baloo 2',sans-serif;padding-left:25px}
-.unit3536-workspace .reference-writing li,.unit3536-workspace .reply-writing li{padding:8px 0;break-inside:avoid}
-.unit3536-workspace .writing-rule{display:block;height:26px;border-bottom:1px solid #BDA78A}
-@media(max-width:800px){
- .unit3536-workspace #lessonWorkspace .action-pages{grid-template-columns:1fr;min-height:1000px;max-width:430px}
- .unit3536-workspace #lessonWorkspace .action-pages .reference-card{min-height:322px}
- .unit3536-workspace #lessonWorkspace .action-pages img{height:170px;width:250px}
+/* Lesson 35–36: the scene, reading controls and cast share one park. */
+.unit3536-workspace{--unit-page:#F4F9FA;--unit-wash:#EAF0E1;--unit-line:#C2CEAF;--unit-accent:#57734D}
+.unit3536-workspace [hidden]{display:none!important}
+.unit3536-workspace .unit-cover{grid-template-columns:1.2fr 1fr;overflow:hidden;padding:0;gap:0}
+.unit3536-workspace .unit-cover>div:last-child{padding:32px}.unit3536-workspace .unit-cover-art{width:100%;max-width:none;min-height:0;height:auto;padding:0;margin:0}
+.unit3536-workspace .unit-cover-art>img{display:block;width:100%;height:auto}.unit3536-workspace .chapter-links a{min-width:0;white-space:normal}.unit3536-workspace .chapter-select select{min-height:44px}
+.unit3536-workspace .unit-word{height:auto;min-height:268px;gap:7px}.unit3536-workspace .unit-word>img{height:96px;width:106px;object-fit:contain}
+.unit3536-workspace .unit-word>strong{max-width:100%;font-size:21px;line-height:1.25;overflow-wrap:normal;word-break:normal}
+.unit3536-workspace .word-phonetic{font:14px/1.4 Arial,sans-serif;color:#795e4b;overflow-wrap:anywhere;max-width:100%}.unit3536-workspace .word-meaning{font-size:16px;line-height:1.4;padding:0 8px}
+.unit3536-workspace .offline-task{max-width:760px;margin:24px auto 0;padding:16px;border:1px solid var(--unit-line);border-radius:16px;background:#fffdf8}
+.unit3536-workspace .offline-task summary{min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:space-between}.unit3536-workspace .offline-task summary::after{content:'＋'}.unit3536-workspace .offline-task[open] summary::after{content:'−'}
+.unit3536-workspace .offline-task li,.unit3536-workspace .offline-task p{overflow-wrap:normal;word-break:normal;font-size:19px;line-height:1.7}
+.unit3536-workspace .grammar-reference{display:grid;gap:12px}.unit3536-workspace .grammar-reference article{border:1px solid var(--unit-line);border-radius:12px;padding:12px;background:#f1f4fa}
+.unit3536-workspace .grammar-reference h4{margin:0;font-size:18px}.unit3536-workspace .grammar-reference p{margin:7px 0;font-size:18px;white-space:pre-line}
+.unit3536-workspace .reference-card{padding:14px;border-radius:16px;background:#eef2f4;text-align:center;font-size:16px}
+.unit3536-workspace .reference-card img{display:block;width:130px;height:130px;object-fit:contain;margin:8px auto}.unit3536-workspace .reference-card p{font-size:22px;line-height:1.5;margin:8px 0;white-space:pre-line}.unit3536-workspace .reference-card small{font-size:17px}
+.unit3536-workspace .reference-pager{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;margin:15px auto}
+.unit3536-workspace .writing-example{white-space:pre-line}.unit3536-workspace .writing-rule{height:32px;border-bottom:1px solid #a9977c;margin-top:2px}
+.unit3536-workspace #unitWriting .writing-blank{display:inline-block;vertical-align:baseline;min-width:80px;height:32px;border-bottom:1px solid #a9977c}
+.unit3536-workspace #unitWriting .writing-a li{line-height:2.1;margin:8px 0}.unit3536-workspace .writing-b li{margin-bottom:14px;break-inside:avoid}
+.unit3536-workspace .desk-model{padding:14px}.unit3536-workspace .desk-model .grammar-model-line>p{font-size:20px;line-height:1.5}
+.unit3536-workspace .desk-intro{display:grid;gap:12px;max-width:720px;margin:0 auto 14px}.unit3536-workspace .desk-intro h3{font-size:23px;line-height:1.5;margin:0;text-align:center}
+.unit3536-workspace .desk-task-status{font-size:16px;line-height:1.5;padding:10px;border:1px solid var(--unit-line);border-radius:12px;background:#fff8e7;text-align:center;margin:0}
+.unit3536-workspace .desk-task-status[data-recorded='true']{background:#edf5e6}
+.unit3536-workspace .desk-completion{display:flex;align-items:center;justify-content:center}
+.unit3536-workspace .desk-completion>img{display:block;position:static;width:100%;height:100%;max-width:100%;object-fit:contain}
+.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage{position:relative;display:grid;grid-template:1fr / minmax(0,1fr);height:auto;overflow:visible;border:0;align-items:start}
+.unit3536-workspace .desk-world{grid-area:1/1;position:relative;width:100%;height:900px;border:2px solid #b9c3d0;border-radius:20px;background:#EDF5EF;overflow:hidden}
+.unit3536-workspace .desk-location{position:absolute;top:10px;left:50%;transform:translateX(-50%);margin:0;padding:4px 16px;font-size:17px;background:#fffaf0;border:1px solid #c7baa6;border-radius:12px}
+.unit3536-workspace .desk-cast{position:absolute;left:2%;bottom:50px;width:96%;height:350px}
+.unit3536-workspace .desk-cast .dialogue-actor{position:absolute;bottom:0;width:26%;height:100%;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;transform:none}
+.unit3536-workspace .stage-text .desk-cast .cast-image{display:block;width:100%;height:calc(100% - 32px);object-fit:contain;object-position:center bottom}
+.unit3536-workspace .actor-label{display:block;font-size:14px;line-height:1.35;padding:4px 6px;border:1px solid transparent;border-radius:8px;background:#fffaf0;text-align:center}
+.unit3536-workspace .dialogue-actor.is-current .actor-label{border-color:#91a0bc;background:#fff5d7}
+.unit3536-workspace .desk-reader{grid-area:1/1;align-self:start;position:relative;z-index:5;width:min(660px,calc(100% - 54px));margin:58px auto 0}
+.unit3536-workspace #lessonWorkspace .stage-text .desk-reader .dialogue-log{display:flex;flex-direction:column;gap:12px;width:100%;height:clamp(180px,calc(100svh - 290px),285px);margin:0;padding:8px 12px;background:transparent;border:0;border-radius:14px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-gutter:stable;scrollbar-color:#a6b2c4 transparent}
+.unit3536-workspace .dialogue-log:has(.story-lead){justify-content:center}.unit3536-workspace .story-lead{display:flex;align-items:center;justify-content:center;gap:12px;padding:16px;text-align:center;background:#fffdf6;border:1px solid var(--unit-line);border-radius:16px}
+.unit3536-workspace .story-lead>img{width:54px;height:54px;object-fit:contain}.unit3536-workspace .story-lead>p{font-size:22px;line-height:1.45;margin:0}
+.unit3536-workspace .bubble-row{display:flex;flex:0 0 auto;align-items:flex-start;margin:0}.unit3536-workspace .speaker-left{justify-content:flex-start}.unit3536-workspace .speaker-right{justify-content:flex-end}
+.unit3536-workspace .bubble{position:relative;width:fit-content;max-width:88%;min-height:0;flex:none;margin:0;padding:10px 14px;border:1px solid #b8c4d5;background:#eef3fa;border-radius:17px;box-shadow:0 3px 0 #dce3ed}
+.unit3536-workspace .speaker-right .bubble{background:#fff4e8;border-color:#d5b79b;box-shadow:0 3px 0 #eee0cd}
+.unit3536-workspace .bubble .bname{font-size:13px;margin-bottom:3px}.unit3536-workspace .bubble .btext{font-size:22px;line-height:1.4;white-space:normal}.unit3536-workspace .bubble .bcn{font-size:16px;line-height:1.5}.unit3536-workspace .bubble .bbtns{margin-top:8px}
+.unit3536-workspace .desk-reader .dialogue-status{margin:4px 0;min-height:26px;text-align:center;font-size:16px}
+.unit3536-workspace .stage-text .desk-reader .stage-ctrl{width:100%;padding-top:8px;background:#e9eef7;border-radius:12px}
+.unit3536-workspace .legacy-learning{background:#f8f1e5}.unit3536-workspace .legacy-records li{margin:12px 0}.unit3536-workspace .legacy-certificate-host .unit-certificate{border:0;background:transparent;padding:10px}
+.unit3536-workspace .legacy-certificate-dialog{font-family:'Baloo 2','ZCOOL KuaiLe',sans-serif;--unit-page:#F8F9F2;--unit-wash:#EAF0E1;--unit-line:#C2CEAF;--unit-accent:#57734D}
+.unit3536-workspace .legacy-certificate-dialog .certificate-paper{max-width:100%;overflow:visible}
+@media(max-width:760px){.unit3536-workspace .unit-cover{grid-template-columns:1fr}.unit3536-workspace .unit-cover>div:last-child{padding:24px}}
+@media(max-width:600px){
+ .unit3536-workspace .desk-world{height:970px;background-size:100% 600px;background-position:center top;background-repeat:no-repeat;background-color:#E6D7BF}.unit3536-workspace .desk-reader{width:calc(100% - 16px);margin-top:55px}.unit3536-workspace #lessonWorkspace .stage-text .desk-reader .dialogue-log{padding:8px}
+ .unit3536-workspace .story-lead{flex-direction:column;padding:14px}.unit3536-workspace .story-lead>p{font-size:20px}.unit3536-workspace .bubble{max-width:96%;padding:10px}.unit3536-workspace .bubble .btext{font-size:20px}
+ .unit3536-workspace .desk-cast{left:2%;width:96%;height:220px;bottom:265px}.unit3536-workspace .desk-cast .dialogue-actor{width:44%}
+ .unit3536-workspace .desk-model{gap:10px;padding:10px}.unit3536-workspace .desk-model .grammar-model-line>p{font-size:18px}.unit3536-workspace .grammar-intro h3{font-size:18px;margin:10px auto}.unit3536-workspace .grammar-rule{font-size:14px}
+ .unit3536-workspace .grammar-runner .cloze-row{padding:8px;margin-bottom:8px}.unit3536-workspace .grammar-runner .cloze-choices .opt-btn{min-height:44px;padding:5px 12px}
+ .unit3536-workspace .unit-word>strong{font-size:19px}.unit3536-workspace .grammar-reference p{font-size:17px}.unit3536-workspace .reference-card p{font-size:20px}
 }
-@media(max-width:640px){
- .unit3536-workspace .unit-word{height:286px}
- .unit3536-workspace .unit-word img{width:110px;height:100px}
- .unit3536-workspace .unit-word strong{font-size:20px}
- .unit3536-workspace .word-phonetic{font-size:14px}
- .unit3536-workspace .word-meaning{font-size:15px;padding:0 3px}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:calc(275px + clamp(190px,75vw - 45px,305px))}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .dialogue-log{left:0;top:8px;width:100%;height:255px;padding:8px 10px}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .classroom-illustration{height:clamp(190px,calc(75vw - 45px),305px);bottom:0}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .classroom-illustration svg{height:100%;width:100%}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .btext{font-size:20px}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .bubble{grid-template-columns:minmax(0,1fr);width:100%}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre.is-narration .bbtns{grid-column:1;grid-row:2;justify-self:start}
- .unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre.is-narration .bcn{grid-row:3}
- .unit3536-workspace .phrase-grid{grid-template-columns:1fr}
- .unit3536-workspace .practice-options:has(.picture-option){grid-template-columns:1fr}
- .unit3536-workspace .picture-option{min-height:140px;flex-direction:row}
- .unit3536-workspace .picture-option img{width:145px;height:115px;max-width:67%}
- .unit3536-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:202px}
-}
-@media(max-width:360px){.unit3536-workspace .unit-word strong{font-size:18px}.unit3536-workspace .word-phonetic{font-size:13px}.unit3536-workspace .sentence-options:has(.wordbank>.word-token:nth-child(6)) .word-answer{height:260px}}
+@media(max-width:360px){.unit3536-workspace .unit-word{padding-inline:4px}.unit3536-workspace .unit-word>strong{font-size:17px}}
 @media print{
- body.print-writing #unitWriting,body.print-writing #unitWriting *{visibility:visible!important}
- body.print-writing>*{display:none!important}
- body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
+ body.print-writing>*{display:none!important}body.print-writing #lessonWorkspace,body.print-writing #l5,body.print-writing .stage-certificate,body.print-writing #unitWriting{display:block!important;position:static!important;border:0!important;margin:0!important;padding:0!important;box-shadow:none!important}
  body.print-writing .shop-chapter:not(#l5),body.print-writing #l5>.chapter-heading,body.print-writing #l5>.shop-stage:not(.stage-certificate),body.print-writing .stage-certificate>*:not(#unitWriting),body.print-writing #unitWriting .activity-actions{display:none!important}
- body.print-writing #unitWriting{max-width:none;font-size:14px;background:white;border-radius:0}
- body.print-writing #unitWriting>summary,body.print-writing #unitWriting>p:first-of-type{display:none!important}
- body.print-writing #unitWriting p{font-size:13px;line-height:1.5;margin:10px 0}
- body.print-writing #unitWriting h4{margin:10px 0;font-size:18px}
- body.print-writing .reference-writing{font-size:15px;line-height:1.5}
- body.print-writing .reference-writing li{margin:10px 0;min-height:60px}
- body.print-writing .writing-b{break-before:page}
- body.print-writing .reply-writing{display:block;font-size:15px;line-height:1.5}
- body.print-writing .reply-writing li{min-height:110px;break-inside:avoid}
- body.print-writing .reply-writing li:nth-child(6){break-after:page}
- body.print-writing .writing-rule{height:26px}
+ body.unit3536-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}body.unit3536-workspace.print-writing .stage-certificate{max-width:none;width:100%;overflow:visible!important}body.unit3536-workspace.print-writing #unitWriting{max-width:none;overflow:visible!important}
+ body.unit3536-workspace.print-writing #unitWriting ol{padding-left:2em!important;overflow:visible!important}body.unit3536-workspace.print-writing #unitWriting li{break-inside:avoid;font-size:17px;line-height:1.45;margin:4px 0}
+ body.unit3536-workspace.print-writing #unitWriting h4{break-after:avoid;font-size:17px;line-height:1.45;margin:12px 0 6px}body.unit3536-workspace.print-writing #unitWriting .reference-note{font-size:14px!important;line-height:1.45;padding:6px;margin:6px 0}body.unit3536-workspace.print-writing #unitWriting .writing-example{break-inside:avoid}
+ body.unit3536-workspace.print-writing #unitWriting .writing-rule{display:block!important;visibility:visible!important;height:32px!important;border-bottom:1px solid #999!important}body.unit3536-workspace.print-writing #unitWriting .writing-b li{break-inside:avoid!important}
+ body.unit3536-workspace.print-writing #unitWriting .writing-blank{display:inline-block!important;height:32px!important;min-width:80px!important;border-bottom:1px solid #999!important}
+ body.print-legacy-certificate>*{display:none!important}body.print-legacy-certificate #legacyCertificateDialog{display:block!important;position:static!important;max-width:none!important;max-height:none!important;width:100%!important;border:0!important;padding:0!important;overflow:visible!important}body.print-legacy-certificate #legacyCertificateDialog *{visibility:visible!important}body.print-legacy-certificate #legacyCertificateDialog .unit-dialog-heading,body.print-legacy-certificate #legacyCertificateDialog .certificate-export-area{display:none!important}body.print-legacy-certificate #legacyCertificateDialog .certificate-paper{display:block!important;width:100%!important;margin:0!important;break-inside:avoid}
 }
 
-.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{outline:9px solid #FFFDF6;box-shadow:0 3px 0 #B4B49A;border-radius:8px}
-.unit3536-workspace .dialogue-status{margin-top:28px}
-.unit3536-workspace .picture-option img{height:156px}
-@media(max-width:640px){.unit3536-workspace .picture-option img{height:124px;width:166px}.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre .classroom-illustration{height:clamp(185px,calc(69vw - 42px),294px)}.unit3536-workspace #lessonWorkspace .stage-text .dialogue-stage.is-story-theatre{height:calc(275px + clamp(185px,69vw - 42px,294px))}}
+
+
+/* Teaching diagrams need visible surfaces and distances, not icon sizing. */
+.unit3536-workspace .stage-exam .practice-options:has(.picture-option){display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.unit3536-workspace .stage-exam .picture-option{flex:0 1 220px;min-width:180px;max-width:240px;display:flex;flex-direction:column;gap:8px;padding:12px}
+.unit3536-workspace .stage-exam .picture-option>img{display:block;width:100%;height:auto;max-width:216px;max-height:none;object-fit:contain}
+/* Actual dialogue, room and full-body cast share one responsive scene. */
+.unit3536-workspace .desk-world{height:auto;padding-top:calc(clamp(180px,calc(100svh - 290px),285px) + 175px);background:#EDF6F8;border-color:#C2CEAF}
+.unit3536-workspace .desk-reader .stage-ctrl{background:#EAF0E1}
+.unit3536-workspace .room-scene{position:relative;width:min(780px,100%);margin:0 auto;background:#EDF6F8;border-radius:0 0 18px 18px;overflow:hidden}
+.unit3536-workspace .room-furniture{position:relative;width:100%;line-height:0}
+.unit3536-workspace .room-furniture picture,.unit3536-workspace .room-image{display:block;width:100%;height:auto;max-width:100%}
+.unit3536-workspace .room-focus{position:absolute;border:3px solid #D1A450;box-shadow:0 0 0 3px #fff9;border-radius:12px;pointer-events:none}
+.unit3536-workspace .desk-cast{position:relative;left:auto;bottom:auto;width:96%;margin:0 auto;display:flex;align-items:end;justify-content:space-between;height:330px;padding:4px 12px 14px}
+.unit3536-workspace .desk-cast .dialogue-actor{position:static;bottom:auto;width:43%;height:100%;max-width:280px}
+.unit3536-workspace .stage-text .desk-cast .cast-image{position:static;width:100%;height:calc(100% - 32px);object-fit:contain;object-position:center bottom;max-width:100%}
+.unit3536-workspace .writing-bank{border:1px solid var(--unit-line);padding:12px;border-radius:12px;background:#F9F4E7}
+.unit3536-workspace .writing-bank p{font-size:18px;line-height:1.8}
+.unit3536-workspace .action-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.unit3536-workspace .action-picture{padding:12px;border:1px solid var(--unit-line);border-radius:14px;background:#FFFDF8}
+.unit3536-workspace .action-picture img{width:140px;height:140px;max-width:100%}
+.unit3536-workspace .action-picture p{font-size:20px;line-height:1.45}
+.unit3536-workspace .gallery-current{display:block}
+@media(max-width:600px){.unit3536-workspace .desk-cast{height:260px;padding:0 0 10px;width:100%}.unit3536-workspace .desk-cast .dialogue-actor{width:49%}.unit3536-workspace .room-focus{border-width:2px;box-shadow:0 0 0 2px #fff9}.unit3536-workspace .action-gallery{grid-template-columns:1fr}.unit3536-workspace .action-picture img{width:160px;height:140px}}
+@media print{
+ body.unit3536-workspace.print-writing #unitWriting>p{font-size:15px;line-height:1.45;margin:6px 0}
+ body.unit3536-workspace.print-writing #unitWriting h3{font-size:20px;margin:8px 0}
+ body.unit3536-workspace.print-writing #unitWriting .writing-bank{padding:8px 12px}
+ body.unit3536-workspace.print-writing #unitWriting .writing-bank p{font-size:16px;line-height:1.5;margin:5px 0}
+ body.unit3536-workspace.print-writing #unitWriting .writing-b li{margin:0;line-height:1.2}
+}
+
+.unit3536-workspace .room-furniture{max-width:700px;margin:auto}.unit3536-workspace .room-image{border-radius:18px}.unit3536-workspace .practice-scene{display:block;width:min(380px,100%);height:230px;object-fit:contain;margin:12px auto}.unit3536-workspace .garden-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.unit3536-workspace .garden-gallery .action-picture img{width:100%;height:180px}.unit3536-workspace .number-label{font-family:'Award Nunito',sans-serif;font-weight:600}.unit3536-workspace .writing-a li,.unit3536-workspace .writing-b li{break-inside:avoid}.unit3536-workspace .writing-b .writing-rule{display:block}
+@media(max-width:600px){.unit3536-workspace .garden-gallery{grid-template-columns:1fr}.unit3536-workspace .room-furniture{margin:8px auto}.unit3536-workspace .practice-scene{height:210px}}
+@media print{body.unit3536-workspace.print-writing #unitWriting .writing-b{break-before:page}body.unit3536-workspace.print-writing #unitWriting .writing-b li{margin:0 0 12px}body.unit3536-workspace.print-writing #unitWriting .writing-b li>span{font-size:15px}body.unit3536-workspace.print-writing #unitWriting .writing-rule{height:32px!important}}
+
+/* A continuous narrated picture; no invented speaker or plot captions. */
+.unit3536-workspace .narration-line{justify-content:flex-start}.unit3536-workspace .narration-line .bubble{max-width:96%;background:#FFFDF6;border-color:#C2CEAF}.unit3536-workspace .narration-line .bname{font-variant-numeric:tabular-nums}.unit3536-workspace .narration-line .btext{font-size:20px;line-height:1.35}.unit3536-workspace .narration-line .bcn{font-size:16px;line-height:1.4}
+.unit3536-workspace #lessonWorkspace .stage-text .desk-reader .dialogue-log{height:clamp(240px,calc(100svh - 275px),320px)}.unit3536-workspace .desk-world{padding-top:calc(clamp(240px,calc(100svh - 275px),320px) + 175px)}.unit3536-workspace .room-furniture{max-width:840px}.unit3536-workspace .room-scene{width:96%;margin:0 auto 16px}.unit3536-workspace .room-image{width:100%;height:auto;object-fit:contain}.unit3536-workspace .stage-roles .picture-option img{width:180px;height:150px;object-fit:contain;max-width:100%}
+@media print{body.unit3536-workspace.print-writing #unitWriting .writing-b{break-before:auto}}
+
+/* Route arrows and the two stacked reference scenes are evidence, not icons. */
+.unit3536-workspace .practice-scene{width:min(280px,100%);height:auto;max-height:none;object-fit:contain}
+.unit3536-workspace .stage-grammar .practice-options:has(.picture-option){display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.unit3536-workspace .stage-grammar .picture-option{flex:0 1 220px;min-width:180px;max-width:240px;display:flex;flex-direction:column;gap:8px;padding:12px}
+.unit3536-workspace .stage-grammar .picture-option>img{display:block;width:100%;height:auto;max-width:216px;max-height:none;object-fit:contain}

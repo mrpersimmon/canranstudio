@@ -1,0 +1,1175 @@
+{
+  "accessPolicy": "class-v1",
+  "schema": 1,
+  "protocol": 1,
+  "basePath": "/",
+  "id": "unit9-10",
+  "title": "街角问候站",
+  "entry": "/unit9-10/index.html",
+  "shell": "/course-shells/unit9-10.html",
+  "route": "/unit9-10/",
+  "revision": "c3581d4571f0ec2ce83894f3f500a0835dca05b9b9782cf67db454bec9f867e2",
+  "mode": "classroom",
+  "required": [
+    {
+      "key": "/assets/awards/award-round.woff2",
+      "url": "/resources/9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28/award-round.woff2",
+      "sha256": "9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28",
+      "bytes": 1296316,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/download.svg",
+      "url": "/resources/3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3/download.svg",
+      "sha256": "3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3",
+      "bytes": 316,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/awards/fonts/award-gothic-500.woff2",
+      "url": "/resources/8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f/award-gothic-500.woff2",
+      "sha256": "8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f",
+      "bytes": 4456656,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/award-gothic-brand-400.woff2",
+      "url": "/resources/29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237/award-gothic-brand-400.woff2",
+      "sha256": "29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237",
+      "bytes": 1948,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/award-nunito.woff2",
+      "url": "/resources/69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279/award-nunito.woff2",
+      "sha256": "69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279",
+      "bytes": 101104,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/lesson-gothic-body-400.woff2",
+      "url": "/resources/7da99f3cf60b901ae0c428a9992c3c9956707df9fdaf5b001ffb6f329bbf48b7/lesson-gothic-body-400.woff2",
+      "sha256": "7da99f3cf60b901ae0c428a9992c3c9956707df9fdaf5b001ffb6f329bbf48b7",
+      "bytes": 301560,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/paper.webp",
+      "url": "/resources/2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce/paper.webp",
+      "sha256": "2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce",
+      "bytes": 1254,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/return.svg",
+      "url": "/resources/1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306/return.svg",
+      "sha256": "1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306",
+      "bytes": 290,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/awards/star-earned.webp",
+      "url": "/resources/7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107/star-earned.webp",
+      "sha256": "7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107",
+      "bytes": 11876,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/star-empty.webp",
+      "url": "/resources/269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c/star-empty.webp",
+      "sha256": "269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c",
+      "bytes": 13200,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/typography-45-46.css",
+      "url": "/resources/1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17/typography-45-46.css",
+      "sha256": "1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17",
+      "bytes": 585,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/assets/awards/unit1-2-handbag-closeup.webp",
+      "url": "/resources/db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826/unit1-2-handbag-closeup.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+      "bytes": 177460,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/brand/starflower-apple-touch.png",
+      "url": "/resources/c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e/starflower-apple-touch.png",
+      "sha256": "c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e",
+      "bytes": 14833,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/brand/starflower-favicon.png",
+      "url": "/resources/0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28/starflower-favicon.png",
+      "sha256": "0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28",
+      "bytes": 2694,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-500.woff2",
+      "url": "/resources/b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36/baloo-2-latin-500.woff2",
+      "sha256": "b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36",
+      "bytes": 19556,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-700.woff2",
+      "url": "/resources/8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0/baloo-2-latin-700.woff2",
+      "sha256": "8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0",
+      "bytes": 19436,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-800.woff2",
+      "url": "/resources/3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7/baloo-2-latin-800.woff2",
+      "sha256": "3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7",
+      "bytes": 18632,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fonts.css",
+      "url": "/resources/4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f/fonts.css",
+      "sha256": "4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f",
+      "bytes": 3061,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-400.woff2",
+      "url": "/resources/9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f/fredoka-latin-400.woff2",
+      "sha256": "9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f",
+      "bytes": 16076,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-500.woff2",
+      "url": "/resources/7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620/fredoka-latin-500.woff2",
+      "sha256": "7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620",
+      "bytes": 16248,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-600.woff2",
+      "url": "/resources/b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294/fredoka-latin-600.woff2",
+      "sha256": "b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294",
+      "bytes": 16468,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-700.woff2",
+      "url": "/resources/ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16/fredoka-latin-700.woff2",
+      "sha256": "ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16",
+      "bytes": 15900,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+      "url": "/resources/843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd/zcool-kuaile-chinese-simplified-400.woff2",
+      "sha256": "843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd",
+      "bytes": 726052,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/zcool-kuaile-latin-400.woff2",
+      "url": "/resources/8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93/zcool-kuaile-latin-400.woff2",
+      "sha256": "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93",
+      "bytes": 5344,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/lesson49/icons/audio.svg",
+      "url": "/resources/379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1/audio.svg",
+      "sha256": "379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1",
+      "bytes": 291,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/back.svg",
+      "url": "/resources/3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6/back.svg",
+      "sha256": "3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6",
+      "bytes": 215,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/beef.svg",
+      "url": "/resources/690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb/beef.svg",
+      "sha256": "690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb",
+      "bytes": 702,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/bird.svg",
+      "url": "/resources/31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1/bird.svg",
+      "sha256": "31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1",
+      "bytes": 2042,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/book.svg",
+      "url": "/resources/2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6/book.svg",
+      "sha256": "2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6",
+      "bytes": 350,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/butcher.svg",
+      "url": "/resources/5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419/butcher.svg",
+      "sha256": "5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419",
+      "bytes": 2094,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/cards.svg",
+      "url": "/resources/c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af/cards.svg",
+      "sha256": "c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af",
+      "bytes": 389,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/check.svg",
+      "url": "/resources/6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0/check.svg",
+      "sha256": "6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0",
+      "bytes": 231,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/chicken.svg",
+      "url": "/resources/a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88/chicken.svg",
+      "sha256": "a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/close.svg",
+      "url": "/resources/65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37/close.svg",
+      "sha256": "65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37",
+      "bytes": 213,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/dog.svg",
+      "url": "/resources/a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d/dog.svg",
+      "sha256": "a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d",
+      "bytes": 868,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/either.svg",
+      "url": "/resources/b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689/either.svg",
+      "sha256": "b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689",
+      "bytes": 1078,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/fish.svg",
+      "url": "/resources/d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b/fish.svg",
+      "sha256": "d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b",
+      "bytes": 364,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/give.svg",
+      "url": "/resources/09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2/give.svg",
+      "sha256": "09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/heart.svg",
+      "url": "/resources/cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f/heart.svg",
+      "sha256": "cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f",
+      "bytes": 255,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/hint.svg",
+      "url": "/resources/72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e/hint.svg",
+      "sha256": "72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e",
+      "bytes": 658,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/hotpot.svg",
+      "url": "/resources/51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06/hotpot.svg",
+      "sha256": "51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06",
+      "bytes": 502,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/husband.svg",
+      "url": "/resources/8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a/husband.svg",
+      "sha256": "8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/lamb.svg",
+      "url": "/resources/3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051/lamb.svg",
+      "sha256": "3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051",
+      "bytes": 873,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/lily.svg",
+      "url": "/resources/aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121/lily.svg",
+      "sha256": "aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121",
+      "bytes": 548,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/map.svg",
+      "url": "/resources/4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6/map.svg",
+      "sha256": "4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6",
+      "bytes": 294,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/meat.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/meat.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/mince.svg",
+      "url": "/resources/d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec/mince.svg",
+      "sha256": "d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec",
+      "bytes": 1356,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/mutton.svg",
+      "url": "/resources/9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd/mutton.svg",
+      "sha256": "9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd",
+      "bytes": 612,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/order.svg",
+      "url": "/resources/4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469/order.svg",
+      "sha256": "4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469",
+      "bytes": 381,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/people.svg",
+      "url": "/resources/3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3/people.svg",
+      "sha256": "3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3",
+      "bytes": 1027,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/piece.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/piece.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/pork.svg",
+      "url": "/resources/edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732/pork.svg",
+      "sha256": "edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732",
+      "bytes": 527,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/pound.svg",
+      "url": "/resources/0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a/pound.svg",
+      "sha256": "0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a",
+      "bytes": 616,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/question.svg",
+      "url": "/resources/e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694/question.svg",
+      "sha256": "e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694",
+      "bytes": 320,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/retry.svg",
+      "url": "/resources/de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692/retry.svg",
+      "sha256": "de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692",
+      "bytes": 281,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/speech.svg",
+      "url": "/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/speech.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/star.svg",
+      "url": "/resources/d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672/star.svg",
+      "sha256": "d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672",
+      "bytes": 262,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/steak.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/steak.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/tell.svg",
+      "url": "/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/tell.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/tom.svg",
+      "url": "/resources/049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750/tom.svg",
+      "sha256": "049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/truth.svg",
+      "url": "/resources/078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b/truth.svg",
+      "sha256": "078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b",
+      "bytes": 1137,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/book.svg",
+      "url": "/resources/5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f/book.svg",
+      "sha256": "5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f",
+      "bytes": 398,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/car.svg",
+      "url": "/resources/0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9/car.svg",
+      "sha256": "0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9",
+      "bytes": 522,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/coat.svg",
+      "url": "/resources/2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5/coat.svg",
+      "sha256": "2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5",
+      "bytes": 450,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/completion/correct-v1.png",
+      "url": "/resources/c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b/correct-v1.png",
+      "sha256": "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+      "bytes": 5381,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/completion/incorrect-v1.png",
+      "url": "/resources/c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415/incorrect-v1.png",
+      "sha256": "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+      "bytes": 7692,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/completion/streak-v1.png",
+      "url": "/resources/191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9/streak-v1.png",
+      "sha256": "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+      "bytes": 7317,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/dress.svg",
+      "url": "/resources/0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67/dress.svg",
+      "sha256": "0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67",
+      "bytes": 368,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/handbag.svg",
+      "url": "/resources/84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4/handbag.svg",
+      "sha256": "84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4",
+      "bytes": 441,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/house.svg",
+      "url": "/resources/df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497/house.svg",
+      "sha256": "df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497",
+      "bytes": 471,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/man.svg",
+      "url": "/resources/2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839/man.svg",
+      "sha256": "2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839",
+      "bytes": 842,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/pen.svg",
+      "url": "/resources/42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b/pen.svg",
+      "sha256": "42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b",
+      "bytes": 428,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/pencil.svg",
+      "url": "/resources/38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0/pencil.svg",
+      "sha256": "38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0",
+      "bytes": 410,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/scene/man.svg",
+      "url": "/resources/0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed/man.svg",
+      "sha256": "0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed",
+      "bytes": 1599,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/scene/woman.svg",
+      "url": "/resources/79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399/woman.svg",
+      "sha256": "79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399",
+      "bytes": 1741,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/shirt.svg",
+      "url": "/resources/7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9/shirt.svg",
+      "sha256": "7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9",
+      "bytes": 416,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/skirt.svg",
+      "url": "/resources/c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf/skirt.svg",
+      "sha256": "c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf",
+      "bytes": 323,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/story-background.webp",
+      "url": "/resources/5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73/story-background.webp",
+      "sha256": "5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73",
+      "bytes": 12446,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit1-2/street.svg",
+      "url": "/resources/37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff/street.svg",
+      "sha256": "37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff",
+      "bytes": 1082,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/watch.svg",
+      "url": "/resources/197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e/watch.svg",
+      "sha256": "197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e",
+      "bytes": 390,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/woman.svg",
+      "url": "/resources/07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9/woman.svg",
+      "sha256": "07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9",
+      "bytes": 870,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit3-4/umbrella.svg",
+      "url": "/resources/8932dd981d159cdb96d29671740aa9901ff71cad4f90fe2ad252dc2644b31684/umbrella.svg",
+      "sha256": "8932dd981d159cdb96d29671740aa9901ff71cad4f90fe2ad252dc2644b31684",
+      "bytes": 667,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit5-6/blake.svg",
+      "url": "/resources/37eba9814e14847bf04591fd21d199b2b6a018400c024d60cd8bd947673514d5/blake.svg",
+      "sha256": "37eba9814e14847bf04591fd21d199b2b6a018400c024d60cd8bd947673514d5",
+      "bytes": 1393,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit5-6/naoko.svg",
+      "url": "/resources/8e224c9df24de8a7ad477cd9e6601f476f3a42edfe4e74d3accd71db44d0d2f9/naoko.svg",
+      "sha256": "8e224c9df24de8a7ad477cd9e6601f476f3a42edfe4e74d3accd71db44d0d2f9",
+      "bytes": 1145,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit5-6/volvo.svg",
+      "url": "/resources/856bec780031c6bb70550219b060a48473dab35a102ba0ca494e6e2551b7d701/volvo.svg",
+      "sha256": "856bec780031c6bb70550219b060a48473dab35a102ba0ca494e6e2551b7d701",
+      "bytes": 741,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit7-8/robert.svg",
+      "url": "/resources/16659308f53edb8a5754f167d8fb828147bcd48702492f1e13b0afcb9698c1b6/robert.svg",
+      "sha256": "16659308f53edb8a5754f167d8fb828147bcd48702492f1e13b0afcb9698c1b6",
+      "bytes": 1597,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit7-8/sophie.svg",
+      "url": "/resources/e7605c4f5d9049ec465ae2a351dfed766598922f4932addfe5f1838464d7852e/sophie.svg",
+      "sha256": "e7605c4f5d9049ec465ae2a351dfed766598922f4932addfe5f1838464d7852e",
+      "bytes": 1819,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/busy-nurse.svg",
+      "url": "/resources/116fe52307aae6b59c6980192aa5376ef0f936f74ac50ec1a79a0ec8b48508af/busy-nurse.svg",
+      "sha256": "116fe52307aae6b59c6980192aa5376ef0f936f74ac50ec1a79a0ec8b48508af",
+      "bytes": 941,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/busy.svg",
+      "url": "/resources/f8c02cefa51ce5cd6b4b6be6f42cee312670fbd6e2d6bcd34009c812658475ee/busy.svg",
+      "sha256": "f8c02cefa51ce5cd6b4b6be6f42cee312670fbd6e2d6bcd34009c812658475ee",
+      "bytes": 903,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/cast-talk-v1.webp",
+      "url": "/resources/73ec229fced6b96a5b2f6175739c639e457081a616365a814eee5c0a88151072/cast-talk-v1.webp",
+      "sha256": "73ec229fced6b96a5b2f6175739c639e457081a616365a814eee5c0a88151072",
+      "bytes": 164504,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit9-10/cast-wave-v1.webp",
+      "url": "/resources/c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7/cast-wave-v1.webp",
+      "sha256": "c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7",
+      "bytes": 157046,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit9-10/clean.svg",
+      "url": "/resources/c5651051903c869b7f08f00c5b015a5e3b111c32e6dada67664597d62ce6387d/clean.svg",
+      "sha256": "c5651051903c869b7f08f00c5b015a5e3b111c32e6dada67664597d62ce6387d",
+      "bytes": 820,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/cold.svg",
+      "url": "/resources/4ac41ce7b3948b36ae64bcd4de865ec3836ffc8d6ae39e2eee19693e2255e5ab/cold.svg",
+      "sha256": "4ac41ce7b3948b36ae64bcd4de865ec3836ffc8d6ae39e2eee19693e2255e5ab",
+      "bytes": 1603,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/dirty-umbrella.svg",
+      "url": "/resources/dc5dad25d7114f02ca5188c1e776cd843e083657f95825948d77927e24363104/dirty-umbrella.svg",
+      "sha256": "dc5dad25d7114f02ca5188c1e776cd843e083657f95825948d77927e24363104",
+      "bytes": 400,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/dirty.svg",
+      "url": "/resources/669b531f8e0fc34fa36df0a8ea4a5e32a587bb243dfbc54fdca798d9cf3c1821/dirty.svg",
+      "sha256": "669b531f8e0fc34fa36df0a8ea4a5e32a587bb243dfbc54fdca798d9cf3c1821",
+      "bytes": 757,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/emma.svg",
+      "url": "/resources/6c12310a35b5f5e587f7aaa6590016fb58f1902c71a376a324059de95fc8a967/emma.svg",
+      "sha256": "6c12310a35b5f5e587f7aaa6590016fb58f1902c71a376a324059de95fc8a967",
+      "bytes": 1343,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/fat.svg",
+      "url": "/resources/89b40a385dc7b4d02e9d73a871161539579ae2057f9453f460d37e28fa19f9c9/fat.svg",
+      "sha256": "89b40a385dc7b4d02e9d73a871161539579ae2057f9453f460d37e28fa19f9c9",
+      "bytes": 597,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/fine.svg",
+      "url": "/resources/8e36d93d54aa582d1c375360c4cba42bb12e23d81829b88a26fc13cf12fcd17f/fine.svg",
+      "sha256": "8e36d93d54aa582d1c375360c4cba42bb12e23d81829b88a26fc13cf12fcd17f",
+      "bytes": 734,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/goodbye.svg",
+      "url": "/resources/7bd13a759c3fa6ddb678aa150a2c107843823bfbac380d0a7f2bd71a778d3de8/goodbye.svg",
+      "sha256": "7bd13a759c3fa6ddb678aa150a2c107843823bfbac380d0a7f2bd71a778d3de8",
+      "bytes": 768,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/greeting.svg",
+      "url": "/resources/4b79bf02574e8d6dd6c7e42eb0ad65bc5bdb29e7ac30048b525e199681417d20/greeting.svg",
+      "sha256": "4b79bf02574e8d6dd6c7e42eb0ad65bc5bdb29e7ac30048b525e199681417d20",
+      "bytes": 514,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/helen.svg",
+      "url": "/resources/9a096e545347c8cceb05c551a55fc6d9a0f1fe3c614db2a04cd5164c59de5e40/helen.svg",
+      "sha256": "9a096e545347c8cceb05c551a55fc6d9a0f1fe3c614db2a04cd5164c59de5e40",
+      "bytes": 1594,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/hello.svg",
+      "url": "/resources/97a927dc0b68740e2d4086d28f08cafb74f604dcdfd789d8e9a7faf8c0f0e243/hello.svg",
+      "sha256": "97a927dc0b68740e2d4086d28f08cafb74f604dcdfd789d8e9a7faf8c0f0e243",
+      "bytes": 735,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/hi.svg",
+      "url": "/resources/00affff9361f5b5b4c7b8fa6805b263c179e851e8854735560d46c6421c4f545/hi.svg",
+      "sha256": "00affff9361f5b5b4c7b8fa6805b263c179e851e8854735560d46c6421c4f545",
+      "bytes": 778,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/hot-character-v1.webp",
+      "url": "/resources/588701051b6a54824b77b8bd445d64e811d6c54333dbc3b72cf3f6577b9079df/hot-character-v1.webp",
+      "sha256": "588701051b6a54824b77b8bd445d64e811d6c54333dbc3b72cf3f6577b9079df",
+      "bytes": 91474,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit9-10/hot.svg",
+      "url": "/resources/6ac49733a89e2affc249eff985f12139572ba3d2b6b26da059ac0544db67a419/hot.svg",
+      "sha256": "6ac49733a89e2affc249eff985f12139572ba3d2b6b26da059ac0544db67a419",
+      "bytes": 122174,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/how.svg",
+      "url": "/resources/9a566b4491a54bc74c179ee9c5d97e04349c435317b361b2b9752ee24b18ddc3/how.svg",
+      "sha256": "9a566b4491a54bc74c179ee9c5d97e04349c435317b361b2b9752ee24b18ddc3",
+      "bytes": 339,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/keepsake-story-v1.webp",
+      "url": "/resources/24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03/keepsake-story-v1.webp",
+      "sha256": "24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03",
+      "bytes": 235346,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit9-10/lazy.svg",
+      "url": "/resources/8bbd67b0b35387ffb4f4d4e1ee9b2835e5f2e70f87718bc208b807fff4bc2d2c/lazy.svg",
+      "sha256": "8bbd67b0b35387ffb4f4d4e1ee9b2835e5f2e70f87718bc208b807fff4bc2d2c",
+      "bytes": 894,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/old.svg",
+      "url": "/resources/306638fa15da820450a6f4168a81bb2141944ec811f4ec86a191d7becfb42c75/old.svg",
+      "sha256": "306638fa15da820450a6f4168a81bb2141944ec811f4ec86a191d7becfb42c75",
+      "bytes": 889,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/see.svg",
+      "url": "/resources/05629883d5c6d6dfe6a3fd825fc6a682340bf314678d8f8a5fa7cccc21208706/see.svg",
+      "sha256": "05629883d5c6d6dfe6a3fd825fc6a682340bf314678d8f8a5fa7cccc21208706",
+      "bytes": 370,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/short.svg",
+      "url": "/resources/1d491cc8b60ef3ca9520811bd60ea781207b90a2f69271115c25815f615c5881/short.svg",
+      "sha256": "1d491cc8b60ef3ca9520811bd60ea781207b90a2f69271115c25815f615c5881",
+      "bytes": 790,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/steven.svg",
+      "url": "/resources/474a0388d3f8af25aff41c71454bda8061d05dba63640f86dcb2bb48661da3d0/steven.svg",
+      "sha256": "474a0388d3f8af25aff41c71454bda8061d05dba63640f86dcb2bb48661da3d0",
+      "bytes": 1705,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/story-background.svg",
+      "url": "/resources/b525607a0faf6325e7f8bb08deef60020d5956cc299c657aa3194e7cacd37e39/story-background.svg",
+      "sha256": "b525607a0faf6325e7f8bb08deef60020d5956cc299c657aa3194e7cacd37e39",
+      "bytes": 1567,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/tall.svg",
+      "url": "/resources/96bca0045ba8e4eb9a4bdf5f20996ae8870e7da18eaf259c470591adda4ba0a2/tall.svg",
+      "sha256": "96bca0045ba8e4eb9a4bdf5f20996ae8870e7da18eaf259c470591adda4ba0a2",
+      "bytes": 787,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/thanks.svg",
+      "url": "/resources/714178484ee8ec1c20dbe1a4dc219d86a107ce352afd3286f3c15ad1f76166ba/thanks.svg",
+      "sha256": "714178484ee8ec1c20dbe1a4dc219d86a107ce352afd3286f3c15ad1f76166ba",
+      "bytes": 364,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/thin.svg",
+      "url": "/resources/89e3219d8fc86ae2c0f8fc06824b7b47f856c253f717852d650dee0f366c3a22/thin.svg",
+      "sha256": "89e3219d8fc86ae2c0f8fc06824b7b47f856c253f717852d650dee0f366c3a22",
+      "bytes": 640,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/today.svg",
+      "url": "/resources/edd59c4bd09a2d2ada8460328de37c68364d9e5e666c6efee35c84744fd7defe/today.svg",
+      "sha256": "edd59c4bd09a2d2ada8460328de37c68364d9e5e666c6efee35c84744fd7defe",
+      "bytes": 391,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/tony.svg",
+      "url": "/resources/b904646bbd9bbca05ef298144db40b48ceb82103b556f6a6d8a01c6d00b43d81/tony.svg",
+      "sha256": "b904646bbd9bbca05ef298144db40b48ceb82103b556f6a6d8a01c6d00b43d81",
+      "bytes": 1139,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/well.svg",
+      "url": "/resources/8e36d93d54aa582d1c375360c4cba42bb12e23d81829b88a26fc13cf12fcd17f/well.svg",
+      "sha256": "8e36d93d54aa582d1c375360c4cba42bb12e23d81829b88a26fc13cf12fcd17f",
+      "bytes": 734,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/woman.svg",
+      "url": "/resources/4d35fcadf1b912f0fa0498b42729ea06ddebced3a4bcceb2af25a0b88ba4ae5a/woman.svg",
+      "sha256": "4d35fcadf1b912f0fa0498b42729ea06ddebced3a4bcceb2af25a0b88ba4ae5a",
+      "bytes": 642,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit9-10/young.svg",
+      "url": "/resources/88c217ff70e961d9afae0156a08c86c1fca7b2f4f5d35e5f3fbd0f6c066a2213/young.svg",
+      "sha256": "88c217ff70e961d9afae0156a08c86c1fca7b2f4f5d35e5f3fbd0f6c066a2213",
+      "bytes": 740,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/core/award-card-layout.css",
+      "url": "/resources/d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af/award-card-layout.css",
+      "sha256": "d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af",
+      "bytes": 3233,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/award-card-layout.js",
+      "url": "/resources/1c1b43cfcd2a3dc449c3a12116e42d6e0ca4600a661a521f0e2184bf673e39f0/award-card-layout.js",
+      "sha256": "1c1b43cfcd2a3dc449c3a12116e42d6e0ca4600a661a521f0e2184bf673e39f0",
+      "bytes": 5958,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-gif.js",
+      "url": "/resources/8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765/award-gif.js",
+      "sha256": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+      "bytes": 5908,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-reveal.css",
+      "url": "/resources/83458ba17d2cd3f2f4196cc8364118fedc51c783172baf89c61f20fbc77a1c6e/award-reveal.css",
+      "sha256": "83458ba17d2cd3f2f4196cc8364118fedc51c783172baf89c61f20fbc77a1c6e",
+      "bytes": 6575,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/award-reveal.js",
+      "url": "/resources/e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252/award-reveal.js",
+      "sha256": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+      "bytes": 12869,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-rules.js",
+      "url": "/resources/4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a/award-rules.js",
+      "sha256": "4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a",
+      "bytes": 2931,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-cache.js",
+      "url": "/resources/6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b/course-cache.js",
+      "sha256": "6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b",
+      "bytes": 11446,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-catalog.js",
+      "url": "/resources/ceef359768e376c2e56d538b75206cae98f81347fdd2b87507f5eb601c105aac/course-catalog.js",
+      "sha256": "ceef359768e376c2e56d538b75206cae98f81347fdd2b87507f5eb601c105aac",
+      "bytes": 529,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-loader.js",
+      "url": "/resources/995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb/course-loader.js",
+      "sha256": "995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb",
+      "bytes": 23868,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-base.css",
+      "url": "/resources/8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d/lesson49-base.css",
+      "sha256": "8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d",
+      "bytes": 25459,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-experience.css",
+      "url": "/resources/c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e/lesson49-experience.css",
+      "sha256": "c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e",
+      "bytes": 38910,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-feedback.js",
+      "url": "/resources/1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1/lesson49-feedback.js",
+      "sha256": "1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1",
+      "bytes": 1053,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-icons.js",
+      "url": "/resources/904e75625f7b90b1bd5057c73a68408158e19dbb5dd5f43c772a8e48472533f7/lesson49-icons.js",
+      "sha256": "904e75625f7b90b1bd5057c73a68408158e19dbb5dd5f43c772a8e48472533f7",
+      "bytes": 369,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-practice.js",
+      "url": "/resources/31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7/lesson49-practice.js",
+      "sha256": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+      "bytes": 50570,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-task-inputs.css",
+      "url": "/resources/9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede/lesson49-task-inputs.css",
+      "sha256": "9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede",
+      "bytes": 10729,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-task-inputs.js",
+      "url": "/resources/2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09/lesson49-task-inputs.js",
+      "sha256": "2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09",
+      "bytes": 14735,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/story-certificate.css",
+      "url": "/resources/694d118aaa38d46820d3dd6a403d280fb5d7af48de762134350672fa09ec14d3/story-certificate.css",
+      "sha256": "694d118aaa38d46820d3dd6a403d280fb5d7af48de762134350672fa09ec14d3",
+      "bytes": 9980,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/story-certificate.js",
+      "url": "/resources/2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a/story-certificate.js",
+      "sha256": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+      "bytes": 10142,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/unit-awards.js",
+      "url": "/resources/0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f/unit-awards.js",
+      "sha256": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+      "bytes": 3432,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/unit-theme.css",
+      "url": "/resources/4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249/unit-theme.css",
+      "sha256": "4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249",
+      "bytes": 8921,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/vendor/gifenc.js",
+      "url": "/resources/cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d/gifenc.js",
+      "sha256": "cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d",
+      "bytes": 9709,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/completion.css",
+      "url": "/resources/01ffb53e58452bafabc0a347773b058fe47585e1eb2a94b6a0fc310863a08e40/completion.css",
+      "sha256": "01ffb53e58452bafabc0a347773b058fe47585e1eb2a94b6a0fc310863a08e40",
+      "bytes": 45351,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/completion.js",
+      "url": "/resources/3015bdbd4c0ea513ae3f2ac8b51078087ed427dd71fcf3113d87194c55a71b1f/completion.js",
+      "sha256": "3015bdbd4c0ea513ae3f2ac8b51078087ed427dd71fcf3113d87194c55a71b1f",
+      "bytes": 6269,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/grammar.css",
+      "url": "/resources/82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e/grammar.css",
+      "sha256": "82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e",
+      "bytes": 2186,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/grammar.js",
+      "url": "/resources/08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912/grammar.js",
+      "sha256": "08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912",
+      "bytes": 3727,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit49-50/unit.css",
+      "url": "/resources/b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d/unit.css",
+      "sha256": "b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d",
+      "bytes": 11611,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/content.js",
+      "url": "/resources/e07a8e85ca2f659674996dc1e98723dab301fba9bdebb38a4d87906f8a2782f7/content.js",
+      "sha256": "e07a8e85ca2f659674996dc1e98723dab301fba9bdebb38a4d87906f8a2782f7",
+      "bytes": 37796,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/grammar.js",
+      "url": "/resources/4fb2f8dc198e90c6aa3602d30ec44436f6fdfba36696ea199a11a8d9ed1a499f/grammar.js",
+      "sha256": "4fb2f8dc198e90c6aa3602d30ec44436f6fdfba36696ea199a11a8d9ed1a499f",
+      "bytes": 389,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/index.html",
+      "url": "/resources/4c58214b615eb8887aeb39c1ed88aa8d33a59225a92ba5cca244615dadf38648/index.html",
+      "sha256": "4c58214b615eb8887aeb39c1ed88aa8d33a59225a92ba5cca244615dadf38648",
+      "bytes": 4178,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/legacy-certificate.js",
+      "url": "/resources/657c31c4b18abc1cae8595603d5186d0898f81ccf4c0eb2b3cc756bbd7dcdaa8/legacy-certificate.js",
+      "sha256": "657c31c4b18abc1cae8595603d5186d0898f81ccf4c0eb2b3cc756bbd7dcdaa8",
+      "bytes": 13569,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/legacy.css",
+      "url": "/resources/31937dabd71f47918270a60a10f42b0616fce27d40623546bb3eaf3790596a81/legacy.css",
+      "sha256": "31937dabd71f47918270a60a10f42b0616fce27d40623546bb3eaf3790596a81",
+      "bytes": 777,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/legacy.js",
+      "url": "/resources/4650b47d6588c4c84b2509734832c8a40ad22603387079aa0a3cd1520c013270/legacy.js",
+      "sha256": "4650b47d6588c4c84b2509734832c8a40ad22603387079aa0a3cd1520c013270",
+      "bytes": 5578,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/references.js",
+      "url": "/resources/7abe1af55dd8b20ca6898b493a2fa16a148b154478acb88241f2a5fca2a95ea1/references.js",
+      "sha256": "7abe1af55dd8b20ca6898b493a2fa16a148b154478acb88241f2a5fca2a95ea1",
+      "bytes": 4326,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/scene.js",
+      "url": "/resources/b56dca50a61c561777d109d73a189a4bc4d35f7406d9eb0c8424cb6819856f36/scene.js",
+      "sha256": "b56dca50a61c561777d109d73a189a4bc4d35f7406d9eb0c8424cb6819856f36",
+      "bytes": 1928,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/typography.css",
+      "url": "/resources/a4502cba8afad3fa476926bf5d758a112edadf3079ebab4a2c162ac26d0a1354/typography.css",
+      "sha256": "a4502cba8afad3fa476926bf5d758a112edadf3079ebab4a2c162ac26d0a1354",
+      "bytes": 2864,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/unit.css",
+      "url": "/resources/942f9dd1a3e0164408d2205f84ccbf1afd509cf40e887010f2e775efbbd78dd4/unit.css",
+      "sha256": "942f9dd1a3e0164408d2205f84ccbf1afd509cf40e887010f2e775efbbd78dd4",
+      "bytes": 17673,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit9-10/unit.js",
+      "url": "/resources/27c9fa7ea79d811ef7fa49e158f71039428d3cb371f9288406c3c126f89b5996/unit.js",
+      "sha256": "27c9fa7ea79d811ef7fa49e158f71039428d3cb371f9288406c3c126f89b5996",
+      "bytes": 18702,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/course-shells/unit9-10.html",
+      "url": "/resources/81fa338c43c3c0520704e096e2bc1cbe4b3bf90e76e16e232711cb63bf5e489e/unit9-10.html",
+      "sha256": "81fa338c43c3c0520704e096e2bc1cbe4b3bf90e76e16e232711cb63bf5e489e",
+      "bytes": 47657,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "audio": [
+    {
+      "key": "/assets/feedback/duolingo-complete.mp3",
+      "url": "/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-correct.mp3",
+      "url": "/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ],
+  "narration": [],
+  "feedback": [
+    {
+      "key": "/assets/feedback/duolingo-complete.mp3",
+      "url": "/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-correct.mp3",
+      "url": "/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ]
+}

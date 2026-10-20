@@ -103,3 +103,57 @@ definition.learning.FEEDBACK=root.CanranCore.courseCatalog.requireCourseDefiniti
 root.CanranCore.unit3334=definition;
 if(root.document?.documentElement.dataset.unit===definition.id)root.CanranCore.learningContext=definition;
 })(globalThis);
+// Actual 33-question predecessor remains above, with original signatures.
+(function(core){
+'use strict';
+const old=core.unit3334;core.unit3334LegacyDefinition=JSON.parse(JSON.stringify(old));
+const source='课本纸66–69／PDF99–102；语法练习册纸91–94／PDF105–108';
+const grammarSource='同步导学纸59–62／PDF73–76，Grammar纸60–61／PDF74–75；'+source;
+const words=old.objects.map(w=>w.en==='with'?{...w,cn:'原文：和……在一起；还可表示带有、使用'}:w);
+const unit={id:'unit33-34',version:1,mode:'classroom',contentRevision:'riverside-five-zones-v1',legacyEdition:'unit33-34-completion-v1',title:'晴天河畔发现之旅',path:'/unit33-34/',start:'learn/words',progress:old.progress,learning:{...old.learning,WORDS:words},objects:words,questions:{},
+stages:[{id:'l1',title:'来到河畔',activities:[['words','河畔小图鉴','cards'],['listen','单词寻宝','cards']],required:['listen']},{id:'l2',title:'一家人看风景',activities:[['text','河畔故事画卷','book'],['roles','故事小侦探','question']],required:['text','roles']},{id:'l3',title:'读懂河畔关系',activities:[['grammar','语法小工坊','speech']],required:['grammar']},{id:'l4',title:'大家正在做什么',activities:[['apply','动作发现站','heart']],required:['apply']},{id:'l5',title:'留下河畔发现',activities:[['exam','综合挑战','star'],['certificate','我的单元纪念卡','star']],required:['exam']}],
+routeAliases:{'learn/phrases':'learn/grammar','learn/observe':'learn/grammar','learn/be':'learn/apply','learn/models':'learn/apply','learn/trans':'learn/apply'},
+reward:{edition:'riverside-five-zones-v1',title:'细心河畔发现家',lesson:'Lesson 33–34',scene:'/assets/unit33-34/keepsake-story-v1.webp',alt:'琼斯一家在桥上看小船、轮船和飞机',color:'#466F7A',zones:[['listen','单词寻宝'],['roles','故事小侦探'],['grammar','语法小工坊'],['apply','动作发现站'],['exam','综合挑战']].map(([id,title])=>({id,title}))}};
+const choice=(options,answer,material='')=>({options,answer,material});
+const blank=(before,after,options)=>({before,after,options});
+const fill=(blanks,answers,material='')=>({type:'cloze',blanks,answer:JSON.stringify(answers),material});
+const q=(id,target,prompt,input,explanation)=>{const{material,...fields}=input;return{id:'u3334-five-'+id,target,prompt,source,...fields,...(material?{display:{title:prompt,material}}:{}),explanation,hint:''};};
+const g=(id,target,prompt,input,rule,demo)=>({...q('g-'+id,target,prompt,input,rule),source:grammarSource,workshop:{rule,...(demo?{model:{lines:demo}}:{})}});
+unit.questions.listen=old.questions.listen;unit.questions.roles=old.questions.roles;
+unit.questions.grammar=[
+g('under','under表示在下方','小船正在桥的拱洞下通过，选出表示桥下的词。',choice(['under','over','on'],'under','The boat is going ___ the bridge.'),'under在这里表示在桥下面；判断物体和参照物的实际关系。',[['There is a cat under the table.','导学原例：桌下有一只猫，under说明猫在桌子下方。']]),
+g('across','across表示从一边到另一边','孩子们正在从路的一边走到另一边，across在这里说明什么？',choice(['横穿道路，从一边到另一边。','在道路下方。','沿着道路一直走。'],'横穿道路，从一边到另一边。','The children are walking across the road.\nroad：道路'),'across在这里表示横穿有边界的区域，不是沿路一直走，也不是在道路下方。',[['Be careful when you go across the road.','导学原例：过马路时要小心。go across说明从一边到另一边。']]),
+g('over-on','本题静态位置区分悬空上方和表面接触','花瓶放在桌面上；画挂在墙上、位于桌子上方，和桌子之间有空隙。分别选词。',fill([blank('The vase is ',' the table.',['on','over','under']),blank('The picture is ',' the table.',['over','on','under'])],['on','over'],'vase：花瓶；picture：画。两句都以桌子为参照物。'),'本题on表示在桌面上接触桌子；over表示画在桌子的上方。此处的接触对比不能套到over的所有用法。',[['There is a bridge over the river.','导学原例：桥在河流上方；人可以在桥面上走。']]),
+g('over-crossing','over也可表示从一边经过到另一边','课文说walk over the bridge，导学练习还用walk across the bridge。哪种理解正确？',choice(['两种都可以表示从桥上走过。','over在这里只能表示从桥上空飞过。','across只能表示在桥下面。'],'两种都可以表示从桥上走过。','They are walking over the bridge.\nMr. Jones is walking across the bridge.'),'在过桥的语境中，over和across都可表达跨过。不能把合法的另一表达当作唯一错项。',[['The aeroplane is flying over the river.','飞机在河上空飞过；换成walking over the bridge时，over可表示从桥上走过。']]),
+g('with-company','with表达陪同','小女孩和妈妈一起散步，这里的with表示什么？',choice(['和妈妈一起。','正在寻找妈妈。','在妈妈上方。'],'和妈妈一起。','The girl is walking with her mother.'),'with可以连接一起参与的人，表达陪同，不直接说明地点或工具。',[['Mr. Brown is playing football with his son.','导学原例：布朗先生正和儿子一起踢球。son：儿子。']]),
+g('with-feature','with描述带有的特征','这里的with是在说明什么？',choice(['女孩有长长的黑发。','这里在说明女孩正和谁一起。','这里在说明女孩用什么写字。'],'女孩有长长的黑发。','the girl with long black hair\nlong black hair：长长的黑发'),'with还可表示带有某种特征。它不总是“和某个人一起”。',[['a house with a red door','带有一扇红门的房子。with后的部分说明房子的特征。']]),
+g('with-tool','with表达使用的工具','她用钢笔写信，这里的with指什么？',choice(['写信使用的工具。','和她一起写信的人。','钢笔所在的位置。'],'写信使用的工具。','She is writing a letter with a pen.\nwrite a letter：写信'),'with可表示做事使用的工具或手段；钢笔是工具，不是陪同者。',[['Many people write with the right hand.','导学原例：许多人用右手写字。right hand：右手；这只是例句，不要求孩子用哪只手。']]),
+...old.questions.observe];
+unit.questions.apply=[...old.questions.be,...old.questions.trans,
+q('a-with','在新表达中区分with的三个用途','给三条表达找到对应意思。',{type:'match',pairs:[{id:'0',en:'walk with my friend',cn:'和朋友一起走'},{id:'1',en:'a bag with books',cn:'装着书的包'},{id:'2',en:'write with a pencil',cn:'用铅笔写'}],answer:JSON.stringify(['0','1','2'])},'同一个with按对象和语境，分别表示陪同、带有和使用工具。')];
+unit.questions.exam=[...old.questions.exam,
+q('e-across','独立理解横穿的起点终点','这句话描述怎样的路线？',choice(['从道路一边走向另一边。','在道路下方走。','在道路上空飞。'],'从道路一边走向另一边。','The man is walking across the road.\nroad：道路'),'across说明跨过这条路，不表示下方或飞行。'),
+q('e-over-on','独立区别静态位置的接触关系','书放在桌面上；灯悬挂在桌子上方，和桌子有空隙。补全两句。',fill([blank('The book is ',' the table.',['on','over','under']),blank('The lamp is ',' the table.',['over','on','under'])],['on','over']),'本题书接触桌面用on，悬空在桌上方的灯用over。'),
+q('e-company','独立识别陪同意义','这句话说明哪种关系？',choice(['妈妈和爸爸在一起。','妈妈正在寻找爸爸。','妈妈在爸爸上方。'],'妈妈和爸爸在一起。','My mother is with my father.'),'with在这里表示与某人一起，不表示工具或空间上方。'),
+q('e-feature','独立使用with描述特征','说“带着一个红色提包的女士”，补全表达。',fill([blank('the woman ',' a red handbag',['with','under','across'])],['with'],'handbag：提包；这里用提包这一特征说明是哪位女士。'),'with表示带有，后面的提包帮助说明这位女士。'),
+q('e-tool','独立使用with说明工具','他用铅笔写信，补全句子。',fill([blank('He is writing a letter ',' a pencil.',['with','on','in'])],['with']),'with a pencil说明使用一支铅笔；不能把在物体上面或里面的关系套到工具。'),
+q('e-bridge','独立辨别over不等于只能悬空','下面两句都说人从桥上走过，哪项判断正确？',choice(['两句都能成立，不必悬空。','第一句只能说人在桥上空飞。','第二句只能说人在桥下走。'],'两句都能成立，不必悬空。','They are walking over the bridge.\nThey are walking across the bridge.'),'over可表示越过，across可表示从一边到另一边；本课过桥语境允许两者。')];
+unit.taskSessions=Object.fromEntries(unit.reward.zones.map(z=>[z.id,'five-zones-v1']));
+const previous={listen:['listen'],roles:['roles'],grammar:['observe'],apply:['be','trans'],exam:['exam']};
+unit.taskPredecessors=Object.fromEntries(Object.entries(previous).map(([id,ids])=>[id,ids.map(prior=>({key:'unit3334-'+prior+'-practice/v1',questions:old.questions[prior]}))]));
+core.unit3334=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit3334,excerpts={"u3334-v1-final-under-on":[0,1,2,3,4,5,6,7,8,9]},speakers={"narrator":""};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 33',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

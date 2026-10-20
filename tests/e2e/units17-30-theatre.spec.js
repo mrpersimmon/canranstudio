@@ -1,4 +1,6 @@
 'use strict';
+// Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
+require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
 const totals={'17-18':16,'19-20':13,'21-22':8,'23-24':8,'25-26':12,'27-28':13,'29-30':9};
 // Keep visual evidence of sitting, offering and receiving, not only the final state.

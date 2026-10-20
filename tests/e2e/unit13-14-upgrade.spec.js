@@ -1,5 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+require('../support/unit1314-legacy').historicalSuite(test);
 const fs = require('node:fs/promises');
 const { EXAM, selectAnswer, finishExamFrom } = require('../support/unit13-14-exam');
 const oldFlow = require('../fixtures/unit13-14-classroom-before/flow');

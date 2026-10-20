@@ -1,70 +1,14 @@
-(function (root) {
-  'use strict';
-  const core = root.CanranCore;
-  const node = (tag, text = '', className = '') => {
-    const el = document.createElement(tag); el.textContent = text; el.className = className; return el;
-  };
-  const facts = {
-    robert: [['Name', 'Robert', 1], ['Nationality', 'Italian', 9], ['Job', 'engineer', 15]],
-    sophie: [['Name', 'Sophie', 3], ['Nationality', 'French', 5], ['Job', 'keyboard operator', 13]]
-  };
-  function records({ portraits = false, label = '采访档案' } = {}) {
-    const element = node('div', '', 'interview-records'); element.setAttribute('role', 'group'); element.setAttribute('aria-label', label);
-    const fields = [];
-    for (const [person, rows] of Object.entries(facts)) {
-      const card = node('article', '', 'interview-record record-' + person); card.dataset.person = person;
-      card.setAttribute('aria-label', core.unit78.learning.PEOPLE[person].name + ' 的采访档案');
-      if (portraits) { const portrait = node('img', '', 'record-portrait'); portrait.src = core.unit78.learning.PEOPLE[person].image; portrait.alt = ''; card.append(portrait); }
-      const list = node('dl');
-      rows.forEach(([key, value, line]) => {
-        const row = node('div'), output = node('dd', '—'); output.lang = 'en';
-        row.append(node('dt', { Name: '名字', Nationality: '国籍', Job: '职业' }[key]), output); list.append(row);
-        fields.push({ person, key, value, line, output });
-      });
-      card.append(list); element.append(card);
-    }
-    const show = known => fields.forEach(field => {
-      const visible = known(field); field.output.textContent = visible ? field.value : '—'; field.output.classList.toggle('is-known', visible);
-    });
-    return { element, showLine: index => show(field => index >= field.line),
-      focus(person, keys) {
-        [...element.children].forEach(card => { card.hidden = card.dataset.person !== person; });
-        fields.forEach(field => { field.output.parentElement.hidden = !keys.includes(field.key); });
-      },
-      showAnswers: values => show(field => Boolean(values[field.person]?.includes(field.key))) };
-  }
-  // A profile only reveals information already read or explicitly checked.
-  // Displaying one never awards an answer, a star, or a completion.
-  function taskView(id) {
-    const box = node('div', '', 'interview-task-scene'), participants = node('div', '', 'interview-participants');
-    box.dataset.task = id;
-    for (const person of ['robert', 'sophie']) {
-      const figure = node('figure'), img = node('img'); img.src = core.unit78.learning.PEOPLE[person].image; img.alt = '';
-      figure.dataset.person = person; figure.append(img, node('figcaption', core.unit78.learning.PEOPLE[person].name)); participants.append(figure);
-    }
-    const heading = node('h3', '', 'interview-task-prompt'), questionArea = node('div', '', 'interview-task-question'), record = records();
-    let current;
-    questionArea.append(heading); box.append(participants, questionArea);
-    if (id !== 'interview') box.append(record.element);
-    function show(answer) {
-      const values = { robert: ['Name'], sophie: ['Name'] };
-      if (answer && current?.id.endsWith('story-job')) values.robert.push('Job');
-      if (answer && /reply-nationality|be-name/.test(current?.id)) values.robert.push('Nationality');
-      if (answer && current?.id.endsWith('be-negative')) values.sophie.push('Nationality');
-      record.showAnswers(values);
-    }
-    return { element: box, heading: () => heading,
-      present(q, progress) {
-        box.hidden = false; current = q; heading.textContent = q.prompt; questionArea.replaceChildren(progress, heading);
-        if (id !== 'interview') {
-          const person = /story-teacher|be-negative/.test(q.id) ? 'sophie' : 'robert';
-          record.focus(person, ['Name', id === 'reply' ? 'Nationality' : 'Job']);
-          [...participants.children].forEach(figure => { figure.hidden = figure.dataset.person !== person; });
-        }
-        show(null);
-      },
-      answer: show, finish() { box.hidden = true; }
-    };
-  }
-  core.unit78Scene = { records, taskView };
-})(globalThis);
+(function(core){
+'use strict';
+const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
+function storyProps(){
+ const element=node('div','interview-world');element.setAttribute('role','group');element.setAttribute('aria-label','Robert和Sophie的会客角');
+ const cast=node('div','interview-cast');
+ for(const pose of ['robert','sophie']){const img=node('img','cast-image '+pose);img.src='/assets/unit7-8/cast-'+pose+'-v1.webp';img.alt=pose==='robert'?'Robert面向Sophie，抬手交谈':'Sophie面向Robert，抬手交谈';cast.append(img);}
+ for(const [who,name] of [['robert','Robert'],['sophie','Sophie']]){const actor=node('div','dialogue-actor');actor.dataset.actor=who;actor.append(node('span','actor-label',name));cast.append(actor);}
+ element.append(node('p','interview-location','会客角'),cast);
+ return{element,update(i){const who=core.unit78.learning.DIALOGUE[i]?.person||'robert';cast.dataset.pose=who;for(const img of cast.querySelectorAll('.cast-image'))img.hidden=!img.classList.contains(who);}};
+}
+function create({element}){let status,heading;return{present(question,progress){element.classList.add('interview-runner');const content=element.querySelector('.practice-content'),intro=node('div','interview-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const facts=content.querySelector('.practice-context');if(facts)intro.append(facts);status=node('p','interview-task-status','选择合适的问法，再检查。');status.setAttribute('role','note');intro.append(status);content.prepend(intro);},answer(value){status.textContent=value===null?'选择合适的问法，再检查。':'这一轮问答已核对。';status.dataset.recorded=String(value!==null);},finish(){},completion(){return null;},heading(){return element.querySelector('.interview-intro .practice-progress')||heading;}};}
+core.unit78Scene={storyProps,create};
+})(globalThis.CanranCore);

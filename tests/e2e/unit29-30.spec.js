@@ -1,3 +1,4 @@
+require('../support/unit2930-legacy').historicalSuite(require('@playwright/test').test);
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');

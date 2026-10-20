@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-16T06:30:07.029726",
+  "failedPath": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\scripts\\build-static.js",
+  "readableBytes": 18894,
+  "beforeSha": "4fbffc05b89ab6b73d8a6f871efe4924a877d271ce2335ca30d9ddff073b5367",
+  "courseModeAlreadyAdded": true,
+  "initialException": "OSError errno22 at pathlib.open(mode=w) on scripts/build-static.js; content intact",
+  "retry": "Same path and original write operation; skip only the already completed course-packages mutation.",
+  "result": "same path retry and remaining registration succeeded"
+}

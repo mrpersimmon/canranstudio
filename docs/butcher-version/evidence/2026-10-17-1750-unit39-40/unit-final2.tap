@@ -1,0 +1,30 @@
+(node:13704) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ published courses keep their independent reward totals and validate submitted question families (184.9177ms)
+✔ unsubmitted choices stay private, a retry retains the previous submission, and offline rounds merge (0.731ms)
+✔ observation validation rejects wrong identity, future content, unsubmitted and fabricated result flags (2.8942ms)
+✔ partial wrong submission is observable without awards or resumable completion (81.646ms)
+✔ duplicate/out-of-order uploads and refresh do not renew timestamps; corrections advance once (77.4022ms)
+✔ reset isolates a new generation and preserves earlier observation history (57.3542ms)
+✔ legacy completion has unknown dates; version changes cannot inherit current question counts (68.7706ms)
+✔ course closure, transfer and disabled accounts preserve learning status and history (59.3069ms)
+✔ 5-star adapters preserve independent awards and the first full-star date; totals never convert 15 to 5 (1.6182ms)
+✔ student identity, pagination and filters expose learning summaries only (852.668ms)
+✔ HTTP endpoints enforce admin/owner/generation boundaries and retire follow-up writes (11027.9987ms)
+✔ Lesson 49–50 subject retries synchronize only submitted appearances and their attempt sequence (3.1094ms)
+✔ three learning statuses require current work, not visits, stars or old content (3.07ms)
+✔ all published courses reach completed only with every required activity including reading (385.5413ms)
+✔ class/course status filters distinguish zero-star work, completion, empty scopes and mixed courses (304.1206ms)
+✔ star ordering covers the full query before pagination, keeps ties stable and follows the course scope (1499.273ms)
+✔ last learned time uses accepted work in the current scope, never visits, replays, resets or undated imports (236.1952ms)
+✔ handoff awards require a complete matching object and recipient from this round (1.2129ms)
+✔ handoff correctness cannot bypass errors, missing submission, signature or round identity (0.3093ms)
+✔ undeclared handoff candidates and other unsupported types stay rejected (0.256ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 15297.3545

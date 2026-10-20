@@ -133,3 +133,17 @@ unit.learning.WRITING_A=['We were ____ the stationer’s ____ Monday.','We were 
 unit.learning.WRITING_B=['you and Susan / the office / March 23rd','Sam and Penny / India / 2021','you and Penny / the baker’s / Saturday','Sam and Penny / Canada / 2019','you and Penny / Austria / August','Sam and Penny / home / May 25th','you and Penny / Finland / December','you and Sam / school / February 22nd'];
 core.unit6970=unit;if(typeof document!=='undefined'&&document.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// 2026-10-20 reviewed reading excerpts: presentation metadata only.
+// Keep scored questions, draft signatures, reward editions and original text intact.
+(function(core){
+ const unit=core.unit6970,excerpts={"u6970-v1-r-when":[0],"u6970-v1-r-people":[1],"u6970-v1-r-left":[1],"u6970-v1-r-count":[2],"u6970-v1-r-origins":[2],"u6970-v1-r-winner":[3],"u6970-v1-r-reminder":[3,4],"u6970-v1-e-numbers":[0,2,3],"u6970-v1-e-safety":[4]},speakers={"narrator":""};
+ unit.copy=unit.copy||{};unit.copy.questions=unit.copy.questions||{};
+ const questions=Object.values(unit.questions).flat();
+ for(const [id,indexes]of Object.entries(excerpts)){
+  const question=questions.find(q=>q.id===id),existing=unit.copy.questions[id]||{};
+  const lines=indexes.map(index=>{const line=unit.learning.DIALOGUE[index],name=speakers[line.person||line.who];return (name?name+': ':'')+line.text;});
+  const prior=existing.material??question.display?.material;
+  unit.copy.questions[id]={...existing,title:existing.title||question.display?.title||question.prompt,material:[prior,'Lesson 69',...lines].filter(Boolean).join('\n')};
+ }
+})(globalThis.CanranCore);

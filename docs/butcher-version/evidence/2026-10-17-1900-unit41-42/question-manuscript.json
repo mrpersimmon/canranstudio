@@ -1,0 +1,1331 @@
+{
+  "listen": [
+    {
+      "id": "u4142-v1-v-cheese",
+      "target": "辨认 cheese",
+      "prompt": "图中是什么？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "cheese",
+        "bread",
+        "soap"
+      ],
+      "answer": "cheese",
+      "image": "/assets/unit41-42/cheese.svg",
+      "imageAlt": "一块有孔洞的乳酪",
+      "explanation": "cheese 是乳酪。",
+      "hint": "",
+      "distractorReasons": {
+        "bread": "不符合本题明确给出的数量、物品、说话者或句型。cheese 是乳酪。",
+        "soap": "不符合本题明确给出的数量、物品、说话者或句型。cheese 是乳酪。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-soap",
+      "target": "区分 soap 与食品",
+      "prompt": "哪一个是肥皂？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "soap",
+        "chocolate",
+        "sugar"
+      ],
+      "answer": "soap",
+      "optionImages": {
+        "soap": "/assets/unit41-42/soap.svg",
+        "chocolate": "/assets/unit41-42/chocolate.svg",
+        "sugar": "/assets/unit41-42/sugar.svg"
+      },
+      "explanation": "soap 是肥皂。",
+      "hint": "",
+      "distractorReasons": {
+        "chocolate": "不符合本题明确给出的数量、物品、说话者或句型。soap 是肥皂。",
+        "sugar": "不符合本题明确给出的数量、物品、说话者或句型。soap 是肥皂。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-drinks",
+      "target": "理解茶、咖啡、牛奶",
+      "prompt": "给这些词配对。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "tea",
+          "cn": "茶"
+        },
+        {
+          "id": "2",
+          "en": "coffee",
+          "cn": "咖啡"
+        },
+        {
+          "id": "3",
+          "en": "milk",
+          "cn": "牛奶"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "explanation": "tea、coffee、milk 分别是茶、咖啡、牛奶。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-bread",
+      "target": "辨认 bread",
+      "prompt": "bread 是什么？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "面包",
+        "糖",
+        "鸟"
+      ],
+      "answer": "面包",
+      "optionImages": {
+        "面包": "/assets/unit41-42/bread.svg",
+        "糖": "/assets/unit41-42/sugar.svg",
+        "鸟": "/assets/unit41-42/bird.svg"
+      },
+      "explanation": "bread 是面包。",
+      "hint": "",
+      "distractorReasons": {
+        "糖": "不符合本题明确给出的数量、物品、说话者或句型。bread 是面包。",
+        "鸟": "不符合本题明确给出的数量、物品、说话者或句型。bread 是面包。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-chocolate",
+      "target": "根据词义选择 chocolate",
+      "prompt": "选出“巧克力”。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "chocolate",
+        "cheese",
+        "coffee"
+      ],
+      "answer": "chocolate",
+      "optionImages": {
+        "chocolate": "/assets/unit41-42/chocolate.svg",
+        "cheese": "/assets/unit41-42/cheese.svg",
+        "coffee": "/assets/unit41-42/coffee.svg"
+      },
+      "explanation": "chocolate 是巧克力。",
+      "hint": "",
+      "distractorReasons": {
+        "cheese": "不符合本题明确给出的数量、物品、说话者或句型。chocolate 是巧克力。",
+        "coffee": "不符合本题明确给出的数量、物品、说话者或句型。chocolate 是巧克力。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-sugar",
+      "target": "根据图形辨认 sugar",
+      "prompt": "包装上画着糖块，它是什么？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "sugar",
+        "soap",
+        "tea"
+      ],
+      "answer": "sugar",
+      "image": "/assets/unit41-42/sugar.svg",
+      "imageAlt": "画有白色糖块的糖袋",
+      "explanation": "sugar 是糖。",
+      "hint": "",
+      "distractorReasons": {
+        "soap": "不符合本题明确给出的数量、物品、说话者或句型。sugar 是糖。",
+        "tea": "不符合本题明确给出的数量、物品、说话者或句型。sugar 是糖。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-v-story-words",
+      "target": "理解课文物品与 Lesson 42 新词",
+      "prompt": "给词和意思配对。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "tobacco",
+          "cn": "烟草；烟丝"
+        },
+        {
+          "id": "2",
+          "en": "bird",
+          "cn": "鸟"
+        },
+        {
+          "id": "3",
+          "en": "tin",
+          "cn": "罐"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "explanation": "tobacco 指内容物，tin 指盛放东西的罐；bird 是鸟。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u4142-v1-r-heavy-v153",
+      "target": "联系问题理解省略回答",
+      "prompt": "Penny 说“Not very.”，她觉得袋子怎样？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "不太重",
+        "非常重",
+        "里面是空的"
+      ],
+      "answer": "不太重",
+      "explanation": "前一句在问 heavy，Not very. 在这里表示不太重。",
+      "hint": "先看 Sam 问的是重量还是里面的东西。",
+      "distractorReasons": {
+        "非常重": "不符合本题明确给出的数量、物品、说话者或句型。前一句在问 heavy，Not very. 在这里表示不太重。",
+        "里面是空的": "不符合本题明确给出的数量、物品、说话者或句型。前一句在问 heavy，Not very. 在这里表示不太重。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。",
+      "display": {
+        "title": "Penny觉得袋子怎样？",
+        "material": "Sam: Is that bag heavy, Penny?\nPenny: Not very."
+      }
+    },
+    {
+      "id": "u4142-v1-r-chair",
+      "target": "定位课文中的放置地点",
+      "prompt": "点出 Sam 请 Penny 放袋子的地方。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "locate",
+      "fragments": [
+        "Sam: Put ",
+        {
+          "value": "it"
+        },
+        " on ",
+        {
+          "value": "this chair"
+        },
+        ".\nSam: What’s in ",
+        {
+          "value": "it?"
+        }
+      ],
+      "options": [
+        "it",
+        "this chair",
+        "it?"
+      ],
+      "answer": "this chair",
+      "explanation": "on this chair 表示在这把椅子上。",
+      "hint": "找表示地点的词组。",
+      "distractorReasons": {
+        "it": "不符合本题明确给出的数量、物品、说话者或句型。on this chair 表示在这把椅子上。",
+        "it?": "不符合本题明确给出的数量、物品、说话者或句型。on this chair 表示在这把椅子上。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-r-weights-v153",
+      "target": "从原文提取三个重量",
+      "prompt": "按 Penny 的话配对。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "sugar",
+          "cn": "一磅"
+        },
+        {
+          "id": "2",
+          "en": "coffee",
+          "cn": "半磅"
+        },
+        {
+          "id": "3",
+          "en": "tea",
+          "cn": "四分之一磅"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "leftLabel": "物品",
+      "rightLabel": "原文中的量",
+      "explanation": "原文分别说 a pound、half a pound、a quarter of a pound。",
+      "hint": "回看物品前面表示重量的部分。",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。",
+      "display": {
+        "title": "根据这段原文，给物品和重量配对。",
+        "material": "Penny: A pound of sugar.\nHalf a pound of coffee.\nA quarter of a pound of tea."
+      }
+    },
+    {
+      "id": "u4142-v1-r-bars-v153",
+      "target": "读懂相同量词修饰不同物品",
+      "prompt": "哪一张清单与课文一致？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "a bar of soap · a bar of chocolate",
+        "a bottle of soap · a bar of chocolate",
+        "a bar of soap · a loaf of chocolate"
+      ],
+      "answer": "a bar of soap · a bar of chocolate",
+      "explanation": "课文用 a bar of 表达一块肥皂和一块巧克力。",
+      "hint": "核对 soap 和 chocolate 前面的词。",
+      "distractorReasons": {
+        "a bottle of soap · a bar of chocolate": "不符合本题明确给出的数量、物品、说话者或句型。课文用 a bar of 表达一块肥皂和一块巧克力。",
+        "a bar of soap · a loaf of chocolate": "不符合本题明确给出的数量、物品、说话者或句型。课文用 a bar of 表达一块肥皂和一块巧克力。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。",
+      "display": {
+        "title": "哪一张清单与这段原文一致？",
+        "material": "Penny: A bar of soap.\nA bar of chocolate."
+      }
+    },
+    {
+      "id": "u4142-v1-r-me",
+      "target": "按说话者理解 me，不添加未知事实",
+      "prompt": "Penny：Well, it’s certainly not for me!\n她明确说，那罐烟丝不是给谁的？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "Penny",
+        "Sam",
+        "没有说明"
+      ],
+      "answer": "Penny",
+      "optionImages": {
+        "Penny": "/assets/unit41-42/penny.svg",
+        "Sam": "/assets/unit41-42/sam.svg"
+      },
+      "explanation": "这里是 Penny 在说话，me 指她自己。",
+      "hint": "先看这句话是谁说的。",
+      "distractorReasons": {
+        "Sam": "不符合本题明确给出的数量、物品、说话者或句型。这里是 Penny 在说话，me 指她自己。",
+        "没有说明": "不符合本题明确给出的数量、物品、说话者或句型。这里是 Penny 在说话，me 指她自己。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u4142-v1-g-is",
+      "target": "单数与不可数名词用 is",
+      "prompt": "补全：有一把勺子；有一些牛奶。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There ",
+          "after": " a spoon.",
+          "options": [
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "There ",
+          "after": " some milk.",
+          "options": [
+            "is",
+            "are"
+          ]
+        }
+      ],
+      "answer": "[\"is\",\"is\"]",
+      "explanation": "a spoon 是单数；milk 在这里是不可数名词，两句都用 is。",
+      "hint": "看看后面是一个物品，还是不能直接用数字数的东西。",
+      "workshop": {
+        "rule": "a spoon 是单数；milk 在这里是不可数名词，两句都用 is。",
+        "model": {
+          "lines": [
+            [
+              "There is a book.",
+              "有一本书。"
+            ],
+            [
+              "There is some coffee.",
+              "有一些咖啡。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-bottles",
+      "target": "量词复数决定 are",
+      "prompt": "牛奶一样，数的是瓶子。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There ",
+          "after": " two bottles of milk.",
+          "options": [
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "There ",
+          "after": " some milk.",
+          "options": [
+            "is",
+            "are"
+          ]
+        }
+      ],
+      "answer": "[\"are\",\"is\"]",
+      "explanation": "two bottles 是两瓶，用 are；some milk 是一些牛奶，用 is。",
+      "hint": "这两句分别在数瓶子，还是在说瓶里的牛奶？",
+      "workshop": {
+        "rule": "two bottles 是两瓶，用 are；some milk 是一些牛奶，用 is。",
+        "model": {
+          "lines": [
+            [
+              "There are three cups of tea.",
+              "有三杯茶；数的是 cups。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-measures",
+      "target": "理解量词短语的完整单位",
+      "prompt": "给三种数量表达配对。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "a loaf of bread",
+          "cn": "一条面包"
+        },
+        {
+          "id": "2",
+          "en": "a bar of soap",
+          "cn": "一块肥皂"
+        },
+        {
+          "id": "3",
+          "en": "a bottle of milk",
+          "cn": "一瓶牛奶"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\"]",
+      "leftLabel": "数量表达",
+      "rightLabel": "意思",
+      "explanation": "量词 + of + 物品，把量说清楚。",
+      "hint": "留意容器和食物的形状。",
+      "workshop": {
+        "rule": "量词 + of + 物品，把量说清楚。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-loaves",
+      "target": "量词可以变复数，物质名词不乱加 s",
+      "prompt": "哪一项表示“两条面包”？",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "options": [
+        "two loaves of bread",
+        "two loaf of bread",
+        "two loaves of breads"
+      ],
+      "answer": "two loaves of bread",
+      "explanation": "loaf 的复数是 loaves；这里 bread 不加 s。",
+      "hint": "数量是 two，要检查的是量词的单复数。",
+      "workshop": {
+        "rule": "loaf 的复数是 loaves；这里 bread 不加 s。",
+        "model": {
+          "lines": [
+            [
+              "a bar of soap → three bars of soap",
+              "一块肥皂 → 三块肥皂；bar 随数量变化。"
+            ],
+            [
+              "loaf → loaves",
+              "一条 → 多条"
+            ]
+          ]
+        }
+      },
+      "distractorReasons": {
+        "two loaf of bread": "不符合本题明确给出的数量、物品、说话者或句型。loaf 的复数是 loaves；这里 bread 不加 s。",
+        "two loaves of breads": "不符合本题明确给出的数量、物品、说话者或句型。loaf 的复数是 loaves；这里 bread 不加 s。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-fraction",
+      "target": "组成半磅的完整量词短语",
+      "prompt": "用词块说：半磅咖啡。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "wordbank",
+      "tokens": [
+        "Half",
+        "a pound",
+        "of coffee",
+        "a quarter"
+      ],
+      "slots": 3,
+      "answer": "Half a pound of coffee",
+      "suffix": ".",
+      "explanation": "half a pound of… 表示半磅……。",
+      "hint": "半磅和四分之一磅不同；把重量与物品连起来。",
+      "workshop": {
+        "rule": "half a pound of… 表示半磅……。",
+        "model": {
+          "lines": [
+            [
+              "a pound of sugar",
+              "一磅糖"
+            ],
+            [
+              "half a pound of sugar",
+              "半磅糖"
+            ],
+            [
+              "a quarter of a pound of sugar",
+              "四分之一磅糖"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-some-a",
+      "target": "肯定句中区分 some 与 a",
+      "prompt": "补全：有一些茶；有一把勺子。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There is ",
+          "after": " tea.",
+          "options": [
+            "some",
+            "a",
+            "any"
+          ]
+        },
+        {
+          "before": "There is ",
+          "after": " spoon.",
+          "options": [
+            "some",
+            "a",
+            "any"
+          ]
+        }
+      ],
+      "answer": "[\"some\",\"a\"]",
+      "explanation": "本课肯定陈述用 some tea；一把勺子用 a spoon。",
+      "hint": "一边是一些茶，一边是一件物品。",
+      "workshop": {
+        "rule": "本课肯定陈述用 some tea；一把勺子用 a spoon。",
+        "model": {
+          "lines": [
+            [
+              "There is some sugar.",
+              "有一些糖。"
+            ],
+            [
+              "There is a tin.",
+              "有一个罐。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-ask-any-v153",
+      "target": "用 any 询问是否有不可数物品",
+      "prompt": "不知道罐里有没有茶，组织一句有无问句。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "wordbank",
+      "tokens": [
+        "Is there",
+        "any tea",
+        "in that tin",
+        "There is"
+      ],
+      "slots": 3,
+      "answer": "Is there any tea in that tin",
+      "suffix": "?",
+      "explanation": "本题用Is there any…?普通询问；some也可出现在有所期待的问句中，不能只凭问号判错。",
+      "hint": "这句话在问有没有，不是在说已经有了。",
+      "workshop": {
+        "rule": "本题用Is there any…?普通询问；不是先断言已经有茶。",
+        "model": {
+          "lines": [
+            [
+              "Is there any milk in that bottle?",
+              "课本句式：那个瓶里有牛奶吗？说话人还不知道有没有。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-negative",
+      "target": "否定句中使用 any",
+      "prompt": "补全：桌上没有巧克力。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There isn’t ",
+          "after": " chocolate on the table.",
+          "options": [
+            "any",
+            "some",
+            "a"
+          ]
+        }
+      ],
+      "answer": "[\"any\"]",
+      "explanation": "本课否定句用 isn’t any chocolate。",
+      "hint": "isn’t 表示没有，再检查后面的词。",
+      "workshop": {
+        "rule": "本课否定句用 isn’t any chocolate。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-ask-a-v153",
+      "target": "组织询问一个可数物品的有无问句",
+      "prompt": "用词块问：那棵树上有一只鸟吗？",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "wordbank",
+      "tokens": [
+        "Is there",
+        "a bird",
+        "in that tree",
+        "There is"
+      ],
+      "slots": 3,
+      "answer": "Is there a bird in that tree",
+      "suffix": "?",
+      "explanation": "问有没有一只鸟，用Is there a bird…?；There is a bird…是在陈述。",
+      "hint": "这次问的是一只鸟。",
+      "workshop": {
+        "rule": "询问一只鸟，用 Is there a bird…?"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-one-some",
+      "target": "用 one 与 some 衔接回答",
+      "prompt": "补全两句回答。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Is there a spoon? Yes, there is ",
+          "after": " on the plate.",
+          "options": [
+            "one",
+            "some"
+          ]
+        },
+        {
+          "before": "Is there any bread? Yes, there is ",
+          "after": " on the table.",
+          "options": [
+            "one",
+            "some"
+          ]
+        }
+      ],
+      "answer": "[\"one\",\"some\"]",
+      "explanation": "one 代替一把勺子；some 代替一些面包。",
+      "hint": "回答中省略的物品，一边是勺子，一边是面包。",
+      "workshop": {
+        "rule": "one 代替一把勺子；some 代替一些面包。",
+        "model": {
+          "lines": [
+            [
+              "Is there a vase? Yes, there is one.",
+              "有一个花瓶吗？有一个。"
+            ],
+            [
+              "Is there any milk? Yes, there is some.",
+              "有牛奶吗？有一些。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-first-item-v153",
+      "target": "按紧跟 there be 的第一项选择形式",
+      "prompt": "按导学“先报第一项，再接其余物品”的列举句式，补全两句。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There ",
+          "after": " a bottle of milk and two bars of soap.",
+          "options": [
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "There ",
+          "after": " two bars of soap and a bottle of milk.",
+          "options": [
+            "is",
+            "are"
+          ]
+        }
+      ],
+      "answer": "[\"is\",\"are\"]",
+      "explanation": "本项采用导学的列举句式：先报a bottle用is，先报two bars用are。这是本项指定练习方式，不把其他语境的并列结构一概判错。",
+      "hint": "分别看 be 后面紧接的第一项及其数量。",
+      "workshop": {
+        "rule": "在本项指定的导学列举句式中，按紧接be的第一项选择。实际英语还会随语体和组织方式变化。",
+        "model": {
+          "lines": [
+            [
+              "There is a pen, two pencils and a book on the desk.",
+              "导学原例：第一项a pen是单数。"
+            ],
+            [
+              "There are two apples, an orange and a banana on the table.",
+              "导学练习中的清单：第一项two apples是复数。"
+            ]
+          ]
+        }
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-g-independent",
+      "target": "撤去示范后独立表达量词复数",
+      "prompt": "用词块说：有三块肥皂。",
+      "source": "《同步导学》Grammar 纸页76／PDF90：there be结构(2)、量词短语；《语法练习册》纸页114–118／PDF128–132",
+      "type": "wordbank",
+      "tokens": [
+        "There are",
+        "three bars",
+        "of soap",
+        "There is",
+        "three soaps"
+      ],
+      "slots": 3,
+      "answer": "There are three bars of soap",
+      "suffix": ".",
+      "explanation": "三块是 three bars of soap；bars 是复数，用 are。",
+      "hint": "数的是肥皂的块数，再检查句首形式。",
+      "workshop": {
+        "rule": "三块是 three bars of soap；bars 是复数，用 are。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v153-g-expectation",
+      "target": "some也可用于有肯定预期的问句",
+      "prompt": "Penny刚说买了牛奶。Sam觉得袋里应该有牛奶，再这样问，可以吗？",
+      "source": "同步导学纸75–76／PDF89–90，Grammar纸76／PDF90；语法练习册纸114–118／PDF128–132",
+      "options": [
+        "可以，some也能用于这种问句。",
+        "不可以，问句绝不能用some。",
+        "这句话是在说袋里没有牛奶。"
+      ],
+      "answer": "可以，some也能用于这种问句。",
+      "display": {
+        "title": "在这个情境中，下面的问法可以吗？",
+        "material": "Penny刚说买了牛奶；Sam觉得袋里应该有牛奶，想再核实。\nSam: Is there some milk in the bag?"
+      },
+      "explanation": "有肯定预期时问句可以用some；普通开放式有无询问常用any，不能把some／any当作问号开关。",
+      "hint": "",
+      "distractorRationale": "按未答题面给出的语境、物品和数量区分，不从问号或未知事实猜答案。",
+      "workshop": {
+        "rule": "some常见于肯定句，也可以用于期待肯定回答的问句。",
+        "model": {
+          "lines": [
+            [
+              "Is there some tea in the cup?",
+              "看见杯里像是有茶，想再核实；这种问句可以用some，不是说any从此不能用。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u4142-v153-g-plural-question",
+      "target": "复数有无问句与否定回应",
+      "prompt": "墙上没有图片。补全问题及符合事实的回答。",
+      "source": "同步导学纸75–76／PDF89–90，Grammar纸76／PDF90；语法练习册纸114–118／PDF128–132",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " there any pictures on the wall?",
+          "options": [
+            "Are",
+            "Is"
+          ]
+        },
+        {
+          "before": "No, there ",
+          "after": " any pictures on the wall.",
+          "options": [
+            "aren’t",
+            "isn’t"
+          ]
+        }
+      ],
+      "answer": "[\"Are\",\"aren’t\"]",
+      "explanation": "pictures是复数，用Are there；题目说明没有，回答No, there aren’t。",
+      "hint": "",
+      "distractorRationale": "按未答题面给出的语境、物品和数量区分，不从问号或未知事实猜答案。",
+      "workshop": {
+        "rule": "复数物品用Are there…?；有则Yes, there are.，没有则No, there aren’t.。",
+        "model": {
+          "lines": [
+            [
+              "Are there any books on the shelf?",
+              "有书：Yes, there are. 没有书：No, there aren’t. 回答要由现场事实决定。"
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "apply": [
+    {
+      "id": "u4142-v1-a-bread",
+      "target": "读懂量词并选择真实物品",
+      "prompt": "Penny 的清单：a loaf of bread\n先把它装进袋子。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "bread",
+        "soap",
+        "milk"
+      ],
+      "answer": "bread",
+      "optionImages": {
+        "bread": "/assets/unit41-42/bread.svg",
+        "soap": "/assets/unit41-42/soap.svg",
+        "milk": "/assets/unit41-42/milk.svg"
+      },
+      "explanation": "一条面包已经放进袋子。",
+      "hint": "看看 loaf 搭配的物品。",
+      "distractorReasons": {
+        "soap": "不符合本题明确给出的数量、物品、说话者或句型。一条面包已经放进袋子。",
+        "milk": "不符合本题明确给出的数量、物品、说话者或句型。一条面包已经放进袋子。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-a-bottles",
+      "target": "按清单核对瓶数",
+      "prompt": "再放入 two bottles of milk。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "一瓶牛奶",
+        "两瓶牛奶",
+        "三块肥皂"
+      ],
+      "answer": "两瓶牛奶",
+      "optionImages": {
+        "一瓶牛奶": "/assets/unit41-42/milk.svg",
+        "两瓶牛奶": "/assets/unit41-42/two-bottles.svg",
+        "三块肥皂": "/assets/unit41-42/three-bars.svg"
+      },
+      "explanation": "two bottles 是两瓶，牛奶本身不加 s。",
+      "hint": "先核对 two，再核对瓶里的物品。",
+      "distractorReasons": {
+        "一瓶牛奶": "不符合本题明确给出的数量、物品、说话者或句型。two bottles 是两瓶，牛奶本身不加 s。",
+        "三块肥皂": "不符合本题明确给出的数量、物品、说话者或句型。two bottles 是两瓶，牛奶本身不加 s。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-a-check",
+      "target": "按实际清单作否定回答",
+      "prompt": "袋里目前只有一条面包、两瓶牛奶。\nSam：Is there any soap in the bag?",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "No, there isn’t.",
+        "Yes, there is.",
+        "Not very."
+      ],
+      "answer": "No, there isn’t.",
+      "reference": "袋里目前只有：一条面包、两瓶牛奶。",
+      "explanation": "当前清单里没有肥皂，所以回答 No, there isn’t.。",
+      "hint": "只按当前清单回答。",
+      "distractorReasons": {
+        "Yes, there is.": "不符合本题明确给出的数量、物品、说话者或句型。当前清单里没有肥皂，所以回答 No, there isn’t.。",
+        "Not very.": "不符合本题明确给出的数量、物品、说话者或句型。当前清单里没有肥皂，所以回答 No, there isn’t.。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-a-place-v2",
+      "target": "按英文指令把同一瓶牛奶从袋里移到指定位置",
+      "prompt": "Sam：Put a bottle of milk on the table.\n从袋里拿一瓶牛奶，放在哪里？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "桌上",
+        "椅子上",
+        "袋子里"
+      ],
+      "answer": "桌上",
+      "display": {
+        "title": "帮 Penny 放好一瓶牛奶",
+        "material": "Sam: Put a bottle of milk on the table."
+      },
+      "optionImages": {
+        "桌上": "/assets/unit41-42/table.svg",
+        "椅子上": "/assets/unit41-42/chair.svg",
+        "袋子里": "/assets/unit41-42/bag.svg"
+      },
+      "explanation": "一瓶移到桌上，袋里还剩一瓶；两瓶牛奶没有变多。",
+      "hint": "看 on 后面的地点，只移动一瓶。",
+      "distractorReasons": {
+        "椅子上": "不符合本题明确给出的数量、物品、说话者或句型。一瓶移到桌上，袋里还剩一瓶；两瓶牛奶没有变多。",
+        "袋子里": "不符合本题明确给出的数量、物品、说话者或句型。一瓶移到桌上，袋里还剩一瓶；两瓶牛奶没有变多。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-a-note-v2",
+      "target": "根据连续整理后的数量和位置组成记录",
+      "prompt": "看整理后的桌面，用词块记下一瓶牛奶的位置。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "wordbank",
+      "tokens": [
+        "There is",
+        "a bottle",
+        "of milk",
+        "on the table",
+        "in the bag"
+      ],
+      "slots": 4,
+      "answer": "There is a bottle of milk on the table",
+      "suffix": ".",
+      "display": {
+        "title": "替 Penny 记下桌上的物品",
+        "material": "用词块说：桌上有一瓶牛奶。"
+      },
+      "explanation": "桌上有一瓶牛奶：There is a bottle of milk on the table.",
+      "hint": "先看桌面，再核对数量和位置。",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    }
+  ],
+  "exam": [
+    {
+      "id": "u4142-v1-e-bread",
+      "target": "独立辨认 bread",
+      "prompt": "图中是什么？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "bread",
+        "cheese",
+        "soap"
+      ],
+      "answer": "bread",
+      "image": "/assets/unit41-42/bread.svg",
+      "imageAlt": "一条面包",
+      "explanation": "bread 是面包。",
+      "hint": "",
+      "distractorReasons": {
+        "cheese": "不符合本题明确给出的数量、物品、说话者或句型。bread 是面包。",
+        "soap": "不符合本题明确给出的数量、物品、说话者或句型。bread 是面包。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-words",
+      "target": "区分四种常见物品",
+      "prompt": "给词和意思配对。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "1",
+          "en": "sugar",
+          "cn": "糖"
+        },
+        {
+          "id": "2",
+          "en": "tea",
+          "cn": "茶"
+        },
+        {
+          "id": "3",
+          "en": "soap",
+          "cn": "肥皂"
+        },
+        {
+          "id": "4",
+          "en": "chocolate",
+          "cn": "巧克力"
+        }
+      ],
+      "answer": "[\"1\",\"2\",\"3\",\"4\"]",
+      "explanation": "留意相近物品词的不同词义。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-reading",
+      "target": "综合读取重量感受与地点",
+      "prompt": "Sam：Is that bag heavy, Penny?\nPenny：Not very.\nSam：Put it on this chair.\n哪张记录准确？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "不太重；放到椅子上",
+        "非常重；放到椅子上",
+        "不太重；放到桌子上"
+      ],
+      "answer": "不太重；放到椅子上",
+      "explanation": "Not very. 回答重量；on this chair 说明地点。",
+      "hint": "",
+      "distractorReasons": {
+        "非常重；放到椅子上": "不符合本题明确给出的数量、物品、说话者或句型。Not very. 回答重量；on this chair 说明地点。",
+        "不太重；放到桌子上": "不符合本题明确给出的数量、物品、说话者或句型。Not very. 回答重量；on this chair 说明地点。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-weights-v153",
+      "target": "独立分辨原文咖啡与茶的重量",
+      "prompt": "按原文补全采购记录。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "coffee：",
+          "after": " a pound",
+          "options": [
+            "half",
+            "a quarter of"
+          ]
+        },
+        {
+          "before": "tea：",
+          "after": " a pound",
+          "options": [
+            "half",
+            "a quarter of"
+          ]
+        }
+      ],
+      "answer": "[\"half\",\"a quarter of\"]",
+      "explanation": "咖啡是 half a pound，茶是 a quarter of a pound。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。",
+      "display": {
+        "title": "根据这段原文补全采购记录。",
+        "material": "Penny: Half a pound of coffee.\nA quarter of a pound of tea."
+      }
+    },
+    {
+      "id": "u4142-v1-e-speaker",
+      "target": "独立确认 me 的所指",
+      "prompt": "Sam：Is that tin of tobacco for me?\n这一句的 me 指谁？",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "Sam",
+        "Penny",
+        "没有说明"
+      ],
+      "answer": "Sam",
+      "optionImages": {
+        "Sam": "/assets/unit41-42/sam.svg",
+        "Penny": "/assets/unit41-42/penny.svg"
+      },
+      "explanation": "Sam 正在说话，me 指 Sam。",
+      "hint": "",
+      "distractorReasons": {
+        "Penny": "不符合本题明确给出的数量、物品、说话者或句型。Sam 正在说话，me 指 Sam。",
+        "没有说明": "不符合本题明确给出的数量、物品、说话者或句型。Sam 正在说话，me 指 Sam。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-measures",
+      "target": "独立选择 loaf 与 piece",
+      "prompt": "补全：一条面包；一块乳酪。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "a ",
+          "after": " of bread",
+          "options": [
+            "loaf",
+            "bottle",
+            "tin"
+          ]
+        },
+        {
+          "before": "a ",
+          "after": " of cheese",
+          "options": [
+            "piece",
+            "bottle",
+            "tin"
+          ]
+        }
+      ],
+      "answer": "[\"loaf\",\"piece\"]",
+      "explanation": "本题用 a loaf of bread 和 a piece of cheese。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-plural-v2",
+      "target": "独立使用不规则量词复数 loaves 与 are",
+      "prompt": "补全记录：有两条面包。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There ",
+          "after": " two",
+          "options": [
+            "are",
+            "is"
+          ]
+        },
+        {
+          "before": "",
+          "after": " of bread.",
+          "options": [
+            "loaves",
+            "loaf",
+            "breads"
+          ]
+        }
+      ],
+      "answer": "[\"are\",\"loaves\"]",
+      "explanation": "两条是 two loaves of bread；数的是 loaves，用 are。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-some-a",
+      "target": "区分单个物品与不可数的一些",
+      "prompt": "补全：有一把勺子；有一些咖啡。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There is ",
+          "after": " spoon.",
+          "options": [
+            "a",
+            "some",
+            "any"
+          ]
+        },
+        {
+          "before": "There is ",
+          "after": " coffee.",
+          "options": [
+            "a",
+            "some",
+            "any"
+          ]
+        }
+      ],
+      "answer": "[\"a\",\"some\"]",
+      "explanation": "一把勺子是 a spoon；一些咖啡是 some coffee。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-any-v153",
+      "target": "独立区分有无询问与肯否陈述",
+      "prompt": "你还不知道那个袋子里有没有糖。应怎样向Penny核实？",
+      "source": "课本纸82–85／PDF115–118",
+      "options": [
+        "Is there any sugar in that bag?",
+        "There is some sugar in that bag.",
+        "There isn’t any sugar in that bag."
+      ],
+      "answer": "Is there any sugar in that bag?",
+      "explanation": "先询问是否有，不能在材料不足时直接断言有或没有。some并非在所有问句中禁用。",
+      "hint": "",
+      "distractorRationale": "两个干扰项分别直接断言有糖、没有糖，与核实有无的意图不同。"
+    },
+    {
+      "id": "u4142-v1-e-negative-v2",
+      "target": "读取新清单的缺失信息后组成否定记录",
+      "prompt": "袋里只有清单上的物品。告诉 Sam：袋里没有茶。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "wordbank",
+      "tokens": [
+        "There isn’t",
+        "any tea",
+        "in the bag",
+        "some tea"
+      ],
+      "slots": 3,
+      "answer": "There isn’t any tea in the bag",
+      "suffix": ".",
+      "display": {
+        "title": "告诉 Sam，袋里没有茶",
+        "material": "袋里只有：bread · milk"
+      },
+      "explanation": "清单里只有面包和牛奶，因此用 There isn’t any tea in the bag.。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-one-some",
+      "target": "用 one 或 some 避免重复名词",
+      "prompt": "补全两句回答。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Is there a passport? Yes, there is ",
+          "after": " on the table.",
+          "options": [
+            "one",
+            "some"
+          ]
+        },
+        {
+          "before": "Is there any chocolate? Yes, there is ",
+          "after": " on the desk.",
+          "options": [
+            "one",
+            "some"
+          ]
+        }
+      ],
+      "answer": "[\"one\",\"some\"]",
+      "explanation": "one 代替一个护照；some 代替一些巧克力。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-position",
+      "target": "区分内容物与容器的位置",
+      "prompt": "茶在罐里，罐在桌上。补全标签。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The tea is ",
+          "after": " the tin.",
+          "options": [
+            "in",
+            "on"
+          ]
+        },
+        {
+          "before": "The tin is ",
+          "after": " the table.",
+          "options": [
+            "in",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"in\",\"on\"]",
+      "explanation": "茶在罐里是 in；罐在桌上是 on。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-agreement-v2-v153",
+      "target": "独立识别并列清单的单复数关系",
+      "prompt": "用本课导学的列举句式补全两张物品清单。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "There ",
+          "after": " a loaf of bread and three bars of soap.",
+          "options": [
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "There ",
+          "after": " two bottles of milk and a tin of tea.",
+          "options": [
+            "is",
+            "are"
+          ]
+        }
+      ],
+      "answer": "[\"is\",\"are\"]",
+      "explanation": "本题采用导学先报第一项的列举句式，a loaf配is，two bottles配are；不把本题方式扩大为所有英语并列句的唯一形式。",
+      "hint": "",
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v1-e-evidence-v2",
+      "target": "根据英文材料综合判断数量与肯否",
+      "prompt": "In the bag: two bottles of milk. No tea.\nSam: Is there any milk in the bag?\n按这张新清单，替 Penny 回答。",
+      "source": "《新概念英语智慧版1》Lesson 41–42，纸页82–85／PDF115–118",
+      "options": [
+        "Yes, there is. There are two bottles of milk.",
+        "No, there isn’t. There is some tea.",
+        "Yes, there is. There is one bottle of milk."
+      ],
+      "answer": "Yes, there is. There are two bottles of milk.",
+      "explanation": "先读 two bottles of milk，再回答有没有与有多少。",
+      "hint": "",
+      "distractorReasons": {
+        "No, there isn’t. There is some tea.": "不符合本题明确给出的数量、物品、说话者或句型。先读 two bottles of milk，再回答有没有与有多少。",
+        "Yes, there is. There is one bottle of milk.": "不符合本题明确给出的数量、物品、说话者或句型。先读 two bottles of milk，再回答有没有与有多少。"
+      },
+      "distractorRationale": "干扰项来自本课易混词义、量词、单复数或肯否结构；按题目给定的事实判断。"
+    },
+    {
+      "id": "u4142-v153-e-plural-replies",
+      "target": "独立按复数物品和事实完成肯否问答",
+      "prompt": "柜里有两只杯子，没有盘子。哪组问答既问对，也答对？",
+      "source": "同步导学纸75–76／PDF89–90，Grammar纸76／PDF90；语法练习册纸114–118／PDF128–132",
+      "options": [
+        "Are there any cups? — Yes, there are.\nAre there any plates? — No, there aren’t.",
+        "Is there any cups? — Yes, there is.\nAre there any plates? — No, there aren’t.",
+        "Are there any cups? — No, there aren’t.\nAre there any plates? — Yes, there are."
+      ],
+      "answer": "Are there any cups? — Yes, there are.\nAre there any plates? — No, there aren’t.",
+      "explanation": "cups／plates均为复数；杯子有、盘子无，肯否回应分别由清单决定。",
+      "hint": "",
+      "distractorRationale": "按未答题面给出的语境、物品和数量区分，不从问号或未知事实猜答案。"
+    },
+    {
+      "id": "u4142-v153-e-some-question",
+      "target": "独立判断some问句是否符合给定语境",
+      "prompt": "妈妈说买了乳酪。孩子觉得袋里应该有，想再核实。这种问法可以吗？",
+      "source": "同步导学纸75–76／PDF89–90，Grammar纸76／PDF90；语法练习册纸114–118／PDF128–132",
+      "options": [
+        "可以，问句在这种情境中也能用some。",
+        "不可以，只要是问句就不能用some。",
+        "这句话表示袋里没有乳酪。"
+      ],
+      "answer": "可以，问句在这种情境中也能用some。",
+      "display": {
+        "title": "这种问法符合给定情境吗？",
+        "material": "妈妈说买了乳酪；孩子觉得袋里应该有，想再核实。\nIs there some cheese in the bag?"
+      },
+      "explanation": "这是一种有肯定预期的核实问法；不把问号或some当成自动判错的线索。",
+      "hint": "",
+      "distractorRationale": "按未答题面给出的语境、物品和数量区分，不从问号或未知事实猜答案。"
+    }
+  ]
+}

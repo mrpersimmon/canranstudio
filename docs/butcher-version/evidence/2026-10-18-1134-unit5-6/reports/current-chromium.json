@@ -1,0 +1,777 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit5-6-v154.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit56-review-20261018/current-chromium"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit56-review-20261018/current-chromium",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4512",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit5-6-v154.spec.js",
+      "file": "unit5-6-v154.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "当前首页使用确认故事图",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 538,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:02:36.229Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-1a600d895e156beb210f",
+          "file": "unit5-6-v154.spec.js",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "Grammar先示范特殊疑问句，再立即练习信息类型",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 447,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:02:36.870Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-fd014e073a409467c857",
+          "file": "unit5-6-v154.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "原文理解在未答页提供必要对白",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1743,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:02:37.324Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-5324863e6e5dd8d9b70e",
+          "file": "unit5-6-v154.spec.js",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "320宽首页、24词卡、20句及七名人物同场可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12166,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:19:124",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 124,
+                      "line": 19
+                    },
+                    "snippet": "  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n  18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n> 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n     |                                                                                                                            ^\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n  22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 124,
+                        "line": 19
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n  18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n> 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n     |                                                                                                                            ^\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n  22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:19:124"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:02:39.076Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-320宽首页、24词卡、20句及七名人物同场可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 124,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-a53026f2f5f00e65a107",
+          "file": "unit5-6-v154.spec.js",
+          "line": 9,
+          "column": 39
+        },
+        {
+          "title": "390宽首页、24词卡、20句及七名人物同场可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12270,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:19:124",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 124,
+                      "line": 19
+                    },
+                    "snippet": "  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n  18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n> 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n     |                                                                                                                            ^\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n  22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 124,
+                        "line": 19
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-text').locator('.bubble-row').last().getByRole('button', { name: '看中文', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" aria-expanded=\"false\" class=\"btn btn-mini btn-yellow\">看中文</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"dialogue-stage\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n  18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n> 19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n     |                                                                                                                            ^\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n  22 |  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:19:124"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:02:52.286Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-390宽首页、24词卡、20句及七名人物同场可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 124,
+                    "line": 19
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-9e57437136e6b7ad1dd2",
+          "file": "unit5-6-v154.spec.js",
+          "line": 9,
+          "column": 39
+        },
+        {
+          "title": "768宽首页、24词卡、20句及七名人物同场可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2322,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:18:224",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 224,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n> 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n     |                                                                                                                                                                                                                                ^\n  19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 224,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m\n\n  16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n> 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n     |                                                                                                                                                                                                                                ^\n  19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:18:224"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:05.685Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-768宽首页、24词卡、20句及七名人物同场可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 224,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-7b3eedc0eb584ded21cd",
+          "file": "unit5-6-v154.spec.js",
+          "line": 9,
+          "column": 39
+        },
+        {
+          "title": "1280宽首页、24词卡、20句及七名人物同场可读",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2261,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:18:224",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 224,
+                      "line": 18
+                    },
+                    "snippet": "  16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n> 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n     |                                                                                                                                                                                                                                ^\n  19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 224,
+                        "line": 18
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m479.078125\u001b[39m\nReceived:    \u001b[31m452.078125\u001b[39m\n\n  16 |   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);\n  17 |   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);\n> 18 |   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}\n     |                                                                                                                                                                                                                                ^\n  19 |   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}\n  20 |   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}\n  21 |  }\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:18:224"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:09.177Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-1280宽首页、24词卡、20句及七名人物同场可读\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 224,
+                    "line": 18
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-2bcd0d968652308459a4",
+          "file": "unit5-6-v154.spec.js",
+          "line": 9,
+          "column": 39
+        },
+        {
+          "title": "36题未答材料、两空上限、撤支持、真实声音故障与五星",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 15022,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:30:86",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                      "column": 121,
+                      "line": 21
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                        "column": 121,
+                        "line": 21
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:30:86"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:12.625Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-36题未答材料、两空上限、撤支持、真实声音故障与五星\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                    "column": 121,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-5aa024f97a3565827025",
+          "file": "unit5-6-v154.spec.js",
+          "line": 27,
+          "column": 1
+        },
+        {
+          "title": "320x568短屏三卡与推进完整",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2898,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:28.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-94e4915e6411ddc4fe52",
+          "file": "unit5-6-v154.spec.js",
+          "line": 34,
+          "column": 49
+        },
+        {
+          "title": "390x500短屏三卡与推进完整",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2572,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m518.40625\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m518.40625\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:35:304",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                      "column": 304,
+                      "line": 35
+                    },
+                    "snippet": "  33 |\n  34 | for(const[width,height]of [[320,568],[390,500]])test(`${width}x${height}短屏三卡与推进完整`,async({page},info)=>{\n> 35 |  await page.setViewportSize({width,height});await flow.activity(page,'listen');const room=page.locator('.stage-listen');await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);const actions=await room.locator('.practice-finish-actions').boundingBox();expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);await page.screenshot({path:info.outputPath('completion.png')});await page.reload();await flow.ready(page);await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);\n     |                                                                                                                                                                                                                                                                                                                ^\n  36 | });\n  37 |\n  38 | test('原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写',async({page})=>{"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                        "column": 304,
+                        "line": 35
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m501\u001b[39m\nReceived:    \u001b[31m518.40625\u001b[39m\n\n  33 |\n  34 | for(const[width,height]of [[320,568],[390,500]])test(`${width}x${height}短屏三卡与推进完整`,async({page},info)=>{\n> 35 |  await page.setViewportSize({width,height});await flow.activity(page,'listen');const room=page.locator('.stage-listen');await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);const actions=await room.locator('.practice-finish-actions').boundingBox();expect(actions.y+actions.height).toBeLessThanOrEqual(height+1);await page.screenshot({path:info.outputPath('completion.png')});await page.reload();await flow.ready(page);await expect(room.locator('.completion-number')).toHaveText(['4','4','0']);\n     |                                                                                                                                                                                                                                                                                                                ^\n  36 | });\n  37 |\n  38 | test('原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写',async({page})=>{\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:35:304"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:31.523Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-390x500短屏三卡与推进完整\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-390x500短屏三卡与推进完整\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js",
+                    "column": 304,
+                    "line": 35
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-c0c46d8d98009b214beb",
+          "file": "unit5-6-v154.spec.js",
+          "line": 34,
+          "column": 49
+        },
+        {
+          "title": "原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20171,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:44:124",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                      "column": 121,
+                      "line": 21
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                        "column": 121,
+                        "line": 21
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-exam').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:44:124"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:34.799Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                    "column": 121,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-a9e1f96b09ebc7b25667",
+          "file": "unit5-6-v154.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 11143,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:49:2",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                      "column": 121,
+                      "line": 21
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                        "column": 121,
+                        "line": 21
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled type=\"button\" class=\"btn btn-green\">检查答案</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    19 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ..\\support\\unit56-v154.js:21\n\n  19 |   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});\n  20 |   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();\n> 21 |   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}\n     |                                                                                                                         ^\n  22 |   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');\n  23 |   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();\n  24 |  }\n    at Object.activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js:21:121)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit5-6-v154.spec.js:49:2"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-18T04:03:56.053Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit56-review-20261018\\current-chromium\\unit5-6-v154-显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit56-v154.js",
+                    "column": 121,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "beb020f0eba9c6147d44-d35c464d1e491783ecc7",
+          "file": "unit5-6-v154.spec.js",
+          "line": 48,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-18T04:02:35.612Z",
+    "duration": 92163.388,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 8,
+    "flaky": 0
+  }
+}

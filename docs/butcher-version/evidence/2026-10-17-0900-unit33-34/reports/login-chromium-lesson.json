@@ -1,0 +1,669 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "-c",
+      "playwright.login.config.js",
+      "tests/login/unit33-34-fivezones.spec.js",
+      "tests/login/unit33-34-fivezones-upgrade.spec.js",
+      "tests/login/unit33-34.spec.js",
+      "--reporter=list,json",
+      "--output=output/unit3334-login-chromium-lesson"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.login.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit3334-login-chromium-lesson",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/login",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/login/server.js",
+      "url": "http://127.0.0.1:4320/lesson/",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit33-34-fivezones-upgrade.spec.js",
+      "file": "unit33-34-fivezones-upgrade.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [
+                {
+                  "type": "old-course-ready",
+                  "description": "888ms; no old answers or certificate injected"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:32032) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:19:06.943Z",
+                  "annotations": [
+                    {
+                      "type": "old-course-ready",
+                      "description": "888ms; no old answers or certificate injected"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "da7185753691650e73a9-11a7cbbef8300b639581",
+          "file": "unit33-34-fivezones-upgrade.spec.js",
+          "line": 11,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit33-34-fivezones.spec.js",
+      "file": "unit33-34-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "课程入口保持班级授权：新课可单独开放",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1419ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3094,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:19:38.786Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1419ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-0fc5a1e59bce2d190699",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "未开放本课的班级看不到入口，直接链接也不能进入",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1254,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:19:41.890Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-694efe157fd87c548735",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "真实账号全流程：五颗星同步、纪念册放大、GIF、跨设备与离线恢复",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "6ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1425ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "10ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 37153,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:19:43.151Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "6ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1425ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "10ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-6fa3943008219db8b35b",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 43,
+          "column": 1
+        },
+        {
+          "title": "缺图先拦截，恢复后完整进入；复访复用素材并恢复词卡页",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1012ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6347,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:20:20.316Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1012ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-133e147335b82de50588",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 146,
+          "column": 1
+        },
+        {
+          "title": "同姓名同星数对照认可卡：新卡、书页和一星动图显示一致",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "1435ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "38ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "6ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "8ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "10ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21832,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:20:26.674Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "1435ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "38ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "6ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "8ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "10ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-9c33c4d8736691003e5c",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "长姓名手机卡、另一学生隔离、教师预览不能保存个人成果",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 70000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "5ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1424ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "1426ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11270,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:20:48.521Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "5ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1424ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "1426ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-c191236885208b0c397e",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "关课重开保留收藏，导出故障可重试且离开取消下载",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [
+                {
+                  "type": "course-ready",
+                  "description": "963ms after navigation"
+                },
+                {
+                  "type": "course-ready",
+                  "description": "987ms after navigation"
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13967,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:20:59.807Z",
+                  "annotations": [
+                    {
+                      "type": "course-ready",
+                      "description": "963ms after navigation"
+                    },
+                    {
+                      "type": "course-ready",
+                      "description": "987ms after navigation"
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a080369e4fdc28d5595-64262c59eb5ecb2e0b3e",
+          "file": "unit33-34-fivezones.spec.js",
+          "line": 232,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "unit33-34.spec.js",
+      "file": "unit33-34.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 26216,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: \u001b[32m\"5\"\u001b[39m\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"5\" data-motion=\"full\" aria-label=\"我的单元纪念卡\" data-unit=\"unit33-34\" class=\"story-award-paper award-card\">…</article> aka getByRole('article', { name: '我的单元纪念卡' })\n    2) <article data-unit=\"unit33-34\" aria-label=\"细心河畔发现家纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('细心河畔发现家纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: \u001b[32m\"5\"\u001b[39m\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"5\" data-motion=\"full\" aria-label=\"我的单元纪念卡\" data-unit=\"unit33-34\" class=\"story-award-paper award-card\">…</article> aka getByRole('article', { name: '我的单元纪念卡' })\n    2) <article data-unit=\"unit33-34\" aria-label=\"细心河畔发现家纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('细心河畔发现家纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js:9:241",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                      "column": 241,
+                      "line": 9
+                    },
+                    "snippet": "   7 |  test.setTimeout(180000);await adminLogin(page);const account=await createStudent(page,'河畔验收班','河畔同学',[/Lesson 33–34 /]);const first=await studentLogin(browser,account);let second,closed;\n   8 |  try{await expect(first.page.locator('.featured-course')).toHaveCount(1);await expect(first.page.locator('.featured-course h2')).toHaveText('晴天河畔发现之旅');await expect(first.page.getByRole('link',{name:'开始学习：晴天河畔发现之旅',exact:true})).toHaveAttribute('href','/lesson/unit33-34/#learn/words');await complete(first.page,'/lesson');await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await first.page.getByRole('link',{name:'我的课程',exact:true}).click();await first.page.screenshot({path:'output/playwright/unit33-34/auth-banner.png',fullPage:true});await expect(first.page.locator('.featured-course')).toContainText('5 / 5');\n>  9 |  second=await studentLogin(browser,account);await expect(second.page.locator('.featured-course')).toContainText('5 / 5');await second.page.goto('/lesson/unit33-34/#learn/certificate');await expect(second.page.locator('.story-award-paper')).toHaveAttribute('data-stars','5');await expect(second.page.locator('#certificateName')).toHaveText('河畔同学');\n     |                                                                                                                                                                                                                                                 ^\n  10 |  await page.goto('/lesson/admin/');const other=await createStudent(page,'只有花园的班','小河',[/Lesson 31–32 /]);await expect(page.getByRole('checkbox',{name:/Lesson 33–34 /})).not.toBeChecked();closed=await studentLogin(browser,other);await expect(closed.page.locator('[data-unit=\"unit33-34\"]')).toHaveCount(0);await closed.page.goto('/lesson/unit33-34/');await expect(closed.page.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();await second.page.goto('/lesson/lesson49/');await expect(second.page.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();\n  11 |  }finally{await first.context.close();await second?.context.close();await closed?.context.close();}\n  12 | });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                        "column": 241,
+                        "line": 9
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('.story-award-paper')\nExpected: \u001b[32m\"5\"\u001b[39m\nError: strict mode violation: locator('.story-award-paper') resolved to 2 elements:\n    1) <article data-stars=\"5\" data-motion=\"full\" aria-label=\"我的单元纪念卡\" data-unit=\"unit33-34\" class=\"story-award-paper award-card\">…</article> aka getByRole('article', { name: '我的单元纪念卡' })\n    2) <article data-unit=\"unit33-34\" aria-label=\"细心河畔发现家纪念卡\" class=\"story-award-paper award-card\">…</article> aka getByLabel('细心河畔发现家纪念卡')\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('.story-award-paper')\u001b[22m\n\n\n   7 |  test.setTimeout(180000);await adminLogin(page);const account=await createStudent(page,'河畔验收班','河畔同学',[/Lesson 33–34 /]);const first=await studentLogin(browser,account);let second,closed;\n   8 |  try{await expect(first.page.locator('.featured-course')).toHaveCount(1);await expect(first.page.locator('.featured-course h2')).toHaveText('晴天河畔发现之旅');await expect(first.page.getByRole('link',{name:'开始学习：晴天河畔发现之旅',exact:true})).toHaveAttribute('href','/lesson/unit33-34/#learn/words');await complete(first.page,'/lesson');await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await first.page.getByRole('link',{name:'我的课程',exact:true}).click();await first.page.screenshot({path:'output/playwright/unit33-34/auth-banner.png',fullPage:true});await expect(first.page.locator('.featured-course')).toContainText('5 / 5');\n>  9 |  second=await studentLogin(browser,account);await expect(second.page.locator('.featured-course')).toContainText('5 / 5');await second.page.goto('/lesson/unit33-34/#learn/certificate');await expect(second.page.locator('.story-award-paper')).toHaveAttribute('data-stars','5');await expect(second.page.locator('#certificateName')).toHaveText('河畔同学');\n     |                                                                                                                                                                                                                                                 ^\n  10 |  await page.goto('/lesson/admin/');const other=await createStudent(page,'只有花园的班','小河',[/Lesson 31–32 /]);await expect(page.getByRole('checkbox',{name:/Lesson 33–34 /})).not.toBeChecked();closed=await studentLogin(browser,other);await expect(closed.page.locator('[data-unit=\"unit33-34\"]')).toHaveCount(0);await closed.page.goto('/lesson/unit33-34/');await expect(closed.page.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();await second.page.goto('/lesson/lesson49/');await expect(second.page.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();\n  11 |  }finally{await first.context.close();await second?.context.close();await closed?.context.close();}\n  12 | });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js:9:241"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:21:13.789Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-login-chromium-lesson\\unit33-34-33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-login-chromium-lesson\\unit33-34-33–34默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                    "column": 241,
+                    "line": 9
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e55ee0dc9c6980ab3a83-ed4395078a585fcf8732",
+          "file": "unit33-34.spec.js",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "根目录真实登录通关、刷新恢复，旧lesson入口不恢复",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 34284,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#starCount')\nExpected: \u001b[32m\"\u001b[7m1\u001b[27m5\"\u001b[39m\nReceived: \u001b[31m\"5\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#starCount')\u001b[22m\n\u001b[2m    5 × locator resolved to <span id=\"starCount\">0</span>\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\u001b[2m    8 × locator resolved to <span id=\"starCount\">5</span>\u001b[22m\n\u001b[2m      - unexpected value \"5\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#starCount')\nExpected: \u001b[32m\"\u001b[7m1\u001b[27m5\"\u001b[39m\nReceived: \u001b[31m\"5\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#starCount')\u001b[22m\n\u001b[2m    5 × locator resolved to <span id=\"starCount\">0</span>\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\u001b[2m    8 × locator resolved to <span id=\"starCount\">5</span>\u001b[22m\n\u001b[2m      - unexpected value \"5\"\u001b[22m\n\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js:15:300",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                      "column": 300,
+                      "line": 15
+                    },
+                    "snippet": "  13 | test('根目录真实登录通关、刷新恢复，旧lesson入口不恢复',async({browser})=>{\n  14 |  test.setTimeout(180000);const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');const {signIn}=require('./helpers');const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-river-root-test-'));const store=openStore(directory);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();const origin=require('../support/login-test-ports').origin(4234);const server=await createApp({dataDir:directory,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4234),'127.0.0.1',resolve));const context=await browser.newContext({baseURL:origin});\n> 15 |  try{const p=await context.newPage();await adminLogin(p,'/');const account=await createStudent(p,'根目录河畔班','小溪',[/Lesson 33–34 /]);await signIn(p,account,'/');await complete(p);await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await p.reload();await expect(p.locator('#starCount')).toHaveText('15');await p.goto('/lesson/');await expect(p.getByRole('heading',{name:'旧课程入口已移除',exact:true})).toBeVisible();}finally{await context.close();await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}\n     |                                                                                                                                                                                                                                                                                                            ^\n  16 | });\n  17 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                        "column": 300,
+                        "line": 15
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#starCount')\nExpected: \u001b[32m\"\u001b[7m1\u001b[27m5\"\u001b[39m\nReceived: \u001b[31m\"5\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#starCount')\u001b[22m\n\u001b[2m    5 × locator resolved to <span id=\"starCount\">0</span>\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\u001b[2m    8 × locator resolved to <span id=\"starCount\">5</span>\u001b[22m\n\u001b[2m      - unexpected value \"5\"\u001b[22m\n\n\n  13 | test('根目录真实登录通关、刷新恢复，旧lesson入口不恢复',async({browser})=>{\n  14 |  test.setTimeout(180000);const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');const {signIn}=require('./helpers');const directory=await fs.mkdtemp(path.join(os.tmpdir(),'canran-river-root-test-'));const store=openStore(directory);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();const origin=require('../support/login-test-ports').origin(4234);const server=await createApp({dataDir:directory,origin,basePath:'/'});await new Promise(resolve=>server.listen(require('../support/login-test-ports').port(4234),'127.0.0.1',resolve));const context=await browser.newContext({baseURL:origin});\n> 15 |  try{const p=await context.newPage();await adminLogin(p,'/');const account=await createStudent(p,'根目录河畔班','小溪',[/Lesson 33–34 /]);await signIn(p,account,'/');await complete(p);await expect(p.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await p.reload();await expect(p.locator('#starCount')).toHaveText('15');await p.goto('/lesson/');await expect(p.getByRole('heading',{name:'旧课程入口已移除',exact:true})).toBeVisible();}finally{await context.close();await new Promise(resolve=>server.close(resolve));await fs.rm(directory,{recursive:true,force:true});}\n     |                                                                                                                                                                                                                                                                                                            ^\n  16 | });\n  17 |\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js:15:300"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [
+                    {
+                      "text": "(node:21164) ExperimentalWarning: SQLite is an experimental feature and might change at any time\n"
+                    }
+                  ],
+                  "retry": 0,
+                  "startTime": "2026-10-17T01:21:41.762Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-login-chromium-lesson\\unit33-34-根目录真实登录通关、刷新恢复，旧lesson入口不恢复\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit3334-login-chromium-lesson\\unit33-34-根目录真实登录通关、刷新恢复，旧lesson入口不恢复\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\login\\unit33-34.spec.js",
+                    "column": 300,
+                    "line": 15
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "e55ee0dc9c6980ab3a83-98c25f79b8d1fcd82d30",
+          "file": "unit33-34.spec.js",
+          "line": 13,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T01:19:01.441Z",
+    "duration": 196356.385,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

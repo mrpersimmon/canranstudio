@@ -1,0 +1,277 @@
+[
+  {
+    "file": "docs/butcher-version/2026-10-15-0041-v1.0-教学单元设计与验收索引.md",
+    "beforeSha256": "e80378ec358cc2c0294a961aacd10e7e488fe194ab7aa791158f9f4585dd951c",
+    "afterSha256": "99e312467d4a2675632b63f3ad02190edcb7a1a3fe137ee0db303578caede3dc"
+  },
+  {
+    "file": "assets/awards/fonts/sources.json",
+    "beforeSha256": "ab4106b246bec202c71010ef72db96f122fd8254f777984042e0ebb7eff161c5",
+    "afterSha256": "a7684b4eac3016e24107b744f94ff8bcc15959d0c0fa6b85671bdd5610336cbf"
+  },
+  {
+    "file": "assets/unit45-46/README.md",
+    "beforeSha256": "97b3cfd5214f19dacd3c0089b7f1166c527df559fd6628731f2f1b6344ed79ad",
+    "afterSha256": "8906c982f09caa42c055d00a1d8f437aa255ea9090dec233ea59fd9c0ed929a1"
+  },
+  {
+    "file": "docs/butcher-version/2026-09-11-2306-v1.1-文档索引.md",
+    "beforeSha256": "22421f4ebf0a3c1ddb1791200d63e517f1a1504d461d874633ea90f82ab55575",
+    "afterSha256": "1f5f48e5b408a3f5b2940d9dbf03b731985d9bbd2f2d738770088ea23a531c1b"
+  },
+  {
+    "file": "docs/butcher-version/publish/2026-10-14-0124-v1.0-统一设计标准可优化清单.md",
+    "beforeSha256": "b7d00a11bfaccdc8f981eb8351f66ef38aed02a42bbcbc2f0cad5d9757fac901",
+    "afterSha256": "805110670c21998cbb4107c13f4af20bfa50dcf271f24a686e55d3ef69cfda11"
+  },
+  {
+    "file": "scripts/art/README.md",
+    "beforeSha256": "64a3187360b6b8d785a4af1dbaf1692b31fe893fb269d203c32b94d24af6f2ec",
+    "afterSha256": "246180ed497347610140ee937c049cc79ac51e078dc9c1076369a39a539cdc35"
+  },
+  {
+    "file": "scripts/check-workflow.config.js",
+    "beforeSha256": "08144aa3b10e7ee86800da5be3d1cac23a200f8f019ba149fcd02c6413254969",
+    "afterSha256": "f506314416c680cfa51e9f0a09f9e5f58ab4beeed79ef0d5b8e81498f330d55f"
+  },
+  {
+    "file": "scripts/vendor-keepsake-fonts.py",
+    "beforeSha256": "f15d9f198baf38c20f5a24c8daa5fa57b6bbb5c50ac0abf6a241e625c53b1d22",
+    "afterSha256": "1e569ceeefe89a285b1a64228f55bf02de43c40b56802c0a29961256853cf218"
+  },
+  {
+    "file": "server/progress.js",
+    "beforeSha256": "24ff75ead5bfaea632e04546a933ae63d6f1f586c645e18bb43c4fa7f33aeb91",
+    "afterSha256": "59d06795c36d8515b940a9e39534373da95de48bc0981650209e03bedd1f0945"
+  },
+  {
+    "file": "tests/README.md",
+    "beforeSha256": "496f381a190c30a7ee079d76dea28c3b6a7f4bad7840229264e0d8f991d5b739",
+    "afterSha256": "6a89098cbc8a37e3074fac9a78a618402efe88cf659390cf3a754b281aa978fa"
+  },
+  {
+    "file": "tests/e2e/unit45-46-story-layout.spec.js",
+    "beforeSha256": "d97b098d51b69e64e3506bcecd4bacd3262d06c6d3253554e4d3b9856489d99b",
+    "afterSha256": "44f10a8d56477df0a5987facc3f12f494e446de64f1cf7677a51a9e9ac25117e"
+  },
+  {
+    "file": "tests/e2e/unit45-46.spec.js",
+    "beforeSha256": "deeb453b090e6dc5288090560982139a46d8d006d4e1a0cc254479c58a8d5ad8",
+    "afterSha256": "9d741ad9b6064b74cbe7aab37689191a4f3c419a4726507eb36e8c46ae6f8d14"
+  },
+  {
+    "file": "tests/login/unit45-46.spec.js",
+    "beforeSha256": "afe859ce78a24b5e972c8deaf5f15ddce9ab94fdf7ebaf10f690161df6633da9",
+    "afterSha256": "487294e1922e30d5ce5ca7737b3218ae7b39ce195e20c734c941853c1c6fe1da"
+  },
+  {
+    "file": "tests/support/static-server.js",
+    "beforeSha256": "6748117f2720a9ee01238e4fbcafe2525e8982acd90124d7ae915e87bf0845ad",
+    "afterSha256": "f2e0070c06cc6250ba82e2309f873fb3e96cdea811772a292fe45a103b91bce1"
+  },
+  {
+    "file": "unit45-46/README.md",
+    "beforeSha256": "a9ea25b453f94b3f674ad66e9c5d7e7f290fc8b928bf7f5e117b001b76a2a256",
+    "afterSha256": "80234d8a6f322ea60b6b9a5d796b7362ff30d22159843ef8addf818c39025d28"
+  },
+  {
+    "file": "unit45-46/content.js",
+    "beforeSha256": "e48e2b216a06535bb582067628a2ae89afe4e1ba4c820ddbe314c77c2b2a2e6d",
+    "afterSha256": "5f363fe5e19105f29c62a9d0ec1fd39faba4cbcf96dd0b9a518d76b9510a7761"
+  },
+  {
+    "file": "unit45-46/grammar.js",
+    "beforeSha256": "19c191ec08f7d1da45a44b3d83151219767836939c8ffe8fe950836bbc8f95cc",
+    "afterSha256": "17b01fe366dfc99900514dc8edfe70de97824c10f2f45fcfa4136d044c3251c4"
+  },
+  {
+    "file": "unit45-46/index.html",
+    "beforeSha256": "df4c8e5622ec9b2bc9899cad1e11edf9fc5a14bac10faa1c2a9f75e062c0e379",
+    "afterSha256": "d5e400c719016d3fb498202927a7e8872ab56759e8487b671350d2433676a6c3"
+  },
+  {
+    "file": "unit45-46/scene.js",
+    "beforeSha256": "5e02e62e628159a5f57029e2b69f15a57b7f735608092c5cdf7b9ec3e7fc9711",
+    "afterSha256": "c00f8659ab83bc7f85b41f8330d3c8bec1eb896e6e982db9cfe67e9472ed918d"
+  },
+  {
+    "file": "unit45-46/unit.css",
+    "beforeSha256": "071cb954eba86ff4549f3f22af2be3b0c011065df418084455dfa8a592cd0551",
+    "afterSha256": "8901703d183ec4c4c97ca982bf7f3f477777963369a4c27ab326140c13f55c0a"
+  },
+  {
+    "file": "unit45-46/unit.js",
+    "beforeSha256": "e04a98471f29f5cd13509d97f0daa0585eb2585f4ca2ad9f7c452a91f8f91953",
+    "afterSha256": "ab2b44cade6f19f55ef26e18f160eb03693795b7a393cc03fb78df96c4ec848b"
+  },
+  {
+    "file": "assets/unit45-46/million-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "f1ab3ef9f8167d259ed05ca5e6a1a2684fdb3771aa0a5e14e66a8633528a0267"
+  },
+  {
+    "file": "assets/unit45-46/put-on-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "9e09e088e89706c65258042492259642fc62885e6acd534ab5c5b81934c6f1f2"
+  },
+  {
+    "file": "assets/unit45-46/reference-1000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "abc5b395dc9ed6b324e5270a63b55f1d1622bc2b4ba15f62069888bd80020bf0"
+  },
+  {
+    "file": "assets/unit45-46/reference-10000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "a259a3ed72668cb9f5ea090889e8fed7cd24f6d604afd0afe6fb54b92aa4041c"
+  },
+  {
+    "file": "assets/unit45-46/reference-100000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "94a52ab3e789b757d1939e5004a241d51c60f733ce65fd0b1a4a397a07fbb576"
+  },
+  {
+    "file": "assets/unit45-46/reference-1000000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "a95d0d821a25d2db831cdb1b46c3288b96c927dfaafe60ad353dde63f5cbd7e9"
+  },
+  {
+    "file": "assets/unit45-46/reference-210000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "48a37ffc38781800fa8797773f800127b702a9335750db81313c9868d58cc0e7"
+  },
+  {
+    "file": "assets/unit45-46/reference-350000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "5a3e37b1b009953bef935322e1efe4bf86c1045de3bccc118b73039ff824c83e"
+  },
+  {
+    "file": "assets/unit45-46/reference-5000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "ae99b3b08896ff77c1a9fe1666bbbf68da4235c728d4db84d0e40c4a19e174f6"
+  },
+  {
+    "file": "assets/unit45-46/reference-500000-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "86fc0e6c0e66187b885b9c9baaaaca1f07256cfb643a66b8863adb3afa7dfebf"
+  },
+  {
+    "file": "assets/unit45-46/thousand-v153.svg",
+    "beforeSha256": null,
+    "afterSha256": "d8d16b5df1a708388289c86fe4b086ebd02a0dd7bfef393d7c4d29e3917ae87f"
+  },
+  {
+    "file": "docs/butcher-version/2026-10-17-2145-v2.0-Lesson45-46统一标准重构与验收.md",
+    "beforeSha256": null,
+    "afterSha256": "4a72583bef75ef0673847f34efb8e5954bfd1dee03f8e24e5aeb868ff78c1922"
+  },
+  {
+    "file": "scripts/art/build-unit4546-v153.cjs",
+    "beforeSha256": null,
+    "afterSha256": "5415315b0c9f8e7e7917d8495af7d03b8cb904238b34df026fd160331443d634"
+  },
+  {
+    "file": "scripts/art/unit45-46-number-labels.py",
+    "beforeSha256": null,
+    "afterSha256": "1eb7bd6a2f76be7f654a1b4036253febe63fc0b4efe7b8c5d466e990e97359f3"
+  },
+  {
+    "file": "server/legacy/unit45-46-content.js",
+    "beforeSha256": null,
+    "afterSha256": "e48e2b216a06535bb582067628a2ae89afe4e1ba4c820ddbe314c77c2b2a2e6d"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153-layout.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "5f7b2ff79fc1349d2d288545bdad7e2009178cb812c226a8f8c621b88be5751b"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153-materials.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "5b47171d90a8eb3e17437f676e6fdccd5afd926b9ad86809da1a37e72f27917a"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153-print.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "b8d0a55235258d3c574a208caed9b60eff535f2ca177563f43500ccc7679ff15"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153-reading.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "550af91a5a4bc082513819dad04b11a2f94b642bc6d19be1da7a2610a2a004a9"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153-upgrade.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "1c9d8fdc25eb406aa8a7847ded1530bfad2b09b9943c9dfb229b004e50b20e44"
+  },
+  {
+    "file": "tests/e2e/unit45-46-v153.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "78851063c538f819715ca2725f551778ff45b4bc182d01e588459b4aa46d328f"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/README.md",
+    "beforeSha256": null,
+    "afterSha256": "b5c53165751c7adab36f0c6f7cf6833b508ba914c706643bff6f42ad7aad2cbf"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/content.js",
+    "beforeSha256": null,
+    "afterSha256": "e48e2b216a06535bb582067628a2ae89afe4e1ba4c820ddbe314c77c2b2a2e6d"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/grammar.js",
+    "beforeSha256": null,
+    "afterSha256": "19c191ec08f7d1da45a44b3d83151219767836939c8ffe8fe950836bbc8f95cc"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/index.html",
+    "beforeSha256": null,
+    "afterSha256": "df4c8e5622ec9b2bc9899cad1e11edf9fc5a14bac10faa1c2a9f75e062c0e379"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/scene.js",
+    "beforeSha256": null,
+    "afterSha256": "5e02e62e628159a5f57029e2b69f15a57b7f735608092c5cdf7b9ec3e7fc9711"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/typography.css",
+    "beforeSha256": null,
+    "afterSha256": "5910473309df3eabce3d2da997878141836144ecdc887da0d075af6bc11e46df"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/unit.css",
+    "beforeSha256": null,
+    "afterSha256": "071cb954eba86ff4549f3f22af2be3b0c011065df418084455dfa8a592cd0551"
+  },
+  {
+    "file": "tests/fixtures/unit45-46-before-v153/unit.js",
+    "beforeSha256": null,
+    "afterSha256": "e04a98471f29f5cd13509d97f0daa0585eb2585f4ca2ad9f7c452a91f8f91953"
+  },
+  {
+    "file": "tests/login/unit45-46-v153-upgrade.spec.js",
+    "beforeSha256": null,
+    "afterSha256": "299999e101099d657191bd37babc08a4421d9000bf3a42c107d4919c503b2edf"
+  },
+  {
+    "file": "tests/support/unit4546-v153-legacy.js",
+    "beforeSha256": null,
+    "afterSha256": "685844f964da37bc8c90dbc8f4527007a2ada3fd64cca9bba377781ede3fb167"
+  },
+  {
+    "file": "tests/support/unit4546-v153.js",
+    "beforeSha256": null,
+    "afterSha256": "88554edbe8adfc95c92b3aa5b0f797309026457cc2ee90529f4ac348930a4c3e"
+  },
+  {
+    "file": "unit45-46/history.js",
+    "beforeSha256": null,
+    "afterSha256": "2058771c2e22eb1d81eff122aa66c3e6935e3b73d8ef2d63e2355cae1584a776"
+  },
+  {
+    "file": "unit45-46/references.js",
+    "beforeSha256": null,
+    "afterSha256": "88507ac8baab8120f935735437d8b75e17ca3dc8b00c0bb5394c306de69579b1"
+  }
+]

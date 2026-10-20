@@ -1,0 +1,226 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/unit41-42-v153.spec.js",
+      "--grep",
+      "完整人物.*320|47题",
+      "--output=output/unit4142-work/representative",
+      "--reporter=json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit4142-work/representative",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "unit41-42-v153.spec.js",
+      "file": "unit41-42-v153.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "47题完整材料、原文与五区五星可完成",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 12311,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:3:473)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142-v153.js:22:205)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:3:290",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                      "column": 473,
+                      "line": 3
+                    },
+                    "snippet": "  1 | 'use strict';const{test,expect}=require('@playwright/test');const{ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit4142-v153');const{expectCompactCompletion}=require('../support/completion-layout');\n  2 | test.use({actionTimeout:7000,...(process.env.UNIT4142_BROWSER==='webkit'?{browserName:'webkit'}:{})});\n> 3 | test('47题完整材料、原文与五区五星可完成',async({page},info)=>{test.setTimeout(240000);const errors=[],voices=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\\/audio\\/|\\/tts(?:\\/|\\?)/.test(r.url()))voices.push(r.url());});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id,{inspect:async(room,i,state)=>{if(state!=='before')return;await expect.poll(()=>room.locator('img').evaluateAll(es=>es.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);await room.screenshot({path:info.outputPath(id+'-'+String(i+1).padStart(2,'0')+'-unanswered.png')});}});await expect(page.locator('#starCount')).toHaveText('5');expect(errors).toEqual([]);expect(voices).toEqual([]);await page.goto('/unit41-42/#learn/certificate');await page.locator('.story-award-panel').screenshot({path:info.outputPath('five-stars.png')});});\n    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^\n  4 | for(const width of [320,390,768,1280])test('完整人物、袋子与当前物品，逐句原文和中文 '+width,async({page},info)=>{\n  5 |  test.setTimeout(60000);await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit41-42/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.story-lead')).toContainText('Who is the tin of tobacco for?');\n  6 |  for(let i=0;i<16;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.pantry-world')).toHaveAttribute('data-bag',i<3?'carried':'chair');const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(before.y-after.y)).toBeLessThan(1);const reader=await room.locator('.pantry-reader').boundingBox(),scene=await room.locator('.pantry-visual').boundingBox();expect(scene.y).toBeGreaterThan(reader.y+reader.height);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);if([0,3,5,9,12,15].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});}"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                        "column": 473,
+                        "line": 3
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  1 | 'use strict';const{test,expect}=require('@playwright/test');const{ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit4142-v153');const{expectCompactCompletion}=require('../support/completion-layout');\n  2 | test.use({actionTimeout:7000,...(process.env.UNIT4142_BROWSER==='webkit'?{browserName:'webkit'}:{})});\n> 3 | test('47题完整材料、原文与五区五星可完成',async({page},info)=>{test.setTimeout(240000);const errors=[],voices=[];page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\\/audio\\/|\\/tts(?:\\/|\\?)/.test(r.url()))voices.push(r.url());});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id,{inspect:async(room,i,state)=>{if(state!=='before')return;await expect.poll(()=>room.locator('img').evaluateAll(es=>es.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);await room.screenshot({path:info.outputPath(id+'-'+String(i+1).padStart(2,'0')+'-unanswered.png')});}});await expect(page.locator('#starCount')).toHaveText('5');expect(errors).toEqual([]);expect(voices).toEqual([]);await page.goto('/unit41-42/#learn/certificate');await page.locator('.story-award-panel').screenshot({path:info.outputPath('five-stars.png')});});\n    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^\n  4 | for(const width of [320,390,768,1280])test('完整人物、袋子与当前物品，逐句原文和中文 '+width,async({page},info)=>{\n  5 |  test.setTimeout(60000);await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit41-42/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.story-lead')).toContainText('Who is the tin of tobacco for?');\n  6 |  for(let i=0;i<16;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.pantry-world')).toHaveAttribute('data-bag',i<3?'carried':'chair');const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(before.y-after.y)).toBeLessThan(1);const reader=await room.locator('.pantry-reader').boundingBox(),scene=await room.locator('.pantry-visual').boundingBox();expect(scene.y).toBeGreaterThan(reader.y+reader.height);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);if([0,3,5,9,12,15].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});}\n    at inspect (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:3:473)\n    at activity (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit4142-v153.js:22:205)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:3:290"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:30:20.756Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\representative\\unit41-42-v153-47题完整材料、原文与五区五星可完成\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\representative\\unit41-42-v153-47题完整材料、原文与五区五星可完成\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                    "column": 473,
+                    "line": 3
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-5c9dd3cd3e1bd04304f1",
+          "file": "unit41-42-v153.spec.js",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "完整人物、袋子与当前物品，逐句原文和中文 320",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 790,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m1\u001b[39m\nReceived:   \u001b[31m34\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m1\u001b[39m\nReceived:   \u001b[31m34\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:6:587",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                      "column": 587,
+                      "line": 6
+                    },
+                    "snippet": "  4 | for(const width of [320,390,768,1280])test('完整人物、袋子与当前物品，逐句原文和中文 '+width,async({page},info)=>{\n  5 |  test.setTimeout(60000);await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit41-42/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.story-lead')).toContainText('Who is the tin of tobacco for?');\n> 6 |  for(let i=0;i<16;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.pantry-world')).toHaveAttribute('data-bag',i<3?'carried':'chair');const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(before.y-after.y)).toBeLessThan(1);const reader=await room.locator('.pantry-reader').boundingBox(),scene=await room.locator('.pantry-visual').boundingBox();expect(scene.y).toBeGreaterThan(reader.y+reader.height);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);if([0,3,5,9,12,15].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});}\n    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^\n  7 |  await page.reload();await expect(room.locator('.btext span')).toHaveCount(16);await expect(room.locator('.bcn:visible')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');\n  8 | });\n  9 | for(const[width,height]of [[320,568],[390,500]])test('短屏三卡及操作完整 '+width+'x'+height,async({page},info)=>{test.setTimeout(240000);await page.setViewportSize({width,height});await story(page);for(const id of Object.keys(ANSWERS)){const room=await activity(page,id);await expect(room.locator('.completion-stat')).toHaveCount(3);await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expectCompactCompletion(page,room,{illustrated:true});await room.locator('.practice-finish').screenshot({path:info.outputPath(id+'-finish.png')});}});"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                        "column": 587,
+                        "line": 6
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m1\u001b[39m\nReceived:   \u001b[31m34\u001b[39m\n\n  4 | for(const width of [320,390,768,1280])test('完整人物、袋子与当前物品，逐句原文和中文 '+width,async({page},info)=>{\n  5 |  test.setTimeout(60000);await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit41-42/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.story-lead')).toContainText('Who is the tin of tobacco for?');\n> 6 |  for(let i=0;i<16;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));await expect(room.locator('.pantry-world')).toHaveAttribute('data-bag',i<3?'carried':'chair');const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(before.y-after.y)).toBeLessThan(1);const reader=await room.locator('.pantry-reader').boundingBox(),scene=await room.locator('.pantry-visual').boundingBox();expect(scene.y).toBeGreaterThan(reader.y+reader.height);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);if([0,3,5,9,12,15].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});}\n    |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ^\n  7 |  await page.reload();await expect(room.locator('.btext span')).toHaveCount(16);await expect(room.locator('.bcn:visible')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');\n  8 | });\n  9 | for(const[width,height]of [[320,568],[390,500]])test('短屏三卡及操作完整 '+width+'x'+height,async({page},info)=>{test.setTimeout(240000);await page.setViewportSize({width,height});await story(page);for(const id of Object.keys(ANSWERS)){const room=await activity(page,id);await expect(room.locator('.completion-stat')).toHaveCount(3);await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expectCompactCompletion(page,room,{illustrated:true});await room.locator('.practice-finish').screenshot({path:info.outputPath(id+'-finish.png')});}});\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js:6:587"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-17T11:30:34.041Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\representative\\unit41-42-v153-完整人物、袋子与当前物品，逐句原文和中文-320\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit4142-work\\representative\\unit41-42-v153-完整人物、袋子与当前物品，逐句原文和中文-320\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit41-42-v153.spec.js",
+                    "column": 587,
+                    "line": 6
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3850cf07e25a63e1a308-3873219e4ec8fa068bbc",
+          "file": "unit41-42-v153.spec.js",
+          "line": 4,
+          "column": 39
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-17T11:30:20.176Z",
+    "duration": 15238.93,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

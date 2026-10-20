@@ -1,3 +1,4 @@
+require('../support/unit3940-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const{test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const{DIALOGUE,ANSWERS,WRONG,select,advance,activity,story,complete}=require('../support/unit39-40-flow');
@@ -92,7 +93,7 @@ for(const width of [390,1280])test(`词卡${width}首访与离线往返逐帧不
 });
 test('两空未齐不提交、错答刷新保留，末题未结算不领证，邻课记录隔离',async({page})=>{
  await page.goto('/unit39-40/#learn/be');const r=page.locator('.stage-be');await select(r,{cloze:['them']});await expect(r.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await r.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'it',exact:true}).click();await r.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(r.getByRole('status')).toHaveText('再看看，试一次。');await r.getByRole('button',{name:'再试一次',exact:true}).click();await select(r,{cloze:['it','them']});await r.getByRole('button',{name:'检查答案',exact:true}).click();await expect(r.getByRole('status')).toHaveText('答对了！');
- await page.goto('/unit39-40/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await page.goto('/unit37-38/#learn/be');await expect(page.locator('.stage-be').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit39-40/#learn/be');await expect(r.getByRole('status')).toHaveText('答对了！');
+ await page.goto('/unit39-40/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await page.goto('/unit37-38/#learn/apply');await expect(page.locator('.stage-apply').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/unit39-40/#learn/be');await expect(r.getByRole('status')).toHaveText('答对了！');
 });
 test('对照已确认样板与相邻单元，保留同尺寸视觉证据',async({page})=>{
  await page.setViewportSize({width:1280,height:1200});await page.goto('/unit1-2/#learn/manners');await page.locator('.stage-manners').screenshot({path:OUT+'/reference-unit1-2.png'});await page.goto('/unit37-38/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit37-38.png'});await page.goto('/unit39-40/#learn/text');await page.locator('.stage-text').getByRole('button',{name:'开始看课文',exact:true}).click();await page.locator('.stage-text').screenshot({path:OUT+'/reference-unit39-40.png'});

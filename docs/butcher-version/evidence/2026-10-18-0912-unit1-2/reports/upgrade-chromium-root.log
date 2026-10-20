@@ -1,0 +1,48 @@
+[WebServer] (node:33572) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:35476) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31984) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:31984) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 (612ms)
+(node:15312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15312) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  2 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 (609ms)
+
+
+  1) tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 ─────────────────────
+
+    Error: EBUSY: resource busy or locked, unlink 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-unit12-v154-pM1GeO\accounts\learning.sqlite-shm'
+
+    Error Context: output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 ─────────────────────
+
+    Error: EBUSY: resource busy or locked, unlink 'C:\Users\DUANXI~1\AppData\Local\Temp\canran-unit12-v154-h6T8M8\accounts\learning.sqlite'
+
+    Error Context: output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\upgrade-chromium-root\unit1-2-v154-upgrade-同库更新与跨设备：原25题证书PNG和精确日期保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 ──────────────────────
+    tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原25题证书PNG和精确日期保留 ──────────────────────

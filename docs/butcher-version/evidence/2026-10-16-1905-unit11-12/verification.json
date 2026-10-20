@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "branch": "codex/release-canranstudio",
+  "standard": "v1.52",
+  "unit": "unit11-12",
+  "edition": "ownership-five-zones-v1",
+  "questions": {"listen":10,"roles":4,"grammar":14,"apply":6,"exam":18,"total":52},
+  "sourcePages": {"textbook":"paper22-25/pdf55-58","guide":"paper21-24/pdf35-38","grammar":"paper22-23/pdf36-37","workbook":"paper28-32/pdf42-46","workbookBoundary":"pdf47 is Lesson13, excluded"},
+  "independentTestConditionsPassed": 145,
+  "checks": [
+    {"scope":"Chromium current course, migration and print","passed":14,"log":"chromium-course-final.log"},
+    {"scope":"WebKit current course and migration","passed":12,"log":"webkit-course.log","reuse":"The later catch-pose label alignment only changes three horizontal CSS positions. All four widths were rechecked in Chromium; both final WebKit account paths use the final stylesheet."},
+    {"scope":"Chromium account root","passed":8,"log":"chromium-root-account.log"},
+    {"scope":"Chromium account subpath","passed":8,"logs":["chromium-sub-account.log","chromium-sub-final-and-earlier.log"],"note":"Seven initial passes plus the corrected full journey; the latter mixed log also includes two separately classified cases."},
+    {"scope":"WebKit account root","passed":8,"log":"webkit-root-account.log"},
+    {"scope":"WebKit account subpath","passed":8,"log":"webkit-sub-account.log"},
+    {"scope":"Historical unit11-12 course","passed":34,"log":"historical-unit.log"},
+    {"scope":"Historical shared 9-10 and 11-12 classroom contracts","passed":16,"log":"historical-course.log","note":"Eight cases per old unit. Windows absolute test-file arguments did not match the 34 intended unit cases, which were then run explicitly with relative paths."},
+    {"scope":"Shared short-screen completion 7-8, 9-10, 11-12","passed":3,"log":"visual-and-shared.log","note":"The other four cases in this seven-case log recheck current unit11-12 widths and are not counted again."},
+    {"scope":"Earlier account chains and current integration","passed":3,"logs":["chromium-sub-final-and-earlier.log","earlier-short-isolated.log"],"note":"One current integration and two older 23-question versions through the frozen 27-question course into the current edition, preserving the existing assertions including fragmented UTF-8 uploads."},
+    {"scope":"Server learning and awards","passed":20,"logs":["server-unit-tests.log","star-order-final.log"],"note":"Nineteen initial passes and one corrected cross-course fixture. Assertions retained; no production sorting changes."},
+    {"scope":"Check workflow","passed":11,"log":"workflow.log"}
+  ],
+  "builds": [{"basePath":"/","courses":72,"passed":true,"log":"build-root.log"},{"basePath":"/lesson/","courses":72,"passed":true,"log":"build-sub.log"}],
+  "additionalChecks": {"documents":9,"syntaxFiles":18,"sourceAndPackages":"source-and-package-checks.json","fontCoverage":"font-coverage.json","oldCharacterAssetsUnchanged":true,"scopedDiffWhitespace":"passed"},
+  "retainedFailures": [
+    {"initial":"chromium-course-initial.log","result":"11 passed, 3 failed","isolated":"legacy-isolated.log","syntaxReproduction":"legacy-syntax-reproduction.log","cause":"A thematic greeting -> claim replacement collided with an existing certificate button variable and changed a shared CSS class.","fix":"Restore the shared greeting variable and class; only specialize unit identifiers.","verified":["chromium-course-final.log","webkit-course.log","chromium-root-account.log","webkit-root-account.log","webkit-sub-account.log"],"accountInitial":"chromium-sub-account-initial.log was interrupted after the same script failure affected readiness; it is not recorded as a completed suite."},
+    {"initial":"chromium-sub-account.log","isolated":"answer-isolated.log","cause":"Offline replay test retained the former lesson's are/is answers.","fix":"Use the reviewed Who/Whose answer while preserving submission, reload, restoration and permanent-star assertions.","verified":["chromium-sub-final-and-earlier.log","chromium-root-account.log","webkit-root-account.log","webkit-sub-account.log"]},
+    {"initial":"server-unit-tests.log","isolated":"star-order-isolated.log","cause":"The replacement 15-star sorting fixture used the same course as the primary fixture.","fix":"Use unit15-16 as the distinct second completion-based course; retain all ordering assertions.","verified":["star-order-final.log"]},
+    {"initial":"chromium-sub-final-and-earlier.log","cause":"Chromium reported ERR_NO_BUFFER_SPACE when opening the third session on the former server during concurrent old-course regression.","isolated":"earlier-short-isolated.log","result":"Passed in isolation with the same old pages, test and assertions. The current course's later catch-label CSS alignment was the only intervening product change and was not used at the failing old-server stage.","boundary":"No lower-level cause established; isolated success does not demonstrate correctness under arbitrary resource load. No retry, timeout or assertion was relaxed."}
+  ],
+  "preservation": {"previousQuestions":27,"learningNamespaceUnchanged":true,"localDrafts":true,"readingPosition":true,"wordPage":true,"modelPage":true,"oldCertificateNameAndDate":true,"oldCertificatePng":true,"oldCertificatePrint":true,"old15StarsIndependent":true,"crossDevice":"Previously synchronized old outcomes and certificate metadata; local-only drafts remain on the original device."},
+  "pdfs": {"worksheet":{"file":"worksheet.pdf","pages":3,"questions":16,"writingLines":40,"lineHeightPx":32,"allPagesVisuallyReviewed":true},"oldCertificate":{"file":"legacy-certificate.pdf","pages":1,"testStudent":"小禾","allPagesVisuallyReviewed":true}},
+  "preview": {"url":"http://127.0.0.1:4295/unit11-12/#learn/certificate","screenshot":"preview-account.jpg","observed":"0/5; words1/3; grammar14; exam18; current keepsake and old-history entry","answersOrStarsInjected":false,"learningDataCleared":false},
+  "optimizationStatus":"O01-O15 confirmed; O16 remains a pending shared-standard proposal with local implementation. Added execution notes without changing v1.52.",
+  "notVerified":["teacher review","child trial","physical-phone WeChat save","physical printing","full repository suite","formal release acceptance"],
+  "git":{"committed":false,"pushed":false,"released":false}
+}

@@ -1,0 +1,1252 @@
+{
+  "accessPolicy": "class-v1",
+  "schema": 1,
+  "protocol": 1,
+  "basePath": "/",
+  "id": "unit15-16",
+  "title": "护照小检查站",
+  "entry": "/unit15-16/index.html",
+  "shell": "/course-shells/unit15-16.html",
+  "route": "/unit15-16/",
+  "revision": "75ecb70a009c2e992d16527578830a1fad9f83198265900cb5468390d4d2cff6",
+  "mode": "classroom",
+  "required": [
+    {
+      "key": "/assets/awards/award-round.woff2",
+      "url": "/resources/9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28/award-round.woff2",
+      "sha256": "9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28",
+      "bytes": 1296316,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/download.svg",
+      "url": "/resources/3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3/download.svg",
+      "sha256": "3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3",
+      "bytes": 316,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/awards/fonts/award-gothic-500.woff2",
+      "url": "/resources/8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f/award-gothic-500.woff2",
+      "sha256": "8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f",
+      "bytes": 4456656,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/award-gothic-brand-400.woff2",
+      "url": "/resources/29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237/award-gothic-brand-400.woff2",
+      "sha256": "29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237",
+      "bytes": 1948,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/award-nunito.woff2",
+      "url": "/resources/69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279/award-nunito.woff2",
+      "sha256": "69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279",
+      "bytes": 101104,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/fonts/lesson-gothic-body-400.woff2",
+      "url": "/resources/1af7ed3ce9efa8d835b15301738b2c676c06f9a7e43bc8455308372e584645f8/lesson-gothic-body-400.woff2",
+      "sha256": "1af7ed3ce9efa8d835b15301738b2c676c06f9a7e43bc8455308372e584645f8",
+      "bytes": 303628,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/awards/paper.webp",
+      "url": "/resources/2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce/paper.webp",
+      "sha256": "2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce",
+      "bytes": 1254,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/return.svg",
+      "url": "/resources/1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306/return.svg",
+      "sha256": "1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306",
+      "bytes": 290,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/awards/star-earned.webp",
+      "url": "/resources/7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107/star-earned.webp",
+      "sha256": "7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107",
+      "bytes": 11876,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/star-empty.webp",
+      "url": "/resources/269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c/star-empty.webp",
+      "sha256": "269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c",
+      "bytes": 13200,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/awards/typography-45-46.css",
+      "url": "/resources/1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17/typography-45-46.css",
+      "sha256": "1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17",
+      "bytes": 585,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/assets/awards/unit1-2-handbag-closeup.webp",
+      "url": "/resources/db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826/unit1-2-handbag-closeup.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+      "bytes": 177460,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/brand/starflower-apple-touch.png",
+      "url": "/resources/c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e/starflower-apple-touch.png",
+      "sha256": "c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e",
+      "bytes": 14833,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/brand/starflower-favicon.png",
+      "url": "/resources/0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28/starflower-favicon.png",
+      "sha256": "0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28",
+      "bytes": 2694,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-500.woff2",
+      "url": "/resources/b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36/baloo-2-latin-500.woff2",
+      "sha256": "b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36",
+      "bytes": 19556,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-700.woff2",
+      "url": "/resources/8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0/baloo-2-latin-700.woff2",
+      "sha256": "8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0",
+      "bytes": 19436,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/baloo-2-latin-800.woff2",
+      "url": "/resources/3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7/baloo-2-latin-800.woff2",
+      "sha256": "3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7",
+      "bytes": 18632,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fonts.css",
+      "url": "/resources/4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f/fonts.css",
+      "sha256": "4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f",
+      "bytes": 3061,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-400.woff2",
+      "url": "/resources/9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f/fredoka-latin-400.woff2",
+      "sha256": "9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f",
+      "bytes": 16076,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-500.woff2",
+      "url": "/resources/7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620/fredoka-latin-500.woff2",
+      "sha256": "7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620",
+      "bytes": 16248,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-600.woff2",
+      "url": "/resources/b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294/fredoka-latin-600.woff2",
+      "sha256": "b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294",
+      "bytes": 16468,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/fredoka-latin-700.woff2",
+      "url": "/resources/ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16/fredoka-latin-700.woff2",
+      "sha256": "ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16",
+      "bytes": 15900,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+      "url": "/resources/843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd/zcool-kuaile-chinese-simplified-400.woff2",
+      "sha256": "843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd",
+      "bytes": 726052,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/fonts/zcool-kuaile-latin-400.woff2",
+      "url": "/resources/8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93/zcool-kuaile-latin-400.woff2",
+      "sha256": "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93",
+      "bytes": 5344,
+      "type": "font/woff2"
+    },
+    {
+      "key": "/assets/lesson49/icons/audio.svg",
+      "url": "/resources/379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1/audio.svg",
+      "sha256": "379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1",
+      "bytes": 291,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/back.svg",
+      "url": "/resources/3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6/back.svg",
+      "sha256": "3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6",
+      "bytes": 215,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/beef.svg",
+      "url": "/resources/690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb/beef.svg",
+      "sha256": "690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb",
+      "bytes": 702,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/bird.svg",
+      "url": "/resources/31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1/bird.svg",
+      "sha256": "31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1",
+      "bytes": 2042,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/book.svg",
+      "url": "/resources/2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6/book.svg",
+      "sha256": "2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6",
+      "bytes": 350,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/butcher.svg",
+      "url": "/resources/5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419/butcher.svg",
+      "sha256": "5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419",
+      "bytes": 2094,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/cards.svg",
+      "url": "/resources/c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af/cards.svg",
+      "sha256": "c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af",
+      "bytes": 389,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/check.svg",
+      "url": "/resources/6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0/check.svg",
+      "sha256": "6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0",
+      "bytes": 231,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/chicken.svg",
+      "url": "/resources/a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88/chicken.svg",
+      "sha256": "a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/close.svg",
+      "url": "/resources/65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37/close.svg",
+      "sha256": "65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37",
+      "bytes": 213,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/dog.svg",
+      "url": "/resources/a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d/dog.svg",
+      "sha256": "a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d",
+      "bytes": 868,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/either.svg",
+      "url": "/resources/b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689/either.svg",
+      "sha256": "b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689",
+      "bytes": 1078,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/fish.svg",
+      "url": "/resources/d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b/fish.svg",
+      "sha256": "d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b",
+      "bytes": 364,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/give.svg",
+      "url": "/resources/09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2/give.svg",
+      "sha256": "09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2",
+      "bytes": 377,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/heart.svg",
+      "url": "/resources/cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f/heart.svg",
+      "sha256": "cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f",
+      "bytes": 255,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/hint.svg",
+      "url": "/resources/72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e/hint.svg",
+      "sha256": "72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e",
+      "bytes": 658,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/hotpot.svg",
+      "url": "/resources/51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06/hotpot.svg",
+      "sha256": "51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06",
+      "bytes": 502,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/husband.svg",
+      "url": "/resources/8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a/husband.svg",
+      "sha256": "8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/lamb.svg",
+      "url": "/resources/3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051/lamb.svg",
+      "sha256": "3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051",
+      "bytes": 873,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/lily.svg",
+      "url": "/resources/aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121/lily.svg",
+      "sha256": "aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121",
+      "bytes": 548,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/map.svg",
+      "url": "/resources/4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6/map.svg",
+      "sha256": "4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6",
+      "bytes": 294,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/meat.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/meat.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/mince.svg",
+      "url": "/resources/d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec/mince.svg",
+      "sha256": "d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec",
+      "bytes": 1356,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/mutton.svg",
+      "url": "/resources/9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd/mutton.svg",
+      "sha256": "9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd",
+      "bytes": 612,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/order.svg",
+      "url": "/resources/4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469/order.svg",
+      "sha256": "4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469",
+      "bytes": 381,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/people.svg",
+      "url": "/resources/3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3/people.svg",
+      "sha256": "3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3",
+      "bytes": 1027,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/piece.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/piece.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/pork.svg",
+      "url": "/resources/edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732/pork.svg",
+      "sha256": "edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732",
+      "bytes": 527,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/pound.svg",
+      "url": "/resources/0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a/pound.svg",
+      "sha256": "0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a",
+      "bytes": 616,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/question.svg",
+      "url": "/resources/e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694/question.svg",
+      "sha256": "e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694",
+      "bytes": 320,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/retry.svg",
+      "url": "/resources/de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692/retry.svg",
+      "sha256": "de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692",
+      "bytes": 281,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/speech.svg",
+      "url": "/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/speech.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/star.svg",
+      "url": "/resources/d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672/star.svg",
+      "sha256": "d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672",
+      "bytes": 262,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/steak.svg",
+      "url": "/resources/1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77/steak.svg",
+      "sha256": "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+      "bytes": 430,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/tell.svg",
+      "url": "/resources/c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196/tell.svg",
+      "sha256": "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+      "bytes": 273,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/tom.svg",
+      "url": "/resources/049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750/tom.svg",
+      "sha256": "049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750",
+      "bytes": 542,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/lesson49/icons/truth.svg",
+      "url": "/resources/078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b/truth.svg",
+      "sha256": "078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b",
+      "bytes": 1137,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/book.svg",
+      "url": "/resources/5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f/book.svg",
+      "sha256": "5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f",
+      "bytes": 398,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/car.svg",
+      "url": "/resources/0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9/car.svg",
+      "sha256": "0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9",
+      "bytes": 522,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/coat.svg",
+      "url": "/resources/2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5/coat.svg",
+      "sha256": "2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5",
+      "bytes": 450,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/completion/correct-v1.png",
+      "url": "/resources/c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b/correct-v1.png",
+      "sha256": "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+      "bytes": 5381,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/completion/incorrect-v1.png",
+      "url": "/resources/c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415/incorrect-v1.png",
+      "sha256": "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+      "bytes": 7692,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/completion/streak-v1.png",
+      "url": "/resources/191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9/streak-v1.png",
+      "sha256": "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+      "bytes": 7317,
+      "type": "image/png"
+    },
+    {
+      "key": "/assets/unit1-2/dress.svg",
+      "url": "/resources/0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67/dress.svg",
+      "sha256": "0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67",
+      "bytes": 368,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/handbag.svg",
+      "url": "/resources/84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4/handbag.svg",
+      "sha256": "84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4",
+      "bytes": 441,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/house.svg",
+      "url": "/resources/df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497/house.svg",
+      "sha256": "df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497",
+      "bytes": 471,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/man.svg",
+      "url": "/resources/2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839/man.svg",
+      "sha256": "2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839",
+      "bytes": 842,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/pen.svg",
+      "url": "/resources/42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b/pen.svg",
+      "sha256": "42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b",
+      "bytes": 428,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/pencil.svg",
+      "url": "/resources/38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0/pencil.svg",
+      "sha256": "38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0",
+      "bytes": 410,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/scene/man.svg",
+      "url": "/resources/0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed/man.svg",
+      "sha256": "0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed",
+      "bytes": 1599,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/scene/woman.svg",
+      "url": "/resources/79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399/woman.svg",
+      "sha256": "79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399",
+      "bytes": 1741,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/shirt.svg",
+      "url": "/resources/7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9/shirt.svg",
+      "sha256": "7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9",
+      "bytes": 416,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/skirt.svg",
+      "url": "/resources/c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf/skirt.svg",
+      "sha256": "c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf",
+      "bytes": 323,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/story-background.webp",
+      "url": "/resources/5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73/story-background.webp",
+      "sha256": "5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73",
+      "bytes": 12446,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit1-2/street.svg",
+      "url": "/resources/37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff/street.svg",
+      "sha256": "37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff",
+      "bytes": 1082,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/watch.svg",
+      "url": "/resources/197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e/watch.svg",
+      "sha256": "197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e",
+      "bytes": 390,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit1-2/woman.svg",
+      "url": "/resources/07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9/woman.svg",
+      "sha256": "07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9",
+      "bytes": 870,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/american.svg",
+      "url": "/resources/aa7e9de929087954f4c1ce0da2ecac9c37d79354175771771d6c0172728241f3/american.svg",
+      "sha256": "aa7e9de929087954f4c1ce0da2ecac9c37d79354175771771d6c0172728241f3",
+      "bytes": 10624,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/black.svg",
+      "url": "/resources/8bd34c2290e06a5f1598b9e43f91a1f09c12c51e804d09395f02cfbcec23113d/black.svg",
+      "sha256": "8bd34c2290e06a5f1598b9e43f91a1f09c12c51e804d09395f02cfbcec23113d",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/blouses.svg",
+      "url": "/resources/a22d4b9de32b19ac3e12ba2275d9c1076cd581ad04f9e3f3b6f7ddbc5dfecdeb/blouses.svg",
+      "sha256": "a22d4b9de32b19ac3e12ba2275d9c1076cd581ad04f9e3f3b6f7ddbc5dfecdeb",
+      "bytes": 1200,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/books.svg",
+      "url": "/resources/8965360cbfbd07d96234404b582808876abcae82cbe8e2564a23f6969ba54b0c/books.svg",
+      "sha256": "8965360cbfbd07d96234404b582808876abcae82cbe8e2564a23f6969ba54b0c",
+      "bytes": 868,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/brown.svg",
+      "url": "/resources/c83920507a197365d2a1249e3968400ffd36184e1111901a2ba3cdf32441953f/brown.svg",
+      "sha256": "c83920507a197365d2a1249e3968400ffd36184e1111901a2ba3cdf32441953f",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/cars.svg",
+      "url": "/resources/06d8a4760bbf15ac9602d088f29483bcd233625994f8bd71d91d2cba2d875868/cars.svg",
+      "sha256": "06d8a4760bbf15ac9602d088f29483bcd233625994f8bd71d91d2cba2d875868",
+      "bytes": 1116,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/case.svg",
+      "url": "/resources/fbc78ed1d32a0f932c02b16bc86f2e97b2dba7d981cc02ffb941a566b0cf2ed8/case.svg",
+      "sha256": "fbc78ed1d32a0f932c02b16bc86f2e97b2dba7d981cc02ffb941a566b0cf2ed8",
+      "bytes": 439,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/cases-brown.svg",
+      "url": "/resources/f61fc7e3cb10c6be12e5cd58fc632d9ead891cc8d2ea28a5a56cf0a46706033d/cases-brown.svg",
+      "sha256": "f61fc7e3cb10c6be12e5cd58fc632d9ead891cc8d2ea28a5a56cf0a46706033d",
+      "bytes": 952,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/cases-grey.svg",
+      "url": "/resources/5e3199c5f0c780622dc1f485113f5ebc72a4cec9278d2f559603a2dc2f79490d/cases-grey.svg",
+      "sha256": "5e3199c5f0c780622dc1f485113f5ebc72a4cec9278d2f559603a2dc2f79490d",
+      "bytes": 952,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/cast-friends-v1.webp",
+      "url": "/resources/fde2425fc54d3ad91ceb1bdebe9dc881a78cb275fa81c5c0b959e097c6871ac0/cast-friends-v1.webp",
+      "sha256": "fde2425fc54d3ad91ceb1bdebe9dc881a78cb275fa81c5c0b959e097c6871ac0",
+      "bytes": 173790,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit15-16/cast-girl-v1.webp",
+      "url": "/resources/42d0fbf9e48091404a985a56d89913b8831b2e6dc5fc4339692f4f733abcfb15/cast-girl-v1.webp",
+      "sha256": "42d0fbf9e48091404a985a56d89913b8831b2e6dc5fc4339692f4f733abcfb15",
+      "bytes": 102382,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit15-16/cast-girls-v1.webp",
+      "url": "/resources/d15aa09664798297f3619f24076bb43d3106e62b172afdb9b3e0b01481c1a05f/cast-girls-v1.webp",
+      "sha256": "d15aa09664798297f3619f24076bb43d3106e62b172afdb9b3e0b01481c1a05f",
+      "bytes": 199504,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit15-16/cast-officer-v1.webp",
+      "url": "/resources/fa8accd4c14682b499428c3eeb9a250726c06a318daef0c5954359c54367a8f4/cast-officer-v1.webp",
+      "sha256": "fa8accd4c14682b499428c3eeb9a250726c06a318daef0c5954359c54367a8f4",
+      "bytes": 108486,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit15-16/coats.svg",
+      "url": "/resources/0a58c73fe28c217f3f73842405eb0bd58ed18c3e532b734aa63d8381997dd82e/coats.svg",
+      "sha256": "0a58c73fe28c217f3f73842405eb0bd58ed18c3e532b734aa63d8381997dd82e",
+      "bytes": 972,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/counter.svg",
+      "url": "/resources/52785ef999dd8d0fa44e2e133e122ac1948d46ca4a764e07ad2dd0d954bc0c93/counter.svg",
+      "sha256": "52785ef999dd8d0fa44e2e133e122ac1948d46ca4a764e07ad2dd0d954bc0c93",
+      "bytes": 393,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/customs.svg",
+      "url": "/resources/c1999e79ab0d03b8199df032a09a1fdae3b3044492b29c05dc6994c752b6e67c/customs.svg",
+      "sha256": "c1999e79ab0d03b8199df032a09a1fdae3b3044492b29c05dc6994c752b6e67c",
+      "bytes": 601,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/danish.svg",
+      "url": "/resources/85c69c67dbd84970866098a4818ab93d1219a386d05a969dd6cc8147f40e1b86/danish.svg",
+      "sha256": "85c69c67dbd84970866098a4818ab93d1219a386d05a969dd6cc8147f40e1b86",
+      "bytes": 774,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/dogs.svg",
+      "url": "/resources/e0d9d37475430bdcd962062ec3f37b6a50e12c7cfa78e7e07675b04d59284f05/dogs.svg",
+      "sha256": "e0d9d37475430bdcd962062ec3f37b6a50e12c7cfa78e7e07675b04d59284f05",
+      "bytes": 1472,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/dresses.svg",
+      "url": "/resources/6e4264e9971a701208ce1892cfcf4be99f4d0b4e449a0022776945a9bebc5749/dresses.svg",
+      "sha256": "6e4264e9971a701208ce1892cfcf4be99f4d0b4e449a0022776945a9bebc5749",
+      "bytes": 808,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/dutch.svg",
+      "url": "/resources/b903dd285fe94b3d373185c5f428b45495295b58b39a92864f04f5bd30d4ca3f/dutch.svg",
+      "sha256": "b903dd285fe94b3d373185c5f428b45495295b58b39a92864f04f5bd30d4ca3f",
+      "bytes": 822,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/english.svg",
+      "url": "/resources/c08187fe046c672178d9ba5d158b0913e040b544be305df59a30a81abf76531a/english.svg",
+      "sha256": "c08187fe046c672178d9ba5d158b0913e040b544be305df59a30a81abf76531a",
+      "bytes": 879,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/friend.svg",
+      "url": "/resources/8f9c02da8bd52f3e55c439fcf597ed3e486ee059df1efc78172a81651a0597f2/friend.svg",
+      "sha256": "8f9c02da8bd52f3e55c439fcf597ed3e486ee059df1efc78172a81651a0597f2",
+      "bytes": 1832,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/girl.svg",
+      "url": "/resources/d58aad5091a63bbe94e4dcaed3f124884f1cb098839f6054ddd365207e99dc2c/girl.svg",
+      "sha256": "d58aad5091a63bbe94e4dcaed3f124884f1cb098839f6054ddd365207e99dc2c",
+      "bytes": 1329,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/girls.svg",
+      "url": "/resources/ab3f72b140b3be396b70b34ca9f4fb837ae966a7e58c95c34c3031e8d3e4421c/girls.svg",
+      "sha256": "ab3f72b140b3be396b70b34ca9f4fb837ae966a7e58c95c34c3031e8d3e4421c",
+      "bytes": 2530,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/grey.svg",
+      "url": "/resources/4f3027cb6959681cc7cf3e641335ad955914943f942fcef83175c2cfbab73979/grey.svg",
+      "sha256": "4f3027cb6959681cc7cf3e641335ad955914943f942fcef83175c2cfbab73979",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/handbags.svg",
+      "url": "/resources/e854680f53e4614f4a40914d254811c2013c926f28a8f16693f363e95a03d72a/handbags.svg",
+      "sha256": "e854680f53e4614f4a40914d254811c2013c926f28a8f16693f363e95a03d72a",
+      "bytes": 804,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/hats.svg",
+      "url": "/resources/f5f0ad9e624be889dbec3a2796ed50d36aab71aee59bafefd6d23dddee5dcb6a/hats.svg",
+      "sha256": "f5f0ad9e624be889dbec3a2796ed50d36aab71aee59bafefd6d23dddee5dcb6a",
+      "bytes": 864,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/keepsake-story-v1.webp",
+      "url": "/resources/9f917bd5d9a5f063b884a19624c678c747f5435c76484fb8512ec0a0f12ac3e0/keepsake-story-v1.webp",
+      "sha256": "9f917bd5d9a5f063b884a19624c678c747f5435c76484fb8512ec0a0f12ac3e0",
+      "bytes": 229842,
+      "type": "image/webp"
+    },
+    {
+      "key": "/assets/unit15-16/norwegian.svg",
+      "url": "/resources/37e37c7f1539cfe59bf48eb78067c7694ca27f0e551a8fe1228baa958b6b28ff/norwegian.svg",
+      "sha256": "37e37c7f1539cfe59bf48eb78067c7694ca27f0e551a8fe1228baa958b6b28ff",
+      "bytes": 839,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/officer-passports.svg",
+      "url": "/resources/8b8fe8a5e0adf6b0f8238f4fc297bd94edc7bd37e9449c28643d58cb224774a6/officer-passports.svg",
+      "sha256": "8b8fe8a5e0adf6b0f8238f4fc297bd94edc7bd37e9449c28643d58cb224774a6",
+      "bytes": 2121,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/officer.svg",
+      "url": "/resources/9a49090b6ac08c8ea8370d7ca42de5ad5daa33be5f3e9ff4087f49afe294d9cd/officer.svg",
+      "sha256": "9a49090b6ac08c8ea8370d7ca42de5ad5daa33be5f3e9ff4087f49afe294d9cd",
+      "bytes": 1085,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/orange.svg",
+      "url": "/resources/b24052fa7c9019346f98b9372155c371e51e918814c800fe4f562b46163631be/orange.svg",
+      "sha256": "b24052fa7c9019346f98b9372155c371e51e918814c800fe4f562b46163631be",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/our.svg",
+      "url": "/resources/dae44307d7de3c2c6b705556f994e41e6455815f3720a527a09c155d2f0d8341/our.svg",
+      "sha256": "dae44307d7de3c2c6b705556f994e41e6455815f3720a527a09c155d2f0d8341",
+      "bytes": 482,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/passport.svg",
+      "url": "/resources/94394ed51babc5b95d7cfa218adc46a1a7ee079bef1d5a7e59519cecf78cd350/passport.svg",
+      "sha256": "94394ed51babc5b95d7cfa218adc46a1a7ee079bef1d5a7e59519cecf78cd350",
+      "bytes": 481,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/passports.svg",
+      "url": "/resources/6dba9b6e69c4cd84c7a6a5781d22e9e5dfdd8ba0e171d2a4d66a2457db2b8b8a/passports.svg",
+      "sha256": "6dba9b6e69c4cd84c7a6a5781d22e9e5dfdd8ba0e171d2a4d66a2457db2b8b8a",
+      "bytes": 1034,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/pens.svg",
+      "url": "/resources/8f9dfac7d5d3e010c872382c31c56026ba67c8962ca36dab677d779b563f5173/pens.svg",
+      "sha256": "8f9dfac7d5d3e010c872382c31c56026ba67c8962ca36dab677d779b563f5173",
+      "bytes": 928,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/red.svg",
+      "url": "/resources/d1358e10212b37857bc8b928ed7688600b3860e972d8459c0e76a0686d890bea/red.svg",
+      "sha256": "d1358e10212b37857bc8b928ed7688600b3860e972d8459c0e76a0686d890bea",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/russian.svg",
+      "url": "/resources/b141289eb8b21b844f92210fcea5ee5218c147565f382cba2b9ca22d4bf4a781/russian.svg",
+      "sha256": "b141289eb8b21b844f92210fcea5ee5218c147565f382cba2b9ca22d4bf4a781",
+      "bytes": 829,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/shirts.svg",
+      "url": "/resources/5fdf52a6d1c2274f2117c71e25ed9be0d38b15183cdbb21b119fe5519418061e/shirts.svg",
+      "sha256": "5fdf52a6d1c2274f2117c71e25ed9be0d38b15183cdbb21b119fe5519418061e",
+      "bytes": 1046,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/story-background.svg",
+      "url": "/resources/b94a58e6fbbf6191f0504d5579815f1e4775b79d5c717e527fd38605a544b78b/story-background.svg",
+      "sha256": "b94a58e6fbbf6191f0504d5579815f1e4775b79d5c717e527fd38605a544b78b",
+      "bytes": 838,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/suits.svg",
+      "url": "/resources/2f0b9529971e28c10bd3b3415a295596473d6ee2977979a68e25e960d7ea1485/suits.svg",
+      "sha256": "2f0b9529971e28c10bd3b3415a295596473d6ee2977979a68e25e960d7ea1485",
+      "bytes": 928,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/swedish.svg",
+      "url": "/resources/5e6d0a39e79a72a537abadd926b165a78e0d39dd75f8dc43b703c4fe310dc276/swedish.svg",
+      "sha256": "5e6d0a39e79a72a537abadd926b165a78e0d39dd75f8dc43b703c4fe310dc276",
+      "bytes": 893,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/these.svg",
+      "url": "/resources/7d3e0a1b46c41dd7f766b413cf7011995c94b482ca14b9158674f8caf1a1c264/these.svg",
+      "sha256": "7d3e0a1b46c41dd7f766b413cf7011995c94b482ca14b9158674f8caf1a1c264",
+      "bytes": 343,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/they.svg",
+      "url": "/resources/6dba9b6e69c4cd84c7a6a5781d22e9e5dfdd8ba0e171d2a4d66a2457db2b8b8a/they.svg",
+      "sha256": "6dba9b6e69c4cd84c7a6a5781d22e9e5dfdd8ba0e171d2a4d66a2457db2b8b8a",
+      "bytes": 1034,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/tickets.svg",
+      "url": "/resources/6d6070a3ead50beded70d566c8979f6c0bc37a1dc5e1e058dcd53694f88b133f/tickets.svg",
+      "sha256": "6d6070a3ead50beded70d566c8979f6c0bc37a1dc5e1e058dcd53694f88b133f",
+      "bytes": 772,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/ties.svg",
+      "url": "/resources/7990f67b3fc0deacb14cfadbfc15ee06edc51a9be32aeb34992b5cc0cec19258/ties.svg",
+      "sha256": "7990f67b3fc0deacb14cfadbfc15ee06edc51a9be32aeb34992b5cc0cec19258",
+      "bytes": 642,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/tourist.svg",
+      "url": "/resources/1234331f8867a24e51df680f52fb5a1bd92497b4fc8401e98f8dd16eb5c4a8f6/tourist.svg",
+      "sha256": "1234331f8867a24e51df680f52fb5a1bd92497b4fc8401e98f8dd16eb5c4a8f6",
+      "bytes": 1291,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/travelling-pair.svg",
+      "url": "/resources/53016a29cb0591ba7732382db9114c0063ccb6d6df63066452ff40473b92ca7f/travelling-pair.svg",
+      "sha256": "53016a29cb0591ba7732382db9114c0063ccb6d6df63066452ff40473b92ca7f",
+      "bytes": 3483,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/umbrellas.svg",
+      "url": "/resources/9b69530507186a94ceaa55b0b56a34251afe3c145b0cd775040364ce46d202ed/umbrellas.svg",
+      "sha256": "9b69530507186a94ceaa55b0b56a34251afe3c145b0cd775040364ce46d202ed",
+      "bytes": 806,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/we.svg",
+      "url": "/resources/ab3f72b140b3be396b70b34ca9f4fb837ae966a7e58c95c34c3031e8d3e4421c/we.svg",
+      "sha256": "ab3f72b140b3be396b70b34ca9f4fb837ae966a7e58c95c34c3031e8d3e4421c",
+      "bytes": 2530,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/assets/unit15-16/yellow.svg",
+      "url": "/resources/9064b3524f2746c893c3c121a5cf26abb771b7a5ea01881559b4b11bd390368a/yellow.svg",
+      "sha256": "9064b3524f2746c893c3c121a5cf26abb771b7a5ea01881559b4b11bd390368a",
+      "bytes": 314,
+      "type": "image/svg+xml"
+    },
+    {
+      "key": "/core/award-card-layout.css",
+      "url": "/resources/d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af/award-card-layout.css",
+      "sha256": "d216fc3fe8accbebbf803b5fef5ffaa116e61401015cfe42c549819b02e9e3af",
+      "bytes": 3233,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/award-card-layout.js",
+      "url": "/resources/3b46342eaa17a7ea50f32366b8c3ec41efadf76447c23518b915d69d1074f02c/award-card-layout.js",
+      "sha256": "3b46342eaa17a7ea50f32366b8c3ec41efadf76447c23518b915d69d1074f02c",
+      "bytes": 6030,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-gif.js",
+      "url": "/resources/8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765/award-gif.js",
+      "sha256": "8876a8a5095042e49d12827a088304b3bad47fc159d143a87ec8875620b31765",
+      "bytes": 5908,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-reveal.css",
+      "url": "/resources/83458ba17d2cd3f2f4196cc8364118fedc51c783172baf89c61f20fbc77a1c6e/award-reveal.css",
+      "sha256": "83458ba17d2cd3f2f4196cc8364118fedc51c783172baf89c61f20fbc77a1c6e",
+      "bytes": 6575,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/award-reveal.js",
+      "url": "/resources/e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252/award-reveal.js",
+      "sha256": "e365b86b4d2ece56b460441a302960e2275c9e22bd860a109a275dc782af4252",
+      "bytes": 12869,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/award-rules.js",
+      "url": "/resources/4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a/award-rules.js",
+      "sha256": "4d6ae9b56f3fd0287df5d66a085f300a41154927d44f931c6c1225716acf0c6a",
+      "bytes": 2931,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-cache.js",
+      "url": "/resources/6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b/course-cache.js",
+      "sha256": "6cd402d38072ad6aeedcd08ee4b64332e18e846d2b26e11f575d01ef30b0ef0b",
+      "bytes": 11446,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-catalog.js",
+      "url": "/resources/ceef359768e376c2e56d538b75206cae98f81347fdd2b87507f5eb601c105aac/course-catalog.js",
+      "sha256": "ceef359768e376c2e56d538b75206cae98f81347fdd2b87507f5eb601c105aac",
+      "bytes": 529,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/course-loader.js",
+      "url": "/resources/995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb/course-loader.js",
+      "sha256": "995f6a221e190324c32618c8756c37751646b92e807aa2149736213c5aaa1edb",
+      "bytes": 23868,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-base.css",
+      "url": "/resources/8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d/lesson49-base.css",
+      "sha256": "8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d",
+      "bytes": 25459,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-experience.css",
+      "url": "/resources/c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e/lesson49-experience.css",
+      "sha256": "c0cb8ba7927d185dbf7771875326f7226f415adb1c9a12c3b710ed3e25ecb05e",
+      "bytes": 38910,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-feedback.js",
+      "url": "/resources/1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1/lesson49-feedback.js",
+      "sha256": "1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1",
+      "bytes": 1053,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-icons.js",
+      "url": "/resources/904e75625f7b90b1bd5057c73a68408158e19dbb5dd5f43c772a8e48472533f7/lesson49-icons.js",
+      "sha256": "904e75625f7b90b1bd5057c73a68408158e19dbb5dd5f43c772a8e48472533f7",
+      "bytes": 369,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-practice.js",
+      "url": "/resources/31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7/lesson49-practice.js",
+      "sha256": "31cbccc59e96ba87a79135e13fc7b140effd8b276031fb600ba9c64f6fe592b7",
+      "bytes": 50570,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-task-inputs.css",
+      "url": "/resources/9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede/lesson49-task-inputs.css",
+      "sha256": "9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede",
+      "bytes": 10729,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/lesson49-task-inputs.js",
+      "url": "/resources/2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09/lesson49-task-inputs.js",
+      "sha256": "2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09",
+      "bytes": 14735,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/story-certificate.css",
+      "url": "/resources/411ae5619044299e6c6b0bcc738996e0fe0d84e5e004ee47a8d0f95297200c71/story-certificate.css",
+      "sha256": "411ae5619044299e6c6b0bcc738996e0fe0d84e5e004ee47a8d0f95297200c71",
+      "bytes": 10160,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/story-certificate.js",
+      "url": "/resources/2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a/story-certificate.js",
+      "sha256": "2553a05330aa80729433405eaf02a45d6257499e9fe9a14d9abcb5698fe7d58a",
+      "bytes": 10142,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/unit-awards.js",
+      "url": "/resources/0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f/unit-awards.js",
+      "sha256": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+      "bytes": 3432,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/core/unit-theme.css",
+      "url": "/resources/4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249/unit-theme.css",
+      "sha256": "4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249",
+      "bytes": 8921,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/core/vendor/gifenc.js",
+      "url": "/resources/cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d/gifenc.js",
+      "sha256": "cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d",
+      "bytes": 9709,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/completion.css",
+      "url": "/resources/cd31c6a8a3cfd615fb7ac7b0f2d24b83e8dd82200ff81750d0623d8f1a6cce42/completion.css",
+      "sha256": "cd31c6a8a3cfd615fb7ac7b0f2d24b83e8dd82200ff81750d0623d8f1a6cce42",
+      "bytes": 47511,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/completion.js",
+      "url": "/resources/3015bdbd4c0ea513ae3f2ac8b51078087ed427dd71fcf3113d87194c55a71b1f/completion.js",
+      "sha256": "3015bdbd4c0ea513ae3f2ac8b51078087ed427dd71fcf3113d87194c55a71b1f",
+      "bytes": 6269,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/grammar.css",
+      "url": "/resources/82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e/grammar.css",
+      "sha256": "82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e",
+      "bytes": 2186,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit1-2/grammar.js",
+      "url": "/resources/08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912/grammar.js",
+      "sha256": "08db5546d0ff511454c51152b1b5a9b3de4270f8f745f72721d99ff29e4e5912",
+      "bytes": 3727,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/content.js",
+      "url": "/resources/a3f2f55dd94f25b3733478ac8ff56793918a5862e73a5d543387e494d431657a/content.js",
+      "sha256": "a3f2f55dd94f25b3733478ac8ff56793918a5862e73a5d543387e494d431657a",
+      "bytes": 42671,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/grammar.js",
+      "url": "/resources/c3454b6ce4d02a561e467042d4c8f8a3a2f6cc1857e3f44b63c16029e6dccceb/grammar.js",
+      "sha256": "c3454b6ce4d02a561e467042d4c8f8a3a2f6cc1857e3f44b63c16029e6dccceb",
+      "bytes": 383,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/index.html",
+      "url": "/resources/cef413c4b9e4dc00ac632205f3429e3fd562d696507708553e7c25a5e966edb8/index.html",
+      "sha256": "cef413c4b9e4dc00ac632205f3429e3fd562d696507708553e7c25a5e966edb8",
+      "bytes": 4160,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/legacy-certificate.js",
+      "url": "/resources/842f62a1e6515a37c53de54dc1e1085b73aaa8f2b12f2cb009cac4212a61c51f/legacy-certificate.js",
+      "sha256": "842f62a1e6515a37c53de54dc1e1085b73aaa8f2b12f2cb009cac4212a61c51f",
+      "bytes": 13309,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/legacy.css",
+      "url": "/resources/aa3c9ca5436a82062a67b3743cb7cbacbc77df05291e88ea470822cfd30f46c4/legacy.css",
+      "sha256": "aa3c9ca5436a82062a67b3743cb7cbacbc77df05291e88ea470822cfd30f46c4",
+      "bytes": 782,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/legacy.js",
+      "url": "/resources/4578ea17e4f11cd839b341f6598eabdb7b6b30973126a2d43758dd38c74a855c/legacy.js",
+      "sha256": "4578ea17e4f11cd839b341f6598eabdb7b6b30973126a2d43758dd38c74a855c",
+      "bytes": 5514,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/references.js",
+      "url": "/resources/fcd9c5ab607a9b3663c9c32892be1f6a51583503681442a0540b14d505d81078/references.js",
+      "sha256": "fcd9c5ab607a9b3663c9c32892be1f6a51583503681442a0540b14d505d81078",
+      "bytes": 7836,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/scene.js",
+      "url": "/resources/05739c6ef4c8c1f08f60d2eac7a50bfad5040de609d24e32b6f459b0b8ece49b/scene.js",
+      "sha256": "05739c6ef4c8c1f08f60d2eac7a50bfad5040de609d24e32b6f459b0b8ece49b",
+      "bytes": 3991,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/typography.css",
+      "url": "/resources/f1ae19b0be5f0c243bc6ce7b1279b23df4a8e710d567a482bbf0b819583a4624/typography.css",
+      "sha256": "f1ae19b0be5f0c243bc6ce7b1279b23df4a8e710d567a482bbf0b819583a4624",
+      "bytes": 2868,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/unit.css",
+      "url": "/resources/612309a1e4fcd126f11a7b556de70ecae9706df20d22f3900717edc6bdce9661/unit.css",
+      "sha256": "612309a1e4fcd126f11a7b556de70ecae9706df20d22f3900717edc6bdce9661",
+      "bytes": 21345,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/unit15-16/unit.js",
+      "url": "/resources/f8a3aef11da9b7231e41a68c0739927f7376f8a274cf8c51d19e9dd2de314281/unit.js",
+      "sha256": "f8a3aef11da9b7231e41a68c0739927f7376f8a274cf8c51d19e9dd2de314281",
+      "bytes": 19023,
+      "type": "text/javascript; charset=utf-8"
+    },
+    {
+      "key": "/unit49-50/unit.css",
+      "url": "/resources/b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d/unit.css",
+      "sha256": "b2a6ee204445b59b5d0a8efb1e5ebe23d35100dd7f56a29f0a101c539d11d19d",
+      "bytes": 11611,
+      "type": "text/css; charset=utf-8"
+    },
+    {
+      "key": "/course-shells/unit15-16.html",
+      "url": "/resources/42e8af374530c9c67afa716da7109412426045877460533591fe8afed0f9a25a/unit15-16.html",
+      "sha256": "42e8af374530c9c67afa716da7109412426045877460533591fe8afed0f9a25a",
+      "bytes": 47646,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "audio": [
+    {
+      "key": "/assets/feedback/duolingo-complete.mp3",
+      "url": "/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-correct.mp3",
+      "url": "/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ],
+  "narration": [],
+  "feedback": [
+    {
+      "key": "/assets/feedback/duolingo-complete.mp3",
+      "url": "/resources/876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78/duolingo-complete.mp3",
+      "sha256": "876e99f4e46e0068d777bb5e99f52422137f18305cc2871b4ea774a84e8a2d78",
+      "bytes": 58931,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-correct.mp3",
+      "url": "/resources/c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e/duolingo-correct.mp3",
+      "sha256": "c509a5957af198939ae868c9cf17676d00927d400b7c721ea08d3f734c39301e",
+      "bytes": 30092,
+      "type": "audio/mpeg"
+    },
+    {
+      "key": "/assets/feedback/duolingo-incorrect.mp3",
+      "url": "/resources/bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e/duolingo-incorrect.mp3",
+      "sha256": "bc134b0e6339896b74486065e94b1e2053015e3d8d69f890e9e631424980ee1e",
+      "bytes": 26957,
+      "type": "audio/mpeg"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "oldCertificates": [
+    {
+      "engine": "chromium",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "bba0435b9d732c9c2d80864da71bdff230f17a6a1bf0a0e989fc2119ad45e79c",
+      "retainedSha256": "bba0435b9d732c9c2d80864da71bdff230f17a6a1bf0a0e989fc2119ad45e79c",
+      "background": "#FBF8F1"
+    },
+    {
+      "engine": "webkit",
+      "width": 1440,
+      "height": 1100,
+      "identicalDecodedPixels": true,
+      "originalSha256": "581665985f566a3602cda18f9c0500bc040bb3c28089c204615280cecd283205",
+      "retainedSha256": "581665985f566a3602cda18f9c0500bc040bb3c28089c204615280cecd283205",
+      "background": "#FBF8F1"
+    }
+  ],
+  "gifs": [
+    {
+      "engine": "chromium",
+      "mount": "root",
+      "file": "one-star.gif",
+      "sha256": "3428dde761d954b6d7505fd593e25bb2ad3d7e9320feb5f8e83fd6ee2bcf65ed",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "root",
+      "file": "keepsake.gif",
+      "sha256": "831af4e751a2ce29ee4feef845dbdf7e287e6cd22ab7c698219d8bf27099e2d7",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "lesson",
+      "file": "one-star.gif",
+      "sha256": "3428dde761d954b6d7505fd593e25bb2ad3d7e9320feb5f8e83fd6ee2bcf65ed",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "chromium",
+      "mount": "lesson",
+      "file": "keepsake.gif",
+      "sha256": "831af4e751a2ce29ee4feef845dbdf7e287e6cd22ab7c698219d8bf27099e2d7",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "root",
+      "file": "one-star.gif",
+      "sha256": "9fae97e6e8e04ddd7b1ab011577b77a99aa1d25ceb60afa7430eeffcd1bf4acd",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "root",
+      "file": "keepsake.gif",
+      "sha256": "fb31f2674f470a00798e3af5a6a3fcd926f1ac5f84cddc840d965d8b85d083ff",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "lesson",
+      "file": "one-star.gif",
+      "sha256": "9fae97e6e8e04ddd7b1ab011577b77a99aa1d25ceb60afa7430eeffcd1bf4acd",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    },
+    {
+      "engine": "webkit",
+      "mount": "lesson",
+      "file": "keepsake.gif",
+      "sha256": "fb31f2674f470a00798e3af5a6a3fcd926f1ac5f84cddc840d965d8b85d083ff",
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "durationMs": 4800,
+      "loop": 0
+    }
+  ],
+  "pdfVisualReview": {
+    "worksheetPages": 1,
+    "legacyCertificatePages": 1,
+    "writingA": 3,
+    "writingB": 11,
+    "writingLines": 14,
+    "lineHeightPx": 32,
+    "physicalPrintTested": false
+  }
+}

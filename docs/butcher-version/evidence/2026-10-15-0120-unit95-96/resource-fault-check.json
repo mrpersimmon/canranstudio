@@ -1,0 +1,11 @@
+{
+  "sourceAssets": [
+    "station-scene.svg",
+    "gate-scene.svg"
+  ],
+  "sameContent": true,
+  "observedCanonicalRequest": "resources/<sha256>/gate-scene.svg",
+  "correctedFaultTarget": "resources/*/ticket-scene.svg",
+  "observed404Required": true,
+  "rootRecoveryCheckPassed": true
+}

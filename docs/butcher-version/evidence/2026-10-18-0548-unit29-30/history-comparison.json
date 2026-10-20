@@ -1,0 +1,25 @@
+{
+  "rawLocalRecords": 50,
+  "priorFiveStarRecords": 50,
+  "legacyRecords": 33,
+  "priorRecordsRetained": true,
+  "legacyRecordsRetained": true,
+  "rounds": [
+    {
+      "id": "listen",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "grammar",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    },
+    {
+      "id": "apply",
+      "runIdUnchanged": true,
+      "statesUnchanged": true
+    }
+  ],
+  "comparison": "Structural equality; array order is strict. No legacy-only row exists in this real 33-to-50 chain. Browser assertions also check both dates after current practice."
+}

@@ -1,0 +1,122 @@
+{
+  "lesson": "135–136",
+  "standard": "v1.52",
+  "branch": "codex/release-canranstudio",
+  "mode": "classroom",
+  "catalogAtValidation": 68,
+  "counts": {
+    "words": 12,
+    "originalSpeakerTurns": 7,
+    "readingSteps": 18,
+    "models": 9,
+    "writingItems": 25,
+    "writingLines": 25,
+    "writingPdfPages": 2,
+    "questions": [
+      6,
+      9,
+      17,
+      8,
+      20
+    ],
+    "questionTotal": 60
+  },
+  "courseTests": {
+    "initialChromium": {
+      "passed": 14,
+      "failed": 1
+    },
+    "initialWebkit": {
+      "passed": 14,
+      "failed": 1
+    },
+    "sameVersionOriginalAssertionIsolation": {
+      "passed": 0,
+      "failed": 1
+    },
+    "correctedMaterialAssertion": {
+      "chromium": 1,
+      "webkit": 1
+    },
+    "distinctSuccessfulConditionsPerEngine": 15
+  },
+  "affectedRechecks": {
+    "independentExamAndFourWidths": {
+      "chromium": 5,
+      "webkit": 5
+    },
+    "finalFullAccountFlow": {
+      "chromiumRoot": 1,
+      "chromiumSub": 1
+    }
+  },
+  "accountTests": {
+    "chromiumRoot": 8,
+    "chromiumSub": 8,
+    "webkitRoot": 8,
+    "webkitSub": 8
+  },
+  "catalogTests": 3,
+  "deploymentTests": 1,
+  "distinctSuccessfulChecks": 66,
+  "representativePassed": 5,
+  "printRefinementPassed": 1,
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs133134": true
+  },
+  "font": {
+    "addedChinese": [
+      "创",
+      "施",
+      "胸",
+      "轰",
+      "逆"
+    ],
+    "currentMissing": 0,
+    "oldCharactersPreserved": 1730,
+    "currentCharacters": 1735,
+    "oldAdvanceAndLineMetricDifferences": 0
+  },
+  "gif": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "durationMs": 4800,
+    "loop": 0,
+    "allFramesNameTitleScenePaperStable": true
+  },
+  "manualPending": [
+    "教师与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部历史课程升级",
+    "共享Worker拒写和回收的所有分支",
+    "除本课所列画布故障重试及离开取消之外的全部导出故障"
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit135-136/#learn/words",
+    "stars": 0,
+    "wordGroup": "1 / 2",
+    "assessmentAnswersSubmitted": false,
+    "coverCheckedAt": [
+      320,
+      390,
+      768,
+      1280
+    ],
+    "updateFlow": "authenticated directory and normal navigation; no learning-data clearing"
+  },
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

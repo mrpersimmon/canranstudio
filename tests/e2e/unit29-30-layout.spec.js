@@ -1,3 +1,4 @@
+require('../support/unit2930-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
 const {ANSWERS}=require('../support/unit29-30-flow');

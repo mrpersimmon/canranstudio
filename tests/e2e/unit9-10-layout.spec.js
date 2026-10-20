@@ -1,5 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
+// Historical expectations run on a complete frozen HTTP course package.
+require('../support/unit910-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('单张示范卡在宽窄屏居中，打印填空至少留出 64 像素书写宽度',async({page})=>{
  for(const width of [320,1280]){await page.setViewportSize({width,height:740});await page.goto('/unit9-10/#learn/models');const card=await page.locator('.model-example .phrase-card').boundingBox(),room=await page.locator('.stage-models').boundingBox();expect(Math.abs(card.x+card.width/2-room.x-room.width/2)).toBeLessThan(2);}

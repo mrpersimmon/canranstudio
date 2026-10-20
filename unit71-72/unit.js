@@ -251,7 +251,7 @@
   writing.append(node('h4','A · 把正在进行的动作改成昨天的记录'));
   const a=node('ol');content.WRITING_A.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'));a.append(li);});writing.append(a);
   writing.append(node('h4','B · 用 What did … do 提问，再用过去式回答'),node('p','以下动作已经完成。例：she / air the room / yesterday → What did she do yesterday? — She aired the room yesterday.'));
-  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);li.append(node('div','________________________________________________'));b.append(li);});writing.append(b);
+  const b=node('ol');content.WRITING_B.forEach(text=>{const li=node('li',text);for(let line=0;line<2;line++)li.append(node('div','','writing-line'));b.append(li);});writing.append(b);
   const printActions=node('div','','activity-actions');printActions.append(button('打印练习纸',()=>{document.body.classList.add('print-writing');root.print();},'btn btn-yellow'));writing.append(printActions);surfaces.get('certificate').append(writing);
   root.addEventListener('afterprint',()=>document.body.classList.remove('print-writing'));
 

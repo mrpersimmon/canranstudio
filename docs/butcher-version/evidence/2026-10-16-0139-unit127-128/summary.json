@@ -1,0 +1,74 @@
+{
+  "lesson": "127–128",
+  "standard": "v1.52",
+  "mode": "classroom",
+  "counts": {
+    "words": 18,
+    "dialogueTurns": 12,
+    "models": 8,
+    "writingItems": 27,
+    "writingLines": 67,
+    "questions": [
+      7,
+      10,
+      18,
+      8,
+      22
+    ],
+    "questionTotal": 65
+  },
+  "currentCatalogAtValidation": 64,
+  "courseTests": {
+    "chromium": 15,
+    "webkit": 15
+  },
+  "accountTests": {
+    "chromiumRoot": 7,
+    "chromiumSubpath": 7,
+    "webkitRoot": 7,
+    "webkitSubpath": 7
+  },
+  "catalog": 3,
+  "deployment": 1,
+  "distinctSuccessfulChecks": 62,
+  "representative": {
+    "initialPassed": 3,
+    "initialFailed": 1,
+    "sameVersionIsolatedFailure": 1,
+    "revisedFourWidthPassed": 4
+  },
+  "workflow": {
+    "passed": 11,
+    "failed": 0
+  },
+  "unit": {
+    "total": 132,
+    "passed": 126,
+    "failed": 6,
+    "sameFailureNamesAs125126": true,
+    "failureNames": [
+      "custom admin reset reads stdin, keeps username and data, revokes old sessions without logging credentials",
+      "grant renewal bounds allocation, preserves old IDs and isolates devices/courses",
+      "opening an existing data directory restores private directory and key modes",
+      "persistent failure windows survive reopen, expire without extension, and never clear source budgets",
+      "preview package construction rejects private symlinks before hash resource aliases are published",
+      "static preview serves public files but denies private paths, aliases, symlinks and foreign hosts"
+    ]
+  },
+  "manualPending": [
+    "教师复核与课堂",
+    "儿童操作",
+    "实体iPhone微信保存",
+    "实体打印"
+  ],
+  "notReexecuted": [
+    "全部旧课与历史版本迁移",
+    "共享缓存Worker及拒写所有分支",
+    "导出取消及故障所有分支"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "published": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "id": "unit89-90",
+  "source": {
+    "file": "tests/support/unit8990.js",
+    "sha256": "d00d0ab4b382ce1400a6a168d1d59a1c21ab2396b352383fdbd9c287763d0f04"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u8990-v1-r-purpose",
+      "text": "Lesson 89\n\nNigel: Good afternoon. I believe that this house is for sale.\n\nIan: That’s right.\n\nNigel: May I have a look at it, please?\n\nIan: Yes, of course. Come in."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u8990-v1-r-years",
+      "text": "Lesson 89\n\nNigel: How long have you lived here?\n\nIan: I’ve lived here for twenty years.\n\nNigel: Twenty years! That’s a long time.\n\nIan: Yes, I’ve been here since 1976."
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u8990-v1-r-reason",
+      "text": "Lesson 89\n\nNigel: Then why do you want to sell it?\n\nIan: Because I’ve just retired. I want to buy a small house in the country."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u8990-v1-r-country",
+      "text": "Lesson 89\n\nNigel: Then why do you want to sell it?\n\nIan: Because I’ve just retired. I want to buy a small house in the country."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u8990-v1-r-price",
+      "text": "Lesson 89\n\nNigel: How much does this house cost?\n\nIan: £68,500.\n\nNigel: That’s a lot of money!\n\nIan: It’s worth every penny of it."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u8990-v1-r-decision",
+      "text": "Lesson 89\n\nNigel: Well, I like the house, but I can’t decide yet. My wife must see it first.\n\nIan: Women always have the last word."
+    },
+    {
+      "zone": "exam",
+      "index": 2,
+      "questionId": "u8990-v1-e-reason",
+      "text": "Lesson 89\n\nNigel: How much does this house cost?\n\nIan: £68,500.\n\nNigel: That’s a lot of money!\n\nIan: It’s worth every penny of it.\n\nNigel: Well, I like the house, but I can’t decide yet. My wife must see it first.\n\nIan: Women always have the last word."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-4",
+    "R2": "5-8",
+    "R3": "9-10",
+    "R4": "9-10",
+    "R5": "11-14",
+    "R6": "15-16",
+    "E2": "11-16"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

@@ -1,0 +1,11 @@
+
+Running 4 tests using 1 worker
+
+(node:13168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\e2e\unit117-118.spec.js:55:39 › 320及短屏：过去动作与时间材料、长句、全部题型和三卡 (34.9s)
+  ok 2 tests\e2e\unit117-118.spec.js:55:39 › 390及短屏：过去动作与时间材料、长句、全部题型和三卡 (36.0s)
+  ok 3 tests\e2e\unit117-118.spec.js:55:39 › 768及短屏：过去动作与时间材料、长句、全部题型和三卡 (35.2s)
+  ok 4 tests\e2e\unit117-118.spec.js:55:39 › 1280及短屏：过去动作与时间材料、长句、全部题型和三卡 (38.4s)
+
+  4 passed (2.4m)

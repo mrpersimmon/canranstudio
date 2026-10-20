@@ -1,58 +1,29 @@
-(function(root){
- 'use strict';
- const core=root.CanranCore,content=core.unit1516.learning;
- const node=(tag,text='',className='')=>{const el=document.createElement(tag);el.textContent=text;el.className=className;return el;};
- const local=name=>'/assets/unit15-16/'+name+'.svg';
- function image(name,alt='',className=''){const el=node('img','',className);el.src=local(name);el.alt=alt;return el;}
- function cast(){
-  const element=node('div','','customs-cast');
-  for(const [person,who] of [['officer','teacher'],['girls','student']]){
-   const actor=node('div','','dialogue-actor');actor.dataset.actor=who;actor.append(image(person),node('span',content.PEOPLE[person].name));element.append(actor);
-  }
-  const friends=node('div','','customs-friends');friends.append(image('friend'),node('span','同行朋友'));
-  const counter=image('counter','','customs-counter'),passports=image('passports','姑娘们准备递交的两本护照','story-passports'),other=image('cases-grey','官员询问的另一对箱子，尚未确认归属','story-other-cases'),own=image('cases-brown','姑娘们自己的棕色箱子','story-own-cases');
-  const clear=node('span','检查结束','customs-clear');
-  element.append(friends,counter,passports,other,own,clear);
-  return{element,showLine(index){
-   element.dataset.phase=index<3?'arrival':index<6?'friends':index===6?'request':index===7?'handover':index<10?'other-cases':index===10?'brown-cases':index<16?'travellers':'clear';
-   friends.hidden=index<3;friends.classList.toggle('is-referenced',[3,4,5,14,15].includes(index));
-   passports.hidden=index<6;passports.dataset.place=index<7?'girls':'counter';passports.alt=index<7?'姑娘们准备递交的两本护照':'已经递到官员面前的两本护照';
-   other.hidden=index<8;own.hidden=index<10;own.dataset.place=index<11?'waiting':'girls';clear.hidden=index<16;
-   element.querySelectorAll('.dialogue-actor').forEach(el=>el.classList.toggle('is-current',el.dataset.actor===content.DIALOGUE[index]?.who));
-  }};
+(function(core){
+'use strict';
+const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
+const picture=(name,alt,cls='',extension='svg')=>{const e=node('img',cls);e.src='/assets/unit15-16/'+name+'.'+extension;e.alt=alt;return e;};
+function storyProps(){
+ const element=node('div','travel-world');element.setAttribute('role','group');element.setAttribute('aria-label','海关官员与两位姑娘的检查站');
+ const cast=node('div','travel-cast'),location=node('p','travel-location','海关检查站');
+ for(const [who,name,asset,alt]of [['officer','海关官员','cast-officer-v1','海关官员面向右侧的姑娘们，伸手示意'],['girls','姑娘们','cast-girls-v1','两位姑娘站在一起，面向左侧的官员']]){const actor=node('div','dialogue-actor '+who);actor.dataset.actor=who;actor.append(picture(asset,alt,'cast-image','webp'),node('span','actor-label',name));cast.append(actor);}
+ const friends=node('div','travel-friends');friends.append(picture('cast-friends-v1','两位同行朋友在旁边等候','','webp'),node('span','actor-label','同行朋友'));
+ const counter=picture('counter','','travel-counter'),passports=picture('passports','姑娘们拿出的两本护照','travel-passports'),other=picture('cases-grey','官员询问的一对灰色箱子，物主尚未确认','travel-other-cases'),own=picture('cases-brown','姑娘们自己的两只棕色箱子','travel-own-cases');
+ cast.append(counter,passports,other,own);element.append(location,cast,friends);
+ function placePassports(){
+  if(passports.hidden)return;
+  const who=passports.dataset.place,img=cast.querySelector('.'+who+' .cast-image'),bounds=img.getBoundingClientRect(),frame=cast.getBoundingClientRect();
+  if(!bounds.width||!img.naturalWidth)return;
+  // Anchors were reviewed on the source sprites. Account for contain's real
+  // painted rectangle and bottom alignment, not the larger image element box.
+  const scale=Math.min(bounds.width/img.naturalWidth,bounds.height/img.naturalHeight),w=img.naturalWidth*scale,h=img.naturalHeight*scale;
+  const hand=who==='girls'?[.105,.435]:[.80,.53],x=bounds.left+(bounds.width-w)/2+w*hand[0]-frame.left,y=bounds.bottom-h+h*hand[1]-frame.top;
+  const paper=passports.getBoundingClientRect();
+  passports.style.left=(x-paper.width/2)+'px';passports.style.top=(y-paper.height*154/180)+'px';
  }
- // Illustration state is separate from the content signature and cannot award progress.
- const tasks={
-  'story-friends':{art:'friend',result:'分清姑娘们和同行朋友了。'},
-  'story-they':{art:'passports',result:'官员要的护照，递到了柜台。',handover:true},
-  'story-finish':{art:'officer',result:'检查结束，大家可以继续出发。'},
-  'reply-we':{art:'girls',result:'姑娘们一起回答：Yes, we are.'},
-  'reply-negative':{art:'friend',result:"说的是朋友：No, they aren't."},
-  'reply-our':{art:'cases-brown',result:'我们的箱子：Our cases。'},
-  'exam-card':{art:'friend',result:'国籍与身份都核对好了。'},
-  'exam-passports':{art:'passports',result:'确认的是两本护照：Yes, they are.',handover:true},
-  'deny-we':{art:'girls',result:'姑娘们否定了对自己的猜测。'},
-  'deny-friends':{art:'friend',result:'按新资料核对朋友们的国籍。'},
-  'these-plural':{art:'tickets',result:'两张车票，复数问句检查好了。'},
-  'ask-colour':{art:'cases-brown',result:'箱子问色句拼好了。'},
-  'our-hats':{art:'hats',alt:'两顶灰色帽子，都带黑色帽带',result:'谁的、数量、两种颜色都说清了。'},
-  'plural-labels':{art:'dresses',alt:'两条绿色连衣裙',result:'两种复数标签都核对好了。'},
-  'articles':{art:'cars',result:'两种首音，分别配上 a 或 an。'},
-  'they-cases':{art:'cases-brown',result:'这次说的是箱子，不能套用护照。'},
-  'thanks':{art:'girls',result:'检查结束，谢谢大家！'}
- };
- function taskView(){
-  const element=node('div','','customs-task'),question=node('div'),heading=node('h3','','customs-task-heading'),board=node('div','','customs-evidence');
-  const picture=image('passport'),result=node('p','','customs-task-result');board.append(picture);element.append(question,board,result);let detail;
-  return{element,heading:()=>heading,present(q,progress){
-   detail=tasks[q.id.replace(/^u1516-(?:v1|final-v2|tasks-v4)-/,'')]||{art:'passport',result:''};
-   element.hidden=false;element.dataset.phase='waiting';board.classList.toggle('is-handover',!!detail.handover);
-   question.replaceChildren(progress,heading);heading.textContent=q.prompt;heading.tabIndex=-1;picture.src=local(detail.art);picture.alt=detail.alt||'';result.textContent='';
-  },answer(value){element.dataset.phase=value?'checked':'waiting';result.textContent=value?detail.result:'';},finish(){element.hidden=true;}};
- }
- function result(id){
-  const box=node('div','','customs-result');box.append(image('passports'),image('cases-brown'));
-  box.append(node('p',{roles:'护照和同行者的线索找到了！',reply:'我们、朋友和我们的行李，分清楚了！',forms:'出行清单的单词准备好了！',trans:'行李问答拼好了！',exam:'出行记录核对完成，一起出发！'}[id]));return box;
- }
- core.unit1516Scene={cast,taskView,result};
-})(globalThis);
+ const resize=new ResizeObserver(placePassports);resize.observe(cast);cast.querySelectorAll('img').forEach(img=>img.addEventListener('load',placePassports));
+ document.addEventListener(['canran','course-ready'].join(':'),placePassports);
+ return{element,update(i){cast.dataset.phase=i<6?'arrival':i===6?'request':i<8?'handover':i<10?'other-cases':i<12?'own-cases':'travellers';passports.hidden=i<6;passports.dataset.place=i===6?'girls':'officer';passports.alt=i===6?'姑娘们拿出的两本护照':'已经递到官员面前的两本护照';other.hidden=i<8;own.hidden=i<10;own.dataset.place=i===10?'waiting':'girls';friends.dataset.referenced=String([3,4,5,14,15].includes(i));requestAnimationFrame(placePassports);}};
+}
+function create({element}){let status,heading;return{present(question,progress){element.classList.add('travel-runner');const content=element.querySelector('.practice-content'),intro=node('div','travel-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const facts=content.querySelector('.practice-context');if(facts)intro.append(facts);status=node('p','travel-task-status','选好表达，再检查。');status.setAttribute('role','note');intro.append(status);content.prepend(intro);},answer(value){status.textContent=value===null?'选好表达，再检查。':'这条表达已核对。';status.dataset.recorded=String(value!==null);},finish(){},completion(){return null;},heading(){return element.querySelector('.travel-intro .practice-progress')||heading;}};}
+core.unit1516Scene={storyProps,create};
+})(globalThis.CanranCore);

@@ -1,0 +1,73 @@
+{
+  "id": "unit65-66",
+  "source": {
+    "file": "tests/support/unit6566.js",
+    "sha256": "5b366422ceaa7cb255660d8d723cfea56c7fd66b197d2609e18108d719299dbb"
+  },
+  "questions": [
+    {
+      "zone": "roles",
+      "index": 1,
+      "questionId": "u6566-v1-r-plan",
+      "text": "Lesson 65\n\nFather · Tom: What are you going to do this evening, Jill?\n\nJill: I’m going to meet some friends, Dad."
+    },
+    {
+      "zone": "roles",
+      "index": 2,
+      "questionId": "u6566-v1-r-first",
+      "text": "Lesson 65\n\nFather · Tom: What are you going to do this evening, Jill?\n\nJill: I’m going to meet some friends, Dad.\n\nFather · Tom: You mustn’t come home late. You must be home at half past ten.\n\nJill: I can’t get home so early, Dad!"
+    },
+    {
+      "zone": "roles",
+      "index": 3,
+      "questionId": "u6566-v1-r-key",
+      "text": "Lesson 65\n\nJill: Can I have the key to the front door, please?\n\nFather · Tom: No, you can’t."
+    },
+    {
+      "zone": "roles",
+      "index": 4,
+      "questionId": "u6566-v1-r-age",
+      "text": "Lesson 65\n\nJill: Can I have the key to the front door, please?\n\nFather · Tom: No, you can’t.\n\nMother: Jill’s eighteen years old, Tom. She’s not a baby. Give her the key. She always comes home early."
+    },
+    {
+      "zone": "roles",
+      "index": 5,
+      "questionId": "u6566-v1-r-reason",
+      "text": "Lesson 65\n\nJill: Can I have the key to the front door, please?\n\nFather · Tom: No, you can’t.\n\nMother: Jill’s eighteen years old, Tom. She’s not a baby. Give her the key. She always comes home early."
+    },
+    {
+      "zone": "roles",
+      "index": 6,
+      "questionId": "u6566-v1-r-last",
+      "text": "Lesson 65\n\nMother: Jill’s eighteen years old, Tom. She’s not a baby. Give her the key. She always comes home early.\n\nFather · Tom: Oh, all right!\n\nFather · Tom: Here you are. But you mustn’t come home after a quarter past eleven. Do you hear?\n\nJill: Yes, Dad."
+    },
+    {
+      "zone": "roles",
+      "index": 7,
+      "questionId": "u6566-v1-r-ourselves",
+      "text": "Lesson 65\n\nFather · Tom: What are you going to do this evening, Jill?\n\nJill: I’m going to meet some friends, Dad.\n\nJill: Thanks, Mum.\n\nMother: That’s all right. Goodbye. Enjoy yourself!\n\nJill: We always enjoy ourselves, Mum. Bye-bye."
+    },
+    {
+      "zone": "exam",
+      "index": 3,
+      "questionId": "u6566-v1-e-plan",
+      "text": "Lesson 65\n\nFather · Tom: What are you going to do this evening, Jill?\n\nJill: I’m going to meet some friends, Dad.\n\nFather · Tom: You mustn’t come home late. You must be home at half past ten.\n\nJill: I can’t get home so early, Dad!\n\nJill: Can I have the key to the front door, please?\n\nFather · Tom: No, you can’t.\n\nMother: Jill’s eighteen years old, Tom. She’s not a baby. Give her the key. She always comes home early.\n\nFather · Tom: Oh, all right!\n\nFather · Tom: Here you are. But you mustn’t come home after a quarter past eleven. Do you hear?\n\nJill: Yes, Dad.\n\nJill: Thanks, Mum.\n\nMother: That’s all right. Goodbye. Enjoy yourself!\n\nJill: We always enjoy ourselves, Mum. Bye-bye."
+    }
+  ],
+  "sourceLines": {
+    "R1": "1-2",
+    "R2": "1-4",
+    "R3": "5-6",
+    "R4": "5-7",
+    "R5": "5-7",
+    "R6": "7-10",
+    "R7": "1-2,11-13",
+    "E3": "*"
+  },
+  "verified": {
+    "chromium": true,
+    "webkit": true,
+    "unansweredDisabled": true,
+    "afterReloadVisible": true
+  }
+}

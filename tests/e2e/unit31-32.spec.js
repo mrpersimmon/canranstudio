@@ -1,3 +1,4 @@
+require('../support/unit3132-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {DIALOGUE,ANSWERS,select,advance,activity,story,complete}=require('../support/unit31-32-flow');

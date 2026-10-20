@@ -1,0 +1,21 @@
+(function(core){
+'use strict';
+const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
+function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/unit135-136/'+name+'.'+ext;e.alt=alt;return e;}
+function storyProps(){
+ const element=node('div','report-world');element.setAttribute('role','group');element.setAttribute('aria-label','饭店采访与街头读报');
+ const group=node('div','report-group');
+ for(const[name,alt]of [['hotel-ask','左侧记者面向右侧Karen，手持一册笔记本和铅笔'],['hotel-reply','Karen面向左侧记者回答，一手轻轻摊开'],['hotel-introduce','记者在左、Karen在中介绍右侧Carlos；Carlos面向两人倾听'],['read','Kate在左读一份新报道，Liz在右倾听；纸上是Karen与Carlos的照片'],['discuss','Kate与Liz面对彼此交流同一份报纸，Liz一手放在胸前']]){const im=picture(name,'report-cast '+name,alt,'webp');im.hidden=true;group.append(im);}
+ for(const[who,label,side]of [['reporter','Reporter','left'],['marsh','Miss Marsh','right'],['carlos','Carlos','right'],['kate','Kate','left'],['liz','Liz','right']]){const actor=node('div','dialogue-actor report-label');actor.dataset.actor=who;actor.dataset.position=side;actor.append(node('span','actor-label',label));group.append(actor);}
+ const location=node('p','report-location','伦敦饭店');element.append(group,location);
+ return{element,update(i){
+  const street=i>=8,trio=i>=5&&i<8,pose=street?(i>=15?'discuss':'read'):(trio?'hotel-introduce':i===0||i===4||i<0?'hotel-ask':'hotel-reply');
+  element.dataset.scene=street?'street':'hotel';group.dataset.pose=pose;group.dataset.cast=trio?'trio':'pair';location.textContent=street?'街头报摊':'伦敦饭店';
+  for(const im of group.querySelectorAll('.report-cast'))im.hidden=!im.classList.contains(pose);
+  for(const actor of group.querySelectorAll('.dialogue-actor')){const who=actor.dataset.actor;actor.hidden=street?!['kate','liz'].includes(who):!['reporter','marsh',...(trio?['carlos']:[])].includes(who);if(who==='marsh')actor.dataset.position=trio?'middle':'right';}
+ },sideFor:(i,who)=>who==='marsh'&&i>=5&&i<8?'center':['reporter','kate'].includes(who)?'left':'right'};
+}
+const tasks={week:['Check the original week','Keep the date of the original plan.','The week is recorded.'],permission:['Check permission and action','Read what has actually happened.','The permission record is checked.'],direction:['Check the introduction','Keep each person’s role clear.','The introduction is recorded.'],contrast:['Keep both abilities','Do not drop the negative clause.','Both abilities are recorded.'],reply:['Read and reply','Keep the promise and the listener.','The reply is recorded.'],earlier:['Keep possibility and ownership','Check whose book is mentioned.','The earlier possibility is recorded.'],'two-plans':['Keep each statement separate','Compare the different actions.','Both statements are recorded.'],quote:['Check the original wording','A report is not a recording.','The evidence is recorded.']};
+function create({element}){let view,heading,task;return{present(question,progress){element.classList.remove('role-runner');element.classList.add('report-runner');const content=element.querySelector('.practice-content'),intro=node('div','report-intro');heading=node('h3','',question.prompt);heading.tabIndex=-1;intro.append(progress,heading);const material=content.querySelector('.practice-context');if(material)intro.append(material);task=question.id.replace('u135136-v1-a-','');view=node('div','report-application');view.dataset.task=task;view.dataset.recorded='false';view.setAttribute('role','group');view.setAttribute('aria-label','消息核对记录');view.append(picture('task-record','application-prop',''));const card=node('div','record-page');card.append(node('strong','',tasks[task][0]),node('span','',tasks[task][1]));view.append(card);intro.append(view);content.prepend(intro);},answer(value){const checked=value!==null;view.dataset.recorded=String(checked);view.querySelector('.record-page strong').textContent=tasks[task][checked?2:0];view.querySelector('.application-prop').src='/assets/unit135-136/'+(checked?'task-checked':'task-record')+'.svg';},finish(){},completion(){return null;},heading(){return element.querySelector('.report-intro .practice-progress')||heading;}};}
+core.unit135136Scene={storyProps,create};
+})(globalThis.CanranCore);

@@ -1,5 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+require('../support/unit1112-legacy').historicalSuite(test);
 const { EXAM, selectAnswer } = require('../support/unit11-12-exam');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });

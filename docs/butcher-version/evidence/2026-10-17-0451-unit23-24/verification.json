@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "completedAt": "2026-10-16T21:13:01.306Z",
+  "uniqueTestConditions": 177,
+  "groups": [
+    {
+      "scope": "Chromium current course, controls, interactions and real predecessor migration",
+      "conditions": 20,
+      "reports": [
+        "reports/chromium-static.json",
+        "reports/chromium-recheck.json"
+      ],
+      "note": "Initial current checks had two stale test locators. Recheck passed nine affected cases, including all four scene widths and three reading sizes after the scene geometry adjustment. Unaffected prior passes are reused; reruns are not added.",
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit current course, controls, interactions and real predecessor migration",
+      "conditions": 20,
+      "reports": [
+        "reports/webkit-static.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium original certificate and worksheet PDFs",
+      "conditions": 2,
+      "reports": [
+        "reports/chromium-static.json"
+      ],
+      "artifacts": [
+        "worksheet.pdf",
+        "legacy-certificate.pdf"
+      ],
+      "note": "Three worksheet pages and one old certificate page rendered and visually inspected. Old PNG before and after migration has identical decoded pixels.",
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/chromium-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "Chromium authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/chromium-subpath.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated root mount",
+      "conditions": 8,
+      "reports": [
+        "reports/webkit-root.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "WebKit authenticated /lesson/ mount",
+      "conditions": 8,
+      "reports": [
+        "reports/webkit-subpath.json"
+      ],
+      "status": "passed"
+    },
+    {
+      "scope": "26 -> 32 -> 45 and 34 -> 32 -> 45 actual older-server account chains",
+      "conditions": 2,
+      "reports": [
+        "reports/chromium-subpath.json"
+      ],
+      "note": "Both chains run their own root-mounted servers across real accounts/devices; not duplicate subpath cases. The dedicated 34-task suite carries forward the former generic three-device contract.",
+      "status": "passed"
+    },
+    {
+      "scope": "Frozen 32-task historical course and shared current submission statistics",
+      "conditions": 42,
+      "reports": [
+        "reports/historical.json"
+      ],
+      "note": "41 historical conditions and one current /lesson/ statistics condition.",
+      "status": "passed"
+    },
+    {
+      "scope": "Progress, award collection, learning management, catalog, public boundary, workflow and existing handoff validator",
+      "conditions": 59,
+      "logs": [
+        "shared-tests.txt",
+        "learning-tests.txt"
+      ],
+      "note": "39 checks in the shared suite plus 17 admin-learning and three existing handoff checks. No overlap and no shared reward-rule change in this task.",
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": "23 source/package/document checks, retained full-name font coverage, and two protected 72-course builds are separate from test-condition totals.",
+  "failuresAndRecovery": [
+    {
+      "finding": "Copied test locators expected the raw matching prompt and the previous lesson reference label, rather than the rendered current labels.",
+      "initialEvidence": "reports/chromium-static.json",
+      "resolution": "Observe the actual page, correct only the two locator labels, keep selection/retry/history/date assertions.",
+      "recheck": "reports/chromium-recheck.json"
+    },
+    {
+      "finding": "First mobile scene placed furniture and actors too far apart.",
+      "initialEvidence": "reports/initial.json",
+      "resolution": "Use one proportional room geometry, keep the tray contacting each surface and both full characters clear of the complete reader.",
+      "recheck": [
+        "reports/chromium-recheck.json",
+        "reports/webkit-static.json"
+      ]
+    }
+  ],
+  "sourceScope": {
+    "tasks": 45,
+    "originalTasksArchived": 32,
+    "unchangedTasksRetained": 31,
+    "newTasks": 14,
+    "wordCards": 30,
+    "dialogueTurns": 8,
+    "originalSvgFiles": 56,
+    "newGeneratedWebP": 3,
+    "reusedApprovedWebP": 2
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4295/unit23-24/#learn/certificate",
+    "screenshot": "preview.png",
+    "dataAudit": "preview-data-check.json",
+    "accountReseeded": false,
+    "recordsCleared": false
+  },
+  "pending": [
+    "teacher content review",
+    "children classroom trial",
+    "physical phone and WeChat saving",
+    "physical printing"
+  ],
+  "git": {
+    "branch": "codex/release-canranstudio",
+    "commit": "not_requested",
+    "push": "not_requested",
+    "release": "not_requested"
+  },
+  "scopeBoundary": "Not a complete production-release test run; historical pass results apply to frozen predecessor pages only."
+}

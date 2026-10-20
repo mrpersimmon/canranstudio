@@ -3,10 +3,10 @@
 const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;};
 function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/unit67-68/'+name+'.'+ext;e.alt=alt;return e;}
 function storyProps(){
- const element=node('div','visit-world'),location=node('p','visit-location','商店街 · 两位老朋友');element.setAttribute('role','group');element.setAttribute('aria-label','两位夫人在商店街相向交谈的场景');
+ const element=node('div','visit-world'),location=node('p','visit-location','商店街');element.setAttribute('role','group');element.setAttribute('aria-label','两位夫人在商店街相向交谈的场景');
  for(const[key,label,side]of [['johnson','Mrs. Johnson','left'],['williams','Mrs. Williams','right']]){const wrap=node('div','dialogue-actor visit-actor actor-'+key+' at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+(side==='left'?'朝向右侧交谈者':'朝向左侧交谈者')+'，头发、双手、衣服与鞋子完整','webp'),node('span','actor-label',label));element.append(wrap);}
- const timeline=node('aside','story-timeline');timeline.setAttribute('aria-label','故事时间线');const time=node('strong'),detail=node('span');timeline.append(time,detail);element.append(location,timeline);
- function update(i){element.dataset.beat=i>=6?'plan':i>=5?'last-week':i>=2?'places':'greeting';const entry=i>=6?['周末计划','Fri · Sat · Sun → 3 days']:i>=5?['上周缺课','Mon · Tue · Wed · Thu']:i>=3?['今天','Jimmy is very well.']:i>=2?['刚才','Williams：肉店 · Johnson：果蔬店']:['街角碰面','两位朋友聊起近况'];time.textContent=entry[0];detail.textContent=entry[1];}
+ element.append(location);
+ function update(i){element.dataset.beat=i>=6?'plan':i>=5?'last-week':i>=2?'places':'greeting';}
  update(-1);return{element,update};
 }
 function create({element}){let view,heading,task;return{

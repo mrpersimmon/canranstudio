@@ -1,0 +1,36 @@
+
+Running 1 test using 1 worker
+
+(node:28348) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\e2e\unit113-114-story-layout.spec.js:15:39 › 320：15轮原文、八人切景与共同台词、按需中文和续读 (3.3s)
+
+
+  1) tests\e2e\unit113-114-story-layout.spec.js:15:39 › 320：15轮原文、八人切景与共同台词、按需中文和续读 ────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      16 |  test.setTimeout(150000);await page.setViewportSize({width,height:width<400?568:1000});await page.goto('/unit113-114/#learn/text');await expect(page.locator('.unit-intro')).toHaveText('读懂零钱故事，按事实回应“也如此”和“也不如此”。');const room=page.locator('.stage-text'),world=room.locator('.bus-world'),log=room.getByRole('log');await expect(room.getByText('谁有零钱？',{exact:true})).toBeVisible();await pose(world,-1);await expect(room.locator('.story-lead img')).toHaveAttribute('src','/assets/unit113-114/coins.svg');await room.locator('.story-lead img').evaluate(img=>img.decode());await expect(world.locator('aside')).toHaveCount(0);await room.screenshot({path:info.outputPath('intro.png')});await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+      17 |  for(let i=0;i<lines.length;i++){
+    > 18 |   await expect(room.locator('.bubble-row')).toHaveCount(i+1);const latest=room.locator('.bubble-row').last();await expect(latest.locator('.bname')).toHaveText(lines[i][0]);await expect(latest.locator('.btext')).toHaveText(lines[i][1]);await expect(latest.locator('.bcn')).toBeHidden();await expect(latest).toHaveClass(lines[i][0]==='Conductor'?/speaker-right/:/speaker-left/);await expect(world.locator('aside')).toHaveCount(0);await expect(room.locator('.story-note,.story-timeline')).toHaveCount(0);await pose(world,i);const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,y:b.y,width:b.width,height:b.height};}));for(let a=0;a<labels.length;a++)for(let b=a+1;b<labels.length;b++)expect(labels[a].x+labels[a].width<=labels[b].x||labels[b].x+labels[b].width<=labels[a].x||labels[a].y+labels[a].height<=labels[b].y||labels[b].y+labels[b].height<=labels[a].y).toBe(true);
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+      19 |   await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=room.getByRole('button',{name:i===14?'完成课文':'下一句',exact:true}),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();expect(Math.abs((await next.boundingBox()).y-before.y)).toBeLessThan(2);const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
+      20 |   for(const img of await world.locator('.bus-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(b.y+b.height);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?125:210);}
+      21 |   if([0,2,5,7,8,10,11,12,13,14].includes(i))await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\e2e\unit113-114-story-layout.spec.js:18:953
+
+    Error Context: output\unit113114-label-initial\unit113-114-story-layout-320：15轮原文、八人切景与共同台词、按需中文和续读\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit113114-label-initial\unit113-114-story-layout-320：15轮原文、八人切景与共同台词、按需中文和续读\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit113114-label-initial\unit113-114-story-layout-320：15轮原文、八人切景与共同台词、按需中文和续读\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\unit113-114-story-layout.spec.js:15:39 › 320：15轮原文、八人切景与共同台词、按需中文和续读 ─────────────────

@@ -77,3 +77,15 @@
 .unit5354-workspace .weather-board-label{position:absolute;left:50%;bottom:23px;transform:translateX(-50%);margin:0;text-align:center;border-radius:8px;padding:3px 9px;background:#fff9e9;font-size:14px;z-index:4;white-space:nowrap}
 .unit5354-workspace .weather-application .weather-board{width:150px;height:150px;bottom:45px}
 @media(max-width:600px){.unit5354-workspace .weather-board,.unit5354-workspace .weather-application .weather-board{width:95px;height:112px;bottom:44px}.unit5354-workspace .weather-board-label{bottom:18px;font-size:12px;padding:2px 4px;max-width:39%;white-space:normal}}
+
+/* 2026-10-20 worksheet visibility: do not change certificate print styles. */
+@media print{
+ body.unit5354-workspace.print-writing :is(#lessonWorkspace,#l5,.stage-certificate,#unitWriting,#unitWriting *){visibility:visible!important}
+ body.unit5354-workspace.print-writing .stage-certificate{max-width:none!important;width:100%!important}
+ body.unit5354-workspace.print-writing #unitWriting ol{padding-left:1.6em;list-style:decimal}
+ body.unit5354-workspace.print-writing #unitWriting li{display:list-item;list-style:decimal;break-inside:avoid}
+}
+
+/* Original multi-sentence questions keep one full handwriting line per sentence. */
+.unit5354-workspace #unitWriting .writing-line{height:32px;min-height:32px;border-bottom:1px solid var(--unit-line,#795f4b);margin:0 0 2px;width:100%}
+@media print{body.unit5354-workspace.print-writing #unitWriting .writing-line{border-bottom-color:#777}}

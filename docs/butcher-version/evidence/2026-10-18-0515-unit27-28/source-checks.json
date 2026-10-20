@@ -1,0 +1,138 @@
+{
+  "complete": true,
+  "at": "2026-10-17T21:47:54.234Z",
+  "checks": [
+    {
+      "name": "Actual prior 43-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "Earlier 27-question definition unchanged",
+      "passed": true
+    },
+    {
+      "name": "11 actual prior runtime files frozen byte for byte",
+      "passed": true
+    },
+    {
+      "name": "Server prior 43-question source is actual baseline",
+      "passed": true
+    },
+    {
+      "name": "Earlier 27-question server source and fixtures unchanged",
+      "passed": true
+    },
+    {
+      "name": "43 questions: 41 unchanged and exactly 2 material revisions",
+      "passed": true
+    },
+    {
+      "name": "Three unaffected question groups and sessions unchanged",
+      "passed": true
+    },
+    {
+      "name": "Revised groups list exact prior session first",
+      "passed": true
+    },
+    {
+      "name": "Reward, key, vocabulary, full text, written source and routes unchanged",
+      "passed": true
+    },
+    {
+      "name": "Every online fill has at most two related blanks",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: unit.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: typography.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: legacy.css",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: legacy-certificate.js",
+      "passed": true
+    },
+    {
+      "name": "Original styling/export source retained: scene.js",
+      "passed": true
+    },
+    {
+      "name": "All 55 original assets unchanged",
+      "passed": true
+    },
+    {
+      "name": "Font binaries/licenses unchanged and current glyphs covered",
+      "passed": true
+    },
+    {
+      "name": "All 418 source hashes match final files",
+      "passed": true
+    },
+    {
+      "name": "Other 97 shared runtime files unchanged",
+      "passed": true
+    },
+    {
+      "name": "Unified standard remains v1.53 byte for byte",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /",
+      "passed": true
+    },
+    {
+      "name": "72 protected packages at /lesson/",
+      "passed": true
+    },
+    {
+      "name": "Actual three rounds and both record archives preserved",
+      "passed": true
+    },
+    {
+      "name": "Original preview records, awards and signing key retained",
+      "passed": true
+    },
+    {
+      "name": "Changed JS parses",
+      "passed": true
+    },
+    {
+      "name": "Local links in changed documentation resolve",
+      "passed": true
+    }
+  ],
+  "packages": {
+    "/": {
+      "title": "客厅发现之旅",
+      "revision": "53e4f4feaea8198d1f019e13169b2ab78c814d613b8e604d7a42dd6aa4d3c0ad",
+      "manifest": "/course-packages/unit27-28/53e4f4feaea8198d1f019e13169b2ab78c814d613b8e604d7a42dd6aa4d3c0ad.json",
+      "sha256": "7f669c081888179596ffd15e05d47f13d78ad89c10a98d162dedb0fef9b5af71"
+    },
+    "/lesson/": {
+      "title": "客厅发现之旅",
+      "revision": "d156bcd62007c5d4d4dee8e553d62fcd6186c18d7186362b7501521400ec447f",
+      "manifest": "/lesson/course-packages/unit27-28/d156bcd62007c5d4d4dee8e553d62fcd6186c18d7186362b7501521400ec447f.json",
+      "sha256": "d9d9795f9990c6d4ce304359d45ebdec9bd3553a19f6680269ea8924d7ca8fdc"
+    }
+  },
+  "questions": {
+    "before": 43,
+    "current": 43,
+    "unchanged": 41,
+    "revised": 2,
+    "additional": 0,
+    "legacy": 27
+  },
+  "originalAssetFiles": 55,
+  "sharedChanges": [
+    "server/progress.js",
+    "server/public/access-client.js",
+    "server/legacy/unit27-28-before-v153-content.js"
+  ]
+}

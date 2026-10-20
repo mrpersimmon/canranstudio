@@ -1,0 +1,43 @@
+[WebServer] (node:27576) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:30832) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36308) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:36308) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  x  1 tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 (605ms)
+
+
+  1) tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 ─────────────────────
+
+    Error: Unknown course in publication list
+
+       at ..\..\scripts\course-packages.js:91
+
+      89 |   for (const item of require('./course-registry').PUBLISHED_COURSES) if (!courses.some(course => course.id === item.id)) courses.push({ id: item.id, entry: item.entry });
+      90 |   if (courseIds) {
+    > 91 |     if (courseIds.some(id => !courses.some(course => course.id === id))) throw new Error('Unknown course in publication list');
+         |                                                                                ^
+      92 |     for (let i = courses.length - 1; i >= 0; i--) if (!courseIds.includes(courses[i].id)) courses.splice(i, 1);
+      93 |   }
+      94 |   const withdrawn = JSON.parse((await readSource('core/course-withdrawals.json')).toString());
+        at createCoursePackages (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\scripts\course-packages.js:91:80)
+        at createApp (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\server\app.js:28:30)
+        at start (C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-v154-upgrade.spec.js:16:33)
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\unit1-2-v154-upgrade.spec.js:24:3
+
+    Error Context: output\unit12-review-20261018\upgrade-diagnostic\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\unit12-review-20261018\upgrade-diagnostic\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\trace.zip
+    Usage:
+
+        npx playwright show-trace output\unit12-review-20261018\upgrade-diagnostic\unit1-2-v154-upgrade-同库更新与跨设备：原五星全部GIF帧和精确日期保留\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\unit1-2-v154-upgrade.spec.js:9:42 › 同库更新与跨设备：原五星全部GIF帧和精确日期保留 ──────────────────────

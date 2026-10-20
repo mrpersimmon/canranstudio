@@ -1,0 +1,1330 @@
+{
+  "listen": [
+    {
+      "id": "u3738-v1-objects",
+      "target": "辨认工具、家具与餐具",
+      "prompt": "把英文和意思配起来。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "辨认工具、家具与餐具",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "bookcase",
+          "cn": "书架"
+        },
+        {
+          "id": "1",
+          "en": "hammer",
+          "cn": "锤子"
+        },
+        {
+          "id": "2",
+          "en": "dish",
+          "cn": "盘子"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "三种新词的首次识别，不能只看外形配同一张图。"
+    },
+    {
+      "id": "u3738-v1-words",
+      "target": "区分制作、涂色与作业",
+      "prompt": "再认三个新词。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "区分制作、涂色与作业",
+      "hint": "",
+      "explanation": "",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "make",
+          "cn": "制作"
+        },
+        {
+          "id": "1",
+          "en": "paint",
+          "cn": "涂色"
+        },
+        {
+          "id": "2",
+          "en": "homework",
+          "cn": "家庭作业"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "distractorRationale": "不同词义，后续再在动作与计划里应用。"
+    },
+    {
+      "id": "u3738-v1-hard",
+      "target": "理解working hard中的副词",
+      "prompt": "You’re working hard, George.\nhard 在这里是什么意思？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "理解working hard中的副词",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "努力地",
+        "坚硬的",
+        "粉色的"
+      ],
+      "answer": "努力地",
+      "distractorRationale": "限定working语境，不把努力解释成材料坚硬。"
+    },
+    {
+      "id": "u3738-v1-favourite",
+      "target": "理解个人最喜欢的颜色",
+      "prompt": "Pink’s her favourite colour.\nfavourite 表示什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "理解个人最喜欢的颜色",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "最喜欢的",
+        "正在涂的",
+        "所有人的"
+      ],
+      "answer": "最喜欢的",
+      "distractorRationale": "不是目前动作，也不把个人偏好扩大为人人如此。"
+    }
+  ],
+  "roles": [
+    {
+      "id": "u3738-v1-making",
+      "target": "分清George当前在做什么",
+      "prompt": "Dan: What are you doing?\nGeorge: I’m making a bookcase.\nGeorge 正在做什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "分清George当前在做什么",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "制作书架",
+        "给书架涂色",
+        "洗盘子"
+      ],
+      "answer": "制作书架",
+      "distractorRationale": "依据当前回答，不用后文计划代替当前动作。"
+    },
+    {
+      "id": "u3738-v1-hammer-handoff",
+      "target": "读懂原文工具与接收者",
+      "prompt": "帮 Dan 选好工具和接收者。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "读懂原文工具与接收者",
+      "hint": "先找是谁说了 me，再看他说要哪一把。",
+      "explanation": "",
+      "type": "handoff",
+      "speaker": {
+        "name": "George",
+        "image": "/assets/unit37-38/george.svg"
+      },
+      "request": "Give me that hammer please, Dan.\nNo, not that one. The big one.",
+      "objects": [
+        {
+          "id": "small",
+          "name": "小锤子",
+          "image": "/assets/unit37-38/hammer-small.svg"
+        },
+        {
+          "id": "big",
+          "name": "大锤子",
+          "image": "/assets/unit37-38/hammer-big.svg"
+        }
+      ],
+      "recipients": [
+        {
+          "id": "dan",
+          "name": "Dan",
+          "images": [
+            "/assets/unit37-38/dan-receive.svg"
+          ]
+        },
+        {
+          "id": "george",
+          "name": "George",
+          "images": [
+            "/assets/unit37-38/george-receive.svg"
+          ]
+        }
+      ],
+      "answer": "[\"big\",\"george\"]",
+      "distractorRationale": "工具大小和me的说话者必须同时匹配；仅选或答错不交接。"
+    },
+    {
+      "id": "u3738-v1-for-susan",
+      "target": "根据跨句关系判断书架给谁",
+      "prompt": "George: This bookcase isn’t for me.\nIt’s for my daughter, Susan.\n书架是给谁做的？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "根据跨句关系判断书架给谁",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Susan",
+        "George",
+        "Dan"
+      ],
+      "answer": "Susan",
+      "distractorRationale": "明确女儿姓名；否定forme不能凭空推出Dan。"
+    },
+    {
+      "id": "u3738-v1-it",
+      "target": "定位paint it中的it所指物",
+      "prompt": "点出 it 指的东西。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "定位paint it中的it所指物",
+      "hint": "",
+      "explanation": "",
+      "type": "locate",
+      "fragments": [
+        "I’m making ",
+        {
+          "value": "a bookcase"
+        },
+        ".\nGive me ",
+        {
+          "value": "that hammer"
+        },
+        " please, Dan.\nI’m going to paint it."
+      ],
+      "options": [
+        "a bookcase",
+        "that hammer"
+      ],
+      "answer": "a bookcase",
+      "distractorRationale": "最近出现的hammer是干扰，须理解制作和涂色的对象。"
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3738-five-g-plan-form",
+      "target": "be going to加原形表达打算",
+      "prompt": "另一个孩子打算明天做一个书架，还没动手。替他说完整。",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " going to",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": " ",
+          "after": " a bookcase.",
+          "options": [
+            "make",
+            "making",
+            "makes"
+          ]
+        }
+      ],
+      "answer": "[\"am\",\"make\"]",
+      "explanation": "I搭配am，going to后用动词原形make；这里表达打算，不表示已经在做。",
+      "hint": "",
+      "workshop": {
+        "rule": "I搭配am，going to后用动词原形make；这里表达打算，不表示已经在做。",
+        "model": {
+          "lines": [
+            [
+              "I am going to put it on the floor.",
+              "导学原例：我打算把它放在地板上。am going to后接put。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-arrangement",
+      "target": "计划安排也可用于事件",
+      "prompt": "现在八点半，会议按计划九点开始，还未开始。这句话在说什么？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "会议预计按计划在九点开始。",
+        "会议现在已经开始。",
+        "会议已经结束。"
+      ],
+      "answer": "会议预计按计划在九点开始。",
+      "display": {
+        "title": "现在八点半，会议按计划九点开始，还未开始。这句话在说什么？",
+        "material": "The meeting is going to begin at nine.\nmeeting：会议；begin：开始"
+      },
+      "explanation": "be going to可谈按计划将发生的事，不要求主语一定是有意愿的人。",
+      "hint": "",
+      "workshop": {
+        "rule": "be going to可谈按计划将发生的事，不要求主语一定是有意愿的人。",
+        "model": {
+          "lines": [
+            [
+              "We are going to have a lesson at ten.",
+              "我们打算十点上课。说话时还没到十点，课也还没开始。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-prediction",
+      "target": "凭眼前迹象作预测",
+      "prompt": "乌云越积越厚，地面仍是干的，还没下雨。说话人根据这些迹象说这句话，意思是？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "看这些迹象，可能很快要下雨。",
+        "雨已经下完了。",
+        "现在正在下雨。"
+      ],
+      "answer": "看这些迹象，可能很快要下雨。",
+      "display": {
+        "title": "乌云越积越厚，地面仍是干的，还没下雨。说话人根据这些迹象说这句话，意思是？",
+        "material": "It’s going to rain!\nrain：下雨"
+      },
+      "explanation": "这里是根据现在的迹象预测，不是天气自己的打算，也不是已经发生的事实。",
+      "hint": "",
+      "workshop": {
+        "rule": "这里是根据现在的迹象预测，不是天气自己的打算，也不是已经发生的事实。",
+        "model": {
+          "lines": [
+            [
+              "The cup is going to fall.",
+              "杯子正倾斜在桌边，还没有落下；说话人据此判断它快掉下来了。fall：落下。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-negative",
+      "target": "not放在be后否定打算",
+      "prompt": "另设情境：Dan今天不打算刮脸。补全他的计划。",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Dan is ",
+          "after": " going to shave today.",
+          "options": [
+            "not",
+            "no",
+            "is"
+          ]
+        }
+      ],
+      "answer": "[\"not\"]",
+      "explanation": "否定be going to结构时，在be后加not；不是所有否定句都套同一规则。",
+      "hint": "",
+      "workshop": {
+        "rule": "否定be going to结构时，在be后加not；不是所有否定句都套同一规则。",
+        "model": {
+          "lines": [
+            [
+              "I am not going to swim.",
+              "我不打算游泳。not放在am后面。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-question",
+      "target": "一般问句的be前置和肯定回应",
+      "prompt": "另设情境：Dan已经决定给一张桌子上漆。向别人核实他的计划，并按事实回答。",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "",
+          "after": " Dan going to paint a table?",
+          "options": [
+            "Is",
+            "Are",
+            "Am"
+          ]
+        },
+        {
+          "before": "Yes, ",
+          "after": ".",
+          "options": [
+            "he is",
+            "he isn’t",
+            "I am"
+          ]
+        }
+      ],
+      "answer": "[\"Is\",\"he is\"]",
+      "explanation": "单数Dan用Is放句首提问；回答谈Dan，用he。肯定回应由题目给定的计划决定。",
+      "hint": "",
+      "workshop": {
+        "rule": "单数Dan用Is放句首提问；回答谈Dan，用he。肯定回应由题目给定的计划决定。",
+        "model": {
+          "lines": [
+            [
+              "Is George going to paint it pink?",
+              "导学原例：乔治打算把它刷成粉色吗？将is提到主语George前。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-for-person",
+      "target": "for指出动作的受益对象",
+      "prompt": "这句话中的书架是给谁做的？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "说话人的弟弟。",
+        "说话人的爸爸。",
+        "说话人自己。"
+      ],
+      "answer": "说话人的弟弟。",
+      "display": {
+        "title": "这句话中的书架是给谁做的？",
+        "material": "My father is making a bookcase for my brother.\nbrother：这里指弟弟"
+      },
+      "explanation": "for my brother说明这件事是为弟弟做的；制作人和受益人不同。",
+      "hint": "",
+      "workshop": {
+        "rule": "for my brother说明这件事是为弟弟做的；制作人和受益人不同。",
+        "model": {
+          "lines": [
+            [
+              "My mother is cooking supper for me.",
+              "导学原例：妈妈正在为我做晚饭。for me说明为谁做。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-for-meal",
+      "target": "for说明用作哪一餐的食物",
+      "prompt": "这句话介绍哪种用餐情况？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "早餐吃鸡蛋。",
+        "午餐吃鸡蛋。",
+        "早餐后去买鸡蛋。"
+      ],
+      "answer": "早餐吃鸡蛋。",
+      "display": {
+        "title": "这句话介绍哪种用餐情况？",
+        "material": "I have eggs for breakfast.\nbreakfast：早餐"
+      },
+      "explanation": "for breakfast表示作为早餐食用，不是在给“早餐”这个人做东西。",
+      "hint": "",
+      "workshop": {
+        "rule": "for breakfast表示作为早餐食用，不是在给“早餐”这个人做东西。",
+        "model": {
+          "lines": [
+            [
+              "I like some bread and milk for breakfast.",
+              "导学原例：我喜欢把面包和牛奶作为早餐。bread：面包；milk：牛奶。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-for-reason",
+      "target": "for说明感谢的原因",
+      "prompt": "这句话为什么感谢对方？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "对方寄来了一封信。",
+        "对方要来吃晚饭。",
+        "说话人要把信送给对方。"
+      ],
+      "answer": "对方寄来了一封信。",
+      "display": {
+        "title": "这句话为什么感谢对方？",
+        "material": "Thank you for your letter.\nletter：信"
+      },
+      "explanation": "for your letter说明感谢的原因；your letter指对方的来信。",
+      "hint": "",
+      "workshop": {
+        "rule": "for your letter说明感谢的原因；your letter指对方的来信。",
+        "model": {
+          "lines": [
+            [
+              "Thank you for helping me with my English.",
+              "导学原例：谢谢你帮我学英语。for后说明感谢的事情。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-for-purpose",
+      "target": "for说明目的",
+      "prompt": "孩子回到教室，指着自己的书包说这句话。他来这里是为了什么？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "来取自己的书包。",
+        "来制作书包。",
+        "来洗书包。"
+      ],
+      "answer": "来取自己的书包。",
+      "display": {
+        "title": "孩子回到教室，指着自己的书包说这句话。他来这里是为了什么？",
+        "material": "I’m here for my schoolbag.\nschoolbag：书包"
+      },
+      "explanation": "for my schoolbag在这个情境中说明来取书包的目的，不是支持一个书包。",
+      "hint": "",
+      "workshop": {
+        "rule": "for my schoolbag在这个情境中说明来取书包的目的，不是支持一个书包。",
+        "model": {
+          "lines": [
+            [
+              "Let’s go for a walk.",
+              "导学原例：我们去散步吧。for a walk说明活动目的。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-for-support",
+      "target": "for可表示支持赞成",
+      "prompt": "这句话是在表达什么？",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "我支持你的计划。",
+        "我正在替你制定计划。",
+        "我打算取消你的计划。"
+      ],
+      "answer": "我支持你的计划。",
+      "display": {
+        "title": "这句话是在表达什么？",
+        "material": "I am for your plan.\nplan：计划"
+      },
+      "explanation": "be for a plan表示赞成这个计划，不等于自己打算做什么。",
+      "hint": "",
+      "workshop": {
+        "rule": "be for a plan表示赞成这个计划，不等于自己打算做什么。",
+        "model": {
+          "lines": [
+            [
+              "No one was for my plan during the meeting.",
+              "导学原例：会议上没有人支持我的计划。这里for表示赞成；was是例句中的过去形式，本题不考时态变化。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-five-g-fixed",
+      "target": "for在固定表达中的用法",
+      "prompt": "想说“例如，我们可以画一个书架”，补全表达。",
+      "source": "同步导学纸67–69／PDF81–83，Grammar纸68／PDF82；课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "For ",
+          "after": ", we can draw a bookcase.",
+          "options": [
+            "example",
+            "homework",
+            "colour"
+          ]
+        }
+      ],
+      "answer": "[\"example\"]",
+      "explanation": "For example是“例如”，用来引出例子；wait for表示等待，两者按完整搭配理解。",
+      "hint": "",
+      "workshop": {
+        "rule": "For example是“例如”，用来引出例子；wait for表示等待，两者按完整搭配理解。",
+        "model": {
+          "lines": [
+            [
+              "Who are you waiting for?",
+              "导学原例：你在等谁？wait for表示等候。"
+            ],
+            [
+              "For example, you can draw a picture of a monkey.",
+              "导学原例：例如，你可以画一只猴子。monkey：猴子。"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "u3738-v1-paint-plan",
+      "target": "按完整表达区分计划和正在涂",
+      "prompt": "I’m going to paint this bookcase.\n哪幅画表现了这句话的打算？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "按完整表达区分计划和正在涂",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "画面一",
+        "画面二"
+      ],
+      "answer": "画面二",
+      "optionImages": {
+        "画面一": "/assets/unit37-38/paint-now.svg",
+        "画面二": "/assets/unit37-38/paint-plan.svg"
+      },
+      "optionImageAlts": {
+        "画面一": "刷子接触书架，局部出现漆色",
+        "画面二": "书架保持木色，刷子与漆罐在旁边准备"
+      },
+      "distractorRationale": "同一人、同一家具；一幅刷子接触并有局部涂色，一幅工具准备好但未开刷。"
+    },
+    {
+      "id": "u3738-v1-homework-now",
+      "target": "识别正在做作业的表达",
+      "prompt": "Now we’re doing our homework.\n这句话告诉了我们什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "识别正在做作业的表达",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "现在正在做作业",
+        "打算接下来做作业",
+        "作业已经全做完"
+      ],
+      "answer": "现在正在做作业",
+      "distractorRationale": "doing不等于going to do或已完成；不以完成截图误导。"
+    },
+    {
+      "id": "u3738-v1-now-plan",
+      "target": "now不覆盖going to结构意义",
+      "prompt": "What are you going to do now, George?\nDan 想知道什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "now不覆盖going to结构意义",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "George 接下来打算做什么",
+        "George 已经做完了什么",
+        "George 的名字是什么"
+      ],
+      "answer": "George 接下来打算做什么",
+      "distractorRationale": "课文真实反例：有now仍询问打算，不让孩子机械匹配词。"
+    }
+  ],
+  "apply": [
+    {
+      "id": "u3738-v1-be-person",
+      "target": "选择I和he所需的be",
+      "prompt": "分别补全两句话。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "选择I和he所需的be",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " going to shave.",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "He ",
+          "after": " working hard.",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"am\",\"is\"]",
+      "distractorRationale": "两个主语的必要对比，不能只把现成am/is词块当掌握。"
+    },
+    {
+      "id": "u3738-v1-forms",
+      "target": "计划后的原形与正在的ing",
+      "prompt": "同一个动作，两种表达。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "计划后的原形与正在的ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "We’re going to ",
+          "after": " the dishes.",
+          "options": [
+            "wash",
+            "washing",
+            "washes"
+          ]
+        },
+        {
+          "before": "Now we’re ",
+          "after": " the dishes.",
+          "options": [
+            "washing",
+            "wash",
+            "washes"
+          ]
+        }
+      ],
+      "answer": "[\"wash\",\"washing\"]",
+      "distractorRationale": "两个时态结构的真实形式对比，不把going to后再用ing。"
+    },
+    {
+      "id": "u3738-v1-listen-to",
+      "target": "保留listen to搭配",
+      "prompt": "补全准备听音响的计划。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "保留listen to搭配",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "We’re going to listen ",
+          "after": " the stereo.",
+          "options": [
+            "to",
+            "at",
+            "on"
+          ]
+        }
+      ],
+      "answer": "[\"to\"]",
+      "distractorRationale": "listen to有介词，不是只认listen图标。"
+    },
+    {
+      "id": "u3738-v1-our",
+      "target": "we与our homework一致",
+      "prompt": "一组孩子说自己的计划，选一个合适的词。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "we与our homework一致",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "We’re going to do ",
+          "after": " homework.",
+          "options": [
+            "our",
+            "my",
+            "his"
+          ]
+        }
+      ],
+      "answer": "[\"our\"]",
+      "distractorRationale": "说话者为复数自己，不把I和we并为同一人称数。"
+    },
+    {
+      "id": "u3738-v1-plan-question",
+      "target": "组织询问打算的问句",
+      "prompt": "你打算做什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "组织询问打算的问句",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "are",
+        "you",
+        "going",
+        "to",
+        "do?"
+      ],
+      "answer": "What are you going to do?",
+      "distractorRationale": "组织已学问句，不引入free typing。"
+    },
+    {
+      "id": "u3738-v1-now-answer",
+      "target": "组织正在进行的回答",
+      "prompt": "我现在正在等公共汽车。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "组织正在进行的回答",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "Now",
+        "I’m",
+        "waiting",
+        "for",
+        "a",
+        "bus."
+      ],
+      "answer": "Now I’m waiting for a bus.",
+      "distractorRationale": "与计划问句不同目标，for保留，不让同一句立即换型重做。"
+    },
+    {
+      "id": "u3738-five-a-for",
+      "target": "撤去示范后区分for的对象、用餐和原因",
+      "prompt": "给三句话配上对应的意思。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "This cake is for Lily.",
+          "cn": "这个蛋糕是给莉莉的。"
+        },
+        {
+          "id": "1",
+          "en": "I have fish for lunch.",
+          "cn": "我午餐吃鱼。"
+        },
+        {
+          "id": "2",
+          "en": "Thank you for your help.",
+          "cn": "谢谢你的帮助。"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\"]",
+      "explanation": "for在三句中分别连接受益对象、哪一餐、感谢原因。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-a-support",
+      "target": "依据事实回应对计划的支持",
+      "prompt": "Tom支持Dan的计划。Dan问下面的问题，Tom该怎样直接回答？",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "Yes, I am.",
+        "No, I’m not.",
+        "I’m making a bookcase."
+      ],
+      "answer": "Yes, I am.",
+      "display": {
+        "title": "Tom支持Dan的计划。Dan问下面的问题，Tom该怎样直接回答？",
+        "material": "Dan: Are you for my plan?\nTom: ___"
+      },
+      "explanation": "问的是Tom是否支持计划；Tom用I回应，按题目支持这一事实回答Yes。",
+      "hint": ""
+    }
+  ],
+  "exam": [
+    {
+      "id": "u3738-v1-final-bookcase",
+      "target": "词汇抽样辨认bookcase",
+      "prompt": "选出图中家具的英文。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "词汇抽样辨认bookcase",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "bookcase",
+        "hammer",
+        "dish"
+      ],
+      "answer": "bookcase",
+      "image": "/assets/unit37-38/bookcase.svg",
+      "imageAlt": "有多层搁板、用来放书的家具",
+      "distractorRationale": "首次配对后延迟的图片识词，不整组反向翻译。"
+    },
+    {
+      "id": "u3738-v1-final-hammer",
+      "target": "理解one回指哪类东西",
+      "prompt": "Dan: Which hammer? This one?\nGeorge: No, not that one. The big one.\nGeorge 要哪一件？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "理解one回指哪类东西",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "工具一",
+        "工具二"
+      ],
+      "answer": "工具二",
+      "optionImages": {
+        "工具一": "/assets/unit37-38/hammer-small.svg",
+        "工具二": "/assets/unit37-38/hammer-big.svg"
+      },
+      "optionImageAlts": {
+        "工具一": "较小的一把锤子",
+        "工具二": "较大的一把锤子"
+      },
+      "distractorRationale": "同种工具必要大小对比，不能靠differentcategory猜测。"
+    },
+    {
+      "id": "u3738-v1-final-recipient",
+      "target": "接收者不能仅由否定推断",
+      "prompt": "George: This bookcase isn’t for me. It’s for my daughter, Susan.\n哪条记录符合原文？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "接收者不能仅由否定推断",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "书架是给 Susan 做的。",
+        "书架是给 Dan 做的。",
+        "书架是给 George 自己做的。"
+      ],
+      "answer": "书架是给 Susan 做的。",
+      "distractorRationale": "间隔抽样原文归属；不将notforme自动等同Dan。"
+    },
+    {
+      "id": "u3738-v1-final-colour",
+      "target": "her回指Susan及个人喜好",
+      "prompt": "George: It’s for my daughter, Susan. Pink’s her favourite colour.\n谁最喜欢粉色？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "her回指Susan及个人喜好",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Susan",
+        "George",
+        "Dan"
+      ],
+      "answer": "Susan",
+      "distractorRationale": "结合两句找her，不能从创作者或性别推断偏好。"
+    },
+    {
+      "id": "u3738-v1-final-plan-fact",
+      "target": "不把计划当作已涂完",
+      "prompt": "George: I’m going to paint it pink.\n仅凭这句，能确定哪件事？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "不把计划当作已涂完",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "George 打算把书架涂成粉色。",
+        "书架已经全部涂成粉色。",
+        "George 正在洗盘子。"
+      ],
+      "answer": "George 打算把书架涂成粉色。",
+      "distractorRationale": "真正检验未完成边界，不把动画当教材结果。"
+    },
+    {
+      "id": "u3738-v1-final-hard",
+      "target": "语境词义hard",
+      "prompt": "为 George 的工作补上“努力地”。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "语境词义hard",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "You’re working ",
+          "after": ", George.",
+          "options": [
+            "hard",
+            "pink",
+            "favourite"
+          ]
+        }
+      ],
+      "answer": "[\"hard\"]",
+      "distractorRationale": "语境抽样而非再做整组翻译，hard修饰动作。"
+    },
+    {
+      "id": "u3738-v1-final-colour-question",
+      "target": "理解询问计划涂成什么颜色",
+      "prompt": "Dan: What colour are you going to paint it?\n哪句直接回答了这个问题？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "理解询问计划涂成什么颜色",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "I’m going to paint it pink.",
+        "I’m making a bookcase.",
+        "It’s for my daughter, Susan."
+      ],
+      "answer": "I’m going to paint it pink.",
+      "distractorRationale": "三个真实课文回答分别表达颜色计划、当前制作和归属；必须读懂问题目的。"
+    },
+    {
+      "id": "u3738-v1-final-plan-question",
+      "target": "完整结构比now关键词重要",
+      "prompt": "What are you going to do now?\n该用哪句话直接回答这个问题？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "完整结构比now关键词重要",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "I’m going to shave.",
+        "Now I’m shaving.",
+        "It’s pink."
+      ],
+      "answer": "I’m going to shave.",
+      "distractorRationale": "打算问句有now，仍用打算回答；过去式等未教内容不入选项。"
+    },
+    {
+      "id": "u3738-v1-final-be",
+      "target": "I和they的be形式",
+      "prompt": "分别补全不同人的回答。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "I和they的be形式",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I ",
+          "after": " washing the dishes.",
+          "options": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "before": "They ",
+          "after": " doing their homework.",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"am\",\"are\"]",
+      "distractorRationale": "WrittenA中I和they必要对比。"
+    },
+    {
+      "id": "u3738-v1-final-question-be",
+      "target": "you和he问句的be形式",
+      "prompt": "分别补全问句。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "you和he问句的be形式",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "What ",
+          "after": " you doing?",
+          "options": [
+            "are",
+            "is",
+            "am"
+          ]
+        },
+        {
+          "before": "What ",
+          "after": " he doing?",
+          "options": [
+            "is",
+            "are",
+            "am"
+          ]
+        }
+      ],
+      "answer": "[\"are\",\"is\"]",
+      "distractorRationale": "WrittenA中you/he确切主语，不以词块暗示。"
+    },
+    {
+      "id": "u3738-v1-final-verb",
+      "target": "计划原形与现在ing",
+      "prompt": "同一个动作，补全两种表达。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "计划原形与现在ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I’m going to ",
+          "after": " this bookcase.",
+          "options": [
+            "paint",
+            "painting",
+            "paints"
+          ]
+        },
+        {
+          "before": "Now I’m ",
+          "after": " this bookcase.",
+          "options": [
+            "painting",
+            "paint",
+            "paints"
+          ]
+        }
+      ],
+      "answer": "[\"paint\",\"painting\"]",
+      "distractorRationale": "从前面的wash迁移到paint，必要结构对比。"
+    },
+    {
+      "id": "u3738-v1-final-listen",
+      "target": "listen to及复数our",
+      "prompt": "补全这组人的计划。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "listen to及复数our",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "We’re going to listen ",
+          "after": " the stereo.",
+          "options": [
+            "to",
+            "at",
+            "on"
+          ]
+        },
+        {
+          "before": "We’re going to do ",
+          "after": " homework.",
+          "options": [
+            "our",
+            "my",
+            "his"
+          ]
+        }
+      ],
+      "answer": "[\"to\",\"our\"]",
+      "distractorRationale": "两个本课短语间隔抽样，家庭作业无复数s。"
+    },
+    {
+      "id": "u3738-v1-final-shave",
+      "target": "去不发音e与直接加ing",
+      "prompt": "补全正在进行的动作。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "去不发音e与直接加ing",
+      "hint": "",
+      "explanation": "",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "Now I am ",
+          "after": ". (shave)",
+          "options": [
+            "shaving",
+            "shaveing",
+            "shave"
+          ]
+        },
+        {
+          "before": "Now I’m ",
+          "after": " the dishes. (wash)",
+          "options": [
+            "washing",
+            "washhing",
+            "wash"
+          ]
+        }
+      ],
+      "answer": "[\"shaving\",\"washing\"]",
+      "distractorRationale": "新动作词复用删e边界，wash不双写末尾。"
+    },
+    {
+      "id": "u3738-v1-final-contraction",
+      "target": "Pink’s是Pink is",
+      "prompt": "Pink’s her favourite colour.\n这句中的 Pink’s 可以展开成什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "Pink’s是Pink is",
+      "hint": "",
+      "explanation": "",
+      "options": [
+        "Pink is",
+        "Pink am",
+        "Pink are"
+      ],
+      "answer": "Pink is",
+      "distractorRationale": "依据完整句还原is，不将’s总是解释为物主；干扰限于已教的be形式。"
+    },
+    {
+      "id": "u3738-v1-final-plan-plural",
+      "target": "组织复数的打算回答",
+      "prompt": "我们打算做家庭作业。",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "组织复数的打算回答",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "We’re",
+        "going",
+        "to",
+        "do",
+        "our",
+        "homework."
+      ],
+      "answer": "We’re going to do our homework.",
+      "distractorRationale": "从前置单数现在回答到复数计划组织，有支架不称自由表达。"
+    },
+    {
+      "id": "u3738-v1-final-now-question-order",
+      "target": "组织询问当前动作",
+      "prompt": "你现在正在做什么？",
+      "source": "《新概念英语智慧版1》纸页74–77（PDF107–110）",
+      "decision": "组织询问当前动作",
+      "hint": "",
+      "explanation": "",
+      "type": "order",
+      "tokens": [
+        "What",
+        "are",
+        "you",
+        "doing",
+        "now?"
+      ],
+      "answer": "What are you doing now?",
+      "distractorRationale": "最后组织问句，不能把doing拆成do+ing机械凑词。"
+    },
+    {
+      "id": "u3738-five-e-schedule",
+      "target": "独立理解按安排发生的事件",
+      "prompt": "现在七点半，英语课按安排八点开始，还未开始。下面这句话说明什么？",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "英语课按安排将在八点开始。",
+        "英语课现在已经开始。",
+        "英语课已经结束。"
+      ],
+      "answer": "英语课按安排将在八点开始。",
+      "display": {
+        "title": "现在七点半，英语课按安排八点开始，还未开始。下面这句话说明什么？",
+        "material": "The English lesson is going to begin at eight.\nbegin：开始"
+      },
+      "explanation": "根据给定的安排和当前时间理解未来事件，不是主语想做某事。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-predict",
+      "target": "独立根据现有迹象理解预测",
+      "prompt": "盘子已经向架子边缘倾斜，尚未掉下。说话人看见它并这样说，意思是？",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "看样子盘子快要掉下来了。",
+        "盘子已经掉到地上了。",
+        "说话人打算把盘子放回架子。"
+      ],
+      "answer": "看样子盘子快要掉下来了。",
+      "display": {
+        "title": "盘子已经向架子边缘倾斜，尚未掉下。说话人看见它并这样说，意思是？",
+        "material": "The dish is going to fall.\nfall：掉下"
+      },
+      "explanation": "这是基于眼前迹象的预测，不是盘子的意愿，也不表示已经掉下。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-negative",
+      "target": "独立组织否定打算",
+      "prompt": "另一个情境：我不打算给这张桌子上漆。按这个意思组织句子。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "order",
+      "tokens": [
+        "I",
+        "am",
+        "not",
+        "going",
+        "to",
+        "paint",
+        "this",
+        "table."
+      ],
+      "answer": "I am not going to paint this table.",
+      "explanation": "not在am后，going to后仍用原形paint；题目指定的是另一计划。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-question",
+      "target": "独立核实计划并按事实否定回答",
+      "prompt": "Lily今天不打算做蛋糕。选出正确的问答。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "Is Lily going to make a cake? — No, she isn’t.",
+        "Is Lily going to make a cake? — Yes, she is.",
+        "Are Lily going to make a cake? — No, she isn’t."
+      ],
+      "answer": "Is Lily going to make a cake? — No, she isn’t.",
+      "explanation": "单数Lily的问句用Is；没有这个打算，按事实回答No, she isn’t.。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-for-person",
+      "target": "独立运用for表示受益对象",
+      "prompt": "爸爸正在为女儿制作书架，补全句子。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "The father is making a bookcase ",
+          "after": " his daughter.",
+          "options": [
+            "for",
+            "under",
+            "across"
+          ]
+        }
+      ],
+      "answer": "[\"for\"]",
+      "explanation": "for his daughter说明书架是为女儿制作的，不是说位置。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-for-meal",
+      "target": "独立运用for表示用餐",
+      "prompt": "说“我早餐喝牛奶”，补全表达。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "cloze",
+      "blanks": [
+        {
+          "before": "I have milk ",
+          "after": " breakfast.",
+          "options": [
+            "for",
+            "under",
+            "from"
+          ]
+        }
+      ],
+      "answer": "[\"for\"]",
+      "explanation": "for breakfast表示把牛奶作为早餐饮用，不是来自早餐。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-for-reason",
+      "target": "独立读懂感谢原因",
+      "prompt": "这句为什么感谢对方？",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "options": [
+        "对方帮助了说话人。",
+        "说话人打算让对方吃早餐。",
+        "对方支持了一个没有提到的计划。"
+      ],
+      "answer": "对方帮助了说话人。",
+      "display": {
+        "title": "这句为什么感谢对方？",
+        "material": "Thank you for helping me.\nhelping me：帮助我"
+      },
+      "explanation": "for helping me给出感谢的原因，不能补写材料没有的计划。",
+      "hint": ""
+    },
+    {
+      "id": "u3738-five-e-for-mixed",
+      "target": "独立区分目的、支持和固定搭配",
+      "prompt": "读完整表达，配上正确的意思。",
+      "source": "课本纸74–77／PDF107–110；语法练习册纸100–105／PDF114–119",
+      "type": "match",
+      "pairs": [
+        {
+          "id": "0",
+          "en": "They are going for a walk.",
+          "cn": "他们要去散步。"
+        },
+        {
+          "id": "1",
+          "en": "We are for this plan.",
+          "cn": "我们支持这个计划。"
+        },
+        {
+          "id": "2",
+          "en": "For example, we can draw a cup.",
+          "cn": "例如，我们可以画一个杯子。"
+        },
+        {
+          "id": "3",
+          "en": "Who are they waiting for?",
+          "cn": "他们在等谁？"
+        }
+      ],
+      "answer": "[\"0\",\"1\",\"2\",\"3\"]",
+      "explanation": "for的含义随完整表达变化，不能一律译成给某个人。",
+      "hint": ""
+    }
+  ]
+}

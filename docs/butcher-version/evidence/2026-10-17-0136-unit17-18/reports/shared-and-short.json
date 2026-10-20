@@ -1,0 +1,273 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "tests/e2e/submission-statistics.spec.js",
+      "tests/e2e/unit17-18-fivezones.spec.js",
+      "--grep",
+      "17-18 共用结算|短屏三卡",
+      "--output",
+      "output/unit1718-shared-and-short",
+      "--reporter=list,json"
+    ],
+    "configFile": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\playwright.config.js",
+    "rootDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/output/unit1718-shared-and-short",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.0",
+    "workers": 1,
+    "webServer": {
+      "command": "node tests/support/static-server.js",
+      "url": "http://127.0.0.1:4308",
+      "reuseExistingServer": false,
+      "timeout": 10000
+    }
+  },
+  "suites": [
+    {
+      "title": "submission-statistics.spec.js",
+      "file": "submission-statistics.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "17-18 共用结算按提交计次，手机三卡完整，刷新保留",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5792,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\submission-statistics.spec.js:27:93",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\submission-statistics.spec.js",
+                      "column": 93,
+                      "line": 27
+                    },
+                    "snippet": "  25 |   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);\n  26 |   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);\n> 27 |   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n     |                                                                                             ^\n  28 |   // These units use an illustrated story result; the standard permits scrolling\n  29 |   // while still requiring all three metrics and both actions together on screen.\n  30 |   await expectCompactCompletion(page, room, { illustrated: ['3-4','7-8','9-10','11-12','13-14','15-16','17-18'].includes(pair) });"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\submission-statistics.spec.js",
+                        "column": 93,
+                        "line": 27
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  25 |   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);\n  26 |   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);\n> 27 |   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);\n     |                                                                                             ^\n  28 |   // These units use an illustrated story result; the standard permits scrolling\n  29 |   // while still requiring all three metrics and both actions together on screen.\n  30 |   await expectCompactCompletion(page, room, { illustrated: ['3-4','7-8','9-10','11-12','13-14','15-16','17-18'].includes(pair) });\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\submission-statistics.spec.js:27:93"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:56:01.026Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-shared-and-short\\submission-statistics-17-18-共用结算按提交计次，手机三卡完整，刷新保留\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-shared-and-short\\submission-statistics-17-18-共用结算按提交计次，手机三卡完整，刷新保留\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\submission-statistics.spec.js",
+                    "column": 93,
+                    "line": 27
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "be34b044db501f8e9647-a003d21b6458eef112bf",
+          "file": "submission-statistics.spec.js",
+          "line": 16,
+          "column": 4
+        }
+      ]
+    },
+    {
+      "title": "unit17-18-fivezones.spec.js",
+      "file": "unit17-18-fivezones.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "短屏三卡、继续操作及阅读按钮 320x568",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 21619,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:56:07.809Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9e7f4bb177ce34eb4daf-ba649d7f79fdaa886ce6",
+          "file": "unit17-18-fivezones.spec.js",
+          "line": 42,
+          "column": 50
+        },
+        {
+          "title": "短屏三卡、继续操作及阅读按钮 390x500",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 149,
+                  "error": {
+                    "message": "Error: page.goto: net::ERR_NO_BUFFER_SPACE at http://127.0.0.1:4308/unit17-18/#learn/text\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4308/unit17-18/#learn/text\", waiting until \"load\"\u001b[22m\n",
+                    "stack": "Error: page.goto: net::ERR_NO_BUFFER_SPACE at http://127.0.0.1:4308/unit17-18/#learn/text\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4308/unit17-18/#learn/text\", waiting until \"load\"\u001b[22m\n\n    at story (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1718-fivezones.js:25:13)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-fivezones.spec.js:43:75",
+                    "location": {
+                      "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1718-fivezones.js",
+                      "column": 13,
+                      "line": 25
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39m..\\support\\unit1718-fivezones.js:25\n\n  23 | async function select(room,answer){await commonSelect(room,answer);}\n  24 | async function story(page,base=''){\n> 25 |  await page.goto(base+'/unit17-18/#learn/text');const room=page.locator('.stage-text');await expect(room).toBeVisible({timeout:30000});\n     |             ^\n  26 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;\n  27 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();\n  28 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1718-fivezones.js",
+                        "column": 13,
+                        "line": 25
+                      },
+                      "message": "Error: page.goto: net::ERR_NO_BUFFER_SPACE at http://127.0.0.1:4308/unit17-18/#learn/text\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4308/unit17-18/#learn/text\", waiting until \"load\"\u001b[22m\n\n\n   at ..\\support\\unit1718-fivezones.js:25\n\n  23 | async function select(room,answer){await commonSelect(room,answer);}\n  24 | async function story(page,base=''){\n> 25 |  await page.goto(base+'/unit17-18/#learn/text');const room=page.locator('.stage-text');await expect(room).toBeVisible({timeout:30000});\n     |             ^\n  26 |  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;\n  27 |  if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();\n  28 |  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();\n    at story (C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1718-fivezones.js:25:13)\n    at C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\e2e\\unit17-18-fivezones.spec.js:43:75"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:56:29.547Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-shared-and-short\\unit17-18-fivezones-短屏三卡、继续操作及阅读按钮-390x500\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\unit1718-shared-and-short\\unit17-18-fivezones-短屏三卡、继续操作及阅读按钮-390x500\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\tests\\support\\unit1718-fivezones.js",
+                    "column": 13,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9e7f4bb177ce34eb4daf-5d76f7f6810c0a532a76",
+          "file": "unit17-18-fivezones.spec.js",
+          "line": 42,
+          "column": 50
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T17:56:00.405Z",
+    "duration": 29668.619000000002,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

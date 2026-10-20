@@ -1,0 +1,15 @@
+{
+  "time": "2026-10-16T07:59:27.777634",
+  "beforeSha256": "2307df3178f05bebb4b104eb8f4ce0350af8fa16bc2765b732440fc41c1bdc4b",
+  "afterSha256": "759d0b579a3c03891abe599881ad5d1599709cbc32df81d093e74411b0ee9b22",
+  "applicationChanged": false,
+  "sameVersionOriginalAssertionReproduced": true,
+  "oldExpected": "Generic multiple-choice retry clears selection, check disabled",
+  "actualAndNewExpected": "Locate custom input retains selected fragment on retry; aria-pressed true and check enabled; selecting another fragment replaces it",
+  "sourceEvidence": [
+    "core/lesson49-practice.js:520",
+    "core/lesson49-task-inputs.js:70"
+  ],
+  "initialHypothesisCorrection": "Selecting the same locate fragment is idempotent, not a toggle; the initial JSON hypothesis was corrected after reading the handler.",
+  "coverage": "Keep two errors, correctness, hints, partial two-blank draft, wordbank undo, refresh, longest streak and full retry. No timeout/threshold change."
+}

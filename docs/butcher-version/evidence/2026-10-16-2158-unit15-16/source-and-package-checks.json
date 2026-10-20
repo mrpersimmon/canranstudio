@@ -1,0 +1,109 @@
+{
+  "documents": 9,
+  "syntaxFiles": 18,
+  "standardSha256": "38a5102891e5b4f923bd871fbc9488286cf1582da870a3611da151205e03c74e",
+  "packages": {
+    "root": {
+      "revision": "75ecb70a009c2e992d16527578830a1fad9f83198265900cb5468390d4d2cff6",
+      "required": 170,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    },
+    "sub": {
+      "revision": "ef5bce8ab0d541b253e4140b7bc685780f410ddde1556a135e96653702c861c3",
+      "required": 170,
+      "feedback": 3,
+      "narration": 0,
+      "all72BuildRevisionMatches": true
+    }
+  },
+  "artwork": [
+    {
+      "file": "assets/unit15-16/keepsake-story-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "sha256": "9f917bd5d9a5f063b884a19624c678c747f5435c76484fb8512ec0a0f12ac3e0"
+    },
+    {
+      "file": "assets/unit15-16/cast-officer-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "fa8accd4c14682b499428c3eeb9a250726c06a318daef0c5954359c54367a8f4"
+    },
+    {
+      "file": "assets/unit15-16/cast-girls-v1.webp",
+      "width": 1123,
+      "height": 1400,
+      "alpha": true,
+      "sha256": "d15aa09664798297f3619f24076bb43d3106e62b172afdb9b3e0b01481c1a05f"
+    },
+    {
+      "file": "assets/unit15-16/cast-friends-v1.webp",
+      "width": 1145,
+      "height": 1374,
+      "alpha": true,
+      "sha256": "fde2425fc54d3ad91ceb1bdebe9dc881a78cb275fa81c5c0b959e097c6871ac0"
+    },
+    {
+      "file": "assets/unit15-16/cast-girl-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "sha256": "42d0fbf9e48091404a985a56d89913b8831b2e6dc5fc4339692f4f733abcfb15"
+    }
+  ],
+  "sources": {
+    "unit15-16/content.js": "f670756e80eee57499f6114ca0f7f1425586e2b4d17588ba63018a80e3b97aa6",
+    "unit15-16/grammar.js": "c3454b6ce4d02a561e467042d4c8f8a3a2f6cc1857e3f44b63c16029e6dccceb",
+    "unit15-16/legacy-certificate.js": "842f62a1e6515a37c53de54dc1e1085b73aaa8f2b12f2cb009cac4212a61c51f",
+    "unit15-16/legacy.js": "4578ea17e4f11cd839b341f6598eabdb7b6b30973126a2d43758dd38c74a855c",
+    "unit15-16/references.js": "fcd9c5ab607a9b3663c9c32892be1f6a51583503681442a0540b14d505d81078",
+    "unit15-16/scene.js": "05739c6ef4c8c1f08f60d2eac7a50bfad5040de609d24e32b6f459b0b8ece49b",
+    "unit15-16/unit.js": "f8a3aef11da9b7231e41a68c0739927f7376f8a274cf8c51d19e9dd2de314281",
+    "server/progress.js": "f68f68febbc2e83ac5031305bcd08936d365112595902c1c49361d71198d8a8b",
+    "server/award-catalog.js": "ef6537017b74678e25d102fca87b1d8a15dd3ab21f46f1c011d92477d5e3ee79",
+    "server/legacy/unit15-16-content.js": "4028530e544af6d14fdbe5dd19019c1aef217b066ea6b9b748783941b89872ef",
+    "core/award-card-layout.js": "3b46342eaa17a7ea50f32366b8c3ec41efadf76447c23518b915d69d1074f02c",
+    "scripts/check-workflow.config.js": "37df92600084199d7a206fb9fdbf7c797ec36a104988afbf06024fdbf89ca4cd",
+    "tests/support/static-server.js": "ac5155070f4a0a7f9d87077d6a2292a0bd6920416a014e6aeb1c455ad3adc2d5",
+    "tests/support/unit1516-fivezones.js": "b100e6c1e7b5debb95b5016d2318c41909e52d628fba406e868f5d503b8bf598",
+    "tests/support/unit1516-legacy.js": "7997858524173fc7fdad0d25d95bb4b98e797d778472031b8fd9762f48abc6b2",
+    "tests/support/unit15-16-flow.js": "7ec7fc21f40c3c54dd9ac478be39bd4c97002ee05866a876b3dbd91fba9fd958",
+    "tests/login/unit15-16-upgrade.spec.js": "60566a4fce5148be47ff6f564f494ce7b570dbaf9b5b44323c16f2bc33060c19",
+    "tests/login/course-integration.spec.js": "65a41b09b41361dc51ac7d3ce12ffee8afb4ea951dbb06b130a4cbe49d36760a",
+    "unit15-16/index.html": "cef413c4b9e4dc00ac632205f3429e3fd562d696507708553e7c25a5e966edb8",
+    "unit15-16/legacy.css": "aa3c9ca5436a82062a67b3743cb7cbacbc77df05291e88ea470822cfd30f46c4",
+    "unit15-16/typography.css": "f1ae19b0be5f0c243bc6ce7b1279b23df4a8e710d567a482bbf0b819583a4624",
+    "unit15-16/unit.css": "612309a1e4fcd126f11a7b556de70ecae9706df20d22f3900717edc6bdce9661",
+    "assets/unit15-16/officer.svg": "9a49090b6ac08c8ea8370d7ca42de5ad5daa33be5f3e9ff4087f49afe294d9cd",
+    "assets/unit15-16/girls.svg": "ab3f72b140b3be396b70b34ca9f4fb837ae966a7e58c95c34c3031e8d3e4421c",
+    "assets/unit15-16/friend.svg": "8f9c02da8bd52f3e55c439fcf597ed3e486ee059df1efc78172a81651a0597f2",
+    "assets/unit15-16/officer-passports.svg": "8b8fe8a5e0adf6b0f8238f4fc297bd94edc7bd37e9449c28643d58cb224774a6",
+    "assets/unit15-16/travelling-pair.svg": "53016a29cb0591ba7732382db9114c0063ccb6d6df63066452ff40473b92ca7f",
+    "assets/awards/fonts/lesson-gothic-body-400.woff2": "1af7ed3ce9efa8d835b15301738b2c676c06f9a7e43bc8455308372e584645f8",
+    "assets/awards/fonts/sources.json": "73c7c0b055382c78a2252c2fa212cb4f46f979065f808843dda39dfce1351c72",
+    "core/story-certificate.css": "411ae5619044299e6c6b0bcc738996e0fe0d84e5e004ee47a8d0f95297200c71",
+    "unit1-2/completion.css": "cd31c6a8a3cfd615fb7ac7b0f2d24b83e8dd82200ff81750d0623d8f1a6cce42",
+    "index.html": "b6f481f574388b2a16fd8e134a6580cb9516c5efb6c47f81983639235a76d8b3",
+    "tests/e2e/unit15-16-fivezones.spec.js": "fafa26e427f8bb65a1022bd78bf0e13c3ff5eb9771d7e8f5d8787c19a1467b0f",
+    "tests/e2e/unit15-16-fivezones-upgrade.spec.js": "648b4aaedab8841499926e995a03386ff5988b9053fbfaa3eb2ca820717195c1",
+    "tests/e2e/unit15-16-print.spec.js": "6a7dc71e2082f75299ce33a67fbf68640a8e4e1e8b618747b91bc4cb86081143",
+    "tests/e2e/unit15-16-state.spec.js": "9a215058ed1aa908c3254d775c41bd87b2ec89e2ca801c0c96b217bf4d5bdfba",
+    "tests/login/unit15-16-fivezones.spec.js": "8126df5c339a968c0b755df3b8e0d90eafa93a83a0d9c9142dfe4d5d901f841e",
+    "tests/login/unit15-16-fivezones-upgrade.spec.js": "5837bbb56b346dce49dd93c70563989b316e4044254d5f7e2f6dbab630381209",
+    "tests/unit/admin-learning.test.js": "56925194832ad1c074d0cb7f5e9b028ffefa7edef06e26294d650b8872ade300",
+    "tests/e2e/submission-statistics.spec.js": "d674980fcf9753220031917ee9a6b460860af7ed07309fd3bc74a09798e0b8f6",
+    "tests/e2e/unit15-16-reading-controls.spec.js": "0674ccd86b60c7b9c72ca0161878c2e337c46883d123c93cc3d1fa19a5df407f",
+    "tests/e2e/unit15-16-reference.spec.js": "f0c5502893992fbfe092edea67eadac18f7e5ef9dc66a4accbcd4ca04e73234e",
+    "tests/support/reward-dialog.js": "2edbdc1ed41fc9fe0d24c6be59213e716595cb045fb7b9639d41fe7f3e229b8b",
+    "scripts/art/unit15-16-prompts.json": "8aa5efb1ac8b7f3dd5dc1cedd16cd8006c6d8d06046a7751d75c5f36c162fac1",
+    "assets/unit15-16/keepsake-story-v1.webp": "9f917bd5d9a5f063b884a19624c678c747f5435c76484fb8512ec0a0f12ac3e0",
+    "assets/unit15-16/cast-officer-v1.webp": "fa8accd4c14682b499428c3eeb9a250726c06a318daef0c5954359c54367a8f4",
+    "assets/unit15-16/cast-girls-v1.webp": "d15aa09664798297f3619f24076bb43d3106e62b172afdb9b3e0b01481c1a05f",
+    "assets/unit15-16/cast-friends-v1.webp": "fde2425fc54d3ad91ceb1bdebe9dc881a78cb275fa81c5c0b959e097c6871ac0",
+    "assets/unit15-16/cast-girl-v1.webp": "42d0fbf9e48091404a985a56d89913b8831b2e6dc5fc4339692f4f733abcfb15"
+  }
+}

@@ -1,0 +1,13 @@
+/* Only the old certificate layout survives here; former scene rules must not clip the new stage. */
+.unit3132-workspace .legacy-certificate-dialog .certificate-keepsakes{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:700px;margin:20px auto}
+.unit3132-workspace .legacy-certificate-dialog .certificate-keepsakes>div{display:grid;gap:4px;padding:14px 10px;background:#FFF9EB;border:1px solid #C9B394;border-radius:12px;font:600 17px/1.4 'Baloo 2',sans-serif}
+.unit3132-workspace .legacy-certificate-dialog .certificate-keepsakes strong{font-size:22px}
+@media(max-width:600px){.unit3132-workspace .legacy-certificate-dialog .certificate-keepsakes{grid-template-columns:1fr;gap:8px}.unit3132-workspace .legacy-certificate-dialog .certificate-keepsakes>div{padding:8px}}
+
+.unit3132-workspace .legacy-certificate-dialog{--unit-page:#F7FAF4;--unit-wash:#E9F2E3;--unit-line:#BED1AE;--unit-accent:#486B42}
+/* The preserved dialog uses distinct IDs. Carry over the original name rules,
+   including print and long-name sizing, without styling the new award card. */
+.unit3132-workspace .legacy-certificate-dialog #legacyCertificateName{font:48px/1.25 'ZCOOL KuaiLe',sans-serif;color:var(--brown);overflow-wrap:anywhere;border-bottom:5px solid var(--yellow);padding:8px 4px 10px;margin:0}
+.unit3132-workspace .legacy-certificate-dialog #legacyCertificateName.is-long{font-size:30px}
+@media(max-width:600px){.unit3132-workspace .legacy-certificate-dialog #legacyCertificateName{font-size:30px;padding:6px 0 8px}.unit3132-workspace .legacy-certificate-dialog #legacyCertificateName.is-long{font-size:23px}}
+@media print{.unit3132-workspace .legacy-certificate-dialog #legacyCertificateName{font-size:42px}}

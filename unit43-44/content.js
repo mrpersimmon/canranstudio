@@ -134,3 +134,23 @@
   core.unit4344=unit;
   if(root.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
 })(globalThis);
+
+// Preserve the established five-star award and retain reviewed v1 questions.
+(function(core){
+'use strict';const unit=core.unit4344,old=JSON.parse(JSON.stringify(unit));core.unit4344BeforeV153=old;
+unit.contentRevision='tea-teaching-v153';
+unit.sources={text:'课本纸86–89／PDF119–122',guide:'同步导学纸77–80／PDF91–94，Grammar纸79／PDF93',workbook:'语法练习册纸119–125／PDF133–139'};
+unit.objects=old.objects.map(w=>({...w,cn:w.en==='any'?'一些':w.cn}));unit.learning.WORDS=unit.objects;
+const material=(title,material)=>({title,material});
+function revise(group,id,changes){const i=unit.questions[group].findIndex(q=>q.id===id);if(i<0)throw Error(id);unit.questions[group][i]={...unit.questions[group][i],...changes,id:id+'-v153'};}
+revise('roles','u4344-v1-r-hurry',{display:material('Penny为什么催促Sam？','Penny: Hurry up, Sam! The kettle’s boiling!')});
+revise('roles','u4344-v1-r-evidence',{display:material('哪条线索最能说明Sam不常沏茶？','Sam: Where’s the tea?\nSam: Where are the cups?\nSam: Yes, of course I can, Penny.'),explanation:'反复询问常用物品的位置，是本故事支持“不常沏茶”的线索；不能据此说他不会沏茶，也不能用来判断所有不熟悉厨房的人。'});
+revise('grammar','u4344-v1-g-reply',{workshop:{rule:'Can you…?按照给出的能力或看见事实，用Yes, I can.或No, I can’t.回答。',model:{lines:[['Can you open the door?','能够开门：Yes, I can.；不能开门：No, I can’t.。不能只从问句猜有无能力。']]}}});
+revise('grammar','u4344-v1-g-there-reply',{prompt:'柜里有两只杯子，没有盘子。补全符合事实的回答。',type:'cloze',options:undefined,blanks:[{before:'Are there any cups? Yes, there ',after:'.',options:['are','is','aren’t']},{before:'Are there any dishes? No, there ',after:'.',options:['aren’t','isn’t','are']}],answer:JSON.stringify(['are','aren’t']),explanation:'cups和dishes均为复数；杯子有、盘子无，分别回答there are和there aren’t。',workshop:{rule:'复数物品用Are there…?，回答有无要看事实。',model:{lines:[['Are there any books here?','有书：Yes, there are.；没有书：No, there aren’t.。这里问存在，不是问能力。']]}}});
+revise('grammar','u4344-v1-g-independent',{target:'撤去示范，组合can肯否和but的事实对比',prompt:'你能看见水壶，但看不见茶叶。把后半句接完整。',tokens:['but','I','can’t','see the tea','can','don’t'],slots:4,answer:'but I can’t see the tea',display:material('按事实接上后半句。','你能看见水壶，但看不见茶叶。\nI can see the kettle, …'),explanation:'but连接这里相反的看见事实；后半句用I can’t see the tea。',workshop:{rule:'but把能够看见与不能看见的两种事实连起来。'}});
+const q=(id,target,prompt,input,explanation)=>({id:'u4344-v153-'+id,target,prompt,source:unit.sources.workbook,...input,explanation,hint:'',distractorRationale:'由已给出的能力事实、问的人和动词形式区分，不能只凭问句猜答案。'});
+unit.questions.grammar.push({...q('g-who','从能力事实回答谁能做某事','Sam会沏茶，Tim不会。回答Penny的问题。',{options:['Sam can make the tea.','Tim can make the tea.','Sam can makes the tea.'],answer:'Sam can make the tea.',display:material('谁会沏茶？','Sam can make the tea. Tim can’t.\nPenny: Who can make the tea?')},'问Who时回答能完成动作的人；Sam后面的can和make都不加s。'),workshop:{rule:'Who can…?问谁有这个能力，回答要有题目给出的依据。',model:{lines:[['Who can open the door? — Penny can open the door.','已知Penny能开门。Who问谁；can后仍用open。']]}}});
+unit.questions.exam.push(q('e-who','撤去示范，根据能力差异回答Who并保持动词原形','读两个人的话，替他们回答。',{options:['Penny can make the tea.','Sam can make the tea.','Penny can makes the tea.'],answer:'Penny can make the tea.',display:material('Who can make the tea?','另一次练习：\nPenny: I can make the tea.\nSam: I can’t make the tea, but I can make the coffee.')},'这次练习里Penny会沏茶，Sam会冲咖啡；按本题材料作答，不沿用原文中Sam的回答。'));
+unit.taskSessions={};unit.taskPredecessors={};for(const id of ['roles','grammar','exam']){unit.taskSessions[id]='v153';unit.taskPredecessors[id]=[{key:'unit4344-'+id+'-practice/v1',questions:old.questions[id]}];}
+core.unit4344=unit;if(globalThis.document?.documentElement.dataset.unit===unit.id)core.learningContext=unit;
+})(globalThis.CanranCore);
