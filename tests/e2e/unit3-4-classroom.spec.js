@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { DIALOGUE, ANSWERS, completeActivity, completeUnit34 } = require('../support/unit3-4-flow');
@@ -237,13 +238,13 @@ test('五星卡日期保留、匿名不能代填姓名或导出，练习纸与�
 });
 
 test('首页进入图鉴，旧拼句和提问地址继续到现行活动', async ({ page }) => {
-  await page.goto('/lesson/'); await page.getByRole('link', { name: '开始学习：雨伞认领小帮手', exact: true }).click();
+  await page.goto('/lesson/');await directoryReady(page); await page.getByRole('link', { name: '开始学习：雨伞认领小帮手', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/words$/);
   for (const [oldRoute, current] of [['trans','reply'], ['ask','exam']]) {
     await page.goto('/lesson/unit3-4/#learn/' + oldRoute); await expect(page).toHaveURL(new RegExp('#learn/' + current + '$'));
     await expect(page.locator('.stage-' + current).getByRole('heading').first()).toBeInViewport();
   }
-  await page.getByRole('link', { name: '我的课程', exact: true }).click();
+  await page.getByRole('link', { name: '我的课程', exact: true }).click();await directoryReady(page);
   await expect(page.getByRole('link', { name: '继续学习：雨伞认领小帮手', exact: true })).toHaveAttribute('href', '/lesson/unit3-4/#learn/exam');
 });
 

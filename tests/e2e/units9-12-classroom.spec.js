@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
 // The 9–10 cases below verify the former 15-star classroom contract.
@@ -123,7 +124,7 @@ for (const unit of units) test(`${unit.title} lesson 路径全部声音失败仍
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await expect(page.getByRole('dialog').filter({ hasText: unit.title + ' 课堂配套练习' })).toBeVisible();
   await page.keyboard.press('Escape'); await page.reload(); await expect(page.locator('#starCount')).toHaveText('15');
-  await page.getByRole('link', { name: '我的课程', exact: true }).click();
+  await page.getByRole('link', { name: '我的课程', exact: true }).click();await directoryReady(page);
   await expect(page).toHaveURL(/\/lesson\/$/);
   await page.goto('/' + unit.id + '/#learn/certificate'); await expect(page.locator('#starCount')).toHaveText('0');
   expect(voices).toEqual([]); expect(errors).toEqual([]); expect(await page.evaluate(() => window.classroomSpeechCalls)).toBe(0);

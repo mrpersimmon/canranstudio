@@ -2,6 +2,7 @@
 const {expect,test}=require('@playwright/test');
 async function directoryReady(page){
  const start=Date.now();
+ await page.waitForURL(url=>url.pathname==='/'||url.pathname==='/lesson/',{waitUntil:'domcontentloaded',timeout:30000});
  // The /lesson/ directory is a real package, including shared fonts. Check
  // its visible loading boundary before asserting its links or saved records.
  // Performance suites keep their separate 5 s / 1.5 s budgets unchanged.

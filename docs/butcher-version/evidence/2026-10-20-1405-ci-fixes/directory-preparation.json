@@ -1,0 +1,760 @@
+{
+  "sourceFailures": {
+    "run": 39381023135,
+    "head": "9e57bd42e4453e5c9d87396a95b9c7a188d3c2b4",
+    "failuresBeforeCancellation": [
+      {
+        "job": "courses (6)",
+        "jobId": 118489921443,
+        "file": "tests/e2e/lesson-deployment.spec.js",
+        "title": "lesson 子目录直接显示导航，组合单元和返回导航都留在子目录"
+      },
+      {
+        "job": "courses (6)",
+        "jobId": 118489921443,
+        "file": "tests/e2e/lesson-deployment.spec.js",
+        "title": "lesson 中走完整五区单元，显示五星卡并返回导航继续学习"
+      },
+      {
+        "job": "courses (6)",
+        "jobId": 118489921443,
+        "file": "tests/e2e/lesson-deployment.spec.js",
+        "title": "手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航"
+      },
+      {
+        "job": "courses (3)",
+        "jobId": 118489921480,
+        "file": "tests/e2e/unit23-24-state.spec.js",
+        "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+      },
+      {
+        "job": "courses (3)",
+        "jobId": 118489921480,
+        "file": "tests/e2e/unit23-24-state.spec.js",
+        "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+      },
+      {
+        "job": "courses (3)",
+        "jobId": 118489921480,
+        "file": "tests/e2e/unit27-28-state.spec.js",
+        "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用"
+      },
+      {
+        "job": "courses (3)",
+        "jobId": 118489921480,
+        "file": "tests/e2e/unit27-28-state.spec.js",
+        "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离"
+      }
+    ]
+  },
+  "performancePreparationFailure": {
+    "run": 39384626700,
+    "head": "65df70103eabb0f0cd4c1e4c509424d8593c8ff0",
+    "jobId": 118501916222,
+    "metric": {
+      "browser": "151.0.7922.34",
+      "platform": "linux",
+      "cpu": "AMD EPYC 7763 64-Core Processor",
+      "trace": false,
+      "attempt": 0,
+      "phase": "first visit",
+      "scenario": "reopen navigation, click course, restore alternating word-card pages 2 and 3",
+      "timing": "actual click to fully usable rendered frame",
+      "samples": [],
+      "navigationSamples": [],
+      "driverSamples": [],
+      "p95": null,
+      "errors": [],
+      "fetched": []
+    }
+  },
+  "scope": "Successful directory transitions observe the real URL and loading boundary. No-JavaScript, intentional loading faults, raw-root-only checks and timed loops keep their separate conditions.",
+  "windows": [
+    {
+      "file": "course-loading.spec.js",
+      "title": "清理课程资源保留学习位置、活动课程和官网缓存",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4002 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit1-2-navigation.spec.js",
+      "title": "/ 导航进入两个独立单元，分别继续，所有资源保留在正确路径",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "49 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "386 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "322 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit1-2-navigation.spec.js",
+      "title": "/lesson/ 导航进入两个独立单元，分别继续，所有资源保留在正确路径",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3951 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1875 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1872 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit1-2-navigation.spec.js",
+      "title": "子目录重开清除两个单元，只影响该版本，取消不会清除任何记录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3455 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit1-2-navigation.spec.js",
+      "title": "章节换序仍能从原有章节链接继续，不把故事和物品记录对调",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "304 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "348 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit13-14-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3928 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit13-14-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "268 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3951 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit17-18-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4077 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit17-18-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "218 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3964 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit21-22-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3965 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit21-22-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "291 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3990 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit25-26-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4486 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit25-26-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "231 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "4610 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit29-30-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4463 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit29-30-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "212 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "4551 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit5-6.spec.js",
+      "title": "首页与 lesson 子目录有新单元入口，独立继续并保留资源路径",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3954 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1947 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit5-6.spec.js",
+      "title": "首页重开包含四个单元，取消保留，确认只清除本路径的学习记录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4483 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit9-10.spec.js",
+      "title": "首页与 lesson 子目录进入问候站，独立恢复草稿并定位同一地址",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3980 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1870 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit9-10.spec.js",
+      "title": "重开冒险包含新单元；取消保留，确认仅清理本网站路径记录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4499 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "lesson 子目录直接显示导航，组合单元和返回导航都留在子目录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4010 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1864 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "每个课程入口和资源都留在 lesson 下，原版记录不被重开操作删除",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4039 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1902 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "lesson 中走完整五区单元，显示五星卡并返回导航继续学习",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3972 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3468 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit11-12.spec.js",
+      "title": "首页和 lesson 子目录进入新单元，独立恢复草稿并定位同一地址",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3448 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1875 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit11-12.spec.js",
+      "title": "重开冒险包括新单元，取消保留而确认仅清理当前网站路径的记录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4656 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit15-16-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3940 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit15-16-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "226 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3938 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit19-20-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3944 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit19-20-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "379 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3994 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit23-24-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4424 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit23-24-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "262 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3982 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit27-28-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3952 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit27-28-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "353 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3927 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit3-4-classroom.spec.js",
+      "title": "首页进入图鉴，旧拼句和提问地址继续到现行活动",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4027 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1879 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit7-8.spec.js",
+      "title": "首页继续定位与旧 be、trans 书签衔接到合并活动",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3992 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1886 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit7-8.spec.js",
+      "title": "首页重开包含新单元，取消保留、确认仅清除 lesson 路径记录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3973 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "units9-12-classroom.spec.js",
+      "title": "Lesson 9–10 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3400 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "units9-12-classroom.spec.js",
+      "title": "Lesson 11–12 lesson 路径全部声音失败仍可完成整课和领证，根路径记录独立",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3419 ms after navigation"
+        }
+      ]
+    }
+  ],
+  "linux": [
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "lesson 子目录直接显示导航，组合单元和返回导航都留在子目录",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "4098 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "1877 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "lesson 中走完整五区单元，显示五星卡并返回导航继续学习",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3896 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "lesson-deployment.spec.js",
+      "title": "手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3955 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit23-24-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3955 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit23-24-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "421 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3942 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit27-28-state.spec.js",
+      "title": "lesson路径阻断全部声音仍可完整通关和领证，各单元与根路径记录互不串用",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3949 ms after navigation"
+        }
+      ]
+    },
+    {
+      "file": "unit27-28-state.spec.js",
+      "title": "首页续学、同一位置继续冒险、重开取消与确认均遵守网站路径隔离",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "447 ms after navigation"
+        },
+        {
+          "type": "directory-ready",
+          "description": "3929 ms after navigation"
+        }
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "file": "course-cache-performance.spec.js",
+      "title": "完整缓存 20 次重新打开导航并点课恢复学习位置",
+      "status": "expected",
+      "readiness": [
+        {
+          "type": "directory-ready",
+          "description": "3862 ms after navigation"
+        }
+      ]
+    }
+  ],
+  "finalPerformance": {
+    "browser": "151.0.7922.34",
+    "platform": "linux",
+    "cpu": "12th Gen Intel(R) Core(TM) i7-12700",
+    "trace": false,
+    "attempt": 20,
+    "phase": "performance budget",
+    "scenario": "reopen navigation, click course, restore alternating word-card pages 2 and 3",
+    "timing": "actual click to fully usable rendered frame",
+    "samples": [
+      645.10009765625,
+      629.400146484375,
+      596.300048828125,
+      611.800048828125,
+      612.7998046875,
+      596.400146484375,
+      596.199951171875,
+      595.300048828125,
+      595.5,
+      579.699951171875,
+      596.60009765625,
+      596.400146484375,
+      579.599853515625,
+      596.900146484375,
+      579.499755859375,
+      596.89990234375,
+      629.300048828125,
+      596.5,
+      596.2998046875,
+      596.10009765625
+    ],
+    "navigationSamples": [
+      644.6999999999825,
+      629.1000000000058,
+      595.7999999999884,
+      611.5,
+      612.2999999999884,
+      596.1000000000058,
+      595.7999999999884,
+      595,
+      595.1000000000058,
+      579.3999999999942,
+      596.2000000000116,
+      596,
+      579.2000000000116,
+      596.5,
+      579.2000000000116,
+      596.5,
+      629,
+      596,
+      595.9000000000233,
+      595.8000000000175
+    ],
+    "driverSamples": [
+      687,
+      671,
+      631,
+      650,
+      648,
+      630,
+      630,
+      634,
+      635,
+      613,
+      632,
+      634,
+      615,
+      627,
+      613,
+      633,
+      665,
+      628,
+      635,
+      629
+    ],
+    "p95": 629.400146484375,
+    "errors": [],
+    "fetched": []
+  },
+  "unchanged": "20 revisit samples, actual-click-to-fully-usable-frame timing, zero-download assertion, 1500ms P95 and 5000ms cold-load budgets; production source and learning data unchanged."
+}

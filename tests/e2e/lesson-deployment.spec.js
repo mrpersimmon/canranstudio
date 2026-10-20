@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 
 async function observeNativeAudio(page) {
@@ -48,13 +49,13 @@ test('lesson 子目录直接显示导航，组合单元和返回导航都留在�
     if (url.protocol === 'http:' && url.origin === new URL(test.info().project.use.baseURL).origin && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
   });
   page.on('pageerror', error => failures.push(error.message));
-  await page.goto('/lesson/');
+  await page.goto('/lesson/');await directoryReady(page);
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
   await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
   await expect(page).toHaveURL(/\/lesson\/unit49-50\/#learn\/words$/);
   await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
   await expect.poll(() => page.locator('.unit-word img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
-  await page.getByRole('link', { name: '我的课程', exact: true }).click();
+  await page.getByRole('link', { name: '我的课程', exact: true }).click();await directoryReady(page);
   await expect(page).toHaveURL(/\/lesson\/$/);
   expect(outside).toEqual([]);
   expect(failures).toEqual([]);
@@ -67,7 +68,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
     if (url.protocol === 'http:' && url.origin === new URL(test.info().project.use.baseURL).origin && !url.pathname.startsWith('/lesson/')) outside.push(url.pathname);
   });
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/lesson/');
+  await page.goto('/lesson/');await directoryReady(page);
   await page.evaluate(() => localStorage.setItem('canran:unit49-50:learning:v1', 'original-app-record'));
   await page.getByText('单课练习', { exact: true }).click();
   const entries = await page.locator('main a').evaluateAll(links => links.map(link => ({ href: link.href, text: link.textContent })));
@@ -82,7 +83,7 @@ test('每个课程入口和资源都留在 lesson 下，原版记录不被重开
     expect(response.status()).toBe(200);
     await expect(page.locator('body')).not.toContainText('Not Found');
   }
-  await page.goto('/lesson/');
+  await page.goto('/lesson/');await directoryReady(page);
   await page.getByRole('button', { name: '设备冒险设置', exact: true }).click();
   await page.getByRole('button', { name: '重开冒险', exact: true }).click();
   await page.getByRole('button', { name: '继续确认', exact: true }).click();
@@ -96,7 +97,7 @@ test('lesson 中走完整五区单元，显示五星卡并返回导航继续学�
   test.setTimeout(90000);
   const flow=require('../support/unit4950');await flow.story(page,'/lesson');for(const id of Object.keys(flow.ANSWERS))await flow.activity(page,id,{base:'/lesson'});
   await page.goto('/lesson/unit49-50/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('5');await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
-  await page.getByRole('link', { name: '我的课程', exact: true }).click();
+  await page.getByRole('link', { name: '我的课程', exact: true }).click();await directoryReady(page);
   await expect(page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '继续学习', exact: true })).toHaveAttribute('href', '/lesson/unit49-50/#learn/certificate');
 });
 
@@ -119,7 +120,7 @@ test('旧官网的根目录缓存不会阻止 lesson 录音，原生播放可以
 
 test('手机 lesson 导航与单元没有横向溢出，旧首页入口返回新导航', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/lesson/home/');
+  await page.goto('/lesson/home/');await directoryReady(page);
   await expect(page).toHaveURL(/\/lesson\/$/);
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);

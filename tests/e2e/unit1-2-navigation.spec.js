@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 const {test,expect}=require('@playwright/test');
 
 for(const base of ['/','/lesson/']) {
@@ -7,20 +8,20 @@ for(const base of ['/','/lesson/']) {
     page.on('pageerror',error=>errors.push(error.message));
     page.on('response',response=>{if(response.status()>=400)failed.push(response.url());});
     page.on('request',request=>{const url=new URL(request.url());if(base==='/lesson/'&&/^https?:$/.test(url.protocol)&&url.origin===new URL(baseURL).origin&&!url.pathname.startsWith(base))outside.push(url.pathname);});
-    await page.goto(base);
+    await page.goto(base);await directoryReady(page);
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await beginner.getByRole('link',{name:'开始学习：礼貌小帮手',exact:true}).click();
     await expect(page).toHaveURL(new RegExp(base+'unit1-2/#learn/words$'));
     await expect(page.getByRole('navigation',{name:'学习关卡',exact:true}).getByRole('link')).toHaveText(['身边的小物品','手提包的故事','语法小工坊','街角小帮手','综合挑战']);
     await page.getByRole('link',{name:'街角小帮手',exact:true}).click();
-    await page.getByRole('link',{name:'我的课程',exact:true}).click();
+    await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
     await expect(beginner).toContainText('上次学到 · 街角小帮手');
     await expect(beginner.getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toHaveAttribute('href',base+'unit1-2/#l4');
     const older=page.getByRole('region',{name:'晚餐采购大冒险',exact:true});
     await expect(older.getByRole('link',{name:'开始学习',exact:true})).toHaveAttribute('href',base+'unit49-50/#learn/words');
     await older.getByRole('link',{name:'开始学习',exact:true}).click();
     await page.getByRole('link',{name:'帮忙买晚餐',exact:true}).click();
-    await page.getByRole('link',{name:'我的课程',exact:true}).click();
+    await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
     await expect(older).toContainText('上次学到 · 帮忙买晚餐');
     await expect(beginner).toContainText('上次学到 · 街角小帮手');
     await expect.poll(()=>page.locator('main img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
@@ -32,7 +33,7 @@ test('子目录重开清除两个单元，只影响该版本，取消不会清�
   await page.goto('/unit1-2/#learn/words');
   await page.goto('/lesson/unit1-2/#learn/ask');
   await page.goto('/lesson/unit49-50/#learn/give');
-  await page.goto('/lesson/');
+  await page.goto('/lesson/');await directoryReady(page);
   const snapshot=()=>page.evaluate(()=>Object.fromEntries(Object.entries(localStorage).filter(([key])=>key.includes('learning:'))));
   const before=await snapshot();
   await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();
@@ -68,7 +69,7 @@ test('章节换序仍能从原有章节链接继续，不把故事和物品记�
   for(const [anchor,title] of [['l1','手提包的故事'],['l2','身边的小物品']]){
     await page.goto('/unit1-2/#'+anchor);
     await expect(page.getByRole('heading',{name:title,exact:true})).toBeInViewport();
-    await page.getByRole('link',{name:'我的课程',exact:true}).click();
+    await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
     const beginner=page.getByRole('region',{name:'礼貌小帮手',exact:true});
     await expect(beginner).toContainText('上次学到 · '+title);
     await beginner.getByRole('link',{name:'继续学习：礼貌小帮手',exact:true}).click();

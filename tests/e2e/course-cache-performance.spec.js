@@ -2,6 +2,7 @@
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const os = require('node:os');
+const { directoryReady } = require('../support/directory-ready');
 
 // Measure the documented return visit: reopen the site, click a course and
 // resume an actual learning position. Keep rapid same-tab reloads as a separate
@@ -42,6 +43,9 @@ test('完整缓存 20 次重新打开导航并点课恢复学习位置', { tag: 
     await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
     await expect(page.locator('.stage-words')).toContainText('2 / 5');
     await page.getByRole('link', { name: '我的课程', exact: true }).click();
+    // Finish the real initial cache preparation before measuring revisits.
+    // The 20 timed visits, zero-download assertion and 1.5s P95 are unchanged.
+    await directoryReady(page);
     await expect(page.locator('#unit2930Entry')).toBeVisible();
     await expect(page.locator('#courseLoader')).toHaveCount(0);
     await page.close();

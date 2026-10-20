@@ -1,4 +1,5 @@
 'use strict';
+const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
@@ -44,7 +45,7 @@ test('清理课程资源保留学习位置、活动课程和官网缓存', async
   const other = await context.newPage();
   await other.goto('/lesson/unit1-2/#learn/words');
   await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
-  await page.goto('/lesson/');
+  await page.goto('/lesson/');await directoryReady(page);
   await page.evaluate(async () => {
     const cache = await caches.open('root-site-cache');
     await cache.put('/root-site-file', new Response('official-site'));
