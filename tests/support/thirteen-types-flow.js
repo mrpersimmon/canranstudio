@@ -41,6 +41,10 @@ async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=t
  const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
  for(let i=first;i<items.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
+  // A new scene can briefly hide its controls while the next question renders.
+  // Distinguish that transition from a genuinely restored, checked answer.
+  await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${items.length} 题`);
+  await expect(check.or(room.locator('.fb').filter({hasText:/^答对了！$/}))).toBeVisible();
   if(await check.isVisible()){
    if(capture)await capture(room,i,'blank');
    await select(room,items[i]);await expect(check).toBeEnabled();await check.click();

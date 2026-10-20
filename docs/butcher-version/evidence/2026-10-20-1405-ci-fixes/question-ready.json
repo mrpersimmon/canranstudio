@@ -1,0 +1,79 @@
+{
+  "sourceRun": 39384626700,
+  "sourceHead": "65df70103eabb0f0cd4c1e4c509424d8593c8ff0",
+  "observedSyncFailure": "The helper queried Check visibility immediately after Next, treated a transient hidden control as an already-checked answer, then waited for feedback without selecting or submitting the next question. Local three-run reproduction failed at the same point.",
+  "correction": "Wait for the independently expected question number and either its visible Check control or its restored correct feedback; keep original answers, sync fault injection, feedback and result assertions.",
+  "sync": {
+    "before": {
+      "report": "copy-sync-before",
+      "stats": {
+        "startTime": "2026-10-20T07:57:30.451Z",
+        "duration": 31761.858,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 3,
+        "flaky": 0
+      }
+    },
+    "after": {
+      "report": "copy-sync-after",
+      "stats": {
+        "startTime": "2026-10-20T08:06:11.673Z",
+        "duration": 47874.793000000005,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "linux": {
+      "report": "copy-sync-linux",
+      "stats": {
+        "startTime": "2026-10-20T08:24:02.992Z",
+        "duration": 170534.864,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "restoredAnswerAndHistoryRegression": {
+    "report": "flow-resume-regression",
+    "stats": {
+      "startTime": "2026-10-20T08:27:23.866Z",
+      "duration": 86456.085,
+      "expected": 7,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "legacy27": {
+    "observation": "The CI trace timed out at the first word assembly; its last captured viewport still showed the preceding completion area. Require the destination activity heading to be fully in view before starting choices.",
+    "windows": {
+      "report": "unit27-navigation-verified",
+      "stats": {
+        "startTime": "2026-10-20T08:23:56.721Z",
+        "duration": 41637.477999999996,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "linux": {
+      "report": "unit27-navigation-linux",
+      "stats": {
+        "startTime": "2026-10-20T08:29:47.274Z",
+        "duration": 203116.459,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "unchanged": "5000ms action deadline, 45000ms complete-test deadline, all answers, path-isolation and certificate assertions."
+  },
+  "productionSourceChanged": false
+}

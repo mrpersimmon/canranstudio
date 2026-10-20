@@ -13,6 +13,9 @@ async function completeStory(page,base=''){
 }
 async function completeActivity(page,id,base=''){
  await page.goto(base+'/unit27-28/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
+ // Hash navigation returns before the historical page's route scroll finishes.
+ // Start real choices only when the requested activity is fully in view.
+ await expect(room.getByRole('heading').first()).toBeInViewport({ratio:1});
  for(const [i,answer] of answers.entries()){
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
   if(answer&&typeof answer==='object'&&!Array.isArray(answer))await taskCases.select(room,answer);
