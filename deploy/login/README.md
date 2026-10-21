@@ -28,7 +28,7 @@ npm run test:login
 LESSON_BASE_PATH=/ npm run build:login
 ```
 
-当前账号测试包含根目录整课通关、旧目录下线、迁址后的真实已完成活动保留。`dist-login/publication.json` 是当前二十一个单元、课包版本及纪念册资源核对表，不是可公开的静态课件。正式包来自已提交版本；生产运行只安装 `npm ci --omit=dev`，不携带本地数据、密钥或 Git 目录。
+当前账号测试包含根目录整课通关、旧目录下线、迁址后的真实已完成活动保留。`dist-login/publication.json` 记录本次构建实际包含的单元、课包版本及纪念册资源，不是可公开的静态课件；2026-10-21 的[正式发布](../../docs/butcher-version/2026-10-21-0147-v1.0-Lesson1-144正式发布与数据保护.md)包含72个配对单元，后续以实际清单为准。同日10:25已上线[目录阻断修复](../../docs/butcher-version/2026-10-21-1015-v1.0-登录目录阻断修复.md) `5ec921f4`，目录后台资源准备失败不能遮住全部入口；课程内容和数据沿用原发布。正式包来自已提交版本；生产运行只安装 `npm ci --omit=dev`，不携带本地数据、密钥或 Git 目录。
 
 纪念册正式源码为 `award-book/`，随账号服务启动构建，所需 React／esbuild 等在生产依赖内。发布包应保留该目录、`scripts/award-book-bundle.js`、`server/award-catalog.js` 与 `assets/awards/`；运行不依赖 `poc/award-book/`。现有 `unit_awards` 数据表继续随学生数据库备份，重开课程不删除收藏。通用图片采用内容哈希和长期缓存，个人页面与 `api/awards` 为 `no-store`。发布后还需以真实学生复核根目录入册、退出隔离、手机翻页与保存图片。
 

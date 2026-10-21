@@ -1,0 +1,29 @@
+{
+  "codeCommit": "5ec921f42877cf7970549d005e561f753a9b8960",
+  "originalRegression": "Confirmed failing on original implementation; HTTP 503 for the other course artwork left zero entries",
+  "browserRuns": [
+    {
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "passed": 9
+    },
+    {
+      "browser": "Chromium",
+      "base": "/",
+      "passed": 3
+    },
+    {
+      "browser": "WebKit",
+      "base": "/",
+      "passed": 3
+    },
+    {
+      "browser": "WebKit",
+      "base": "/lesson/",
+      "passed": 3
+    }
+  ],
+  "foundationFocusedPassed": 12,
+  "fullCheckCommitExecuted": false,
+  "fullCI": "in progress at documentation time; foundation and cache-performance passed"
+}

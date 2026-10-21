@@ -1,0 +1,48 @@
+{
+  "commit": "1c3649f51af248307714d56eee8495ec7c895950",
+  "previousCommit": "c8ebadebce55e6987dc1824500733def964a4543",
+  "releasePath": "/opt/canran-lesson/releases/1c3649f51af248307714d56eee8495ec7c895950",
+  "dataPath": "/var/lib/canran-lesson",
+  "backupPath": "/var/backups/canran-release-20261021",
+  "cutoverStarted": "2026-10-21T01:47:11+08:00",
+  "cutoverFinished": "2026-10-21T01:47:20+08:00",
+  "health": {
+    "ok": true,
+    "access": "class-v1"
+  },
+  "dataIntegrity": "ok",
+  "criticalTablesEqual": true,
+  "cardKeyEqual": true,
+  "counts": {
+    "admin": 1,
+    "classes": 10,
+    "students": 92,
+    "progress": 81,
+    "unit_awards": 26,
+    "teachers": 0,
+    "class_teachers": 0,
+    "student_numbers": 106,
+    "teacher_numbers": 0,
+    "learning_students": 92,
+    "learning_availability": 177,
+    "learning_courses": 81,
+    "learning_submissions": 1688,
+    "management_audit": 12
+  },
+  "courses": 72,
+  "resourceFiles": 3702,
+  "stageHistory": {
+    "normalizedExistingProgress": 81,
+    "historicalAwardCards": 12,
+    "oldCurrentPackages": 45,
+    "oldResourceObjects": 1985
+  },
+  "stageHttpResources": {
+    "courses": 72,
+    "verifiedResources": 3554,
+    "totalBytes": 81145785,
+    "sha256Verified": true
+  },
+  "nginxConfigurationUnchanged": true,
+  "exerciseRelease": "/var/www/canranstudio-exercise/releases/20260926-0134-96d4c8cd"
+}

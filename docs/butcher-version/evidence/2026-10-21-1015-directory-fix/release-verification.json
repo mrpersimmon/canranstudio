@@ -1,0 +1,29 @@
+{
+  "commit": "5ec921f42877cf7970549d005e561f753a9b8960",
+  "started": "2026-10-21T10:25:07+08:00",
+  "finished": "2026-10-21T10:25:15+08:00",
+  "release": "/opt/canran-lesson/releases/5ec921f42877cf7970549d005e561f753a9b8960",
+  "backup": "/var/backups/canran-directory-fix-20261021",
+  "integrity": "ok",
+  "stableTables": 14,
+  "cutoverDataIdentical": true,
+  "postLiveDataIdentical": true,
+  "counts": {
+    "admin": 1,
+    "classes": 10,
+    "students": 92,
+    "progress": 81,
+    "unit_awards": 26,
+    "teachers": 0,
+    "class_teachers": 0,
+    "student_numbers": 106,
+    "teacher_numbers": 0,
+    "learning_students": 92,
+    "learning_availability": 177,
+    "learning_courses": 81,
+    "learning_submissions": 1688,
+    "management_audit": 12
+  },
+  "portalSha256": "e3c432170944463f87af38b5f648dacc46865de15554ac4ac64fbde687816f81",
+  "exerciseRelease": "/var/www/canranstudio-exercise/releases/20260926-0134-96d4c8cd"
+}
