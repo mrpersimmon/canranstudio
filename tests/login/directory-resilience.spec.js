@@ -1,0 +1,32 @@
+'use strict';
+const {test,expect}=require('@playwright/test');
+const {adminLogin,createStudent,fillLogin,setPassword}=require('./helpers');
+const {courseResponse}=require('../support/course-response-faults');
+const base=process.env.AWARD_TEST_BASE||'/lesson/';
+test.use({browserName:process.env.DIRECTORY_REVIEW_BROWSER||'chromium'});
+
+test('一门课的目录插画失败不阻断其他课程，重试不改成绩',async({page})=>{
+ test.setTimeout(90000);
+ await adminLogin(page,base);
+ const account=await createStudent(page,'目录容错验收','小禾',[/Lesson 1–2 /,/Lesson 3–4 /]);
+ await page.locator('#adminLogout').click();
+ const image=base+'assets/awards/unit3-4-umbrella.webp';let failed=0;
+ page.context().on('response',r=>{if(r.url().endsWith(image)&&r.status()===503)failed++;});
+ await courseResponse(page,image,{status:503});
+ await page.goto(base);await fillLogin(page,account);await setPassword(page);
+ await expect(page.locator('.course')).toHaveCount(2,{timeout:10000});
+ const other=page.locator('[data-unit="unit3-4"]');await other.scrollIntoViewIfNeeded();
+ await expect(other.getByRole('button',{name:'重试插画',exact:true})).toBeVisible();
+ expect(failed).toBeGreaterThan(0);
+ const before=await(await page.request.get(base+'api/me')).json();
+ await page.locator('[data-unit="unit1-2"] .primary-button').click();
+ await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+ await courseResponse(page,image,null);
+ await page.getByRole('link',{name:'我的课程',exact:true}).click();
+ await expect(page.locator('.course')).toHaveCount(2);
+ await other.scrollIntoViewIfNeeded();
+ await expect.poll(()=>other.locator('.featured-art img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+ const after=await(await page.request.get(base+'api/me')).json();
+ expect(after.student.id).toBe(before.student.id);
+ expect(after.courses.map(c=>c.stars)).toEqual(before.courses.map(c=>c.stars));
+});

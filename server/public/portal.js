@@ -62,8 +62,44 @@
     // A short lease protects prepared public font bytes from quota cleanup;
     // it contains no student identity, answers, awards or certificate dates.
     await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)})).catch(()=>{});
-    await Promise.all(Array.from({length:4},async()=>{while(queue.length)await store.obtain(queue.shift());}));
+    await Promise.all(Array.from({length:2},async()=>{while(queue.length)await store.obtain(queue.shift());}));
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
+  }
+  function prepareDirectory(hasCourses, waiting) {
+    const note=app.querySelector('p[role="status"]'),retry=document.createElement('button');
+    const pending=waiting?'还有学习成果保存在本机，联网后将继续同步。':'';
+    retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(retry);
+    delete document.documentElement.dataset.sharedFontsReady;
+    let busy=false;
+    const prepare=async()=>{
+      if(busy)return;busy=true;retry.hidden=true;
+      note.textContent=pending+(hasCourses?'可以先选择课程，首次进入可能需要稍等。':'');
+      try{
+        if(hasCourses){
+          const link=document.getElementById('courseFonts')||Object.assign(document.createElement('link'),{id:'courseFonts',rel:'stylesheet',href:'/lesson/assets/fonts/fonts.css'});
+          if(!link.isConnected)await new Promise((resolve,reject)=>{link.onload=resolve;link.onerror=()=>{link.remove();reject(Error('字体尚未就绪'));};document.head.append(link);});
+          await Promise.all([prepareSharedFonts(),document.fonts.load('600 20px "Baloo 2"'),document.fonts.load('24px "ZCOOL KuaiLe"')]);
+        }else document.documentElement.dataset.sharedFontsReady='0';
+        if(note.isConnected)note.textContent=pending;
+      }catch{
+        if(note.isConnected){note.textContent=pending+'部分内容还没准备好，可以进入课程继续加载。';retry.hidden=false;}
+      }finally{busy=false;}
+    };
+    retry.onclick=prepare;
+    // A directory is a choice of courses, not a package containing every
+    // course. Background preparation must never remove its working links.
+    for(const card of app.querySelectorAll('.course')){
+      const images=[...card.querySelectorAll('.featured-art img')];let retryArt;
+      for(const image of images){
+        image.addEventListener('error',()=>{
+          image.dataset.failed='true';image.style.visibility='hidden';
+          if(!retryArt){retryArt=document.createElement('button');retryArt.type='button';retryArt.className='compact';retryArt.textContent='重试插画';card.querySelector('.featured-copy').append(retryArt);
+            retryArt.onclick=()=>{for(const item of images.filter(img=>img.dataset.failed)){const src=item.getAttribute('src');item.removeAttribute('src');item.src=src;}};}
+        });
+        image.addEventListener('load',()=>{delete image.dataset.failed;image.style.visibility='';if(retryArt&&!images.some(img=>img.dataset.failed)){retryArt.remove();retryArt=null;}});
+      }
+    }
+    void prepare();
   }
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
@@ -72,16 +108,9 @@
     if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
     const waiting=who.preview?0:await syncPending(who.student.id);
     if(!who.preview)who=await api('me');
-    app.innerHTML=`<section class="login panel">${logo}<h1>灿然英语工作室</h1><p role="status">正在准备画面…</p></section>`;
-    // Prepare the whole directory before revealing any of its illustrations.
-    try {
-      const fontLink = document.getElementById('courseFonts') || Object.assign(document.createElement('link'), {id:'courseFonts', rel:'stylesheet', href:'/lesson/assets/fonts/fonts.css'});
-      if (!fontLink.isConnected) await new Promise((resolve,reject)=>{fontLink.onload=resolve;fontLink.onerror=()=>{fontLink.remove();reject(Error('字体尚未就绪'));};document.head.append(fontLink);});
-      await Promise.all([...(who.courses.length?[prepareSharedFonts()]:[]),document.fonts.load('600 20px "Baloo 2"'),document.fonts.load('24px "ZCOOL KuaiLe"'),...new Set(who.courses.flatMap(c=>c.artwork?.length?c.artwork:[c.image]).filter(Boolean))].map(value=>typeof value==='string'?new Promise((resolve,reject)=>{const image=new Image();image.onload=()=>image.decode().then(resolve,reject);image.onerror=reject;image.src=value;}):value));
-    } catch {app.innerHTML='<section class="login panel"><h1>画面还没准备好</h1><button id="retry">再试一次</button></section>';document.getElementById('retry').onclick=home;return;}
     const banners=who.courses.map(c=>{
       const pictures=c.artwork?.length?c.artwork:[c.image];
-      const img=(src,cls='')=>`<img class="${cls}" src="${e(src)}" alt="">`;
+      const img=(src,cls='')=>`<img class="${cls}" src="${e(src)}" loading="lazy" decoding="async" alt="">`;
       const art=pictures.length===5?img(pictures[0],'actor')+`<div class="food-cards">${pictures.slice(1,4).map(src=>img(src)).join('')}</div>`+img(pictures[4],'actor'):pictures.map(src=>img(src,'featured-scene')).join('');
       const action=c.started||c.stars?'继续学习':'开始学习';
       return `<section class="featured-course course" data-unit="${e(c.id)}" aria-labelledby="${e(c.id)}-title"><div class="featured-copy"><p class="lesson-label">${e(c.label)}</p><h2 id="${e(c.id)}-title">${e(c.title)}</h2><p class="course-intro">${e(c.intro)}</p>${c.started||c.stars?`<p class="resume-location">★ ${c.stars} / ${c.maxStars||15}</p>`:''}<a class="primary-button" aria-label="${action}：${e(c.title)}" href="/lesson/${e(c.id)}/${preview?'?preview='+encodeURIComponent(preview):''}#learn/${e(c.next||'words')}">${action}</a></div><div class="featured-art" aria-hidden="true">${art}</div></section>`;
@@ -94,6 +123,7 @@
     const list=document.getElementById('legacy');let found=false;
     for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!/^canran:(?:lesson:)?(?:unit\d+-\d+:learning|l\d+:progress|soundmark:progress)/.test(key))continue;try{const value=JSON.parse(localStorage.getItem(key));const item=document.createElement('li');const unit=key.match(/unit\d+-\d+|l\d+/)?.[0];item.textContent=unit+' · '+(value.activity?.unitCompleted?Object.keys(value.activity.unitCompleted).length+' 项活动完成':Object.values(value.ratings||{}).reduce((sum,n)=>sum+(Number(n)||0),0)+' 颗星');list.append(item);found=true;}catch{}}
     if(!found)list.textContent='这台设备没有旧记录。';
+    prepareDirectory(who.courses.length>0,waiting);
   }
   async function loadAdmin(selected=currentClass) {
     state=await api('admin/state');currentClass=selected==='all'||state.classes.some(c=>c.id===selected)?selected:undefined;

@@ -12,7 +12,7 @@ async function banners(page,base,info){
   await page.setViewportSize({width,height:900});
   for(const pair of PAIRS){
    const card=page.locator(`[data-unit="unit${pair}"]`),picture=card.locator('.featured-art img');
-   await expect(picture).toHaveCount(1);await expect(picture).toHaveAttribute('src',base+ART[pair]);await expect(picture).toBeVisible();
+   await card.scrollIntoViewIfNeeded();await expect(picture).toHaveCount(1);await expect(picture).toHaveAttribute('src',base+ART[pair]);await expect(picture).toBeVisible();
    await expect.poll(()=>picture.evaluate(im=>im.complete&&im.naturalWidth>0)).toBe(true);
    const bounds=await picture.evaluate(im=>{const a=im.getBoundingClientRect(),b=im.closest('.featured-art').getBoundingClientRect(),c=im.closest('.featured-course').querySelector('.featured-copy').getBoundingClientRect();return{image:{x:a.x,y:a.y,w:a.width,h:a.height},art:{x:b.x,y:b.y,w:b.width,h:b.height},copy:{x:c.x,y:c.y,w:c.width,h:c.height},fit:getComputedStyle(im).objectFit};});
    expect(bounds.fit).toBe('contain');expect(bounds.image.w).toBeGreaterThan(150);expect(bounds.image.h).toBeGreaterThan(100);
