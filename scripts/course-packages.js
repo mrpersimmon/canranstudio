@@ -198,6 +198,19 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
     index.courses.home={...previous,revision:pack.revision,manifest:basePath+manifestPath,sha256:digest(body)};
   }
   generated.set('course-index.json', { body: Buffer.from(JSON.stringify(index)), type: TYPES['.json'] });
+  // Update checks read one small document, not the complete catalog. Keep these
+  // mutable files outside lesson manifests so polling does not change a lesson
+  // revision or become a prerequisite for rendering its existing cached copy.
+  for (const [courseId, descriptor] of Object.entries(index.courses)) {
+    const common = { schema: index.schema, protocol: index.protocol, basePath, courseId };
+    for (const [kind, value] of [
+      ['course-status', { ...common, descriptor, withdrawn: index.withdrawn }],
+      ['course-withdrawals', { ...common, withdrawn: index.withdrawn }]
+    ]) {
+      const body = Buffer.from(JSON.stringify(value));
+      generated.set(kind + '/' + courseId + '.json', { body, type: TYPES['.json'], etag: '"' + digest(body) + '"' });
+    }
+  }
   for (const relative of ['core/course-cache.js', 'core/course-loader.js']) generated.set(relative, { body: await bytes(relative), type: TYPES['.js'] });
   generated.set('core/subpath-worker.js', { body: Buffer.concat([Buffer.from('self.courseResponseHeaders = ' + JSON.stringify(LESSON_HEADER_CONTRACT) + ';\n'), await bytes('core/course-cache.js'), Buffer.from('\n'), await bytes('core/course-worker.js')]), type: TYPES['.js'], worker: true });
   return { generated, index };

@@ -19,6 +19,10 @@ async function serveCourses({ root = process.cwd(), port = 4176 } = {}) {
     const item = generated.get(relative) || logical.get(relative);
     if (!item) return response.writeHead(404).end('Not Found');
     const headers = { ...LESSON_HEADER_CONTRACT, 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', 'Service-Worker-Allowed': base };
+    if (item.etag) {
+      headers.ETag = item.etag;
+      if (request.headers['if-none-match'] === item.etag) return response.writeHead(304,headers).end();
+    }
     const range = request.headers.range?.match(/^bytes=(\d+)-(\d*)$/);
     if (range) {
       const start = Number(range[1]), end = range[2] ? Math.min(Number(range[2]), item.body.length - 1) : item.body.length - 1;

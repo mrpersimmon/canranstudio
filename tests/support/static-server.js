@@ -94,7 +94,7 @@ const server = http.createServer(async (request, response) => {
   } catch { response.writeHead(400).end('Bad Request'); return; }
   const scoped = pathname.startsWith('/lesson/');
   const relative = (scoped ? pathname.slice('/lesson/'.length) : pathname.slice(1)) + (pathname.endsWith('/') ? 'index.html' : '');
-  const generatedPath = /^(?:course-index\.json|course-packages\/(?:home|unit\d+-\d+|lesson\d+|soundmark)\/[a-f0-9]{64}\.json|resources\/[a-f0-9]{64}\/[^/]+)$/.test(relative);
+  const generatedPath = /^(?:course-index\.json|course-(?:status|withdrawals)\/(?:home|unit\d+-\d+|lesson\d+|soundmark)\.json|course-packages\/(?:home|unit\d+-\d+|lesson\d+|soundmark)\/[a-f0-9]{64}\.json|resources\/[a-f0-9]{64}\/[^/]+)$/.test(relative);
   response.setHeader('X-Content-Type-Options', 'nosniff');
   if (scoped) for (const [key, value] of Object.entries(LESSON_HEADER_CONTRACT)) response.setHeader(key, value);
   if (pathname === '/lesson' || /^\/lesson\/home(?:\/|\/index\.html)?$/.test(pathname)) {
@@ -107,7 +107,9 @@ const server = http.createServer(async (request, response) => {
       const packages = await lessonPackages;
       const item = packages.generated.get(relative);
       if (item) {
-        response.writeHead(200, { 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', ...(item.worker ? { 'Service-Worker-Allowed': '/lesson/' } : {}) }).end(request.method === 'HEAD' ? undefined : item.body);
+        const headers = { 'Content-Type': item.type, 'Cache-Control': item.immutable ? 'public, max-age=31536000, immutable' : 'no-cache', ...(item.worker ? { 'Service-Worker-Allowed': '/lesson/' } : {}), ...(item.etag ? { ETag: item.etag } : {}) };
+        if (item.etag && request.headers['if-none-match']?.split(',').some(value => value.trim() === '*' || value.trim().replace(/^W\//, '') === item.etag)) return response.writeHead(304, headers).end();
+        response.writeHead(200, headers).end(request.method === 'HEAD' ? undefined : item.body);
         return;
       }
       if (generatedPath) { response.writeHead(404).end('Not Found'); return; }

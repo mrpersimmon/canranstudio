@@ -142,6 +142,15 @@ test('shared completion changes always include legacy, paired-unit and authentic
   }
 });
 
+test('update entry and predecessor changes retain choice, real certificate and WebKit checks', () => {
+  const config = require('../../scripts/check-workflow.config');
+  for (const file of ['core/course-loader.js','server/public/portal.js','server/public/portal.css','tests/login/course-update-choice.spec.js','tests/login/course-update-performance.spec.js','server/app.js','scripts/course-packages.js','tests/fixtures/course-loader-before-update-choice/course-loader.js']) {
+    const plan = planChecks(config, [file]), definitions = config.tasks(process.cwd(), [file]);
+    const commands = plan.flatMap(id => definitions[id].args);
+    for (const required of ['tests/login/course-update-choice.spec.js','tests/login/course-update-performance.spec.js','tests/login/unit37-38-fivezones-upgrade.spec.js','playwright.recovery.config.js']) assert.ok(commands.includes(required), `${file} must check ${required}`);
+  }
+});
+
 test('expired evidence reruns, while clearing browser reports does not erase unrelated successful checks', async t => {
   const root = fixture(t);
   await run(root);

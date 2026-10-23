@@ -117,11 +117,13 @@ function tasks(root, files) {
     'browser-worksheets': browser(['tests/e2e/worksheet-acceptance.spec.js',...(!paperShared&&paperChanged.length?['--grep',paperChanged.map(pair=>'Lesson '+pair+' ').join('|')]:[])]),
     'browser-wording-repairs': browser(['tests/e2e/lesson-wording-repairs.spec.js']),
     'browser-directory-fonts': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js','tests/login/directory-font-preparation.spec.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
+    'browser-course-updates': {args:['node_modules/@playwright/test/cli.js','test','-c','playwright.login.config.js','tests/login/course-update-choice.spec.js','tests/login/course-update-performance.spec.js','tests/login/unit37-38-fivezones-upgrade.spec.js'],inputs:[...runtimeInputs,'server','tests/login','playwright.login.config.js'],browser:true},
     'browser-lessons': browser(['tests/e2e/l50-assessment.spec.js', 'tests/e2e/l51-progress.spec.js', 'tests/e2e/l52-progress.spec.js', 'tests/e2e/l53-progress.spec.js', 'tests/e2e/l54-progress.spec.js', 'tests/e2e/soundmark-progress.spec.js']),
   };
 }
 function select(files) {
   const selected = [];
+  if(files.some(file=>/^(core\/course-(?:cache|loader|worker)\.js|server\/app\.js|scripts\/course-packages\.js|server\/public\/portal\.(?:js|css)|tests\/login\/course-update-(?:choice|performance)\.spec\.js|tests\/fixtures\/course-loader-before-update-choice\/)/.test(file)))selected.push('browser-course-updates','browser-recovery-webkit');
   if(readingBoundaryChanged(files).length||files.includes('tests/e2e/story-reading-boundary.spec.js'))selected.push('browser-reading-boundary');
   if(changedRepairUnits(materialRepairUnits,files).length||files.some(file=>/^(core\/lesson49-(?:practice|task-inputs)\.(?:js|css)|tests\/(?:e2e\/reading-materials-acceptance\.spec\.js|support\/reading-materials-acceptance\.json))$/.test(file)))selected.push('browser-reading-materials');
   if(changedRepairUnits(worksheetRepairUnits,files).length||files.some(file=>/^(unit49-50\/unit\.css|core\/unit-theme\.css|tests\/e2e\/worksheet-acceptance\.spec\.js)$/.test(file)))selected.push('browser-worksheets');
@@ -129,7 +131,7 @@ function select(files) {
   if(files.some(file=>/^(core\/course-(?:cache|loader)\.js|scripts\/course-packages\.js|server\/(?:app\.js|public\/portal\.js)|tests\/login\/directory-font-preparation\.spec\.js|tests\/unit\/directory-font-package\.test\.js)$/.test(file)))selected.push('browser-directory-fonts');
   if (files.some(file => /^(core\/lesson49-(?:practice|subjects|experience)\.(?:js|css)$|unit1-2\/completion\.(?:js|css)$|tests\/support\/completion-layout\.js$|tests\/e2e\/(?:l49-v14|submission-statistics|unit1-2-completion)\.spec\.js$)/.test(file))) selected.push('browser-completion', 'browser-statistics-webkit');
   if (files.some(file => /^(core\/lesson49-(?:practice|subjects|experience)\.(?:js|css)|unit1-2\/completion\.(?:js|css)|tests\/(?:e2e|login)\/submission-statistics\.spec\.js|tests\/fixtures\/submission-statistics-before\/|playwright\.statistics\.config\.js)/.test(file))) selected.push('browser-statistics-webkit');
-  if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-loading-recovery\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file))) selected.push('browser-recovery-webkit');
+  if (files.some(file => /^(core\/course-(?:cache|loader|worker)\.js|scripts\/course-packages\.js|server\/public\/access-(?:client|worker)\.js|tests\/login\/(?:server\.js|helpers\.js|course-(?:loading-recovery|update-choice|update-performance)\.spec\.js)|tests\/support\/course-response-faults\.js|playwright\.(?:recovery|login)\.config\.js)$/.test(file)||file.startsWith('tests/fixtures/course-loader-before-update-choice/'))) selected.push('browser-recovery-webkit');
   if(files.some(file=>/^(server\/|tests\/login\/|playwright.login.config.js|deploy\/login\/|core\/(?:course-(?:cache|loader|worker)|lesson49-practice)\.js|scripts\/(?:course-packages|public-base-path|build-login)\.js|unit[^/]+\/(?:content|unit)\.js)/.test(file)))selected.push('browser-login');
   if (files.some(isWorkflow)) selected.push('workflow');
   const code = files.filter(file => !isDoc(file) && !isWorkflow(file));

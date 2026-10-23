@@ -8,6 +8,13 @@ const http = require('node:http');
 const { createCoursePackages } = require('../../scripts/course-packages');
 const { completeUnit2930 } = require('../support/unit29-30-flow');
 const sha = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
+async function publishIndex(context,index){
+  await context.route('**/lesson/course-index.json',route=>route.fulfill({json:index}));
+  await context.route(/\/lesson\/course-(?:status|withdrawals)\/[^/]+\.json$/,route=>{
+    const match=new URL(route.request().url()).pathname.match(/course-(status|withdrawals)\/([^/]+)\.json$/);
+    return route.fulfill({json:{schema:1,protocol:1,basePath:'/lesson/',courseId:match[2],...(match[1]==='status'?{descriptor:index.courses[match[2]]}:{}),withdrawn:index.withdrawn||[]}});
+  });
+}
 test('两个标签页同时准备同课，关掉一页后另一页仍能完整进入', async ({ context }) => {
   let release, seen;
   const held = new Promise(resolve => { release = resolve; });
@@ -29,7 +36,7 @@ test('已知撤回版本不会继续推进作答，新版失败时保留位置�
   await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
   const index = await (await request.get('/lesson/course-index.json')).json();
   index.withdrawn = ['unit29-30@' + index.courses['unit29-30'].revision];
-  await context.route('**/lesson/course-index.json', route => route.fulfill({ json: index }));
+  await publishIndex(context,index);
   await page.reload();
   await expect(page.locator('.stage-words')).toContainText('2 / 5');
   // The rendered old page remains stable until the learner tries an operation.
@@ -78,14 +85,14 @@ async function revisedCourse(request, id = 'unit29-30') {
   return { index, pack, updated, bytes, body };
 }
 
-test('普通更新后台准备，旧页不被改写，下一次进入使用完整新版且不重下未变文件', async ({ page, context, request }) => {
+test('普通更新后台准备并提醒，选择后使用完整新版且不重下未变文件', async ({ page, context, request }) => {
   await page.goto('/lesson/unit29-30/#learn/words');
   const oldTitle = await page.title();
   await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
   const revision = await revisedCourse(request);
   let newFetched = false;
   const fetched = [];
-  await context.route('**/lesson/course-index.json', route => route.fulfill({ json: revision.index }));
+  await publishIndex(context,revision.index);
   await context.route('**' + revision.index.courses['unit29-30'].manifest, route => route.fulfill({ body: revision.body, contentType: 'application/json' }));
   await context.route('**/lesson/resources/**', async route => {
     fetched.push(route.request().url());
@@ -97,11 +104,12 @@ test('普通更新后台准备，旧页不被改写，下一次进入使用完�
   await second.goto('/lesson/unit29-30/#learn/words');
   await expect(second).toHaveTitle(oldTitle);
   await expect.poll(() => newFetched).toBe(true);
-  // Use UI reloads until the prepared version is committed; never inspect its private index.
-  await expect(async () => {
-    await second.reload();
-    await expect(second).toHaveTitle('新版课程缓存验收');
-  }).toPass({ timeout: 15000 });
+  // Preparation never makes the decision for the learner. Use only the
+  // visible update choice; retain isolation and zero unchanged downloads.
+  await expect(second.getByRole('region', {name:'课程更新',exact:true})).toContainText('新版已准备好');
+  await second.reload();await expect(second).toHaveTitle(oldTitle);
+  await second.getByRole('region', {name:'课程更新',exact:true}).getByRole('button', {name:'进入新版',exact:true}).click();
+  await expect(second).toHaveTitle('新版课程缓存验收');
   await expect(page).toHaveTitle(oldTitle);
   await expect(second.locator('.stage-words')).toContainText('2 / 5');
   expect(fetched.filter(url => !url.endsWith('.mp3'))).toEqual([new URL(revision.updated.url, page.url()).href]);

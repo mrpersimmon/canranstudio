@@ -9,6 +9,7 @@ docs/butcher-version/evidence/**/*.pdf binary
 tests/fixtures/**/*.js whitespace=-blank-at-eof
 # This fixture has a SHA-256 provenance manifest; keep archived Git bytes exact.
 tests/fixtures/classroom-before-fivezones/** -text -whitespace
+tests/fixtures/course-loader-before-update-choice/course-loader.js -text
 server/legacy/*.js whitespace=-blank-at-eof
 unit*/history.js whitespace=-blank-at-eof
 # CSV audit exports use CRLF line endings; retain the other whitespace checks.

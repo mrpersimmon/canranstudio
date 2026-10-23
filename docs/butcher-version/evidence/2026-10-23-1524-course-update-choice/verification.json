@@ -1,0 +1,71 @@
+{
+  "baseCommit": "259eac2083ef370d6f78ee8dfe1c249ac61e82af",
+  "scope": "Local working-tree implementation; not committed, pushed or deployed",
+  "browserChecks": [
+    {
+      "browser": "Chromium",
+      "platform": "Windows",
+      "base": "/lesson/",
+      "passed": 5,
+      "suite": "course-update-choice; reuse the five passing cases from choice-and-history, whose separate certificate preparation assertion was subsequently corrected and verified independently"
+    },
+    {
+      "browser": "Chromium",
+      "platform": "Windows",
+      "base": "/lesson/",
+      "passed": 1,
+      "suite": "unit37-38-fivezones-upgrade; actual old certificate and original ISO after explicit update"
+    },
+    {
+      "browser": "Chromium",
+      "platform": "Windows",
+      "base": "/",
+      "passed": 23,
+      "suite": "15 loading recovery + 5 update choice + 2 directory fonts + 1 directory resilience"
+    },
+    {
+      "browser": "Chromium",
+      "platform": "Windows",
+      "base": "/lesson/",
+      "passed": 2,
+      "suite": "static ordinary update and withdrawn version"
+    },
+    {
+      "browser": "Chromium",
+      "platform": "Windows",
+      "base": "/lesson/",
+      "passed": 2,
+      "suite": "cold and 20-revisit original performance limits"
+    },
+    {
+      "browser": "WebKit",
+      "platform": "Ubuntu WSL",
+      "base": "/",
+      "passed": 6,
+      "suite": "5 update choice + actual unit37-38 legacy certificate/ISO/cross-device"
+    },
+    {
+      "browser": "WebKit",
+      "platform": "Ubuntu WSL",
+      "base": "/lesson/",
+      "passed": 5,
+      "suite": "update choice"
+    }
+  ],
+  "foundationChecksPassed": 24,
+  "buildProtectedCourses": 72,
+  "inventoryOnly": {
+    "courses": 2985,
+    "accounts": 660
+  },
+  "knownEnvironmentFailures": [
+    "Windows WebKit cannot create even about:blank; original failure retained",
+    "WSL first application setup exceeded 30 seconds; isolated local config allows 180 seconds for server setup only. Original test, action, assertion and performance limits unchanged"
+  ],
+  "productionDataTouched": false,
+  "runtimeSha256": {
+    "core\\course-loader.js": "7f27d42ad0cc73173203ec3310049a5a3c1b6cbf12252d73669240edb9be13a1",
+    "server\\public\\portal.js": "14255e3fb99ae574df9cdd56b7b638854a1ce3c15094d13cd5fd688bee8f06ce",
+    "server\\public\\portal.css": "8d50aa750456a3deaed40bc12a0267cd7e19381ea8275ae42bc7bb2230014e92"
+  }
+}

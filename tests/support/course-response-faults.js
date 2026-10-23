@@ -5,20 +5,45 @@
 // This module is installed only by tests/login/server.js, never the app server.
 function installCourseResponseFaults(server) {
   const handlers = server.listeners('request');
-  const faults = new Map(), held = new Set();
+  const faults = new Map(), held = new Set(), network = [];
   server.removeAllListeners('request');
   server.on('request', async (request, response) => {
     const pathname = new URL(request.url, 'http://localhost').pathname;
+    if (pathname === '/__test__/course-network') {
+      response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify(network));return;
+    }
+    if (/\/course-(?:status\/|withdrawals\/|index\.json)/.test(pathname)) {
+      let bytes=0;const write=response.write,end=response.end;
+      const count=chunk=>{if(typeof chunk==='string'||Buffer.isBuffer(chunk)||ArrayBuffer.isView(chunk))bytes+=Buffer.byteLength(chunk);};
+      response.write=function(chunk,...args){count(chunk);return write.call(this,chunk,...args);};
+      response.end=function(chunk,...args){count(chunk);return end.call(this,chunk,...args);};
+      response.on('finish',()=>network.push({path:pathname,status:response.statusCode,bytes,conditional:!!request.headers['if-none-match']}));
+    }
     if (pathname === '/__test__/course-responses') {
       const chunks = [];
       for await (const chunk of request) chunks.push(chunk);
       const { path, result, reset } = JSON.parse(Buffer.concat(chunks).toString() || '{}');
-      if (reset) faults.clear();
+      if (reset) { faults.clear(); network.length=0; }
       else if (result) faults.set(path, result);
       else faults.delete(path);
       for (const item of held) if (reset || item.path === path) { item.response.writeHead(503).end(); held.delete(item); }
       response.writeHead(200, { 'Content-Type': 'application/json' }).end('{}');
       return;
+    }
+    // Simulated publication updates must expose the same new metadata as the
+    // production builder. Keep this at HTTP level so workers see it too.
+    const metadata = pathname.match(/^(.*\/)(course-status|course-withdrawals)\/([^/]+)\.json$/);
+    const indexFault = metadata && faults.get(metadata[1]+'course-index.json');
+    if (indexFault && !faults.has(pathname) && (!indexFault.status || indexFault.status === 200)) {
+      try {
+        const index = JSON.parse(Buffer.from(indexFault.body,'base64').toString());
+        const descriptor = index.courses[metadata[3]];
+        if (descriptor) {
+          const value = {schema:index.schema,protocol:index.protocol,basePath:index.basePath,courseId:metadata[3],...(metadata[2]==='course-status'?{descriptor}:{}),withdrawn:index.withdrawn||[]};
+          const body = JSON.stringify(value),etag='"'+require('node:crypto').createHash('sha256').update(body).digest('hex')+'"';
+          response.writeHead(request.headers['if-none-match']===etag?304:200,{'Content-Type':'application/json','Cache-Control':'private, no-cache',ETag:etag}).end(request.headers['if-none-match']===etag?undefined:body);return;
+        }
+      } catch { /* Invalid-index fault remains a fault of the original route. */ }
     }
     const entry = [...faults].find(([pattern]) => new RegExp('^' + pattern.split('*').map(value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[^/]*') + '$').test(pathname));
     if (!entry) { for (const handler of handlers) handler(request, response); return; }

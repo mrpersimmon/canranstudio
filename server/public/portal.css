@@ -20,6 +20,8 @@
 }
 
 /* Class settings keep renaming and course access as separate saves. */
+.course-update-choice{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:20px;padding-top:16px;border-top:1px dashed #c8b597;font:500 14px/1.5 system-ui,sans-serif;color:#4b543c}.course-update-choice strong{padding:4px 10px;border-radius:7px;background:#f6e4b0;color:#6d542c;font-size:12px;font-weight:500}.course-update-choice .button{min-height:46px;padding:9px 20px;border:1px solid #36553e;border-radius:14px;background:#42674d;color:#fff;box-shadow:0 3px 0 #2c4835;font-weight:500}.featured-copy:has(.course-update-choice)>.primary-button{background:#fffcf6;color:#735b45;border-color:#bbaa94;box-shadow:0 3px 0 #d2c1ab}.course-update-choice .button:hover{background:#36583f}@media(max-width:720px){.course-update-choice{justify-content:space-between;gap:8px;text-align:left}.course-update-choice .button{flex:1;max-width:180px}}
+
 .class-name-fields{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
 .class-courses-title{font-size:20px;margin:24px 0 0;padding-top:24px;border-top:1px solid var(--line)}
 .course-selection-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:14px}

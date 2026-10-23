@@ -1,0 +1,98 @@
+{
+  "baseCommit": "259eac2083ef370d6f78ee8dfe1c249ac61e82af",
+  "scope": "Snapshot at local acceptance time: then not committed, pushed or deployed. Subsequent delivery is recorded in Git and Actions; measurements below remain historical.",
+  "browserChecks": [
+    {
+      "platform": "Windows",
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "passed": 9,
+      "suite": "5 update choice + 4 update performance; 4 performance cases also repeated with wire observer"
+    },
+    {
+      "platform": "Windows",
+      "browser": "Chromium",
+      "base": "/",
+      "passed": 28,
+      "suite": "15 loading recovery + 5 update choice + 4 update performance + 1 real legacy certificate/ISO/cross-device + 2 directory fonts + 1 directory resilience"
+    },
+    {
+      "platform": "Windows",
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "passed": 2,
+      "suite": "static ordinary update and withdrawal"
+    },
+    {
+      "platform": "Windows",
+      "browser": "Chromium",
+      "base": "/lesson/",
+      "passed": 2,
+      "suite": "original isolated cold and 20 revisit performance limits"
+    },
+    {
+      "platform": "Ubuntu WSL",
+      "browser": "WebKit",
+      "base": "/",
+      "passed": 10,
+      "suite": "5 update choice + 4 update performance + 1 real legacy certificate/ISO/cross-device; 9 original passes plus corrected HTTP observation case rerun"
+    },
+    {
+      "platform": "Ubuntu WSL",
+      "browser": "WebKit",
+      "base": "/lesson/",
+      "passed": 9,
+      "suite": "5 update choice + 4 update performance with actual server wire observation"
+    }
+  ],
+  "foundationChecks": {
+    "windows": 27,
+    "linuxStaticBuild": 19
+  },
+  "buildProtectedCourses": 72,
+  "inventoryOnly": {
+    "courses": 2985,
+    "accounts": 664
+  },
+  "corrections": [
+    {
+      "logs": [
+        "chromium.log",
+        "chromium-final.log"
+      ],
+      "reason": "Two event tests originally expected immediate reconnect; now advance the real 30-second throttle using controlled time. No network or assertion timeout increased."
+    },
+    {
+      "logs": [
+        "webkit-root.log",
+        "webkit-root-wire.log",
+        "webkit-lesson.log"
+      ],
+      "reason": "WebKit exposes conditional wire 304 as synthesized browser 200. Added test-server status/body-byte observation; same zero-body assertion passes on both engines."
+    },
+    {
+      "logs": [
+        "metadata-adjacent.log",
+        "metadata-adjacent-linux.log"
+      ],
+      "reason": "Windows run had 11 passes and 9 symlink/mkfifo/autocrlf environment failures. Unchanged static-build tests all 19 pass in Ubuntu."
+    }
+  ],
+  "localRawEvidence": "output/performance-update-20261023/",
+  "limits": [
+    "No production deployment, remote CI or concurrent-user capacity test this turn",
+    "No new physical iPhone/Android/WeChat validation",
+    "No full check:commit or full course-suite execution",
+    "Cold timing requires prepared directory; not total login or cold direct-link time"
+  ],
+  "productionDataTouched": false,
+  "runtimeSha256": {
+    "core/course-loader.js": "eb1266f1c4e943cb602363598960822171287daa1e95a26ffdbdb9768acda429",
+    "scripts/course-packages.js": "68c2c226c0d0a79c7b0ee5510f2626852013d0198d9119c65c01b7269b1e1da7",
+    "server/app.js": "d50d3caa0374893b7c0fce05ccb5057fd3ece7190fa1e73e58262a9ff1c57f8d",
+    "server/public/portal.js": "14255e3fb99ae574df9cdd56b7b638854a1ce3c15094d13cd5fd688bee8f06ce",
+    "server/public/portal.css": "48870025b7a04a223bb38fa2500e2ecf422de5fc8f8bb289bac23d2abc7f11b6",
+    "scripts/preview-courses.js": "c2d0a941b9fa724eab7cdd9b86b6188af7d6871e9643d36a234d23e36fad028a",
+    "tests/support/static-server.js": "c464f1131b08f73399aec37fe9c0ac89f7942c25317b8675831a566053094df5"
+  }
+}

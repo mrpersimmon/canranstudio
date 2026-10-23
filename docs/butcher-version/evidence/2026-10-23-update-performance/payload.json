@@ -1,0 +1,224 @@
+{
+  "basePath": "/lesson/",
+  "courses": 72,
+  "withdrawals": 0,
+  "indexBodyBytes": 24351,
+  "statusBodyBytes": {
+    "min": 393,
+    "max": 413
+  },
+  "withdrawalBodyBytes": {
+    "min": 83,
+    "max": 87
+  },
+  "scope": "Generated response bodies; excludes headers, TLS, auth requests and other downloads",
+  "packs": [
+    {
+      "id": "unit1-2",
+      "manifestBytes": 34551,
+      "requiredFiles": 121,
+      "requiredBytes": 7963333,
+      "requiredImages": 67,
+      "fonts": [
+        {
+          "key": "/lesson/assets/awards/award-round.woff2",
+          "bytes": 1296316
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-500.woff2",
+          "bytes": 4456656
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-brand-400.woff2",
+          "bytes": 1948
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-nunito.woff2",
+          "bytes": 101104
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/lesson-gothic-body-400.woff2",
+          "bytes": 323072
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-500.woff2",
+          "bytes": 19556
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-700.woff2",
+          "bytes": 19436
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-800.woff2",
+          "bytes": 18632
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-400.woff2",
+          "bytes": 16076
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-500.woff2",
+          "bytes": 16248
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-600.woff2",
+          "bytes": 16468
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-700.woff2",
+          "bytes": 15900
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+          "bytes": 726052
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-latin-400.woff2",
+          "bytes": 5344
+        }
+      ]
+    },
+    {
+      "id": "unit29-30",
+      "manifestBytes": 52976,
+      "requiredFiles": 191,
+      "requiredBytes": 8518711,
+      "requiredImages": 136,
+      "fonts": [
+        {
+          "key": "/lesson/assets/awards/award-round.woff2",
+          "bytes": 1296316
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-500.woff2",
+          "bytes": 4456656
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-brand-400.woff2",
+          "bytes": 1948
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-nunito.woff2",
+          "bytes": 101104
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/lesson-gothic-body-400.woff2",
+          "bytes": 323072
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-500.woff2",
+          "bytes": 19556
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-700.woff2",
+          "bytes": 19436
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-800.woff2",
+          "bytes": 18632
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-400.woff2",
+          "bytes": 16076
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-500.woff2",
+          "bytes": 16248
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-600.woff2",
+          "bytes": 16468
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-700.woff2",
+          "bytes": 15900
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+          "bytes": 726052
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-latin-400.woff2",
+          "bytes": 5344
+        }
+      ]
+    },
+    {
+      "id": "unit37-38",
+      "manifestBytes": 45001,
+      "requiredFiles": 160,
+      "requiredBytes": 8734239,
+      "requiredImages": 106,
+      "fonts": [
+        {
+          "key": "/lesson/assets/awards/award-round.woff2",
+          "bytes": 1296316
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-500.woff2",
+          "bytes": 4456656
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-gothic-brand-400.woff2",
+          "bytes": 1948
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/award-nunito.woff2",
+          "bytes": 101104
+        },
+        {
+          "key": "/lesson/assets/awards/fonts/lesson-gothic-body-400.woff2",
+          "bytes": 323072
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-500.woff2",
+          "bytes": 19556
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-700.woff2",
+          "bytes": 19436
+        },
+        {
+          "key": "/lesson/assets/fonts/baloo-2-latin-800.woff2",
+          "bytes": 18632
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-400.woff2",
+          "bytes": 16076
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-500.woff2",
+          "bytes": 16248
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-600.woff2",
+          "bytes": 16468
+        },
+        {
+          "key": "/lesson/assets/fonts/fredoka-latin-700.woff2",
+          "bytes": 15900
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-chinese-simplified-400.woff2",
+          "bytes": 726052
+        },
+        {
+          "key": "/lesson/assets/fonts/zcool-kuaile-latin-400.woff2",
+          "bytes": 5344
+        }
+      ]
+    }
+  ],
+  "rootMetadata": {
+    "basePath": "/",
+    "indexBodyBytes": 23770,
+    "statusBodyBytes": {
+      "min": 379,
+      "max": 399
+    },
+    "withdrawalBodyBytes": {
+      "min": 76,
+      "max": 80
+    }
+  }
+}

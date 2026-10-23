@@ -55,6 +55,9 @@
     }
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);let index;
     try{const response=await fetch('/lesson/course-index.json',{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('课程资源尚未就绪');index=await response.json();}finally{clearTimeout(timer);}
+    // Check revisions before the large shared-font downloads. A failed or slow
+    // preparation must not hide either the course entries or update choices.
+    void showCourseUpdates(index);
     const fonts=index.sharedFonts||[];
     if(!Array.isArray(fonts)||fonts.some(item=>item.type!=='font/woff2'||!item.url.startsWith('/lesson/resources/')||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isSafeInteger(item.bytes)||item.bytes<=0))throw Error('课程资源尚未就绪');
     const queue=[...fonts];
@@ -64,6 +67,18 @@
     await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)})).catch(()=>{});
     await Promise.all(Array.from({length:2},async()=>{while(queue.length)await store.obtain(queue.shift());}));
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
+  }
+  async function showCourseUpdates(index){
+    const store=CanranCourseCache.open('/lesson/');
+    for(const card of app.querySelectorAll('.course')){
+      const current=await store.current(card.dataset.unit),latest=index.courses?.[card.dataset.unit];
+      if(!card.isConnected||!current||!latest||current.revision===latest.revision||card.querySelector('.course-update-choice'))continue;
+      const row=document.createElement('div');row.className='course-update-choice';
+      const label=document.createElement('strong');label.textContent='有新版课程';
+      const link=document.createElement('a');link.className='button compact';link.textContent='进入新版';
+      const url=new URL(card.querySelector('.primary-button').href);url.searchParams.set('course-update','1');link.href=url.href;
+      row.append(label,link);card.querySelector('.featured-copy').append(row);
+    }
   }
   function prepareDirectory(hasCourses, waiting) {
     const note=app.querySelector('p[role="status"]'),retry=document.createElement('button');

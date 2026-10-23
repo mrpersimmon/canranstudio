@@ -256,6 +256,20 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       const auth = session(request, 'student', false), admin = management.authenticate(request, false, false);
       if (!admin && store.lookupSession(cookie(request, 'student'), 'student-setup', Date.now())) throw fail(403, '请先设置新密码');
       const allowed = [...new Set([...(admin ? management.courses(admin) : []), ...(auth ? [...store.allowed(auth.subject), ...store.activeCourses(auth, Date.now())] : [])])];
+      const metadataRoute = relative.match(/^(?:course-status|course-withdrawals)\/((?:unit\d+-\d+|lesson\d+|soundmark|home))\.json$/);
+      if (metadataRoute) {
+        // Never answer a conditional request before checking current account
+        // state and course access. A cached ETag is not an authorization token.
+        if (!admin) studentSession(request);
+        if (!allowed.includes(metadataRoute[1])) throw fail(403, '这节课还没向你的班级开放');
+        const item = packages.generated.get(relative);
+        if (!item) throw fail(404, '课程不存在');
+        const headers = { 'Content-Type': item.type, 'Cache-Control': 'private, no-cache', Vary: 'Cookie', ETag: item.etag };
+        const unchanged = request.headers['if-none-match']?.split(',').some(value => value.trim() === '*' || value.trim().replace(/^W\//, '') === item.etag);
+        if (unchanged) return response.writeHead(304, headers).end();
+        response.writeHead(200, { ...headers, 'Content-Length': item.body.length });
+        return response.end(request.method === 'HEAD' ? undefined : item.body);
+      }
       if (relative === 'course-index.json') {
         if (!auth && !admin) throw fail(401, '请先登录');
         const sharedFonts=(packages.index.sharedFonts||[]).filter(item=>[...(owners.get(item.url)||[])].some(id=>allowed.includes(id)));
