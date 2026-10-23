@@ -10,20 +10,30 @@ async function ready(p){await expect(p.locator('#wordPageProgress')).toBeVisible
 test('无更新时只轮询单课元数据，普通检测错峰，撤回仍及时且304没有响应体',async({page,browser},info)=>{
  test.setTimeout(90000);const student=await learner(page,browser),p=student.page,requests=[];
  try{
+  // A prior lesson may already have made conditional requests on this shared
+  // test server. Reproduce that history with real authenticated HTTP traffic.
+  const earlier=await p.request.get(base+'course-withdrawals/'+course+'.json');
+  const previous=await p.request.get(base+'course-withdrawals/'+course+'.json',{headers:{'If-None-Match':earlier.headers().etag}});
+  expect(previous.status()).toBe(304);
+  const readWire=async()=> (await p.request.get('/__test__/course-network')).json();
+  const history=await readWire();
+  expect(history.some(r=>r.path===base+'course-withdrawals/'+course+'.json'&&r.status===304)).toBe(true);
+  // Count only traffic after this visit starts. Other tests share the server;
+  // their completed checks must not be mistaken for this page polling twice.
+  const wire=async()=> (await readWire()).slice(history.length);
   await p.clock.install();p.on('response',r=>{if(/course-(?:index|status|withdrawals)/.test(r.url()))requests.push({path:new URL(r.url()).pathname,status:r.status()});});
   await p.goto(base+course+'/#learn/words');await ready(p);
   await expect.poll(()=>requests.filter(r=>r.path.includes('/course-status/')).length).toBe(1);
   const full=requests.filter(r=>r.path.endsWith('course-index.json')).length;
   await p.clock.fastForward(61000);await expect.poll(()=>requests.filter(r=>r.path.includes('/course-withdrawals/')).length).toBe(1);
   expect(requests.filter(r=>r.path.includes('/course-status/'))).toHaveLength(1);
-  const wire=async()=> (await p.request.get('/__test__/course-network')).json();
   // WebKit can present a wire 304 as a synthesized 200. Check actual server
   // delivery as well as browser behavior, not a browser-specific event status.
-  await p.clock.fastForward(61000);await expect.poll(async()=> (await wire()).filter(r=>r.path.includes('/course-withdrawals/')&&r.status===304&&r.bytes===0&&r.conditional).length).toBe(1);
+  await p.clock.fastForward(61000);await expect.poll(async()=> (await wire()).filter(r=>r.path===base+'course-withdrawals/'+course+'.json'&&r.status===304&&r.bytes===0&&r.conditional).length).toBe(1);
   await p.clock.fastForward(57000);expect(requests.filter(r=>r.path.includes('/course-status/'))).toHaveLength(1);
-  await p.clock.fastForward(122000);await expect.poll(async()=> (await wire()).filter(r=>r.path.includes('/course-status/')&&r.status===304&&r.bytes===0&&r.conditional).length).toBe(1);
+  await p.clock.fastForward(122000);await expect.poll(async()=> (await wire()).filter(r=>r.path===base+'course-status/'+course+'.json'&&r.status===304&&r.bytes===0&&r.conditional).length).toBe(1);
   expect(requests.filter(r=>r.path.endsWith('course-index.json'))).toHaveLength(full);
-  await info.attach('metadata-requests.json',{body:JSON.stringify({browser:requests,wire:await wire()},null,2),contentType:'application/json'});
+  await info.attach('metadata-requests.json',{body:JSON.stringify({priorRequestCount:history.length,browser:requests,wire:await wire()},null,2),contentType:'application/json'});
  }finally{await student.context.close();}
 });
 

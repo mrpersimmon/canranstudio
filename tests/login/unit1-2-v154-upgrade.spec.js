@@ -1,4 +1,6 @@
 'use strict';
+// Frozen paper certificates used the learner's local date. Generate the
+// historical original in Shanghai; compare its current copy on a UTC device.
 const {test,expect,devices}=require('@playwright/test');
 const fs=require('fs/promises'),path=require('path'),os=require('os'),sharp=require('sharp');
 const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
@@ -26,15 +28,15 @@ for(const kind of ['card','certificate'])test(`同库更新与跨设备：原${k
   const fixture=kind==='card'?'unit1-2-before-v154':'unit1-2-before-awards';
   for(const name of await fs.readdir(path.join(root,'tests/fixtures',fixture)))if(/\.(js|css|html)$/.test(name)&&name!=='flow.js')await fs.copyFile(path.join(root,'tests/fixtures',fixture,name),path.join(oldRoot,'unit1-2',name));
   const store=openStore(dataDir);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();
-  await start(true);first=await browser.newContext({baseURL:origin,...(webkit?mobile:{})});const p=await first.newPage();await adminLogin(p,base);const account=await createStudent(p,'历史成果保留验收','小禾',[/Lesson 1–2/]);await signIn(p,account,base);
+  await start(true);first=await browser.newContext({baseURL:origin,timezoneId:kind==='certificate'?'Asia/Shanghai':'UTC',...(webkit?mobile:{})});const p=await first.newPage();await adminLogin(p,base);const account=await createStudent(p,'历史成果保留验收','小禾',[/Lesson 1–2/]);await signIn(p,account,base);
   if(kind==='card')await flow.complete(p,'1-2',prefix);else{
    // The frozen 2026-10-06 helper assumed a 5-second load. Keep its independent
    // answers; explicitly wait for the historical page's real ready boundary.
    await p.goto(base+'unit1-2/#learn/text');await ready(p);const text=p.locator('.stage-text');await text.getByRole('button',{name:'开始看课文',exact:true}).click();while(await text.getByRole('button',{name:'下一句',exact:true}).isVisible())await text.getByRole('button',{name:'下一句',exact:true}).click();await text.getByRole('button',{name:'完成课文',exact:true}).click();
    for(const[id,answers]of Object.entries(old25.ANSWERS['1-2'])){await p.goto(base+'unit1-2/#learn/'+id);await ready(p);const room=p.locator('.stage-'+id);for(let i=0;i<answers.length;i++){await old25.select(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();}}
-   await p.goto(base+'unit1-2/#learn/certificate');await ready(p);await p.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('原证姓名');await p.getByRole('button',{name:'领取单元证书',exact:true}).click();
+   await p.goto(base+'unit1-2/#learn/certificate');await ready(p);await p.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('原证姓名');await p.clock.setFixedTime(new Date('2026-10-23T16:10:00.000Z'));await p.getByRole('button',{name:'领取单元证书',exact:true}).click();
   }
-  await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');const before=await read(p),date=await p.locator('#certificateDate').innerText(),ext=kind==='card'?'gif':'png';
+  await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');const before=await read(p);if(kind==='certificate')expect(before.activity.unitCertificateIssuedAt).toBe('2026-10-23T16:10:00.000Z');const date=await p.locator('#certificateDate').innerText(),ext=kind==='card'?'gif':'png';
   const beforeFile=info.outputPath('before.'+ext);let download=p.waitForEvent('download');await p.getByRole('button',{name:kind==='card'?'保存动图':'保存图片',exact:true}).click();await(await download).saveAs(beforeFile);
   if(kind==='certificate')await p.keyboard.press('Escape');
   await stop();await start(false);await p.goto(base+'unit1-2/?course-retry=1#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText(kind==='card'?'5':'0');
@@ -45,7 +47,7 @@ for(const kind of ['card','certificate'])test(`同库更新与跨设备：原${k
   const opts=kind==='card'?{animated:true}:{};expect((await sharp(beforeFile,opts).raw().toBuffer()).equals(await sharp(afterFile,opts).raw().toBuffer())).toBe(true);
   if(kind==='card'){const meta=await sharp(afterFile,{animated:true}).metadata();expect(meta.pages).toBe(60);}else await p.keyboard.press('Escape');
   await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
-  second=await browser.newContext({baseURL:origin,...(webkit?mobile:{})});const q=await second.newPage();await signIn(q,account,base);await q.goto(base+'unit1-2/#learn/certificate');await ready(q);
+  second=await browser.newContext({baseURL:origin,timezoneId:'UTC',...(webkit?mobile:{})});const q=await second.newPage();await signIn(q,account,base);await q.goto(base+'unit1-2/#learn/certificate');await ready(q);
   await q.getByText('之前的学习记录与证书',{exact:true}).click();const archive=(await read(q)).activity.unit12HistoryProgress;expect(archive.records).toEqual(before.records);
   if(kind==='certificate'){await expect(q.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',before.activity.unitCertificateIssuedAt);await q.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(q.locator('#legacyCertificateName')).toHaveText('原证姓名');await expect(q.locator('#legacyCertificateDate')).toHaveText(date);await q.keyboard.press('Escape');}
   else{

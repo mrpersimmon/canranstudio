@@ -130,3 +130,102 @@ test('runner preserves child failures and rejects success with a missing or inco
     assert.ok(fs.existsSync(path.join(root, 'output/ci/courses-1/plan.json')));
   }
 });
+
+const originalMirrors = '# Hosted runner defaults\r\n' +
+  'http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\r\n' +
+  'https://archive.ubuntu.com/ubuntu/\tpriority:2\r\n' +
+  'https://security.ubuntu.com/ubuntu/\tpriority:3\r\n';
+const originalSources = 'Types: deb\r\nURIs: mirror+file:/etc/apt/apt-mirrors.txt\r\n' +
+  'Suites: noble noble-updates noble-backports noble-security\r\n' +
+  'Components: main restricted universe multiverse\r\nSigned-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg\r\n';
+
+function mirrorFixture(t) {
+  const aptDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'canran-apt-mirrors-'));
+  t.after(() => fs.rmSync(aptDirectory, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(aptDirectory, 'sources.list.d'));
+  const sources = path.join(aptDirectory, 'sources.list.d/ubuntu.sources');
+  const mirrors = path.join(aptDirectory, 'apt-mirrors.txt');
+  fs.writeFileSync(sources, originalSources);
+  fs.writeFileSync(mirrors, originalMirrors);
+  const writes = [], logs = [];
+  const options = { aptDirectory, platform: 'linux', env: { GITHUB_ACTIONS: 'true', RUNNER_OS: 'Linux' },
+    writeFile(file, value) { writes.push(file); fs.writeFileSync(file, value); }, log(message) { logs.push(message); } };
+  return { sources, mirrors, writes, logs, options };
+}
+
+test('CI mirror preparation changes only known priorities, preserves source bytes and is idempotent', t => {
+  // A slow but responsive Azure mirror consumed the job deadline before tests
+  // began. Prefer the existing official fallback without changing package trust.
+  const { prepare } = require('../../scripts/ci/prepare-ubuntu-mirrors');
+  const fixture = mirrorFixture(t);
+  assert.equal(prepare(fixture.options).changed, true);
+  assert.equal(fs.readFileSync(fixture.mirrors, 'utf8'), '# Hosted runner defaults\r\n' +
+    'http://azure.archive.ubuntu.com/ubuntu/\tpriority:3\r\n' +
+    'https://archive.ubuntu.com/ubuntu/\tpriority:1\r\n' +
+    'https://security.ubuntu.com/ubuntu/\tpriority:2\r\n');
+  assert.deepEqual(fs.readFileSync(fixture.sources), Buffer.from(originalSources));
+  assert.equal(prepare(fixture.options).changed, false);
+  assert.deepEqual(fixture.writes, [fixture.mirrors]);
+  assert.ok(fixture.logs.some(message => /applied/.test(message)));
+});
+
+test('unknown or missing runner mirror layouts remain unchanged and explain why preparation was not applied', t => {
+  const { prepare } = require('../../scripts/ci/prepare-ubuntu-mirrors');
+  const fixture = mirrorFixture(t);
+  for (const content of [originalMirrors + 'https://example.invalid/ubuntu/\tpriority:1\n',
+    originalMirrors.replace('priority:2', 'priority:unknown'),
+    originalMirrors.replace('https://security.ubuntu.com/ubuntu/', 'https://archive.ubuntu.com/ubuntu/')]) {
+    fs.writeFileSync(fixture.mirrors, content);
+    assert.equal(prepare(fixture.options).changed, false);
+    assert.equal(fs.readFileSync(fixture.mirrors, 'utf8'), content);
+  }
+  fs.writeFileSync(fixture.mirrors, originalMirrors);
+  for (const content of [originalSources.replace('mirror+file:/etc/apt/apt-mirrors.txt', 'https://archive.ubuntu.com/ubuntu/'),
+    originalSources.replace('URIs:', '# URIs:')]) {
+    fs.writeFileSync(fixture.sources, content);
+    assert.equal(prepare(fixture.options).changed, false);
+    assert.equal(fs.readFileSync(fixture.sources, 'utf8'), content);
+    assert.equal(fs.readFileSync(fixture.mirrors, 'utf8'), originalMirrors);
+  }
+  fs.rmSync(fixture.sources);
+  assert.equal(prepare(fixture.options).changed, false);
+  fs.writeFileSync(fixture.sources, originalSources);
+  fs.rmSync(fixture.mirrors);
+  assert.equal(prepare(fixture.options).changed, false);
+  assert.deepEqual(fixture.writes, []);
+  assert.equal(fixture.logs.length, 7);
+  assert.ok(fixture.logs.every(message => /not applied/.test(message)));
+  assert.deepEqual(fs.readFileSync(fixture.sources), Buffer.from(originalSources));
+});
+
+test('mirror preparation leaves non-GitHub Linux environments alone but surfaces permission failures', t => {
+  const { prepare } = require('../../scripts/ci/prepare-ubuntu-mirrors');
+  const fixture = mirrorFixture(t);
+  const forbiddenRead = () => { throw new Error('must not read host files'); };
+  for (const patch of [{ platform: 'win32' }, { env: {} }, { env: { GITHUB_ACTIONS: 'true', RUNNER_OS: 'macOS' } }]) {
+    assert.equal(prepare({ ...fixture.options, ...patch, readFile: forbiddenRead }).changed, false);
+  }
+  const denied = Object.assign(new Error('Permission denied'), { code: 'EACCES' });
+  assert.throws(() => prepare({ ...fixture.options, readFile() { throw denied; } }), error => error === denied);
+  assert.throws(() => prepare({ ...fixture.options, writeFile() { throw denied; } }), error => error === denied);
+  assert.deepEqual(fs.readFileSync(fixture.sources), Buffer.from(originalSources));
+  assert.equal(fs.readFileSync(fixture.mirrors, 'utf8'), originalMirrors);
+  assert.deepEqual(fixture.writes, []);
+});
+
+test('all five CI browser jobs prepare mirrors before unchanged installs, deadlines and performance assertions', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8');
+  for (const [job, deadline, browser] of [['foundation', 60, 'chromium'], ['courses', 60, 'chromium'],
+    ['accounts', 60, 'chromium'], ['cache-performance', 10, 'chromium'], ['recovery-webkit', 15, 'webkit']]) {
+    const block = workflow.match(new RegExp('\\n  ' + job + ':[\\s\\S]*?(?=\\n  [\\w-]+:|$)'))?.[0];
+    assert.ok(block, job + ' remains scheduled');
+    assert.match(block, new RegExp('timeout-minutes: ' + deadline + '\\b'));
+    assert.match(block, new RegExp('run: node scripts/ci/prepare-ubuntu-mirrors\\.js\\r?\\n      - run: npx playwright install --with-deps ' + browser));
+    assert.equal((block.match(/prepare-ubuntu-mirrors/g) || []).length, 1);
+    assert.doesNotMatch(block, /continue-on-error:|--no-deps|\|\| true/);
+  }
+  const cold = fs.readFileSync(path.join(ROOT, 'tests/e2e/course-cache-cold.spec.js'), 'utf8');
+  const revisit = fs.readFileSync(path.join(ROOT, 'tests/e2e/course-cache-performance.spec.js'), 'utf8');
+  assert.match(cold, /expect\(report\.elapsedMs\)\.toBeLessThan\(5000\)/);
+  assert.match(revisit, /expect\(\[\.\.\.samples\]\.sort\(\(a, b\) => a - b\)\[18\]\)\.toBeLessThan\(1500\)/);
+});

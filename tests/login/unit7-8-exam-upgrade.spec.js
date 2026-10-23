@@ -1,4 +1,6 @@
 'use strict';
+// Frozen paper certificates used the learner's local date. Generate the
+// historical original in Shanghai; compare its current copy on a UTC device.
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, signIn } = require('./helpers');
 const legacy = require('../fixtures/unit7-8-exam3-before/flow');
@@ -22,16 +24,17 @@ test('7–8三题旧挑战先升十一题再升五星版，跨设备保留原证
     await createSite(oldRoot, { classroom:true, overlays:{'unit7-8':path.join(root,'tests/fixtures/unit7-8-exam3-before')} });
     await createSite(elevenRoot, { classroom:true });
     const store = openStore(dataDir); store.setAdmin('teacher', 'Test-only-classroom-2026!'); store.close(); await start(oldRoot);
-    first = await browser.newContext({ baseURL: origin }); const old = await first.newPage(); await adminLogin(old, '/');
+    first = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Shanghai' }); const old = await first.newPage(); await adminLogin(old, '/');
     const account = await createStudent(old, '综合挑战升级验收', '采访班', [/Lesson 7–8 /]); await signIn(old, account, '/');
     await legacy.completeUnit78(old);
-    await old.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('综合小记者'); await old.getByRole('button', { name: '领取单元证书', exact: true }).click();
+    await old.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('综合小记者'); await old.clock.setFixedTime(new Date('2026-10-23T16:10:00.000Z')); await old.getByRole('button', { name: '领取单元证书', exact: true }).click();
     const date = await old.locator('#certificateDate').innerText(); await old.keyboard.press('Escape');
     const issuedAt=await old.evaluate(()=>JSON.parse(localStorage.getItem(window.CanranCore.unit78.progress.learningKey)).activity.unitClassroomCertificateIssuedAt);
     expect(Number.isFinite(Date.parse(issuedAt))).toBe(true);
+    expect(issuedAt).toBe('2026-10-23T16:10:00.000Z');
     await expect(old.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await first.close(); first = null; await new Promise(resolve => server.close(resolve)); server = null; await start(elevenRoot);
-    second = await browser.newContext({ baseURL: origin }); const current = await second.newPage(); await signIn(current, account, '/');
+    second = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Shanghai' }); const current = await second.newPage(); await signIn(current, account, '/');
     await expect(current.locator('.course')).toContainText('6 / 15');
     await current.goto('/unit7-8/#learn/certificate'); await expect(current.getByRole('button', { name: '领取单元证书', exact: true })).toBeDisabled();
     await expect(current.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小记者');
@@ -44,7 +47,7 @@ test('7–8三题旧挑战先升十一题再升五星版，跨设备保留原证
     await room.getByRole('button', { name: '下一站：我的单元证书', exact: true }).click();
     await current.getByRole('button', { name: '领取单元证书', exact: true }).click(); await expect(current.locator('#certificateDate')).toHaveText(date); await current.keyboard.press('Escape');
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    third = await browser.newContext({ baseURL: origin }); const restored = await third.newPage(); await signIn(restored, account, '/');
+    third = await browser.newContext({ baseURL: origin, timezoneId: 'Asia/Shanghai' }); const restored = await third.newPage(); await signIn(restored, account, '/');
     await expect(restored.locator('.course')).toContainText('15 / 15'); await restored.goto('/unit7-8/#learn/exam');
     await expect(restored.locator('.stage-exam')).toContainText('首次独立答对 11 / 11');
     await restored.goto('/unit7-8/#learn/certificate'); await expect(restored.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('综合小记者');
@@ -69,7 +72,7 @@ test('7–8三题旧挑战先升十一题再升五星版，跨设备保留原证
     await expect(restored.locator('#legacyCertificateDate')).toHaveText(date);
     await restored.keyboard.press('Escape');
 
-    await second.close();second=await browser.newContext({baseURL:origin});
+    await second.close();second=await browser.newContext({baseURL:origin,timezoneId:'UTC'});
     const fresh=await second.newPage();await signIn(fresh,account,'/');
     await fresh.goto('/unit7-8/#learn/certificate');
     await expect(fresh.locator('#wordPageProgress')).toBeVisible({timeout:30000});

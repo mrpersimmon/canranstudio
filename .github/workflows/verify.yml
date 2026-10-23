@@ -36,6 +36,7 @@ jobs:
           retention-days: 7
       - run: npm run vendor:fonts
       - run: git diff --exit-code -- assets/fonts
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps chromium
       - run: npm run test:unit
       - run: npm run test:deploy
@@ -61,6 +62,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps chromium
       # Keep serial files together; live discovery covers new files as well.
       - run: node scripts/ci/browser-suite.js run courses ${{ matrix.shard }}
@@ -83,6 +85,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps chromium
       # Cold-load and warm-revisit budgets use separate browser processes; do
       # not mix them with the repeated reload and fault-injection stress tests.
@@ -117,6 +120,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps chromium
       - run: node scripts/ci/browser-suite.js run accounts ${{ matrix.shard }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -142,6 +146,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps webkit
       - run: npm run test:recovery:webkit -- --reporter=line,json
         env:
