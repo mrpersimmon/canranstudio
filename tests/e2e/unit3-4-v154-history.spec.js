@@ -1,7 +1,9 @@
 'use strict';
 const {test,expect}=require('@playwright/test'),fs=require('fs/promises'),sharp=require('sharp');
 const flow=require('../support/unit34-v154'),voiced=require('../fixtures/unit3-4-voiced-before/flow');
-test.use({browserName:process.env.UNIT34_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',browserName:process.env.UNIT34_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
 for(const version of ['classroom25','voiced27'])test(`${version}真实旧页证书原文、姓名、精确日期、PNG与打印保留`,async({page,browserName},info)=>{
  test.setTimeout(180000);await page.clock.setFixedTime(new Date('2026-10-05T01:18:37.000Z'));const restore=await flow.installPrevious(page,version==='classroom25'?'unit3-4-before-awards':'unit3-4-voiced-before');
  if(version==='classroom25')await flow.complete(page,'',true);else await voiced.completeUnit34(page);

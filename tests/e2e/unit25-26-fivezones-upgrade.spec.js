@@ -1,7 +1,9 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
 const{legacy}=require('../support/unit2526-legacy');const{completeUnit2526}=require('../support/unit25-26-flow');const{activity,select,ANSWERS}=require('../support/unit2526-fivezones');
-test.use({actionTimeout:7000,...(process.env.UNIT2526_BROWSER==='webkit'?{browserName:'webkit'}:{})});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',actionTimeout:7000,...(process.env.UNIT2526_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 async function pair(room,en,cn){await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:en,exact:true}).click();await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:cn,exact:true}).click();}
 for(const selected of [false,true])test(`旧${selected?'仅配一对':'空白'}升级：不伪造作答，完整新轮可获星`,async({page})=>{
  test.setTimeout(90000);const upgrade=await legacy(page);await page.goto('/unit25-26/#learn/listen');const room=page.locator('.stage-listen');if(selected)await pair(room,'on the left','在左边');await page.reload();await upgrade();await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 7 题');await expect(page.locator('#starCount')).toHaveText('0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

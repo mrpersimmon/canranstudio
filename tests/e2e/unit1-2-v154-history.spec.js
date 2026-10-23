@@ -4,7 +4,9 @@ const {test,expect}=require('@playwright/test');
 const flow=require('../support/thirteen-types-flow'),old25=require('../fixtures/unit1-2-before-awards/flow');
 const six=require('../support/unit12-six-zones-predecessor');
 const {installPrevious,book}=require('../support/unit12-v154');
-test.use({browserName:process.env.UNIT12_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:8000});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',browserName:process.env.UNIT12_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:8000});
 for(const version of [25,37])test(`旧${version}题真实领取的证书原文、姓名、日期、PNG与打印保留`,async({page,browserName},info)=>{
  test.setTimeout(120000);await page.clock.setFixedTime(new Date('2026-10-07T02:31:47.000Z'));
  const restore=version===25?await installPrevious(page,'unit1-2-before-awards'):await six.install(page);

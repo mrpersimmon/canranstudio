@@ -1,7 +1,9 @@
 'use strict';
 const{test,expect}=require('@playwright/test');
 const{legacy}=require('../support/unit3536-legacy');const{complete}=require('../support/unit35-36-flow');const{activity,select,ANSWERS}=require('../support/unit3536-fivezones');
-test.use({actionTimeout:7000,...(process.env.UNIT3536_BROWSER==='webkit'?{browserName:'webkit'}:{})});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',actionTimeout:7000,...(process.env.UNIT3536_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 for(const selected of [false,true])test(`旧${selected?'仅选未提交':'空白'}升级：不伪造作答，完整新轮可获星`,async({page})=>{
  test.setTimeout(90000);const upgrade=await legacy(page);await page.goto('/unit35-36/#learn/listen');const room=page.locator('.stage-listen');if(selected)await room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'photograph',exact:true}).click();await page.reload();await upgrade();await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');await expect(page.locator('#starCount')).toHaveText('0');if(selected)await expect(room.getByRole('group',{name:'英文',exact:true}).getByRole('button',{name:'photograph',exact:true})).toHaveAttribute('aria-pressed','true');else await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await activity(page,'listen');await expect(page.locator('#starCount')).toHaveText('1');
 });

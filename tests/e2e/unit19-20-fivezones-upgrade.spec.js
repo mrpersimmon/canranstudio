@@ -3,7 +3,9 @@ const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit1920-legacy');
 const {completeUnit1920}=require('../support/unit19-20-flow');
 const {activity,select,ANSWERS}=require('../support/unit1920-fivezones');
-test.use({actionTimeout:7000,...(process.env.UNIT1920_BROWSER==='webkit'?{browserName:'webkit'}:{})});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',actionTimeout:7000,...(process.env.UNIT1920_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 for(const selected of [false,true])test(`旧${selected?'仅选择':'空白'}升级：不伪造作答，完整新轮可获星`,async({page})=>{
  test.setTimeout(90000);const upgrade=await legacy(page);await page.goto('/unit19-20/#learn/listen');const room=page.locator('.stage-listen');
  if(selected)await room.getByRole('button',{name:'累的；疲倦的',exact:true}).click();

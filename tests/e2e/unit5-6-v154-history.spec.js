@@ -1,6 +1,8 @@
 'use strict';
 const {test,expect}=require('@playwright/test'),fs=require('fs/promises'),sharp=require('sharp'),flow=require('../support/unit56-v154'),voiced=require('../fixtures/unit5-6-voiced-before/flow');
-test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai',browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
 for(const version of ['classroom26','voiced27'])test(`${version}真实旧证书原内容、姓名、精确日期、PNG与打印保留`,async({page,browserName},info)=>{
  test.setTimeout(240000);await page.clock.setFixedTime(new Date('2026-10-05T01:18:37.000Z'));const restore=await flow.installPrevious(page,version==='classroom26'?'unit5-6-before-awards':'unit5-6-voiced-before');
  if(version==='classroom26')await flow.complete(page,'','classroom');else await voiced.completeUnit56(page);

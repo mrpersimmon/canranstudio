@@ -2,6 +2,9 @@
 const {test,expect}=require('@playwright/test');
 const {legacy,audioBoundary}=require('../support/unit4950-legacy');
 const {activity,story}=require('../support/unit4950');
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai'});
 for(const selected of [false,true])test(`旧${selected?'已选未交':'空白'}草稿升级：新题不代答，新轮全对正常获星`,async({page})=>{
  const upgrade=await legacy(page);await page.goto('/unit49-50/#learn/listen');
  if(selected)await page.locator('.stage-listen').getByRole('button',{name:'butcher',exact:true}).click();

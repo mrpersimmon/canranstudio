@@ -2,6 +2,9 @@
 const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit1112-legacy');
 const {completeUnit1112}=require('../support/unit11-12-flow');
+// Original-paper comparison uses the agreed Shanghai calendar day.
+// UTC/Honolulu cross-day preservation is covered by units17-30-upgrade in login.
+test.use({timezoneId:'Asia/Shanghai'});
 test('练习纸保留A四题、B十二题、原例和40条书写线，实际PDF无隐藏题目',async({page},info)=>{
  await page.goto('/unit11-12/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await expect(page.locator('body')).toHaveClass(/print-writing/);await page.emulateMedia({media:'print'});
  await expect(page.locator('.writing-a li')).toHaveCount(4);await expect(page.locator('.writing-b li')).toHaveCount(12);await expect(page.locator('.writing-rule')).toHaveCount(40);
