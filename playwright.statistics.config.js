@@ -4,7 +4,7 @@ const login = require('./playwright.login.config');
 
 module.exports = defineConfig({
   ...login,
-  testMatch: 'submission-statistics.spec.js',
+  testMatch: ['submission-statistics.spec.js', 'settlement-sequence.spec.js'],
   outputDir: './output/test-statistics',
   projects: [
     { name: 'chromium', use: { ...login.use, browserName: 'chromium' } },

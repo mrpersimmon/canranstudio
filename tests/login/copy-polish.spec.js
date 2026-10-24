@@ -17,7 +17,7 @@ test('账号课程与纪念册文案统一，短记录同步、目录状态和�
     await flow.activity(p, '1-2', 'listen', { base: base.slice(0, -1), keepAward: true });
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     const reveal = p.getByRole('dialog', { name: /纪念卡结算/ });
-    await expect(reveal).toBeVisible(); await reveal.press('Escape');
+    await expect(reveal).toBeVisible(); await require('../support/reward-dialog').dismissRewardDialog(p);
     await p.getByRole('button', { name: '学习记录', exact: true }).click();
     const record = p.getByRole('dialog', { name: '学习记录', exact: true });
     await expect(record.getByText('首次答对', { exact: true })).toHaveCount(5);
@@ -71,7 +71,9 @@ test('草稿、正在同步与联网后同步分别提示，不把未提交到�
     await room.getByRole('button', { name: '下一题', exact: true }).click();
     let held;
     await p.route('**/api/progress', route => { held = route; });
-    await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1) });
+    // Deliberately hold server confirmation: leave the foreground keepsake in
+    // place until this test releases the request, rather than auto-dismiss it.
+    await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1), keepAward: true });
     await expect(room.locator('.award-round-result')).toHaveText('正在同步星星…');
     await expect.poll(() => Boolean(held)).toBe(true);
     await held.abort();

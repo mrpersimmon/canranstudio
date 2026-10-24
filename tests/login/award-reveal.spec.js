@@ -3,6 +3,7 @@ const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,addStudent,studentLogin}=require('./helpers');
 const flow=require('../support/thirteen-types-flow');
 const tasks=require('../support/units1-30-tasks');
+const {waitForRewardDismissal,dismissRewardDialog}=require('../support/reward-dialog');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 const options={base:base.replace(/\/$/,''),keepAward:true};
 
@@ -68,7 +69,7 @@ test('悬浮卡关闭后才播放三张统计卡，重练展示已有星光且�
     const result = p.locator('.stage-listen .completion-card');
     await expect(reveal.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
     await expect(result).toHaveAttribute('data-result-motion', 'pending');
-    await reveal.press('Escape');
+    await dismissRewardDialog(p,'Escape');
     await expect(result).toHaveAttribute('data-result-motion', 'finished');
     let frames = await p.evaluate(() => window.resultMotionFrames);
     expect(frames.filter(frame => frame.modal && frame.phase === 'playing')).toEqual([]);
@@ -79,7 +80,7 @@ test('悬浮卡关闭后才播放三张统计卡，重练展示已有星光且�
     await expect(reveal).toHaveAttribute('data-kind', 'replay');
     await expect(reveal).toBeVisible(); await expect(reveal.locator('.travelling-star')).toHaveCount(0);
     await expect(p.locator('#starCount')).toHaveText('1');
-    await reveal.press('Escape');
+    await dismissRewardDialog(p,'Escape');
     await expect(result).toHaveAttribute('data-result-motion', 'finished');
     await p.reload(); await expect(reveal).not.toBeVisible(); await expect(p.locator('#starCount')).toHaveText('1');
   } finally { await student.context.close(); }
@@ -107,13 +108,13 @@ for (const [pair, width, motion] of [
     const glint = reveal.locator('.award-star[data-earned="true"] .star-glint').first();
     const opacity = await glint.evaluate(el => getComputedStyle(el).opacity);
     await expect.poll(() => glint.evaluate(el => getComputedStyle(el).opacity)).not.toBe(opacity);
-    await reveal.click({ position: { x: 8, y: 8 } });
+    await waitForRewardDismissal(p); await reveal.click({ position: { x: 8, y: 8 } });
     await expect(reveal).not.toBeVisible();
     await expect(p.locator('#starCount')).toHaveText('1');
   } finally { await student.context.close(); }
 });
 
-test('真实账号离线零错不预发星，恢复同步后仅一次悬浮卡、当前姓名、跨设备不重播',async({page,browser})=>{
+test('真实账号离线零错不预发星，恢复同步不打断结算，主动复练显示原星与当前姓名',async({page,browser})=>{
   test.setTimeout(120000);
   await adminLogin(page,base);const name='热爱探险和英语学习的小朋友李明小明';
   const account=await createStudent(page,'悬浮卡同步验收班',name,[/Lesson 1–2/]);const other=await addStudent(page,'另一位同学');
@@ -126,8 +127,21 @@ test('真实账号离线零错不预发星，恢复同步后仅一次悬浮卡�
   await flow.activity(p,'1-2','listen',options);
   await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('.stage-listen .award-round-result')).toContainText('联网后同步星星');
   const reveal=p.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal).not.toBeVisible();
+  const finish=p.locator('.stage-listen .completion-card');
+  await expect(finish).toHaveAttribute('data-result-motion','finished');
   await first.context.setOffline(false);
+  await expect(p.locator('#starCount')).toHaveText('1');
+  await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
+  await expect(reveal).not.toBeVisible();
+  await expect(finish).toHaveAttribute('data-result-motion','finished');
+  const confirmed=await p.evaluate(()=>CanranStudentAccess.awards);
+  // A late network acknowledgement updates the ledger silently. Only an
+  // explicit new perfect round may open the already-earned card again.
+  await finish.getByRole('button',{name:'再练一轮',exact:true}).click();
+  await flow.activity(p,'1-2','listen',options);
+  await expect(reveal).toHaveAttribute('data-kind','replay');
   await expect(reveal.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();
+  await expect(reveal.locator('.travelling-star')).toHaveCount(0);
   await expect(reveal.locator('.star-bloom')).toHaveCount(0);
   expect(await p.evaluate(()=>window.awardRevealFrames.interruptions)).toEqual([]);
   await expect(reveal.locator('.story-award-name')).toHaveText(name);
@@ -136,7 +150,8 @@ test('真实账号离线零错不预发星，恢复同步后仅一次悬浮卡�
     expect(await reveal.locator('.story-award-name').evaluate(el=>el.scrollHeight<=el.clientHeight+1&&el.scrollWidth<=el.clientWidth+1)).toBe(true);
     await p.screenshot({path:`output/playwright/award-reveal/account-${size.width}.png`});
   }
-  await reveal.press('Escape');await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
+  await dismissRewardDialog(p,'Escape');await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
+  expect(await p.evaluate(()=>CanranStudentAccess.awards)).toEqual(confirmed);
   const second=await studentLogin(browser,account,base);await second.page.goto(base+'unit1-2/#learn/certificate');
   await expect(second.page.locator('#certificateName')).toHaveText(name);await expect(second.page.locator('#starCount')).toHaveText('1');
   await expect(second.page.getByRole('dialog',{name:/纪念卡结算/})).not.toBeVisible();
@@ -162,7 +177,7 @@ test('服务器确认第五颗星后显示金边和固定日期，卡片与纪�
     else{
       await expect(reveal.locator('time')).toBeVisible();await expect(reveal.locator('.gold-light-ring')).toHaveCSS('opacity','1');
       const date=await reveal.locator('time').textContent();await p.screenshot({path:'output/playwright/award-reveal/account-full.png'});
-      await reveal.press('Enter');await p.goto(base+'unit3-4/#learn/certificate');await expect(p.locator('#certificateDate')).toHaveText(date);
+      await dismissRewardDialog(p,'Enter');await p.goto(base+'unit3-4/#learn/certificate');await expect(p.locator('#certificateDate')).toHaveText(date);
       await p.clock.setFixedTime(new Date(Date.now()+86400000));await p.reload();await expect(p.locator('#certificateDate')).toHaveText(date);
       await p.goto(base+'unit3-4/#learn/listen');
       await p.locator('.stage-listen').getByRole('button',{name:'再练一轮',exact:true}).click();
@@ -173,13 +188,13 @@ test('服务器确认第五颗星后显示金边和固定日期，卡片与纪�
       await expect(reveal.locator('.gold-light-ring')).toHaveCSS('opacity','1');
       const angle=await reveal.locator('.gold-light-ring').evaluate(el=>getComputedStyle(el).getPropertyValue('--gold-angle'));
       await expect.poll(()=>reveal.locator('.gold-light-ring').evaluate(el=>getComputedStyle(el).getPropertyValue('--gold-angle'))).not.toBe(angle);
-      await reveal.press('Escape');await p.goto(base+'unit3-4/#learn/certificate');
+      await dismissRewardDialog(p,'Escape');await p.goto(base+'unit3-4/#learn/certificate');
       await expect(p.locator('#certificateDate')).toHaveText(date);
       await p.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(p.locator('.book')).toHaveAttribute('aria-busy','false');await expect(p.locator('.certificate')).toHaveAttribute('data-stars','5');
       await expect(p.getByRole('heading',{name:'我的纪念册'})).toBeVisible();
       continue;
     }
-    await reveal.press('Escape');
+    await dismissRewardDialog(p,'Escape');
   }
   await student.context.close();
 });

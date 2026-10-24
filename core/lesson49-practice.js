@@ -9,6 +9,8 @@
   const activeDraftKeys = new Set();
   let lastSaveFailed = false;
   const isRecord = value => value && typeof value === 'object' && !Array.isArray(value);
+  const unifiedSystem = Boolean(root.CanranStudentAccess?.systemUpgrade?.epoch);
+  const legacyActivityKey = key => /^unit(?:\d+)?(?:Legacy|History|V153)/.test(key) || /^unit\d+(?:FiveZoneMigration|V154Seen)$/.test(key);
   const newRunId = () => root.crypto?.randomUUID?.() || Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
   function submissionStatistics(submissions) {
     let streak = 0, best = 0, correct = 0, incorrect = 0;
@@ -103,6 +105,9 @@
       else loadMessage = '旧练习草稿无法恢复，可以重新练习；原有星星保留。';
     }
   } catch { loadMessage = '练习记录暂时无法读取，本次可以继续学习。'; }
+  // Only the current epoch's notebook is open here. Original receipts remain
+  // in their isolated old namespace and independent certificate archive.
+  if (unifiedSystem) for (const key of Object.keys(notebook.activity)) if (legacyActivityKey(key)) delete notebook.activity[key];
   function outcome(state) {
     if (!state.correct) return '首次未答对 · 建议再练';
     if (state.revealed) return '看过示范后完成 · 建议换题再练';
@@ -213,6 +218,7 @@
     notebook.records[q.id] = { ...state, target: q.target, prompt: q.prompt };save();
   }
   function activity(key, value) {
+    if (unifiedSystem && legacyActivityKey(key)) return /(?:Migration|Seen)$/.test(key) ? true : undefined;
     if (arguments.length > 1) { notebook.activity[key] = value; save(); }
     return notebook.activity[key];
   }
@@ -266,6 +272,9 @@
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
   function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null, roundPolicy = null }) {
+    if (root.CanranStudentAccess?.systemUpgrade?.epoch) {
+      legacySessionIds = []; previousQuestionSets = []; previousGroups = [];
+    }
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     activeDraftKeys.add(key);
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);

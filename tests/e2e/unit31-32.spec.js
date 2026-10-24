@@ -1,5 +1,6 @@
 require('../support/unit3132-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {DIALOGUE,ANSWERS,select,advance,activity,story,complete}=require('../support/unit31-32-flow');
 const OUT='output/playwright/unit31-32';
@@ -41,7 +42,7 @@ for(const width of [320,390,768,1280])test(`宽度${width}场景、找人、动�
  await page.goto('/unit31-32/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await page.locator('.stage-words').getByRole('button',{name:'after',exact:true}).click();await page.screenshot({path:OUT+'/words-'+width+'.png'});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
 });
 test('缓存前缀首次准备、重访离线词卡与后续画册全部就绪',async({page,context})=>{
- test.setTimeout(120000);await page.goto('/lesson/unit31-32/#learn/words');await expect(page.locator('#courseLoader')).toBeHidden({timeout:60000});await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await context.setOffline(true);await page.reload();await expect(page.locator('#courseLoader')).toBeHidden({timeout:30000});await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');for(let i=0;i<2;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await page.goto('/lesson/unit31-32/#learn/models');for(let i=0;i<5;i++)await page.locator('.stage-models').getByRole('button',{name:'下一页动作',exact:true}).click();await expect.poll(()=>page.locator('.stage-models .reference-card img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);await context.setOffline(false);
+ test.setTimeout(120000);await page.goto('/lesson/unit31-32/#learn/words');await expect(page.locator('#courseLoader')).toBeHidden({timeout:60000});await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await context.setOffline(true);await reloadWithLatestCheck(page,context);await expect(page.locator('#courseLoader')).toBeHidden({timeout:30000});await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');for(let i=0;i<2;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();await page.goto('/lesson/unit31-32/#learn/models');for(let i=0;i<5;i++)await page.locator('.stage-models').getByRole('button',{name:'下一页动作',exact:true}).click();await expect.poll(()=>page.locator('.stage-models .reference-card img').evaluateAll(imgs=>imgs.every(im=>im.complete&&im.naturalWidth>0))).toBe(true);await context.setOffline(false);
 });
 test('未答完刷新直接续做，键盘能改选；正常反馈音播放，课堂练习纸保留A5与B10',async({page})=>{
  await page.addInitScript(()=>{

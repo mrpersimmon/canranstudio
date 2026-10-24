@@ -21,11 +21,14 @@ test('无更新时只轮询单课元数据，普通检测错峰，撤回仍及�
   // Count only traffic after this visit starts. Other tests share the server;
   // their completed checks must not be mistaken for this page polling twice.
   const wire=async()=> (await readWire()).slice(history.length);
+  // A response event can precede body validation and the next scheduled poll
+  // in WebKit. Advance the virtual clock only after the real cycle completes.
+  await p.addInitScript(()=>{window.withdrawalChecks=0;document.addEventListener('canran:course-withdrawals-checked',()=>window.withdrawalChecks++);});
   await p.clock.install();p.on('response',r=>{if(/course-(?:index|status|withdrawals)/.test(r.url()))requests.push({path:new URL(r.url()).pathname,status:r.status()});});
   await p.goto(base+course+'/#learn/words');await ready(p);
   await expect.poll(()=>requests.filter(r=>r.path.includes('/course-status/')).length).toBe(1);
   const full=requests.filter(r=>r.path.endsWith('course-index.json')).length;
-  await p.clock.fastForward(61000);await expect.poll(()=>requests.filter(r=>r.path.includes('/course-withdrawals/')).length).toBe(1);
+  await p.clock.fastForward(61000);await expect.poll(()=>p.evaluate(()=>window.withdrawalChecks)).toBe(1);expect(requests.filter(r=>r.path.includes('/course-withdrawals/'))).toHaveLength(1);
   expect(requests.filter(r=>r.path.includes('/course-status/'))).toHaveLength(1);
   // WebKit can present a wire 304 as a synthesized 200. Check actual server
   // delivery as well as browser behavior, not a browser-specific event status.
@@ -56,7 +59,7 @@ test('已准备同一新版不会在后续检测中重新解码和下载清单�
   // Evict only public resource bytes. Choosing the prepared candidate must
   // still repair a missing file, never trust the preparation label alone.
   await p.evaluate(async({base,picture})=>{for(const name of await caches.keys())if(name.endsWith(':course-cache:v1'))await(await caches.open(name)).delete(base+'resources/'+picture.sha256);},{base,picture});
-  await p.getByRole('region',{name:'课程更新',exact:true}).getByRole('button',{name:'进入新版',exact:true}).click();await ready(p);await expect(p).toHaveTitle('更新准备只做一次');
+  await p.getByRole('region',{name:'课程更新',exact:true}).getByRole('button',{name:'刷新课程',exact:true}).click();await ready(p);await expect(p).toHaveTitle('更新准备只做一次');
   expect(repaired).toBeGreaterThan(0);
  }finally{await student.context.close();}
 });

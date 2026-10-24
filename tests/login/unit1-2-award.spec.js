@@ -44,7 +44,7 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   await first.context.setOffline(false);
   await expect(learner.locator('#starCount')).toHaveText('1');
   const reveal = learner.getByRole('dialog', { name: /纪念卡结算/ });
-  await expect(reveal).toBeVisible(); await reveal.press('Escape');
+  await expect(reveal).toBeVisible(); await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
   await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');
   await expectManagedLearning(page, account, mount, '学习中', 1);
   const second = await studentLogin(browser, account, mount);
@@ -66,7 +66,7 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   for (const [index, id] of ['roles','listen','manners','exam'].entries()) {
     await finishZone(learner, id, { base, keepAward:true });
     await expect(reveal.getByRole('group', { name:`已获得 ${index + 2} / 5 颗星`, exact:true })).toBeVisible();
-    await reveal.press('Escape');
+    await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
   }
   await expect(learner.locator('#starCount')).toHaveText('5');
   await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');

@@ -1,0 +1,52 @@
+[WebServer] (node:41308) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:29184) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:35440) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 1 tests\login\system-upgrade-certificates.spec.js:8:1 › 真实旧纸证独立归档后原名日期PNG和打印不变，关课仍可查看且不恢复学习进度 (27.8s)
+  x  2 tests\login\system-upgrade.spec.js:17:1 › 真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度 (1.2m)
+
+
+  1) tests\login\system-upgrade.spec.js:17:1 › 真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度 ────────────
+
+    Error: expect(locator).toHaveCount(expected) failed
+
+    Locator:  getByRole('dialog', { name: '纪念卡目录', exact: true }).locator('.directory-item')
+    Expected: 2
+    Received: 0
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveCount" with timeout 5000ms
+      - waiting for getByRole('dialog', { name: '纪念卡目录', exact: true }).locator('.directory-item')
+        14 × locator resolved to 0 elements
+           - unexpected value "0"
+
+
+      60 |     await p.getByRole('button', { name: '目录', exact: true }).click();
+      61 |     const albumDirectory=p.getByRole('dialog', { name: '目录', exact: true });
+    > 62 |     await expect(albumDirectory.locator('.directory-row')).toHaveCount(2);
+         |                                                             ^
+      63 |     await expect(albumDirectory).toContainText('Lesson 1–2');
+      64 |     await expect(albumDirectory).toContainText('Lesson 3–4');
+      65 |     await albumDirectory.press('Escape');
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\system-upgrade.spec.js:62:61
+
+    Error Context: output\certificate-section-20261024\browser\system-upgrade-真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\certificate-section-20261024\browser\system-upgrade-真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度\trace.zip
+    Usage:
+
+        npx playwright show-trace output\certificate-section-20261024\browser\system-upgrade-真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\system-upgrade.spec.js:17:1 › 真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度 ─────────────
+  1 passed (1.8m)

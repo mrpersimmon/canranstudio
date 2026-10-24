@@ -1,0 +1,944 @@
+{
+  "phase": "after",
+  "checkedAt": "2026-10-23T18:35:30.035Z",
+  "sourceCommit": "ac19bff1773e05e0d0b406948a1168d82edbf170",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/admin/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/awards/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/api/me",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/api/admin/state",
+      "status": 401,
+      "bytes": 33,
+      "sha256": "076bcf4350f7f5cf4d128dbf979bd0c3e748da371572d064155bb0680cda3c8b",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/api/awards",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-index.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-status/unit1-2.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-status/unit1-2.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/course-withdrawals/unit1-2.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-withdrawals/unit1-2.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/course-withdrawals/unit37-38.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-withdrawals/unit37-38.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/course-status/unit143-144.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-status/unit143-144.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/course-withdrawals/unit143-144.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/course-withdrawals/unit143-144.json",
+      "status": 401,
+      "bytes": 24,
+      "sha256": "9ae5df81a66150b59c285b977d88c172ec17a2d4e79f7b0c6c7d234513589abf",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": true
+    },
+    {
+      "path": "/lesson/",
+      "status": 410,
+      "bytes": 347,
+      "sha256": "e58b145e8db59b0c3882bc22ed3db2c4945e5c941b87b50ea800e53bb983ed7a",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/lesson49/",
+      "status": 410,
+      "bytes": 335,
+      "sha256": "3b44d47e5e45158fec2829b5e2299ddf0bfed4abaff35dabe065176812b5dce6",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/.git/config",
+      "status": 404,
+      "bytes": 146,
+      "sha256": "55f7d9e99b8e2d4e0e193b2f0275501e6d9c1ebd29cadbea6a0da48a8587e3e0",
+      "location": null,
+      "cacheControl": null,
+      "conditionalRequest": false
+    },
+    {
+      "path": "/.data/learning.sqlite",
+      "status": 404,
+      "bytes": 146,
+      "sha256": "55f7d9e99b8e2d4e0e193b2f0275501e6d9c1ebd29cadbea6a0da48a8587e3e0",
+      "location": null,
+      "cacheControl": null,
+      "conditionalRequest": false
+    },
+    {
+      "path": "/server/run.js",
+      "status": 401,
+      "bytes": 42,
+      "sha256": "60186de435ebc17404a8b427b32b5830f29b250c9c37f0e4ab294bb070d36a4f",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/exercise/",
+      "status": 200,
+      "bytes": 4811,
+      "sha256": "d086060ffd597b2c8777ecc46a10e664d7052d1cc9be83c0671a4dcc59325dcb",
+      "location": null,
+      "cacheControl": "no-cache",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/exercise/release-manifest.json",
+      "status": 404,
+      "bytes": 146,
+      "sha256": "55f7d9e99b8e2d4e0e193b2f0275501e6d9c1ebd29cadbea6a0da48a8587e3e0",
+      "location": null,
+      "cacheControl": "no-cache",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/lesson/core/subpath-worker.js",
+      "status": 200,
+      "bytes": 600,
+      "sha256": "255759c8b07061c7953fc4eb2ed84c0dcbf295d41b98d0da076bfbedc5d79a18",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/exercise",
+      "status": 308,
+      "bytes": 164,
+      "sha256": "43a81fb3d47b34e7d42d6b8444f592ed9251b8e57db8f67d32419aa40b1480d0",
+      "location": "/exercise/",
+      "cacheControl": null,
+      "conditionalRequest": false
+    },
+    {
+      "path": "/portal.js",
+      "status": 200,
+      "bytes": 40340,
+      "sha256": "c0abdf09507ca0e7873f1ef1916fde1e572c8d39052532518ef73cfbc3d1ccf3",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/portal.css",
+      "status": 200,
+      "bytes": 10250,
+      "sha256": "1ea428936fd09e17777a723c56fac53d48c5b882e9c936a9cfef360cdbd6391f",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit1-2/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit5-6/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit3-4/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit7-8/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit9-10/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit11-12/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit13-14/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit15-16/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit17-18/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit19-20/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit21-22/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit23-24/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit25-26/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit27-28/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit29-30/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit31-32/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit33-34/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit35-36/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit39-40/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit37-38/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit41-42/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit43-44/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit45-46/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit47-48/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit49-50/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit51-52/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit55-56/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit53-54/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit57-58/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit63-64/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit59-60/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit61-62/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit65-66/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit67-68/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit69-70/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit71-72/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit73-74/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit75-76/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit77-78/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit79-80/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit81-82/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit83-84/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit85-86/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit87-88/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit89-90/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit91-92/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit93-94/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit95-96/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit97-98/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit99-100/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit101-102/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit103-104/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit105-106/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit107-108/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit109-110/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit111-112/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit113-114/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit115-116/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit117-118/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit119-120/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit121-122/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit123-124/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit125-126/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit127-128/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit129-130/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit131-132/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit133-134/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit135-136/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit137-138/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit139-140/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit143-144/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "/unit141-142/",
+      "status": 200,
+      "bytes": 1570,
+      "sha256": "91fa046afd2cd2256071edfdc54cde2a0dfddbc9d54bc26e00649dcd3b516b91",
+      "location": null,
+      "cacheControl": "no-store",
+      "conditionalRequest": false
+    },
+    {
+      "path": "http://www.canranstudio.cn/",
+      "status": 301,
+      "location": "https://www.canranstudio.cn/"
+    },
+    {
+      "path": "https://canranstudio.cn/",
+      "status": 308,
+      "location": "https://www.canranstudio.cn/"
+    }
+  ]
+}

@@ -45,6 +45,16 @@ function Certificate({card}){
     {card.stars===5&&<span className="gold-light-ring" aria-hidden="true"/>}
   </article>;
 }
+const legacyPapers = (archives = []) => archives.filter(archive=>archive.kind==='legacy-paper');
+function HistoricalCertificates({archives=[]}){
+  const papers=legacyPapers(archives);
+  if(!papers.length)return null;
+  return <section className="historical-certificates" id="historicalCertificates" aria-labelledby="historicalCertificateTitle"><h2 id="historicalCertificateTitle">已获得的原证书</h2><p>保留15星体系的原证书，原姓名、内容与领取日期不变。</p><ul>{papers.map(archive=><li key={archive.id}><div><strong>{archive.meta?.lesson||'Lesson '+archive.course.slice(4).replace('-','–')}</strong><span>15星原版通关证书</span><small>{archive.name||'原领证姓名'} · {dateLabel(archive.issuedAt)}</small></div><a className="button" href={BASE+'awards/history/'+encodeURIComponent(archive.id)+'/'}>查看原证书</a></li>)}</ul></section>;
+}
+function LocalCertificateCopies({copies=[],available=[]}){
+  if(!copies.length)return null;
+  return <section className="historical-certificates" aria-labelledby="localCertificateTitle"><h2 id="localCertificateTitle">这台设备保留的旧证资料</h2><p>这些资料尚未确认入册。只读查看或下载保留副本，不增加新版星数。</p><ul>{copies.map(copy=><li key={copy.id}><div><strong>{'Lesson '+copy.course.slice(4).replace('-','–')}</strong><span>{copy.kind==='legacy-paper'?'原版证书资料':'五星纪念卡资料'}</span><small>{copy.name||'原领证姓名'} · {dateLabel(copy.issuedAt)}</small>{!available.includes(copy.course)&&<small>本课当前未开放在线查看，资料仍保留在本机，可下载副本请老师协助恢复。</small>}</div><div className="local-certificate-actions">{available.includes(copy.course)&&<a className="button" href={BASE+'awards/local-history/'+copy.course+'/'+copy.kind+'/'+copy.id+'/'}>查看本机原证</a>}<button className="button" onClick={()=>window.CanranLocalCertificates.download(copy)}>下载保留副本</button></div></li>)}</ul></section>;
+}
 function Corners(){return <span className="photo-corners" aria-hidden="true">{[0,1,2,3].map(i=><img key={i} src={corner} className={`photo-corner corner-${i}`} alt="" draggable="false"/>)}</span>;}
 function Leaf({index,side,onOpen,decorative=false,blank=false}){
   const cards=useContext(CardsContext),card=cards[index];
@@ -137,6 +147,8 @@ function Album({collection}){
         <div className="pagination"><button className="button" disabled={!canPrev||opening} aria-disabled={!canPrev||!!turn||preparing||opening} onClick={()=>flip(-1)}><ArrowLeft {...iconProps}/>上一页</button><p role="status" aria-live="polite" className="page-count">第 {Math.floor(start/perPage)+1}<span> / {Math.ceil(cards.length/perPage)} 页</span></p><button className="button primary" disabled={!canNext||opening} aria-disabled={!canNext||!!turn||preparing||opening} onClick={()=>flip(1)}>下一页<ArrowRight {...iconProps}/></button></div>
       </>}
       <p className="album-status" role="status">{preparing?'正在准备书页…':pageError|| (pending?'记录待同步，联网后自动更新。':'')}</p>
+      <HistoricalCertificates archives={collection.archives}/>
+      <LocalCertificateCopies copies={collection.localCertificates} available={collection.availableCourses}/>
     </main>
     {directory&&<Modal label="目录" className="directory-modal" onClose={()=>setDirectory(false)}><div className="modal-heading"><h2>目录</h2><button className="icon-button" aria-label="关闭目录" onClick={()=>setDirectory(false)}><X {...iconProps}/></button></div><div className="directory-list">{cards.map((card,index)=><button className="directory-row" key={card.id} onClick={()=>goTo(index)}>{decoded.has(card.scene)?<img src={card.scene} alt=""/>:<span className="directory-placeholder">{index+1}</span>}<span><small>{card.lesson}</small><strong>{card.title}</strong></span><span className="directory-stars"><img src={star} alt=""/>{card.stars}<span className="sr-only">颗星</span></span><ArrowRight {...iconProps}/></button>)}</div><p className="album-status" role="status">{preparing?'正在准备书页…':pageError}</p><div className="motion-preference"><span>翻页动画</span><button className="motion-switch" role="switch" aria-label="翻页动画" aria-checked={!reduced} onClick={toggleMotion}>{reduced?'已关闭':'已开启'}</button></div></Modal>}
     {opened!==null&&<Modal label={`${cards[opened].lesson} 纪念卡`} className="card-modal" onClose={closeCard}><div className="modal-heading"><button className="icon-button" aria-label="关闭纪念卡" onClick={closeCard}><X {...iconProps}/></button></div><Certificate card={cards[opened]}/><div className="modal-actions"><button className="button primary" disabled={saving} onClick={download}><DownloadSimple {...iconProps}/>{saving?'正在保存…':'保存动图'}</button></div><p className="save-state" role="status">{saveState==='动图已生成'&&<Check {...iconProps}/>} {saveState}</p></Modal>}
@@ -156,10 +168,11 @@ async function collection(){
   let result=await request('awards'),changed=false,pending=0;
   // Only synchronize the authenticated student's queue. Never fabricate a card
   // from browser storage or display another student's cached personal data.
-  const prefix='canran:student:'+result.student.id+':pending:';
+  const epoch=result.systemUpgrade?.epoch;
+  const prefix='canran:student:'+result.student.id+':'+(epoch?'epoch:'+epoch+':':'')+'pending:';
   try{for(const key of Object.keys(localStorage).filter(key=>key.startsWith(prefix))){
     const raw=localStorage.getItem(key);
-    try{const claim=JSON.parse(raw);if(claim.studentId!==result.student.id)continue;
+    try{const claim=JSON.parse(raw);if(claim.studentId!==result.student.id||(epoch&&claim.epoch!==epoch))continue;
       let synced;
       try{synced=await request('progress',claim);}catch(error){
         if(error.status!==403)throw error;
@@ -175,7 +188,11 @@ async function collection(){
     }catch{pending++;}
   }}catch{/* Storage unavailable does not prevent reading the server collection. */}
   if(changed)result=await request('awards');
-  return {...result,pending,cards:result.cards.map(card=>({...card,name:result.student.name,date:dateLabel(card.firstFullStarAt)}))};
+  window.CanranSystemUpgrade?.notice(result,document.body);
+  const localCertificates=window.CanranLocalCertificates?await window.CanranLocalCertificates.collect(result):[];
+  const originalIds=new Set((result.archives||[]).map(item=>item.id));
+  const archivedCards=new Set((result.archives||[]).filter(item=>item.kind==='card').map(item=>JSON.stringify([item.course,item.edition,Date.parse(item.issuedAt)])));
+  return {...result,pending,localCertificates:localCertificates.filter(item=>!originalIds.has(item.id)&&!(item.kind==='card'&&archivedCards.has(JSON.stringify([item.course,item.edition,Date.parse(item.issuedAt)])))),cards:result.cards.map(card=>({...card,name:card.name??result.student.name,date:dateLabel(card.firstFullStarAt)}))};
 }
 export function App(){
   const [data,setData]=useState(null),[error,setError]=useState(null),[revision,setRevision]=useState(0);
@@ -194,6 +211,6 @@ export function App(){
     return()=>{active=false;run++;channel?.close();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pageshow',resume);window.removeEventListener('pagehide',hide);window.removeEventListener('online',refresh);navigator.serviceWorker?.removeEventListener('message',worker);};
   },[revision]);
   if(!data)return <main className="loading-panel"><img src={logo} alt=""/><h1>{error?error.status===401?'请重新登录':'暂时打不开纪念册':'正在打开纪念册…'}</h1>{error&&<><p>{error.status===401?'登录后查看自己的纪念卡。':'请重试，已获纪念卡会保留。'}</p><a className="button" href={BASE}>{error.status===401?'去登录':'返回课程'}</a>{error.status!==401&&<button className="button primary" onClick={()=>setRevision(v=>v+1)}>再试一次</button>}</>}</main>;
-  if(!data.cards.length)return <main className="loading-panel empty-album"><img src={logo} alt=""/><h1>我的纪念册</h1><p>点亮第一颗星，收藏第一张纪念卡。</p>{data.pending>0&&<p role="status">记录待同步，联网后自动更新。</p>}<a className="button primary" href={BASE}>去学习</a></main>;
+  if(!data.cards.length)return <main className="loading-panel empty-album"><img src={logo} alt=""/><h1>我的纪念册</h1>{!legacyPapers(data.archives).length&&!data.localCertificates?.length&&<p>点亮第一颗星，收藏第一张纪念卡。</p>}{data.pending>0&&<p role="status">记录待同步，联网后自动更新。</p>}<HistoricalCertificates archives={data.archives}/><LocalCertificateCopies copies={data.localCertificates} available={data.availableCourses}/><a className="button primary" href={BASE}>去学习</a></main>;
   return <Album collection={data} key={data.student.id+':'+revision}/>;
 }

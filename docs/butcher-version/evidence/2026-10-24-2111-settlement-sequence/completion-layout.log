@@ -1,0 +1,29 @@
+
+Running 22 tests using 1 worker
+
+(node:15924) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\unit1-2-completion.spec.js:8:1 › 结算完成信号等待三张卡实际入场结束，较慢动画不提前对齐验收 (6.8s)
+  ok  2 tests\e2e\unit1-2-completion.spec.js:32:1 › 三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数 (3.2s)
+  ok  3 tests\e2e\unit1-2-completion.spec.js:79:1 › 390×500 短屏结束后从插画顶部露出，不被固定导航遮挡 (8.8s)
+  ok  4 tests\e2e\unit1-2-completion.spec.js:95:1 › 语法小工坊保留人物成果画面，恢复三张统计卡 (6.2s)
+  ok  5 tests\e2e\unit1-2-completion.spec.js:111:37 › root 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (30.2s)
+  ok  6 tests\e2e\unit1-2-completion.spec.js:111:37 › /lesson 五个答题环节统一新版结算，结果和按钮在四种宽度保持完整 (39.1s)
+  ok  7 tests\e2e\unit1-2-completion.spec.js:152:1 › 同题错两次各计一次，订正后刷新保留十次错误，再练重新统计 (15.2s)
+  ok  8 tests\e2e\unit3-4-classroom.spec.js:15:1 › 全部声音失败仍能完成33题与完整原文并领奖，零英语配音或系统朗读 (25.0s)
+  ok  9 tests\e2e\unit3-4-classroom.spec.js:35:1 › 反馈音真实结束，错答只重试且不泄题 (4.8s)
+  ok 10 tests\e2e\unit3-4-classroom.spec.js:56:1 › 12句原文可续读和翻译，末句主动完成，只有对话内部滚动 (2.3s)
+  ok 11 tests\e2e\unit3-4-classroom.spec.js:81:1 › 七个词义任务不以图配图，末三题刷新不代答，重练清空本轮 (5.4s)
+  ok 12 tests\e2e\unit3-4-classroom.spec.js:101:1 › 25张音标词卡可翻面，15问和10组否定回应仍供阅读 (4.1s)
+  ok 13 tests\e2e\unit3-4-classroom.spec.js:126:34 › 320柜台答对才交接，灯泡和按钮稳定，结束动作集中 (2.2s)
+  ok 14 tests\e2e\unit3-4-classroom.spec.js:126:34 › 1280柜台答对才交接，灯泡和按钮稳定，结束动作集中 (2.3s)
+  ok 15 tests\e2e\unit3-4-classroom.spec.js:158:44 › 320宽度可阅读操作，帮助关闭回到原按钮 (1.4s)
+  ok 16 tests\e2e\unit3-4-classroom.spec.js:158:44 › 390宽度可阅读操作，帮助关闭回到原按钮 (2.0s)
+  ok 17 tests\e2e\unit3-4-classroom.spec.js:158:44 › 768宽度可阅读操作，帮助关闭回到原按钮 (1.4s)
+  ok 18 tests\e2e\unit3-4-classroom.spec.js:158:44 › 1280宽度可阅读操作，帮助关闭回到原按钮 (2.1s)
+  ok 19 tests\e2e\unit3-4-classroom.spec.js:199:1 › 工坊词块可撤回，未知归属不猜，末题刷新没有自动作答 (2.9s)
+  ok 20 tests\e2e\unit3-4-classroom.spec.js:222:1 › 五星卡日期保留、匿名不能代填姓名或导出，练习纸与路径记录独立 (19.9s)
+  ok 21 tests\e2e\unit3-4-classroom.spec.js:240:1 › 首页进入图鉴，旧拼句和提问地址继续到现行活动 (7.5s)
+  ok 22 tests\e2e\unit3-4-classroom.spec.js:251:1 › 整课准备后断网仍能翻后组词卡、刷新续练，缓存不请求英语录音 (3.9s)
+
+  22 passed (3.3m)

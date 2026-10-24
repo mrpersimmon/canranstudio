@@ -87,7 +87,7 @@ test('长姓名和六种卡面：课程、悬浮卡、纪念册放大与实际�
       await readable(reveal.locator('.story-award-paper'));
       await reveal.locator('.story-award-paper').screenshot({path:info.outputPath(`reveal-${width}.png`)});
     }
-    await reveal.press('Escape');
+    await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
     await p.setViewportSize({width:1280,height:1000});
     await p.goto(base+'unit45-46/#learn/certificate');
     const pending=p.waitForEvent('download');

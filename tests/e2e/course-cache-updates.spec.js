@@ -37,9 +37,10 @@ test('已知撤回版本不会继续推进作答，新版失败时保留位置�
   const index = await (await request.get('/lesson/course-index.json')).json();
   index.withdrawn = ['unit29-30@' + index.courses['unit29-30'].revision];
   await publishIndex(context,index);
-  await page.reload();
-  await expect(page.locator('.stage-words')).toContainText('2 / 5');
-  // The rendered old page remains stable until the learner tries an operation.
+  // The already rendered page remains stable until the learner tries an operation.
+  await page.clock.install();
+  await page.evaluate(() => window.dispatchEvent(new Event('online')));
+  await page.clock.fastForward(31000);
   await expect(async () => {
     await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
     await expect(page.getByText('课程需要更新，请联网后再试。', { exact: true })).toBeVisible();
@@ -85,7 +86,7 @@ async function revisedCourse(request, id = 'unit29-30') {
   return { index, pack, updated, bytes, body };
 }
 
-test('普通更新后台准备并提醒，选择后使用完整新版且不重下未变文件', async ({ page, context, request }) => {
+test('重新进入自动使用完整新版，已打开页不混版且不重下未变文件', async ({ page, context, request }) => {
   await page.goto('/lesson/unit29-30/#learn/words');
   const oldTitle = await page.title();
   await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
@@ -99,17 +100,13 @@ test('普通更新后台准备并提醒，选择后使用完整新版且不重�
     if (new URL(route.request().url()).pathname === revision.updated.url) { newFetched = true; await route.fulfill({ body: revision.bytes, contentType: revision.updated.type }); }
     else await route.continue();
   });
-  // Another visit opens the old complete package and discovers the normal update.
+  // A new document always checks the current server release; the earlier
+  // document keeps its own resources pinned until it leaves or refreshes.
   const second = await context.newPage();
   await second.goto('/lesson/unit29-30/#learn/words');
-  await expect(second).toHaveTitle(oldTitle);
-  await expect.poll(() => newFetched).toBe(true);
-  // Preparation never makes the decision for the learner. Use only the
-  // visible update choice; retain isolation and zero unchanged downloads.
-  await expect(second.getByRole('region', {name:'课程更新',exact:true})).toContainText('新版已准备好');
-  await second.reload();await expect(second).toHaveTitle(oldTitle);
-  await second.getByRole('region', {name:'课程更新',exact:true}).getByRole('button', {name:'进入新版',exact:true}).click();
   await expect(second).toHaveTitle('新版课程缓存验收');
+  await expect.poll(() => newFetched).toBe(true);
+  await expect(second.getByRole('button', {name:'继续当前版本',exact:true})).toHaveCount(0);
   await expect(page).toHaveTitle(oldTitle);
   await expect(second.locator('.stage-words')).toContainText('2 / 5');
   expect(fetched.filter(url => !url.endsWith('.mp3'))).toEqual([new URL(revision.updated.url, page.url()).href]);
@@ -135,7 +132,7 @@ test('损坏一张已存图片，刷新只补齐该文件并保留词卡页', as
   expect(fetched).toEqual([new URL(item.url, page.url()).href]);
 });
 
-test('已准备课程在浏览器重启后断网仍可进入，未知课程明确要求联网', async () => {
+test('浏览器重启后必须联网核验最新版，已有资源与进度保留但不直接开放旧包', async () => {
   test.setTimeout(45000);
   const profile = await fs.mkdtemp(path.join(os.tmpdir(), 'canran-cache-browser-'));
   const packages = await createCoursePackages({ root: process.cwd(), basePath: '/lesson/' });
@@ -158,7 +155,9 @@ test('已准备课程在浏览器重启后断网仍可进入，未知课程明�
     context = await chromium.launchPersistentContext(profile, { headless: true, offline: true });
     page = await context.newPage();
     await page.goto(origin + '/lesson/unit29-30/#learn/words');
-    await expect(page.locator('.stage-words')).toContainText('2 / 5');
+    await expect(page.locator('#courseLoader')).toContainText('错误编号：L06');
+    await expect(page.locator('.stage-words')).not.toBeVisible();
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity.unitWordPage)).toBe(1);
     await page.goto(origin + '/lesson/unit27-28/');
     await expect(page.getByRole('heading', { name: '这节课还没准备好', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();

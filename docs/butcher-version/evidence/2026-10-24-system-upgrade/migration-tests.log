@@ -1,0 +1,26 @@
+(node:38836) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (152.5209ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.4858ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (84.8304ms)
+✔ ratingFor exposes every branch including zero (0.5504ms)
+✔ awardRating is finite, immutable, and keeps the historic maximum (0.5446ms)
+✔ certificate predicates require every named challenge (0.1405ms)
+✔ every approved course rating table reaches zero through three stars (0.1595ms)
+(node:31432) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ explicit cutover backs up exact rows and key, preserves full originals, and resets all old student courses only once (301.2528ms)
+✔ old full-card editions and issued legacy paper receipts archive independently and retain five stars without invented answers (168.0441ms)
+✔ a backup failure leaves progress and awards untouched (78.4127ms)
+✔ corrupt or unsupported evidence stops the entire transaction after a recoverable backup (158.4547ms)
+✔ startup alone is nondestructive and the explicit command requires a backup destination (85.6452ms)
+✔ a genuine write after the backup snapshot aborts the cutover instead of discarding new learning (84.0388ms)
+✔ the paired backup restores old partial stars and exact progress without auto-applying the destructive migration (164.9825ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1238.6034

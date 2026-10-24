@@ -24,7 +24,10 @@ for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
     await page.goto('/lesson/' + id + '/#learn/words');
     await expect(page.locator('.stage-words').getByRole('button', { name: first === 1 ? '下一组' : '下一组词卡', exact: true })).toBeVisible();
     await context.setOffline(true);
-    await run(page, '/lesson');
+    // These three historical flows explicitly exercise a mid-round reload.
+    // Revalidate the latest release for that new document, then continue the
+    // original full offline journey with its retained answers and certificate.
+    await run(page, '/lesson', { offlineContext: context });
     if(first===1){
       // Anonymous previews can practise offline, but cannot impersonate a student
       // by typing a name. Real-name offline GIF export is covered in login/award-book.

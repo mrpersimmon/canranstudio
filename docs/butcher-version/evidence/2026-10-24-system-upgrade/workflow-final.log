@@ -1,0 +1,48 @@
+
+> canranstudio@0.0.0 test:workflow
+> node --test tests/workflow/*.test.js
+
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ unchanged successful inputs reuse evidence without executing the command again (391.4578ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ source, added file, deletion, lockfile, test code, command and environment invalidate evidence (1556.377ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ force reruns; failed commands remove previous evidence and cannot become cache hits (859.848ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ a source change during a successful command invalidates the run (636.2136ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ missing required artifacts force a rerun and missing new outputs fail (550.0681ms)
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+fatal: Needed a single revision
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+✔ malformed evidence is ignored; concurrent runs do not share a partial receipt (418.3095ms)
+✔ change discovery includes staged, unstaged, deleted and untracked paths (399.5502ms)
+✔ document checks resolve relative links, ignore web and code examples, and reject broken links (206.1137ms)
+✔ a documentation-only plan avoids runtime tests; source changes retain relevant checks (6.0377ms)
+✔ shared completion changes always include legacy, paired-unit and authenticated record checks (1.971ms)
+✔ reward ordering and result changes keep the WebKit settlement regression in scope (245.1907ms)
+✔ update entry and predecessor changes retain choice, real certificate and WebKit checks (1.7569ms)
+✔ expired evidence reruns, while clearing browser reports does not erase unrelated successful checks (473.4977ms)
+✔ duration balancing keeps every test and whole serial files exactly once (9.7635ms)
+✔ new tests and files join the live plan; deleted history cannot select removed files (0.4667ms)
+✔ inventory includes skipped tests, projects and nested suites, and rejects load errors (0.6718ms)
+✔ omitted, duplicate, unexpected tests and invalid partitions fail closed (0.1838ms)
+✔ merge gate requires all named groups; failure, cancellation, skip and missing groups fail (0.1743ms)
+✔ full CI runs on PRs and protected pushes; feature push has only a distinct quick gate (1.1177ms)
+✔ CI preserves isolated performance checks and uploads failure evidence with pinned actions (0.4107ms)
+✔ local scoped checks include CI regression tests and invalidate cached plans after timing changes (2.5197ms)
+✔ runner preserves child failures and rejects success with a missing or incomplete report (3328.0498ms)
+✔ CI mirror preparation changes only known priorities, preserves source bytes and is idempotent (5.2329ms)
+✔ unknown or missing runner mirror layouts remain unchanged and explain why preparation was not applied (7.6018ms)
+✔ mirror preparation leaves non-GitHub Linux environments alone but surfaces permission failures (3.4202ms)
+✔ all five CI browser jobs prepare mirrors before unchanged installs, deadlines and performance assertions (0.7277ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5902.9521

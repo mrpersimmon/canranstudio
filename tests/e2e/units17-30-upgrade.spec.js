@@ -3,6 +3,7 @@
 require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {EXAMS,selectAnswer,finishExamFrom}=require('../support/units17-30-exam');
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 async function oldEdition(page,pair){
  let old=true;for(const name of ['index.html','content.js','unit.js','unit.css']){
@@ -36,7 +37,7 @@ for(const[pair,answers]of Object.entries(EXAMS)){
  });
  test(`${pair} 缓存版复访断网可翻卡和看新场景，词块草稿刷新不代答`,async({page,context})=>{
   test.setTimeout(90000);await page.goto(`/lesson/unit${pair}/#learn/words`);await expect(page.locator('#courseLoader')).toHaveCount(0);
-  await context.setOffline(true);const response=await page.reload();expect(response.headers()['x-course-offline']).toBe('1');await expect(page.locator('#courseLoader')).toHaveCount(0);
+  await context.setOffline(true);const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(page.locator('#courseLoader')).toHaveCount(0);
   await page.evaluate(()=>{
    window.paintFailures=[];window.watchCourse=true;
    const sample=frame=>{const room=document.getElementById(location.hash.slice(1));if(!room)return;const entry={hidden:document.documentElement.hasAttribute('data-course-painting')||getComputedStyle(room).visibility!=='visible',loader:!!document.getElementById('courseLoader'),missing:frame&&[...room.querySelectorAll('img')].filter(e=>!e.hidden&&e.getClientRects().length).some(e=>!e.complete||!e.naturalWidth)};if(Object.values(entry).some(Boolean))window.paintFailures.push(entry);};
@@ -47,10 +48,10 @@ for(const[pair,answers]of Object.entries(EXAMS)){
   await page.goto(`/lesson/unit${pair}/#learn/text`);const text=page.locator('.stage-text'),total=require(`../support/unit${pair}-flow`).DIALOGUE.length;
   for(let i=0;i<total;i++)await text.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
   await expect.poll(()=>text.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
-  await page.reload();await expect(text.getByRole('log').locator('.bubble-row').last()).toBeInViewport({ratio:1});
+  await reloadWithLatestCheck(page,context);await expect(text.getByRole('log').locator('.bubble-row').last()).toBeInViewport({ratio:1});
   await page.goto(`/lesson/unit${pair}/#learn/exam`);const room=page.locator('.stage-exam'),order=answers.findIndex(Array.isArray);
   for(const answer of answers.slice(0,order)){await selectAnswer(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
-  await selectAnswer(room,[answers[order][0]]);await page.reload();await expect(room.getByRole('status')).toBeEmpty();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(order));await expect(room.getByRole('button',{name:'撤回 '+answers[order][0],exact:true})).toBeVisible();
+  await selectAnswer(room,[answers[order][0]]);await reloadWithLatestCheck(page,context);await expect(room.getByRole('status')).toBeEmpty();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(order));await expect(room.getByRole('button',{name:'撤回 '+answers[order][0],exact:true})).toBeVisible();
   // Resume the retained draft through the bank; the full-answer helper clears
   // existing tokens for retries and would discard the first restored token.
   const chosen=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button');

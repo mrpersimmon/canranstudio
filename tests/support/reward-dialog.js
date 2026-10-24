@@ -1,5 +1,17 @@
 'use strict';
+const { expect } = require('@playwright/test');
 const handlers = new WeakMap();
+
+async function waitForRewardDismissal(page) {
+  const dialog = page.locator('dialog.award-reveal[open]');
+  await expect.poll(async () => !await dialog.count() || await dialog.getAttribute('data-dismissible') !== 'false').toBe(true);
+}
+
+async function dismissRewardDialog(page, key = 'Escape') {
+  await waitForRewardDismissal(page);
+  const dialog = page.locator('dialog.award-reveal[open]');
+  if (await dialog.count()) await dialog.press(key);
+}
 
 // Data/upgrade walkthroughs acknowledge rewards as a learner would. A single
 // isVisible() probe after completion can miss a later server confirmation.
@@ -11,9 +23,14 @@ async function handleRewardDialog(page, keepAward = false) {
     handlers.delete(page);
   } else if (!existing) {
     const dialog = page.locator('dialog.award-reveal[open]');
-    await page.addLocatorHandler(dialog, async () => { await page.keyboard.press('Escape'); });
+    await page.addLocatorHandler(dialog, async () => {
+      // The card owns focus until its confirmed star has landed. A learning
+      // walkthrough must wait for the same dismissal gate as the student;
+      // repeated early Esc presses would now correctly leave the card open.
+      await dismissRewardDialog(page);
+    });
     handlers.set(page, dialog);
   }
 }
 
-module.exports = { handleRewardDialog };
+module.exports = { handleRewardDialog, waitForRewardDismissal, dismissRewardDialog };

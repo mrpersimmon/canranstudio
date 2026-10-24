@@ -1,5 +1,6 @@
 'use strict';
 const taskCases=require('./units1-30-tasks');
+const {reloadWithLatestCheck}=require('./offline-reentry');
 const { expect } = require('@playwright/test');
 // Independent expectations from textbook paper pages 14–17 and the unit manuscript.
 const DIALOGUE=['I am a new student.',"My name's Robert.",'Nice to meet you.',"My name's Sophie.",'Are you French?','Yes, I am.','Are you French, too?','No, I am not.','What nationality are you?',"I'm Italian.",'Are you a teacher?',"No, I'm not.","What's your job?","I'm a keyboard operator.","What's your job?","I'm an engineer."];
@@ -15,7 +16,7 @@ async function completeStory(page,base=''){
  }
  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('故事看完了！');
 }
-async function completeActivity(page,id,base=''){
+async function completeActivity(page,id,base='',{offlineContext}={}){
  await page.goto(base+'/unit7-8/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
  for(let i=0;i<answers.length;i++){
   const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
@@ -25,10 +26,10 @@ async function completeActivity(page,id,base=''){
   else await room.locator('.practice-options').getByRole('button',{name:answer,exact:true}).click();
   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-  if(id==='listen'&&i===11){await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
+  if(id==='listen'&&i===11){if(offlineContext)await reloadWithLatestCheck(page,offlineContext);else await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
   await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
-async function completeUnit78(page,base=''){await completeActivity(page,'listen',base);await completeStory(page,base);for(const id of ['roles','reply','interview','exam'])await completeActivity(page,id,base);await page.goto(base+'/unit7-8/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
+async function completeUnit78(page,base='',options={}){await completeActivity(page,'listen',base,options);await completeStory(page,base);for(const id of ['roles','reply','interview','exam'])await completeActivity(page,id,base,options);await page.goto(base+'/unit7-8/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
 module.exports={DIALOGUE,SPEAKERS,ANSWERS,completeStory,completeActivity,completeUnit78};

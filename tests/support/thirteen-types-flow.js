@@ -53,7 +53,9 @@ async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=t
   if(capture)await capture(room,i,'correct');
   await room.getByRole('button',{name:i===items.length-1?(pair==='1-2'?(id==='exam'?'完成挑战':'完成这一组'):(id==='exam'?'查看本次记录':'完成这一站')):'下一题',exact:true}).click();
  }
- await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
+ // The two actions are prepared in the DOM, but are intentionally inaccessible
+ // while the keepsake owns the foreground. Callers may keep that card open.
+ await expect(room.getByRole('group',{name:'完成后的操作',exact:true,includeHidden:true}).getByRole('button',{includeHidden:true})).toHaveCount(2);
  if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
 }
 async function complete(page,pair,base=''){

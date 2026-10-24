@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
@@ -89,10 +90,10 @@ test('七个词义任务不以图配图，末三题刷新不代答，重练清�
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     await room.getByRole('button', { name: i === ANSWERS.listen.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
   }
-  await expect(room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true })).toBeVisible();
   const reward = page.locator('dialog.award-reveal[open]');
   await expect(reward).toBeVisible();
-  await reward.press('Escape');
+  await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape');
+  await expect(room.getByRole('button', { name: '下一站：衣帽间小剧场', exact: true })).toBeVisible();
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -248,17 +249,17 @@ test('首页进入图鉴，旧拼句和提问地址继续到现行活动', async
   await expect(page.getByRole('link', { name: '继续学习：雨伞认领小帮手', exact: true })).toHaveAttribute('href', '/lesson/unit3-4/#learn/exam');
 });
 
-test('整课准备后断网仍能翻后组词卡、刷新续练，缓存不请求英语录音', async ({ page, context }) => {
+test('整课准备后同页断网可练，断网刷新受阻并联网恢复原位置，缓存不请求英语录音', async ({ page, context }) => {
   const voices = [];
   page.on('request', request => { if (/\.mp3/.test(request.url()) && !isFeedbackAudio(request.url())) voices.push(request.url()); });
   await page.goto('/lesson/unit3-4/#learn/words'); const words = page.locator('.stage-words');
   await expect(words.getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
   await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
-  await context.setOffline(true); await page.reload(); await expect(words).toContainText('2 / 5');
+  await context.setOffline(true); await reloadWithLatestCheck(page, context); await expect(words).toContainText('2 / 5');
   for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
   await expect(words).toContainText('5 / 5');
   await expect.poll(() => words.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
-  await choose(page.locator('.stage-listen'), 'umbrella'); await page.reload();
+  await choose(page.locator('.stage-listen'), 'umbrella'); await reloadWithLatestCheck(page, context);
   await expect(page.locator('.stage-listen').getByRole('status')).toHaveText('答对了！'); expect(voices).toEqual([]);
 });

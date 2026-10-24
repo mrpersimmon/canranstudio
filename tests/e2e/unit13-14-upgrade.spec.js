@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 require('../support/unit1314-legacy').historicalSuite(test);
 const fs = require('node:fs/promises');
@@ -77,13 +78,13 @@ test('13–14 旧草稿只是选择，升级、返回与刷新都不代为判对
   await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
 });
 
-test('13–14 缓存版断网刷新保留新增题的未提交词块，下一题仍为空', async ({ page, context }) => {
+test('13–14 断网刷新受阻，联网恢复新增题的未提交词块，下一题仍为空', async ({ page, context }) => {
   test.setTimeout(60000); await page.goto('/lesson/unit13-14/#learn/exam'); const room = page.locator('.stage-exam');
   for (let i = 0; i < 7; i++) {
     await selectAnswer(room, EXAM[i].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   }
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'This', exact: true }).click();
-  await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
+  await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('button', { name: '撤回 This', exact: true })).toBeVisible();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '7'); await expect(room.getByRole('status')).toBeEmpty();
   for (const token of ['is', 'my', "father's", 'suit.']) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
@@ -92,7 +93,7 @@ test('13–14 缓存版断网刷新保留新增题的未提交词块，下一题
   await context.setOffline(false);
 });
 
-test('13–14 完成整课加载后，刷新对白仍展示已读的最后一句', async ({ page, context }) => {
+test('13–14 断网刷新受阻，联网恢复对白后仍展示已读的最后一句', async ({ page, context }) => {
   // Keep real images and decoding, but model a device whose decoding spans a paint.
   await page.addInitScript(() => {
     const decode = HTMLImageElement.prototype.decode;
@@ -103,7 +104,7 @@ test('13–14 完成整课加载后，刷新对白仍展示已读的最后一句
   await page.goto('/lesson/unit13-14/#learn/text'); await expect(page.locator('#courseLoader')).toHaveCount(0);
   const room = page.locator('.stage-text'), log = room.getByRole('log');
   for (let i=0; i<13; i++) await room.getByRole('button', { name:i?'下一句':'开始看课文', exact:true }).click();
-  await context.setOffline(true); await page.reload(); await expect(page.locator('#courseLoader')).toHaveCount(0);
+  await context.setOffline(true); await reloadWithLatestCheck(page, context); await expect(page.locator('#courseLoader')).toHaveCount(0);
   await expect(room.locator('.dialogue-status')).toHaveText('13 / 13');
   await expect(log.locator('.bubble-row').last()).toBeInViewport({ ratio:1 });
 });

@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const{test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
 const legacy=require('../fixtures/unit9-10-classroom-before/flow');
@@ -34,12 +35,12 @@ test('旧拼句草稿跟随原题进入问候接力，未答题与未提交的�
  await expect(room.getByRole('status')).toContainText('答对了！');await room.getByRole('button',{name:'完成这一站',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('3');
  await page.goto('/unit9-10/#learn/describe');await expect(describe).toContainText('第 1 / 4 题');await expect(describe.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
 });
-test('人物未齐不显示课件，整课加载后断网换主题、翻词卡与刷新续读都完整',async({page,context})=>{
+test('人物未齐不显示课件，同页离线换主题和翻词卡，断网刷新受阻并联网续读',async({page,context})=>{
  const voices=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url())&&!isFeedbackAudio(r.url()))voices.push(r.url());});
  let release;const held=new Promise(resolve=>{release=resolve;});await page.route(/tony\.svg(?:\?|$)/,async route=>{await held;await route.continue();});
  try{await page.goto('/lesson/unit9-10/#learn/text',{waitUntil:'domcontentloaded'});await expect(page.getByRole('status',{name:'课程准备状态',exact:true})).toContainText('准备');await expect(page.locator('.stage-text')).not.toBeVisible();}finally{release();}
  await expect(page.locator('#courseLoader')).toHaveCount(0);await context.setOffline(true);const story=page.locator('.stage-text');
- for(let i=0;i<10;i++)await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const response=await page.reload();expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
+ for(let i=0;i<10;i++)await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
  await page.goto('/lesson/unit9-10/#learn/models');
  for(const label of ['冷热','忙与懒','脏净']){await page.getByRole('group',{name:'选择观察主题',exact:true}).getByRole('button',{name:label,exact:true}).click();await expect.poll(()=>page.locator('.observation-pair img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);}
  await page.goto('/lesson/unit9-10/#learn/words');await expect(page.locator('#courseLoader')).toHaveCount(0);

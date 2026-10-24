@@ -37,23 +37,35 @@
   }
   function celebrateResult(finish, stats, values, waitForCelebration) {
     let retry, started = false;
+    const settlement = core.awardReveal?.completion?.(finish);
+    function hold(waiting) {
+      finish.style.visibility = waiting ? 'hidden' : '';
+      finish.inert = waiting;
+      if (waiting) finish.setAttribute('aria-hidden', 'true');
+      else finish.removeAttribute('aria-hidden');
+    }
+    hold(Boolean(settlement?.waiting));
     finish.dataset.resultMotion = 'pending';
     const observer = new IntersectionObserver(() => tryStart());
     const cleanup = () => {
       observer.disconnect(); root.clearTimeout(retry);
       document.removeEventListener('close', tryStart, true);
       document.removeEventListener('visibilitychange', tryStart);
+      document.removeEventListener('lesson-settlement:change', tryStart);
     };
     function tryStart() {
       if (started) return;
       root.clearTimeout(retry);
       if (!finish.isConnected) { cleanup(); return; }
+      // Keep all result content and controls out of sight until the foreground
+      // card has been acknowledged. Retain geometry for scroll/intersection.
+      if (settlement ? settlement.waiting : waitForCelebration()) { hold(true); retry = root.setTimeout(tryStart, 100); return; }
+      hold(false);
       const box = stats.getBoundingClientRect();
       if (box.bottom <= 0 || box.top >= root.innerHeight || !box.width || document.hidden) return;
       // A reward modal owns the foreground. Start the results only after the
       // child dismisses it, not underneath the flying-star celebration.
       if (document.querySelector('dialog[open]')) return;
-      if (waitForCelebration()) { retry = root.setTimeout(tryStart, 100); return; }
       started = true; cleanup();
       finish.dataset.resultMotion = 'playing';
       finish.classList.add('is-celebrating');
@@ -85,6 +97,7 @@
     observer.observe(stats);
     document.addEventListener('close', tryStart, true);
     document.addEventListener('visibilitychange', tryStart);
+    document.addEventListener('lesson-settlement:change', tryStart);
     retry = root.setTimeout(tryStart, 0);
   }
   function render({ finish, activity, details = null, celebrate = false, awardStatus = '', waitForCelebration = () => false, theme = themes[activity], artwork = null }) {

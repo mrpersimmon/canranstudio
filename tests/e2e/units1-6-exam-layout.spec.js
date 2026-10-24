@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
@@ -34,7 +35,7 @@ for (const unit of ['1-2', '3-4', '5-6']) for (const width of [320, 390, 768, 12
       await room.getByRole('button', { name: i === questions.length - 1 ? (unit === '1-2' ? '完成挑战' : '查看本次记录') : '下一题', exact: true }).click();
     }
     const reward = page.locator('dialog.award-reveal[open]');
-    await expect(reward).toBeVisible(); await reward.press('Escape');
+    await expect(reward).toBeVisible(); await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape');
     const finish = room.getByRole('group', { name: '完成后的操作', exact: true }); await expect(finish.getByRole('button')).toHaveCount(2);
     for (const control of await finish.getByRole('button').all()) {
       const b = await control.boundingBox(); expect(b.x).toBeGreaterThanOrEqual(0); expect(b.x + b.width).toBeLessThanOrEqual(width); expect(b.height).toBeGreaterThanOrEqual(44);
@@ -42,12 +43,12 @@ for (const unit of ['1-2', '3-4', '5-6']) for (const width of [320, 390, 768, 12
     await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-finish-${width}.png` });
   });
 }
-for (const unit of ['1-2', '3-4', '5-6']) test(`${unit} 缓存课程断网刷新仍保留未提交答案，下一题为空`, async ({ page, context }) => {
+for (const unit of ['1-2', '3-4', '5-6']) test(`${unit} 断网刷新受阻，联网恢复缓存课程的未提交答案，下一题为空`, async ({ page, context }) => {
   test.setTimeout(60000);
   await page.goto(`/lesson/unit${unit}/#learn/exam`); const room = page.locator('.stage-exam');
   await choose(room, EXAMS[unit][0]);
   await context.setOffline(true);
-  const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
+  const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   await expect(room.getByRole('status')).toBeEmpty();
   const answer = EXAMS[unit][0].answer;

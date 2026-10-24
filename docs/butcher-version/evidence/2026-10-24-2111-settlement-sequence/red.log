@@ -1,0 +1,47 @@
+[WebServer] (node:28784) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:43700) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 tests\login\settlement-sequence.spec.js:31:1 › 全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星 (11.9s)
+
+
+  1) tests\login\settlement-sequence.spec.js:31:1 › 全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星 ─────────
+
+    Error: expect(locator).not.toBeVisible() failed
+
+    Locator:  locator('.stage-reply .completion-card').locator('.completion-stats')
+    Expected: not visible
+    Received: visible
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toBeVisible" with timeout 5000ms
+      - waiting for locator('.stage-reply .completion-card').locator('.completion-stats')
+        14 × locator resolved to <ul aria-label="本轮成果" class="completion-stats" data-statistics-version="submissions-v1">…</ul>
+           - unexpected value "visible"
+
+
+      45 |   // This is deliberately before releasing the actual server response, not a
+      46 |   // longer wait that could hide the score flash once the card finally opens.
+    > 47 |   await expect(result(p).locator('.completion-stats')).not.toBeVisible();
+         |                                                            ^
+      48 |   expect((await p.evaluate(()=>window.settlementFrames)).filter(frame=>frame.visible)).toEqual([]);
+      49 |   await expect(p.locator('#starCount')).toHaveText('0');
+      50 |   release();
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\settlement-sequence.spec.js:47:60
+
+    Error Context: output\settlement-20261024\red\settlement-sequence-全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    output\settlement-20261024\red\settlement-sequence-全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星\trace.zip
+    Usage:
+
+        npx playwright show-trace output\settlement-20261024\red\settlement-sequence-全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\login\settlement-sequence.spec.js:31:1 › 全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星 ──────────

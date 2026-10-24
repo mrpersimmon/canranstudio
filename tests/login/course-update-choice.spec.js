@@ -33,43 +33,50 @@ async function publish(page){
 async function ready(page){await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(page.locator('#courseLoader')).toHaveCount(0);}
 async function position(page){await page.locator('.stage-words').getByRole('button',{name:'下一组',exact:true}).click();await expect(page.locator('#wordPageProgress')).toContainText('2 / 4');}
 
-test('目录与课内提示更新，保留当前版本直到明确选择，位置和已获纪念卡日期不变',async({page,browser},info)=>{
+test('已打开页仅提示刷新，下一次进入自动使用最新课包，无旧版选择且成果不被加载层改写',async({page,browser},info)=>{
  test.setTimeout(120000);const student=await learner(page,browser),p=student.page;
  try{
   await finishZone(p,'listen',{base:course});await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
   const awards=await(await p.request.get(base+'api/awards')).json();
-  await p.goto(course+'#learn/words');await ready(p);await position(p);const oldTitle=await p.title();
-  await publish(p);await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');
-  await expect(card.getByText('有新版课程',{exact:true})).toBeVisible();
-  await expect(card.getByRole('link',{name:'进入新版',exact:true})).toBeVisible();
-  await card.locator('.primary-button').click();await ready(p);await expect(p).toHaveTitle(oldTitle);const resumeUrl=p.url();
+  await p.clock.install();await p.goto(course+'#learn/words');await p.reload();await ready(p);await position(p);const oldTitle=await p.title(),resumeUrl=p.url();
+  await publish(p);await p.clock.fastForward(301000);
   const notice=p.getByRole('region',{name:'课程更新',exact:true});await expect(notice).toBeVisible();
-  for(const width of [320,390,768,1280]){await p.setViewportSize({width,height:500});await notice.scrollIntoViewIfNeeded();expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(notice.getByRole('button',{name:'进入新版',exact:true})).toBeInViewport();await notice.screenshot({path:info.outputPath('notice-'+width+'.png')});if(width===320)await p.screenshot({path:info.outputPath('page-320.png')});}
-  await notice.getByRole('button',{name:'继续当前版本',exact:true}).click();await expect(p).toHaveTitle(oldTitle);
-  await p.reload();await ready(p);await expect(p).toHaveTitle(oldTitle);await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
-  await notice.getByRole('button',{name:'进入新版',exact:true}).click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  await expect(p).toHaveTitle(oldTitle);
+  await expect(notice.getByRole('button')).toHaveCount(1);
+  await expect(notice.getByRole('button',{name:'刷新课程',exact:true})).toBeVisible();
+  await expect(p.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
+  for(const width of [320,390,768,1280]){await p.setViewportSize({width,height:500});await notice.scrollIntoViewIfNeeded();expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(notice.getByRole('button',{name:'刷新课程',exact:true})).toBeInViewport();await notice.screenshot({path:info.outputPath('notice-'+width+'.png')});}
+  await notice.getByRole('button',{name:'刷新课程',exact:true}).click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
   await expect(p).toHaveURL(resumeUrl);await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
   await expect(notice).toHaveCount(0);expect(await(await p.request.get(base+'api/awards')).json()).toEqual(awards);
-  await p.reload();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(card.locator('.primary-button')).toBeVisible();
+  await expect(card.locator('.course-update-choice')).toHaveCount(0);
+  await expect(card.getByRole('link',{name:'进入新版',exact:true})).toHaveCount(0);
+  await card.locator('.primary-button').click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
  }finally{await student.context.close();}
 });
 
-test('新版文件失败可重试或继续当前版本，目录的进入新版可直接恢复',async({page,browser})=>{
+test('旧课包已完整缓存时也必须核验最新版，文件或索引失败仅重试不回到旧版',async({page,browser})=>{
  test.setTimeout(90000);const student=await learner(page,browser),p=student.page;
  try{
-  await p.goto(course+'#learn/words');await ready(p);await position(p);const oldTitle=await p.title();
+  await p.goto(course+'#learn/words');await ready(p);await position(p);
   const release=await publish(p);await courseResponse(p,release.item.url,{status:503});
-  await p.reload();await ready(p);const notice=p.getByRole('region',{name:'课程更新',exact:true});
-  await notice.getByRole('button',{name:'进入新版',exact:true}).click();
-  const loader=p.getByRole('region',{name:'课程加载',exact:true});await expect(loader).toContainText('错误编号：L03',{timeout:15000});
-  await loader.getByRole('button',{name:'继续当前版本',exact:true}).click();await ready(p);await expect(p).toHaveTitle(oldTitle);await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
+  await p.reload();const loader=p.getByRole('region',{name:'课程加载',exact:true});
+  await expect(loader).toContainText('错误编号：L03',{timeout:15000});
+  await expect(p.locator('#wordPageProgress')).not.toBeVisible();
+  await expect(loader.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
+  await expect(loader.getByRole('link',{name:'返回课程',exact:true})).toBeVisible();
   await courseResponse(p,release.item.url,{body:release.bytes,contentType:release.item.type});
-  await p.goto(base);await p.locator('[data-unit="unit1-2"]').getByRole('link',{name:'进入新版',exact:true}).click();
-  await ready(p);await expect(p).toHaveTitle('新版课程选择验收');await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
+  await loader.getByRole('button',{name:'再试一次',exact:true}).click();await ready(p);
+  await expect(p).toHaveTitle('新版课程选择验收');await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
+  await courseResponse(p,base+'course-index.json',{status:503});await p.reload();
+  await expect(loader).toContainText('错误编号：L01',{timeout:15000});await expect(p.locator('#wordPageProgress')).not.toBeVisible();
+  await expect(loader.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
+  await courseResponse(p,base+'course-index.json',null);await loader.getByRole('button',{name:'再试一次',exact:true}).click();await ready(p);
  }finally{await student.context.close();}
 });
 
-for(const mode of ['save-data','no-worker'])test(`${mode}仍检查更新，重新联网出现提醒并由学生选择新版`,async({page,browser})=>{
+for(const mode of ['save-data','no-worker'])test(`${mode}只提示刷新，重新进入无需选择即加载最新版`,async({page,browser})=>{
  test.setTimeout(90000);const student=await learner(page,browser,mode==='no-worker'?{serviceWorkers:'block'}:{}),p=student.page;
  try{
   if(mode==='save-data')await p.addInitScript(()=>Object.defineProperty(navigator,'connection',{configurable:true,value:{saveData:true}}));
@@ -78,16 +85,16 @@ for(const mode of ['save-data','no-worker'])test(`${mode}仍检查更新，重�
   const release=await publish(p);let downloads=0;
   student.context.on('response',response=>{if(response.url().endsWith(release.item.url))downloads++;});
   await student.context.setOffline(true);await student.context.setOffline(false);
-  // Foreground/network events share a 30-second minimum check interval.
   await p.clock.fastForward(31000);
   const notice=p.getByRole('region',{name:'课程更新',exact:true});await expect(notice).toBeVisible({timeout:15000});
   await expect(p).toHaveTitle(oldTitle);expect(downloads).toBe(0);
-  await notice.getByRole('button',{name:'进入新版',exact:true}).click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  await expect(notice.getByRole('button')).toHaveCount(1);
+  await p.reload();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
   await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');expect(downloads).toBeGreaterThan(0);
  }finally{await student.context.close();}
 });
 
-test('升级前已缓存的旧加载程序也能收到新提醒，不要求清缓存',async({page,browser})=>{
+test('升级前缓存的旧加载程序在重新进入时直接使用最新版，不要求清缓存或旧版选择',async({page,browser})=>{
  test.setTimeout(90000);const student=await learner(page,browser),p=student.page;
  try{
   const directory=path.join(__dirname,'../fixtures/course-loader-before-update-choice');
@@ -104,9 +111,10 @@ test('升级前已缓存的旧加载程序也能收到新提醒，不要求清�
   let initialChecks=0;p.on('response',response=>{if(response.url().endsWith(base+'course-index.json'))initialChecks++;});
   await p.goto(course+'#learn/words');await ready(p);await position(p);await expect.poll(()=>initialChecks).toBeGreaterThanOrEqual(2);
   await courseResponse(p,base+'core/course-loader.js',null);await courseResponse(p,base+'course-index.json',null);await publish(p);
-  await p.goto(base);await expect(p.locator('[data-unit="unit1-2"]').getByText('有新版课程',{exact:true})).toBeVisible();
+  await p.goto(base);await expect(p.locator('[data-unit="unit1-2"] .primary-button')).toBeVisible();
+  await expect(p.locator('[data-unit="unit1-2"] .course-update-choice')).toHaveCount(0);
   await p.locator('[data-unit="unit1-2"] .primary-button').click();await ready(p);
-  await p.getByRole('region',{name:'课程更新',exact:true}).getByRole('button',{name:'进入新版',exact:true}).click();
-  await ready(p);await expect(p).toHaveTitle('新版课程选择验收');await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
+  await expect(p).toHaveTitle('新版课程选择验收');await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
+  await expect(p.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
  }finally{await student.context.close();}
 });

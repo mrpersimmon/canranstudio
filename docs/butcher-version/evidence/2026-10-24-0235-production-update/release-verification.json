@@ -1,0 +1,98 @@
+{
+  "commit": "ac19bff1773e05e0d0b406948a1168d82edbf170",
+  "previousCommit": "5ec921f42877cf7970549d005e561f753a9b8960",
+  "backupPath": "/var/backups/canran-release-20261024",
+  "dataPath": "/var/lib/canran-lesson",
+  "cutoverStarted": "2026-10-24T02:34:52+08:00",
+  "cutoverFinished": "2026-10-24T02:35:02+08:00",
+  "dataIntegrity": "ok",
+  "cutoverAll14TablesEqual": true,
+  "cardKeyUnchanged": true,
+  "allOriginalRowsRetained": true,
+  "originalDataComparison": {
+    "admin": {
+      "originalRows": 1,
+      "currentRows": 1,
+      "originalRowsMissingOrChanged": 0
+    },
+    "classes": {
+      "originalRows": 10,
+      "currentRows": 11,
+      "originalRowsMissingOrChanged": 0
+    },
+    "students": {
+      "originalRows": 92,
+      "currentRows": 93,
+      "originalRowsMissingOrChanged": 0
+    },
+    "progress": {
+      "originalRows": 85,
+      "currentRows": 86,
+      "originalRowsMissingOrChanged": 0
+    },
+    "unit_awards": {
+      "originalRows": 30,
+      "currentRows": 31,
+      "originalRowsMissingOrChanged": 0
+    },
+    "teachers": {
+      "originalRows": 0,
+      "currentRows": 0,
+      "originalRowsMissingOrChanged": 0
+    },
+    "class_teachers": {
+      "originalRows": 0,
+      "currentRows": 0,
+      "originalRowsMissingOrChanged": 0
+    },
+    "student_numbers": {
+      "originalRows": 106,
+      "currentRows": 107,
+      "originalRowsMissingOrChanged": 0
+    },
+    "teacher_numbers": {
+      "originalRows": 0,
+      "currentRows": 0,
+      "originalRowsMissingOrChanged": 0
+    },
+    "learning_students": {
+      "originalRows": 92,
+      "currentRows": 93,
+      "originalRowsMissingOrChanged": 0
+    },
+    "learning_availability": {
+      "originalRows": 177,
+      "currentRows": 249,
+      "originalRowsMissingOrChanged": 0
+    },
+    "learning_courses": {
+      "originalRows": 84,
+      "currentRows": 86,
+      "originalRowsMissingOrChanged": 0
+    },
+    "learning_submissions": {
+      "originalRows": 1812,
+      "currentRows": 1812,
+      "originalRowsMissingOrChanged": 0
+    },
+    "management_audit": {
+      "originalRows": 12,
+      "currentRows": 17,
+      "originalRowsMissingOrChanged": 0
+    }
+  },
+  "nginxConfigurationUnchanged": true,
+  "exerciseRelease": "/var/www/canranstudio-exercise/releases/20260926-0134-96d4c8cd",
+  "stageHistory": {
+    "normalizedExistingProgress": 85,
+    "historicalAwardCards": 16,
+    "oldCurrentPackages": 72,
+    "oldResourceObjects": 3422
+  },
+  "stageHttpResources": {
+    "courses": 72,
+    "verifiedResources": 3554,
+    "totalBytes": 81090457,
+    "sha256Verified": true
+  }
+}

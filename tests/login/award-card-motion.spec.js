@@ -70,7 +70,7 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await expect(p.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
     await finishZone(p, 'listen', { base: course, keepAward: true });
     const reveal = p.getByRole('dialog', { name: /纪念卡结算/ });
-    await expect(reveal).toBeVisible(); await reveal.press('Escape');
+    await expect(reveal).toBeVisible(); await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
     await p.goto(course + '#learn/certificate');
     await lights(card, 1);
     await student.context.setOffline(true);
@@ -82,7 +82,7 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await readStory(p, course);
     for (const id of ['roles', 'trans', 'manners', 'exam']) {
       await finishZone(p, id, { base: course, keepAward: true });
-      await expect(reveal).toBeVisible(); await reveal.press('Escape');
+      await expect(reveal).toBeVisible(); await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
     }
     await p.goto(course + '#learn/certificate');
     await lights(card, 5);

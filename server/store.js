@@ -8,6 +8,7 @@ const { suggestPinyin, validPinyin } = require('./student-credentials');
 const { createAuthThrottle } = require('./auth-throttle');
 const { learningStore } = require('./learning-store');
 const { teacherStore } = require('./teacher-store');
+const { createSystemUpgrade } = require('./system-upgrade');
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const token = () => crypto.randomBytes(32).toString('base64url');
 const id = () => crypto.randomUUID();
@@ -120,6 +121,7 @@ function openStore(directory) {
     return raw;
   };
   const teachers = teacherStore({ db, transaction, seal, unseal, encodePassword, passwordMatches, createSession, authThrottle });
+  const systemUpgrade = createSystemUpgrade({ db, directory, keyFile, transaction, learning });
   try { teachers.checkIntegrity(); } catch { db.close(); throw Error('老师密码密钥与数据库不匹配，请恢复配套备份。'); }
   const insertStudent = (name, classId, spelling) => {
     if (!validPinyin(spelling)) throw Error('请核对姓名拼音');
@@ -130,6 +132,7 @@ function openStore(directory) {
     return student(who);
   };
   return {
+    ...systemUpgrade,
     directory,
     authThrottle,
     learning,

@@ -1,0 +1,93 @@
+[WebServer] (node:39240) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:27860) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[statistics-step] first login ready: 3201 ms
+[statistics-step] wrong-answer reload ready: 29018 ms
+[statistics-step] corrected round with lost response: 32823 ms
+[statistics-step] first retry reload ready: 46171 ms
+[statistics-step] second retry reload ready: 59862 ms
+[statistics-step] second login ready: 61462 ms
+[statistics-step] second course ready: 69266 ms
+[statistics-step] fresh round restored: 75406 ms
+[statistics-step] fresh round completed: 89483 ms
+  x  1 [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 (1.5m)
+
+
+  1) [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\duanxiaodong\AppData\Local\ms-playwright\webkit-2336\Playwright.exe --inspector-pipe --disable-accelerated-compositing --headless --no-startup-window
+    <launched> pid=42100
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13509813745864773477
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 13509813745864773477, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13509813745864773477 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 10693838778842938364
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 10693838778842938364, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 10693838778842938364 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 3682477582317476636
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 3682477582317476636, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 3682477582317476636 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 4763265986575601031
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 4763265986575601031, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 4763265986575601031 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::dumpSessionStates(0)  Sessions:
+    [pid=42100][err] 
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 7165123092926677362
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 7165123092926677362, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 7165123092926677362 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13608096163295689745
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 13608096163295689745, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13608096163295689745 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 16921193284351957081
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 16921193284351957081, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 16921193284351957081 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 7179825914571197592
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 7179825914571197592, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 7179825914571197592 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::dumpSessionStates(0)  Sessions:
+    [pid=42100][err] 
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 2530492244371927276
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 2530492244371927276, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 2530492244371927276 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 16557941379875495080
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 16557941379875495080, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 16557941379875495080 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 10520778712340884998
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 10520778712340884998, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 10520778712340884998 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 5503614047539514352
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 5503614047539514352, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 5503614047539514352 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13533979905692589306
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 13533979905692589306, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 13533979905692589306 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 4491287157711462954
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::setCurrentSession(0) 4491287157711462954, size = 1
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::sessionWillBeginPlayback(0) 4491287157711462954 returning true
+    [pid=42100][err] [WebKitWin:Media:-] MediaSessionManagerInterface::dumpSessionStates(0)  Sessions:
+    [pid=42100][err] 
+    [pid=42100] <gracefully close start>
+
+      240 |     // Independent browser contexts can flush their retained traces together;
+      241 |     // keep cleanup inside the original 90 s limit and propagate either error.
+    > 242 |     await Promise.all([first.context.close(), second?.context.close()]);
+          |     ^
+      243 |     mark('contexts closed');
+      244 |   }
+      245 | });
+        at C:\Users\duanxiaodong\Documents\ChatGPT\canranstudio\tests\login\submission-statistics.spec.js:242:5
+
+    Error: End of central directory record signature not found. Either not a zip file, or file is truncated.
+
+    Error Context: output\settlement-20261024\statistics-webkit-cleanup\submission-statistics-有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始-webkit-phone\error-context.md
+
+  1 failed
+    [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 

@@ -1,0 +1,13 @@
+[WebServer] (node:43132) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:40856) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38304) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:38304) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 1 tests\login\unit37-38-fivezones-upgrade.spec.js:13:1 › 真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册 (39.8s)
+
+  1 passed (48.4s)

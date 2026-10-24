@@ -1,0 +1,13 @@
+[WebServer] (node:40128) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:43580) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:16900) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 1 tests\login\system-upgrade.spec.js:17:1 › 真实全星与未通关一次性升级：备份、原证归档、清零、旧离线拒绝、重复执行保留新进度 (1.3m)
+
+  1 passed (1.4m)

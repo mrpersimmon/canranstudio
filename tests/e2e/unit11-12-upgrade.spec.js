@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const{test,expect}=require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
 const fs=require('node:fs/promises');
@@ -30,12 +31,12 @@ test('旧课堂未提交的选择和词块保留，不能变成正确答案',asy
  upgrade();await page.reload();const trans=page.locator('.stage-trans');await expect(trans.getByRole('button',{name:'撤回 Whose',exact:true})).toBeVisible();await expect(trans.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  await page.goto('/unit11-12/#learn/owner');const owner=page.locator('.stage-owner');await expect(owner.getByRole('button',{name:'her',exact:true})).toHaveAttribute('aria-pressed','true');await expect(owner.getByRole('status')).toBeEmpty();await expect(owner.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(owner.locator('.claim-task-result')).toBeEmpty();await expect(page.locator('#starCount')).toHaveText('0');
 });
-test('人物未齐不显示课件，整课加载后断网翻档案、翻词卡与刷新续读都完整',async({page,context})=>{
+test('人物未齐不显示课件，同页离线翻档案和词卡，断网刷新受阻并联网续读',async({page,context})=>{
  const voices=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url())&&!isFeedbackAudio(r.url()))voices.push(r.url());});
  let release;const held=new Promise(resolve=>{release=resolve;});await page.route(/tim\.svg(?:\?|$)/,async route=>{await held;await route.continue();});
  try{await page.goto('/lesson/unit11-12/#learn/text',{waitUntil:'domcontentloaded'});await expect(page.getByRole('status',{name:'课程准备状态',exact:true})).toContainText('准备');await expect(page.locator('.stage-text')).not.toBeVisible();}finally{release();}
  await expect(page.locator('#courseLoader')).toHaveCount(0);await context.setOffline(true);const story=page.locator('.stage-text');
- for(let i=0;i<10;i++)await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const response=await page.reload();expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
+ for(let i=0;i<10;i++)await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
  await page.goto('/lesson/unit11-12/#learn/models');
  for(let i=0;i<11;i++){await page.getByRole('button',{name:'下一份档案',exact:true}).click();await expect.poll(()=>page.locator('.claim-record img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);}
  await page.goto('/lesson/unit11-12/#learn/words');await expect(page.locator('#courseLoader')).toHaveCount(0);

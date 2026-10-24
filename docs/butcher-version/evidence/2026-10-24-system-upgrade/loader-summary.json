@@ -1,0 +1,126 @@
+{
+  "checkedAt": "2026-10-24T14:43:02.296Z",
+  "scope": {
+    "runtime": [
+      "core/course-loader.js",
+      "core/course-worker.js"
+    ],
+    "portal": "Removed showCourseUpdates and its call only; root owns home, epoch and sync changes",
+    "tests": [
+      "tests/login/course-update-choice.spec.js",
+      "tests/login/course-update-performance.spec.js",
+      "tests/e2e/course-cache-updates.spec.js"
+    ]
+  },
+  "behavior": {
+    "latestAuthorizedIndexOnEveryEntry": true,
+    "noOldVersionChoice": true,
+    "noFallbackToOldPackage": true,
+    "singleRefreshActionForOpenPages": true,
+    "openedPagePinned": true,
+    "currentBootstrapUsesNetwork": true,
+    "learningResetHandledSeparately": true
+  },
+  "browser": {
+    "chromiumRoot": {
+      "passed": 9,
+      "logs": [
+        "chromium-root-final.log",
+        "chromium-root-boundary.log"
+      ]
+    },
+    "chromiumLesson": {
+      "passed": 9,
+      "logs": [
+        "chromium-lesson.log",
+        "chromium-lesson-boundary.log"
+      ]
+    },
+    "webkitRoot": {
+      "passed": 9,
+      "logs": [
+        "webkit-root.log (8 passed, initial timer-boundary failure retained)",
+        "webkit-root-boundary.log (failed case passed)"
+      ]
+    },
+    "webkitLesson": {
+      "passed": 9,
+      "logs": [
+        "webkit-lesson.log (8 passed, initial timer-boundary failure retained)",
+        "webkit-lesson-boundary.log (failed case passed)"
+      ]
+    }
+  },
+  "static": {
+    "passed": 7,
+    "log": "static-cache.log"
+  },
+  "performance": {
+    "passed": 2,
+    "log": "performance.log",
+    "coldMs": 4312.099853515625,
+    "coldBudgetMs": 5000,
+    "revisit20P95Ms": 830.199951171875,
+    "revisitBudgetMs": 1500,
+    "unchangedResourceDownloads": 0,
+    "pageErrors": 0
+  },
+  "initialFailures": [
+    {
+      "log": "chromium-root.log",
+      "reason": "Clock installed after the exercise and followed only by hash navigation; fixed by actual reload before timing. No product failure."
+    },
+    {
+      "logs": [
+        "webkit-root.log",
+        "webkit-lesson.log"
+      ],
+      "reason": "A response-header event preceded withdrawal body validation and rescheduling. Test now waits for the real completion event before advancing fake time; exact count=1, wire304 and zero bytes retained."
+    }
+  ],
+  "unresolved": [],
+  "productionChanged": false,
+  "committed": false,
+  "pushed": false,
+  "sourceHashes": {
+    "core/course-loader.js": "233c48aa76b2c9071b95c795e9036155d516a5e0a2de7c22659c3609f7e171bb",
+    "core/course-worker.js": "60df933ebd9fd1b8ebd1bca93b3062b90bab1f07302b3edd6e977e80c0e5d1f3"
+  },
+  "archiveResourceFollowup": {
+    "request": "Allow authenticated retained certificate artwork outside the current lesson pack",
+    "runtime": "core/course-worker.js",
+    "allowedPrefix": "awards/history-assets/",
+    "undeclaredResourcesStill409": true,
+    "unitTestsPassed": 2,
+    "log": "archive-worker.log",
+    "realMigrationImageValidation": "Positive image fetch and SHA-256 through an installed upgraded worker verified in the capability browser test; full retained-certificate rendering owned by migration agent"
+  },
+  "archiveCapabilityFollowup": {
+    "requiredWhen": "CanranStudentAccess.systemUpgrade exists",
+    "protocol": 1,
+    "capability": "archiveAssets:true",
+    "oldControllerMustWait": true,
+    "compatibleControllerFastPath": true,
+    "incompatibleControlledFallback": "L02 retry; no pin or execution",
+    "realBrowserPassed": 4,
+    "combinations": [
+      "Chromium root success",
+      "Chromium root update503/retry",
+      "WebKit subpath success",
+      "WebKit subpath update503/retry"
+    ],
+    "logs": [
+      "worker-capability-green.log",
+      "worker-capability-failure.log",
+      "worker-capability-webkit.log"
+    ],
+    "archivedImageStatus": 200,
+    "archivedImageHashEqual": true,
+    "unlistedImageStatus": 409,
+    "unauthorizedArchiveStatus": 403,
+    "redLog": "worker-capability-red-ready.log",
+    "initialFixturePreparationFailure": "worker-capability-red.log: preserve Service-Worker-Allowed on replaced worker response before testing real registration",
+    "fixture": "tests/fixtures/course-worker-before-archive/manifest.json",
+    "finalChromiumRootRecheck": "worker-capability-final.log"
+  }
+}

@@ -1,5 +1,6 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
+const { reloadWithLatestCheck } = require('../support/offline-reentry');
 
 async function watchTransition(page, action, testInfo, name) {
   await page.evaluate(() => {
@@ -40,7 +41,7 @@ for (const width of course === 'unit5-6' ? [390, 1280] : [390]) test(`${course} 
   const previous = page.getByRole('button', { name: course === 'unit1-2' ? '上一组' : '上一组词卡', exact: true });
   // Cold and revisited pages, then offline: all movement comes from real buttons.
   for (let visit = 0; visit < 2; visit++) {
-    if (visit) { await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1'); }
+    if (visit) { await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1'); }
     const total = Number((await page.locator('#wordPageProgress').textContent()).split('/')[1]);
     for (let i = 1; i < total; i++) {
       await next.scrollIntoViewIfNeeded();

@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { EXAM, selectAnswer, finishExamFrom } = require('../support/unit9-10-exam');
@@ -51,13 +52,13 @@ test('9–10 旧草稿只是选择，升级、返回与刷新都不代为判对'
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });
 
-test('9–10 缓存版断网刷新保留新增题的未提交词块，下一题仍为空', async ({ page, context }) => {
+test('9–10 断网刷新受阻，联网恢复新增题的未提交词块，下一题仍为空', async ({ page, context }) => {
   test.setTimeout(60000); await page.goto('/lesson/unit9-10/#learn/exam'); const room = page.locator('.stage-exam');
   for (let i = 0; i < 8; i++) {
     await selectAnswer(room, EXAM[i].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   }
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'Look', exact: true }).click();
-  await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
+  await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('button', { name: '撤回 Look', exact: true })).toBeVisible();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8'); await expect(room.getByRole('status')).toBeEmpty();
   for (const token of ['at', 'Helen.', "She's", 'very well.']) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();

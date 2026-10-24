@@ -39,10 +39,10 @@
     });};
     document.getElementById('cancelPassword').onclick=()=>attempt(async()=>{if(required){await api('logout',{});changed();}await home();});
   }
-  async function syncPending(studentId){
-    const prefix='canran:student:'+studentId+':';let remaining=0;
+  async function syncPending(studentId,upgrade){
+    const prefix=window.CanranSystemUpgrade?.namespace(studentId,upgrade)||'canran:student:'+studentId+':'+(upgrade?.epoch?'epoch:'+upgrade.epoch+':':'');let remaining=0;
     const keys=Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).filter(k=>k.startsWith(prefix+'pending:'));
-    for(const key of keys){try{const pending=JSON.parse(localStorage.getItem(key));if(pending.studentId!==studentId)continue;const result=await api('progress',pending);if(result.stale){localStorage.removeItem(prefix+'canran:lesson:'+pending.course+':learning:v1');localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}localStorage.removeItem(key);}catch{remaining++;}}
+    for(const key of keys){try{const pending=JSON.parse(localStorage.getItem(key));if(pending.studentId!==studentId||upgrade&&pending.epoch!==upgrade.epoch)continue;const result=await api('progress',pending);if(result.stale){localStorage.removeItem(prefix+'canran:lesson:'+pending.course+':learning:v1');localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}localStorage.removeItem(key);}catch{remaining++;}}
     return remaining;
   }
   async function prepareSharedFonts(){
@@ -55,9 +55,8 @@
     }
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);let index;
     try{const response=await fetch('/lesson/course-index.json',{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('课程资源尚未就绪');index=await response.json();}finally{clearTimeout(timer);}
-    // Check revisions before the large shared-font downloads. A failed or slow
-    // preparation must not hide either the course entries or update choices.
-    void showCourseUpdates(index);
+    // The directory prepares shared bytes only. Course entry verifies and
+    // opens the latest authorized version without a separate version choice.
     const fonts=index.sharedFonts||[];
     if(!Array.isArray(fonts)||fonts.some(item=>item.type!=='font/woff2'||!item.url.startsWith('/lesson/resources/')||!/^[a-f0-9]{64}$/.test(item.sha256)||!Number.isSafeInteger(item.bytes)||item.bytes<=0))throw Error('课程资源尚未就绪');
     const queue=[...fonts];
@@ -67,18 +66,6 @@
     await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)})).catch(()=>{});
     await Promise.all(Array.from({length:2},async()=>{while(queue.length)await store.obtain(queue.shift());}));
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
-  }
-  async function showCourseUpdates(index){
-    const store=CanranCourseCache.open('/lesson/');
-    for(const card of app.querySelectorAll('.course')){
-      const current=await store.current(card.dataset.unit),latest=index.courses?.[card.dataset.unit];
-      if(!card.isConnected||!current||!latest||current.revision===latest.revision||card.querySelector('.course-update-choice'))continue;
-      const row=document.createElement('div');row.className='course-update-choice';
-      const label=document.createElement('strong');label.textContent='有新版课程';
-      const link=document.createElement('a');link.className='button compact';link.textContent='进入新版';
-      const url=new URL(card.querySelector('.primary-button').href);url.searchParams.set('course-update','1');link.href=url.href;
-      row.append(label,link);card.querySelector('.featured-copy').append(row);
-    }
   }
   function prepareDirectory(hasCourses, waiting) {
     const note=app.querySelector('p[role="status"]'),retry=document.createElement('button');
@@ -119,16 +106,17 @@
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
     if(who.mustChangePassword)return passwordForm(who,true);
-    if(['/lesson/awards','/lesson/awards/'].includes(location.pathname)){location.reload();return;}
+    if(['/lesson/awards','/lesson/awards/'].includes(location.pathname)||(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/'))){location.reload();return;}
     if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
-    const waiting=who.preview?0:await syncPending(who.student.id);
+    const waiting=who.preview?0:await syncPending(who.student.id,who.systemUpgrade);
     if(!who.preview)who=await api('me');
     const banners=who.courses.map(c=>{
       const pictures=c.artwork?.length?c.artwork:[c.image];
       const img=(src,cls='')=>`<img class="${cls}" src="${e(src)}" loading="lazy" decoding="async" alt="">`;
       const art=pictures.length===5?img(pictures[0],'actor')+`<div class="food-cards">${pictures.slice(1,4).map(src=>img(src)).join('')}</div>`+img(pictures[4],'actor'):pictures.map(src=>img(src,'featured-scene')).join('');
-      const action=c.started||c.stars?'继续学习':'开始学习';
-      return `<section class="featured-course course" data-unit="${e(c.id)}" aria-labelledby="${e(c.id)}-title"><div class="featured-copy"><p class="lesson-label">${e(c.label)}</p><h2 id="${e(c.id)}-title">${e(c.title)}</h2><p class="course-intro">${e(c.intro)}</p>${c.started||c.stars?`<p class="resume-location">★ ${c.stars} / ${c.maxStars||15}</p>`:''}<a class="primary-button" aria-label="${action}：${e(c.title)}" href="/lesson/${e(c.id)}/${preview?'?preview='+encodeURIComponent(preview):''}#learn/${e(c.next||'words')}">${action}</a></div><div class="featured-art" aria-hidden="true">${art}</div></section>`;
+      const completed=Boolean(who.systemUpgrade?.epoch&&c.completed);
+      const action=completed?'再次学习':c.started||c.stars?'继续学习':'开始学习';
+      return `<section class="featured-course course" data-unit="${e(c.id)}" aria-labelledby="${e(c.id)}-title"><div class="featured-copy"><p class="lesson-label">${e(c.label)}</p><h2 id="${e(c.id)}-title">${e(c.title)}</h2><p class="course-intro">${e(c.intro)}</p>${c.started||c.stars?`<p class="resume-location">★ ${c.stars} / ${c.maxStars||15}${completed?' · 已通关':''}</p>`:''}<a class="primary-button" aria-label="${action}：${e(c.title)}" href="/lesson/${e(c.id)}/${preview?'?preview='+encodeURIComponent(preview):''}#learn/${e(c.next||'words')}">${action}</a></div><div class="featured-art" aria-hidden="true">${art}</div></section>`;
     }).join('');
     app.innerHTML=`<div class="toolbar"><div><p class="muted">${e(who.className)}${who.preview?' · 预览不记录成绩':' · <span class="student-number">'+e(who.student.studentNumber)+'</span>'}</p><h1>${e(who.student.name)}的课程</h1></div>${who.preview?'<a class="button compact" href="/lesson/admin/">返回班级管理</a>':'<div class="actions"><a class="button compact" href="/lesson/awards/">我的纪念册</a><button class="compact" id="changePassword">修改密码</button><button class="compact" id="logout">切换学生</button></div>'}</div><div class="course-directory">${banners}</div>${who.courses.length?'':'<section class="panel empty"><h2>老师还没开放课程</h2><p>开课后，再回来看看吧。</p><button id="refresh">刷新课程</button></section>'}<p role="status"></p><details class="panel" style="margin-top:28px"><summary>本机旧记录</summary><p class="muted">这些记录来自使用学生账号之前，不计入当前学生。</p><ul id="legacy"></ul></details>`;
     document.getElementById('changePassword')?.addEventListener('click',()=>passwordForm(who,false));
@@ -138,6 +126,8 @@
     const list=document.getElementById('legacy');let found=false;
     for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!/^canran:(?:lesson:)?(?:unit\d+-\d+:learning|l\d+:progress|soundmark:progress)/.test(key))continue;try{const value=JSON.parse(localStorage.getItem(key));const item=document.createElement('li');const unit=key.match(/unit\d+-\d+|l\d+/)?.[0];item.textContent=unit+' · '+(value.activity?.unitCompleted?Object.keys(value.activity.unitCompleted).length+' 项活动完成':Object.values(value.ratings||{}).reduce((sum,n)=>sum+(Number(n)||0),0)+' 颗星');list.append(item);found=true;}catch{}}
     if(!found)list.textContent='这台设备没有旧记录。';
+    if(who.systemUpgrade?.epoch)list.closest('details')?.remove();
+    window.CanranSystemUpgrade?.notice(who,app);
     prepareDirectory(who.courses.length>0,waiting);
   }
   async function loadAdmin(selected=currentClass) {

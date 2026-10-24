@@ -1,0 +1,13 @@
+[WebServer] (node:39392) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:23764) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:41260) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 1 tests\login\system-upgrade-certificates.spec.js:8:1 › 真实旧纸证独立归档后原名日期PNG和打印不变，关课仍可查看且不恢复学习进度 (24.2s)
+
+  1 passed (29.4s)

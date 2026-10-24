@@ -10,7 +10,7 @@
 
 - 学习已发布课程：打开[正式课程导航](https://www.canranstudio.cn/)，选择课程。
 - 在自己电脑上查看或修改：按下面的“本地预览”操作。
-- 设计或扩充教学单元：先读[统一设计标准与验收清单 v1.54](docs/butcher-version/publish/2026-10-18-0843-v1.54-教学单元设计标准与验收清单.md)。
+- 设计或扩充教学单元：先读[统一设计标准与验收清单 v1.55](docs/butcher-version/publish/2026-10-24-2200-v1.55-教学单元设计标准与验收清单.md)。
 - 查各课教材、题量与验收状态：使用[教学单元索引](docs/butcher-version/2026-10-15-0041-v1.0-教学单元设计与验收索引.md)；标准正文不再维护逐课表。
 - 设计加载与缓存：见[独立缓存方案](docs/butcher-version/publish/2026-09-24-2031-v1.0-网页加载缓存设计.md)；已在本地实现，具体验收范围见文档，共用文档集中在 [publish](docs/butcher-version/publish/README.md)。
 - 本地新增 Lesson 43–44：[茶具躲猫猫设计与验收](docs/butcher-version/2026-10-12-1542-v1.0-Lesson43-44设计与验收.md)，无配音、五区44题与五星纪念卡；未发布。

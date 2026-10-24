@@ -4,7 +4,7 @@ const fs = require('node:fs/promises'), os = require('node:os'), path = require(
 const { adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
 const flow = require('../support/thirteen-types-flow');
 const tasks = require('../support/units1-30-tasks');
-const { expectCompactCompletion } = require('../support/completion-layout');
+const { expectCompactCompletion, courseReadyForAssertions } = require('../support/completion-layout');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
 
 // Explicit contexts do not inherit the page fixture's device settings.
@@ -33,7 +33,7 @@ test('登录手机短屏完成后统计与操作完整，再进和重练保留�
     await tasks.activity(p, '3-4', 'listen', { base: base.slice(0, -1), keepAward: true });
     const reward = p.getByRole('dialog', { name: /纪念卡结算/ });
     await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
-    await reward.press('Escape'); await expect(reward).not.toBeVisible();
+    await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape'); await expect(reward).not.toBeVisible();
     const room = p.locator('.stage-listen');
     await expectCompactCompletion(p, room, { illustrated: true });
     await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
@@ -48,6 +48,7 @@ test('登录手机短屏完成后统计与操作完整，再进和重练保留�
     await room.getByRole('button', { name: '再练一轮', exact: true }).click();
     await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
     await p.reload();
+    await courseReadyForAssertions(p);
     await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
     await expect(p.locator('#starCount')).toHaveText('1');
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -63,7 +64,7 @@ test('加载层移除后再检查结算布局，延后的呈现帧不覆盖操�
     await tasks.activity(p, '3-4', 'listen', { base: base.slice(0, -1), keepAward: true });
     const reward = p.getByRole('dialog', { name: /纪念卡结算/ });
     await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
-    await reward.press('Escape');
+    await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape');
     // Slow the browser's presentation boundary, without changing course state.
     // Elements already have boxes behind the loading overlay; they are not yet
     // the user's interactive page, and startup still restores the chapter.
@@ -115,7 +116,7 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
       await flow.activity(p, '1-2', id, { base: base.slice(0, -1), keepAward: true });
       const reward = p.getByRole('dialog', { name: /纪念卡结算/ });
       await expect(reward.getByRole('group', { name: `已获得 ${index + 1} / 5 颗星`, exact: true })).toBeVisible();
-      await reward.press('Escape'); await expect(reward).not.toBeVisible();
+      await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape'); await expect(reward).not.toBeVisible();
       await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     }
     await p.goto(base + 'unit1-2/#learn/certificate');
@@ -135,6 +136,7 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     // An open course deliberately keeps its cached edition. The public retry
     // navigation requests the new package without deleting any learning data.
     await p.goto(base + 'unit1-2/?course-retry=1#learn/manners');
+    await courseReadyForAssertions(p);
     // Versioned resource hashes and real drafts both survive the deployment boundary.
     await expect(room.locator('.progress-copy')).toHaveText('第 3 / 5 题');
     await expect(room.locator('.fb')).toHaveText('再看看。');
@@ -153,11 +155,13 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     await p.getByRole('dialog', { name: '学习记录', exact: true }).getByRole('button', { name: '关闭', exact: true }).click();
     await p.goto(base + 'unit1-2/#learn/certificate'); await expect(p.locator('#certificateDate')).toHaveText(date);
     await p.clock.setFixedTime(new Date(Date.now() + 86400000)); await p.reload();
+    await courseReadyForAssertions(p);
     await expect(p.locator('#certificateDate')).toHaveText(date); await expect(p.locator('#starCount')).toHaveText('5');
     second = await browser.newContext({ ...deviceSettings(), baseURL: origin }); const other = await second.newPage();
     await signIn(other, account, base); await other.goto(base + 'unit1-2/#learn/manners');
+    await courseReadyForAssertions(other);
     await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
-    await other.reload(); await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
+    await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
     await other.goto(base + 'unit1-2/#learn/certificate');
     await expect(other.locator('#certificateDate')).toHaveText(date); await expect(other.locator('#certificateName')).toHaveText('小禾');
     await other.getByRole('link', { name: '我的纪念册', exact: true }).click();
@@ -170,12 +174,19 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
   }
 });
 
-test('有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始', async ({ page, browser }) => {
-  test.setTimeout(90000); await adminLogin(page, base);
+test('有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始', async ({ page, browser }, info) => {
+  test.setTimeout(90000);
+  const started=Date.now(),mark=label=>{
+    const description=`${label}: ${Date.now()-started} ms`;
+    info.annotations.push({type:'statistics-step',description});
+    console.log('[statistics-step] '+description);
+  };
+  await adminLogin(page, base);
   const account = await createStudent(page, '统计同步验收', '小雨', [/Lesson 1–2/]);
   // Page routing is not a reliable fault boundary for WebKit worker requests.
   // The upgrade test above covers Worker allow; this fault case uses fallback.
   const first = await studentLogin(browser, account, base, { ...deviceSettings(), serviceWorkers: 'block' }); let second;
+  mark('first login ready');
   try {
     const p = first.page;
     let completedTransmissions = 0, loseReplies = true;
@@ -194,25 +205,41 @@ test('有错轮次同步到另一设备仍为零星，重复传输不增加统�
     await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1), capture: async (room, i, phase) => {
       if (i !== 2 || phase !== 'blank') return;
       await twoErrors(room); await p.reload();
+      await courseReadyForAssertions(p);
+      mark('wrong-answer reload ready');
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     } });
     await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
     await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state', 'retry');
+    mark('corrected round with lost response');
     // Resend/merge the same accepted proof without another learner submission.
     loseReplies = false;
-    await p.reload(); await p.reload();
+    await p.reload(); await courseReadyForAssertions(p);
+    mark('first retry reload ready');
+    await p.reload(); await courseReadyForAssertions(p);
+    mark('second retry reload ready');
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     expect(completedTransmissions).toBeGreaterThanOrEqual(2);
     await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
     await expect(p.locator('#starCount')).toHaveText('0');
     second = await studentLogin(browser, account, base, deviceSettings()); const other = second.page;
+    mark('second login ready');
     await other.goto(base + 'unit1-2/#learn/manners');
+    await courseReadyForAssertions(other);
+    mark('second course ready');
     await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
     await expect(other.locator('#starCount')).toHaveText('0');
     await other.locator('.stage-manners').getByRole('button', { name: '再练一轮', exact: true }).click();
-    await other.reload(); await expect(other.locator('.stage-manners .progress-copy')).toHaveText('第 1 / 5 题');
+    await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .progress-copy')).toHaveText('第 1 / 5 题');
+    mark('fresh round restored');
     await flow.activity(other, '1-2', 'manners', { base: base.slice(0, -1) });
     await expect(other.locator('.stage-manners .completion-number')).toHaveText(['5', '5', '0']);
     await expect(other.locator('#starCount')).toHaveText('1');
-  } finally { await first.context.close(); await second?.context.close(); }
+    mark('fresh round completed');
+  } finally {
+    // Independent browser contexts can flush their retained traces together;
+    // keep cleanup inside the original 90 s limit and propagate either error.
+    await Promise.all([first.context.close(), second?.context.close()]);
+    mark('contexts closed');
+  }
 });

@@ -1,0 +1,31 @@
+(node:30856) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ three confirmed editions have exactly five answer zones and catalog metadata matches the course (168.2502ms)
+✔ zero-error claims require this edition and one real first-correct submission, not merely completion (0.4818ms)
+✔ collection retains editions independently, isolates owners, and fixes the first full-star date across replays and resets (91.6279ms)
+✔ every supported original paper renders through an isolated allowlist without teaching scripts (142.3172ms)
+✔ archive template metadata is escaped and static fonts/images stay available (5.5855ms)
+(node:39308) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ static update metadata stays small, versioned and outside lesson dependencies (135.4485ms)
+✔ conditional metadata HTTP authorizes before 304 at / (4191.2898ms)
+✔ conditional metadata HTTP authorizes before 304 at /lesson/ (4799.7622ms)
+✔ / pinned courses let archive assets reach server authorization without allowing other undeclared images (17.2493ms)
+✔ /lesson/ pinned courses let archive assets reach server authorization without allowing other undeclared images (1.0321ms)
+(node:7580) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ explicit cutover backs up exact rows and key, preserves full originals, and resets all old student courses only once (325.4884ms)
+✔ old full-card editions and issued legacy paper receipts archive independently and retain five stars without invented answers (174.3757ms)
+✔ a backup failure leaves progress and awards untouched (80.982ms)
+✔ corrupt or unsupported evidence stops the entire transaction after a recoverable backup (170.4954ms)
+✔ startup alone is nondestructive and the explicit command requires a backup destination (81.8525ms)
+✔ a genuine write after the backup snapshot aborts the cutover instead of discarding new learning (94.5274ms)
+✔ the paired backup restores old partial stars and exact progress without auto-applying the destructive migration (214.0796ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9393.5388

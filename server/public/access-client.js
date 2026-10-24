@@ -27,6 +27,7 @@ function completedSnapshot(book){
  for(const id of ['unitDialogue','subjectRound'])if(book.activity?.[id]?.done)activity[id]=book.activity[id];
  for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
  if(book.activity?.unitAwardClaims)activity.unitAwardClaims=book.activity.unitAwardClaims;
+ if(access?.systemUpgrade?.epoch)return {version:1,groups,records,activity};
  if(course==='unit1-2'){
   if(book.activity?.unit12HistoryProgress)activity.unit12HistoryProgress=book.activity.unit12HistoryProgress;
   if(book.activity?.unit12V154Seen===true)activity.unit12V154Seen=true;
@@ -70,8 +71,8 @@ function completedSnapshot(book){
  }
  return {version:1,groups,records,activity};
 }
-function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
-async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock('学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(result.awards){access.awards=result.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:result.awards}));}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步','retry');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
+function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,epoch:access.systemUpgrade?.epoch,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
+async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock(result.systemUpgrade?.message||'学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(result.awards){access.awards=result.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:result.awards}));}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步','retry');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
 function lock(message,retry=()=>location.reload()){
  locked=true;document.documentElement.setAttribute('data-access-locked','');
  let gate=document.getElementById('accessGate');if(!gate){gate=document.createElement('div');gate.id='accessGate';gate.setAttribute('role','alertdialog');gate.setAttribute('aria-label','课程访问');gate.style='position:fixed;inset:0;z-index:2147483646;background:#fcf8ef;display:grid;place-items:center;padding:24px;color:#4b3428;font:18px/1.7 system-ui';document.body.append(gate);}
@@ -79,7 +80,7 @@ function lock(message,retry=()=>location.reload()){
  gate.style.setProperty('display','grid','important');gate.style.setProperty('visibility','visible','important');gate.replaceChildren();const box=document.createElement('div'),copy=document.createElement('h2'),button=document.createElement('button'),back=document.createElement('a');copy.textContent=message;button.textContent='再试一次';button.style='font:inherit;padding:12px 24px;margin:12px;border-radius:18px';button.onclick=retry;back.textContent='返回课程';back.href='/lesson/';box.append(copy,button,back);gate.append(box);button.focus({preventScroll:true});window.dispatchEvent(new Event('lesson49:leave-activity'));
 }
 function unlock(){document.querySelectorAll('[data-access-inert]').forEach(el=>{el.inert=false;delete el.dataset.accessInert;});locked=false;document.documentElement.removeAttribute('data-access-locked');document.getElementById('accessGate')?.remove();}
-async function renew(){if(renewing)return;renewing=true;for(const child of document.body.children)if(!child.inert){child.inert=true;child.dataset.accessInert='';}try{const next=await api('courses/'+course+'/enter',{preview});if(next.student.id!==owner){lock('学习身份已改变，请重新进入课程。');return;}access.grant=next.grant;access.expires=next.expires;if(next.awards){access.awards=next.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:next.awards}));}renewAt=Date.now()+7200000;unlock();await pinAgain();flush();}catch(error){lock(error.status===403?error.message:'暂时无法核验，请联网后再试。',renew);}finally{renewing=false;}}
+async function renew(){if(renewing)return;renewing=true;for(const child of document.body.children)if(!child.inert){child.inert=true;child.dataset.accessInert='';}try{const next=await api('courses/'+course+'/enter',{preview});if(next.student.id!==owner){lock('学习身份已改变，请重新进入课程。');return;}if(next.systemUpgrade?.epoch!==access.systemUpgrade?.epoch){lock(next.systemUpgrade?.message||'课程已更新，请刷新课程。',()=>location.reload());return;}access.grant=next.grant;access.expires=next.expires;if(next.awards){access.awards=next.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:next.awards}));}renewAt=Date.now()+7200000;unlock();await pinAgain();flush();}catch(error){lock(error.status===403?error.message:'暂时无法核验，请联网后再试。',renew);}finally{renewing=false;}}
 async function pinAgain(){const controller=navigator.serviceWorker?.controller;if(!controller||!window.CanranCourseCache)return;const pack=await window.CanranCourseCache.open('/lesson/').current(course);if(pack)controller.postMessage({type:'course:pin',id:course,revision:pack.revision});}
 function mergeRemote(local,remote){
  const v=local&&typeof local==='object'?local:{version:1,groups:{},records:{},activity:{}};
@@ -101,7 +102,7 @@ function installStorage(){
  Storage.prototype.removeItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.remove.call(this,k);if(access.preview){memory.delete(k);return;}native.remove.call(this,prefix+k);};
 }
 window.CanranAccessReady=(async()=>{
- access=await api('courses/'+course+'/enter',{preview});owner=access.student.id;prefix='canran:student:'+owner+':';renewAt=Date.now()+7200000;
+ access=await api('courses/'+course+'/enter',{preview});owner=access.student.id;prefix=window.CanranSystemUpgrade?.namespace(owner,access.systemUpgrade)||'canran:student:'+owner+':'+(access.systemUpgrade?.epoch?'epoch:'+access.systemUpgrade.epoch+':':'');renewAt=Date.now()+7200000;
  if(!access.preview){
   const generationKey=prefix+'generation:'+course;const oldGeneration=Number(read(generationKey)||0);
   let local=null;try{local=JSON.parse(read(prefix+key)||'null');pending=JSON.parse(read(prefix+'pending:'+course)||'null');}catch{}
@@ -120,6 +121,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)hiddenAt=Da
 setInterval(()=>{if(access&&!document.hidden&&!locked&&Date.now()>=renewAt)renew();},10000);
 document.addEventListener('click',event=>{if(locked&&!event.target.closest('#accessGate')){event.preventDefault();event.stopImmediatePropagation();}},true);
 document.addEventListener('canran:course-ready',()=>{
+ window.CanranSystemUpgrade?.notice(access,document.querySelector('main')||document.body);
  const actions=document.querySelector('.unit-top-actions')||document.getElementById('starCountWrap')?.parentElement;if(!actions)return;
  const strip=document.createElement('div');strip.className='student-access-bar';document.getElementById('chapterNav').before(strip);
  const style=document.createElement('style');style.textContent=`
@@ -162,7 +164,7 @@ document.addEventListener('canran:course-ready',()=>{
   const resetNote=document.createElement('p');resetNote.textContent=access.awards?'重开练习，保留星星和首次满星日期。':'只清空本课的个人学习成果。';
   reset.onclick=()=>{
    reset.textContent=access.awards?'确认重开练习':'确认清空本课个人成果';
-   reset.onclick=async()=>{try{await flush();if(pending){showError('还有成果等待同步，请联网后再重开练习。');return;}const result=await api('progress/reset',{course});native.remove.call(localStorage,prefix+key);native.remove.call(localStorage,prefix+'pending:'+course);write(prefix+'generation:'+course,String(result.generation));location.reload();}catch(error){showError(error.message);}};
+   reset.onclick=async()=>{try{await flush();if(pending){showError('还有成果等待同步，请联网后再重开练习。');return;}const result=await api('progress/reset',{course,epoch:access.systemUpgrade?.epoch});native.remove.call(localStorage,prefix+key);native.remove.call(localStorage,prefix+'pending:'+course);write(prefix+'generation:'+course,String(result.generation));location.reload();}catch(error){showError(error.message);}};
   };
   resetArea.append(reset,resetNote);dialog.append(heading);
   if(course==='unit1-2'){const name=document.createElement('p');name.className='student-settings-name';name.textContent=access.student.name;dialog.append(name);}

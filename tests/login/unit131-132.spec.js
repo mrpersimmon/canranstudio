@@ -216,7 +216,7 @@ test('长姓名手机卡、另一学生隔离、教师预览不能保存个人�
  const first=await studentLogin(browser,account,base);let other;
  try{
   await activity(first.page,'listen',{base:prefix,keepAward:true});
-  const reveal=first.page.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();await reveal.press('Escape');await expect(reveal).toBeHidden();
+  const reveal=first.page.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');await expect(reveal).toBeHidden();
   await first.page.setViewportSize({width:320,height:568});await first.page.goto(base+'unit131-132/#learn/certificate');await ready(first.page);
   await expect(first.page.locator('#certificateName')).toHaveText('欧阳小禾同学');
   const card=first.page.locator('.stage-certificate .story-award-paper'),name=first.page.locator('#certificateName');

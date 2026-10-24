@@ -1,0 +1,80 @@
+{
+  "ok": true,
+  "checkedAt": "2026-10-23T18:38:44.237Z",
+  "origin": "https://www.canranstudio.cn",
+  "course": "unit37-38",
+  "directoryCount": 72,
+  "oldRevision": "f6766e74013c2584cbf0238788c49c67cb2119601b365c3b1845a48166d72336",
+  "newRevision": "d44c875ef3c0f39b1ec99461b61656b48d7c5e84f6e9ec6873b4fa3591679066",
+  "directoryUpdateChoice": true,
+  "ordinaryEntryKeptOldVersion": true,
+  "keepCurrentAndReload": true,
+  "explicitLatestSelection": true,
+  "latestPersistsOnReload": true,
+  "freshOrdinaryUserLogin": true,
+  "freshFirstCourseWordCardExpanded": true,
+  "independentTimezoneAwardsPreserved": true,
+  "unchangedLearningBook": true,
+  "unchangedAwardData": true,
+  "unchangedLegacyDateData": true,
+  "position": "2 / 2",
+  "bookSha256": "62adaf490973b187813a808876e912f98878dc80515ba294efc31f99c1a7f98e",
+  "awardsSha256": "981cbcb8313c1f8ae742763423e3530c153af466bcbf76df73149c1f51a0044d",
+  "existingAwardCards": 0,
+  "legacyCertificateCount": 0,
+  "oldCertificateVisuallyChecked": false,
+  "metadataConditional304": true,
+  "metadata304Bytes": 0,
+  "anonymousMatchingEtagDenied": true,
+  "timings": {
+    "directoryVisibleMs": 2840,
+    "latestVersionReadyMs": 8188,
+    "freshFirstCourseReadyMs": 27346,
+    "freshLoginDirectoryVisibleMs": 4475
+  },
+  "pageErrors": [],
+  "serverErrors": [],
+  "requests": [
+    {
+      "path": "/course-index.json",
+      "status": 200
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 200
+    },
+    {
+      "path": "/course-packages/unit37-38/d44c875ef3c0f39b1ec99461b61656b48d7c5e84f6e9ec6873b4fa3591679066.json",
+      "status": 200
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 200
+    },
+    {
+      "path": "/course-packages/unit37-38/d44c875ef3c0f39b1ec99461b61656b48d7c5e84f6e9ec6873b4fa3591679066.json",
+      "status": 200
+    },
+    {
+      "path": "/course-index.json",
+      "status": 200
+    },
+    {
+      "path": "/course-packages/unit37-38/d44c875ef3c0f39b1ec99461b61656b48d7c5e84f6e9ec6873b4fa3591679066.json",
+      "status": 200
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 200
+    },
+    {
+      "path": "/course-status/unit37-38.json",
+      "status": 200
+    }
+  ],
+  "limitations": [
+    "Dedicated synthetic learner only; production-wide preservation uses the separate database audit.",
+    "Legacy certificate visual coverage depends on genuine existing records in this learner.",
+    "No response interception, fabricated production versions, or storage seeding was used."
+  ]
+}

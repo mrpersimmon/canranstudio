@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { EXAM, selectAnswer } = require('../support/unit7-8-exam');
 const { finishExamFrom } = require('../support/unit7-8-exam');
@@ -147,7 +148,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十一题长题干、�
   await room.screenshot({ path: `output/playwright/unit7-8-exam/finish-${width}.png` });
 });
 
-test('整课包离线刷新仍是十一题，当前新题未提交不计分', async ({ page, context }) => {
+test('断网刷新受阻，联网恢复十一题与原词块，当前新题未提交不计分', async ({ page, context }) => {
   await page.goto('/lesson/unit7-8/#learn/exam');
   await expect(page.locator('#courseLoader')).toHaveCount(0); const room = page.locator('.stage-exam');
   for (let i = 0; i < 3; i++) {
@@ -155,7 +156,7 @@ test('整课包离线刷新仍是十一题，当前新题未提交不计分', as
     await room.getByRole('button', { name: '下一题', exact: true }).click();
   }
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'What nationality', exact: true }).click();
-  await context.setOffline(true); const response = await page.reload(); expect(response.headers()['x-course-offline']).toBe('1');
+  await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room).toContainText('第 4 / 11 题'); await expect(room.getByRole('button', { name: '撤回 What nationality', exact: true })).toBeVisible();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '3');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

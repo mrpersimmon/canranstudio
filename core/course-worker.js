@@ -45,7 +45,7 @@ self.addEventListener('message', event => {
   event.waitUntil((async () => {
     if (message.type === 'identity:changed') { coursePins.clear(); accessPins.clear(); for(const client of await self.clients.matchAll({type:'window'})){await courseStore.remove('pins',client.id);if(client.id!==event.source?.id)client.postMessage({type:'identity:changed'});} return; }
     if (message.type === 'course:activate' && message.protocol === 1) { await self.skipWaiting(); return; }
-    if (message.type === 'course:hello') { respond({ protocol: 1, base: COURSE_BASE }); return; }
+    if (message.type === 'course:hello') { respond({ protocol: 1, base: COURSE_BASE, archiveAssets: true }); return; }
     if (message.type === 'course:clean' || message.type === 'course:trim') { await cleanup(message.type === 'course:clean'); respond({ ok: true }); return; }
     if (message.type === 'course:pin') {
       await courseStore.maintain(async () => {
@@ -95,8 +95,17 @@ self.addEventListener('fetch', event => {
     event.respondWith(fetch(event.request).catch(()=>new Response('<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>联网后再进入</title><body style="font:18px/1.8 system-ui;text-align:center;padding:48px 20px;background:#fcf8ef;color:#4b3428"><h1>联网后再进入</h1><p>课程资源和学习记录都还在。</p><button onclick="location.reload()" style="font:inherit;padding:12px 24px">再试一次</button> <a href="' + COURSE_BASE + '">返回课程</a></body></html>',{status:503,headers:{'Content-Type':'text/html; charset=utf-8'}})));
     return;
   }
-  // Immutable downloads are verified by the foreground preparer, never recursively intercepted.
-  if (/^(?:resources\/|awards\/static\/|course-packages\/|course-index\.json|core\/subpath-worker\.js)/.test(relative)) return;
+  // A new document must receive the current bootstrap even when an older
+  // worker supplied its cached shell. The document's actual course resources
+  // remain pinned below, so an already open exercise never mixes versions.
+  if (/^core\/course-(?:loader|cache)\.js$/.test(relative)) {
+    event.respondWith(fetch(event.request, { cache: 'no-cache' }).catch(() => new Response('Course bootstrap requires a network connection', { status: 503 })));
+    return;
+  }
+  // Immutable downloads are verified by the foreground preparer. Archived
+  // certificate assets are separate from the current pack and remain subject
+  // to the server's student/archive allowlist on every request.
+  if (/^(?:resources\/|awards\/(?:static|history-assets)\/|course-packages\/|course-index\.json|core\/subpath-worker\.js)/.test(relative)) return;
   if (event.request.mode === 'navigate' && /^(?:(?:unit\d+-\d+|lesson\d+|soundmark)\/)?(?:index\.html)?$/.test(relative)) {
     event.respondWith((async () => {
       const id = relative.split('/')[0] || 'home';

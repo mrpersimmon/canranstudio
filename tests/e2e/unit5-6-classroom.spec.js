@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, PEOPLE, ANSWERS, completeActivity, completeUnit56 } = require('../support/unit5-6-flow');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
@@ -137,7 +138,7 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
   await page.locator('.stage-cars .car-reference').screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
 });
 
-test('后段人物缺图时先等待，准备后离线可读20句并恢复最新句', async ({ page, context }) => {
+test('后段人物缺图时先等待，同页离线可读20句，断网刷新受阻并联网恢复最新句', async ({ page, context }) => {
   const voices = []; page.on('request', request => { if (/\.mp3/.test(request.url()) && !isFeedbackAudio(request.url())) voices.push(request.url()); });
   let release; const held = new Promise(resolve => { release = resolve; });
   await page.route(/xiaohui-v154\.webp(?:\?|$)/, async route => { await held; await route.continue(); });
@@ -152,7 +153,7 @@ test('后段人物缺图时先等待，准备后离线可读20句并恢复最新
     await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
     await expect.poll(() => room.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
     if ([7,13,19].includes(i)) {
-      const response = await page.reload();
+      const response = await reloadWithLatestCheck(page, context);
       expect(response.headers()['x-course-offline']).toBe('1');
       await expect(room.locator('.bubble-row').last()).toBeInViewport({ ratio: 1 });
     }
@@ -165,7 +166,7 @@ test('后段人物缺图时先等待，准备后离线可读20句并恢复最新
     await expect.poll(() => words.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
     if (i < 3) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
   }
-  await page.reload(); await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');
+  await reloadWithLatestCheck(page, context); await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');
 });
 
 test.describe('历史课程的原共用人物和汽车', () => {

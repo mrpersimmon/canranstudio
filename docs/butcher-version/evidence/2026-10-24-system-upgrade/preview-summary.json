@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-10-24T15:01:22.992Z",
+  "preview": "http://127.0.0.1:4298/__preview__/",
+  "pid": 39328,
+  "epoch": "five-star-system-20261024-v1",
+  "backup": {
+    "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio\\output\\system-upgrade-preview-20261024\\pre-upgrade-backup",
+    "databaseSha256": "bc2c5698fc03fa3258049d49e4e1e3a53b8d41d101b71519010e5468b01e90d3",
+    "cardKeySha256": "7850cb1c0a27c526cb2a689d2406b424e722d91744b0fb2809282448996bb484",
+    "hashesVerified": true
+  },
+  "beforeStars": [
+    {
+      "course": "unit1-2",
+      "stars": 5
+    },
+    {
+      "course": "unit3-4",
+      "stars": 5
+    },
+    {
+      "course": "unit5-6",
+      "stars": 1
+    }
+  ],
+  "afterStars": [
+    {
+      "course": "unit1-2",
+      "stars": 5,
+      "completed": true
+    },
+    {
+      "course": "unit3-4",
+      "stars": 5,
+      "completed": true
+    },
+    {
+      "course": "unit5-6",
+      "stars": 0,
+      "completed": false
+    }
+  ],
+  "originalCertificates": [
+    {
+      "course": "unit1-2",
+      "edition": "grammar-five-zones-v1",
+      "issuedAt": "2026-10-24T14:19:25.962Z",
+      "name": "升级体验的小禾",
+      "displayedDate": "2026.10.24"
+    },
+    {
+      "course": "unit3-4",
+      "edition": "grammar-negatives-v1",
+      "issuedAt": "2026-10-24T14:19:43.287Z",
+      "name": "升级体验的小禾",
+      "displayedDate": "2026.10.24"
+    }
+  ],
+  "certificateNamesAndISODatesPreserved": true,
+  "emptyNewPracticeVerified": true,
+  "ordinaryAccount": true,
+  "seededThroughRealUI": true,
+  "scriptErrors": [],
+  "browserIntegration": [
+    {
+      "browser": "chromium",
+      "base": "/",
+      "passed": true,
+      "log": "output/system-upgrade-20261024/browser-migration-chromium-epoch-history.log",
+      "previousLog": "output/system-upgrade-20261024/browser-migration-chromium-fixed.log",
+      "includesFreshLegacyRegression": true
+    },
+    {
+      "browser": "webkit",
+      "base": "/",
+      "passed": true,
+      "log": "output/system-upgrade-20261024/browser-migration-webkit-fixed.log"
+    },
+    {
+      "browser": "chromium",
+      "base": "/lesson/",
+      "passed": true,
+      "log": "output/system-upgrade-20261024/browser-migration-chromium-lesson.log"
+    }
+  ],
+  "oldOfflineQueueRejected": true,
+  "repeatedMigrationDoesNotResetNewStar": true,
+  "anotherDeviceAndTimezone": true,
+  "retainedFailure": "History-assets request was blocked by the course worker with 409 and L05; actual card navigation was added, worker narrow network pass-through repaired, both engines passed afterwards",
+  "noProductionDataAccess": true,
+  "finalPreviewVerification": "output/system-upgrade-preview-20261024/verify-epoch-final.log",
+  "finalRuntimeHashes": {
+    "core/course-loader.js": "233c48aa76b2c9071b95c795e9036155d516a5e0a2de7c22659c3609f7e171bb",
+    "core/course-worker.js": "60df933ebd9fd1b8ebd1bca93b3062b90bab1f07302b3edd6e977e80c0e5d1f3",
+    "core/lesson49-practice.js": "0e32eaf4a709ccd2b02605b37105e03c3c57e154a4cf0810e54bf1197e6dfe28",
+    "server/app.js": "6789f0810c0031b8bb0a69851bcca48451eb6ecfac89e0e7d411f6f400276659",
+    "server/public/access-client.js": "bfdb0db2b38411403a673fca330438219b6b65125844b79b53ec1b521a3e4567",
+    "server/public/system-upgrade.js": "750d108fd836e97379fe4d354bdcd1d2022c63789c637d3d1774648456ad72ac",
+    "core/story-certificate.js": "5221d5a607e7baf8dab227fb4de04bfaf1c77ca271e9be7eec3222cdc427928e"
+  },
+  "freshEpochHistory": {
+    "course": "unit37-38",
+    "legacyCount": 0,
+    "legacySnapshot": null,
+    "activityKeys": [
+      "unitCompleted",
+      "unitWordPage",
+      "unitActionPage",
+      "unitLocation"
+    ],
+    "passed": true,
+    "before": "fresh-history-before.json",
+    "after": "fresh-history-after.json"
+  }
+}

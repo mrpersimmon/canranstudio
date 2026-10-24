@@ -1,0 +1,110 @@
+{
+  "checkedAt": "2026-10-24T13:27:21.120Z",
+  "focused": {
+    "chromiumRoot": {
+      "passed": 4,
+      "log": "chromium-root-http.log"
+    },
+    "chromiumLesson": {
+      "passed": 4,
+      "log": "chromium-lesson-http.log"
+    },
+    "webkitRoot": {
+      "passed": 4,
+      "logs": [
+        "webkit-root-http.log (failure/recovery and wrong-answer passed)",
+        "webkit-root-final.log (perfect and combined-ack passed)"
+      ]
+    },
+    "webkitLesson": {
+      "passed": 4,
+      "log": "webkit-lesson-http.log"
+    }
+  },
+  "existing": {
+    "staticAwardReveal": {
+      "passed": 9,
+      "log": "static-regression.log"
+    },
+    "accountAwardReveal": {
+      "passed": 8,
+      "log": "award-regression.log"
+    },
+    "copyPolishRoot": {
+      "passed": 2,
+      "log": "chromium-root-http.log"
+    }
+  },
+  "reproducedOriginalBug": {
+    "log": "red.log",
+    "assertion": "Perfect round statistics visible while genuine confirmation was held"
+  },
+  "retainedInitialFailures": [
+    {
+      "log": "webkit-root.log",
+      "reason": "page.route did not own worker request; replaced with actual HTTP hold/resume"
+    },
+    {
+      "log": "webkit-root-http.log",
+      "reason": "Final reload read transitional zero stars before course paint-ready; preserved 5s star assertion after established readiness boundary"
+    },
+    {
+      "log": "award-regression.log",
+      "reason": "copy-polish pressed Escape before landing; adopted shared safe-dismiss gate"
+    }
+  ],
+  "noProductionDataOrDeployment": true,
+  "storageFailureBoundary": {
+    "chromiumRoot": {
+      "passed": 1,
+      "log": "storage-failed-chromium.log"
+    },
+    "webkitPhoneRoot": {
+      "passed": 1,
+      "log": "storage-failed-webkit.log"
+    },
+    "fault": "Real pending-queue Storage.setItem throws QuotaExceededError; exercise records remain genuine; successful retry does not replay result or reward"
+  },
+  "statisticsPhoneRecovery": {
+    "project": "webkit-phone",
+    "basePath": "/",
+    "originalFourFailures": {
+      "log": "statistics-webkit.log",
+      "cause": "Content queried before the genuine course paint-ready boundary; no changes to 5 s assertions or independent performance gates"
+    },
+    "passed": [
+      {
+        "case": "short-screen results, revisit and restart",
+        "log": "statistics-webkit-ready.log"
+      },
+      {
+        "case": "delayed presentation boundary and operation placement",
+        "log": "statistics-webkit-ready.log"
+      },
+      {
+        "case": "old package wrong drafts, five stars, original date and second-device consistency",
+        "log": "statistics-webkit-ready.log"
+      }
+    ],
+    "failed": [
+      {
+        "case": "wrong round sync, duplicate transmission and restart",
+        "caseOutcome": "FAILED",
+        "businessAssertions": "All original assertions completed before timeout",
+        "businessAssertionsCompletedAtMs": 89483,
+        "totalCaseLimitMs": 90000,
+        "failurePhase": "finally Promise.all browserContext.close / retained trace flush",
+        "log": "statistics-webkit-cleanup.log",
+        "priorIsolatedLog": "statistics-webkit-isolated.log",
+        "priorBusinessAssertionsCompletedAtMs": 87595,
+        "scope": "Windows WebKit phone local acceptance remains unpassed for this scenario; not counted as pass; no product failure assertion observed",
+        "preserved": "Original 90 s case limit, 5 s assertions, both real reloads, trace retention, all scores/stars/date and cross-device assertions unchanged"
+      }
+    ]
+  },
+  "agentChangesOnlyInTests": true,
+  "agentVerifiedScenarioCounts": {
+    "passed": 40,
+    "failedLocalEnvironmentScenario": 1
+  }
+}

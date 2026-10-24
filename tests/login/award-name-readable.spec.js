@@ -51,7 +51,7 @@ test('最小字号16px时，真实长姓名在课程、奖励与纪念册中完�
       await p.setViewportSize({width,height:900});
       await checkName(reveal.locator('.story-award-paper'),info,'reveal-'+width);
     }
-    await reveal.press('Escape');
+    await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
     await p.setViewportSize({width:1280,height:1000});
     await p.goto(base+'unit1-2/#learn/certificate');
     await p.getByRole('link',{name:'我的纪念册',exact:true}).click();

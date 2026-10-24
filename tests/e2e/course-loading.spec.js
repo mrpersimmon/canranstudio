@@ -54,10 +54,20 @@ test('清理课程资源保留学习位置、活动课程和官网缓存', async
   await page.getByRole('button', { name: '清理课程资源', exact: true }).click();
   await expect(page.getByText('已清理未使用的课程资源，学习记录已保留。', { exact: true })).toBeVisible();
   expect(await page.evaluate(async () => (await (await caches.open('root-site-cache')).match('/root-site-file')).text())).toBe('official-site');
+  const activeRecord = await other.evaluate(() => localStorage.getItem('canran:lesson:unit1-2:learning:v1'));
   await context.setOffline(true);
   await other.reload();
-  await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
+  // Cached resources survive cleanup, but a new document must still obtain
+  // the latest authorized version. Offline loading must not open the old pack.
+  await expect(other.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
+  await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).not.toBeVisible();
+  expect(await other.evaluate(() => localStorage.getItem('canran:lesson:unit1-2:learning:v1'))).toBe(activeRecord);
+  const requiredDownloads = [];
+  other.on('request', request => { if (/\/resources\//.test(request.url()) && !request.url().endsWith('.mp3')) requiredDownloads.push(request.url()); });
   await context.setOffline(false);
+  await other.getByRole('button', { name: '再试一次', exact: true }).click();
+  await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
+  expect(requiredDownloads).toEqual([]);
   await page.goto('/lesson/unit29-30/#learn/words');
   await expect(page.locator('.stage-words')).toContainText('2 / 5');
 });
@@ -129,16 +139,27 @@ test('整课的手提包尚未准备好时留在加载页，准备好后完整�
   await expect(page).toHaveURL(/\/lesson\/unit1-2\/#learn\/words$/);
 });
 
-test('准备过的无配音课断网刷新后恢复词卡位置，后续图片仍完整', async ({ page, context }) => {
+test('准备过的无配音课断网刷新须联网核验，恢复后词卡位置与缓存完整', async ({ page, context }) => {
   await page.goto('/lesson/unit29-30/#learn/words', { waitUntil: 'domcontentloaded' });
   const words = page.locator('.stage-words');
   await expect(words.getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
   await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
   await expect(words).toContainText('2 / 5');
   await expect(page.getByText('这次可正常学习，下次可能需要重新准备。', { exact: true })).toHaveCount(0);
+  const saved = await page.evaluate(() => localStorage.getItem('canran:lesson:unit29-30:learning:v1'));
   await context.setOffline(true);
   await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(page.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
+  await expect(words).not.toBeVisible();
+  expect(await page.evaluate(() => localStorage.getItem('canran:lesson:unit29-30:learning:v1'))).toBe(saved);
+  const requiredDownloads = [];
+  page.on('request', request => { if (/\/resources\//.test(request.url()) && !request.url().endsWith('.mp3')) requiredDownloads.push(request.url()); });
+  await context.setOffline(false);
+  await page.getByRole('button', { name: '再试一次', exact: true }).click();
   await expect(words).toContainText('2 / 5');
+  expect(requiredDownloads).toEqual([]);
+  // The already opened, fully prepared page remains usable offline.
+  await context.setOffline(true);
   await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
   await expect(words).toContainText('3 / 5');
   await expect.poll(() => words.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);

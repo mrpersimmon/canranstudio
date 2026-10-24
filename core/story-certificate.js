@@ -15,10 +15,17 @@
   const dateLabel = date => date ? new Intl.DateTimeFormat('zh-CN', {
     timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit'
   }).format(new Date(date)).replaceAll('/', '.') : '';
+  const retainedFor = unit => {
+    const saved = root.CanranStudentAccess?.retainedCertificate;
+    return saved?.course === unit.id && saved.issuedAt ? saved : null;
+  };
+  const originalUnit = (unit, retained) => retained?.kind === 'card'
+    ? { ...unit, reward: { ...unit.reward, ...retained.meta, zones: unit.reward.zones } } : unit;
 
   // One card renderer for the course, its settlement and the saved artwork.
   // The caller supplies the account identity; never collect another name.
   function card({ unit, label = unit.copy?.compact ? '我的纪念卡' : '我的单元纪念卡' }) {
+    const retained = retainedFor(unit); unit = originalUnit(unit, retained);
     const lesson = unit.reward.lesson || 'Lesson 1–2';
     const paper = make('article', '', 'story-award-paper award-card'); paper.setAttribute('aria-label', label); paper.dataset.unit = unit.id;
     const brand = make('p', '灿然英语工作室', 'story-award-brand');
@@ -49,11 +56,13 @@
     foot.append(make('span', lesson), date);
     paper.append(brand, title, name, stars, illustration, foot);
     function identity(recipient, identityLabel = '登录后显示姓名') {
+      if (retained?.kind === 'card') recipient = retained.name;
       name.textContent = recipient || identityLabel;
       name.classList.toggle('is-placeholder', !recipient);
       Object.entries(layout.typography(unit.reward.title, name.textContent, unit.id)).forEach(([key, value]) => paper.style.setProperty(key, value));
     }
     function update(state) {
+      if (retained?.kind === 'card') state = { ...state, stars: 5, firstFullStarAt: retained.issuedAt };
       paper.dataset.stars = String(state.stars);
       stars.setAttribute('aria-label', '已获得 ' + state.stars + ' / 5 颗星');
       showStars(state.stars);
@@ -65,6 +74,22 @@
   }
 
   function mount({ element, unit, go, returnUrl, progress, restart }) {
+    const retained = retainedFor(unit);
+    if (retained?.kind === 'legacy-paper') {
+      // A historical paper certificate is never redrawn as today's keepsake
+      // with its old date. Its dedicated, read-only renderer owns all exports.
+      const section = make('section', '', 'retained-paper-certificate');
+      section.append(make('h3', '已通关'), make('p', '★★★★★', 'retained-certificate-stars'));
+      section.querySelector('.retained-certificate-stars').setAttribute('aria-label', '已获得 5 / 5 颗星');
+      const name = make('p', retained.name); name.id = 'certificateName';
+      const date = make('time', dateLabel(retained.issuedAt)); date.id = 'certificateDate'; date.dateTime = retained.issuedAt;
+      const link = make('a', '查看原证书', 'btn btn-green'); link.href = new URL('awards/history/' + encodeURIComponent(retained.id) + '/', returnUrl).href;
+      const album = make('a', '我的纪念册', 'btn btn-yellow'); album.href = new URL('awards/', returnUrl).href;
+      const actions = make('div', '', 'story-award-actions'); actions.append(link, album);
+      section.append(name, date, make('p', '本课通关成果已保留。再次学习使用新的练习记录，原证书和领取日期不变。'), actions);
+      element.append(section); return { update() {} };
+    }
+    unit = originalUnit(unit, retained);
     const artwork = {...assets,scene:unit.reward.scene || assets.scene};
     const lesson = unit.reward.lesson || 'Lesson 1–2';
     let state = { stars: 0, zones: {}, firstFullStarAt: null }, exportUrl, exportJob, exporting = false;
@@ -109,13 +134,14 @@
       save.disabled = exporting || state.stars === 0 || !recipient;
     }
     root.CanranAccessReady?.then(access => {
-      recipient = access.preview ? '' : String(access.student.name || '').trim();
+      recipient = access.preview ? '' : retained?.kind === 'card' ? retained.name : String(access.student.name || '').trim();
       identityLabel = access.preview ? '班级预览' : '登录后显示姓名';
       if (!access.preview) { back.replaceChildren(backIcon,document.createTextNode('我的纪念册')); back.href=new URL('awards/',returnUrl).href; }
       showName();
     }).catch(() => { recipient = ''; showName(); });
 
     function update(next) {
+      if (retained?.kind === 'card') next = { ...next, stars: 5, firstFullStarAt: retained.issuedAt };
       state = next; view.update(state);
       slots.forEach((slot, i) => { slot.dataset.earned = String(i < state.stars); });
       items.forEach(({ zone, text, link }) => {

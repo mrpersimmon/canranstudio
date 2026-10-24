@@ -151,7 +151,7 @@ function tidyingV153PreviousDefinition(){
  if(!tidyingV153Previous){const sandbox={CanranCore:{courseCatalog:catalog}};vm.runInNewContext(fs.readFileSync(path.join(__dirname,'legacy','unit29-30-before-v153-content.js'),'utf8'),sandbox);tidyingV153Previous=sandbox.CanranCore.unit2930;}
  return tidyingV153Previous;
 }
-function normalize(value, unit, course) {
+function normalize(value, unit, course, currentOnly = false) {
   const result={version:1,groups:{},records:{},activity:{unitCompleted:{}}};
   if (!record(value) || !record(value.activity)) return result;
   if (unit.reward) {
@@ -192,6 +192,9 @@ function normalize(value, unit, course) {
     }
     result.activity.unitCompleted[id]=signatures[id];
   }
+  // After the explicit system cutover, learning accepts only current work.
+  // Historical receipts live in certificate_archives, never in this notebook.
+  if (currentOnly) return result;
   const complete=unit.stages.flatMap(s=>s.required).every(id=>result.activity.unitCompleted[id]===signatures[id]);
   // An explicitly merged course may need validated predecessor rounds on a
   // second device. Keep them as migration sources, never as current completion.
@@ -489,8 +492,8 @@ function merge(left,right){
 // The reward ledger remains authoritative where installed. Grammar-only units
 // use the complete-round claims already validated by normalize().
 function zoneAwarded(normalized,zone,award=null){return Boolean(award?award.zones?.[zone]:normalized.activity.unitAwardClaims?.[zone]);}
-function summary(value,unit,course,award=null){
-  const normalized=normalize(value,unit,course),saved=normalized.activity.unitCompleted;
+function summary(value,unit,course,award=null,currentOnly=false){
+  const normalized=normalize(value,unit,course,currentOnly),saved=normalized.activity.unitCompleted;
   let stars=0,next='certificate';
   for(const stage of unit.stages)stars+=Math.floor(stage.required.filter(id=>saved[id]).length/stage.required.length*3);
   for(const stage of unit.stages){const unfinished=stage.required.find(id=>!saved[id]);if(unfinished){next=unfinished;break;}}

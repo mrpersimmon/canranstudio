@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
+const {waitForRewardDismissal,dismissRewardDialog}=require('../support/reward-dialog');
 
 test.use({ reducedMotion: 'reduce' });
 
@@ -13,7 +14,7 @@ test('真实答题首星显示悬浮纪念卡，无按钮，点击卡片退出�
   await expect(reveal.locator('.story-award-illustration')).toHaveAttribute('src', /unit1-2-handbag-closeup/);
   await expect(reveal.locator('time')).toBeHidden();
   await expect(reveal).not.toContainText('课程已升级');
-  await reveal.getByRole('article').click();
+  await waitForRewardDismissal(page); await reveal.getByRole('article').click();
   await expect(reveal).not.toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('1');
   await expect(page.locator('.stage-listen').getByRole('button', { name: '再练一轮', exact: true })).toBeFocused();
@@ -50,11 +51,11 @@ for (const pair of Object.keys(zones)) test(`${pair} 五个真实答题区依次
       await expect(reveal.locator('.award-star').last()).toHaveCSS('filter','none');
       await page.screenshot({path:`${OUT}/unit${pair}-full.png`});
       const date=await reveal.locator('time').textContent();
-      await reveal.press('Escape');await page.clock.setFixedTime(new Date(Date.now()+3*86400000));
+      await dismissRewardDialog(page,'Escape');await page.clock.setFixedTime(new Date(Date.now()+3*86400000));
       await page.goto(`/unit${pair}/#learn/certificate`);
       await expect(page.locator('#certificateDate')).toHaveText(date);
       await expect(page.locator('dialog.award-reveal')).not.toBeVisible();
-    } else await reveal.press(i%2?' ':'Enter');
+    } else await dismissRewardDialog(page,i%2?' ':'Enter');
   }
   expect(errors).toEqual([]);
 });
@@ -97,7 +98,7 @@ test('错答订正不弹获星，重练全对展示已有卡片但不重复点�
   await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('这轮有过答错');
   await expect(page.locator('dialog.award-reveal')).not.toBeVisible();
   await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'1-2','manners');
-  await page.getByRole('dialog',{name:/纪念卡结算/}).click({position:{x:8,y:8}});
+  await waitForRewardDismissal(page); await page.getByRole('dialog',{name:/纪念卡结算/}).click({position:{x:8,y:8}});
   await expect(page.locator('#starCount')).toHaveText('1');
   await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'1-2','manners');
   const replay=page.getByRole('dialog',{name:/纪念卡结算/});
@@ -108,15 +109,18 @@ test('错答订正不弹获星，重练全对展示已有卡片但不重复点�
   const glint=replay.locator('.award-star[data-earned="true"] .star-glint').first();
   const opacity=await glint.evaluate(el=>getComputedStyle(el).opacity);
   await expect.poll(()=>glint.evaluate(el=>getComputedStyle(el).opacity)).not.toBe(opacity);
-  await replay.click({position:{x:8,y:8}});
+  await waitForRewardDismissal(page); await replay.click({position:{x:8,y:8}});
   await expect(page.locator('#starCount')).toHaveText('1');await expect(room.locator('.award-round-result')).toHaveText('已获星');
   await page.reload();await expect(replay).not.toBeVisible();
 });
 
-test('系统减少动态开启时奖励仍默认有动效；途中关闭即停止且保留星星',async({page})=>{
+test('系统减少动态开启时奖励仍默认有动效；星飞完成后才允许关闭且保留星星',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});
   await activity(page,'1-2','listen');
   const reveal=page.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal.locator('.travelling-star')).toBeVisible();
+  await reveal.click({position:{x:8,y:8}});await expect(reveal).toBeVisible();
+  await reveal.press('Escape');await expect(reveal).toBeVisible();
+  await expect(reveal).toHaveAttribute('data-dismissible','true');
   await reveal.click({position:{x:8,y:8}});await expect(reveal).not.toBeVisible();
   await expect(page.locator('.travelling-star,.sparkle,.star-trail,.star-bloom')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('1');
   await page.emulateMedia({reducedMotion:'no-preference'});await activity(page,'1-2','manners');
@@ -128,6 +132,6 @@ test('系统减少动态开启时奖励仍默认有动效；途中关闭即停�
   const glint=reveal.locator('.award-star[data-earned="true"] .star-glint').first();
   const opacity=await glint.evaluate(el=>getComputedStyle(el).opacity);
   await expect.poll(()=>glint.evaluate(el=>getComputedStyle(el).opacity)).not.toBe(opacity);
-  await reveal.press('Escape');await expect(reveal).not.toBeVisible();
+  await dismissRewardDialog(page,'Escape');await expect(reveal).not.toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('2');
 });

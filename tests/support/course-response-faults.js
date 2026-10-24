@@ -12,6 +12,10 @@ function installCourseResponseFaults(server) {
     if (pathname === '/__test__/course-network') {
       response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify(network));return;
     }
+    if (pathname === '/__test__/course-held') {
+      // Expose only route names, never cookies, request bodies or pupil data.
+      response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify([...held].map(item=>item.path)));return;
+    }
     if (/\/course-(?:status\/|withdrawals\/|index\.json)/.test(pathname)) {
       let bytes=0;const write=response.write,end=response.end;
       const count=chunk=>{if(typeof chunk==='string'||Buffer.isBuffer(chunk)||ArrayBuffer.isView(chunk))bytes+=Buffer.byteLength(chunk);};
@@ -22,11 +26,15 @@ function installCourseResponseFaults(server) {
     if (pathname === '/__test__/course-responses') {
       const chunks = [];
       for await (const chunk of request) chunks.push(chunk);
-      const { path, result, reset } = JSON.parse(Buffer.concat(chunks).toString() || '{}');
+      const { path, result, reset, resumeHeld } = JSON.parse(Buffer.concat(chunks).toString() || '{}');
       if (reset) { faults.clear(); network.length=0; }
       else if (result) faults.set(path, result);
       else faults.delete(path);
-      for (const item of held) if (reset || item.path === path) { item.response.writeHead(503).end(); held.delete(item); }
+      for (const item of held) if (reset || item.path === path) {
+        held.delete(item);
+        if(resumeHeld&&!reset)for(const handler of handlers)handler(item.request,item.response);
+        else item.response.writeHead(503).end();
+      }
       response.writeHead(200, { 'Content-Type': 'application/json' }).end('{}');
       return;
     }
@@ -49,7 +57,7 @@ function installCourseResponseFaults(server) {
     if (!entry) { for (const handler of handlers) handler(request, response); return; }
     const [path, fault] = entry;
     if (fault.hold) {
-      const item = { path, response }; held.add(item);
+      const item = { path, request, response }; held.add(item);
       response.on('close', () => held.delete(item));
       return;
     }
@@ -59,9 +67,9 @@ function installCourseResponseFaults(server) {
   });
 }
 
-async function courseResponse(page, path, result) {
+async function courseResponse(page, path, result, {resumeHeld=false}={}) {
   const response = await page.request.post('/__test__/course-responses', { data: {
-    path, result: result && {
+    path, resumeHeld, result: result && {
       ...result, json: undefined,
       contentType: result.json ? 'application/json' : result.contentType,
       body: Buffer.from(result.json ? JSON.stringify(result.json) : result.body || '').toString('base64')

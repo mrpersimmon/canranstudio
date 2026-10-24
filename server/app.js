@@ -2,6 +2,7 @@
 const http = require('node:http');
 const fs = require('node:fs/promises');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const { openStore } = require('./store');
 const { UNITS, RETIRED } = require('./catalog');
 const { createCoursePackages } = require('../scripts/course-packages');
@@ -47,8 +48,20 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     return { id, intro, artwork, title: packages.index.courses[id].title, label: 'Lesson ' + id.slice(4).replace('-', '–'), image: image?.startsWith('/') ? BASE.slice(0, -1) + image : null };
   }));
   const definitions = Object.fromEntries(UNITS.map(id=>[id,progress.definition(root,id,BASE)]));
-  const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course) }; };
+  const currentProgress = (studentId, course) => { const saved = store.progress(studentId, course); return { ...saved, value: progress.normalize(saved.value, definitions[course], course, Boolean(store.systemUpgrade())) }; };
   const currentAwards = (studentId, course) => definitions[course].reward ? store.award(studentId, course, definitions[course].reward.edition) : null;
+  const archiveSummary = archive => ({id:archive.id,course:archive.course,kind:archive.kind,edition:archive.edition,name:archive.name,issuedAt:archive.issuedAt,meta:archive.meta,url:BASE+'awards/history/'+archive.id+'/'});
+  function retainedCertificate(who, course) {
+    const retained = store.courseUpgrade(who, course);
+    if (!retained?.completed) return null;
+    const archive = retained.certificateIds.map(id=>store.certificateArchive(who,id)).find(Boolean);
+    if (!archive) return null;
+    const summary = archiveSummary(archive);
+    if (summary.kind === 'card') summary.meta = {...summary.meta,scene:BASE+'awards/history-assets/'+course+'/'+archive.meta.scene.replace(/^\/+/, '')};
+    return summary;
+  }
+  let certificateView;
+  const archiveView = async () => certificateView ||= await require('./certificate-archive-view').createCertificateArchiveView({root,basePath:BASE});
   function throttle(request, kind, credential) {
     store.authThrottle.check(clientAddress(request, trustProxy), kind, credential);
   }
@@ -104,7 +117,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         return response.end(request.method === 'HEAD' ? undefined : file.body);
       }
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
-      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','admin-teachers.js','admin-teachers.css','access-client.js','learning-observer.js','access-worker.js'].includes(relative)) {
+      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','admin-teachers.js','admin-teachers.css','access-client.js','learning-observer.js','access-worker.js','system-upgrade.js','history-certificates.js','history-certificates.css','local-certificate-copies.js'].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
@@ -179,13 +192,27 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const {student} = studentSession(request);
           // Earned keepsakes belong to the student even after a class closes a
           // course. No course entry or answers are granted by this read endpoint.
+          const archives = store.certificateArchives(student.id);
           const cards = store.awards(student.id).flatMap(saved => {
-            const meta = awardBook.editions[saved.course]?.[saved.edition];
+            if (saved.retainedCompletion) return [];
+            const original = archives.find(a=>a.kind==='card'&&a.course===saved.course&&a.edition===saved.edition);
+            const liveMeta = awardBook.editions[saved.course]?.[saved.edition];
+            const meta = original ? {...original.meta,scene:BASE+'awards/history-assets/'+saved.course+'/'+original.meta.scene.replace(/^\/+/, '')} : liveMeta;
             const stars = Math.min(5, Object.values(saved.zones || {}).filter(zone=>zone?.earnedAt).length);
             return meta && stars ? [{...meta,id:saved.course+':'+saved.edition,course:saved.course,edition:saved.edition,
-              stars,firstFullStarAt:stars===5?saved.firstFullStarAt:null}] : [];
+              ...(original?{name:original.name,archiveId:original.id}:{}),stars,firstFullStarAt:stars===5?saved.firstFullStarAt:null}] : [];
           }).sort((a,b)=>Number(a.course.match(/\d+/)[0])-Number(b.course.match(/\d+/)[0]) || a.edition.localeCompare(b.edition));
-          return json(response, {student:{id:student.id,name:student.name},cards});
+          return json(response, {student:{id:student.id,name:student.name},cards,archives:archives.map(archiveSummary),availableCourses:[...new Set([...store.allowed(student.id),...archives.map(a=>a.course)])],systemUpgrade:store.systemUpgrade(student.id)});
+        }
+        if (relative === 'api/certificates' && !input) {
+          const {student}=studentSession(request);
+          return json(response,{archives:store.certificateArchives(student.id).map(archiveSummary)});
+        }
+        const certificate = relative.match(/^api\/certificates\/([a-zA-Z0-9_-]+)$/);
+        if (certificate && !input) {
+          const {student}=studentSession(request),archive=store.certificateArchive(student.id,certificate[1]);
+          if(!archive)throw fail(404,'证书不存在');
+          return json(response,{archive});
         }
         if (relative === 'api/me' && !input) {
           if (!url.searchParams.get('preview')) {
@@ -193,7 +220,12 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             if (student.mustChangePassword || auth.role === 'student-setup') return json(response, { student, mustChangePassword: true, courses: [] });
           }
           const who = identity(request, url.searchParams.get('preview'));
-          return json(response, { ...who, auth: undefined, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>({...c,...progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id,who.preview?null:currentAwards(who.student.id,c.id))})) });
+          const upgrade=who.preview?null:store.systemUpgrade(who.student.id);
+          return json(response, { ...who, auth: undefined, systemUpgrade:upgrade, courses: descriptions.filter(c => who.courses.includes(c.id)).map(c=>{
+            const summary=progress.summary(who.preview?{}:store.progress(who.student.id,c.id).value,definitions[c.id],c.id,who.preview?null:currentAwards(who.student.id,c.id),Boolean(upgrade));
+            const retained=who.preview?null:store.courseUpgrade(who.student.id,c.id);
+            return {...c,...summary,completed:summary.stars===5,retainedCompletion:Boolean(retained?.completed),...(retained?.completed?{next:'words'}:{})};
+          }) });
         }
         const entering = relative.match(/^api\/courses\/(unit\d+-\d+)\/enter$/);
         const permitting = relative.match(/^api\/courses\/(unit\d+-\d+)\/permit$/);
@@ -201,22 +233,25 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           const auth = session(request,'student',false), admin = session(request,'admin',false);
           const grant = auth && store.activeGrant(auth, permitting[1], Date.now());
           if (!grant && !admin) throw fail(403,'请重新进入课程');
-          return json(response,{studentId:auth?.subject || 'admin-preview',expires:grant?.expires || Date.now()+7200000});
+          return json(response,{studentId:auth?.subject || 'admin-preview',expires:grant?.expires || Date.now()+7200000,systemUpgrade:auth?store.systemUpgrade(auth.subject):null});
         }
         if (entering && input) {
           const who = identity(request, input.preview), course = entering[1];
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
           if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
-          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
+          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
           const {auth} = studentSession(request), course = input.course;
-          if (input.studentId !== auth.subject || !UNITS.includes(course) || !store.validGrant(input.grant,auth.subject,course)) throw fail(403,'学习记录不属于当前身份或课程');
+          if (input.studentId !== auth.subject || !UNITS.includes(course)) throw fail(403,'学习记录不属于当前身份或课程');
           const current = store.progress(auth.subject,course);
+          const upgrade=store.systemUpgrade(auth.subject);
+          if(upgrade&&input.epoch!==upgrade.epoch)return json(response,{stale:true,generation:current.generation,systemUpgrade:upgrade});
+          if(!store.validGrant(input.grant,auth.subject,course))throw fail(403,'学习记录不属于当前身份或课程');
           if (input.generation !== current.generation) return json(response,{stale:true,generation:current.generation});
-          const before=progress.normalize(current.value,definitions[course],course);
-          const value = progress.merge(before,progress.normalize(input.value,definitions[course],course));
+          const before=progress.normalize(current.value,definitions[course],course,Boolean(upgrade));
+          const value = progress.merge(before,progress.normalize(input.value,definitions[course],course,Boolean(upgrade)));
           const advanced=Object.keys(value.activity.unitCompleted).some(id=>!before.activity.unitCompleted[id]);
           const unit = definitions[course];
           const claims = Object.entries(input.value?.activity?.unitAwardClaims || {}).filter(([zone, claim]) => validClaim(unit, zone, claim));
@@ -227,6 +262,8 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (relative === 'api/progress/reset' && input) {
           const who=identity(request),course=input.course;
           if (!who.courses.includes(course)) throw fail(403,'这节课还没向你的班级开放');
+          const upgrade=store.systemUpgrade(who.student.id);
+          if(upgrade&&input.epoch!==upgrade.epoch)return json(response,{stale:true,generation:store.progress(who.student.id,course).generation,systemUpgrade:upgrade});
           const generation=store.progress(who.student.id,course).generation+1;
           store.resetLearning(who.student.id,course,generation);
           return json(response,{generation});
@@ -234,6 +271,32 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         throw fail(404, '操作不存在');
       }
       if (!['GET','HEAD'].includes(request.method)) throw fail(405, '不支持此操作');
+      const localArchivePage=relative.match(/^awards\/local-history\/(unit\d+-\d+)\/(card|legacy-paper)\/([a-f0-9]{64})\/?$/);
+      if(localArchivePage){
+        let student;try{({student}=studentSession(request));}catch(error){if(error.status===401)return publicFile(response,'index.html','text/html; charset=utf-8');throw error;}
+        const [,course,kind,id]=localArchivePage;
+        if(!store.allowed(student.id).includes(course)&&!store.certificateArchives(student.id,course).length)throw fail(403,'该课程当前未开放；本机原证资料仍保留');
+        response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':COURSE_CSP,'Cache-Control':'no-store'});
+        return response.end(request.method==='HEAD'?undefined:await(await archiveView()).page({id,course,kind,local:true}));
+      }
+      const archivePage=relative.match(/^awards\/history\/([a-zA-Z0-9_-]+)\/?$/);
+      if(archivePage){
+        let student;try{({student}=studentSession(request));}catch(error){if(error.status===401)return publicFile(response,'index.html','text/html; charset=utf-8');throw error;}
+        const archive=store.certificateArchive(student.id,archivePage[1]);if(!archive)throw fail(404,'证书不存在');
+        response.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':COURSE_CSP,'Cache-Control':'no-store'});
+        return response.end(request.method==='HEAD'?undefined:await(await archiveView()).page(archive));
+      }
+      const archiveAsset=relative.match(/^awards\/history-assets\/(unit\d+-\d+)\/(.+)$/);
+      if(archiveAsset){
+        const {student}=studentSession(request);
+        if(!store.certificateArchives(student.id,archiveAsset[1]).length&&!store.allowed(student.id).includes(archiveAsset[1]))throw fail(403,'证书不属于当前账号');
+        const resource=await(await archiveView()).resource(archiveAsset[1],archiveAsset[2]);if(!resource)throw fail(404,'证书资源不存在');
+        const etag='"'+crypto.createHash('sha256').update(resource.body).digest('hex')+'"';
+        const headers={'Content-Type':resource.type,'Cache-Control':'private, no-cache',Vary:'Cookie',ETag:etag};
+        if(request.headers['if-none-match']?.split(',').some(value=>value.trim().replace(/^W\//,'')===etag))return response.writeHead(304,headers).end();
+        response.writeHead(200,headers);
+        return response.end(request.method==='HEAD'?undefined:resource.body);
+      }
       if (RETIRED.includes(relative.split('/')[0]) && /^(?:lesson\d+|soundmark)\/?(?:index\.html)?$/.test(relative)) return notice(response, '这节课已下架', 410);
       if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) return publicFile(response, 'index.html', 'text/html; charset=utf-8');
       if (['awards','awards/'].includes(relative)) {
@@ -249,7 +312,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         const course = courseRoute[1]; if (!UNITS.includes(course)) throw fail(404, '课程不存在');
         let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
         if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
-        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
+        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'system-upgrade.js"></script><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
         response.setHeader('Content-Security-Policy', COURSE_CSP);
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
       }

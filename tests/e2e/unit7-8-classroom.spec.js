@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
@@ -275,7 +276,7 @@ test('27题旧课堂记录升级重答新her题和七道新增挑战，保留合
  const room=page.locator('.stage-interview');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room).toContainText('第 1 / 4 题');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 
-test('人物资源未齐先等待，整课准备后离线阅读与词卡换组完整且不闪加载',async({page,context})=>{
+test('人物资源未齐先等待，同页离线阅读与词卡完整，断网刷新受阻并联网恢复',async({page,context})=>{
  const voices=[];page.on('request',request=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(request.url())&&!isFeedbackAudio(request.url()))voices.push(request.url());});
  let release;const held=new Promise(resolve=>{release=resolve;});
  await page.route(/sophie\.svg(?:\?|$)/,async route=>{await held;await route.continue();});
@@ -287,7 +288,7 @@ test('人物资源未齐先等待，整课准备后离线阅读与词卡换组�
  const story=page.locator('.stage-text');
  for(let i=0;i<16;i++){
   await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
-  if([3,13,15].includes(i)){const response=await page.reload();expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});}
+  if([3,13,15].includes(i)){const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});}
  }
  await story.getByRole('button',{name:'完成课文',exact:true}).click();await expect(story.getByRole('group',{name:'随课文填写的采访档案',exact:true})).toContainText('keyboard operator');
  await page.goto('/lesson/unit7-8/#learn/words');await expect(page.locator('#courseLoader')).toHaveCount(0);
@@ -301,5 +302,5 @@ test('人物资源未齐先等待，整课准备后离线阅读与词卡换组�
  });
  for(let i=0;i<3;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
  expect(await page.evaluate(()=>window.unit78PaintFailures)).toEqual([]);
- await page.reload();await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');expect(voices).toEqual([]);
+ await reloadWithLatestCheck(page,context);await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');expect(voices).toEqual([]);
 });

@@ -1,14 +1,24 @@
 'use strict';
-const { expect } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
+
+async function courseReadyForAssertions(page) {
+  const start = Date.now();
+  // This is the existing course paint boundary, not the statistics timeout.
+  // Loading/performance suites keep their own independent latency assertions.
+  await expect(page.locator('#courseLoader')).toHaveCount(0, { timeout: 30000 });
+  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing', '');
+  await expect(page.locator('html')).not.toHaveAttribute('data-course-painting', '');
+  test.info().annotations.push({ type: 'course-ready', description: `${Date.now() - start} ms before content assertions` });
+}
 
 // A completion is usable when its metrics and both actions fit the actual
 // viewport. Its total height is allowed to change with the approved content.
 async function expectCompactCompletion(page, room, { illustrated = false } = {}) {
   const results = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(results).toBeVisible();
   // Boxes can be visible behind the loader while startup still restores the
   // chapter scroll. Exercise the ready page, as a learner would, before moving it.
-  await expect(page.locator('#courseLoader')).toHaveCount(0);
+  await courseReadyForAssertions(page);
+  await expect(results).toBeVisible();
   if (illustrated) {
     // The approved story result includes its illustration and may scroll on a
     // short screen. Keep the image and scroll to the actual visible action row.
@@ -51,4 +61,4 @@ async function expectCompactCompletion(page, room, { illustrated = false } = {})
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 }
 
-module.exports = { expectCompactCompletion };
+module.exports = { expectCompactCompletion, courseReadyForAssertions };

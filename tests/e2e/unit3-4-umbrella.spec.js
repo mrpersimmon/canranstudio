@@ -1,4 +1,5 @@
 'use strict';
+const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, ANSWERS } = require('../support/unit3-4-flow');
 test.use({ reducedMotion: 'reduce' });
@@ -109,7 +110,7 @@ test('换伞动作不阻挡连续前进，重新上演会取消过期的画面�
   await expect(room.locator('.dialogue-status')).toHaveText('');
 });
 
-test('第二把伞未准备好时不进课，准备后断网换伞和刷新均不缺图', async ({ page, context }) => {
+test('第二把伞未准备好时不进课，同页离线换伞完整，断网刷新受阻并联网恢复', async ({ page, context }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   let release;
   const held = new Promise(resolve => { release = resolve; });
@@ -128,7 +129,7 @@ test('第二把伞未准备好时不进课，准备后断网换伞和刷新均�
     const design = i < 7 ? '红色纯色' : i < 9 ? '黄色条纹' : '紫色圆点';
     await expectUmbrella(room, design, i >= 10);
     if ([7, 9, 10].includes(i)) {
-      await page.reload();
+      await reloadWithLatestCheck(page, context);
       await expect(page.locator('#courseLoader')).toHaveCount(0);
       await expectUmbrella(room, design, i >= 10);
       await expect(room.locator('.dialogue-status')).toHaveText(`${i + 1} / 12`);

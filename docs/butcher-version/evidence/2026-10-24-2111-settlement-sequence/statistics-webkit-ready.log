@@ -1,0 +1,25 @@
+[WebServer] (node:13532) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 4 tests using 1 worker
+
+(node:6416) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [webkit-phone] › tests\login\submission-statistics.spec.js:26:1 › 登录手机短屏完成后统计与操作完整，再进和重练保留已获星 (33.7s)
+  ok 2 [webkit-phone] › tests\login\submission-statistics.spec.js:58:1 › 加载层移除后再检查结算布局，延后的呈现帧不覆盖操作区定位 (25.3s)
+(node:6416) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+  ok 3 [webkit-phone] › tests\login\submission-statistics.spec.js:93:1 › 旧课包升级保留中途错答、既有五星和首次满星日期，另一设备统计一致 (1.6m)
+  x  4 [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 (1.5m)
+
+
+  1) [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 
+
+    Test timeout of 90000ms exceeded.
+
+    Error: End of central directory record signature not found. Either not a zip file, or file is truncated.
+
+    Error Context: output\settlement-20261024\statistics-webkit-ready\submission-statistics-有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始-webkit-phone\error-context.md
+
+  1 failed
+    [webkit-phone] › tests\login\submission-statistics.spec.js:177:1 › 有错轮次同步到另一设备仍为零星，重复传输不增加统计，重练从零开始 
+  3 passed (4.2m)

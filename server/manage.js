@@ -3,6 +3,12 @@ const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('n
 const {openStore}=require('./store');
 async function main(){
  const [command,argument]=process.argv.slice(2),directory=path.resolve(process.env.LESSON_DATA_DIR||'.data/lesson-access');
+ if(command==='system-upgrade'){
+  if(!argument)throw Error('用法：停服务后 node server/manage.js system-upgrade <新的独立备份目录>');
+  const store=openStore(directory);
+  try{store.checkIntegrity();const result=await store.applySystemUpgrade({backupDirectory:path.resolve(argument)});console.log(JSON.stringify(result,null,2));}
+  finally{store.close();}return;
+ }
  if(command==='bootstrap'||command==='reset-admin'){
   const store=openStore(directory);
   try{
@@ -30,6 +36,6 @@ async function main(){
   if((await fs.readdir(directory).catch(e=>{if(e.code==='ENOENT')return [];throw e;})).length)throw Error('恢复目标必须为空，请使用新的 LESSON_DATA_DIR；不覆盖已有学生记录。');
   await fs.mkdir(directory,{recursive:true,mode:0o700});for(const file of ['learning.sqlite','card-key']){await fs.copyFile(path.join(source,file),path.join(directory,file));await fs.chmod(path.join(directory,file),0o600);}const store=openStore(directory);store.checkIntegrity();store.close();console.log('恢复完成；启动服务后复查班级、学习卡和学习成果。');return;
  }
- throw Error('命令：bootstrap | reset-admin | backup <新目录> | restore <备份目录>');
+ throw Error('命令：bootstrap | reset-admin | backup <新目录> | restore <备份目录> | system-upgrade <新备份目录>');
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});
