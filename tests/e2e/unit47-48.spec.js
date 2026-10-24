@@ -34,7 +34,13 @@ test('语法错两次、部分填空、撤回、提示和刷新，订正不发�
  for(let i=0;i<2;i++){await select(room,'我此刻正在喝茶');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
   if(i===2){await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'am',exact:true}).click();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'am',exact:true}).click();}
-  if(i===3){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'She',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 She',exact:true}).click();await expect(check).toBeDisabled();}
+   if(i===3){
+    await expect(room.locator('.progress-copy')).toHaveText('第 4 / 14 题');
+    await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+    const undo=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 She',exact:true});
+    await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'She',exact:true}).press('Enter');await expect(undo).toBeVisible();
+    await page.reload();await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);await expect(check).toBeDisabled();
+   }
   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i>=12)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===13?'完成这一站':'下一题',exact:true}).click();

@@ -57,9 +57,14 @@ test('词块撤回、重复错答与提示：本次统计按提交，重练归�
   }
   for(const [i,answer] of ANSWERS.grammar.entries()){
     if(i===4){
+      // The frozen course still delegates focus to the shared grammar renderer.
+      await expect(room.locator('.progress-copy')).toHaveText('第 5 / 12 题');
+      await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+      const undo=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 Half',exact:true});
       await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Half',exact:true}).press('Enter');
+      await expect(undo).toBeVisible();
       await page.reload();await expect(room.getByRole('group',{name:'已选词块'})).toContainText('Half');
-      await room.getByRole('button',{name:'撤回 Half',exact:true}).click();
+      await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);
       await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
     }
     if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}

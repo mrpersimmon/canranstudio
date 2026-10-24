@@ -22,7 +22,16 @@ test('连续错答、词块撤回、提示与刷新；订正不发星',async({pa
  test.setTimeout(140000);await page.goto('/unit87-88/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
  for(let i=0;i<2;i++){await select(room,'过去某一天几点丢的');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
-  if(i===3){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'They',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 They',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===3){
+   // The next frame focuses the grammar progress row. Wait for that transition
+   // before Enter, then prove a real draft exists before testing its reload.
+   await expect(room.locator('.progress-copy')).toHaveText('第 4 / 18 题');
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   const token=room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'They',exact:true});
+   const undo=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 They',exact:true});
+   await token.press('Enter');await expect(undo).toBeVisible();await expect(check).toBeDisabled();
+   await page.reload();await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);await expect(check).toBeDisabled();
+  }
   if(i===5){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i>=14)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===17?'完成这一站':'下一题',exact:true}).click();

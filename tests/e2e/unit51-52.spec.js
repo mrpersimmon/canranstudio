@@ -27,7 +27,12 @@ test('语法错两次、部分填空、撤回、提示及刷新；订正不发�
  test.setTimeout(100000);await page.goto('/unit51-52/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
  for(let i=0;i<2;i++){await select(room,'你喜欢什么天气');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
-  if(i===1){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'What’s',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 What’s',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===1){
+   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${ANSWERS.grammar.length} 题`);
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'What’s',exact:true}).press('Enter');
+   await expect(room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 What’s',exact:true})).toBeVisible();
+   await page.reload();await room.getByRole('button',{name:'撤回 What’s',exact:true}).click();await expect(check).toBeDisabled();}
   if(i===2){await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'climate',exact:true}).click();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'climate',exact:true}).click();}
   if(i===7){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i>=10)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);

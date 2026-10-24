@@ -27,7 +27,12 @@ test('连续两次错答、词块撤回、提示与刷新；订正不发星',asy
 
  for(let i=0;i<2;i++){await select(room,'还完全没收拾');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
-  if(i===6){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'I',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 I',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===6){
+   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${ANSWERS.grammar.length} 题`);
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'I',exact:true}).press('Enter');
+   await expect(room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 I',exact:true})).toBeVisible();
+   await page.reload();await room.getByRole('button',{name:'撤回 I',exact:true}).click();await expect(check).toBeDisabled();}
   if(i===11){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i>=18)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===21?'完成这一站':'下一题',exact:true}).click();

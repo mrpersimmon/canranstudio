@@ -23,7 +23,12 @@ test('重复错答、两空门槛、撤回、提示、刷新与重练',async({pa
  for(let k=0;k<2;k++){await select(room,'正在读的Penny');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const[i,a]of ANSWERS.grammar.entries()){
   if(i===1){await select(room,{fills:['is']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'is',exact:true}).click();}
-  if(i===19){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Ann says',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 Ann says',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===19){
+   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${ANSWERS.grammar.length} 题`);
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Ann says',exact:true}).press('Enter');
+   await expect(room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 Ann says',exact:true})).toBeVisible();
+   await page.reload();await room.getByRole('button',{name:'撤回 Ann says',exact:true}).click();await expect(check).toBeDisabled();}
   if(i===3){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===22?'完成这一站':'下一题',exact:true}).click();
  }await expect(room.locator('.completion-number')).toHaveText(['23','23','2']);await expect(room.locator('.completion-award')).toContainText('本轮有过错答');await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['23','23','2']);await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');

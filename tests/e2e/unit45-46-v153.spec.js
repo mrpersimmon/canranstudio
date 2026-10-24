@@ -56,7 +56,14 @@ test('语法反复错答、部分填空、撤回、提示与刷新；订正不�
  for(let i=0;i<2;i++){await select(room,'I can type.');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.grammar-rule')).toBeHidden();await expect(room.locator('.is-correct')).toHaveCount(0);await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();}
  for(const [i,answer]of ANSWERS.grammar.entries()){
   if(i===1){await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'can’t',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'can’t',exact:true}).click();}
-  if(i===2){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Can',exact:true}).press('Enter');await page.reload();await expect(room.getByRole('group',{name:'已选词块'})).toContainText('Can');await room.getByRole('button',{name:'撤回 Can',exact:true}).click();await expect(check).toBeDisabled();}
+   if(i===2){
+    // The scene retains the shared grammar progress row as its focus target.
+    await expect(room.locator('.progress-copy')).toHaveText('第 3 / 16 题');
+    await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+    const undo=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 Can',exact:true});
+    await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'Can',exact:true}).press('Enter');await expect(undo).toBeVisible();
+    await page.reload();await expect(room.getByRole('group',{name:'已选词块'})).toContainText('Can');await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);await expect(check).toBeDisabled();
+   }
   if(i===8){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   if(i===15)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
   // Static-page DOM swaps load images asynchronously; broken assets still fail this bounded wait.

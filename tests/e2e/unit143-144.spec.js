@@ -41,7 +41,12 @@ test('重复错答、双空草稿保留、撤回、提示、刷新与重练',asy
  await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'have',exact:true}).click();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'has',exact:true}).click();await expect(check).toBeDisabled();
  for(const[i,a]of ANSWERS.grammar.entries()){
   if(i===0){await select(room,{fills:['has']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'has',exact:true}).click();}
-  if(i===4){await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'The room',exact:true}).press('Enter');await page.reload();await room.getByRole('button',{name:'撤回 The room',exact:true}).click();await expect(check).toBeDisabled();}
+  if(i===4){
+   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${ANSWERS.grammar.length} 题`);
+   await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+   await room.getByRole('group',{name:'待选词块'}).getByRole('button',{name:'The room',exact:true}).press('Enter');
+   await expect(room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button',{name:'撤回 The room',exact:true})).toBeVisible();
+   await page.reload();await room.getByRole('button',{name:'撤回 The room',exact:true}).click();await expect(check).toBeDisabled();}
   if(i===5){await room.getByRole('button',{name:'给点线索',exact:true}).click();await page.reload();await expect(room.locator('.practice-hint')).toBeVisible();}
   await select(room,a);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===16?'完成这一站':'下一题',exact:true}).click();
  }await expect(room.locator('.completion-number')).toHaveText(['17','17','2']);await expect(room.locator('.completion-award')).toContainText('本轮有过错答');await expect(page.locator('#starCount')).toHaveText('0');await page.reload();await expect(room.locator('.completion-number')).toHaveText(['17','17','2']);await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');

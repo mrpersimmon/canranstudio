@@ -51,10 +51,15 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
     }
     if (i === 4) {
       await expect(room).toContainText('猜猜自己的身份：我是学生吗？');
+      // This grammar scene completes next-question focus on the progress row.
+      await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
       const bank = room.getByRole('group', { name: '待选词块', exact: true });
+      const undo = room.getByRole('group', { name: '已选词块', exact: true }).getByRole('button', { name: '撤回 Am', exact: true });
       await bank.getByRole('button', { name: 'Am', exact: true }).press('Enter');
+      await expect(undo).toBeVisible();
       await expect(check).toBeDisabled(); await page.reload();
       await expect(room.getByRole('group', { name: '已选词块', exact: true })).toContainText('Am');
+      await expect(undo).toBeVisible();
       await expect(check).toBeDisabled();
     }
     if (i === 5) {

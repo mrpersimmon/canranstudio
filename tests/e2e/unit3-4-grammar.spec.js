@@ -39,10 +39,14 @@ test('十题完成：拼句撤回、逐空选择、配对、提示、错答和�
     await expect(check).toBeDisabled();
     await expect(room.locator('.progress-copy')).toHaveText(`第 ${i + 1} / 10 题`);
     if (i === 2) {
+      // The current grammar wrapper retains the shared progress-row focus.
+      await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
+      const undo = room.getByRole('group', { name: '已选词块', exact: true }).getByRole('button', { name: '撤回 This', exact: true });
       await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'This', exact: true }).press('Enter');
+      await expect(undo).toBeVisible();
       await page.reload();
       await expect(room.getByRole('group', { name: '已选词块', exact: true })).toContainText('This');
-      await room.getByRole('button', { name: '撤回 This', exact: true }).click();
+      await expect(undo).toBeVisible();await undo.click();await expect(undo).toHaveCount(0);
       await expect(check).toBeDisabled();
     }
     if (i === 3) {
