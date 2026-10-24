@@ -107,11 +107,13 @@ test('runner preserves child failures and rejects success with a missing or inco
   fs.copyFileSync(path.join(ROOT, 'scripts/ci/browser-suite.js'), path.join(root, 'scripts/ci/browser-suite.js'));
   fs.writeFileSync(path.join(root, 'scripts/ci/timings.json'), JSON.stringify({ courses: {}, accounts: {} }));
   // This process fixture exercises the runner protocol, not lesson behavior.
+  // Keep enough complete files to exercise every configured course partition.
+  const fakeFileCount = require('../../scripts/ci/browser-suite').definition('courses').shards;
   fs.writeFileSync(path.join(root, 'node_modules/@playwright/test/cli.js'), `
     const fs = require('node:fs');
     const args = process.argv.slice(2);
     const select = args.indexOf('--test-list');
-    let files = select < 0 ? Array.from({length:8}, (_, i) => 'file-' + i + '.spec.js')
+    let files = select < 0 ? Array.from({length:${fakeFileCount}}, (_, i) => 'file-' + i + '.spec.js')
       : fs.readFileSync(args[select + 1], 'utf8').trim().split('\\n');
     const listing = args.includes('--list');
     if (!listing && process.env.FAKE_MODE === 'failure') process.exit(7);

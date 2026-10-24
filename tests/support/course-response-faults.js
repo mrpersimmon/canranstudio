@@ -5,16 +5,17 @@
 // This module is installed only by tests/login/server.js, never the app server.
 function installCourseResponseFaults(server) {
   const handlers = server.listeners('request');
-  const faults = new Map(), held = new Set(), network = [];
+  const faults = new Map(), held = new Set(), network = []; let nextHeldId = 0;
   server.removeAllListeners('request');
   server.on('request', async (request, response) => {
-    const pathname = new URL(request.url, 'http://localhost').pathname;
+    const target = new URL(request.url, 'http://localhost'), pathname = target.pathname;
     if (pathname === '/__test__/course-network') {
       response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify(network));return;
     }
     if (pathname === '/__test__/course-held') {
-      // Expose only route names, never cookies, request bodies or pupil data.
-      response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify([...held].map(item=>item.path)));return;
+      // Expose only request IDs and route names, never cookies, bodies or pupil data.
+      const details=target.searchParams.get('details')==='1';
+      response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify([...held].map(item=>details?{id:item.id,path:item.path}:item.path)));return;
     }
     if (/\/course-(?:status\/|withdrawals\/|index\.json)/.test(pathname)) {
       let bytes=0;const write=response.write,end=response.end;
@@ -57,7 +58,7 @@ function installCourseResponseFaults(server) {
     if (!entry) { for (const handler of handlers) handler(request, response); return; }
     const [path, fault] = entry;
     if (fault.hold) {
-      const item = { path, request, response }; held.add(item);
+      const item = { id: ++nextHeldId, path, request, response }; held.add(item);
       response.on('close', () => held.delete(item));
       return;
     }

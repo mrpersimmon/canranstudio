@@ -36,10 +36,20 @@ test.describe('目录字体准备的离开和返回',()=>{
   try{
    await page.goto(base);
    await expect.poll(async()=>await(await page.request.get('/__test__/course-held')).json()).toContain(font.url);
-   const cancelled=page.waitForEvent('requestfailed',{predicate:r=>r.url().endsWith(font.url),timeout:5000});
+   const held=await(await page.request.get('/__test__/course-held?details=1')).json();
+   const original=held.find(request=>request.path===font.url);expect(original).toBeDefined();
    const clickedAt=Date.now();
-   await page.locator('.course[data-unit="unit1-2"] .primary-button').click();
-   await cancelled;
+   // Chromium need not emit a Page requestfailed event for the old document
+   // across navigation. Observe the actual held connection instead: its ID
+   // must close while the new course may legitimately request the same URL.
+   await Promise.all([
+    expect.poll(async()=>{
+     const requests=await(await page.request.get('/__test__/course-held?details=1')).json();
+     return requests.map(request=>request.id);
+    },{timeout:5000}).not.toContain(original.id),
+    page.locator('.course[data-unit="unit1-2"] .primary-button').click()
+   ]);
+   await info.attach('directory-font-cancellation.json',{contentType:'application/json',body:Buffer.from(JSON.stringify({requestId:original.id,cancelConfirmedMs:Date.now()-clickedAt}))});
    await courseResponse(page,font.url,null,{resumeHeld:true});
    await expect(page.locator('#courseLoader')).toHaveCount(0,{timeout:15000});
    expect(Date.now()-clickedAt).toBeLessThan(15000);
