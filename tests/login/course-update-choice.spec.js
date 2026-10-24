@@ -46,7 +46,9 @@ test('已打开页仅提示刷新，下一次进入自动使用最新课包，�
   await expect(notice.getByRole('button',{name:'刷新课程',exact:true})).toBeVisible();
   await expect(p.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
   for(const width of [320,390,768,1280]){await p.setViewportSize({width,height:500});await notice.scrollIntoViewIfNeeded();expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await expect(notice.getByRole('button',{name:'刷新课程',exact:true})).toBeInViewport();await notice.screenshot({path:info.outputPath('notice-'+width+'.png')});}
-  await notice.getByRole('button',{name:'刷新课程',exact:true}).click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  // Bind readiness to the new document: the old word cards can still be
+  // visible after click resolves and before this same-URL navigation commits.
+  await Promise.all([p.waitForEvent('domcontentloaded'),notice.getByRole('button',{name:'刷新课程',exact:true}).click()]);await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
   await expect(p).toHaveURL(resumeUrl);await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
   await expect(notice).toHaveCount(0);expect(await(await p.request.get(base+'api/awards')).json()).toEqual(awards);
   await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(card.locator('.primary-button')).toBeVisible();

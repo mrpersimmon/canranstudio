@@ -3,8 +3,10 @@ const { expect } = require('@playwright/test');
 const handlers = new WeakMap();
 
 async function waitForRewardDismissal(page) {
-  const dialog = page.locator('dialog.award-reveal[open]');
-  await expect.poll(async () => !await dialog.count() || await dialog.getAttribute('data-dismissible') !== 'false').toBe(true);
+  // One browser-side predicate keeps the original assertion deadline without
+  // two RPC/trace snapshots per poll. A pending or flying card still blocks;
+  // a closed card or a historical renderer without this field does not.
+  await expect(page.locator('dialog.award-reveal[open][data-dismissible="false"]')).toHaveCount(0);
 }
 
 async function dismissRewardDialog(page, key = 'Escape') {

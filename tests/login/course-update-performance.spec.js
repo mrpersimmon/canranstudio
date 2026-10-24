@@ -59,7 +59,9 @@ test('已准备同一新版不会在后续检测中重新解码和下载清单�
   // Evict only public resource bytes. Choosing the prepared candidate must
   // still repair a missing file, never trust the preparation label alone.
   await p.evaluate(async({base,picture})=>{for(const name of await caches.keys())if(name.endsWith(':course-cache:v1'))await(await caches.open(name)).delete(base+'resources/'+picture.sha256);},{base,picture});
-  await p.getByRole('region',{name:'课程更新',exact:true}).getByRole('button',{name:'刷新课程',exact:true}).click();await ready(p);await expect(p).toHaveTitle('更新准备只做一次');
+  // The URL is normalized back to the existing URL during startup. Observe a
+  // new document instead of letting ready() succeed against the old word card.
+  await Promise.all([p.waitForEvent('domcontentloaded'),p.getByRole('region',{name:'课程更新',exact:true}).getByRole('button',{name:'刷新课程',exact:true}).click()]);await ready(p);await expect(p).toHaveTitle('更新准备只做一次');
   expect(repaired).toBeGreaterThan(0);
  }finally{await student.context.close();}
 });

@@ -3,6 +3,7 @@ const { test, expect } = require('@playwright/test');
 const crypto = require('node:crypto');
 const { courseResponse } = require('../support/course-response-faults');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
+const { dismissRewardDialog } = require('../support/reward-dialog');
 const flow = require('../support/thirteen-types-flow');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
 const course = base + 'unit1-2/';
@@ -192,7 +193,7 @@ test('缺图失败显示原因编号，手机页面可以返回课程并在恢�
     await p.goto(course + '#learn/words');
     const loader = p.getByRole('region', { name: '课程加载', exact: true });
     await expect(loader).toContainText('错误编号：L03',{timeout:15000});
-    await expect(loader).toContainText('学习记录会保留。');
+    await expect(loader).toContainText('已获得的证书会保留。');
     await expect(p.getByRole('region', { name: '单词小图鉴', exact: true })).not.toBeVisible();
     expect(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await p.screenshot({ path: `output/playwright/loading-recovery/${base === '/' ? 'root' : 'lesson'}-missing-image.png` });
@@ -293,7 +294,7 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
       await flow.activity(p, '1-2', id, { base: mount, keepAward: true });
       const reward = p.locator('dialog.award-reveal[open]');
       await expect(reward).toBeVisible();
-      await p.keyboard.press('Escape');
+      await dismissRewardDialog(p);
       await expect(reward).toHaveCount(0);
     }
     await p.goto(course + '#learn/certificate');
