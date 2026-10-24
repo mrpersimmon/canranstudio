@@ -92,6 +92,9 @@ test('不支持较新取消接口时仍可查看自己的已获纪念卡', async
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     const reward = p.locator('dialog.award-reveal[open]');
     await expect(reward).toBeVisible();
+    // A synchronized page total can coexist with a pending zero-star card.
+    // Verify the foreground result before checking its final landing/close gate.
+    await expect(reward.getByRole('group', { name: '已获得 1 / 5 颗星', exact: true })).toBeVisible();
     await dismissRewardDialog(p);
     await expect(reward).toHaveCount(0);
     await p.goto(base + 'awards/');
