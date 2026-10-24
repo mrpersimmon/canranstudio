@@ -22,7 +22,7 @@ async function story(p,base=''){
 async function activity(p,id,{base='',old25=false,capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);
  if(navigate)await p.goto(base+'/unit3-4/#learn/'+id);await ready(p);
- const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];if(await room.locator('.practice-finish').isVisible())return room;
+ const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];if(await room.locator('.practice-finish').count()){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;}
  const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
  for(let i=first;i<answers.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
@@ -30,7 +30,7 @@ async function activity(p,id,{base='',old25=false,capture,navigate=true,keepAwar
   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
  }
- if(!keepAward&&await p.locator('dialog.award-reveal[open]').isVisible())await p.keyboard.press('Escape');return room;
+ if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;
 }
 async function complete(p,base='',old25=false){await story(p,base);for(const id of ['listen','roles','reply','manners','exam'])await activity(p,id,{base,old25});await p.goto(base+'/unit3-4/#learn/certificate');await ready(p);}
 const book=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')));

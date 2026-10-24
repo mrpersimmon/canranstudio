@@ -15,6 +15,21 @@ async function dismissRewardDialog(page, key = 'Escape') {
   if (await dialog.count()) await dialog.press(key);
 }
 
+async function finishRewardPresentation(page, room) {
+  // The entry handler also catches a server confirmation which appears after
+  // this first probe. A normal walkthrough returns only once the child can
+  // actually use the results, rather than while the pending card hides them.
+  await dismissRewardDialog(page);
+  const statistics = room.locator('.completion-stats');
+  await statistics.scrollIntoViewIfNeeded();
+  await expect(statistics).toBeVisible();
+  const card = room.locator('.completion-card');
+  // Restored and historical completions may have no entrance animation.
+  if (await card.count() && await card.getAttribute('data-result-motion')) {
+    await expect(card).toHaveAttribute('data-result-motion', 'finished');
+  }
+}
+
 // Data/upgrade walkthroughs acknowledge rewards as a learner would. A single
 // isVisible() probe after completion can miss a later server confirmation.
 // Animation tests explicitly keep the dialog and remove this handler.
@@ -35,4 +50,4 @@ async function handleRewardDialog(page, keepAward = false) {
   }
 }
 
-module.exports = { handleRewardDialog, waitForRewardDismissal, dismissRewardDialog };
+module.exports = { handleRewardDialog, waitForRewardDismissal, dismissRewardDialog, finishRewardPresentation };

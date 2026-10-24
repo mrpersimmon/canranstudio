@@ -4,6 +4,7 @@ const { select } = require('../support/units1-30-tasks');
 const { GRAMMAR, TRANSFER, predecessor } = require('../support/unit34-grammar');
 const { completeActivity, completeUnit34 } = require('../support/unit3-4-flow');
 const { EXAMS, choose } = require('../support/units1-6-exam');
+const { dismissRewardDialog } = require('../support/reward-dialog');
 test.use({ actionTimeout: 5000 });
 
 test('旧锦囊入口进入语法小工坊：先示范，错答不揭底，再撤去示范', async ({ page }) => {
@@ -101,7 +102,7 @@ test('旧综合挑战全对升级：保留九题学习记录，新两题不代�
     await room.getByRole('button', { name: i === 8 ? '查看本次记录' : '下一题', exact: true }).click();
   }
   await expect(page.locator('#starCount')).toHaveText('1');
-  await page.keyboard.press('Escape'); await upgrade(); await page.reload();
+  await dismissRewardDialog(page); await upgrade(); await page.reload();
   await expect(page.locator('#starCount')).toHaveText('0');
   for (const [i, answer] of TRANSFER.entries()) {
     await expect(room.locator('.progress-copy')).toHaveText(`第 ${i + 10} / 11 题`);
@@ -112,7 +113,8 @@ test('旧综合挑战全对升级：保留九题学习记录，新两题不代�
   }
   await expect(page.locator('#starCount')).toHaveText('0');
   await expect(page.locator('dialog.award-reveal[open]')).toContainText('课程已升级');
-  await page.keyboard.press('Escape');
+  // Even this no-flight reminder has a real entrance before it can close.
+  await dismissRewardDialog(page);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await completeActivity(page, 'exam'); await expect(page.locator('#starCount')).toHaveText('1');
 });

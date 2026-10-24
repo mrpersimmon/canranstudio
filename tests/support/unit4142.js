@@ -18,6 +18,7 @@ async function story(page,base=''){
  await room.getByRole('button',{name:'完成课文',exact:true}).click();
 }
 async function activity(page,id,{base='',inspect,keepAward=false}={}){
+ await require('./reward-dialog').handleRewardDialog(page,keepAward);
  await page.goto(base+'/unit41-42/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
  if(await room.locator('.practice-finish').isVisible())return;
  const index=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
@@ -30,7 +31,7 @@ async function activity(page,id,{base='',inspect,keepAward=false}={}){
   await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();
  }
  await expect(room.locator('.completion-number')).toHaveText([String(answers.length),String(answers.length),'0']);
- if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
+ if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);
  return room;
 }
 module.exports={ANSWERS,activity,story};

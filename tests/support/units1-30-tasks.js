@@ -87,6 +87,6 @@ async function activity(page,pair,group,{base='',old=false,capture,beforeFinish,
  // A perfect round prepares these actions behind an inert, hidden result;
  // this count is structural, and keepAward callers inspect the foreground card.
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true,includeHidden:true}).getByRole('button',{includeHidden:true})).toHaveCount(2);
- if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
+ if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);
 }
 module.exports={CASES,select,story,answers,activity,currentGroup};

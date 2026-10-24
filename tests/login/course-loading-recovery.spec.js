@@ -84,9 +84,16 @@ test('不支持较新取消接口时仍可查看自己的已获纪念卡', async
   const p = student.page;
   try {
     await p.addInitScript(() => { AbortSignal.any = undefined; AbortSignal.timeout = undefined; });
-    await flow.activity(p, '1-2', 'listen', { base: base.replace(/\/$/, '') });
+    // Observe account confirmation before acknowledging its foreground card.
+    // An automatic handler inside the completion-count assertion would share
+    // that assertion's remaining deadline with confirmation and star flight.
+    await flow.activity(p, '1-2', 'listen', { base: base.replace(/\/$/, ''), keepAward: true });
     await expect(p.locator('#starCount')).toHaveText('1');
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
+    const reward = p.locator('dialog.award-reveal[open]');
+    await expect(reward).toBeVisible();
+    await dismissRewardDialog(p);
+    await expect(reward).toHaveCount(0);
     await p.goto(base + 'awards/');
     await expect(p.locator('.book')).toBeVisible();
     await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false');
@@ -308,6 +315,7 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
     await expect(p.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
     await publish();
     await p.getByRole('button', { name: '再试一次', exact: true }).click();
+    await waitForCourseReady(p, info, 'certificate-retry');
     await expect(p.locator('#starCount')).toHaveText('5');
     await expect(p.locator('#certificateName')).toHaveText('小禾');
     await expect(p.locator('#certificateDate')).toHaveText(date);

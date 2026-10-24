@@ -41,11 +41,17 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   await finishZone(learner, 'trans', { base, keepAward: true, navigate: false });
   await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');
   await expect(learner.locator('#starCount')).toHaveText('0');
+  const offlineResult = learner.locator('.stage-trans .completion-card');
+  await offlineResult.locator('.completion-stats').scrollIntoViewIfNeeded();
+  await expect(offlineResult).toHaveAttribute('data-result-motion', 'finished');
   await first.context.setOffline(false);
   await expect(learner.locator('#starCount')).toHaveText('1');
   const reveal = learner.getByRole('dialog', { name: /纪念卡结算/ });
-  await expect(reveal).toBeVisible(); await expect(reveal).not.toHaveAttribute('data-dismissible', 'false'); await reveal.press('Escape');
   await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');
+  // This offline round has already presented its result. The later real
+  // confirmation updates the award ledger without replaying a foreground card.
+  await expect(reveal).not.toBeVisible();
+  await expect(offlineResult).toHaveAttribute('data-result-motion', 'finished');
   await expectManagedLearning(page, account, mount, '学习中', 1);
   const second = await studentLogin(browser, account, mount);
   await expect(second.page.locator('.course').filter({ hasText:'Lesson 1–2' })).toContainText('1 / 5');

@@ -67,6 +67,7 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
       await expect(modal.getByRole('group',{name:`已获得 ${++count} / 5 颗星`,exact:true})).toBeVisible();
       await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','pending');
       await expect.poll(()=>learner.evaluate(()=>window.unit7172Frames.flights.length)).toBeGreaterThan(3);
+      await require('../support/reward-dialog').waitForRewardDismissal(learner);
       await modal.press('Escape');
       await room.locator('.completion-stats').scrollIntoViewIfNeeded();
       await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');

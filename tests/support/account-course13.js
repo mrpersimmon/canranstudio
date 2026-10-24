@@ -1,17 +1,18 @@
 'use strict';
 const {expect}=require('@playwright/test'),flow=require('./unit1314-fivezones');
+const {dismissRewardDialog}=require('./reward-dialog');
 async function completeStory(page,base=''){await flow.story(page,base);}
 async function completeActivity(page,id,base=''){
  await flow.activity(page,id,{base,keepAward:true});
  const reveal=page.locator('dialog.award-reveal[open]');
- await expect(reveal).toBeVisible();await page.keyboard.press('Escape');await expect(reveal).toHaveCount(0);
+ await expect(reveal).toBeVisible();await dismissRewardDialog(page);await expect(reveal).toHaveCount(0);
 }
 async function completeUnit1314(page,base=''){
  await completeStory(page,base);
  for(const id of Object.keys(flow.ANSWERS)){
   await flow.activity(page,id,{base,keepAward:true});
   const reveal=page.locator('dialog.award-reveal[open]');
-  await expect(reveal).toBeVisible();await page.keyboard.press('Escape');await expect(reveal).toHaveCount(0);
+  await expect(reveal).toBeVisible();await dismissRewardDialog(page);await expect(reveal).toHaveCount(0);
  }
  await page.goto(base+'/unit13-14/#learn/certificate');
  await expect(page.locator('#starCount')).toHaveText('5');

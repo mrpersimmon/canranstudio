@@ -5,6 +5,43 @@
   const e = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('canran-lesson-identity') : null;
   let state, currentClass, selectedStudents = new Set();
+  let directoryFontController, resumeDirectoryFonts, courseCacheScript, directoryStyles;
+  const stopDirectoryFonts = () => directoryFontController?.abort();
+  window.addEventListener('pagehide', stopDirectoryFonts);
+  window.addEventListener('pageshow', event => { if(event.persisted)resumeDirectoryFonts?.(); });
+  document.addEventListener('click', event => {
+    // Cancel before a same-tab course navigation can freeze this directory.
+    // Keep the link's native timing, modifiers and new-tab behavior intact.
+    if(event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    const link=event.target.closest?.('.course a[href]');
+    if(link&&!link.hasAttribute('download')&&(!link.target||link.target==='_self'))stopDirectoryFonts();
+  }, true);
+  const checkDirectoryActive = signal => { if(signal.aborted)throw new DOMException('已取消准备','AbortError'); };
+  function directoryRead(promise, signal){
+    return new Promise((resolve,reject)=>{
+      const stop=()=>reject(new DOMException('已取消准备','AbortError'));
+      signal.addEventListener('abort',stop,{once:true});
+      Promise.resolve(promise).then(value=>{signal.removeEventListener('abort',stop);if(signal.aborted)stop();else resolve(value);},error=>{signal.removeEventListener('abort',stop);reject(error);});
+      if(signal.aborted)stop();
+    });
+  }
+  function loadDirectoryStyles(){
+    const existing=document.getElementById('courseFonts');
+    if(existing?.sheet)return Promise.resolve();
+    if(!directoryStyles){
+      const link=existing||Object.assign(document.createElement('link'),{id:'courseFonts',rel:'stylesheet',href:'/lesson/assets/fonts/fonts.css'});
+      // A restored directory must await the same real stylesheet load. Merely
+      // being connected does not mean its font faces have been registered.
+      directoryStyles=new Promise((resolve,reject)=>{
+        const clean=()=>{link.removeEventListener('load',loaded);link.removeEventListener('error',failed);};
+        const loaded=()=>{clean();resolve();};
+        const failed=()=>{clean();link.remove();reject(Error('字体尚未就绪'));};
+        link.addEventListener('load',loaded,{once:true});link.addEventListener('error',failed,{once:true});
+        if(!link.isConnected)document.head.append(link);
+      }).catch(error=>{directoryStyles=null;throw error;});
+    }
+    return directoryStyles;
+  }
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
@@ -45,16 +82,23 @@
     for(const key of keys){try{const pending=JSON.parse(localStorage.getItem(key));if(pending.studentId!==studentId||upgrade&&pending.epoch!==upgrade.epoch)continue;const result=await api('progress',pending);if(result.stale){localStorage.removeItem(prefix+'canran:lesson:'+pending.course+':learning:v1');localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}localStorage.removeItem(key);}catch{remaining++;}}
     return remaining;
   }
-  async function prepareSharedFonts(){
+  async function prepareSharedFonts(signal){
+    checkDirectoryActive(signal);
     if(!window.CanranCourseCache){
-      await new Promise((resolve,reject)=>{
+      // Cancelling the caller must not insert a second copy on BFCache return:
+      // executing cache.js twice would replace its stores and in-flight tasks.
+      if(!courseCacheScript)courseCacheScript=new Promise((resolve,reject)=>{
         const script=document.createElement('script');script.src='/lesson/core/course-cache.js';
         const failed=()=>{clearTimeout(timer);script.remove();reject(Error('课程资源尚未就绪'));};
         const timer=setTimeout(failed,15000);script.onload=()=>{clearTimeout(timer);resolve();};script.onerror=failed;document.head.append(script);
-      });
+      }).catch(error=>{courseCacheScript=null;throw error;});
+      await directoryRead(courseCacheScript,signal);
     }
+    checkDirectoryActive(signal);
     const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);let index;
-    try{const response=await fetch('/lesson/course-index.json',{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('课程资源尚未就绪');index=await response.json();}finally{clearTimeout(timer);}
+    const stop=()=>controller.abort();signal.addEventListener('abort',stop,{once:true});
+    try{const response=await fetch('/lesson/course-index.json',{cache:'no-store',signal:controller.signal});if(!response.ok)throw Error('课程资源尚未就绪');index=await response.json();}finally{clearTimeout(timer);signal.removeEventListener('abort',stop);}
+    checkDirectoryActive(signal);
     // The directory prepares shared bytes only. Course entry verifies and
     // opens the latest authorized version without a separate version choice.
     const fonts=index.sharedFonts||[];
@@ -63,31 +107,44 @@
     const store=CanranCourseCache.open('/lesson/');
     // A short lease protects prepared public font bytes from quota cleanup;
     // it contains no student identity, answers, awards or certificate dates.
-    await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)})).catch(()=>{});
-    await Promise.all(Array.from({length:2},async()=>{while(queue.length)await store.obtain(queue.shift());}));
+    await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)},{signal}),{signal}).catch(()=>{});
+    checkDirectoryActive(signal);
+    // Wait for both workers to stop: an already-started native cache write
+    // finishes under its lock even when the other worker is cancelled first.
+    const results=await Promise.allSettled(Array.from({length:2},async()=>{while(queue.length){checkDirectoryActive(signal);await store.obtain(queue.shift(),{signal});}}));
+    const failed=results.find(result=>result.status==='rejected');if(failed)throw failed.reason;
+    checkDirectoryActive(signal);
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
   }
   function prepareDirectory(hasCourses, waiting) {
+    stopDirectoryFonts();
     const note=app.querySelector('p[role="status"]'),retry=document.createElement('button');
     const pending=waiting?'还有学习成果保存在本机，联网后将继续同步。':'';
     retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(retry);
     delete document.documentElement.dataset.sharedFontsReady;
-    let busy=false;
+    let busy=false,preparation;
     const prepare=async()=>{
       if(busy)return;busy=true;retry.hidden=true;
+      delete document.documentElement.dataset.sharedFontsReady;
+      const controller=new AbortController();directoryFontController=controller;
       note.textContent=pending+(hasCourses?'可以先选择课程，首次进入可能需要稍等。':'');
       try{
         if(hasCourses){
-          const link=document.getElementById('courseFonts')||Object.assign(document.createElement('link'),{id:'courseFonts',rel:'stylesheet',href:'/lesson/assets/fonts/fonts.css'});
-          if(!link.isConnected)await new Promise((resolve,reject)=>{link.onload=resolve;link.onerror=()=>{link.remove();reject(Error('字体尚未就绪'));};document.head.append(link);});
-          await Promise.all([prepareSharedFonts(),document.fonts.load('600 20px "Baloo 2"'),document.fonts.load('24px "ZCOOL KuaiLe"')]);
+          await directoryRead(loadDirectoryStyles(),controller.signal);
+          const results=await Promise.allSettled([prepareSharedFonts(controller.signal),directoryRead(document.fonts.load('600 20px "Baloo 2"'),controller.signal),directoryRead(document.fonts.load('24px "ZCOOL KuaiLe"'),controller.signal)]);
+          const failed=results.find(result=>result.status==='rejected');if(failed)throw failed.reason;
         }else document.documentElement.dataset.sharedFontsReady='0';
         if(note.isConnected)note.textContent=pending;
       }catch{
+        if(controller.signal.aborted)return;
         if(note.isConnected){note.textContent=pending+'部分内容还没准备好，可以进入课程继续加载。';retry.hidden=false;}
-      }finally{busy=false;}
+      }finally{busy=false;if(directoryFontController===controller)directoryFontController=null;}
     };
-    retry.onclick=prepare;
+    const startPreparation=()=>{preparation=prepare();return preparation;};
+    retry.onclick=startPreparation;
+    resumeDirectoryFonts=()=>{
+      if(note.isConnected)void Promise.resolve(preparation).then(()=>{if(note.isConnected)return startPreparation();});
+    };
     // A directory is a choice of courses, not a package containing every
     // course. Background preparation must never remove its working links.
     for(const card of app.querySelectorAll('.course')){
@@ -101,7 +158,7 @@
         image.addEventListener('load',()=>{delete image.dataset.failed;image.style.visibility='';if(retryArt&&!images.some(img=>img.dataset.failed)){retryArt.remove();retryArt=null;}});
       }
     }
-    void prepare();
+    void startPreparation();
   }
   async function home() {
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}

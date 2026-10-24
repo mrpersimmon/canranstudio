@@ -56,7 +56,12 @@ async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=t
  // The two actions are prepared in the DOM, but are intentionally inaccessible
  // while the keepsake owns the foreground. Callers may keep that card open.
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true,includeHidden:true}).getByRole('button',{includeHidden:true})).toHaveCount(2);
- if(!keepAward&&await page.locator('dialog.award-reveal[open]').isVisible())await page.keyboard.press('Escape');
+ if(!keepAward){
+  await require('./reward-dialog').dismissRewardDialog(page);
+  // Preserve the illustration's natural scroll position for short-screen
+  // checks; the results need to be revealed, not forced into the viewport.
+  await expect(room.locator('.completion-stats')).toBeVisible();
+ }
 }
 async function complete(page,pair,base=''){
  await story(page,pair,base);for(const id of Object.keys(ANSWERS[pair]))await activity(page,pair,id,{base});

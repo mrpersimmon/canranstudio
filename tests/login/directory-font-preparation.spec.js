@@ -18,3 +18,39 @@ test('字体下载失败不封锁目录，后台重试不改学习成果',async(
  await expect(page.locator('.course')).toHaveCount(1,{timeout:10000});await expect(page.locator('#directoryPrepareRetry')).toBeVisible({timeout:30000});expect(hits).toBeGreaterThan(0);await expect(page.locator('.course .primary-button')).toBeVisible();const before=await(await page.request.get(base+'api/me')).json();expect(before.courses[0].stars).toBe(0);await page.screenshot({path:info.outputPath('font-failure.png')});
  await courseResponse(page,target,null);await page.locator('#directoryPrepareRetry').click();await expect(page.locator('.course')).toHaveCount(1);await expect(page.locator('html')).toHaveAttribute('data-shared-fonts-ready','5');await expect(page.locator('#directoryPrepareRetry')).toBeHidden();const after=await(await page.request.get(base+'api/me')).json();expect(after.student.id).toBe(before.student.id);expect(after.courses[0].stars).toBe(0);await page.screenshot({path:info.outputPath('font-retry.png')});
 });
+
+test.describe('目录字体准备的离开和返回',()=>{
+ test.use({serviceWorkers:'block'});
+ test('后台字体未完成也能立即点课，返回目录后继续准备且成绩不变',async({page},info)=>{
+  test.setTimeout(90000);
+  await page.addInitScript(()=>{window.addEventListener('pageshow',event=>{window.directoryHistoryRestore={persisted:event.persisted};});});
+  await adminLogin(page,base);const account=await createStudent(page,'字体取消核验班','小禾',[/Lesson 1–2/]);
+  await page.locator('#adminLogout').click();await signIn(page,account,base);
+  const before=await(await page.request.get(base+'api/me')).json();
+  const index=await(await page.request.get(base+'course-index.json')).json();
+  const font=index.sharedFonts.find(item=>item.key.endsWith('/award-nunito.woff2'));
+  // Evict public font bytes only. The real login and learning/award stores
+  // remain unchanged; the server holds the directory's actual HTTP request.
+  await page.evaluate(async({base,font})=>{const store=CanranCourseCache.open(base);await(await store.cache).delete(base+'resources/'+font.sha256);},{base,font});
+  await courseResponse(page,font.url,{hold:true});
+  try{
+   await page.goto(base);
+   await expect.poll(async()=>await(await page.request.get('/__test__/course-held')).json()).toContain(font.url);
+   const cancelled=page.waitForEvent('requestfailed',{predicate:r=>r.url().endsWith(font.url),timeout:5000});
+   const clickedAt=Date.now();
+   await page.locator('.course[data-unit="unit1-2"] .primary-button').click();
+   await cancelled;
+   await courseResponse(page,font.url,null,{resumeHeld:true});
+   await expect(page.locator('#courseLoader')).toHaveCount(0,{timeout:15000});
+   expect(Date.now()-clickedAt).toBeLessThan(15000);
+   await expect(page.locator('#wordPageProgress')).toBeVisible();
+   await page.goBack();
+   await expect(page.locator('.course')).toHaveCount(1);
+   await expect(page.locator('html')).toHaveAttribute('data-shared-fonts-ready','5',{timeout:15000});
+   await info.attach('directory-history-restore.json',{contentType:'application/json',body:Buffer.from(JSON.stringify(await page.evaluate(()=>window.directoryHistoryRestore)))});
+   const after=await(await page.request.get(base+'api/me')).json();
+   expect(after.student.id).toBe(before.student.id);
+   expect(after.courses.map(c=>({id:c.id,stars:c.stars,completed:c.completed}))).toEqual(before.courses.map(c=>({id:c.id,stars:c.stars,completed:c.completed})));
+  }finally{await courseResponse(page,font.url,null,{resumeHeld:true});}
+ });
+});

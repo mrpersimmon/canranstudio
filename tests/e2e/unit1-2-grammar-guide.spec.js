@@ -1,11 +1,13 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
+const { handleRewardDialog, finishRewardPresentation } = require('../support/reward-dialog');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
 
 for (const width of [320, 390, 768, 1280]) test(`${width} 工坊十二题与结束卡可读，选择提示和反馈不移动操作区`, async ({ page }) => {
   test.setTimeout(90000); await page.setViewportSize({ width, height: 850 });
   const base = width === 390 ? '/lesson' : '';
+  await handleRewardDialog(page);
   await page.goto(`${base}/unit1-2/#learn/trans`);
   const room = page.locator('.stage-trans');
   for (const [i, answer] of flow.ANSWERS['1-2'].trans.entries()) {
@@ -34,6 +36,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 工坊十二题与结�
     }
     await room.getByRole('button', { name: i === 11 ? '完成这一组' : '下一题', exact: true }).click();
   }
+  await finishRewardPresentation(page, room);
   await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-number')).toHaveText(['12', '12', '0']);
   await expect.poll(() => room.locator('img:visible').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);

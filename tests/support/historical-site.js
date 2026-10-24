@@ -5,6 +5,7 @@ async function mirror(source,target){const stat=await fs.stat(source);if(stat.is
 // Every course directory and source file is independent. Directory junctions
 // are only for unchanged assets/dependencies, never files that a fixture edits.
 async function createSite(destination,{classroom=false,overlays={}}={}){
+ if(classroom)require('./classroom-history').installHistoricalRewardAdapter();
  await fs.mkdir(destination);
  for(const entry of await fs.readdir(root,{withFileTypes:true})){
   if(entry.name.startsWith('.')||['output','docs'].includes(entry.name))continue;

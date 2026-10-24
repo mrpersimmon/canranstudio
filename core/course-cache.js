@@ -1,16 +1,38 @@
 (function (root) {
   'use strict';
+  // A delayed directory script can finish after its retry. Keep one cache and
+  // one task registry per document instead of orphaning already-held locks.
+  if (root.CanranCourseCache?.open) return;
   const stores = new Map();
   const digest = async buffer => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', buffer)), value => value.toString(16).padStart(2, '0')).join('');
   const delay = time => new Promise(resolve => setTimeout(resolve, time));
   const failure = (code, message) => Object.assign(new Error(message), { courseCode: code });
+  const cancelled = () => new DOMException('已取消准备', 'AbortError');
+  const checkCancelled = signal => { if (signal?.aborted) throw cancelled(); };
+  // CacheStorage reads cannot be aborted. Stop waiting when the owning page
+  // leaves, then discard their eventual result before any delete/write starts.
+  function readWhileActive(promise, signal) {
+    if (!signal) return promise;
+    return new Promise((resolve, reject) => {
+      const stop = () => reject(cancelled());
+      signal.addEventListener('abort', stop, { once: true });
+      Promise.resolve(promise).then(value => {
+        signal.removeEventListener('abort', stop);
+        if (signal.aborted) reject(cancelled()); else resolve(value);
+      }, error => { signal.removeEventListener('abort', stop); reject(error); });
+      if (signal.aborted) stop();
+    });
+  }
   function open(base) {
     if (stores.has(base)) return stores.get(base);
     const prefix = 'canran:' + (base === '/' ? 'preview-root' : base.slice(1, -1).replaceAll('/', ':')) + ':course-cache:v1';
     const memory = new Map(), tasks = new Map();
     const cacheKey = item => base + 'resources/' + item.sha256;
     const resourceResponse = (item, bytes) => new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } });
-    const maintain = work => root.navigator?.locks ? root.navigator.locks.request(prefix + ':maintenance', work) : work();
+    const maintain = (work, { signal } = {}) => {
+      checkCancelled(signal);
+      return root.navigator?.locks ? root.navigator.locks.request(prefix + ':maintenance', signal ? { signal } : {}, work) : work();
+    };
     let persistent = true;
     const database = new Promise((resolve, reject) => {
       const request = indexedDB.open(prefix, 1);
@@ -28,12 +50,19 @@
         request.onsuccess = () => resolve(request.result || null); request.onerror = () => reject(request.error);
       }).catch(() => { persistent = false; return null; });
     }
-    async function put(table, key, value) {
-      const db = await database;
+    async function put(table, key, value, { signal } = {}) {
+      const db = await readWhileActive(database, signal);
       if (!db) return false;
+      checkCancelled(signal);
       return new Promise((resolve, reject) => {
-        const transaction = db.transaction(table, 'readwrite'); transaction.objectStore(table).put(value, key);
-        transaction.oncomplete = () => resolve(true); transaction.onerror = () => reject(transaction.error); transaction.onabort = () => reject(transaction.error);
+        const transaction = db.transaction(table, 'readwrite');
+        const stop = () => { try { transaction.abort(); } catch {} };
+        const finish = (success, error) => { signal?.removeEventListener('abort', stop); if (success) resolve(true); else reject(error); };
+        transaction.oncomplete = () => finish(!signal?.aborted, signal?.aborted ? cancelled() : null);
+        transaction.onerror = () => finish(false, transaction.error);
+        transaction.onabort = () => finish(false, signal?.aborted ? cancelled() : transaction.error);
+        signal?.addEventListener('abort', stop, { once: true });
+        transaction.objectStore(table).put(value, key);
       });
     }
     async function remove(table, key) {
@@ -56,20 +85,22 @@
       const url = new URL(item.url, root.location.origin);
       if (url.origin !== root.location.origin || !url.pathname.startsWith(base + 'resources/' + item.sha256 + '/') || !/^[a-f0-9]{64}$/.test(item.sha256) || !Number.isSafeInteger(item.bytes) || item.bytes < 1) throw failure('L02', '无效课程资源');
     }
-    async function validBuffer(response, item) {
+    async function validBuffer(response, item, signal) {
       if (!response?.ok || response.status !== 200) return null;
-      const buffer = await response.arrayBuffer();
-      if (buffer.byteLength !== item.bytes || await digest(buffer) !== item.sha256) return null;
+      const buffer = await readWhileActive(response.arrayBuffer(), signal);
+      if (buffer.byteLength !== item.bytes || await readWhileActive(digest(buffer), signal) !== item.sha256) return null;
       return buffer;
     }
-    async function cached(item) {
+    async function cached(item, { signal } = {}) {
+      checkCancelled(signal);
       validateItem(item);
       if (memory.has(item.sha256)) return memory.get(item.sha256);
-      const disk = await cache;
+      const disk = await readWhileActive(cache, signal);
       if (!disk) return null;
-      const response = await disk.match(cacheKey(item)).catch(() => null);
+      const response = await readWhileActive(disk.match(cacheKey(item)).catch(() => null), signal);
       if (!response) return null;
-      const buffer = await validBuffer(response, item);
+      const buffer = await validBuffer(response, item, signal);
+      checkCancelled(signal);
       if (!buffer) { await disk.delete(cacheKey(item)); return null; }
       memory.set(item.sha256, buffer);
       return buffer;
@@ -77,7 +108,7 @@
     async function download(item, signal) {
       let lastError;
       for (let attempt = 0; attempt < 3; attempt++) {
-        if (signal?.aborted) throw new DOMException('已取消准备', 'AbortError');
+        checkCancelled(signal);
         const controller = new AbortController();
         const cancel = () => controller.abort(); signal?.addEventListener('abort', cancel, { once: true });
         let timer;
@@ -96,17 +127,23 @@
           }
           const bytes = new Uint8Array(size); let offset = 0;
           for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-          if (size !== item.bytes || await digest(bytes.buffer) !== item.sha256) throw failure('L04', '资源校验失败');
+          if (size !== item.bytes || await readWhileActive(digest(bytes.buffer), signal) !== item.sha256) throw failure('L04', '资源校验失败');
+          checkCancelled(signal);
           memory.set(item.sha256, bytes.buffer);
-          const disk = await cache;
+          const disk = await readWhileActive(cache, signal);
+          checkCancelled(signal);
           if (disk) {
-            const save = () => disk.put(cacheKey(item), resourceResponse(item, bytes));
+            // Once a put starts, await the actual write before releasing its
+            // lock. Cancellation must never leave an orphan cache write.
+            const save = () => { checkCancelled(signal); return disk.put(cacheKey(item), resourceResponse(item, bytes)); };
             try { await save(); }
             catch {
+              checkCancelled(signal);
               try { if (!api.onQuota) throw new Error('No cleanup available'); await api.onQuota(); await save(); }
-              catch { persistent = false; }
+              catch { checkCancelled(signal); persistent = false; }
             }
           }
+          checkCancelled(signal);
           return bytes.buffer;
         } catch (error) { lastError = error; if (signal?.aborted) throw error; }
         finally { clearTimeout(timer); signal?.removeEventListener('abort', cancel); }
@@ -116,11 +153,12 @@
       throw lastError;
     }
     async function obtain(item, { signal, network = true } = {}) {
-      const found = await cached(item); if (found) return found;
+      const found = await cached(item, { signal }); if (found) return found;
+      checkCancelled(signal);
       if (!network) return null;
       if (!tasks.has(item.sha256)) {
-        const work = async () => await cached(item) || download(item, signal);
-        const promise = root.navigator?.locks ? root.navigator.locks.request(prefix + ':' + item.sha256, work) : work();
+        const work = async () => { const value = await cached(item, { signal }); checkCancelled(signal); return value || download(item, signal); };
+        const promise = root.navigator?.locks ? root.navigator.locks.request(prefix + ':' + item.sha256, signal ? { signal } : {}, work) : work();
         tasks.set(item.sha256, promise);
         promise.finally(() => tasks.delete(item.sha256)).catch(() => {});
       }

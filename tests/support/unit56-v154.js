@@ -14,7 +14,7 @@ async function select(room,answer){if(answer?.fills){for(let i=0;i<answer.fills.
 async function activity(p,id,{base='',edition='current',capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);if(navigate)await p.goto(base+'/unit5-6/#learn/'+id);await ready(p);
  const room=p.locator('.stage-'+id),answers=({current:CURRENT,before:BEFORE,classroom:CLASSROOM}[edition])[id];let guard=0;
- while(!await room.locator('.practice-finish').isVisible()){
+ while(!await room.locator('.practice-finish').count()){
   if(++guard>answers.length+1)throw Error('Practice did not advance: '+id);
   const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});
   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();
@@ -22,7 +22,7 @@ async function activity(p,id,{base='',edition='current',capture,navigate=true,ke
   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
   await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
  }
- if(!keepAward&&await p.locator('dialog.award-reveal[open]').isVisible())await p.keyboard.press('Escape');return room;
+ if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;
 }
 async function complete(p,base='',edition='current'){await story(p,base);for(const id of Object.keys({current:CURRENT,before:BEFORE,classroom:CLASSROOM}[edition]))await activity(p,id,{base,edition});await p.goto(base+'/unit5-6/#learn/certificate');await ready(p);}
 const book=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit5-6:learning:v1')));
