@@ -7,7 +7,7 @@ const ROOT = path.resolve(__dirname, '../..');
 const CLI = path.join(ROOT, 'node_modules/@playwright/test/cli.js');
 const SUITES = {
   courses: { config: 'playwright.config.js', directory: 'tests/e2e', shards: 9, filters: ['--grep-invert', '@cache-performance'] },
-  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 4, filters: [] }
+  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 5, filters: [] }
 };
 
 function inventory(report) {
