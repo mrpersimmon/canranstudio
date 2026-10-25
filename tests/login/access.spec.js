@@ -188,7 +188,14 @@ test('学生不能提交别人的成果，旧上传不能覆盖重开，来源�
  const stale=await a.page.evaluate(async body=>(await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json(),completed);expect(stale.stale).toBe(true);await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('1');await expectFreshPractice(a.page);
  const cross=await page.request.post('/lesson/api/admin/classes',{headers:{Origin:'https://another-origin.invalid'},data:{name:'不应该创建的班级'}});expect(cross.status()).toBe(403);await page.reload();await expect(page.getByRole('button',{name:'管理 不应该创建的班级',exact:true})).toHaveCount(0);
  await b.page.getByRole('button',{name:'切换学生',exact:true}).click();await b.page.getByLabel('学号',{exact:true}).fill('x99999999');await b.page.getByLabel('密码',{exact:true}).fill('Invalid-password-123');
- for(let i=0;i<11;i++){await b.page.getByRole('button',{name:'进入我的课程'}).click();await expect(b.page.getByRole('status')).toHaveText(i===10?'尝试有些频繁，请十五分钟后再试':'学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');}
+ for(let i=0;i<11;i++){
+  const response=b.page.waitForResponse(r=>r.request().method()==='POST'&&r.url().endsWith('/api/login'));
+  await b.page.getByRole('button',{name:'进入我的课程'}).click();const result=await response;expect(result.status()).toBe(i===10?429:401);
+  if(i===10){
+   const body=await result.json();expect(body.cooldown.retryAt).toBeGreaterThan(body.cooldown.serverTime);expect(Number(result.headers()['retry-after'])).toBeLessThanOrEqual(900);
+   await expect(b.page.getByRole('timer')).toHaveText(/剩余 \d{2}:\d{2}/);await expect(b.page.getByRole('status')).toContainText('解除时间：');await expect(b.page.getByRole('status')).toContainText('北京时间');await expect(b.page.getByRole('button',{name:'进入我的课程'})).toBeDisabled();
+  }else await expect(b.page.getByRole('status')).toHaveText('学号或密码不正确，或账号已停用。初始密码已使用或过期时，请联系老师重置。');
+ }
  await a.context.close();await b.context.close();
 });
 
