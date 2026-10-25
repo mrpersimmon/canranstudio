@@ -148,6 +148,18 @@ function openStore(directory) {
       db.exec('BEGIN IMMEDIATE');
       try { db.prepare('DELETE FROM admin').run(); db.prepare('INSERT INTO admin VALUES (?,?)').run(username, encodePassword(password)); db.prepare("DELETE FROM sessions WHERE role='admin'").run(); authThrottle.clearAdmin(); db.exec('COMMIT'); } catch (error) { db.exec('ROLLBACK'); throw error; }
     },
+    renameAdmin(previous, username) {
+      if (typeof username !== 'string' || !/^[a-zA-Z][a-zA-Z0-9_.-]{2,63}$/.test(username)) throw Error('管理员用户名请使用 3–64 位字母、数字、下划线、点或短横线，并以字母开头');
+      return transaction(() => {
+        if (!db.prepare('SELECT 1 FROM admin WHERE username=?').get(previous)) throw Error('当前管理员用户名不匹配，未执行改名');
+        if (teachers.list().some(t=>t.teacherNumber===username.toLowerCase())) throw Error('管理员账号不能与老师工号重复');
+        if (previous === username) return false;
+        db.prepare('UPDATE admin SET username=? WHERE username=?').run(username, previous);
+        db.prepare("DELETE FROM sessions WHERE role='admin'").run();
+        authThrottle.clear('admin', previous); authThrottle.clear('admin', username);
+        return true;
+      });
+    },
     adminLogin(username, password) { const row = db.prepare('SELECT * FROM admin WHERE username=?').get(username); const matches = passwordMatches(password, row?.password || DUMMY_PASSWORD_HASH); return matches && row ? row.username : null; },
     session: createSession,
     lookupSession(raw, role, now) {

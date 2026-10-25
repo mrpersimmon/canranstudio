@@ -17,18 +17,19 @@ function createAuthThrottle(db) {
     try { const result = action(); db.exec('COMMIT'); return result; }
     catch (error) { db.exec('ROLLBACK'); throw error; }
   }
-  const blocked = (until, now, long = false) => ({
+  const blocked = (until, now, scope = 'account') => ({
     status: 429, retryAfter: Math.max(1, Math.ceil((until - now) / 1000)),
-    message: long ? '尝试有些频繁，请十五分钟后再试' : '尝试有些频繁，请一分钟后再试'
+    retryAt: until, serverTime: now, scope,
+    message: '尝试有些频繁，请在等待结束后重试'
   });
   function increment(key, duration, limit, now) {
     const old = get.get(key);
     const row = old?.expires > now ? old : { count: 0, expires: now + duration };
     // Keep active buckets when full: evicting them would reset attack budgets.
-    if (!old && db.prepare('SELECT count(*) AS n FROM auth_throttle').get().n >= MAX_KEYS) return blocked(now + 60000, now);
+    if (!old && db.prepare('SELECT count(*) AS n FROM auth_throttle').get().n >= MAX_KEYS) return blocked(now + 60000, now, 'service');
     row.count = Math.min(row.count + 1, limit + 1);
     put.run(key, row.count, row.expires);
-    return row.count > limit ? blocked(row.expires, now) : null;
+    return row.count > limit ? blocked(row.expires, now, key.startsWith('ip:') ? 'source' : 'account') : null;
   }
   return {
     check(address, kind, credential, now = Date.now()) {
@@ -39,9 +40,9 @@ function createAuthThrottle(db) {
         const source = increment('ip:' + digest(address), 60000, 120, now);
         if (source) return source;
         const key = accountKey(kind, credential), failures = get.get('failure:' + key);
-        if (failures?.count >= 10) return blocked(failures.expires, now, true);
+        if (failures?.count >= 10) return blocked(failures.expires, now);
         if (!failures) {
-          if (db.prepare('SELECT count(*) AS n FROM auth_throttle').get().n >= MAX_KEYS) return blocked(now + 60000, now);
+          if (db.prepare('SELECT count(*) AS n FROM auth_throttle').get().n >= MAX_KEYS) return blocked(now + 60000, now, 'service');
           put.run('failure:' + key, 0, now + 15 * 60000);
         }
         return increment('account:' + key, 60000, 12, now);

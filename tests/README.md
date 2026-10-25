@@ -1,3 +1,9 @@
+## 2026-10-25登录倒计时与管理员改名
+
+规则及发布边界见[专项说明](../docs/security-version/2026-10-25-登录冷却提示与管理员改名.md)。运行`node --test tests/unit/auth-cooldown.test.js tests/unit/admin-rename.test.js tests/unit/server-security.test.js tests/unit/admin-accounts.test.js`；涉及POSIX文件权限的既有用例在Linux核验，Windows文件模式或打开文件清理错误不能冒称通过。
+
+`npx playwright test -c playwright.login.config.js tests/login/auth-cooldown.spec.js tests/login/security.spec.js`核对真实请求与页面；新专项用`AUTH_COOLDOWN_BROWSER=webkit`切换浏览器，`AWARD_TEST_BASE=/`与默认`/lesson/`分别核对。服务器剩余时间、错误设备日期、到期无自动POST、账号切换、来源限制与大小写修正必须实测。新专项自动进入账号CI清单，原安全用例保留；生产演练只用隔离身份。管理员改名核对密码散列、学习记录、原证及领取日期原字节保留，旧用户名与旧管理会话失效。
+
 ## 2026-10-25提交检查与CI复验
 
 统一最新版入口的静态旧预期已按下节修正，保留离线已打开页作答、联网恢复原草稿/位置/图片与原证的断言。CI的加载失败文案检查同步为“已获得的证书会保留。”；正常满星恢复流程等待实际可关闭状态后再按Esc，不把提前输入专项改成自动关闭。

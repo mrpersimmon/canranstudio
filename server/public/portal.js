@@ -45,7 +45,7 @@
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
-    const result = await response.json(); if (!response.ok) { if(adminMode && state && response.status===401 && endpoint!=='admin/login'){state=null;document.querySelectorAll('.teacher-dialog,.admin-save-dialog').forEach(d=>d.close());login(true,'登录已失效，请重新登录；若账号被禁用，请联系管理员。');} throw Object.assign(new Error(result.error), { status:response.status }); } return result;}finally{clearTimeout(timeout);}
+    const result = await response.json(); if (!response.ok) { if(adminMode && state && response.status===401 && endpoint!=='admin/login'){state=null;document.querySelectorAll('.teacher-dialog,.admin-save-dialog').forEach(d=>d.close());login(true,'登录已失效，请重新登录；若账号被禁用，请联系管理员。');} throw Object.assign(new Error(result.error), { status:response.status, cooldown:response.status===429?result.cooldown:null }); } return result;}finally{clearTimeout(timeout);}
   }
   async function worker() { try {
     const api = navigator.serviceWorker;
@@ -63,10 +63,42 @@
   function login(admin = false, message = '') {
     app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号或老师工号</label><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required><label for="password">管理员密码 / 老师密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
     document.getElementById('forgot')?.addEventListener('click',()=>status('请联系老师：学号可以查回，密码可以重置，学习成果会保留。'));
-    document.getElementById('loginForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{
-      const form=new FormData(event.target);const button=event.target.querySelector('button');button.disabled=true;
-      try {await api(admin?'admin/login':'login',Object.fromEntries(form));if(admin)await loadAdmin();else{changed();await home();}}finally{button.disabled=false;}
-    });};
+    const form=document.getElementById('loginForm'),button=form.querySelector('button'),note=form.querySelector('[role=status]');
+    const account=form.querySelector(admin?'[name=username]':'[name=studentNumber]');
+    // The server owns the deadline. Elapsed time uses a monotonic clock, so a
+    // wrong or adjusted device clock cannot turn fifteen minutes into hours.
+    const identity=()=>admin?account.value:account.value.trim().toLowerCase();let pending=false,cooldown=null,timer=null;
+    function clearCooldown(){clearInterval(timer);timer=null;cooldown=null;note.classList.remove('auth-cooldown');button.disabled=pending;}
+    function showCooldown(error,submitted){
+      const value=error.cooldown,remaining=value?.retryAt-value?.serverTime;
+      if(error.status!==429||!Number.isFinite(remaining)||remaining<=0||remaining>900000||!['account','source','service'].includes(value.scope))return false;
+      if(!form.isConnected||(value.scope==='account'&&identity()!==submitted))return false;
+      clearCooldown();cooldown={identity:submitted,scope:value.scope,until:performance.now()+remaining};
+      const heading=value.scope==='account'?'这个账号暂时需要等待':value.scope==='source'?'当前网络的登录尝试较多':'登录服务暂时需要等待';
+      const when=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(value.retryAt));
+      note.classList.add('auth-cooldown');note.replaceChildren();
+      const title=document.createElement('strong');title.textContent=heading;
+      const countdown=document.createElement('span');countdown.setAttribute('role','timer');countdown.setAttribute('aria-live','off');
+      const deadline=document.createElement('span');deadline.textContent='解除时间：'+when+'（北京时间）';
+      const help=document.createElement('span');help.textContent='到期后请再次点击登录。反复尝试不会提前解除。';
+      note.append(title,countdown,deadline,help);
+      function update(){
+        if(!form.isConnected){clearCooldown();return;}
+        const seconds=Math.max(0,Math.ceil((cooldown.until-performance.now())/1000));
+        if(!seconds){clearCooldown();note.textContent='等待已结束，可以再次点击登录。';return;}
+        countdown.textContent='剩余 '+String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');button.disabled=true;
+      }
+      update();if(cooldown)timer=setInterval(update,1000);return true;
+    }
+    account.addEventListener('input',()=>{if(cooldown?.scope==='account'&&identity()!==cooldown.identity){clearCooldown();note.textContent='已切换账号，可以登录；原账号的等待时间保持不变。';}});
+    form.onsubmit=event=>{event.preventDefault();if(pending||cooldown)return;
+      pending=true;button.disabled=true;const submitted=identity();
+      attempt(async()=>{
+        try{await api(admin?'admin/login':'login',Object.fromEntries(new FormData(form)));if(admin)await loadAdmin();else{changed();await home();}}
+        catch(error){if(!showCooldown(error,submitted))throw error;}
+        finally{pending=false;button.disabled=!!cooldown;}
+      });
+    };
   }
   function passwordForm(who, required) {
     app.innerHTML=`<section class="login panel">${logo}<h1>${required?'设置你的新密码':'修改密码'}</h1><p>${e(who.student.name)} · <span class="student-number">${e(who.student.studentNumber)}</span></p><p class="muted">${required?'初始密码已使用，请在 15 分钟内设置新密码。关闭页面后可在原浏览器继续；超时或切换学生后，请联系老师重置。':''}使用 8–64 位字符，包含字母和数字。</p><form id="passwordForm" method="post">${required?'':'<label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" maxlength="128" required>'}<label for="newPassword">新密码</label><input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><label for="confirmPassword">再输一次新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><button class="primary">${required?'保存新密码，开始学习':'保存新密码'}</button><p role="status" aria-live="polite"></p></form><button id="cancelPassword" class="compact">${required?'切换学生':'返回课程'}</button></section>`;

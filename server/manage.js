@@ -2,7 +2,23 @@
 const fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto');
 const {openStore}=require('./store');
 async function main(){
- const [command,argument]=process.argv.slice(2),directory=path.resolve(process.env.LESSON_DATA_DIR||'.data/lesson-access');
+ const [command,argument,nextUsername]=process.argv.slice(2),directory=path.resolve(process.env.LESSON_DATA_DIR||'.data/lesson-access');
+ if(command==='rename-admin'){
+  if(!argument||!nextUsername||process.argv.length!==5)throw Error('用法：先备份，停服务后 node server/manage.js rename-admin <当前用户名> <新用户名>；保留密码');
+  const store=openStore(directory),file=path.join(directory,'admin-first-login.txt'),temporary=file+'.rename-'+crypto.randomUUID();let prepared=false,renamed=false;
+  try{
+   const prior=await fs.readFile(file,'utf8').catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+   if(prior!==null){
+    if(!prior.startsWith('管理员账号：'+argument+'\n')&&!prior.startsWith('管理员账号：'+argument+'\r\n'))throw Error('私有账号单的用户名不匹配，请先核对；未执行改名');
+    const content=prior.replace(/^管理员账号：[^\r\n]+/,'管理员账号：'+nextUsername);
+    await fs.writeFile(temporary,content,{mode:0o600,flag:'wx'});prepared=true;await fs.chmod(temporary,0o600);
+   }
+   renamed=store.renameAdmin(argument,nextUsername);
+   if(prepared)await fs.rename(temporary,file);
+   console.log(renamed?'管理员用户名已更新，密码保持不变；请使用新用户名重新登录。':'管理员用户名未改变。');
+  }catch(error){if(renamed)throw Error('管理员用户名已更新，但私有账号单更新失败，请核对该文件；密码未改变。');throw error;}
+  finally{if(prepared)await fs.rm(temporary,{force:true});store.close();}return;
+ }
  if(command==='system-upgrade'){
   if(!argument)throw Error('用法：停服务后 node server/manage.js system-upgrade <新的独立备份目录>');
   const store=openStore(directory);
@@ -36,6 +52,6 @@ async function main(){
   if((await fs.readdir(directory).catch(e=>{if(e.code==='ENOENT')return [];throw e;})).length)throw Error('恢复目标必须为空，请使用新的 LESSON_DATA_DIR；不覆盖已有学生记录。');
   await fs.mkdir(directory,{recursive:true,mode:0o700});for(const file of ['learning.sqlite','card-key']){await fs.copyFile(path.join(source,file),path.join(directory,file));await fs.chmod(path.join(directory,file),0o600);}const store=openStore(directory);store.checkIntegrity();store.close();console.log('恢复完成；启动服务后复查班级、学习卡和学习成果。');return;
  }
- throw Error('命令：bootstrap | reset-admin | backup <新目录> | restore <备份目录> | system-upgrade <新备份目录>');
+ throw Error('命令：bootstrap | reset-admin | rename-admin <当前用户名> <新用户名> | backup <新目录> | restore <备份目录> | system-upgrade <新备份目录>');
 }
 main().catch(error=>{console.error(error.message);process.exitCode=1;});

@@ -349,7 +349,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       response.writeHead(200).end(request.method === 'HEAD' ? undefined : item.body);
     } catch (error) {
       if (!response.headersSent && error.status === 429 && error.retryAfter) response.setHeader('Retry-After', String(error.retryAfter));
-      if (!response.headersSent) json(response, { error: error.status ? error.message : '暂时无法完成，请重试' }, error.status || 500); else response.end();
+      const cooldown = error.status === 429 && Number.isFinite(error.retryAt) && Number.isFinite(error.serverTime)
+        ? { retryAt: error.retryAt, serverTime: error.serverTime, scope: error.scope } : null;
+      if (!response.headersSent) json(response, { error: error.status ? error.message : '暂时无法完成，请重试', ...(cooldown ? { cooldown } : {}) }, error.status || 500); else response.end();
       if (!error.status) console.error('Lesson request failed:', error.code || error.name);
     }
   });

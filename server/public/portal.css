@@ -21,6 +21,9 @@
 
 /* Class settings keep renaming and course access as separate saves. */
 
+.auth-cooldown{display:grid;gap:8px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--paper);font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.auth-cooldown strong{font-size:16px}.auth-cooldown [role=timer]{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink)}
+
 .class-name-fields{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
 .class-courses-title{font-size:20px;margin:24px 0 0;padding-top:24px;border-top:1px solid var(--line)}
 .course-selection-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:14px}
