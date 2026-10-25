@@ -17,11 +17,12 @@ function createAuthThrottle(db) {
     try { const result = action(); db.exec('COMMIT'); return result; }
     catch (error) { db.exec('ROLLBACK'); throw error; }
   }
-  const blocked = (until, now, scope = 'account') => ({
-    status: 429, retryAfter: Math.max(1, Math.ceil((until - now) / 1000)),
-    retryAt: until, serverTime: now, scope,
-    message: '尝试有些频繁，请在等待结束后重试'
-  });
+  const blocked = (until, now, scope = 'account') => {
+    const retryAfter = Math.max(1, Math.ceil((until - now) / 1000));
+    return { status: 429, retryAfter, retryAt: until, serverTime: now, scope,
+      // Older clients and password-change forms also retain a useful duration.
+      message: '尝试有些频繁，请稍后重试（剩余 ' + retryAfter + ' 秒）' };
+  };
   function increment(key, duration, limit, now) {
     const old = get.get(key);
     const row = old?.expires > now ? old : { count: 0, expires: now + duration };

@@ -83,3 +83,20 @@ test('管理员修正大小写后作为另一登录标识处理，不被错误�
     await page.getByRole('button',{name:'登录管理页'}).click();await expect(page.getByRole('button',{name:'退出管理'})).toBeVisible();
   }finally{await context.close();await f.close();}
 });
+
+test('设备休眠后墙上时钟已过截止点，按钮及时恢复且仍由服务器决定能否登录',async({browser})=>{
+  const f=await fixture(),context=await browser.newContext();
+  try{
+    const page=await context.newPage();await page.goto(f.origin+base+'admin/');
+    await page.getByLabel('管理员账号或老师工号').fill('test-owner');await page.getByLabel('管理员密码 / 老师密码').fill(password);
+    await f.lock('admin','test-owner');await page.clock.install();
+    await page.getByRole('button',{name:'登录管理页'}).click();await expect(page.getByRole('timer')).toBeVisible();
+    // Some devices suspend their monotonic timer during sleep. Advance wall
+    // time alone; the real backend still rejects an unexpired account.
+    await page.clock.setSystemTime(new Date(Date.now()+3600000));await page.clock.runFor(1000);
+    await expect(page.getByRole('button',{name:'登录管理页'})).toBeEnabled();
+    await page.getByRole('button',{name:'登录管理页'}).click();await expect(page.getByRole('timer')).toBeVisible();await expect(page.getByRole('button',{name:'登录管理页'})).toBeDisabled();
+    f.deadline('admin','test-owner',-1);await page.clock.setSystemTime(new Date(Date.now()+7200000));await page.clock.runFor(1000);
+    await page.getByRole('button',{name:'登录管理页'}).click();await expect(page.getByRole('button',{name:'退出管理'})).toBeVisible();
+  }finally{await context.close();await f.close();}
+});

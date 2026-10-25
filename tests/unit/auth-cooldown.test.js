@@ -13,7 +13,7 @@ test('denials describe the original deadline and server time without extending t
       assert.throws(()=>rate.check('192.0.2.2','admin','test-admin',start+elapsed),error=>{
         assert.equal(error.status,429);assert.equal(error.retryAt,start+900000);assert.equal(error.serverTime,start+elapsed);
         assert.equal(error.retryAfter,Math.ceil((900000-elapsed)/1000));assert.equal(error.scope,'account');
-        assert.ok(!error.message.includes('十五分钟'));return true;
+        assert.ok(!error.message.includes('十五分钟'));assert.ok(error.message.includes('剩余 '+error.retryAfter+' 秒'));return true;
       });
     }
     assert.doesNotThrow(()=>rate.check('192.0.2.2','admin','test-admin',start+900000));

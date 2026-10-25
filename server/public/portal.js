@@ -65,15 +65,15 @@
     document.getElementById('forgot')?.addEventListener('click',()=>status('请联系老师：学号可以查回，密码可以重置，学习成果会保留。'));
     const form=document.getElementById('loginForm'),button=form.querySelector('button'),note=form.querySelector('[role=status]');
     const account=form.querySelector(admin?'[name=username]':'[name=studentNumber]');
-    // The server owns the deadline. Elapsed time uses a monotonic clock, so a
-    // wrong or adjusted device clock cannot turn fifteen minutes into hours.
-    const identity=()=>admin?account.value:account.value.trim().toLowerCase();let pending=false,cooldown=null,timer=null;
-    function clearCooldown(){clearInterval(timer);timer=null;cooldown=null;note.classList.remove('auth-cooldown');button.disabled=pending;}
+    // The server owns the deadline. Monotonic time prevents a backward clock
+    // change extending the wait; wall elapsed time covers clocks paused in sleep.
+    const identity=()=>admin?account.value:account.value.trim().toLowerCase();let pending=false,cooldown=null,timer=null,refreshCooldown=null;
+    function clearCooldown(){clearInterval(timer);timer=null;cooldown=null;if(refreshCooldown)document.removeEventListener('visibilitychange',refreshCooldown);refreshCooldown=null;note.classList.remove('auth-cooldown');button.disabled=pending;}
     function showCooldown(error,submitted){
       const value=error.cooldown,remaining=value?.retryAt-value?.serverTime;
       if(error.status!==429||!Number.isFinite(remaining)||remaining<=0||remaining>900000||!['account','source','service'].includes(value.scope))return false;
       if(!form.isConnected||(value.scope==='account'&&identity()!==submitted))return false;
-      clearCooldown();cooldown={identity:submitted,scope:value.scope,until:performance.now()+remaining};
+      clearCooldown();cooldown={identity:submitted,scope:value.scope,remaining,started:performance.now(),wallStarted:Date.now()};
       const heading=value.scope==='account'?'这个账号暂时需要等待':value.scope==='source'?'当前网络的登录尝试较多':'登录服务暂时需要等待';
       const when=new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date(value.retryAt));
       note.classList.add('auth-cooldown');note.replaceChildren();
@@ -84,11 +84,12 @@
       note.append(title,countdown,deadline,help);
       function update(){
         if(!form.isConnected){clearCooldown();return;}
-        const seconds=Math.max(0,Math.ceil((cooldown.until-performance.now())/1000));
+        const elapsed=Math.max(performance.now()-cooldown.started,Date.now()-cooldown.wallStarted);
+        const seconds=Math.max(0,Math.ceil((cooldown.remaining-elapsed)/1000));
         if(!seconds){clearCooldown();note.textContent='等待已结束，可以再次点击登录。';return;}
         countdown.textContent='剩余 '+String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');button.disabled=true;
       }
-      update();if(cooldown)timer=setInterval(update,1000);return true;
+      update();if(cooldown){timer=setInterval(update,1000);refreshCooldown=update;document.addEventListener('visibilitychange',refreshCooldown);}return true;
     }
     account.addEventListener('input',()=>{if(cooldown?.scope==='account'&&identity()!==cooldown.identity){clearCooldown();note.textContent='已切换账号，可以登录；原账号的等待时间保持不变。';}});
     form.onsubmit=event=>{event.preventDefault();if(pending||cooldown)return;
