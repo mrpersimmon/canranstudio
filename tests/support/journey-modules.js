@@ -7,6 +7,26 @@ const distance=(a,b)=>Math.hypot(Math.max(0,a.left-b.right,b.left-a.right),Math.
 // character finishing decode. Failure of one character must stay local.
 async function waitForModulesReady(page,ids){
  const chapter=await page.getByLabel('旅程地图范围',{exact:true}).inputValue();
+ // A resize usually leaves the same decoded scene ready. Check every existing
+ // readiness condition in one DOM snapshot instead of repeatedly recording
+ // locator snapshots for thousands of settled viewport samples. If anything
+ // is incomplete, keep the original waits, deadlines and diagnostics below.
+ const ready=await page.evaluate(({chapter,ids})=>{
+  const scenes=[...document.querySelectorAll('.journey-map-scene')];
+  const modules=[...document.querySelectorAll('[data-module-course]')];
+  if(scenes.length!==1||scenes[0].dataset.chapter!==chapter||scenes[0].dataset.composition!=='modules')return false;
+  if(ids?(modules.length!==ids.length||modules.some((node,index)=>node.dataset.moduleCourse!==ids[index])):modules.length===0)return false;
+  const terrain=[...document.querySelectorAll('[data-route-terrain]')];
+  if(ids?.length===0)return terrain.length===0&&document.querySelectorAll('.journey-world-passage').length===0;
+  const worlds=[...document.querySelectorAll('[data-route-world]')];
+  const images=modules.flatMap(node=>[...node.querySelectorAll('[data-module-ground],[data-story-course]')]);
+  return !!(worlds.length===1&&worlds[0].dataset.worldState==='ready'&&
+   terrain.length===1&&terrain[0].complete&&terrain[0].naturalWidth>0&&
+   modules.every(node=>node.dataset.artState==='ready')&&
+   images.length>0&&images.every(img=>img.complete&&img.naturalWidth>0)&&
+   modules.every(node=>!node.querySelector('.journey-module-status')));
+ },{chapter,ids});
+ if(ready)return;
  await expect(page.locator('.journey-map-scene')).toHaveCount(1);
  await expect(page.locator('.journey-map-scene')).toHaveAttribute('data-chapter',chapter);
  await expect(page.locator('.journey-map-scene')).toHaveAttribute('data-composition','modules');
