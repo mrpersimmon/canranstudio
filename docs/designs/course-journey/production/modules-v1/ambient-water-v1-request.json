@@ -1,0 +1,18 @@
+{
+  "asset": "ambient-water-v1",
+  "tool": "built-in image_gen",
+  "targetSize": [
+    1024,
+    1536
+  ],
+  "transparent_background": false,
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp"
+  ],
+  "referenceRoles": [
+    "environment palette/style only",
+    "environment palette/style only"
+  ],
+  "prompt": "Use case: illustration-story. Create an opaque PORTRAIT ambient background for an existing children's storybook journey game, target 1024 x 1536. The two references show the approved art direction ONLY. Preserve the clear teal/turquoise sea, soft warm upper-left sunshine, coral/cream architecture, cheerful rounded hand-painted environment volumes and gentle painterly texture.\nMajor change in composition: this is ONLY an expandable BACKDROP behind separate floating lesson-island modules. It must have NO main platform, NO stairs, NO bridge, NO winding path, NO stepping stones, NO separate grounded objects in the center, NO course entry objects, NO figures, NO animals and NO UI.\nRender an expansive calm turquoise sea taking the central 70 percent of the entire image width, from top to bottom. Low contrast fine water texture, softly varying turquoise/cyan tones, broad subtle sun haze. Near the distant very top edge only, hazy small coral city arch walls and tiny teal treetops may suggest the established world, with very soft far blue hills. Along the extreme left and right outermost 10–15 percent only, a few soft cropped teal-green leafy shrubs, coral wall fragments and warm cream rock edges can frame the view, subtle and sparse. Do not create a large arch or a close architectural object spanning the center. Keep center free so separate opaque islands remain easy to read. Lower half especially open soft water. No strong focal point, no detailed foreground platform.\nSoft top and bottom transitions suitable for cropping across mobile/tablet/desktop. This is NOT a route map and NOT a screenshot: clean ambient environment illustration only. No text, numbers, labels, lesson markers, stars, medals, bright sparkle UI or watermark. Opaque background, full bleed."
+}

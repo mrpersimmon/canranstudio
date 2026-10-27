@@ -1,0 +1,31 @@
+/* The keepsake's existing star asset, gold palette, 4.8s sheen and stagger are
+   reused for earned progress. Selection never controls reward light. */
+.journey-star{position:relative;display:inline-flex;flex:none;isolation:isolate;width:var(--journey-star-size);height:var(--journey-star-size)}
+.journey-star>img,.journey-star>svg{display:block;position:relative;z-index:1;width:100%;height:100%;object-fit:contain}
+.journey-star[data-earned=true]>img,.journey-star[data-earned=true]>svg{color:#efaf18;filter:brightness(1.13) saturate(1.18) drop-shadow(0 0 3px #ffd561b3)}
+.journey-star[data-earned=true]::before{content:'';position:absolute;inset:-20%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#ffd8655c,transparent 69%)}
+.journey-star[data-earned=true]::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.3;background:linear-gradient(112deg,transparent 35%,#fff7c680 43%,#fffdf5ed 48%,#ffeaa580 53%,transparent 63%) 50% 0/260% 100%;mask:var(--journey-earned-star) center/contain no-repeat;-webkit-mask:var(--journey-earned-star) center/contain no-repeat}
+.journey-star-glint{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.6}
+.journey-star-glint::before,.journey-star-glint::after{content:'';position:absolute;background:#fffce8;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffda75)}
+.journey-star-glint::before{width:32%;height:42%;top:3%;right:10%}
+.journey-star-glint::after{width:20%;height:27%;bottom:7%;left:11%}
+.journey-stars[data-animate=true] .journey-star[data-earned=true]::after{animation:journey-star-sheen 4.8s ease-in-out infinite;animation-delay:calc(var(--star-order) * -.32s)}
+.journey-stars[data-animate=true] .journey-star-glint{animation:journey-star-twinkle 4.8s ease-in-out infinite;animation-delay:calc(var(--star-order) * -.32s)}
+@keyframes journey-star-sheen{0%,8%{opacity:0;background-position:180% 0}20%{opacity:.85}42%{opacity:0;background-position:-80% 0}100%{opacity:0;background-position:-80% 0}}
+@keyframes journey-star-twinkle{0%,5%,50%,100%{opacity:.22;transform:scale(.8)}23%{opacity:1;transform:scale(1.14)}36%{opacity:.6;transform:scale(1)}}
+
+/* Full completion leaves a quiet collectible. The sprite-clipped sheen only
+   plays once for a newly seen completion or an explicit medal replay. */
+.journey-story-sheen{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat;background:linear-gradient(110deg,transparent 30%,#ffcf5e55 40%,#fff0a7ed 48%,#ffdb6e80 55%,transparent 66%) 180% 0/260% 100%}
+.journey-home .journey-completion-medal{position:absolute;right:calc(100% - 2px);top:50%;transform:translateY(-50%);width:48px;height:48px;min-height:44px;display:flex;align-items:center;justify-content:center;pointer-events:auto;cursor:pointer;border-radius:50%;-webkit-tap-highlight-color:transparent}
+.journey-home .journey-completion-medal:active{transform:translateY(-50%)}
+.journey-medal-face{position:relative;display:block;isolation:isolate;width:48px;height:48px;pointer-events:none}
+.journey-completion-medal img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;filter:brightness(1.13) saturate(1.18) drop-shadow(0 0 3px #ffd561b3) drop-shadow(0 2px 2px #8c5e2630)}
+.journey-medal-face::before{content:'';position:absolute;inset:2%;z-index:-1;border-radius:50%;background:radial-gradient(circle,#ffd8656b,transparent 72%)}
+.journey-medal-face::after{content:'';position:absolute;inset:0;z-index:2;opacity:.3;pointer-events:none;background:linear-gradient(112deg,transparent 35%,#fff7c680 43%,#fffdf5ed 48%,#ffeaa580 53%,transparent 63%) 50% 0/260% 100%;mask:var(--journey-medal-image) center/contain no-repeat;-webkit-mask:var(--journey-medal-image) center/contain no-repeat;animation:journey-star-sheen 4.8s ease-in-out infinite;animation-delay:var(--medal-delay)}
+.journey-medal-glint{inset:13%;animation:journey-star-twinkle 4.8s ease-in-out infinite;animation-delay:var(--medal-delay)}
+.journey-medal-fallback{font-size:11px;line-height:1;background:#f9dfa0;color:#744819;border:1px solid #d6aa4f;border-radius:50%;padding:10px 5px}
+@media not all and (min-width:1024px){.journey-home .journey-completion-medal{width:44px;height:44px}.journey-medal-face{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){
+  .journey-home .journey-star::after,.journey-home .journey-star-glint,.journey-home .journey-medal-face::after{animation:none!important}
+}

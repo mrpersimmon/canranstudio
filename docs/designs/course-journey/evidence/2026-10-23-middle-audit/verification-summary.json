@@ -1,0 +1,63 @@
+{
+  "run": "2026-10-23-middle-audit",
+  "tool": "CUA in-app Chromium",
+  "motion": "reduced during geometry checks",
+  "state": "existing local demo five-star collection",
+  "views": 336,
+  "chapters": 24,
+  "courses": 72,
+  "viewports": [
+    [
+      320,
+      568
+    ],
+    [
+      361,
+      801
+    ],
+    [
+      375,
+      812
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      495,
+      1188
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1440,
+      900
+    ]
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "course-journey/overlay-layout.js": "1f04dfa3e1dec2f31add140f415c3b1b8f4c5afe80fe026de1d1cbb289f726ab",
+    "course-journey/App.jsx": "51bd2a62396387ee09c88216b4bbe93e1a6de798a5d398e80024a28a6aa34155",
+    "course-journey/styles.css": "720da437070069a9dc0a55e55db9301061ebaca3a161fe359be3ee2ae6b220cf",
+    "course-journey/use-map-layout.js": "2dbc081aa032b95dd03e6f4181b696ced30a3786a2f4034c827e27ecefd80dd5"
+  },
+  "unitTests": 11,
+  "layoutMatrix": 59,
+  "layoutChapters": 24,
+  "buildLoginCourses": 72,
+  "normalMotionSpotCheck": {
+    "course": "unit3-4",
+    "during": "matrix(0.996741, 0, 0, 0.996741, 0, 0)",
+    "after": "none",
+    "internalScroll": [
+      0,
+      0
+    ]
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "method": "Real image URLs temporarily replaced with nonexistent same-origin assets; native error handler and actual retry UI exercised. Original sources restored by retry.",
+  "discardedAttempt": "Initial raw interception produced Invalid InterceptionId; not counted as successful fault validation.",
+  "missingResponses": [
+    {
+      "url": "http://127.0.0.1:4187/assets/course-journey/modules-v5/qa-missing-gallery.webp",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:4187/assets/course-journey/modules-v5/qa-missing-person.webp",
+      "status": 403
+    }
+  ],
+  "missingGround": {
+    "buttons": 3,
+    "states": [
+      [
+        "unit13-14",
+        "error"
+      ],
+      [
+        "unit15-16",
+        "error"
+      ],
+      [
+        "unit17-18",
+        "error"
+      ]
+    ]
+  },
+  "groundBack": {
+    "source": "/assets/course-journey/modules-v5/visits-gallery-v1.webp?retry=1",
+    "states": [
+      [
+        "unit13-14",
+        "ready"
+      ],
+      [
+        "unit15-16",
+        "ready"
+      ],
+      [
+        "unit17-18",
+        "ready"
+      ]
+    ]
+  },
+  "missingPerson": {
+    "buttons": 3,
+    "states": [
+      [
+        "unit19-20",
+        "ready"
+      ],
+      [
+        "unit21-22",
+        "ready"
+      ],
+      [
+        "unit23-24",
+        "error"
+      ]
+    ]
+  },
+  "personBack": {
+    "source": "/assets/course-journey/shelf-glasses-pair-v1.webp?retry=1",
+    "states": [
+      [
+        "unit19-20",
+        "ready"
+      ],
+      [
+        "unit21-22",
+        "ready"
+      ],
+      [
+        "unit23-24",
+        "ready"
+      ]
+    ]
+  }
+}

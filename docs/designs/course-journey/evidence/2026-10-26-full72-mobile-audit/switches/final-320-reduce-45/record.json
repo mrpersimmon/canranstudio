@@ -1,0 +1,303 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "from": "woodland",
+  "to": "news",
+  "before": {
+    "chapter": "woodland",
+    "dock": {
+      "bottom": 656,
+      "height": 119.390625,
+      "left": 0,
+      "right": 320,
+      "top": 536.609375,
+      "width": 320,
+      "x": 0,
+      "y": 536.609375
+    },
+    "height": 720,
+    "selected": "unit139-140",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 630.296875,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 562.296875,
+        "width": 48,
+        "x": 11,
+        "y": 562.296875
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit139-140-landmark-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1164,
+      "height": 960,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "after": {
+    "chapter": "news",
+    "dock": {
+      "bottom": 656,
+      "height": 142.78125,
+      "left": 0,
+      "right": 320,
+      "top": 513.21875,
+      "width": 320,
+      "x": 0,
+      "y": 513.21875
+    },
+    "height": 720,
+    "selected": "unit133-134",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 618.609375,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 550.609375,
+        "width": 48,
+        "x": 11,
+        "y": 550.609375
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1164,
+      "height": 960,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 61867,
+      "sha256": "a88535f0f9e0f50813f347e03099f50608d8429f95d021bfc85c46c3fc587779",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030627.810425,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984590.141448
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 60039,
+      "sha256": "107872a57699d465c5296539a6e5fef5cda8eb1793649f7c31b5e85ba0702d3c",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030627.86459,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984590.195613
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 58329,
+      "sha256": "e07de45505f96896fe1a894b1c64f06b39038bfe9593ce7ae6e899f31346dd67",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030627.881288,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984590.212311
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "woodland",
+      "dock": {
+        "bottom": 656,
+        "height": 119.390625,
+        "left": 0,
+        "right": 320,
+        "top": 536.609375,
+        "width": 320,
+        "x": 0,
+        "y": 536.609375
+      },
+      "height": 720,
+      "selected": "unit139-140",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 630.296875,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 562.296875,
+          "width": 48,
+          "x": 11,
+          "y": 562.296875
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit139-140-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1164,
+        "height": 960,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 656,
+        "height": 142.78125,
+        "left": 0,
+        "right": 320,
+        "top": 513.21875,
+        "width": 320,
+        "x": 0,
+        "y": 513.21875
+      },
+      "height": 720,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 618.609375,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 550.609375,
+          "width": 48,
+          "x": 11,
+          "y": 550.609375
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1164,
+        "height": 960,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 656,
+        "height": 142.78125,
+        "left": 0,
+        "right": 320,
+        "top": 513.21875,
+        "width": 320,
+        "x": 0,
+        "y": 513.21875
+      },
+      "height": 720,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 618.609375,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 550.609375,
+          "width": 48,
+          "x": 11,
+          "y": 550.609375
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1164,
+        "height": 960,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      284,
+      36,
+      492
+    ],
+    [
+      284,
+      284,
+      312,
+      492
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 63.303456959706956,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0.07071314102564102,
+      "toNew": 63.30016597985348,
+      "minimum": 0.07071314102564102
+    },
+    {
+      "index": 2,
+      "toOld": 63.303456959706956,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

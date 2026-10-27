@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T20:02:52.785Z",
+  "job": "unit105-106-clean",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit105-106-clean.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-6062f36a-d61a-4ae9-a7fc-0cdeb6823775.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "assets/course-journey/unit105-106-landmark-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/unit105-106-landmark-v2.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1136086,
+      "sha256": "ad4e2525f30ac800cc21a21ac6a9ffbbb0294bb7564298931c30c61e7c5dfc7a",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/unit105-106-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 193498,
+      "sha256": "a87d36f75d485712c22a5edc3d9b1079553552840af596e4cc7579cdd5de5e4e",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 812212,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          22,
+          1237,
+          1205
+        ],
+        "normalized": [
+          0,
+          0.017543859649122806,
+          0.9864433811802232,
+          0.9609250398724083
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          96,
+          82,
+          1196,
+          1195
+        ],
+        "normalized": [
+          0.07655502392344497,
+          0.06539074960127592,
+          0.9537480063795853,
+          0.9529505582137161
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          97,
+          83,
+          1195,
+          1195
+        ],
+        "normalized": [
+          0.0773524720893142,
+          0.06618819776714513,
+          0.9529505582137161,
+          0.9529505582137161
+        ]
+      }
+    ]
+  }
+}

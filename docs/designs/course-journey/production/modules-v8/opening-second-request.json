@@ -1,0 +1,11 @@
+{
+  "id": "opening",
+  "name": "opening-mobile-clearance-v2",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v8/opening-mobile-clearance-v1.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/evidence/2026-10-26-full72-mobile-audit/candidate-1/phone-unit1-2.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/evidence/2026-10-26-full72-mobile-audit/candidate-1/phone-unit5-6.png"
+  ],
+  "transparent_background": false,
+  "prompt": "Use case: precise-object-edit. Image1 is the ONLY edit target: the existing 724x2172 portrait garden map. Images2 and3 are diagnostic screenshots only, showing where the separate website buttons are. Do NOT paint people or any UI from the diagnostic screenshots into the output. Preserve the target's exact camera, warm illustration style, coral bridges, teal water, floral gate, violet kiosk and little school. Change ONLY the central foreground pavement at the three landings. The previous correction still has water, the front bridge face, cypress trees and flowering planters behind the buttons, especially the first and last stop. In the 724x2172 target, these THREE rectangles MUST be completely traversable cream pavement, seamlessly continuing each landing: x=166..558,y=440..715; x=166..558,y=1164..1439; x=166..558,y=1888..2164. No water, vertical arch face, plants, cypress trees, parapet, steps or railings inside any of those rectangles. Move the lower front edge of each landing down past its rectangle; move intervening cypresses and raised flower beds entirely to the outer left or right. Keep the level standing floor around y=405,1129,1853 unchanged. Keep the rich bridge/water/flowers at outer edges, with natural S-shaped connections between the widened landing pavements. The center of each specified rectangle must be actual existing-style stone ground, not an added platform, panel, floating overlay or blank white box. Preserve the original full 724x2172 1:3 canvas; no resizing/crop. No people, signs, letters, stars, badges, buttons, UI, marks, watermark or framing lines. Return only the corrected environment."
+}

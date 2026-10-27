@@ -21,7 +21,7 @@ test('课程入口保持班级授权：新课可单独开放', async ({ page, br
   try {
     await expect(learner.page.locator('.course')).toHaveCount(1);
     await expect(learner.page.locator('.course')).toContainText('车站里的时间谜题');
-    await learner.page.getByRole('link', { name: /开始学习/ }).click();
+    await learner.page.locator('.course').getByRole('link', { name: /开始学习/ }).click();
     await expect(learner.page).toHaveURL(/unit95-96\/#learn\/words/);await ready(learner.page);
     await expect(learner.page.locator('.unit-word')).toHaveCount(6);
   } finally { await learner.context.close(); }

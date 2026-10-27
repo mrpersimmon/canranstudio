@@ -1,0 +1,1555 @@
+{
+  "version": "complete-journey-v1",
+  "completedDate": "2026-10-23",
+  "generator": "built-in image_gen.imagegen",
+  "actualCalls": 105,
+  "selectedRuntimeImages": 95,
+  "lockedFiles": {
+    "assets/course-journey/appointments-desktop-v1.png": "f24d4cab4a18bacb7872c8a1650fc04ede41fd02aca29cd8a76c8c4989fc2937",
+    "assets/course-journey/appointments-desktop-v1.webp": "23f0804897103c1fe46d722f9789bccb032614bb07209563227a506ef3f375c7",
+    "assets/course-journey/appointments-mobile-v1.png": "1b44760cd65c8d2d3fb75a9852167845e0a2f4e6ba992ed849b88c109083dd9a",
+    "assets/course-journey/appointments-mobile-v1.webp": "9b0c156817ac264848d3542affb1af60d3a7ea4d2b0546d9c54c241ef0ae188d",
+    "assets/course-journey/caring-desktop-v1.png": "b15d05ab84146d7fd49857e79c80f7af40818ea92fa26b1a012b2eae95971836",
+    "assets/course-journey/caring-desktop-v1.webp": "267df447aedba394f614482eed0f4ea97e8333a9b4c6c0452f2133ae47b4def8",
+    "assets/course-journey/caring-mobile-v1.png": "25cab5c8e75dc9be8eb325134141ee0550e0fb963719d45f41f0eeb7248e5e56",
+    "assets/course-journey/caring-mobile-v1.webp": "c70823a8ce9941abcfa84da0435cea2ea6a8b8ef6ec423489398199247aa3b88",
+    "assets/course-journey/choices-desktop-v1.png": "4cf15b773853b69193b2228345a26c2ce096b04a81093eeae3729dbc383a9672",
+    "assets/course-journey/choices-desktop-v1.webp": "7c17d8b4ccfb99ff2964d94ba0d3842437db1d35b4a80ba25430fa4c606a9866",
+    "assets/course-journey/choices-mobile-v1.png": "d7302f4af5e4f9106003c73617f6bd4d47d898225c8a0e98b4693d19f3f6b7a3",
+    "assets/course-journey/choices-mobile-v1.webp": "c21283fe31069f945c4a54edb31537f9c1c6d008a8f49b6830a101c1a58f7267",
+    "assets/course-journey/decisions-desktop-v1.png": "b1387141e4d682a396d1da635c5c4f1a43e9015961931e4abe9a8844acc5b4ed",
+    "assets/course-journey/decisions-desktop-v1.webp": "cad9e75c651c3a791f701d0cdaabdd0d96781536de381bd16c1bf73a74458961",
+    "assets/course-journey/decisions-mobile-v1.png": "42ec1c3f6f7cfdcc57813e680fc3e7c1512b4eaaa278e82f854c6bf2b80cbc18",
+    "assets/course-journey/decisions-mobile-v1.webp": "63268b8f4b6682aece778064975a20efd6b1510993fd1b324776f723ede67889",
+    "assets/course-journey/departures-desktop-v1.png": "fdc7cb25fba5164b71557d1960f52346e47526b66b24ced28ed436b7cfec7de1",
+    "assets/course-journey/departures-desktop-v1.webp": "a7f9bd427b323d5e0f2f26785bdcb52975a72e842329fafff3d0662d03b713c0",
+    "assets/course-journey/departures-mobile-v1.png": "73816992b2645b764b64143b7342a2f4412849dcbe8aae8a14bd8a613fb4fd11",
+    "assets/course-journey/departures-mobile-v1.webp": "45a959ae6a343bee3e4346647d12e825918113f2b6aa83b08ab88d4384e03660",
+    "assets/course-journey/everyday-desktop-v1.png": "a1b61cc10f3e9861ccd3b83b07a77a2a69af97c1162c148b124a47641eb020fb",
+    "assets/course-journey/everyday-desktop-v1.webp": "5d3e1cd5db3386405a24270351efe44f169c95b2e2b2bfb797ec6cc32e7d430b",
+    "assets/course-journey/everyday-mobile-v1.png": "79fdc43f816b54be24ae88deb2ec6b8c5ed10ef96620e2de78e7373568c98fcb",
+    "assets/course-journey/everyday-mobile-v1.webp": "36e4df0d23c307465d3d3b7ed06f7ab94638797e2f048d030945175b28013982",
+    "assets/course-journey/handbag-couple.png": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68",
+    "assets/course-journey/hospitality-desktop-v1.png": "7d3e5e07e071aebc4fd87221bebbf0a3c7bd54a207a9a72633e88815122a6a53",
+    "assets/course-journey/hospitality-desktop-v1.webp": "bfe31931717c69b846f61172bbbbc6f07e7f9fab724aaed2836ec56d89f8d156",
+    "assets/course-journey/hospitality-mobile-v1.png": "7f3fbc3051c8bd9be708a41dff9042a6653bf9fb864f778a2c858437266e8bae",
+    "assets/course-journey/hospitality-mobile-v1.webp": "93c282dd36c1e67c5a477c054e8c5aa1b3280d325a06c140f4af7d11ad4dede6",
+    "assets/course-journey/learning-desktop-v1.png": "86eec14e5ea7db009497c288d86e1ee6e64c0035815a6175c3f1e377d3347ca6",
+    "assets/course-journey/learning-desktop-v1.webp": "aa0e3f7c93b3ed280777a297f75960475b764f8e62a327c0bc50e63073e8308d",
+    "assets/course-journey/learning-mobile-v1.png": "c64540e2bfd5f013c9b8bcf46e73f94548ba8f44ae73e2b0eb5098d72ac2ae62",
+    "assets/course-journey/learning-mobile-v1.webp": "53f037f258482e87ce20e89641b0c87288d3d391937b071565511eb28211ff75",
+    "assets/course-journey/making-desktop-v1.png": "6bfa5f969142191d2417cd37fd3da9f57651a52c8976b816fbfcdd98c1aef1a9",
+    "assets/course-journey/making-desktop-v1.webp": "6c8c26cccf669b54e6ab25ceb74bff4fd532c0d96726b26b10a9c56fa912de70",
+    "assets/course-journey/making-mobile-v1.png": "bfddb9e0f0aab608052b827223f2ae69cc2c15ad3034398f314304cdabefb97a",
+    "assets/course-journey/making-mobile-v1.webp": "943a390028253f0835fba29fccff4e2f65a01b45ee44d560e82b61279c4ba83b",
+    "assets/course-journey/memories-desktop-v1.png": "dd1544f7083c9db827ff957d0ce8dd89a6bdb84785ed1fc413d6158b0af2976a",
+    "assets/course-journey/memories-desktop-v1.webp": "65d0173fd506be445c3d3fef555ddd0380241c1deefb8b645cdb702ba81d5662",
+    "assets/course-journey/memories-mobile-v1.png": "dbbdf6af0e000be631a69bde33b607fb05e163e27c04c07abd615a9bc3a22fac",
+    "assets/course-journey/memories-mobile-v1.webp": "32c3e5f1a0cfbf9ea871c72d047359a2ce09b4f4fa7384e29dfa70d3cfe2ec5d",
+    "assets/course-journey/messages-desktop-v1.png": "56283b987645cf9743f9d3f6209709c34491a9c94c64968c59b7e38bb1b41a16",
+    "assets/course-journey/messages-desktop-v1.webp": "be2cc28a8dbfb296cf67d2252ba43da340b036d78f34a9d553246ab72afe5e6e",
+    "assets/course-journey/messages-mobile-v1.png": "1e5210910cd809563c6ea9e0ef5a13f0fae0272331d434c168b93bd26e5523f7",
+    "assets/course-journey/messages-mobile-v1.webp": "66cdb31790671277a6a0338bcebf2521616f48b4f08fd43882a4a0a31af9b2b2",
+    "assets/course-journey/news-desktop-v1.png": "be5198bc7f000574f6ead8de49adb5447d594036d8a469403cbfd75218091554",
+    "assets/course-journey/news-desktop-v1.webp": "b5c55cf5c00eb5c75c7d0286cbfb34fc5268a471e357f696bb38916e1f298be0",
+    "assets/course-journey/news-mobile-v1.png": "8efd2109d3760556f75dec33a4776dcd74dd836c7e22c7cfa593c2c74224c020",
+    "assets/course-journey/news-mobile-v1.webp": "0da51ec77a9b3158633aadd9cc636d4ffc5b4d789310f2a5feeba3a11bddca59",
+    "assets/course-journey/outdoors-desktop-v1.png": "63063fe8932159ab079b8837e7bd7a23b168e13cfeca59c9627bcf6545c452c2",
+    "assets/course-journey/outdoors-desktop-v1.webp": "0359e1636eee7d577b11166d128d6ef2b82228dd6634d93ccefeb11fe97c8eb7",
+    "assets/course-journey/outdoors-mobile-v1.png": "e7c56d93901134927da3936e6b985152e816b31ceaa89f0744b7f741c08b7420",
+    "assets/course-journey/outdoors-mobile-v1.webp": "b8f87ee236f0925dbb17c7f9e7b4a5ec81ca5ef7f017814de0798b95d0b749f0",
+    "assets/course-journey/possibilities-desktop-v1.png": "154427d46fb4ced688b1cafa17f6cee87aef74fd350712392c682a12fae8fdab",
+    "assets/course-journey/possibilities-desktop-v1.webp": "0c6196aeb3bf3ea5b791c0f94c639f1b0041786da826b0b09c0f5444cbf070a3",
+    "assets/course-journey/possibilities-mobile-v1.png": "0ea7a0b66a011826b46fbe57046630c23631c688e7f6a9fce4980f9f85e319cf",
+    "assets/course-journey/possibilities-mobile-v1.webp": "eb7ba0381f4e9bfe39369169d87b01582cd91488715ee1736e0900791ecc3646",
+    "assets/course-journey/preparations-desktop-v1.png": "9af96f46050e1bac3c4a3744a298c1d0ebde483bc45d5910477f5fa6ef50065e",
+    "assets/course-journey/preparations-desktop-v1.webp": "292cded2c47cf1ecb5b43f23737e7446b6536315e2fbe7979126fafb465da4b5",
+    "assets/course-journey/preparations-mobile-v1.png": "be2a87d639ccadd9e1bf9b56255e099d17e078e41ccf6e6cc8205f3c3792ae33",
+    "assets/course-journey/preparations-mobile-v1.webp": "161a4708cf2a4a52764868715d19c2764fec287de47edb6e4f1f1c1cdbb31e30",
+    "assets/course-journey/seasons-desktop-v1.png": "bb00bda9d8472e42a3367a73d3bea2d0eaffdd2756dcaf7683927cfe453a70cc",
+    "assets/course-journey/seasons-desktop-v1.webp": "189bd59cbdb21f85e527547299a1e4d074accca8cd6bae5e6dd41326674d13ea",
+    "assets/course-journey/seasons-mobile-v1.png": "179c2c26e08ce5333643d9263b9d2a33c53a161730d8752b8b8dfe21db548188",
+    "assets/course-journey/seasons-mobile-v1.webp": "1563d76aee5f1a563f7e977d56444bd5d259e0f37fe516dbb9ab248ebf5746e2",
+    "assets/course-journey/stories-desktop-v1.png": "1627112be6eb92fa5fc2cd33338c1fa1e6a40ef909e9b6ae62ae6cab0eeca4d8",
+    "assets/course-journey/stories-desktop-v1.webp": "b7afd18a3504ee4db80b5786b01d04186ecf527f810e3fca6b454b9f8bbf8435",
+    "assets/course-journey/stories-mobile-v1.png": "0198bf5c7a9cf0c7958b143264ffac45fbc59b0b80b492e393c010e39088b84c",
+    "assets/course-journey/stories-mobile-v1.webp": "7441b6b4aa82255505696ef228efd3634f580523c5e848ba1b0b654ad9dc71ea",
+    "assets/course-journey/surprises-desktop-v1.png": "ba67d168546d024b09ccdb2afef90d011e4dc4937b055c2b2c4d1012df34a5a5",
+    "assets/course-journey/surprises-desktop-v1.webp": "a9380c2717d95a9dbd4f9b89a95f429f1be52c2bdf92c61177cc6e0577e98da1",
+    "assets/course-journey/surprises-mobile-v1.png": "b899771a285f7fb48bf59450a5681f0e0651b9539fd4346f8bf4ecfffcf3fba6",
+    "assets/course-journey/surprises-mobile-v1.webp": "d82cf49d1becdbdea94c6755366744281c66e90ef9c2c95b37c71eec23078ec6",
+    "assets/course-journey/unit101-102-landmark-v1.png": "5280f5fe0ac27afaeef4dc6a7a745a590901cc29b025ed9d26319c820d053c54",
+    "assets/course-journey/unit101-102-landmark-v1.webp": "a0e36e4025cf02b307153f2aecc53390afd5d30d41aa769451a932729e6be2f5",
+    "assets/course-journey/unit103-104-landmark-v1.png": "b81ab70dd5a3bb6183ff27c0b268dbee1387315581922e4a80ab3d9677072481",
+    "assets/course-journey/unit103-104-landmark-v1.webp": "27cbb4d70503303b6570a4bd4e597e584cf27ac597f3dab57699e1156ed4d1c8",
+    "assets/course-journey/unit105-106-landmark-v1.png": "2d6045cc2138fd22e873b709984ba5b6baa1f4ebfae740f51f2f101d10d39683",
+    "assets/course-journey/unit105-106-landmark-v1.webp": "85e127d7901714ba1e3819a1fff6cc405a07a85a8365f58f4acc3a6afcc5b93b",
+    "assets/course-journey/unit105-106-landmark-v2.png": "ad4e2525f30ac800cc21a21ac6a9ffbbb0294bb7564298931c30c61e7c5dfc7a",
+    "assets/course-journey/unit105-106-landmark-v2.webp": "a87d36f75d485712c22a5edc3d9b1079553552840af596e4cc7579cdd5de5e4e",
+    "assets/course-journey/unit107-108-landmark-v1.png": "0758ff568ddd606634d0a8253f74a4adb0b197e8ddf5c379db9f6718365856e7",
+    "assets/course-journey/unit107-108-landmark-v1.webp": "417157e8d03311e7d92480e04c3c581a12dd35b23fa615c6a424d510facac2ba",
+    "assets/course-journey/unit109-110-landmark-v1.png": "d1db595d51a57a7c654b85badd18d27a9959135d4a1e489ca2fdb8f5912a9c35",
+    "assets/course-journey/unit109-110-landmark-v1.webp": "4cbcf1935297416bec77add98bf122899c79d91b992750ff9e9c36e11385ab75",
+    "assets/course-journey/unit111-112-landmark-v1.png": "351e2609677a43a0d0f6f437aa0003fb274dd41280a3f9f70ec179851e05fd35",
+    "assets/course-journey/unit111-112-landmark-v1.webp": "5e9b6e301c0e2107ec26ac18735f18850437c50e2afbb2b9bced9ca043fb3124",
+    "assets/course-journey/unit111-112-landmark-v2.png": "02a9df3fa9f5ecb2bc3daec98111b85d38d3ca73d18f39c678f99b26d13a45ed",
+    "assets/course-journey/unit111-112-landmark-v2.webp": "0a529c1c1e3b5281ae64a9b1dfc5c5d0164a7ddabb871e744f1a12d5d91ebf63",
+    "assets/course-journey/unit113-114-landmark-v1.png": "c71729de032bed071a7540a50b8a3e17f5d6b8204634d2f7e9cde48d0ecbb05c",
+    "assets/course-journey/unit113-114-landmark-v1.webp": "a00ab28f0afc90ebab7483ea301ea80d3b46f844ce0603ca1285c2261ea9af57",
+    "assets/course-journey/unit115-116-landmark-v1.png": "74e1cb02e48a4b43543ad6d44a03d83e82ff5911c2cd1e4f0420edb9159e8faf",
+    "assets/course-journey/unit115-116-landmark-v1.webp": "cf8c6521ba28af0d025622633f6aa6448938b70569a6dba7466d418fad7a9e5e",
+    "assets/course-journey/unit117-118-landmark-v1.png": "20db396969c88ede546070d9603faea707e95164e603d59faba749f86024916e",
+    "assets/course-journey/unit117-118-landmark-v1.webp": "03fad65fd51a95f7ec17552682b1769fb18fa4852d0690618d0a9454ec875884",
+    "assets/course-journey/unit119-120-landmark-v1.png": "30cc3d8581d8962e6f209ca7608d9d77d4726a4a63fdd7ba25d024287f72805a",
+    "assets/course-journey/unit119-120-landmark-v1.webp": "8647ce03452fec7594083239df72d9831fe7e32b258b711f5ecdad3fbffa4f49",
+    "assets/course-journey/unit121-122-landmark-v1.png": "2e38d068794f4b7df2896803e5fa5169db2ba835ba41af3024378975fb643348",
+    "assets/course-journey/unit121-122-landmark-v1.webp": "a3b0de65a7ab95cd03506fd148ab0c1f89f4a0a3133305f2905446c791a5da38",
+    "assets/course-journey/unit123-124-landmark-v1.png": "020955abb947aa122ec0d81fbb1ae500b5de79670c6a1038f5fd08b64b19d647",
+    "assets/course-journey/unit123-124-landmark-v1.webp": "946b60d2c8d881db4bb77bf3cd60e2622cd37ac667bd7bb4907920f1de8e9f2d",
+    "assets/course-journey/unit125-126-landmark-v1.png": "e29e0b3d04c2e2fee0cdd35f91a97f620c8db13f847a0b1ce119ab1f266ec0bf",
+    "assets/course-journey/unit125-126-landmark-v1.webp": "d8d864bf924e25078675ab58f6faec79ebdc80de578ffd49ea3b7c2443736996",
+    "assets/course-journey/unit127-128-landmark-v1.png": "7030582bddd09a7f8d629c37a0806056d7b402d50b2646532c0ad30a42da13ea",
+    "assets/course-journey/unit127-128-landmark-v1.webp": "c5803ef988c1284e7b80bb72eac106484de74da76f7d04a038047393f23f2e7a",
+    "assets/course-journey/unit129-130-landmark-v1.png": "26dc85e880364070cc9a60ebef772cd1d577b334fd6259c05b72c5753ce033cc",
+    "assets/course-journey/unit129-130-landmark-v1.webp": "3ed63f7fc91afed1718ab82fa9277cd3950e1c8718177776d3f4c2df9ef2a39a",
+    "assets/course-journey/unit131-132-landmark-v1.png": "e39ba4bd5064e9d223ef2732e8284c5821a66b77f4a6fe9ffb6b3d9e842820b2",
+    "assets/course-journey/unit131-132-landmark-v1.webp": "7e2be8c261907a9d4c7f3d5bebf0beff977fac92c54b1266ae19e779b63bba57",
+    "assets/course-journey/unit133-134-landmark-v1.png": "49e2c03ab8a89a51c6f8c0d829cbc06cb3bd387a3710dab955d14c894216ab98",
+    "assets/course-journey/unit133-134-landmark-v1.webp": "99fcd2c28258e250fe98ad563835b1a956137823b553ad6757bb64b21249c4a4",
+    "assets/course-journey/unit135-136-landmark-v1.png": "07866e80ec3a449c862fd2635fca8235c972656846c43961da00fe4ca2e42174",
+    "assets/course-journey/unit135-136-landmark-v1.webp": "5510f3e976d40355a46434e37d3da7477ab075e07f7419f430d11cde882dd301",
+    "assets/course-journey/unit137-138-landmark-v1.png": "de67bcaef0808dc23e925671b81c73b0dc14ec2e977d54faeb6dffc2f0dd5bc0",
+    "assets/course-journey/unit137-138-landmark-v1.webp": "202347d24399a713891906396297c066909e7f15c1541444d94dd2ab05edcd54",
+    "assets/course-journey/unit139-140-landmark-v1.png": "481c56ab7e6291caa9323385e2490a30bbfa147a48dfcf43f464c1b842f892f9",
+    "assets/course-journey/unit139-140-landmark-v1.webp": "e6846b6940d5c5aeb43fc373823083e595bc1d00e9d8735510caa3569a06d453",
+    "assets/course-journey/unit141-142-landmark-v1.png": "8bf4147ac7d84919a9e6f36a436319b8474c3463fde5c95c7f61fa50af91f3c5",
+    "assets/course-journey/unit141-142-landmark-v1.webp": "cd9b43a7ce13eaad0f1423d771cfba64cfc827d3ab121aa9936337735f2e2ce3",
+    "assets/course-journey/unit141-142-landmark-v2.png": "812f1a0812c1967fac9672c298a44e7ef151961016e47d00bddf4290652bab0b",
+    "assets/course-journey/unit141-142-landmark-v2.webp": "490d546d4c23cccbf01f9a29915fd989259a751562fc253cef1c0a45574a48d6",
+    "assets/course-journey/unit143-144-landmark-v1.png": "0fbbb6e758e1c4c89a59d3939c569ae19e228a09514beb9772eefb511107a52c",
+    "assets/course-journey/unit143-144-landmark-v1.webp": "ff4802663163377b6e10da96928711f92d51d913d5b5d1bb5daf586c4c8f0a08",
+    "assets/course-journey/unit31-32-landmark-v1.png": "17271b7f219f67c0ac8dee31a47e10032029c8fd3f0785f63c97e7c842876ae7",
+    "assets/course-journey/unit31-32-landmark-v1.webp": "e5cfb695f6015377e6fe599eaa8cba3f48748da36ea5cabdc98f7cf6ca0f4261",
+    "assets/course-journey/unit33-34-landmark-v1.png": "5324deb851128535270338ec4a10b49d22910c90eee98a171fcffdf5a3b30a31",
+    "assets/course-journey/unit33-34-landmark-v1.webp": "aa6bb303a104a555d81770a65ba9360d9d841c5ebcc5f7f8da09b77dff1d1d30",
+    "assets/course-journey/unit35-36-landmark-v1.png": "dea6efba98c88e20e7f4a33d20096410e44a44a096f94d104eb3d19a0a32a680",
+    "assets/course-journey/unit35-36-landmark-v1.webp": "f9298c5733f8f5064d32aa161df96534392be0a98fb8a428ecdbff8727898367",
+    "assets/course-journey/unit37-38-landmark-v1.png": "feb72a1eb1f2ecdd7e5a4a6aff528ecf3cfd01e880e16f6fc447a1d71a1fad94",
+    "assets/course-journey/unit37-38-landmark-v1.webp": "62c9c6dbd7349fbb07135567562107d6717e45c8962ad277195bcf6532c43f21",
+    "assets/course-journey/unit39-40-landmark-v1.png": "6cd4604c8e0797650cab0fe8ef7266c7ff348181c3e94e4ff04bf89627298d47",
+    "assets/course-journey/unit39-40-landmark-v1.webp": "7deae7c6a507b82ad8b33b72adbcf6ebf9629c107f4faf569fc38048e6eaba66",
+    "assets/course-journey/unit41-42-landmark-v1.png": "40f25d3c2166aee0b4d5579272793c4494a8a8f7e69708d33950ff703f68912a",
+    "assets/course-journey/unit41-42-landmark-v1.webp": "059753f1afcbfdee3b4c542ec4928cc5b8274976bef52127746d518632d2608b",
+    "assets/course-journey/unit43-44-landmark-v1.png": "8859bc0aa6b629a5b25f163a40d2e44210754195ecc3db63df3ecbf2e68e7896",
+    "assets/course-journey/unit43-44-landmark-v1.webp": "d98060e3f9d1c9027a5890371197cc7034a963f20363f90f521ce58cbf5beb6d",
+    "assets/course-journey/unit43-44-landmark-v2.png": "92f67c418bc11df9c186973a7fbb992a5a033c3600b5ba731fac2fdf061271cf",
+    "assets/course-journey/unit43-44-landmark-v2.webp": "fdbeb416a2f3c8913040e78cd56af6768b426a7495f397f2f446cfe9e449fead",
+    "assets/course-journey/unit45-46-landmark-v1.png": "db61c72587c45017aa48de6d32329398b495eb8034dcb808ee03e632109c72eb",
+    "assets/course-journey/unit45-46-landmark-v1.webp": "b5357f61992ec40a07faa4ae07959eeba65590a41b4bb981e99eefa218fc2148",
+    "assets/course-journey/unit47-48-landmark-v1.png": "f130873247c8a087b898ae8450a865829f311bd1925bab9356256058e38a6f58",
+    "assets/course-journey/unit47-48-landmark-v1.webp": "ffa3d9bf5188568b5ecd1572509e1fc50bcba55319e812e1ca53006c8f1925e6",
+    "assets/course-journey/unit49-50-landmark-v1.png": "9e52fbe358588f851ebc0165920000b75d24cd00da9478fb68157c02804d0959",
+    "assets/course-journey/unit49-50-landmark-v1.webp": "bedc2064d602997488da7391ad8389302e82db975e771f160e061173ba694a6e",
+    "assets/course-journey/unit51-52-landmark-v1.png": "83298ab45384cde5ab612737d43287113eaa873fda3e1a43dbb98ba100aecb34",
+    "assets/course-journey/unit51-52-landmark-v1.webp": "355ab4939956325776c7612f2d9313353d6588bf44095666305ead46daa0ba61",
+    "assets/course-journey/unit53-54-landmark-v1.png": "8f5b7642dbb1d78b5c05e274d177d13fbb2f208f4e0db016f01498bdf52f3bf2",
+    "assets/course-journey/unit53-54-landmark-v1.webp": "92847a32e18793d050534b3cc335103bd1d9f88f65415745ec0e32276f257168",
+    "assets/course-journey/unit55-56-landmark-v1.png": "73cdfb67cb939601642c4905cff02c39c2e1a8bf82cd7beaa5dc8a00e0ac97e1",
+    "assets/course-journey/unit55-56-landmark-v1.webp": "2976d26bbad25e498bd2f93637253c536b26946e3832b0742ea58297dfb38950",
+    "assets/course-journey/unit55-56-landmark-v2.png": "5ebb04e7ee2bd02d1522797290be8ee0101c977e5a7e2f861dba6532013713ae",
+    "assets/course-journey/unit55-56-landmark-v2.webp": "08851ab7d5af5dd4da039e97e19e829d50755216fd75157bab33da48f5004508",
+    "assets/course-journey/unit57-58-landmark-v1.png": "744574c3bd951561228a30de89f5217559bf2ebe5b575b5fd4058982aabb23d0",
+    "assets/course-journey/unit57-58-landmark-v1.webp": "d1a43be8e9478baa51f1148019129b84b1e9e46210b1f6e75ddb2a98cb8ab7ba",
+    "assets/course-journey/unit59-60-landmark-v1.png": "3e97faa2a7f317a2d6e8a15f1c54b821010b8ee4a6e980e477fe6a53817ec4a5",
+    "assets/course-journey/unit59-60-landmark-v1.webp": "41797ef10504f4d059603a243a4552e555fe93722d6dc06a5ff69156e7d3af1e",
+    "assets/course-journey/unit59-60-landmark-v2.png": "3ef8e01e154feb78b8ed631fe0b89785eb51b12d0966feee4c01dd6af08e2427",
+    "assets/course-journey/unit59-60-landmark-v2.webp": "f04bdf708e54d90a48d501b1fe9b43429c716c4185a15beb5ca2f6d0051f0c6a",
+    "assets/course-journey/unit61-62-landmark-v1.png": "1db93d41b71a34e96e68f5010cbdf847d6cb4f9fb3eeaa9ea2d38a043ba27637",
+    "assets/course-journey/unit61-62-landmark-v1.webp": "863339bbbf897d8052245b9071ea7b7e40f8fa375379820ff524f0ed0e5a8fdd",
+    "assets/course-journey/unit63-64-landmark-v1.png": "c235847c972939b3b7aeb7060c53cee756572ce0967155cad3c55b3258935f95",
+    "assets/course-journey/unit63-64-landmark-v1.webp": "d3fb3f168604fd5eb318f070cd1eb92517a3566bf6724e8e64fc7a4b198acad5",
+    "assets/course-journey/unit65-66-landmark-v1.png": "693fcb8ff81d6af193a210aa006d84d554c8916f5016aa7a53555ece353c3baa",
+    "assets/course-journey/unit65-66-landmark-v1.webp": "6e0280ae26d006bdb499c551e6b12fdc00eef0e63ff25e1db2f900c679586edc",
+    "assets/course-journey/unit67-68-landmark-v1.png": "9b4d5e6def902dd282f18280dc268560b22fd4d5959b2f60daf9ba86254343b0",
+    "assets/course-journey/unit67-68-landmark-v1.webp": "7a5b29de7edf8dfdd4dfc4db2fde7dc6f9af48f06305ecde1ad754acbe0a5836",
+    "assets/course-journey/unit69-70-landmark-v1.png": "3ed61fffeefb16de5427530af4bdccdde82844ed88d96f728035e7c22b81899a",
+    "assets/course-journey/unit69-70-landmark-v1.webp": "3e9ea66589fc36ab2c1a12e8d0407c0800b5049501041f9af72f7cf82f943f34",
+    "assets/course-journey/unit71-72-landmark-v1.png": "068c7db6fe1f9199b2d3eb53450040cc95ce7939c3bca56324071f046c16c819",
+    "assets/course-journey/unit71-72-landmark-v1.webp": "9254504a7fd68742bb92bb0ccf204046ed35aeb31dfc61901424841ca55e55b9",
+    "assets/course-journey/unit73-74-landmark-v1.png": "2462a46c982300c9de36d38435496a80ac48b3de9fed5fe8068dc05c22387426",
+    "assets/course-journey/unit73-74-landmark-v1.webp": "eb96fc4fb13b8fb9fcf8c413487aca079f802f320eb8ab7e0455714ae7a8a030",
+    "assets/course-journey/unit75-76-landmark-v1.png": "8cac4014840c20640b388521abe5614d50291b2394d265e3103dbd84bc3fee89",
+    "assets/course-journey/unit75-76-landmark-v1.webp": "7f975ba90c4534fd2eff4f89fdea79b88bc643eed8071161138cc3d38590ceb9",
+    "assets/course-journey/unit77-78-landmark-v1.png": "4fd7a6f6ae050c17a24f3be21db237871db64c1a68565a12556743831bce55ca",
+    "assets/course-journey/unit77-78-landmark-v1.webp": "8d7fbfa17116d3f1102dad84ebd489f40b74ba2047185a5e628036fcf9f21cf6",
+    "assets/course-journey/unit79-80-landmark-v1.png": "c5b4d62cf8b7811bf95e2c963f410b71ff9ab5187e4760e769e60f462fc2da11",
+    "assets/course-journey/unit79-80-landmark-v1.webp": "17d801590c9bfc2c79f70b3ebf6187d84f6f6ff81fb0e22a0e6f9c00b8ed77a6",
+    "assets/course-journey/unit81-82-landmark-v1.png": "49c1cfe6a08719bbcd6445d64ad5eb6ed4b6f8661aab976e222796f74e69d64b",
+    "assets/course-journey/unit81-82-landmark-v1.webp": "e0e9ff4e7e0822e2f7db3ce62372a9335726f6364c5c5a7934cc65266681369f",
+    "assets/course-journey/unit81-82-landmark-v2.png": "98f4f04ad470f68be1303b5dda95317c08b3aa7e205362b0d5b9bc30093191c6",
+    "assets/course-journey/unit81-82-landmark-v2.webp": "0e614ee1bd78e348609f2fbc4e1bc871f8a5a0b67bba5ab3c65ee0d0196dfae3",
+    "assets/course-journey/unit83-84-landmark-v1.png": "0fd3c598f3c14479cf16ef07809178ba4741b9c060fcd83603a64ce16b1184fd",
+    "assets/course-journey/unit83-84-landmark-v1.webp": "e496e7c470aa58db336065d4dd2e22b518038b484e2811db6013cd8f144df227",
+    "assets/course-journey/unit85-86-landmark-v1.png": "a08297853a1fea4154d4621c2266a3d517ac1e2dd0d395ef6b9dee98687f96d9",
+    "assets/course-journey/unit85-86-landmark-v1.webp": "5c08469fe31e13f4616994b862bcfe1f513c46bbec1fb129f763dd599a781345",
+    "assets/course-journey/unit87-88-landmark-v1.png": "c39af7068a7ebda9101732a9dadd62f429c4c435971ea867df86780565ffe066",
+    "assets/course-journey/unit87-88-landmark-v1.webp": "a93cede055b9904c115852500dd3b0ddb305f4df3827dfd5f2c9fe8056425e31",
+    "assets/course-journey/unit89-90-landmark-v1.png": "90e5456ebd6622d1d0c1714335b5445b12983043369486a47224a4c75432bf52",
+    "assets/course-journey/unit89-90-landmark-v1.webp": "834de17fe333af5035661aad7d543873e2f892cfae9eabb13356b64fa2fe8be1",
+    "assets/course-journey/unit89-90-landmark-v2.png": "aad2d5bf29170c953b43c9ee25e891f39901f222cac579bf4c77c30a55121ee3",
+    "assets/course-journey/unit89-90-landmark-v2.webp": "64b978d1fefd57d6e0035cc0828b49e747248b40c5386d9f60a02453b561f597",
+    "assets/course-journey/unit91-92-landmark-v1.png": "4a761f02b4f214831895ba5c6e8e943485ca8fa6cfe921d1175d9603d460673f",
+    "assets/course-journey/unit91-92-landmark-v1.webp": "d2c699bc6ed471663abbf2dcff7982e07821abc7d1d1581de6d4d2f9179615c9",
+    "assets/course-journey/unit93-94-landmark-v1.png": "5a193c0ffb31721c0255ed061a3d830431fc829eda72584f1a1c8a36c574a4b7",
+    "assets/course-journey/unit93-94-landmark-v1.webp": "eb755d4f0bbb645cdf1bd6b274321916c046e97b843db70df010f68282efa747",
+    "assets/course-journey/unit95-96-landmark-v1.png": "b79e91509520ccf03a9b713f6c57b00ab8cfaf66cdf0bacbcf685c9f9f96acda",
+    "assets/course-journey/unit95-96-landmark-v1.webp": "38520dc2f5288fd58ebf95dcf3b01bb3f510df77273648c40b3c7b3a0c374a89",
+    "assets/course-journey/unit97-98-landmark-v1.png": "012aac9fac9854fea2daa4d58f128823bdb73b84b3a3f579655c1bfab4c6e92f",
+    "assets/course-journey/unit97-98-landmark-v1.webp": "79220a83d0542721867f02adf4f0222cb8b2087806675e7f5153289c3374eb75",
+    "assets/course-journey/unit99-100-landmark-v1.png": "400e33918aeb33b17cfb4755bcd9f93a578ff87489fc282b28ba7beeb1d778fe",
+    "assets/course-journey/unit99-100-landmark-v1.webp": "11c20622db41223fd5b4d056ca53ba756944e4774358bc7e408ebc8d07dab993",
+    "assets/course-journey/visits-desktop-v1.png": "7b2487a177af23c9178015b1f85c679f622ff464e33fda7c475b4a5e194720b9",
+    "assets/course-journey/visits-mobile-v2.png": "f26805752b4a44ccb354bc5291921e12cb9e327d7a5783b5f9e4f855dd9397be",
+    "assets/course-journey/woodland-desktop-v1.png": "6864e9841a82a0568fbbc3c0bef7e8ab45bdcc48e3e5f6b4ddd2d58574e1fc92",
+    "assets/course-journey/woodland-desktop-v1.webp": "437997e97dccf36e6c8f49061d6d790ddf327d38bcf335487c30017c39897e14",
+    "assets/course-journey/woodland-desktop-v2.png": "e076e3a34979a7f5a6fcd674f82133c9ed6d54670442bcd3d02c508242fa017e",
+    "assets/course-journey/woodland-desktop-v2.webp": "63eee4e2281833b6d5ea8fe6d72765358ed4548e73fb36c1c706dd8f523ee06a",
+    "assets/course-journey/woodland-mobile-v1.png": "28e144aa06187abadf5898c61b70970e3c63ed7297f540dcb68d07c3223a66fa",
+    "assets/course-journey/woodland-mobile-v1.webp": "e3bcbd8524b0db38a88b732c407d379aa79ed24fc6e5d59ccbb7edea217511af",
+    "assets/course-journey/woodland-mobile-v2.png": "83460aa87186e537ede7f43ecfb5b2dcf5a13d9c37d63c29678d4abf61f72199",
+    "assets/course-journey/woodland-mobile-v2.webp": "4121290e0cd0745754aaa1b77687d6af356de0a69619201bd4e7d350470abef2",
+    "assets/unit101-102/keepsake-story-v1.webp": "74bb683a0be557af002f9aec9e32071a5ad902e15b6bce1be444806f66f20092",
+    "assets/unit103-104/keepsake-story-v1.webp": "6646cfd2e5e34712ec1ab72b80d1aa6eae71b01b08866edb1a4ffc6134245360",
+    "assets/unit105-106/keepsake-story-v1.webp": "de3bd5252c98dbf756652a6503252d6000608050eef96133692238caee9e2be9",
+    "assets/unit107-108/keepsake-story-v1.webp": "c0dc3f77558c2a6464297ebc43624708bb63847f9106dda2137405ace60b1683",
+    "assets/unit109-110/keepsake-story-v1.webp": "f80b336ff6b0792ebb94dd71003c0c4a8284d70fb9e2feb342db06c5c33223f4",
+    "assets/unit111-112/keepsake-story-v1.webp": "fee9bee75ef084524e39e0a520e835de6fd0dfef36b74687cdb0aa37a3434fb0",
+    "assets/unit113-114/keepsake-story-v1.webp": "e5162faee217fb2b823ec70abfa80582e379115ae4c6a50a26bac80c236a7b81",
+    "assets/unit115-116/keepsake-story-v1.webp": "796b6cb55beba4ccf9a62032fe6460dec4ab71c8f09fff2da2c7c051998a9660",
+    "assets/unit117-118/keepsake-story-v1.webp": "d3e4187ee33508ac6dc79cd9e8083f8d1dd282f53becfc2a48d0bb0b7496fde7",
+    "assets/unit119-120/keepsake-story-v1.webp": "399723759f2c2e02a3db68c8420d9f94eec81e099a84394597d24125d6882277",
+    "assets/unit121-122/keepsake-story-v1.webp": "79d4a6b26f1364450b0b5a214c800df3edbbcc325a408b82832bcf97441871b9",
+    "assets/unit123-124/keepsake-story-v1.webp": "7ffd063f3f5fe09a583466ab6d2346d700b8edbc2131e50cfee3954e6919f354",
+    "assets/unit125-126/keepsake-story-v1.webp": "d97d83122c36f2a7d9df55e95c796d4f6203ddb2eca519a8a16539fec17fabe8",
+    "assets/unit127-128/keepsake-story-v1.webp": "cb31e394162cf5681fab8adf055752755875f394579dc27fdf75c52e7b57c86c",
+    "assets/unit129-130/keepsake-story-v1.webp": "569ded7902b080455de0f5c63e8e949381f24baa6d0d3d87500763e92cac6027",
+    "assets/unit131-132/keepsake-story-v1.webp": "dd91e390f21d1dacbd3937351f0bc980c9825d3fa0aaea8487c81291521c3371",
+    "assets/unit133-134/keepsake-story-v1.webp": "d3c7c2587c1827601bcb9c399573de26de75a51111997d9031da75169ae5c3b8",
+    "assets/unit135-136/keepsake-story-v1.webp": "e131a46c29272edf61a3a385beb41c8b07e5f09b67af3aeedb98b7557869f744",
+    "assets/unit137-138/keepsake-story-v1.webp": "cf4d52de0793abe77e173bce9111136c53bfa70f44b69fb1ca921d72f9144c93",
+    "assets/unit139-140/keepsake-story-v1.webp": "62d22014eed9e299b98b4da5fcc3c0a735ec6e4a9f9098b2ac1e23bc8340ee64",
+    "assets/unit141-142/keepsake-story-v1.webp": "e69b64a5c005b32b71529ca07266b69541fc3a7864661c6050a7264fe14c554a",
+    "assets/unit143-144/keepsake-story-v1.webp": "bc15a8cad3db93f67f6038e10b924967ded6dc6c433619a205b9b97c19c9f03b",
+    "assets/unit31-32/keepsake-story-v1.webp": "d6540a8e6ec875313502f97e1009c447392a4af9fda14a59b52fc6b657a35eff",
+    "assets/unit33-34/keepsake-story-v1.webp": "0c5061ff098bba37bd42f800c4b1257e39cda2dda5c886d54ff9840a11c0bc26",
+    "assets/unit35-36/keepsake-story-v1.webp": "37d3a0e633a713e3615dbdc0518a814c7c0495a93690c3d022e474d5b70cff4a",
+    "assets/unit37-38/keepsake-story-v1.webp": "24d3183ae588a802906bf2529f7ad965ec093f4457886ab021c3c51e1324bb88",
+    "assets/unit39-40/keepsake-story-v1.webp": "dc5105e915aa2257980da9b062856b1ca438f1b58648cbd8e4098b509e65f0de",
+    "assets/unit41-42/keepsake-story-v4.webp": "876a072f9bd80fd7dbe63ac51000daf586db41debaeacae5c4e693d91e7d1b99",
+    "assets/unit43-44/keepsake-story-v1.webp": "5dacad1492148afcb9cab3530bfc67d645a91d2f3a2834a639447879da511953",
+    "assets/unit45-46/keepsake-story-v1.webp": "5624fec14d6740ee4670d4618946f5720bc29c05f774fe952cbc82ab7a39b3fd",
+    "assets/unit47-48/keepsake-story-v1.webp": "c5c5cc77e787620ad1b337203428eca3f4bac4114835fcd9ae370ea9ef5bcbb4",
+    "assets/unit49-50/keepsake-story-v2.webp": "6cdfab520018dddacb264972804530caef3d78af2078ef3fb07eb31a71eede5d",
+    "assets/unit51-52/keepsake-story-v1.webp": "e1ec073cbd39326c5a5581ac2c1365c86beba33b4379466b0cf892db0ef8014b",
+    "assets/unit53-54/keepsake-story-v1.webp": "c03944b6f34bde3a22f805e626e3dd362bbd7930700efbc7350756c2c744d5ff",
+    "assets/unit55-56/keepsake-story-v1.webp": "6dc4e74d68926400fe882b76ecf5de91432784dc1d897561c49498185e1fb268",
+    "assets/unit57-58/keepsake-story-v1.webp": "5422a45dbb515ea18b7519a90b319494d1ae3acf4d95f6989b5a5b7bb5acaa6e",
+    "assets/unit59-60/keepsake-story-v1.webp": "5d50816922990e2d9d328c584ed2c16379a2b9d140a29ef5c36dae69ef775b67",
+    "assets/unit61-62/keepsake-story-v2.webp": "a635fb35fd8d45a8582cc9bc76f8b0daf81287ddd3346ee807da436fca9fd7ef",
+    "assets/unit63-64/keepsake-story-v1.webp": "341c74cb84b2aa861518bd1b0872f7c1ef81c72d20d184d22644e32d98675f2d",
+    "assets/unit65-66/keepsake-story-v1.webp": "1927fcc171747e57cac2dcebaeca090a2d422082c42e918734c904a8bcc87306",
+    "assets/unit67-68/keepsake-story-v1.webp": "ffccabbcc3ddcb62ddc6e19b33767c1a858a6e9b1335dc2d3d28a943d8d68e3a",
+    "assets/unit69-70/keepsake-story-v1.webp": "e00ae5f446833e8bde7430422a987556941c0b9fabddbc0fb9c26c39431f66e2",
+    "assets/unit71-72/keepsake-story-v1.webp": "ba2df893e31845ad1df73ea5b0ee0a92fc07516e7be0aa551639d6dd55bd0b6e",
+    "assets/unit73-74/keepsake-story-v1.webp": "8ab108d508a576a36aa2097ede14516d91f30b829e59b262d250cd7be914d841",
+    "assets/unit75-76/keepsake-story-v1.webp": "cc1cd41a480de630908fcc31eec8387facc4f07a4f877f7dd7f39a1e61c038e5",
+    "assets/unit77-78/keepsake-story-v1.webp": "632ecb95302a11901be5464bf96c9bd803cb4ca345ea212f5a6ae11eacd59187",
+    "assets/unit79-80/keepsake-story-v1.webp": "0db99e86e60edcdf5e1a8f997139d53baf8f41b223fb0488597e59a6caf384ca",
+    "assets/unit81-82/keepsake-story-v1.webp": "63b3ca1137fb18eab1f3bfdebd8e257fa0f30999d70f5f28e2b5fb03f64bea65",
+    "assets/unit83-84/keepsake-story-v1.webp": "3ae836c321a94683f684c37c6be49d426d4e98082e51f6a07951f6efd04a481d",
+    "assets/unit85-86/keepsake-story-v1.webp": "15a982dedaa37db32fcc2e721be7c5a9a0a9a7b84069e042af7903e79225b6b1",
+    "assets/unit87-88/keepsake-story-v1.webp": "927d89706a7b32dea8c2df52342ffc6a60f9c877e6b2b0f17250d4756a83b6b9",
+    "assets/unit89-90/keepsake-story-v1.webp": "598bd44a66f77d73988e99e0b5466f6e1cbe0c778b34d29f12eabdb957aa9257",
+    "assets/unit91-92/keepsake-story-v1.webp": "dc1baad9c4ddfd61a5b9fc3cf52b569a035bafa6a4c16876d111296203aa6ffc",
+    "assets/unit93-94/keepsake-story-v1.webp": "61cddff957709b442f06809499e682abad6d6068ff48acc39d37cb9d3814011e",
+    "assets/unit95-96/keepsake-story-v1.webp": "00120be37c47bf77934a2e21f585f074bd99169e6d8b81bd55aa0bd42495035b",
+    "assets/unit97-98/keepsake-story-v1.webp": "95709e4c743c8e2e66280b8bded6a46454a72bb102b1f967801dfbab6a3f98bd",
+    "assets/unit99-100/keepsake-story-v1.webp": "a8cd5eda713a4bea53e3873936de84a7f5ee51d0340bafcc2aa4226f99433e0e",
+    "docs/designs/course-journey/production/complete-journey-v1/README.md": "dd6290d480421e18d828b2d8b4a8e855700caf352d6bd6d2f2b1f9455e65f46e",
+    "docs/designs/course-journey/production/complete-journey-v1/appointments-desktop-receipt.json": "1e481a955bc9fa2054554040d57f87393865abcec92dab17cfa92cdb9ef3a192",
+    "docs/designs/course-journey/production/complete-journey-v1/appointments-mobile-receipt.json": "c93ea556e538f2a807c1e7768fabe86634637a8794cc84740e41f53b9fbfd98c",
+    "docs/designs/course-journey/production/complete-journey-v1/build-placement.cjs": "44d9dab24e3554d60d525c471d3770785b021be89d1d5f8945f20451d9e8f9a9",
+    "docs/designs/course-journey/production/complete-journey-v1/caring-desktop-receipt.json": "2a6f2c8c734ebabb4f2079e638aec1ad73ea3290751ed90811f7ee9363438e45",
+    "docs/designs/course-journey/production/complete-journey-v1/caring-mobile-receipt.json": "be8c58952eba52a7e708d6095412086345467bc501a656cbc00378430b5b1305",
+    "docs/designs/course-journey/production/complete-journey-v1/choices-desktop-receipt.json": "b323899008206216d3964f389a5d4e5d73d988d4a6e258196fa21a51420e3ead",
+    "docs/designs/course-journey/production/complete-journey-v1/choices-mobile-receipt.json": "df6a6e5d21842250c97d33a604e7cd1a50e415c86428ecbd7e35ccc7e76d1ae9",
+    "docs/designs/course-journey/production/complete-journey-v1/decisions-desktop-receipt.json": "d266db1d95954724a5bf0f403cdce0ba61e919b4bf3c6710e82c396cb4862d1f",
+    "docs/designs/course-journey/production/complete-journey-v1/decisions-mobile-receipt.json": "74c2008d2262a54564cc686a1d68091d3ecd31be803d7d04eee94fd31a9b1a61",
+    "docs/designs/course-journey/production/complete-journey-v1/departures-desktop-receipt.json": "20118554d9aa346c0aeb4272470e574c1645c19acc0dd30d667dcb6458e4e548",
+    "docs/designs/course-journey/production/complete-journey-v1/departures-mobile-receipt.json": "9d415274c9e820a87469d26babb4d2c034dfd521965b653bc7323b0b36ef947b",
+    "docs/designs/course-journey/production/complete-journey-v1/everyday-desktop-receipt.json": "09cb1ab0d46e6272782b63a95fd5814222157b7e1c6484a2b27026133cf63d7a",
+    "docs/designs/course-journey/production/complete-journey-v1/everyday-mobile-receipt.json": "ea3242ef4b1b358f49c34dd1ac3b88bb82e47dc9fd7fb60cc17f909e2a2b84d5",
+    "docs/designs/course-journey/production/complete-journey-v1/hospitality-desktop-receipt.json": "21d25b66c4b08f80622982ae81dc19f721ec8c0203067105320c7b887233af0b",
+    "docs/designs/course-journey/production/complete-journey-v1/hospitality-mobile-receipt.json": "db78a0aa20968c4a1539225916fde8c87fa471050039f87b514b3212212b574b",
+    "docs/designs/course-journey/production/complete-journey-v1/learning-desktop-receipt.json": "7cdd26b80a5d3b86ed16f4100a0011272b466ed7927bd3bd267708eaf8a4736a",
+    "docs/designs/course-journey/production/complete-journey-v1/learning-mobile-receipt.json": "f0eeb882e99e0a277998546126a07bea3ea962823da8d3ccba943ceb447ad90b",
+    "docs/designs/course-journey/production/complete-journey-v1/making-desktop-receipt.json": "ab2776ef9887086172c50289c04d44c11d55ea4b33ea62b6522a2615d5797a2e",
+    "docs/designs/course-journey/production/complete-journey-v1/making-mobile-receipt.json": "b7d34807c3473c98bce30c9cb9dc4a65e9c6a9670b944dd34e120e43639d7b20",
+    "docs/designs/course-journey/production/complete-journey-v1/memories-desktop-receipt.json": "6c049772dae09a2bceee206fe7b1d2c5b7a29b442623731d3f0c1b5c5f09b5b8",
+    "docs/designs/course-journey/production/complete-journey-v1/memories-mobile-receipt.json": "1cac3d95b9529b41d10586aa3920b342e4e5de003be7014b1d216b6b62c03396",
+    "docs/designs/course-journey/production/complete-journey-v1/messages-desktop-receipt.json": "e95c89f9046945cf5f3ce5011f51b545dc7a07da300cc3195b1e881e1da2ef96",
+    "docs/designs/course-journey/production/complete-journey-v1/messages-mobile-receipt.json": "de0d672bac1e0ce5d46b90eed18c06e82fc273863669e2dd24236e4b8dd38f60",
+    "docs/designs/course-journey/production/complete-journey-v1/news-desktop-receipt.json": "da13a6aa390740baecf6c56a6a4601f4b3c4e0d5899cab42da2aa38bcda050a3",
+    "docs/designs/course-journey/production/complete-journey-v1/news-mobile-receipt.json": "fc72307bd714b9dbffe93aed1d1ff08e080ea548a1775e7e3b55aaf93a53022c",
+    "docs/designs/course-journey/production/complete-journey-v1/outdoors-desktop-receipt.json": "962dfec2d4b6cc127c51ec76b63ee4688dc2a5d02439f4949edfd787874e4967",
+    "docs/designs/course-journey/production/complete-journey-v1/outdoors-mobile-receipt.json": "384e1bdf1ca36e41874e3d7f9fa14e48145a72642b8e31107582c37a9cc79f10",
+    "docs/designs/course-journey/production/complete-journey-v1/placement.json": "b84a0220b57b5d7a381be5ca3fc5d39f7fa59aad9d15145bbd5206e026b6c201",
+    "docs/designs/course-journey/production/complete-journey-v1/possibilities-desktop-receipt.json": "ce8495b8b8564c91329d7bcdb390043bf6725d244a8941c704b530adf60bfc51",
+    "docs/designs/course-journey/production/complete-journey-v1/possibilities-mobile-receipt.json": "bd1985bfb49548b1be08aee4b4729cbd5e4ed9e575784aa7d31ac1c43455eaf4",
+    "docs/designs/course-journey/production/complete-journey-v1/preparations-desktop-receipt.json": "c5f597a89900d1997f3f0af076291267e3826feeb6e091719f6eea0619d68778",
+    "docs/designs/course-journey/production/complete-journey-v1/preparations-mobile-receipt.json": "0688ca1055bb11ed74966f960a99f6cb5c7e971be836fd38011d406b74128ae7",
+    "docs/designs/course-journey/production/complete-journey-v1/replay-prompt.cjs": "1c1c1552861ab9d10ef30bb8333bb1281935e20ae9c48a1b6052b80ba49b7d64",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/appointments-desktop.json": "b4a57dec6eba13848b2ff780cf1be2ade9a858e53e3b240dec68faf816f4e796",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/appointments-mobile.json": "b57e11ae5e1ed3907645b2c72da1d278c2f0e573a092b27e4d57576cdcc1f53e",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/caring-desktop.json": "5da5496b31dada07cf8e1c58bb27ac64cbc443e889fdb17d641a2c4aac0bb469",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/caring-mobile.json": "12948b755a9b83fb4aa5457e84f3c78d2fbc5766fe5d9aeffc1f5efbd367a33b",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/choices-desktop.json": "9fec0b16bd9b760279e126ab8fff14ddf26629c08ec2491c5661162fcc5e4069",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/choices-mobile.json": "ac29c40bd4cd7a46ae0d970ab21a7b23366e297285918ffaff18562cc34d5423",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/decisions-desktop.json": "ba2015a3e3c5f553a1a6a6988f9476eb570e11a36d2eed30c261944e6c1bddca",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/decisions-mobile.json": "3d54c4cfb2f714c6004dbd816b70e536101004e2fe2c87607a8ad39a7eaa0694",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/departures-desktop.json": "bb4ebb189f208b33f8fe0d270cdaa2bb5fcce718b0d15a73bd7680426475ba80",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/departures-mobile.json": "5406226109aa05f6196f7821302259e1131af9127eda1f42cb7c854752934caa",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/everyday-desktop.json": "2e2fa5181a3f656bf8372fff99384d46f91033e9b5f8c9730638e90b5530f46a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/everyday-mobile.json": "cca92f39c2b950718b1aaff5d2108b36be6265c798ee413226c1dd5b3dd993bd",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/hospitality-desktop.json": "b06a5e5c39c94c07d389efcd2777d819b38656f543d301d91984ca7730cf02b7",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/hospitality-mobile.json": "5f351fecb2932ae938a7443fb1020e00ddda97012689847829a937340f93a2a1",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/learning-desktop.json": "d396e11522efcaaaa9b47f628e85a3934782106695d99aa9942c99f8e501d2b6",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/learning-mobile.json": "5003ed3a208b2770f9fe450bba653319835fc051d8c21926289c2c26a99980a3",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/making-desktop.json": "e0a23849ae68dac52453722f9b5c080444e3d4abe772b2e78fa6f00789616f78",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/making-mobile.json": "a1e496e2adbca009600d627c10cc1289ec13ee296966b545efbbf62778d6fd67",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/memories-desktop.json": "9abc3dec4fcfc34d296f50b4908bc25d07e6c79ba90d40172fdbd183184854f6",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/memories-mobile.json": "a3042ee1cc4c4677b4b57b3c2fcfe12d5cb86daca11211db4f2e41e485e0056b",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/messages-desktop.json": "e9292213d70d6c702069c52e998567ab6bfe36e7a8730009799c17b97b3120ff",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/messages-mobile.json": "b4760dc5798b5dadde1663d9f90745199a67f28562083cc1df534f1d4fb232fb",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/news-desktop.json": "5e5ac0c58365dfb6be01056c724220737a82df76586ecef0ab2d5281d9670fee",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/news-mobile.json": "a099265850fc5ecbc18578442903191ec783e43cbb9447c0516f8c2ff4116b1e",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/outdoors-desktop.json": "ed05a7c4d41516fa4ad35963772e5d7d3649a69f4f97cdcdc1d2c4b825ee30d2",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/outdoors-mobile.json": "c69280d698842b919b5f1f5ada975802ed137f17188207de3c1edd6c2a91d9b2",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/possibilities-desktop.json": "cfa9011bbd9304af5d376aabd57d0928db2e06e2e8b4bd5b0c2bb5b1c2aac0bb",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/possibilities-mobile.json": "f371478fd069515a5a64e3561175e940e4b1d629ce1c99e144f46f36d9e4e209",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/preparations-desktop.json": "e45ff727311cb786ec56a2c1e9b26a8063ef7e1ff8298d2ec4412d76c1376a64",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/preparations-mobile.json": "8a0f925ef76fafbcc4bc34d2f798998d247e941fb35c7b4a5709894db98b8782",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/seasons-desktop.json": "406872f042cf71183a4967ad979a00ad2b81c8d9dad545cfb0f9e58a892b2891",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/seasons-mobile.json": "ee4b91c3cd55a7cb45e35149f54cbc00472a78a34153dbc3faf5649d6ae74d52",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/stories-desktop.json": "a23c8dc95dc8c257773d998681b5de89816e9ff197444a08da6f97d5fdddd08c",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/stories-mobile.json": "4da12f095a029f904c8580d7b072b442b940e10af10b13bddff782b2ef9b7ac8",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/surprises-desktop.json": "c0897be8524ffb363cc4d9afbefe3b0e4e8e800e5ff13c0991b5f326b7118c5d",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/surprises-mobile.json": "d8a56487ce13bbeb8985d454bbbe00d46d3ca4ad970f16e8793baa2daca3b804",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit101-102.json": "1a34bd0a772d46604f506d82210ab1e000d23efbd058abb02edbce354abe4cfc",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit103-104.json": "556e6cc1bbcd1c36969423308d0dd675cca174417177c551e40927543bd7eff2",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit105-106-clean.json": "9c7baa8b682d8d0276e6793e7fadc12ce33da4ef6f428c32ea8754193fa7ed1b",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit105-106.json": "1785f5e1b72378f4e4b52953c44e515f63c95a0780653d30f560060e1dce80b9",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit107-108.json": "f638cae841d6e860d18563afa0096e39224b99fce8dec05289974213f7949b78",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit109-110.json": "0d1486a8c7b6b3a51c7577b1df0d954c87849bdd71d710d2d2c2bee1fd3d6b6d",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit111-112-full-body.json": "a0eb21cb217baf5cbfda4e15163024b908d570a43e96da21fad9b27949b50243",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit111-112.json": "1bef2eb950958d08a5c0f8348b8be5501aa477de79dd2ad7952c106a03f6ee34",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit113-114.json": "60210e33a19b7e958751f7014fdc3ddeaa9e6a16d862a52ce9322b60a76902d9",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit115-116.json": "4477bac746fa59bf75a1cb869f0678858922d2162d44bff48cca889b9aed155f",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit117-118.json": "559832fc4c0469ae21b420d04f2e9d468f61e0c82fbd5cf89073bc822d335e20",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit119-120.json": "2a10ba494f476ce959d970f850b028b7ebc47dfe6cf95fa2905cdcf18e66f9fa",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit121-122.json": "56666fca66b1db16f4e4d81f74bdfbd1ba6b9239c891bc0373d2c8d8508c9598",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit123-124.json": "05b88f35b6e36b3717ceb866507979a9d5fd8f5ecbe7f4feb8d32f61fec77e61",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit125-126.json": "0499067aa68267cc3e8fa5117ce1d01700c4b7da7982cb4f4bd22ef45974a463",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit127-128.json": "a76481786bb61485093ec6ed860726abe014c49f1997d6f3c9eb8a532dacb90a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit129-130.json": "76d7701a6ac4290eca50cdd3f258708796af256b9c870772a898961a8e206350",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit131-132.json": "0374f4d8bede995420a5877d2c539c4245b98889f257349362d0f240e339ee10",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit133-134.json": "3abe9123e0323ddc8c81e2c3fe333400cef1e309dbcc588f4e75aafe198d1cb1",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit135-136.json": "290c5ec7088d74b158dfde1702e8ccf761c59e38aaea03878d8b50ebcab7de73",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit137-138.json": "2bc29f41c96f93e1b2627862834d116e24219a60ffef8cff3536fe197140f0be",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit139-140.json": "ba0877c97e9c70e4037acd6a53f3869bbccc804e589b7d42918d48810a94c7d2",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit141-142-cutout.json": "5cf4c4edcdf89ce71f6019b06a961c7a7d45804af639cfb9da0e2ee5e4797d10",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit141-142.json": "bf7921286471ac116db09173730a2c1edf1cf297f6fe2472d05fca98a6ce1ac7",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit143-144.json": "5b6ed2c06e37be317a8bba541ba2dfe0c19ae1451b8c830b2020822dddd196c6",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit31-32.json": "168de99b7aa61f816d1eaf0cd520ef4152c444dbe2b1977cbef9b0b04f51f8eb",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit33-34.json": "5cdb53b204ea82019db2760e429032193aa2fc688cc21c38bbdfa2a45cd9efa9",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit35-36.json": "b00e6a10e46934d5eddfa1b0da5331b2fa070994ac604a4fda2fca6801e2cdde",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit37-38.json": "3a8b2234dc2d388d6da5bfd92aae549599e3dd2d45870eea23820bfd7069b61a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit39-40.json": "3124462c3767730b46dc9b9fde787d6f7d40d7047d5a90be12d9251ca04bed42",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit41-42.json": "fcee1926a1a97a2cae6df6a53bb52b61e414296ed5b0a2ebb44b6781e41c1911",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit43-44-identity.json": "3824ace82df8bb4d97a0a772f33a6145709054263e8a9d6bef79950ac9fdd272",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit43-44.json": "70844b87ea80c6efb0645f68cafc04db0375dfceccdc0566f2b26941f8b903fb",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit45-46.json": "fc3db30a20f26e517794e02d8f729de34b46b5dca431904e6e5cbc5d35999680",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit47-48.json": "422e78e2bf3cb8237fd2303ff9b2a114126333bb7d5dfeb86bd05b6ffef7011f",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit49-50.json": "8f0fb6f7414f03a6685cb6e3d2ae413d47a185e694f378fbee1f3779687eb77e",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit51-52.json": "481d70f1d6bdb2b760154788cf16dd57d28093f9c53438bf5236f542282511e5",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit53-54.json": "ef4c9704709ddc8a102e8547a931c693bf4dcd15ab0d91005e18952391e0e05a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit55-56-full-body.json": "63d45ceb27f1cbbbd95b1be50adacb6fb5ae160e53256b1ce17e523bd3d9ff6a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit55-56.json": "9c9742bd7575764a99d3c1a9c2581ab8513a07662de358698aaddd8a0dede1bf",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit57-58.json": "ecf6a738fddae53ba437f54f67e1dfbbb5a217b9b1948a3a91d59e276355d4fd",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit59-60-full-body.json": "e4ea47538de31bc55dfe9c015cf612ec586790239014a3d5dc05f3483207b4de",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit59-60.json": "39f41375e31e3a4d875fd8170318d890cf14d6cdd088ff2f10dcb676f5c1eb31",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit61-62.json": "c41f770729900b03400dbf6044a7be9c8088b3e0504a4f0285102d2371c0e47c",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit63-64.json": "861a4244c1bc38bfa3c402f08f111df067b43e24a6fabf02d368972be102dd0f",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit65-66.json": "8d9ad623eb5c93510042b6b2fbedc6436b32599122cc673ec3675d8b9c248aa5",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit67-68.json": "5d5dc08ee1da16a27fcfda0848a0da7474bf228feebabec617e29331f8c944c3",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit69-70.json": "37f2f3ccf86b491f66d31a87e0a8961d837425b09b5b12155c2e4cca363df1a9",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit71-72.json": "659f44cd061e7f2f4d65dfcf966b8443c1a970babab20e35b3627a7febc3710a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit73-74.json": "d8b9c5cb5b5d1f5116031271c4395fb635887d30ded22f8b514c514e1d10a37c",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit75-76.json": "8ccce26aca2347e4153dfb72e54cebe5d3621ee38fbf157a342144dc7bf52732",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit77-78.json": "7d3c7dcfd5eccd40eb94452cb39e7b8d6772bc86744e3ad51fa8134f23d01f1f",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit79-80.json": "bb9f208502af9960e72c4f9abbfed14469e2c15bee905c581fd610f99cd2d8b9",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit81-82-identity.json": "a096ab23e769c5e4fd750dc0d1da715c7480aaba89232f26deee74a57994db13",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit81-82.json": "d641dbbbedb4fa878e9f614bdc09af4a1a9e5f371f4d5a8def15746e4274889b",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit83-84.json": "088b60d40acb383e3560684bda222c86f34e423183ec53595c6efa967e334312",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit85-86.json": "9d9686b693bf246c560fea4d66091674d3ad1e51a98e0b13fdf84499311fd075",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit87-88.json": "383b9a535cd0a1f9f7470d14bbe53605659a5fa0a7ab9674ab02755edcdfc53c",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit89-90-clean.json": "740ffd85c3d883aa220e6ee795239178819292e05bed681d33fc6160999aedca",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit89-90.json": "83f92b5252ee950e30bd9f2efbd8f9aed7554c3cb7c0d1438f6e5caa1f9424da",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit91-92.json": "4d200575c7867442c9839d6c0ad4adb78cf40222b63cbe5528fe99abc91e5dfa",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit93-94.json": "dd2634e37a7f48e120bd2a82b442ef2a2247c16934136bd5bf7f63c87085b81e",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit95-96.json": "4dc3bdfa7482d3c1cc2617773afdc38039b03326779a47394f0aa0057dc6ede4",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit97-98.json": "2e7cc8fd38829b28c32bde6e14884c4d0ec60640e50da18c74e239000c557e1d",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/unit99-100.json": "65f003f6917f707f5bedb2b8b8cb185b556a8a7d42cab4320d2ae71b21148062",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-desktop-clean.json": "e0f7101368574a821721db23e06c65ba6bea1e306a32a00abe121f5a6e8a59fb",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-desktop.json": "0e6af7fd2aa7f9c031f37f1de59f154c7d7759ef3abee65aff7a8bdaba31646c",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-mobile-clean.json": "34129edf275e7cfc6ffc33c9da915a8ebe2f693deab68e496f40a42f2509079a",
+    "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-mobile.json": "c1d0ecee93f0babd83b7e55c5ef3ccdea582675626110fd3e96fd4e3c74a2c33",
+    "docs/designs/course-journey/production/complete-journey-v1/rules.md": "ef522af7b275ff23dd9681740e5e681fc69d4fe67a3a1ce8536e4c539b729e2d",
+    "docs/designs/course-journey/production/complete-journey-v1/seasons-desktop-receipt.json": "92507237deced2b1ed64fb31703634c6cef00423e40b4bafb13de172050fbbea",
+    "docs/designs/course-journey/production/complete-journey-v1/seasons-mobile-receipt.json": "ed72538401f3ee7b6a9de075f972c81e026be2a6a9eab6aaa083d5537cbd5566",
+    "docs/designs/course-journey/production/complete-journey-v1/selected-variants.json": "6f6f72636b6392fcd00d00d1a14149e34fa02b751249a3b57b6beae5444768aa",
+    "docs/designs/course-journey/production/complete-journey-v1/stories-desktop-receipt.json": "348ca2c0ae9090b027e0fcbacf0f8b3f1848bea762bb3e7cb3d1f86c84c48121",
+    "docs/designs/course-journey/production/complete-journey-v1/stories-mobile-receipt.json": "1763a21adfed37422b2badc86c7c48d947b74d4078b3c81dff6cd6a5ef688e1a",
+    "docs/designs/course-journey/production/complete-journey-v1/story-briefs.json": "675f4493d6acefcb196318ce253403bb66f6076888579555656df37d4e006077",
+    "docs/designs/course-journey/production/complete-journey-v1/surprises-desktop-receipt.json": "0898a0acfb0b1423237a0eeafced2410be39331f17d2de85b9080905c5e0ccff",
+    "docs/designs/course-journey/production/complete-journey-v1/surprises-mobile-receipt.json": "8b97aab76b60338637d74a9fd8ac0a08be16b8ea0d7cfbf1e3764c23ddc9537d",
+    "docs/designs/course-journey/production/complete-journey-v1/unit101-102-receipt.json": "53589faeb27890eccd33b7e45b66af61b5f929896746b86c19728194d6a93118",
+    "docs/designs/course-journey/production/complete-journey-v1/unit103-104-receipt.json": "955172996c09f0b2cbd31528980fdb4174f1fc27c84ec081490e0aba8d08d1c3",
+    "docs/designs/course-journey/production/complete-journey-v1/unit105-106-clean-receipt.json": "edd7cd10648da995a277a6eb1b8fe6fa390eaa7c81a97dee14172e44e4517361",
+    "docs/designs/course-journey/production/complete-journey-v1/unit105-106-receipt.json": "4e05eb45a1c3dbf7bd20b8a8636f253765502b89b583dc320e2577ee05f38e39",
+    "docs/designs/course-journey/production/complete-journey-v1/unit107-108-receipt.json": "1b03bb178732f0e54fc8bf925ac1e2d05a2e44d913ef94ae89be5a24e514535e",
+    "docs/designs/course-journey/production/complete-journey-v1/unit109-110-receipt.json": "54b175f67ef80fb852e0ad400b3d0bfb12e2bca0e9ccf8c88706ca9401baf9f0",
+    "docs/designs/course-journey/production/complete-journey-v1/unit111-112-full-body-receipt.json": "5c35725f3b09aec443b74406fa0662b8502230538586c3e8c4c9fee7c86f1104",
+    "docs/designs/course-journey/production/complete-journey-v1/unit111-112-receipt.json": "adae59c9de77bfe17f597a31af8ec4edaa0a589514f8fd49a0fd78e89aef8791",
+    "docs/designs/course-journey/production/complete-journey-v1/unit113-114-receipt.json": "d68e76e2ac7e29e4e69f1271ca92b8bcbb4541caec5324793280095736fbbb0f",
+    "docs/designs/course-journey/production/complete-journey-v1/unit115-116-receipt.json": "70f8f3107554a06ce8bf5dc6d8a704ddebe3ebd6129f1a7ff0b9457e0f572d6d",
+    "docs/designs/course-journey/production/complete-journey-v1/unit117-118-receipt.json": "bc74b2ad5efaaa9b2ad2688dc76c008182bfa7ec9981c7711f1ece4b5373969d",
+    "docs/designs/course-journey/production/complete-journey-v1/unit119-120-receipt.json": "9dc343f383bd3c36b1946ea07abd2413d83c6a828d03d74514dc3af0929a1037",
+    "docs/designs/course-journey/production/complete-journey-v1/unit121-122-receipt.json": "b32ddfd6786a9eef3a825476e764fe8372c317b8f60726439487ed64f4ba50c7",
+    "docs/designs/course-journey/production/complete-journey-v1/unit123-124-receipt.json": "cb3c927f960d52a141c57136169df2e0e379e6d4b7a0f24187ae134f064568c0",
+    "docs/designs/course-journey/production/complete-journey-v1/unit125-126-receipt.json": "6b310f8bb123bd57e24ae277407f28664bd5e14cdbaae39deb0b1917a94fda8b",
+    "docs/designs/course-journey/production/complete-journey-v1/unit127-128-receipt.json": "0d3b6835bf8b35b511808d9401f31c45ff372608d1e9ca26e290e47b4c2fac99",
+    "docs/designs/course-journey/production/complete-journey-v1/unit129-130-receipt.json": "afe0291a6383fba4cde7cbbebf15e4a9c705228512571782b459fb0630859cd8",
+    "docs/designs/course-journey/production/complete-journey-v1/unit131-132-receipt.json": "5cb5dc2e7f6ecae6d3d2559fa87822a6e915e37377b91bb9196a35787365efff",
+    "docs/designs/course-journey/production/complete-journey-v1/unit133-134-receipt.json": "75bfe2d963ee3fe5a4b9f833a5d89af798a8ba9c035ff7be14d9aff1cf51701f",
+    "docs/designs/course-journey/production/complete-journey-v1/unit135-136-receipt.json": "86841dfa12aead850c27e23c5373750ba707f455c0c87912d7a4cbef56f1c8e5",
+    "docs/designs/course-journey/production/complete-journey-v1/unit137-138-receipt.json": "7bb121211fec91df2a0d714eeba801ab4c0fd6de066dd42a31a591adc3821dd2",
+    "docs/designs/course-journey/production/complete-journey-v1/unit139-140-receipt.json": "6de981d6d6f8edad6e87d260def5d698caa84dc459b366edf719685d0c0ab3d9",
+    "docs/designs/course-journey/production/complete-journey-v1/unit141-142-cutout-receipt.json": "01d6d027e0f692ec1551a82c7cceb106a3748594a484c752ca0daf686c5fbe14",
+    "docs/designs/course-journey/production/complete-journey-v1/unit141-142-receipt.json": "d8b97c564996335258a3d845867b1d857b31af0cf6357af5f13ba35b182374c5",
+    "docs/designs/course-journey/production/complete-journey-v1/unit143-144-receipt.json": "cd3955174ae0d7b267b7da547d90163ab661dd0ff97df87daecf679f78879c38",
+    "docs/designs/course-journey/production/complete-journey-v1/unit31-32-receipt.json": "5b021538dcae766ab12995a18857aa0109ae0135440744673d58e23c734a88d1",
+    "docs/designs/course-journey/production/complete-journey-v1/unit33-34-receipt.json": "a2fb967c4909348966ed8bf1d724c8ee90d07a1cf9a8341623ac61332be9e56a",
+    "docs/designs/course-journey/production/complete-journey-v1/unit35-36-receipt.json": "50b0424bf5b136acffac44f2df1d13708d7437ead5fcd65305607176a81eaf3c",
+    "docs/designs/course-journey/production/complete-journey-v1/unit37-38-receipt.json": "1d475e98fedf37a89fac2e4c555c479615c0907322fd91d8e64864c3d4be5873",
+    "docs/designs/course-journey/production/complete-journey-v1/unit39-40-receipt.json": "9009d02723a79a6f7a381a1d06e8ab77cab9197a89ca7405781b7236893842ae",
+    "docs/designs/course-journey/production/complete-journey-v1/unit41-42-receipt.json": "e29a4f734f85ef84d9336a36d614f912fffe186b2ef3e3c6d6745d9016e277ab",
+    "docs/designs/course-journey/production/complete-journey-v1/unit43-44-identity-receipt.json": "9471abca1e17591e986605c083e299719b1d62b6bb09e6c07660f4d76f1dfbe9",
+    "docs/designs/course-journey/production/complete-journey-v1/unit43-44-receipt.json": "e1fe7819b413bdfaed38d8328aba283faa4a4cc39b7f441992b5d3792fe06c21",
+    "docs/designs/course-journey/production/complete-journey-v1/unit45-46-receipt.json": "eb22bed66e26a804e31d7aa0efa2ed8fd3e4639afde8384b055f670d511b42fe",
+    "docs/designs/course-journey/production/complete-journey-v1/unit47-48-receipt.json": "1daf99ff7b194dd82a8358ae6bbff69e9bd4fd6a2cf3d27806991e6d7a11ee81",
+    "docs/designs/course-journey/production/complete-journey-v1/unit49-50-receipt.json": "be36a8d88812475a6837bc888902fd6a25cb032ae26e63b1df5d8948d3753dae",
+    "docs/designs/course-journey/production/complete-journey-v1/unit51-52-receipt.json": "c0c76197f100959023cab7aded9e987c9c070e018f84682e8935b5379368dcda",
+    "docs/designs/course-journey/production/complete-journey-v1/unit53-54-receipt.json": "a1f798fb5a47041bafe8343e54d041301897af824d6d2c750df82040d255bf43",
+    "docs/designs/course-journey/production/complete-journey-v1/unit55-56-full-body-receipt.json": "e12856dd54484d659f77ed8d550a9e0e28fc33806d375784404f4c286141f0fc",
+    "docs/designs/course-journey/production/complete-journey-v1/unit55-56-receipt.json": "e52e04d3473d3b0091c602587aee1b587b9e3416b1a18422120340cbbac05b9f",
+    "docs/designs/course-journey/production/complete-journey-v1/unit57-58-receipt.json": "ed0307a37469624152957bcfba2f70bb000056f60123091f144a24d4efa7fe1a",
+    "docs/designs/course-journey/production/complete-journey-v1/unit59-60-full-body-receipt.json": "8a5b00e0f19ce4b3d7ab2173acdd7cf38f02fc28b72bf6e476c95e33f86b1e51",
+    "docs/designs/course-journey/production/complete-journey-v1/unit59-60-receipt.json": "bd0a1c425aef6e6356ed312ec0af472c9cd882504762916eb2c4c70ab3666c2c",
+    "docs/designs/course-journey/production/complete-journey-v1/unit61-62-receipt.json": "3808b0a13aca0e44d0eedfc2fdb4e91c7ea4037bb8760fb58d2d7b36b491d742",
+    "docs/designs/course-journey/production/complete-journey-v1/unit63-64-receipt.json": "749dc7bccb1511f26295c97de0a5f71f3530928672f6d2fa274c32aedfd5e401",
+    "docs/designs/course-journey/production/complete-journey-v1/unit65-66-receipt.json": "1392f2030c11509bfd9480655ba0d8dc2a25f5a15e2ee0c9acd209c9c1d1e736",
+    "docs/designs/course-journey/production/complete-journey-v1/unit67-68-receipt.json": "66cb7955af44d84cb6b85b55ceb6ab2f1de4d30ed4b5e3eb432b4eb2b15fcd58",
+    "docs/designs/course-journey/production/complete-journey-v1/unit69-70-receipt.json": "877b308502f7e7b9bdcd952123050cb1c381de33b69fd8896688b1adf8dc9cd5",
+    "docs/designs/course-journey/production/complete-journey-v1/unit71-72-receipt.json": "4e22d67250422ee635f876d34dadefed92be9d18016fff89e8ddb7e0ac8e26e4",
+    "docs/designs/course-journey/production/complete-journey-v1/unit73-74-receipt.json": "71e1ff31dee8213bb32f2d900b08df3d3847a495a7751d4cf6e0329ddb098298",
+    "docs/designs/course-journey/production/complete-journey-v1/unit75-76-receipt.json": "80c2790e944274ce58e7b64cebd1dfd8306f429a622f6bafd19ca0f2b72989ac",
+    "docs/designs/course-journey/production/complete-journey-v1/unit77-78-receipt.json": "6b7fb30553552843d4df15a9e047e34436f700d41a4540002e4ec9540fb7610e",
+    "docs/designs/course-journey/production/complete-journey-v1/unit79-80-receipt.json": "d7cf59fec420424bfdb26c84283ba0d03bb8a32f9f787a565db82f50c2de6df5",
+    "docs/designs/course-journey/production/complete-journey-v1/unit81-82-identity-receipt.json": "50e64ad55fa5eea05a0b6be441e0728b5e3b33fffdbecbab7bba221b9f214b74",
+    "docs/designs/course-journey/production/complete-journey-v1/unit81-82-receipt.json": "c934dbeb2a6f122fe4e12f6de1f717d36d701fced0e08cb0f225a3c4450ac40a",
+    "docs/designs/course-journey/production/complete-journey-v1/unit83-84-receipt.json": "0f835ae017dadb617033abaa24fc58dccd754851ae25a7a7cf762be5a265793e",
+    "docs/designs/course-journey/production/complete-journey-v1/unit85-86-receipt.json": "6f6a0d265e825fd568f8f2c2705ae84bbb4e9a25a7bf99747fa5660846dc3178",
+    "docs/designs/course-journey/production/complete-journey-v1/unit87-88-receipt.json": "22fbcc16b58bb36a172df81db0860cfed6869334f17f77d016e80a3f33aaded2",
+    "docs/designs/course-journey/production/complete-journey-v1/unit89-90-clean-receipt.json": "6a18ef842e596b422b15046abf601c0b4f0b8822aaabdaece2f3ee76c70307d5",
+    "docs/designs/course-journey/production/complete-journey-v1/unit89-90-receipt.json": "59f765dc7e8101cee0b9519693f6b26009eb8fc5d5333a749d65763937ed5465",
+    "docs/designs/course-journey/production/complete-journey-v1/unit91-92-receipt.json": "94425ea787d23be2de293823a312a4c6cc60a356bca1bc79dfd00e6058e85ab9",
+    "docs/designs/course-journey/production/complete-journey-v1/unit93-94-receipt.json": "f515280afd55c373e7d6f787550f8721c6f57509f062802f70ccda455fef6ffb",
+    "docs/designs/course-journey/production/complete-journey-v1/unit95-96-receipt.json": "6585a5456e0b7ee83c8316dda6bf4394346e78c7c78f4c9e4abfd69be11061eb",
+    "docs/designs/course-journey/production/complete-journey-v1/unit97-98-receipt.json": "9a1e8753f9c5d8dd81bc518b1c31e4ef2cf7f3a1a886cab842c4c3fc5a9d0205",
+    "docs/designs/course-journey/production/complete-journey-v1/unit99-100-receipt.json": "4e15f3faa698d81d5f88253e26344df097331c9f60427aba82142b24cb4b1624",
+    "docs/designs/course-journey/production/complete-journey-v1/woodland-desktop-clean-receipt.json": "05752358f07e2eb17c0c1c10254193ab4eed2e12bb4b2bb2b729a5cf7eeca0b9",
+    "docs/designs/course-journey/production/complete-journey-v1/woodland-desktop-receipt.json": "9876cc7f05ff3d076f7618dbaa140ab56ba0ef7387d2781f9a6164af3f55591e",
+    "docs/designs/course-journey/production/complete-journey-v1/woodland-mobile-clean-receipt.json": "8950f421aa15bdb5b6e3d232d8e46e8fd4e87c6a35188090bbb80b3a1b3aa74f",
+    "docs/designs/course-journey/production/complete-journey-v1/woodland-mobile-receipt.json": "85e48d9f0ed3ea2a6c9ea27eee3e60b9b3c114065dce5031aeb33ed78c495ed1",
+    "docs/designs/course-journey/references/approved-mobile-v1.png": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+    "unit101-102/content.js": "843cf012ec54bdea8ecb6bd43378b9efce999adcbd5257ad32212bcb01b91e7b",
+    "unit103-104/content.js": "1a1aa2ceca4792302f344e47c665ba4ae69d77fc9392d1ea2ff8d398821754ce",
+    "unit105-106/content.js": "fc2987af2d0920269c79c69b4247aa6511f3ee37730f62e007c5a6135d588b44",
+    "unit107-108/content.js": "ff522f32abcc12f39a0bab949bf8d6ef176aa3b0419fa8eaacfe2d050c408b6c",
+    "unit109-110/content.js": "e25018e4ae14453901e0b6d8279e0f590c904145ef6f568365a53a250f8b898e",
+    "unit111-112/content.js": "bf42cf559f851631e47510aa17bc5970cb4966a12ff8ad649cda38c5eaf397e5",
+    "unit113-114/content.js": "0eafc9ac6c69df5bee360342666dc23f0b41a6e9b157157d2ecb44e406a5fe34",
+    "unit115-116/content.js": "837752cb468ccaed62655631b58c3ba1efc7abdb293b2706af3588616cfed217",
+    "unit117-118/content.js": "436a50f26121fdaf2e8566fe3af9a072f23da1cb22635ca0d16d065a2844f8c8",
+    "unit119-120/content.js": "1f2ebd31b78f6ed31e3efa6b10f5b0ae5b67b8797a933cc0c9e5fc551fe761cd",
+    "unit121-122/content.js": "52dfbb8f4778d2e016cc7c974601077d18a908c1091470a7c8bb98eb83f2e7a6",
+    "unit123-124/content.js": "e635d67adabeae7f661f9cc20b73b5b2d87ab5d1001e42efe9f0e00754c77099",
+    "unit125-126/content.js": "b5d34f4b0bab904dc3c97efd5695b6698f855dbea472e298d2736584a405115e",
+    "unit127-128/content.js": "922e40739183be7155d50d9ad6f6cdf2123cf217c79b80911e4747f7ec37a7dc",
+    "unit129-130/content.js": "abde4202247916cd2ee9cfa801f82045b0183b923d5df1578029b6df7325fda5",
+    "unit131-132/content.js": "bdbcea4d60ec5544259b9f77662e6daa041c7b82f41fcbdfb2354afdfd1a5d99",
+    "unit133-134/content.js": "65e982e917e86c7bf40f1f11220a846a367ab8ec4c9426f84e7ba4bc4b69245c",
+    "unit135-136/content.js": "4db8049ad269aa4f54210ef260df23b3428d9f1832dec917f0954b09c7b62c05",
+    "unit137-138/content.js": "6835b4827ab08a7f93b80dd9b718a9bc4fc602587879adb41b29f03c201ea8de",
+    "unit139-140/content.js": "6cba03e8c7a4724e126cb2a22acc555e949e66e1b53433523946c09e7d54bc4c",
+    "unit141-142/content.js": "d7d5e8b58bc69819b2bb545aa7bd53c3c230c803105c24e6ffd9c4a5ad5644e1",
+    "unit143-144/content.js": "86888c8fe50b61990e6dcc579ac2adcd9f5cf0107b7ab602af5da95225987ba4",
+    "unit31-32/content.js": "06e7adda3127d0110e0ac10984239a9ef2fe5f144082690d7815031ee59f8e77",
+    "unit33-34/content.js": "e929310c8e0d73d5a7c2efac06fe9558b7e09df7573c17dc2e86ebc41462a67e",
+    "unit35-36/content.js": "74d8815f13420aecb2f0dfcc6bae71f10c73b691c8924e4f7337c21044fef64d",
+    "unit37-38/content.js": "a6eaf0b70c9e94ce68da11bef9fb1c37fbd97797aa277e4ce517b12247de9ae2",
+    "unit39-40/content.js": "0c2b2744da6ac50507a6a2f90180b4ced6ad27b8c2da0a99c37d3b944f8aa87b",
+    "unit41-42/content.js": "2b5dd7d7cddcfda4dc30c8913e1c90cbd8de912c840564143f2ba39486013653",
+    "unit43-44/content.js": "e970e70e28169218a8bd0be3e6c93047aa34dad1bc794b241ade9d036d25a53b",
+    "unit45-46/content.js": "b970021f50e9b21444dbc9ba86a59a04d919cd54807d994f7f6edac551fa084e",
+    "unit47-48/content.js": "5b97995077e403f7475d73bde77d5a6f99aa23c860b4c97e782e9f582957c18c",
+    "unit49-50/content.js": "bf0b1ee04115d89ebde131419375eb63b5b1b7d46efac1a258cc39075208fc36",
+    "unit51-52/content.js": "a74395a5a8c1be1637d8e47fc7ae0f22c329f0007bda12b32782f9e9d5a40d79",
+    "unit53-54/content.js": "2271a7f281de3164ec354d8fb2c3eac8cde5350d003ec53f4345124cadc0ce83",
+    "unit55-56/content.js": "79b040948ed97849a2be4f0466f68682354d9ea54d6ef80d02c36fd37dfa3f1e",
+    "unit57-58/content.js": "e85dd01e56006b5331a87cf0993be7e178edf96d0e275df293cec5dcc3c533e5",
+    "unit59-60/content.js": "3d0a0b0737901970c17da14b9b2f5d799d0dd43680d2a7a37be6e00aa8e824ac",
+    "unit61-62/content.js": "730b5396ef728765793897bd768a3eeb10795a92e92e21f7aa8a2a83ad6a6f84",
+    "unit63-64/content.js": "fa76e7c4fd2ba2d48e6c678c23e3f6a2aac735bc69114a25fe764f985d937611",
+    "unit65-66/content.js": "a3d4dc0ac05e9f7921d6c0205d720a274166f6f0a7058d4409db3e744519d713",
+    "unit67-68/content.js": "4a882fcd6770fe8e2b07efc3d1bda50d5260b8f019128625d11d007d3b978211",
+    "unit69-70/content.js": "7abeccb14261e434203a8a94391981d07a80fb07c62b8e3728b0eee4d47dab45",
+    "unit71-72/content.js": "520f0521fd2e4f0cf803e79773af3b72dd78f85374dc7168a45cc03fddd9ce0c",
+    "unit73-74/content.js": "b46f26e4687abd8a1a5f9321d3c52f1fef7d7d68bf682afd1e903e2cd1bef62c",
+    "unit75-76/content.js": "e8a63e03c44cafe130f025d288c8a54ab55bf00aad30305cd21574eb18847631",
+    "unit77-78/content.js": "559961d592d7f14f2c325f71f990ddb4de0b3de09f63bb290fb244234f768e5c",
+    "unit79-80/content.js": "780ad282509c437264e365ae8c12c459b9993f336be89c49724d1b981cf05260",
+    "unit81-82/content.js": "c1af5900e0ad26c69b0fefcdf113f7bfc7cb57e13bff9007a392efb4c0f03613",
+    "unit83-84/content.js": "b83f182ac710878fb94099ae6d8bae38a5aad7d3edcecbe1a28c582704db77cd",
+    "unit85-86/content.js": "b093407b4bcf775cf7115b8c085b5184a5073462361f7b6440fe75e3767a2385",
+    "unit87-88/content.js": "6848a89e0e50694dec6b00e75da4efe68631bbed8735f6f143d15b1272c8bc37",
+    "unit89-90/content.js": "81fd661b09846386ed62b58c208868c3ca756d6c93d5574008359a3e47eb8628",
+    "unit91-92/content.js": "dde91e93ef244883bbefd6b47fd1f089339892d65a5605c4bb98260797df49a2",
+    "unit93-94/content.js": "1b44d69e909513da59485bee987569d067897ca10df3039c4a5a3ce7e502c951",
+    "unit95-96/content.js": "862565e2227c9459777b4d4d4dc74cac450ce1193adcf1da978b64bac21fd00e",
+    "unit97-98/content.js": "f24e047db514069c6f3199d802de042e19feb4e0373e19cf222738f791092bfe",
+    "unit99-100/content.js": "544f9c7aa499d76312b59f512e9df45c7fbb5f2108ae354b23532f23d7533877"
+  },
+  "jobs": {
+    "appointments-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/appointments-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/appointments-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "appointments-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/appointments-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/appointments-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "caring-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/caring-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/caring-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "caring-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/caring-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/caring-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "choices-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/choices-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/choices-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "choices-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/choices-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/choices-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "decisions-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/decisions-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/decisions-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "decisions-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/decisions-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/decisions-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "departures-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/departures-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/departures-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "departures-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/departures-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/departures-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "everyday-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/everyday-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/everyday-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "everyday-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/everyday-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/everyday-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "hospitality-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/hospitality-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/hospitality-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "hospitality-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/hospitality-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/hospitality-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "learning-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/learning-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/learning-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "learning-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/learning-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/learning-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "making-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/making-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/making-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "making-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/making-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/making-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "memories-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/memories-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/memories-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "memories-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/memories-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/memories-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "messages-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/messages-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/messages-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "messages-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/messages-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/messages-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "news-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/news-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/news-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "news-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/news-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/news-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "outdoors-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/outdoors-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/outdoors-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "outdoors-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/outdoors-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/outdoors-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "possibilities-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/possibilities-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/possibilities-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "possibilities-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/possibilities-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/possibilities-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "preparations-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/preparations-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/preparations-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "preparations-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/preparations-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/preparations-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "seasons-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/seasons-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/seasons-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "seasons-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/seasons-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/seasons-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "stories-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/stories-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/stories-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "stories-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/stories-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/stories-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "surprises-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/surprises-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/surprises-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "surprises-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/surprises-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/surprises-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit101-102": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit101-102.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit101-102/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit101-102-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit103-104": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit103-104.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit103-104/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit103-104-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit105-106-clean": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit105-106-clean.json",
+      "references": [
+        "assets/course-journey/unit105-106-landmark-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit105-106-clean-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit105-106": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit105-106.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit105-106/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit105-106-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit107-108": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit107-108.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit107-108/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit107-108-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit109-110": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit109-110.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit109-110/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit109-110-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit111-112-full-body": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit111-112-full-body.json",
+      "references": [
+        "assets/course-journey/unit111-112-landmark-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit111-112-full-body-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit111-112": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit111-112.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit111-112/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit111-112-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit113-114": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit113-114.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit113-114/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit113-114-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit115-116": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit115-116.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit115-116/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit115-116-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit117-118": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit117-118.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit117-118/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit117-118-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit119-120": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit119-120.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit119-120/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit119-120-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit121-122": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit121-122.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit121-122/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit121-122-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit123-124": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit123-124.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit123-124/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit123-124-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit125-126": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit125-126.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit125-126/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit125-126-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit127-128": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit127-128.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit127-128/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit127-128-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit129-130": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit129-130.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit129-130/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit129-130-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit131-132": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit131-132.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit131-132/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit131-132-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit133-134": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit133-134.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit133-134/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit133-134-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit135-136": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit135-136.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit135-136/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit135-136-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit137-138": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit137-138.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit137-138/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit137-138-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit139-140": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit139-140.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit139-140/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit139-140-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit141-142-cutout": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit141-142-cutout.json",
+      "references": [
+        "assets/course-journey/unit141-142-landmark-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit141-142-cutout-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit141-142": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit141-142.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit141-142/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit141-142-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit143-144": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit143-144.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit143-144/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit143-144-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit31-32": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit31-32.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit31-32/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit31-32-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit33-34": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit33-34.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit33-34/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit33-34-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit35-36": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit35-36.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit35-36/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit35-36-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit37-38": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit37-38.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit37-38/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit37-38-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit39-40": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit39-40.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit39-40/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit39-40-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit41-42": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit41-42.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit41-42/keepsake-story-v4.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit41-42-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit43-44-identity": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit43-44-identity.json",
+      "references": [
+        "assets/course-journey/unit43-44-landmark-v1.png",
+        "assets/unit43-44/keepsake-story-v1.webp",
+        "assets/course-journey/unit41-42-landmark-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit43-44-identity-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit43-44": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit43-44.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit43-44/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit43-44-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit45-46": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit45-46.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit45-46/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit45-46-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit47-48": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit47-48.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit47-48/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit47-48-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit49-50": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit49-50.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit49-50/keepsake-story-v2.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit49-50-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit51-52": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit51-52.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit51-52/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit51-52-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit53-54": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit53-54.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit53-54/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit53-54-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit55-56-full-body": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit55-56-full-body.json",
+      "references": [
+        "assets/course-journey/unit55-56-landmark-v1.png",
+        "assets/unit55-56/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit55-56-full-body-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit55-56": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit55-56.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit55-56/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit55-56-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit57-58": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit57-58.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit57-58/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit57-58-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit59-60-full-body": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit59-60-full-body.json",
+      "references": [
+        "assets/course-journey/unit59-60-landmark-v1.png",
+        "assets/unit59-60/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit59-60-full-body-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit59-60": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit59-60.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit59-60/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit59-60-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit61-62": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit61-62.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit61-62/keepsake-story-v2.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit61-62-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit63-64": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit63-64.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit63-64/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit63-64-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit65-66": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit65-66.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit65-66/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit65-66-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit67-68": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit67-68.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit67-68/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit67-68-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit69-70": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit69-70.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit69-70/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit69-70-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit71-72": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit71-72.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit71-72/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit71-72-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit73-74": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit73-74.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit73-74/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit73-74-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit75-76": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit75-76.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit75-76/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit75-76-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit77-78": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit77-78.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit77-78/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit77-78-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit79-80": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit79-80.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit79-80/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit79-80-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit81-82-identity": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit81-82-identity.json",
+      "references": [
+        "assets/course-journey/unit81-82-landmark-v1.png",
+        "assets/unit81-82/keepsake-story-v1.webp",
+        "assets/course-journey/unit83-84-landmark-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit81-82-identity-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit81-82": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit81-82.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit81-82/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit81-82-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit83-84": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit83-84.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit83-84/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit83-84-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit85-86": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit85-86.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit85-86/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit85-86-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit87-88": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit87-88.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit87-88/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit87-88-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit89-90-clean": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit89-90-clean.json",
+      "references": [
+        "assets/course-journey/unit89-90-landmark-v1.png",
+        "assets/unit89-90/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit89-90-clean-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit89-90": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit89-90.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit89-90/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit89-90-receipt.json",
+      "selectedForRuntime": false
+    },
+    "unit91-92": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit91-92.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit91-92/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit91-92-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit93-94": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit93-94.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit93-94/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit93-94-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit95-96": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit95-96.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit95-96/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit95-96-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit97-98": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit97-98.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit97-98/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit97-98-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit99-100": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit99-100.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit99-100/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/unit99-100-receipt.json",
+      "selectedForRuntime": true
+    },
+    "woodland-desktop-clean": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-desktop-clean.json",
+      "references": [
+        "assets/course-journey/woodland-desktop-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/woodland-desktop-clean-receipt.json",
+      "selectedForRuntime": true
+    },
+    "woodland-desktop": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/woodland-desktop-receipt.json",
+      "selectedForRuntime": false
+    },
+    "woodland-mobile-clean": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-mobile-clean.json",
+      "references": [
+        "assets/course-journey/woodland-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/woodland-mobile-clean-receipt.json",
+      "selectedForRuntime": true
+    },
+    "woodland-mobile": {
+      "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/complete-journey-v1/woodland-mobile-receipt.json",
+      "selectedForRuntime": false
+    }
+  }
+}

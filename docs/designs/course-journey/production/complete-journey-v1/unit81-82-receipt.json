@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:27:19.436Z",
+  "job": "unit81-82",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/unit81-82.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-07e11dca-d685-4e46-a639-a9be0e10ad25.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit81-82/keepsake-story-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/unit81-82-landmark-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1175084,
+      "sha256": "49c1cfe6a08719bbcd6445d64ad5eb6ed4b6f8661aab976e222796f74e69d64b",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/unit81-82-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 229266,
+      "sha256": "e0e9ff4e7e0822e2f7db3ce62372a9335726f6364c5c5a7934cc65266681369f",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 851602,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          56,
+          67,
+          1231,
+          1253
+        ],
+        "normalized": [
+          0.044657097288676235,
+          0.05342902711323764,
+          0.981658692185008,
+          0.9992025518341308
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          60,
+          207,
+          1229,
+          1105
+        ],
+        "normalized": [
+          0.04784688995215311,
+          0.16507177033492823,
+          0.9800637958532695,
+          0.8811802232854864
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          60,
+          208,
+          1228,
+          1104
+        ],
+        "normalized": [
+          0.04784688995215311,
+          0.16586921850079744,
+          0.9792663476874003,
+          0.8803827751196173
+        ]
+      }
+    ]
+  }
+}

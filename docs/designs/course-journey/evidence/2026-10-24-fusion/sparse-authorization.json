@@ -1,0 +1,91 @@
+{
+  "sparseGap": {
+    "courseIds": [
+      "unit1-2",
+      "unit5-6"
+    ],
+    "hiddenControls": 0,
+    "indices": [
+      "0",
+      "2"
+    ],
+    "passages": [
+      {
+        "ariaHidden": "true",
+        "box": {
+          "bottom": 969,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 579,
+          "width": 390,
+          "x": 0,
+          "y": 579
+        },
+        "text": ""
+      }
+    ],
+    "terrain": {
+      "bottom": 1359,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 189,
+      "width": 390,
+      "x": 0,
+      "y": 189
+    },
+    "world": {
+      "bottom": 1359,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 189,
+      "width": 390,
+      "x": 0,
+      "y": 189
+    }
+  },
+  "sparseSingle": {
+    "courseIds": [
+      "unit9-10"
+    ],
+    "indices": [
+      "1"
+    ],
+    "patch": {
+      "bottom": 969,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -201,
+      "width": 390,
+      "x": 0,
+      "y": -201
+    },
+    "terrain": {
+      "bottom": 969,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -201,
+      "width": 390,
+      "x": 0,
+      "y": -201
+    },
+    "world": {
+      "bottom": 579,
+      "height": 390,
+      "left": 0,
+      "right": 390,
+      "top": 189,
+      "width": 390,
+      "x": 0,
+      "y": 189
+    }
+  },
+  "sparseEmpty": {
+    "courseControls": 0,
+    "text": "老师还没开放课程\n\n开课后，再回来看看吧。\n\n刷新课程"
+  }
+}

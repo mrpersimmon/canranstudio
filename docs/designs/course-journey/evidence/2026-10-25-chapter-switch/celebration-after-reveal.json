@@ -1,0 +1,18 @@
+{
+  "uiFixtureOnly": true,
+  "beforeReveal": {
+    "busy": "true",
+    "celebrations": []
+  },
+  "afterReveal": {
+    "busy": "false",
+    "celebrations": [
+      {
+        "id": "unit7-8",
+        "staging": "false",
+        "state": "ready",
+        "visible": "1"
+      }
+    ]
+  }
+}

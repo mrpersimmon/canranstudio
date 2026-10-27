@@ -1,0 +1,7 @@
+JOB: CHARACTER MAP SPRITE WITH TRANSPARENT BACKGROUND
+Canvas: {{canvas}}. Character(s): {{character_ids}}. Story/cast source: {{course_label}}.
+The first reference fixes the approved MAP character style and proportions. The second reference supplies the correct cast identity and story prop. If both depict the same course, keep their known identity and use the approved map's full-body treatment.
+Identity and action: {{identity_action}}.
+Use flat warm-brown rounded outlines and the approved friendly faces, around 2.2–2.6 heads tall, complete natural hands and feet, simple warm shading. Keep the identity, clothing, hairstyle and essential props from the supplied course source. Only the named pose/action may vary. Both figures must have coherent sight lines and prop interaction.
+Transparent background with real alpha; no environment, floor, ground shadow, ring, podium, card, border, text, stars, logo or UI. Keep at least 10% transparent safe padding on every side, and do not crop hair, hats, fingers, shoes or held objects. The alpha edge must be clean for placement on the existing map.
+Do not introduce an unrelated cast or use Lesson 1–2 identities for another lesson. If identity information is insufficient, the production job must be completed with approved source material before generation.

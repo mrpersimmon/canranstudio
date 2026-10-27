@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "designId": "canran-course-journey",
+  "version": "1.0.0",
+  "date": "2026-10-20",
+  "visualMaster": "approvedMobile",
+  "references": {
+    "approvedMobile": {
+      "path": "references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+      "width": 853,
+      "height": 1844,
+      "format": "png",
+      "role": "User-approved visual master; most recent set, third displayed image."
+    },
+    "brand": {
+      "path": "references/starflower.png",
+      "sha256": "626de2a7c1107bd937981157db1e390dba9f305afc25f18fd8ce7efeb90cb588",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "role": "Existing brand artwork; use unchanged."
+    },
+    "unit12": {
+      "path": "references/characters/unit1-2-source.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+      "width": 1000,
+      "height": 791,
+      "format": "webp",
+      "role": "Identity and hand-over story only; map proportions follow approvedMobile."
+    },
+    "unit34": {
+      "path": "references/characters/unit3-4-source.webp",
+      "sha256": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f",
+      "width": 980,
+      "height": 980,
+      "format": "webp",
+      "role": "Existing umbrella-story cast; do not replace with Lesson 1–2 cast."
+    },
+    "unit56": {
+      "path": "references/characters/unit5-6-source.webp",
+      "sha256": "5e14f4b2b4ec86ede7bc586e0df14de4fe50adaefc55659c799eb5b8dfbe06bd",
+      "width": 880,
+      "height": 859,
+      "format": "webp",
+      "role": "Existing teacher and new-friends cast; preserve identities."
+    },
+    "originalProduct": {
+      "path": "references/original-context/canran-current.jpg",
+      "sha256": "dbd3f4c4aa6cd5178bc4006c497256664a5ac30aef04f3deccfa59717f282282",
+      "width": 451,
+      "height": 872,
+      "format": "jpeg",
+      "role": "Historical generation context only."
+    },
+    "originalDuolingo": {
+      "path": "references/original-context/duolingo-path-official.jpg",
+      "sha256": "a949134984d48e6f091c7a4db9c024131c121ee4282edfc48a6a5e696ed72a5d",
+      "width": 1265,
+      "height": 712,
+      "format": "jpeg",
+      "role": "Historical navigation inspiration only; no copying brand or characters."
+    },
+    "originalMonument": {
+      "path": "references/original-context/monument-valley-official.jpg",
+      "sha256": "9709b300a6cd5f6cbe1a3e4f2441cdc35819c1a0923c3ef8745df6915b20864c",
+      "width": 1265,
+      "height": 712,
+      "format": "jpeg",
+      "role": "Historical spatial inspiration only; not a future generation baseline."
+    },
+    "unit49": {
+      "path": "references/characters/unit49-50-source.webp",
+      "sha256": "6cdfab520018dddacb264972804530caef3d78af2078ef3fb07eb31a71eede5d",
+      "width": 1100,
+      "height": 825,
+      "format": "webp",
+      "role": "Correct Lesson 49–50 butcher and Mrs. Bird cast, clothing, basket and wrapped purchase; use for search-result course artwork only."
+    }
+  },
+  "lockedFiles": {
+    "build-prompt.cjs": "bb56eb3be052d94def7b1b41ada00d3ec753dfc98a5884c2e615625448ab3c89",
+    "catalog-snapshot.json": "1d1d88f9f0bac4a9480dbd77d4396f547b7bee23c0bfc7e7557aeba947cfc53e",
+    "prompts/character.txt": "947309b98dec2eba88333f70f1d9b8e6712d69dd84cbc0d3b2eb8ba32048d822",
+    "prompts/desktop-home.txt": "63735cc706b672d29fc16de4a29ef3c007236829db592efed5c7e0a93f492b16",
+    "prompts/environment.txt": "aee4943bf9a98e2c05c32d011e73be00050e0d7a190962e71d237e0a5ae105a1",
+    "prompts/mobile-directory.txt": "0c4150fab21b233de106f96b18292d5d83156b8f6658fe64257be8856364c14f",
+    "prompts/mobile-home.txt": "0631225619661c5982f78f5de476e0a52f8b5345841851a753a1395bca39afc0",
+    "prompts/negative.txt": "8cd26bfa266a3de39a5e1c03c521be5acaae29299b5cf051f99702c692165d9d",
+    "prompts/style-lock.txt": "3990437413bbd67a6116dc9d396c17cd9e78f520db330f839d686985dca0b3e9",
+    "provenance/generation.json": "10b9e799efdc0d4bedc116f2c926120c2af90e82acc4550eb59e14c137aed351",
+    "provenance/original-common.txt": "2d205508c920743e73a03ec4f6685551c0af9050b41ae23fb6ed78028e2aba32",
+    "provenance/original-direction.txt": "9c5d057d4773829dcc1d897b5764070848401825001a67d1253c77a3ead02d15",
+    "provenance/original-request.txt": "74c637fdffb58b11584a263a73ca579a805b8b6de10f68fd282f247d187f0417",
+    "recipes/character-unit1-2.json": "de9cf3916f393bb0a06e25e552d66d6415881f5810bef0b996e9daa25377a315",
+    "recipes/desktop-home.json": "ecbc9f783c5bae9796aac82245ffdf7a5942ae2f90b25c040a79cc394e472ced",
+    "recipes/environment-opening.json": "0ee04c950cae2777348e27640684529a41438bbc24eeab35f864a88d16a46b47",
+    "recipes/mobile-directory.json": "e6266790f3dc38776a49253192d2e508e37e81eb86a050d520c618c4287890ea",
+    "recipes/mobile-home.json": "a800aafd3cfe93d73122ad1865c9d3f89da7726ddfdfdd39595d2ee01bd883a1",
+    "tokens.json": "5177796e37da6badf2d1f7b583e9fc0759665cfa0eba0d5cb3779794d43880d7"
+  },
+  "generationEngine": {
+    "tool": "image_gen.imagegen",
+    "maxReferenceImages": 5,
+    "seed": null,
+    "modelRevision": null
+  },
+  "jobs": {
+    "character-unit1-2": "recipes/character-unit1-2.json",
+    "desktop-home": "recipes/desktop-home.json",
+    "environment-opening": "recipes/environment-opening.json",
+    "mobile-directory": "recipes/mobile-directory.json",
+    "mobile-home": "recipes/mobile-home.json"
+  }
+}

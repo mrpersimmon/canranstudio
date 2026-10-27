@@ -1,0 +1,31 @@
+{
+  "asset": "unit9-10-ground",
+  "tool": "built-in image_gen",
+  "targetSize": [
+    1536,
+    1024
+  ],
+  "transparent_background": true,
+  "prompt": "Use case: illustration-story. Project-bound environment sprite for a children's English learning game. Create exactly ONE isolated EMPTY courtyard terrain module, target canvas 1536 x 1024 landscape 3:2, true alpha transparent background.\nReferences: image 1 and image 2 are visual-style references only: retain their warm cream limestone, coral stucco, rounded storybook game volumes, gentle painterly texture, teal greenery and warm upper-left light. Image 3 is the EXISTING character group which will later be composited by code: use it ONLY to understand the camera / foot plane and leave sufficient empty ground. DO NOT draw those or any other people.\nSubject: a friendly street-corner greeting terrace, an isolated softly rounded cream stone island base with a shallow coral sidewall. Along ONLY the far rear rim (upper half, y<0.5), a low coral garden archway suggesting a neighborhood corner. Sparse plants may occupy ONLY far outside x<0.16 or x>0.84. Broad, clean flat cream paved floor across normalized x 0.18–0.82, y 0.56–0.81. The target feet contact line for the separate original character group is y=0.72. In this entire central safe-floor rectangle do not put lamps, plants, steps, walls, pots, furniture, signs, props, or raised curbs. Floor should visibly extend behind and in front of that contact line. Flat softly rendered limestone, very subtle seams, no central decoration.\nComposition: match slightly elevated three-quarter/isometric view of the map references, but keep the central foot plane broad and open. Entire oval-ish island and rear arch silhouette must fit fully inside the canvas with at least 8% transparent margin on every side; no cropped edge. The island's full lower rim should end around y=.88. Modest overall visual complexity, beautiful compact game environment, old map's approved palette and light. Genuine transparency outside the island, gentle grounded local shadow only, no white rectangle or checkerboard baked in.\nHard exclusions: NO people, person-like objects, faces, animals, text, signage lettering, numbers, lesson labels, stars, medals, UI, paths continuing outside the island, water background, distant scenery, foreground rail blocking central feet. This is one reusable terrain sprite, not a full map and not a screenshot.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/greeting-neighbors-v1.webp"
+  ],
+  "referenceRoles": [
+    "environment style",
+    "environment style",
+    "feet plane guidance; never regenerate character"
+  ],
+  "safeFloor": {
+    "x": [
+      0.18,
+      0.82
+    ],
+    "y": [
+      0.56,
+      0.81
+    ],
+    "feetY": 0.72
+  }
+}

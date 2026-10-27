@@ -1,0 +1,19 @@
+{
+  "mode": "reduce",
+  "actualPaused": [
+    "http://127.0.0.1:4193/assets/course-journey/modules-v4/neighborhood-town-v1.webp?audit=audit72-rapid-reduced"
+  ],
+  "sequence": [
+    "opening",
+    "neighborhood",
+    "woodland"
+  ],
+  "result": {
+    "name": "final-rapid-reduce",
+    "from": "opening",
+    "to": "woodland",
+    "frames": 9,
+    "span": 0.2502439022064209,
+    "errors": []
+  }
+}

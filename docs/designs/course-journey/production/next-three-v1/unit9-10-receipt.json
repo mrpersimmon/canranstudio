@@ -1,0 +1,75 @@
+{
+  "version": "1.0",
+  "createdDate": "2026-10-22",
+  "asset": "greeting-neighbors-v1",
+  "courseId": "unit9-10",
+  "generator": "built-in image_gen.imagegen",
+  "selectedAttempt": "padding-refinement",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-80f7-77c0-ab06-610afb2f73d2/exec-8ddba8a7-3843-4538-a8f9-4fc9f8636c2d.png",
+  "outputs": [
+    {
+      "path": "assets/course-journey/greeting-neighbors-v1.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 842975,
+      "sha256": "c573e74d90b0cac1c0c0c979a4fc58e75f3bb1544ac823d813b212dee3ca035d",
+      "preservation": "Native output bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/greeting-neighbors-v1.webp",
+      "format": "webp",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 159450,
+      "sha256": "f5e40c6f0793e2662ca3d8c0f9134e855e5d0464bb302a5926279ae6461fb05b",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "hasAlpha": true,
+    "threshold": 8,
+    "visibleBoundsPixels": [
+      235,
+      243,
+      1042,
+      1066
+    ],
+    "visibleBoundsNormalized": [
+      0.18740031897926634,
+      0.1937799043062201,
+      0.8309409888357256,
+      0.8500797448165869
+    ],
+    "fullyTransparentPixels": 1130411,
+    "fullyOpaquePixels": 2420,
+    "totalPixels": 1572516
+  },
+  "placement": {
+    "anchorNormalized": [
+      0.509170653907496,
+      0.8500797448165869
+    ],
+    "anchorDescription": "Horizontal center of visible two-person group and lowest visible shoe baseline; no ground or platform baked into asset."
+  },
+  "visualReview": {
+    "status": "accepted",
+    "completeHeadHandsBagFeet": true,
+    "exactlyTwoAdults": true,
+    "correctIdentitiesAndClothing": true,
+    "warmBrownOutlinesAndSoftVolume": true,
+    "approximatelyThreeHeadsTall": true,
+    "backgroundAbsent": true,
+    "notes": "Final output is more generously framed than requested; use measured bounds to maintain consistent on-map apparent character scale. No post-generation crop, resize, recolor or alpha extraction."
+  },
+  "initialReference": {
+    "path": "docs/designs/course-journey/production/next-three-v1/unit9-10-initial.png",
+    "sha256": "8142354aa1ddbb104e1e9ab09ca2b0abb8d25e4f39ff30758ffae1ad96395605"
+  },
+  "actualRequests": "docs/designs/course-journey/production/next-three-v1/unit9-10-request.json"
+}

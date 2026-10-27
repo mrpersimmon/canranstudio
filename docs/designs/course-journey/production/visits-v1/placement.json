@@ -1,0 +1,189 @@
+{
+  "version": "visits-v1",
+  "date": "2026-10-22",
+  "source": "course-journey/chapter-layout.js",
+  "visibleAlphaThreshold": 16,
+  "characters": {
+    "unit13-14": {
+      "file": "dress-friends-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.51,
+        0.917863
+      ],
+      "bounds": [
+        0.089314,
+        0.124402,
+        0.927432,
+        0.917863
+      ]
+    },
+    "unit15-16": {
+      "file": "passport-travelers-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "anchor": [
+        0.52,
+        0.926758
+      ],
+      "bounds": [
+        0.146484,
+        0.102539,
+        0.904948,
+        0.926758
+      ]
+    },
+    "unit17-18": {
+      "file": "office-introduction-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "anchor": [
+        0.51,
+        0.959961
+      ],
+      "bounds": [
+        0.093099,
+        0.078125,
+        0.923177,
+        0.959961
+      ]
+    }
+  },
+  "scenes": {
+    "portrait": {
+      "file": "visits-mobile-v2.webp",
+      "width": 1024,
+      "height": 1536,
+      "nodes": {
+        "unit13-14": {
+          "feet": [
+            0.349,
+            0.797
+          ],
+          "width": 0.4,
+          "stars": [
+            0.349,
+            0.808
+          ],
+          "label": [
+            0.54,
+            0.86
+          ],
+          "info": {
+            "x": 0.54,
+            "offsetY": -68,
+            "after": "unit15-16"
+          }
+        },
+        "unit15-16": {
+          "feet": [
+            0.35,
+            0.46
+          ],
+          "width": 0.44,
+          "stars": [
+            0.35,
+            0.49
+          ],
+          "label": [
+            0.54,
+            0.568
+          ],
+          "info": {
+            "x": 0.54,
+            "offsetY": -12,
+            "after": "unit17-18"
+          }
+        },
+        "unit17-18": {
+          "feet": [
+            0.73,
+            0.24
+          ],
+          "width": 0.38,
+          "stars": [
+            0.73,
+            0.262
+          ],
+          "label": [
+            0.54,
+            0.316
+          ],
+          "info": {
+            "x": 0.54,
+            "offsetY": 8
+          }
+        }
+      }
+    },
+    "landscape": {
+      "file": "visits-desktop-v1.webp",
+      "width": 1374,
+      "height": 1145,
+      "nodes": {
+        "unit13-14": {
+          "feet": [
+            0.314,
+            0.768
+          ],
+          "width": 0.25,
+          "stars": [
+            0.314,
+            0.794
+          ],
+          "label": [
+            0.314,
+            0.86
+          ],
+          "info": {
+            "x": 0.314,
+            "offsetY": 4,
+            "center": true
+          }
+        },
+        "unit15-16": {
+          "feet": [
+            0.5,
+            0.52
+          ],
+          "width": 0.34,
+          "stars": [
+            0.5,
+            0.545
+          ],
+          "label": [
+            0.64,
+            0.575
+          ],
+          "info": {
+            "x": 0.64,
+            "offsetY": -20,
+            "after": "unit17-18"
+          }
+        },
+        "unit17-18": {
+          "feet": [
+            0.75,
+            0.31
+          ],
+          "width": 0.3,
+          "stars": [
+            0.75,
+            0.336
+          ],
+          "label": [
+            0.67,
+            0.375
+          ],
+          "info": {
+            "x": 0.78,
+            "offsetY": 8,
+            "center": true
+          }
+        }
+      }
+    }
+  },
+  "note": "Information stacks resolve the complete prior group recursively. Portrait 13 follows 15, which follows 17. Coordinates are measured scene tuning, not universal standards."
+}

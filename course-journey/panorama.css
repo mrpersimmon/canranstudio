@@ -1,0 +1,28 @@
+/* One native-ratio terrain image is the sole near-field scene.
+   Square stops reserve ordinary-flow rewards; the artboard stays square. */
+.journey-panorama-switch{position:relative;isolation:isolate;background:#e8edda;overflow:clip}
+.journey-panorama-layer{position:relative;z-index:1}
+.journey-panorama-layer[data-staging=true]{position:absolute;inset:0 0 auto;visibility:hidden;opacity:0;pointer-events:none}
+.journey-switch-status{position:absolute;z-index:5;top:16px;right:16px;padding:8px 14px!important;border-radius:20px;background:#fffaf0f5;box-shadow:0 3px 12px #51342220;font-size:14px}
+.journey-map-scene.journey-panorama{position:relative;padding:0;background:transparent;overflow:clip}
+.journey-world-distant{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+.journey-world{position:relative;z-index:1;isolation:isolate;width:100%;max-width:480px;margin:0 auto;overflow:clip;background:#eee5cc}
+.journey-world-terrain{position:absolute;left:0;width:100%;height:auto;max-width:none;display:block;z-index:-1;pointer-events:none;user-select:none}
+.journey-world-stop.journey-module{box-sizing:border-box;width:100%;max-width:none;aspect-ratio:var(--journey-stop-ratio,1);flex:none;padding:0 0 16px;display:flex;flex-direction:column;align-items:center}
+.journey-world-stop .journey-module-stage{box-sizing:content-box;width:100%;aspect-ratio:auto;min-height:0;height:8px;padding-top:var(--journey-figure-bottom);flex:none;position:relative}
+.journey-home .journey-world-stop .journey-landmark-select:focus-visible{outline-offset:-4px}
+.journey-world-stop .journey-story-motion{pointer-events:none}
+.journey-world-stop .journey-landmark-select[data-pressed=true] .journey-story-motion{transform:scale(.992)}
+.journey-world-ground-patch{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.journey-world-patch-source{position:absolute;left:0;display:block;width:100%;height:auto;max-width:none;pointer-events:none}
+.journey-world-stop .journey-module-character{filter:drop-shadow(0 1px 1px #50362220)}
+.journey-world-stop .journey-story-sheen{mask-size:100% 100%}
+.journey-world-stop .journey-map-stars,.journey-world-stop .journey-map-caption{z-index:2}
+.journey-world-passage{width:100%;aspect-ratio:var(--journey-stop-ratio,1);pointer-events:none}
+.journey-panorama[data-empty=true]{min-height:320px}
+@media(min-width:768px){
+ .journey-map-scene.journey-panorama{padding:24px}
+ .journey-world{max-width:560px;border-radius:22px;outline:5px solid #fffbef;box-shadow:0 8px 28px #5b614c25}
+ .journey-world-stop.journey-module{width:100%;align-self:auto}
+}
+@media(prefers-reduced-motion:reduce){.journey-world-stop .journey-landmark-select[data-pressed=true] .journey-story-motion{transform:none}}

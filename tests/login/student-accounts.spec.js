@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
+const {openMyAccount}=require('./helpers');
 const { completeActivity } = require('../support/account-course13');
 
 test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
@@ -93,7 +94,8 @@ test('重名学生独立学号及拼音加三位随机数字初始密码，首�
     await expect(student.locator('.unit-word').first()).toBeVisible();
     await student.goto('/lesson/');
     await expect(student.getByRole('heading', { name: '段晓东的课程' })).toBeVisible();
-    await student.getByRole('button', { name: '切换学生', exact: true }).click();
+    await openMyAccount(student);
+    await student.getByRole('button', { name: '退出登录', exact: true }).click();
     await student.getByLabel('学号', { exact: true }).fill(accounts[0]);
     await student.getByLabel('密码', { exact: true }).fill(initialPasswords[0]);
     await student.getByRole('button', { name: '进入我的课程' }).click();
@@ -138,7 +140,8 @@ test('手机核对多音字和 ü，必填拼音阻止部分添加；主动改�
     await setPassword(learner, 'My-first-password-2026');
     account.password = 'My-first-password-2026'; account.fresh = false;
     other = await studentLogin(browser, account);
-    await learner.getByRole('button', { name: '修改密码', exact: true }).click();
+    await openMyAccount(learner);
+    await learner.getByRole('link', { name: '修改密码', exact: true }).click();
     await learner.getByLabel('当前密码').fill('Wrong-first-password-2026');
     await learner.getByLabel('新密码', { exact: true }).fill('My-second-password-2026');
     await learner.getByLabel('再输一次新密码').fill('My-second-password-2026');

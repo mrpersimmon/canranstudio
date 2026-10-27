@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-20T17:09:20.054Z",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "useCase": "illustration-story",
+  "requestFile": "output/fronted-opt/journey-prompts/character-unit1-2-v1.0.0.request.json",
+  "requestSha256": "3e7da852e4a65d5be55726bcf69c7c5576c2f6afb66e5f10bd8363be1dd75164",
+  "request": {
+    "prompt": "Frozen design pack: canran-course-journey v1.0.0. Date anchor: 2026-10-20, Asia/Shanghai; no visible dates unless the job explicitly requires them.\n\nCANRAN JOURNEY — LOCKED ART DIRECTION v1.0.0\nUse case: ui-mockup or project asset, as explicitly stated by the job.\nThe first attached image is ALWAYS the user's approved mobile journey master. Preserve its visual identity. Additional images have explicitly declared roles. Prefer the approved master over descriptions if a subjective style choice is ambiguous. This is one chosen design being refined, not a new visual exploration.\n\nCHARACTERS\nFriendly flat 2D storybook characters, with warm dark-brown rounded outlines and simple expressive faces, placed inside the dimensional environment. Approximately 2.2–2.6 heads tall for the full-body map figures; use the approved image to judge proportions, not a literal mathematical caricature. Large readable heads, short limbs, complete hands and feet, warm skin tones, small blush, rounded noses and clear eyes. They should retain adult clothing and story identities. Do not convert them into realistic adults, babies, anime, 3D clay, glossy plastic, Pixar-like renders, or generic interchangeable mascots.\nLesson 1–2 man: brown side-parted hair, large dark rounded glasses, teal-blue jacket, warm ivory shirt, yellow tie, brown shoes.\nLesson 1–2 woman: shoulder-length brown hair with softly curled ends, ochre hat with a coral band, terracotta/coral coat, golden-yellow scarf, brown shoes.\nTheir shared red handbag with a simple gold clasp is the key prop. They face and engage with each other; the hand-over is legible. Keep both faces, hands, feet and handbag complete. Do not duplicate the prop, add limbs or accessories, or swap clothing.\nFor another lesson, use its own approved source cast and story facts. Preserve identity from that source while adapting only map scale/proportions to this master. Never reuse the Lesson 1–2 couple across every course.\n\nENVIRONMENT\nA grounded, sunlit miniature architectural journey, with soft 2.5D/isometric depth and coherent terraces. Warm ivory stone paths and rounded steps; soft salmon/peach walls and arches; terracotta roofs; pale aqua/turquoise water; jade, olive and sage vegetation; sparse small warm-yellow flowers and selection accents.\nThe architecture is dimensional; characters remain crisp warm-outline storybook art. Rounded edges, broad calm color planes, fine soft shadows and subtle matte texture. No photoreal gritty stone, hard specular plastic, excessive outlines around architecture, deep high-contrast black shadows or dense noise.\nPreserve the approved image's elevated three-quarter camera, near-parallel verticals, scale relationships and warm upper-left sunlight with shadows to the lower right. Camera wording describes the master, it does not authorize a different viewpoint.\nKeep one visually coherent connected path, arch bridges, garden edges and readable destination landings. Buildings stand on connected terrain, not floating islands or rotating planets. Water and greenery remain supporting scenery.\nOpening segment: handbag-exchange circular landing in the foreground/lower left; purple umbrella kiosk at middle right; welcoming schoolhouse with coral roof toward upper right. The approved environment is the reference, not a reason to invent new curriculum events.\n\nUI AND COMPOSITION\nPreserve the real starflower logo and the product name 灿然英语工作室. Warm paper/ivory UI, forest-green primary controls and warm-brown text. Keep text on calm high-contrast surfaces, separate from scenery.\nCourse discovery is the hero use case. Include global Lesson search and the complete authorized directory in UI mockups. All 45 demo units belong to one hub. The route is a browsing aid, not a forced learning order or access lock.\nOnly the job may change framing, responsive layout, visible UI state, course identity or landmarks. It must not change the character style, camera language, materials, lighting or overall palette.\nNever squeeze an image or UI to fill a canvas. Recompose for the exact target ratio, leave safe space for controls, and keep important characters and props intact.\nFor mockups, use crisp simplified Chinese and the exact copy in the job. Do not invent extra controls, currencies, lives, streaks, advertisements or personal information.\nFor production artwork, render NO text, lesson labels, badges, stars, student names, dates, buttons, navigation, search fields or state-dependent glow. Those are separate runtime layers.\n\nACTUAL ATTACHED REFERENCE ORDER\nImage 1: approvedMobile. User-approved visual master; most recent set, third displayed image.\nImage 2: unit12. Identity and hand-over story only; map proportions follow approvedMobile.\n\nJOB: CHARACTER MAP SPRITE WITH TRANSPARENT BACKGROUND\nCanvas: 1024 x 1024 px, transparent PNG. Character(s): Lesson 1–2 man and woman as one coherent full-body pair. Story/cast source: Lesson 1–2 礼貌小帮手.\nThe first reference fixes the approved MAP character style and proportions. The second reference supplies the correct cast identity and story prop. If both depict the same course, keep their known identity and use the approved map's full-body treatment.\nIdentity and action: Exactly the approved man with brown side-parted hair, large dark glasses, teal-blue jacket, ivory shirt, yellow tie and brown shoes; the approved woman with curled brown hair, ochre hat/coral band, terracotta coat, yellow scarf and brown shoes. They face each other and jointly hold the single red handbag with a simple gold clasp between them, smiling warmly. Preserve the approved map pose, scale, short-limbed proportions and warm outlines. Do not redesign..\nUse flat warm-brown rounded outlines and the approved friendly faces, around 2.2–2.6 heads tall, complete natural hands and feet, simple warm shading. Keep the identity, clothing, hairstyle and essential props from the supplied course source. Only the named pose/action may vary. Both figures must have coherent sight lines and prop interaction.\nTransparent background with real alpha; no environment, floor, ground shadow, ring, podium, card, border, text, stars, logo or UI. Keep at least 10% transparent safe padding on every side, and do not crop hair, hats, fingers, shoes or held objects. The alpha edge must be clean for placement on the existing map.\nDo not introduce an unrelated cast or use Lesson 1–2 identities for another lesson. If identity information is insufficient, the production job must be completed with approved source material before generation.\n\nFIXED EXCLUSIONS\nNo other product's logo, mascot, characters, exact interface or copyrighted game world. No generic space, orbit, floating-island, cinema, page-turning-book or neon-cyberpunk redesign. No new character style or wardrobe. No duplicated faces, swapped identities, missing hands, cropped hair/feet, malformed prop interaction or extra limbs.\nNo scenery behind essential text that reduces contrast. No thin unreadable text, tiny touch controls, dense UI inventory, nested cards or giant decorative heading that displaces course navigation.\nNo automatic assumption that selected means completed, that a gray marker means locked, or that five stars are awarded merely by visiting a node. No fabricated progress or dates.\nNo baked-in dynamic UI in production assets. No real student or account data. No credentials.\nMobile mockups show app content only: no phone body, bezel, OS status bar, clock, battery, home indicator, browser chrome or device shadow. Desktop mockups likewise omit browser chrome.",
+    "referenced_image_paths": [
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png",
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\characters\\unit1-2-source.webp"
+    ],
+    "transparent_background": true
+  },
+  "references": [
+    {
+      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\characters\\unit1-2-source.webp",
+      "sha256": "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826"
+    }
+  ],
+  "originalOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15a46-2c7a-7fb2-b694-3c29dd734e95/exec-31af4d99-7987-4529-9857-4ee45e702f4a.png",
+  "workspaceOutput": "assets/course-journey/handbag-couple.png",
+  "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68",
+  "byteLength": 1012838,
+  "width": 1254,
+  "height": 1254,
+  "requestedCanvas": {
+    "width": 1024,
+    "height": 1024
+  },
+  "alphaVerification": {
+    "actualAlpha": true,
+    "colorType": 6,
+    "transparentPixels": 905177,
+    "opaquePixels": 2775,
+    "partialAlphaPixels": 664564,
+    "totalPixels": 1572516,
+    "alphaNonzeroBBox": {
+      "x": 0,
+      "y": 33,
+      "width": 1238,
+      "height": 1163,
+      "rightExclusive": 1238,
+      "bottomExclusive": 1196
+    },
+    "alpha16BBox": {
+      "x": 126,
+      "y": 148,
+      "width": 1021,
+      "height": 1013,
+      "rightExclusive": 1147,
+      "bottomExclusive": 1161
+    },
+    "alpha128BBox": {
+      "x": 127,
+      "y": 149,
+      "width": 1020,
+      "height": 1011,
+      "rightExclusive": 1147,
+      "bottomExclusive": 1160
+    },
+    "edgeAlphaMax": {
+      "top": 0,
+      "right": 0,
+      "bottom": 0,
+      "left": 1
+    },
+    "normalizedMainSubjectBounds": {
+      "left": 0.10127591706539076,
+      "top": 0.11881977671451356,
+      "right": 0.9146730462519936,
+      "bottom": 0.9250398724082934
+    },
+    "notes": [
+      "Some nearly invisible alpha=1 residue extends to the left edge. This is recorded and accepted for ordinary rendering; no programmatic background removal, alpha thresholding or cropping was performed.",
+      "Use alpha>=128 subject bounds for layout rather than the complete nonzero-alpha bounds."
+    ]
+  },
+  "visualReview": {
+    "identity": "Brown side-part hair, round glasses, teal coat, yellow tie; ochre hat with coral band, curled brown hair, terracotta coat, yellow scarf.",
+    "interaction": "One red handbag with gold clasp jointly held; both complete figures with feet and headwear within canvas.",
+    "style": "Warm brown outlines, flat storybook figures; approximately 2.2-2.6 heads tall, matches approved mobile cast.",
+    "background": "No scene, text, stars, UI, ground shadow, platform or ring.",
+    "note": "Built-in saved output is 1254x1254 despite requested 1024x1024. Original output bytes and generated alpha are retained unchanged."
+  },
+  "transformations": []
+}

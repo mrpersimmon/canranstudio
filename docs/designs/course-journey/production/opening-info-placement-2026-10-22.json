@@ -1,0 +1,81 @@
+{
+  "recordedAt": "2026-10-22",
+  "scope": "opening / unit3-4 information placement; existing artwork and character anchors unchanged",
+  "runtime": "course-journey/chapter-layout.js",
+  "assetMeasurements": "course-journey/scene-layout.js",
+  "info": {
+    "portrait": {
+      "x": 0.54,
+      "offsetY": -24,
+      "after": "unit5-6"
+    },
+    "landscape": {
+      "x": 0.61,
+      "offsetY": -40,
+      "after": "unit5-6"
+    }
+  },
+  "dimensions": {
+    "mobile": {
+      "width": 140,
+      "rewardHeight": 44,
+      "labelHeight": 56,
+      "medalHit": 44
+    },
+    "desktop": {
+      "width": 208,
+      "rewardHeight": 48,
+      "labelHeight": 80,
+      "medalHit": 48
+    },
+    "gap": 6,
+    "clearance": 12,
+    "selectedRing": 5,
+    "testedLabelInset": 6
+  },
+  "placementRule": "top=max(own feet + offsetY, preceding entry bottom + clearance). For a grouped preceding entry use its full group; for legacy unit5-6 reserve its label height at its label anchor.",
+  "unchanged": [
+    "unit1-2 placement",
+    "unit3-4 art/feet/scale",
+    "unit5-6 placement",
+    "all existing illustration and medal assets",
+    "star and award data"
+  ],
+  "audit": "2026-10-22-1428-前三单元入口设计审视.md",
+  "fix": "2026-10-22-1505-首段入口修复与标准优化记录.md",
+  "visualFixtureStars": [
+    0,
+    2,
+    5
+  ],
+  "geometryViewports": [
+    [
+      320,
+      568
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      495,
+      1188
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1366,
+      768
+    ],
+    [
+      1440,
+      1024
+    ]
+  ]
+}

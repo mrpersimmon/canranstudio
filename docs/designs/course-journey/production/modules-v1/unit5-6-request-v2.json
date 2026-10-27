@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Edit this generated EMPTY school courtyard sprite only to improve framing. Preserve its exact painterly warm coral and cream stone style, school, vegetation, upper-left warm sunlight and complete flat cream courtyard floor. Output exactly landscape 1536x1024 with true alpha transparency. Reduce the overall courtyard and all its details as a coherent group so the entire SOLID platform including foliage has at least 9% clear transparent margin on the LEFT and RIGHT; preserve approximately 8% at TOP and BOTTOM. No cropping. Keep the top-down-looking flat floor broad and unobstructed at full-image x=.20..80,y=.56..80, with future feet at y=.72. Move the little school backward slightly if needed; central field must stay empty. No persons, humanoids, animals, lettering, numbers, medals, stars, furniture, lights or UI. Remove any colored ambient glow outside the silhouette; only a subtle neutral real-alpha contact shadow is acceptable. This remains a standalone EMPTY background ground sprite to be layered under separately existing characters, so do not add characters. Everything else preserved.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/.codex/generated_images/01a1693b-9472-76e0-9cb3-06739ef24f7a/exec-673521fc-aec1-4060-9d8e-b48eff8df651.png"
+  ],
+  "transparent_background": true
+}

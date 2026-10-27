@@ -16,6 +16,16 @@
 @media(max-width:360px){.brand{font-size:18px}.site-header{padding-inline:12px}h1{font-size:26px}.album-heading{padding-inline:4px}.pagination{gap:8px}.pagination .button{font-size:17px;padding:9px 13px}.modal-actions .button{font-size:15px;padding:9px 12px}.directory-row{gap:7px}.directory-row>img{width:56px}.directory-row strong{font-size:18px}.directory-row em{font-size:11px}.directory-row>svg{display:none}}
 @media(prefers-reduced-motion:reduce){.button{transition:none}}
 
+.album-collection-count{font:14px/1.6 'Student Shell','Microsoft YaHei',sans-serif;color:#85705b;margin-top:8px}
+.directory-thumb{width:92px;height:90px;flex:none;display:flex;align-items:center;justify-content:center}
+.directory-thumb>img{width:100%;height:100%;object-fit:contain}
+.directory-row>span:nth-child(2){min-width:0}.directory-row strong{overflow-wrap:anywhere}
+.thumbnail-error{display:flex;flex-direction:column;align-items:center;gap:6px;color:#85705b}.thumbnail-error small{font:12px/1.4 sans-serif;text-align:center}
+.directory-history{border:1px solid #d9cdbb;border-radius:14px;margin:0 0 18px;padding:0 12px}.directory-history>summary{cursor:pointer;min-height:44px;padding:10px 0;font-size:18px}.directory-history>p{font:14px/1.6 sans-serif;color:#85705b;margin:8px 0 16px}.directory-history .directory-list{margin-bottom:12px}.history-card-label{margin-right:auto;font-size:18px;color:#85705b}
+.directory-modal .modal-heading{position:sticky;top:0;background:#fcf9ef;z-index:2;padding-block:4px 10px}
+@media(max-width:700px){.directory-thumb{width:68px;height:74px}.album-collection-count{font-size:12px;max-width:210px}}
+@media(max-width:360px){.directory-thumb{width:48px;height:62px}.directory-row strong{font-size:17px}.directory-stars{font-size:17px}.directory-stars img{width:20px;height:20px}}
+
 .photo-corner{position:absolute;width:9%;height:auto;pointer-events:none;z-index:4}.corner-0{left:-2.7%;top:-4.5%}.corner-1{right:-2.7%;top:-4.5%;transform:rotate(90deg)}.corner-2{right:-2.7%;bottom:-4.5%;transform:rotate(180deg)}.corner-3{left:-2.7%;bottom:-4.5%;transform:rotate(270deg)}
 .brand{text-shadow:.014em 0 currentColor,-.014em 0 currentColor}
 

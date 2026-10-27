@@ -1,0 +1,366 @@
+{
+  "date": "2026-10-20",
+  "purpose": "Design inventory only; runtime course authorization and progress must come from the existing backend.",
+  "courses": [
+    {
+      "id": "unit1-2",
+      "label": "Lesson 1–2",
+      "title": "礼貌小帮手",
+      "region": 1,
+      "segment": 1,
+      "route": "/unit1-2/"
+    },
+    {
+      "id": "unit3-4",
+      "label": "Lesson 3–4",
+      "title": "雨伞认领小帮手",
+      "region": 1,
+      "segment": 1,
+      "route": "/unit3-4/"
+    },
+    {
+      "id": "unit5-6",
+      "label": "Lesson 5–6",
+      "title": "新朋友见面会",
+      "region": 1,
+      "segment": 1,
+      "route": "/unit5-6/"
+    },
+    {
+      "id": "unit7-8",
+      "label": "Lesson 7–8",
+      "title": "新朋友采访站",
+      "region": 1,
+      "segment": 2,
+      "route": "/unit7-8/"
+    },
+    {
+      "id": "unit9-10",
+      "label": "Lesson 9–10",
+      "title": "街角问候站",
+      "region": 1,
+      "segment": 2,
+      "route": "/unit9-10/"
+    },
+    {
+      "id": "unit11-12",
+      "label": "Lesson 11–12",
+      "title": "失物招领小侦探",
+      "region": 1,
+      "segment": 2,
+      "route": "/unit11-12/"
+    },
+    {
+      "id": "unit13-14",
+      "label": "Lesson 13–14",
+      "title": "新衣配色屋",
+      "region": 1,
+      "segment": 3,
+      "route": "/unit13-14/"
+    },
+    {
+      "id": "unit15-16",
+      "label": "Lesson 15–16",
+      "title": "护照小检查站",
+      "region": 1,
+      "segment": 3,
+      "route": "/unit15-16/"
+    },
+    {
+      "id": "unit17-18",
+      "label": "Lesson 17–18",
+      "title": "办公室探访记",
+      "region": 1,
+      "segment": 3,
+      "route": "/unit17-18/"
+    },
+    {
+      "id": "unit19-20",
+      "label": "Lesson 19–20",
+      "title": "冰淇淋休息站",
+      "region": 2,
+      "segment": 4,
+      "route": "/unit19-20/"
+    },
+    {
+      "id": "unit21-22",
+      "label": "Lesson 21–22",
+      "title": "寻物交接站",
+      "region": 2,
+      "segment": 4,
+      "route": "/unit21-22/"
+    },
+    {
+      "id": "unit23-24",
+      "label": "Lesson 23–24",
+      "title": "房间寻物队",
+      "region": 2,
+      "segment": 4,
+      "route": "/unit23-24/"
+    },
+    {
+      "id": "unit25-26",
+      "label": "Lesson 25–26",
+      "title": "厨房探访记",
+      "region": 2,
+      "segment": 5,
+      "route": "/unit25-26/"
+    },
+    {
+      "id": "unit27-28",
+      "label": "Lesson 27–28",
+      "title": "客厅发现之旅",
+      "region": 2,
+      "segment": 5,
+      "route": "/unit27-28/"
+    },
+    {
+      "id": "unit29-30",
+      "label": "Lesson 29–30",
+      "title": "房间整理行动",
+      "region": 2,
+      "segment": 5,
+      "route": "/unit29-30/"
+    },
+    {
+      "id": "unit31-32",
+      "label": "Lesson 31–32",
+      "title": "花园观察小队",
+      "region": 2,
+      "segment": 6,
+      "route": "/unit31-32/"
+    },
+    {
+      "id": "unit33-34",
+      "label": "Lesson 33–34",
+      "title": "晴天河畔发现之旅",
+      "region": 2,
+      "segment": 6,
+      "route": "/unit33-34/"
+    },
+    {
+      "id": "unit35-36",
+      "label": "Lesson 35–36",
+      "title": "村庄相册探险",
+      "region": 2,
+      "segment": 6,
+      "route": "/unit35-36/"
+    },
+    {
+      "id": "unit37-38",
+      "label": "Lesson 37–38",
+      "title": "书架制作小工坊",
+      "region": 3,
+      "segment": 7,
+      "route": "/unit37-38/"
+    },
+    {
+      "id": "unit39-40",
+      "label": "Lesson 39–40",
+      "title": "花瓶安放小帮手",
+      "region": 3,
+      "segment": 7,
+      "route": "/unit39-40/"
+    },
+    {
+      "id": "unit41-42",
+      "label": "Lesson 41–42",
+      "title": "购物袋里的发现",
+      "region": 3,
+      "segment": 7,
+      "route": "/unit41-42/"
+    },
+    {
+      "id": "unit43-44",
+      "label": "Lesson 43–44",
+      "title": "茶具躲猫猫",
+      "region": 3,
+      "segment": 8,
+      "route": "/unit43-44/"
+    },
+    {
+      "id": "unit45-46",
+      "label": "Lesson 45–46",
+      "title": "一封难读的信",
+      "region": 3,
+      "segment": 8,
+      "route": "/unit45-46/"
+    },
+    {
+      "id": "unit47-48",
+      "label": "Lesson 47–48",
+      "title": "一杯咖啡的心意",
+      "region": 3,
+      "segment": 8,
+      "route": "/unit47-48/"
+    },
+    {
+      "id": "unit49-50",
+      "label": "Lesson 49–50",
+      "title": "晚餐采购大冒险",
+      "region": 3,
+      "segment": 9,
+      "route": "/unit49-50/"
+    },
+    {
+      "id": "unit51-52",
+      "label": "Lesson 51–52",
+      "title": "希腊四季明信片",
+      "region": 3,
+      "segment": 9,
+      "route": "/unit51-52/"
+    },
+    {
+      "id": "unit53-54",
+      "label": "Lesson 53–54",
+      "title": "天气观察站",
+      "region": 3,
+      "segment": 9,
+      "route": "/unit53-54/"
+    },
+    {
+      "id": "unit55-56",
+      "label": "Lesson 55–56",
+      "title": "索耶家的一天",
+      "region": 4,
+      "segment": 10,
+      "route": "/unit55-56/"
+    },
+    {
+      "id": "unit57-58",
+      "label": "Lesson 57–58",
+      "title": "今天不一样",
+      "region": 4,
+      "segment": 10,
+      "route": "/unit57-58/"
+    },
+    {
+      "id": "unit59-60",
+      "label": "Lesson 59–60",
+      "title": "别忘了找零",
+      "region": 4,
+      "segment": 10,
+      "route": "/unit59-60/"
+    },
+    {
+      "id": "unit61-62",
+      "label": "Lesson 61–62",
+      "title": "给 Jimmy 请医生",
+      "region": 4,
+      "segment": 11,
+      "route": "/unit61-62/"
+    },
+    {
+      "id": "unit63-64",
+      "label": "Lesson 63–64",
+      "title": "Jimmy 好些了",
+      "region": 4,
+      "segment": 11,
+      "route": "/unit63-64/"
+    },
+    {
+      "id": "unit65-66",
+      "label": "Lesson 65–66",
+      "title": "Jill 的晚间约定",
+      "region": 4,
+      "segment": 11,
+      "route": "/unit65-66/"
+    },
+    {
+      "id": "unit67-68",
+      "label": "Lesson 67–68",
+      "title": "街角的周末消息",
+      "region": 4,
+      "segment": 12,
+      "route": "/unit67-68/"
+    },
+    {
+      "id": "unit69-70",
+      "label": "Lesson 69–70",
+      "title": "赛车日的时光相册",
+      "region": 4,
+      "segment": 12,
+      "route": "/unit69-70/"
+    },
+    {
+      "id": "unit71-72",
+      "label": "Lesson 71–72",
+      "title": "电话里的昨天",
+      "region": 4,
+      "segment": 12,
+      "route": "/unit71-72/"
+    },
+    {
+      "id": "unit73-74",
+      "label": "Lesson 73–74",
+      "title": "街角的短语手册",
+      "region": 5,
+      "segment": 13,
+      "route": "/unit73-74/"
+    },
+    {
+      "id": "unit75-76",
+      "label": "Lesson 75–76",
+      "title": "鞋店里的时间线索",
+      "region": 5,
+      "segment": 13,
+      "route": "/unit75-76/"
+    },
+    {
+      "id": "unit77-78",
+      "label": "Lesson 77–78",
+      "title": "诊所里的预约时间",
+      "region": 5,
+      "segment": 13,
+      "route": "/unit77-78/"
+    },
+    {
+      "id": "unit79-80",
+      "label": "Lesson 79–80",
+      "title": "一起写购物清单",
+      "region": 5,
+      "segment": 14,
+      "route": "/unit79-80/"
+    },
+    {
+      "id": "unit81-82",
+      "label": "Lesson 81–82",
+      "title": "晚餐前的小意外",
+      "region": 5,
+      "segment": 14,
+      "route": "/unit81-82/"
+    },
+    {
+      "id": "unit83-84",
+      "label": "Lesson 83–84",
+      "title": "出发前的行李箱",
+      "region": 5,
+      "segment": 14,
+      "route": "/unit83-84/"
+    },
+    {
+      "id": "unit85-86",
+      "label": "Lesson 85–86",
+      "title": "电影院外聊巴黎",
+      "region": 5,
+      "segment": 15,
+      "route": "/unit85-86/"
+    },
+    {
+      "id": "unit87-88",
+      "label": "Lesson 87–88",
+      "title": "修理厂里的进度单",
+      "region": 5,
+      "segment": 15,
+      "route": "/unit87-88/"
+    },
+    {
+      "id": "unit89-90",
+      "label": "Lesson 89–90",
+      "title": "看房时的时间线索",
+      "region": 5,
+      "segment": 15,
+      "route": "/unit89-90/"
+    }
+  ]
+}

@@ -1,0 +1,548 @@
+{
+  "date": "2026-10-26",
+  "scope": "Lesson25-48, unchanged original characters in four continuous 1:3 environments",
+  "worlds": {
+    "home": {
+      "file": "modules-v6/home-interior-v3.webp",
+      "png": "modules-v6/home-interior-v3.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit25-26",
+        "unit27-28",
+        "unit29-30"
+      ],
+      "floor": [
+        0.32,
+        0.48,
+        0.72,
+        0.61
+      ],
+      "patchRadii": [
+        0.26,
+        0.07
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit25-26": {
+          "source": {
+            "file": "kitchen-host-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.517544,
+              0.95614
+            ],
+            "bounds": [
+              0.104466,
+              0.047847,
+              0.930622,
+              0.95614
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.39634787452947445,
+            "visualBottom": 0.56,
+            "floor": [
+              0.32,
+              0.48,
+              0.72,
+              0.61
+            ],
+            "patchRadii": [
+              0.26,
+              0.07
+            ]
+          }
+        },
+        "unit27-28": {
+          "source": {
+            "file": "living-room-host-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.510766,
+              0.956938
+            ],
+            "bounds": [
+              0.062201,
+              0.049442,
+              0.95933,
+              0.956938
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5000001983479817,
+              0.56
+            ],
+            "width": 0.39669596339818575,
+            "visualBottom": 0.56,
+            "floor": [
+              0.32,
+              0.48,
+              0.72,
+              0.61
+            ],
+            "patchRadii": [
+              0.26,
+              0.07
+            ]
+          }
+        },
+        "unit29-30": {
+          "source": {
+            "file": "tidy-room-pair-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.520335,
+              0.964115
+            ],
+            "bounds": [
+              0.090112,
+              0.047847,
+              0.950558,
+              0.964115
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.3928981477035103,
+            "visualBottom": 0.56,
+            "floor": [
+              0.32,
+              0.48,
+              0.72,
+              0.61
+            ],
+            "patchRadii": [
+              0.26,
+              0.07
+            ]
+          }
+        }
+      }
+    },
+    "outdoors": {
+      "file": "modules-v6/outdoors-riverwalk-v1.webp",
+      "png": "modules-v6/outdoors-riverwalk-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit31-32",
+        "unit33-34",
+        "unit35-36"
+      ],
+      "floors": {
+        "unit31-32": [
+          0.32,
+          0.49,
+          0.68,
+          0.61
+        ],
+        "unit33-34": [
+          0.29,
+          0.49,
+          0.73,
+          0.61
+        ],
+        "unit35-36": [
+          0.34,
+          0.49,
+          0.7,
+          0.61
+        ]
+      },
+      "patchRadii": [
+        0.25,
+        0.06
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit31-32": {
+          "source": {
+            "file": "unit31-32-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5382775119617225,
+              0.9210526315789473
+            ],
+            "bounds": [
+              0.11722488038277512,
+              0.1339712918660287,
+              0.9593301435406698,
+              0.9210526315789473
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4573860182370821,
+            "visualBottom": 0.56,
+            "floor": [
+              0.32,
+              0.49,
+              0.68,
+              0.61
+            ],
+            "patchRadii": [
+              0.25,
+              0.06
+            ]
+          }
+        },
+        "unit33-34": {
+          "source": {
+            "file": "unit33-34-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5023923444976076,
+              0.9242424242424242
+            ],
+            "bounds": [
+              0.02073365231259968,
+              0.11881977671451356,
+              0.9840510366826156,
+              0.9242424242424242
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.446970297029703,
+            "visualBottom": 0.56,
+            "floor": [
+              0.29,
+              0.49,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.25,
+              0.06
+            ]
+          }
+        },
+        "unit35-36": {
+          "source": {
+            "file": "unit35-36-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5027910685805422,
+              0.9617224880382775
+            ],
+            "bounds": [
+              0.09250398724082935,
+              0.08532695374800638,
+              0.9130781499202552,
+              0.9617224880382775
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.41077343039126474,
+            "visualBottom": 0.56,
+            "floor": [
+              0.34,
+              0.49,
+              0.7,
+              0.61
+            ],
+            "patchRadii": [
+              0.25,
+              0.06
+            ]
+          }
+        }
+      }
+    },
+    "making": {
+      "file": "modules-v6/making-workshop-v2.webp",
+      "png": "modules-v6/making-workshop-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit37-38",
+        "unit39-40",
+        "unit41-42"
+      ],
+      "floor": [
+        0.27,
+        0.47,
+        0.75,
+        0.61
+      ],
+      "patchRadii": [
+        0.29,
+        0.08
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit37-38": {
+          "source": {
+            "file": "unit37-38-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5047846889952152,
+              0.9027113237639554
+            ],
+            "bounds": [
+              0.06618819776714513,
+              0.21770334928229665,
+              0.9433811802232854,
+              0.9027113237639554
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5255413271245634,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        },
+        "unit39-40": {
+          "source": {
+            "file": "unit39-40-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49800637958532695,
+              0.9242424242424242
+            ],
+            "bounds": [
+              0.03668261562998405,
+              0.11004784688995216,
+              0.9593301435406698,
+              0.9242424242424242
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.442154750244858,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        },
+        "unit41-42": {
+          "source": {
+            "file": "unit41-42-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.507177033492823,
+              0.9529505582137161
+            ],
+            "bounds": [
+              0.08771929824561403,
+              0.0733652312599681,
+              0.9266347687400319,
+              0.9529505582137161
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4092837715321849,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        }
+      }
+    },
+    "hospitality": {
+      "file": "modules-v6/hospitality-sunroom-v2.webp",
+      "png": "modules-v6/hospitality-sunroom-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit43-44",
+        "unit45-46",
+        "unit47-48"
+      ],
+      "floor": [
+        0.29,
+        0.48,
+        0.73,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.07
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit43-44": {
+          "source": {
+            "file": "unit43-44-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5187400318979266,
+              0.9401913875598086
+            ],
+            "bounds": [
+              0.05582137161084529,
+              0.07177033492822966,
+              0.981658692185008,
+              0.9401913875598086
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4145454545454545,
+            "visualBottom": 0.56,
+            "floor": [
+              0.29,
+              0.48,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.07
+            ]
+          }
+        },
+        "unit45-46": {
+          "source": {
+            "file": "unit45-46-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5147527910685805,
+              0.9130781499202552
+            ],
+            "bounds": [
+              0.05980861244019139,
+              0.12599681020733652,
+              0.9696969696969697,
+              0.9130781499202552
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4573860182370821,
+            "visualBottom": 0.56,
+            "floor": [
+              0.29,
+              0.48,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.07
+            ]
+          }
+        },
+        "unit47-48": {
+          "source": {
+            "file": "unit47-48-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5167464114832536,
+              0.9625199362041468
+            ],
+            "bounds": [
+              0.06299840510366826,
+              0.10845295055821372,
+              0.970494417862839,
+              0.9625199362041468
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4215126050420168,
+            "visualBottom": 0.56,
+            "floor": [
+              0.29,
+              0.48,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.07
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "personFailure": {
+    "stops": [
+      {
+        "id": "unit1-2",
+        "state": "ready"
+      },
+      {
+        "id": "unit3-4",
+        "state": "error"
+      },
+      {
+        "id": "unit5-6",
+        "state": "ready"
+      }
+    ],
+    "world": "ready"
+  },
+  "personRecovered": {
+    "stops": [
+      {
+        "id": "unit1-2",
+        "state": "ready"
+      },
+      {
+        "id": "unit3-4",
+        "state": "ready"
+      },
+      {
+        "id": "unit5-6",
+        "state": "ready"
+      }
+    ],
+    "world": "ready"
+  }
+}

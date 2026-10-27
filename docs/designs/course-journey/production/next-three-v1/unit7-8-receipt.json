@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-22",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "useCase": "illustration-story",
+  "request": "unit7-8-request.json",
+  "references": [
+    {
+      "order": 1,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "order": 2,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "order": 3,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit7-8/keepsake-story-v1.webp",
+      "sha256": "4ef63b50f8cd719ca4dabb1247eb69c513bb12be61873942376a9a5a7f566e2e"
+    },
+    {
+      "order": 4,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit7-8/cast-sophie-v1.webp",
+      "sha256": "631b7d66ad8360263cf33dc8bb4d828d0f4eb744720a2ed70c10f9aa883c9735"
+    }
+  ],
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-2e0f-77b1-bc08-cfa620431dc1/exec-69ce9632-3a90-4d2a-8705-bca8853a3d2f.png",
+  "output": "assets/course-journey/interview-couple-v1.png",
+  "width": 1254,
+  "height": 1254,
+  "alpha": true,
+  "transparentPixels": 832028,
+  "opaquePixels": 3057,
+  "alphaBounds": {
+    "threshold": 0,
+    "pixels": [
+      25,
+      41,
+      1194,
+      1224
+    ],
+    "normalized": [
+      0.019936,
+      0.032695,
+      0.952153,
+      0.976077
+    ]
+  },
+  "alphaCoreBounds": {
+    "threshold": 16,
+    "pixels": [
+      134,
+      93,
+      1170,
+      1222
+    ],
+    "normalized": [
+      0.106858,
+      0.074163,
+      0.933014,
+      0.974482
+    ]
+  },
+  "footAnchor": {
+    "normalized": [
+      0.519936,
+      0.974482
+    ],
+    "basis": "水平中心取非透明主体包围盒中心，脚底取 alpha>=16 主体底边；接地时保持双鞋原始基线。"
+  },
+  "sha256": "96d69b0c493d8f2498e810423e6d0d31a2a8e18ea6582e5fc8ccc122e6251575",
+  "web": {
+    "path": "assets/course-journey/interview-couple-v1.webp",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 194328,
+    "sha256": "eaebe41691113fb754db886352183d7ada8d55e87480edcfe0db16eea09f9843",
+    "encoding": {
+      "format": "webp",
+      "quality": 92,
+      "alphaQuality": 100,
+      "resize": false,
+      "crop": false
+    }
+  },
+  "visualReview": "已目视检查：Robert 左侧棕色侧分短发、赭黄开衫、奶油衬衫、蓝灰长裤、棕鞋，手持素面棕色笔记本；Sophie 右侧赤褐波波头、青绿衬衣、珊瑚裙、棕平鞋，抬手交谈。双人完整头手脚，粗暖棕轮廓、紧凑圆润约三头身，与首课资产保持同一绘本方向。无平台建筑文字、星星金章、旗帜或制服。生成图底部留白小于请求值，保存原生 alpha，不裁剪、不抠图、不绘制。"
+}

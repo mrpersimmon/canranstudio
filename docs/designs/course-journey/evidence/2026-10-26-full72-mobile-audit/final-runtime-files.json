@@ -1,0 +1,216 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "files": [
+    {
+      "file": "course-journey/App.jsx",
+      "bytes": 26538,
+      "sha256": "39185001599db7c48aeab203f4a3f3cea8f3924f2cc374904d973677e5ab2281"
+    },
+    {
+      "file": "course-journey/Landmark.jsx",
+      "bytes": 6011,
+      "sha256": "c9049f737201a670d6d968c9dc295e7b313dea50c3985718305c40c348c75853"
+    },
+    {
+      "file": "course-journey/ModuleJourney.jsx",
+      "bytes": 2318,
+      "sha256": "4cfc63f44f8dfccaa4f818cbdc5f5e3b3e965bbb92fe878adba897b09016f477"
+    },
+    {
+      "file": "course-journey/PanoramaJourney.jsx",
+      "bytes": 6354,
+      "sha256": "8a82ea87e25dd760c702e732fbe71cd5b7aab32667eff25d3529259cc23da066"
+    },
+    {
+      "file": "course-journey/route-worlds.js",
+      "bytes": 3942,
+      "sha256": "ca487343771b36e6e284ed82b1ad0cf581f372706c774f395bf137b18dfbcf4d"
+    },
+    {
+      "file": "course-journey/remaining-route-worlds.json",
+      "bytes": 8619,
+      "sha256": "1b3ff5ca20caaf19cca5e3f3898e42d7ca8eafee7c2fdf5e7a4c9f47ae90a302"
+    },
+    {
+      "file": "course-journey/mobile-audit-worlds.json",
+      "bytes": 1393,
+      "sha256": "9568c005dd6376e03dbd49f92b82e1b75da154dd7ce63c1501970136ae30ce5b"
+    },
+    {
+      "file": "course-journey/styles.css",
+      "bytes": 22633,
+      "sha256": "3f9b1e06ddf5b2ea238723318710e075947e5ef2a144984eb642c81e80f03fed"
+    },
+    {
+      "file": "course-journey/panorama.css",
+      "bytes": 2773,
+      "sha256": "ff82f5cbe9c1cf2275043e6f480fbfa14422b23c06ed7220dbb2567dd4b56a45"
+    },
+    {
+      "file": "course-journey/modules.css",
+      "bytes": 2693,
+      "sha256": "aa600a799f05d81923288646dd8f0db21473d6bd449f32bc13c32be82644cbcb"
+    },
+    {
+      "file": "course-journey/effects.css",
+      "bytes": 4582,
+      "sha256": "9d9d34aa29d3a684c0e52257e81351af3b5002c6733f7191ed2e72af1eda3ad6"
+    },
+    {
+      "file": "course-journey/use-map-layout.js",
+      "bytes": 3962,
+      "sha256": "a4520f0a2c911b026b5cfb0ce8a4f83a4642549118958c088d1cfaf39e07aeb2"
+    },
+    {
+      "file": "course-journey/module-readiness.js",
+      "bytes": 894,
+      "sha256": "4002849938701fae8505e640d28416811213f10603c28d72c8c167751cb58448"
+    },
+    {
+      "file": "course-journey/model.js",
+      "bytes": 3157,
+      "sha256": "c9483cf243481aca2fe99ff178418a06723a2f4ff930af0378812dbc327edebc"
+    },
+    {
+      "file": "tests/support/journey-modules.js",
+      "bytes": 16177,
+      "sha256": "f1cdf2e15869305160a779d7bc391712906b079c811f71a9fbc042250b3fdb69"
+    },
+    {
+      "file": "tests/support/journey-viewports.json",
+      "bytes": 6676,
+      "sha256": "ad831a1d56891db2718735efb9d2e59a634e44bcb48bb7ccb41be3fb31458745"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/opening-mobile-clearance-v2.webp",
+      "bytes": 309936,
+      "sha256": "f8b501b649069ec3f4d96463dafea36c7f839c90dbb859428cc6d7c06a236a4b"
+    },
+    {
+      "file": "assets/course-journey/modules-v4/neighborhood-town-v1.webp",
+      "bytes": 475830,
+      "sha256": "6e58d2a13912da9ff7b6e5d3d50fab79361d42be1bfc048630c5e8a800c322ac"
+    },
+    {
+      "file": "assets/course-journey/modules-v5/visits-gallery-v1.webp",
+      "bytes": 393810,
+      "sha256": "b3455251e6ae4f93f3472e74836b844814229d8cfe582571f5a21b4b9b2309f7"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/kindness-mobile-clearance-v1.webp",
+      "bytes": 429656,
+      "sha256": "38b7a802f7b96c1451421e308aaac3118ce1f5ad647af55400a00146e47fda98"
+    },
+    {
+      "file": "assets/course-journey/modules-v6/home-interior-v3.webp",
+      "bytes": 276052,
+      "sha256": "f52d09f8fdea300884af512ac3a0dd39e0a7aec8701c7dc57ebe8637e2ba4d40"
+    },
+    {
+      "file": "assets/course-journey/modules-v6/outdoors-riverwalk-v1.webp",
+      "bytes": 526300,
+      "sha256": "cfb897a12a0481ed9240d04f9cfc5039a92144cc64024a23f68ca15f1bfb108e"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/making-mobile-clearance-v1.webp",
+      "bytes": 435982,
+      "sha256": "c999977e08318356e47a4013d0ed4da5f10cc524abcafe9496eb3158226fd5f1"
+    },
+    {
+      "file": "assets/course-journey/modules-v6/hospitality-sunroom-v2.webp",
+      "bytes": 422980,
+      "sha256": "ee592ffd2c2423b1f90862ed510c6d1af6f5cd0b09b394b1cd55c070453aee3a"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/seasons-market-v2.webp",
+      "bytes": 501112,
+      "sha256": "2f2fbf89f0ce0bc7de3fb54ce4badcdd8c4f21fb1313409bdf2ce27dfd88ec89"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/everyday-mobile-clearance-v1.webp",
+      "bytes": 456306,
+      "sha256": "f0499a9eea1b95784054c8904299b0936d57da06c3c9826f00a39edc7ee7537d"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/caring-mobile-clearance-v1.webp",
+      "bytes": 502720,
+      "sha256": "a0e299e3df7e47fffa98b09ab22d9f5ece732c3232bbb9846880f0df4688b392"
+    },
+    {
+      "file": "assets/course-journey/modules-v8/memories-mobile-clearance-v1.webp",
+      "bytes": 461730,
+      "sha256": "b6ab9dae1ea09cd6470437ea0e36893195a69033ff4a083946ef1f9535f32790"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/appointments-street-v2.webp",
+      "bytes": 495808,
+      "sha256": "caf4036ee4af6439092ae32daeec3ad2a406d8b30771e255d717fdd6cedbe8f6"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/preparations-home-v3.webp",
+      "bytes": 355918,
+      "sha256": "c3892d4b9cbbbe221b458d6339153b77e30845a5f0b94ae1e99f7e8476f50030"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/decisions-block-v1.webp",
+      "bytes": 525498,
+      "sha256": "d2cf36bcf21620265998ea9edfec7aec517482d422f391e8e14e5cdf2e49846e"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/departures-promenade-v2.webp",
+      "bytes": 463632,
+      "sha256": "c09197b92c6317e206d47e51b2ba6d2a9bd5b29d229eb645c620c24f8bfd72a6"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/messages-courtyard-v1.webp",
+      "bytes": 519450,
+      "sha256": "ba3b6d169fa8a1315be0e64945e083f3dac0fe00851e96224ba70c469d354c00"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/learning-atrium-v1.webp",
+      "bytes": 512104,
+      "sha256": "9b5a5651656fbf6e9c690e62ed9289937f1cd4b8743f74aa3e0ccc9f7f611a61"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/choices-transit-v3.webp",
+      "bytes": 455230,
+      "sha256": "1c54e5ad9aa397a05a4eef3aa2d35732cbf6cb0a80a0604d2f6eca110a6808ed"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/surprises-house-v2.webp",
+      "bytes": 512410,
+      "sha256": "ffe838888fc8be483d63cfd6f311081c2a6ea8301b21606ccaf3eda8de27358c"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/stories-rain-gallery-v1.webp",
+      "bytes": 447820,
+      "sha256": "3dcc470aecd7402361c7f2989e269f833c6c75e9a4012ac291b765e3a0aa0de8"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/possibilities-plane-trees-v1.webp",
+      "bytes": 546622,
+      "sha256": "5ab533ee27315749f7769c96cf149a376d15da727a9877cce704ba648a8904e0"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/news-terraces-v1.webp",
+      "bytes": 484392,
+      "sha256": "01e3ee25a05f36ffcacc3e4b96e9a8a5e187f605fdba3c5f99028f08f782cde2"
+    },
+    {
+      "file": "assets/course-journey/modules-v7/woodland-station-v2.webp",
+      "bytes": 451832,
+      "sha256": "e41023b1c6161b47620e3236c34bc40dd8647b76c5e323b327a3fc3a44846eb6"
+    },
+    {
+      "file": "docs/designs/course-journey/evidence/2026-10-26-full72-mobile-audit/source-geometry.json",
+      "bytes": 21065,
+      "sha256": "8564bd9355c85166fe0d3bd7c1ea15bcfffa9e2698e9ae791f23e6acf35a6dec"
+    },
+    {
+      "file": "tests/support/journey-selection.js",
+      "bytes": 1168,
+      "sha256": "ed39dbd57e213706a8bf364b68cbb963a6f95b20423fcb96b0866e73b586e1f1"
+    }
+  ],
+  "note": "Final CSS removes fill-only selection transition. Earlier60-size reduced-motion geometry is retained with its own source hash; normal first-frame colors and four representative full layouts are rechecked on this final signature."
+}

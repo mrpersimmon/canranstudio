@@ -1,0 +1,89 @@
+{
+  "id": "unit5-6",
+  "tool": "built-in image_gen",
+  "generatedAt": "2026-10-23",
+  "requestFiles": [
+    "unit5-6-request-v1.json",
+    "unit5-6-request-v2.json"
+  ],
+  "referenceRoles": {
+    "environment": [
+      "opening-mobile-v2.webp",
+      "neighborhood-mobile-v1.webp"
+    ],
+    "characterStyleOnly": [
+      "friends-trio-v1.webp",
+      "interview-couple-v1.webp"
+    ],
+    "companionGround": null
+  },
+  "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1693b-9472-76e0-9cb3-06739ef24f7a/exec-15821cb9-2a40-4fbe-b970-e59317e023ea.png",
+  "previousReturnedPaths": [
+    "C:/Users/duanxiaodong/.codex/generated_images/01a1693b-9472-76e0-9cb3-06739ef24f7a/exec-673521fc-aec1-4060-9d8e-b48eff8df651.png"
+  ],
+  "adopted": {
+    "png": "assets/course-journey/modules-v1/unit5-6-ground.png",
+    "webp": "assets/course-journey/modules-v1/unit5-6-ground.webp"
+  },
+  "size": [
+    1536,
+    1024
+  ],
+  "alphaRange": [
+    0,
+    254
+  ],
+  "alphaCounts": {
+    "transparent": 684531,
+    "opaque": 0,
+    "partial": 888333
+  },
+  "alphaBounds": {
+    "0": [
+      45,
+      32,
+      1504,
+      1000
+    ],
+    "16": [
+      47,
+      94,
+      1501,
+      944
+    ],
+    "128": [
+      48,
+      95,
+      1500,
+      943
+    ],
+    "240": [
+      49,
+      96,
+      1500,
+      943
+    ]
+  },
+  "sha256": {
+    "png": "492c66fe644272d2dd49ef622b7b9d0e6f0e60d877df8f7765eb56806974245d",
+    "webp": "2c78e1f87e6c87eae3f96afe6d2aacdfdf038201a1461b9327c47d35646f950a"
+  },
+  "processing": "Original PNG copied verbatim. WebP is encoding only: sharp quality92 alphaQuality100 effort6; no resize, crop, retouch, background removal, geometry or compositing.",
+  "review": {
+    "emptyGround": true,
+    "noCharacters": true,
+    "completePlatform": true,
+    "recommendedSoles": [
+      0.5,
+      0.72
+    ],
+    "safeStandingArea": [
+      0.23,
+      0.56,
+      0.77,
+      0.75
+    ],
+    "framingDeviation": "Requested 8-10 percent alpha margin was not met: solid foliage/platform reaches around 3 percent horizontal margins. Whole island remains uncut. Add parent layout breathing room rather than modifying pixels.",
+    "notes": "School or arbor restricted to rear, broad flat central floor supports later original-character compositing. Preserve character/platform transform as one group."
+  }
+}

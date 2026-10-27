@@ -1,0 +1,746 @@
+{
+  "startedDate": "2026-10-26",
+  "tool": "image_gen.imagegen",
+  "processing": "Original PNG copied byte-for-byte; qualifying WebP quality90 encoding only. No resizing, cropping, compositing or recoloring.",
+  "receipts": [
+    {
+      "chapter": "seasons",
+      "name": "seasons-market-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-d6f14321-44ff-4f05-99e0-c6589df43661.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:41:03.796Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/seasons-market-v1.png",
+        "bytes": 3030874,
+        "sha256": "eb4cd3edc27218cd1fc23290ff7dbf7a96eeb6c83f6f52419272bbd69fc52f18"
+      },
+      "adopted": false,
+      "reason": "The initial exact1:3 check found724x2171; preferred the later exact-size v2 with the same market composition.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "everyday",
+      "name": "everyday-evening-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-c6a454d5-6a27-4b38-a4b6-bba625769539.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:41:33.821Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/everyday-evening-v1.png",
+        "bytes": 3031131,
+        "sha256": "d02b6fc3b41486c3f08e5ceb50ed8bd1c1d316629c1ce52aff4577a79e34310b"
+      },
+      "adopted": false,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/everyday-evening-v1.webp",
+        "bytes": 514006,
+        "sha256": "de48a214409beb4658d2c6c8e285126c01fbcef09dcdeb0cb1367cd1376fe795"
+      },
+      "nativeGeometryAccepted": true,
+      "reason": "Actual family composite showed the background coffee table near the father support area; v2 removes that background table.",
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0
+    },
+    {
+      "chapter": "caring",
+      "name": "caring-veranda-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-03f36174-5915-4fab-8ad6-d3fc5975bb52.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:42:03.869Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/caring-veranda-v1.png",
+        "bytes": 3184385,
+        "sha256": "496b3a127e79fa317f84dfd9a9b9cbfa50c3a983cba9249bf4ce7f1bd198aff7"
+      },
+      "adopted": false,
+      "reason": "Upper entrance steps crossed the intended support zone; native image was also one row short. v2 removes the steps.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "memories",
+      "name": "memories-arcade-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-bc6e662c-17ca-40c4-9cec-0f1eb9212703.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:42:30.748Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/memories-arcade-v1.png",
+        "bytes": 2968665,
+        "sha256": "b268e33844f6ba46275b8f540a02142c1881bfe15282173a8a5597a48c3e8c8a"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/memories-arcade-v1.webp",
+        "bytes": 501150,
+        "sha256": "c71cc2910573884d4959b86c3ac3a7cec85a6f5b6147dfc11be8b08be8acaf04"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "appointments",
+      "name": "appointments-street-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-7cbc52a5-fde0-40f9-8a8d-7c452c71a02d.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:44:58.265Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/appointments-street-v1.png",
+        "bytes": 3055620,
+        "sha256": "369f4bbeef1dffb5eca1acf27e6c5bbcc9cc1505a7c6c0a0612e9f239df64a34"
+      },
+      "adopted": false,
+      "reason": "Initial exact1:3 check found724x2171; v2 preserves the scene at724x2172.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-334efa81-a979-485f-a30a-2f3a5a6607ba.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:45:31.524Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/preparations-home-v1.png",
+        "bytes": 2716611,
+        "sha256": "d4e9639680700b2aa33b0089085bd76b8cc62d69c2c2cd66e034616bb4ad7507"
+      },
+      "adopted": false,
+      "reason": "Initial exact1:3 check found724x2171; v2 was the first native-size revision.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "decisions",
+      "name": "decisions-block-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-e843710e-2b43-4568-9d1a-6ab64f415df4.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:46:01.251Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/decisions-block-v1.png",
+        "bytes": 3115148,
+        "sha256": "0a9c8247bbb1b58c84d2a295c4b1c6d43972f4f9730173eb568f6b565f40b50a"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/decisions-block-v1.webp",
+        "bytes": 525498,
+        "sha256": "d2cf36bcf21620265998ea9edfec7aec517482d422f391e8e14e5cdf2e49846e"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-17f7b904-f114-4409-87f3-f74d02ba1053.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:46:34.497Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v1.png",
+        "bytes": 2992382,
+        "sha256": "2cee0bdcf14a7065239cb75ba4cddfdc381a1e71dc0fb68b5fd00d447b0dff01"
+      },
+      "adopted": false,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v1.webp",
+        "bytes": 507412,
+        "sha256": "e46ed03d3c4d20da0aa8d73e144ded28e37b487d5557ff7c6ce93fa8d5f3029b"
+      },
+      "reason": "Two diagonal floor/ceiling slabs made disconnected stacked levels. v2 restores a continuous ground route.",
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0
+    },
+    {
+      "chapter": "messages",
+      "name": "messages-courtyard-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-68d5552a-95f8-46e2-8784-a2fcfc2e4ff0.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:48:40.981Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/messages-courtyard-v1.png",
+        "bytes": 3021638,
+        "sha256": "34847f019c7a10ef77b3bd7c5ca04eecdb353bd022e4914400e6343e0c964ec0"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/messages-courtyard-v1.webp",
+        "bytes": 519450,
+        "sha256": "ba3b6d169fa8a1315be0e64945e083f3dac0fe00851e96224ba70c469d354c00"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "learning",
+      "name": "learning-atrium-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-8e86f31c-0b41-46c6-b997-1e9b02b8aa4f.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:49:07.913Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/learning-atrium-v1.png",
+        "bytes": 2989391,
+        "sha256": "af33c886a03cd913fe946bc73791c547b0e6e9a8dbf5ac6685650e52863ee41d"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/learning-atrium-v1.webp",
+        "bytes": 512104,
+        "sha256": "9b5a5651656fbf6e9c690e62ed9289937f1cd4b8743f74aa3e0ccc9f7f611a61"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-e5063d1d-8e05-4067-b60f-3e112e7b9cc7.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:49:41.992Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/choices-transit-v1.png",
+        "bytes": 2921187,
+        "sha256": "dc1b876d7d00ab0599b655bcc8696980b7ad208422d6ce0bfa10e088da30c843"
+      },
+      "adopted": false,
+      "reason": "Disconnected floor slab and a one-row-short canvas. v2 removes the slab.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "surprises",
+      "name": "surprises-house-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-8f1d02e8-b980-47a1-bcb5-2cb4116343d3.png",
+      "requestFile": "requests.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:50:14.922Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/surprises-house-v1.png",
+        "bytes": 3001338,
+        "sha256": "5eec0f3bf591a74419a7be0415c71ea5c818738cdb4ed8cae513c38b41ae3357"
+      },
+      "adopted": false,
+      "reason": "Stacked-room floor edges and middle dining furniture intruded on the continuous route. v2 clears the corridor.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "stories",
+      "name": "stories-rain-gallery-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-b5928594-5560-4eab-8ab7-5b48b864c564.png",
+      "requestFile": "requests-final-four.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:54:14.038Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/stories-rain-gallery-v1.png",
+        "bytes": 2873181,
+        "sha256": "2091118b26c41c332c3281fe0408ac9856db4fbcd71b82807b49ec8cd81f4244"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/stories-rain-gallery-v1.webp",
+        "bytes": 447820,
+        "sha256": "3dcc470aecd7402361c7f2989e269f833c6c75e9a4012ac291b765e3a0aa0de8"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "possibilities",
+      "name": "possibilities-plane-trees-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-910692bd-ce81-4d16-85c1-eb0b7785d423.png",
+      "requestFile": "requests-final-four.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:54:44.252Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/possibilities-plane-trees-v1.png",
+        "bytes": 3070032,
+        "sha256": "7cd6ce8fc05b9a1d934a27104b088313b67e09aad1fe38bfcfd06ffbea937595"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/possibilities-plane-trees-v1.webp",
+        "bytes": 546622,
+        "sha256": "5ab533ee27315749f7769c96cf149a376d15da727a9877cce704ba648a8904e0"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "news",
+      "name": "news-terraces-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-216762f5-36f4-4f84-a13b-b13e3b28a3fa.png",
+      "requestFile": "requests-final-four.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:55:14.233Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/news-terraces-v1.png",
+        "bytes": 2935012,
+        "sha256": "6520a0726e12e15c748832930e8e0bdc80dd169621a7cf4d2c36cc0d5db97306"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/news-terraces-v1.webp",
+        "bytes": 484392,
+        "sha256": "01e3ee25a05f36ffcacc3e4b96e9a8a5e187f605fdba3c5f99028f08f782cde2"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "woodland",
+      "name": "woodland-station-v1",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-f75c1513-f54b-4d1d-b298-ff1db3740538.png",
+      "requestFile": "requests-final-four.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:55:44.359Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/woodland-station-v1.png",
+        "bytes": 2969902,
+        "sha256": "5c4fe78ff6a318a851c5ef3be3289e989e2eef8b99714f42fe7bb673b604ca71"
+      },
+      "adopted": false,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/woodland-station-v1.webp",
+        "bytes": 503504,
+        "sha256": "b177c5fb50cc9502244a35d04f136f1563051eaf2cb257d22427cbd840ce5b43"
+      },
+      "nativeGeometryAccepted": true,
+      "reason": "Actual train-bench composite read as outdoor platform seating; v2 adds a recognizable carriage interior and wood floor.",
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0
+    },
+    {
+      "chapter": "seasons",
+      "name": "seasons-market-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-a51a8401-14d7-4b27-8043-2a8eac9ed28d.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T18:59:35.546Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/seasons-market-v2.png",
+        "bytes": 2949862,
+        "sha256": "afc834b3531069640906673f6902d964d64f239fbc9ff56a040842ee2f2e043a"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/seasons-market-v2.webp",
+        "bytes": 501112,
+        "sha256": "2f2fbf89f0ce0bc7de3fb54ce4badcdd8c4f21fb1313409bdf2ce27dfd88ec89"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "appointments",
+      "name": "appointments-street-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2d60e8fd-b1ca-4a24-9ac5-986b9e91a8e2.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:00:00.138Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/appointments-street-v2.png",
+        "bytes": 2986914,
+        "sha256": "f19573ae21ec1ea30843f3e75928b92d32514cc76801d0a67bffd6182a9324b9"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/appointments-street-v2.webp",
+        "bytes": 495808,
+        "sha256": "caf4036ee4af6439092ae32daeec3ad2a406d8b30771e255d717fdd6cedbe8f6"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-886b028c-6f17-45d6-ada8-433c260e31eb.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:00:25.151Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/preparations-home-v2.png",
+        "bytes": 2647609,
+        "sha256": "d3a529101d2a505662ca5cdbb5a31942900a74db8cf225a5ff8024dff88eec18"
+      },
+      "adopted": false,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/preparations-home-v2.webp",
+        "bytes": 368760,
+        "sha256": "f1d34dbea1c2c346fa84d95eca9ab5c8e40db12af5e709480c13edab3745bbb0"
+      },
+      "nativeGeometryAccepted": true,
+      "reason": "Actual phone composite revealed a projecting lower-door cornice near the middle Lesson plaque. v3 moves that alcove to the outer edge.",
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0
+    },
+    {
+      "chapter": "caring",
+      "name": "caring-veranda-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2d5c4223-e591-4025-8c85-d3edb6a61c57.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:00:48.977Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/caring-veranda-v2.png",
+        "bytes": 3066560,
+        "sha256": "2364caa2b576fe81dfc19e48ddc4c81399ad57e569fb91c30af9f5f031869993"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/caring-veranda-v2.webp",
+        "bytes": 533628,
+        "sha256": "039bafb975f3ccdc7aa8ac839390e308cba21a48aa4f86db887a58e989267da8"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-88f5d14d-76bc-41b2-b346-ff5bc22864f8.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:01:56.519Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v2.png",
+        "bytes": 2838911,
+        "sha256": "1079184717917d897645dda6804f53df07364ae54054f7d014e33dfe886b8789"
+      },
+      "adopted": true,
+      "reason": "Selected after visual comparison. Native 724x2171 is preserved; section height and patch offset use exact source H/3, with no image scaling/cropping. J41 bounds integer quantization to one source pixel.",
+      "webp": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v2.webp",
+        "bytes": 463632,
+        "sha256": "c09197b92c6317e206d47e51b2ba6d2a9bd5b29d229eb645c620c24f8bfd72a6"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-52be1568-a94b-4725-9c21-a1c0b012805f.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:02:21.874Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/choices-transit-v2.png",
+        "bytes": 2820540,
+        "sha256": "27044f517f885c9460dceb949a8736069fb3ff3b3145d323a267227663cd4032"
+      },
+      "adopted": false,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/choices-transit-v2.webp",
+        "bytes": 458746,
+        "sha256": "6adbbb74b9b77b321a508925aa0f6599814daf7e175450d564e954b9345bcbf7"
+      },
+      "reason": "Continuous floor was corrected, but the bus cue became weak; v3 restores a narrow teal bus side and yellow handrails.",
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0
+    },
+    {
+      "chapter": "surprises",
+      "name": "surprises-house-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-4ed62fa7-3a2a-43c4-bbca-8fd20b22912e.png",
+      "requestFile": "revisions-round1.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:02:46.273Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/surprises-house-v2.png",
+        "bytes": 2950469,
+        "sha256": "bfd4b0735bfc7ee12fe70359980b9ca42a3f56ccd294686a7bfb520ecd1f6616"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/surprises-house-v2.webp",
+        "bytes": 512410,
+        "sha256": "ffe838888fc8be483d63cfd6f311081c2a6ea8301b21606ccaf3eda8de27358c"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v3",
+      "attempt": 3,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-147576ae-3cec-4bc8-a26b-e2046e55a5e4.png",
+      "requestFile": "revisions-round2.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:05:53.841Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v3.png",
+        "bytes": 2788997,
+        "sha256": "d47b8e63b78c5ce6eb33d75157c1ea730d8f889490c7011e0ae6bc97d806cbd1"
+      },
+      "adopted": false,
+      "reason": "Repeated canvas-only edit still returned724x2171. No gain over v2; preserve the preferred v2 composition with exact native geometry.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v3",
+      "attempt": 3,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-a5b8e940-84fc-4674-8b70-14b96dd004d0.png",
+      "requestFile": "revisions-round2.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:06:17.370Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/choices-transit-v3.png",
+        "bytes": 2788364,
+        "sha256": "ddb559d1b74948a9dd8b78aa394d485816f9e56d0d49090298f62f4c692b3f46"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/choices-transit-v3.webp",
+        "bytes": 455230,
+        "sha256": "1c54e5ad9aa397a05a4eef3aa2d35732cbf6cb0a80a0604d2f6eca110a6808ed"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v4",
+      "attempt": 4,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-446270af-54a8-4cb1-869a-c9083100860b.png",
+      "requestFile": "departures-canvas-revision.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:09:23.410Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/departures-promenade-v4.png",
+        "bytes": 2803344,
+        "sha256": "9af32760436da4435d9afb7ec41dc0510804e92db10d6eb46bb40da02b48ec34"
+      },
+      "adopted": false,
+      "reason": "Second canvas-reference approach still returned724x2171. Do not pretend dimensions changed; v2 remains the visual choice under J41.",
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1
+    },
+    {
+      "chapter": "woodland",
+      "name": "woodland-station-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-247faa23-8b34-46c3-9481-577696a9b9e7.png",
+      "requestFile": "woodland-interior-revision.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T19:41:58.834Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/woodland-station-v2.png",
+        "bytes": 2796033,
+        "sha256": "63628eb1a9f2353cced9d86eab2cb9492b12c73055e56558a42487e32f460e2f"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/woodland-station-v2.webp",
+        "bytes": 451832,
+        "sha256": "e41023b1c6161b47620e3236c34bc40dd8647b76c5e323b327a3fc3a44846eb6"
+      },
+      "reason": "Superseded after visual review of level-ground continuity, support-band clearance or bus context; see targeted revision request.",
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "everyday",
+      "name": "everyday-evening-v2",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-4331ba62-9402-4a45-b04b-6fc6ddd6531b.png",
+      "requestFile": "composite-review-revisions.json",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T20:03:35.888Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/everyday-evening-v2.png",
+        "bytes": 2919010,
+        "sha256": "ba6e19c21a9daf5ef236385fdc76a810bb49f4097167e0478a91c822e20a0f4a"
+      },
+      "adopted": true,
+      "webp": {
+        "path": "assets/course-journey/modules-v7/everyday-evening-v2.webp",
+        "bytes": 479278,
+        "sha256": "d1fd46c9422fe3e0209a5408d408ed3081730933e197e70d2e75c723fc24abdf"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": true,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": 0,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v3",
+      "attempt": 3,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-9d88f068-8815-40f0-862b-0f73bf66724e.png",
+      "requestFile": "composite-review-revisions.json",
+      "width": 724,
+      "height": 2171,
+      "alpha": false,
+      "sourceModifiedAt": "2026-10-25T20:03:55.161Z",
+      "png": {
+        "path": "assets/course-journey/modules-v7/preparations-home-v3.png",
+        "bytes": 2576907,
+        "sha256": "b2b2f9456f83d6e7d69a32cf0e7366592ea5432bec543746cbec4d2081e800bd"
+      },
+      "adopted": true,
+      "reason": "Selected after visual comparison. Native 724x2171 is preserved; section height and patch offset use exact source H/3, with no image scaling/cropping. J41 bounds integer quantization to one source pixel.",
+      "webp": {
+        "path": "assets/course-journey/modules-v7/preparations-home-v3.webp",
+        "bytes": 355918,
+        "sha256": "c3892d4b9cbbbe221b458d6339153b77e30845a5f0b94ae1e99f7e8476f50030"
+      },
+      "nativeGeometryAccepted": true,
+      "initialExactRatioPassed": false,
+      "nativeGeometrySupported": true,
+      "nativeDimensionDeviation": -1,
+      "visualReview": "Original long image, all associated phone composites, and desktop chapter composition inspected; versions selected after targeted corrections where needed."
+    }
+  ],
+  "actualCalls": 29,
+  "adoptedEnvironments": 16,
+  "nativeGeometryRule": "Target1:3, at most one whole-source-pixel quantization difference. Register actual W/H and render source sections with H/3; never stretch/crop/fill pixels to fabricate target dimensions."
+}

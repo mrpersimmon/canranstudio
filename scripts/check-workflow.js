@@ -38,7 +38,7 @@ function environment(root, browser = false) {
     catch { installed[name] = 'missing'; }
   }
   const env = Object.fromEntries(Object.entries(process.env).filter(([key]) =>
-    /^(CI|NODE_ENV|NODE_OPTIONS|TZ|LANG|LC_ALL|PLAYWRIGHT_.*|PW_.*|COURSE_TEST_PORT|LOGIN_TEST_PORT|TASKS_UPGRADE_PORT|AWARD_TEST_BASE)$/.test(key)).sort(([a], [b]) => a.localeCompare(b)));
+    /^(CI|NODE_ENV|NODE_OPTIONS|TZ|LANG|LC_ALL|PLAYWRIGHT_.*|PW_.*|COURSE_TEST_PORT|LOGIN_TEST_PORT|TASKS_UPGRADE_PORT|AWARD_TEST_BASE|JOURNEY_REVIEW_BROWSER|JOURNEY_VIEWPORT_TIER|VIEWPORT_TEST_BROWSER|VIEWPORT_TEST_ENABLED)$/.test(key)).sort(([a], [b]) => a.localeCompare(b)));
   let executable = null;
   if (browser) {
     try {

@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit29-30",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-224e0bd1-0470-4696-bc0c-3f0f26832d88.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit29-30/keepsake-story-v1.webp",
+    "assets/unit29-30/cast-amy-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "docs/designs/course-journey/production/daily-life-v1/drafts/unit29-30-initial.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1165990,
+      "sha256": "64c819ea669838f85e2587abc6eab1928d2e6904592f64cde45658c1032bae3b",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 816106,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          41,
+          1249,
+          1253
+        ],
+        "normalized": [
+          0,
+          0.03269537480063796,
+          0.9960127591706539,
+          0.9992025518341308
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          114,
+          60,
+          1191,
+          1212
+        ],
+        "normalized": [
+          0.09090909090909091,
+          0.04784688995215311,
+          0.9497607655502392,
+          0.9665071770334929
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          115,
+          61,
+          1190,
+          1212
+        ],
+        "normalized": [
+          0.09170653907496013,
+          0.04864433811802233,
+          0.94896331738437,
+          0.9665071770334929
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:38:19.810Z"
+}

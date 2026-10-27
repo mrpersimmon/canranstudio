@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-26",
+  "requests": [
+    {
+      "chapter": "everyday",
+      "name": "everyday-evening-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Change ONLY the UPPER living-room side bay: REMOVE the small round coffee table and its potted plant in front of the left sofa. Replace that table's complete silhouette and shadows with matching continuous flat cream stone floor. The original family and homework-table sprite is added separately and its father's feet overlap this background table, so no replacement furniture should occupy that place. Keep the left sofa against the outer wall, bookshelves, lamp, blue-hour view, middle reading arcade, lower stationery shop, all paving, architecture and lighting otherwise unchanged. Maintain the empty flat support region global x20%-80%, y15%-22% and the quiet floor below for UI. No people, no stars, no text or labels. Preserve the native 724x2172 opaque canvas and original aspect ratio; no stretching.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/everyday-evening-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v3",
+      "attempt": 3,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Change ONLY the LOWER-LEFT entrance alcove and its projecting upper cornice/beam. Currently the diagonal wooden cornice above this door protrudes into the middle stop's Lesson-label area. Pull this entire alcove's upper overhang and right-hand pilaster back toward the extreme LEFT edge, keeping the relevant architectural silhouette within x0%-22% at global y52%-68%. The centre x25%-75% at y55%-64% must become uninterrupted flat honey wood flooring, with no beam, wall edge, column or raised lip behind the future label. The doorway can remain as a shallower, narrower side bay further down at the left margin, preserving the departure-before-travel meaning. Keep the top kitchen, middle dining area, large clear floor, colours, warm light and lower-right cupboards unchanged. No additional furniture, people, props, text, numbers or UI. Preserve native 724x2172 opaque canvas and continuous one-level floor; do not stretch, add stairs or create stacked storeys.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/preparations-home-v2.png"
+      ],
+      "transparent_background": false
+    }
+  ]
+}

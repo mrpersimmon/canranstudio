@@ -13,7 +13,7 @@
     // Cancel before a same-tab course navigation can freeze this directory.
     // Keep the link's native timing, modifiers and new-tab behavior intact.
     if(event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-    const link=event.target.closest?.('.course a[href]');
+    const link=event.target.closest?.('.course a[href],.journey-start[href]');
     if(link&&!link.hasAttribute('download')&&(!link.target||link.target==='_self'))stopDirectoryFonts();
   }, true);
   const checkDirectoryActive = signal => { if(signal.aborted)throw new DOMException('已取消准备','AbortError'); };
@@ -42,6 +42,12 @@
     }
     return directoryStyles;
   }
+  let clearHeader, clearHome;
+  function studentHeader(who=null){
+    clearHeader?.();
+    clearHeader=window.CanranStudentShell.mount(document.getElementById('siteHeader'),{base:'/lesson/',student:who?.student,current:'courses',preview:!!who?.preview});
+    document.body.classList.toggle('student-portal',!!who&&!who.preview);
+  }
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
@@ -57,10 +63,12 @@
   } catch {} }
   worker();
   function changed() { channel?.postMessage('changed'); navigator.serviceWorker?.controller?.postMessage({type:'identity:changed'}); }
-  function status(message) { const target=app.querySelector('[role=status]'); if(target)target.textContent=message; }
+  function status(message) { const target=app.querySelector('[data-home-status]')||app.querySelector('[role=status]'); if(target)target.textContent=message; }
   async function attempt(action) { try { await action(); } catch(error) { status(error.message || '暂时无法连接，请重试'); } }
   const logo='<img class="hero-logo" src="/lesson/assets/brand/starflower.png" alt="">';
   function login(admin = false, message = '') {
+    clearHome?.(); clearHome=null;
+    studentHeader();
     app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号或老师工号</label><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required><label for="password">管理员密码 / 老师密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
     document.getElementById('forgot')?.addEventListener('click',()=>status('请联系老师：学号可以查回，密码可以重置，学习成果会保留。'));
     const form=document.getElementById('loginForm'),button=form.querySelector('button'),note=form.querySelector('[role=status]');
@@ -102,6 +110,8 @@
     };
   }
   function passwordForm(who, required) {
+    clearHome?.(); clearHome=null;
+    studentHeader(who);
     app.innerHTML=`<section class="login panel">${logo}<h1>${required?'设置你的新密码':'修改密码'}</h1><p>${e(who.student.name)} · <span class="student-number">${e(who.student.studentNumber)}</span></p><p class="muted">${required?'初始密码已使用，请在 15 分钟内设置新密码。关闭页面后可在原浏览器继续；超时或切换学生后，请联系老师重置。':''}使用 8–64 位字符，包含字母和数字。</p><form id="passwordForm" method="post">${required?'':'<label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" maxlength="128" required>'}<label for="newPassword">新密码</label><input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><label for="confirmPassword">再输一次新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><button class="primary">${required?'保存新密码，开始学习':'保存新密码'}</button><p role="status" aria-live="polite"></p></form><button id="cancelPassword" class="compact">${required?'切换学生':'返回课程'}</button></section>`;
     document.getElementById('passwordForm').onsubmit=event=>{event.preventDefault();attempt(async()=>{
       const button=event.target.querySelector('button');button.disabled=true;
@@ -142,16 +152,28 @@
     // it contains no student identity, answers, awards or certificate dates.
     await store.maintain(()=>store.put('meta','preparing:directory-fonts',{expires:Date.now()+30*60*1000,resources:fonts.map(item=>item.sha256)},{signal}),{signal}).catch(()=>{});
     checkDirectoryActive(signal);
+    const families={
+      'award-gothic-500.woff2':[['Journey Gothic','500'],['Journey Complete','500']],
+      'lesson-gothic-body-400.woff2':[['Journey Gothic','400']],
+      'award-nunito.woff2':[['Journey Nunito','400 600']]
+    };
     // Wait for both workers to stop: an already-started native cache write
     // finishes under its lock even when the other worker is cancelled first.
-    const results=await Promise.allSettled(Array.from({length:2},async()=>{while(queue.length){checkDirectoryActive(signal);await store.obtain(queue.shift(),{signal});}}));
+    const results=await Promise.allSettled(Array.from({length:2},async()=>{while(queue.length){
+      checkDirectoryActive(signal);const item=queue.shift(),bytes=await store.obtain(item,{signal});checkDirectoryActive(signal);
+      for(const [family,weight] of families[item.key.split('/').pop()]||[]){
+        if([...document.fonts].some(face=>face.family===family&&face.weight===weight&&face.status==='loaded'))continue;
+        const face=new FontFace(family,bytes,{weight,display:'swap'});
+        await directoryRead(face.load(),signal);checkDirectoryActive(signal);document.fonts.add(face);
+      }
+    }}));
     const failed=results.find(result=>result.status==='rejected');if(failed)throw failed.reason;
     checkDirectoryActive(signal);
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
   }
   function prepareDirectory(hasCourses, waiting) {
     stopDirectoryFonts();
-    const note=app.querySelector('p[role="status"]'),retry=document.createElement('button');
+    const note=app.querySelector('[data-home-status]')||app.querySelector('p[role="status"]'),retry=document.createElement('button');
     const pending=waiting?'还有学习成果保存在本机，联网后将继续同步。':'';
     retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(retry);
     delete document.documentElement.dataset.sharedFontsReady;
@@ -160,7 +182,7 @@
       if(busy)return;busy=true;retry.hidden=true;
       delete document.documentElement.dataset.sharedFontsReady;
       const controller=new AbortController();directoryFontController=controller;
-      note.textContent=pending+(hasCourses?'可以先选择课程，首次进入可能需要稍等。':'');
+      note.textContent=pending;
       try{
         if(hasCourses){
           await directoryRead(loadDirectoryStyles(),controller.signal);
@@ -194,29 +216,29 @@
     void startPreparation();
   }
   async function home() {
+    stopDirectoryFonts();
     let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
     if(who.mustChangePassword)return passwordForm(who,true);
     if(['/lesson/awards','/lesson/awards/'].includes(location.pathname)||(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/'))){location.reload();return;}
     if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
     const waiting=who.preview?0:await syncPending(who.student.id,who.systemUpgrade);
     if(!who.preview)who=await api('me');
-    const banners=who.courses.map(c=>{
-      const pictures=c.artwork?.length?c.artwork:[c.image];
-      const img=(src,cls='')=>`<img class="${cls}" src="${e(src)}" loading="lazy" decoding="async" alt="">`;
-      const art=pictures.length===5?img(pictures[0],'actor')+`<div class="food-cards">${pictures.slice(1,4).map(src=>img(src)).join('')}</div>`+img(pictures[4],'actor'):pictures.map(src=>img(src,'featured-scene')).join('');
-      const completed=Boolean(who.systemUpgrade?.epoch&&c.completed);
-      const action=completed?'再次学习':c.started||c.stars?'继续学习':'开始学习';
-      return `<section class="featured-course course" data-unit="${e(c.id)}" aria-labelledby="${e(c.id)}-title"><div class="featured-copy"><p class="lesson-label">${e(c.label)}</p><h2 id="${e(c.id)}-title">${e(c.title)}</h2><p class="course-intro">${e(c.intro)}</p>${c.started||c.stars?`<p class="resume-location">★ ${c.stars} / ${c.maxStars||15}${completed?' · 已通关':''}</p>`:''}<a class="primary-button" aria-label="${action}：${e(c.title)}" href="/lesson/${e(c.id)}/${preview?'?preview='+encodeURIComponent(preview):''}#learn/${e(c.next||'words')}">${action}</a></div><div class="featured-art" aria-hidden="true">${art}</div></section>`;
-    }).join('');
-    app.innerHTML=`<div class="toolbar"><div><p class="muted">${e(who.className)}${who.preview?' · 预览不记录成绩':' · <span class="student-number">'+e(who.student.studentNumber)+'</span>'}</p><h1>${e(who.student.name)}的课程</h1></div>${who.preview?'<a class="button compact" href="/lesson/admin/">返回班级管理</a>':'<div class="actions"><a class="button compact" href="/lesson/awards/">我的纪念册</a><button class="compact" id="changePassword">修改密码</button><button class="compact" id="logout">切换学生</button></div>'}</div><div class="course-directory">${banners}</div>${who.courses.length?'':'<section class="panel empty"><h2>老师还没开放课程</h2><p>开课后，再回来看看吧。</p><button id="refresh">刷新课程</button></section>'}<p role="status"></p><details class="panel" style="margin-top:28px"><summary>本机旧记录</summary><p class="muted">这些记录来自使用学生账号之前，不计入当前学生。</p><ul id="legacy"></ul></details>`;
-    document.getElementById('changePassword')?.addEventListener('click',()=>passwordForm(who,false));
-    if(waiting)status('还有学习成果保存在本机，联网后将继续同步。');
-    document.getElementById('logout')?.addEventListener('click',()=>attempt(async()=>{await api('logout',{});changed();location.replace('/lesson/');}));
-    document.getElementById('refresh')?.addEventListener('click',home);
+    studentHeader(who);
+    if(!who.preview&&new URLSearchParams(location.search).get('account')==='password'){
+      const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);passwordForm(who,false);return;
+    }
+    clearHome?.(); clearHome=null;
+    // Mount usable navigation first. Font bytes prepare in the background.
+    if(!window.CanranCourseJourney){app.innerHTML='<section class="login panel"><h1>画面还没准备好</h1><button id="retry">再试一次</button></section>';document.getElementById('retry').onclick=home;return;}
+    app.innerHTML='';
+    const openLegacy=!who.preview&&new URLSearchParams(location.search).get('account')==='history';
+    if(openLegacy){const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);}
+    clearHome=window.CanranCourseJourney.mount(app,{who,base:'/lesson/',preview,waiting,onRefresh:home,openLegacy});
     const list=document.getElementById('legacy');let found=false;
+    if(list){
     for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!/^canran:(?:lesson:)?(?:unit\d+-\d+:learning|l\d+:progress|soundmark:progress)/.test(key))continue;try{const value=JSON.parse(localStorage.getItem(key));const item=document.createElement('li');const unit=key.match(/unit\d+-\d+|l\d+/)?.[0];item.textContent=unit+' · '+(value.activity?.unitCompleted?Object.keys(value.activity.unitCompleted).length+' 项活动完成':Object.values(value.ratings||{}).reduce((sum,n)=>sum+(Number(n)||0),0)+' 颗星');list.append(item);found=true;}catch{}}
     if(!found)list.textContent='这台设备没有旧记录。';
-    if(who.systemUpgrade?.epoch)list.closest('details')?.remove();
+    }
     window.CanranSystemUpgrade?.notice(who,app);
     prepareDirectory(who.courses.length>0,waiting);
   }
@@ -265,6 +287,7 @@
     }else if(group){
       const list=document.getElementById('classStudents').lastElementChild;list.innerHTML=studentList(state.students.filter(s=>s.classId===group.id));
     }
+    if(isAdmin){const metricsButton=document.createElement('button');metricsButton.id='openViewports';metricsButton.className='compact';metricsButton.textContent='设备与窗口';metricsButton.onclick=()=>window.CanranAdminViewports.open({app,api,back:renderAdmin});app.querySelector('.toolbar .actions').prepend(metricsButton);}
     document.getElementById('studentSearch').oninput=event=>{
       const query=event.target.value.trim().toLowerCase(),target=document.getElementById('searchResults');
       selectedStudents.clear();

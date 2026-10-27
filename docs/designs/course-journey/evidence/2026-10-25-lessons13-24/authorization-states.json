@@ -1,0 +1,670 @@
+{
+  "uiFixtureOnly": true,
+  "sparseCounts": {
+    "ids": [
+      "unit13-14",
+      "unit17-18"
+    ],
+    "missingControls": 0,
+    "passages": 1
+  },
+  "sparse": {
+    "bridgeCount": 0,
+    "modules": [
+      {
+        "accessibleName": "选择 Lesson 13–14 新衣配色屋，5 / 5 颗星",
+        "art": {
+          "bottom": 439.9237365722656,
+          "height": 176.9375,
+          "left": 105.04312133789062,
+          "right": 281.9806213378906,
+          "top": 262.9862365722656,
+          "width": 176.9375,
+          "x": 105.04312133789062,
+          "y": 262.9862365722656
+        },
+        "artInGround": {
+          "h": 0.15122863247863247,
+          "w": 0.45368589743589743,
+          "x": 0.2693413367638221,
+          "y": 0.04785148424979968
+        },
+        "artboardRatio": 1,
+        "board": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "box": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "frame": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "ground": {
+          "bottom": 1377,
+          "height": 1170,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "groundMask": "radial-gradient(29% 7% at 50.0738% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+        "id": "unit13-14",
+        "index": 0,
+        "label": {
+          "bottom": 535.390625,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 491.390625,
+          "width": 132,
+          "x": 129,
+          "y": 491.390625
+        },
+        "labelPosition": "relative",
+        "loaded": true,
+        "localArt": {
+          "h": 0.45368589743589743,
+          "w": 0.45368589743589743,
+          "x": 0.2693413367638221,
+          "y": 0.14355445274939904
+        },
+        "localGround": {
+          "h": 3,
+          "w": 1,
+          "x": 0,
+          "y": 0
+        },
+        "medal": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 439.390625,
+          "width": 44,
+          "x": 220.5,
+          "y": 439.390625
+        },
+        "motionCount": 0,
+        "ratios": {
+          "art": 1,
+          "board": 1,
+          "ground": 0.3333333333333333,
+          "stage": 1.722686175719511
+        },
+        "reward": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 439.390625,
+          "width": 148,
+          "x": 121,
+          "y": 439.390625
+        },
+        "row": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 439.390625,
+          "width": 148,
+          "x": 121,
+          "y": 439.390625
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "sameStage": true,
+        "source": "http://127.0.0.1:4193/assets/course-journey/modules-v5/visits-gallery-v1.webp",
+        "stage": {
+          "bottom": 433.390625,
+          "height": 226.390625,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "stageClientHeight": 226,
+        "stageOverflow": "visible",
+        "stageScroll": [
+          0,
+          0
+        ],
+        "stageScrollHeight": 390,
+        "tag": "ARTICLE",
+        "text": "Lesson 13–14",
+        "type": {
+          "clientWidth": 91,
+          "content": {
+            "bottom": 519.640625,
+            "height": 14,
+            "left": 149.578125,
+            "right": 240.421875,
+            "top": 505.640625,
+            "width": 90.84375,
+            "x": 149.578125,
+            "y": 505.640625
+          },
+          "fontSize": 14,
+          "lines": 1,
+          "rect": {
+            "bottom": 522.140625,
+            "height": 17.5,
+            "left": 149.578125,
+            "right": 240.421875,
+            "top": 504.640625,
+            "width": 90.84375,
+            "x": 149.578125,
+            "y": 504.640625
+          },
+          "scrollWidth": 91
+        },
+        "visible": {
+          "bottom": 425.3906211347656,
+          "left": 120.84611721289062,
+          "right": 269.14062083789065,
+          "top": 284.9976154472656
+        }
+      },
+      {
+        "accessibleName": "选择 Lesson 17–18 办公室探访记，5 / 5 颗星",
+        "art": {
+          "bottom": 1211.764892578125,
+          "height": 159.203125,
+          "left": 73.64312744140625,
+          "right": 312.45562744140625,
+          "top": 1052.561767578125,
+          "width": 238.8125,
+          "x": 73.64312744140625,
+          "y": 1052.561767578125
+        },
+        "artInGround": {
+          "h": 0.136071047008547,
+          "w": 0.6123397435897436,
+          "x": 0.18882853190104168,
+          "y": 0.7227023654513889
+        },
+        "artboardRatio": 1,
+        "board": {
+          "bottom": 1377,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 987,
+          "width": 390,
+          "x": 0,
+          "y": 987
+        },
+        "box": {
+          "bottom": 1377,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 987,
+          "width": 390,
+          "x": 0,
+          "y": 987
+        },
+        "frame": {
+          "bottom": 1377,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 987,
+          "width": 390,
+          "x": 0,
+          "y": 987
+        },
+        "ground": {
+          "bottom": 1377,
+          "height": 1170,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "groundMask": "radial-gradient(29% 7% at 50.114% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+        "id": "unit17-18",
+        "index": 2,
+        "label": {
+          "bottom": 1315.390625,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 1271.390625,
+          "width": 132,
+          "x": 129,
+          "y": 1271.390625
+        },
+        "labelPosition": "relative",
+        "loaded": true,
+        "localArt": {
+          "h": 0.40821314102564105,
+          "w": 0.6123397435897436,
+          "x": 0.18882853190104168,
+          "y": 0.16810709635416668
+        },
+        "localGround": {
+          "h": 3,
+          "w": 1,
+          "x": 0,
+          "y": -2
+        },
+        "medal": {
+          "bottom": 1263.390625,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 1219.390625,
+          "width": 44,
+          "x": 220.5,
+          "y": 1219.390625
+        },
+        "motionCount": 0,
+        "ratios": {
+          "art": 1.5,
+          "board": 1,
+          "ground": 0.3333333333333333,
+          "stage": 1.722686175719511
+        },
+        "reward": {
+          "bottom": 1263.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 1219.390625,
+          "width": 148,
+          "x": 121,
+          "y": 1219.390625
+        },
+        "row": {
+          "bottom": 1263.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 1219.390625,
+          "width": 148,
+          "x": 121,
+          "y": 1219.390625
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "sameStage": true,
+        "source": "http://127.0.0.1:4193/assets/course-journey/modules-v5/visits-gallery-v1.webp",
+        "stage": {
+          "bottom": 1213.390625,
+          "height": 226.390625,
+          "left": 0,
+          "right": 390,
+          "top": 987,
+          "width": 390,
+          "x": 0,
+          "y": 987
+        },
+        "stageClientHeight": 226,
+        "stageOverflow": "visible",
+        "stageScroll": [
+          0,
+          0
+        ],
+        "stageScrollHeight": 390,
+        "tag": "ARTICLE",
+        "text": "Lesson 17–18",
+        "type": {
+          "clientWidth": 91,
+          "content": {
+            "bottom": 1299.640625,
+            "height": 14,
+            "left": 149.71875,
+            "right": 240.28125,
+            "top": 1285.640625,
+            "width": 90.5625,
+            "x": 149.71875,
+            "y": 1285.640625
+          },
+          "fontSize": 14,
+          "lines": 1,
+          "rect": {
+            "bottom": 1302.140625,
+            "height": 17.5,
+            "left": 149.71875,
+            "right": 240.28125,
+            "top": 1284.640625,
+            "width": 90.5625,
+            "x": 149.71875,
+            "y": 1284.640625
+          },
+          "scrollWidth": 91
+        },
+        "visible": {
+          "bottom": 1205.39055865625,
+          "left": 95.87633237890626,
+          "right": 294.1093347539063,
+          "top": 1064.99951171875
+        }
+      }
+    ],
+    "overflow": 390,
+    "passages": [
+      {
+        "box": {
+          "bottom": 987,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 597,
+          "width": 390,
+          "x": 0,
+          "y": 597
+        },
+        "controls": 0,
+        "courseId": null,
+        "hidden": "true",
+        "text": ""
+      }
+    ],
+    "scene": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    },
+    "scroll": [
+      0,
+      0
+    ],
+    "scrollWidth": 390,
+    "terrain": {
+      "box": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      },
+      "loaded": true,
+      "ratio": 0.3333333333333333,
+      "source": "http://127.0.0.1:4193/assets/course-journey/modules-v5/visits-gallery-v1.webp"
+    },
+    "terrainCount": 1,
+    "width": 390,
+    "windowWidth": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "single": {
+    "bridgeCount": 0,
+    "modules": [
+      {
+        "accessibleName": "选择 Lesson 21–22 寻物交接站，5 / 5 颗星",
+        "art": {
+          "bottom": 433.1103515625,
+          "height": 164.078125,
+          "left": 108.83929443359376,
+          "right": 272.91741943359375,
+          "top": 269.0322265625,
+          "width": 164.078125,
+          "x": 108.83929443359376,
+          "y": 269.0322265625
+        },
+        "artInGround": {
+          "h": 0.14023771367521368,
+          "w": 0.420713141025641,
+          "x": 0.2790751139322917,
+          "y": 0.3863523303952991
+        },
+        "artboardRatio": 1,
+        "board": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "box": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "frame": {
+          "bottom": 597,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "ground": {
+          "bottom": 987,
+          "height": 1170,
+          "left": 0,
+          "right": 390,
+          "top": -183,
+          "width": 390,
+          "x": 0,
+          "y": -183
+        },
+        "groundMask": "radial-gradient(28% 6% at 50% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+        "id": "unit21-22",
+        "index": 1,
+        "label": {
+          "bottom": 535.390625,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 491.390625,
+          "width": 132,
+          "x": 129,
+          "y": 491.390625
+        },
+        "labelPosition": "relative",
+        "loaded": true,
+        "localArt": {
+          "h": 0.420713141025641,
+          "w": 0.420713141025641,
+          "x": 0.2790751139322917,
+          "y": 0.15905699118589745
+        },
+        "localGround": {
+          "h": 3,
+          "w": 1,
+          "x": 0,
+          "y": -1
+        },
+        "medal": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 439.390625,
+          "width": 44,
+          "x": 220.5,
+          "y": 439.390625
+        },
+        "motionCount": 0,
+        "ratios": {
+          "art": 1,
+          "board": 1,
+          "ground": 0.3333333333333333,
+          "stage": 1.722686175719511
+        },
+        "reward": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 439.390625,
+          "width": 148,
+          "x": 121,
+          "y": 439.390625
+        },
+        "row": {
+          "bottom": 483.390625,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 439.390625,
+          "width": 148,
+          "x": 121,
+          "y": 439.390625
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "sameStage": true,
+        "source": "http://127.0.0.1:4193/assets/course-journey/modules-v5/kindness-courtyard-v1.webp",
+        "stage": {
+          "bottom": 433.390625,
+          "height": 226.390625,
+          "left": 0,
+          "right": 390,
+          "top": 207,
+          "width": 390,
+          "x": 0,
+          "y": 207
+        },
+        "stageClientHeight": 226,
+        "stageOverflow": "visible",
+        "stageScroll": [
+          0,
+          0
+        ],
+        "stageScrollHeight": 390,
+        "tag": "ARTICLE",
+        "text": "Lesson 21–22",
+        "type": {
+          "clientWidth": 91,
+          "content": {
+            "bottom": 519.640625,
+            "height": 14,
+            "left": 149.578125,
+            "right": 240.421875,
+            "top": 505.640625,
+            "width": 90.84375,
+            "x": 149.578125,
+            "y": 505.640625
+          },
+          "fontSize": 14,
+          "lines": 1,
+          "rect": {
+            "bottom": 522.140625,
+            "height": 17.5,
+            "left": 149.578125,
+            "right": 240.421875,
+            "top": 504.640625,
+            "width": 90.84375,
+            "x": 149.578125,
+            "y": 504.640625
+          },
+          "scrollWidth": 91
+        },
+        "visible": {
+          "bottom": 425.390639859375,
+          "left": 124.93306140234375,
+          "right": 265.06677338671875,
+          "top": 284.995223265625
+        }
+      }
+    ],
+    "overflow": 390,
+    "passages": [],
+    "scene": {
+      "bottom": 597,
+      "height": 390,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    },
+    "scroll": [
+      0,
+      0
+    ],
+    "scrollWidth": 390,
+    "terrain": {
+      "box": {
+        "bottom": 987,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": -183,
+        "width": 390,
+        "x": 0,
+        "y": -183
+      },
+      "loaded": true,
+      "ratio": 0.3333333333333333,
+      "source": "http://127.0.0.1:4193/assets/course-journey/modules-v5/kindness-courtyard-v1.webp"
+    },
+    "terrainCount": 1,
+    "width": 390,
+    "windowWidth": 390,
+    "world": {
+      "bottom": 597,
+      "height": 390,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "empty": {
+    "characters": 0,
+    "controls": 0,
+    "terrain": 0
+  }
+}

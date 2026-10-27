@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit25-26",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit25-26.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-f6179ad6-2bc1-45ec-9513-7d74ca93e3d7.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit25-26/keepsake-story-v1.webp",
+    "assets/unit25-26/cast-mrs-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/kitchen-host-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 854915,
+      "sha256": "035fe0a77a65f2a6b6d6b73d09bd62a0f1f5925b4aef360124674d52808bfd45",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/kitchen-host-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 160184,
+      "sha256": "3c09f58d2811b16f0c07dde79a622b38fc510fd36b3a9b56a6bd4b91e0b93ae8",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 1015128,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          39,
+          50,
+          1213,
+          1211
+        ],
+        "normalized": [
+          0.03110047846889952,
+          0.03987240829346093,
+          0.967304625199362,
+          0.9657097288676236
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          131,
+          60,
+          1167,
+          1199
+        ],
+        "normalized": [
+          0.10446570972886762,
+          0.04784688995215311,
+          0.930622009569378,
+          0.956140350877193
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          132,
+          61,
+          1166,
+          1198
+        ],
+        "normalized": [
+          0.10526315789473684,
+          0.04864433811802233,
+          0.9298245614035088,
+          0.9553429027113237
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:37:28.419Z"
+}

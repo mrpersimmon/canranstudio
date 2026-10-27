@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit19-20",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit19-20.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-607e8c93-e154-476c-87fc-4c85cdaae08a.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit19-20/keepsake-story-v1.webp",
+    "assets/unit19-20/cast-standing-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/icecream-family-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1306138,
+      "sha256": "d8f0fbec916ac5f942887aef263fdac31104cdff295af566f33b26f8b2210f4b",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/icecream-family-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 252628,
+      "sha256": "88a6e91c270b7ba7f89a321306bccc04bda586808905b3db43d8cd9a4102b921",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 790838,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          65,
+          1225,
+          1219
+        ],
+        "normalized": [
+          0,
+          0.051834130781499205,
+          0.9768740031897927,
+          0.9720893141945773
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          80,
+          75,
+          1223,
+          1211
+        ],
+        "normalized": [
+          0.06379585326953748,
+          0.05980861244019139,
+          0.9752791068580542,
+          0.9657097288676236
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          80,
+          76,
+          1222,
+          1211
+        ],
+        "normalized": [
+          0.06379585326953748,
+          0.06060606060606061,
+          0.9744816586921851,
+          0.9657097288676236
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:35:39.167Z"
+}

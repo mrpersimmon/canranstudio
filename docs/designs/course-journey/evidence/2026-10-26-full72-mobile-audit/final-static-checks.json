@@ -1,0 +1,50 @@
+[
+  {
+    "command": "node .data/fronted-preview/audit72-final-checks.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"documents\": 10,\n  \"localLinks\": 1049,\n  \"broken\": 0,\n  \"standardRules\": 44,\n  \"finalRuntimeFiles\": 42,\n  \"geometrySourceSnapshotMatched\": true\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v8/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\"readOnly\":true,\"files\":49,\"matched\":49,\"actualCalls\":7,\"adoptedEnvironments\":6}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v7/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\"readOnly\":true,\"files\":123,\"matched\":123,\"actualGenerationCalls\":29,\"adoptedEnvironments\":16}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v6/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "36 frozen files verified; no files changed.\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v5/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"files\": 16,\n  \"matched\": 16,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v4/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"version\": \"modules-v4-town-2026-10-25\",\n  \"readOnly\": true,\n  \"filesChecked\": 6,\n  \"generationCalls\": 3,\n  \"adoptedAssets\": 1,\n  \"passed\": true,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v3/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"version\": \"modules-v3-art-2026-10-24\",\n  \"readOnly\": true,\n  \"filesChecked\": 11,\n  \"filesMatched\": 11,\n  \"adoptedAssetCount\": 3,\n  \"generationCallCount\": 3,\n  \"artFileCount\": 6,\n  \"evidenceFileCount\": 5,\n  \"passed\": true,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "git -c core.safecrlf=false diff --check",
+    "exitCode": 0,
+    "output": "",
+    "status": "fulfilled"
+  }
+]

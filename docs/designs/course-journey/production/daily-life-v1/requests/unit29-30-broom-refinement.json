@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit.\nImage 1 is the exact two-woman sprite to edit. Preserve both women, their faces, clothing, body proportions, scale, full-frame layout, colors, upper-left light, clean outlines and true alpha. Correct only the broom angle and the hands holding it: the golden straw head currently obscures Amy's inner shoe. Tilt the broom's LOWER end toward the empty gap BETWEEN the two women, with its straw tip around x=0.54 of canvas width at the common shoe baseline, while its upper handle stays near Amy's hands. Keep the broom clear of BOTH women's shoes and legs; all four complete shoes must be separately visible. Adjust Amy's gripping hands naturally to the new handle angle, with one wooden handle and one straw head only. Do not change Mrs. Jones's gesture. No floor, shadow, glow, backdrop, new props, text or extra people. Preserve transparent margins and do not crop any existing body part.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/production/daily-life-v1/drafts/unit29-30-initial.png"
+  ],
+  "transparent_background": true
+}

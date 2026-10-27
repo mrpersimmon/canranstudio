@@ -1,0 +1,33 @@
+{
+  "status": "reconstructed-from-logged-template-parts",
+  "generationDate": "2026-10-19",
+  "userApprovedDate": "2026-10-20",
+  "sourceImageBasename": "exec-d1c452a1-53e4-4a77-9423-6030cbb499b0.png",
+  "sourceThreadId": "01a144fe-4a3a-7820-8418-b9fde4db67e1",
+  "sourceCalls": [
+    {
+      "line": 2145,
+      "callId": "call_d3bc64601ef34682acfbefab117bfa25"
+    },
+    {
+      "line": 2160,
+      "callId": "call_4e6afeac79e843148fa9a7c1d255d26f"
+    },
+    {
+      "line": 2188,
+      "callId": "call_682c05974ae84e4fa8240c4281745c10"
+    }
+  ],
+  "reconstruction": "Decode the logged template literals; apply the logged Input roles replacement once; concatenate the resolved common text and direction. No new art direction was added to the historical prompt.",
+  "promptSha256": "74c637fdffb58b11584a263a73ca579a805b8b6de10f68fd282f247d187f0417",
+  "inputReferenceOrder": [
+    "originalProduct",
+    "brand",
+    "unit12",
+    "originalDuolingo",
+    "originalMonument"
+  ],
+  "tool": "image_gen.imagegen",
+  "transparentBackground": false,
+  "limitation": "The historical call did not expose a seed or pin a backend model revision, and did not record input-image hashes. Archived context files are copies available on 2026-10-20. Hashes in this pack fix the reference bytes for future use, not prove backend pixel-level reproducibility."
+}

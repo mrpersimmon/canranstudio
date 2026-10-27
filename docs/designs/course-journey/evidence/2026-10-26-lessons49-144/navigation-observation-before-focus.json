@@ -1,0 +1,10 @@
+{
+  "query": "78",
+  "counted": false,
+  "observedURL": "http://127.0.0.1:4187/",
+  "selected": "unit77-78",
+  "activeElement": "data-map-course=unit77-78",
+  "continueHref": "/unit77-78/#learn/listen",
+  "reason": "Probe advanced before deferred map-location focus had settled; no course-page failure is asserted",
+  "correction": "Wait for prepared scene and the requested map control focus before activating the continue link"
+}

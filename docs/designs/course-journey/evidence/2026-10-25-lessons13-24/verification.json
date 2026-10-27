@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-25",
+  "branch": "codex/fronted-opt-version",
+  "sources": {
+    "course-journey/route-worlds.js": "2abb0fb3b4b49bf2d59093b57375de1fa83758dd3d2081de2a525477cbe30dfa",
+    "course-journey/model.js": "e441ed6f09924ea482b5946d124f19ebaae5cd030d573f03c7a0381a0e6736a0",
+    "course-journey/ModuleJourney.jsx": "4cfc63f44f8dfccaa4f818cbdc5f5e3b3e965bbb92fe878adba897b09016f477",
+    "course-journey/PanoramaJourney.jsx": "44d2a1f50c1f58e8fd14eed0b7af42579a3a0b60c4d5a42afca479a6ac9515f3",
+    "course-journey/use-map-layout.js": "a4520f0a2c911b026b5cfb0ce8a4f83a4642549118958c088d1cfaf39e07aeb2",
+    "course-journey/styles.css": "fbeec0f5ebefd65ae0e22c07cae4b6cef279276bcdaea3936206ccb27577b894",
+    "course-journey/modules.css": "dda737840a8f4ad04f55e327ee8510a7512fb19cbafbac46bf3b1369b55f19ff",
+    "course-journey/panorama.css": "35ae0f0d6d24ac3fd2a5d42427f4b6da284fd006b3869eac6960d70c1223feee",
+    "tests/support/journey-visits-kindness-contact.json": "1aa43bd7e26a9ecc51605e007b5ca7d8353d8019940ab6a28b94fa2a249ee5f6"
+  },
+  "geometrySizes": 60,
+  "geometrySamples": 360,
+  "starUiSamples": 36,
+  "switchScenarios": 48,
+  "domFrameSamples": 2880,
+  "nodeTests": 14,
+  "currentProductionFiles": 16,
+  "historicalPackages": {
+    "visits": 45,
+    "dailyLife": 61
+  },
+  "playwrightCliRun": false,
+  "realDevicesRun": false,
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

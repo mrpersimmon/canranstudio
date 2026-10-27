@@ -1,0 +1,82 @@
+{
+  "scope": "Fresh captures only: all72 at390x844 and24 middle stops at320x720",
+  "steps": [
+    {
+      "step": 1,
+      "name": "All course compositions",
+      "count": 72
+    },
+    {
+      "step": 2,
+      "name": "Narrow middle stops",
+      "count": 24,
+      "mixedSamples": 144
+    },
+    {
+      "step": 3,
+      "name": "Chapter transitions",
+      "status": "passed in stated capture scope",
+      "scenarios": 96,
+      "actualFrames": 2181
+    }
+  ],
+  "findings": [
+    {
+      "id": "A1",
+      "status": "fixed",
+      "type": "scenery-information clearance",
+      "chapters": [
+        "opening",
+        "kindness",
+        "making",
+        "everyday",
+        "caring",
+        "memories"
+      ],
+      "evidence": [
+        "phone-unit3-4.png",
+        "narrow-middle/phone-unit21-22.png",
+        "narrow-middle/phone-unit39-40.png",
+        "narrow-middle/phone-unit57-58.png",
+        "narrow-middle/phone-unit63-64.png",
+        "narrow-middle/phone-unit69-70.png"
+      ],
+      "root": "Fixed-size rewards and minimum touch controls occupy a larger proportion of the source scene at320; independent shoe-floor checks did not validate the complete info stack against drawn foreground objects."
+    },
+    {
+      "id": "A2",
+      "status": "fixed",
+      "type": "stale course thumbnail",
+      "evidence": "switch-probe/003.jpg",
+      "root": "React reuses the same img for different courses; a src update may temporarily retain the old decoded bitmap while dock text is already updated."
+    },
+    {
+      "id": "A3",
+      "status": "fixed",
+      "type": "opening silhouette axis",
+      "root": "Earlier tests covered centering for extensions but excluded the first six. The opening couple was about1.9px off-axis at560px map width.",
+      "verification": "All72 now use silhouette alignment; full60-size measured maximum0.124435px."
+    },
+    {
+      "id": "A4",
+      "status": "fixed",
+      "type": "selection first-frame contrast",
+      "root": "White text switched immediately while the cream fill transitioned180ms. Reduced-motion and settled screenshots missed it.",
+      "evidence": [
+        "before-selection-blank-caption.png",
+        "before-selection-colors.json"
+      ],
+      "verification": "Final normal-motion216 selections,864 sampled frames, minimum contrast6.43:1."
+    }
+  ],
+  "strengths": [
+    "72 character groups preserve original course identity",
+    "24 middle stops remain on matching same-scale ground in the captured frames",
+    "Rewards and captions remain visually grouped beneath their own characters"
+  ],
+  "limits": [
+    "No physical touch device or WebKit",
+    "Fresh screenshot audit does not prove pixel continuity between captures; actual screencast samples are collected separately",
+    "Fetch hold attempt did not reproduce a delayed network request and is not counted as a failure/retry pass"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "asset": "unit9-10-ground",
+  "tool": "built-in image_gen",
+  "targetSize": [
+    1536,
+    1024
+  ],
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/.codex/generated_images/01a1693d-c894-79a1-b00e-54d20ab1cd07/exec-9a2fa3a1-cc00-4c89-8f0f-e910d7ec5a3d.png"
+  ],
+  "prompt": "Use case: precise-object-edit. Revise this exact EMPTY isolated terrace sprite only to correct framing and transparency. Keep the coral arch terrace design, palette, cream stone floor, empty safe central floor, materials and upper-left lighting unchanged. Target output 1536 x 1024 landscape, genuine alpha transparency. Place the ENTIRE sprite including every leaf and local shadow INSIDE normalized x=.09..91 and y=.09..90, with clear fully transparent margins on all four sides. It currently touches too near the left and right edges: reduce the total composition uniformly just enough to produce the margins, preserving shape and aspect ratio. Remove any diffuse green or coral colored halo outside the physical island; only a small subtle shadow immediately under the island rim. Keep a large unobstructed flat foot-placement area at x=.20..80, y=.56..78; no central steps, curbs, people, props, furniture, lettering, numbers, stars or medals. No new objects. Do not crop the original silhouette. Preserve alpha, no white rectangle, no checkerboard texture."
+}

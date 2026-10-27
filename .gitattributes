@@ -19,3 +19,13 @@ docs/butcher-version/evidence/**/*.csv whitespace=blank-at-eol,blank-at-eof,spac
 docs/research/duolingo-language-exercises-2026-09-27/sources/*.html -whitespace
 docs/research/duolingo-language-exercises-2026-09-27/sources/*.log -whitespace
 docs/research/duolingo-language-exercises-2026-09-27/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Reviewed journey provenance is byte-addressed; do not rewrite its line endings.
+docs/designs/course-journey/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/designs/course-journey/production/** -whitespace
+docs/designs/course-journey/provenance/** -whitespace
+docs/designs/course-journey/generated/** -whitespace
+docs/designs/course-journey/prompts/** -whitespace
+docs/designs/course-journey/recipes/** -whitespace
+docs/designs/course-journey/evidence/** -whitespace
+docs/designs/course-journey/evidence/**/*.zip binary
+assets/course-journey/** -text

@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-26",
+  "requests": [
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v3",
+      "attempt": 3,
+      "prompt": "Use case: precise-object-edit. This is the exact edit target. Preserve the entire illustrated promenade, all buildings, paving and light exactly as seen. Only correct the NATIVE PNG canvas to EXACTLY 724 pixels wide and 2172 pixels high, a true exact 1:3 ratio. The current image is 724x2171, one row too short. Extend the very bottom naturally, do not scale or distort the artwork. No other change, no people, no text, no UI. Return opaque RGB with exact 724x2172 native dimensions.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v2.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v3",
+      "attempt": 3,
+      "prompt": "Use case: precise-object-edit. Edit ONLY the extreme right-side structure in the bottom third of this exact image. Keep the exact 724x2172 canvas, top cafe, middle shop, broad continuous central paving, colour and style unchanged. Replace the lower-right generic glass shelter edge with a recognizable narrow side cutaway of a classic TEAL CITY BUS: rounded teal bus window framing, a cream inner wall panel and two slender YELLOW handrails, only within x82%-100% and y70%-96% of the full image. These rails remain strictly at that right border; none crosses the clear central walkway. This is a level bus boarding bay with a visible bus context, no wheels, vehicle nose, signs, numbers, coins, seats or people. Do not reintroduce the old diagonal floor slab or any barrier into x20%-80%. Preserve one continuous same-level ground surface and all three clear person/reward zones. Output opaque native 724x2172 PNG.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/choices-transit-v2.png"
+      ],
+      "transparent_background": false
+    }
+  ]
+}

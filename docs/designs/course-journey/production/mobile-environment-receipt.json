@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "asset": "assets/course-journey/opening-mobile.png",
+  "role": "Opaque portrait environment base for the first three course nodes. Characters and dynamic UI are separate runtime layers.",
+  "createdDate": "2026-10-21",
+  "generator": "image_gen.imagegen",
+  "frozenRecipe": "environment-opening-v1.0.0",
+  "approvedMaster": "docs/designs/course-journey/references/approved-mobile-v1.png",
+  "approvedMasterSha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+  "actualInitialRequest": {
+    "prompt": "Frozen design pack: canran-course-journey v1.0.0. Date anchor: 2026-10-20, Asia/Shanghai; no visible dates unless the job explicitly requires them.\n\nCANRAN JOURNEY — LOCKED ART DIRECTION v1.0.0\nUse case: ui-mockup or project asset, as explicitly stated by the job.\nThe first attached image is ALWAYS the user's approved mobile journey master. Preserve its visual identity. Additional images have explicitly declared roles. Prefer the approved master over descriptions if a subjective style choice is ambiguous. This is one chosen design being refined, not a new visual exploration.\n\nCHARACTERS\nFriendly flat 2D storybook characters, with warm dark-brown rounded outlines and simple expressive faces, placed inside the dimensional environment. Approximately 2.2–2.6 heads tall for the full-body map figures; use the approved image to judge proportions, not a literal mathematical caricature. Large readable heads, short limbs, complete hands and feet, warm skin tones, small blush, rounded noses and clear eyes. They should retain adult clothing and story identities. Do not convert them into realistic adults, babies, anime, 3D clay, glossy plastic, Pixar-like renders, or generic interchangeable mascots.\nLesson 1–2 man: brown side-parted hair, large dark rounded glasses, teal-blue jacket, warm ivory shirt, yellow tie, brown shoes.\nLesson 1–2 woman: shoulder-length brown hair with softly curled ends, ochre hat with a coral band, terracotta/coral coat, golden-yellow scarf, brown shoes.\nTheir shared red handbag with a simple gold clasp is the key prop. They face and engage with each other; the hand-over is legible. Keep both faces, hands, feet and handbag complete. Do not duplicate the prop, add limbs or accessories, or swap clothing.\nFor another lesson, use its own approved source cast and story facts. Preserve identity from that source while adapting only map scale/proportions to this master. Never reuse the Lesson 1–2 couple across every course.\n\nENVIRONMENT\nA grounded, sunlit miniature architectural journey, with soft 2.5D/isometric depth and coherent terraces. Warm ivory stone paths and rounded steps; soft salmon/peach walls and arches; terracotta roofs; pale aqua/turquoise water; jade, olive and sage vegetation; sparse small warm-yellow flowers and selection accents.\nThe architecture is dimensional; characters remain crisp warm-outline storybook art. Rounded edges, broad calm color planes, fine soft shadows and subtle matte texture. No photoreal gritty stone, hard specular plastic, excessive outlines around architecture, deep high-contrast black shadows or dense noise.\nPreserve the approved image's elevated three-quarter camera, near-parallel verticals, scale relationships and warm upper-left sunlight with shadows to the lower right. Camera wording describes the master, it does not authorize a different viewpoint.\nKeep one visually coherent connected path, arch bridges, garden edges and readable destination landings. Buildings stand on connected terrain, not floating islands or rotating planets. Water and greenery remain supporting scenery.\nOpening segment: handbag-exchange circular landing in the foreground/lower left; purple umbrella kiosk at middle right; welcoming schoolhouse with coral roof toward upper right. The approved environment is the reference, not a reason to invent new curriculum events.\n\nUI AND COMPOSITION\nPreserve the real starflower logo and the product name 灿然英语工作室. Warm paper/ivory UI, forest-green primary controls and warm-brown text. Keep text on calm high-contrast surfaces, separate from scenery.\nCourse discovery is the hero use case. Include global Lesson search and the complete authorized directory in UI mockups. All 45 demo units belong to one hub. The route is a browsing aid, not a forced learning order or access lock.\nOnly the job may change framing, responsive layout, visible UI state, course identity or landmarks. It must not change the character style, camera language, materials, lighting or overall palette.\nNever squeeze an image or UI to fill a canvas. Recompose for the exact target ratio, leave safe space for controls, and keep important characters and props intact.\nFor mockups, use crisp simplified Chinese and the exact copy in the job. Do not invent extra controls, currencies, lives, streaks, advertisements or personal information.\nFor production artwork, render NO text, lesson labels, badges, stars, student names, dates, buttons, navigation, search fields or state-dependent glow. Those are separate runtime layers.\n\nACTUAL ATTACHED REFERENCE ORDER\nImage 1: approvedMobile. User-approved visual master; most recent set, third displayed image.\n\nJOB: REUSABLE ENVIRONMENT ARTWORK, NOT A UI SCREEN\nCanvas: 1080 x 1440 px, portrait production artwork. Output role: Opaque environment base for the first three course nodes; runtime characters and UI will be composited separately. This job has NO characters or UI.\nUse the first approved-master reference solely for the connected architectural setting. Produce a coherent empty environment segment for Lesson 1–6, first segment of the Lesson 1–18 range, maintaining the locked camera, lighting, matte materials, scale and color family.\nLandmark plan: An empty circular landing at lower left for the later handbag-couple sprite; a purple umbrella resting in a small wooden kiosk at middle right; a welcoming cream schoolhouse with terracotta roof at upper right. Connected ivory paths, arches and stairs, aqua water and restrained green planting..\nComposition/safe space: Keep a clear central path; reserve the top 12% and bottom 16% as quiet environment behind separate UI, and keep key landmark silhouettes inside an 8% left/right margin. No labels or characters in the empty landing..\nPreserve welcoming warm ivory paths, soft salmon arches, terracotta accents, clear aqua water and restrained jade foliage. Paths must connect visibly through the frame without impossible jumps. Empty circular destination landing areas should be quiet enough to later place separate characters and DOM controls.\nNo people, silhouettes, faces, signage, lesson numbers, printed text, logos, search fields, labels, buttons, nav, stars, gold selection rings or progress-state decoration. The empty landings are physical architectural surfaces, not UI placeholders.\nThis is a reusable production layer: visually rich but calm, exact requested framing, no accidental holes or unrelated props. Reuse a verified environment for state changes rather than generating another background each time.\n\nFIXED EXCLUSIONS\nNo other product's logo, mascot, characters, exact interface or copyrighted game world. No generic space, orbit, floating-island, cinema, page-turning-book or neon-cyberpunk redesign. No new character style or wardrobe. No duplicated faces, swapped identities, missing hands, cropped hair/feet, malformed prop interaction or extra limbs.\nNo scenery behind essential text that reduces contrast. No thin unreadable text, tiny touch controls, dense UI inventory, nested cards or giant decorative heading that displaces course navigation.\nNo automatic assumption that selected means completed, that a gray marker means locked, or that five stars are awarded merely by visiting a node. No fabricated progress or dates.\nNo baked-in dynamic UI in production assets. No real student or account data. No credentials.\nMobile mockups show app content only: no phone body, bezel, OS status bar, clock, battery, home indicator, browser chrome or device shadow. Desktop mockups likewise omit browser chrome.",
+    "referenced_image_paths": [
+      "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png"
+    ],
+    "transparent_background": false
+  },
+  "initialGeneratedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a15a45-d4b3-7f40-bbea-26c89a91ab7c\\exec-3ac635a5-a4d5-4956-9baf-fed6aa785d17.png",
+  "cleanupReason": "The initial image repeated the master reference's flower-logo banner. A narrow image edit removed the banner and support rod to comply with the production artwork's exclusion of logos.",
+  "actualCleanupRequest": {
+    "prompt": "Edit the attached production environment image with one strictly local change only. Remove the hanging cream banner with the stylized yellow-and-green flower logo on the wall at the lower left, together with its hanging rod and brackets. Fill its exact former area with the same warm salmon/peach stone wall, matching existing masonry, matte material, light and shadow. Preserve absolutely everything else pixel-compositionally as closely as possible: the empty green circular foreground landing; all ivory paths, arches, bridges and steps; the purple umbrella in its wooden kiosk with its simple umbrella icon; the cream schoolhouse with terracotta roof and plain yellow flag; turquoise water; vegetation; camera; lighting; framing; same portrait dimensions. No text, logos, people, UI, lesson labels, badges, stars or other additions. This is a minimal cleanup to an already approved direction, not a redesign. Output opaque full-frame PNG.",
+    "referenced_image_paths": [
+      "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a15a45-d4b3-7f40-bbea-26c89a91ab7c\\exec-3ac635a5-a4d5-4956-9baf-fed6aa785d17.png"
+    ],
+    "transparent_background": false
+  },
+  "selectedGeneratedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a15a45-d4b3-7f40-bbea-26c89a91ab7c\\exec-82d99512-4591-47df-8038-aef201457dec.png",
+  "selectedOutput": {
+    "width": 1086,
+    "height": 1448,
+    "requestedWidth": 1080,
+    "requestedHeight": 1440,
+    "aspectRatio": "3:4",
+    "bytes": 1968693,
+    "sha256": "02e6c944b5e80f4cec5534e1c737a530201c3e28894a9533599c38585d33cb11",
+    "transparent": false,
+    "postprocessing": "None. Original selected PNG copied byte-for-byte; source preserved."
+  },
+  "composition": {
+    "coordinates": "Normalized x,y relative to full raster, origin at top left.",
+    "emptyCircularLandingCenter": {
+      "x": 0.313,
+      "y": 0.716
+    },
+    "emptyCircularLandingBounds": {
+      "left": 0.087,
+      "top": 0.643,
+      "right": 0.54,
+      "bottom": 0.797
+    },
+    "umbrellaKioskCenter": {
+      "x": 0.454,
+      "y": 0.423
+    },
+    "umbrellaTop": {
+      "x": 0.458,
+      "y": 0.29
+    },
+    "schoolhouseCenter": {
+      "x": 0.718,
+      "y": 0.139
+    },
+    "schoolEntranceLanding": {
+      "x": 0.683,
+      "y": 0.228
+    },
+    "suggestedCharacterFeet": {
+      "x": 0.313,
+      "y": 0.754
+    }
+  },
+  "visualReview": {
+    "inspected": true,
+    "noPeople": true,
+    "noUi": true,
+    "noText": true,
+    "noStarsOrProgress": true,
+    "noBrandLogo": true,
+    "connectedPaths": true,
+    "approvedCameraPaletteAndMaterials": true,
+    "notes": [
+      "Warm peach architectural terraces, ivory paths, aqua water and soft upper-left light follow the approved master closely.",
+      "Purple umbrella kiosk, cream schoolhouse and empty circular landing are visible and linked by stairs and bridges.",
+      "The small umbrella pictogram remains as a static prop decoration, not a logo or runtime control.",
+      "Output dimensions differ by six and eight pixels from the request but preserve the exact 3:4 ratio; no resize or image editing was performed outside image_gen.",
+      "The school roof and flag occupy part of the top 12 percent. Keep search/header outside the art rather than covering the top with essential text.",
+      "The circular landing uses a warm yellow stone rim without stars or a runtime selection glow."
+    ]
+  }
+}

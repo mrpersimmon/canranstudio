@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit21-22",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit21-22.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-49a9f7dc-46a6-4cef-aed6-c66280a8c50d.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit21-22/keepsake-story-v1.webp",
+    "assets/unit21-22/cast-received-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/red-book-pair-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1045910,
+      "sha256": "ca25fd95408a92f1404800861fae313a4b37dc3506c17657b5e58af7179e6bd2",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/red-book-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 176172,
+      "sha256": "6ea1c1b82c9f94631cdde2fe75a78183ff8440016f99be753dca246e96d3b8c2",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 882639,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          33,
+          1201,
+          1253
+        ],
+        "normalized": [
+          0,
+          0.02631578947368421,
+          0.9577352472089314,
+          0.9992025518341308
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          123,
+          122,
+          1194,
+          1195
+        ],
+        "normalized": [
+          0.09808612440191387,
+          0.09728867623604466,
+          0.9521531100478469,
+          0.9529505582137161
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          124,
+          123,
+          1193,
+          1195
+        ],
+        "normalized": [
+          0.09888357256778309,
+          0.09808612440191387,
+          0.9513556618819776,
+          0.9529505582137161
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:36:40.279Z"
+}

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-22",
+  "tool": "image_gen.imagegen",
+  "request": "environment-mobile-request.json",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-bc0a7589-0316-415c-87a8-dca7f058e426.png",
+  "output": "assets/course-journey/neighborhood-mobile-v1.png",
+  "width": 1024,
+  "height": 1536,
+  "alpha": false,
+  "sha256": "fb726872b8bf06dfb4db20c6446f25a73d20bc5229b84de26326f67e2b4eb248",
+  "references": [
+    {
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+      "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c"
+    }
+  ],
+  "web": {
+    "path": "assets/course-journey/neighborhood-mobile-v1.webp",
+    "bytes": 312386,
+    "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+  },
+  "review": "Preserves three empty terraces, paths and palette. New meeting table, garden fence and teal cloakroom doorway; no people, shirts, text or UI. Native dimensions preserved; encoding only."
+}

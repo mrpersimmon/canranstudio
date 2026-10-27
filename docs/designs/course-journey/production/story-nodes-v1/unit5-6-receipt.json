@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "assetId": "unit5-6-friends-trio-v1",
+  "createdAt": "2026-10-21T11:26:26.092Z",
+  "generator": "built-in image_gen.imagegen",
+  "mode": "reference-based generation followed by one targeted refinement",
+  "transparentBackground": true,
+  "references": [
+    {
+      "order": 1,
+      "role": "sole approved visual master",
+      "path": "docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "order": 2,
+      "role": "production full-body style and proportion",
+      "path": "assets/course-journey/handbag-couple.png",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "order": 3,
+      "role": "lesson identities and costume only",
+      "path": "assets/awards/unit5-6-friends.webp",
+      "sha256": "5e14f4b2b4ec86ede7bc586e0df14de4fe50adaefc55659c799eb5b8dfbe06bd"
+    }
+  ],
+  "attempts": [
+    {
+      "number": 1,
+      "actualRequest": "docs/designs/course-journey/production/story-nodes-v1/unit5-6-request.json",
+      "nativeOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15e32-21dc-7013-9822-1e1a44de1cd3/exec-1b71db08-37c4-474f-8550-6cdb00576707.png",
+      "retainedCopy": "docs/designs/course-journey/production/story-nodes-v1/unit5-6-attempt1.png",
+      "sha256": "d65aba890718da1ff650ebbbe92d9a9c53b2154b4629f0d0fdf16816126c5ccd",
+      "width": 1536,
+      "height": 1024,
+      "selected": false,
+      "reason": "Identities and costume matched; refine body proportion and top/bottom breathing room."
+    },
+    {
+      "number": 2,
+      "actualRequest": "docs/designs/course-journey/production/story-nodes-v1/unit5-6-refinement-request.json",
+      "referenceOrder": [
+        1,
+        2,
+        3,
+        "attempt 1 edit target"
+      ],
+      "nativeOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15e32-21dc-7013-9822-1e1a44de1cd3/exec-f3418628-0042-4869-be90-1904e3b6dc12.png",
+      "finalCopy": "assets/course-journey/friends-trio-v1.png",
+      "sha256": "452fbf7405d7e849f70faa8d0fa571b6d95d107f700281db50ec813b21ced17e",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1564144,
+      "selected": true
+    }
+  ],
+  "finalOutput": {
+    "path": "assets/course-journey/friends-trio-v1.png",
+    "format": "PNG",
+    "width": 1536,
+    "height": 1024,
+    "hasAlpha": true,
+    "sha256": "452fbf7405d7e849f70faa8d0fa571b6d95d107f700281db50ec813b21ced17e",
+    "nativePixelsPreserved": true,
+    "noProgrammaticCutout": true
+  },
+  "alpha": {
+    "boundsInclusiveByThreshold": {
+      "1": [
+        0,
+        38,
+        1483,
+        985
+      ],
+      "2": [
+        168,
+        150,
+        1400,
+        950
+      ],
+      "8": [
+        170,
+        152,
+        1398,
+        948
+      ],
+      "128": [
+        170,
+        153,
+        1398,
+        947
+      ],
+      "254": [
+        175,
+        161,
+        1389,
+        946
+      ]
+    },
+    "zeroAlphaPixels": 922201,
+    "totalPixels": 1572864,
+    "note": "RGB values exist underneath transparent pixels. Far fringe only has alpha=1/255; the substantive silhouette begins at x=168,y=150. Preserve native alpha; do not infer a dark background from raw RGB display."
+  },
+  "placement": {
+    "recommendedFeetAnchorNormalized": {
+      "x": 0.51,
+      "y": 0.9258
+    },
+    "recommendedCssTransform": "translate(-51%, -92.58%)",
+    "substantiveVisibleBoundsNormalized": {
+      "left": 0.1107,
+      "top": 0.1494,
+      "right": 0.9102,
+      "bottom": 0.9258
+    },
+    "suggestedImageElementWidthCssPx": {
+      "mobile": [
+        190,
+        220
+      ],
+      "desktop": [
+        320,
+        380
+      ]
+    },
+    "note": "Anchor uses final opaque shoe bottom; per-person shoe baselines differ by less than about 2% of canvas height. Parent should assess final map composition at actual rendered sizes."
+  },
+  "visualReview": {
+    "method": "Inspected native generated image and measured alpha read-only with sharp.",
+    "identities": "Left Mr Blake: square glasses/sage suit/ochre vest/green tie/red book. Center Sophie: brown wavy hair/yellow clip/coral dress/white collar/yellow shoulder bag. Right Hans: blond curls/yellow jacket/green bow tie/backpack straps/waving hand.",
+    "style": "Compact full-body warm storybook illustration, rounded brown outlines and simple soft shading, matching the shipping handbag couple.",
+    "composition": "Three complete figures, all hair/hands/shoes visible; no architecture, ground plane, pedestal, text, UI or stars.",
+    "remainingValidation": "Browser compositing and final phone map placement are delegated to the parent integration task."
+  }
+}

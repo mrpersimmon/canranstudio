@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "version": "1.0.0",
+  "design": "course-journey-story-nodes",
+  "date": "2026-10-21",
+  "mode": "built-in image_gen.imagegen",
+  "jobs": {
+    "unit3-4": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/unit3-4-request.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/awards/unit3-4-umbrella.webp"
+      ],
+      "transparentBackground": true
+    },
+    "unit3-4-margin": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/unit3-4-margin-request.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/awards/unit3-4-umbrella.webp",
+        "docs/designs/course-journey/production/story-nodes-v1/unit3-4-attempt1.png"
+      ],
+      "transparentBackground": true
+    },
+    "unit5-6": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/unit5-6-request.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/awards/unit5-6-friends.webp"
+      ],
+      "transparentBackground": true
+    },
+    "unit5-6-refinement": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/unit5-6-refinement-request.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/awards/unit5-6-friends.webp",
+        "docs/designs/course-journey/production/story-nodes-v1/unit5-6-attempt1.png"
+      ],
+      "transparentBackground": true
+    },
+    "mobile-environment": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-request.json",
+      "references": [
+        "assets/course-journey/opening-mobile.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "transparentBackground": false
+    },
+    "mobile-environment-refinement": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-revision-02-request.json",
+      "references": [
+        "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-candidate-01.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "transparentBackground": false
+    },
+    "desktop-environment": {
+      "request": "docs/designs/course-journey/production/story-nodes-v1/desktop-environment-request.json",
+      "references": [
+        "assets/course-journey/opening-desktop.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "transparentBackground": false
+    }
+  },
+  "lockedFiles": {
+    "assets/awards/unit3-4-umbrella.webp": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f",
+    "assets/awards/unit5-6-friends.webp": "5e14f4b2b4ec86ede7bc586e0df14de4fe50adaefc55659c799eb5b8dfbe06bd",
+    "assets/course-journey/friends-trio-v1.png": "452fbf7405d7e849f70faa8d0fa571b6d95d107f700281db50ec813b21ced17e",
+    "assets/course-journey/friends-trio-v1.webp": "8c97dedf6894f23a6fad779704be71cae5879ecebae9bc7e80815e5a47c2de59",
+    "assets/course-journey/handbag-couple.png": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68",
+    "assets/course-journey/handbag-couple.webp": "df99ee8abaf3ce1cbbc3c2849c721e2c5302355a7ebf05825092d2a263fa4967",
+    "assets/course-journey/opening-desktop-v2.png": "255125643efc997036995e7c5e7aff94ab0f3535ce4aac462304b1f172ccef35",
+    "assets/course-journey/opening-desktop-v2.webp": "e5f29bc8d0124a81dbcb24708c0cf99ad382afc6213a271ef0dc5ae28fdb77ab",
+    "assets/course-journey/opening-desktop.png": "73ca7c02036e842b7c9d45f738335a27498adfad05f9cbaa044e988b33981acb",
+    "assets/course-journey/opening-mobile-v2.png": "75f484778eee39527e047d9a0af2f32429fb759377363cf97a7d9d58d94ad2a9",
+    "assets/course-journey/opening-mobile-v2.webp": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+    "assets/course-journey/opening-mobile.png": "02e6c944b5e80f4cec5534e1c737a530201c3e28894a9533599c38585d33cb11",
+    "assets/course-journey/umbrella-counter-v1.png": "516ddb352665a69c436c8f345ff8ea0b07bd4a65983eb1e8218f46c089b0bdc5",
+    "assets/course-journey/umbrella-counter-v1.webp": "c1a9f4d258a4caf9134403a2171924e643e177b792b7f3ff4f12829da8732a92",
+    "docs/designs/course-journey/production/story-nodes-v1/desktop-environment-receipt.json": "e4f562c9b992ffbc7e209944840d8e7ad3c90d8f130f715a3dd3b31a0e5b5c0c",
+    "docs/designs/course-journey/production/story-nodes-v1/desktop-environment-request.json": "a1cc2494bca32f9d821713dad73ce10fe35f7b1b40f17f5609f7aeaad73611f3",
+    "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-candidate-01.png": "d0098e14c1f56546bade2e33b04307c0bf2bb3645666a77755de1e5b4c0a1614",
+    "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-receipt.json": "730b938b8995a67e03463f51318bce520b0e0288374a71a412fee0fcdb31b608",
+    "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-request.json": "7c9a33d1708647e3a68454b31ba5d6c25794280b038227197218d93e0896dc78",
+    "docs/designs/course-journey/production/story-nodes-v1/mobile-environment-revision-02-request.json": "4f2c4b6027f466d6f6df125c7f46f77bceaff8d2195d4648d9e01d43148425c0",
+    "docs/designs/course-journey/production/story-nodes-v1/placement.json": "a454f7e5116d2af0952c1c78113b2ef75f32af1a11d6ef971818ac19320e0452",
+    "docs/designs/course-journey/production/story-nodes-v1/replay-prompt.cjs": "3680ca589cfdea171c947fe0eff45f57dad216497549c91321d7a84486a386fe",
+    "docs/designs/course-journey/production/story-nodes-v1/rules.md": "58954ca1873d093b67e37b6edaa787ad2c08d850d686ec096862223463ab48ec",
+    "docs/designs/course-journey/production/story-nodes-v1/unit3-4-attempt1.png": "cc0ce9e0b616d574ee094a930da9d2a3cfea6df240c7956229f1a793a9a49f6d",
+    "docs/designs/course-journey/production/story-nodes-v1/unit3-4-margin-request.json": "0a04b4ce42c74ca20c584599e8560d0932cc6c8a9b1dfd92d3dc158436aea5ad",
+    "docs/designs/course-journey/production/story-nodes-v1/unit3-4-receipt.json": "bdcc685125decc841700954db4020dae80dfceb1797be2cce4bdf6e304eedc0e",
+    "docs/designs/course-journey/production/story-nodes-v1/unit3-4-request.json": "53408850e283846f9adeb5f00cc4e8a8a06e3d03c9baed2da68eb81a202c28e4",
+    "docs/designs/course-journey/production/story-nodes-v1/unit5-6-attempt1.png": "d65aba890718da1ff650ebbbe92d9a9c53b2154b4629f0d0fdf16816126c5ccd",
+    "docs/designs/course-journey/production/story-nodes-v1/unit5-6-receipt.json": "48d744cd0f6de5d512682ec871f6f5716aa2c78f86844f8ab4d368bd6514b817",
+    "docs/designs/course-journey/production/story-nodes-v1/unit5-6-refinement-request.json": "754dcdd86bc6f1f63f21ee42da7cfe34c82296f57d51aae238fb0adebc51e67a",
+    "docs/designs/course-journey/production/story-nodes-v1/unit5-6-request.json": "c699e19716325a51ef2962105ec2759df95b89e5e6c9c9729f3a8d23edf92a14",
+    "docs/designs/course-journey/production/story-nodes-v1/web-assets.json": "b7d9e96879d3b19a0a0466276d6ffdb641333e8cead310989a5b9c9ce5d3f9da",
+    "docs/designs/course-journey/references/approved-mobile-v1.png": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+  }
+}

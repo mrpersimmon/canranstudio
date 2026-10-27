@@ -1,0 +1,434 @@
+{
+  "version": "2026-10-25.1",
+  "unit": "CSS px",
+  "scope": "学生旅程首页、地图入口和课程目录；不代表全部教学页面已在这些尺寸验收",
+  "coverageTarget": {
+    "percent": 95,
+    "status": "pending-first-party-viewport-data",
+    "population": "本站学生页面真实访问上下文",
+    "windowDays": 30,
+    "denominator": "全部有效访问上下文，包含未识别和未覆盖项",
+    "numerator": "具有相应尺寸、环境和所需交互验证证据的访问上下文",
+    "notes": [
+      "手机、平板、电脑分别报告，并报告总体；不能让电脑占比掩盖手机缺口",
+      "固定尺寸通过率不能代替流量覆盖率，区间内未实测尺寸也不能自动计入",
+      "设备销量、标称分辨率和公开屏幕统计只用于选样",
+      "用户已确认暂无本站尺寸统计，本轮只固化矩阵和目标"
+    ]
+  },
+  "sources": [
+    {
+      "url": "https://gs.statcounter.com/screen-resolution-stats/mobile/china",
+      "period": "2026-09",
+      "use": "手机参考，屏幕访问统计，不是本站视口覆盖率"
+    },
+    {
+      "url": "https://gs.statcounter.com/screen-resolution-stats/tablet/china",
+      "period": "页面本次返回 2026-08",
+      "use": "平板参考，不与 9 月比例相加"
+    },
+    {
+      "url": "https://gs.statcounter.com/screen-resolution-stats/desktop/china",
+      "period": "2026-09",
+      "use": "电脑参考，含笔记本和台式机"
+    },
+    {
+      "url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "use": "设备逻辑尺寸与旋转参考"
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth",
+      "use": "实际布局视口口径"
+    },
+    {
+      "url": "https://gs.statcounter.com/faq",
+      "use": "外部流量样本和本站数据的区别"
+    }
+  ],
+  "groups": {
+    "phonePortrait": [
+      [
+        360,
+        640
+      ],
+      [
+        360,
+        800
+      ],
+      [
+        361,
+        801
+      ],
+      [
+        375,
+        667
+      ],
+      [
+        375,
+        812
+      ],
+      [
+        384,
+        832
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        393,
+        873
+      ],
+      [
+        402,
+        874
+      ],
+      [
+        412,
+        915
+      ],
+      [
+        414,
+        896
+      ],
+      [
+        428,
+        926
+      ],
+      [
+        430,
+        932
+      ],
+      [
+        440,
+        956
+      ]
+    ],
+    "phoneLandscape": [
+      [
+        667,
+        375
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        956,
+        440
+      ]
+    ],
+    "tabletPortrait": [
+      [
+        744,
+        1133
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        800,
+        1280
+      ],
+      [
+        810,
+        1080
+      ],
+      [
+        820,
+        1180
+      ],
+      [
+        834,
+        1194
+      ],
+      [
+        1024,
+        1366
+      ],
+      [
+        1032,
+        1376
+      ]
+    ],
+    "tabletLandscape": [
+      [
+        1133,
+        744
+      ],
+      [
+        1024,
+        768
+      ],
+      [
+        1280,
+        800
+      ],
+      [
+        1080,
+        810
+      ],
+      [
+        1180,
+        820
+      ],
+      [
+        1194,
+        834
+      ],
+      [
+        1366,
+        1024
+      ],
+      [
+        1376,
+        1032
+      ]
+    ],
+    "desktop": [
+      [
+        1280,
+        720
+      ],
+      [
+        1366,
+        768
+      ],
+      [
+        1440,
+        900
+      ],
+      [
+        1440,
+        1024
+      ],
+      [
+        1536,
+        864
+      ],
+      [
+        1707,
+        1067
+      ],
+      [
+        1920,
+        1080
+      ],
+      [
+        2560,
+        1440
+      ]
+    ],
+    "breakpointWidth": [
+      [
+        359,
+        800
+      ],
+      [
+        360,
+        800
+      ],
+      [
+        361,
+        800
+      ],
+      [
+        599,
+        900
+      ],
+      [
+        600,
+        900
+      ],
+      [
+        601,
+        900
+      ],
+      [
+        1023,
+        768
+      ],
+      [
+        1024,
+        768
+      ],
+      [
+        1025,
+        768
+      ]
+    ],
+    "breakpointHeight": [
+      [
+        1366,
+        819
+      ],
+      [
+        1366,
+        820
+      ],
+      [
+        1366,
+        821
+      ]
+    ],
+    "stress": [
+      [
+        612,
+        913
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        932
+      ],
+      [
+        390,
+        1024
+      ],
+      [
+        495,
+        1188
+      ],
+      [
+        686,
+        1143
+      ],
+      [
+        800,
+        600
+      ],
+      [
+        768,
+        900
+      ],
+      [
+        600,
+        600
+      ]
+    ],
+    "directoryCompact": [
+      [
+        390,
+        500
+      ],
+      [
+        390,
+        519
+      ],
+      [
+        390,
+        520
+      ],
+      [
+        390,
+        521
+      ]
+    ]
+  },
+  "suites": {
+    "map": [
+      "phonePortrait",
+      "phoneLandscape",
+      "tabletPortrait",
+      "tabletLandscape",
+      "desktop",
+      "breakpointWidth",
+      "breakpointHeight",
+      "stress"
+    ],
+    "mobileInteraction": [
+      "320x568",
+      "390x844",
+      "768x900"
+    ],
+    "directoryCompact": [
+      "390x500",
+      "390x519",
+      "390x520",
+      "390x521"
+    ],
+    "sameWidth": [
+      "390x844",
+      "390x932",
+      "390x1024"
+    ],
+    "rotation": [
+      [
+        "768x1024",
+        "1024x768"
+      ],
+      [
+        "820x1180",
+        "1180x820"
+      ],
+      [
+        "390x844",
+        "844x390"
+      ]
+    ]
+  },
+  "smoke": [
+    "320x568",
+    "360x800",
+    "390x844",
+    "440x956",
+    "495x1188",
+    "768x1024",
+    "820x1180",
+    "1023x768",
+    "1024x768",
+    "1180x820",
+    "1366x768",
+    "1536x864",
+    "1920x1080"
+  ],
+  "states": {
+    "geometryStars": [
+      0,
+      2,
+      5
+    ],
+    "selection": [
+      "unselected",
+      "selected",
+      "keyboard-focus"
+    ],
+    "motion": [
+      "normal",
+      "reduced"
+    ],
+    "recovery": [
+      "images-ready",
+      "image-failed",
+      "retry"
+    ],
+    "directory": [
+      "one-result",
+      "empty-result",
+      "all-authorized"
+    ]
+  },
+  "environmentPolicy": {
+    "automated": [
+      "Chromium",
+      "WebKit"
+    ],
+    "realDevicesRequired": [
+      "iOS Safari",
+      "Android Chrome",
+      "iOS WeChat",
+      "Android WeChat"
+    ],
+    "additional": [
+      "平板分屏",
+      "125%／150%／200% 页面缩放",
+      "DPR 1／2／3",
+      "真实软键盘和安全区"
+    ],
+    "unexecutedMustRemainPending": true
+  }
+}

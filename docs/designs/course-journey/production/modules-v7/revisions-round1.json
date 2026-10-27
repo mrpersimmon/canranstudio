@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-26",
+  "requests": [
+    {
+      "chapter": "seasons",
+      "name": "seasons-market-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve every shop, paving and garden placement.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/seasons-market-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "appointments",
+      "name": "appointments-street-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve the station, shop and reception positions and the continuous route.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/appointments-street-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve the home, cupboards, door and continuous honey-wood floor.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/preparations-home-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "caring",
+      "name": "caring-veranda-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nAdditionally remove ALL raised steps at the UPPER LEFT living-room entrance. Make that opening level with the central tile paving, so there is a flat, continuous clear floor through global x20%-80%, y15%-22%. The doorway and side furniture remain at the upper edges, away from this support band. Preserve middle and lower scenes. No new steps, rug or furniture in the clear support area.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/caring-veranda-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry. Remove both enormous diagonal ceiling/floor slabs that span the central route around one-third and two-thirds height. Turn the whole central x20%-80% into ONE continuous level pavement from top to bottom. The upper house, middle curved terminal glass and lower station canopy are SIDE BAYS along this same ground-level route, not floors above one another. Keep the green canopy roofs strictly at outer side edges; never use an upper walking floor as a roof over the next section. Preserve the architecture identities, flowers and warm light. All three stop feet areas and space below them stay clear, flat paving. No stairs or level changes.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry and the lower boarding area. Remove the huge diagonal floor/ceiling slab at about two-thirds image height. The centre x20%-80% must remain ONE connected level walking surface. Keep the cafe and shop as side bays. Rebuild the lower stop as a wide LEVEL bus boarding/aisle bay, with teal vehicle window/wall frames only at extreme side edges and an open clear central floor extending below the future characters and their controls. No vehicle body, curb, stair, canopy or rail crosses that central floor. Do not invent extra televisions, people, cups, coins, seats or signs.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/choices-transit-v1.png"
+      ],
+      "transparent_background": false
+    },
+    {
+      "chapter": "surprises",
+      "name": "surprises-house-v2",
+      "attempt": 2,
+      "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry. Remove the big horizontal/diagonal floor edge above the middle breakfast room and the floor edge above the lower study. All three rooms must be SIDE ALCOVES along ONE broad same-level central cream-tile corridor, not vertically stacked storeys. Keep garden greenery upper, breakfast cupboards mid, and deep-blue night window lower; their walls and furniture remain peripheral. Remove the middle dining table/chairs if they intrude into x20%-80%, global y48%-54%. No cross-route stairs. Maintain the exact painted style, original light cues, warm connected floor and empty support/information zones.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/surprises-house-v1.png"
+      ],
+      "transparent_background": false
+    }
+  ]
+}

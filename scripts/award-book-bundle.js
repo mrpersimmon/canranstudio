@@ -31,7 +31,7 @@ async function compile(root, basePath) {
     }
   }
   const js = [...files.keys()].find(key=>key.endsWith('.js')), css = [...files.keys()].find(key=>key.endsWith('.css'));
-  const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="award-base" content="${basePath}"><title>我的纪念册 · 灿然英语工作室</title><link rel="icon" href="${basePath}assets/brand/starflower-favicon.png"><link rel="stylesheet" href="${basePath+css}"><script defer src="${basePath}system-upgrade.js"></script><script defer src="${basePath}local-certificate-copies.js"></script><script defer src="${basePath+js}"></script></head><body><div id="root"></div><noscript>请允许 JavaScript 以打开纪念册。</noscript></body></html>`;
+  const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="award-base" content="${basePath}"><title>我的纪念册 · 灿然英语工作室</title><link rel="icon" href="${basePath}assets/brand/starflower-favicon.png"><link rel="stylesheet" href="${basePath+css}"><link rel="stylesheet" href="${basePath}student-shell.css"><script defer src="${basePath}system-upgrade.js"></script><script defer src="${basePath}local-certificate-copies.js"></script><script defer src="${basePath+js}"></script></head><body><div id="root"></div><noscript>请允许 JavaScript 以打开纪念册。</noscript></body></html>`;
   return {files,editions,html,bytes:[...files.values()].reduce((sum,file)=>sum+file.body.length,0)};
 }
 module.exports = { createAwardBook };

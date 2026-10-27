@@ -1,0 +1,59 @@
+{
+  "name": "opening-world-v1",
+  "tool": "built-in image_gen",
+  "date": "2026-10-24",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-6e6bdfc1-0677-4406-89fd-d785f88478ce.png",
+  "prompt": "Use case: illustration-story, a single continuous foreground map for a children's English learning journey.\nInput image 1 is the APPROVED environment style and materials. Images 2 and 3 show the EXISTING characters for scale, palette and viewpoint reference ONLY. Do NOT draw these people, their handbag, umbrella or counter; they will be overlaid unchanged by the app.\nCreate ONE unified tall scene with a precise 1:3 aspect ratio, ideally 1024x3072. Warm cream limestone paths, coral salmon arched retaining walls, small stairs, cypress trees, daisies, soft turquoise side canals, warm upper-left sunlight, three-quarter camera, polished soft storybook rendering like image 1. Keep one consistent camera, masonry size and depth scale through the full scene. NOT a collage of circular floating islands, not stacked disconnected platforms, not a maze of overlapping routes.\nLayout: the illustration will be shown as three contiguous equal square sections, with no gap or stretch between them. It MUST read as ONE connected promenade from top to bottom. Each section has one broad level stone courtyard that widens out from the same path, with its foot-contact area near local x=50%, y=55% of that square. In the whole image those three quiet level standing areas are centered at approximately (50%,18.3%), (50%,51.7%), (50%,85%). Each has a broad safe cream paved floor spanning x=18%-82%, local y=47%-64%. This surface is empty and unobstructed for original 2D cartoon people to stand on.\nFirst square: welcoming garden with a modest flower-covered coral arch at the rear-right of the courtyard. Second square: a small purple-roof lost-property pavilion at rear-left. Third square: a little cream schoolhouse with terracotta roof and teal door at rear-right. Buildings are modest background landmarks, not giant facades; avoid placing lamp posts or flowers in the middle standing areas.\nThe single pathway links these courtyards through gentle bends and a few architecturally plausible short steps toward the sides. Do not add a second nearby road network behind them. Courtyard fronts are part of solid continuous terraces with understandable support, not discs pasted over another staircase.\nLeave the center of the LOWER third of EACH square (x=28%-72%, local y=70%-96%) visually QUIET: simple flat cream paving without plants, railings, doorways, steps or focal objects, to host app star/lesson controls later. Do not paint controls, signs, UI or placeholder marks.\nGreenery and narrow canals can frame the left and right edges; no vast ocean, no dramatic cliffs, no broad blue empty field. Foreground structures have clear but restrained edges, soft contact shadows and no bloom halo. No human figures, characters, animals, numbers, letters, labels, stars, medals, pins, cards, circular pedestals, borders or watermark. Full finished opaque image, not separated panels.",
+  "references": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/umbrella-counter-v1.webp"
+  ],
+  "transparent": false,
+  "metadata": {
+    "format": "png",
+    "mediaType": "image/png",
+    "width": 724,
+    "height": 2172,
+    "space": "srgb",
+    "channels": 3,
+    "depth": "uchar",
+    "density": 72,
+    "isProgressive": false,
+    "isPalette": false,
+    "bitsPerSample": 8,
+    "hasProfile": false,
+    "hasAlpha": false,
+    "autoOrient": {
+      "width": 724,
+      "height": 2172
+    }
+  },
+  "encoding": "Native PNG bytes retained; WebP quality90 only",
+  "files": [
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.png",
+      "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a",
+      "bytes": 2463868
+    },
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.webp",
+      "sha256": "d903bc4ebb797e3fdb26e45d18ffa7d10e9dde0b43f215f842e5a5887bf3ac86",
+      "bytes": 348220
+    }
+  ],
+  "referenceHashes": [
+    {
+      "path": "assets/course-journey/opening-mobile-v2.webp",
+      "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c"
+    },
+    {
+      "path": "assets/course-journey/handbag-couple.webp",
+      "sha256": "df99ee8abaf3ce1cbbc3c2849c721e2c5302355a7ebf05825092d2a263fa4967"
+    },
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "sha256": "c1a9f4d258a4caf9134403a2171924e643e177b792b7f3ff4f12829da8732a92"
+    }
+  ]
+}

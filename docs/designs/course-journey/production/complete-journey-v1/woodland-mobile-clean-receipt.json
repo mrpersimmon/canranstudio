@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T21:08:16.392Z",
+  "job": "woodland-mobile-clean",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-mobile-clean.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-628b2d95-00f4-45ee-b930-144584b26117.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/woodland-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/woodland-mobile-v2.png",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 2295984,
+      "sha256": "83460aa87186e537ede7f43ecfb5b2dcf5a13d9c37d63c29678d4abf61f72199",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/woodland-mobile-v2.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 335352,
+      "sha256": "4121290e0cd0745754aaa1b77687d6af356de0a69619201bd4e7d350470abef2",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

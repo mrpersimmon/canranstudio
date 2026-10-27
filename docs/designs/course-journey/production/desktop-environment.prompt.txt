@@ -1,0 +1,57 @@
+EDIT JOB — one precise object removal. Image 3 is the actual edit target. Image 1 remains the approved visual master; Image 2 remains the layout reference. Use Image 3 as the pixel/composition baseline and change ONLY the hanging cream banner with the yellow flower symbol on the left lower wall, including its horizontal hanging rod and brackets. Remove the entire banner, flower motif, rod and brackets and reconstruct the uninterrupted salmon/peach wall and stone texture behind it. Preserve all other shapes, objects, color, lighting, camera, size, composition and landmark placements in Image 3 exactly. Do not add anything to the empty circular landing. Keep the street lamp, umbrella, school and plants untouched. Do not recompose.
+
+The original locked generation specification follows as style and constraints, not a request to redraw the scene:
+
+Frozen design pack: canran-course-journey v1.0.0. Date anchor: 2026-10-20, Asia/Shanghai; no visible dates unless the job explicitly requires them.
+
+CANRAN JOURNEY — LOCKED ART DIRECTION v1.0.0
+Use case: ui-mockup or project asset, as explicitly stated by the job.
+The first attached image is ALWAYS the user's approved mobile journey master. Preserve its visual identity. Additional images have explicitly declared roles. Prefer the approved master over descriptions if a subjective style choice is ambiguous. This is one chosen design being refined, not a new visual exploration.
+
+CHARACTERS
+Friendly flat 2D storybook characters, with warm dark-brown rounded outlines and simple expressive faces, placed inside the dimensional environment. Approximately 2.2–2.6 heads tall for the full-body map figures; use the approved image to judge proportions, not a literal mathematical caricature. Large readable heads, short limbs, complete hands and feet, warm skin tones, small blush, rounded noses and clear eyes. They should retain adult clothing and story identities. Do not convert them into realistic adults, babies, anime, 3D clay, glossy plastic, Pixar-like renders, or generic interchangeable mascots.
+Lesson 1–2 man: brown side-parted hair, large dark rounded glasses, teal-blue jacket, warm ivory shirt, yellow tie, brown shoes.
+Lesson 1–2 woman: shoulder-length brown hair with softly curled ends, ochre hat with a coral band, terracotta/coral coat, golden-yellow scarf, brown shoes.
+Their shared red handbag with a simple gold clasp is the key prop. They face and engage with each other; the hand-over is legible. Keep both faces, hands, feet and handbag complete. Do not duplicate the prop, add limbs or accessories, or swap clothing.
+For another lesson, use its own approved source cast and story facts. Preserve identity from that source while adapting only map scale/proportions to this master. Never reuse the Lesson 1–2 couple across every course.
+
+ENVIRONMENT
+A grounded, sunlit miniature architectural journey, with soft 2.5D/isometric depth and coherent terraces. Warm ivory stone paths and rounded steps; soft salmon/peach walls and arches; terracotta roofs; pale aqua/turquoise water; jade, olive and sage vegetation; sparse small warm-yellow flowers and selection accents.
+The architecture is dimensional; characters remain crisp warm-outline storybook art. Rounded edges, broad calm color planes, fine soft shadows and subtle matte texture. No photoreal gritty stone, hard specular plastic, excessive outlines around architecture, deep high-contrast black shadows or dense noise.
+Preserve the approved image's elevated three-quarter camera, near-parallel verticals, scale relationships and warm upper-left sunlight with shadows to the lower right. Camera wording describes the master, it does not authorize a different viewpoint.
+Keep one visually coherent connected path, arch bridges, garden edges and readable destination landings. Buildings stand on connected terrain, not floating islands or rotating planets. Water and greenery remain supporting scenery.
+Opening segment: handbag-exchange circular landing in the foreground/lower left; purple umbrella kiosk at middle right; welcoming schoolhouse with coral roof toward upper right. The approved environment is the reference, not a reason to invent new curriculum events.
+
+UI AND COMPOSITION
+Preserve the real starflower logo and the product name 灿然英语工作室. Warm paper/ivory UI, forest-green primary controls and warm-brown text. Keep text on calm high-contrast surfaces, separate from scenery.
+Course discovery is the hero use case. Include global Lesson search and the complete authorized directory in UI mockups. All 45 demo units belong to one hub. The route is a browsing aid, not a forced learning order or access lock.
+Only the job may change framing, responsive layout, visible UI state, course identity or landmarks. It must not change the character style, camera language, materials, lighting or overall palette.
+Never squeeze an image or UI to fill a canvas. Recompose for the exact target ratio, leave safe space for controls, and keep important characters and props intact.
+For mockups, use crisp simplified Chinese and the exact copy in the job. Do not invent extra controls, currencies, lives, streaks, advertisements or personal information.
+For production artwork, render NO text, lesson labels, badges, stars, student names, dates, buttons, navigation, search fields or state-dependent glow. Those are separate runtime layers.
+
+ACTUAL ATTACHED REFERENCE ORDER
+Image 1: approvedMobile. User-approved visual master; most recent set, third displayed image. This is the primary reference for all palette, materials, camera, lighting and environmental identity.
+Image 2: desktop-home-v1. A supplementary composition reference only. Use only the environmental region to the right of its directory sidebar; it guides wide-scene terrain and landmark placement. Do not reproduce its UI, characters, text, badges or logo.
+
+JOB: REUSABLE ENVIRONMENT ARTWORK, NOT A UI SCREEN
+Canvas: 1440 x 1200 px, landscape 6:5 production artwork. Create ONLY the map environment, not an application screenshot. The application will put a separate 340px directory rail to its left, so do NOT draw that rail or reserve space for it inside this image. Output role: Opaque environment base for the first three course nodes; runtime characters and UI will be composited separately. This job has NO characters or UI.
+Use the first approved-master reference solely for the connected architectural setting. Produce a coherent empty environment segment for Lesson 1–6, first segment of the Lesson 1–18 range, maintaining the locked camera, lighting, matte materials, scale and color family.
+Landmark plan: An empty circular landing at lower left for the later handbag-couple sprite; a purple umbrella resting in a small wooden kiosk at middle right; a welcoming cream schoolhouse with terracotta roof at upper right. Connected ivory paths, arches and stairs, aqua water and restrained green planting..
+Composition/safe space: Recompose the right-hand environment of Image 2 to fill this 6:5 canvas while matching Image 1 style. Use a broad connected terrain with an empty circular stone landing in the lower-left foreground, centered approximately at x=27%, y=70%; a purple closed umbrella in its small wooden holder on the middle landing at approximately x=52%, y=45%; a welcoming cream schoolhouse with terracotta roof toward the upper-right, approximately x=77%, y=21%. These are environmental placement guides, never visible markings. The empty circular landing should have a calm neutral cream-stone interior, not a bright green selected-state surface or gold ring, and enough room for a pair of separately composited full-body figures. Use the descending ivory stair and salmon arch-bridge route to connect the school landing through the umbrella landing and down to the circular landing. Include the quiet aqua water, flowering planters and soft near-edge foliage from the references, with calm edges and light distant haze. Keep all three important landmark silhouettes inside an 8% left/right margin. Do not add any crop of characters or UI.
+Preserve welcoming warm ivory paths, soft salmon arches, terracotta accents, clear aqua water and restrained jade foliage. Paths must connect visibly through the frame without impossible jumps. Empty circular destination landing areas should be quiet enough to later place separate characters and DOM controls.
+No people, silhouettes, faces, signage, lesson numbers, printed text, logos, search fields, labels, buttons, nav, stars, gold selection rings or progress-state decoration. The empty landings are physical architectural surfaces, not UI placeholders.
+This is a reusable production layer: visually rich but calm, exact requested framing, no accidental holes or unrelated props. Reuse a verified environment for state changes rather than generating another background each time.
+
+FIXED EXCLUSIONS
+No other product's logo, mascot, characters, exact interface or copyrighted game world. No generic space, orbit, floating-island, cinema, page-turning-book or neon-cyberpunk redesign. No new character style or wardrobe. No duplicated faces, swapped identities, missing hands, cropped hair/feet, malformed prop interaction or extra limbs.
+No scenery behind essential text that reduces contrast. No thin unreadable text, tiny touch controls, dense UI inventory, nested cards or giant decorative heading that displaces course navigation.
+No automatic assumption that selected means completed, that a gray marker means locked, or that five stars are awarded merely by visiting a node. No fabricated progress or dates.
+No baked-in dynamic UI in production assets. No real student or account data. No credentials.
+Mobile mockups show app content only: no phone body, bezel, OS status bar, clock, battery, home indicator, browser chrome or device shadow. Desktop mockups likewise omit browser chrome.
+
+PRODUCTION VARIANT RECORD
+Variant: opening-desktop-v1, derived from frozen environment-opening v1.0.0 without changing the frozen files. Use case: stylized-concept. Asset type: opaque reusable desktop map background. The production job overrides the historical mockup-only 45-unit wording: there is no course count or other text to render. Render exactly the environment described above. Never include people, character silhouettes, human faces, numbers, lettering, logo banners, star-shaped progress symbols, selection glow, UI markers, buttons, or panel shapes. Small natural flowers are permitted; no star icons. Preserve a matte, welcoming, soft salmon/ivory/turquoise connected architectural world rather than a game level floating in space.
+
+
+FINAL EDIT CONSTRAINT: Image 3 is the edit target; only erase the flower banner plus its holder from the wall at the left side, approximately x=16%, y=59%. Everything else must remain visually identical, including canvas proportions. No banner, logo, text, characters, UI or progress icons in the output.

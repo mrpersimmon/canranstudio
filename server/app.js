@@ -11,21 +11,32 @@ const learning = require('./learning');
 const { createManagement } = require('./management');
 const { validClaim } = require('../core/award-rules');
 const { createAwardBook } = require('../scripts/award-book-bundle');
+const { createCourseJourney } = require('../scripts/course-journey-bundle');
 const {retainPackages}=require('./bundles');
 const { passwordProblem } = require('./student-credentials');
 const { clientAddress } = require('./client-address');
 const { normalizeBasePath } = require('../scripts/public-base-path');
+const { createViewportMetrics } = require('./viewport-metrics');
+const journeyArtwork = require('../course-journey/chapter-layout');
+const journeyModules = require('../course-journey/module-scenes');
+const journeyWorlds = require('../course-journey/route-worlds');
+// Only exact filenames registered by the journey may be served here.
+const journeyAssets = new Set([...Object.values(journeyArtwork.characters), ...Object.values(journeyArtwork.chapters).flatMap(Object.values), journeyModules.ambient, journeyModules.ambientDesktop, journeyModules.connector, ...Object.values(journeyModules.scenes).map(scene=>scene.ground), ...Object.values(journeyWorlds.worlds), journeyWorlds.distant, ...journeyWorlds.legacyAssets].map(item => 'assets/course-journey/' + item.file));
 const fail = (status, message) => Object.assign(new Error(message), { status });
 const escape = text => String(text).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 const PORTAL_CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'";
 // The course loader executes integrity-checked cached scripts inline. Keep that
 // compatibility only on authorized course documents, never the account portal.
 const COURSE_CSP = PORTAL_CSP.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'");
-async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/' } = {}) {
+async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/', viewportMetrics = {} } = {}) {
   const BASE = normalizeBasePath(basePath);
   if (trustProxy !== false && trustProxy !== 'loopback') throw Error('trustProxy must be false or loopback');
   const store = openStore(dataDir);
+  const localMetricsOrigin=/^(?:localhost|127\.[\d.]+|\[?::1\]?)$/.test(new URL(origin).hostname);
+  const metrics=createViewportMetrics({dataDir,enabled:viewportMetrics.enabled===true&&(!localMetricsOrigin||viewportMetrics.allowLocal===true),buildVersion:viewportMetrics.buildVersion||'unversioned'});
+  const instrument=(html,pageKind,excluded=false)=>!metrics.enabled||excluded?html:html.replace('<head>','<head><script defer src="'+BASE+'viewport-metrics.js" data-base="'+BASE+'" data-page-kind="'+pageKind+'"></script>');
   const awardBook = await createAwardBook(root, BASE);
+  const journey = await createCourseJourney(root, BASE);
   const packages = bundle || await createCoursePackages({ root, basePath: BASE, courseIds: UNITS, isolatedDefinitions: true });
   const logical = new Map(), owners = new Map();
   const addOwner = (address, course) => { if (!owners.has(address)) owners.set(address, new Set()); owners.get(address).add(course); };
@@ -82,12 +93,12 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     return { auth, student };
   }
   function setCookie(response, role, token, maxAge) { response.setHeader('Set-Cookie', `canran_${role}=${token}; Path=${BASE}; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${origin.startsWith('https:') ? '; Secure' : ''}`); }
-  async function body(request) {
+  async function body(request, limit=1500000) {
     if (request.headers.origin !== origin || !request.headers['content-type']?.startsWith('application/json')) throw fail(403, '请求来源不正确');
     // Network chunks can split a UTF-8 character. Decode once after collecting
     // bytes so Chinese learning records retain their exact completion proof.
     const chunks = []; let bytes = 0;
-    for await (const chunk of request) { bytes += chunk.length; if (bytes > 1500000) throw fail(413, '提交内容过大'); chunks.push(chunk); }
+    for await (const chunk of request) { bytes += chunk.length; if (bytes > limit) throw fail(413, '提交内容过大'); chunks.push(chunk); }
     try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { throw fail(400, '提交内容不完整'); }
   }
   function identity(request, preview) {
@@ -99,7 +110,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     return { student, className: store.classes().find(c => c.id === student.classId)?.name || '', courses: store.allowed(student.id), preview: false, auth };
   }
   const json = (res, value, status = 200) => { res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(JSON.stringify(value)); };
-  async function publicFile(res, file, type, status = 200) { const content = await fs.readFile(path.join(root, 'server/public', file), 'utf8'); res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' }).end(content.replaceAll('/lesson/', BASE)); }
+  async function publicFile(res, file, type, status = 200, excludedMetrics=false) { const content = await fs.readFile(path.join(root, 'server/public', file), 'utf8'); const replaced=content.replaceAll('/lesson/', BASE);res.writeHead(status, { 'Content-Type': type, 'Cache-Control':'no-store' }).end(file==='index.html'?instrument(replaced,'portal',excludedMetrics):replaced); }
   function notice(res, title, code) { res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8' }).end(`<!doctype html><html lang="zh-CN"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="${BASE}portal.css"><title>${escape(title)}</title><main><section class="login panel"><h1>${escape(title)}</h1><a class="button primary" href="${BASE}">返回课程</a></section></main></html>`); }
   const server = http.createServer(async (request, response) => {
     response.setHeader('Cache-Control', 'no-store'); response.setHeader('X-Content-Type-Options', 'nosniff'); response.setHeader('Referrer-Policy', 'no-referrer'); response.setHeader('X-Frame-Options', 'DENY');
@@ -111,13 +122,22 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (BASE !== '/' && pathname === BASE.slice(0, -1)) return response.writeHead(308, { Location: BASE }).end();
       if (!pathname.startsWith(BASE) || relative.split('/').some(part => part === '..' || part.startsWith('.'))) throw fail(404, '页面不存在');
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
+      if (['GET','HEAD'].includes(request.method) && journey.files.has(relative)) {
+        const file=journey.files.get(relative);
+        response.writeHead(200,{'Content-Type':file.type,'Cache-Control':'no-cache'});
+        return response.end(request.method==='HEAD'?undefined:file.body);
+      }
+      if (journeyAssets.has(relative) || ['assets/course-journey/opening-mobile.webp','assets/course-journey/opening-desktop.webp','assets/course-journey/handbag-couple.webp','assets/course-journey/opening-mobile-v2.webp','assets/course-journey/opening-desktop-v2.webp','assets/course-journey/umbrella-counter-v1.webp','assets/course-journey/friends-trio-v1.webp','assets/course-journey/starflower-medal-v1.webp','assets/course-journey/neighborhood-mobile-v1.webp','assets/course-journey/neighborhood-desktop-v1.webp','assets/course-journey/interview-couple-v1.webp','assets/course-journey/greeting-neighbors-v1.webp','assets/course-journey/shirt-return-v1.webp','assets/course-journey/dress-friends-v1.webp','assets/course-journey/passport-travelers-v1.webp','assets/course-journey/office-introduction-v1.webp','assets/course-journey/visits-mobile-v1.webp','assets/course-journey/visits-mobile-v2.webp','assets/course-journey/visits-desktop-v1.webp','assets/course-journey/icecream-family-v1.webp','assets/course-journey/red-book-pair-v1.webp','assets/course-journey/shelf-glasses-pair-v1.webp','assets/course-journey/kitchen-host-v1.webp','assets/course-journey/living-room-host-v1.webp','assets/course-journey/tidy-room-pair-v1.webp','assets/course-journey/kindness-mobile-v1.webp','assets/course-journey/kindness-desktop-v1.webp','assets/course-journey/home-mobile-v1.webp','assets/course-journey/home-desktop-v1.webp'].includes(relative)) {
+        response.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=86400'});
+        return response.end(await fs.readFile(path.join(root,relative)));
+      }
       if (['GET','HEAD'].includes(request.method) && awardBook.files.has(relative)) {
         const file = awardBook.files.get(relative);
         response.writeHead(200, {'Content-Type':file.type, 'Cache-Control':'public, max-age=31536000, immutable'});
         return response.end(request.method === 'HEAD' ? undefined : file.body);
       }
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
-      if (['portal.css','portal.js','admin-learning.js','admin-learning.css','admin-teachers.js','admin-teachers.css','access-client.js','learning-observer.js','access-worker.js','system-upgrade.js','history-certificates.js','history-certificates.css','local-certificate-copies.js'].includes(relative)) {
+      if (["portal.css","portal.js","admin-learning.js","admin-learning.css","admin-teachers.js","admin-teachers.css","access-client.js","learning-observer.js","access-worker.js","system-upgrade.js","history-certificates.js","history-certificates.css","local-certificate-copies.js","viewport-metrics.js","admin-viewports.js","student-shell.css","student-shell.js","course-directory.js","course-book.css"].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
@@ -125,11 +145,36 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         response.writeHead(200, { 'Content-Type': 'font/woff2', 'Cache-Control': 'public, max-age=86400' });
         return response.end(await fs.readFile(path.join(root, 'server/public', relative)));
       }
+      if (relative === 'student-shell.woff2') {
+        response.writeHead(200, {'Content-Type':'font/woff2','Cache-Control':'public, max-age=86400'});
+        return response.end(await fs.readFile(path.join(root,'assets/awards/award-round.woff2')));
+      }
+      if (['assets/awards/book-open.webp','assets/awards/paper.webp','assets/awards/star-earned.webp','assets/awards/star-empty.webp'].includes(relative)) {
+        response.writeHead(200,{'Content-Type':'image/webp','Cache-Control':'public, max-age=86400'});
+        return response.end(await fs.readFile(path.join(root,relative)));
+      }
       if (relative === 'core/course-banners.css') { response.writeHead(200, {'Content-Type':'text/css', 'Cache-Control':'no-cache'}); return response.end(await fs.readFile(path.join(root,relative))); }
       if (relative === 'core/subpath-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (BASE === '/' && relative === 'core/course-package-service-worker.js') { response.setHeader('Service-Worker-Allowed', BASE); return publicFile(response, 'access-worker.js', 'text/javascript'); }
       if (['assets/brand/starflower.png','assets/brand/starflower-favicon.png','assets/brand/starflower-apple-touch.png'].includes(relative)) { response.writeHead(200, { 'Content-Type': 'image/png', 'Cache-Control':'public, max-age=86400' }); return response.end(await fs.readFile(path.join(root, relative))); }
       if (/^api\//.test(relative)) {
+        if(relative==='api/client-viewports'){
+          if(request.method!=='POST')throw fail(405,'不支持此操作');
+          if(!metrics.enabled){response.setHeader('X-Viewport-Metrics','disabled');return response.writeHead(204).end();}
+          let report;try{report=await body(request,4096);}catch(error){metrics.reject('invalid');throw error;}
+          const staff=management.authenticate(request,false,false);
+          const student=store.lookupSession(cookie(request,'student'),'student',Date.now());
+          const result=metrics.receive(report,{userAgent:request.headers['user-agent'],audience:report.pageKind==='admin'&&staff?'staff':student?'student':staff?'staff':'anonymous',source:clientAddress(request,trustProxy)+':'+(student?.hash||staff?.auth?.hash||'anonymous')});
+          if(result.limited){response.setHeader('Retry-After','60');return response.writeHead(429).end();}
+          if(result.dropped)return response.writeHead(503).end();
+          return response.writeHead(204).end();
+        }
+        if(relative==='api/admin/viewport-metrics'){
+          if(request.method!=='GET')throw fail(405,'不支持此操作');
+          const who=management.authenticate(request);
+          if(who.role!=='admin')throw fail(403,'只有管理员可以查看全站尺寸统计');
+          return json(response,metrics.report(Number(url.searchParams.get('days')||30)));
+        }
         const input = request.method === 'POST' ? await body(request) : null;
         if (request.method !== 'GET' && request.method !== 'POST') throw fail(405, '不支持此操作');
         if (relative === 'api/admin/login' && input) {
@@ -200,9 +245,10 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
             const meta = original ? {...original.meta,scene:BASE+'awards/history-assets/'+saved.course+'/'+original.meta.scene.replace(/^\/+/, '')} : liveMeta;
             const stars = Math.min(5, Object.values(saved.zones || {}).filter(zone=>zone?.earnedAt).length);
             return meta && stars ? [{...meta,id:saved.course+':'+saved.edition,course:saved.course,edition:saved.edition,
+              current:saved.edition===definitions[saved.course]?.reward?.edition,
               ...(original?{name:original.name,archiveId:original.id}:{}),stars,firstFullStarAt:stars===5?saved.firstFullStarAt:null}] : [];
           }).sort((a,b)=>Number(a.course.match(/\d+/)[0])-Number(b.course.match(/\d+/)[0]) || a.edition.localeCompare(b.edition));
-          return json(response, {student:{id:student.id,name:student.name},cards,archives:archives.map(archiveSummary),availableCourses:[...new Set([...store.allowed(student.id),...archives.map(a=>a.course)])],systemUpgrade:store.systemUpgrade(student.id)});
+          return json(response, {student:{id:student.id,name:student.name,studentNumber:student.studentNumber},cards,archives:archives.map(archiveSummary),availableCourses:[...new Set([...store.allowed(student.id),...archives.map(a=>a.course)])],systemUpgrade:store.systemUpgrade(student.id)});
         }
         if (relative === 'api/certificates' && !input) {
           const {student}=studentSession(request);
@@ -298,14 +344,14 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         return response.end(request.method==='HEAD'?undefined:resource.body);
       }
       if (RETIRED.includes(relative.split('/')[0]) && /^(?:lesson\d+|soundmark)\/?(?:index\.html)?$/.test(relative)) return notice(response, '这节课已下架', 410);
-      if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) return publicFile(response, 'index.html', 'text/html; charset=utf-8');
+      if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) return publicFile(response, 'index.html', 'text/html; charset=utf-8',200,url.searchParams.has('preview'));
       if (['awards','awards/'].includes(relative)) {
         try { studentSession(request); } catch(error) {
           if (error.status===401 || error.message==='请先设置新密码') return publicFile(response,'index.html','text/html; charset=utf-8');
           throw error;
         }
         response.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
-        return response.end(request.method==='HEAD'?undefined:awardBook.html);
+        return response.end(request.method==='HEAD'?undefined:instrument(awardBook.html,'album',url.searchParams.has('preview')));
       }
       const courseRoute = relative.match(/^(unit\d+-\d+)(?:\/(?:index\.html)?)?$/);
       if (courseRoute) {
@@ -314,7 +360,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
         const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'system-upgrade.js"></script><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
         response.setHeader('Content-Security-Policy', COURSE_CSP);
-        response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : entry); return;
+        response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : instrument(entry,'lesson',who.preview)); return;
       }
       const auth = session(request, 'student', false), admin = management.authenticate(request, false, false);
       if (!admin && store.lookupSession(cookie(request, 'student'), 'student-setup', Date.now())) throw fail(403, '请先设置新密码');
@@ -356,7 +402,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
     }
   });
   server.requestTimeout=30000;server.headersTimeout=15000;
-  server.on('close', () => store.close());
+  server.on('close', () => {metrics.close();store.close();});
   return server;
 }
 module.exports = { createApp };

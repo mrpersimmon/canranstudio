@@ -1,0 +1,55 @@
+{
+  "views": 336,
+  "chapters": 24,
+  "courses": 72,
+  "sizes": [
+    [
+      320,
+      568
+    ],
+    [
+      360,
+      800
+    ],
+    [
+      390,
+      844
+    ],
+    [
+      430,
+      932
+    ],
+    [
+      495,
+      1188
+    ],
+    [
+      768,
+      1024
+    ],
+    [
+      1024,
+      768
+    ],
+    [
+      1440,
+      900
+    ]
+  ],
+  "environment": "CUA in-app Chromium, reduced motion, existing full-star local demo",
+  "errors": [],
+  "sourceHashes": {
+    "course-journey/App.jsx": "7b5889d938c729b87ddd8c0042903bf4e001ce0a7d03c26188de6b594b190654",
+    "course-journey/styles.css": "84cbd1da81628989228f91f8106b4bc10a509bf83455067c1fc93556818808ab",
+    "course-journey/chapter-layout.js": "d2589fad2e50465c545b9378f80611fce0533bcbd9a18e28f74909bab7f97c25",
+    "course-journey/ground-contact-layout.js": "a405b3e2520d19539918a616952ed5c147f8aea17e4b0e796e99912e05d1eba6",
+    "course-journey/overlay-layout.js": "1bd6fe94d180f1f1dd54f21bbc1cccaf06ee9ed364fc09c242de8c4fb25d6fec",
+    "course-journey/use-map-layout.js": "9f922267c52e2881599c114181bde13e3551a7b96503891d373fd5ecc28ed3c5"
+  },
+  "normalMotion": {
+    "course": "unit141-142",
+    "during": "matrix(0.999635, 0, 0, 0.999635, 0, 0)",
+    "after": "none"
+  },
+  "contactChecks": 238
+}

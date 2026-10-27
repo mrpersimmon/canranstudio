@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "environment-mobile-floor",
+  "selectedForRuntime": true,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-97577497-3db0-4853-bafc-793debc3cce3.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/environment-mobile-floor-request.json",
+  "referenceOrder": [
+    "assets/course-journey/visits-mobile-v1.png"
+  ],
+  "transparentBackgroundRequested": false,
+  "outputs": [
+    {
+      "path": "assets/course-journey/visits-mobile-v2.png",
+      "format": "png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2215162,
+      "sha256": "f26805752b4a44ccb354bc5291921e12cb9e327d7a5783b5f9e4f855dd9397be",
+      "hasAlpha": false,
+      "preservation": "Native PNG bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/visits-mobile-v2.webp",
+      "format": "webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 298048,
+      "sha256": "9a2ad666f1eb6e6be7d5a815dea535e4b6d75fc267b01e0d674b3c2c827926b8",
+      "hasAlpha": false,
+      "encoding": {
+        "quality": 90,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "observedDeviation": "Prompt proposed standing at y 0.492; actual floor and visual review place the runtime group at y 0.46. Placement follows the resulting paving, not the intended prompt coordinate."
+}

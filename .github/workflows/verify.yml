@@ -110,9 +110,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # One of four groups hit the job deadline without an individual failure.
-        # Keep every file and deadline; distribute account checks over five jobs.
-        shard: [1, 2, 3, 4, 5]
+        # The complete journey matrix is a long serial file. Measured durations
+        # leave headroom under the unchanged job deadline when balanced six ways.
+        shard: [1, 2, 3, 4, 5, 6]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:

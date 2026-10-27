@@ -1,0 +1,26 @@
+{
+  "faults": [
+    {
+      "kind": "shared-native-terrain",
+      "errors": 3,
+      "lessons": 3
+    },
+    {
+      "kind": "single-person",
+      "errors": 1,
+      "ready": 2,
+      "lessons": 3
+    }
+  ],
+  "missing": [
+    {
+      "url": "http://127.0.0.1:4187/assets/course-journey/modules-v7/qa-missing-world.webp",
+      "status": 403
+    },
+    {
+      "url": "http://127.0.0.1:4187/assets/course-journey/modules-v7/qa-missing-person.webp",
+      "status": 403
+    }
+  ],
+  "recovered": 3
+}

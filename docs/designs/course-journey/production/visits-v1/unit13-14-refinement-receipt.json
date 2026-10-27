@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit13-14-refinement",
+  "selectedForRuntime": true,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-b769458d-e08e-4ae0-8f19-7af2bf16b61f.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/unit13-14-refinement-request.json",
+  "referenceOrder": [
+    "docs/designs/course-journey/production/visits-v1/drafts/unit13-14-initial.png",
+    "assets/course-journey/handbag-couple.png"
+  ],
+  "transparentBackgroundRequested": true,
+  "outputs": [
+    {
+      "path": "assets/course-journey/dress-friends-v1.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1338506,
+      "sha256": "897c5a10a3b965df8d8f7382c416f53b89929c62f010b1c2c3df20147cdc0385",
+      "hasAlpha": true,
+      "preservation": "Native PNG bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/dress-friends-v1.webp",
+      "format": "webp",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 241924,
+      "sha256": "530fb6814a93c8eac50016aba904d79e6c6af2ee363b33149d9ba918399fb3f8",
+      "hasAlpha": true,
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 834910,
+    "totalPixels": 1572516,
+    "visibleGeometryThreshold": 16,
+    "note": "Runtime bounds use alpha > 16 to exclude faint isolated alpha noise. Full support is separately retained; no pixels were edited or removed.",
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          27,
+          19,
+          1225,
+          1207
+        ],
+        "normalized": [
+          0.0215311004784689,
+          0.015151515151515152,
+          0.9768740031897927,
+          0.9625199362041468
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          112,
+          156,
+          1163,
+          1151
+        ],
+        "normalized": [
+          0.08931419457735247,
+          0.12440191387559808,
+          0.9274322169059012,
+          0.9178628389154705
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          113,
+          157,
+          1162,
+          1151
+        ],
+        "normalized": [
+          0.09011164274322168,
+          0.1251993620414673,
+          0.9266347687400319,
+          0.9178628389154705
+        ]
+      }
+    ]
+  }
+}

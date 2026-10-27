@@ -137,6 +137,7 @@ test('HTTP teacher permissions cover setup, many-to-many scope, search/detail, b
     assert.deepEqual(state.students.map(s=>s.id), students.slice(0,2).map(s=>s.id));
     assert.ok(!JSON.stringify(state).includes(initial));
     for (const [route, body] of [
+      ['/api/admin/viewport-metrics', undefined],
       ['/api/admin/teachers', undefined], ['/api/admin/teachers', { name:'越权老师', pinyin:'yuequan' }],
       ['/api/admin/class-teachers', { classId:classes[0].id, teacherIds:[], expectedIds:[teacher.id] }],
       ['/api/admin/teacher-reset-password', {teacherId:teacher.id,revision:store.teachers.get(teacher.id).revision}],

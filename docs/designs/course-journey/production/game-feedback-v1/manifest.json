@@ -1,0 +1,22 @@
+{
+  "version": "game-feedback-v1",
+  "lockedFiles": {
+    "assets/brand/starflower.png": "626de2a7c1107bd937981157db1e390dba9f305afc25f18fd8ce7efeb90cb588",
+    "assets/course-journey/handbag-couple.png": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68",
+    "docs/designs/course-journey/references/approved-mobile-v1.png": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+    "assets/course-journey/starflower-medal-v1.png": "c1344f196c2fe394950b2e7316eeb981f8e3377b60f63a3c04aaccdd6f54d33c",
+    "assets/course-journey/starflower-medal-v1.webp": "aa2ee458f5314c6b90c0ecd198dd440b41520a09574817031a49f08629b0fd8a",
+    "docs/designs/course-journey/production/game-feedback-v1/medal-request.json": "070670253c0e79e0dc7733ecd36943fa8bacfc2b1b6f84cf884b97dc34b34666",
+    "docs/designs/course-journey/production/game-feedback-v1/medal-receipt.json": "5529d860869c0601b064ac30a50f09933c82a42242443260b53352e972010b1e"
+  },
+  "jobs": {
+    "completion-medal": {
+      "request": "docs/designs/course-journey/production/game-feedback-v1/medal-request.json",
+      "references": [
+        "assets/brand/starflower.png",
+        "assets/course-journey/handbag-couple.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ]
+    }
+  }
+}

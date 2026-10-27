@@ -170,6 +170,6 @@ test('订正完成但零星，课程首页仍可继续学习',async({browser,pag
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await finishZone(p,'trans',{base});
   await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
   await p.getByRole('link',{name:'我的课程',exact:true}).click();
-  await expect(p.getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toBeVisible();
+  await expect(p.locator('.course').getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toBeVisible();
  }finally{await student.context.close();}
 });

@@ -1,0 +1,431 @@
+{
+  "date": "2026-10-26",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "note": "Authoritative29 actual tool argument sets. The unexecuted last four initial plans in requests.json are superseded by requests-final-four.json.",
+  "requests": [
+    {
+      "chapter": "seasons",
+      "name": "seasons-market-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 49–54: A sunlit Mediterranean market garden, white plaster with cobalt shutters, apricot awnings and terracotta pots. Upper side bay: a modest food shop with closed parcels on distant shelves, no raw meat or knives. Middle: Greek-style white courtyard with citrus and flowering plants, subtle varied foliage all within ONE coherent sunny scene, not four seasonal quadrants. Lower: open garden observation terrace beside a low wall; no extra weather display. Continuous pale limestone walking surface through all three. Keep the book/album and weather-board props exclusively in the character layers.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "everyday",
+      "name": "everyday-evening-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 55–60: ONE connected neighbourhood reading arcade at gentle blue hour. Upper: open home sitting-room bay along the LEFT edge with warm lamplight; middle: quieter library nook along the RIGHT edge; lower: a small stationery shop front with closed paper-stock boxes along the LEFT edge. Honey-lit continuous cream stone arcade floor; cool periwinkle exterior sky seen only at the distant top and through side windows. No dark foreground. Do not add people, newspapers, books being read, homework tables, chairs, money or envelopes in the central area: the unchanged figures provide these. Not a simultaneous morning/evening montage.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "caring",
+      "name": "caring-veranda-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 61–66: A calm family-home garden veranda, pale sage shutters, ivory plaster, soft lavender hydrangeas and a gently curving cream-tile walkway. Upper: open family sitting-room side bay, not a hospital. Middle: sheltered recovery porch with simple cushions on a distant side bench, no medical equipment. Lower: a welcoming front-door alcove with a clearly connected same-level stone doorstep along an OUTER edge. Warm late-afternoon light throughout. No doctor, child, medicine, needles, keys or central furniture: all story figures/props come from separate sprites. Do not add clinical crosses, signage, clocks or extra beds.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "memories",
+      "name": "memories-arcade-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 67–72: A distinct curved shopping arcade made of soft rose brick and pale stone, broad dry paving, muted green striped awnings, shallow curved shop windows and climbing flowers. Upper: neighbourhood shop corner. Middle: a small photographic memory-window bay displaying abstract landscape colours only, not people or racing cars. Lower: a home-front conversation porch, no additional telephone. Use alternating shallow side bays and one long coherent crescent-like arcade edge, not three matching buildings. The continuous central limestone route remains broad and unblocked. No live race scene, racing cars, numbers, telephone props or newspapers.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "appointments",
+      "name": "appointments-street-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 73–78: A small friendly service street alongside a railway station. Upper outer edge: a low station canopy with a simple empty information cabinet, no text, clock or train covering the scene. Middle outer edge: a rounded shoe-shop window with a few CLOSED stock boxes, no display shoes duplicating the black/purple shoes in the figures. Lower side bay: a quiet dental reception doorway with pale mint glass and one potted plant, no medical procedure or symbols. Continuous cool cream/sand paving, apricot brick and blue-green metal canopy. ONE connected urban block; no stairs across the walking route.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 79–84: ONE warm roof-cutaway family home with a continuous honey-coloured wood hallway. Upper LEFT side bay: sage-green kitchen cupboards and an empty side worktop. Middle RIGHT bay: open dining nook with wall shelves, no large table across the centre and no roast meal. Lower LEFT bay: entrance and packing alcove with empty coat hooks and an open plain doorway, no packed bags or travel scenes. Warm domestic afternoon light; restrained ivory curtains and small plants. No shopping list, food plate, suitcase, blue shirt or people in this background: the foreground sprites provide the exact story actions. Different architecture from the earlier cream-tiled kitchen chapter.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "decisions",
+      "name": "decisions-block-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 85–90: A connected small-town decision street with warm sandstone facades, petrol-blue details and broad light slate paving. Upper outer side: compact old cinema entrance with an unlettered shallow marquee and closed doors. Middle opposite side: open repair workshop bay with simple wall tool-storage and empty floor, NO cars or car parts because the original sprite supplies one dented fender. Lower side: modest house-viewing gate and front garden, no sold sign, key exchange or mansion. The same central walking level connects cinema, garage and home without crossing walls or curb steps. No Eiffel tower, tickets, repair paperwork or humans.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 91–96: A continuous covered promenade linking a modest neighbourhood edge with a small transport terminal. Upper side: garden house porch with flowers, no moving boxes. Middle opposite side: curved pale teal terminal glazing and a view of clear distant sky, no plane or extra luggage. Lower side: a long station platform canopy, tracks may be visible only beyond an OUTER fence, never under the reserved standing floor. Warm cream terrazzo/stone walkway joins all three at one level, with elegant rounded green canopy supports outside the central route. No clocks, tickets, globes, suitcases, labels, departing passengers or readable departure boards.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "messages",
+      "name": "messages-courtyard-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 97–102: A serene apricot-and-aqua courtyard with one continuous pale mosaic-stone floor and open room bays. Upper side: small luggage-service porch with CLOSED empty cubbies, no suitcases. Middle opposite side: family hallway alcove with a plain wall and side window, no stairs (the sprite already includes a stair-shaped seat), no additional telephone. Lower: cosy reading veranda with flowering window boxes and a low empty wall shelf. Broad same-level central floor; alternating shallow bays rather than tall partitions. No postcard, notebook, phone, person or duplicate furniture in the standing bands.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "learning",
+      "name": "learning-atrium-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 103–108: A light-filled small civic arcade with a continuous cream terrazzo floor, rounded ivory columns and a long green-framed skylight. Upper outer bay: school/exam-room doorway with closed abstract book storage, no exam marks. Middle opposite bay: modest office entrance with warm timber panels and leafy pots. Lower outer bay: fabric boutique window with rolled neutral fabric and closed boxes, NO mannequins, hanging dresses or people. Distinct high airy arcade architecture, not a repeat of the courtyard. No words, scores, diplomas, dictionaries, gift boxes or blue/green dress duplicates.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 109–114: A friendly pedestrian transit precinct with one broad continuous beige stone route. Upper LEFT: a small cafe facade with a recessed counter and ceramic shelves at the back, no central coffee table/cups/biscuits. Middle RIGHT: a classic electrical shop window with abstract frosted glass and CLOSED stock cabinets, no television duplicating the character prop. Lower: an open-side cutaway city bus boarding bay at a LEVEL platform; show understated teal bus wall/window frames at the OUTER edges, the central standing area is the bus interior floor flush with the platform path. No wheels or vehicle body crossing that floor, no extra passenger benches in the centre. Make the bus context legible while keeping a physically coherent level walkway into it. No passengers, coins, tickets, money, labels or numbers.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "surprises",
+      "name": "surprises-house-v1",
+      "attempt": 1,
+      "requestFile": "requests.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 115–120: ONE roof-cutaway family home and garden, connected by a broad cream-tiled veranda/hallway. Upper: leafy garden-party terrace with warm plain lanterns at the outer edges, no drinks or people. Middle: breakfast-room side bay with closed cupboards and an empty side counter, no food or scattered coins. Lower: quiet study window with deep blue night glass and soft warm interior lamp, no extra parrot, bird stand or burglar. Each story nook has its local window-light cue, but the entire connected dry foreground floor uses one gentle warm illumination and one perspective; no panel borders or separate horizons. Do not add cups, furniture under figures, money or repeated birds.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "stories",
+      "name": "stories-rain-gallery-v1",
+      "attempt": 1,
+      "requestFile": "requests-final-four.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 121–126: A sheltered old-book arcade on a softly rainy day, plum-brown timber shelves, cream plaster, tall rounded windows with fine rain streaks and a continuous dry pale wood/stone floor. Upper side: bookshop with unlabelled book spines and a recessed counter outside the standing band. Middle opposite side: small travel-photo gallery with abstract landscape frames, no people/photos of faces or bearded characters. Lower side: cosy rain-window tea nook, no tea table or cups because the sprite already includes them. Rain stays beyond glazing, no puddles under feet, no umbrella, duplicate hat or extra guest. One connected interior arcade, not separate room pictures.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.\nCRITICAL SINGLE-LEVEL GEOGRAPHY: View ONE ground-level route from above at a fixed parallel-oblique angle. Room settings are SIDE ALCOVES along that same route, never vertically stacked storeys. The centre x25%-75% is one uninterrupted floor from top to bottom. Never make the floor of an upper stop into the ceiling over the next stop; no horizontal or diagonal slab edge crosses that central corridor at one-third or two-thirds height. Walls, roofs and vehicle framing stay outside the central corridor. A person could walk from first to last without stairs, bridges, jumping or going through a wall. Keep the entire lower quarter free of any foreground barrier.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "possibilities",
+      "name": "possibilities-plane-trees-v1",
+      "attempt": 1,
+      "requestFile": "requests-final-four.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 127–132: A leafy residential cafe street under broad plane-tree canopies, soft cream and muted apricot buildings, copper-green trim. Upper: cafe terrace facade with an empty recessed serving area, no other guests. Middle: quiet roadside lay-by visible only along a far OUTER edge; wide safe pedestrian standing pavement, no police barrier or arrest scene. Lower: open living-room veranda with an empty bookshelf and plain side window for discussing plans. One connected pale stone pedestrian walk, modest ordinary neighbourhood scale. No celebrities, confirmed holiday tickets, packed luggage, sports cars, money or licence duplicates. Tree shadows remain light and soft away from support bands.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.\nCRITICAL SINGLE-LEVEL GEOGRAPHY: View ONE ground-level route from above at a fixed parallel-oblique angle. Room settings are SIDE ALCOVES along that same route, never vertically stacked storeys. The centre x25%-75% is one uninterrupted floor from top to bottom. Never make the floor of an upper stop into the ceiling over the next stop; no horizontal or diagonal slab edge crosses that central corridor at one-third or two-thirds height. Walls, roofs and vehicle framing stay outside the central corridor. A person could walk from first to last without stairs, bridges, jumping or going through a wall. Keep the entire lower quarter free of any foreground barrier.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "news",
+      "name": "news-terraces-v1",
+      "attempt": 1,
+      "requestFile": "requests-final-four.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 133–138: A modest sunny town guesthouse and residential terrace arcade, soft buttery stone, sage palms, curved bay windows and broad cream paving. Upper side: quiet newspaper-reading veranda without any additional paper. Middle side: guesthouse hotel doorway and small recessed reception window, comfortable and ordinary rather than a palace; no wedding decor. Lower side: open cosy home sitting-room balcony with plain walls and an empty small side shelf, no prizes, cash, forms or pencils. Continuous pedestrian floor from first to last, no tall balustrade across the centre. No reporter crowd, celebrity portraits, marriage signs, mansion or winning celebration.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.\nCRITICAL SINGLE-LEVEL GEOGRAPHY: View ONE ground-level route from above at a fixed parallel-oblique angle. Room settings are SIDE ALCOVES along that same route, never vertically stacked storeys. The centre x25%-75% is one uninterrupted floor from top to bottom. Never make the floor of an upper stop into the ceiling over the next stop; no horizontal or diagonal slab edge crosses that central corridor at one-third or two-thirds height. Walls, roofs and vehicle framing stay outside the central corridor. A person could walk from first to last without stairs, bridges, jumping or going through a wall. Keep the entire lower quarter free of any foreground barrier.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "woodland",
+      "name": "woodland-station-v1",
+      "attempt": 1,
+      "requestFile": "requests-final-four.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: style-transfer. Asset: finished continuous chapter environment for the same children's English learning journey game. Input image 1 and image 2 are STYLE REFERENCES ONLY, not a layout to copy. Preserve their rounded architecture, softly painted volumetric shading, warm brown details, cream/coral/teal family palette and polished picture-book/game finish. Create the NEW distinct chapter below. No photographic realism, no hard vector shapes.\nEXACT native portrait canvas 724x2172, height exactly three times width, opaque RGB. ONE physically coherent continuous environment with three square-length stops, consistent parallel oblique perspective, and a single traceable dry ground plane. NO three stacked pictures, panel seams, restarted horizons, floating platforms or independent circles. Keep architecture mostly at the outer edges/back of each stop; the centre is genuine usable floor, not a blank cutout.\nThree unchanged character/furniture groups will be layered later. Do NOT draw people or animals. Their visible group height is 36% of one square. Reserve broad FLAT clear support bands at global x20%-80%, y15%-21%, y48%-54%, y81%-87%. The feet centres are (50%,18.67%), (50%,52%), (50%,85.33%). Keep these bands and the figure area above them free of central furniture, stairs, thresholds, carpets, posts, water, planting, dramatic shadows or walls.\nCritical foreground rule: BELOW each group, global central x25%-75% through y22%-31%, y55%-64%, y88%-98% stays quiet continuous floor for separate stars/medal and Lesson buttons. No foreground wall, hedge, canopy, balustrade, furniture or raised lip crosses these information areas. A character's feet fitting is not sufficient; its reward/label area and connecting road must also fit. Side scenery can richly frame the path but may not close it.\nUse natural detailed floor material at a human scale, warm upper-left light except the explicitly described gentle evening variants. No text, letters, digits, signs, brands, flags, symbols, UI, stars, medals, map pins or watermark. No extra handheld story props, no duplicate figure furniture, no depiction of uncertain/future events as already completed.\nCHAPTER Lesson 139–144: A coherent small woodland station and dry forest-edge walkway. Upper section: LEFT side open office-window bay, RIGHT side outdoor utility-cabinet/telephone-line pole near foliage; keep these two contexts visually distinct because the original two callers are at separate ends of a phone call. No extra telephone props. Middle section: an open-side cutaway train-carriage bay with simple blue-green window framing only along the outer/back edges; central level wood floor joins the station walkway and stays EMPTY because the original sprite supplies its two benches and seated family. No extra train seats, passengers or wheels across the route. Lower section: a quiet local woodland clearing reached by the same level sandy stone path; no extra sign or litter basket (the sprite supplies their backs and a few specific discarded objects). Do not turn this into a cleanup victory, pristine-restoration campaign or huge junkyard. No readable boards, labels, railway clocks, added trash piles or additional humans.\nFinish this as one cohesive illustrated location, distinctly different in architecture and spatial organisation from the references while maintaining their exact visual family.\nCRITICAL SINGLE-LEVEL GEOGRAPHY: View ONE ground-level route from above at a fixed parallel-oblique angle. Room settings are SIDE ALCOVES along that same route, never vertically stacked storeys. The centre x25%-75% is one uninterrupted floor from top to bottom. Never make the floor of an upper stop into the ceiling over the next stop; no horizontal or diagonal slab edge crosses that central corridor at one-third or two-thirds height. Walls, roofs and vehicle framing stay outside the central corridor. A person could walk from first to last without stairs, bridges, jumping or going through a wall. Keep the entire lower quarter free of any foreground barrier.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/hospitality-sunroom-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "seasons",
+      "name": "seasons-market-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve every shop, paving and garden placement.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/seasons-market-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "appointments",
+      "name": "appointments-street-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve the station, shop and reception positions and the continuous route.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/appointments-street-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nChange only the canvas extent as described; preserve the home, cupboards, door and continuous honey-wood floor.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/preparations-home-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "caring",
+      "name": "caring-veranda-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nAdditionally remove ALL raised steps at the UPPER LEFT living-room entrance. Make that opening level with the central tile paving, so there is a flat, continuous clear floor through global x20%-80%, y15%-22%. The doorway and side furniture remain at the upper edges, away from this support band. Preserve middle and lower scenes. No new steps, rug or furniture in the clear support area.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/caring-veranda-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry. Remove both enormous diagonal ceiling/floor slabs that span the central route around one-third and two-thirds height. Turn the whole central x20%-80% into ONE continuous level pavement from top to bottom. The upper house, middle curved terminal glass and lower station canopy are SIDE BAYS along this same ground-level route, not floors above one another. Keep the green canopy roofs strictly at outer side edges; never use an upper walking floor as a roof over the next section. Preserve the architecture identities, flowers and warm light. All three stop feet areas and space below them stay clear, flat paving. No stairs or level changes.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry and the lower boarding area. Remove the huge diagonal floor/ceiling slab at about two-thirds image height. The centre x20%-80% must remain ONE connected level walking surface. Keep the cafe and shop as side bays. Rebuild the lower stop as a wide LEVEL bus boarding/aisle bay, with teal vehicle window/wall frames only at extreme side edges and an open clear central floor extending below the future characters and their controls. No vehicle body, curb, stair, canopy or rail crosses that central floor. Do not invent extra televisions, people, cups, coins, seats or signs.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/choices-transit-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "surprises",
+      "name": "surprises-house-v2",
+      "attempt": 2,
+      "requestFile": "revisions-round1.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Return an opaque PNG whose NATIVE PIXEL DIMENSIONS are EXACTLY 724 pixels wide by 2172 pixels high (a mathematically exact 1:3 ratio), not 724x2171. The old image is one row short. Preserve its illustration; extend the very bottom naturally as needed to achieve the exact canvas, do not stretch the scene. Keep all style, colours, subjects and lighting unchanged. No labels or UI.\nFix ONLY the disconnected stacked-floor geometry. Remove the big horizontal/diagonal floor edge above the middle breakfast room and the floor edge above the lower study. All three rooms must be SIDE ALCOVES along ONE broad same-level central cream-tile corridor, not vertically stacked storeys. Keep garden greenery upper, breakfast cupboards mid, and deep-blue night window lower; their walls and furniture remain peripheral. Remove the middle dining table/chairs if they intrude into x20%-80%, global y48%-54%. No cross-route stairs. Maintain the exact painted style, original light cues, warm connected floor and empty support/information zones.\nInvariant: no people, animals, text, digits, UI, stars, medals or map pins. Preserve empty central ground at (50%,18.67%), (50%,52%), (50%,85.33%) and continuous quiet floor below each for rewards and Lesson controls. Do not add any foreground wall or hedge over those areas.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/surprises-house-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v3",
+      "attempt": 3,
+      "requestFile": "revisions-round2.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. This is the exact edit target. Preserve the entire illustrated promenade, all buildings, paving and light exactly as seen. Only correct the NATIVE PNG canvas to EXACTLY 724 pixels wide and 2172 pixels high, a true exact 1:3 ratio. The current image is 724x2171, one row too short. Extend the very bottom naturally, do not scale or distort the artwork. No other change, no people, no text, no UI. Return opaque RGB with exact 724x2172 native dimensions.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "choices",
+      "name": "choices-transit-v3",
+      "attempt": 3,
+      "requestFile": "revisions-round2.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Edit ONLY the extreme right-side structure in the bottom third of this exact image. Keep the exact 724x2172 canvas, top cafe, middle shop, broad continuous central paving, colour and style unchanged. Replace the lower-right generic glass shelter edge with a recognizable narrow side cutaway of a classic TEAL CITY BUS: rounded teal bus window framing, a cream inner wall panel and two slender YELLOW handrails, only within x82%-100% and y70%-96% of the full image. These rails remain strictly at that right border; none crosses the clear central walkway. This is a level bus boarding bay with a visible bus context, no wheels, vehicle nose, signs, numbers, coins, seats or people. Do not reintroduce the old diagonal floor slab or any barrier into x20%-80%. Preserve one continuous same-level ground surface and all three clear person/reward zones. Output opaque native 724x2172 PNG.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/choices-transit-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "departures",
+      "name": "departures-promenade-v4",
+      "attempt": 4,
+      "requestFile": "departures-canvas-revision.json",
+      "adopted": false,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET and its exact native canvas is 724x2172. KEEP THAT EXACT CANVAS. Image 2 is a visual guide for the corrected single-level paving, not a canvas-size source. Edit image 1 to remove the two central diagonal floor/ceiling slabs around one-third and two-thirds height, using the continuous open paving treatment in image 2. Keep every house facade, curved terminal glass, station canopy, bench, flower, palette and lighting from the image family; join the three stops on one level, no crossing floor lip or ceiling. The centre x20%-80% must be one continuous clear stone path from top to bottom, with no stairs, no wall or rail across it. Preserve empty standing bands and space below for UI that will be added in code; do not draw UI or characters. Keep image 1's EXACT 724 pixels wide by 2172 pixels high dimensions, NOT the one-row-short dimensions of image 2. Opaque RGB PNG.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v1.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v3.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "woodland",
+      "name": "woodland-station-v2",
+      "attempt": 2,
+      "requestFile": "woodland-interior-revision.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Preserve the complete top telephone-office/utility area, bottom forest clearing, palette, drawing quality and native portrait size. Change ONLY the MIDDLE THIRD (global y33%-67%) so it reads unmistakably as the INTERIOR of a roof-cutaway vintage TRAIN CARRIAGE, not a paved outdoor platform between two huts. Replace the middle central brick paving with clean warm honey WOOD FLOORBOARDS. The floor is level and clear at global x20%-80%, y46%-62%, including the future seated family and their rewards. Replace the wooden hut-like side frames in this middle third with continuous rounded TEAL METAL TRAIN WINDOW FRAMES and muted cream/red inner carriage wall panels at x0%-18% and x82%-100%; show greenery beyond these windows, NOT greenery growing inside the carriage. Subtle empty overhead luggage racks may stay at extreme side edges. NO benches, seats or people: the unchanged foreground sprite already provides the two red train benches, mother, child and opposite passenger. NO extra props, text, digits, signage, wheels, metal poles or rails crossing the standing area. The cutaway carriage has open ends; its wood aisle connects at the same level with the upper station floor and lower woodland path, with natural flush material transitions rather than border lines, steps or floor slabs. Never turn the upper walking floor into the ceiling of the middle scene. Keep the central route visually traceable top to bottom; preserve all three clear support and UI zones. Target opaque native 724x2172, near 1:3 with exact original proportions, no stretching.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/woodland-station-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "everyday",
+      "name": "everyday-evening-v2",
+      "attempt": 2,
+      "requestFile": "composite-review-revisions.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Change ONLY the UPPER living-room side bay: REMOVE the small round coffee table and its potted plant in front of the left sofa. Replace that table's complete silhouette and shadows with matching continuous flat cream stone floor. The original family and homework-table sprite is added separately and its father's feet overlap this background table, so no replacement furniture should occupy that place. Keep the left sofa against the outer wall, bookshelves, lamp, blue-hour view, middle reading arcade, lower stationery shop, all paving, architecture and lighting otherwise unchanged. Maintain the empty flat support region global x20%-80%, y15%-22% and the quiet floor below for UI. No people, no stars, no text or labels. Preserve the native 724x2172 opaque canvas and original aspect ratio; no stretching.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/everyday-evening-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "chapter": "preparations",
+      "name": "preparations-home-v3",
+      "attempt": 3,
+      "requestFile": "composite-review-revisions.json",
+      "adopted": true,
+      "toolArguments": {
+        "prompt": "Use case: precise-object-edit. Image 1 is the exact edit target. Change ONLY the LOWER-LEFT entrance alcove and its projecting upper cornice/beam. Currently the diagonal wooden cornice above this door protrudes into the middle stop's Lesson-label area. Pull this entire alcove's upper overhang and right-hand pilaster back toward the extreme LEFT edge, keeping the relevant architectural silhouette within x0%-22% at global y52%-68%. The centre x25%-75% at y55%-64% must become uninterrupted flat honey wood flooring, with no beam, wall edge, column or raised lip behind the future label. The doorway can remain as a shallower, narrower side bay further down at the left margin, preserving the departure-before-travel meaning. Keep the top kitchen, middle dining area, large clear floor, colours, warm light and lower-right cupboards unchanged. No additional furniture, people, props, text, numbers or UI. Preserve native 724x2172 opaque canvas and continuous one-level floor; do not stretch, add stairs or create stacked storeys.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/preparations-home-v2.png"
+        ],
+        "transparent_background": false
+      }
+    }
+  ]
+}

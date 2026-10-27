@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-22",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "request": "medal-request.json",
+  "references": [
+    {
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/brand/starflower.png",
+      "sha256": "626de2a7c1107bd937981157db1e390dba9f305afc25f18fd8ce7efeb90cb588"
+    },
+    {
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    }
+  ],
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-b2a797b9-4851-4854-bbd5-c8b57e121179.png",
+  "output": "assets/course-journey/starflower-medal-v1.png",
+  "width": 1254,
+  "height": 1254,
+  "alpha": true,
+  "transparentPixels": 732869,
+  "opaquePixels": 1284,
+  "sha256": "c1344f196c2fe394950b2e7316eeb981f8e3377b60f63a3c04aaccdd6f54d33c",
+  "web": {
+    "path": "assets/course-journey/starflower-medal-v1.webp",
+    "bytes": 153270,
+    "sha256": "aa2ee458f5314c6b90c0ecd198dd440b41520a09574817031a49f08629b0fd8a"
+  },
+  "visualReview": "One starflower relief with two leaves, complete round gold rim, no text or state-dependent star count; actual alpha preserved. Native canvas differs from requested 768px; no crop, stretch or background removal."
+}

@@ -1,0 +1,2218 @@
+{
+  "date": "2026-10-26",
+  "scope": "Lesson49-144; original48 sprites and16 native terrains",
+  "worlds": {
+    "seasons": {
+      "file": "modules-v7/seasons-market-v2.webp",
+      "png": "modules-v7/seasons-market-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit49-50",
+        "unit51-52",
+        "unit53-54"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "四季市集",
+      "description": "白墙蓝窗之间的连续石路，连接市集、四季庭院与天气花园",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit49-50": {
+          "source": {
+            "file": "unit49-50-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5039872408293461,
+              0.9401913875598086
+            ],
+            "bounds": [
+              0.050239234449760764,
+              0.12041467304625199,
+              0.9577352472089314,
+              0.9401913875598086
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.43914396887159535,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit51-52": {
+          "source": {
+            "file": "unit51-52-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5099681020733653,
+              0.960127591706539
+            ],
+            "bounds": [
+              0.08931419457735247,
+              0.09888357256778309,
+              0.930622009569378,
+              0.960127591706539
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.418,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit53-54": {
+          "source": {
+            "file": "unit53-54-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5123604465709729,
+              0.9330143540669856
+            ],
+            "bounds": [
+              0.05263157894736842,
+              0.10925039872408293,
+              0.9720893141945773,
+              0.9330143540669856
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.43701839303000967,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "everyday": {
+      "file": "modules-v7/everyday-evening-v2.webp",
+      "png": "modules-v7/everyday-evening-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit55-56",
+        "unit57-58",
+        "unit59-60"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "灯火邻里",
+      "description": "暖灯下的石路连接家庭阅读角、书架与文具店",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit55-56": {
+          "source": {
+            "file": "unit55-56-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49681020733652315,
+              0.8939393939393939
+            ],
+            "bounds": [
+              0.05582137161084529,
+              0.11483253588516747,
+              0.937799043062201,
+              0.8939393939393939
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.46206755373592634,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit57-58": {
+          "source": {
+            "file": "unit57-58-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5055821371610846,
+              0.9505582137161085
+            ],
+            "bounds": [
+              0.03269537480063796,
+              0.11084529505582137,
+              0.9784688995215312,
+              0.9505582137161085
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4287179487179487,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit59-60": {
+          "source": {
+            "file": "unit59-60-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5107655502392344,
+              0.919457735247209
+            ],
+            "bounds": [
+              0.06539074960127592,
+              0.12121212121212122,
+              0.956140350877193,
+              0.919457735247209
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45098901098901095,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "caring": {
+      "file": "modules-v7/caring-veranda-v2.webp",
+      "png": "modules-v7/caring-veranda-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit61-62",
+        "unit63-64",
+        "unit65-66"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "安心花园",
+      "description": "同层花园铺地连接家庭会客处、休息门廊和家门",
+      "floors": {
+        "unit65-66": [
+          0.28,
+          0.48,
+          0.69,
+          0.61
+        ]
+      },
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit61-62": {
+          "source": {
+            "file": "unit61-62-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5059808612440191,
+              0.9314194577352473
+            ],
+            "bounds": [
+              0.04784688995215311,
+              0.1076555023923445,
+              0.9641148325358851,
+              0.9314194577352473
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.43701839303000956,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit63-64": {
+          "source": {
+            "file": "unit63-64-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5079744816586922,
+              0.9465709728867624
+            ],
+            "bounds": [
+              0.03110047846889952,
+              0.07496012759170653,
+              0.9848484848484849,
+              0.9465709728867624
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.41302836230558093,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit65-66": {
+          "source": {
+            "file": "unit65-66-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5279106858054227,
+              0.9449760765550239
+            ],
+            "bounds": [
+              0.09170653907496013,
+              0.07097288676236045,
+              0.9641148325358851,
+              0.9449760765550239
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4118978102189781,
+            "visualBottom": 0.56,
+            "floor": [
+              0.28,
+              0.48,
+              0.69,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "memories": {
+      "file": "modules-v7/memories-arcade-v1.webp",
+      "png": "modules-v7/memories-arcade-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit67-68",
+        "unit69-70",
+        "unit71-72"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "街角时光廊",
+      "description": "弧形砖墙与绿条纹遮阳棚串起商店、照片橱窗与会客门廊",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit67-68": {
+          "source": {
+            "file": "unit67-68-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5139553429027113,
+              0.9425837320574163
+            ],
+            "bounds": [
+              0.07814992025518341,
+              0.094896331738437,
+              0.9497607655502392,
+              0.9425837320574163
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4246848541862653,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit69-70": {
+          "source": {
+            "file": "unit69-70-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5187400318979266,
+              0.9585326953748007
+            ],
+            "bounds": [
+              0.15550239234449761,
+              0.06778309409888357,
+              0.8819776714513556,
+              0.9585326953748007
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4041539838854073,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit71-72": {
+          "source": {
+            "file": "unit71-72-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5,
+              0.9178628389154705
+            ],
+            "bounds": [
+              0.06299840510366826,
+              0.09888357256778309,
+              0.9370015948963317,
+              0.9178628389154705
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4395715676728335,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "appointments": {
+      "file": "modules-v7/appointments-street-v2.webp",
+      "png": "modules-v7/appointments-street-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit73-74",
+        "unit75-76",
+        "unit77-78"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "车站服务街",
+      "description": "站台雨棚、鞋店橱窗与诊所门口沿着连续铺地展开",
+      "floors": {
+        "unit73-74": [
+          0.28,
+          0.53,
+          0.68,
+          0.61
+        ],
+        "unit75-76": [
+          0.28,
+          0.51,
+          0.73,
+          0.61
+        ],
+        "unit77-78": [
+          0.26,
+          0.51,
+          0.73,
+          0.61
+        ]
+      },
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit73-74": {
+          "source": {
+            "file": "unit73-74-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5107655502392344,
+              0.9657097288676236
+            ],
+            "bounds": [
+              0.094896331738437,
+              0.07256778309409888,
+              0.9266347687400319,
+              0.9657097288676236
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4030714285714286,
+            "visualBottom": 0.56,
+            "floor": [
+              0.28,
+              0.53,
+              0.68,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit75-76": {
+          "source": {
+            "file": "unit75-76-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5219298245614035,
+              0.9577352472089314
+            ],
+            "bounds": [
+              0.12200956937799043,
+              0.07256778309409888,
+              0.9218500797448166,
+              0.9577352472089314
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4067027027027027,
+            "visualBottom": 0.56,
+            "floor": [
+              0.28,
+              0.51,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit77-78": {
+          "source": {
+            "file": "unit77-78-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49362041467304624,
+              0.9513556618819776
+            ],
+            "bounds": [
+              0.07814992025518341,
+              0.10287081339712918,
+              0.9090909090909091,
+              0.9513556618819776
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.42428571428571427,
+            "visualBottom": 0.56,
+            "floor": [
+              0.26,
+              0.51,
+              0.73,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "preparations": {
+      "file": "modules-v7/preparations-home-v3.webp",
+      "png": "modules-v7/preparations-home-v3.png",
+      "width": 724,
+      "height": 2171,
+      "ids": [
+        "unit79-80",
+        "unit81-82",
+        "unit83-84"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "出发前的家",
+      "description": "蜂蜜色木地板连接厨房、餐厅侧厅与出发前的家门",
+      "sourceSectionHeight": 723.6666666666666,
+      "renderedSectionRatio": 1.0004606172270842,
+      "characters": {
+        "unit79-80": {
+          "source": {
+            "file": "unit79-80-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5083732057416268,
+              0.9473684210526315
+            ],
+            "bounds": [
+              0.08373205741626795,
+              0.09330143540669857,
+              0.9330143540669856,
+              0.9473684210526315
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4215126050420168,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit81-82": {
+          "source": {
+            "file": "unit81-82-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5095693779904307,
+              0.8819776714513556
+            ],
+            "bounds": [
+              0.03907496012759171,
+              0.16507177033492823,
+              0.9800637958532695,
+              0.8819776714513556
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5021579532814239,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit83-84": {
+          "source": {
+            "file": "unit83-84-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5079744816586922,
+              0.9130781499202552
+            ],
+            "bounds": [
+              0.03588516746411483,
+              0.1251993620414673,
+              0.9800637958532695,
+              0.9130781499202552
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45692307692307693,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "decisions": {
+      "file": "modules-v7/decisions-block-v1.webp",
+      "png": "modules-v7/decisions-block-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit85-86",
+        "unit87-88",
+        "unit89-90"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "城市工坊街",
+      "description": "电影院、修理工坊与待售住宅旁的连续石街",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit85-86": {
+          "source": {
+            "file": "unit85-86-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5211323763955342,
+              0.9481658692185008
+            ],
+            "bounds": [
+              0.11802232854864433,
+              0.09888357256778309,
+              0.9242424242424242,
+              0.9481658692185008
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4238873239436619,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit87-88": {
+          "source": {
+            "file": "unit87-88-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.4984051036682615,
+              0.9170653907496013
+            ],
+            "bounds": [
+              0.045454545454545456,
+              0.13556618819776714,
+              0.9513556618819776,
+              0.9170653907496013
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4606530612244898,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit89-90": {
+          "source": {
+            "file": "unit89-90-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.509170653907496,
+              0.9625199362041468
+            ],
+            "bounds": [
+              0.0733652312599681,
+              0.2025518341307815,
+              0.9449760765550239,
+              0.9625199362041468
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.47370409233997895,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "departures": {
+      "file": "modules-v7/departures-promenade-v2.webp",
+      "png": "modules-v7/departures-promenade-v2.png",
+      "width": 724,
+      "height": 2171,
+      "ids": [
+        "unit91-92",
+        "unit93-94",
+        "unit95-96"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "启程长廊",
+      "description": "邻里门廊、弧形候机玻璃与车站雨棚旁的同层步道",
+      "sourceSectionHeight": 723.6666666666666,
+      "renderedSectionRatio": 1.0004606172270842,
+      "characters": {
+        "unit91-92": {
+          "source": {
+            "file": "unit91-92-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5035885167464115,
+              0.9282296650717703
+            ],
+            "bounds": [
+              0.029505582137161084,
+              0.16905901116427433,
+              0.9776714513556619,
+              0.9282296650717703
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4742016806722689,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit93-94": {
+          "source": {
+            "file": "unit93-94-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5239234449760766,
+              0.9641148325358851
+            ],
+            "bounds": [
+              0.15311004784688995,
+              0.08771929824561403,
+              0.8947368421052632,
+              0.9641148325358851
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.41077343039126474,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit95-96": {
+          "source": {
+            "file": "unit95-96-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49920255183413076,
+              0.9385964912280702
+            ],
+            "bounds": [
+              0.018341307814992026,
+              0.14354066985645933,
+              0.9800637958532695,
+              0.9385964912280702
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45279839518555665,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "messages": {
+      "file": "modules-v7/messages-courtyard-v1.webp",
+      "png": "modules-v7/messages-courtyard-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit97-98",
+        "unit99-100",
+        "unit101-102"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "书信问候庭",
+      "description": "寄存小屋、家庭走廊与阅读门廊之间的问候庭院",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit97-98": {
+          "source": {
+            "file": "unit97-98-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5095693779904307,
+              0.9130781499202552
+            ],
+            "bounds": [
+              0.08213716108452951,
+              0.10845295055821372,
+              0.9370015948963317,
+              0.9130781499202552
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.44741328047571854,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit99-100": {
+          "source": {
+            "file": "unit99-100-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5043859649122807,
+              0.8875598086124402
+            ],
+            "bounds": [
+              0.03349282296650718,
+              0.19138755980861244,
+              0.9752791068580542,
+              0.8875598086124402
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5171134020618556,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit101-102": {
+          "source": {
+            "file": "unit101-102-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5095693779904307,
+              0.9314194577352473
+            ],
+            "bounds": [
+              0.05263157894736842,
+              0.145933014354067,
+              0.9665071770334929,
+              0.9314194577352473
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4583147208121827,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "learning": {
+      "file": "modules-v7/learning-atrium-v1.webp",
+      "png": "modules-v7/learning-atrium-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit103-104",
+        "unit105-106",
+        "unit107-108"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "学堂与书香街",
+      "description": "天窗与柱廊下的连续地面连接学堂、办公室和布料店",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit103-104": {
+          "source": {
+            "file": "unit103-104-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5003987240829346,
+              0.956140350877193
+            ],
+            "bounds": [
+              0.09170653907496013,
+              0.07256778309409888,
+              0.9090909090909091,
+              0.956140350877193
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4074368231046931,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit105-106": {
+          "source": {
+            "file": "unit105-106-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5151515151515151,
+              0.9529505582137161
+            ],
+            "bounds": [
+              0.07655502392344497,
+              0.06539074960127592,
+              0.9537480063795853,
+              0.9529505582137161
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.40560646900269537,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit107-108": {
+          "source": {
+            "file": "unit107-108-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5055821371610846,
+              0.9242424242424242
+            ],
+            "bounds": [
+              0.03269537480063796,
+              0.13157894736842105,
+              0.9784688995215312,
+              0.9242424242424242
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45416498993963783,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "choices": {
+      "file": "modules-v7/choices-transit-v3.webp",
+      "png": "modules-v7/choices-transit-v3.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit109-110",
+        "unit111-112",
+        "unit113-114"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "咖啡与出行街",
+      "description": "咖啡街、商店与公交停靠处之间的同层步行街",
+      "floors": {
+        "unit109-110": [
+          0.24,
+          0.5,
+          0.76,
+          0.61
+        ]
+      },
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit109-110": {
+          "source": {
+            "file": "unit109-110-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.4996012759170654,
+              0.8716108452950558
+            ],
+            "bounds": [
+              0.008771929824561403,
+              0.1634768740031898,
+              0.9904306220095693,
+              0.8716108452950558
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5083783783783783,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.5,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit111-112": {
+          "source": {
+            "file": "unit111-112-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.4996012759170654,
+              0.8620414673046252
+            ],
+            "bounds": [
+              0.01594896331738437,
+              0.17464114832535885,
+              0.9832535885167464,
+              0.8620414673046252
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5237122969837587,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit113-114": {
+          "source": {
+            "file": "unit113-114-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5011961722488039,
+              0.9449760765550239
+            ],
+            "bounds": [
+              0.017543859649122806,
+              0.14274322169059012,
+              0.9848484848484849,
+              0.9449760765550239
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4487475149105368,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "surprises": {
+      "file": "modules-v7/surprises-house-v2.webp",
+      "png": "modules-v7/surprises-house-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit115-116",
+        "unit117-118",
+        "unit119-120"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "家园小故事",
+      "description": "花园、早餐侧厅与夜窗书房沿着同层家庭走廊展开",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit115-116": {
+          "source": {
+            "file": "unit115-116-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5091706539074959,
+              0.9178628389154705
+            ],
+            "bounds": [
+              0.05901116427432217,
+              0.17783094098883573,
+              0.9593301435406698,
+              0.9178628389154705
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4864655172413793,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit117-118": {
+          "source": {
+            "file": "unit117-118-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5191387559808612,
+              0.9385964912280702
+            ],
+            "bounds": [
+              0.058213716108452954,
+              0.11004784688995216,
+              0.9800637958532695,
+              0.9385964912280702
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4344947064485082,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit119-120": {
+          "source": {
+            "file": "unit119-120-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5263157894736842,
+              0.9625199362041468
+            ],
+            "bounds": [
+              0.12599681020733652,
+              0.07256778309409888,
+              0.9266347687400319,
+              0.9625199362041468
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.404516129032258,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "stories": {
+      "file": "modules-v7/stories-rain-gallery-v1.webp",
+      "png": "modules-v7/stories-rain-gallery-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit121-122",
+        "unit123-124",
+        "unit125-126"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "雨窗旧书廊",
+      "description": "雨窗外的柔光照进旧书店、照片廊与茶室",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit121-122": {
+          "source": {
+            "file": "unit121-122-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49521531100478466,
+              0.9282296650717703
+            ],
+            "bounds": [
+              0.017543859649122806,
+              0.14992025518341306,
+              0.9728867623604466,
+              0.9282296650717703
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.46254098360655743,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit123-124": {
+          "source": {
+            "file": "unit123-124-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5023923444976077,
+              0.9585326953748007
+            ],
+            "bounds": [
+              0.10446570972886762,
+              0.10047846889952153,
+              0.9003189792663477,
+              0.9585326953748007
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4195539033457249,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit125-126": {
+          "source": {
+            "file": "unit125-126-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.4996012759170654,
+              0.9250398724082934
+            ],
+            "bounds": [
+              0.04146730462519936,
+              0.10925039872408293,
+              0.9577352472089314,
+              0.9250398724082934
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.44129032258064516,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "possibilities": {
+      "file": "modules-v7/possibilities-plane-trees-v1.webp",
+      "png": "modules-v7/possibilities-plane-trees-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit127-128",
+        "unit129-130",
+        "unit131-132"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "梧桐漫想街",
+      "description": "梧桐下的石路连接咖啡馆、路边停车区和家庭门廊",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit127-128": {
+          "source": {
+            "file": "unit127-128-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5171451355661882,
+              0.9250398724082934
+            ],
+            "bounds": [
+              0.0861244019138756,
+              0.14912280701754385,
+              0.9481658692185008,
+              0.9250398724082934
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.463967112024666,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit129-130": {
+          "source": {
+            "file": "unit129-130-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.507177033492823,
+              0.9370015948963317
+            ],
+            "bounds": [
+              0.03349282296650718,
+              0.14433811802232854,
+              0.9808612440191388,
+              0.9370015948963317
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45416498993963783,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit131-132": {
+          "source": {
+            "file": "unit131-132-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5003987240829346,
+              0.9210526315789473
+            ],
+            "bounds": [
+              0.018341307814992026,
+              0.15231259968102073,
+              0.9824561403508771,
+              0.9210526315789473
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.468298755186722,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "news": {
+      "file": "modules-v7/news-terraces-v1.webp",
+      "png": "modules-v7/news-terraces-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit133-134",
+        "unit135-136",
+        "unit137-138"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "城市会客露台",
+      "description": "城镇露台连接读报处、旅店接待口和家庭会客角",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit133-134": {
+          "source": {
+            "file": "unit133-134-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5023923444976076,
+              0.9537480063795853
+            ],
+            "bounds": [
+              0.12998405103668262,
+              0.094896331738437,
+              0.8748006379585327,
+              0.9537480063795853
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.41916434540389974,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit135-136": {
+          "source": {
+            "file": "unit135-136-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5123604465709729,
+              0.9457735247208932
+            ],
+            "bounds": [
+              0.03827751196172249,
+              0.1682615629984051,
+              0.9864433811802232,
+              0.9457735247208932
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4630153846153846,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit137-138": {
+          "source": {
+            "file": "unit137-138-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5003987240829346,
+              0.930622009569378
+            ],
+            "bounds": [
+              0.0342902711323764,
+              0.12200956937799043,
+              0.9665071770334929,
+              0.930622009569378
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.445207100591716,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "woodland": {
+      "file": "modules-v7/woodland-station-v2.webp",
+      "png": "modules-v7/woodland-station-v2.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit139-140",
+        "unit141-142",
+        "unit143-144"
+      ],
+      "floor": [
+        0.24,
+        0.46,
+        0.76,
+        0.61
+      ],
+      "patchRadii": [
+        0.28,
+        0.075
+      ],
+      "alignSilhouette": true,
+      "theme": "林间车站",
+      "description": "办公室与户外线路旁的步道穿过车站窗口，通向林间空地",
+      "sourceSectionHeight": 724,
+      "renderedSectionRatio": 1,
+      "characters": {
+        "unit139-140": {
+          "source": {
+            "file": "unit139-140-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5123604465709729,
+              0.9035087719298246
+            ],
+            "bounds": [
+              0.04226475279106858,
+              0.15709728867623604,
+              0.9824561403508771,
+              0.9035087719298246
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.48230769230769227,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit141-142": {
+          "source": {
+            "file": "unit141-142-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.4996012759170654,
+              0.9059011164274322
+            ],
+            "bounds": [
+              0.011961722488038277,
+              0.19059011164274323,
+              0.9872408293460925,
+              0.9059011164274322
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5032775919732441,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit143-144": {
+          "source": {
+            "file": "unit143-144-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5087719298245614,
+              0.9282296650717703
+            ],
+            "bounds": [
+              0.03668261562998405,
+              0.13476874003189793,
+              0.9808612440191388,
+              0.9282296650717703
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45370854271356786,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    }
+  }
+}

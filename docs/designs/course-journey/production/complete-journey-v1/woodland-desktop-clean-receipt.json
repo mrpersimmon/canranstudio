@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T21:08:50.745Z",
+  "job": "woodland-desktop-clean",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/woodland-desktop-clean.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-b2c4a944-affd-4a29-b163-86e662a4ea84.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/woodland-desktop-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/woodland-desktop-v2.png",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 2414242,
+      "sha256": "e076e3a34979a7f5a6fcd674f82133c9ed6d54670442bcd3d02c508242fa017e",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/woodland-desktop-v2.webp",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 361466,
+      "sha256": "63eee4e2281833b6d5ea8fe6d72765358ed4548e73fb36c1c706dd8f523ee06a",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

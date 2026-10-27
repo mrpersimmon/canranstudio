@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit17-18",
+  "selectedForRuntime": false,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-a42dac45-fe02-4b10-b6eb-67a9f747c0da.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/unit17-18-request.json",
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit17-18/keepsake-story-v1.webp"
+  ],
+  "transparentBackgroundRequested": true,
+  "outputs": [
+    {
+      "path": "docs/designs/course-journey/production/visits-v1/drafts/unit17-18-initial.png",
+      "format": "png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1701177,
+      "sha256": "e258f29b8847dc37ec05707ab4e0c01d5a52b292a3310613679a9e7acb7fa860",
+      "hasAlpha": true,
+      "preservation": "Native PNG bytes preserved exactly"
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 744383,
+    "totalPixels": 1572864,
+    "visibleGeometryThreshold": 16,
+    "note": "Runtime bounds use alpha > 16 to exclude faint isolated alpha noise. Full support is separately retained; no pixels were edited or removed.",
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          27,
+          1515,
+          994
+        ],
+        "normalized": [
+          0,
+          0.0263671875,
+          0.986328125,
+          0.970703125
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          138,
+          69,
+          1419,
+          992
+        ],
+        "normalized": [
+          0.08984375,
+          0.0673828125,
+          0.923828125,
+          0.96875
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          139,
+          69,
+          1418,
+          991
+        ],
+        "normalized": [
+          0.09049479166666667,
+          0.0673828125,
+          0.9231770833333334,
+          0.9677734375
+        ]
+      }
+    ]
+  }
+}

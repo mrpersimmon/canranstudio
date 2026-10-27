@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-26",
+  "sizes": 60,
+  "selections": 720,
+  "errors": 0,
+  "edgeErrors": 0,
+  "rewardGap": [
+    13.765276724832006,
+    13.899746409633735
+  ],
+  "maxCenterDifference": 0.11734675600564515,
+  "method": "CUA Chromium real DOM measurements, reduced motion. Batch signature hashes route-worlds and contact fixture only. Final runtime SHA is listed separately. All geometry verified after final build; viewport-media readiness rechecks replace early size41/51/52 samples. Timed DOM switch samples are not video frames.",
+  "runtime": [
+    {
+      "file": "course-journey/route-worlds.js",
+      "sha256": "b728ac6692e716a995030b0fd93e1c4e536991cf6d36f316cdb2d05a07a182f9"
+    },
+    {
+      "file": "course-journey/model.js",
+      "sha256": "c99c876fa35c880df3f765316cd29d7538ed4966da17a538af92f67319252095"
+    },
+    {
+      "file": "course-journey/App.jsx",
+      "sha256": "3f547564b8f4ebc3dc22259d35f33aa5c2fc7dcb678c8313e33ab1592b45c1ed"
+    },
+    {
+      "file": "course-journey/styles.css",
+      "sha256": "e761b31b3389246ba0c0e6750297408a597218b2869f1b0011625a5fc15e4cb1"
+    },
+    {
+      "file": "course-journey/effects.css",
+      "sha256": "9d9d34aa29d3a684c0e52257e81351af3b5002c6733f7191ed2e72af1eda3ad6"
+    },
+    {
+      "file": "course-journey/ModuleJourney.jsx",
+      "sha256": "4cfc63f44f8dfccaa4f818cbdc5f5e3b3e965bbb92fe878adba897b09016f477"
+    },
+    {
+      "file": "course-journey/PanoramaJourney.jsx",
+      "sha256": "44d2a1f50c1f58e8fd14eed0b7af42579a3a0b60c4d5a42afca479a6ac9515f3"
+    },
+    {
+      "file": "course-journey/use-map-layout.js",
+      "sha256": "a4520f0a2c911b026b5cfb0ce8a4f83a4642549118958c088d1cfaf39e07aeb2"
+    },
+    {
+      "file": "tests/support/journey-home-hospitality-contact.json",
+      "sha256": "74cc80bce16d343f6d1898ef3bfe9316373a14813bbe0c7e04aefd94fb8ea5a2"
+    }
+  ]
+}

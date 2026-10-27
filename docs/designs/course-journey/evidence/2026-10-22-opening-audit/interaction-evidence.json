@@ -1,0 +1,107 @@
+{
+  "press": [
+    {
+      "state": "running",
+      "time": 0,
+      "frames": [
+        {
+          "offset": null,
+          "transform": "scale(1)"
+        },
+        {
+          "offset": null,
+          "transform": "scale(0.97)"
+        }
+      ],
+      "duration": 80
+    }
+  ],
+  "rebound": [
+    {
+      "state": "running",
+      "time": 0,
+      "frames": [
+        {
+          "offset": 0,
+          "transform": "scale(0.97)"
+        },
+        {
+          "offset": 0.43,
+          "transform": "scale(1.035)"
+        },
+        {
+          "offset": 0.75,
+          "transform": "scale(0.995)"
+        },
+        {
+          "offset": 1,
+          "transform": "scale(1)"
+        }
+      ],
+      "duration": 380
+    }
+  ],
+  "medalReplay": [
+    {
+      "name": "",
+      "duration": 1000,
+      "iterations": "1",
+      "state": "running",
+      "target": "journey-story-sheen"
+    },
+    {
+      "name": "",
+      "duration": 550,
+      "iterations": "1",
+      "state": "running",
+      "target": "journey-medal-face"
+    },
+    {
+      "name": "",
+      "duration": 650,
+      "iterations": "1",
+      "state": "running",
+      "target": "journey-star"
+    }
+  ],
+  "continuous": {
+    "journey-star-sheen": {
+      "count": 23,
+      "duration": 4800,
+      "sampleTime": 0
+    },
+    "journey-star-twinkle": {
+      "count": 23,
+      "duration": 4800,
+      "sampleTime": 0
+    }
+  },
+  "activeBeforeReduce": [
+    {
+      "time": 0,
+      "duration": 1000
+    },
+    {
+      "time": 0,
+      "duration": 550
+    },
+    {
+      "time": 0,
+      "duration": 650
+    }
+  ],
+  "reducedAfterTwoFrames": {
+    "reduced": true,
+    "animations": [],
+    "current": "true"
+  },
+  "replayWhileReduced": {
+    "animations": [],
+    "current": "true",
+    "sceneScroll": [
+      0,
+      0
+    ],
+    "scrollY": 0
+  }
+}

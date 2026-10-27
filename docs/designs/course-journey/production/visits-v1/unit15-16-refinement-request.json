@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: identity-preserve / background-extraction. Edit Image 1 only. Image 1 is the character sprite to refine; Image 2 is the accepted map sprite showing the required clean alpha edge and generous margins. Preserve Image 1's exact people, expressions, gestures, clothing colors, number and ownership of props, warm brown outlines and compact storybook style. Remove ALL surrounding glow, colored fog, dark soft background, cast floor shadow and any halo outside the actual figures and their props. Pixels outside the crisp antialiased illustration edge must be fully transparent. Keep antialiasing only at the immediate outline, not a broad translucent aura. Place the entire group comfortably within the same aspect ratio canvas with at least 8–10% empty transparent margin on EVERY side, especially under shoes and around hats/hands. Scale the group down within the canvas if needed; do not crop, stretch or distort it. Every shoe must be complete. Keep exactly two green passports and two brown suitcases. Move the blonde woman's case slightly to her outer right if needed to make both of her shoes fully visible; all other poses and identities stay unchanged. No new people, props, platforms, shadows, UI, stars, text or watermarks. Output actual transparent alpha, no painted checkerboard, no white or black matte.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/production/visits-v1/drafts/unit15-16-initial.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png"
+  ],
+  "transparent_background": true
+}

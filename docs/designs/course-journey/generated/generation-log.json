@@ -1,0 +1,49 @@
+{
+  "designVersion": "1.0.0",
+  "records": [
+    {
+      "date": "2026-10-20",
+      "job": "desktop-home",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "status": "supplemental-concept-not-new-approved-master",
+      "logicalViewport": "1440x1024",
+      "image": "desktop-home-v1.png",
+      "width": 1487,
+      "height": 1058,
+      "imageSha256": "f8786a23e1f2baedafbc738f416c05b3e18b1177446d43d6254e7cb377036dc1",
+      "prompt": "desktop-home-v1.prompt.txt",
+      "promptSha256": "dfa696e7535c4b18696be57c8491838ad46dc1d0be005e0bc5c4055614428eee",
+      "receipt": "desktop-home-v1.receipt.json",
+      "referenceIds": [
+        "approvedMobile",
+        "brand",
+        "unit12"
+      ],
+      "transparentBackground": false,
+      "sourceImageBasename": "exec-077e26ba-b569-41d2-9ae5-21aaded937b5.png"
+    },
+    {
+      "date": "2026-10-20",
+      "job": "mobile-directory",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in",
+      "status": "supplemental-concept-not-new-approved-master",
+      "logicalViewport": "390x844",
+      "image": "mobile-directory-v1.png",
+      "width": 853,
+      "height": 1844,
+      "imageSha256": "e2eff9c7ad46303bd92d92c14f3ec53ac86f2f65259f369e057cc1b1565906fb",
+      "prompt": "mobile-directory-v1.prompt.txt",
+      "promptSha256": "e719b60e5c26af3af6bcc97b452d4d83493b472980d9acf263d07bd5cf5c647d",
+      "receipt": "mobile-directory-v1.receipt.json",
+      "referenceIds": [
+        "approvedMobile",
+        "brand",
+        "unit49"
+      ],
+      "transparentBackground": false,
+      "sourceImageBasename": "exec-21cc54e7-6c37-4d4a-b90c-b77efb732bfe.png"
+    }
+  ]
+}

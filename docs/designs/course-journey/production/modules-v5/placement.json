@@ -1,0 +1,270 @@
+{
+  "date": "2026-10-25",
+  "scope": "Lesson13-24, original characters in two continuous 1:3 worlds",
+  "worlds": {
+    "visits": {
+      "file": "modules-v5/visits-gallery-v1.webp",
+      "png": "modules-v5/visits-gallery-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit13-14",
+        "unit15-16",
+        "unit17-18"
+      ],
+      "floor": [
+        0.25,
+        0.49,
+        0.77,
+        0.61
+      ],
+      "patchRadii": [
+        0.29,
+        0.07
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit13-14": {
+          "source": {
+            "file": "dress-friends-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.51,
+              0.917863
+            ],
+            "bounds": [
+              0.089314,
+              0.124402,
+              0.927432,
+              0.917863
+            ]
+          },
+          "placement": {
+            "index": 0,
+            "feet": [
+              0.500738183729257,
+              0.56
+            ],
+            "width": 0.4537084998506543,
+            "visualBottom": 0.56,
+            "floor": [
+              0.25,
+              0.49,
+              0.77,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.07
+            ]
+          }
+        },
+        "unit15-16": {
+          "source": {
+            "file": "passport-travelers-v1.webp",
+            "width": 1536,
+            "height": 1024,
+            "anchor": [
+              0.52,
+              0.926758
+            ],
+            "bounds": [
+              0.146484,
+              0.102539,
+              0.904948,
+              0.926758
+            ]
+          },
+          "placement": {
+            "index": 1,
+            "feet": [
+              0.4962550729842433,
+              0.56
+            ],
+            "width": 0.6551656780540124,
+            "visualBottom": 0.56,
+            "floor": [
+              0.25,
+              0.49,
+              0.77,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.07
+            ]
+          }
+        },
+        "unit17-18": {
+          "source": {
+            "file": "office-introduction-v1.webp",
+            "width": 1536,
+            "height": 1024,
+            "anchor": [
+              0.51,
+              0.959961
+            ],
+            "bounds": [
+              0.093099,
+              0.078125,
+              0.923177,
+              0.959961
+            ]
+          },
+          "placement": {
+            "index": 2,
+            "feet": [
+              0.5011402120122109,
+              0.56
+            ],
+            "width": 0.6123587605858686,
+            "visualBottom": 0.56,
+            "floor": [
+              0.25,
+              0.49,
+              0.77,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.07
+            ]
+          }
+        }
+      }
+    },
+    "kindness": {
+      "file": "modules-v5/kindness-courtyard-v1.webp",
+      "png": "modules-v5/kindness-courtyard-v1.png",
+      "width": 724,
+      "height": 2172,
+      "ids": [
+        "unit19-20",
+        "unit21-22",
+        "unit23-24"
+      ],
+      "floor": [
+        0.3,
+        0.5,
+        0.72,
+        0.6
+      ],
+      "patchRadii": [
+        0.28,
+        0.06
+      ],
+      "alignSilhouette": true,
+      "characters": {
+        "unit19-20": {
+          "source": {
+            "file": "icecream-family-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.519537,
+              0.96571
+            ],
+            "bounds": [
+              0.063796,
+              0.059809,
+              0.975279,
+              0.96571
+            ]
+          },
+          "placement": {
+            "index": 0,
+            "feet": [
+              0.49999980130279137,
+              0.56
+            ],
+            "width": 0.39739441727076136,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        },
+        "unit21-22": {
+          "source": {
+            "file": "red-book-pair-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.52512,
+              0.952951
+            ],
+            "bounds": [
+              0.098086,
+              0.097289,
+              0.952153,
+              0.952951
+            ]
+          },
+          "placement": {
+            "index": 1,
+            "feet": [
+              0.5000002103634379,
+              0.56
+            ],
+            "width": 0.42072687579908885,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        },
+        "unit23-24": {
+          "source": {
+            "file": "shelf-glasses-pair-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.521132,
+              0.951356
+            ],
+            "bounds": [
+              0.082935,
+              0.093301,
+              0.95933,
+              0.951356
+            ]
+          },
+          "placement": {
+            "index": 2,
+            "feet": [
+              0.49999979022323743,
+              0.56
+            ],
+            "width": 0.4195535251236809,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        }
+      }
+    }
+  }
+}

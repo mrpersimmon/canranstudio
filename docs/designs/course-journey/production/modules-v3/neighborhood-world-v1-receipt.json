@@ -1,0 +1,54 @@
+{
+  "name": "neighborhood-world-v1",
+  "tool": "built-in image_gen",
+  "date": "2026-10-24",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-4e6142c7-7768-4c0c-ac6a-a6939d30cc2c.png",
+  "prompt": "Use case: precise-object-edit of a continuous storybook learning map.\nImage 1 is the EDIT TARGET, the approved first-section layout for the new single-world renderer. Image 2 is a STYLE AND LANDMARK reference for the next section.\nCreate the Lesson7–12 companion environment by editing ONLY the landmark themes in image1, keeping its exact tall 1:3 composition, the same three connected terraces, the same courtyard floor sizes/positions, the same single winding road, stairs, canal placement, masonry scale, perspective and warm upper-left light. Keep native 1:3 aspect ratio. This must remain ONE spatially coherent complete opaque scene, not separate cards or floating circular discs.\nThe three equal square sections in the full image must retain wide empty level floor at local x18%-82%,y47%-64%, with local foot center(50%,55%). The whole image floor centers remain about y18.3%,51.7%,85%. Keep lower middle of each square (local x28%-72%,y70%-96%) quiet for later UI; don't add extra objects there.\nTop section: flower-covered garden conversation arbor, with a small wooden trellis and coral arch behind/right, not another large building. Middle section: neighborhood street greeting corner, replace the purple-roof pavilion with a modest coral arch gate and flowers toward the rear-left; preserve the central empty cream pavement. Bottom section: small school's lost-property courtyard, retain a modest cream schoolhouse with terracotta roof and teal double doors at rear-right.\nPreserve the reference's cream stone, coral walls, cypresses, daisies, narrow turquoise canals. Match the existing original cartoon characters by keeping surfaces simple and lighting soft, without adding harsh 3D effects. No thick bloom, vignettes or collage edges. No other nearer road network behind these three courtyards. No people, animals, lesson props, words, digits, pins, labels, stars, medals or UI. Do not insert dividing lines or seams between square sections. Return a finished continuous environment image.",
+  "references": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v3/opening-world-v1.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp"
+  ],
+  "transparent": false,
+  "metadata": {
+    "format": "png",
+    "mediaType": "image/png",
+    "width": 724,
+    "height": 2172,
+    "space": "srgb",
+    "channels": 3,
+    "depth": "uchar",
+    "density": 72,
+    "isProgressive": false,
+    "isPalette": false,
+    "bitsPerSample": 8,
+    "hasProfile": false,
+    "hasAlpha": false,
+    "autoOrient": {
+      "width": 724,
+      "height": 2172
+    }
+  },
+  "encoding": "Native PNG bytes retained; WebP quality90 only",
+  "files": [
+    {
+      "path": "assets/course-journey/modules-v3/neighborhood-world-v1.png",
+      "sha256": "056d08afef9a2be1add1505181d701f6a94a2543c5d6973fe5fead4c45a86fae",
+      "bytes": 2511839
+    },
+    {
+      "path": "assets/course-journey/modules-v3/neighborhood-world-v1.webp",
+      "sha256": "caf4b380811879e2b26b88a56864ede332fa5305384314475534cd1e01deb1c7",
+      "bytes": 370828
+    }
+  ],
+  "referenceHashes": [
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.png",
+      "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a"
+    },
+    {
+      "path": "assets/course-journey/neighborhood-mobile-v1.webp",
+      "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+    }
+  ]
+}

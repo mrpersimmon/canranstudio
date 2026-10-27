@@ -1,0 +1,184 @@
+{
+  "version": "daily-life-v1",
+  "completedDate": "2026-10-23",
+  "generator": "built-in image_gen.imagegen",
+  "actualCalls": 11,
+  "lockedFiles": {
+    "assets/course-journey/handbag-couple.png": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68",
+    "assets/course-journey/home-desktop-v1.png": "3c3ffa96998a9f45b425fd08179cf9f61d925b45dcdf1220bbfc0eba1e717b1f",
+    "assets/course-journey/home-desktop-v1.webp": "d53932f4bdba73c002274bdd316563bb356e69e44264b89ed9ea136dca4fb882",
+    "assets/course-journey/home-mobile-v1.png": "e2e04718b25c1308d12b45bee60282a2c3817bbd3f8e41f4afc3689a5bebccd7",
+    "assets/course-journey/home-mobile-v1.webp": "be6eb6c941ea0181c61b41b44e906faee14c83cc6f4b01b0bf487da83654688b",
+    "assets/course-journey/icecream-family-v1.png": "d8f0fbec916ac5f942887aef263fdac31104cdff295af566f33b26f8b2210f4b",
+    "assets/course-journey/icecream-family-v1.webp": "88a6e91c270b7ba7f89a321306bccc04bda586808905b3db43d8cd9a4102b921",
+    "assets/course-journey/kindness-desktop-v1.png": "8728617692d91b2ce9f48c44c2405b32b8dc7e0ee08186817ea852084f0e00b4",
+    "assets/course-journey/kindness-desktop-v1.webp": "73b29e6e403525ee822a697fad39f425c33431aa0ceffda60c109ac5ee24f780",
+    "assets/course-journey/kindness-mobile-v1.png": "ab6007e4b20f3042d87b3226a415460e370e235e95ec5ac45464ed139c01c3dd",
+    "assets/course-journey/kindness-mobile-v1.webp": "a8937a114b3781d5ae2c0382a2b66945a1330dee115e17a175f443f043b54033",
+    "assets/course-journey/kitchen-host-v1.png": "035fe0a77a65f2a6b6d6b73d09bd62a0f1f5925b4aef360124674d52808bfd45",
+    "assets/course-journey/kitchen-host-v1.webp": "3c09f58d2811b16f0c07dde79a622b38fc510fd36b3a9b56a6bd4b91e0b93ae8",
+    "assets/course-journey/living-room-host-v1.png": "39f437eb7fb0f821853cd8f83da3dc58baab71246627fb0a3154e914d2463297",
+    "assets/course-journey/living-room-host-v1.webp": "99900487b2f9ed86799860b72b0ac71993c8d958314515a6a26a3fe2c34c3514",
+    "assets/course-journey/red-book-pair-v1.png": "ca25fd95408a92f1404800861fae313a4b37dc3506c17657b5e58af7179e6bd2",
+    "assets/course-journey/red-book-pair-v1.webp": "6ea1c1b82c9f94631cdde2fe75a78183ff8440016f99be753dca246e96d3b8c2",
+    "assets/course-journey/shelf-glasses-pair-v1.png": "c496ec35891ffbe1c2b2c125907c9cfc3fa921c53be8973b4f8e5d5c32a34bed",
+    "assets/course-journey/shelf-glasses-pair-v1.webp": "5c66cbf8060c302918721a95be60abf063936c27d8cb3663a1dea31b0eb316ae",
+    "assets/course-journey/tidy-room-pair-v1.png": "d2bf2d952620f59b32085931819b11ea98e494fba21ccc4043a35fee9f11e4fa",
+    "assets/course-journey/tidy-room-pair-v1.webp": "49b62a66ae43e195563f2e3bc4fdeaebc8cf27e6d505f829d278f8404ee4fece",
+    "assets/course-journey/visits-desktop-v1.png": "7b2487a177af23c9178015b1f85c679f622ff464e33fda7c475b4a5e194720b9",
+    "assets/course-journey/visits-mobile-v2.png": "f26805752b4a44ccb354bc5291921e12cb9e327d7a5783b5f9e4f855dd9397be",
+    "assets/unit19-20/cast-standing-v1.webp": "70b6e9313d0a32274fb4e8fe2b6bd10b23e0afca20474eeb9822c3e53b1fb58d",
+    "assets/unit19-20/keepsake-story-v1.webp": "8ed2a905b04195c06b4e3ed2fe3099655e8c70b0b1f3e9e78755f3f48f2cd862",
+    "assets/unit21-22/cast-received-v1.webp": "8db535efb29dc419f678aa6be94a8624660be6c673322bf6f940fb5acdaa7ae2",
+    "assets/unit21-22/keepsake-story-v1.webp": "a05446ae88100eda18104adcfe9128dbfff92eff08cb77a05f27ede496d20795",
+    "assets/unit23-24/keepsake-story-v1.webp": "103ddca24ea0abf3601cc2be2b16730c060033c17accfd4f79a88890973e6855",
+    "assets/unit25-26/cast-mrs-v1.webp": "a5b4bd8179cfff10c01d00dc78266f836ee129a8402b1da73587cd6631b809bd",
+    "assets/unit25-26/keepsake-story-v1.webp": "83022497eae354736c7728764837f45c321a32978cc5eb35281eeba12ba9c088",
+    "assets/unit27-28/keepsake-story-v1.webp": "47aae4fc1d9195ff1c8ca8778c9aab9d44faae5ed02688837d16181381937a7a",
+    "assets/unit29-30/cast-amy-v1.webp": "06ac4ad0ef153c1132444ffc802c9de4a47c7dd7dfbfc6fd3a267bc04670a0ef",
+    "assets/unit29-30/keepsake-story-v1.webp": "b3092fc2e27340e45d1fc7c26d397564b29bd32d5478c19e9e4de51f62a86110",
+    "docs/designs/course-journey/production/daily-life-v1/README.md": "e0d650907db4b321f702ec9dfe29f67d5d3c25a50e77f075eb0ce890f0d48bd3",
+    "docs/designs/course-journey/production/daily-life-v1/drafts/unit29-30-initial.png": "64c819ea669838f85e2587abc6eab1928d2e6904592f64cde45658c1032bae3b",
+    "docs/designs/course-journey/production/daily-life-v1/home-desktop-receipt.json": "9a1f9b99e7aaa14aab15d9f041c3c8d2a91c5b13034d451fd5dc695022f79fa0",
+    "docs/designs/course-journey/production/daily-life-v1/home-mobile-receipt.json": "6b1b52ced80111827444576b8bc1a6f455f1f0b422470ace9cd4b889ce311305",
+    "docs/designs/course-journey/production/daily-life-v1/kindness-desktop-receipt.json": "16a9ba63418bd50a4635f96c200facc3fedf3f1367689922adefa700cce73fbf",
+    "docs/designs/course-journey/production/daily-life-v1/kindness-mobile-receipt.json": "0473ab243c2a1c438a02ae617f12fafad22b7903a84a638733a4637f0b35881b",
+    "docs/designs/course-journey/production/daily-life-v1/placement.json": "5379285e7a271bc98eb570e9a61370753326ba9a2627f618ca401d3106d779db",
+    "docs/designs/course-journey/production/daily-life-v1/replay-prompt.cjs": "8d235ac15d04506401c8100f6c041e1ca96d8c57633a26b3f9dd3d65c099c34c",
+    "docs/designs/course-journey/production/daily-life-v1/requests/home-desktop.json": "8330fe1b2737bcf9b567e15665075697b8e7119fc648b6b9870eac587bfd98dc",
+    "docs/designs/course-journey/production/daily-life-v1/requests/home-mobile.json": "0dd0b7dd73281061f9ee5ca9fbd3ec9ec4ab7d47aa5c7201d91f2f2803fceab5",
+    "docs/designs/course-journey/production/daily-life-v1/requests/kindness-desktop.json": "a54ae380dff63ff654cf355dffd08e659c93c8c2814b3154fd9a6b408324c253",
+    "docs/designs/course-journey/production/daily-life-v1/requests/kindness-mobile.json": "acd4fc64abbe4b13872885daadc44eca783745128588080f530750053821e741",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit19-20.json": "3e85b8bc50cc8261a5eedb61188fbe0cf1b1974fd4c3e489787f3ab910d236fe",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit21-22.json": "0ce4d73a62ae0ef5c075f54fd2c61bea591528b586edd45a464476b88c736979",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit23-24.json": "151c52be53708a10733f9f6019e9fa2e2e5c3c9352cd6313a481fb669c3f9be2",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit25-26.json": "5cae3eb7f44891bf735b0b3805524e9e57cd45fc9cbe5b8908b4f5b086841013",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit27-28.json": "3fe7b1380f0bb8a0ac3d195e3bc7597971731a3aec92d9869f40155c80d7c2e3",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30-broom-refinement.json": "6e070c5376dfba548ddf9860243ba0c7216c6abff416a11a3eb877bf8f917304",
+    "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30.json": "7a4838cd5ae5d234cd2c0e34d059a555cbb81f348e4699a4ac7471e66d4a2270",
+    "docs/designs/course-journey/production/daily-life-v1/rules.md": "8ee0249f1ec451094a61fd14fec439856f20f65837ff3b7711220497c5bf4f1c",
+    "docs/designs/course-journey/production/daily-life-v1/unit19-20-receipt.json": "9752577c0221c23e04f28ef56d0907cb6c78f419b90f83b3691314a93736e47e",
+    "docs/designs/course-journey/production/daily-life-v1/unit21-22-receipt.json": "d6746b2895afe21eeef742fcd6c3a0bafaf676b528e9cc352cbfbc8a106da53c",
+    "docs/designs/course-journey/production/daily-life-v1/unit23-24-receipt.json": "c5c1c27b43a2832705c7827400b8dfe4ea8d92e2c4d807127d249839e5f563c1",
+    "docs/designs/course-journey/production/daily-life-v1/unit25-26-receipt.json": "12d6890e04100fff43eaac3b148e093f9f930528fde5c9b6eceefaf2479ec040",
+    "docs/designs/course-journey/production/daily-life-v1/unit27-28-receipt.json": "00840190568918c4584b1f669f5d9e575990ed49345cad1168d962b50b8b4f89",
+    "docs/designs/course-journey/production/daily-life-v1/unit29-30-broom-refinement-receipt.json": "c61305027b15609022c98de593ce51fc92dcf4d0bc1165faf58538de5410cc81",
+    "docs/designs/course-journey/production/daily-life-v1/unit29-30-receipt.json": "348adf4bc33a18145f59f69516ae350393e08d006c3f94257c897c3d4300420a",
+    "docs/designs/course-journey/references/approved-mobile-v1.png": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+  },
+  "jobs": {
+    "home-desktop": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/home-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "assets/course-journey/home-mobile-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/home-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "home-mobile": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/home-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/unit25-26/keepsake-story-v1.webp",
+        "assets/unit27-28/keepsake-story-v1.webp",
+        "assets/unit29-30/keepsake-story-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/home-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "kindness-desktop": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/kindness-desktop.json",
+      "references": [
+        "assets/course-journey/visits-desktop-v1.png",
+        "assets/course-journey/kindness-mobile-v1.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/kindness-desktop-receipt.json",
+      "selectedForRuntime": true
+    },
+    "kindness-mobile": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/kindness-mobile.json",
+      "references": [
+        "assets/course-journey/visits-mobile-v2.png",
+        "docs/designs/course-journey/references/approved-mobile-v1.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/kindness-mobile-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit19-20": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit19-20.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit19-20/keepsake-story-v1.webp",
+        "assets/unit19-20/cast-standing-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit19-20-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit21-22": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit21-22.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit21-22/keepsake-story-v1.webp",
+        "assets/unit21-22/cast-received-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit21-22-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit23-24": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit23-24.json",
+      "references": [
+        "assets/course-journey/red-book-pair-v1.png",
+        "assets/unit23-24/keepsake-story-v1.webp",
+        "assets/course-journey/handbag-couple.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit23-24-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit25-26": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit25-26.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit25-26/keepsake-story-v1.webp",
+        "assets/unit25-26/cast-mrs-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit25-26-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit27-28": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit27-28.json",
+      "references": [
+        "assets/course-journey/kitchen-host-v1.png",
+        "assets/unit27-28/keepsake-story-v1.webp",
+        "assets/course-journey/handbag-couple.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit27-28-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit29-30-broom-refinement": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30-broom-refinement.json",
+      "references": [
+        "docs/designs/course-journey/production/daily-life-v1/drafts/unit29-30-initial.png"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit29-30-broom-refinement-receipt.json",
+      "selectedForRuntime": true
+    },
+    "unit29-30": {
+      "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30.json",
+      "references": [
+        "docs/designs/course-journey/references/approved-mobile-v1.png",
+        "assets/course-journey/handbag-couple.png",
+        "assets/unit29-30/keepsake-story-v1.webp",
+        "assets/unit29-30/cast-amy-v1.webp"
+      ],
+      "receipt": "docs/designs/course-journey/production/daily-life-v1/unit29-30-receipt.json",
+      "selectedForRuntime": false
+    }
+  }
+}

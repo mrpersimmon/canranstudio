@@ -1,0 +1,372 @@
+{
+  "version": "daily-life-v1",
+  "date": "2026-10-23",
+  "source": "course-journey/daily-life-layout.js",
+  "rewardPlacement": "visible silhouette bottom + 6 CSS px, centered on the visible silhouette",
+  "captionPlacement": "separate collision-aware captions; foreground may sit beside its landmark",
+  "visibleAlphaThreshold": 16,
+  "characters": {
+    "unit19-20": {
+      "file": "icecream-family-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.519537,
+        0.96571
+      ],
+      "bounds": [
+        0.063796,
+        0.059809,
+        0.975279,
+        0.96571
+      ]
+    },
+    "unit21-22": {
+      "file": "red-book-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.52512,
+        0.952951
+      ],
+      "bounds": [
+        0.098086,
+        0.097289,
+        0.952153,
+        0.952951
+      ]
+    },
+    "unit23-24": {
+      "file": "shelf-glasses-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.521132,
+        0.951356
+      ],
+      "bounds": [
+        0.082935,
+        0.093301,
+        0.95933,
+        0.951356
+      ]
+    },
+    "unit25-26": {
+      "file": "kitchen-host-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.517544,
+        0.95614
+      ],
+      "bounds": [
+        0.104466,
+        0.047847,
+        0.930622,
+        0.95614
+      ]
+    },
+    "unit27-28": {
+      "file": "living-room-host-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.510766,
+        0.956938
+      ],
+      "bounds": [
+        0.062201,
+        0.049442,
+        0.95933,
+        0.956938
+      ]
+    },
+    "unit29-30": {
+      "file": "tidy-room-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "anchor": [
+        0.520335,
+        0.964115
+      ],
+      "bounds": [
+        0.090112,
+        0.047847,
+        0.950558,
+        0.964115
+      ]
+    }
+  },
+  "chapters": {
+    "kindness": {
+      "portrait": {
+        "file": "kindness-mobile-v1.webp",
+        "width": 1024,
+        "height": 1536,
+        "nodes": {
+          "unit19-20": {
+            "feet": [
+              0.34,
+              0.797
+            ],
+            "width": 0.37,
+            "stars": [
+              0.34,
+              0.808
+            ],
+            "label": [
+              0.54,
+              0.86
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": -68,
+              "after": "unit21-22"
+            }
+          },
+          "unit21-22": {
+            "feet": [
+              0.35,
+              0.46
+            ],
+            "width": 0.36,
+            "stars": [
+              0.35,
+              0.49
+            ],
+            "label": [
+              0.54,
+              0.568
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": -12,
+              "after": "unit23-24"
+            }
+          },
+          "unit23-24": {
+            "feet": [
+              0.73,
+              0.24
+            ],
+            "width": 0.31,
+            "stars": [
+              0.73,
+              0.262
+            ],
+            "label": [
+              0.54,
+              0.316
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": 8
+            }
+          }
+        }
+      },
+      "landscape": {
+        "file": "kindness-desktop-v1.webp",
+        "width": 1374,
+        "height": 1145,
+        "nodes": {
+          "unit19-20": {
+            "feet": [
+              0.314,
+              0.768
+            ],
+            "width": 0.24,
+            "stars": [
+              0.314,
+              0.794
+            ],
+            "label": [
+              0.314,
+              0.86
+            ],
+            "info": {
+              "x": 0.314,
+              "offsetY": 4,
+              "center": true
+            }
+          },
+          "unit21-22": {
+            "feet": [
+              0.5,
+              0.52
+            ],
+            "width": 0.24,
+            "stars": [
+              0.5,
+              0.545
+            ],
+            "label": [
+              0.64,
+              0.575
+            ],
+            "info": {
+              "x": 0.64,
+              "offsetY": -20,
+              "after": "unit23-24"
+            }
+          },
+          "unit23-24": {
+            "feet": [
+              0.75,
+              0.31
+            ],
+            "width": 0.22,
+            "stars": [
+              0.75,
+              0.336
+            ],
+            "label": [
+              0.78,
+              0.375
+            ],
+            "info": {
+              "x": 0.78,
+              "offsetY": 8,
+              "center": true
+            }
+          }
+        }
+      }
+    },
+    "home": {
+      "portrait": {
+        "file": "home-mobile-v1.webp",
+        "width": 1024,
+        "height": 1536,
+        "nodes": {
+          "unit25-26": {
+            "feet": [
+              0.34,
+              0.797
+            ],
+            "width": 0.37,
+            "stars": [
+              0.34,
+              0.808
+            ],
+            "label": [
+              0.54,
+              0.86
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": -68,
+              "after": "unit27-28"
+            }
+          },
+          "unit27-28": {
+            "feet": [
+              0.35,
+              0.46
+            ],
+            "width": 0.34,
+            "stars": [
+              0.35,
+              0.49
+            ],
+            "label": [
+              0.54,
+              0.568
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": -12,
+              "after": "unit29-30"
+            }
+          },
+          "unit29-30": {
+            "feet": [
+              0.73,
+              0.24
+            ],
+            "width": 0.3,
+            "stars": [
+              0.73,
+              0.262
+            ],
+            "label": [
+              0.54,
+              0.316
+            ],
+            "info": {
+              "x": 0.54,
+              "offsetY": 8
+            }
+          }
+        }
+      },
+      "landscape": {
+        "file": "home-desktop-v1.webp",
+        "width": 1374,
+        "height": 1145,
+        "nodes": {
+          "unit25-26": {
+            "feet": [
+              0.314,
+              0.768
+            ],
+            "width": 0.25,
+            "stars": [
+              0.314,
+              0.794
+            ],
+            "label": [
+              0.314,
+              0.86
+            ],
+            "info": {
+              "x": 0.314,
+              "offsetY": 4,
+              "center": true
+            }
+          },
+          "unit27-28": {
+            "feet": [
+              0.5,
+              0.52
+            ],
+            "width": 0.23,
+            "stars": [
+              0.5,
+              0.545
+            ],
+            "label": [
+              0.64,
+              0.575
+            ],
+            "info": {
+              "x": 0.64,
+              "offsetY": -20,
+              "after": "unit29-30"
+            }
+          },
+          "unit29-30": {
+            "feet": [
+              0.75,
+              0.31
+            ],
+            "width": 0.21,
+            "stars": [
+              0.75,
+              0.336
+            ],
+            "label": [
+              0.78,
+              0.375
+            ],
+            "info": {
+              "x": 0.78,
+              "offsetY": 8,
+              "center": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

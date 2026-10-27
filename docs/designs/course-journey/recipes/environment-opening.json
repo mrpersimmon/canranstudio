@@ -1,0 +1,15 @@
+{
+  "id": "environment-opening",
+  "template": "prompts/environment.txt",
+  "referenceIds": [
+    "approvedMobile"
+  ],
+  "transparentBackground": false,
+  "variables": {
+    "canvas": "1080 x 1440 px, portrait production artwork",
+    "asset_role": "Opaque environment base for the first three course nodes; runtime characters and UI will be composited separately",
+    "segment_label": "Lesson 1–6, first segment of the Lesson 1–18 range",
+    "landmark_plan": "An empty circular landing at lower left for the later handbag-couple sprite; a purple umbrella resting in a small wooden kiosk at middle right; a welcoming cream schoolhouse with terracotta roof at upper right. Connected ivory paths, arches and stairs, aqua water and restrained green planting.",
+    "safe_area": "Keep a clear central path; reserve the top 12% and bottom 16% as quiet environment behind separate UI, and keep key landmark silhouettes inside an 8% left/right margin. No labels or characters in the empty landing."
+  }
+}

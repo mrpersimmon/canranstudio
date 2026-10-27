@@ -2,6 +2,7 @@
 const { test, expect } = require('@playwright/test');
 
 const { saveCourses, adminLogin,createStudent,fillLogin,setPassword,signIn,studentLogin}=require('./helpers');
+const {openMyAccount}=require('./helpers');
 
 test('未登录先看到学号密码入口，不能直接进入教学单元', async ({ page }) => {
   await page.goto('/lesson/');
@@ -66,7 +67,7 @@ test('A/B 范围、已缓存课程换人、清单与固定资源均受权限限�
  const entries=await b.page.evaluate(async()=>{const i=await(await fetch('/lesson/course-index.json')).json(),url=i.courses['unit9-10'].manifest,p=await(await fetch(url)).json();return {manifest:url,resource:p.required.find(r=>r.key.endsWith('/unit9-10/content.js')).url};});
  await b.page.goto('/lesson/unit9-10/#learn/listen');await expect(b.page.locator('.stage-listen').getByRole('heading').first()).toBeVisible();
  const old=await b.context.newPage();await old.goto('/lesson/unit9-10/#learn/listen');await expect(old.locator('.stage-listen').getByRole('heading').first()).toBeVisible();
- await b.page.goto('/lesson/');await b.page.getByRole('button',{name:'切换学生',exact:true}).click();await fillLogin(b.page,aCode);await setPassword(b.page);
+ await b.page.goto('/lesson/');await openMyAccount(b.page);await b.page.getByRole('button',{name:'退出登录',exact:true}).click();await fillLogin(b.page,aCode);await setPassword(b.page);
  await expect(b.page.getByRole('heading',{name:'小甲的课程'})).toBeVisible();await expect(b.page.locator('.course')).toHaveCount(1);
  await expect(old.getByRole('alertdialog',{name:'课程访问'})).toBeVisible();
  await b.page.goBack();await expect(b.page.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();await expect(b.page.locator('.stage-listen')).toBeHidden();
@@ -187,7 +188,7 @@ test('学生不能提交别人的成果，旧上传不能覆盖重开，来源�
  await a.page.getByRole('button',{name:'果果 · 学习设置'}).click();await a.page.getByRole('button',{name:'重开本课',exact:true}).click();await Promise.all([a.page.waitForEvent('load'),a.page.getByRole('button',{name:'确认重开练习',exact:true}).click()]);await expect(a.page.locator('#starCount')).toHaveText('1');await expectFreshPractice(a.page);
  const stale=await a.page.evaluate(async body=>(await fetch('/lesson/api/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})).json(),completed);expect(stale.stale).toBe(true);await a.page.reload();await expect(a.page.locator('#starCount')).toHaveText('1');await expectFreshPractice(a.page);
  const cross=await page.request.post('/lesson/api/admin/classes',{headers:{Origin:'https://another-origin.invalid'},data:{name:'不应该创建的班级'}});expect(cross.status()).toBe(403);await page.reload();await expect(page.getByRole('button',{name:'管理 不应该创建的班级',exact:true})).toHaveCount(0);
- await b.page.getByRole('button',{name:'切换学生',exact:true}).click();await b.page.getByLabel('学号',{exact:true}).fill('x99999999');await b.page.getByLabel('密码',{exact:true}).fill('Invalid-password-123');
+ await openMyAccount(b.page);await b.page.getByRole('button',{name:'退出登录',exact:true}).click();await b.page.getByLabel('学号',{exact:true}).fill('x99999999');await b.page.getByLabel('密码',{exact:true}).fill('Invalid-password-123');
  for(let i=0;i<11;i++){
   const response=b.page.waitForResponse(r=>r.request().method()==='POST'&&r.url().endsWith('/api/login'));
   await b.page.getByRole('button',{name:'进入我的课程'}).click();const result=await response;expect(result.status()).toBe(i===10?429:401);

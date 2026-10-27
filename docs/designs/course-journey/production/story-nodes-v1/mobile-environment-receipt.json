@@ -1,0 +1,124 @@
+{
+  "version": "1.0",
+  "asset": "mobile-environment-v2",
+  "date": "2026-10-21",
+  "mode": "built-in image_gen image editing",
+  "transparent_background": false,
+  "scope": "Environment asset only; no application code, browser, deployment, or v1 asset modifications.",
+  "references": [
+    {
+      "role": "edit target for candidate 1",
+      "path": "assets/course-journey/opening-mobile.png",
+      "sha256": "02e6c944b5e80f4cec5534e1c737a530201c3e28894a9533599c38585d33cb11",
+      "width": 1086,
+      "height": 1448
+    },
+    {
+      "role": "approved world and style reference, used in both calls",
+      "path": "docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+      "width": 853,
+      "height": 1844
+    }
+  ],
+  "generations": [
+    {
+      "request": "mobile-environment-request.json",
+      "output": "mobile-environment-candidate-01.png",
+      "native_output": "C:/Users/duanxiaodong/.codex/generated_images/01a15e32-6828-7b43-91a3-2fdb5f400d0b/exec-dcfc8478-40d0-4c18-b113-a6082e723727.png",
+      "sha256": "d0098e14c1f56546bade2e33b04307c0bf2bb3645666a77755de1e5b4c0a1614",
+      "width": 1024,
+      "height": 1536,
+      "selection": "archived candidate; insufficient vertical separation, grassy station center approximately (0.34,0.69)"
+    },
+    {
+      "request": "mobile-environment-revision-02-request.json",
+      "edit_target": "mobile-environment-candidate-01.png",
+      "edit_target_sha256": "d0098e14c1f56546bade2e33b04307c0bf2bb3645666a77755de1e5b4c0a1614",
+      "native_output": "C:/Users/duanxiaodong/.codex/generated_images/01a15e32-6828-7b43-91a3-2fdb5f400d0b/exec-20329065-ba5d-43de-bc77-eb881709e8b0.png",
+      "output": "assets/course-journey/opening-mobile-v2.png",
+      "sha256": "75f484778eee39527e047d9a0af2f32429fb759377363cf97a7d9d58d94ad2a9",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2128279,
+      "selection": "selected for integration"
+    }
+  ],
+  "inspection": {
+    "method": "Visual inspection of original generated bitmap; coordinates are approximate manual normalized measurements, not programmatically drawn guides.",
+    "result": "Selected artwork retains approved creamy stone, coral arches, turquoise water, foliage, school and warm upper-left light. Old purple umbrella and wooden crate removed. Three clear stations connected by continuous stone stairs and paths. No people, counter, text, stars, UI or coordinate markings. Native opaque painting saved without image manipulation.",
+    "limitations": [
+      "Generated staging positions are approximate rather than exact prompt coordinates; integration must use measured anchors below.",
+      "Viewport-level character alignment remains parent integration responsibility."
+    ]
+  },
+  "anchors": {
+    "coordinate_system": "normalized x,y from top left of 1024 x 1536 native image",
+    "unit1_2": {
+      "grass_center": [
+        0.349,
+        0.76
+      ],
+      "feet_recommended": [
+        0.349,
+        0.797
+      ],
+      "grass_bounds_approx": {
+        "left": 0.143,
+        "right": 0.555,
+        "top": 0.69,
+        "bottom": 0.831
+      },
+      "label_recommended": [
+        0.349,
+        0.885
+      ]
+    },
+    "unit3_4": {
+      "stone_clearing_center": [
+        0.44,
+        0.463
+      ],
+      "feet_recommended": [
+        0.44,
+        0.492
+      ],
+      "stage_bounds_approx": {
+        "left": 0.325,
+        "right": 0.605,
+        "top": 0.415,
+        "bottom": 0.51
+      },
+      "label_right_clearance": [
+        0.66,
+        0.555
+      ]
+    },
+    "unit5_6": {
+      "courtyard_center": [
+        0.71,
+        0.226
+      ],
+      "feet_recommended": [
+        0.735,
+        0.24
+      ],
+      "courtyard_bounds_approx": {
+        "left": 0.465,
+        "right": 0.885,
+        "top": 0.201,
+        "bottom": 0.26
+      },
+      "school": {
+        "roof_center": [
+          0.73,
+          0.107
+        ],
+        "door_bottom": [
+          0.706,
+          0.194
+        ]
+      }
+    }
+  }
+}

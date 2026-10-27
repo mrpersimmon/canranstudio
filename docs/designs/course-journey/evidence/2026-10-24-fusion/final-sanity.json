@@ -1,0 +1,4346 @@
+[
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "box": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": 247.4442138671875,
+          "height": 174.140625,
+          "left": 107.9296875,
+          "right": 282.0703125,
+          "top": 73.3035888671875,
+          "width": 174.140625,
+          "x": 107.9296875,
+          "y": 73.3035888671875
+        },
+        "index": 0,
+        "label": {
+          "bottom": 390,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 346,
+          "width": 132,
+          "x": 129,
+          "y": 346
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465144230769231,
+          "w": 0.4465144230769231,
+          "x": 0.27674278846153844,
+          "y": 0.14693227914663462
+        },
+        "medal": {
+          "bottom": 338,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 294,
+          "width": 44,
+          "x": 220.5,
+          "y": 294
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 338,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 294,
+          "width": 148,
+          "x": 121,
+          "y": 294
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 288,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": 234.3906326171875,
+          "left": 125.5701328125,
+          "right": 267.2161171875,
+          "top": 93.9914951171875
+        }
+      },
+      {
+        "board": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "box": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 631.5484008789062,
+          "height": 163.90625,
+          "left": 90.54562377929688,
+          "right": 295.3581237792969,
+          "top": 467.64215087890625,
+          "width": 204.8125,
+          "x": 90.54562377929688,
+          "y": 467.64215087890625
+        },
+        "index": 1,
+        "label": {
+          "bottom": 780,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 736,
+          "width": 132,
+          "x": 129,
+          "y": 736
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4202724358974359,
+          "w": 0.5251602564102564,
+          "x": 0.2321682661007612,
+          "y": 0.15805679712540063
+        },
+        "medal": {
+          "bottom": 728,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 684,
+          "width": 44,
+          "x": 220.5,
+          "y": 684
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 728,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 684,
+          "width": 148,
+          "x": 121,
+          "y": 684
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 678,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 624.3906149414063,
+          "left": 121.36990502929687,
+          "right": 268.93731127929686,
+          "top": 483.9999946289063
+        }
+      },
+      {
+        "board": {
+          "bottom": 1186,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "box": {
+          "bottom": 1186,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 1027.80810546875,
+          "height": 180.82818603515625,
+          "left": 56.662506103515625,
+          "right": 327.9125061035156,
+          "top": 846.9799194335938,
+          "width": 271.25,
+          "x": 56.662506103515625,
+          "y": 846.9799194335938
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1170,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 1126,
+          "width": 132,
+          "x": 129,
+          "y": 1126
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4636620154747596,
+          "w": 0.6955128205128205,
+          "x": 0.1452884771885016,
+          "y": 0.13071774213741988
+        },
+        "medal": {
+          "bottom": 1118,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 1074,
+          "width": 44,
+          "x": 220.5,
+          "y": 1074
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1118,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 1074,
+          "width": 148,
+          "x": 121,
+          "y": 1074
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 1068,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 1014.3906540649414,
+          "left": 86.68988110351563,
+          "right": 303.5542561035156,
+          "top": 873.9956504272461
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1186,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 16,
+        "width": 390,
+        "x": 0,
+        "y": 16
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1186,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 16,
+      "width": 390,
+      "x": 0,
+      "y": 16
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": 16,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "box": {
+          "bottom": 16,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": -142.5557861328125,
+          "height": 174.140625,
+          "left": 107.9296875,
+          "right": 282.0703125,
+          "top": -316.6964111328125,
+          "width": 174.140625,
+          "x": 107.9296875,
+          "y": -316.6964111328125
+        },
+        "index": 0,
+        "label": {
+          "bottom": 0,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": -44,
+          "width": 132,
+          "x": 129,
+          "y": -44
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465144230769231,
+          "w": 0.4465144230769231,
+          "x": 0.27674278846153844,
+          "y": 0.14693227914663462
+        },
+        "medal": {
+          "bottom": -52,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": -96,
+          "width": 44,
+          "x": 220.5,
+          "y": -96
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": -52,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": -96,
+          "width": 148,
+          "x": 121,
+          "y": -96
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -102,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": -155.6093673828125,
+          "left": 125.5701328125,
+          "right": 267.2161171875,
+          "top": -296.0085048828125
+        }
+      },
+      {
+        "board": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "box": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 241.54840087890625,
+          "height": 163.90625,
+          "left": 90.54562377929688,
+          "right": 295.3581237792969,
+          "top": 77.64215087890625,
+          "width": 204.8125,
+          "x": 90.54562377929688,
+          "y": 77.64215087890625
+        },
+        "index": 1,
+        "label": {
+          "bottom": 390,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 346,
+          "width": 132,
+          "x": 129,
+          "y": 346
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4202724358974359,
+          "w": 0.5251602564102564,
+          "x": 0.2321682661007612,
+          "y": 0.15805679712540063
+        },
+        "medal": {
+          "bottom": 338,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 294,
+          "width": 44,
+          "x": 220.5,
+          "y": 294
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 338,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 294,
+          "width": 148,
+          "x": 121,
+          "y": 294
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 288,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 234.39061494140623,
+          "left": 121.36990502929687,
+          "right": 268.93731127929686,
+          "top": 93.99999462890624
+        }
+      },
+      {
+        "board": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "box": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 637.8080444335938,
+          "height": 180.828125,
+          "left": 56.662506103515625,
+          "right": 327.9125061035156,
+          "top": 456.97991943359375,
+          "width": 271.25,
+          "x": 56.662506103515625,
+          "y": 456.97991943359375
+        },
+        "index": 2,
+        "label": {
+          "bottom": 780,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 736,
+          "width": 132,
+          "x": 129,
+          "y": 736
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.46366185897435896,
+          "w": 0.6955128205128205,
+          "x": 0.1452884771885016,
+          "y": 0.13071774213741988
+        },
+        "medal": {
+          "bottom": 728,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 684,
+          "width": 44,
+          "x": 220.5,
+          "y": 684
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 728,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 684,
+          "width": 148,
+          "x": 121,
+          "y": 684
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 678,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 624.3905975585938,
+          "left": 86.68988110351563,
+          "right": 303.5542561035156,
+          "top": 483.99564130859375
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 796,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": -374,
+        "width": 390,
+        "x": 0,
+        "y": -374
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 796,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -374,
+      "width": 390,
+      "x": 0,
+      "y": -374
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": -124,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "box": {
+          "bottom": -124,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": -282.5557861328125,
+          "height": 174.140625,
+          "left": 107.9296875,
+          "right": 282.0703125,
+          "top": -456.6964111328125,
+          "width": 174.140625,
+          "x": 107.9296875,
+          "y": -456.6964111328125
+        },
+        "index": 0,
+        "label": {
+          "bottom": -140,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": -184,
+          "width": 132,
+          "x": 129,
+          "y": -184
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465144230769231,
+          "w": 0.4465144230769231,
+          "x": 0.27674278846153844,
+          "y": 0.14693227914663462
+        },
+        "medal": {
+          "bottom": -192,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": -236,
+          "width": 44,
+          "x": 220.5,
+          "y": -236
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": -192,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": -236,
+          "width": 148,
+          "x": 121,
+          "y": -236
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -242,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": -295.6093673828125,
+          "left": 125.5701328125,
+          "right": 267.2161171875,
+          "top": -436.0085048828125
+        }
+      },
+      {
+        "board": {
+          "bottom": 266,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "box": {
+          "bottom": 266,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 101.54840087890624,
+          "height": 163.90625,
+          "left": 90.54562377929688,
+          "right": 295.3581237792969,
+          "top": -62.35784912109375,
+          "width": 204.8125,
+          "x": 90.54562377929688,
+          "y": -62.35784912109375
+        },
+        "index": 1,
+        "label": {
+          "bottom": 250,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 206,
+          "width": 132,
+          "x": 129,
+          "y": 206
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4202724358974359,
+          "w": 0.5251602564102564,
+          "x": 0.2321682661007612,
+          "y": 0.15805679712540063
+        },
+        "medal": {
+          "bottom": 198,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 154,
+          "width": 44,
+          "x": 220.5,
+          "y": 154
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 198,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 154,
+          "width": 148,
+          "x": 121,
+          "y": 154
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 148,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 94.39061494140626,
+          "left": 121.36990502929687,
+          "right": 268.93731127929686,
+          "top": -46.00000537109375
+        }
+      },
+      {
+        "board": {
+          "bottom": 656,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "box": {
+          "bottom": 656,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 497.80804443359375,
+          "height": 180.828125,
+          "left": 56.662506103515625,
+          "right": 327.9125061035156,
+          "top": 316.97991943359375,
+          "width": 271.25,
+          "x": 56.662506103515625,
+          "y": 316.97991943359375
+        },
+        "index": 2,
+        "label": {
+          "bottom": 640,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 596,
+          "width": 132,
+          "x": 129,
+          "y": 596
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.46366185897435896,
+          "w": 0.6955128205128205,
+          "x": 0.1452884771885016,
+          "y": 0.13071774213741988
+        },
+        "medal": {
+          "bottom": 588,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 544,
+          "width": 44,
+          "x": 220.5,
+          "y": 544
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 588,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 544,
+          "width": 148,
+          "x": 121,
+          "y": 544
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 538,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 484.39059755859375,
+          "left": 86.68988110351563,
+          "right": 303.5542561035156,
+          "top": 343.99564130859375
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 656,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": -514,
+        "width": 390,
+        "x": 0,
+        "y": -514
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 656,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -514,
+      "width": 390,
+      "x": 0,
+      "y": -514
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "box": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": 238.36984252929688,
+          "height": 155.9375,
+          "left": 113.92247772216795,
+          "right": 269.85997772216797,
+          "top": 82.43234252929688,
+          "width": 155.9375,
+          "x": 113.92247772216795,
+          "y": 82.43234252929688
+        },
+        "index": 0,
+        "label": {
+          "bottom": 390,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 346,
+          "width": 132,
+          "x": 129,
+          "y": 346
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998397435897436,
+          "w": 0.3998397435897436,
+          "x": 0.29210891723632815,
+          "y": 0.17033933981870994
+        },
+        "medal": {
+          "bottom": 338,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 294,
+          "width": 44,
+          "x": 220.5,
+          "y": 294
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 338,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 294,
+          "width": 148,
+          "x": 121,
+          "y": 294
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 288,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": 234.39062940429687,
+          "left": 130.58564709716796,
+          "right": 259.41434834716796,
+          "top": 93.99713534179688
+        }
+      },
+      {
+        "board": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "box": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 656.4617919921875,
+          "height": 213.921875,
+          "left": 86.07718658447266,
+          "right": 299.99906158447266,
+          "top": 442.5399169921875,
+          "width": 213.921875,
+          "x": 86.07718658447266,
+          "y": 442.5399169921875
+        },
+        "index": 1,
+        "label": {
+          "bottom": 780,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 736,
+          "width": 132,
+          "x": 129,
+          "y": 736
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485176282051282,
+          "w": 0.5485176282051282,
+          "x": 0.22071073483198117,
+          "y": 0.09369209485176282
+        },
+        "medal": {
+          "bottom": 728,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 684,
+          "width": 44,
+          "x": 220.5,
+          "y": 684
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 728,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 684,
+          "width": 148,
+          "x": 121,
+          "y": 684
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 678,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 624.3906244921875,
+          "left": 126.16614595947266,
+          "right": 263.83364331884763,
+          "top": 483.9936979296875
+        }
+      },
+      {
+        "board": {
+          "bottom": 1186,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "box": {
+          "bottom": 1186,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 1026.456787109375,
+          "height": 166.96875,
+          "left": 67.26094055175781,
+          "right": 317.72967529296875,
+          "top": 859.488037109375,
+          "width": 250.46873474121097,
+          "x": 67.26094055175781,
+          "y": 859.488037109375
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1170,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 1126,
+          "width": 132,
+          "x": 129,
+          "y": 1126
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.428125,
+          "w": 0.6422275249774639,
+          "x": 0.17246395013271237,
+          "y": 0.1627898387419872
+        },
+        "medal": {
+          "bottom": 1118,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 1074,
+          "width": 44,
+          "x": 220.5,
+          "y": 1074
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1186,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": 16,
+            "width": 390,
+            "x": 0,
+            "y": 16
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1118,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 1074,
+          "width": 148,
+          "x": 121,
+          "y": 1074
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 1068,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 796,
+          "width": 390,
+          "x": 0,
+          "y": 796
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 1014.390623421875,
+          "left": 110.47330948171998,
+          "right": 281.04001315313724,
+          "top": 873.999959046875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1186,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 16,
+        "width": 390,
+        "x": 0,
+        "y": 16
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1186,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 16,
+      "width": 390,
+      "x": 0,
+      "y": 16
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": 16,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "box": {
+          "bottom": 16,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": -151.63015747070312,
+          "height": 155.9375,
+          "left": 113.92247772216795,
+          "right": 269.85997772216797,
+          "top": -307.5676574707031,
+          "width": 155.9375,
+          "x": 113.92247772216795,
+          "y": -307.5676574707031
+        },
+        "index": 0,
+        "label": {
+          "bottom": 0,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": -44,
+          "width": 132,
+          "x": 129,
+          "y": -44
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998397435897436,
+          "w": 0.3998397435897436,
+          "x": 0.29210891723632815,
+          "y": 0.17033933981870994
+        },
+        "medal": {
+          "bottom": -52,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": -96,
+          "width": 44,
+          "x": 220.5,
+          "y": -96
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": -52,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": -96,
+          "width": 148,
+          "x": 121,
+          "y": -96
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -102,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -374,
+          "width": 390,
+          "x": 0,
+          "y": -374
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": -155.60937059570313,
+          "left": 130.58564709716796,
+          "right": 259.41434834716796,
+          "top": -296.0028646582031
+        }
+      },
+      {
+        "board": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "box": {
+          "bottom": 406,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 266.4617919921875,
+          "height": 213.92189025878903,
+          "left": 86.07718658447266,
+          "right": 299.99906158447266,
+          "top": 52.53990173339844,
+          "width": 213.921875,
+          "x": 86.07718658447266,
+          "y": 52.53990173339844
+        },
+        "index": 1,
+        "label": {
+          "bottom": 390,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 346,
+          "width": 132,
+          "x": 129,
+          "y": 346
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485176673302283,
+          "w": 0.5485176282051282,
+          "x": 0.22071073483198117,
+          "y": 0.09369205572666266
+        },
+        "medal": {
+          "bottom": 338,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 294,
+          "width": 44,
+          "x": 220.5,
+          "y": 294
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 338,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 294,
+          "width": 148,
+          "x": 121,
+          "y": 294
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 288,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 16,
+          "width": 390,
+          "x": 0,
+          "y": 16
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 234.39062220458985,
+          "left": 126.16614595947266,
+          "right": 263.83364331884763,
+          "top": 93.9936856277466
+        }
+      },
+      {
+        "board": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "box": {
+          "bottom": 796,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 636.456787109375,
+          "height": 166.96875,
+          "left": 67.26094055175781,
+          "right": 317.72967529296875,
+          "top": 469.488037109375,
+          "width": 250.46873474121097,
+          "x": 67.26094055175781,
+          "y": 469.488037109375
+        },
+        "index": 2,
+        "label": {
+          "bottom": 780,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 736,
+          "width": 132,
+          "x": 129,
+          "y": 736
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.428125,
+          "w": 0.6422275249774639,
+          "x": 0.17246395013271237,
+          "y": 0.1627898387419872
+        },
+        "medal": {
+          "bottom": 728,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 684,
+          "width": 44,
+          "x": 220.5,
+          "y": 684
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 796,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -374,
+            "width": 390,
+            "x": 0,
+            "y": -374
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 728,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 684,
+          "width": 148,
+          "x": 121,
+          "y": 684
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 678,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 406,
+          "width": 390,
+          "x": 0,
+          "y": 406
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 624.390623421875,
+          "left": 110.47330948171998,
+          "right": 281.04001315313724,
+          "top": 483.999959046875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 796,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": -374,
+        "width": 390,
+        "x": 0,
+        "y": -374
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 796,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -374,
+      "width": 390,
+      "x": 0,
+      "y": -374
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 844,
+    "modules": [
+      {
+        "board": {
+          "bottom": -124,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "box": {
+          "bottom": -124,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": -291.6301574707031,
+          "height": 155.9375,
+          "left": 113.92247772216795,
+          "right": 269.85997772216797,
+          "top": -447.5676574707031,
+          "width": 155.9375,
+          "x": 113.92247772216795,
+          "y": -447.5676574707031
+        },
+        "index": 0,
+        "label": {
+          "bottom": -140,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": -184,
+          "width": 132,
+          "x": 129,
+          "y": -184
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998397435897436,
+          "w": 0.3998397435897436,
+          "x": 0.29210891723632815,
+          "y": 0.17033933981870994
+        },
+        "medal": {
+          "bottom": -192,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": -236,
+          "width": 44,
+          "x": 220.5,
+          "y": -236
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": -192,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": -236,
+          "width": 148,
+          "x": 121,
+          "y": -236
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -242,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -514,
+          "width": 390,
+          "x": 0,
+          "y": -514
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": -295.6093705957031,
+          "left": 130.58564709716796,
+          "right": 259.41434834716796,
+          "top": -436.0028646582031
+        }
+      },
+      {
+        "board": {
+          "bottom": 266,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "box": {
+          "bottom": 266,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 126.46177673339844,
+          "height": 213.921875,
+          "left": 86.07718658447266,
+          "right": 299.99906158447266,
+          "top": -87.46009826660156,
+          "width": 213.921875,
+          "x": 86.07718658447266,
+          "y": -87.46009826660156
+        },
+        "index": 1,
+        "label": {
+          "bottom": 250,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 206,
+          "width": 132,
+          "x": 129,
+          "y": 206
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485176282051282,
+          "w": 0.5485176282051282,
+          "x": 0.22071073483198117,
+          "y": 0.09369205572666266
+        },
+        "medal": {
+          "bottom": 198,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 154,
+          "width": 44,
+          "x": 220.5,
+          "y": 154
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 198,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 154,
+          "width": 148,
+          "x": 121,
+          "y": 154
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 148,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": -124,
+          "width": 390,
+          "x": 0,
+          "y": -124
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 94.39060923339844,
+          "left": 126.16614595947266,
+          "right": 263.83364331884763,
+          "top": -46.00631732910156
+        }
+      },
+      {
+        "board": {
+          "bottom": 656,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "box": {
+          "bottom": 656,
+          "height": 390,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 496.456787109375,
+          "height": 166.96875,
+          "left": 67.26094055175781,
+          "right": 317.72967529296875,
+          "top": 329.488037109375,
+          "width": 250.46873474121097,
+          "x": 67.26094055175781,
+          "y": 329.488037109375
+        },
+        "index": 2,
+        "label": {
+          "bottom": 640,
+          "height": 44,
+          "left": 129,
+          "right": 261,
+          "top": 596,
+          "width": 132,
+          "x": 129,
+          "y": 596
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.428125,
+          "w": 0.6422275249774639,
+          "x": 0.17246395013271237,
+          "y": 0.1627898387419872
+        },
+        "medal": {
+          "bottom": 588,
+          "height": 44,
+          "left": 220.5,
+          "right": 264.5,
+          "top": 544,
+          "width": 44,
+          "x": 220.5,
+          "y": 544
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 656,
+            "height": 1170,
+            "left": 0,
+            "right": 390,
+            "top": -514,
+            "width": 390,
+            "x": 0,
+            "y": -514
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 588,
+          "height": 44,
+          "left": 121,
+          "right": 269,
+          "top": 544,
+          "width": 148,
+          "x": 121,
+          "y": 544
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 538,
+          "height": 272,
+          "left": 0,
+          "right": 390,
+          "top": 266,
+          "width": 390,
+          "x": 0,
+          "y": 266
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 484.390623421875,
+          "left": 110.47330948171998,
+          "right": 281.04001315313724,
+          "top": 343.999959046875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 656,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": -514,
+        "width": 390,
+        "x": 0,
+        "y": -514
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 656,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": -514,
+      "width": 390,
+      "x": 0,
+      "y": -514
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "box": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": 308.3372802734375,
+          "height": 250.04689025878903,
+          "left": 757.4765625,
+          "right": 1007.5234375,
+          "top": 58.29039001464844,
+          "width": 250.046875,
+          "x": 757.4765625,
+          "y": 58.29039001464844
+        },
+        "index": 0,
+        "label": {
+          "bottom": 520,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 476,
+          "width": 156,
+          "x": 804.5,
+          "y": 476
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465123040335519,
+          "w": 0.4465122767857143,
+          "x": 0.27674386160714287,
+          "y": 0.14694712502615792
+        },
+        "medal": {
+          "bottom": 468,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 420,
+          "width": 48,
+          "x": 913.5,
+          "y": 420
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 468,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 420,
+          "width": 184,
+          "x": 790.5,
+          "y": 420
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 414,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": 289.5937653796386,
+          "left": 782.8063109375,
+          "right": 986.1944390625,
+          "top": 87.99596057739258
+        }
+      },
+      {
+        "board": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "box": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 859.8712158203125,
+          "height": 235.34375,
+          "left": 732.51220703125,
+          "right": 1026.60595703125,
+          "top": 624.5274658203125,
+          "width": 294.09375,
+          "x": 732.51220703125,
+          "y": 624.5274658203125
+        },
+        "index": 1,
+        "label": {
+          "bottom": 1080,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1036,
+          "width": 156,
+          "x": 804.5,
+          "y": 1036
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.42025669642857144,
+          "w": 0.5251674107142857,
+          "x": 0.2321646554129464,
+          "y": 0.15808476039341518
+        },
+        "medal": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 980,
+          "width": 48,
+          "x": 913.5,
+          "y": 980
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 980,
+          "width": 184,
+          "x": 790.5,
+          "y": 980
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 974,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 849.5937542578125,
+          "left": 776.77331640625,
+          "right": 988.66786328125,
+          "top": 648.0147720703125
+        }
+      },
+      {
+        "board": {
+          "bottom": 1656,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "box": {
+          "bottom": 1656,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 1428.8602294921875,
+          "height": 259.65625,
+          "left": 683.8629760742188,
+          "right": 1073.347412109375,
+          "top": 1169.2039794921875,
+          "width": 389.48443603515625,
+          "x": 683.8629760742188,
+          "y": 1169.2039794921875
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1640,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1596,
+          "width": 156,
+          "x": 804.5,
+          "y": 1596
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.463671875,
+          "w": 0.6955079214913504,
+          "x": 0.14529102870396204,
+          "y": 0.13072139195033483
+        },
+        "medal": {
+          "bottom": 1588,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 1540,
+          "width": 48,
+          "x": 913.5,
+          "y": 1540
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1588,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 1540,
+          "width": 184,
+          "x": 790.5,
+          "y": 1540
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 1534,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 1409.5937357421874,
+          "left": 726.9789031433105,
+          "right": 1038.371709753418,
+          "top": 1207.9966232421875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1656,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -24,
+        "width": 560,
+        "x": 602.5,
+        "y": -24
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 1656,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -24,
+      "width": 560,
+      "x": 602.5,
+      "y": -24
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": -24,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "box": {
+          "bottom": -24,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": -251.6627197265625,
+          "height": 250.046875,
+          "left": 757.4765625,
+          "right": 1007.5234375,
+          "top": -501.7095947265625,
+          "width": 250.046875,
+          "x": 757.4765625,
+          "y": -501.7095947265625
+        },
+        "index": 0,
+        "label": {
+          "bottom": -40,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": -84,
+          "width": 156,
+          "x": 804.5,
+          "y": -84
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465122767857143,
+          "w": 0.4465122767857143,
+          "x": 0.27674386160714287,
+          "y": 0.14694715227399557
+        },
+        "medal": {
+          "bottom": -92,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": -140,
+          "width": 48,
+          "x": 913.5,
+          "y": -140
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": -92,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": -140,
+          "width": 184,
+          "x": 790.5,
+          "y": -140
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -146,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": -270.40623347656253,
+          "left": 782.8063109375,
+          "right": 986.1944390625,
+          "top": -472.0040259765625
+        }
+      },
+      {
+        "board": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "box": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 299.8712158203125,
+          "height": 235.34375,
+          "left": 732.51220703125,
+          "right": 1026.60595703125,
+          "top": 64.5274658203125,
+          "width": 294.09375,
+          "x": 732.51220703125,
+          "y": 64.5274658203125
+        },
+        "index": 1,
+        "label": {
+          "bottom": 520,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 476,
+          "width": 156,
+          "x": 804.5,
+          "y": 476
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.42025669642857144,
+          "w": 0.5251674107142857,
+          "x": 0.2321646554129464,
+          "y": 0.15808476039341518
+        },
+        "medal": {
+          "bottom": 468,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 420,
+          "width": 48,
+          "x": 913.5,
+          "y": 420
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 468,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 420,
+          "width": 184,
+          "x": 790.5,
+          "y": 420
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 414,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 289.5937542578125,
+          "left": 776.77331640625,
+          "right": 988.66786328125,
+          "top": 88.0147720703125
+        }
+      },
+      {
+        "board": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "box": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 868.8602294921875,
+          "height": 259.65625,
+          "left": 683.8629760742188,
+          "right": 1073.347412109375,
+          "top": 609.2039794921875,
+          "width": 389.48443603515625,
+          "x": 683.8629760742188,
+          "y": 609.2039794921875
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1080,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1036,
+          "width": 156,
+          "x": 804.5,
+          "y": 1036
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.463671875,
+          "w": 0.6955079214913504,
+          "x": 0.14529102870396204,
+          "y": 0.13072139195033483
+        },
+        "medal": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 980,
+          "width": 48,
+          "x": 913.5,
+          "y": 980
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 980,
+          "width": 184,
+          "x": 790.5,
+          "y": 980
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 974,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 849.5937357421875,
+          "left": 726.9789031433105,
+          "right": 1038.371709753418,
+          "top": 647.9966232421875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1096,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -584,
+        "width": 560,
+        "x": 602.5,
+        "y": -584
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 1096,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -584,
+      "width": 560,
+      "x": 602.5,
+      "y": -584
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "opening",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": -244,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "box": {
+          "bottom": -244,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "font": "16px",
+        "id": "unit1-2",
+        "image": {
+          "bottom": -471.6627197265625,
+          "height": 250.046875,
+          "left": 757.4765625,
+          "right": 1007.5234375,
+          "top": -721.7095947265625,
+          "width": 250.046875,
+          "x": 757.4765625,
+          "y": -721.7095947265625
+        },
+        "index": 0,
+        "label": {
+          "bottom": -260,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": -304,
+          "width": 156,
+          "x": 804.5,
+          "y": -304
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4465122767857143,
+          "w": 0.4465122767857143,
+          "x": 0.27674386160714287,
+          "y": 0.14694715227399557
+        },
+        "medal": {
+          "bottom": -312,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": -360,
+          "width": 48,
+          "x": 913.5,
+          "y": -360
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": -312,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": -360,
+          "width": 184,
+          "x": 790.5,
+          "y": -360
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -366,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "state": "ready",
+        "text": "Lesson 1–2",
+        "visible": {
+          "bottom": -490.40623347656253,
+          "left": 782.8063109375,
+          "right": 986.1944390625,
+          "top": -692.0040259765625
+        }
+      },
+      {
+        "board": {
+          "bottom": 316,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "box": {
+          "bottom": 316,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "font": "16px",
+        "id": "unit3-4",
+        "image": {
+          "bottom": 79.8712158203125,
+          "height": 235.34375,
+          "left": 732.51220703125,
+          "right": 1026.60595703125,
+          "top": -155.4725341796875,
+          "width": 294.09375,
+          "x": 732.51220703125,
+          "y": -155.4725341796875
+        },
+        "index": 1,
+        "label": {
+          "bottom": 300,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 256,
+          "width": 156,
+          "x": 804.5,
+          "y": 256
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.42025669642857144,
+          "w": 0.5251674107142857,
+          "x": 0.2321646554129464,
+          "y": 0.15808476039341518
+        },
+        "medal": {
+          "bottom": 248,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 200,
+          "width": 48,
+          "x": 913.5,
+          "y": 200
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 248,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 200,
+          "width": 184,
+          "x": 790.5,
+          "y": 200
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 194,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "state": "ready",
+        "text": "Lesson 3–4",
+        "visible": {
+          "bottom": 69.59375425781249,
+          "left": 776.77331640625,
+          "right": 988.66786328125,
+          "top": -131.9852279296875
+        }
+      },
+      {
+        "board": {
+          "bottom": 876,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "box": {
+          "bottom": 876,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "font": "16px",
+        "id": "unit5-6",
+        "image": {
+          "bottom": 648.8602294921875,
+          "height": 259.65625,
+          "left": 683.8629760742188,
+          "right": 1073.347412109375,
+          "top": 389.2039794921875,
+          "width": 389.48443603515625,
+          "x": 683.8629760742188,
+          "y": 389.2039794921875
+        },
+        "index": 2,
+        "label": {
+          "bottom": 860,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 816,
+          "width": 156,
+          "x": 804.5,
+          "y": 816
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.463671875,
+          "w": 0.6955079214913504,
+          "x": 0.14529102870396204,
+          "y": 0.13072139195033483
+        },
+        "medal": {
+          "bottom": 808,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 760,
+          "width": 48,
+          "x": 913.5,
+          "y": 760
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+        },
+        "row": {
+          "bottom": 808,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 760,
+          "width": 184,
+          "x": 790.5,
+          "y": 760
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 754,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "state": "ready",
+        "text": "Lesson 5–6",
+        "visible": {
+          "bottom": 629.5937357421875,
+          "left": 726.9789031433105,
+          "right": 1038.371709753418,
+          "top": 427.9966232421875
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 876,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -804,
+        "width": 560,
+        "x": 602.5,
+        "y": -804
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/opening-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 876,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -804,
+      "width": 560,
+      "x": 602.5,
+      "y": -804
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "box": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": 295.3074035644531,
+          "height": 223.90625,
+          "left": 766.0830688476562,
+          "right": 989.9893188476562,
+          "top": 71.40115356445312,
+          "width": 223.90625,
+          "x": 766.0830688476562,
+          "y": 71.40115356445312
+        },
+        "index": 0,
+        "label": {
+          "bottom": 520,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 476,
+          "width": 156,
+          "x": 804.5,
+          "y": 476
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998325892857143,
+          "w": 0.3998325892857143,
+          "x": 0.2921126229422433,
+          "y": 0.1703592027936663
+        },
+        "medal": {
+          "bottom": 468,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 420,
+          "width": 48,
+          "x": 913.5,
+          "y": 420
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 468,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 420,
+          "width": 184,
+          "x": 790.5,
+          "y": 420
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 414,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": 289.5937638769531,
+          "left": 790.0092429101562,
+          "right": 974.9907347851564,
+          "top": 88.00671278320313
+        }
+      },
+      {
+        "board": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "box": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 895.6448974609375,
+          "height": 307.171875,
+          "left": 726.0969848632812,
+          "right": 1033.268798828125,
+          "top": 588.4730224609375,
+          "width": 307.17181396484375,
+          "x": 726.0969848632812,
+          "y": 588.4730224609375
+        },
+        "index": 1,
+        "label": {
+          "bottom": 1080,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1036,
+          "width": 156,
+          "x": 804.5,
+          "y": 1036
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485212053571429,
+          "w": 0.5485210963657924,
+          "x": 0.2207089015415737,
+          "y": 0.09370182582310269
+        },
+        "medal": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 980,
+          "width": 48,
+          "x": 913.5,
+          "y": 980
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 980,
+          "width": 184,
+          "x": 790.5,
+          "y": 980
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 974,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 849.5936899609375,
+          "left": 783.6609828002929,
+          "right": 981.3386391310426,
+          "top": 647.9967883984375
+        }
+      },
+      {
+        "board": {
+          "bottom": 1656,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "box": {
+          "bottom": 1656,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 1426.9195556640625,
+          "height": 239.75,
+          "left": 699.083251953125,
+          "right": 1058.723876953125,
+          "top": 1187.1695556640625,
+          "width": 359.640625,
+          "x": 699.083251953125,
+          "y": 1187.1695556640625
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1640,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1596,
+          "width": 156,
+          "x": 804.5,
+          "y": 1596
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.428125,
+          "w": 0.6422154017857142,
+          "x": 0.1724700927734375,
+          "y": 0.1628027779715402
+        },
+        "medal": {
+          "bottom": 1588,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 1540,
+          "width": 48,
+          "x": 913.5,
+          "y": 1540
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1656,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -24,
+            "width": 560,
+            "x": 602.5,
+            "y": -24
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1588,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 1540,
+          "width": 184,
+          "x": 790.5,
+          "y": 1540
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 1534,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 1096,
+          "width": 560,
+          "x": 602.5,
+          "y": 1096
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 1409.5937821640623,
+          "left": 761.130610421875,
+          "right": 1006.042279640625,
+          "top": 1208.0071871640623
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1656,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -24,
+        "width": 560,
+        "x": 602.5,
+        "y": -24
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 1656,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -24,
+      "width": 560,
+      "x": 602.5,
+      "y": -24
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": -24,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "box": {
+          "bottom": -24,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": -264.6925964355469,
+          "height": 223.90625,
+          "left": 766.0830688476562,
+          "right": 989.9893188476562,
+          "top": -488.5988464355469,
+          "width": 223.90625,
+          "x": 766.0830688476562,
+          "y": -488.5988464355469
+        },
+        "index": 0,
+        "label": {
+          "bottom": -40,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": -84,
+          "width": 156,
+          "x": 804.5,
+          "y": -84
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998325892857143,
+          "w": 0.3998325892857143,
+          "x": 0.2921126229422433,
+          "y": 0.1703592027936663
+        },
+        "medal": {
+          "bottom": -92,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": -140,
+          "width": 48,
+          "x": 913.5,
+          "y": -140
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": -92,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": -140,
+          "width": 184,
+          "x": 790.5,
+          "y": -140
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -146,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -584,
+          "width": 560,
+          "x": 602.5,
+          "y": -584
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": -270.4062361230469,
+          "left": 790.0092429101562,
+          "right": 974.9907347851564,
+          "top": -471.9932872167969
+        }
+      },
+      {
+        "board": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "box": {
+          "bottom": 536,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 335.6449279785156,
+          "height": 307.171875,
+          "left": 726.0969848632812,
+          "right": 1033.268798828125,
+          "top": 28.473052978515625,
+          "width": 307.17181396484375,
+          "x": 726.0969848632812,
+          "y": 28.473052978515625
+        },
+        "index": 1,
+        "label": {
+          "bottom": 520,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 476,
+          "width": 156,
+          "x": 804.5,
+          "y": 476
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485212053571429,
+          "w": 0.5485210963657924,
+          "x": 0.2207089015415737,
+          "y": 0.09370188031877792
+        },
+        "medal": {
+          "bottom": 468,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 420,
+          "width": 48,
+          "x": 913.5,
+          "y": 420
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 468,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 420,
+          "width": 184,
+          "x": 790.5,
+          "y": 420
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 414,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -24,
+          "width": 560,
+          "x": 602.5,
+          "y": -24
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 289.5937204785156,
+          "left": 783.6609828002929,
+          "right": 981.3386391310426,
+          "top": 87.99681891601563
+        }
+      },
+      {
+        "board": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "box": {
+          "bottom": 1096,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 866.9195556640625,
+          "height": 239.75,
+          "left": 699.083251953125,
+          "right": 1058.723876953125,
+          "top": 627.1695556640625,
+          "width": 359.640625,
+          "x": 699.083251953125,
+          "y": 627.1695556640625
+        },
+        "index": 2,
+        "label": {
+          "bottom": 1080,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 1036,
+          "width": 156,
+          "x": 804.5,
+          "y": 1036
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.428125,
+          "w": 0.6422154017857142,
+          "x": 0.1724700927734375,
+          "y": 0.1628027779715402
+        },
+        "medal": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 980,
+          "width": 48,
+          "x": 913.5,
+          "y": 980
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 1096,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -584,
+            "width": 560,
+            "x": 602.5,
+            "y": -584
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 1028,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 980,
+          "width": 184,
+          "x": 790.5,
+          "y": 980
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 974,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 536,
+          "width": 560,
+          "x": 602.5,
+          "y": 536
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 849.5937821640625,
+          "left": 761.130610421875,
+          "right": 1006.042279640625,
+          "top": 648.0071871640625
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 1096,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -584,
+        "width": 560,
+        "x": 602.5,
+        "y": -584
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 1096,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -584,
+      "width": 560,
+      "x": 602.5,
+      "y": -584
+    },
+    "errors": []
+  },
+  {
+    "bridgeCount": 0,
+    "chapter": "neighborhood",
+    "height": 900,
+    "modules": [
+      {
+        "board": {
+          "bottom": -244,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "box": {
+          "bottom": -244,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "font": "16px",
+        "id": "unit7-8",
+        "image": {
+          "bottom": -484.6925964355469,
+          "height": 223.90628051757812,
+          "left": 766.0830688476562,
+          "right": 989.9893188476562,
+          "top": -708.598876953125,
+          "width": 223.90625,
+          "x": 766.0830688476562,
+          "y": -708.598876953125
+        },
+        "index": 0,
+        "label": {
+          "bottom": -260,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": -304,
+          "width": 156,
+          "x": 804.5,
+          "y": -304
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.3998326437813895,
+          "w": 0.3998325892857143,
+          "x": 0.2921126229422433,
+          "y": 0.17035914829799106
+        },
+        "medal": {
+          "bottom": -312,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": -360,
+          "width": 48,
+          "x": 913.5,
+          "y": -360
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": -312,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": -360,
+          "width": 184,
+          "x": 790.5,
+          "y": -360
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": -366,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -804,
+          "width": 560,
+          "x": 602.5,
+          "y": -804
+        },
+        "state": "ready",
+        "text": "Lesson 7–8",
+        "visible": {
+          "bottom": -490.4062369017944,
+          "left": 790.0092429101562,
+          "right": 974.9907347851564,
+          "top": -691.9933154710999
+        }
+      },
+      {
+        "board": {
+          "bottom": 316,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "box": {
+          "bottom": 316,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "font": "16px",
+        "id": "unit9-10",
+        "image": {
+          "bottom": 115.64492797851562,
+          "height": 307.171875,
+          "left": 726.0969848632812,
+          "right": 1033.268798828125,
+          "top": -191.5269470214844,
+          "width": 307.17181396484375,
+          "x": 726.0969848632812,
+          "y": -191.5269470214844
+        },
+        "index": 1,
+        "label": {
+          "bottom": 300,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 256,
+          "width": 156,
+          "x": 804.5,
+          "y": 256
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.5485212053571429,
+          "w": 0.5485210963657924,
+          "x": 0.2207089015415737,
+          "y": 0.09370188031877792
+        },
+        "medal": {
+          "bottom": 248,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 200,
+          "width": 48,
+          "x": 913.5,
+          "y": 200
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 248,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 200,
+          "width": 184,
+          "x": 790.5,
+          "y": 200
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "false",
+        "stage": {
+          "bottom": 194,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": -244,
+          "width": 560,
+          "x": 602.5,
+          "y": -244
+        },
+        "state": "ready",
+        "text": "Lesson 9–10",
+        "visible": {
+          "bottom": 69.59372047851559,
+          "left": 783.6609828002929,
+          "right": 981.3386391310426,
+          "top": -132.00318108398437
+        }
+      },
+      {
+        "board": {
+          "bottom": 876,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "box": {
+          "bottom": 876,
+          "height": 560,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "font": "16px",
+        "id": "unit11-12",
+        "image": {
+          "bottom": 646.9195556640625,
+          "height": 239.75003051757812,
+          "left": 699.083251953125,
+          "right": 1058.723876953125,
+          "top": 407.1695251464844,
+          "width": 359.640625,
+          "x": 699.083251953125,
+          "y": 407.1695251464844
+        },
+        "index": 2,
+        "label": {
+          "bottom": 860,
+          "height": 44,
+          "left": 804.5,
+          "right": 960.5,
+          "top": 816,
+          "width": 156,
+          "x": 804.5,
+          "y": 816
+        },
+        "labelPosition": "relative",
+        "localImage": {
+          "h": 0.4281250544956752,
+          "w": 0.6422154017857142,
+          "x": 0.1724700927734375,
+          "y": 0.16280272347586497
+        },
+        "medal": {
+          "bottom": 808,
+          "height": 48,
+          "left": 913.5,
+          "right": 961.5,
+          "top": 760,
+          "width": 48,
+          "x": 913.5,
+          "y": 760
+        },
+        "motion": "none",
+        "patch": {
+          "loaded": true,
+          "rect": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.5,
+            "right": 1162.5,
+            "top": -804,
+            "width": 560,
+            "x": 602.5,
+            "y": -804
+          },
+          "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+        },
+        "row": {
+          "bottom": 808,
+          "height": 48,
+          "left": 790.5,
+          "right": 974.5,
+          "top": 760,
+          "width": 184,
+          "x": 790.5,
+          "y": 760
+        },
+        "rowPosition": "relative",
+        "sameMotion": true,
+        "selected": "true",
+        "stage": {
+          "bottom": 754,
+          "height": 438,
+          "left": 602.5,
+          "right": 1162.5,
+          "top": 316,
+          "width": 560,
+          "x": 602.5,
+          "y": 316
+        },
+        "state": "ready",
+        "text": "Lesson 11–12",
+        "visible": {
+          "bottom": 629.5937799586792,
+          "left": 761.130610421875,
+          "right": 1006.042279640625,
+          "top": 428.0071592988892
+        }
+      }
+    ],
+    "overflow": false,
+    "terrain": {
+      "loaded": true,
+      "native": [
+        724,
+        2172
+      ],
+      "rect": {
+        "bottom": 876,
+        "height": 1680,
+        "left": 602.5,
+        "right": 1162.5,
+        "top": -804,
+        "width": 560,
+        "x": 602.5,
+        "y": -804
+      },
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v3/neighborhood-world-v1.webp"
+    },
+    "width": 1440,
+    "world": {
+      "bottom": 876,
+      "height": 1680,
+      "left": 602.5,
+      "right": 1162.5,
+      "top": -804,
+      "width": 560,
+      "x": 602.5,
+      "y": -804
+    },
+    "errors": []
+  }
+]

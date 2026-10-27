@@ -1,0 +1,774 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "scenarios": [
+    {
+      "name": "final-390-no-preference-00",
+      "from": "opening",
+      "to": "neighborhood",
+      "frames": 42,
+      "span": 0.7005879878997803,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-01",
+      "from": "neighborhood",
+      "to": "opening",
+      "frames": 38,
+      "span": 0.7005140781402588,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-02",
+      "from": "neighborhood",
+      "to": "visits",
+      "frames": 43,
+      "span": 0.7005269527435303,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-03",
+      "from": "visits",
+      "to": "neighborhood",
+      "frames": 40,
+      "span": 0.6838381290435791,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-04",
+      "from": "visits",
+      "to": "kindness",
+      "frames": 42,
+      "span": 0.6838469505310059,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-05",
+      "from": "kindness",
+      "to": "visits",
+      "frames": 43,
+      "span": 0.7005910873413086,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-06",
+      "from": "kindness",
+      "to": "home",
+      "frames": 42,
+      "span": 0.7004868984222412,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-07",
+      "from": "home",
+      "to": "kindness",
+      "frames": 41,
+      "span": 0.6838150024414062,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-08",
+      "from": "home",
+      "to": "outdoors",
+      "frames": 39,
+      "span": 0.6839110851287842,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-09",
+      "from": "outdoors",
+      "to": "home",
+      "frames": 41,
+      "span": 0.6671440601348877,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-10",
+      "from": "outdoors",
+      "to": "making",
+      "frames": 41,
+      "span": 0.6838409900665283,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-11",
+      "from": "making",
+      "to": "outdoors",
+      "frames": 43,
+      "span": 0.700577974319458,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-12",
+      "from": "making",
+      "to": "hospitality",
+      "frames": 40,
+      "span": 0.7172818183898926,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-13",
+      "from": "hospitality",
+      "to": "making",
+      "frames": 39,
+      "span": 0.6838698387145996,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-14",
+      "from": "hospitality",
+      "to": "seasons",
+      "frames": 38,
+      "span": 0.7172420024871826,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-15",
+      "from": "seasons",
+      "to": "hospitality",
+      "frames": 42,
+      "span": 0.6838951110839844,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-16",
+      "from": "seasons",
+      "to": "everyday",
+      "frames": 41,
+      "span": 0.6838641166687012,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-17",
+      "from": "everyday",
+      "to": "seasons",
+      "frames": 42,
+      "span": 0.6838850975036621,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-18",
+      "from": "everyday",
+      "to": "caring",
+      "frames": 40,
+      "span": 0.667090892791748,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-19",
+      "from": "caring",
+      "to": "everyday",
+      "frames": 43,
+      "span": 0.7004599571228027,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-20",
+      "from": "caring",
+      "to": "memories",
+      "frames": 42,
+      "span": 0.6837818622589111,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-21",
+      "from": "memories",
+      "to": "caring",
+      "frames": 41,
+      "span": 0.6672358512878418,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-22",
+      "from": "memories",
+      "to": "appointments",
+      "frames": 43,
+      "span": 0.7171950340270996,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-23",
+      "from": "appointments",
+      "to": "memories",
+      "frames": 42,
+      "span": 0.6838159561157227,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-24",
+      "from": "appointments",
+      "to": "preparations",
+      "frames": 42,
+      "span": 0.6838679313659668,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-25",
+      "from": "preparations",
+      "to": "appointments",
+      "frames": 41,
+      "span": 0.6838099956512451,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-26",
+      "from": "preparations",
+      "to": "decisions",
+      "frames": 40,
+      "span": 0.6672019958496094,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-27",
+      "from": "decisions",
+      "to": "preparations",
+      "frames": 41,
+      "span": 0.6838779449462891,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-28",
+      "from": "decisions",
+      "to": "departures",
+      "frames": 41,
+      "span": 0.6672239303588867,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-29",
+      "from": "departures",
+      "to": "decisions",
+      "frames": 41,
+      "span": 0.6672239303588867,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-30",
+      "from": "departures",
+      "to": "messages",
+      "frames": 42,
+      "span": 0.6838488578796387,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-31",
+      "from": "messages",
+      "to": "departures",
+      "frames": 42,
+      "span": 0.6839079856872559,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-32",
+      "from": "messages",
+      "to": "learning",
+      "frames": 44,
+      "span": 0.7171549797058105,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-33",
+      "from": "learning",
+      "to": "messages",
+      "frames": 41,
+      "span": 0.667198896408081,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-34",
+      "from": "learning",
+      "to": "choices",
+      "frames": 43,
+      "span": 0.7004671096801758,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-35",
+      "from": "choices",
+      "to": "learning",
+      "frames": 40,
+      "span": 0.6671028137207031,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-36",
+      "from": "choices",
+      "to": "surprises",
+      "frames": 39,
+      "span": 0.6672120094299316,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-37",
+      "from": "surprises",
+      "to": "choices",
+      "frames": 40,
+      "span": 0.6839330196380615,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-38",
+      "from": "surprises",
+      "to": "stories",
+      "frames": 42,
+      "span": 0.6838419437408447,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-39",
+      "from": "stories",
+      "to": "surprises",
+      "frames": 42,
+      "span": 0.6838729381561279,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-40",
+      "from": "stories",
+      "to": "possibilities",
+      "frames": 42,
+      "span": 0.7005481719970703,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-41",
+      "from": "possibilities",
+      "to": "stories",
+      "frames": 43,
+      "span": 0.7004878520965576,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-42",
+      "from": "possibilities",
+      "to": "news",
+      "frames": 42,
+      "span": 0.6838669776916504,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-43",
+      "from": "news",
+      "to": "possibilities",
+      "frames": 42,
+      "span": 0.6837282180786133,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-44",
+      "from": "news",
+      "to": "woodland",
+      "frames": 41,
+      "span": 0.6671159267425537,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-45",
+      "from": "woodland",
+      "to": "news",
+      "frames": 43,
+      "span": 0.7005131244659424,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-46",
+      "from": "woodland",
+      "to": "opening",
+      "frames": 44,
+      "span": 0.71726393699646,
+      "errors": []
+    },
+    {
+      "name": "final-390-no-preference-47",
+      "from": "opening",
+      "to": "woodland",
+      "frames": 43,
+      "span": 0.7005820274353027,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-00",
+      "from": "opening",
+      "to": "neighborhood",
+      "frames": 20,
+      "span": 0.3320889472961426,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-01",
+      "from": "neighborhood",
+      "to": "opening",
+      "frames": 3,
+      "span": 0.09144783020019531,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-02",
+      "from": "neighborhood",
+      "to": "visits",
+      "frames": 4,
+      "span": 0.1339130401611328,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-03",
+      "from": "visits",
+      "to": "neighborhood",
+      "frames": 3,
+      "span": 0.06594514846801758,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-04",
+      "from": "visits",
+      "to": "kindness",
+      "frames": 4,
+      "span": 0.12356996536254883,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-05",
+      "from": "kindness",
+      "to": "visits",
+      "frames": 3,
+      "span": 0.05162501335144043,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-06",
+      "from": "kindness",
+      "to": "home",
+      "frames": 4,
+      "span": 0.12746906280517578,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-07",
+      "from": "home",
+      "to": "kindness",
+      "frames": 3,
+      "span": 0.06542706489562988,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-08",
+      "from": "home",
+      "to": "outdoors",
+      "frames": 4,
+      "span": 0.1622471809387207,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-09",
+      "from": "outdoors",
+      "to": "home",
+      "frames": 3,
+      "span": 0.09234619140625,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-10",
+      "from": "outdoors",
+      "to": "making",
+      "frames": 4,
+      "span": 0.16015410423278809,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-11",
+      "from": "making",
+      "to": "outdoors",
+      "frames": 3,
+      "span": 0.05337810516357422,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-12",
+      "from": "making",
+      "to": "hospitality",
+      "frames": 4,
+      "span": 0.16060614585876465,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-13",
+      "from": "hospitality",
+      "to": "making",
+      "frames": 3,
+      "span": 0.09308195114135742,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-14",
+      "from": "hospitality",
+      "to": "seasons",
+      "frames": 5,
+      "span": 0.15781807899475098,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-15",
+      "from": "seasons",
+      "to": "hospitality",
+      "frames": 3,
+      "span": 0.07847905158996582,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-16",
+      "from": "seasons",
+      "to": "everyday",
+      "frames": 5,
+      "span": 0.15107393264770508,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-17",
+      "from": "everyday",
+      "to": "seasons",
+      "frames": 3,
+      "span": 0.08417487144470215,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-18",
+      "from": "everyday",
+      "to": "caring",
+      "frames": 5,
+      "span": 0.18044805526733398,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-19",
+      "from": "caring",
+      "to": "everyday",
+      "frames": 3,
+      "span": 0.07820701599121094,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-20",
+      "from": "caring",
+      "to": "memories",
+      "frames": 4,
+      "span": 0.17236113548278809,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-21",
+      "from": "memories",
+      "to": "caring",
+      "frames": 3,
+      "span": 0.07629704475402832,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-22",
+      "from": "memories",
+      "to": "appointments",
+      "frames": 4,
+      "span": 0.1509690284729004,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-23",
+      "from": "appointments",
+      "to": "memories",
+      "frames": 3,
+      "span": 0.08280515670776367,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-24",
+      "from": "appointments",
+      "to": "preparations",
+      "frames": 4,
+      "span": 0.14537811279296875,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-25",
+      "from": "preparations",
+      "to": "appointments",
+      "frames": 3,
+      "span": 0.07964777946472168,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-26",
+      "from": "preparations",
+      "to": "decisions",
+      "frames": 5,
+      "span": 0.152817964553833,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-27",
+      "from": "decisions",
+      "to": "preparations",
+      "frames": 3,
+      "span": 0.05576181411743164,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-28",
+      "from": "decisions",
+      "to": "departures",
+      "frames": 4,
+      "span": 0.14557600021362305,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-29",
+      "from": "departures",
+      "to": "decisions",
+      "frames": 3,
+      "span": 0.0647580623626709,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-30",
+      "from": "departures",
+      "to": "messages",
+      "frames": 4,
+      "span": 0.15005898475646973,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-31",
+      "from": "messages",
+      "to": "departures",
+      "frames": 3,
+      "span": 0.06887102127075195,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-32",
+      "from": "messages",
+      "to": "learning",
+      "frames": 5,
+      "span": 0.16536402702331543,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-33",
+      "from": "learning",
+      "to": "messages",
+      "frames": 3,
+      "span": 0.08670210838317871,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-34",
+      "from": "learning",
+      "to": "choices",
+      "frames": 4,
+      "span": 0.14264297485351562,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-35",
+      "from": "choices",
+      "to": "learning",
+      "frames": 3,
+      "span": 0.06943392753601074,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-36",
+      "from": "choices",
+      "to": "surprises",
+      "frames": 4,
+      "span": 0.16368603706359863,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-37",
+      "from": "surprises",
+      "to": "choices",
+      "frames": 4,
+      "span": 0.14876294136047363,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-38",
+      "from": "surprises",
+      "to": "stories",
+      "frames": 4,
+      "span": 0.14129400253295898,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-39",
+      "from": "stories",
+      "to": "surprises",
+      "frames": 3,
+      "span": 0.11580920219421387,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-40",
+      "from": "stories",
+      "to": "possibilities",
+      "frames": 4,
+      "span": 0.1486530303955078,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-41",
+      "from": "possibilities",
+      "to": "stories",
+      "frames": 3,
+      "span": 0.09860706329345703,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-42",
+      "from": "possibilities",
+      "to": "news",
+      "frames": 4,
+      "span": 0.14028716087341309,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-43",
+      "from": "news",
+      "to": "possibilities",
+      "frames": 5,
+      "span": 0.1509230136871338,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-44",
+      "from": "news",
+      "to": "woodland",
+      "frames": 4,
+      "span": 0.17662811279296875,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-45",
+      "from": "woodland",
+      "to": "news",
+      "frames": 3,
+      "span": 0.07086300849914551,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-46",
+      "from": "woodland",
+      "to": "opening",
+      "frames": 4,
+      "span": 0.14346098899841309,
+      "errors": []
+    },
+    {
+      "name": "final-320-reduce-47",
+      "from": "opening",
+      "to": "woodland",
+      "frames": 3,
+      "span": 0.0718691349029541,
+      "errors": []
+    }
+  ],
+  "actualFrames": 2181
+}

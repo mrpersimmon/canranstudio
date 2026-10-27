@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image 1 is the accepted opaque desktop map to edit. Preserve its exact canvas dimensions/aspect, camera, all terraces, standing floors, stairs, railings, warm color palette, buildings, train, trees and lighting. Two very localized cleanup changes only. 1) On the UPPER forest destination, REMOVE the wooden notice board and the wicker litter basket. Replace their small occupied areas with the surrounding shrubs/stones/forest path, keeping the broad empty cream standing landing completely unchanged. The character sprite separately supplies the one notice board and empty basket; do not duplicate them in the background. 2) At the FOREGROUND office/telephone kiosk, remove the small green desk telephone only, leaving the desk, lamp, papers and architecture intact. The two callers and their handsets are separately rendered in the sprite. Do not add another telephone, board or basket anywhere. No people, animals, text, stars, medals, pins, icons, glow or UI. Do NOT change any floor outlines or move the train station. Keep the same polished matte storybook style.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/woodland-desktop-v1.png"
+  ],
+  "transparent_background": false
+}
