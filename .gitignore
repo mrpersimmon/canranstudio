@@ -35,3 +35,6 @@ dist-login/
 # Local Python bytecode from asset tools.
 __pycache__/
 *.py[cod]
+
+# Full native screencast frames are preserved byte-for-byte in evidence archives.
+/docs/designs/course-journey/evidence/**/switches*/**/*.jpg

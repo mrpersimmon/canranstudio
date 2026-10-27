@@ -1,0 +1,87 @@
+{
+  "version": "1.0",
+  "createdDate": "2026-10-22",
+  "asset": "greeting-neighbors-v1",
+  "courseId": "unit9-10",
+  "mode": "built-in imagegen",
+  "useCase": "illustration-story",
+  "intent": "generate using reference images",
+  "request": {
+    "prompt": "Use case: illustration-story.\nAsset type: a transparent full-body landmark character group for the established Canran children's English learning journey map, Lesson 9–10.\nInput images in exact order: Image 1 is the approved world visual master, use only its warm storybook art direction and friendly small landmark scale; do not recreate the UI or environment. Image 2 is the precise character rendering and body-proportion master: thick clean warm-brown outlines, round large heads, compact short bodies, rounded hands and shoes, soft shaded volume, warm cheerful faces. Images 3 and 4 are identity, clothing, age, and greeting-pose references only for Steven and Helen; do NOT inherit their tall slender body proportions or their background.\nPrimary request: Create exactly two complete adult neighbors greeting each other. Steven on the left: mature silver-gray curly hair visible beneath a moss-green flat cap, forest-green jacket, cream shirt, warm-brown trousers and brown shoes. Helen on the right: straight black bob hair with blunt bangs, plum-purple long coat, cream dress, blue handbag with a small gold clasp, brown shoes. Preserve their recognizable mature identities, but redraw both with approximately three-heads-tall, round-headed compact proportions matching Image 2 closely. They turn slightly toward one another, each lifts an open hand in a friendly greeting, with warm smiles. Steven may keep the other hand relaxed near his pocket; Helen holds or carries her blue handbag on the other forearm. Keep all hands clearly readable and anatomically simple.\nStyle/medium: polished warm children's storybook cartoon; thick confident dark warm-brown outline, smooth softly shaded color surfaces, gentle cream highlights and warm shadows, friendly rounded forms, subtle texture only. Match Image 2's finish and scale, not a sketch, watercolor wash, photorealistic adult, 3D plastic toy, anime, or flat thin-line vector.\nComposition/framing: one cohesive centered two-person group in a square canvas approximately 1254x1254. Full bodies head to toe, complete caps, hair, arms, hands, handbag, dress hems and shoes. Both feet rest on the same clear horizontal ground baseline. Figures occupy about 78–82% of canvas height with 8–12% fully transparent safe margins around the complete group. Leave a modest natural gap between the two neighbors; no overlapping faces or hands.\nScene/backdrop: genuine transparent alpha background, absolutely no scenic background, no baked-in street corner, no railing, tree, architecture, floor, platform, pedestal or ground shadow. Only the two characters and Helen's handbag.\nConstraints: exactly Steven and Helen, no additional people, no Tony or Emma, no decorative objects or floating effects. No text, letters, numbers, lesson labels, UI, badges, medallions, stars, circles, glow, borders or watermark. Preserve complete silhouettes with transparent padding on every edge.",
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/references/approved-mobile-v1.png",
+      "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png",
+      "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit9-10/keepsake-story-v1.webp",
+      "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit9-10/cast-wave-v1.webp"
+    ]
+  },
+  "references": [
+    {
+      "order": 1,
+      "path": "docs/designs/course-journey/references/approved-mobile-v1.png",
+      "role": "approved world art direction",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "order": 2,
+      "path": "assets/course-journey/handbag-couple.png",
+      "role": "precise character rendering and compact body proportions",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "order": 3,
+      "path": "assets/unit9-10/keepsake-story-v1.webp",
+      "role": "Steven and Helen identities and clothing",
+      "sha256": "24fc87212a79a3b5eff0c5581de19b26083e4364842e927663b76e02e2122c03"
+    },
+    {
+      "order": 4,
+      "path": "assets/unit9-10/cast-wave-v1.webp",
+      "role": "Steven and Helen full-body identities and greeting poses",
+      "sha256": "c1f328fbee3ab008aa08af098af893ce5fbbe77b6a64d7e435ab5008cd047bf7"
+    }
+  ],
+  "plannedOutputs": {
+    "png": "assets/course-journey/greeting-neighbors-v1.png",
+    "webp": "assets/course-journey/greeting-neighbors-v1.webp"
+  },
+  "preservation": "Preserve native generated PNG and genuine alpha. WebP encoding only; no crop, resizing, recoloring, extraction or programmatic image editing.",
+  "attempts": [
+    {
+      "id": "initial",
+      "useCase": "illustration-story",
+      "request": {
+        "prompt": "Use case: illustration-story.\nAsset type: a transparent full-body landmark character group for the established Canran children's English learning journey map, Lesson 9–10.\nInput images in exact order: Image 1 is the approved world visual master, use only its warm storybook art direction and friendly small landmark scale; do not recreate the UI or environment. Image 2 is the precise character rendering and body-proportion master: thick clean warm-brown outlines, round large heads, compact short bodies, rounded hands and shoes, soft shaded volume, warm cheerful faces. Images 3 and 4 are identity, clothing, age, and greeting-pose references only for Steven and Helen; do NOT inherit their tall slender body proportions or their background.\nPrimary request: Create exactly two complete adult neighbors greeting each other. Steven on the left: mature silver-gray curly hair visible beneath a moss-green flat cap, forest-green jacket, cream shirt, warm-brown trousers and brown shoes. Helen on the right: straight black bob hair with blunt bangs, plum-purple long coat, cream dress, blue handbag with a small gold clasp, brown shoes. Preserve their recognizable mature identities, but redraw both with approximately three-heads-tall, round-headed compact proportions matching Image 2 closely. They turn slightly toward one another, each lifts an open hand in a friendly greeting, with warm smiles. Steven may keep the other hand relaxed near his pocket; Helen holds or carries her blue handbag on the other forearm. Keep all hands clearly readable and anatomically simple.\nStyle/medium: polished warm children's storybook cartoon; thick confident dark warm-brown outline, smooth softly shaded color surfaces, gentle cream highlights and warm shadows, friendly rounded forms, subtle texture only. Match Image 2's finish and scale, not a sketch, watercolor wash, photorealistic adult, 3D plastic toy, anime, or flat thin-line vector.\nComposition/framing: one cohesive centered two-person group in a square canvas approximately 1254x1254. Full bodies head to toe, complete caps, hair, arms, hands, handbag, dress hems and shoes. Both feet rest on the same clear horizontal ground baseline. Figures occupy about 78–82% of canvas height with 8–12% fully transparent safe margins around the complete group. Leave a modest natural gap between the two neighbors; no overlapping faces or hands.\nScene/backdrop: genuine transparent alpha background, absolutely no scenic background, no baked-in street corner, no railing, tree, architecture, floor, platform, pedestal or ground shadow. Only the two characters and Helen's handbag.\nConstraints: exactly Steven and Helen, no additional people, no Tony or Emma, no decorative objects or floating effects. No text, letters, numbers, lesson labels, UI, badges, medallions, stars, circles, glow, borders or watermark. Preserve complete silhouettes with transparent padding on every edge.",
+        "transparent_background": true,
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/references/approved-mobile-v1.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit9-10/keepsake-story-v1.webp",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit9-10/cast-wave-v1.webp"
+        ]
+      },
+      "outputPath": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-80f7-77c0-ab06-610afb2f73d2/exec-17de3693-2734-4658-9a0a-a66a65b908c8.png",
+      "workspaceCopy": "docs/designs/course-journey/production/next-three-v1/unit9-10-initial.png",
+      "decision": "Retained as actual edit input. Complete and stylistically accepted, but bottom transparent margin 3.19% was too tight for bounce animation."
+    },
+    {
+      "id": "padding-refinement",
+      "useCase": "precise-object-edit",
+      "request": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached transparent Steven-and-Helen full-body character group.\nChange only framing: keep exactly the same two characters, identities, faces, adult ages, compact proportions, greeting poses, clothing, colors, outline thickness, shading, handbag, and complete hands and shoes. Keep the square canvas. Make the entire existing two-person group smaller together by approximately 15 percent, without stretching it or changing their relative positions, and center the group so that there is about 10–12 percent clean genuinely transparent alpha margin on every side, especially below the shoes and to the right of the blue handbag. Both feet still share their current common baseline.\nPreserve all details. Do not redraw the anatomy or introduce anything. No background, no floor, no shadow, no scene, no platform, no new object, no text, no labels, no stars, no badge, no glow. Transparent background; the only requested change is more generous transparent framing around the unchanged complete two-person group.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-80f7-77c0-ab06-610afb2f73d2/exec-17de3693-2734-4658-9a0a-a66a65b908c8.png"
+        ],
+        "transparent_background": true
+      },
+      "outputPath": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-80f7-77c0-ab06-610afb2f73d2/exec-8ddba8a7-3843-4538-a8f9-4fc9f8636c2d.png",
+      "workspaceCopy": "assets/course-journey/greeting-neighbors-v1.png",
+      "decision": "Selected final. Complete bodies, friendly compact mature characters, correct clothing. Native output has more generous margins than requested; retained intact without crop or resize. Place using measured visible bounds and foot anchor."
+    }
+  ],
+  "selectedAttempt": "padding-refinement",
+  "replayReferenceOverride": {
+    "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-80f7-77c0-ab06-610afb2f73d2/exec-17de3693-2734-4658-9a0a-a66a65b908c8.png": "docs/designs/course-journey/production/next-three-v1/unit9-10-initial.png"
+  }
+}

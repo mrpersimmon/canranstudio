@@ -1,0 +1,2211 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "from": "possibilities",
+  "to": "news",
+  "before": {
+    "chapter": "possibilities",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit127-128",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit127-128-landmark-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "after": {
+    "chapter": "news",
+    "dock": {
+      "bottom": 780,
+      "height": 129,
+      "left": 0,
+      "right": 390,
+      "top": 651,
+      "width": 390,
+      "x": 0,
+      "y": 651
+    },
+    "height": 844,
+    "selected": "unit133-134",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 756.5,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 676.5,
+        "width": 65,
+        "x": 15,
+        "y": 676.5
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 90911,
+      "sha256": "13e465eb086d6c77cca5473ee3d6422d5e0197ea50485ddbbdf814446d1b036d",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.573429,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.904398
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 90652,
+      "sha256": "8404f0c0e8a7ffd138919913eb1d2ebca19a75d4fd8ed35aaf7300027b55f5fd",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.590081,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.92105
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 90643,
+      "sha256": "2a7699f035f4d3be4a410ee278855fa4071f2a1e5b60cb89de097bf73308fe33",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.606805,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.937774
+      }
+    },
+    {
+      "index": 3,
+      "file": "003.jpg",
+      "bytes": 90638,
+      "sha256": "7b9fabd48aaf6edb6ba619fd2ddfc05788fa859097e6d009e0d18b1257de55f0",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.62345,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.954419
+      }
+    },
+    {
+      "index": 4,
+      "file": "004.jpg",
+      "bytes": 88277,
+      "sha256": "75087a907759f07e5eabb1f5a0a26bcfa6f40ea227af4a84670939e387bb3080",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.640175,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.971144
+      }
+    },
+    {
+      "index": 5,
+      "file": "005.jpg",
+      "bytes": 88282,
+      "sha256": "4f3b30645e8a463d8cad03d08707031b5f3e322f228ff7890afb3d3077ffbab0",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.656807,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984418.987775
+      }
+    },
+    {
+      "index": 6,
+      "file": "006.jpg",
+      "bytes": 88268,
+      "sha256": "7a2e78646f9613f1b56dc5b35bcb4cb4924e7d6d5232080e08e9b90754baef96",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.673489,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.004458
+      }
+    },
+    {
+      "index": 7,
+      "file": "007.jpg",
+      "bytes": 88262,
+      "sha256": "c8700c96a36a2b6c77b721fa0d8e0ce120c97f5409244452eafd99b7a318d72f",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.690202,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.02117
+      }
+    },
+    {
+      "index": 8,
+      "file": "008.jpg",
+      "bytes": 88261,
+      "sha256": "f42977fee66d544a261f8fd7d89958fbf9956781e4043ee738e2ff960ae3e656",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.706854,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.037823
+      }
+    },
+    {
+      "index": 9,
+      "file": "009.jpg",
+      "bytes": 88259,
+      "sha256": "401682e1ae871dc54ad7387fcdafd6b1b13b4aa22a98f409d3e4d946199a79ee",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.723551,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.054519
+      }
+    },
+    {
+      "index": 10,
+      "file": "010.jpg",
+      "bytes": 88265,
+      "sha256": "83c0ba47b266b2a96de257feb362fd37ed921d5e8da5e6a7cfd8b74e37ea3ccc",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.740209,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.071178
+      }
+    },
+    {
+      "index": 11,
+      "file": "011.jpg",
+      "bytes": 84745,
+      "sha256": "e9aabfdd4c6d219721ba61f30a92a2ade4bd892b2b9d4bdb290c3572ba2b5ba7",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.756915,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.087884
+      }
+    },
+    {
+      "index": 12,
+      "file": "012.jpg",
+      "bytes": 84738,
+      "sha256": "4e992f2fb99476e6ea9135f1ed8f428cdab135da45437ec56241faeeab7198a6",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.7736,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.104569
+      }
+    },
+    {
+      "index": 13,
+      "file": "013.jpg",
+      "bytes": 84765,
+      "sha256": "bd1ab5fc12a552c206df0734584cc089af583a5089bd0fbeca193aae245c7ece",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.790243,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.121212
+      }
+    },
+    {
+      "index": 14,
+      "file": "014.jpg",
+      "bytes": 84746,
+      "sha256": "22ef799e25a558c02edee9234874c732fb54f86040c199edf2dbbe39e440c3d5",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.806943,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.137912
+      }
+    },
+    {
+      "index": 15,
+      "file": "015.jpg",
+      "bytes": 84725,
+      "sha256": "e8aa14e8c30319c9b6cf5562311ffb700496a3364151db45eefd885fa7e2f1ff",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.823609,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.154578
+      }
+    },
+    {
+      "index": 16,
+      "file": "016.jpg",
+      "bytes": 84518,
+      "sha256": "5d2ccfb3d6e2d6c64c76c7e69ffd75529b5032ea5a78143d1503277a8bc269e8",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.840301,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.171269
+      }
+    },
+    {
+      "index": 17,
+      "file": "017.jpg",
+      "bytes": 84383,
+      "sha256": "84fccdd77b44390135209dc39960d44440336b45e5b99e6fdc2d6087b643a01a",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.85698,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.187949
+      }
+    },
+    {
+      "index": 18,
+      "file": "018.jpg",
+      "bytes": 84339,
+      "sha256": "945541167fb8e9bd2b6a4487570955d6a679c49f2cf201712ea3ec0367f1963c",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.873659,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.204628
+      }
+    },
+    {
+      "index": 19,
+      "file": "019.jpg",
+      "bytes": 84465,
+      "sha256": "7a3dcd166d1073c7f8191ab12ba5eed0ea4cb4adb4a5748f8f9262db7665714f",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.890324,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.221293
+      }
+    },
+    {
+      "index": 20,
+      "file": "020.jpg",
+      "bytes": 84680,
+      "sha256": "2b52a77f081caeea275cf574e72b3ad8dfb0d0e014137698eb3d6e3c5da3c9f0",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.907012,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.237981
+      }
+    },
+    {
+      "index": 21,
+      "file": "021.jpg",
+      "bytes": 84689,
+      "sha256": "a1be95fc8f5e757501979394d83a0a4533d3216d5aff9532224bab63248233a3",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.923689,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.254658
+      }
+    },
+    {
+      "index": 22,
+      "file": "022.jpg",
+      "bytes": 84708,
+      "sha256": "7eee7f378386e38e60c77284cf66095b8cfd42971dbc70c381013fb9a60e5f09",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.940372,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.271341
+      }
+    },
+    {
+      "index": 23,
+      "file": "023.jpg",
+      "bytes": 84727,
+      "sha256": "08bf5668e60c85bd80ed60708726e729762e546308139b0fc3ab12ab3f398620",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.957078,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.288047
+      }
+    },
+    {
+      "index": 24,
+      "file": "024.jpg",
+      "bytes": 84747,
+      "sha256": "ccf05f431a6dc6c5f5c5b72be7978e6974cb82aba33eeecfc9bcf8ba38cc36a3",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.973737,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.304706
+      }
+    },
+    {
+      "index": 25,
+      "file": "025.jpg",
+      "bytes": 84723,
+      "sha256": "a27e7ffa2331fdd8041907dc842ebcd4683da5df147635f5f8b2e1c0838e1e78",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030456.990415,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.321384
+      }
+    },
+    {
+      "index": 26,
+      "file": "026.jpg",
+      "bytes": 84745,
+      "sha256": "79912999ff108b98e8001f3d86c8b6e5b7e3e245ca0a9ae1b1bd21c6be8a60db",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.007113,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.338082
+      }
+    },
+    {
+      "index": 27,
+      "file": "027.jpg",
+      "bytes": 84708,
+      "sha256": "275ba2809c7b97d38e8a43b251f4e9b8fed404fb8f242786642748b1f13ad390",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.023784,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.354753
+      }
+    },
+    {
+      "index": 28,
+      "file": "028.jpg",
+      "bytes": 84692,
+      "sha256": "ebbfba68ff5854768bb82bc0aa19c21b9e976c4d5314db98724735f698cc0a88",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.040458,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.371427
+      }
+    },
+    {
+      "index": 29,
+      "file": "029.jpg",
+      "bytes": 84713,
+      "sha256": "a7564356a46a755ad318f48292f45568fea8c9724a675bdaad0140c6dd4202aa",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.057136,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.388105
+      }
+    },
+    {
+      "index": 30,
+      "file": "030.jpg",
+      "bytes": 84724,
+      "sha256": "d50de9af7e6464fd7b8150c3519c5de254f04c1caffb58bc7b312b5e6a754572",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.07382,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.404789
+      }
+    },
+    {
+      "index": 31,
+      "file": "031.jpg",
+      "bytes": 84727,
+      "sha256": "669a7730c8ec6a01236ffed53bd8b2d1296f27ebc434c50a8d6787a422bba408",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.0905,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.421469
+      }
+    },
+    {
+      "index": 32,
+      "file": "032.jpg",
+      "bytes": 84730,
+      "sha256": "09cbd54d8e5c7e53acc2db4241a98f1bbf6868a62383531d27f2a32ccad5e2ab",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.107185,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.438154
+      }
+    },
+    {
+      "index": 33,
+      "file": "033.jpg",
+      "bytes": 84725,
+      "sha256": "3e4ab51f8f1334de86a41667250deb801179487e680b1407080212c9e83fad6a",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.123887,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.454855
+      }
+    },
+    {
+      "index": 34,
+      "file": "034.jpg",
+      "bytes": 84733,
+      "sha256": "2a2cd253702e0d2d0c7790e249e130fd6beae6caf04b7c4d161283f324d99a90",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.140565,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.471534
+      }
+    },
+    {
+      "index": 35,
+      "file": "035.jpg",
+      "bytes": 85441,
+      "sha256": "b5d99314b720c600aadc6aeed5642791f8e1e125cbf2d5c78ccfeef87bde7886",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.157223,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.488192
+      }
+    },
+    {
+      "index": 36,
+      "file": "036.jpg",
+      "bytes": 85496,
+      "sha256": "54434f9cf516bfa9e1429875aa77d8f3169ac493e4cd764bfd0c12045a218e2e",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.17393,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.504899
+      }
+    },
+    {
+      "index": 37,
+      "file": "037.jpg",
+      "bytes": 85485,
+      "sha256": "1e1406878f51c5b833117374a44aa5cd52c42d392a5295662bf87ebac944ab9f",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.190609,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.521578
+      }
+    },
+    {
+      "index": 38,
+      "file": "038.jpg",
+      "bytes": 85486,
+      "sha256": "5e174ac1f9481461906e69303783af27e45b0bcbca1a6fce6c0f184be034053d",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.207289,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.538258
+      }
+    },
+    {
+      "index": 39,
+      "file": "039.jpg",
+      "bytes": 85480,
+      "sha256": "2188031db7c465ecffd3d575c3bdc25b3631531b26bad9f590e30678fdfcc0fc",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.223958,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.554927
+      }
+    },
+    {
+      "index": 40,
+      "file": "040.jpg",
+      "bytes": 85475,
+      "sha256": "6ae0f41903af3d0121ebfc8c8cf10bdace501679f6157564fe2f15c385de801b",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.240655,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.571624
+      }
+    },
+    {
+      "index": 41,
+      "file": "041.jpg",
+      "bytes": 85433,
+      "sha256": "6edc7526a28cac69262b284ca75a32ab2e2453f98a557ea1e4bb36836e533dec",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1030457.257297,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984419.588265
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "possibilities",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit127-128",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit127-128-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "possibilities",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "possibilities",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "possibilities",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "news",
+      "dock": {
+        "bottom": 780,
+        "height": 129,
+        "left": 0,
+        "right": 390,
+        "top": 651,
+        "width": 390,
+        "x": 0,
+        "y": 651
+      },
+      "height": 844,
+      "selected": "unit133-134",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 756.5,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 676.5,
+          "width": 65,
+          "x": 15,
+          "y": 676.5
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit133-134-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      287,
+      36,
+      495
+    ],
+    [
+      354,
+      287,
+      382,
+      495
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 2,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 3,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 4,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 5,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 6,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 7,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 8,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 9,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 10,
+      "toOld": 0,
+      "toNew": 68.02864583333333,
+      "minimum": 0
+    },
+    {
+      "index": 11,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 12,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 13,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 14,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 15,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 16,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 17,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 18,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 19,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 20,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 21,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 22,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 23,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 24,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 25,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 26,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 27,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 28,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 29,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 30,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 31,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 32,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 33,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 34,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 35,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 36,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 37,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 38,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 39,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 40,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 41,
+      "toOld": 68.02864583333333,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

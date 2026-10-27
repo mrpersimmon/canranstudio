@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit23-24",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit23-24.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-5483e3f0-9e29-47ed-a584-615b6dbd3059.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "assets/course-journey/red-book-pair-v1.png",
+    "assets/unit23-24/keepsake-story-v1.webp",
+    "assets/course-journey/handbag-couple.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/shelf-glasses-pair-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1062984,
+      "sha256": "c496ec35891ffbe1c2b2c125907c9cfc3fa921c53be8973b4f8e5d5c32a34bed",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/shelf-glasses-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 190772,
+      "sha256": "5c66cbf8060c302918721a95be60abf063936c27d8cb3663a1dea31b0eb316ae",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 856577,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          41,
+          1233,
+          1231
+        ],
+        "normalized": [
+          0,
+          0.03269537480063796,
+          0.9832535885167464,
+          0.981658692185008
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          104,
+          117,
+          1203,
+          1193
+        ],
+        "normalized": [
+          0.08293460925039872,
+          0.09330143540669857,
+          0.9593301435406698,
+          0.9513556618819776
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          104,
+          118,
+          1203,
+          1192
+        ],
+        "normalized": [
+          0.08293460925039872,
+          0.09409888357256778,
+          0.9593301435406698,
+          0.9505582137161085
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:45:45.428Z"
+}

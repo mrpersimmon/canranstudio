@@ -1,0 +1,2423 @@
+{
+  "signature": "b636fa04d44a7364a80fb571e306e91a522642a0cd11cb2d760fbe9e72bc8628",
+  "from": "making",
+  "to": "outdoors",
+  "before": {
+    "chapter": "making",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit37-38",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit37-38-landmark-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "after": {
+    "chapter": "outdoors",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit31-32",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 31162,
+      "sha256": "a9d698d4f85371e156c4ebcc793a9cb5ecbfa26e3a065b7de182acad48869c27",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.396149,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.726599
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 31213,
+      "sha256": "84030af1490e3cd4b03137a80cbb7152bd17a0fa19b3b08e84503000d292d0c1",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.412728,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.743178
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 31298,
+      "sha256": "597968b2e199a27317ee090f91f0b1f90e4412154319ef223b1f8332e9bde73c",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.429476,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.759925
+      }
+    },
+    {
+      "index": 3,
+      "file": "003.jpg",
+      "bytes": 31561,
+      "sha256": "8e63c519940dd24e7fb9895cf24305cbe192ea3fc5b403e341f54d097c2cd992",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.446118,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.776568
+      }
+    },
+    {
+      "index": 4,
+      "file": "004.jpg",
+      "bytes": 34573,
+      "sha256": "2622d2f8b4a3b69e4cf54d74f8176eaf566775bc3474d10df7d188458c595b12",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.462768,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.793217
+      }
+    },
+    {
+      "index": 5,
+      "file": "005.jpg",
+      "bytes": 34567,
+      "sha256": "afdf81fad284f958535a3c28971519fb560a10591b67a67e78f1f337b9e83587",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.479445,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.809895
+      }
+    },
+    {
+      "index": 6,
+      "file": "006.jpg",
+      "bytes": 34566,
+      "sha256": "4701e20cead76ca4ee048ab8da5efe76904da6601c92ab191a6c4da22a997c15",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.496127,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.826577
+      }
+    },
+    {
+      "index": 7,
+      "file": "007.jpg",
+      "bytes": 34566,
+      "sha256": "4bb3009a97134dca84a610ebb114a52ae78d8ffce34dc78932612a7cc507a5ca",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.51281,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.84326
+      }
+    },
+    {
+      "index": 8,
+      "file": "008.jpg",
+      "bytes": 34598,
+      "sha256": "ca6da5428bc5f1397291c2487bcd2d1065529a2547d4c5f7174067e65e06c9fa",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.529527,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.859977
+      }
+    },
+    {
+      "index": 9,
+      "file": "009.jpg",
+      "bytes": 34535,
+      "sha256": "86ca57f806c498152173a6e2ff83a463fef17df6f2696158f1b7249a0f9ccb35",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.546173,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.876623
+      }
+    },
+    {
+      "index": 10,
+      "file": "010.jpg",
+      "bytes": 34465,
+      "sha256": "8ed40458bb83101e956996b57c5b6837a3025198a920c1fb2d6f63a0588ffbe8",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.562856,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.893306
+      }
+    },
+    {
+      "index": 11,
+      "file": "011.jpg",
+      "bytes": 34471,
+      "sha256": "be0889b9ce6c146aa5c6d1317b4b109daa9da13c062271f5325d1031e7a13e90",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.579532,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.909982
+      }
+    },
+    {
+      "index": 12,
+      "file": "012.jpg",
+      "bytes": 34515,
+      "sha256": "6b7a78a9451a04b005b9912bc0d34ed930c8c07d83f8016f0de20bba0c09ecf1",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.59621,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.92666
+      }
+    },
+    {
+      "index": 13,
+      "file": "013.jpg",
+      "bytes": 34560,
+      "sha256": "d7ec2ffdb105fa80f9410c6612951cc4b02b7eda054f7667950608ba699eaecb",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.612893,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.943343
+      }
+    },
+    {
+      "index": 14,
+      "file": "014.jpg",
+      "bytes": 34586,
+      "sha256": "83eecdb25f068a64023bfeaa58c1d9eda6d3fc18df351433e05e0e05c124620b",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.629601,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.960051
+      }
+    },
+    {
+      "index": 15,
+      "file": "015.jpg",
+      "bytes": 34574,
+      "sha256": "94490666c64b8853ecda39ba304c45355ad720b6216b4b231e8261aee1886a54",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.646264,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.976714
+      }
+    },
+    {
+      "index": 16,
+      "file": "016.jpg",
+      "bytes": 34547,
+      "sha256": "f1057e05d7478c827808fa898d7bba144e21b94b279ff04e1d0c4beb580c677a",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.662939,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982893.993389
+      }
+    },
+    {
+      "index": 17,
+      "file": "017.jpg",
+      "bytes": 34570,
+      "sha256": "3ddcd0a1252cae7d088caf561dfb6f423f1ee50d9d53edea568393031a673ad8",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.679619,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.010069
+      }
+    },
+    {
+      "index": 18,
+      "file": "018.jpg",
+      "bytes": 34552,
+      "sha256": "2a92e9c4290132cabaeacd2d104c193c72e6b01bb3aa4bbcd501760d1972d5b2",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.696322,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.026772
+      }
+    },
+    {
+      "index": 19,
+      "file": "019.jpg",
+      "bytes": 34581,
+      "sha256": "90905135a50c3848e06b8a5a41565381adfae9c70663c3d5d5e5fba0aa5796d8",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.712977,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.043427
+      }
+    },
+    {
+      "index": 20,
+      "file": "020.jpg",
+      "bytes": 34561,
+      "sha256": "5dd611084bc4a31e0989fbf0ee71a159b46a0f46a881434adcd9544899698d05",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.729777,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.060227
+      }
+    },
+    {
+      "index": 21,
+      "file": "021.jpg",
+      "bytes": 34568,
+      "sha256": "a72217c4a13268b3d3eebd64f200e487796b53bcaae2a0333cfa113fed5f1d53",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.746334,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.076784
+      }
+    },
+    {
+      "index": 22,
+      "file": "022.jpg",
+      "bytes": 34552,
+      "sha256": "b8d2b65a1745572a468f3c5b28a438ccaf5c5e60956cbab966c5405cb601a17c",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.76304,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.09349
+      }
+    },
+    {
+      "index": 23,
+      "file": "023.jpg",
+      "bytes": 34553,
+      "sha256": "b75f64f83683517cc7dda4f747f93724bb3b75d1de30756f0b9cca22cd9cfcbd",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.779701,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.11015
+      }
+    },
+    {
+      "index": 24,
+      "file": "024.jpg",
+      "bytes": 34555,
+      "sha256": "084438e01fae85216e6389ae12e00f755bb4feb559ff2c4834e4301aa41f69a2",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.796375,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.126825
+      }
+    },
+    {
+      "index": 25,
+      "file": "025.jpg",
+      "bytes": 34582,
+      "sha256": "6b22717f5e6f814109e4eac8ec4b7a73a378effa13c478421e38bf4a2759650a",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.813056,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.143506
+      }
+    },
+    {
+      "index": 26,
+      "file": "026.jpg",
+      "bytes": 34573,
+      "sha256": "6756793e0fa5f0617d1f922cc11a285fd6bf8d5c762498326bc126365283bdc1",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.82978,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.16023
+      }
+    },
+    {
+      "index": 27,
+      "file": "027.jpg",
+      "bytes": 34813,
+      "sha256": "ac6f737274449b9ce1a3f02656ad736c35c7b4f61749cbc7fbf7691fce17c6f4",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.846449,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.176899
+      }
+    },
+    {
+      "index": 28,
+      "file": "028.jpg",
+      "bytes": 34816,
+      "sha256": "9f9d0bc8d7afc8d9bde6b44d0879a2b1ec9351ef72b0d58104adfe80b1efc339",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.863137,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.193586
+      }
+    },
+    {
+      "index": 29,
+      "file": "029.jpg",
+      "bytes": 34814,
+      "sha256": "c4e485b14371b5d06af629eb6c579afcf3f1d99187a20ecc9ac80dc02b83bf07",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.879823,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.210273
+      }
+    },
+    {
+      "index": 30,
+      "file": "030.jpg",
+      "bytes": 34809,
+      "sha256": "13b44288571898d282667678f9b6f8fa8888ddc1f619d2e9a9fe0343578b9b6d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.896492,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.226942
+      }
+    },
+    {
+      "index": 31,
+      "file": "031.jpg",
+      "bytes": 34812,
+      "sha256": "36bb228995ebf8b07379c4ae5cd865bb59800dc03f1b35af6985c0e7c80bcbe3",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.913182,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.243632
+      }
+    },
+    {
+      "index": 32,
+      "file": "032.jpg",
+      "bytes": 34812,
+      "sha256": "d4c6e85142dc5e19d325db683cd0eb21ce1aecf6afb116f66349a3f6a4f4febf",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.92985,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.260299
+      }
+    },
+    {
+      "index": 33,
+      "file": "033.jpg",
+      "bytes": 34780,
+      "sha256": "cb61f5f2f4362b606ad580282c3e81cecb78951df0a9862a3344412baace2c3a",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.946553,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.277003
+      }
+    },
+    {
+      "index": 34,
+      "file": "034.jpg",
+      "bytes": 34777,
+      "sha256": "4fd1c317ad353950fa2d4953f605e5deeddbbce0ada254d90cc373e058f4132f",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.963202,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.293652
+      }
+    },
+    {
+      "index": 35,
+      "file": "035.jpg",
+      "bytes": 34778,
+      "sha256": "2cd5e9143e94ab5dc139b172731e589efa6d5d355bc9c10fa45422efc12f0813",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.97986,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.31031
+      }
+    },
+    {
+      "index": 36,
+      "file": "036.jpg",
+      "bytes": 34787,
+      "sha256": "ff3c62be7a235e0164bd80480e0fdcdd390b227487a9302620ea052ac72b240a",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028931.996533,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.326983
+      }
+    },
+    {
+      "index": 37,
+      "file": "037.jpg",
+      "bytes": 34782,
+      "sha256": "6333d21f1076ffd624e0c3908f0d67ed8f1971cf2367a8446cc11a12fa1deac9",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028932.01333,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.34378
+      }
+    },
+    {
+      "index": 38,
+      "file": "038.jpg",
+      "bytes": 34787,
+      "sha256": "f5efdcc98be41ec8957640e4bfa41ce7bfd67019075bde5e0a777faf46437264",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028932.029929,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.360379
+      }
+    },
+    {
+      "index": 39,
+      "file": "039.jpg",
+      "bytes": 34785,
+      "sha256": "72eb7c978c5acb54764cf94c3a4b2515d80546aebd1fab418abaa13ee8682faa",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028932.046589,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.377039
+      }
+    },
+    {
+      "index": 40,
+      "file": "040.jpg",
+      "bytes": 34791,
+      "sha256": "6fe42f18bb3cd9c19cadc0eb1a75b96fd80573681111b922ac889f3aab44d8b0",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028932.063263,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.393713
+      }
+    },
+    {
+      "index": 41,
+      "file": "041.jpg",
+      "bytes": 34784,
+      "sha256": "ef90d54745cc4f2a6e8fb3996cc6866270c94a8151806953e699e7d1b0d09598",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028932.079973,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982894.410423
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "making",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit37-38",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit37-38-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "outdoors",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit31-32",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit31-32-landmark-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      287,
+      36,
+      495
+    ],
+    [
+      354,
+      287,
+      382,
+      495
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 1,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 2,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 3,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 4,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 5,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 6,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 7,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 8,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 9,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 10,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 11,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 12,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 13,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 14,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 15,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 16,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 17,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 18,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 19,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 20,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 21,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 22,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 23,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 24,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 25,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 26,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 27,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 28,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 29,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 30,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 31,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 32,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 33,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 34,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 35,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 36,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 37,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 38,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 39,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 40,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 41,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    }
+  ],
+  "errors": [
+    "Frame dimensions do not match viewport",
+    "Unexpected near-field pixels frame 0 deviation NaN",
+    "Unexpected near-field pixels frame 1 deviation NaN",
+    "Unexpected near-field pixels frame 2 deviation NaN",
+    "Unexpected near-field pixels frame 3 deviation NaN",
+    "Unexpected near-field pixels frame 4 deviation NaN",
+    "Unexpected near-field pixels frame 5 deviation NaN",
+    "Unexpected near-field pixels frame 6 deviation NaN",
+    "Unexpected near-field pixels frame 7 deviation NaN",
+    "Unexpected near-field pixels frame 8 deviation NaN",
+    "Unexpected near-field pixels frame 9 deviation NaN",
+    "Unexpected near-field pixels frame 10 deviation NaN",
+    "Unexpected near-field pixels frame 11 deviation NaN",
+    "Unexpected near-field pixels frame 12 deviation NaN",
+    "Unexpected near-field pixels frame 13 deviation NaN",
+    "Unexpected near-field pixels frame 14 deviation NaN",
+    "Unexpected near-field pixels frame 15 deviation NaN",
+    "Unexpected near-field pixels frame 16 deviation NaN",
+    "Unexpected near-field pixels frame 17 deviation NaN",
+    "Unexpected near-field pixels frame 18 deviation NaN",
+    "Unexpected near-field pixels frame 19 deviation NaN",
+    "Unexpected near-field pixels frame 20 deviation NaN",
+    "Unexpected near-field pixels frame 21 deviation NaN",
+    "Unexpected near-field pixels frame 22 deviation NaN",
+    "Unexpected near-field pixels frame 23 deviation NaN",
+    "Unexpected near-field pixels frame 24 deviation NaN",
+    "Unexpected near-field pixels frame 25 deviation NaN",
+    "Unexpected near-field pixels frame 26 deviation NaN",
+    "Unexpected near-field pixels frame 27 deviation NaN",
+    "Unexpected near-field pixels frame 28 deviation NaN",
+    "Unexpected near-field pixels frame 29 deviation NaN",
+    "Unexpected near-field pixels frame 30 deviation NaN",
+    "Unexpected near-field pixels frame 31 deviation NaN",
+    "Unexpected near-field pixels frame 32 deviation NaN",
+    "Unexpected near-field pixels frame 33 deviation NaN",
+    "Unexpected near-field pixels frame 34 deviation NaN",
+    "Unexpected near-field pixels frame 35 deviation NaN",
+    "Unexpected near-field pixels frame 36 deviation NaN",
+    "Unexpected near-field pixels frame 37 deviation NaN",
+    "Unexpected near-field pixels frame 38 deviation NaN",
+    "Unexpected near-field pixels frame 39 deviation NaN",
+    "Unexpected near-field pixels frame 40 deviation NaN",
+    "Unexpected near-field pixels frame 41 deviation NaN"
+  ],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

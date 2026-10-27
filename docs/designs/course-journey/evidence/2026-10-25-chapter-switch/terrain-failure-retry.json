@@ -1,0 +1,53 @@
+{
+  "failedRequests": 4,
+  "failedState": {
+    "buttons": [
+      [
+        "unit7-8",
+        44
+      ],
+      [
+        "unit9-10",
+        44
+      ],
+      [
+        "unit11-12",
+        44
+      ]
+    ],
+    "chapter": "neighborhood",
+    "inert": false,
+    "states": [
+      [
+        "unit7-8",
+        "error"
+      ],
+      [
+        "unit9-10",
+        "error"
+      ],
+      [
+        "unit11-12",
+        "error"
+      ]
+    ]
+  },
+  "recoveredState": {
+    "chapter": "neighborhood",
+    "layers": 1,
+    "states": [
+      [
+        "unit7-8",
+        "ready"
+      ],
+      [
+        "unit9-10",
+        "ready"
+      ],
+      [
+        "unit11-12",
+        "ready"
+      ]
+    ]
+  }
+}

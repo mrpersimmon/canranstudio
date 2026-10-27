@@ -1,0 +1,7 @@
+JOB: MOBILE HOME REFINEMENT
+Create realistic production-quality UI, one screen only. Target logical viewport {{viewport}}. Keep the approved journey's characters, environment, lighting, prop interaction and overall composition. This is a responsive refinement of the selected master, not a new option.
+State: {{ui_state}}. Demo selected course: {{selected_label}} — {{selected_title}}. Earned stars shown in this concept: {{stars}} / 5. All visible text is mock UI; actual implementation uses backend values.
+Show the real brand, the exact heading 学习旅程, a compact {{course_count}} 个单元 · Lesson 1–90 subtitle, global 搜索 Lesson 或课程名称 and 全部课程. A compact range control reads {{range_label}}.
+Keep the first three named stations in the same lower-left to upper-right arrangement as the master. Unselected markers remain visibly available, with neutral warm-white centers and green outlines, not dimmed locks.
+The selected-course dock is calm ivory, with a small character thumbnail, exact Lesson/title, five star slots and one clear 进入课程 button. Bottom nav: 课程 / 纪念册 / 我的. Maintain 44px minimum tap targets, readable 14–16px body text, and map-safe margins around both top controls and bottom dock.
+On a short screen the map may continue vertically; do not shrink text or characters to cram all three landmarks into one view. No forced opening animation.

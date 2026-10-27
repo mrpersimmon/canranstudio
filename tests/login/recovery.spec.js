@@ -6,7 +6,8 @@ const {createApp}=require('../../server/app'),{openStore}=require('../../server/
 const {completeActivity}=require('../support/account-course13');
 const historicalCourse=require('../support/unit13-14-flow');
 const {createSite,removeTemporaryDirectory}=require('../support/historical-site');
-const { saveCourses, adminLogin,addStudent,signIn,fillLogin,setPassword,readInitialPassword}=require('./helpers');
+const { saveCourses, adminLogin,addStudent,signIn,fillLogin,setPassword,openCourseDirectory,readInitialPassword}=require('./helpers');
+const {openMyAccount}=require('./helpers');
 test('停服务备份恢复后，原学号密码、班级和真实成果仍可使用',async({browser})=>{
  test.setTimeout(60000);const root=await fs.mkdtemp(path.join(os.tmpdir(),'canran-recovery-'));let server,context;
  const active=path.join(root,'active'),restored=path.join(root,'restored'),backup=path.join(root,'backup');
@@ -22,12 +23,12 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
   execFileSync(process.execPath,['server/manage.js','backup',backup],{env:{...process.env,LESSON_DATA_DIR:active}});
   execFileSync(process.execPath,['server/manage.js','restore',backup],{env:{...process.env,LESSON_DATA_DIR:restored}});
   await start(restored);context=await browser.newContext({baseURL:require('../support/login-test-ports').origin(4194)});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('1 / 5');
-  await recovered.locator('.course .primary-button').click();await expect(recovered.locator('#starCount')).toHaveText('1');
+  await openCourseDirectory(recovered);await recovered.locator('.course .primary-button').click();await expect(recovered.locator('#starCount')).toHaveText('1');
   await recovered.goto('/lesson/unit13-14/#learn/certificate');await expect(recovered.locator('#certificateName')).toHaveText('豆豆');await expect(recovered.locator('#certificateDate')).toHaveText(firstDate);
   await adminLogin(recovered);await recovered.getByRole('button',{name:'管理 备份班',exact:true}).click();
   const pendingRow=recovered.locator('.student-row').filter({hasText:pending.number});
   expect(await readInitialPassword(recovered,pendingRow)).toBe(pending.initialPassword);
-  await recovered.goto('/lesson/');await recovered.getByRole('button',{name:'切换学生',exact:true}).click();
+  await recovered.goto('/lesson/');await openMyAccount(recovered);await recovered.getByRole('button',{name:'退出登录',exact:true}).click();
   await expect(recovered.getByLabel('学号',{exact:true})).toBeVisible();
   await fillLogin(recovered,pending);await setPassword(recovered);await expect(recovered.getByRole('heading',{name:'待领取同学的课程'})).toBeVisible();
  }finally{await context?.close();if(server)await new Promise(r=>server.close(r));await fs.rm(root,{recursive:true,force:true});}
@@ -68,7 +69,7 @@ test('旧公开缓存在线迁移后要求登录，真实匿名成果保留而�
   await new Promise(r=>server.close(r));server=null;const store=openStore(directory);store.setAdmin('teacher','Test-only-classroom-2026!');store.close();server=await createApp({dataDir:directory,origin:require('../support/login-test-ports').origin(4195)});await new Promise(r=>server.listen(require('../support/login-test-ports').port(4195),'127.0.0.1',r));
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await expect(old.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();
-  await page.getByLabel('新班级名称').fill('迁移班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');const account=await addStudent(page,'新同学');await signIn(page,account);await page.getByText('本机旧记录',{exact:true}).click();await expect(page.locator('#legacy')).toContainText('unit13-14 · 1 项活动完成');
+  await page.getByLabel('新班级名称').fill('迁移班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');const account=await addStudent(page,'新同学');await signIn(page,account);await expect(page.locator('.journey-home > .journey-legacy')).toHaveCount(0);await openMyAccount(page);await page.getByRole('link',{name:'本机旧记录',exact:true}).click();await expect(page.locator('.journey-account-sheet .journey-legacy')).toHaveAttribute('open','');await expect(page.locator('#legacy')).toContainText('unit13-14 · 1 项活动完成');await page.getByRole('button',{name:'关闭我的',exact:true}).click();
   await page.locator('.course .primary-button').click();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/lesson/unit13-14/#learn/grammar');await expect(page.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  }finally{await context?.close();if(server)await new Promise(r=>server.close(r));await removeTemporaryDirectory(directory);}
 });

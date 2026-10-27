@@ -1,0 +1,89 @@
+{
+  "assetType": "environment-ground-only; characters remain original and are composited by runtime",
+  "generationTool": "built-in image_gen.imagegen",
+  "generatedAt": "2026-10-23",
+  "request": "unit1-2-request-v2.json",
+  "originalRequest": "unit1-2-request.json",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1693a-2b1d-7312-82e7-5ba94390b7f4/exec-2a41fdd0-e47f-4c12-a87f-37daeb251c99.png",
+  "requestedDimensions": [
+    1536,
+    1024
+  ],
+  "requestedTransparentBackground": true,
+  "actual": {
+    "width": 1536,
+    "height": 1024,
+    "channels": 4,
+    "alpha": {
+      "min": 0,
+      "max": 254,
+      "zero": 585732,
+      "partial": 987132,
+      "boundsAbove16": [
+        20,
+        63,
+        1520,
+        951
+      ],
+      "normalizedBoundsAbove16": [
+        0.013020833333333334,
+        0.0615234375,
+        0.9895833333333334,
+        0.9287109375
+      ]
+    }
+  },
+  "approvedFloorSafeRange": [
+    0.23,
+    0.57,
+    0.77,
+    0.74
+  ],
+  "recommendedFoot": [
+    0.5,
+    0.71
+  ],
+  "limitations": [
+    "8 percent transparent edge request was not met exactly; actual alpha bounds are recorded. Keep transparent padding in the layout container.",
+    "Flat safe range is visually assessed; verify the original character shoes and furniture contact in the composed page.",
+    "No crop, masking, repaint, resize or compositing was performed; original PNG copied byte-for-byte, WebP is format encoding only."
+  ],
+  "references": [
+    {
+      "path": "assets/course-journey/opening-mobile-v2.webp",
+      "bytes": 274858,
+      "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+      "role": "approved environment style"
+    },
+    {
+      "path": "assets/course-journey/handbag-couple.webp",
+      "bytes": 146522,
+      "sha256": "df99ee8abaf3ce1cbbc3c2849c721e2c5302355a7ebf05825092d2a263fa4967",
+      "role": "identity, palette, eventual overlay footprint only; no rendered people"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/modules-v1/unit1-2-ground.png",
+      "bytes": 1811978,
+      "sha256": "04459457b992610950e4d40706c9772767e44c34ccf4469855582279ba65386a"
+    },
+    {
+      "path": "assets/course-journey/modules-v1/unit1-2-ground.webp",
+      "bytes": 987428,
+      "sha256": "ab751550186d000e83c9fc5cf9e9d67eb0272402c004ab7ca11723cbb9c84e1d"
+    }
+  ],
+  "rejected": {
+    "path": "docs/designs/course-journey/production/modules-v1/unit1-2-ground-first-generation.png",
+    "bytes": 1749222,
+    "sha256": "3c0ad5890cfe59717b8080b7144cf9e8a6e77bf9c4bb5235af0975162059ce52",
+    "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1693a-2b1d-7312-82e7-5ba94390b7f4/exec-da96dd06-de28-4d23-8421-2cecd9f271c3.png",
+    "reason": "Cream floor ended too high; revised front wall depth to make shoe contact y=.71 viable."
+  },
+  "encodingValidation": {
+    "alphaDifferences": 0,
+    "visibleRgbDifferences": 0,
+    "note": "lossless WebP optimizes RGB under alpha=0; all visible RGB and every alpha sample remain identical"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T20:00:59.101Z",
+  "job": "news-desktop",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/news-desktop.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-28d15c73-cdf6-46fc-a3af-0caebe8ce589.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-desktop-v1.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/news-desktop-v1.png",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 2415625,
+      "sha256": "be5198bc7f000574f6ead8de49adb5447d594036d8a469403cbfd75218091554",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/news-desktop-v1.webp",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 363412,
+      "sha256": "b5c55cf5c00eb5c75c7d0286cbfb34fc5268a471e357f696bb38916e1f298be0",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

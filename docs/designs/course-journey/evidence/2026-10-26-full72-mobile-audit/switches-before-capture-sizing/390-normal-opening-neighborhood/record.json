@@ -1,0 +1,2040 @@
+{
+  "from": "opening",
+  "to": "neighborhood",
+  "before": {
+    "chapter": "opening",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit1-2",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/handbag-couple.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1376.4375,
+      "height": 1169.4375,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "after": {
+    "chapter": "neighborhood",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit7-8",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/interview-couple-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 69148,
+      "sha256": "39decce2b37a0f8001caf22f6adaa60883abe4f96a040ab7f58bc6d0aa4ac981",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.816793,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.145698
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 68941,
+      "sha256": "1e17ce2eeda6d5027d5954b1ae2dee40fe383fb37c732691b63125716a2db08a",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.833542,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.162447
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 68923,
+      "sha256": "f769e1e58f376187f6c9b5522139f08f3df652edb234c9b4d1e49ef18ef0333f",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.850157,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.179062
+      }
+    },
+    {
+      "index": 3,
+      "file": "003.jpg",
+      "bytes": 69070,
+      "sha256": "d3ca4744d5e86d3d47677c19a57416064f2039d98d3c6ec5d072db44ce229a2f",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.866871,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.195776
+      }
+    },
+    {
+      "index": 4,
+      "file": "004.jpg",
+      "bytes": 69279,
+      "sha256": "fa1c09f66a173af43c8f19b713729f057edfa904374fb1dc29a5e04691ad96f4",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.900214,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.229119
+      }
+    },
+    {
+      "index": 5,
+      "file": "005.jpg",
+      "bytes": 68641,
+      "sha256": "089fc68bcbece18440a6156fa7e3421fefd159a7724b44cff7b95b9776f3f550",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.9169,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.245805
+      }
+    },
+    {
+      "index": 6,
+      "file": "006.jpg",
+      "bytes": 70302,
+      "sha256": "c881a39d0b2aa184ada84f19969bc8bfb85081e1e3fa37552afff9396e599625",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.933556,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.262461
+      }
+    },
+    {
+      "index": 7,
+      "file": "007.jpg",
+      "bytes": 70263,
+      "sha256": "c021d867665c316f1adc1b56b98f5098f4e6ba4334d289e096f9afe8d9d5075c",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.950255,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.279159
+      }
+    },
+    {
+      "index": 8,
+      "file": "008.jpg",
+      "bytes": 70256,
+      "sha256": "d8a893be55e11b3367365f77fe2130011f39184cab57210ab011daacf0a044f5",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025882.983607,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.312512
+      }
+    },
+    {
+      "index": 9,
+      "file": "009.jpg",
+      "bytes": 70317,
+      "sha256": "d978fe5983c5e4534b2f3825c48bfdead72e22e252a1aec9ec16ecd5499a0441",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.000285,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.32919
+      }
+    },
+    {
+      "index": 10,
+      "file": "010.jpg",
+      "bytes": 70258,
+      "sha256": "5fae89357d803104a739ec15a2583f012f413bd58838adc769566881e69e35cf",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.016966,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.345871
+      }
+    },
+    {
+      "index": 11,
+      "file": "011.jpg",
+      "bytes": 86898,
+      "sha256": "36e88cdd060c540b216ba831f1a4229e5db6ec92b58865cbd7f93a1cd2d7a415",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.033648,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.362553
+      }
+    },
+    {
+      "index": 12,
+      "file": "012.jpg",
+      "bytes": 86929,
+      "sha256": "e1c8967bb235b58047d18efbdc7048d751d3c137e3f5ea7d5ca7dc82877566b9",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.050332,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.379237
+      }
+    },
+    {
+      "index": 13,
+      "file": "013.jpg",
+      "bytes": 86973,
+      "sha256": "f6f53c964b865655830a67b71e520a466010c8c0ea33c2f1208e43491b2889a9",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.067014,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.395919
+      }
+    },
+    {
+      "index": 14,
+      "file": "014.jpg",
+      "bytes": 86901,
+      "sha256": "cb551456559da2edc5205f564d16b70c03ca8dc3b9fcc8d881ecc45a5aa463aa",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.083686,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.412591
+      }
+    },
+    {
+      "index": 15,
+      "file": "015.jpg",
+      "bytes": 86885,
+      "sha256": "d2fa73d2e7656b786734715de24736620c336846bd528127ef0e601d1165f079",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.100361,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.429266
+      }
+    },
+    {
+      "index": 16,
+      "file": "016.jpg",
+      "bytes": 86731,
+      "sha256": "0dfc3aa6ef98000c5fa811f613772fe10d9439c6e79f9ac3c30826f5d932ba6a",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.117054,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.445958
+      }
+    },
+    {
+      "index": 17,
+      "file": "017.jpg",
+      "bytes": 86547,
+      "sha256": "51ec66a8adae59755681c1334286501f00daa5f09f0042c38861116a71e554b8",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.133697,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.462602
+      }
+    },
+    {
+      "index": 18,
+      "file": "018.jpg",
+      "bytes": 86509,
+      "sha256": "7289a7e71711a9d2f08febe8c438d207f50c70745fc75e52de94c169308f0813",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.150404,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.479309
+      }
+    },
+    {
+      "index": 19,
+      "file": "019.jpg",
+      "bytes": 86605,
+      "sha256": "2b175536b86b97c34a660431da0cd957ecf559da80335b24ebce4e4d18d7a367",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.167053,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.495958
+      }
+    },
+    {
+      "index": 20,
+      "file": "020.jpg",
+      "bytes": 86780,
+      "sha256": "4f7adb0eb6b251601637f34c92c31b0392855408a148f18ccdaeb7288db51bb7",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.183761,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.512666
+      }
+    },
+    {
+      "index": 21,
+      "file": "021.jpg",
+      "bytes": 86738,
+      "sha256": "a3d9030bfcf89124a1d5dd745012fcabed21031814c8b6a9781ce62d901aa19e",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.200415,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.52932
+      }
+    },
+    {
+      "index": 22,
+      "file": "022.jpg",
+      "bytes": 86752,
+      "sha256": "b103e37f04bbcc478d125241a966a50655fa3d917ef9aef8481e0d6d188c8c44",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.217126,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.546031
+      }
+    },
+    {
+      "index": 23,
+      "file": "023.jpg",
+      "bytes": 86779,
+      "sha256": "800741440da7403829dfd28251b9bc59d8303c52945600b798b4ac7693012124",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.233791,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.562696
+      }
+    },
+    {
+      "index": 24,
+      "file": "024.jpg",
+      "bytes": 86801,
+      "sha256": "4ccf0ff645af45b769d3f862338a9642b6c471125d166259c187674821a7172d",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.250484,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.579389
+      }
+    },
+    {
+      "index": 25,
+      "file": "025.jpg",
+      "bytes": 86828,
+      "sha256": "3ae2481f009eb6a57f03d7a8e2d7d175ac6134d7c2b8264db71cce3d64509614",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.26718,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.596085
+      }
+    },
+    {
+      "index": 26,
+      "file": "026.jpg",
+      "bytes": 86833,
+      "sha256": "1c14749d0d20fea3e0d3e918d71de438d8d96c150be39b689f906335df7967ac",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.283844,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.612749
+      }
+    },
+    {
+      "index": 27,
+      "file": "027.jpg",
+      "bytes": 86807,
+      "sha256": "6bc3d90a92992c04e3cc115c5228cee83fca38b6bb541d9c2369438602f94e95",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.300521,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.629426
+      }
+    },
+    {
+      "index": 28,
+      "file": "028.jpg",
+      "bytes": 86852,
+      "sha256": "a2d5403e927fad56ce1f9966ac569835f44f96171378faafe003bb61cc839827",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.317178,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.646083
+      }
+    },
+    {
+      "index": 29,
+      "file": "029.jpg",
+      "bytes": 86838,
+      "sha256": "eec5ab58f8f244d9f922cbf6f16ad0a6c3d542b5e2cb7856c03321f3e86c3a3a",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.333886,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.662791
+      }
+    },
+    {
+      "index": 30,
+      "file": "030.jpg",
+      "bytes": 86829,
+      "sha256": "cb1c7d63633a9a1c011421df9b4c909042ac5f381290f5aa2dffd12fa1bb5b36",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.350567,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.679472
+      }
+    },
+    {
+      "index": 31,
+      "file": "031.jpg",
+      "bytes": 86836,
+      "sha256": "743cff896bef20787ac721ca42633e601f0162d735e894d90bd538c579a129f4",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.367247,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.696152
+      }
+    },
+    {
+      "index": 32,
+      "file": "032.jpg",
+      "bytes": 86807,
+      "sha256": "df4e08bb4f333a62c087fd4f97ff62603dc9cfaf85a2f3456a8391a1a7fd8d1d",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.383915,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.71282
+      }
+    },
+    {
+      "index": 33,
+      "file": "033.jpg",
+      "bytes": 86823,
+      "sha256": "4d9896fbdff9f692e64696d528630b71b051ed495f4c68eab724a0e829261d1b",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.400589,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.729494
+      }
+    },
+    {
+      "index": 34,
+      "file": "034.jpg",
+      "bytes": 86825,
+      "sha256": "de9a88a0e468f5930bace1a72fe135db533cab229b8e3ffb1cf02fbbb20bd819",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.417284,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.746189
+      }
+    },
+    {
+      "index": 35,
+      "file": "035.jpg",
+      "bytes": 87685,
+      "sha256": "1c690c37f673a07c0e25ab2dd9f8ea7a51026b805747d5b3a7b1f2a4fdc7e972",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.433939,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.762844
+      }
+    },
+    {
+      "index": 36,
+      "file": "036.jpg",
+      "bytes": 87686,
+      "sha256": "a7da5b843739f8ab7af68e900142627468090c779d4e0d9c09b462a4065c79b0",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.450675,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.779579
+      }
+    },
+    {
+      "index": 37,
+      "file": "037.jpg",
+      "bytes": 87670,
+      "sha256": "42ce44cd2c32c304b52a4c08a8af95ce1105725354cfdb23c3e8a83f3d1ae4eb",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.467328,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.796233
+      }
+    },
+    {
+      "index": 38,
+      "file": "038.jpg",
+      "bytes": 87690,
+      "sha256": "d50ecd982d05ab0b9d6dcf9be014ae9e479ebc5ed40f8f4b0610ef0dc6f47f44",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.483991,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.812896
+      }
+    },
+    {
+      "index": 39,
+      "file": "039.jpg",
+      "bytes": 87688,
+      "sha256": "2ea2aad14959f08025ebe9827677ae32d5d748b1b20939854a2f642dab94a2dd",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1025883.517347,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792979845.846252
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit1-2",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/handbag-couple.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      227,
+      36,
+      495
+    ],
+    [
+      354,
+      227,
+      382,
+      495
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 2,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 3,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 4,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 5,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 6,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 7,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 8,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 9,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 10,
+      "toOld": 0,
+      "toNew": 69.27831823027718,
+      "minimum": 0
+    },
+    {
+      "index": 11,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 12,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 13,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 14,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 15,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 16,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 17,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 18,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 19,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 20,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 21,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 22,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 23,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 24,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 25,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 26,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 27,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 28,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 29,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 30,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 31,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 32,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 33,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 34,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 35,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 36,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 37,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 38,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    },
+    {
+      "index": 39,
+      "toOld": 69.27831823027718,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

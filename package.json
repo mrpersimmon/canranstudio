@@ -30,6 +30,9 @@
     "preview:login": "node server/run.js",
     "build:login": "node scripts/build-login.js",
     "test:login": "playwright test -c playwright.login.config.js",
+    "test:viewport-metrics": "playwright test -c playwright.viewport.config.js",
+    "check:journey:viewports": "node tests/support/journey-viewports.js",
+    "test:journey:layout": "playwright test -c playwright.login.config.js tests/login/course-banners.spec.js tests/login/journey-next-three.spec.js tests/login/journey-visits.spec.js tests/login/journey-daily-life.spec.js tests/login/journey-complete.spec.js --grep @journey-layout",
     "test:recovery:webkit": "playwright test -c playwright.recovery.config.js",
     "test:statistics": "playwright test -c playwright.statistics.config.js",
     "admin:login": "node server/manage.js"

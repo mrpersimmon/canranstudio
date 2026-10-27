@@ -1,0 +1,303 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "from": "home",
+  "to": "kindness",
+  "before": {
+    "chapter": "home",
+    "dock": {
+      "bottom": 656,
+      "height": 104,
+      "left": 0,
+      "right": 320,
+      "top": 552,
+      "width": 320,
+      "x": 0,
+      "y": 552
+    },
+    "height": 720,
+    "selected": "unit25-26",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 638,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 570,
+        "width": 48,
+        "x": 11,
+        "y": 570
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/kitchen-host-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1164,
+      "height": 960,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "after": {
+    "chapter": "kindness",
+    "dock": {
+      "bottom": 656,
+      "height": 104,
+      "left": 0,
+      "right": 320,
+      "top": 552,
+      "width": 320,
+      "x": 0,
+      "y": 552
+    },
+    "height": 720,
+    "selected": "unit19-20",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 638,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 570,
+        "width": 48,
+        "x": 11,
+        "y": 570
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/icecream-family-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1163.53125,
+      "height": 959.53125,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 49824,
+      "sha256": "ba80cdcee33a241e0f33e37f439f0dbbf61b0bd406705f97faec2b678ff1897e",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030470.669663,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984433.000632
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 50360,
+      "sha256": "43dc93d744c6966678acc24d3c035680642af8b70207ccad3ab2a0b631833a19",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030470.718389,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984433.049358
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 63574,
+      "sha256": "3af60ff99cd0e17f5cbd3723c68a4b69aa21466e50e311c1cba2673d8fc6484f",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030470.73509,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984433.066059
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit25-26",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/kitchen-host-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1164,
+        "height": 960,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1163.53125,
+        "height": 959.53125,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1163.53125,
+        "height": 959.53125,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      284,
+      36,
+      492
+    ],
+    [
+      284,
+      284,
+      312,
+      492
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 74.00675366300366,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0,
+      "toNew": 74.00675366300366,
+      "minimum": 0
+    },
+    {
+      "index": 2,
+      "toOld": 74.00675366300366,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

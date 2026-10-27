@@ -1,0 +1,62 @@
+{
+  "asset": "ambient-water-v1",
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a1693d-c894-79a1-b00e-54d20ab1cd07\\exec-d8423973-1758-4214-b198-c1cd0bdcfab5.png",
+  "sourceSha256": "04fb9ebbad4ba2495955a86898cec0e1c86f645b6083a606c81881c960852f3c",
+  "actualSize": [
+    1024,
+    1536
+  ],
+  "hasAlpha": false,
+  "alpha": {
+    "fullyTransparent": 0,
+    "partiallyTransparent": 0,
+    "boundsAt16": [
+      0,
+      0,
+      1023,
+      1535
+    ],
+    "normalizedBoundsAt16": [
+      0,
+      0,
+      1,
+      1
+    ]
+  },
+  "inspectionNotes": [
+    "Opaque portrait ambient background, central low-obstruction water, architecture and vegetation peripheral.",
+    "No route platform, stairs or required foot-contact objects."
+  ],
+  "requests": [
+    {
+      "file": "docs/designs/course-journey/production/modules-v1/ambient-water-v1-request.json",
+      "sha256": "49c42fea8c5d5e33b3ce864cc04ba5b80c10be541ced04b227fd1a9dec8082d5",
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395",
+          "role": "environment palette/style only"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+          "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+          "role": "environment palette/style only"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "file": "assets/course-journey/modules-v1/ambient-water-v1.png",
+      "sha256": "04fb9ebbad4ba2495955a86898cec0e1c86f645b6083a606c81881c960852f3c",
+      "bytes": 1906474
+    },
+    {
+      "file": "assets/course-journey/modules-v1/ambient-water-v1.webp",
+      "sha256": "82ed21e2651122c6de10d74ce06f24b78cfa9dfc9708dd0c089f69f6759d99d4",
+      "bytes": 169872
+    }
+  ],
+  "processing": "Native PNG copied byte-for-byte; WebP re-encoding only. No crop, resize, recolor or generated content changes."
+}

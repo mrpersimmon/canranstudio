@@ -2,9 +2,11 @@ import React, {createContext, useCallback, useContext, useEffect, useRef, useSta
 import {BookOpening} from './BookOpening';
 import awardGif from '../core/award-gif.js';
 import cardLayout from '../core/award-card-layout.js';
+import collectionView from '../core/award-collection-view.js';
+import studentShell from '../server/public/student-shell.js';
 import '../core/award-card-layout.css';
 import '../assets/awards/typography-45-46.css';
-import {ArrowLeft, ArrowRight, List, DownloadSimple, X, Check} from '@phosphor-icons/react';
+import {ArrowLeft, ArrowRight, List, DownloadSimple, X, Check, ImageBroken} from '@phosphor-icons/react';
 import book from '../assets/awards/book-open.webp';
 import paper from '../assets/awards/paper.webp';
 import corner from '../assets/awards/photo-corner.webp';
@@ -36,6 +38,15 @@ function saveMotion(enabled){
 function readPosition(cards,owner){try{return Math.max(0,cards.findIndex(c=>c.id===sessionStorage.getItem(STORAGE_KEY+':'+owner)));}catch{return 0;}}
 function useMedia(query){const [value,setValue]=useState(()=>matchMedia(query).matches);useEffect(()=>{const m=matchMedia(query),change=()=>setValue(m.matches);m.addEventListener('change',change);return()=>m.removeEventListener('change',change);},[query]);return value;}
 const iconProps={size:24,weight:'bold','aria-hidden':true};
+function StudentHeader({student}){
+  const target=useRef(null);
+  useEffect(()=>studentShell.mount(target.current,{base:BASE,student,current:'awards'}),[student]);
+  return <div ref={target}/>;
+}
+function DirectoryThumbnail({card}){
+  const [failed,setFailed]=useState(false);
+  return <span className="directory-thumb">{failed?<span className="thumbnail-error"><ImageBroken {...iconProps}/><small>图片暂不可用</small></span>:<img src={card.scene} alt="" loading="lazy" onError={()=>setFailed(true)}/>}</span>;
+}
 function Certificate({card}){
   return <article className="certificate award-card" data-stars={card.stars} data-unit={card.course} style={{...cardLayout.typography(card.title,card.name,card.course),'--accent':card.color,'--paper':`url(${paper})`,'--earned-star':`url(${star})`}} aria-label={`${card.lesson} ${card.title}，${card.name}，${card.stars} 颗星`}>
     <img className="card-scene" src={card.scene} alt={card.alt} draggable="false"/>
@@ -87,7 +98,8 @@ async function saveCard(card,signal){
   return {width:canvas.width,height:canvas.height,bytes:blob.size};
 }
 function Album({collection}){
-  const {cards,student,pending}=collection;
+  const {student,pending}=collection;
+  const {primary:cards,history:historyCards}=collectionView.split(collection.cards);
   const [ready,setReady]=useState(false),[error,setError]=useState(false),[progress,setProgress]=useState(0);
   const [motion,setMotion]=useState(readMotion),[opening,setOpening]=useState(true);
   const [selected,setSelected]=useState(()=>readPosition(cards,student.id)),[turn,setTurn]=useState(null),[directory,setDirectory]=useState(false),[opened,setOpened]=useState(null),[saveState,setSaveState]=useState(''),[saving,setSaving]=useState(false);
@@ -110,7 +122,13 @@ function Album({collection}){
     if(reduced){setSelected(target);busy.current=false;return;}setTurn({direction,from:start,to:target});
     timers.current.push(setTimeout(()=>{setSelected(target);setTurn(null);busy.current=false;},580));
   }
-  function openCard(index){if(opening||busy.current)return;setSelected(index);setOpened(index);setSaveState('');}
+  function openCard(index){if(opening||busy.current)return;setSelected(index);setOpened(cards[index]);setSaveState('');}
+  async function openHistory(card){
+    if(busy.current)return;busy.current=true;setPreparing(true);setPageError('');
+    try{await prepare([card],[0]);setOpened({...card,historical:true});setSaveState('');}
+    catch{setPageError('这张纪念卡暂时打不开，请重试。');}
+    finally{setPreparing(false);busy.current=false;}
+  }
   const finishOpening=useCallback((focus=false)=>{setOpening(false);if(focus)bookRef.current?.focus({preventScroll:true});},[]);
   const failOpening=useCallback(()=>{setError(true);setReady(false);},[]);
   function closeCard(){saveJob.current?.abort();setSaving(false);setOpened(null);setSaveState('');}
@@ -119,16 +137,16 @@ function Album({collection}){
   function swipeEnd(e){const p=pointer.current;pointer.current=null;if(!p)return;const dx=e.clientX-p.x,dy=e.clientY-p.y;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.8)flip(dx<0?1:-1);}
   async function download(){
     if(saving)return;const job=new AbortController();saveJob.current=job;setSaving(true);setSaveState('');
-    try{await saveCard({...cards[opened]},job.signal);setSaveState('动图已生成');}
+    try{await saveCard({...opened},job.signal);setSaveState('动图已生成');}
     catch(error){if(error.name!=='AbortError')setSaveState('暂时没能保存，请再试一次。');}
     finally{if(saveJob.current===job&&!job.signal.aborted)setSaving(false);}
   }
   const displayLeft=turn&&!mobile?(turn.direction>0?turn.from:turn.to):start;
   const displayRight=turn&&!mobile?(turn.direction>0?turn.to+1:turn.from+1):start+1;
   return <CardsContext.Provider value={cards}>
-    <header className="site-header"><a className="brand" href={BASE} aria-label="灿然英语工作室首页"><img src={logo} alt=""/><span>灿然英语工作室</span></a><nav aria-label="主导航"><a href={BASE}>我的课程</a><span className="current" aria-current="page">我的纪念册</span><span className="student">{student.name}</span></nav></header>
+    <StudentHeader student={student}/>
     <main className="album-main">
-      <div className="album-heading"><h1>我的纪念册</h1><button className="button directory-button" disabled={!ready||opening} onClick={()=>setDirectory(true)}><List {...iconProps}/>目录</button></div>
+      <div className="album-heading"><div><h1>我的纪念册</h1><p className="album-collection-count">{cards.length} 个单元的纪念卡{historyCards.length>0&&` · ${historyCards.length} 张历史版本`}</p></div><button className="button directory-button" disabled={!ready||opening} onClick={()=>setDirectory(true)}><List {...iconProps}/>目录</button></div>
       {!ready?<section className="loading-panel" aria-label="准备纪念册"><img src={logo} alt=""/><h2>{error?'暂时打不开纪念册':'正在打开纪念册…'}</h2>{error?<><p>请重试，已获纪念卡会保留。</p><button className="button primary" onClick={()=>window.location.reload()}>再试一次</button></>:<progress value={progress} max="1" aria-label="素材加载进度"/>}</section>:<>
         <div className={`book ${mobile?'is-mobile':''} ${turn?'is-turning':''} ${opening?'is-opening':''}`} ref={bookRef} tabIndex="0" role="group" aria-label="纪念册书页，左右方向键翻页" aria-busy={!!turn||preparing||opening} data-motion={reduced?'reduced':'full'} onKeyDown={e=>{if(e.target===e.currentTarget&&['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();flip(e.key==='ArrowLeft'?-1:1);}}} onPointerDown={swipeStart} onPointerUp={swipeEnd} onPointerCancel={()=>{pointer.current=null;}} style={{'--book-art':`url(${book})`,'--paper':`url(${paper})`}}>
           <img className="book-art" src={book} alt="" draggable="false"/>
@@ -150,8 +168,17 @@ function Album({collection}){
       <HistoricalCertificates archives={collection.archives}/>
       <LocalCertificateCopies copies={collection.localCertificates} available={collection.availableCourses}/>
     </main>
-    {directory&&<Modal label="目录" className="directory-modal" onClose={()=>setDirectory(false)}><div className="modal-heading"><h2>目录</h2><button className="icon-button" aria-label="关闭目录" onClick={()=>setDirectory(false)}><X {...iconProps}/></button></div><div className="directory-list">{cards.map((card,index)=><button className="directory-row" key={card.id} onClick={()=>goTo(index)}>{decoded.has(card.scene)?<img src={card.scene} alt=""/>:<span className="directory-placeholder">{index+1}</span>}<span><small>{card.lesson}</small><strong>{card.title}</strong></span><span className="directory-stars"><img src={star} alt=""/>{card.stars}<span className="sr-only">颗星</span></span><ArrowRight {...iconProps}/></button>)}</div><p className="album-status" role="status">{preparing?'正在准备书页…':pageError}</p><div className="motion-preference"><span>翻页动画</span><button className="motion-switch" role="switch" aria-label="翻页动画" aria-checked={!reduced} onClick={toggleMotion}>{reduced?'已关闭':'已开启'}</button></div></Modal>}
-    {opened!==null&&<Modal label={`${cards[opened].lesson} 纪念卡`} className="card-modal" onClose={closeCard}><div className="modal-heading"><button className="icon-button" aria-label="关闭纪念卡" onClick={closeCard}><X {...iconProps}/></button></div><Certificate card={cards[opened]}/><div className="modal-actions"><button className="button primary" disabled={saving} onClick={download}><DownloadSimple {...iconProps}/>{saving?'正在保存…':'保存动图'}</button></div><p className="save-state" role="status">{saveState==='动图已生成'&&<Check {...iconProps}/>} {saveState}</p></Modal>}
+    {directory&&<Modal label="目录" className="directory-modal" onClose={()=>setDirectory(false)}>
+      <div className="modal-heading"><h2>目录</h2><button className="icon-button" aria-label="关闭目录" onClick={()=>setDirectory(false)}><X {...iconProps}/></button></div>
+      {historyCards.length>0&&<details className="directory-history">
+        <summary>历史版本 · {historyCards.length} 张</summary><p>保留每个版本原有的星星与首次集齐日期。</p>
+        <div className="directory-list">{historyCards.map(card=><button className="directory-row" key={card.id} onClick={()=>openHistory(card)}><DirectoryThumbnail card={card}/><span><small>{card.lesson}</small><strong>{card.title}</strong><em>历史版本{card.date&&` · ${card.date}`}</em></span><span className="directory-stars"><img src={star} alt=""/>{card.stars}<span className="sr-only">颗星</span></span><ArrowRight {...iconProps}/></button>)}</div>
+      </details>}
+      <div className="directory-list directory-current">{cards.map((card,index)=><button className="directory-row" key={card.id} onClick={()=>goTo(index)}><DirectoryThumbnail card={card}/><span><small>{card.lesson}</small><strong>{card.title}</strong></span><span className="directory-stars"><img src={star} alt=""/>{card.stars}<span className="sr-only">颗星</span></span><ArrowRight {...iconProps}/></button>)}</div>
+      <p className="album-status" role="status">{preparing?'正在准备书页…':pageError}</p>
+      <div className="motion-preference"><span>翻页动画</span><button className="motion-switch" role="switch" aria-label="翻页动画" aria-checked={!reduced} onClick={toggleMotion}>{reduced?'已关闭':'已开启'}</button></div>
+    </Modal>}
+    {opened!==null&&<Modal label={`${opened.lesson} 纪念卡`} className="card-modal" onClose={closeCard}><div className="modal-heading">{opened.historical&&<p className="history-card-label">历史版本</p>}<button className="icon-button" aria-label="关闭纪念卡" onClick={closeCard}><X {...iconProps}/></button></div><Certificate card={opened}/><div className="modal-actions"><button className="button primary" disabled={saving} onClick={download}><DownloadSimple {...iconProps}/>{saving?'正在保存…':'保存动图'}</button></div><p className="save-state" role="status">{saveState==='动图已生成'&&<Check {...iconProps}/>} {saveState}</p></Modal>}
     <noscript>请允许 JavaScript 以打开纪念册。</noscript>
   </CardsContext.Provider>;
 }
@@ -211,6 +238,6 @@ export function App(){
     return()=>{active=false;run++;channel?.close();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pageshow',resume);window.removeEventListener('pagehide',hide);window.removeEventListener('online',refresh);navigator.serviceWorker?.removeEventListener('message',worker);};
   },[revision]);
   if(!data)return <main className="loading-panel"><img src={logo} alt=""/><h1>{error?error.status===401?'请重新登录':'暂时打不开纪念册':'正在打开纪念册…'}</h1>{error&&<><p>{error.status===401?'登录后查看自己的纪念卡。':'请重试，已获纪念卡会保留。'}</p><a className="button" href={BASE}>{error.status===401?'去登录':'返回课程'}</a>{error.status!==401&&<button className="button primary" onClick={()=>setRevision(v=>v+1)}>再试一次</button>}</>}</main>;
-  if(!data.cards.length)return <main className="loading-panel empty-album"><img src={logo} alt=""/><h1>我的纪念册</h1>{!legacyPapers(data.archives).length&&!data.localCertificates?.length&&<p>点亮第一颗星，收藏第一张纪念卡。</p>}{data.pending>0&&<p role="status">记录待同步，联网后自动更新。</p>}<HistoricalCertificates archives={data.archives}/><LocalCertificateCopies copies={data.localCertificates} available={data.availableCourses}/><a className="button primary" href={BASE}>去学习</a></main>;
+  if(!data.cards.length)return <><StudentHeader student={data.student}/><main className="loading-panel empty-album"><img src={logo} alt=""/><h1>我的纪念册</h1>{!legacyPapers(data.archives).length&&!data.localCertificates?.length&&<p>点亮第一颗星，收藏第一张纪念卡。</p>}{data.pending>0&&<p role="status">记录待同步，联网后自动更新。</p>}<HistoricalCertificates archives={data.archives}/><LocalCertificateCopies copies={data.localCertificates} available={data.availableCourses}/><a className="button primary" href={BASE}>去学习</a></main></>;
   return <Album collection={data} key={data.student.id+':'+revision}/>;
 }

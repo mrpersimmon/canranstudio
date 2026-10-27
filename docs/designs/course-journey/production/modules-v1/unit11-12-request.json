@@ -1,0 +1,31 @@
+{
+  "asset": "unit11-12-ground",
+  "tool": "built-in image_gen",
+  "targetSize": [
+    1536,
+    1024
+  ],
+  "transparent_background": true,
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/shirt-return-v1.webp"
+  ],
+  "referenceRoles": [
+    "environment style",
+    "environment style",
+    "feet plane guidance only; do not draw"
+  ],
+  "safeFloor": {
+    "x": [
+      0.18,
+      0.82
+    ],
+    "y": [
+      0.56,
+      0.81
+    ],
+    "feetY": 0.72
+  },
+  "prompt": "Use case: illustration-story. Create one EMPTY isolated environment sprite for a children's learning journey, with genuine alpha transparency. Landscape 1536x1024. References 1–2 supply the approved environment style: coral warm stucco, cream stone, teal greenery, rounded hand-painted storybook game volumes, upper-left sunlight. Reference 3 is the ORIGINAL teacher and pupils to be composited later in code, not to regenerate: use only to understand generous empty foot-placement floor. Absolutely NO people in the new image.\nSubject: a small cream limestone courtyard outside a school lost-and-found room. Rounded cream platform, shallow coral side wall, a small simple cream and coral school-house with teal arched door at far BACK only. No sign lettering; no shirts/clothes/props duplicate of character artwork. Very sparse greenery confined to outside left/right edges. Empty broad flat foreground stone floor, normalized x .18–.82 and y .56–.81, with future characters' shoe contacts at y .72. Absolutely no raised object, plants, steps, lamp, furniture, pillar or decoration inside that central area. Low-complexity welcoming environment that will support the original full-body teacher and two boys.\nFraming: draw the complete compact island centered as a small sprite surrounded by CLEAR EMPTY TRANSPARENT SPACE. Its total silhouette including plants and shadow should fit x=.10..90,y=.10..90: ten percent margin on all four edges. Entire lower rim visible. Large transparent gutters, no cropped leaves. Slightly elevated three-quarter/isometric camera consistent with the map references. House only y<.5, plants only x<.16 or x>.84; central foot floor stays unobstructed. True alpha outside the island and only subtle local contact shadow, no broad colored halo. No water or landscape background.\nAvoid people/person-like objects, animals, text, numbers, stars, medals, UI, lamps, furniture, lost shirts, footpath extending beyond the isolated island. No white/checkerboard background. One terrain module only."
+}

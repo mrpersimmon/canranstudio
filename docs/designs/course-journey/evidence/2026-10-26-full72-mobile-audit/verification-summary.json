@@ -1,0 +1,59 @@
+{
+  "date": "2026-10-26",
+  "scope": "Fresh full72 mobile review; all outcomes are from this run",
+  "visual": {
+    "phone390": 72,
+    "narrowMiddle320": 24,
+    "correctedPhone320": 18,
+    "correctedDesktopMiddle1440": 6
+  },
+  "geometry": {
+    "sizes": 60,
+    "selections": 4320,
+    "failures": 0,
+    "rewardGap": [
+      13.751312255859375,
+      14.000138424230045
+    ],
+    "maxVisibleAxisError": 0.1244354248046875,
+    "signature": "b636fa04d44a7364a80fb571e306e91a522642a0cd11cb2d760fbe9e72bc8628"
+  },
+  "postColorGeometry": {
+    "sizes": 4,
+    "selections": 288,
+    "failures": 0,
+    "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7"
+  },
+  "mixed": {
+    "cases": 144,
+    "failures": 0
+  },
+  "normalSelection": {
+    "cases": 216,
+    "frames": 864,
+    "minimumContrast": 6.433772598584635,
+    "failures": 0
+  },
+  "chapterSwitches": {
+    "scenarios": 96,
+    "actualFrames": 2181,
+    "failures": 0
+  },
+  "controlledSwitches": {
+    "cases": 4,
+    "actualFrames": 90,
+    "actualHeldRequests": 4,
+    "failures": 0
+  },
+  "limits": [
+    "Chromium only, no physical iOS/Android/WeChat or WebKit",
+    "Screencast samples and two near-field strips, not every physical refresh or every pixel",
+    "Adjacent24-chapter ring, not all552 arbitrary directions",
+    "60-size geometry and mixed/held cases preceded the final color-transition-only edit; four full layouts and normal first-frame colors rechecked after it",
+    "No new learning answers, full release acceptance, or verified95percent real-traffic coverage"
+  ],
+  "middleMotion": {
+    "cases": 24,
+    "failures": 0
+  }
+}

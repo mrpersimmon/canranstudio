@@ -1,0 +1,99 @@
+{
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "requests": [
+    {
+      "id": "opening",
+      "name": "opening-mobile-clearance-v1",
+      "adopted": false,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: At ALL THREE circular landings, extend the existing flat cream pavement forward through the central foreground. The front parapet, arched bridge face, water, stair edges and planted walls currently occupy the lower center of each landing: move only these obstructing front edges to the far left and right or beyond the central safe rectangle. Keep recognizable coral arches over teal water, top floral gateway, middle violet-roof kiosk and bottom little school. Preserve their locations, same continuous S-shaped journey. The usable center must not be a new added floating platform.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v3/opening-world-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "making",
+      "name": "making-mobile-clearance-v1",
+      "adopted": true,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: Only the lower-right tiled roof/eave below the MIDDLE stop intrudes into the information area: shorten/recess its projecting left edge toward the right. Continue the existing terracotta ground through the cleared central area. Keep the woodworker shed at the top, flower-window wall in the middle and cleanup doorway at the bottom.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "everyday",
+      "name": "everyday-mobile-clearance-v1",
+      "adopted": true,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: Only the stationery shop's red tiled roof, flowering eave and awning at the lower LEFT below the MIDDLE reading stop intrude into its information area: recess that projecting edge toward the far left, continue the same brick pavement across the cleared center. Keep the recognizable stationery storefront, upper family veranda and bookcases, warm night lamps, distant night town and all other details. Do not reintroduce a coffee table in the upper standing area.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/everyday-evening-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "kindness",
+      "name": "kindness-mobile-clearance-v1",
+      "adopted": true,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: Only the lower-right porch roof and flowering eave below the MIDDLE stop intrude into the center: recess that porch/eave toward the far right until the existing cream path remains open under the middle information area. Keep the top striped awning, left grass and orange trees, middle open home doorway and lower curtained porch unchanged elsewhere.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v5/kindness-courtyard-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "caring",
+      "name": "caring-mobile-clearance-v1",
+      "adopted": true,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: The right-side roofs and flowering eaves below the TOP and MIDDLE stops project into the central information areas. Recess those roof/eave edges to the far right and continue the existing warm pavement through the freed center. Keep the living room in upper left, middle resting veranda and lower green front door, and preserve all foot-support pavement. Do not add new stairs in the upper or middle standing area.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/caring-veranda-v2.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "memories",
+      "name": "memories-mobile-clearance-v1",
+      "adopted": true,
+      "requestFile": "requests.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit.\nEdit target: the attached existing game-map environment, not a new design. Create a restrained production correction for narrow-phone composition. Keep the exact original 724×2172 canvas (1:3 portrait), camera, palette, brushwork, architectural identity, lighting and overall layout. No crop, rescale, reframing, people, UI, text, stars, badges or watermark.\nThe picture has three consecutive square source regions, each 724 pixels high. Character artwork is layered separately with its feet around local y=56% in each region. Preserve those character standing/foot zones (local y=42–60%) and the original scene identity.\nUI clearance requirement: in each corrected region below, the central rectangle x=23–77% and LOCAL y=61–96% must be continuous flat existing pavement, without any wall, parapet, roof, steps, tree trunk, furniture or protruding plants. This is ordinary scene floor, not a drawn panel, plaque, rectangle, platform or UI. Blend the pavement naturally into the same scene; no straight seams.\nLocalized change: The roofs/awnings and foliage of the LEFT facades below the TOP and MIDDLE stops project into the central information areas. Recess their projecting edges toward the far left and keep continuous existing warm brick pavement under both information areas. Keep the upper produce shop, middle curved photo display window, lower small house entrance, striped awnings and orange trees in their recognizable original places.\nPreserve all other parts of the reference as closely as possible. The correction must look like the same approved illustration with only the obstructing foreground edge moved aside, and must still connect top, middle and bottom as one uninterrupted journey. Do not erase environmental detail outside the central information corridor. Return the edited environment only.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/memories-arcade-v1.png"
+        ],
+        "transparent_background": false
+      }
+    },
+    {
+      "id": "opening",
+      "name": "opening-mobile-clearance-v2",
+      "adopted": true,
+      "requestFile": "opening-second-request.json",
+      "args": {
+        "prompt": "Use case: precise-object-edit. Image1 is the ONLY edit target: the existing 724x2172 portrait garden map. Images2 and3 are diagnostic screenshots only, showing where the separate website buttons are. Do NOT paint people or any UI from the diagnostic screenshots into the output. Preserve the target's exact camera, warm illustration style, coral bridges, teal water, floral gate, violet kiosk and little school. Change ONLY the central foreground pavement at the three landings. The previous correction still has water, the front bridge face, cypress trees and flowering planters behind the buttons, especially the first and last stop. In the 724x2172 target, these THREE rectangles MUST be completely traversable cream pavement, seamlessly continuing each landing: x=166..558,y=440..715; x=166..558,y=1164..1439; x=166..558,y=1888..2164. No water, vertical arch face, plants, cypress trees, parapet, steps or railings inside any of those rectangles. Move the lower front edge of each landing down past its rectangle; move intervening cypresses and raised flower beds entirely to the outer left or right. Keep the level standing floor around y=405,1129,1853 unchanged. Keep the rich bridge/water/flowers at outer edges, with natural S-shaped connections between the widened landing pavements. The center of each specified rectangle must be actual existing-style stone ground, not an added platform, panel, floating overlay or blank white box. Preserve the original full 724x2172 1:3 canvas; no resizing/crop. No people, signs, letters, stars, badges, buttons, UI, marks, watermark or framing lines. Return only the corrected environment.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v8/opening-mobile-clearance-v1.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/evidence/2026-10-26-full72-mobile-audit/candidate-1/phone-unit1-2.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/evidence/2026-10-26-full72-mobile-audit/candidate-1/phone-unit5-6.png"
+        ],
+        "transparent_background": false
+      }
+    }
+  ]
+}

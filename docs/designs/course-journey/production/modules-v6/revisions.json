@@ -1,0 +1,20 @@
+[
+  {
+    "chapter": "home",
+    "attempt": 2,
+    "prompt": "Use case: precise-object-edit. Edit this home-interior environment only. Preserve its exact native 724x2172 (1:3) canvas, camera, continuous tile floor, walls, windows, kitchen layout, cooker LEFT, refrigerator RIGHT, living-room TV/radio placement, blue bed and wardrobe, warm colors and all architecture.\nMake only these cleanup changes: remove BOTH floor rugs completely, including the oval rug under the blue bed and the rug near the sofa; seamlessly continue the SAME cream tile pattern in their place. The full standing floor needs to be level and pattern-consistent, with no rug edge under later character feet. Also remove the tiny writing/brand mark from the refrigerator door, leaving a plain clean white door.\nKeep the existing furniture in exactly its current position. Do not add a table, purple armchair, bottle, cup, broom, person or any UI. Do not change the scene into three separate panels. Keep every existing clear floor area and the connecting route intact. Finished opaque image, exact height=3*width.",
+    "referenced_image_paths": [
+      "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-dee0bd48-22b1-406d-804a-4980d1854ea6.png"
+    ],
+    "transparent_background": false
+  },
+  {
+    "chapter": "hospitality",
+    "attempt": 2,
+    "prompt": "Use case: precise-object-edit. Recreate the supplied tea-and-letters sunroom with the SAME continuous wood-floor arrangement, tall teal glazing, cream/coral architecture, side cabinets, writing nook, sofa, garden arch and single milk jug. Keep the same illustration style, lighting, object positions and unobstructed central floor. No new people, cups, tea objects, letters, typewriters, labels or UI.\nThe correction is the NATIVE CANVAS GEOMETRY: the supplied raster is 724x2171 and is one pixel short. Deliver an exact 1:3 native raster, for example 724x2172 or768x2304: height MUST equal precisely 3 times width. Do not preserve the previous 2171 height. Keep the whole scene complete with natural floor continuation at the bottom; no squashing, cropping away the scene, adding visible border strips or separate panels. Preserve flat clear support areas centered at global (50%,18.67%),(50%,52%),(50%,85.33%). Output opaque RGB.",
+    "referenced_image_paths": [
+      "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-8338e11c-d78e-4e13-a61d-16215e033aa6.png"
+    ],
+    "transparent_background": false
+  }
+]

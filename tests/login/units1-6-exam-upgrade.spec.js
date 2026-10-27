@@ -46,7 +46,7 @@ for (const [unit, title, oldCount, complete] of [
     await first.close(); first = null; await new Promise(resolve => server.close(resolve)); server = null; await start(root);
     second = await browser.newContext({ baseURL: origin, reducedMotion: 'reduce' }); const current = await second.newPage(); await signIn(current, account, '/');
     if(unit==='5-6'){
-      await expect(current.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toBeVisible();
+      await expect(current.locator('.course').getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toBeVisible();
       await current.goto('/unit5-6/#learn/certificate');await expect(current.locator('#starCount')).toHaveText('0');await expect(current.locator('#certificateName')).toHaveText('课程升级班');await expect(current.locator('#certificateDate')).toBeHidden();
       await current.goto('/unit5-6/#learn/exam');const room=current.locator('.stage-exam');
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(oldCount));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

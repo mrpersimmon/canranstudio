@@ -1,0 +1,647 @@
+{
+  "signature": "b636fa04d44a7364a80fb571e306e91a522642a0cd11cb2d760fbe9e72bc8628",
+  "from": "opening",
+  "to": "neighborhood",
+  "before": {
+    "chapter": "opening",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit1-2",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/handbag-couple.webp?audit=audit72-terrain-final2"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1376.4375,
+      "height": 1169.4375,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "after": {
+    "chapter": "neighborhood",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit7-8",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 71274,
+      "sha256": "858f63a4a6e7d9e8f9120113a10ea79274a0545dd607bcbef60fefe7cb623617",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.149228,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.479821
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 71286,
+      "sha256": "b4041d37e6c32e70e28f856b2968d3bd687fe13202942bd2d2f3df1ba767375b",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.165951,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.496544
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 71242,
+      "sha256": "7ae593e7734a509ff3579020e4200ed06205d29c1e6a0774bf3532600156d913",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.182591,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.513183
+      }
+    },
+    {
+      "index": 3,
+      "file": "003.jpg",
+      "bytes": 71237,
+      "sha256": "75b793365482e0b8259bd84a08ce4e22aef04016a0cd60f239ab88044d5c77ef",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.199283,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.529876
+      }
+    },
+    {
+      "index": 4,
+      "file": "004.jpg",
+      "bytes": 70125,
+      "sha256": "bfe7543f71331e5b5402a6f57553fdbac2040773d3b69923a60bf9106e683980",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.215956,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.546549
+      }
+    },
+    {
+      "index": 5,
+      "file": "005.jpg",
+      "bytes": 70164,
+      "sha256": "946a4f7559fb19c19ac6c4338247a30e9963db4be48e054eca9dc0bb52a91f53",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.232652,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.563245
+      }
+    },
+    {
+      "index": 6,
+      "file": "006.jpg",
+      "bytes": 70136,
+      "sha256": "9a1a65082c2c145a33cb5ea2d78541b78b7b8fee4c07c60a1734ed20044ae29b",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.249326,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.579919
+      }
+    },
+    {
+      "index": 7,
+      "file": "007.jpg",
+      "bytes": 71735,
+      "sha256": "fa62f761ab2b51d1b08d696389332232edb0edbba199734b039cd92260bb387e",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.265991,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.596584
+      }
+    },
+    {
+      "index": 8,
+      "file": "008.jpg",
+      "bytes": 71737,
+      "sha256": "e4b2df824600d7ddec7fc1c725ab4536e050a7603734f0356679a68382574fed",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.282712,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.613305
+      }
+    },
+    {
+      "index": 9,
+      "file": "009.jpg",
+      "bytes": 71302,
+      "sha256": "3b78dafc4895fe8aa6c5b38803215cde08f3c0d548e72164d50a0f245d53cdcb",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.366071,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983196.696664
+      }
+    },
+    {
+      "index": 10,
+      "file": "010.jpg",
+      "bytes": 89261,
+      "sha256": "7af790772a4ca81592eaf338e432e3e3010691b88817ea0ff08fed72e7db6eb3",
+      "metadata": {
+        "deviceHeight": 844,
+        "deviceWidth": 390,
+        "monotonicTimestamp": 1029234.833171,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792983197.163764
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit1-2",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/handbag-couple.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "opening",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "neighborhood",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit7-8",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/interview-couple-v1.webp?audit=audit72-terrain-final2"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      287,
+      36,
+      495
+    ],
+    [
+      354,
+      287,
+      382,
+      495
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 2,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 3,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 4,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 5,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 6,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 7,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 8,
+      "toOld": 0,
+      "toNew": 69.94894688644689,
+      "minimum": 0
+    },
+    {
+      "index": 9,
+      "toOld": 0.026785714285714284,
+      "toNew": 69.94991987179488,
+      "minimum": 0.026785714285714284
+    },
+    {
+      "index": 10,
+      "toOld": 69.94894688644689,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

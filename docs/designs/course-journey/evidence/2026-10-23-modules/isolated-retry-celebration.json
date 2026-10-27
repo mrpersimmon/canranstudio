@@ -1,0 +1,29 @@
+{
+  "scope": "isolated UI props, no real score writes",
+  "blocked": {
+    "state": "error",
+    "sheen": "0"
+  },
+  "afterRetry": [
+    {
+      "sheen": "0.297174",
+      "state": "ready"
+    },
+    {
+      "sheen": "0.297174",
+      "state": "ready"
+    },
+    {
+      "sheen": "0.350439",
+      "state": "ready"
+    },
+    {
+      "sheen": "0.350439",
+      "state": "ready"
+    },
+    {
+      "sheen": "0.350439",
+      "state": "ready"
+    }
+  ]
+}

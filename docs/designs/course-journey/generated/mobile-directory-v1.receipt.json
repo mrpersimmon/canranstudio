@@ -1,0 +1,30 @@
+{
+  "designId": "canran-course-journey",
+  "version": "1.0.0",
+  "job": "mobile-directory",
+  "promptSha256": "e719b60e5c26af3af6bcc97b452d4d83493b472980d9acf263d07bd5cf5c647d",
+  "referenceIds": [
+    "approvedMobile",
+    "brand",
+    "unit49"
+  ],
+  "references": [
+    {
+      "id": "approvedMobile",
+      "path": "references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "id": "brand",
+      "path": "references/starflower.png",
+      "sha256": "626de2a7c1107bd937981157db1e390dba9f305afc25f18fd8ce7efeb90cb588"
+    },
+    {
+      "id": "unit49",
+      "path": "references/characters/unit49-50-source.webp",
+      "sha256": "6cdfab520018dddacb264972804530caef3d78af2078ef3fb07eb31a71eede5d"
+    }
+  ],
+  "seed": null,
+  "modelRevision": null
+}

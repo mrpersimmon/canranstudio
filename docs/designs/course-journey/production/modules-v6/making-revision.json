@@ -1,0 +1,9 @@
+{
+  "chapter": "making",
+  "attempt": 2,
+  "prompt": "Use case: precise-object-edit. Edit this exact handcraft-courtyard image. Keep the native 724x2172 1:3 canvas, warm terracotta brick paving, lighting, soft storybook rendering, carpentry shed, window alcove, lower pantry porch, and all architecture in the TOP TWO THIRDS unchanged.\nFix the BOTTOM THIRD ONLY: the diagonal foreground wall/gate/hedge currently blocks the central route and occupies the future stars/lesson-label area. Remove the transverse foreground wall and dense hedge across the center. Continue the SAME uninterrupted brick floor naturally down through the bottom edge. Keep any remaining gate or boundary wall tight to the FAR LEFT edge (x<20%); plants may frame the far left/right margins, but never cross central x25%-75%.\nIn the bottom square, local x25%-75%, y45%-90% must be clear, level brick paving; no fence, wall, gate, planter, roof or foreground canopy crossing it. The standing point at global(50%,85.33%) and the band immediately below it must share the same unobstructed floor.\nDo not move the lower right house or create a second route, new horizon, visible patch seam, blank UI pedestal or panel border. No added people, bookshelves, hammers, paint cans, food, chairs, bags, text, numbers, badges or UI. Preserve all other details and the approved art style. Opaque output, exact height=3*width.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v1.png"
+  ],
+  "transparent_background": false
+}

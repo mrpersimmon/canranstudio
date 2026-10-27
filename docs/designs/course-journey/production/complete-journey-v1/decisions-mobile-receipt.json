@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:31:24.968Z",
+  "job": "decisions-mobile",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/decisions-mobile.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-4edeaae9-f7c0-48ce-a3e8-b07d5ccf8c12.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-mobile-v2.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/decisions-mobile-v1.png",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 2260637,
+      "sha256": "42ec1c3f6f7cfdcc57813e680fc3e7c1512b4eaaa278e82f854c6bf2b80cbc18",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/decisions-mobile-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 322992,
+      "sha256": "63268b8f4b6682aece778064975a20efd6b1510993fd1b324776f723ede67889",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

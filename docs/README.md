@@ -1,10 +1,22 @@
 # 文档导航
 
+最新整体复查：[全部72入口手机优先复查与修复](designs/course-journey/2026-10-26-全72单元手机优先整体复查与修复.md)。局部修正六章背景、缩略图串课、首课中轴及选中初帧可读性；新增J42–J44。[实际提示词与修订素材](designs/course-journey/production/modules-v8/README.md)单独固定，技术、视觉、过程及真机范围分别报告。
+
 第一次接触项目，先读[项目首页](../README.md)。按你要做的事选择下面一份文档即可。
 
 | 想做什么 | 看哪里 |
 | --- | --- |
 | 打开课程、在电脑上预览 | [项目首页](../README.md) |
+| 设计、实现或验收首页与课程入口 | [首页入口统一标准 v2.0](designs/course-journey/2026-10-22-1332-v2.0-首页入口统一设计标准与验收清单.md)：唯一现行入口J01–J44；全部72入口／24章采用连续近景、原人物与同源地面绑定，成果距人物14px。导航、页尾、切换与原生区段对齐共同验收；本地未发布。 |
+| 查看最新49–144入口 | [实施与验证](designs/course-journey/2026-10-26-Lesson49-144全量连续入口实施记录.md)、[16张环境与实际提示词](designs/course-journey/production/modules-v7/README.md)；60尺寸／2880组、新增J41及真实进课结果。 |
+| 查看25–48入口记录 | [前批实施](designs/course-journey/2026-10-26-Lesson25-48连续入口实施记录.md)、[四张环境与提示词](designs/course-journey/production/modules-v6/README.md)；保留当时验证范围。 |
+| 查看13–24入口记录 | [实施与验证](designs/course-journey/2026-10-25-Lesson13-24连续入口实施记录.md)、[两张环境与固定提示词](designs/course-journey/production/modules-v5/README.md)；四章连续机制、60尺寸与真实进课结果。 |
+| 查看Lesson1–12此前设计演进 | [J32单一近景](designs/course-journey/2026-10-24-人物与环境融合复核及修正.md)、[J33星章距离](designs/course-journey/2026-10-25-星章课号贴近人物.md)、[J34花园与街区](designs/course-journey/2026-10-25-两段旅程主题差异化.md)；第一段与远景保留[modules-v3](designs/course-journey/production/modules-v3/README.md)，第二段使用[modules-v4](designs/course-journey/production/modules-v4/README.md)。技术／视觉分别验收。 |
+| 查看 Lesson 1–12 独立场景样板 | [最新实施](designs/course-journey/2026-10-23-Lesson1-12独立场景样板.md)：原人物与专属平台共用局部坐标和动效，星章／Lesson在完整场景下方文档流排列；[美术与提示词](designs/course-journey/production/modules-v1/README.md)和实际验收边界分开。 |
+| 查看 Lesson 31–144 全量入口 | [此前实施](designs/course-journey/2026-10-23-Lesson31-144全量入口与星章统一.md)：57个新入口、19段横竖场景、固定提示词和分批验收记录；保留该阶段的原素材与验收范围，当前连续入口另见最新实施。 |
+| 查看前轮 Lesson 19–30 与星章统一 | [最新实施](designs/course-journey/2026-10-23-0200-Lesson19-30入口与星章归属统一.md)：六课、横竖场景、固定提示词、脚下成果与相关验收。 |
+| 查看尺寸采集与 Lesson 13–18 地图入口 | [实施记录](designs/course-journey/2026-10-22-1930-尺寸采集与第三段入口实施记录.md)：管理员尺寸汇总、证据口径、第三段人物场景及实际验收；采集生产默认关闭。 |
+| 制作地图素材、追溯历史方案与验证 | [旅程地图设计包](designs/course-journey/README.md)：认可图、完整提示词、固定包与 v1.0–v1.8 历史记录；实际页面证据见[视觉验收](../design-qa.md)。 |
 | 了解 Lesson 49 当前功能 | [课程说明](../lesson49/README.md) |
 | 设计、制作与验收教学单元 | [统一设计标准与验收清单 v1.55](butcher-version/publish/2026-10-24-2200-v1.55-教学单元设计标准与验收清单.md)：唯一现行入口；纪念卡视觉基准、C 悬浮结算、A 纪念册、持续星光与 GIF、五区和三卡口径；保留教学准确性、题目覆盖、声音模式、记录保护与逐帧验收。 |
 | 查各课教材、题稿与验收去向 | [教学单元索引](butcher-version/2026-10-15-0041-v1.0-教学单元设计与验收索引.md)：覆盖Lesson 1–144；详细页码、题数和状态按所链接记录核对，不把旧数字当新课配额。 |
@@ -61,7 +73,7 @@
 | 组织孩子试用 | [儿童试用说明](v1-map-usability-pilot-toolkit.md) |
 | 发布网站、出错后恢复 | [发布指南](../deploy/README.md) |
 | 看不懂项目里的称呼 | [术语表](../CONTEXT.md) |
-| 追溯旧地图设计 | [地图设计](superpowers/specs/2026-08-04-atlas-only-entry-and-growth-reveal-design.md)、[册页布局](superpowers/specs/2026-08-07-single-screen-route-pages-design.md)（当前分支首页已改为课程卡片） |
+| 追溯旧地图设计 | [地图设计](superpowers/specs/2026-08-04-atlas-only-entry-and-growth-reveal-design.md)、[册页布局](superpowers/specs/2026-08-07-single-screen-route-pages-design.md)保留历史；当前分支旅程首页从上方设计包进入。 |
 
 ## 需要追溯时再看
 

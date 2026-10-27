@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-25",
+  "tool": "image_gen.imagegen",
+  "receipts": [
+    {
+      "chapter": "visits",
+      "name": "visits-gallery-v1",
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-deb13186-852e-46ae-90d4-adc0476ff028.png",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "png": {
+        "path": "assets/course-journey/modules-v5/visits-gallery-v1.png",
+        "bytes": 2607857,
+        "sha256": "bb39770355d95cabd6971ebde0d98632c58de65af8a59df86fa75939e45c1385"
+      },
+      "webp": {
+        "path": "assets/course-journey/modules-v5/visits-gallery-v1.webp",
+        "bytes": 393810,
+        "sha256": "b3455251e6ae4f93f3472e74836b844814229d8cfe582571f5a21b4b9b2309f7"
+      },
+      "processing": "Original PNG copied byte-for-byte; WebP encoding only, quality 90. No resize, crop, recolor, composite or alpha removal."
+    },
+    {
+      "chapter": "kindness",
+      "name": "kindness-courtyard-v1",
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-0512d6ed-1e19-496d-83ea-fdf3396a9f78.png",
+      "width": 724,
+      "height": 2172,
+      "alpha": false,
+      "png": {
+        "path": "assets/course-journey/modules-v5/kindness-courtyard-v1.png",
+        "bytes": 2793131,
+        "sha256": "8b0c3768306087a8c34ebd52947a4a5c44aff00bf6e68ef59fc5a186368c9e52"
+      },
+      "webp": {
+        "path": "assets/course-journey/modules-v5/kindness-courtyard-v1.webp",
+        "bytes": 476294,
+        "sha256": "26573da419fac04ff45a78879d3829dac072aafd5b9a1dc35c43ea759ef5a840"
+      },
+      "processing": "Original PNG copied byte-for-byte; WebP encoding only, quality 90. No resize, crop, recolor, composite or alpha removal."
+    }
+  ],
+  "status": "adopted after native-image and six-course phone/desktop composite review",
+  "references": [
+    {
+      "path": "assets/course-journey/modules-v4/neighborhood-town-v1.png",
+      "sha256": "b0820c8379f85f31d76a0c2bfbab3ba8fb0cbcce0f5a427b26ad80605676dde1"
+    },
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.png",
+      "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a"
+    }
+  ],
+  "characterPolicy": "The six accepted character WebPs are reused byte-for-byte. New environment images contain no people or lesson props."
+}

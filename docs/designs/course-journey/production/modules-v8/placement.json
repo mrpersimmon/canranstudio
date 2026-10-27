@@ -1,0 +1,824 @@
+{
+  "chapters": {
+    "making": {
+      "world": {
+        "file": "modules-v8/making-mobile-clearance-v1.webp",
+        "png": "modules-v8/making-mobile-clearance-v1.png",
+        "width": 724,
+        "height": 2172,
+        "ids": [
+          "unit37-38",
+          "unit39-40",
+          "unit41-42"
+        ],
+        "floor": [
+          0.27,
+          0.47,
+          0.75,
+          0.61
+        ],
+        "patchRadii": [
+          0.29,
+          0.08
+        ],
+        "alignSilhouette": true,
+        "previousFile": "modules-v6/making-workshop-v2.webp"
+      },
+      "sourceSectionHeight": 724,
+      "characters": {
+        "unit37-38": {
+          "source": {
+            "file": "unit37-38-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5047846889952152,
+              0.9027113237639554
+            ],
+            "bounds": [
+              0.06618819776714513,
+              0.21770334928229665,
+              0.9433811802232854,
+              0.9027113237639554
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.5255413271245634,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        },
+        "unit39-40": {
+          "source": {
+            "file": "unit39-40-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49800637958532695,
+              0.9242424242424242
+            ],
+            "bounds": [
+              0.03668261562998405,
+              0.11004784688995216,
+              0.9593301435406698,
+              0.9242424242424242
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.442154750244858,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        },
+        "unit41-42": {
+          "source": {
+            "file": "unit41-42-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.507177033492823,
+              0.9529505582137161
+            ],
+            "bounds": [
+              0.08771929824561403,
+              0.0733652312599681,
+              0.9266347687400319,
+              0.9529505582137161
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4092837715321849,
+            "visualBottom": 0.56,
+            "floor": [
+              0.27,
+              0.47,
+              0.75,
+              0.61
+            ],
+            "patchRadii": [
+              0.29,
+              0.08
+            ]
+          }
+        }
+      }
+    },
+    "everyday": {
+      "world": {
+        "file": "modules-v8/everyday-mobile-clearance-v1.webp",
+        "png": "modules-v8/everyday-mobile-clearance-v1.png",
+        "width": 724,
+        "height": 2172,
+        "ids": [
+          "unit55-56",
+          "unit57-58",
+          "unit59-60"
+        ],
+        "floor": [
+          0.24,
+          0.46,
+          0.76,
+          0.61
+        ],
+        "patchRadii": [
+          0.28,
+          0.075
+        ],
+        "alignSilhouette": true,
+        "theme": "灯火邻里",
+        "description": "暖灯下的石路连接家庭阅读角、书架与文具店",
+        "previousFile": "modules-v7/everyday-evening-v2.webp"
+      },
+      "sourceSectionHeight": 724,
+      "characters": {
+        "unit55-56": {
+          "source": {
+            "file": "unit55-56-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.49681020733652315,
+              0.8939393939393939
+            ],
+            "bounds": [
+              0.05582137161084529,
+              0.11483253588516747,
+              0.937799043062201,
+              0.8939393939393939
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.46206755373592634,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit57-58": {
+          "source": {
+            "file": "unit57-58-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5055821371610846,
+              0.9505582137161085
+            ],
+            "bounds": [
+              0.03269537480063796,
+              0.11084529505582137,
+              0.9784688995215312,
+              0.9505582137161085
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4287179487179487,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit59-60": {
+          "source": {
+            "file": "unit59-60-landmark-v2.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5107655502392344,
+              0.919457735247209
+            ],
+            "bounds": [
+              0.06539074960127592,
+              0.12121212121212122,
+              0.956140350877193,
+              0.919457735247209
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.45098901098901095,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "kindness": {
+      "world": {
+        "file": "modules-v8/kindness-mobile-clearance-v1.webp",
+        "png": "modules-v8/kindness-mobile-clearance-v1.png",
+        "width": 724,
+        "height": 2171,
+        "ids": [
+          "unit19-20",
+          "unit21-22",
+          "unit23-24"
+        ],
+        "floor": [
+          0.3,
+          0.5,
+          0.72,
+          0.6
+        ],
+        "patchRadii": [
+          0.28,
+          0.06
+        ],
+        "alignSilhouette": true,
+        "previousFile": "modules-v5/kindness-courtyard-v1.webp"
+      },
+      "sourceSectionHeight": 723.6666666666666,
+      "characters": {
+        "unit19-20": {
+          "source": {
+            "file": "icecream-family-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.519537,
+              0.96571
+            ],
+            "bounds": [
+              0.063796,
+              0.059809,
+              0.975279,
+              0.96571
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.49999980130279137,
+              0.56
+            ],
+            "width": 0.39739441727076136,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        },
+        "unit21-22": {
+          "source": {
+            "file": "red-book-pair-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.52512,
+              0.952951
+            ],
+            "bounds": [
+              0.098086,
+              0.097289,
+              0.952153,
+              0.952951
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5000002103634379,
+              0.56
+            ],
+            "width": 0.42072687579908885,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        },
+        "unit23-24": {
+          "source": {
+            "file": "shelf-glasses-pair-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.521132,
+              0.951356
+            ],
+            "bounds": [
+              0.082935,
+              0.093301,
+              0.95933,
+              0.951356
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.49999979022323743,
+              0.56
+            ],
+            "width": 0.4195535251236809,
+            "visualBottom": 0.56,
+            "floor": [
+              0.3,
+              0.5,
+              0.72,
+              0.6
+            ],
+            "patchRadii": [
+              0.28,
+              0.06
+            ]
+          }
+        }
+      }
+    },
+    "caring": {
+      "world": {
+        "file": "modules-v8/caring-mobile-clearance-v1.webp",
+        "png": "modules-v8/caring-mobile-clearance-v1.png",
+        "width": 724,
+        "height": 2172,
+        "ids": [
+          "unit61-62",
+          "unit63-64",
+          "unit65-66"
+        ],
+        "floor": [
+          0.24,
+          0.46,
+          0.76,
+          0.61
+        ],
+        "patchRadii": [
+          0.28,
+          0.075
+        ],
+        "alignSilhouette": true,
+        "theme": "安心花园",
+        "description": "同层花园铺地连接家庭会客处、休息门廊和家门",
+        "floors": {
+          "unit65-66": [
+            0.28,
+            0.48,
+            0.69,
+            0.61
+          ]
+        },
+        "previousFile": "modules-v7/caring-veranda-v2.webp"
+      },
+      "sourceSectionHeight": 724,
+      "characters": {
+        "unit61-62": {
+          "source": {
+            "file": "unit61-62-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5059808612440191,
+              0.9314194577352473
+            ],
+            "bounds": [
+              0.04784688995215311,
+              0.1076555023923445,
+              0.9641148325358851,
+              0.9314194577352473
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.43701839303000956,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit63-64": {
+          "source": {
+            "file": "unit63-64-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5079744816586922,
+              0.9465709728867624
+            ],
+            "bounds": [
+              0.03110047846889952,
+              0.07496012759170653,
+              0.9848484848484849,
+              0.9465709728867624
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.41302836230558093,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit65-66": {
+          "source": {
+            "file": "unit65-66-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5279106858054227,
+              0.9449760765550239
+            ],
+            "bounds": [
+              0.09170653907496013,
+              0.07097288676236045,
+              0.9641148325358851,
+              0.9449760765550239
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4118978102189781,
+            "visualBottom": 0.56,
+            "floor": [
+              0.28,
+              0.48,
+              0.69,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "memories": {
+      "world": {
+        "file": "modules-v8/memories-mobile-clearance-v1.webp",
+        "png": "modules-v8/memories-mobile-clearance-v1.png",
+        "width": 724,
+        "height": 2172,
+        "ids": [
+          "unit67-68",
+          "unit69-70",
+          "unit71-72"
+        ],
+        "floor": [
+          0.24,
+          0.46,
+          0.76,
+          0.61
+        ],
+        "patchRadii": [
+          0.28,
+          0.075
+        ],
+        "alignSilhouette": true,
+        "theme": "街角时光廊",
+        "description": "弧形砖墙与绿条纹遮阳棚串起商店、照片橱窗与会客门廊",
+        "previousFile": "modules-v7/memories-arcade-v1.webp"
+      },
+      "sourceSectionHeight": 724,
+      "characters": {
+        "unit67-68": {
+          "source": {
+            "file": "unit67-68-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5139553429027113,
+              0.9425837320574163
+            ],
+            "bounds": [
+              0.07814992025518341,
+              0.094896331738437,
+              0.9497607655502392,
+              0.9425837320574163
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4246848541862653,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit69-70": {
+          "source": {
+            "file": "unit69-70-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5187400318979266,
+              0.9585326953748007
+            ],
+            "bounds": [
+              0.15550239234449761,
+              0.06778309409888357,
+              0.8819776714513556,
+              0.9585326953748007
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4041539838854073,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        },
+        "unit71-72": {
+          "source": {
+            "file": "unit71-72-landmark-v1.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5,
+              0.9178628389154705
+            ],
+            "bounds": [
+              0.06299840510366826,
+              0.09888357256778309,
+              0.9370015948963317,
+              0.9178628389154705
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.5,
+              0.56
+            ],
+            "width": 0.4395715676728335,
+            "visualBottom": 0.56,
+            "floor": [
+              0.24,
+              0.46,
+              0.76,
+              0.61
+            ],
+            "patchRadii": [
+              0.28,
+              0.075
+            ]
+          }
+        }
+      }
+    },
+    "opening": {
+      "world": {
+        "file": "modules-v8/opening-mobile-clearance-v2.webp",
+        "png": "modules-v8/opening-mobile-clearance-v2.png",
+        "width": 724,
+        "height": 2171,
+        "ids": [
+          "unit1-2",
+          "unit3-4",
+          "unit5-6"
+        ],
+        "alignSilhouette": true,
+        "previousFile": "modules-v3/opening-world-v1.webp"
+      },
+      "sourceSectionHeight": 723.6666666666666,
+      "characters": {
+        "unit1-2": {
+          "source": {
+            "file": "handbag-couple.webp",
+            "width": 1254,
+            "height": 1254,
+            "anchor": [
+              0.5,
+              0.92504
+            ],
+            "bounds": [
+              0.1013,
+              0.1188,
+              0.9147,
+              0.92504
+            ]
+          },
+          "position": {
+            "index": 0,
+            "feet": [
+              0.4964278626711649,
+              0.56
+            ],
+            "width": 0.4465171661043858,
+            "visualBottom": 0.56,
+            "floor": [
+              0.2,
+              0.42,
+              0.8,
+              0.64
+            ],
+            "patchRadii": [
+              0.36,
+              0.09
+            ]
+          }
+        },
+        "unit3-4": {
+          "source": {
+            "file": "umbrella-counter-v1.webp",
+            "width": 1402,
+            "height": 1122,
+            "anchor": [
+              0.51,
+              0.95633
+            ],
+            "bounds": [
+              0.1505,
+              0.0998,
+              0.871,
+              0.95633
+            ]
+          },
+          "position": {
+            "index": 1,
+            "feet": [
+              0.4996061087420821,
+              0.56
+            ],
+            "width": 0.5251883438904806,
+            "visualBottom": 0.56,
+            "floor": [
+              0.2,
+              0.42,
+              0.8,
+              0.64
+            ],
+            "patchRadii": [
+              0.36,
+              0.09
+            ]
+          }
+        },
+        "unit5-6": {
+          "source": {
+            "file": "friends-trio-v1.webp",
+            "width": 1536,
+            "height": 1024,
+            "anchor": [
+              0.51,
+              0.9258
+            ],
+            "bounds": [
+              0.1107,
+              0.1494,
+              0.9102,
+              0.9258
+            ]
+          },
+          "position": {
+            "index": 2,
+            "feet": [
+              0.4996870170015456,
+              0.56
+            ],
+            "width": 0.6955177743431221,
+            "visualBottom": 0.56,
+            "floor": [
+              0.2,
+              0.42,
+              0.8,
+              0.64
+            ],
+            "patchRadii": [
+              0.36,
+              0.09
+            ]
+          }
+        }
+      }
+    }
+  }
+}

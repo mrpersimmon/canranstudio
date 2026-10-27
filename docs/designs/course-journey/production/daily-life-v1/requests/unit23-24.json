@@ -1,0 +1,9 @@
+{
+  "prompt": "Use case: identity-preserve / precise-object-edit.\nImage 1 is the exact full-body two-person map sprite to EDIT. Image 2 is the Lesson 23 keepsake story reference, not an edit target. Image 3 is the accepted first-lesson rendering style.\nChange ONLY the book interaction to the correct-glasses interaction. Keep the same older man's grey hair, grey moustache, round glasses, cream shirt, sage waistcoat, grey-green trousers and brown shoes. Keep Jane's brown ponytail, dusty-rose dress with broad ivory collar, dark leggings and brown shoes. Keep both adult proportions, friendly expressions, finish, upper-left light, full bodies, overall positions and canvas aspect.\nRemove the red book entirely. The man LEFT now carries ONE slim ivory tray with exactly THREE empty translucent pale-green drinking glasses upright side-by-side at waist height. Both his hands support the tray. Jane RIGHT has empty hands, one open palm in a courteous just-handed-over gesture. This is the ending after Jane handed him the ones from the shelf. Do not add a fourth glass, a book, shelves, floor, furniture, drink, floating symbols or another person.\nFully transparent alpha background with clean antialiased outline only, no surrounding dark/colored haze or cast floor shadow. Keep all heads, hands, shoes and tray inside the frame with generous transparent margin, including under shoes. No text, lettering, UI, stars, gold badge, logo or watermark.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/red-book-pair-v1.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit23-24/keepsake-story-v1.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png"
+  ],
+  "transparent_background": true
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "command": "node docs/designs/course-journey/production/modules-v7/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\"readOnly\":true,\"files\":123,\"matched\":123,\"actualGenerationCalls\":29,\"adoptedEnvironments\":16}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v6/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "36 frozen files verified; no files changed.\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v5/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"files\": 16,\n  \"matched\": 16,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v4/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"version\": \"modules-v4-town-2026-10-25\",\n  \"readOnly\": true,\n  \"filesChecked\": 6,\n  \"generationCalls\": 3,\n  \"adoptedAssets\": 1,\n  \"passed\": true,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/modules-v3/verify-manifest.cjs",
+    "exitCode": 0,
+    "output": "{\n  \"version\": \"modules-v3-art-2026-10-24\",\n  \"readOnly\": true,\n  \"filesChecked\": 11,\n  \"filesMatched\": 11,\n  \"adoptedAssetCount\": 3,\n  \"generationCallCount\": 3,\n  \"artFileCount\": 6,\n  \"evidenceFileCount\": 5,\n  \"passed\": true,\n  \"failures\": []\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/visits-v1/replay-prompt.cjs --verify",
+    "exitCode": 0,
+    "output": "{\n  \"ok\": true,\n  \"version\": \"visits-v1\",\n  \"lockedFiles\": 45,\n  \"jobs\": [\n    \"unit13-14\",\n    \"unit15-16\",\n    \"unit17-18\",\n    \"unit13-14-refinement\",\n    \"unit15-16-refinement\",\n    \"unit17-18-refinement\",\n    \"environment-mobile\",\n    \"environment-desktop\",\n    \"environment-mobile-floor\"\n  ]\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/daily-life-v1/replay-prompt.cjs --verify",
+    "exitCode": 0,
+    "output": "{\n  \"ok\": true,\n  \"version\": \"daily-life-v1\",\n  \"lockedFiles\": 61,\n  \"jobs\": [\n    \"home-desktop\",\n    \"home-mobile\",\n    \"kindness-desktop\",\n    \"kindness-mobile\",\n    \"unit19-20\",\n    \"unit21-22\",\n    \"unit23-24\",\n    \"unit25-26\",\n    \"unit27-28\",\n    \"unit29-30-broom-refinement\",\n    \"unit29-30\"\n  ]\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "node docs/designs/course-journey/production/complete-journey-v1/replay-prompt.cjs --verify",
+    "exitCode": 0,
+    "output": "Warning: truncated output (original token count: 571)\nTotal output lines: 112\n\n{\n  \"ok\": true,\n  \"version\": \"complete-journey-v1\",\n  \"lockedFiles\": 545,\n  \"jobs\": [\n    \"appointments-desktop\",\n    \"appointments-mobile\",\n    \"caring-desktop\",\n    \"caring-mobile\",\n    \"choices-desktop\",\n    \"choices-mobile\",\n    \"decisions-desktop\",\n    \"decisions-mobile\",\n    \"departures-desktop\",\n    \"departures-mobile\",\n    \"everyday-desktop\",\n    \"everyday-mobile\",\n    \"hospitality-desktop\",\n    \"hospitality-mobile\",\n    \"learning-desktop\",\n    \"learning-mobile\",\n    \"making-desktop\",\n    \"making-mobile\",\n    \"memories-desktop\",\n    \"memories-mobile\",\n    \"messages-desktop\",\n    \"messages-mobile\",\n    \"news-desktop\",\n    \"news-mobile\",\n    \"outdoors-desktop\",\n    \"outdoors-mobile\",\n    \"possibilities-desktop\",\n    \"possibilities-mobile\",\n    \"preparations-desktop\",\n    \"preparations-mobile\",\n    \"seasons-desktop\",\n    \"seasons-mobile\",\n    \"stories-desktop\",\n    \"stories-mobile\",\n    \"surprises-desktop\",\n    \"surprises-mobile\",\n    \"unit101-102\",\n    \"unit103-104\",\n    \"unit105…71 tokens truncated…30\",\n    \"unit131-132\",\n    \"unit133-134\",\n    \"unit135-136\",\n    \"unit137-138\",\n    \"unit139-140\",\n    \"unit141-142-cutout\",\n    \"unit141-142\",\n    \"unit143-144\",\n    \"unit31-32\",\n    \"unit33-34\",\n    \"unit35-36\",\n    \"unit37-38\",\n    \"unit39-40\",\n    \"unit41-42\",\n    \"unit43-44-identity\",\n    \"unit43-44\",\n    \"unit45-46\",\n    \"unit47-48\",\n    \"unit49-50\",\n    \"unit51-52\",\n    \"unit53-54\",\n    \"unit55-56-full-body\",\n    \"unit55-56\",\n    \"unit57-58\",\n    \"unit59-60-full-body\",\n    \"unit59-60\",\n    \"unit61-62\",\n    \"unit63-64\",\n    \"unit65-66\",\n    \"unit67-68\",\n    \"unit69-70\",\n    \"unit71-72\",\n    \"unit73-74\",\n    \"unit75-76\",\n    \"unit77-78\",\n    \"unit79-80\",\n    \"unit81-82-identity\",\n    \"unit81-82\",\n    \"unit83-84\",\n    \"unit85-86\",\n    \"unit87-88\",\n    \"unit89-90-clean\",\n    \"unit89-90\",\n    \"unit91-92\",\n    \"unit93-94\",\n    \"unit95-96\",\n    \"unit97-98\",\n    \"unit99-100\",\n    \"woodland-desktop-clean\",\n    \"woodland-desktop\",\n    \"woodland-mobile-clean\",\n    \"woodland-mobile\"\n  ]\n}\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "git diff --check",
+    "exitCode": 0,
+    "output": "warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'design-qa.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/award-version/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/butcher-version/publish/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'scripts/check-workflow.config.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'server/app.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'server/public/portal.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/login/access.spec.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/login/course-banners.spec.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/login/recovery.spec.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/login/student-accounts.spec.js', LF will be replaced by CRLF the next time Git touches it\n",
+    "status": "fulfilled"
+  },
+  {
+    "command": "git branch --show-current",
+    "exitCode": 0,
+    "output": "codex/fronted-opt-version\n",
+    "status": "fulfilled"
+  }
+]

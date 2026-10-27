@@ -1,0 +1,48 @@
+{
+  "name": "distant-garden-v1",
+  "tool": "built-in image_gen",
+  "calls": 1,
+  "date": "2026-10-24",
+  "prompt": "Use case: illustration-story. Asset: a very quiet DISTANT environment backing plate behind a separate foreground learning-journey map.\nBoth input images are STYLE AND COLOR REFERENCES ONLY. Keep their warm upper-left sunlight, soft storybook painted rendering, cream stone / coral salmon accents and cypress green palette. Do not recreate their foreground, paths, courtyards or architecture layout.\nCreate one opaque landscape image, ideally 1536x1024, showing a distant gentle green hillside and a few tiny coral-roof village silhouettes far away through atmospheric haze. Soft-focus tree canopies can loosely frame the outer left and right edges. The center 60 percent should be calm pale warm cream and grey-green haze, almost empty, with very low contrast; it will be covered by the real foreground map. Small distant buildings should be subdued and occupy only a small part of the upper side areas, clearly far behind the main content.\nThis image must contain NO walkable near-field surfaces: no nearby floor, paving, roads, paths, terraces, courtyards, staircases, bridges, platforms, arches at human scale, circular discs or pedestals. No second road network. No ocean or large water field. No foreground subject or sharp architectural detail. Keep all recognizable features atmospheric, small and remote, softer and lower contrast than the references.\nThe output is only distant vegetation, rolling hills, restrained warm tiny village forms, soft daylight and haze. Preserve the approved world's mood without inventing a new setting. No people, animals, lesson props, text, numbers, labels, UI, stars, medals, pins, frames or watermark.",
+  "references": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-desktop-v2.webp",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v3/opening-world-v1.png"
+  ],
+  "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a16e20-d7de-7cc3-b4ce-1676f6ce34ae/exec-75d38636-9826-4d31-b65b-593034016600.png",
+  "transparent_background": false,
+  "visualReview": {
+    "adopted": true,
+    "scope": "Distant atmosphere only. Soft-focus hills and tree canopy, small distant coral-roof villages, quiet cream/grey-green central haze. No near-field roads, floors, courtyards, steps, bridges or platforms observed. No people, text or UI.",
+    "limitations": "Final blending with the foreground and desktop crop still requires real-page validation by the parent."
+  },
+  "metadata": {
+    "width": 1536,
+    "height": 1024,
+    "format": "png",
+    "space": "srgb",
+    "hasAlpha": false
+  },
+  "encoding": "Native PNG bytes retained; WebP quality 90 encoding only. No crop, scaling or pixel edits.",
+  "files": [
+    {
+      "path": "assets/course-journey/modules-v3/distant-garden-v1.png",
+      "sha256": "24dd2d3b0f105bb8713fede406131b84765b18cdad46e029c9e297cdba085dfa",
+      "bytes": 1708952
+    },
+    {
+      "path": "assets/course-journey/modules-v3/distant-garden-v1.webp",
+      "sha256": "5fbd6176888ac3b0f44e6ebe47cf1259400398584d60ae107af6ee34b0cce90e",
+      "bytes": 102448
+    }
+  ],
+  "referenceHashes": [
+    {
+      "path": "assets/course-journey/opening-desktop-v2.webp",
+      "sha256": "e5f29bc8d0124a81dbcb24708c0cf99ad382afc6213a271ef0dc5ae28fdb77ab"
+    },
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.png",
+      "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a"
+    }
+  ]
+}

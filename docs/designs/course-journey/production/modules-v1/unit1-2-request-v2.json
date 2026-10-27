@@ -1,0 +1,8 @@
+{
+  "prompt": "Use case: precise-object-edit. Edit target image 1 is a transparent environment ground module generated for a game; reference image 2 is the approved environment art style. Preserve the beautiful cream-stone / coral masonry / leafy garden rendering, no characters anywhere. Correct only the framing and floor proportions of image 1: fit the entire platform, arch and all plants inside x=.08..92 and y=.08..92 of a 1536x1024 transparent canvas. Remove the huge diffuse colored glow around the silhouette; transparency must be clean outside the island with only a delicate small contact shadow directly beneath. Make the front wall shallower so the cream standing surface extends further down, remaining level and unobstructed at y=.72 across x=.22..78. The front floor lip should be at approximately y=.80, with low coral wall below to y=.9. Keep all plants and walls outside the broad central standing surface x=.18..82,y=.56..78. Small arch at rear only. Real alpha background, no white rectangle, no checkerboard. Do not add any person, human silhouette, animal, furniture, letter, digit, label, star, medal, handbag or UI. The central empty floor is specifically reserved for an existing character cutout; output only the empty environment ground module.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/.codex/generated_images/01a1693a-2b1d-7312-82e7-5ba94390b7f4/exec-da96dd06-de28-4d23-8421-2cecd9f271c3.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp"
+  ],
+  "transparent_background": true
+}

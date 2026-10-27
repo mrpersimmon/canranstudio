@@ -1,0 +1,11 @@
+{
+  "chapter": "departures",
+  "name": "departures-promenade-v4",
+  "attempt": 4,
+  "prompt": "Use case: precise-object-edit. Image 1 is the EDIT TARGET and its exact native canvas is 724x2172. KEEP THAT EXACT CANVAS. Image 2 is a visual guide for the corrected single-level paving, not a canvas-size source. Edit image 1 to remove the two central diagonal floor/ceiling slabs around one-third and two-thirds height, using the continuous open paving treatment in image 2. Keep every house facade, curved terminal glass, station canopy, bench, flower, palette and lighting from the image family; join the three stops on one level, no crossing floor lip or ceiling. The centre x20%-80% must be one continuous clear stone path from top to bottom, with no stairs, no wall or rail across it. Preserve empty standing bands and space below for UI that will be added in code; do not draw UI or characters. Keep image 1's EXACT 724 pixels wide by 2172 pixels high dimensions, NOT the one-row-short dimensions of image 2. Opaque RGB PNG.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v1.png",
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v7/departures-promenade-v3.png"
+  ],
+  "transparent_background": false
+}

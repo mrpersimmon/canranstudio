@@ -1,0 +1,18 @@
+{
+  "id": "mobile-directory",
+  "template": "prompts/mobile-directory.txt",
+  "referenceIds": [
+    "approvedMobile",
+    "brand",
+    "unit49"
+  ],
+  "transparentBackground": false,
+  "variables": {
+    "viewport": "390 x 844 CSS px",
+    "query": "Lesson 50",
+    "selected_label": "Lesson 49–50",
+    "selected_title": "晚餐采购大冒险",
+    "stars": 5,
+    "course_count": 45
+  }
+}

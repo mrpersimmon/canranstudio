@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:12:37.735Z",
+  "job": "seasons-desktop",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/seasons-desktop.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-50a2e2a1-bd2e-4d18-869c-7ebd3194ad67.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-desktop-v1.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/seasons-desktop-v1.png",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 2412360,
+      "sha256": "bb00bda9d8472e42a3367a73d3bea2d0eaffdd2756dcaf7683927cfe453a70cc",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/seasons-desktop-v1.webp",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 365146,
+      "sha256": "189bd59cbdb21f85e527547299a1e4d074accca8cd6bae5e6dd41326674d13ea",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,442 @@
+{
+  "date": "2026-10-25",
+  "method": "Visually identified source shoe/wheel horizontal windows; bottommost alpha >=128 pixel within each window, below 80% source height. Not derived from runtime feet anchors. Source pixels unchanged.",
+  "floorByChapter": {
+    "visits": [
+      0.25,
+      0.49,
+      0.77,
+      0.61
+    ],
+    "kindness": [
+      0.3,
+      0.5,
+      0.72,
+      0.6
+    ]
+  },
+  "characters": {
+    "unit13-14": {
+      "file": "dress-friends-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "530fb6814a93c8eac50016aba904d79e6c6af2ee363b33149d9ba918399fb3f8",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            170,
+            250
+          ],
+          "pixel": [
+            204,
+            1151
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            350,
+            430
+          ],
+          "pixel": [
+            417,
+            1138
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            845,
+            920
+          ],
+          "pixel": [
+            850,
+            1146
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1080,
+            1150
+          ],
+          "pixel": [
+            1124,
+            1150
+          ]
+        }
+      ]
+    },
+    "unit15-16": {
+      "file": "passport-travelers-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "d4c62c5346a653c6dc682a4815ab6ebb55ad27e4f0ccddaa82ba8a88fbc97e25",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            270,
+            335
+          ],
+          "pixel": [
+            331,
+            947
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            425,
+            485
+          ],
+          "pixel": [
+            469,
+            936
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            770,
+            825
+          ],
+          "pixel": [
+            771,
+            941
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            870,
+            925
+          ],
+          "pixel": [
+            872,
+            949
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1030,
+            1090
+          ],
+          "pixel": [
+            1036,
+            942
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1160,
+            1210
+          ],
+          "pixel": [
+            1169,
+            943
+          ]
+        },
+        {
+          "kind": "luggage-wheel",
+          "sourceWindow": [
+            575,
+            595
+          ],
+          "pixel": [
+            586,
+            913
+          ]
+        },
+        {
+          "kind": "luggage-wheel",
+          "sourceWindow": [
+            605,
+            630
+          ],
+          "pixel": [
+            617,
+            921
+          ]
+        },
+        {
+          "kind": "luggage-wheel",
+          "sourceWindow": [
+            1215,
+            1250
+          ],
+          "pixel": [
+            1234,
+            937
+          ]
+        },
+        {
+          "kind": "luggage-wheel",
+          "sourceWindow": [
+            1330,
+            1365
+          ],
+          "pixel": [
+            1331,
+            939
+          ]
+        }
+      ]
+    },
+    "unit17-18": {
+      "file": "office-introduction-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "76b56f534f84e6cf4d552e38d51982441363ede96a71086c241a5765a96ea2d2",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            195,
+            275
+          ],
+          "pixel": [
+            247,
+            982
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            405,
+            475
+          ],
+          "pixel": [
+            454,
+            974
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            630,
+            710
+          ],
+          "pixel": [
+            659,
+            977
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            835,
+            920
+          ],
+          "pixel": [
+            906,
+            977
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1070,
+            1140
+          ],
+          "pixel": [
+            1084,
+            976
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1260,
+            1350
+          ],
+          "pixel": [
+            1321,
+            981
+          ]
+        }
+      ]
+    },
+    "unit19-20": {
+      "file": "icecream-family-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "88a6e91c270b7ba7f89a321306bccc04bda586808905b3db43d8cd9a4102b921",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            150,
+            230
+          ],
+          "pixel": [
+            227,
+            1204
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            360,
+            455
+          ],
+          "pixel": [
+            447,
+            1188
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            590,
+            650
+          ],
+          "pixel": [
+            595,
+            1186
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            710,
+            770
+          ],
+          "pixel": [
+            711,
+            1199
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            880,
+            945
+          ],
+          "pixel": [
+            904,
+            1195
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            1045,
+            1120
+          ],
+          "pixel": [
+            1050,
+            1211
+          ]
+        }
+      ]
+    },
+    "unit21-22": {
+      "file": "red-book-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "6ea1c1b82c9f94631cdde2fe75a78183ff8440016f99be753dca246e96d3b8c2",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            230,
+            325
+          ],
+          "pixel": [
+            323,
+            1195
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            440,
+            520
+          ],
+          "pixel": [
+            496,
+            1173
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            770,
+            850
+          ],
+          "pixel": [
+            800,
+            1184
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            940,
+            1000
+          ],
+          "pixel": [
+            944,
+            1193
+          ]
+        }
+      ]
+    },
+    "unit23-24": {
+      "file": "shelf-glasses-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "sha256": "5c66cbf8060c302918721a95be60abf063936c27d8cb3663a1dea31b0eb316ae",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            230,
+            325
+          ],
+          "pixel": [
+            311,
+            1190
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            440,
+            520
+          ],
+          "pixel": [
+            482,
+            1170
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            770,
+            850
+          ],
+          "pixel": [
+            803,
+            1181
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceWindow": [
+            940,
+            1000
+          ],
+          "pixel": [
+            947,
+            1192
+          ]
+        }
+      ]
+    }
+  }
+}

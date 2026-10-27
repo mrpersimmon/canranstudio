@@ -1,0 +1,12 @@
+[
+  {
+    "sizeIndex": 16,
+    "size": [
+      956,
+      440
+    ],
+    "counted": false,
+    "reason": "One 16-chapter CDP transaction exceeded 20 seconds; subsequent inspection found final chapter woodland fully ready.",
+    "action": "Split each viewport into four-chapter debugger transactions; retain all assertions and coverage."
+  }
+]

@@ -82,7 +82,7 @@ test('三单元真实获星入册、跨设备、翻页与动图不重复请求�
  const guest=await browser.newContext(),anonymous=await guest.newPage();expect((await anonymous.request.get(base+'api/awards')).status()).toBe(401);await anonymous.goto(base+'awards/');await expect(anonymous.getByRole('button',{name:'进入我的课程'})).toBeVisible();await guest.close();
  const someone=await studentLogin(browser,other,base);await someone.page.goto(base+'awards/');await expect(someone.page.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(someone.page.locator('.certificate')).toHaveCount(0);
  const isolated=await(await someone.page.request.get(base+'api/awards?studentId='+saved.student.id)).json();expect(isolated.cards).toEqual([]);
- const switcher=await first.context.newPage();await switcher.goto(base);await switcher.getByRole('button',{name:'切换学生',exact:true}).click();await expect(learner.locator('.certificate')).toHaveCount(0);await expect(learner.getByRole('heading',{name:'请重新登录'})).toBeVisible();await signIn(switcher,other,base);await expect(learner.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(learner.locator('.certificate')).toHaveCount(0);
+ const switcher=await first.context.newPage();await switcher.goto(base);await switcher.locator('.student-account > summary').click();await switcher.getByRole('button',{name:'退出登录',exact:true}).click();await expect(learner.locator('.certificate')).toHaveCount(0);await expect(learner.getByRole('heading',{name:'请重新登录'})).toBeVisible();await signIn(switcher,other,base);await expect(learner.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(learner.locator('.certificate')).toHaveCount(0);
  expect(errors).toEqual([]);await first.context.close();await second.context.close();await someone.context.close();
 });
 

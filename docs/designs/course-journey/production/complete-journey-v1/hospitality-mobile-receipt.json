@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:06:22.565Z",
+  "job": "hospitality-mobile",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/hospitality-mobile.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2b46cb63-1963-4b7c-9d85-695975ad705c.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-mobile-v2.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/hospitality-mobile-v1.png",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 2289270,
+      "sha256": "7f3fbc3051c8bd9be708a41dff9042a6653bf9fb864f778a2c858437266e8bae",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/hospitality-mobile-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 326812,
+      "sha256": "93c282dd36c1e67c5a477c054e8c5aa1b3280d325a06c140f4af7d11ad4dede6",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

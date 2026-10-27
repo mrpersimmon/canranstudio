@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit13-14",
+  "selectedForRuntime": false,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-7625567e-4e8a-43e5-99ee-ffe0c724a179.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/unit13-14-request.json",
+  "referenceOrder": [
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/course-journey/handbag-couple.png",
+    "assets/unit13-14/keepsake-story-v1.webp",
+    "assets/unit13-14/cast-wear-v1.webp"
+  ],
+  "transparentBackgroundRequested": true,
+  "outputs": [
+    {
+      "path": "docs/designs/course-journey/production/visits-v1/drafts/unit13-14-initial.png",
+      "format": "png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1770511,
+      "sha256": "7d61734813c52f608909c56bff4b123ce1c459c9ac0f1f91f53e0d5ecef938f7",
+      "hasAlpha": true,
+      "preservation": "Native PNG bytes preserved exactly"
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 630330,
+    "totalPixels": 1572516,
+    "visibleGeometryThreshold": 16,
+    "note": "Runtime bounds use alpha > 16 to exclude faint isolated alpha noise. Full support is separately retained; no pixels were edited or removed.",
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          36,
+          39,
+          1237,
+          1235
+        ],
+        "normalized": [
+          0.028708133971291867,
+          0.03110047846889952,
+          0.9864433811802232,
+          0.9848484848484849
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          40,
+          81,
+          1226,
+          1212
+        ],
+        "normalized": [
+          0.03189792663476874,
+          0.0645933014354067,
+          0.9776714513556619,
+          0.9665071770334929
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          41,
+          81,
+          1225,
+          1212
+        ],
+        "normalized": [
+          0.03269537480063796,
+          0.0645933014354067,
+          0.9768740031897927,
+          0.9665071770334929
+        ]
+      }
+    ]
+  }
+}

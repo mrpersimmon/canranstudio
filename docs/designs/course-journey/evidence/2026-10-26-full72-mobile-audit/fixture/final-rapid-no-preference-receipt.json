@@ -1,0 +1,19 @@
+{
+  "mode": "no-preference",
+  "actualPaused": [
+    "http://127.0.0.1:4193/assets/course-journey/modules-v4/neighborhood-town-v1.webp?audit=audit72-rapid-normal"
+  ],
+  "sequence": [
+    "opening",
+    "neighborhood",
+    "woodland"
+  ],
+  "result": {
+    "name": "final-rapid-no-preference",
+    "from": "opening",
+    "to": "woodland",
+    "frames": 54,
+    "span": 1.0174500942230225,
+    "errors": []
+  }
+}

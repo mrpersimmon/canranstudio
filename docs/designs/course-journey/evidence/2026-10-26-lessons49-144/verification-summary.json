@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-26",
+  "finalMatrix": {
+    "date": "2026-10-26",
+    "scope": "New48 entries Lesson49-144; CUA Chromium, reduced motion, native-control event selection",
+    "sizes": 60,
+    "selections": 2880,
+    "geometryFailures": 0,
+    "edgeFailures": 0,
+    "headingFailures": 0,
+    "rewardGap": [
+      13.766087922943598,
+      13.897162332489074
+    ],
+    "maxSilhouetteRewardAxisDifference": 0.1169891357421875,
+    "maxSameSourcePatchEdgeDifference": 0.0104217529296875,
+    "signatureCount": 1,
+    "signature": "8a2f3c5fa074eb38600ebf7265af490ba4ecf048e39daba603d87d45e052c8fa"
+  },
+  "stars": {
+    "cases": 288,
+    "errors": 0
+  },
+  "existing": {
+    "cases": 96,
+    "errors": 0
+  },
+  "motionCases": 16,
+  "cachedAdjacentSwitches": {
+    "scenarios": 192,
+    "samples": 5760
+  },
+  "actualCourseNavigations": 48,
+  "gradeRecordsUnchanged": 72,
+  "phoneImages": 48,
+  "desktopChapterImages": 16,
+  "desktopMiddleImages": 3,
+  "finalScreenshot": "final-preview-phone.png",
+  "verificationBoundary": "CUA Chromium only; matrix includes final Lesson label grouping; stars, existing, motion, navigation and switches were captured before that text-only grouping change and reused because their behavior was unchanged. Final desktop and preview images include it."
+}

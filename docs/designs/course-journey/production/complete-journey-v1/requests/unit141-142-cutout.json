@@ -1,0 +1,7 @@
+{
+  "prompt": "Use case: precise-object-edit. Image 1 is the transparent map sprite to edit. Keep EXACTLY Sally, her mother, the blue-coated woman applying face powder, both compact red train benches, the powder compact, handbag, all faces, hairstyles, clothes, hands and complete shoes. REMOVE the large train WINDOW, its entire cream frame, the scenery visible through it, and every piece of wall BETWEEN or BEHIND the two benches. All removed areas are truly transparent. The remaining cutout is only three seated people and their two benches, with open transparent space between the seat backs and around heads. Keep the existing composition and scale, do not crop or erase the benches, bodies or feet. No replacement backdrop, no white rectangle, no ground, no shadow, no text or UI. This is a full-body character group to place into an existing map environment; the map already supplies the train station scenery.",
+  "referenced_image_paths": [
+    "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/unit141-142-landmark-v1.png"
+  ],
+  "transparent_background": true
+}

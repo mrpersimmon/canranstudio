@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "scope": "Lesson 5–8 open-courtyard scene edits",
+  "records": [
+    {
+      "id": "unit5-6",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in edit",
+      "prompt": "Use case: precise-object-edit.\nAsset type: production transparent local environment for Lesson 5–6 in a children's English learning journey map.\nInputs: Image 1 is the EDIT TARGET (current school courtyard platform). Image 2 is the approved continuous-world STYLE REFERENCE, not a replacement composition. Image 3 is an additional approved style reference.\nEdit ONLY the platform's disconnected island outline so it reads as an open stretch of a connected architectural journey. Preserve the small coral-roof cream school with teal doors, white daisies, green cypress trees, warm upper-left lighting, painterly soft 3D children's picture-book finish, camera angle and all central floor positioning.\nOutput exactly 1536 × 1024, landscape 3:2, genuine transparent alpha background. Retain the existing open cream paved standing area at normalized x 0.23–0.77 and y 0.56–0.75; do not move, obstruct, lower, or slope this central character contact surface.\nAdd a broad cream-stone access road entering from the left-rear edge near (0.03,0.40) and joining the courtyard at (0.22,0.60). Add an outgoing cream-stone road starting near (0.78,0.70) and extending to the right-front edge near (0.98,0.78). Open the relevant enclosing wall sections so both paths actually connect to the same paved courtyard. Support these short paths with coral-pink arches or low retaining walls in exactly the approved reference style. Modest flowers and foliage can soften the joins. The far-left and far-right path ends may reach the canvas edge, as connection ports to adjacent scenery.\nMake the existing enclosed round island feel like one terrace along a continuous scenic path, with a clear entrance and exit. Do not replace the architecture or flatten the approved textured illustration into vector art. Keep the rest of the scene as unchanged as possible.\nTransparent outside the architecture and vegetation. No ocean, water, sky, horizon, opaque background, giant background glow, checkerboard, people, animals, characters, UI, text, letters, numbers, lesson labels, stars, medals, arrows, logos or watermarks. Keep the central floor empty for separately rendered original characters.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit5-6-ground.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp"
+      ],
+      "transparent_background": true,
+      "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a16d56-cea3-72f3-a003-eef21815e750/exec-5d6255ab-6473-407f-b95f-a4c6ad16f32c.png",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d56-cea3-72f3-a003-eef21815e750 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d56-cea3-72f3-a003-eef21815e750\\exec-5d6255ab-6473-407f-b95f-a4c6ad16f32c.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "png": "assets/course-journey/modules-v2/unit5-6-ground.png",
+      "webp": "assets/course-journey/modules-v2/unit5-6-ground.webp",
+      "encoding": {
+        "format": "webp",
+        "quality": 88,
+        "resize": false,
+        "crop": false
+      },
+      "visualReview": {
+        "approved": [
+          "原有建筑、花拱、树木画风与光向保留",
+          "中央空铺地可供原人物叠放",
+          "新增左右石桥通道，打通平台围合",
+          "未出现人物、文字、星星、徽章或不透明大背景"
+        ],
+        "deviations": [
+          "左侧入口比提示的 y=0.40 更偏左上，约 y=0.15–0.40 接入；不作为像素级固定连接端口承诺",
+          "通道端头主动延伸至左右画布边缘，透明边距不适用于连接端头",
+          "查看器可能显示透明像素中 RGB 的压缩条带；PNG 与 WebP alpha 逐像素完全一致，须以浏览器实际透明合成作为最终视觉验收。"
+        ],
+        "centralFloor": "x=0.23–0.77,y=0.56–0.75 仍为奶油铺地；需在运行页面按人物鞋底实际检查"
+      },
+      "output": {
+        "width": 1536,
+        "height": 1024,
+        "channels": 4,
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alphaThreshold": 16,
+        "alphaBoundsInclusive": [
+          0,
+          42,
+          1535,
+          978
+        ],
+        "normalizedAlphaBounds": [
+          0,
+          0.041015625,
+          1,
+          0.9560546875
+        ],
+        "pngSha256": "9d9a106b0dbba93ff028951352730c19f1bca519a1393a8675823925d5fce627",
+        "webpSha256": "e1a077fdc40e211b9f1f4198a0901eb2231a4df5f60fd7c57217200e293f6cd2",
+        "pngBytes": 1973773,
+        "webpBytes": 198880,
+        "originalPngBytesPreserved": true,
+        "encodingVerification": {
+          "alphaMismatchPixels": 0,
+          "alphaMaxDifference": 0,
+          "opaqueRgbMeanAbsoluteDifference": 2.1431855504154176
+        }
+      },
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit5-6-ground.png",
+          "sha256": "492c66fe644272d2dd49ef622b7b9d0e6f0e60d877df8f7765eb56806974245d"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+          "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+        }
+      ]
+    },
+    {
+      "id": "unit7-8",
+      "tool": "image_gen.imagegen",
+      "mode": "built-in edit",
+      "prompt": "Use case: precise-object-edit.\nAsset type: production transparent local environment for Lesson 7–8 in a children's English learning journey map.\nInputs: Image 1 is the EDIT TARGET (current flower-arch conversation courtyard). Image 2 is the approved continuous-world STYLE REFERENCE, not a replacement composition. Image 3 is an additional approved style reference.\nEdit ONLY the platform's disconnected island outline so it reads as an open stretch of a connected architectural journey. Preserve the cream-and-coral flower arch with wooden trellis, white daisies, green cypress trees, warm upper-left lighting, painterly soft 3D children's picture-book finish, camera angle and all central floor positioning.\nOutput exactly 1536 × 1024, landscape 3:2, genuine transparent alpha background. Retain the existing open cream paved standing area at normalized x 0.23–0.77 and y 0.56–0.75; do not move, obstruct, lower, or slope this central character contact surface.\nAdd a broad cream-stone access road entering from the left-rear edge near (0.03,0.40) and joining the courtyard at (0.22,0.60). Add an outgoing cream-stone road starting near (0.78,0.70) and extending to the right-front edge near (0.98,0.78). Open the relevant enclosing wall sections so both paths actually connect to the same paved courtyard. Support these short paths with coral-pink arches or low retaining walls in exactly the approved reference style. Modest flowers and foliage can soften the joins. The far-left and far-right path ends may reach the canvas edge, as connection ports to adjacent scenery.\nMake the existing enclosed round island feel like one terrace along a continuous scenic path, with a clear entrance and exit. Do not replace the architecture or flatten the approved textured illustration into vector art. Keep the rest of the scene as unchanged as possible.\nTransparent outside the architecture and vegetation. No ocean, water, sky, horizon, opaque background, giant background glow, checkerboard, people, animals, characters, UI, text, letters, numbers, lesson labels, stars, medals, arrows, logos or watermarks. Keep the central floor empty for separately rendered original characters.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit7-8-ground.png",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+        "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp"
+      ],
+      "transparent_background": true,
+      "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a16d56-cea3-72f3-a003-eef21815e750/exec-84424787-10dd-4111-990c-21a9ea3166e1.png",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d56-cea3-72f3-a003-eef21815e750 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d56-cea3-72f3-a003-eef21815e750\\exec-84424787-10dd-4111-990c-21a9ea3166e1.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "png": "assets/course-journey/modules-v2/unit7-8-ground.png",
+      "webp": "assets/course-journey/modules-v2/unit7-8-ground.webp",
+      "encoding": {
+        "format": "webp",
+        "quality": 88,
+        "resize": false,
+        "crop": false
+      },
+      "visualReview": {
+        "approved": [
+          "原有建筑、花拱、树木画风与光向保留",
+          "中央空铺地可供原人物叠放",
+          "新增左右石桥通道，打通平台围合",
+          "未出现人物、文字、星星、徽章或不透明大背景"
+        ],
+        "deviations": [
+          "左侧入口比提示的 y=0.40 更偏左上，约 y=0.15–0.40 接入；不作为像素级固定连接端口承诺",
+          "通道端头主动延伸至左右画布边缘，透明边距不适用于连接端头",
+          "花圃增加少量紫色花，与原 neighborhood 风格参考一致",
+          "查看器可能显示透明像素中 RGB 的压缩条带；PNG 与 WebP alpha 逐像素完全一致，须以浏览器实际透明合成作为最终视觉验收。"
+        ],
+        "centralFloor": "x=0.23–0.77,y=0.56–0.75 仍为奶油铺地；需在运行页面按人物鞋底实际检查"
+      },
+      "output": {
+        "width": 1536,
+        "height": 1024,
+        "channels": 4,
+        "alphaRange": [
+          0,
+          254
+        ],
+        "alphaThreshold": 16,
+        "alphaBoundsInclusive": [
+          0,
+          83,
+          1535,
+          1023
+        ],
+        "normalizedAlphaBounds": [
+          0,
+          0.0810546875,
+          1,
+          1
+        ],
+        "pngSha256": "41633c830dc1323a1639cf5ec7eabcbb702d1b1986fedae67f8caec227f62e7c",
+        "webpSha256": "0d83c9bf285f53462a6d9fe542c4d3815922ddc646440e5aec395fa531d1f30c",
+        "pngBytes": 2024319,
+        "webpBytes": 221388,
+        "originalPngBytesPreserved": true,
+        "encodingVerification": {
+          "alphaMismatchPixels": 0,
+          "alphaMaxDifference": 0,
+          "opaqueRgbMeanAbsoluteDifference": 2.5678630657479844
+        }
+      },
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit7-8-ground.png",
+          "sha256": "9e99aba3a4f78140178d7f03406dd1c33a65fc6e0d476aef8964dd107600a14a"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+          "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "assetType": "environment-ground-only; characters remain original and are composited by runtime",
+  "generationTool": "built-in image_gen.imagegen",
+  "generatedAt": "2026-10-23",
+  "request": "unit3-4-request.json",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1693a-2b1d-7312-82e7-5ba94390b7f4/exec-6c439099-d451-41a2-8d88-e586d52d3326.png",
+  "requestedDimensions": [
+    1536,
+    1024
+  ],
+  "requestedTransparentBackground": true,
+  "actual": {
+    "width": 1536,
+    "height": 1024,
+    "channels": 4,
+    "alpha": {
+      "min": 0,
+      "max": 254,
+      "zero": 768615,
+      "partial": 804249,
+      "boundsAbove16": [
+        90,
+        25,
+        1469,
+        958
+      ],
+      "normalizedBoundsAbove16": [
+        0.05859375,
+        0.0244140625,
+        0.9563802083333334,
+        0.935546875
+      ]
+    }
+  },
+  "approvedFloorSafeRange": [
+    0.23,
+    0.56,
+    0.77,
+    0.75
+  ],
+  "recommendedFoot": [
+    0.5,
+    0.71
+  ],
+  "limitations": [
+    "8 percent transparent edge request was not met exactly; actual alpha bounds are recorded. Keep transparent padding in the layout container.",
+    "Flat safe range is visually assessed; verify the original character shoes and furniture contact in the composed page.",
+    "No crop, masking, repaint, resize or compositing was performed; original PNG copied byte-for-byte, WebP is format encoding only."
+  ],
+  "references": [
+    {
+      "path": "assets/course-journey/opening-mobile-v2.webp",
+      "bytes": 274858,
+      "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+      "role": "approved environment style"
+    },
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "bytes": 167456,
+      "sha256": "c1a9f4d258a4caf9134403a2171924e643e177b792b7f3ff4f12829da8732a92",
+      "role": "identity, palette, eventual overlay footprint only; no rendered people"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/modules-v1/unit3-4-ground.png",
+      "bytes": 1664214,
+      "sha256": "5ceda37b474a79437b37a72821d709dace1b6279018e425f1fdcbad284f35b39"
+    },
+    {
+      "path": "assets/course-journey/modules-v1/unit3-4-ground.webp",
+      "bytes": 779782,
+      "sha256": "9ea4d52d993f9d6c7d7208f6bbca8c7567a7a07770f5b56e57446fbddf7ef14f"
+    }
+  ],
+  "encodingValidation": {
+    "alphaDifferences": 0,
+    "visibleRgbDifferences": 0,
+    "note": "lossless WebP optimizes RGB under alpha=0; all visible RGB and every alpha sample remain identical"
+  }
+}

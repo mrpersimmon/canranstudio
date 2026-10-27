@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:59:44.296Z",
+  "job": "possibilities-desktop",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/possibilities-desktop.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-1a6487c8-2d71-4be3-85b1-484077112842.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-desktop-v1.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/possibilities-desktop-v1.png",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 2443379,
+      "sha256": "154427d46fb4ced688b1cafa17f6cee87aef74fd350712392c682a12fae8fdab",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/possibilities-desktop-v1.webp",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 369470,
+      "sha256": "0c6196aeb3bf3ea5b791c0f94c639f1b0041786da826b0b09c0f5444cbf070a3",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

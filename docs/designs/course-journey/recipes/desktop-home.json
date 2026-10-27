@@ -1,0 +1,19 @@
+{
+  "id": "desktop-home",
+  "template": "prompts/desktop-home.txt",
+  "referenceIds": [
+    "approvedMobile",
+    "brand",
+    "unit12"
+  ],
+  "transparentBackground": false,
+  "variables": {
+    "viewport": "1440 x 1024 CSS px",
+    "ui_state": "normal home, first node selected, all demo courses authorized",
+    "selected_label": "Lesson 1–2",
+    "selected_title": "礼貌小帮手",
+    "stars": 5,
+    "course_count": 45,
+    "range_label": "Lesson 1–18"
+  }
+}

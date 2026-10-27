@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-23",
+  "nativeFileModifiedAt": "2026-10-22T19:44:36.960Z",
+  "job": "learning-mobile",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/complete-journey-v1/requests/learning-mobile.json",
+  "sourceOutput": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-5bc15d15-1009-49c2-8090-5c0ee8c657bb.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-mobile-v2.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/learning-mobile-v1.png",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 2243817,
+      "sha256": "c64540e2bfd5f013c9b8bcf46e73f94548ba8f44ae73e2b0eb5098d72ac2ae62",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/learning-mobile-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 315928,
+      "sha256": "53f037f258482e87ce20e89641b0c87288d3d391937b071565511eb28211ff75",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

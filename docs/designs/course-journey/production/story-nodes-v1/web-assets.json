@@ -1,0 +1,41 @@
+{
+  "purpose": "Web encodings only; original generated PNG and alpha retained",
+  "assets": [
+    {
+      "input": "assets/course-journey/opening-mobile-v2.png",
+      "output": "assets/course-journey/opening-mobile-v2.webp",
+      "width": 1024,
+      "height": 1536,
+      "alpha": false,
+      "bytes": 274858,
+      "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c"
+    },
+    {
+      "input": "assets/course-journey/opening-desktop-v2.png",
+      "output": "assets/course-journey/opening-desktop-v2.webp",
+      "width": 1374,
+      "height": 1145,
+      "alpha": false,
+      "bytes": 302986,
+      "sha256": "e5f29bc8d0124a81dbcb24708c0cf99ad382afc6213a271ef0dc5ae28fdb77ab"
+    },
+    {
+      "input": "assets/course-journey/umbrella-counter-v1.png",
+      "output": "assets/course-journey/umbrella-counter-v1.webp",
+      "width": 1402,
+      "height": 1122,
+      "alpha": true,
+      "bytes": 167456,
+      "sha256": "c1a9f4d258a4caf9134403a2171924e643e177b792b7f3ff4f12829da8732a92"
+    },
+    {
+      "input": "assets/course-journey/friends-trio-v1.png",
+      "output": "assets/course-journey/friends-trio-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 175874,
+      "sha256": "8c97dedf6894f23a6fad779704be71cae5879ecebae9bc7e80815e5a47c2de59"
+    }
+  ]
+}

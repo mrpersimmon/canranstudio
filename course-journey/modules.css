@@ -1,0 +1,29 @@
+/* Historical independent-module base styles. Current Lesson 1–144 uses
+   panorama.css: each character and its ground patch share the terrain scale. */
+.journey-map-scene.journey-modules{aspect-ratio:auto;overflow:clip;padding:28px 16px 40px;background:#eadbbb;isolation:isolate}
+.journey-module-ambient{position:absolute;inset:0;z-index:-1;display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+.journey-module-list{position:relative;display:flex;flex-direction:column;align-items:center;gap:36px;max-width:560px;margin:0 auto}
+.journey-module-links{position:absolute;inset:0;pointer-events:none;z-index:0}
+.journey-module-links img{position:absolute;display:block;max-width:none;pointer-events:none;user-select:none}
+.journey-module{display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;width:min(100%,380px);flex:none}
+.journey-module-stage{position:relative;width:100%;aspect-ratio:3/2;overflow:visible}
+.journey-module .journey-landmark-select{border-radius:28px;scroll-margin-top:90px}
+.journey-module .journey-landmark-select::after{display:none}
+.journey-map-scene.journey-modules[data-empty=true]{min-height:320px}
+.journey-module .journey-story-motion{width:100%;height:100%}
+.journey-module-ground{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.journey-module-character{position:absolute;display:block;height:auto;max-width:none;pointer-events:none;user-select:none}
+.journey-module:not([data-art-state=ready]) .journey-landmark-select{visibility:hidden}
+.journey-module-status{position:absolute;inset:12% 5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;text-align:center;background:#fffaf0e8;border-radius:24px;color:#735c45;font-size:15px}
+.journey-home .journey-module-status button{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid #d9cdb7;border-radius:24px;background:#fffdf6}
+.journey-module .journey-map-stars.is-under-landmark{position:relative;inset:auto;transform:none;margin:6px 0 0;flex:none}
+.journey-module .journey-map-caption{position:relative;inset:auto;margin-top:8px;flex:none}
+.journey-module .journey-map-stars.is-under-landmark>.journey-stars{background:#fff9e8f5}
+.journey-module .journey-node{scroll-margin-top:96px;transition:box-shadow 180ms}
+@media(min-width:768px){
+  .journey-map-scene.journey-modules{padding:38px 30px 50px}
+  .journey-module{width:min(74%,420px)}
+  .journey-module:nth-of-type(odd){align-self:flex-start}
+  .journey-module:nth-of-type(even){align-self:flex-end}
+  .journey-module-list{gap:28px}
+}

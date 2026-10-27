@@ -1,0 +1,674 @@
+[
+  {
+    "label": "新章跳过中课",
+    "ids": [
+      "unit25-26",
+      "unit29-30"
+    ],
+    "view": {
+      "bridgeCount": 0,
+      "modules": [
+        {
+          "accessibleName": "选择 Lesson 25–26 厨房探访记，5 / 5 颗星",
+          "art": {
+            "bottom": -480.67164611816406,
+            "height": 221.9479217529297,
+            "left": 767.4655151367188,
+            "right": 989.4134368896484,
+            "top": -702.6195678710938,
+            "width": 221.9479217529297,
+            "x": 767.4655151367188,
+            "y": -702.6195678710938
+          },
+          "artInGround": {
+            "h": 0.13211185818626767,
+            "w": 0.396335574558803,
+            "x": 0.2948788234165737,
+            "y": 0.06034549531482515
+          },
+          "artboardRatio": 1,
+          "board": {
+            "bottom": -244,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "box": {
+            "bottom": -244,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "frame": {
+            "bottom": -244,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "ground": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "groundMask": "radial-gradient(26% 7% at 50% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+          "id": "unit25-26",
+          "index": 0,
+          "label": {
+            "bottom": -376.40625,
+            "height": 44,
+            "left": 804.3333740234375,
+            "right": 960.3333740234376,
+            "top": -420.40625,
+            "width": 156,
+            "x": 804.3333740234375,
+            "y": -420.40625
+          },
+          "labelPosition": "relative",
+          "loaded": true,
+          "localArt": {
+            "h": 0.396335574558803,
+            "w": 0.396335574558803,
+            "x": 0.2948788234165737,
+            "y": 0.18103648594447544
+          },
+          "localGround": {
+            "h": 3,
+            "w": 1,
+            "x": 0,
+            "y": 0
+          },
+          "medal": {
+            "bottom": -428.40625,
+            "height": 48,
+            "left": 913.3333740234376,
+            "right": 961.3333740234376,
+            "top": -476.40625,
+            "width": 48,
+            "x": 913.3333740234376,
+            "y": -476.40625
+          },
+          "motionCount": 0,
+          "ratios": {
+            "art": 1,
+            "board": 1,
+            "ground": 0.3333333333333333,
+            "stage": 1.741327373433097
+          },
+          "reward": {
+            "bottom": -428.40625,
+            "height": 48,
+            "left": 790.3333740234375,
+            "right": 974.3333740234376,
+            "top": -476.40625,
+            "width": 184,
+            "x": 790.3333740234375,
+            "y": -476.40625
+          },
+          "row": {
+            "bottom": -428.40625,
+            "height": 48,
+            "left": 790.3333740234375,
+            "right": 974.3333740234376,
+            "top": -476.40625,
+            "width": 184,
+            "x": 790.3333740234375,
+            "y": -476.40625
+          },
+          "rowPosition": "relative",
+          "sameMotion": true,
+          "sameStage": true,
+          "source": "http://127.0.0.1:4193/assets/course-journey/modules-v6/home-interior-v3.webp",
+          "stage": {
+            "bottom": -482.40625,
+            "height": 321.59375,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "stageClientHeight": 322,
+          "stageOverflow": "visible",
+          "stageScroll": [
+            0,
+            0
+          ],
+          "stageScrollHeight": 560,
+          "tag": "ARTICLE",
+          "text": "Lesson 25–26",
+          "type": {
+            "clientWidth": 104,
+            "content": {
+              "bottom": -390.40625,
+              "height": 16,
+              "left": 830.4271240234375,
+              "right": 934.2396240234376,
+              "top": -406.40625,
+              "width": 103.8125,
+              "x": 830.4271240234375,
+              "y": -406.40625
+            },
+            "fontSize": 16,
+            "lines": 1,
+            "rect": {
+              "bottom": -388.40625,
+              "height": 20,
+              "left": 830.4271240234375,
+              "right": 934.2396240234376,
+              "top": -408.40625,
+              "width": 103.8125,
+              "x": 830.4271240234375,
+              "y": -408.40625
+            },
+            "scrollWidth": 104
+          },
+          "visible": {
+            "bottom": -490.2292121266634,
+            "left": 790.6514623054858,
+            "right": 974.1921280612976,
+            "top": -692.0000500838722
+          }
+        },
+        {
+          "accessibleName": "选择 Lesson 29–30 房间整理行动，5 / 5 颗星",
+          "art": {
+            "bottom": 637.4891967773438,
+            "height": 220.02084350585935,
+            "left": 767.8488159179688,
+            "right": 987.869659423828,
+            "top": 417.4683532714844,
+            "width": 220.02084350585935,
+            "x": 767.8488159179688,
+            "y": 417.4683532714844
+          },
+          "artInGround": {
+            "h": 0.13096478780110676,
+            "w": 0.3928943634033203,
+            "x": 0.2955632890973772,
+            "y": 0.7270644959949312
+          },
+          "artboardRatio": 1,
+          "board": {
+            "bottom": 876,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": 316,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": 316
+          },
+          "box": {
+            "bottom": 876,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": 316,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": 316
+          },
+          "frame": {
+            "bottom": 876,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": 316,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": 316
+          },
+          "ground": {
+            "bottom": 876,
+            "height": 1680,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -804,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -804
+          },
+          "groundMask": "radial-gradient(26% 7% at 50% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+          "id": "unit29-30",
+          "index": 2,
+          "label": {
+            "bottom": 743.59375,
+            "height": 44,
+            "left": 804.3333740234375,
+            "right": 960.3333740234376,
+            "top": 699.59375,
+            "width": 156,
+            "x": 804.3333740234375,
+            "y": 699.59375
+          },
+          "labelPosition": "relative",
+          "loaded": true,
+          "localArt": {
+            "h": 0.3928943634033203,
+            "w": 0.3928943634033203,
+            "x": 0.2955632890973772,
+            "y": 0.1811934879847935
+          },
+          "localGround": {
+            "h": 3,
+            "w": 1,
+            "x": 0,
+            "y": -2
+          },
+          "medal": {
+            "bottom": 691.59375,
+            "height": 48,
+            "left": 913.3333740234376,
+            "right": 961.3333740234376,
+            "top": 643.59375,
+            "width": 48,
+            "x": 913.3333740234376,
+            "y": 643.59375
+          },
+          "motionCount": 0,
+          "ratios": {
+            "art": 1,
+            "board": 1,
+            "ground": 0.3333333333333333,
+            "stage": 1.741327373433097
+          },
+          "reward": {
+            "bottom": 691.59375,
+            "height": 48,
+            "left": 790.3333740234375,
+            "right": 974.3333740234376,
+            "top": 643.59375,
+            "width": 184,
+            "x": 790.3333740234375,
+            "y": 643.59375
+          },
+          "row": {
+            "bottom": 691.59375,
+            "height": 48,
+            "left": 790.3333740234375,
+            "right": 974.3333740234376,
+            "top": 643.59375,
+            "width": 184,
+            "x": 790.3333740234375,
+            "y": 643.59375
+          },
+          "rowPosition": "relative",
+          "sameMotion": true,
+          "sameStage": true,
+          "source": "http://127.0.0.1:4193/assets/course-journey/modules-v6/home-interior-v3.webp",
+          "stage": {
+            "bottom": 637.59375,
+            "height": 321.59375,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": 316,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": 316
+          },
+          "stageClientHeight": 322,
+          "stageOverflow": "visible",
+          "stageScroll": [
+            0,
+            0
+          ],
+          "stageScrollHeight": 560,
+          "tag": "ARTICLE",
+          "text": "Lesson 29–30",
+          "type": {
+            "clientWidth": 104,
+            "content": {
+              "bottom": 729.59375,
+              "height": 16,
+              "left": 830.4271240234375,
+              "right": 934.2396240234376,
+              "top": 713.59375,
+              "width": 103.8125,
+              "x": 830.4271240234375,
+              "y": 713.59375
+            },
+            "fontSize": 16,
+            "lines": 1,
+            "rect": {
+              "bottom": 731.59375,
+              "height": 20,
+              "left": 830.4271240234375,
+              "right": 934.2396240234376,
+              "top": 711.59375,
+              "width": 103.8125,
+              "x": 830.4271240234375,
+              "y": 711.59375
+            },
+            "scrollWidth": 104
+          },
+          "visible": {
+            "bottom": 629.769167180647,
+            "left": 787.6752555640311,
+            "right": 977.1668911193166,
+            "top": 427.9956663578891
+          }
+        }
+      ],
+      "overflow": 1425,
+      "passages": [
+        {
+          "box": {
+            "bottom": 316,
+            "height": 560,
+            "left": 602.3333740234375,
+            "right": 1162.3333740234375,
+            "top": -244,
+            "width": 560,
+            "x": 602.3333740234375,
+            "y": -244
+          },
+          "controls": 0,
+          "courseId": null,
+          "hidden": "true",
+          "text": ""
+        }
+      ],
+      "scene": {
+        "bottom": 900,
+        "height": 1728,
+        "left": 340,
+        "right": 1424.666748046875,
+        "top": -828,
+        "width": 1084.666748046875,
+        "x": 340,
+        "y": -828
+      },
+      "scroll": [
+        0,
+        0
+      ],
+      "scrollWidth": 1425,
+      "terrain": {
+        "box": {
+          "bottom": 876,
+          "height": 1680,
+          "left": 602.3333740234375,
+          "right": 1162.3333740234375,
+          "top": -804,
+          "width": 560,
+          "x": 602.3333740234375,
+          "y": -804
+        },
+        "loaded": true,
+        "ratio": 0.3333333333333333,
+        "source": "http://127.0.0.1:4193/assets/course-journey/modules-v6/home-interior-v3.webp"
+      },
+      "terrainCount": 1,
+      "width": 1440,
+      "windowWidth": 1440,
+      "world": {
+        "bottom": 876,
+        "height": 1680,
+        "left": 602.3333740234375,
+        "right": 1162.3333740234375,
+        "top": -804,
+        "width": 560,
+        "x": 602.3333740234375,
+        "y": -804
+      }
+    }
+  },
+  {
+    "label": "仅45–46",
+    "ids": [
+      "unit45-46"
+    ],
+    "view": {
+      "bridgeCount": 0,
+      "modules": [
+        {
+          "accessibleName": "选择 Lesson 45–46 一封难读的信，5 / 5 颗星",
+          "art": {
+            "bottom": 445.85752868652344,
+            "height": 256.13543701171875,
+            "left": 758.153564453125,
+            "right": 1014.2890014648438,
+            "top": 189.7220916748047,
+            "width": 256.13543701171875,
+            "x": 758.153564453125,
+            "y": 189.7220916748047
+          },
+          "artInGround": {
+            "h": 0.1524615696498326,
+            "w": 0.4573847089494978,
+            "x": 0.2645599365234375,
+            "y": 0.38078695933024087
+          },
+          "artboardRatio": 1,
+          "board": {
+            "bottom": 670,
+            "height": 560,
+            "left": 610,
+            "right": 1170,
+            "top": 110,
+            "width": 560,
+            "x": 610,
+            "y": 110
+          },
+          "box": {
+            "bottom": 670,
+            "height": 560,
+            "left": 610,
+            "right": 1170,
+            "top": 110,
+            "width": 560,
+            "x": 610,
+            "y": 110
+          },
+          "frame": {
+            "bottom": 670,
+            "height": 560,
+            "left": 610,
+            "right": 1170,
+            "top": 110,
+            "width": 560,
+            "x": 610,
+            "y": 110
+          },
+          "ground": {
+            "bottom": 1230,
+            "height": 1680,
+            "left": 610,
+            "right": 1170,
+            "top": -450,
+            "width": 560,
+            "x": 610,
+            "y": -450
+          },
+          "groundMask": "radial-gradient(28% 7% at 50% 56%, rgb(0, 0, 0) 65%, rgba(0, 0, 0, 0) 100%)",
+          "id": "unit45-46",
+          "index": 1,
+          "label": {
+            "bottom": 537.59375,
+            "height": 44,
+            "left": 812,
+            "right": 968,
+            "top": 493.59375,
+            "width": 156,
+            "x": 812,
+            "y": 493.59375
+          },
+          "labelPosition": "relative",
+          "loaded": true,
+          "localArt": {
+            "h": 0.4573847089494978,
+            "w": 0.4573847089494978,
+            "x": 0.2645599365234375,
+            "y": 0.14236087799072267
+          },
+          "localGround": {
+            "h": 3,
+            "w": 1,
+            "x": 0,
+            "y": -1
+          },
+          "medal": {
+            "bottom": 485.59375,
+            "height": 48,
+            "left": 921,
+            "right": 969,
+            "top": 437.59375,
+            "width": 48,
+            "x": 921,
+            "y": 437.59375
+          },
+          "motionCount": 0,
+          "ratios": {
+            "art": 1,
+            "board": 1,
+            "ground": 0.3333333333333333,
+            "stage": 1.741327373433097
+          },
+          "reward": {
+            "bottom": 485.59375,
+            "height": 48,
+            "left": 798,
+            "right": 982,
+            "top": 437.59375,
+            "width": 184,
+            "x": 798,
+            "y": 437.59375
+          },
+          "row": {
+            "bottom": 485.59375,
+            "height": 48,
+            "left": 798,
+            "right": 982,
+            "top": 437.59375,
+            "width": 184,
+            "x": 798,
+            "y": 437.59375
+          },
+          "rowPosition": "relative",
+          "sameMotion": true,
+          "sameStage": true,
+          "source": "http://127.0.0.1:4193/assets/course-journey/modules-v6/hospitality-sunroom-v2.webp",
+          "stage": {
+            "bottom": 431.59375,
+            "height": 321.59375,
+            "left": 610,
+            "right": 1170,
+            "top": 110,
+            "width": 560,
+            "x": 610,
+            "y": 110
+          },
+          "stageClientHeight": 322,
+          "stageOverflow": "visible",
+          "stageScroll": [
+            0,
+            0
+          ],
+          "stageScrollHeight": 560,
+          "tag": "ARTICLE",
+          "text": "Lesson 45–46",
+          "type": {
+            "clientWidth": 104,
+            "content": {
+              "bottom": 523.59375,
+              "height": 16,
+              "left": 838.0104370117188,
+              "right": 941.9791870117188,
+              "top": 507.59375,
+              "width": 103.96875,
+              "x": 838.0104370117188,
+              "y": 507.59375
+            },
+            "fontSize": 16,
+            "lines": 1,
+            "rect": {
+              "bottom": 525.59375,
+              "height": 20,
+              "left": 838.0104370117188,
+              "right": 941.9791870117188,
+              "top": 505.59375,
+              "width": 103.96875,
+              "x": 838.0104370117188,
+              "y": 505.59375
+            },
+            "scrollWidth": 104
+          },
+          "visible": {
+            "bottom": 423.79801736494,
+            "left": 773.472669537558,
+            "right": 1006.7315762898568,
+            "top": 221.99433971934343
+          }
+        }
+      ],
+      "overflow": 1440,
+      "passages": [],
+      "scene": {
+        "bottom": 694,
+        "height": 608,
+        "left": 340,
+        "right": 1440,
+        "top": 86,
+        "width": 1100,
+        "x": 340,
+        "y": 86
+      },
+      "scroll": [
+        0,
+        0
+      ],
+      "scrollWidth": 1440,
+      "terrain": {
+        "box": {
+          "bottom": 1230,
+          "height": 1680,
+          "left": 610,
+          "right": 1170,
+          "top": -450,
+          "width": 560,
+          "x": 610,
+          "y": -450
+        },
+        "loaded": true,
+        "ratio": 0.3333333333333333,
+        "source": "http://127.0.0.1:4193/assets/course-journey/modules-v6/hospitality-sunroom-v2.webp"
+      },
+      "terrainCount": 1,
+      "width": 1440,
+      "windowWidth": 1440,
+      "world": {
+        "bottom": 670,
+        "height": 560,
+        "left": 610,
+        "right": 1170,
+        "top": 110,
+        "width": 560,
+        "x": 610,
+        "y": 110
+      }
+    }
+  },
+  {
+    "label": "无课程",
+    "emptyHeading": true,
+    "entries": 0
+  }
+]

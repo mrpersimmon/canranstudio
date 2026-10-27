@@ -1,0 +1,129 @@
+{
+  "tool": "built-in image_gen",
+  "generationCalls": 3,
+  "adoptedAssets": 1,
+  "encoding": "PNG bytes retained; adopted WebP encoded at quality90 only",
+  "receipts": [
+    {
+      "call": 1,
+      "status": "rejected",
+      "metadata": {
+        "format": "png",
+        "mediaType": "image/png",
+        "width": 724,
+        "height": 2172,
+        "space": "srgb",
+        "channels": 3,
+        "depth": "uchar",
+        "density": 72,
+        "isProgressive": false,
+        "isPalette": false,
+        "bitsPerSample": 8,
+        "hasProfile": false,
+        "hasAlpha": false,
+        "autoOrient": {
+          "width": 724,
+          "height": 2172
+        }
+      },
+      "files": [
+        {
+          "path": "docs/designs/course-journey/production/modules-v4/drafts/town-attempt-1.png",
+          "bytes": 2504599,
+          "sha256": "fb44ad1fea4e286138810aa1467e0588393c1354ae0bba4fdfdc3ac6326699b9"
+        }
+      ],
+      "referenceHashes": [
+        {
+          "source": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v3/opening-world-v1.png",
+          "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a"
+        },
+        {
+          "source": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/interview-couple-v1.webp",
+          "sha256": "eaebe41691113fb754db886352183d7ada8d55e87480edcfe0db16eea09f9843"
+        }
+      ]
+    },
+    {
+      "call": 2,
+      "status": "rejected",
+      "metadata": {
+        "format": "png",
+        "mediaType": "image/png",
+        "width": 724,
+        "height": 2171,
+        "space": "srgb",
+        "channels": 3,
+        "depth": "uchar",
+        "density": 72,
+        "isProgressive": false,
+        "isPalette": false,
+        "bitsPerSample": 8,
+        "hasProfile": false,
+        "hasAlpha": false,
+        "autoOrient": {
+          "width": 724,
+          "height": 2171
+        }
+      },
+      "files": [
+        {
+          "path": "docs/designs/course-journey/production/modules-v4/drafts/town-attempt-2.png",
+          "bytes": 2583046,
+          "sha256": "6c36cb1ad41720defc21aa04ad179b6509ebc1c4350112ece9e3d2c01f8e5832"
+        }
+      ],
+      "referenceHashes": [
+        {
+          "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-7901449f-5e1e-48b5-80cd-d05a204baae4.png",
+          "sha256": "fb44ad1fea4e286138810aa1467e0588393c1354ae0bba4fdfdc3ac6326699b9"
+        }
+      ]
+    },
+    {
+      "call": 3,
+      "status": "adopted",
+      "metadata": {
+        "format": "png",
+        "mediaType": "image/png",
+        "width": 724,
+        "height": 2172,
+        "space": "srgb",
+        "channels": 3,
+        "depth": "uchar",
+        "density": 72,
+        "isProgressive": false,
+        "isPalette": false,
+        "bitsPerSample": 8,
+        "hasProfile": false,
+        "hasAlpha": false,
+        "autoOrient": {
+          "width": 724,
+          "height": 2172
+        }
+      },
+      "files": [
+        {
+          "path": "assets/course-journey/modules-v4/neighborhood-town-v1.png",
+          "bytes": 2810740,
+          "sha256": "b0820c8379f85f31d76a0c2bfbab3ba8fb0cbcce0f5a427b26ad80605676dde1"
+        },
+        {
+          "path": "assets/course-journey/modules-v4/neighborhood-town-v1.webp",
+          "bytes": 475830,
+          "sha256": "6e58d2a13912da9ff7b6e5d3d50fab79361d42be1bfc048630c5e8a800c322ac"
+        }
+      ],
+      "referenceHashes": [
+        {
+          "source": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v3/opening-world-v1.png",
+          "sha256": "6fb4e002294e17052cb9d3902427613c75f40e63d04dd21db190d66bdf1b775a"
+        },
+        {
+          "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-422fa831-f9a3-4d68-898d-2ca413d0b746.png",
+          "sha256": "6c36cb1ad41720defc21aa04ad179b6509ebc1c4350112ece9e3d2c01f8e5832"
+        }
+      ]
+    }
+  ]
+}

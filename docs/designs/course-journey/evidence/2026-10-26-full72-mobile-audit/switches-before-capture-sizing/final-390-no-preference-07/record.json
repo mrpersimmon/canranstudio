@@ -1,0 +1,2400 @@
+{
+  "signature": "b636fa04d44a7364a80fb571e306e91a522642a0cd11cb2d760fbe9e72bc8628",
+  "from": "home",
+  "to": "kindness",
+  "before": {
+    "chapter": "home",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit25-26",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/kitchen-host-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1377,
+      "height": 1170,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "after": {
+    "chapter": "kindness",
+    "dock": {
+      "bottom": 780,
+      "height": 108,
+      "left": 0,
+      "right": 390,
+      "top": 672,
+      "width": 390,
+      "x": 0,
+      "y": 672
+    },
+    "height": 844,
+    "selected": "unit19-20",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 767,
+        "height": 80,
+        "left": 15,
+        "right": 80,
+        "top": 687,
+        "width": 65,
+        "x": 15,
+        "y": 687
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/icecream-family-v1.webp"
+    },
+    "width": 390,
+    "world": {
+      "bottom": 1376.4375,
+      "height": 1169.4375,
+      "left": 0,
+      "right": 390,
+      "top": 207,
+      "width": 390,
+      "x": 0,
+      "y": 207
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 26184,
+      "sha256": "78cb76ef4d75ba90d72833a24318aa61604e0eb0532465ba5b1dff3f02f96516",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.292795,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.623216
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 26192,
+      "sha256": "56ddb4aeed87111d8c42a280268425dc1c7bea1806baaa276076e48684e78e92",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.30934,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.639761
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 26215,
+      "sha256": "3e7d9c496958e782efbe4b0332388bb53c8ebb16216e406d2bf5aa5da0e3a8ea",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.326035,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.656456
+      }
+    },
+    {
+      "index": 3,
+      "file": "003.jpg",
+      "bytes": 26372,
+      "sha256": "abf761cc462012966fb226046371d9d657de3f50abe5ed082e26442d3dfb5bfb",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.342749,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.67317
+      }
+    },
+    {
+      "index": 4,
+      "file": "004.jpg",
+      "bytes": 26374,
+      "sha256": "91ea1754c42086183663c4d0f42c3a4813a665ab9302ed86601bf495425f08ad",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.359454,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.689875
+      }
+    },
+    {
+      "index": 5,
+      "file": "005.jpg",
+      "bytes": 26375,
+      "sha256": "d74521d295bf1b6747afe89cf525fbe4b4f1ef5885a33e7cd421f7118ace5230",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.376068,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.706518
+      }
+    },
+    {
+      "index": 6,
+      "file": "006.jpg",
+      "bytes": 26384,
+      "sha256": "277a312ee2f6ccc24bcf2787fd005fedcb09d6d61d064eceb59e98be824892ea",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.392751,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.723201
+      }
+    },
+    {
+      "index": 7,
+      "file": "007.jpg",
+      "bytes": 26383,
+      "sha256": "9558b1d7fbec47b15dc5c6b3b08b60ddd6d4974289e9ecf3fbc79ac47c7fe83d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.409434,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.739884
+      }
+    },
+    {
+      "index": 8,
+      "file": "008.jpg",
+      "bytes": 26376,
+      "sha256": "f991514a4529f94089b49d89bd0ae8dc805a36ba27a6adabc5021ef10f5d999d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.426116,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.756566
+      }
+    },
+    {
+      "index": 9,
+      "file": "009.jpg",
+      "bytes": 34761,
+      "sha256": "7455a20c340b72a368f9dc62a45de5161efab9994539f574b323cfcbfc8a026b",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.442831,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.773281
+      }
+    },
+    {
+      "index": 10,
+      "file": "010.jpg",
+      "bytes": 34741,
+      "sha256": "960a4ea050adc92e2cf5f05e3ead9a5b72cc0cdce4b6b0b27473f6ef3978537b",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.45948,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.78993
+      }
+    },
+    {
+      "index": 11,
+      "file": "011.jpg",
+      "bytes": 34733,
+      "sha256": "bcebf5689d5c598a80b1389a58a92e0bc9041bfc12f82ae7f5d26d878799d225",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.476158,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.806608
+      }
+    },
+    {
+      "index": 12,
+      "file": "012.jpg",
+      "bytes": 34798,
+      "sha256": "a89fac9a52074de490823fb9177d5ec393322a724347f5321dcff4c90f3c2ec7",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.492831,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.823281
+      }
+    },
+    {
+      "index": 13,
+      "file": "013.jpg",
+      "bytes": 34820,
+      "sha256": "6fcceeca97add1aae5298057d6773ee0624c543b5f2bbff6f280105318e4128f",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.50955,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.84
+      }
+    },
+    {
+      "index": 14,
+      "file": "014.jpg",
+      "bytes": 34730,
+      "sha256": "25250210adb7141e60d1eae6f517b63fe88a8d8bd6db41d99646f0411354124d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.526219,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.856669
+      }
+    },
+    {
+      "index": 15,
+      "file": "015.jpg",
+      "bytes": 34657,
+      "sha256": "cb9b27a5e928d8a8675e89d6fe7b0ddae3c22f87818c6d76b8e070a55a6fd0c0",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.542904,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.873354
+      }
+    },
+    {
+      "index": 16,
+      "file": "016.jpg",
+      "bytes": 34648,
+      "sha256": "f7aab85b7afbdebeaea3756c433be5480b26684f6a1874cf43c41181f77bc6b6",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.559549,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.889999
+      }
+    },
+    {
+      "index": 17,
+      "file": "017.jpg",
+      "bytes": 34697,
+      "sha256": "d1e061c1693ab82387ab8bcea4afe98f029ca27983bd453e0c997ac9a8289eec",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.576233,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.906683
+      }
+    },
+    {
+      "index": 18,
+      "file": "018.jpg",
+      "bytes": 34786,
+      "sha256": "886ba8a88b115e750e782948a63e5587972497060ae8be6d3ebf69ebbef2c380",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.592938,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.923388
+      }
+    },
+    {
+      "index": 19,
+      "file": "019.jpg",
+      "bytes": 34773,
+      "sha256": "a58a99ecb4c987fdbb66ed4ddba6cb1affcf1ae1cc4d9590f8e5f6efa2577d33",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.609596,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.940045
+      }
+    },
+    {
+      "index": 20,
+      "file": "020.jpg",
+      "bytes": 34802,
+      "sha256": "ac579f31ce08702549e29772315025121b99518c9b0e5736d60960f5152bc968",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.626297,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.956747
+      }
+    },
+    {
+      "index": 21,
+      "file": "021.jpg",
+      "bytes": 34768,
+      "sha256": "4b960b5ed816a38f34230092d10c94ed8f8b6f58b4e533db809f2a3ddb0bfbe5",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.642953,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.973403
+      }
+    },
+    {
+      "index": 22,
+      "file": "022.jpg",
+      "bytes": 34716,
+      "sha256": "e1b9b8e579871515a8a2a920c9a60b25015e8c1fb2472906a5763fcac9a2af68",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.659635,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982889.990085
+      }
+    },
+    {
+      "index": 23,
+      "file": "023.jpg",
+      "bytes": 34726,
+      "sha256": "8e1264baa6c1b9c10e3e7e2db8d0d5fa58fd2d392d56f6133c6bb46170455f78",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.676322,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.006772
+      }
+    },
+    {
+      "index": 24,
+      "file": "024.jpg",
+      "bytes": 34733,
+      "sha256": "6bd69abf0db4c8ac4bb1c14a503d21fa5f30a3311a0b5b1c8620466c944d0e6d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.693075,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.023525
+      }
+    },
+    {
+      "index": 25,
+      "file": "025.jpg",
+      "bytes": 34785,
+      "sha256": "c91e3cfad5c7eafc99e9a9da6808651250dd037e4f32b57dcb9f6890fe04d73e",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.709819,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.040269
+      }
+    },
+    {
+      "index": 26,
+      "file": "026.jpg",
+      "bytes": 34778,
+      "sha256": "9e6ba2cd24764b243fe6644a73ccd750779218c046c0c632138827f432236d32",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.726379,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.056829
+      }
+    },
+    {
+      "index": 27,
+      "file": "027.jpg",
+      "bytes": 34777,
+      "sha256": "29a72826041647018cc0e4093f86e94e56b67739883d064ea15eda7784727155",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.74306,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.07351
+      }
+    },
+    {
+      "index": 28,
+      "file": "028.jpg",
+      "bytes": 34770,
+      "sha256": "f63e71604231a2906369a9149064603c9ffa4545091a64766ad843a9cdcbbb98",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.759737,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.090187
+      }
+    },
+    {
+      "index": 29,
+      "file": "029.jpg",
+      "bytes": 34766,
+      "sha256": "a4bbe559dcf3601eab12007cca7dbd80a34e6eb4f3bf4f941a6a947eb1d19e00",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.776423,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.106873
+      }
+    },
+    {
+      "index": 30,
+      "file": "030.jpg",
+      "bytes": 34771,
+      "sha256": "b610606fd3d03fd40bce3992d3517ace22fc1e0934715d46d634ff9988bf98e5",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.793099,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.123549
+      }
+    },
+    {
+      "index": 31,
+      "file": "031.jpg",
+      "bytes": 34764,
+      "sha256": "77c0b7d961bc6f838745c87f86c46906cfcc0679315b243f382323da8211b094",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.809765,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.140215
+      }
+    },
+    {
+      "index": 32,
+      "file": "032.jpg",
+      "bytes": 34975,
+      "sha256": "f954e88b373d7c6cd5c535bba5993d8e3005e95fb17f343570227c7ff5c687e2",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.826475,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.156925
+      }
+    },
+    {
+      "index": 33,
+      "file": "033.jpg",
+      "bytes": 34974,
+      "sha256": "a5ed5a1a8084cb74bf63d2ed682eef4cbe19a6ccf7ad65e491273909a3fe5782",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.843116,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.173566
+      }
+    },
+    {
+      "index": 34,
+      "file": "034.jpg",
+      "bytes": 34975,
+      "sha256": "c33d275d463bd7d67f4430e2b000027c61d19d85cf37d8a966c8218caa2f8bfb",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.859828,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.190278
+      }
+    },
+    {
+      "index": 35,
+      "file": "035.jpg",
+      "bytes": 34976,
+      "sha256": "82b8189c85430d0046ed315dbcd8062e4661b7219f0c221a04ed807dcd0b397d",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.876534,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.206984
+      }
+    },
+    {
+      "index": 36,
+      "file": "036.jpg",
+      "bytes": 34974,
+      "sha256": "34296f55ea171ce0c7d92c052c7e384dff8d10e56f7f988635289ac4f5e07b8a",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.893159,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.223609
+      }
+    },
+    {
+      "index": 37,
+      "file": "037.jpg",
+      "bytes": 34971,
+      "sha256": "19b2182ed8f9bde9c0507d0e493e74fcfc025f189e2bcfa7a8b0b5f3ec9045e5",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.909904,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.240354
+      }
+    },
+    {
+      "index": 38,
+      "file": "038.jpg",
+      "bytes": 34979,
+      "sha256": "25cb9b22e2c6b6dd86d8bf727ddfab7e7980bd0e18bd06dcfbb15ed41326a6ef",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.926527,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.256977
+      }
+    },
+    {
+      "index": 39,
+      "file": "039.jpg",
+      "bytes": 34973,
+      "sha256": "237027e5ed1ceebd9d8467cd12146bc31c4ad7a4b61bc622c063ae07573c59c4",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.943219,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.273668
+      }
+    },
+    {
+      "index": 40,
+      "file": "040.jpg",
+      "bytes": 34974,
+      "sha256": "ee265c10f63994c4735f52e30dd97ea60d7c3b1ab0f2dee61539b0ea1d776f00",
+      "metadata": {
+        "deviceHeight": 600,
+        "deviceWidth": 600,
+        "monotonicTimestamp": 1028927.959919,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792982890.290369
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit25-26",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/kitchen-host-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "home",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "true",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1377,
+        "height": 1170,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    },
+    {
+      "chapter": "kindness",
+      "dock": {
+        "bottom": 780,
+        "height": 108,
+        "left": 0,
+        "right": 390,
+        "top": 672,
+        "width": 390,
+        "x": 0,
+        "y": 672
+      },
+      "height": 844,
+      "selected": "unit19-20",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 767,
+          "height": 80,
+          "left": 15,
+          "right": 80,
+          "top": 687,
+          "width": 65,
+          "x": 15,
+          "y": 687
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/icecream-family-v1.webp"
+      },
+      "width": 390,
+      "world": {
+        "bottom": 1376.4375,
+        "height": 1169.4375,
+        "left": 0,
+        "right": 390,
+        "top": 207,
+        "width": 390,
+        "x": 0,
+        "y": 207
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      287,
+      36,
+      495
+    ],
+    [
+      354,
+      287,
+      382,
+      495
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 1,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 2,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 3,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 4,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 5,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 6,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 7,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 8,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 9,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 10,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 11,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 12,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 13,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 14,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 15,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 16,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 17,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 18,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 19,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 20,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 21,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 22,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 23,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 24,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 25,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 26,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 27,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 28,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 29,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 30,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 31,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 32,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 33,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 34,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 35,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 36,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 37,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 38,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 39,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    },
+    {
+      "index": 40,
+      "toOld": null,
+      "toNew": null,
+      "minimum": null
+    }
+  ],
+  "errors": [
+    "Frame dimensions do not match viewport",
+    "Unexpected near-field pixels frame 0 deviation NaN",
+    "Unexpected near-field pixels frame 1 deviation NaN",
+    "Unexpected near-field pixels frame 2 deviation NaN",
+    "Unexpected near-field pixels frame 3 deviation NaN",
+    "Unexpected near-field pixels frame 4 deviation NaN",
+    "Unexpected near-field pixels frame 5 deviation NaN",
+    "Unexpected near-field pixels frame 6 deviation NaN",
+    "Unexpected near-field pixels frame 7 deviation NaN",
+    "Unexpected near-field pixels frame 8 deviation NaN",
+    "Unexpected near-field pixels frame 9 deviation NaN",
+    "Unexpected near-field pixels frame 10 deviation NaN",
+    "Unexpected near-field pixels frame 11 deviation NaN",
+    "Unexpected near-field pixels frame 12 deviation NaN",
+    "Unexpected near-field pixels frame 13 deviation NaN",
+    "Unexpected near-field pixels frame 14 deviation NaN",
+    "Unexpected near-field pixels frame 15 deviation NaN",
+    "Unexpected near-field pixels frame 16 deviation NaN",
+    "Unexpected near-field pixels frame 17 deviation NaN",
+    "Unexpected near-field pixels frame 18 deviation NaN",
+    "Unexpected near-field pixels frame 19 deviation NaN",
+    "Unexpected near-field pixels frame 20 deviation NaN",
+    "Unexpected near-field pixels frame 21 deviation NaN",
+    "Unexpected near-field pixels frame 22 deviation NaN",
+    "Unexpected near-field pixels frame 23 deviation NaN",
+    "Unexpected near-field pixels frame 24 deviation NaN",
+    "Unexpected near-field pixels frame 25 deviation NaN",
+    "Unexpected near-field pixels frame 26 deviation NaN",
+    "Unexpected near-field pixels frame 27 deviation NaN",
+    "Unexpected near-field pixels frame 28 deviation NaN",
+    "Unexpected near-field pixels frame 29 deviation NaN",
+    "Unexpected near-field pixels frame 30 deviation NaN",
+    "Unexpected near-field pixels frame 31 deviation NaN",
+    "Unexpected near-field pixels frame 32 deviation NaN",
+    "Unexpected near-field pixels frame 33 deviation NaN",
+    "Unexpected near-field pixels frame 34 deviation NaN",
+    "Unexpected near-field pixels frame 35 deviation NaN",
+    "Unexpected near-field pixels frame 36 deviation NaN",
+    "Unexpected near-field pixels frame 37 deviation NaN",
+    "Unexpected near-field pixels frame 38 deviation NaN",
+    "Unexpected near-field pixels frame 39 deviation NaN",
+    "Unexpected near-field pixels frame 40 deviation NaN"
+  ],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

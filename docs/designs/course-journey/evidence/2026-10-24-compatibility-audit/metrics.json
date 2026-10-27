@@ -1,0 +1,62 @@
+{
+  "ambient": [
+    {
+      "box": {
+        "bottom": 1376.75,
+        "height": 1290.75,
+        "left": 340,
+        "right": 1425,
+        "top": 86,
+        "width": 1085,
+        "x": 340,
+        "y": 86
+      },
+      "natural": [
+        1254,
+        1254
+      ],
+      "objectFit": "cover",
+      "src": "http://127.0.0.1:4187/assets/course-journey/modules-v2/garden-route-desktop-v2.webp"
+    }
+  ],
+  "bridges": [
+    {
+      "box": {
+        "bottom": 633.109375,
+        "height": 307.453125,
+        "left": 765.5,
+        "right": 1014.421875,
+        "top": 325.65625,
+        "width": 248.921875,
+        "x": 765.5,
+        "y": 325.65625
+      },
+      "from": "unit1-2",
+      "natural": [
+        1536,
+        1024
+      ],
+      "to": "unit3-4"
+    },
+    {
+      "box": {
+        "bottom": 1043.359375,
+        "height": 307.453125,
+        "left": 609.953125,
+        "right": 1189.796875,
+        "top": 735.90625,
+        "width": 579.84375,
+        "x": 609.953125,
+        "y": 735.90625
+      },
+      "from": "unit3-4",
+      "natural": [
+        1536,
+        1024
+      ],
+      "to": "unit5-6"
+    }
+  ],
+  "height": 900,
+  "width": 1440
+}

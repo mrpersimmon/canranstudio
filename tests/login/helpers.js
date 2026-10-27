@@ -56,14 +56,37 @@ async function signIn(page, account, base = '/lesson/') {
   if (account.fresh) {
     await setPassword(page); account.password = 'Learning-journey-2026!'; account.fresh = false;
   }
-  // The real directory now prepares shared fonts before exposing course cards.
-  // Wait for that boundary, then keep the original visible-card assertion.
-  // Cold-load performance budgets are tested independently, without this wait.
-  await expect(page.locator('html')).toHaveAttribute('data-shared-fonts-ready', /^\d+$/, { timeout: 30000 });
-  await expect(page.locator('.course').first()).toBeVisible();
+  await openCourseDirectory(page);
+}
+async function openCourseDirectory(page) {
+  // Course choice is ready before decorative font/art preparation finishes.
+  // Wait for the actual usable surface, never reinstate a global font gate.
+  await expect(page.locator('.journey-home, #openCourseBook:visible:enabled, .course:visible').first()).toBeVisible();
+  if(await page.locator('.journey-home').count()){
+    if(!await page.locator('.course:visible').count())await page.locator('.journey-all').click();
+    await expect(page.locator('.course:visible').first()).toBeVisible();
+    return;
+  }
+  // Restoring a bookmark disables the cover until the saved page is ready,
+  // then hides it. Do not queue a click on that disappearing disabled cover.
+  const cover=page.locator('#openCourseBook:visible:enabled');
+  await expect(page.locator('#openCourseBook:visible:enabled, .course:visible').first()).toBeVisible();
+  if(await cover.isVisible())await cover.click();
+  await expect(page.locator('.course:visible').first()).toBeVisible();
 }
 async function studentLogin(browser, account, base = '/lesson/', contextOptions = {}) {
   const context = await browser.newContext(contextOptions); const page = await context.newPage();
   await signIn(page, account, base); return { context, page };
 }
-module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, readInitialPassword };
+async function waitForCourseReady(page) {
+  // Match the protected-course readiness boundary already used by later
+  // units. Initial zero-star markup is not an interactive, restored course.
+  await expect(page.locator('html:not([data-course-preparing]) #wordPageProgress')).toBeVisible({ timeout: 30000 });
+  await expect(page.locator('#courseLoader')).toHaveCount(0);
+}
+async function openMyAccount(page){
+  const mobile=page.locator('.journey-bottom-nav button');
+  if(await mobile.isVisible())await mobile.click();
+  else await page.locator('.student-account > summary').click();
+}
+module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };

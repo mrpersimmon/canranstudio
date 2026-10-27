@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "kindness-desktop",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/kindness-desktop.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-5141e7ae-571f-45ee-b61b-0f64b1b16b22.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-desktop-v1.png",
+    "assets/course-journey/kindness-mobile-v1.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/kindness-desktop-v1.png",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 2394633,
+      "sha256": "8728617692d91b2ce9f48c44c2405b32b8dc7e0ee08186817ea852084f0e00b4",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/kindness-desktop-v1.webp",
+      "width": 1374,
+      "height": 1145,
+      "hasAlpha": false,
+      "bytes": 359458,
+      "sha256": "73b29e6e403525ee822a697fad39f425c33431aa0ceffda60c109ac5ee24f780",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "nativeFileModifiedAt": "2026-10-22T15:56:21.863Z"
+}

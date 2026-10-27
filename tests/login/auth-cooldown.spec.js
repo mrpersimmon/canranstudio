@@ -6,6 +6,7 @@ const {openStore}=require('../../server/store');
 const {createApp}=require('../../server/app');
 const {createCoursePackages}=require('../../scripts/course-packages');
 const {UNITS}=require('../../server/catalog');
+const {openMyAccount}=require('./helpers');
 const base=process.env.AWARD_TEST_BASE||'/lesson/',password='Test-only-cooldown-2026!';
 test.use({browserName:process.env.AUTH_COOLDOWN_BROWSER||'chromium'});
 let bundle;
@@ -50,7 +51,7 @@ for(const kind of ['student','admin'])test(kind+'：真实429显示剩余时间�
     await page.screenshot({path:test.info().outputPath('login-cooldown.png')});
     await expect(button).toBeEnabled();await expect(page.getByRole('status')).toContainText('等待已结束');
     expect(requests).toBe(1);
-    await button.click();await expect(page.getByRole('heading',{name:kind==='admin'?'班级管理':'小禾的课程',exact:true})).toBeVisible();
+    await button.click();await expect(page.getByRole('heading',{name:kind==='admin'?'班级管理':'学习旅程 · 小禾的课程',exact:true})).toBeVisible();
     if(kind==='admin')await expect(page.getByRole('button',{name:'退出管理',exact:true})).toBeVisible();
     expect(requests).toBe(2);
   }finally{await context.close();await f.close();}
@@ -64,7 +65,7 @@ test('账号冷却不阻止切换另一学生；来源冷却不能通过改学�
     await f.lock('student',first);await page.getByRole('button',{name:'进入我的课程'}).click();await expect(page.getByRole('timer')).toBeVisible();
     await page.getByLabel('学号',{exact:true}).fill(f.students[1].studentNumber);await expect(page.getByRole('button',{name:'进入我的课程'})).toBeEnabled();
     await page.getByRole('button',{name:'进入我的课程'}).click();await expect(page.getByRole('heading',{name:'小雨的课程'})).toBeVisible();
-    await page.getByRole('button',{name:'切换学生',exact:true}).click();await page.getByLabel('学号',{exact:true}).fill(first);await page.getByLabel('密码',{exact:true}).fill(password);
+    await openMyAccount(page);await page.getByRole('button',{name:'退出登录',exact:true}).click();await page.getByLabel('学号',{exact:true}).fill(first);await page.getByLabel('密码',{exact:true}).fill(password);
     const ip='ip:'+crypto.createHash('sha256').update('127.0.0.1').digest('hex');
     f.db.prepare('UPDATE auth_throttle SET count=120,expires=? WHERE key=?').run(Date.now()+60000,ip);
     await page.getByRole('button',{name:'进入我的课程'}).click();await expect(page.getByRole('timer')).toBeVisible();

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "environment-desktop",
+  "selectedForRuntime": true,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-556e06ce-3c21-46aa-9919-090ad5443da8.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/environment-desktop-request.json",
+  "referenceOrder": [
+    "assets/course-journey/neighborhood-desktop-v1.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png"
+  ],
+  "transparentBackgroundRequested": false,
+  "outputs": [
+    {
+      "path": "assets/course-journey/visits-desktop-v1.png",
+      "format": "png",
+      "width": 1374,
+      "height": 1145,
+      "bytes": 2351896,
+      "sha256": "7b2487a177af23c9178015b1f85c679f622ff464e33fda7c475b4a5e194720b9",
+      "hasAlpha": false,
+      "preservation": "Native PNG bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/visits-desktop-v1.webp",
+      "format": "webp",
+      "width": 1374,
+      "height": 1145,
+      "bytes": 343748,
+      "sha256": "2c35b4b5616004381478cdcaed28e1dc50dfdcd5c20d08389abcbe9e7cd4d459",
+      "hasAlpha": false,
+      "encoding": {
+        "quality": 90,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "asset": "Lesson 3–4 umbrella-counter story node",
+  "version": "1.0",
+  "createdAt": "2026-10-21T11:25:12.074Z",
+  "mode": "built-in image_gen",
+  "nativeOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15e31-dfd5-7412-8a15-0008320eaabc/exec-bed91304-77f4-4f66-b9c2-75ed7c73222a.png",
+  "workspaceOutput": "assets/course-journey/umbrella-counter-v1.png",
+  "sha256": "516ddb352665a69c436c8f345ff8ea0b07bd4a65983eb1e8218f46c089b0bdc5",
+  "actualDimensions": {
+    "width": 1402,
+    "height": 1122
+  },
+  "hasAlpha": true,
+  "alpha": {
+    "fullyTransparentFraction": 0.6174353673514537,
+    "fullyOpaqueFraction": 0.0017710884120215329,
+    "boundsAt1": {
+      "left": 33,
+      "top": 109,
+      "right": 1351,
+      "bottom": 1103,
+      "width": 1319,
+      "height": 995,
+      "normalized": {
+        "left": 0.023537803138373753,
+        "top": 0.09714795008912656,
+        "right": 0.9643366619115549,
+        "bottom": 0.983957219251337
+      }
+    },
+    "boundsAt128": {
+      "left": 211,
+      "top": 112,
+      "right": 1221,
+      "bottom": 1072,
+      "width": 1011,
+      "height": 961,
+      "normalized": {
+        "left": 0.15049928673323823,
+        "top": 0.09982174688057041,
+        "right": 0.8716119828815977,
+        "bottom": 0.9563279857397504
+      }
+    },
+    "note": "Native generator uses alpha 253–254 for most visually solid pixels, matching the existing handbag-couple asset. Very low-opacity fringe expands boundsAt1; use boundsAt128 for layout anchors."
+  },
+  "requestFiles": [
+    "unit3-4-request.json",
+    "unit3-4-margin-request.json"
+  ],
+  "referenceOrder": [
+    {
+      "path": "docs/designs/course-journey/references/approved-mobile-v1.png",
+      "role": "sole visual master",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "path": "assets/course-journey/handbag-couple.png",
+      "role": "shipped full-body character rendering",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "path": "assets/awards/unit3-4-umbrella.webp",
+      "role": "lesson identity and umbrella story",
+      "sha256": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f"
+    }
+  ],
+  "iterations": [
+    {
+      "request": "unit3-4-request.json",
+      "nativeOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15e31-dfd5-7412-8a15-0008320eaabc/exec-b6b2b9ad-a8fe-48b6-a23f-9e677df000d1.png",
+      "reasonForRevision": "Bottom safety margin too tight; requested framing-only correction.",
+      "sha256": "cc0ce9e0b616d574ee094a930da9d2a3cfea6df240c7956229f1a793a9a49f6d",
+      "actualDimensions": {
+        "width": 1402,
+        "height": 1122
+      }
+    },
+    {
+      "request": "unit3-4-margin-request.json",
+      "selected": true
+    }
+  ],
+  "visualReview": {
+    "exactlyTwoCharacters": true,
+    "onePurpleDottedUmbrella": true,
+    "coatDrapedOnCustomerArm": true,
+    "fullHatAndCustomerShoes": true,
+    "attendantBodyNaturallyOccludedByCounter": true,
+    "noGroundOrShadowBase": true,
+    "noTextNumbersUiOrStars": true,
+    "styleMatchesShippedHandbagCouple": true,
+    "notes": "Warm brown round outlines, simple soft shaded fills and matching facial expression language. Genuine alpha around and between objects. Final native padding differs from requested 8–10%; measured bounds are authoritative. No programmatic cutout, repaint, padding or scaling was performed."
+  },
+  "integration": {
+    "recommendedRestingAnchor": {
+      "x": 0.51,
+      "y": 0.9563279857397504
+    },
+    "note": "Place counter lower edge on existing platform and align using alpha bounds. Customer shoe baseline is slightly above counter baseline due to three-quarter depth.",
+    "approximateCustomerSoleAnchor": {
+      "x": 0.326,
+      "y": 0.935
+    },
+    "approximateCounterBaseAnchor": {
+      "x": 0.734,
+      "y": 0.9563
+    }
+  },
+  "actualToolRequests": [
+    {
+      "path": "docs/designs/course-journey/production/story-nodes-v1/unit3-4-request.json",
+      "sha256": "53408850e283846f9adeb5f00cc4e8a8a06e3d03c9baed2da68eb81a202c28e4"
+    },
+    {
+      "path": "docs/designs/course-journey/production/story-nodes-v1/unit3-4-margin-request.json",
+      "sha256": "0a04b4ce42c74ca20c584599e8560d0932cc6c8a9b1dfd92d3dc158436aea5ad"
+    }
+  ],
+  "nativeOutputSha256": "516ddb352665a69c436c8f345ff8ea0b07bd4a65983eb1e8218f46c089b0bdc5",
+  "nativeOutputCopiedWithoutModification": true
+}

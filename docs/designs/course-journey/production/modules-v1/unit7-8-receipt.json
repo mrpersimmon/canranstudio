@@ -1,0 +1,85 @@
+{
+  "id": "unit7-8",
+  "tool": "built-in image_gen",
+  "generatedAt": "2026-10-23",
+  "requestFiles": [
+    "unit7-8-request-v1.json"
+  ],
+  "referenceRoles": {
+    "environment": [
+      "opening-mobile-v2.webp",
+      "neighborhood-mobile-v1.webp"
+    ],
+    "characterStyleOnly": [
+      "interview-couple-v1.webp"
+    ],
+    "companionGround": "unit5-6-ground.png"
+  },
+  "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1693b-9472-76e0-9cb3-06739ef24f7a/exec-be87d6ad-b3ee-4599-9d91-ae8087face27.png",
+  "previousReturnedPaths": [],
+  "adopted": {
+    "png": "assets/course-journey/modules-v1/unit7-8-ground.png",
+    "webp": "assets/course-journey/modules-v1/unit7-8-ground.webp"
+  },
+  "size": [
+    1536,
+    1024
+  ],
+  "alphaRange": [
+    0,
+    254
+  ],
+  "alphaCounts": {
+    "transparent": 673022,
+    "opaque": 0,
+    "partial": 899842
+  },
+  "alphaBounds": {
+    "0": [
+      0,
+      33,
+      1522,
+      992
+    ],
+    "16": [
+      47,
+      78,
+      1503,
+      944
+    ],
+    "128": [
+      48,
+      79,
+      1502,
+      944
+    ],
+    "240": [
+      51,
+      80,
+      1502,
+      943
+    ]
+  },
+  "sha256": {
+    "png": "9e99aba3a4f78140178d7f03406dd1c33a65fc6e0d476aef8964dd107600a14a",
+    "webp": "cb8af4a5d69b980f0201315875f8ab66339aafb61fefb94d4dd99b5886530126"
+  },
+  "processing": "Original PNG copied verbatim. WebP is encoding only: sharp quality92 alphaQuality100 effort6; no resize, crop, retouch, background removal, geometry or compositing.",
+  "review": {
+    "emptyGround": true,
+    "noCharacters": true,
+    "completePlatform": true,
+    "recommendedSoles": [
+      0.5,
+      0.72
+    ],
+    "safeStandingArea": [
+      0.23,
+      0.56,
+      0.77,
+      0.75
+    ],
+    "framingDeviation": "Requested 8-10 percent alpha margin was not met: solid foliage/platform reaches around 3 percent horizontal margins. Whole island remains uncut. Add parent layout breathing room rather than modifying pixels.",
+    "notes": "School or arbor restricted to rear, broad flat central floor supports later original-character compositing. Preserve character/platform transform as one group."
+  }
+}

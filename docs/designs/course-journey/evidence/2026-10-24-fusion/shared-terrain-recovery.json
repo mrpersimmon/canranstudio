@@ -1,0 +1,45 @@
+{
+  "sharedFailure": {
+    "state": "error",
+    "stops": [
+      {
+        "id": "unit1-2",
+        "selected": "false",
+        "sheen": "0",
+        "state": "error"
+      },
+      {
+        "id": "unit3-4",
+        "selected": "true",
+        "sheen": "0",
+        "state": "error"
+      },
+      {
+        "id": "unit5-6",
+        "selected": "false",
+        "sheen": "0",
+        "state": "error"
+      }
+    ]
+  },
+  "recovered": {
+    "state": "ready",
+    "stops": [
+      {
+        "id": "unit1-2",
+        "sheen": "0.297859",
+        "state": "ready"
+      },
+      {
+        "id": "unit3-4",
+        "sheen": "0",
+        "state": "ready"
+      },
+      {
+        "id": "unit5-6",
+        "sheen": "0",
+        "state": "ready"
+      }
+    ]
+  }
+}

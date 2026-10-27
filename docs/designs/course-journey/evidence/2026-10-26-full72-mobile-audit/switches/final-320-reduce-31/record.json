@@ -1,0 +1,303 @@
+{
+  "signature": "91d9eaa8ba0ff02ede99954c44e287f6d11c144951ee7ac91f54bdcf80867cf7",
+  "from": "messages",
+  "to": "departures",
+  "before": {
+    "chapter": "messages",
+    "dock": {
+      "bottom": 656,
+      "height": 104,
+      "left": 0,
+      "right": 320,
+      "top": 552,
+      "width": 320,
+      "x": 0,
+      "y": 552
+    },
+    "height": 720,
+    "selected": "unit97-98",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 638,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 570,
+        "width": 48,
+        "x": 11,
+        "y": 570
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit97-98-landmark-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1164,
+      "height": 960,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "after": {
+    "chapter": "departures",
+    "dock": {
+      "bottom": 656,
+      "height": 104,
+      "left": 0,
+      "right": 320,
+      "top": 552,
+      "width": 320,
+      "x": 0,
+      "y": 552
+    },
+    "height": 720,
+    "selected": "unit91-92",
+    "switching": "false",
+    "thumbnail": {
+      "box": {
+        "bottom": 638,
+        "height": 68,
+        "left": 11,
+        "right": 59,
+        "top": 570,
+        "width": 48,
+        "x": 11,
+        "y": 570
+      },
+      "complete": true,
+      "naturalWidth": 1254,
+      "src": "/assets/course-journey/unit91-92-landmark-v1.webp"
+    },
+    "width": 320,
+    "world": {
+      "bottom": 1163.53125,
+      "height": 959.53125,
+      "left": 0,
+      "right": 320,
+      "top": 204,
+      "width": 320,
+      "x": 0,
+      "y": 204
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "000.jpg",
+      "bytes": 61875,
+      "sha256": "501ddb1373c41f3eed9c986d6ceea809d2d07ed60b0c45bef56ceac085e174fe",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030551.866452,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984514.197457
+      }
+    },
+    {
+      "index": 1,
+      "file": "001.jpg",
+      "bytes": 62167,
+      "sha256": "09568f1f998bb29d9dfad9b11f7074f2aea2017e187925ef7a3560d34d7eb29a",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030551.918645,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984514.24965
+      }
+    },
+    {
+      "index": 2,
+      "file": "002.jpg",
+      "bytes": 60346,
+      "sha256": "504f885057c19afda4ac6f2f68847d2a9f3cc8078c9bf5699db1e4ac3bd683b6",
+      "metadata": {
+        "deviceHeight": 720,
+        "deviceWidth": 320,
+        "monotonicTimestamp": 1030551.935324,
+        "offsetTop": 0,
+        "pageScaleFactor": 1,
+        "scrollOffsetX": 0,
+        "scrollOffsetY": 0,
+        "timestamp": 1792984514.266328
+      }
+    }
+  ],
+  "states": [
+    {
+      "chapter": "messages",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit97-98",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit97-98-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1164,
+        "height": 960,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "departures",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit91-92",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit91-92-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1163.53125,
+        "height": 959.53125,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    },
+    {
+      "chapter": "departures",
+      "dock": {
+        "bottom": 656,
+        "height": 104,
+        "left": 0,
+        "right": 320,
+        "top": 552,
+        "width": 320,
+        "x": 0,
+        "y": 552
+      },
+      "height": 720,
+      "selected": "unit91-92",
+      "switching": "false",
+      "thumbnail": {
+        "box": {
+          "bottom": 638,
+          "height": 68,
+          "left": 11,
+          "right": 59,
+          "top": 570,
+          "width": 48,
+          "x": 11,
+          "y": 570
+        },
+        "complete": true,
+        "naturalWidth": 1254,
+        "src": "/assets/course-journey/unit91-92-landmark-v1.webp"
+      },
+      "width": 320,
+      "world": {
+        "bottom": 1163.53125,
+        "height": 959.53125,
+        "left": 0,
+        "right": 320,
+        "top": 204,
+        "width": 320,
+        "x": 0,
+        "y": 204
+      }
+    }
+  ],
+  "strips": [
+    [
+      8,
+      284,
+      36,
+      492
+    ],
+    [
+      284,
+      284,
+      312,
+      492
+    ]
+  ],
+  "pixels": [
+    {
+      "index": 0,
+      "toOld": 0,
+      "toNew": 63.9479739010989,
+      "minimum": 0
+    },
+    {
+      "index": 1,
+      "toOld": 0,
+      "toNew": 63.9479739010989,
+      "minimum": 0
+    },
+    {
+      "index": 2,
+      "toOld": 63.9479739010989,
+      "toNew": 0,
+      "minimum": 0
+    }
+  ],
+  "errors": [],
+  "method": "Actual browser screencast JPEG80 frames; two near-field edge strips below the expected loading-hint UI band compared with outgoing and settled incoming frames, threshold3 mean RGB levels. This detects blank/intermediate terrain in sampled frames, not every pixel or every physical refresh."
+}

@@ -1,0 +1,78 @@
+{
+  "asset": "unit11-12-ground",
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a1693d-c894-79a1-b00e-54d20ab1cd07\\exec-b0fd777a-8c27-4820-b36f-39d124f3b5eb.png",
+  "sourceSha256": "af6a9758de3aab9bb3b578d01148a342af82f6238d11034f2a04ece1e0fb11ed",
+  "actualSize": [
+    1536,
+    1024
+  ],
+  "hasAlpha": true,
+  "alpha": {
+    "fullyTransparent": 757943,
+    "partiallyTransparent": 814921,
+    "boundsAt16": [
+      99,
+      32,
+      1472,
+      949
+    ],
+    "normalizedBoundsAt16": [
+      0.064453125,
+      0.03125,
+      0.958984375,
+      0.927734375
+    ]
+  },
+  "safeFloor": {
+    "x": [
+      0.22,
+      0.78
+    ],
+    "y": [
+      0.56,
+      0.78
+    ],
+    "feetY": 0.72
+  },
+  "inspectionNotes": [
+    "School house and steps behind safe floor; no people or duplicated shirt props.",
+    "Requested 8% margins require verification against measured bounds; external layout gutters remain necessary."
+  ],
+  "requests": [
+    {
+      "file": "docs/designs/course-journey/production/modules-v1/unit11-12-request.json",
+      "sha256": "948998b499df9f5d47e1c2b6e4b948aadcbae04b0113b008e6fcc95774401c89",
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395",
+          "role": "environment style"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+          "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+          "role": "environment style"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/shirt-return-v1.webp",
+          "sha256": "c741eedb1b795fe6260db04853f68587790b2ec36b507e882d5ca26df5d29480",
+          "role": "feet plane guidance only; do not draw"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "file": "assets/course-journey/modules-v1/unit11-12-ground.png",
+      "sha256": "af6a9758de3aab9bb3b578d01148a342af82f6238d11034f2a04ece1e0fb11ed",
+      "bytes": 1768069
+    },
+    {
+      "file": "assets/course-journey/modules-v1/unit11-12-ground.webp",
+      "sha256": "21ebe7cf6da9cc82ad869e3d045c857b98cbdd97af5d732f2fb51d71eb5f7878",
+      "bytes": 161904
+    }
+  ],
+  "processing": "Native PNG copied byte-for-byte; WebP re-encoding only. No crop, resize, recolor or generated content changes."
+}

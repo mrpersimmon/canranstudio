@@ -1,0 +1,95 @@
+{
+  "asset": "unit9-10-ground",
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a1693d-c894-79a1-b00e-54d20ab1cd07\\exec-97979e9d-d2b4-4083-90b2-c92cbc9903d1.png",
+  "sourceSha256": "e01d1ebf6243199b711dfd9e28a681c6a59ccf4882486d37af6c3c89d332fd2f",
+  "actualSize": [
+    1536,
+    1024
+  ],
+  "hasAlpha": true,
+  "alpha": {
+    "fullyTransparent": 668484,
+    "partiallyTransparent": 904380,
+    "boundsAt16": [
+      35,
+      91,
+      1508,
+      943
+    ],
+    "normalizedBoundsAt16": [
+      0.022786458333333332,
+      0.0888671875,
+      0.982421875,
+      0.921875
+    ]
+  },
+  "safeFloor": {
+    "x": [
+      0.2,
+      0.8
+    ],
+    "y": [
+      0.56,
+      0.78
+    ],
+    "feetY": 0.72
+  },
+  "inspectionNotes": [
+    "Complete island, no people. Main floor empty.",
+    "Requested 8% transparent margins not fully achieved horizontally; use measured alpha bounds and external module gutters."
+  ],
+  "requests": [
+    {
+      "file": "docs/designs/course-journey/production/modules-v1/unit9-10-request.json",
+      "sha256": "6cc8abfbe5c014395e389bcd1e114ebeaeb325f85b14c5eb2b2d41310281e8d6",
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395",
+          "role": "environment style"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/opening-mobile-v2.webp",
+          "sha256": "dee8003d458cb1bb266b0a0207f647430de5d26a5ffcdbacf6d90f047bb4989c",
+          "role": "environment style"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/greeting-neighbors-v1.webp",
+          "sha256": "f5e40c6f0793e2662ca3d8c0f9134e855e5d0464bb302a5926279ae6461fb05b",
+          "role": "feet plane guidance; never regenerate character"
+        }
+      ]
+    },
+    {
+      "file": "docs/designs/course-journey/production/modules-v1/unit9-10-request-v2.json",
+      "sha256": "18494a53846fb68d36938808474539bcf6f2f8d367a6daa82eba2763fb3d9677",
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/.codex/generated_images/01a1693d-c894-79a1-b00e-54d20ab1cd07/exec-9a2fa3a1-cc00-4c89-8f0f-e910d7ec5a3d.png",
+          "sha256": "b7c4f712f1b5e56689c63febed11d80376366d27ce52ad33e64314e1d04a262a",
+          "role": "edit target; preserve scene design"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "file": "assets/course-journey/modules-v1/unit9-10-ground.png",
+      "sha256": "e01d1ebf6243199b711dfd9e28a681c6a59ccf4882486d37af6c3c89d332fd2f",
+      "bytes": 1879862
+    },
+    {
+      "file": "assets/course-journey/modules-v1/unit9-10-ground.webp",
+      "sha256": "edf891b5aaf27bd87e3d91a20c8cc052901eba5578dc609efbab32941856d399",
+      "bytes": 198548
+    }
+  ],
+  "processing": "Native PNG copied byte-for-byte; WebP re-encoding only. No crop, resize, recolor or generated content changes.",
+  "priorVariant": {
+    "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a1693d-c894-79a1-b00e-54d20ab1cd07\\exec-9a2fa3a1-cc00-4c89-8f0f-e910d7ec5a3d.png",
+    "file": "docs/designs/course-journey/production/modules-v1/unit9-10-ground-first-generation.png",
+    "sha256": "b7c4f712f1b5e56689c63febed11d80376366d27ce52ad33e64314e1d04a262a",
+    "reason": "Horizontal transparent gutter too small; retained for provenance."
+  }
+}

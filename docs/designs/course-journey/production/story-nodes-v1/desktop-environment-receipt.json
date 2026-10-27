@@ -1,0 +1,110 @@
+{
+  "version": "1.0",
+  "asset": "desktop-environment-v2",
+  "date": "2026-10-21",
+  "mode": "built-in image_gen image editing",
+  "transparent_background": false,
+  "scope": "Environment asset only; no application code, browser, deployment, or v1 asset modifications.",
+  "request": "desktop-environment-request.json",
+  "references": [
+    {
+      "role": "edit target",
+      "path": "assets/course-journey/opening-desktop.png",
+      "sha256": "73ca7c02036e842b7c9d45f738335a27498adfad05f9cbaa044e988b33981acb",
+      "width": 1373,
+      "height": 1145
+    },
+    {
+      "role": "approved world and style reference",
+      "path": "docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+      "width": 853,
+      "height": 1844
+    }
+  ],
+  "output": {
+    "native_output": "C:/Users/duanxiaodong/.codex/generated_images/01a15e32-6828-7b43-91a3-2fdb5f400d0b/exec-fd27377f-aca4-4606-9b49-69d59445a16a.png",
+    "path": "assets/course-journey/opening-desktop-v2.png",
+    "sha256": "255125643efc997036995e7c5e7aff94ab0f3535ce4aac462304b1f172ccef35",
+    "width": 1374,
+    "height": 1145,
+    "bytes": 2228722,
+    "aspect_ratio": 1.2,
+    "selection": "selected for integration",
+    "note": "Native output is one pixel wider than the input; copied unchanged without resampling."
+  },
+  "inspection": {
+    "method": "Viewed original edit target, approved reference and final native output. Anchor values are approximate manual visual readings.",
+    "result": "Approved light, camera, palette, creamy/coral stone, turquoise water, greenery, lower grass circle and overall connected terrain retained. Giant middle umbrella and wooden crate removed. Middle paving expanded; original lantern remains. School forecourt expanded into broad flat stone paving, with readable red roof, doorway and right wall. The lower grass platform remains in the original location and scale. No people, umbrella, counter, crate, text, stars, UI or coordinate markings.",
+    "limitations": [
+      "Normalized anchors are measured visual recommendations, not exact generated guarantees.",
+      "Application-level overlay fit and minimum hit target checks remain parent integration responsibility."
+    ]
+  },
+  "anchors": {
+    "coordinate_system": "normalized x,y from top left of 1374 x 1145 native output",
+    "unit1_2": {
+      "grass_center": [
+        0.314,
+        0.725
+      ],
+      "feet_recommended": [
+        0.314,
+        0.768
+      ],
+      "grass_bounds_approx": {
+        "left": 0.162,
+        "right": 0.466,
+        "top": 0.651,
+        "bottom": 0.796
+      }
+    },
+    "unit3_4": {
+      "stone_clearing_center": [
+        0.535,
+        0.491
+      ],
+      "feet_recommended": [
+        0.49,
+        0.52
+      ],
+      "stage_bounds_approx": {
+        "left": 0.44,
+        "right": 0.66,
+        "top": 0.445,
+        "bottom": 0.54
+      },
+      "lantern_foot": [
+        0.41,
+        0.507
+      ]
+    },
+    "unit5_6": {
+      "courtyard_center": [
+        0.738,
+        0.279
+      ],
+      "feet_recommended": [
+        0.75,
+        0.31
+      ],
+      "courtyard_bounds_approx": {
+        "left": 0.585,
+        "right": 0.87,
+        "top": 0.237,
+        "bottom": 0.33
+      },
+      "school": {
+        "roof_center": [
+          0.782,
+          0.104
+        ],
+        "door_bottom": [
+          0.758,
+          0.229
+        ]
+      },
+      "note": "Recommended feet position is on flat paving, above the foreground staircase start."
+    }
+  }
+}

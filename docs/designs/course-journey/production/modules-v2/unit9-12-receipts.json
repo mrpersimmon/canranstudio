@@ -1,0 +1,125 @@
+{
+  "method": "Built-in image_gen; one call per asset; original PNG byte copy; WebP quality 88 encoding only.",
+  "records": [
+    {
+      "id": "unit9-10",
+      "request": {
+        "prompt": "Use case: precise-object-edit\nAsset type: production transparent environment sprite for a children's English journey map, Lesson 9–10.\nInput image 1 is the edit target: the existing 1536×1024 cream stone courtyard with coral flower arch. Input image 2 is a style reference only: the already approved connected cream paths, coral arch bridges and lush garden neighborhood.\nPrimary request: open the edit target's enclosed circular courtyard into a continuous journey path, keeping the target's composition, proportions, central standing area, flower arch, foliage, palette, soft upper-left sunlight and polished illustrated game-art finish unchanged.\nExact local changes: add a cream stone walkway entering from the canvas left-rear edge at normalized (0.03,0.40) and meeting the courtyard's left side near (0.22,0.60). Add an outgoing cream stone walkway from the courtyard's right-front side near (0.78,0.70) extending to the right canvas edge at (0.98,0.78). Open/remove the small sections of enclosing wall where these paths join, so the route visibly continues through the courtyard instead of forming a sealed island. Use coral arch openings or low coral retaining walls under the paths and little lush flower beds to naturally soften join edges. Continue the original paving perspective.\nInvariants: preserve the original central cream paved standing zone covering x=0.20–0.80,y=0.56–0.78 and its floor height and camera angle. Preserve central flower arch, cream coping, green cypress shrubs, daisies and lavender, coral pink masonry. No people or characters, no new central objects, no labels, UI, lettering, stars, medals or watermarks. No ocean, sky, scenery backdrop or cast backdrop gradient. No glow aura.\nCanvas: exactly 1536×1024, landscape 3:2, genuinely transparent RGBA background and clean alpha outside the environment. Scene may extend toward both canvas sides to communicate onward travel. Do not crop or alter the scale or height of the central platform. Only add connecting passages and open their respective wall sections.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit9-10-ground.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp"
+        ],
+        "transparent_background": true
+      },
+      "returned": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d57-05db-7902-854f-cf877aeb433c as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d57-05db-7902-854f-cf877aeb433c\\exec-7c86b00a-5ac7-4738-b404-c782d458fe57.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a16d57-05db-7902-854f-cf877aeb433c/exec-7c86b00a-5ac7-4738-b404-c782d458fe57.png",
+      "output": {
+        "png": {
+          "path": "assets/course-journey/modules-v2/unit9-10-ground.png",
+          "bytes": 1921360,
+          "sha256": "3e07865ea9cca372b46b8f6979289451000b75497c99692ff9e08070cc4a4276",
+          "width": 1536,
+          "height": 1024,
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alphaGreaterThan16Bounds": [
+            0,
+            90,
+            1536,
+            980
+          ]
+        },
+        "webp": {
+          "path": "assets/course-journey/modules-v2/unit9-10-ground.webp",
+          "bytes": 196108,
+          "sha256": "eeddb9db3e1bbb7e9abc6a58fe784ea34887ee21a7ad749ac6450fc28acd48bd",
+          "width": 1536,
+          "height": 1024,
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alphaGreaterThan16Bounds": [
+            0,
+            90,
+            1536,
+            980
+          ]
+        }
+      },
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit9-10-ground.png",
+          "sha256": "e01d1ebf6243199b711dfd9e28a681c6a59ccf4882486d37af6c3c89d332fd2f"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+        }
+      ],
+      "visualReview": "Both side walls now have open cream-paved bridge passages. Original central architecture, cream courtyard perspective, coral masonry, flowers and upper-left lighting remain recognisable. Central standing region is open. The generated sides deliberately reach canvas edges; bridge extension is horizontally oriented, not a claim of automatic continuity between separately laid-out modules. Alpha and scene integration require normal UI composition checks."
+    },
+    {
+      "id": "unit11-12",
+      "request": {
+        "prompt": "Use case: precise-object-edit\nAsset type: production transparent environment sprite for a children's English journey map, Lesson 11–12.\nInput image 1 is the edit target: the existing 1536×1024 cream stone school courtyard with coral red roof and turquoise double doors. Input image 2 is a style reference only: the already approved connected cream paths, coral arch bridges and lush garden neighborhood.\nPrimary request: open the edit target's enclosed circular school courtyard into a continuous journey path, keeping the target's composition, proportions, central standing area, small school building and yellow flag, foliage, palette, soft upper-left sunlight and polished illustrated game-art finish unchanged.\nExact local changes: add a cream stone walkway entering from the canvas left-rear edge at normalized (0.03,0.40) and meeting the courtyard's left side near (0.22,0.60). Add an outgoing cream stone walkway from the courtyard's right-front side near (0.78,0.70) extending to the right canvas edge at (0.98,0.78). Open/remove the small sections of enclosing wall where these paths join, so the route visibly continues through the courtyard instead of forming a sealed island. Use coral arch openings or low coral retaining walls under the paths and little lush flower beds to naturally soften join edges. Continue the original paving perspective.\nInvariants: preserve the original central cream paved standing zone covering x=0.20–0.80,y=0.56–0.78 and its floor height and camera angle. Preserve school's coral roof, turquoise double doors, cream coping, green cypress shrubs, daisies and lavender, coral pink masonry. No people or characters, no new central objects, no labels, UI, lettering, stars, medals or watermarks. No ocean, sky, scenery backdrop or cast backdrop gradient. No glow aura.\nCanvas: exactly 1536×1024, landscape 3:2, genuinely transparent RGBA background and clean alpha outside the environment. Scene may extend toward both canvas sides to communicate onward travel. Do not crop or alter the scale or height of the central platform. Only add connecting passages and open their respective wall sections.",
+        "referenced_image_paths": [
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit11-12-ground.png",
+          "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp"
+        ],
+        "transparent_background": true
+      },
+      "returned": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d57-05db-7902-854f-cf877aeb433c as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a16d57-05db-7902-854f-cf877aeb433c\\exec-7dc36327-7480-493a-b810-6e153e86a377.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "returnedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a16d57-05db-7902-854f-cf877aeb433c/exec-7dc36327-7480-493a-b810-6e153e86a377.png",
+      "output": {
+        "png": {
+          "path": "assets/course-journey/modules-v2/unit11-12-ground.png",
+          "bytes": 1838645,
+          "sha256": "b6afc2762d14023084aed144ec57035afb4ba03a1368666924094732ac4b5d33",
+          "width": 1536,
+          "height": 1024,
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alphaGreaterThan16Bounds": [
+            0,
+            32,
+            1536,
+            939
+          ]
+        },
+        "webp": {
+          "path": "assets/course-journey/modules-v2/unit11-12-ground.webp",
+          "bytes": 178580,
+          "sha256": "2a2445f667a47c00e1457209990c527d089cfff38a5e47c0ac3da6f9504425c8",
+          "width": 1536,
+          "height": 1024,
+          "alphaRange": [
+            0,
+            254
+          ],
+          "alphaGreaterThan16Bounds": [
+            0,
+            32,
+            1536,
+            939
+          ]
+        }
+      },
+      "references": [
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v1/unit11-12-ground.png",
+          "sha256": "af6a9758de3aab9bb3b578d01148a342af82f6238d11034f2a04ece1e0fb11ed"
+        },
+        {
+          "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/neighborhood-mobile-v1.webp",
+          "sha256": "4f75b6ef989c8b3e72794298dc89e96a444634f9b695b7e8e65bc2aa9f601395"
+        }
+      ],
+      "visualReview": "Both side walls now have open cream-paved bridge passages. Original central architecture, cream courtyard perspective, coral masonry, flowers and upper-left lighting remain recognisable. Central standing region is open. The generated sides deliberately reach canvas edges; bridge extension is horizontally oriented, not a claim of automatic continuity between separately laid-out modules. Alpha and scene integration require normal UI composition checks."
+    }
+  ]
+}

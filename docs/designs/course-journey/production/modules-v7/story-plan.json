@@ -1,0 +1,502 @@
+{
+  "date": "2026-10-26",
+  "source": "Existing accepted sprites and complete-journey-v1/story-briefs.json; factual course direction is retained",
+  "chapters": [
+    {
+      "chapter": "seasons",
+      "theme": "四季市集",
+      "description": "A sunlit Mediterranean market garden, white plaster with cobalt shutters, apricot awnings and terracotta pots. Upper side bay: a modest food shop with closed parcels on distant shelves, no raw meat or knives. Middle: Greek-style white courtyard with citrus and flowering plants, subtle varied foliage all within ONE coherent sunny scene, not four seasonal quadrants. Lower: open garden observation terrace beside a low wall; no extra weather display. Continuous pale limestone walking surface through all three. Keep the book/album and weather-board props exclusively in the character layers.",
+      "entries": [
+        {
+          "id": "unit49-50",
+          "title": "晚餐采购大冒险",
+          "story": "老板把纸包交给Mrs. Bird，她提着采购篮微笑接过",
+          "direction": "Butcher hands one wrapped paper parcel to Mrs. Bird, who has her shopping basket. Same identities and costumes as card. Full body, no large shop counter obscuring feet, no raw meat, no knives.",
+          "source": "unit49-50/content.js",
+          "card": "assets/unit49-50/keepsake-story-v2.webp"
+        },
+        {
+          "id": "unit51-52",
+          "title": "希腊四季明信片",
+          "story": "Dimitri翻开四季相册，Hans指着春天的照片，两人一起交流",
+          "direction": "Dimitri opens a four-season photo album, Hans points at the spring image. Two adult men as card, complete standing group, four unlabelled seasonal picture panels. Do not add four tiny clones of people or a large wall chart.",
+          "source": "unit51-52/content.js",
+          "card": "assets/unit51-52/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit53-54",
+          "title": "天气观察站",
+          "story": "Hans和Jim在花园天气观察站里指着方位天气板交流",
+          "direction": "Hans and Jim converse at one compact freestanding directional weather display, matching the card; weather motifs are sun/cloud/rain, no text, no country flags, no readable letters. Show full legs and shoes.",
+          "source": "unit53-54/content.js",
+          "card": "assets/unit53-54/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "everyday",
+      "theme": "灯火邻里",
+      "description": "ONE connected neighbourhood reading arcade at gentle blue hour. Upper: open home sitting-room bay along the LEFT edge with warm lamplight; middle: quieter library nook along the RIGHT edge; lower: a small stationery shop front with closed paper-stock boxes along the LEFT edge. Honey-lit continuous cream stone arcade floor; cool periwinkle exterior sky seen only at the distant top and through side windows. No dark foreground. Do not add people, newspapers, books being read, homework tables, chairs, money or envelopes in the central area: the unchanged figures provide these. Not a simultaneous morning/evening montage.",
+      "entries": [
+        {
+          "id": "unit55-56",
+          "title": "索耶家的一天",
+          "story": "索耶一家在温暖的夜晚读报、陪伴和做家庭作业",
+          "direction": "The Sawyer family, parents and two children; father with his newspaper, mother beside them, children with homework books. Compact four-person group around one low small study surface. Keep every head and shoe visible, no oversized sofa. This is their usual evening, no simultaneous morning montage.",
+          "source": "unit55-56/content.js",
+          "card": "assets/unit55-56/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit57-58",
+          "title": "今天不一样",
+          "story": "索耶先生今晚正读着一本有趣的书，平时看的报纸合好放在一旁",
+          "direction": "Mr. Sawyer alone with an interesting open book, a neatly folded newspaper remains on a small side stool. Keep his card appearance; full-body seated on a compact chair with both shoes visible. He is reading the BOOK tonight, not the newspaper.",
+          "source": "unit57-58/content.js",
+          "card": "assets/unit57-58/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit59-60",
+          "title": "别忘了找零",
+          "story": "文具店售货员把零钱递给女士，柜台上有信封、信笺簿和胶水",
+          "direction": "Stationery shopkeeper hands coins as change to the woman; one small side stand holds envelopes, a writing pad and glue. Two full-body adults; coins are clearly being returned to the customer. No cash register hiding their legs.",
+          "source": "unit59-60/content.js",
+          "card": "assets/unit59-60/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "caring",
+      "theme": "安心花园",
+      "description": "A calm family-home garden veranda, pale sage shutters, ivory plaster, soft lavender hydrangeas and a gently curving cream-tile walkway. Upper: open family sitting-room side bay, not a hospital. Middle: sheltered recovery porch with simple cushions on a distant side bench, no medical equipment. Lower: a welcoming front-door alcove with a clearly connected same-level stone doorstep along an OUTER edge. Warm late-afternoon light throughout. No doctor, child, medicine, needles, keys or central furniture: all story figures/props come from separate sprites. Do not add clinical crosses, signage, clocks or extra beds.",
+      "entries": [
+        {
+          "id": "unit61-62",
+          "title": "给 Jimmy 请医生",
+          "story": "医生在家中检查Jimmy的嘴，妈妈陪在床边",
+          "direction": "The doctor examines Jimmy who is sitting on a compact examination stool, mother attentively beside him. Exactly three people, child shorter, mouth gently open, doctor uses a small examination light. Preserve identities; no injection, no hospital bed hiding all legs, no dangerous or frightening props.",
+          "source": "unit61-62/content.js",
+          "card": "assets/unit61-62/keepsake-story-v2.webp"
+        },
+        {
+          "id": "unit63-64",
+          "title": "Jimmy 好些了",
+          "story": "医生举起两根手指提醒再休息两天，Jimmy微笑，妈妈在旁倾听",
+          "direction": "Same doctor, Jimmy and mother as card; doctor holds up TWO fingers to indicate two more days of rest. Jimmy smiles, mother listens. Exactly three complete figures, no medicine dispensing or cured sports activity.",
+          "source": "unit63-64/content.js",
+          "card": "assets/unit63-64/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit65-66",
+          "title": "Jill 的晚间约定",
+          "story": "爸爸把一枚前门钥匙递给Jill，妈妈在旁微笑，三人相向交谈",
+          "direction": "Father hands Jill ONE front-door key; mother stands beside them smiling. Exactly three people, key is visibly between father and daughter. No extra keyring or door background.",
+          "source": "unit65-66/content.js",
+          "card": "assets/unit65-66/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "memories",
+      "theme": "街角时光廊",
+      "description": "A distinct curved shopping arcade made of soft rose brick and pale stone, broad dry paving, muted green striped awnings, shallow curved shop windows and climbing flowers. Upper: neighbourhood shop corner. Middle: a small photographic memory-window bay displaying abstract landscape colours only, not people or racing cars. Lower: a home-front conversation porch, no additional telephone. Use alternating shallow side bays and one long coherent crescent-like arcade edge, not three matching buildings. The continuous central limestone route remains broad and unblocked. No live race scene, racing cars, numbers, telephone props or newspapers.",
+      "entries": [
+        {
+          "id": "unit67-68",
+          "title": "街角的周末消息",
+          "story": "Johnson夫人与Williams夫人在商店街相向交谈",
+          "direction": "Mrs. Johnson and Mrs. Williams standing face-to-face sharing weekend news, exact two women and their bags as the card. No other family members mentioned in their conversation are present.",
+          "source": "unit67-68/content.js",
+          "card": "assets/unit67-68/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit69-70",
+          "title": "赛车日的时光相册",
+          "story": "叙述者与妻子在观众席回忆赛车日，远处是15号赛车",
+          "direction": "Narrator and wife recalling the race; the pair stand together with a small race photograph showing a simple race car. Do not put a life-size car in the sprite. Any car number belongs to the environment story, no readable digits in this small cutout.",
+          "source": "unit69-70/content.js",
+          "card": "assets/unit69-70/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit71-72",
+          "title": "电话里的昨天",
+          "story": "Jane倾听Pauline讲述昨天的电话，桌上放着薄荷色电话与记录本",
+          "direction": "Jane listens to Pauline recount yesterday’s phone call; a mint-green rotary telephone and small notebook sit on a small side stand. Exactly the two women, no present-time man on the phone.",
+          "source": "unit71-72/content.js",
+          "card": "assets/unit71-72/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "appointments",
+      "theme": "车站服务街",
+      "description": "A small friendly service street alongside a railway station. Upper outer edge: a low station canopy with a simple empty information cabinet, no text, clock or train covering the scene. Middle outer edge: a rounded shoe-shop window with a few CLOSED stock boxes, no display shoes duplicating the black/purple shoes in the figures. Lower side bay: a quiet dental reception doorway with pale mint glass and one potted plant, no medical procedure or symbols. Continuous cool cream/sand paving, apricot brick and blue-green metal canopy. ONE connected urban block; no stairs across the walking route.",
+      "entries": [
+        {
+          "id": "unit73-74",
+          "title": "街角的短语手册",
+          "story": "Mills夫人与游客在车站旁翻看短语手册",
+          "direction": "Mrs. Mills and the traveller look together at the small open phrase book near the station. Two full-body adults, preserve card identities; no implied fluent conversation or giant street map.",
+          "source": "unit73-74/content.js",
+          "card": "assets/unit73-74/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit75-76",
+          "title": "鞋店里的时间线索",
+          "story": "女士拿着自己的黑色样鞋，比较售货员展示的紫色鞋",
+          "direction": "The woman holds her own BLACK sample shoe while the shop assistant displays the PURPLE alternative shoe. Two adults, two distinctly coloured handheld shoes; their worn shoes remain on their feet. No purchase bag suggesting she bought the purple pair.",
+          "source": "unit75-76/content.js",
+          "card": "assets/unit75-76/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit77-78",
+          "title": "诊所里的预约时间",
+          "story": "克罗夫特先生扶着面颊，与拿着预约本的护士交谈",
+          "direction": "Mr. Croft holds his painful cheek while talking to the nurse with an appointment book. Two adult figures; subtle concerned expression, no visible injured tooth or medical procedure.",
+          "source": "unit77-78/content.js",
+          "card": "assets/unit77-78/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "preparations",
+      "theme": "出发前的家",
+      "description": "ONE warm roof-cutaway family home with a continuous honey-coloured wood hallway. Upper LEFT side bay: sage-green kitchen cupboards and an empty side worktop. Middle RIGHT bay: open dining nook with wall shelves, no large table across the centre and no roast meal. Lower LEFT bay: entrance and packing alcove with empty coat hooks and an open plain doorway, no packed bags or travel scenes. Warm domestic afternoon light; restrained ivory curtains and small plants. No shopping list, food plate, suitcase, blue shirt or people in this background: the foreground sprites provide the exact story actions. Different architecture from the earlier cream-tiled kitchen chapter.",
+      "entries": [
+        {
+          "id": "unit79-80",
+          "title": "一起写购物清单",
+          "story": "Carol拿着笔和清单，与Tom讨论家里需要什么",
+          "direction": "Carol holds a pen and shopping list, Tom discusses what they need. Exactly two adults, abstract marks on paper only, no shopping purchases already delivered.",
+          "source": "unit79-80/content.js",
+          "card": "assets/unit79-80/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit81-82",
+          "title": "晚餐前的小意外",
+          "story": "Carol端着烤牛肉和土豆，Tom与来访的Sam聊起午餐",
+          "direction": "Carol carries a small plate of roast beef and potatoes while Tom talks to their visitor Sam. Exactly three full-body adults; one food plate, no second meal or enormous dining table.",
+          "source": "unit81-82/content.js",
+          "card": "assets/unit81-82/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit83-84",
+          "title": "出发前的行李箱",
+          "story": "Carol把蓝衬衫放进行李箱，Tom和来访的Sam聊假期",
+          "direction": "Carol puts one blue shirt into an OPEN suitcase on a low small stand while Tom and visiting Sam discuss the holiday. Exactly three adults; suitcase does not cover shoes. They have not departed.",
+          "source": "unit83-84/content.js",
+          "card": "assets/unit83-84/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "decisions",
+      "theme": "城市工坊街",
+      "description": "A connected small-town decision street with warm sandstone facades, petrol-blue details and broad light slate paving. Upper outer side: compact old cinema entrance with an unlettered shallow marquee and closed doors. Middle opposite side: open repair workshop bay with simple wall tool-storage and empty floor, NO cars or car parts because the original sprite supplies one dented fender. Lower side: modest house-viewing gate and front garden, no sold sign, key exchange or mansion. The same central walking level connects cinema, garage and home without crossing walls or curb steps. No Eiffel tower, tickets, repair paperwork or humans.",
+      "entries": [
+        {
+          "id": "unit85-86",
+          "title": "电影院外聊巴黎",
+          "story": "电影院外，戴圆眼镜的George与拿票根的Ken聊起巴黎",
+          "direction": "George with round glasses talks to Ken holding cinema ticket stubs. Two full-body men as the card. They are outside the cinema discussing Paris, not actually in Paris; no Eiffel tower miniature in hands.",
+          "source": "unit85-86/content.js",
+          "card": "assets/unit85-86/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit87-88",
+          "title": "修理厂里的进度单",
+          "story": "Wood与接待员查看仍有凹痕的汽车和维修进度单",
+          "direction": "Wood and the receptionist inspect a repair progress sheet beside a SMALL partial dented car fender prop matching the card. Two complete men, do not show a repaired shiny car; fender only, not a life-size car overwhelming the figures.",
+          "source": "unit87-88/content.js",
+          "card": "assets/unit87-88/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit89-90",
+          "title": "看房时的时间线索",
+          "story": "Nigel拿着看房笔记，与Ian讨论待售房屋，尚未决定购买",
+          "direction": "Nigel holds house-viewing notes while talking with Ian. Two adults, no key handover, no sold label, no handshake implying purchase; decision has NOT been made.",
+          "source": "unit89-90/content.js",
+          "card": "assets/unit89-90/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "departures",
+      "theme": "启程长廊",
+      "description": "A continuous covered promenade linking a modest neighbourhood edge with a small transport terminal. Upper side: garden house porch with flowers, no moving boxes. Middle opposite side: curved pale teal terminal glazing and a view of clear distant sky, no plane or extra luggage. Lower side: a long station platform canopy, tracks may be visible only beyond an OUTER fence, never under the reserved standing floor. Warm cream terrazzo/stone walkway joins all three at one level, with elegant rounded green canopy supports outside the central route. No clocks, tickets, globes, suitcases, labels, departing passengers or readable departure boards.",
+      "entries": [
+        {
+          "id": "unit91-92",
+          "title": "邻居们的明日约定",
+          "story": "Catherine、Jenny和Linda在屋外谈论Ian明天的搬家安排与问候",
+          "direction": "Catherine, Jenny and Linda converse about Ian moving tomorrow. Exactly three women as the card, no Ian present, no moving boxes already carried away, no departure scene.",
+          "source": "unit91-92/content.js",
+          "card": "assets/unit91-92/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit93-94",
+          "title": "新邻居的飞行手记",
+          "story": "飞行员Nigel在机场窗边查看旅行手记，旁边放着地球仪与行李",
+          "direction": "Pilot Nigel alone checks his open travel journal beside a small globe on a low stand and one suitcase. Full uniform identity as card, complete body and shoes. No additional pilot or real aeroplane in cutout.",
+          "source": "unit93-94/content.js",
+          "card": "assets/unit93-94/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit95-96",
+          "title": "车站里的时间谜题",
+          "story": "George拿着两张车票，与Ken一起听车站乘务员解释",
+          "direction": "George holds TWO train tickets, Ken stands beside him, a station attendant explains the time. Three full-body men as the card, no boarding train, no invented clock reading.",
+          "source": "unit95-96/content.js",
+          "card": "assets/unit95-96/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "messages",
+      "theme": "书信问候庭",
+      "description": "A serene apricot-and-aqua courtyard with one continuous pale mosaic-stone floor and open room bays. Upper side: small luggage-service porch with CLOSED empty cubbies, no suitcases. Middle opposite side: family hallway alcove with a plain wall and side window, no stairs (the sprite already includes a stair-shaped seat), no additional telephone. Lower: cosy reading veranda with flowering window boxes and a low empty wall shelf. Broad same-level central floor; alternating shallow bays rather than tall partitions. No postcard, notebook, phone, person or duplicate furniture in the standing bands.",
+      "entries": [
+        {
+          "id": "unit97-98",
+          "title": "蓝色箱子的归属",
+          "story": "Mr. Hall与服务员一起核对蓝色箱子把手上的标签",
+          "direction": "Mr. Hall and the attendant examine the label on the handle of ONE BLUE suitcase. Two adults with visible shoes. Label has no legible writing. No second identical suitcase or exchange already completed.",
+          "source": "unit97-98/content.js",
+          "card": "assets/unit97-98/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit99-100",
+          "title": "把话传清楚",
+          "story": "Andy坐在楼梯旁，Lucy用电话联系医生",
+          "direction": "Andy sits carefully on a compact stair-shaped stool while Lucy uses a telephone to call the doctor. Exactly two people, no doctor present. The telephone base can sit on a small side stool; both people’s feet remain visible.",
+          "source": "unit99-100/content.js",
+          "card": "assets/unit99-100/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit101-102",
+          "title": "来自Jimmy的明信片",
+          "story": "Penny为Grandmother读Jimmy的明信片",
+          "direction": "Penny reads Jimmy’s postcard to Grandmother. Exactly two women, older grandmother visibly elderly; full body with shoes. Jimmy is away, not standing in the scene. Card only has abstract marks.",
+          "source": "unit101-102/content.js",
+          "card": "assets/unit101-102/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "learning",
+      "theme": "学堂与书香街",
+      "description": "A light-filled small civic arcade with a continuous cream terrazzo floor, rounded ivory columns and a long green-framed skylight. Upper outer bay: school/exam-room doorway with closed abstract book storage, no exam marks. Middle opposite bay: modest office entrance with warm timber panels and leafy pots. Lower outer bay: fabric boutique window with rolled neutral fabric and closed boxes, NO mannequins, hanging dresses or people. Distinct high airy arcade architecture, not a repeat of the courtyard. No words, scores, diplomas, dictionaries, gift boxes or blue/green dress duplicates.",
+      "entries": [
+        {
+          "id": "unit103-104",
+          "title": "考场外的对话",
+          "story": "Gary和Richard在考场外交流",
+          "direction": "Gary and Richard talking after the exam, with a slim closed exam paper folder. Two young adult men matching the card; no triumphant scores, no claim that both passed.",
+          "source": "unit103-104/content.js",
+          "card": "assets/unit103-104/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit105-106",
+          "title": "办公室的小礼物",
+          "story": "老板把词典递给Sandra",
+          "direction": "The boss hands ONE dictionary to Sandra, exact two adult figures. No wrapped gift box, no award ceremony, no extra office staff. A subtle apologetic smile from Sandra, supportive neutral boss.",
+          "source": "unit105-106/content.js",
+          "card": "assets/unit105-106/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit107-108",
+          "title": "服装店里的比较",
+          "story": "店员与女士比较蓝裙和绿裙",
+          "direction": "Shop assistant and customer compare ONE blue dress and ONE green dress on hangers. Exactly two adult women, full body; do not replace the women’s own clothes or add duplicate dresses.",
+          "source": "unit107-108/content.js",
+          "card": "assets/unit107-108/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "choices",
+      "theme": "咖啡与出行街",
+      "description": "A friendly pedestrian transit precinct with one broad continuous beige stone route. Upper LEFT: a small cafe facade with a recessed counter and ceramic shelves at the back, no central coffee table/cups/biscuits. Middle RIGHT: a classic electrical shop window with abstract frosted glass and CLOSED stock cabinets, no television duplicating the character prop. Lower: an open-side cutaway city bus boarding bay at a LEVEL platform; show understated teal bus wall/window frames at the OUTER edges, the central standing area is the bus interior floor flush with the platform path. No wheels or vehicle body crossing that floor, no extra passenger benches in the centre. Make the bus context legible while keeping a physically coherent level walkway into it. No passengers, coins, tickets, money, labels or numbers.",
+      "entries": [
+        {
+          "id": "unit109-110",
+          "title": "咖啡桌上的数量",
+          "story": "Charlotte给Jane递上饼干",
+          "direction": "Charlotte offers a biscuit to Jane near a small coffee side table with two cups. Exactly two women, one offered biscuit, no excessive mountain of food or readable packaging.",
+          "source": "unit109-110/content.js",
+          "card": "assets/unit109-110/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit111-112",
+          "title": "电视机店里的比较",
+          "story": "Frith夫妇与店员讨论电视机",
+          "direction": "Mr. and Mrs. Frith with a television shop assistant, discussing one small classic television on a narrow stand. Exactly three adults with complete legs and shoes; no purchase bag, no money handover or huge TV covering people.",
+          "source": "unit111-112/content.js",
+          "card": "assets/unit111-112/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit113-114",
+          "title": "公共汽车上的零钱",
+          "story": "两位流浪汉告诉售票员自己有零钱",
+          "direction": "The two tramps tell the bus conductor they have coins. Exactly three adult men matching the card, respectful friendly portrayal, coins in hands. No other passengers in this compact group.",
+          "source": "unit113-114/content.js",
+          "card": "assets/unit113-114/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "surprises",
+      "theme": "家园小故事",
+      "description": "ONE roof-cutaway family home and garden, connected by a broad cream-tiled veranda/hallway. Upper: leafy garden-party terrace with warm plain lanterns at the outer edges, no drinks or people. Middle: breakfast-room side bay with closed cupboards and an empty side counter, no food or scattered coins. Lower: quiet study window with deep blue night glass and soft warm interior lamp, no extra parrot, bird stand or burglar. Each story nook has its local window-light cue, but the entire connected dry foreground floor uses one gentle warm illumination and one perspective; no panel borders or separate horizons. Do not add cups, furniture under figures, money or repeated birds.",
+      "entries": [
+        {
+          "id": "unit115-116",
+          "title": "敲门后的花园聚会",
+          "story": "Tom在花园里向Jim提供啤酒，Carol微笑",
+          "direction": "Tom offers a glass of beer to Jim while Carol smiles beside them. Exactly three adults as card, one offered glass with pale amber liquid, no drunk behaviour and no child holding a drink.",
+          "source": "unit115-116/content.js",
+          "card": "assets/unit115-116/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit117-118",
+          "title": "早餐时的意外",
+          "story": "父亲不小心掉落硬币，母亲和Tommy注意到地上的动静",
+          "direction": "Father has accidentally dropped ONE coin, mother and Tommy notice it near the father’s shoe. Exactly three people; no swallowed coin, no medical incident illustrated, no additional coin in a hand. Keep the tiny coin distinct from shoes.",
+          "source": "unit117-118/content.js",
+          "card": "assets/unit117-118/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit119-120",
+          "title": "夜里的声音",
+          "story": "George微笑着看向仍在栖架上的鹦鹉Henry",
+          "direction": "George smiles at Henry the parrot still sitting on its small perch. One adult and one green parrot on a narrow bird stand; no burglar or night intruder. Complete human shoes and bird perch base visible.",
+          "source": "unit119-120/content.js",
+          "card": "assets/unit119-120/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "stories",
+      "theme": "雨窗旧书廊",
+      "description": "A sheltered old-book arcade on a softly rainy day, plum-brown timber shelves, cream plaster, tall rounded windows with fine rain streaks and a continuous dry pale wood/stone floor. Upper side: bookshop with unlabelled book spines and a recessed counter outside the standing band. Middle opposite side: small travel-photo gallery with abstract landscape frames, no people/photos of faces or bearded characters. Lower side: cosy rain-window tea nook, no tea table or cups because the sprite already includes them. Rain stays beyond glazing, no puddles under feet, no umbrella, duplicate hat or extra guest. One connected interior arcade, not separate room pictures.",
+      "entries": [
+        {
+          "id": "unit121-122",
+          "title": "书店里的帽子",
+          "story": "顾客戴上帽子，Caroline认出了他，经理在旁核对",
+          "direction": "The customer has put his hat on; Caroline recognises him while the manager checks. Exactly three adults, one hat worn on the customer’s head, no second floating hat or duplicate customer.",
+          "source": "unit121-122/content.js",
+          "card": "assets/unit121-122/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit123-124",
+          "title": "旅行照片里的故事",
+          "story": "Mike与Scott一起看旅行照片，照片中的Mike留着络腮胡子",
+          "direction": "Mike and Scott examine travel photographs. Present-day Mike is clean-shaven; the SMALL photo of his earlier journey shows him with a beard. Two adults, do not give present-day Mike the travel-photo beard. No third person outside the photo.",
+          "source": "unit123-124/content.js",
+          "card": "assets/unit123-124/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit125-126",
+          "title": "雨中的双人茶时光",
+          "story": "Peter与Susan在窗边一起喝茶，窗外正下着雨",
+          "direction": "Peter and Susan enjoying tea together, two cups on a tiny round table. Exactly two full-body adults, no rainy umbrella in their hands because they are indoors; their legs and shoes visible.",
+          "source": "unit125-126/content.js",
+          "card": "assets/unit125-126/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "possibilities",
+      "theme": "梧桐漫想街",
+      "description": "A leafy residential cafe street under broad plane-tree canopies, soft cream and muted apricot buildings, copper-green trim. Upper: cafe terrace facade with an empty recessed serving area, no other guests. Middle: quiet roadside lay-by visible only along a far OUTER edge; wide safe pedestrian standing pavement, no police barrier or arrest scene. Lower: open living-room veranda with an empty bookshelf and plain side window for discussing plans. One connected pale stone pedestrian walk, modest ordinary neighbourhood scale. No celebrities, confirmed holiday tickets, packed luggage, sports cars, money or licence duplicates. Tree shadows remain light and soft away from support bands.",
+      "entries": [
+        {
+          "id": "unit127-128",
+          "title": "咖啡馆里的辨认",
+          "story": "Kate与Liz在咖啡馆交谈，望向邻桌的两位客人",
+          "direction": "Kate and Liz conversing and discreetly looking towards neighbouring café guests. ONLY Kate and Liz in this sprite, two women; do not turn their conjecture about strangers into certainty. One modest coffee cup each, no celebrity labels.",
+          "source": "unit127-128/content.js",
+          "card": "assets/unit127-128/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit129-130",
+          "title": "路边的一次提醒",
+          "story": "Gary向警察出示一张驾照，Ann在旁听他们交谈",
+          "direction": "Gary presents ONE driving licence to the police officer, Ann listens beside him. Exactly three adults. No arrest, handcuffs, money, signed confession or invented speeding fine.",
+          "source": "unit129-130/content.js",
+          "card": "assets/unit129-130/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit131-132",
+          "title": "客厅里的假期计划",
+          "story": "Martin与Gary在客厅看旅行资料，商量尚未确定的假期",
+          "direction": "Martin and Gary review travel leaflets while discussing an undecided holiday. Exactly two men, no packed luggage, passport handover or confirmed departure; small abstract destination pictures only.",
+          "source": "unit131-132/content.js",
+          "card": "assets/unit131-132/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "news",
+      "theme": "城市会客露台",
+      "description": "A modest sunny town guesthouse and residential terrace arcade, soft buttery stone, sage palms, curved bay windows and broad cream paving. Upper side: quiet newspaper-reading veranda without any additional paper. Middle side: guesthouse hotel doorway and small recessed reception window, comfortable and ordinary rather than a palace; no wedding decor. Lower side: open cosy home sitting-room balcony with plain walls and an empty small side shelf, no prizes, cash, forms or pencils. Continuous pedestrian floor from first to last, no tall balustrade across the centre. No reporter crowd, celebrity portraits, marriage signs, mansion or winning celebration.",
+      "entries": [
+        {
+          "id": "unit133-134",
+          "title": "机场采访与一份报纸",
+          "story": "Kate与Liz一起读报，报纸刊载Karen Marsh的机场采访",
+          "direction": "Kate and Liz reading one newspaper carrying Karen Marsh’s airport interview. Exactly these two women; Karen is ONLY an abstract small photo printed in the paper, not standing beside them. No readable headlines.",
+          "source": "unit133-134/content.js",
+          "card": "assets/unit133-134/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit135-136",
+          "title": "饭店里的最新消息",
+          "story": "Karen在饭店向记者介绍Carlos，记者用笔记本记录",
+          "direction": "Karen introduces Carlos to the reporter at the hotel; reporter holds notebook and pen. Exactly three adults, preserve card clothing. No wedding ceremony, paparazzi crowd, microphone or marriage certificate.",
+          "source": "unit135-136/content.js",
+          "card": "assets/unit135-136/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit137-138",
+          "title": "美好梦想里的如果",
+          "story": "Brian与Julie坐在客厅交谈，桌上保留一张表格和一支铅笔",
+          "direction": "Brian and Julie discuss hypothetical dreams, ONE football-pool form and pencil on a little side table. Two adults only, no money winnings, sports car, mansion keys or celebration claiming a win.",
+          "source": "unit137-138/content.js",
+          "card": "assets/unit137-138/keepsake-story-v1.webp"
+        }
+      ]
+    },
+    {
+      "chapter": "woodland",
+      "theme": "林间车站",
+      "description": "A coherent small woodland station and dry forest-edge walkway. Upper section: LEFT side open office-window bay, RIGHT side outdoor utility-cabinet/telephone-line pole near foliage; keep these two contexts visually distinct because the original two callers are at separate ends of a phone call. No extra telephone props. Middle section: an open-side cutaway train-carriage bay with simple blue-green window framing only along the outer/back edges; central level wood floor joins the station walkway and stays EMPTY because the original sprite supplies its two benches and seated family. No extra train seats, passengers or wheels across the route. Lower section: a quiet local woodland clearing reached by the same level sandy stone path; no extra sign or litter basket (the sprite supplies their backs and a few specific discarded objects). Do not turn this into a cleanup victory, pristine-restoration campaign or huge junkyard. No readable boards, labels, railway clocks, added trash piles or additional humans.",
+      "entries": [
+        {
+          "id": "unit139-140",
+          "title": "电话那头的问话",
+          "story": "Graham Turner在办公室用电话交谈，John Smith在户外线路旁接听",
+          "direction": "Graham Turner in office attire and John Smith in workwear each hold their respective telephone handset; two separate compact phone bases on low stands visually distinguish the two ends of the call. They must not face one another as if in the same room; orient slightly outward. No actual installation work, tangled cables or additional callers.",
+          "source": "unit139-140/content.js",
+          "card": "assets/unit139-140/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit141-142",
+          "title": "Sally的火车初体验",
+          "story": "Sally和妈妈坐在火车一侧，蓝外套女士在对面拿着粉盒化妆",
+          "direction": "Sally and her mother sit together on one compact train bench; opposite them a woman in a BLUE coat uses a powder compact. Exactly three people, Sally clearly a child. All feet visible, no smoking or extra passengers.",
+          "source": "unit141-142/content.js",
+          "card": "assets/unit141-142/keepsake-story-v1.webp"
+        },
+        {
+          "id": "unit143-144",
+          "title": "树林里的告示牌",
+          "story": "树林局部：作者、告示牌背面、空废物筐和地面杂物",
+          "direction": "The writer stands beside the BACK of a small wooden notice board and an EMPTY litter basket. A few paper pieces, one old tyre and a rusty tin sit near the basket, localized story excerpt only. One adult matching the card, mildly disappointed, not collecting rubbish. Do not depict all seven cars/three fridges, do not invent a successful clean-up, no readable sign text.",
+          "source": "unit143-144/content.js",
+          "card": "assets/unit143-144/keepsake-story-v1.webp"
+        }
+      ]
+    }
+  ]
+}

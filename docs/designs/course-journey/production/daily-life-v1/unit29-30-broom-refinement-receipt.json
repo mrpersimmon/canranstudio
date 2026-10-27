@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit29-30-broom-refinement",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/unit29-30-broom-refinement.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-1b0983e1-c1f3-45ee-a055-e3e12770b091.png",
+  "transparentBackgroundRequested": true,
+  "referenceOrder": [
+    "docs/designs/course-journey/production/daily-life-v1/drafts/unit29-30-initial.png"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/tidy-room-pair-v1.png",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 1187189,
+      "sha256": "d2bf2d952620f59b32085931819b11ea98e494fba21ccc4043a35fee9f11e4fa",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/tidy-room-pair-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": true,
+      "bytes": 220338,
+      "sha256": "49b62a66ae43e195563f2e3bc4fdeaebc8cf27e6d505f829d278f8404ee4fece",
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 791465,
+    "totalPixels": 1572516,
+    "geometryThreshold": 16,
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          41,
+          37,
+          1195,
+          1235
+        ],
+        "normalized": [
+          0.03269537480063796,
+          0.029505582137161084,
+          0.9529505582137161,
+          0.9848484848484849
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          113,
+          60,
+          1192,
+          1209
+        ],
+        "normalized": [
+          0.09011164274322168,
+          0.04784688995215311,
+          0.9505582137161085,
+          0.9641148325358851
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          114,
+          60,
+          1192,
+          1208
+        ],
+        "normalized": [
+          0.09090909090909091,
+          0.04784688995215311,
+          0.9505582137161085,
+          0.9633173843700159
+        ]
+      }
+    ]
+  },
+  "nativeFileModifiedAt": "2026-10-22T15:47:11.400Z"
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-25",
+  "branch": "codex/fronted-opt-version",
+  "sourceHashes": {
+    "course-journey/ModuleJourney.jsx": "4cfc63f44f8dfccaa4f818cbdc5f5e3b3e965bbb92fe878adba897b09016f477",
+    "course-journey/PanoramaJourney.jsx": "44d2a1f50c1f58e8fd14eed0b7af42579a3a0b60c4d5a42afca479a6ac9515f3",
+    "course-journey/App.jsx": "ae1682d1f7aab6144b05da0096adb960f7bd2ad6c772b4aabb862e55d8c62c7f",
+    "course-journey/use-map-layout.js": "a4520f0a2c911b026b5cfb0ce8a4f83a4642549118958c088d1cfaf39e07aeb2",
+    "course-journey/panorama.css": "35ae0f0d6d24ac3fd2a5d42427f4b6da284fd006b3869eac6960d70c1223feee",
+    "tests/support/journey-modules.js": "c2e9534eafa5441536245d57638a51d21068fc0457ffcdb30946a45c30f75d6e",
+    "tests/login/journey-modules.spec.js": "6db8e985014e91d68e5e39effd28c8513b3e8c07de8373d4690f69bf8b257573"
+  },
+  "nodeTests": 12,
+  "browserSwitchScenarios": 24,
+  "domFrameSamples": 1440,
+  "starUiSamples": 12,
+  "playwrightCliRun": false,
+  "realDeviceRun": false,
+  "committed": false,
+  "pushed": false,
+  "published": false
+}

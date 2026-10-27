@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-20",
+  "status": "passed-scoped-design-pack-validation",
+  "referenceHashesVerified": 9,
+  "lockedFilesVerified": 19,
+  "approvedImageByteIdentical": true,
+  "catalogTitlesMatchCurrent45Courses": true,
+  "recipes": [
+    {
+      "id": "character-unit1-2",
+      "promptSha256": "90651eb24685de0af68304fce29977601371e85a5d5a1a99158086e2c8c0300e",
+      "identicalRequestOnRepeat": true
+    },
+    {
+      "id": "desktop-home",
+      "promptSha256": "dfa696e7535c4b18696be57c8491838ad46dc1d0be005e0bc5c4055614428eee",
+      "identicalRequestOnRepeat": true
+    },
+    {
+      "id": "environment-opening",
+      "promptSha256": "2b472026d8ba64a043b5d9ad842dc3f6a3200ae793aa3ec95d9d69c3854a6b27",
+      "identicalRequestOnRepeat": true
+    },
+    {
+      "id": "mobile-directory",
+      "promptSha256": "e719b60e5c26af3af6bcc97b452d4d83493b472980d9acf263d07bd5cf5c647d",
+      "identicalRequestOnRepeat": true
+    },
+    {
+      "id": "mobile-home",
+      "promptSha256": "ffcebca5467465adb672d0c1822f9a0fdd0bc8324e13e9b9f0b524d9ccf03e44",
+      "identicalRequestOnRepeat": true
+    }
+  ],
+  "failureChecks": {
+    "unknownRecipeRejected": true,
+    "isolatedPromptTamperRejected": true,
+    "missingViewportRejected": true
+  },
+  "localMarkdownLinksValid": true,
+  "generatedPromptReceiptsMatch": true,
+  "visualComparison": "Approved mobile, desktop extension, and mobile directory were viewed together; style continuity reviewed. Layout targets and static-mock limitations are documented in README.md.",
+  "notRun": [
+    "Implemented UI behavior",
+    "Full repository test suite",
+    "iOS or Android device tests",
+    "Real soft-keyboard behavior",
+    "Frame-rate or network-budget acceptance",
+    "Production environment or character-layer generation"
+  ]
+}

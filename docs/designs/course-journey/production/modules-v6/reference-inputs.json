@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-26",
+  "note": "Original tool-input paths and byte-identical repository copies. mtime is filesystem evidence, not a claimed generation timestamp.",
+  "inputs": [
+    {
+      "originalPath": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v5/visits-gallery-v1.png",
+      "repositoryPath": "assets/course-journey/modules-v5/visits-gallery-v1.png",
+      "bytes": 2607857,
+      "sha256": "bb39770355d95cabd6971ebde0d98632c58de65af8a59df86fa75939e45c1385",
+      "sourceModifiedAt": "2026-10-25T12:12:23.740Z"
+    },
+    {
+      "originalPath": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v5/kindness-courtyard-v1.png",
+      "repositoryPath": "assets/course-journey/modules-v5/kindness-courtyard-v1.png",
+      "bytes": 2793131,
+      "sha256": "8b0c3768306087a8c34ebd52947a4a5c44aff00bf6e68ef59fc5a186368c9e52",
+      "sourceModifiedAt": "2026-10-25T12:13:01.218Z"
+    },
+    {
+      "originalPath": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-dee0bd48-22b1-406d-804a-4980d1854ea6.png",
+      "repositoryPath": "docs/designs/course-journey/production/modules-v6/drafts/home-interior-v1.png",
+      "bytes": 2420176,
+      "sha256": "84511f6bbde79cc2f80947fd1db46ba783e08885dda8122360d98315e50a1eb4",
+      "sourceModifiedAt": "2026-10-25T15:18:53.252Z"
+    },
+    {
+      "originalPath": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-8338e11c-d78e-4e13-a61d-16215e033aa6.png",
+      "repositoryPath": "docs/designs/course-journey/production/modules-v6/drafts/hospitality-sunroom-v1.png",
+      "bytes": 2903718,
+      "sha256": "978a2fd838f251c2e6d0e7440107f58e9b45ae2a3bc566eebde5e061b3ad704d",
+      "sourceModifiedAt": "2026-10-25T15:21:10.157Z"
+    },
+    {
+      "originalPath": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/making-workshop-v1.png",
+      "repositoryPath": "assets/course-journey/modules-v6/making-workshop-v1.png",
+      "bytes": 2908160,
+      "sha256": "1b640097d1ded523a442ff79965269ef3d99e8173159573cb15ca6559bb1a3bd",
+      "sourceModifiedAt": "2026-10-25T15:20:28.810Z"
+    },
+    {
+      "originalPath": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/modules-v6/home-interior-v2.png",
+      "repositoryPath": "assets/course-journey/modules-v6/home-interior-v2.png",
+      "bytes": 2302880,
+      "sha256": "89ee1b29b1648016b49b7a8f2e5b3f623c86a50bf688f85cb12ebd17ca516aec",
+      "sourceModifiedAt": "2026-10-25T15:34:32.497Z"
+    }
+  ],
+  "outputs": [
+    {
+      "chapter": "home",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-dee0bd48-22b1-406d-804a-4980d1854ea6.png",
+      "sourceModifiedAt": "2026-10-25T15:18:53.252Z"
+    },
+    {
+      "chapter": "home",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-f144c3db-8a0a-4d41-83c9-be9102b883b4.png",
+      "sourceModifiedAt": "2026-10-25T15:34:32.497Z"
+    },
+    {
+      "chapter": "outdoors",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-6694102d-cd02-4df6-9579-66bce738d551.png",
+      "sourceModifiedAt": "2026-10-25T15:19:36.894Z"
+    },
+    {
+      "chapter": "making",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-99babd0e-b4d2-43b9-a526-451b73006368.png",
+      "sourceModifiedAt": "2026-10-25T15:20:28.810Z"
+    },
+    {
+      "chapter": "hospitality",
+      "attempt": 1,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-8338e11c-d78e-4e13-a61d-16215e033aa6.png",
+      "sourceModifiedAt": "2026-10-25T15:21:10.157Z"
+    },
+    {
+      "chapter": "hospitality",
+      "attempt": 2,
+      "source": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-a4d148cf-790b-43f7-adb6-94d98434d578.png",
+      "sourceModifiedAt": "2026-10-25T15:35:00.775Z"
+    },
+    {
+      "chapter": "making",
+      "attempt": 2,
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-eb861f5d-3671-4c49-8a01-102a4743d609.png",
+      "sourceModifiedAt": "2026-10-25T16:32:32.288Z"
+    },
+    {
+      "chapter": "home",
+      "attempt": 3,
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-a2ef4901-1965-41a7-93d6-ba0a5cc47c27.png",
+      "sourceModifiedAt": "2026-10-25T17:19:13.964Z"
+    }
+  ]
+}

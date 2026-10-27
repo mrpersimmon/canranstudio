@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit17-18-refinement",
+  "selectedForRuntime": true,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-ce103da2-5a98-453d-a0c8-892b71b81e10.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/unit17-18-refinement-request.json",
+  "referenceOrder": [
+    "docs/designs/course-journey/production/visits-v1/drafts/unit17-18-initial.png",
+    "assets/course-journey/handbag-couple.png"
+  ],
+  "transparentBackgroundRequested": true,
+  "outputs": [
+    {
+      "path": "assets/course-journey/office-introduction-v1.png",
+      "format": "png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1686412,
+      "sha256": "9b6c1346af1593dcb14697e29631ce05448915f2740d7d86297d606ca4642997",
+      "hasAlpha": true,
+      "preservation": "Native PNG bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/office-introduction-v1.webp",
+      "format": "webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 213316,
+      "sha256": "76b56f534f84e6cf4d552e38d51982441363ede96a71086c241a5765a96ea2d2",
+      "hasAlpha": true,
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 764353,
+    "totalPixels": 1572864,
+    "visibleGeometryThreshold": 16,
+    "note": "Runtime bounds use alpha > 16 to exclude faint isolated alpha noise. Full support is separately retained; no pixels were edited or removed.",
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          0,
+          51,
+          1483,
+          987
+        ],
+        "normalized": [
+          0,
+          0.0498046875,
+          0.9654947916666666,
+          0.9638671875
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          143,
+          80,
+          1418,
+          983
+        ],
+        "normalized": [
+          0.09309895833333333,
+          0.078125,
+          0.9231770833333334,
+          0.9599609375
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          144,
+          80,
+          1417,
+          982
+        ],
+        "normalized": [
+          0.09375,
+          0.078125,
+          0.9225260416666666,
+          0.958984375
+        ]
+      }
+    ]
+  },
+  "observedDeviation": "Bottom visible shoe margin is about 4%, smaller than the requested 8–10%. Shoes are complete; placement uses the measured baseline. No programmatic padding or crop was applied."
+}

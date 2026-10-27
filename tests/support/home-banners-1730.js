@@ -25,4 +25,65 @@ async function banners(page,base,info){
  }
  for(const pair of PAIRS)expect(await imageHash(page.locator(`[data-unit="unit${pair}"] .featured-art img`))).toBe(SHA[pair]);
 }
-module.exports={PAIRS,ART,SHA,banners,imageHash};
+// The authenticated journey uses approved full-body landmarks. The static
+// preview and the course cover/card keep the original scene contract above.
+const LANDMARK_ART={
+ '1-2':'assets/course-journey/handbag-couple.webp',
+ '3-4':'assets/course-journey/umbrella-counter-v1.webp',
+ '5-6':'assets/course-journey/friends-trio-v1.webp',
+ '17-18':'assets/course-journey/office-introduction-v1.webp',
+ '19-20':'assets/course-journey/icecream-family-v1.webp',
+ '21-22':'assets/course-journey/red-book-pair-v1.webp',
+ '23-24':'assets/course-journey/shelf-glasses-pair-v1.webp',
+ '25-26':'assets/course-journey/kitchen-host-v1.webp',
+ '27-28':'assets/course-journey/living-room-host-v1.webp',
+ '29-30':'assets/course-journey/tidy-room-pair-v1.webp'
+};
+const LANDMARK_SHA=Object.fromEntries(Object.keys(LANDMARK_ART).map(pair=>[pair,crypto.createHash('sha256').update(fs.readFileSync(path.resolve(__dirname,'../..',LANDMARK_ART[pair]))).digest('hex')]));
+// The map now has its own full-body art. Compare packaged course/card pixels
+// against the independently named adopted original, not against the map.
+async function referenceArtworkPixels(page,src,expectedSha){
+ const result=await page.evaluate(async src=>{
+  const response=await fetch(src);if(!response.ok)throw Error('Reference artwork failed: '+response.status);
+  const hash=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');
+  const sha=await hash(await response.arrayBuffer()),im=new Image();im.src=src;await im.decode();
+  const canvas=document.createElement('canvas');canvas.width=im.naturalWidth;canvas.height=im.naturalHeight;
+  const ctx=canvas.getContext('2d');ctx.drawImage(im,0,0);
+  return{sha,pixels:await hash(ctx.getImageData(0,0,canvas.width,canvas.height).data)};
+ },src);
+ expect(result.sha).toBe(expectedSha);return result.pixels;
+}
+async function landmarks(page,base,info,widths=[320,390,768,1280],pairs=PAIRS){
+ const {openCourseDirectory}=require('../login/helpers'),{assertModules}=require('./journey-modules');
+ // Independent visible-alpha baselines from the approved artwork review.
+ // The older visits contact fixture records feet, not visible-alpha bounds.
+ const acceptedBounds={
+  'unit1-2':[.1013,.1188,.9147,.92504],
+  'unit3-4':[.1505,.0998,.871,.95633],
+  'unit5-6':[.1107,.1494,.9102,.9258],
+  'unit17-18':[.093099,.078125,.923177,.959961],
+  'unit19-20':[.063796,.059809,.975279,.965710],
+  'unit21-22':[.098086,.097289,.952153,.952951],
+  'unit23-24':[.082935,.093301,.959330,.951356],
+  ...Object.fromEntries(Object.entries(require('./journey-home-hospitality-contact.json').characters).map(([id,art])=>[id,art.alpha16Bounds]))
+ };
+ const groups=[['1-2','3-4','5-6'],['17-18'],['19-20','21-22','23-24'],['25-26','27-28','29-30']];
+ for(const width of widths){
+  await page.setViewportSize({width,height:900});await expect(page.locator('.journey-desktop-search')).toHaveCount(width>=1024?1:0);
+  for(const pair of pairs){
+   await openCourseDirectory(page);const card=page.locator('[data-unit="unit'+pair+'"]');
+   await expect(card.locator('.primary-button')).toHaveAttribute('href',base+'unit'+pair+'/#learn/words');
+   const authorized=await page.locator('.course').evaluateAll(cards=>cards.map(card=>card.dataset.unit));
+   await card.locator('.journey-locate').click();
+   const ids=groups.find(group=>group.includes(pair)).map(value=>'unit'+value).filter(id=>authorized.includes(id)),bounds=Object.fromEntries(ids.map(id=>[id,acceptedBounds[id]]));
+   const view=await assertModules(page,bounds,width),entry=page.locator('[data-module-course="unit'+pair+'"]'),picture=entry.locator('[data-story-course]');
+   const url=new URL(await picture.getAttribute('src'),page.url());expect(url.origin).toBe(new URL(page.url()).origin);expect(url.pathname).toBe(base+LANDMARK_ART[pair]);
+   expect(await imageHash(picture)).toBe(LANDMARK_SHA[pair]);
+   for(const module of view.modules)expect((module.visible.bottom-module.visible.top)/module.board.width,'actual visible figure scale').toBeCloseTo(.36,2);
+   await expect(entry.locator('[data-map-course]')).toHaveAttribute('aria-pressed','true');
+   if(info&&[320,1280].includes(width))await entry.screenshot({path:info.outputPath('landmark-'+pair+'-'+width+'.png')});
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+ }
+}
+module.exports={PAIRS,ART,SHA,banners,imageHash,LANDMARK_ART,LANDMARK_SHA,landmarks,referenceArtworkPixels};

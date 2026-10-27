@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "assetId": "course-journey-opening-desktop-v1",
+  "createdAt": "2026-10-20T17:10:29.036Z",
+  "tool": "built-in image_gen",
+  "intent": "production environment generation, logo-banner removal, then restoring the approved permanent grass surface",
+  "frozenRecipe": "environment-opening-v1.0.0",
+  "frozenInputsModified": false,
+  "transparentBackground": false,
+  "output": {
+    "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\assets\\course-journey\\opening-desktop.png",
+    "sha256": "73ca7c02036e842b7c9d45f738335a27498adfad05f9cbaa044e988b33981acb",
+    "width": 1373,
+    "height": 1145,
+    "bytes": 2196261
+  },
+  "originalGeneratedOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15a46-814a-73c1-b532-074170f61302/exec-77d77fd7-72c6-4012-bdfc-006cf85e6d30.png",
+  "requestedSize": {
+    "width": 1440,
+    "height": 1200
+  },
+  "aspectRatio": "1373:1145 (approximately 6:5)",
+  "runs": [
+    {
+      "purpose": "Initial production environment",
+      "prompt": "Frozen design pack: canran-course-journey v1.0.0. Date anchor: 2026-10-20, Asia/Shanghai; no visible dates unless the job explicitly requires them.\n\nCANRAN JOURNEY — LOCKED ART DIRECTION v1.0.0\nUse case: ui-mockup or project asset, as explicitly stated by the job.\nThe first attached image is ALWAYS the user's approved mobile journey master. Preserve its visual identity. Additional images have explicitly declared roles. Prefer the approved master over descriptions if a subjective style choice is ambiguous. This is one chosen design being refined, not a new visual exploration.\n\nCHARACTERS\nFriendly flat 2D storybook characters, with warm dark-brown rounded outlines and simple expressive faces, placed inside the dimensional environment. Approximately 2.2–2.6 heads tall for the full-body map figures; use the approved image to judge proportions, not a literal mathematical caricature. Large readable heads, short limbs, complete hands and feet, warm skin tones, small blush, rounded noses and clear eyes. They should retain adult clothing and story identities. Do not convert them into realistic adults, babies, anime, 3D clay, glossy plastic, Pixar-like renders, or generic interchangeable mascots.\nLesson 1–2 man: brown side-parted hair, large dark rounded glasses, teal-blue jacket, warm ivory shirt, yellow tie, brown shoes.\nLesson 1–2 woman: shoulder-length brown hair with softly curled ends, ochre hat with a coral band, terracotta/coral coat, golden-yellow scarf, brown shoes.\nTheir shared red handbag with a simple gold clasp is the key prop. They face and engage with each other; the hand-over is legible. Keep both faces, hands, feet and handbag complete. Do not duplicate the prop, add limbs or accessories, or swap clothing.\nFor another lesson, use its own approved source cast and story facts. Preserve identity from that source while adapting only map scale/proportions to this master. Never reuse the Lesson 1–2 couple across every course.\n\nENVIRONMENT\nA grounded, sunlit miniature architectural journey, with soft 2.5D/isometric depth and coherent terraces. Warm ivory stone paths and rounded steps; soft salmon/peach walls and arches; terracotta roofs; pale aqua/turquoise water; jade, olive and sage vegetation; sparse small warm-yellow flowers and selection accents.\nThe architecture is dimensional; characters remain crisp warm-outline storybook art. Rounded edges, broad calm color planes, fine soft shadows and subtle matte texture. No photoreal gritty stone, hard specular plastic, excessive outlines around architecture, deep high-contrast black shadows or dense noise.\nPreserve the approved image's elevated three-quarter camera, near-parallel verticals, scale relationships and warm upper-left sunlight with shadows to the lower right. Camera wording describes the master, it does not authorize a different viewpoint.\nKeep one visually coherent connected path, arch bridges, garden edges and readable destination landings. Buildings stand on connected terrain, not floating islands or rotating planets. Water and greenery remain supporting scenery.\nOpening segment: handbag-exchange circular landing in the foreground/lower left; purple umbrella kiosk at middle right; welcoming schoolhouse with coral roof toward upper right. The approved environment is the reference, not a reason to invent new curriculum events.\n\nUI AND COMPOSITION\nPreserve the real starflower logo and the product name 灿然英语工作室. Warm paper/ivory UI, forest-green primary controls and warm-brown text. Keep text on calm high-contrast surfaces, separate from scenery.\nCourse discovery is the hero use case. Include global Lesson search and the complete authorized directory in UI mockups. All 45 demo units belong to one hub. The route is a browsing aid, not a forced learning order or access lock.\nOnly the job may change framing, responsive layout, visible UI state, course identity or landmarks. It must not change the character style, camera language, materials, lighting or overall palette.\nNever squeeze an image or UI to fill a canvas. Recompose for the exact target ratio, leave safe space for controls, and keep important characters and props intact.\nFor mockups, use crisp simplified Chinese and the exact copy in the job. Do not invent extra controls, currencies, lives, streaks, advertisements or personal information.\nFor production artwork, render NO text, lesson labels, badges, stars, student names, dates, buttons, navigation, search fields or state-dependent glow. Those are separate runtime layers.\n\nACTUAL ATTACHED REFERENCE ORDER\nImage 1: approvedMobile. User-approved visual master; most recent set, third displayed image. This is the primary reference for all palette, materials, camera, lighting and environmental identity.\nImage 2: desktop-home-v1. A supplementary composition reference only. Use only the environmental region to the right of its directory sidebar; it guides wide-scene terrain and landmark placement. Do not reproduce its UI, characters, text, badges or logo.\n\nJOB: REUSABLE ENVIRONMENT ARTWORK, NOT A UI SCREEN\nCanvas: 1440 x 1200 px, landscape 6:5 production artwork. Create ONLY the map environment, not an application screenshot. The application will put a separate 340px directory rail to its left, so do NOT draw that rail or reserve space for it inside this image. Output role: Opaque environment base for the first three course nodes; runtime characters and UI will be composited separately. This job has NO characters or UI.\nUse the first approved-master reference solely for the connected architectural setting. Produce a coherent empty environment segment for Lesson 1–6, first segment of the Lesson 1–18 range, maintaining the locked camera, lighting, matte materials, scale and color family.\nLandmark plan: An empty circular landing at lower left for the later handbag-couple sprite; a purple umbrella resting in a small wooden kiosk at middle right; a welcoming cream schoolhouse with terracotta roof at upper right. Connected ivory paths, arches and stairs, aqua water and restrained green planting..\nComposition/safe space: Recompose the right-hand environment of Image 2 to fill this 6:5 canvas while matching Image 1 style. Use a broad connected terrain with an empty circular stone landing in the lower-left foreground, centered approximately at x=27%, y=70%; a purple closed umbrella in its small wooden holder on the middle landing at approximately x=52%, y=45%; a welcoming cream schoolhouse with terracotta roof toward the upper-right, approximately x=77%, y=21%. These are environmental placement guides, never visible markings. The empty circular landing should have a calm neutral cream-stone interior, not a bright green selected-state surface or gold ring, and enough room for a pair of separately composited full-body figures. Use the descending ivory stair and salmon arch-bridge route to connect the school landing through the umbrella landing and down to the circular landing. Include the quiet aqua water, flowering planters and soft near-edge foliage from the references, with calm edges and light distant haze. Keep all three important landmark silhouettes inside an 8% left/right margin. Do not add any crop of characters or UI.\nPreserve welcoming warm ivory paths, soft salmon arches, terracotta accents, clear aqua water and restrained jade foliage. Paths must connect visibly through the frame without impossible jumps. Empty circular destination landing areas should be quiet enough to later place separate characters and DOM controls.\nNo people, silhouettes, faces, signage, lesson numbers, printed text, logos, search fields, labels, buttons, nav, stars, gold selection rings or progress-state decoration. The empty landings are physical architectural surfaces, not UI placeholders.\nThis is a reusable production layer: visually rich but calm, exact requested framing, no accidental holes or unrelated props. Reuse a verified environment for state changes rather than generating another background each time.\n\nFIXED EXCLUSIONS\nNo other product's logo, mascot, characters, exact interface or copyrighted game world. No generic space, orbit, floating-island, cinema, page-turning-book or neon-cyberpunk redesign. No new character style or wardrobe. No duplicated faces, swapped identities, missing hands, cropped hair/feet, malformed prop interaction or extra limbs.\nNo scenery behind essential text that reduces contrast. No thin unreadable text, tiny touch controls, dense UI inventory, nested cards or giant decorative heading that displaces course navigation.\nNo automatic assumption that selected means completed, that a gray marker means locked, or that five stars are awarded merely by visiting a node. No fabricated progress or dates.\nNo baked-in dynamic UI in production assets. No real student or account data. No credentials.\nMobile mockups show app content only: no phone body, bezel, OS status bar, clock, battery, home indicator, browser chrome or device shadow. Desktop mockups likewise omit browser chrome.\n\nPRODUCTION VARIANT RECORD\nVariant: opening-desktop-v1, derived from frozen environment-opening v1.0.0 without changing the frozen files. Use case: stylized-concept. Asset type: opaque reusable desktop map background. The production job overrides the historical mockup-only 45-unit wording: there is no course count or other text to render. Render exactly the environment described above. Never include people, character silhouettes, human faces, numbers, lettering, logo banners, star-shaped progress symbols, selection glow, UI markers, buttons, or panel shapes. Small natural flowers are permitted; no star icons. Preserve a matte, welcoming, soft salmon/ivory/turquoise connected architectural world rather than a game level floating in space.\n",
+      "promptFile": "desktop-environment.initial.prompt.txt",
+      "references": [
+        {
+          "order": 1,
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png",
+          "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+          "width": 853,
+          "height": 1844,
+          "bytes": 1915092
+        },
+        {
+          "order": 2,
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\generated\\desktop-home-v1.png",
+          "sha256": "f8786a23e1f2baedafbc738f416c05b3e18b1177446d43d6254e7cb377036dc1",
+          "width": 1487,
+          "height": 1058,
+          "bytes": 2031924
+        }
+      ],
+      "result": {
+        "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\references\\desktop-environment-initial.png",
+        "sha256": "0daf07626375c8a4d645476cca259d49beb0e0e6acc8456b73af3d8a20280ab1",
+        "width": 1374,
+        "height": 1145,
+        "bytes": 2266296,
+        "originalGeneratedOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15a46-814a-73c1-b532-074170f61302/exec-613cd17e-fcfd-4150-ba12-7702c6c501cf.png"
+      },
+      "selected": false,
+      "reason": "Inherited flower-logo banner needed removal."
+    },
+    {
+      "purpose": "Remove inherited logo banner only",
+      "prompt": "EDIT JOB — one precise object removal. Image 3 is the actual edit target. Image 1 remains the approved visual master; Image 2 remains the layout reference. Use Image 3 as the pixel/composition baseline and change ONLY the hanging cream banner with the yellow flower symbol on the left lower wall, including its horizontal hanging rod and brackets. Remove the entire banner, flower motif, rod and brackets and reconstruct the uninterrupted salmon/peach wall and stone texture behind it. Preserve all other shapes, objects, color, lighting, camera, size, composition and landmark placements in Image 3 exactly. Do not add anything to the empty circular landing. Keep the street lamp, umbrella, school and plants untouched. Do not recompose.\n\nThe original locked generation specification follows as style and constraints, not a request to redraw the scene:\n\nFrozen design pack: canran-course-journey v1.0.0. Date anchor: 2026-10-20, Asia/Shanghai; no visible dates unless the job explicitly requires them.\n\nCANRAN JOURNEY — LOCKED ART DIRECTION v1.0.0\nUse case: ui-mockup or project asset, as explicitly stated by the job.\nThe first attached image is ALWAYS the user's approved mobile journey master. Preserve its visual identity. Additional images have explicitly declared roles. Prefer the approved master over descriptions if a subjective style choice is ambiguous. This is one chosen design being refined, not a new visual exploration.\n\nCHARACTERS\nFriendly flat 2D storybook characters, with warm dark-brown rounded outlines and simple expressive faces, placed inside the dimensional environment. Approximately 2.2–2.6 heads tall for the full-body map figures; use the approved image to judge proportions, not a literal mathematical caricature. Large readable heads, short limbs, complete hands and feet, warm skin tones, small blush, rounded noses and clear eyes. They should retain adult clothing and story identities. Do not convert them into realistic adults, babies, anime, 3D clay, glossy plastic, Pixar-like renders, or generic interchangeable mascots.\nLesson 1–2 man: brown side-parted hair, large dark rounded glasses, teal-blue jacket, warm ivory shirt, yellow tie, brown shoes.\nLesson 1–2 woman: shoulder-length brown hair with softly curled ends, ochre hat with a coral band, terracotta/coral coat, golden-yellow scarf, brown shoes.\nTheir shared red handbag with a simple gold clasp is the key prop. They face and engage with each other; the hand-over is legible. Keep both faces, hands, feet and handbag complete. Do not duplicate the prop, add limbs or accessories, or swap clothing.\nFor another lesson, use its own approved source cast and story facts. Preserve identity from that source while adapting only map scale/proportions to this master. Never reuse the Lesson 1–2 couple across every course.\n\nENVIRONMENT\nA grounded, sunlit miniature architectural journey, with soft 2.5D/isometric depth and coherent terraces. Warm ivory stone paths and rounded steps; soft salmon/peach walls and arches; terracotta roofs; pale aqua/turquoise water; jade, olive and sage vegetation; sparse small warm-yellow flowers and selection accents.\nThe architecture is dimensional; characters remain crisp warm-outline storybook art. Rounded edges, broad calm color planes, fine soft shadows and subtle matte texture. No photoreal gritty stone, hard specular plastic, excessive outlines around architecture, deep high-contrast black shadows or dense noise.\nPreserve the approved image's elevated three-quarter camera, near-parallel verticals, scale relationships and warm upper-left sunlight with shadows to the lower right. Camera wording describes the master, it does not authorize a different viewpoint.\nKeep one visually coherent connected path, arch bridges, garden edges and readable destination landings. Buildings stand on connected terrain, not floating islands or rotating planets. Water and greenery remain supporting scenery.\nOpening segment: handbag-exchange circular landing in the foreground/lower left; purple umbrella kiosk at middle right; welcoming schoolhouse with coral roof toward upper right. The approved environment is the reference, not a reason to invent new curriculum events.\n\nUI AND COMPOSITION\nPreserve the real starflower logo and the product name 灿然英语工作室. Warm paper/ivory UI, forest-green primary controls and warm-brown text. Keep text on calm high-contrast surfaces, separate from scenery.\nCourse discovery is the hero use case. Include global Lesson search and the complete authorized directory in UI mockups. All 45 demo units belong to one hub. The route is a browsing aid, not a forced learning order or access lock.\nOnly the job may change framing, responsive layout, visible UI state, course identity or landmarks. It must not change the character style, camera language, materials, lighting or overall palette.\nNever squeeze an image or UI to fill a canvas. Recompose for the exact target ratio, leave safe space for controls, and keep important characters and props intact.\nFor mockups, use crisp simplified Chinese and the exact copy in the job. Do not invent extra controls, currencies, lives, streaks, advertisements or personal information.\nFor production artwork, render NO text, lesson labels, badges, stars, student names, dates, buttons, navigation, search fields or state-dependent glow. Those are separate runtime layers.\n\nACTUAL ATTACHED REFERENCE ORDER\nImage 1: approvedMobile. User-approved visual master; most recent set, third displayed image. This is the primary reference for all palette, materials, camera, lighting and environmental identity.\nImage 2: desktop-home-v1. A supplementary composition reference only. Use only the environmental region to the right of its directory sidebar; it guides wide-scene terrain and landmark placement. Do not reproduce its UI, characters, text, badges or logo.\n\nJOB: REUSABLE ENVIRONMENT ARTWORK, NOT A UI SCREEN\nCanvas: 1440 x 1200 px, landscape 6:5 production artwork. Create ONLY the map environment, not an application screenshot. The application will put a separate 340px directory rail to its left, so do NOT draw that rail or reserve space for it inside this image. Output role: Opaque environment base for the first three course nodes; runtime characters and UI will be composited separately. This job has NO characters or UI.\nUse the first approved-master reference solely for the connected architectural setting. Produce a coherent empty environment segment for Lesson 1–6, first segment of the Lesson 1–18 range, maintaining the locked camera, lighting, matte materials, scale and color family.\nLandmark plan: An empty circular landing at lower left for the later handbag-couple sprite; a purple umbrella resting in a small wooden kiosk at middle right; a welcoming cream schoolhouse with terracotta roof at upper right. Connected ivory paths, arches and stairs, aqua water and restrained green planting..\nComposition/safe space: Recompose the right-hand environment of Image 2 to fill this 6:5 canvas while matching Image 1 style. Use a broad connected terrain with an empty circular stone landing in the lower-left foreground, centered approximately at x=27%, y=70%; a purple closed umbrella in its small wooden holder on the middle landing at approximately x=52%, y=45%; a welcoming cream schoolhouse with terracotta roof toward the upper-right, approximately x=77%, y=21%. These are environmental placement guides, never visible markings. The empty circular landing should have a calm neutral cream-stone interior, not a bright green selected-state surface or gold ring, and enough room for a pair of separately composited full-body figures. Use the descending ivory stair and salmon arch-bridge route to connect the school landing through the umbrella landing and down to the circular landing. Include the quiet aqua water, flowering planters and soft near-edge foliage from the references, with calm edges and light distant haze. Keep all three important landmark silhouettes inside an 8% left/right margin. Do not add any crop of characters or UI.\nPreserve welcoming warm ivory paths, soft salmon arches, terracotta accents, clear aqua water and restrained jade foliage. Paths must connect visibly through the frame without impossible jumps. Empty circular destination landing areas should be quiet enough to later place separate characters and DOM controls.\nNo people, silhouettes, faces, signage, lesson numbers, printed text, logos, search fields, labels, buttons, nav, stars, gold selection rings or progress-state decoration. The empty landings are physical architectural surfaces, not UI placeholders.\nThis is a reusable production layer: visually rich but calm, exact requested framing, no accidental holes or unrelated props. Reuse a verified environment for state changes rather than generating another background each time.\n\nFIXED EXCLUSIONS\nNo other product's logo, mascot, characters, exact interface or copyrighted game world. No generic space, orbit, floating-island, cinema, page-turning-book or neon-cyberpunk redesign. No new character style or wardrobe. No duplicated faces, swapped identities, missing hands, cropped hair/feet, malformed prop interaction or extra limbs.\nNo scenery behind essential text that reduces contrast. No thin unreadable text, tiny touch controls, dense UI inventory, nested cards or giant decorative heading that displaces course navigation.\nNo automatic assumption that selected means completed, that a gray marker means locked, or that five stars are awarded merely by visiting a node. No fabricated progress or dates.\nNo baked-in dynamic UI in production assets. No real student or account data. No credentials.\nMobile mockups show app content only: no phone body, bezel, OS status bar, clock, battery, home indicator, browser chrome or device shadow. Desktop mockups likewise omit browser chrome.\n\nPRODUCTION VARIANT RECORD\nVariant: opening-desktop-v1, derived from frozen environment-opening v1.0.0 without changing the frozen files. Use case: stylized-concept. Asset type: opaque reusable desktop map background. The production job overrides the historical mockup-only 45-unit wording: there is no course count or other text to render. Render exactly the environment described above. Never include people, character silhouettes, human faces, numbers, lettering, logo banners, star-shaped progress symbols, selection glow, UI markers, buttons, or panel shapes. Small natural flowers are permitted; no star icons. Preserve a matte, welcoming, soft salmon/ivory/turquoise connected architectural world rather than a game level floating in space.\n\n\nFINAL EDIT CONSTRAINT: Image 3 is the edit target; only erase the flower banner plus its holder from the wall at the left side, approximately x=16%, y=59%. Everything else must remain visually identical, including canvas proportions. No banner, logo, text, characters, UI or progress icons in the output.\n",
+      "promptFile": "desktop-environment.prompt.txt",
+      "references": [
+        {
+          "order": 1,
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png",
+          "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+          "width": 853,
+          "height": 1844,
+          "bytes": 1915092
+        },
+        {
+          "order": 2,
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\generated\\desktop-home-v1.png",
+          "sha256": "f8786a23e1f2baedafbc738f416c05b3e18b1177446d43d6254e7cb377036dc1",
+          "width": 1487,
+          "height": 1058,
+          "bytes": 2031924
+        },
+        {
+          "order": 3,
+          "path": "C:/Users/duanxiaodong/.codex/generated_images/01a15a46-814a-73c1-b532-074170f61302/exec-613cd17e-fcfd-4150-ba12-7702c6c501cf.png",
+          "sha256": "0daf07626375c8a4d645476cca259d49beb0e0e6acc8456b73af3d8a20280ab1",
+          "width": 1374,
+          "height": 1145,
+          "bytes": 2266296,
+          "preservedWorkspaceCopy": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\references\\desktop-environment-initial.png"
+        }
+      ],
+      "result": {
+        "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\desktop-environment-before-grass.png",
+        "sha256": "d4edb54a46967b855f3f713970332c5598ea40a77047d5e467e073b1efb3d8fc",
+        "width": 1374,
+        "height": 1145,
+        "bytes": 2209707,
+        "historicalRuntimePath": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\assets\\course-journey\\opening-desktop.png"
+      },
+      "selected": false,
+      "reason": "Superseded only to restore the approved green grass inside the circular landing."
+    },
+    {
+      "purpose": "Restore approved grass only inside the lower-left circular platform",
+      "editType": "precise-object-edit",
+      "tool": "built-in image_gen",
+      "prompt": "Use case: precise-object-edit.\nAsset type: production desktop journey-map environment.\nTask: Restore ONLY the inner surface of the lower-left empty circular platform in Image 3 to green grass, matching the grass in Image 2 and the approved master Image 1. Image 3 is the edit target. It is the current accepted desktop production environment at 1374 x 1145 pixels, 6:5. Preserve this EXACT canvas size, crop and camera.\n\nREFERENCE ORDER AND ROLES\nImage 1: the user-approved mobile journey master. This remains the primary visual identity reference. It shows the intended grassy interior of this landing; do not copy its characters, UI, selected glow, ring, stars or text.\nImage 2: the current mobile environment production asset. Match the grass color and subtle illustrated short-grass texture of its lower-left circular landing. The grass is a permanent physical landscaping surface, not selection-state decoration.\nImage 3: the current desktop environment, preserved before this edit. This is the precise edit target. Copy its entire scene unchanged except for the one platform inner surface described below. Do not redraw, recompose, rescale, change lighting or shift any object.\n\nTHE ONLY PERMITTED CHANGE\nIn Image 3 the large empty circular raised platform lies at approximately normalized center x=0.314, y=0.725, near the lower left. It has a thick cream stone top rim, terracotta/salmon curved sidewall, and currently a cream tiled inner ellipse. Replace ONLY that inner cream tiled ellipse inside the existing rim with a natural sunlit yellow-green lawn matching Image 2. Use a calm, soft illustrated grass texture with sparse small short grass marks. Remove the tile lines only within this inner ellipse. Preserve the ellipse outline and perspective exactly. The grass must meet the existing cream rim cleanly, without altering rim thickness, diameter, sidewall, location, shadows or the adjoining path. Keep the grass empty for separately composited characters. No rocks, flowers or new props on the grass.\n\nLOCKED INVARIANTS\nKeep all other desktop pixels and visual relationships unchanged: all ivory paths and steps, soft salmon arches, terracotta schoolhouse, its simple clock and yellow roof flag, the purple umbrella and wooden holder, street lamp, plantings, water, background mountains and sky, foreground leaves, warm upper-left daylight, matte textures and soft shadows. This is the same connected 2.5D miniature architectural world, not a new scene. The entire map must still occupy the identical coordinates in a 1374 x 1145 canvas. Do not add the removed wall banner back.\n\nEXCLUSIONS\nNo people, silhouettes, faces, characters, lettering, numbers, logos, UI, buttons, panels, course markers, stars, selection rings, golden outlines, bloom, glow or progress-state decoration. The existing cream architectural edge can catch ordinary sunlight, but do not create a luminous selection outline. No changed viewpoint, zoom, crop, altered aspect ratio, new buildings or terrain. Opaque image, no transparency.\n\nFinal instruction: edit Image 3 only. Restore green grass inside the existing lower-left platform. Keep everything else and the output dimensions unchanged.\n",
+      "promptFile": "desktop-environment.grass.prompt.txt",
+      "requestFile": "desktop-environment.grass.request.json",
+      "references": [
+        {
+          "order": 1,
+          "role": "approved visual master",
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\references\\approved-mobile-v1.png",
+          "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f",
+          "width": 853,
+          "height": 1844,
+          "bytes": 1915092
+        },
+        {
+          "order": 2,
+          "role": "grass style reference",
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\assets\\course-journey\\opening-mobile.png",
+          "sha256": "02e6c944b5e80f4cec5534e1c737a530201c3e28894a9533599c38585d33cb11",
+          "width": 1086,
+          "height": 1448,
+          "bytes": 1968693
+        },
+        {
+          "order": 3,
+          "role": "immutable desktop edit target",
+          "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\desktop-environment-before-grass.png",
+          "sha256": "d4edb54a46967b855f3f713970332c5598ea40a77047d5e467e073b1efb3d8fc",
+          "width": 1374,
+          "height": 1145,
+          "bytes": 2209707
+        }
+      ],
+      "input": {
+        "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\desktop-environment-before-grass.png",
+        "sha256": "d4edb54a46967b855f3f713970332c5598ea40a77047d5e467e073b1efb3d8fc",
+        "width": 1374,
+        "height": 1145,
+        "bytes": 2209707
+      },
+      "result": {
+        "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\assets\\course-journey\\opening-desktop.png",
+        "sha256": "73ca7c02036e842b7c9d45f738335a27498adfad05f9cbaa044e988b33981acb",
+        "width": 1373,
+        "height": 1145,
+        "bytes": 2196261
+      },
+      "originalGeneratedOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a15a46-814a-73c1-b532-074170f61302/exec-77d77fd7-72c6-4012-bdfc-006cf85e6d30.png",
+      "selected": true,
+      "dimensionsChanged": true,
+      "sizeDelta": {
+        "width": -1,
+        "height": 0
+      },
+      "normalizedAnchorsChanged": false,
+      "review": {
+        "grassMatchedTo": "opening-mobile.png and approved-mobile-v1.png",
+        "platformEdgeVisuallyPreserved": true,
+        "otherLandmarkPositionsVisuallyPreserved": true,
+        "containsCharacters": false,
+        "containsUI": false,
+        "containsProgressStars": false,
+        "containsSelectionGlow": false,
+        "limitation": "The image tool changed width from 1374 to 1373 pixels despite explicit size preservation. No post-generation resize or other image editing was performed."
+      }
+    }
+  ],
+  "anchors": {
+    "coordinateSystem": "normalized [0,1], x from left and y from top of full image; estimates from visual inspection",
+    "landingCenter": {
+      "x": 0.314,
+      "y": 0.725,
+      "pixelX": 431,
+      "pixelY": 830
+    },
+    "characterPairFeet": {
+      "x": 0.314,
+      "y": 0.768,
+      "pixelX": 431,
+      "pixelY": 879
+    },
+    "umbrellaKioskCenter": {
+      "x": 0.509,
+      "y": 0.43,
+      "pixelX": 699,
+      "pixelY": 492
+    },
+    "umbrellaKioskBase": {
+      "x": 0.509,
+      "y": 0.512,
+      "pixelX": 699,
+      "pixelY": 586
+    },
+    "schoolhouseCenter": {
+      "x": 0.785,
+      "y": 0.159,
+      "pixelX": 1078,
+      "pixelY": 182
+    },
+    "schoolhouseDoorLanding": {
+      "x": 0.76,
+      "y": 0.243,
+      "pixelX": 1043,
+      "pixelY": 278
+    }
+  },
+  "visualReview": {
+    "status": "accepted-for-integration",
+    "preserved": [
+      "warm ivory connected stone path",
+      "soft salmon arch walls",
+      "terracotta schoolhouse at upper right",
+      "purple umbrella kiosk at middle",
+      "turquoise water and restrained green foliage",
+      "upper-left daylight and soft shadows",
+      "empty lower-left landing for runtime characters",
+      "permanent soft yellow-green grass inside the original cream circular rim"
+    ],
+    "verifiedAbsent": [
+      "people and character silhouettes",
+      "visible lettering or lesson numbers",
+      "UI panels and controls",
+      "progress stars or selection glow",
+      "flower logo banner"
+    ],
+    "observations": [
+      "The actual generated canvas is 1374 x 1145, exactly 6:5, rather than requested 1440 x 1200.",
+      "A small simple clock face on the schoolhouse and a yellow rooftop flag are static architectural features; no numerals or progress data are printed.",
+      "Near-left foreground foliage is softly blurred; keep course text in separate DOM panels and landing controls above it.",
+      "Anchors are integration starting points and should be calibrated on the real responsive page.",
+      "Revision 2 restores only the circular platform grass after visual QA; the prior neutral-tile version is preserved as desktop-environment-before-grass.png.",
+      "Revision 2 is 1373 x 1145, one pixel narrower than the previous image. The native tool output is retained without resizing; normalized anchors remain unchanged after visual comparison and pixel coordinates are recalculated."
+    ]
+  },
+  "revision": 2,
+  "updatedAt": "2026-10-20T17:44:45.511Z",
+  "previousVersion": {
+    "path": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\docs\\designs\\course-journey\\production\\desktop-environment-before-grass.png",
+    "sha256": "d4edb54a46967b855f3f713970332c5598ea40a77047d5e467e073b1efb3d8fc",
+    "width": 1374,
+    "height": 1145,
+    "bytes": 2209707,
+    "preservedFromRuntimePath": "C:\\Users\\duanxiaodong\\Documents\\ChatGPT\\canranstudio-release-worktrees\\release-canranstudio\\assets\\course-journey\\opening-desktop.png"
+  },
+  "latestPromptFile": "desktop-environment.grass.prompt.txt",
+  "latestRequestFile": "desktop-environment.grass.request.json",
+  "actualSizeUnchanged": false,
+  "actualSizeChange": {
+    "from": {
+      "width": 1374,
+      "height": 1145
+    },
+    "to": {
+      "width": 1373,
+      "height": 1145
+    },
+    "widthDelta": -1,
+    "heightDelta": 0
+  }
+}

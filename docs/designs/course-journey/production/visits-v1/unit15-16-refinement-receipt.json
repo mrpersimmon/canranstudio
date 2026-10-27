@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "unit15-16-refinement",
+  "selectedForRuntime": true,
+  "generator": "built-in image_gen.imagegen",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-0e5640a3-f305-46c1-aa28-47b56078f558.png",
+  "actualRequest": "docs/designs/course-journey/production/visits-v1/unit15-16-refinement-request.json",
+  "referenceOrder": [
+    "docs/designs/course-journey/production/visits-v1/drafts/unit15-16-initial.png",
+    "assets/course-journey/handbag-couple.png"
+  ],
+  "transparentBackgroundRequested": true,
+  "outputs": [
+    {
+      "path": "assets/course-journey/passport-travelers-v1.png",
+      "format": "png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1595796,
+      "sha256": "3d81c2f3206a646c58d0f11c0cc27ea266d0cf07d61ef1ebb7b593fe5afb1a03",
+      "hasAlpha": true,
+      "preservation": "Native PNG bytes preserved exactly"
+    },
+    {
+      "path": "assets/course-journey/passport-travelers-v1.webp",
+      "format": "webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 202696,
+      "sha256": "d4c62c5346a653c6dc682a4815ab6ebb55ad27e4f0ccddaa82ba8a88fbc97e25",
+      "hasAlpha": true,
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "alpha": {
+    "fullyTransparentPixels": 866061,
+    "totalPixels": 1572864,
+    "visibleGeometryThreshold": 16,
+    "note": "Runtime bounds use alpha > 16 to exclude faint isolated alpha noise. Full support is separately retained; no pixels were edited or removed.",
+    "bounds": [
+      {
+        "thresholdExclusive": 0,
+        "pixels": [
+          53,
+          21,
+          1487,
+          1000
+        ],
+        "normalized": [
+          0.034505208333333336,
+          0.0205078125,
+          0.9680989583333334,
+          0.9765625
+        ]
+      },
+      {
+        "thresholdExclusive": 16,
+        "pixels": [
+          225,
+          105,
+          1390,
+          949
+        ],
+        "normalized": [
+          0.146484375,
+          0.1025390625,
+          0.9049479166666666,
+          0.9267578125
+        ]
+      },
+      {
+        "thresholdExclusive": 128,
+        "pixels": [
+          225,
+          105,
+          1389,
+          949
+        ],
+        "normalized": [
+          0.146484375,
+          0.1025390625,
+          0.904296875,
+          0.9267578125
+        ]
+      }
+    ]
+  }
+}

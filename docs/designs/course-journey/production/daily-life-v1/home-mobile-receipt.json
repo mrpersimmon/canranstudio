@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "createdDate": "2026-10-22",
+  "job": "home-mobile",
+  "generator": "built-in image_gen.imagegen",
+  "request": "docs/designs/course-journey/production/daily-life-v1/requests/home-mobile.json",
+  "sourceOutput": "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-f716830c-02eb-4f27-9837-a602b16cb75d.png",
+  "transparentBackgroundRequested": false,
+  "referenceOrder": [
+    "assets/course-journey/visits-mobile-v2.png",
+    "docs/designs/course-journey/references/approved-mobile-v1.png",
+    "assets/unit25-26/keepsake-story-v1.webp",
+    "assets/unit27-28/keepsake-story-v1.webp",
+    "assets/unit29-30/keepsake-story-v1.webp"
+  ],
+  "outputs": [
+    {
+      "path": "assets/course-journey/home-mobile-v1.png",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 2311322,
+      "sha256": "e2e04718b25c1308d12b45bee60282a2c3817bbd3f8e41f4afc3689a5bebccd7",
+      "preservation": "Original native PNG bytes, no pixel processing"
+    },
+    {
+      "path": "assets/course-journey/home-mobile-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "hasAlpha": false,
+      "bytes": 338826,
+      "sha256": "be6eb6c941ea0181c61b41b44e906faee14c83cc6f4b01b0bf487da83654688b",
+      "encoding": {
+        "quality": 90,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      }
+    }
+  ],
+  "nativeFileModifiedAt": "2026-10-22T15:57:29.750Z"
+}

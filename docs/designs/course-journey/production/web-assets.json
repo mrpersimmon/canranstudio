@@ -1,0 +1,32 @@
+{
+  "purpose": "Web encodings; generated PNG originals remain unchanged",
+  "assets": [
+    {
+      "input": "assets/course-journey/opening-mobile.png",
+      "output": "assets/course-journey/opening-mobile.webp",
+      "width": 1086,
+      "height": 1448,
+      "alpha": false,
+      "bytes": 195230,
+      "sha256": "6bd5371c4ce6c1396d81cef5c3c839c8264df3b5424a3b346a189c4202bd2bbd"
+    },
+    {
+      "input": "assets/course-journey/opening-desktop.png",
+      "output": "assets/course-journey/opening-desktop.webp",
+      "width": 1373,
+      "height": 1145,
+      "alpha": false,
+      "bytes": 263398,
+      "sha256": "f048484587ee01a14b55badec5da195da73a44d4449905224d06b7fb98486520"
+    },
+    {
+      "input": "assets/course-journey/handbag-couple.png",
+      "output": "assets/course-journey/handbag-couple.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "bytes": 146522,
+      "sha256": "df99ee8abaf3ce1cbbc3c2849c721e2c5302355a7ebf05825092d2a263fa4967"
+    }
+  ]
+}

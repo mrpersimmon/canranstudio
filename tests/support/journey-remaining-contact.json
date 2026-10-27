@@ -1,0 +1,4765 @@
+{
+  "date": "2026-10-26",
+  "method": "All 48 source sprites viewed individually. Manually selected support ROIs; bottommost alpha>=128 pixel within each ROI. Source pixels unchanged; points not derived from runtime feet. Unit141-142 reuses six independently documented supports. Occluded supports and airborne crossed legs/child feet are excluded.",
+  "boundsConvention": "Outer pixel edges; right/bottom exclusive. Historical runtime bounds remain last-pixel indexes.",
+  "excluded": {
+    "unit57-58": "Crossed raised shoe is airborne.",
+    "unit61-62": "Jimmy shoes are above the stool wheels, not floor contacts.",
+    "unit99-100": "Crossed raised shoe is airborne.",
+    "unit127-128": "One left seated shoe is occluded; do not invent it.",
+    "unit141-142": "Sally shoes are airborne; use adult shoes and bench bases.",
+    "unit143-144": "Notice-board feet and tyre contact edge are hidden by foreground objects; no invented points."
+  },
+  "floorByChapter": {
+    "seasons": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "everyday": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "caring": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "memories": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "appointments": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "preparations": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "decisions": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "departures": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "messages": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "learning": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "choices": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "surprises": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "stories": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "possibilities": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "news": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "woodland": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ]
+  },
+  "floorByCourse": {
+    "unit65-66": [
+      0.28,
+      0.48,
+      0.69,
+      0.61
+    ],
+    "unit73-74": [
+      0.28,
+      0.53,
+      0.68,
+      0.61
+    ],
+    "unit75-76": [
+      0.28,
+      0.51,
+      0.73,
+      0.61
+    ],
+    "unit77-78": [
+      0.26,
+      0.51,
+      0.73,
+      0.61
+    ],
+    "unit109-110": [
+      0.24,
+      0.5,
+      0.76,
+      0.61
+    ]
+  },
+  "characters": {
+    "unit49-50": {
+      "file": "unit49-50-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.050239234449760764,
+        0.12041467304625199,
+        0.9585326953748007,
+        0.9409888357256778
+      ],
+      "sha256": "bedc2064d602997488da7391ad8389302e82db975e771f160e061173ba694a6e",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            150,
+            1040,
+            327,
+            1204
+          ],
+          "pixel": [
+            269,
+            1175
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            338,
+            1028,
+            540,
+            1179
+          ],
+          "pixel": [
+            470,
+            1152
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            777,
+            1040,
+            928,
+            1179
+          ],
+          "pixel": [
+            927,
+            1173
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            940,
+            1040,
+            1079,
+            1204
+          ],
+          "pixel": [
+            961,
+            1178
+          ]
+        }
+      ]
+    },
+    "unit51-52": {
+      "file": "unit51-52-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.08931419457735247,
+        0.09888357256778309,
+        0.9314194577352473,
+        0.9609250398724083
+      ],
+      "sha256": "355ab4939956325776c7612f2d9313353d6588bf44095666305ead46daa0ba61",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            112,
+            1065,
+            301,
+            1217
+          ],
+          "pixel": [
+            229,
+            1196
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            338,
+            1065,
+            552,
+            1204
+          ],
+          "pixel": [
+            476,
+            1179
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1065,
+            941,
+            1204
+          ],
+          "pixel": [
+            801,
+            1188
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1003,
+            1065,
+            1179,
+            1217
+          ],
+          "pixel": [
+            1099,
+            1203
+          ]
+        }
+      ]
+    },
+    "unit53-54": {
+      "file": "unit53-54-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.05263157894736842,
+        0.10925039872408293,
+        0.9728867623604466,
+        0.9338118022328549
+      ],
+      "sha256": "92847a32e18793d050534b3cc335103bd1d9f88f65415745ec0e32276f257168",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            75,
+            1040,
+            251,
+            1192
+          ],
+          "pixel": [
+            177,
+            1165
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            263,
+            1028,
+            427,
+            1154
+          ],
+          "pixel": [
+            425,
+            1147
+          ]
+        },
+        {
+          "kind": "display-leg",
+          "sourceRect": [
+            413,
+            1028,
+            490,
+            1167
+          ],
+          "pixel": [
+            453,
+            1149
+          ]
+        },
+        {
+          "kind": "display-leg",
+          "sourceRect": [
+            501,
+            1003,
+            565,
+            1129
+          ],
+          "pixel": [
+            536,
+            1105
+          ]
+        },
+        {
+          "kind": "display-leg",
+          "sourceRect": [
+            777,
+            1040,
+            853,
+            1192
+          ],
+          "pixel": [
+            818,
+            1166
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            865,
+            1028,
+            1016,
+            1154
+          ],
+          "pixel": [
+            1011,
+            1153
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1028,
+            1053,
+            1192,
+            1192
+          ],
+          "pixel": [
+            1073,
+            1169
+          ]
+        }
+      ]
+    },
+    "unit55-56": {
+      "file": "unit55-56-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.05582137161084529,
+        0.11483253588516747,
+        0.9385964912280702,
+        0.8947368421052632
+      ],
+      "sha256": "08851ab7d5af5dd4da039e97e19e829d50755216fd75157bab33da48f5004508",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            100,
+            1015,
+            239,
+            1142
+          ],
+          "pixel": [
+            146,
+            1112
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1015,
+            352,
+            1129
+          ],
+          "pixel": [
+            350,
+            1120
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            351,
+            1003,
+            377,
+            1142
+          ],
+          "pixel": [
+            357,
+            1120
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1028,
+            502,
+            1142
+          ],
+          "pixel": [
+            449,
+            1116
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            514,
+            1028,
+            615,
+            1142
+          ],
+          "pixel": [
+            576,
+            1111
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            702,
+            1028,
+            791,
+            1142
+          ],
+          "pixel": [
+            744,
+            1113
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            1028,
+            891,
+            1142
+          ],
+          "pixel": [
+            835,
+            1115
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            915,
+            1003,
+            954,
+            1142
+          ],
+          "pixel": [
+            936,
+            1120
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            965,
+            1028,
+            1054,
+            1142
+          ],
+          "pixel": [
+            973,
+            1110
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1078,
+            1028,
+            1167,
+            1142
+          ],
+          "pixel": [
+            1114,
+            1113
+          ]
+        }
+      ]
+    },
+    "unit57-58": {
+      "file": "unit57-58-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03269537480063796,
+        0.11084529505582137,
+        0.9792663476874003,
+        0.9513556618819776
+      ],
+      "sha256": "d1a43be8e9478baa51f1148019129b84b1e9e46210b1f6e75ddb2a98cb8ab7ba",
+      "contacts": [
+        {
+          "kind": "chair-foot",
+          "sourceRect": [
+            112,
+            1003,
+            189,
+            1129
+          ],
+          "pixel": [
+            149,
+            1102
+          ]
+        },
+        {
+          "kind": "chair-foot",
+          "sourceRect": [
+            313,
+            1040,
+            414,
+            1167
+          ],
+          "pixel": [
+            362,
+            1150
+          ]
+        },
+        {
+          "kind": "chair-foot",
+          "sourceRect": [
+            764,
+            1040,
+            828,
+            1142
+          ],
+          "pixel": [
+            769,
+            1141
+          ]
+        },
+        {
+          "kind": "shoe-grounded",
+          "sourceRect": [
+            564,
+            1090,
+            778,
+            1217
+          ],
+          "pixel": [
+            699,
+            1191
+          ]
+        },
+        {
+          "kind": "side-table-leg",
+          "sourceRect": [
+            915,
+            1003,
+            979,
+            1142
+          ],
+          "pixel": [
+            933,
+            1111
+          ]
+        },
+        {
+          "kind": "side-table-leg",
+          "sourceRect": [
+            1028,
+            978,
+            1091,
+            1091
+          ],
+          "pixel": [
+            1050,
+            1077
+          ]
+        },
+        {
+          "kind": "side-table-leg",
+          "sourceRect": [
+            1153,
+            1028,
+            1217,
+            1154
+          ],
+          "pixel": [
+            1185,
+            1121
+          ]
+        }
+      ]
+    },
+    "unit59-60": {
+      "file": "unit59-60-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.06539074960127592,
+        0.12121212121212122,
+        0.9569377990430622,
+        0.9202551834130781
+      ],
+      "sha256": "f04bdf708e54d90a48d501b1fe9b43429c716c4185a15beb5ca2f6d0051f0c6a",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            200,
+            1028,
+            339,
+            1167
+          ],
+          "pixel": [
+            293,
+            1144
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            351,
+            1028,
+            477,
+            1154
+          ],
+          "pixel": [
+            421,
+            1128
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            664,
+            1040,
+            841,
+            1154
+          ],
+          "pixel": [
+            840,
+            1141
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            840,
+            1053,
+            966,
+            1179
+          ],
+          "pixel": [
+            883,
+            1148
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            965,
+            1028,
+            1004,
+            1154
+          ],
+          "pixel": [
+            981,
+            1131
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            1116,
+            1040,
+            1154,
+            1179
+          ],
+          "pixel": [
+            1135,
+            1152
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            1166,
+            1028,
+            1192,
+            1129
+          ],
+          "pixel": [
+            1173,
+            1104
+          ]
+        }
+      ]
+    },
+    "unit61-62": {
+      "file": "unit61-62-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.04784688995215311,
+        0.1076555023923445,
+        0.9649122807017544,
+        0.9322169059011164
+      ],
+      "sha256": "863339bbbf897d8052245b9071ea7b7e40f8fa375379820ff524f0ed0e5a8fdd",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            100,
+            1065,
+            276,
+            1192
+          ],
+          "pixel": [
+            209,
+            1167
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1053,
+            490,
+            1167
+          ],
+          "pixel": [
+            410,
+            1144
+          ]
+        },
+        {
+          "kind": "stool-wheel",
+          "sourceRect": [
+            639,
+            1078,
+            703,
+            1179
+          ],
+          "pixel": [
+            664,
+            1155
+          ]
+        },
+        {
+          "kind": "stool-wheel",
+          "sourceRect": [
+            827,
+            1078,
+            891,
+            1179
+          ],
+          "pixel": [
+            845,
+            1154
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            902,
+            1053,
+            1016,
+            1167
+          ],
+          "pixel": [
+            1010,
+            1165
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1003,
+            1053,
+            1129,
+            1192
+          ],
+          "pixel": [
+            1018,
+            1165
+          ]
+        }
+      ]
+    },
+    "unit63-64": {
+      "file": "unit63-64-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03110047846889952,
+        0.07496012759170653,
+        0.9856459330143541,
+        0.9473684210526315
+      ],
+      "sha256": "d3fb3f168604fd5eb318f070cd1eb92517a3566bf6724e8e64fc7a4b198acad5",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            87,
+            1065,
+            264,
+            1204
+          ],
+          "pixel": [
+            197,
+            1186
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            263,
+            1065,
+            452,
+            1179
+          ],
+          "pixel": [
+            373,
+            1160
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            539,
+            1078,
+            690,
+            1192
+          ],
+          "pixel": [
+            598,
+            1169
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            702,
+            1078,
+            841,
+            1192
+          ],
+          "pixel": [
+            778,
+            1177
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            915,
+            1065,
+            1029,
+            1192
+          ],
+          "pixel": [
+            1026,
+            1182
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1015,
+            1065,
+            1154,
+            1204
+          ],
+          "pixel": [
+            1048,
+            1184
+          ]
+        }
+      ]
+    },
+    "unit65-66": {
+      "file": "unit65-66-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.09170653907496013,
+        0.07097288676236045,
+        0.9649122807017544,
+        0.9457735247208932
+      ],
+      "sha256": "6e0280ae26d006bdb499c551e6b12fdc00eef0e63ff25e1db2f900c679586edc",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            125,
+            1065,
+            327,
+            1204
+          ],
+          "pixel": [
+            257,
+            1184
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            326,
+            1065,
+            527,
+            1179
+          ],
+          "pixel": [
+            452,
+            1165
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            551,
+            1065,
+            653,
+            1167
+          ],
+          "pixel": [
+            605,
+            1148
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            652,
+            1053,
+            753,
+            1154
+          ],
+          "pixel": [
+            702,
+            1131
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            790,
+            1065,
+            966,
+            1179
+          ],
+          "pixel": [
+            965,
+            1173
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            965,
+            1065,
+            1117,
+            1204
+          ],
+          "pixel": [
+            1009,
+            1183
+          ]
+        }
+      ]
+    },
+    "unit67-68": {
+      "file": "unit67-68-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.07814992025518341,
+        0.094896331738437,
+        0.9505582137161085,
+        0.9433811802232854
+      ],
+      "sha256": "7a5b29de7edf8dfdd4dfc4db2fde7dc6f9af48f06305ecde1ad754acbe0a5836",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            213,
+            1065,
+            364,
+            1204
+          ],
+          "pixel": [
+            313,
+            1178
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            376,
+            1065,
+            540,
+            1179
+          ],
+          "pixel": [
+            481,
+            1163
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            764,
+            1065,
+            928,
+            1179
+          ],
+          "pixel": [
+            816,
+            1165
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            940,
+            1078,
+            1079,
+            1204
+          ],
+          "pixel": [
+            975,
+            1181
+          ]
+        }
+      ]
+    },
+    "unit69-70": {
+      "file": "unit69-70-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.15550239234449761,
+        0.06778309409888357,
+        0.8827751196172249,
+        0.9593301435406698
+      ],
+      "sha256": "3e9ea66589fc36ab2c1a12e8d0407c0800b5049501041f9af72f7cf82f943f34",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            188,
+            1065,
+            352,
+            1217
+          ],
+          "pixel": [
+            273,
+            1201
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            413,
+            1065,
+            627,
+            1204
+          ],
+          "pixel": [
+            542,
+            1188
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1078,
+            903,
+            1217
+          ],
+          "pixel": [
+            784,
+            1198
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            940,
+            1065,
+            1066,
+            1217
+          ],
+          "pixel": [
+            970,
+            1199
+          ]
+        }
+      ]
+    },
+    "unit71-72": {
+      "file": "unit71-72-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.06299840510366826,
+        0.09888357256778309,
+        0.937799043062201,
+        0.9186602870813397
+      ],
+      "sha256": "9254504a7fd68742bb92bb0ccf204046ed35aeb31dfc61901424841ca55e55b9",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            94,
+            965,
+            157,
+            1117
+          ],
+          "pixel": [
+            116,
+            1096
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            206,
+            990,
+            239,
+            1154
+          ],
+          "pixel": [
+            230,
+            1135
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            476,
+            990,
+            515,
+            1104
+          ],
+          "pixel": [
+            481,
+            1103
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            307,
+            1065,
+            383,
+            1148
+          ],
+          "pixel": [
+            381,
+            1140
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            388,
+            1065,
+            515,
+            1167
+          ],
+          "pixel": [
+            465,
+            1151
+          ]
+        },
+        {
+          "kind": "table-base",
+          "sourceRect": [
+            526,
+            1028,
+            653,
+            1142
+          ],
+          "pixel": [
+            553,
+            1116
+          ]
+        },
+        {
+          "kind": "table-base",
+          "sourceRect": [
+            677,
+            1028,
+            791,
+            1142
+          ],
+          "pixel": [
+            763,
+            1122
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            790,
+            1003,
+            828,
+            1079
+          ],
+          "pixel": [
+            820,
+            1078
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            1053,
+            916,
+            1154
+          ],
+          "pixel": [
+            914,
+            1150
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            915,
+            1065,
+            1016,
+            1167
+          ],
+          "pixel": [
+            921,
+            1150
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1065,
+            978,
+            1104,
+            1066
+          ],
+          "pixel": [
+            1081,
+            1045
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1128,
+            990,
+            1167,
+            1129
+          ],
+          "pixel": [
+            1147,
+            1100
+          ]
+        }
+      ]
+    },
+    "unit73-74": {
+      "file": "unit73-74-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.094896331738437,
+        0.07256778309409888,
+        0.9274322169059012,
+        0.9665071770334929
+      ],
+      "sha256": "eb96fc4fb13b8fb9fcf8c413487aca079f802f320eb8ab7e0455714ae7a8a030",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            238,
+            1065,
+            389,
+            1229
+          ],
+          "pixel": [
+            341,
+            1204
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            565,
+            1217
+          ],
+          "pixel": [
+            503,
+            1196
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            664,
+            1065,
+            878,
+            1217
+          ],
+          "pixel": [
+            732,
+            1201
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            927,
+            1065,
+            1066,
+            1229
+          ],
+          "pixel": [
+            991,
+            1210
+          ]
+        }
+      ]
+    },
+    "unit75-76": {
+      "file": "unit75-76-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.12200956937799043,
+        0.07256778309409888,
+        0.9226475279106858,
+        0.9585326953748007
+      ],
+      "sha256": "7f975ba90c4534fd2eff4f89fdea79b88bc643eed8071161138cc3d38590ceb9",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            225,
+            1065,
+            389,
+            1229
+          ],
+          "pixel": [
+            339,
+            1200
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            565,
+            1204
+          ],
+          "pixel": [
+            514,
+            1184
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            752,
+            1065,
+            954,
+            1204
+          ],
+          "pixel": [
+            825,
+            1184
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1065,
+            1117,
+            1229
+          ],
+          "pixel": [
+            1019,
+            1200
+          ]
+        }
+      ]
+    },
+    "unit77-78": {
+      "file": "unit77-78-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.07814992025518341,
+        0.10287081339712918,
+        0.9098883572567783,
+        0.9521531100478469
+      ],
+      "sha256": "8d7fbfa17116d3f1102dad84ebd489f40b74ba2047185a5e628036fcf9f21cf6",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            150,
+            1065,
+            352,
+            1204
+          ],
+          "pixel": [
+            272,
+            1188
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            351,
+            1065,
+            552,
+            1179
+          ],
+          "pixel": [
+            466,
+            1168
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            777,
+            1065,
+            954,
+            1192
+          ],
+          "pixel": [
+            953,
+            1190
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            953,
+            1065,
+            1104,
+            1217
+          ],
+          "pixel": [
+            981,
+            1193
+          ]
+        }
+      ]
+    },
+    "unit79-80": {
+      "file": "unit79-80-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.08373205741626795,
+        0.09330143540669857,
+        0.9338118022328549,
+        0.9481658692185008
+      ],
+      "sha256": "17d801590c9bfc2c79f70b3ebf6187d84f6f6ff81fb0e22a0e6f9c00b8ed77a6",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            188,
+            1040,
+            364,
+            1204
+          ],
+          "pixel": [
+            294,
+            1180
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            363,
+            1040,
+            527,
+            1192
+          ],
+          "pixel": [
+            454,
+            1162
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1065,
+            928,
+            1192
+          ],
+          "pixel": [
+            801,
+            1172
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1065,
+            1129,
+            1217
+          ],
+          "pixel": [
+            1035,
+            1187
+          ]
+        }
+      ]
+    },
+    "unit81-82": {
+      "file": "unit81-82-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03907496012759171,
+        0.16507177033492823,
+        0.9808612440191388,
+        0.8827751196172249
+      ],
+      "sha256": "0e614ee1bd78e348609f2fbc4e1bc871f8a5a0b67bba5ab3c65ee0d0196dfae3",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            125,
+            978,
+            264,
+            1117
+          ],
+          "pixel": [
+            206,
+            1095
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            275,
+            978,
+            414,
+            1117
+          ],
+          "pixel": [
+            354,
+            1090
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            539,
+            978,
+            715,
+            1117
+          ],
+          "pixel": [
+            593,
+            1092
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            752,
+            978,
+            891,
+            1129
+          ],
+          "pixel": [
+            823,
+            1102
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            915,
+            978,
+            1079,
+            1117
+          ],
+          "pixel": [
+            1078,
+            1093
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1090,
+            990,
+            1204,
+            1129
+          ],
+          "pixel": [
+            1125,
+            1106
+          ]
+        }
+      ]
+    },
+    "unit83-84": {
+      "file": "unit83-84-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03588516746411483,
+        0.1251993620414673,
+        0.9808612440191388,
+        0.9138755980861244
+      ],
+      "sha256": "e496e7c470aa58db336065d4dd2e22b518038b484e2811db6013cd8f144df227",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            62,
+            1003,
+            207,
+            1154
+          ],
+          "pixel": [
+            164,
+            1127
+          ]
+        },
+        {
+          "kind": "shoe-visible-edge",
+          "sourceRect": [
+            213,
+            1003,
+            245,
+            1129
+          ],
+          "pixel": [
+            244,
+            1128
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            244,
+            1003,
+            301,
+            1154
+          ],
+          "pixel": [
+            266,
+            1137
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            376,
+            965,
+            414,
+            1091
+          ],
+          "pixel": [
+            390,
+            1068
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            689,
+            1003,
+            740,
+            1167
+          ],
+          "pixel": [
+            709,
+            1143
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            551,
+            1003,
+            678,
+            1117
+          ],
+          "pixel": [
+            592,
+            1091
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            764,
+            1003,
+            903,
+            1129
+          ],
+          "pixel": [
+            902,
+            1104
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            915,
+            1003,
+            1066,
+            1142
+          ],
+          "pixel": [
+            1065,
+            1129
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1065,
+            1015,
+            1192,
+            1167
+          ],
+          "pixel": [
+            1104,
+            1145
+          ]
+        }
+      ]
+    },
+    "unit85-86": {
+      "file": "unit85-86-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.11802232854864433,
+        0.09888357256778309,
+        0.9250398724082934,
+        0.94896331738437
+      ],
+      "sha256": "5c08469fe31e13f4616994b862bcfe1f513c46bbec1fb129f763dd599a781345",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            175,
+            1065,
+            339,
+            1204
+          ],
+          "pixel": [
+            259,
+            1180
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            363,
+            1065,
+            590,
+            1179
+          ],
+          "pixel": [
+            507,
+            1152
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1065,
+            941,
+            1179
+          ],
+          "pixel": [
+            789,
+            1154
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            990,
+            1065,
+            1129,
+            1217
+          ],
+          "pixel": [
+            1032,
+            1188
+          ]
+        }
+      ]
+    },
+    "unit87-88": {
+      "file": "unit87-88-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.045454545454545456,
+        0.13556618819776714,
+        0.9521531100478469,
+        0.9178628389154705
+      ],
+      "sha256": "a93cede055b9904c115852500dd3b0ddb305f4df3827dfd5f2c9fe8056425e31",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            87,
+            1040,
+            276,
+            1167
+          ],
+          "pixel": [
+            191,
+            1149
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1040,
+            464,
+            1154
+          ],
+          "pixel": [
+            398,
+            1133
+          ]
+        },
+        {
+          "kind": "tyre",
+          "sourceRect": [
+            476,
+            1040,
+            690,
+            1154
+          ],
+          "pixel": [
+            564,
+            1129
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            840,
+            1040,
+            1029,
+            1167
+          ],
+          "pixel": [
+            893,
+            1140
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1065,
+            1040,
+            1217,
+            1167
+          ],
+          "pixel": [
+            1132,
+            1149
+          ]
+        }
+      ]
+    },
+    "unit89-90": {
+      "file": "unit89-90-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.0733652312599681,
+        0.2025518341307815,
+        0.9457735247208932,
+        0.9633173843700159
+      ],
+      "sha256": "64b978d1fefd57d6e0035cc0828b49e747248b40c5386d9f60a02453b561f597",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            188,
+            1090,
+            377,
+            1229
+          ],
+          "pixel": [
+            299,
+            1205
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            376,
+            1065,
+            565,
+            1204
+          ],
+          "pixel": [
+            481,
+            1185
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            752,
+            1078,
+            966,
+            1217
+          ],
+          "pixel": [
+            965,
+            1192
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1090,
+            1129,
+            1229
+          ],
+          "pixel": [
+            1021,
+            1207
+          ]
+        }
+      ]
+    },
+    "unit91-92": {
+      "file": "unit91-92-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.029505582137161084,
+        0.16905901116427433,
+        0.9784688995215312,
+        0.9290271132376395
+      ],
+      "sha256": "d2c699bc6ed471663abbf2dcff7982e07821abc7d1d1581de6d4d2f9179615c9",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            137,
+            1053,
+            289,
+            1179
+          ],
+          "pixel": [
+            227,
+            1161
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1053,
+            439,
+            1154
+          ],
+          "pixel": [
+            380,
+            1136
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            539,
+            1053,
+            678,
+            1167
+          ],
+          "pixel": [
+            579,
+            1145
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            702,
+            1053,
+            816,
+            1179
+          ],
+          "pixel": [
+            761,
+            1154
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            890,
+            1053,
+            1054,
+            1179
+          ],
+          "pixel": [
+            1053,
+            1158
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1065,
+            1053,
+            1167,
+            1192
+          ],
+          "pixel": [
+            1079,
+            1164
+          ]
+        }
+      ]
+    },
+    "unit93-94": {
+      "file": "unit93-94-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.15311004784688995,
+        0.08771929824561403,
+        0.8955342902711324,
+        0.9649122807017544
+      ],
+      "sha256": "eb755d4f0bbb645cdf1bd6b274321916c046e97b843db70df010f68282efa747",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            300,
+            1078,
+            452,
+            1217
+          ],
+          "pixel": [
+            379,
+            1190
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            476,
+            1078,
+            690,
+            1192
+          ],
+          "pixel": [
+            607,
+            1178
+          ]
+        },
+        {
+          "kind": "case-bottom",
+          "sourceRect": [
+            714,
+            1078,
+            816,
+            1192
+          ],
+          "pixel": [
+            815,
+            1174
+          ]
+        },
+        {
+          "kind": "case-bottom",
+          "sourceRect": [
+            965,
+            1128,
+            1054,
+            1229
+          ],
+          "pixel": [
+            995,
+            1208
+          ]
+        }
+      ]
+    },
+    "unit95-96": {
+      "file": "unit95-96-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.018341307814992026,
+        0.14354066985645933,
+        0.9808612440191388,
+        0.9393939393939394
+      ],
+      "sha256": "38520dc2f5288fd58ebf95dcf3b01bb3f510df77273648c40b3c7b3a0c374a89",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            125,
+            1065,
+            264,
+            1192
+          ],
+          "pixel": [
+            206,
+            1176
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            275,
+            1065,
+            439,
+            1167
+          ],
+          "pixel": [
+            380,
+            1159
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            451,
+            1065,
+            577,
+            1179
+          ],
+          "pixel": [
+            516,
+            1164
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            589,
+            1053,
+            765,
+            1154
+          ],
+          "pixel": [
+            697,
+            1141
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            815,
+            1065,
+            1004,
+            1167
+          ],
+          "pixel": [
+            877,
+            1152
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1040,
+            1078,
+            1192,
+            1192
+          ],
+          "pixel": [
+            1083,
+            1175
+          ]
+        }
+      ]
+    },
+    "unit97-98": {
+      "file": "unit97-98-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.08213716108452951,
+        0.10845295055821372,
+        0.937799043062201,
+        0.9138755980861244
+      ],
+      "sha256": "79220a83d0542721867f02adf4f0222cb8b2087806675e7f5153289c3374eb75",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            125,
+            1028,
+            314,
+            1154
+          ],
+          "pixel": [
+            249,
+            1138
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            313,
+            1028,
+            464,
+            1129
+          ],
+          "pixel": [
+            463,
+            1114
+          ]
+        },
+        {
+          "kind": "case-wheel",
+          "sourceRect": [
+            451,
+            1053,
+            527,
+            1154
+          ],
+          "pixel": [
+            487,
+            1128
+          ]
+        },
+        {
+          "kind": "case-wheel",
+          "sourceRect": [
+            664,
+            1065,
+            728,
+            1167
+          ],
+          "pixel": [
+            693,
+            1144
+          ]
+        },
+        {
+          "kind": "case-wheel",
+          "sourceRect": [
+            739,
+            1053,
+            791,
+            1142
+          ],
+          "pixel": [
+            748,
+            1128
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            1028,
+            979,
+            1142
+          ],
+          "pixel": [
+            978,
+            1134
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1040,
+            1142,
+            1167
+          ],
+          "pixel": [
+            1024,
+            1140
+          ]
+        }
+      ]
+    },
+    "unit99-100": {
+      "file": "unit99-100-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03349282296650718,
+        0.19138755980861244,
+        0.9760765550239234,
+        0.8883572567783095
+      ],
+      "sha256": "11c20622db41223fd5b4d056ca53ba756944e4774358bc7e408ebc8d07dab993",
+      "contacts": [
+        {
+          "kind": "step-base",
+          "sourceRect": [
+            50,
+            965,
+            164,
+            1054
+          ],
+          "pixel": [
+            162,
+            1042
+          ]
+        },
+        {
+          "kind": "step-base",
+          "sourceRect": [
+            213,
+            990,
+            327,
+            1091
+          ],
+          "pixel": [
+            257,
+            1072
+          ]
+        },
+        {
+          "kind": "shoe-grounded",
+          "sourceRect": [
+            388,
+            1015,
+            565,
+            1129
+          ],
+          "pixel": [
+            495,
+            1112
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            677,
+            990,
+            803,
+            1091
+          ],
+          "pixel": [
+            790,
+            1090
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            1003,
+            916,
+            1129
+          ],
+          "pixel": [
+            818,
+            1102
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            978,
+            953,
+            1029,
+            1079
+          ],
+          "pixel": [
+            1001,
+            1054
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            1053,
+            915,
+            1091,
+            1029
+          ],
+          "pixel": [
+            1076,
+            1009
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            1128,
+            965,
+            1179,
+            1079
+          ],
+          "pixel": [
+            1152,
+            1061
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            1178,
+            927,
+            1217,
+            1041
+          ],
+          "pixel": [
+            1195,
+            1015
+          ]
+        }
+      ]
+    },
+    "unit101-102": {
+      "file": "unit101-102-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.05263157894736842,
+        0.145933014354067,
+        0.967304625199362,
+        0.9322169059011164
+      ],
+      "sha256": "a0e36e4025cf02b307153f2aecc53390afd5d30d41aa769451a932729e6be2f5",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            125,
+            990,
+            176,
+            1117
+          ],
+          "pixel": [
+            149,
+            1098
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            194,
+            990,
+            251,
+            1154
+          ],
+          "pixel": [
+            214,
+            1138
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            614,
+            1003,
+            665,
+            1104
+          ],
+          "pixel": [
+            634,
+            1082
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            376,
+            1053,
+            527,
+            1192
+          ],
+          "pixel": [
+            472,
+            1168
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            526,
+            1053,
+            627,
+            1167
+          ],
+          "pixel": [
+            564,
+            1153
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            739,
+            1040,
+            878,
+            1167
+          ],
+          "pixel": [
+            872,
+            1166
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            877,
+            1053,
+            1016,
+            1192
+          ],
+          "pixel": [
+            888,
+            1167
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1065,
+            1003,
+            1117,
+            1154
+          ],
+          "pixel": [
+            1088,
+            1129
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1128,
+            1003,
+            1167,
+            1117
+          ],
+          "pixel": [
+            1139,
+            1095
+          ]
+        }
+      ]
+    },
+    "unit103-104": {
+      "file": "unit103-104-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.09170653907496013,
+        0.07256778309409888,
+        0.9098883572567783,
+        0.9569377990430622
+      ],
+      "sha256": "27cbb4d70503303b6570a4bd4e597e584cf27ac597f3dab57699e1156ed4d1c8",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            200,
+            1065,
+            364,
+            1217
+          ],
+          "pixel": [
+            288,
+            1192
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            615,
+            1192
+          ],
+          "pixel": [
+            528,
+            1174
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1065,
+            941,
+            1192
+          ],
+          "pixel": [
+            797,
+            1176
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            990,
+            1078,
+            1142,
+            1217
+          ],
+          "pixel": [
+            1056,
+            1198
+          ]
+        }
+      ]
+    },
+    "unit105-106": {
+      "file": "unit105-106-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.07655502392344497,
+        0.06539074960127592,
+        0.9545454545454546,
+        0.9537480063795853
+      ],
+      "sha256": "a87d36f75d485712c22a5edc3d9b1079553552840af596e4cc7579cdd5de5e4e",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            150,
+            1065,
+            364,
+            1217
+          ],
+          "pixel": [
+            292,
+            1195
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            363,
+            1065,
+            540,
+            1179
+          ],
+          "pixel": [
+            464,
+            1163
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            1065,
+            979,
+            1179
+          ],
+          "pixel": [
+            965,
+            1178
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            965,
+            1078,
+            1129,
+            1217
+          ],
+          "pixel": [
+            992,
+            1193
+          ]
+        }
+      ]
+    },
+    "unit107-108": {
+      "file": "unit107-108-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03269537480063796,
+        0.13157894736842105,
+        0.9792663476874003,
+        0.9250398724082934
+      ],
+      "sha256": "417157e8d03311e7d92480e04c3c581a12dd35b23fa615c6a424d510facac2ba",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            300,
+            1040,
+            439,
+            1167
+          ],
+          "pixel": [
+            388,
+            1145
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            438,
+            1040,
+            565,
+            1142
+          ],
+          "pixel": [
+            513,
+            1128
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            852,
+            1040,
+            1016,
+            1154
+          ],
+          "pixel": [
+            994,
+            1153
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1053,
+            1117,
+            1179
+          ],
+          "pixel": [
+            999,
+            1159
+          ]
+        }
+      ]
+    },
+    "unit109-110": {
+      "file": "unit109-110-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.008771929824561403,
+        0.1634768740031898,
+        0.9912280701754386,
+        0.8724082934609251
+      ],
+      "sha256": "4cbcf1935297416bec77add98bf122899c79d91b992750ff9e9c36e11385ab75",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            56,
+            940,
+            101,
+            1054
+          ],
+          "pixel": [
+            75,
+            1032
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            150,
+            953,
+            201,
+            1079
+          ],
+          "pixel": [
+            170,
+            1065
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            463,
+            940,
+            502,
+            1054
+          ],
+          "pixel": [
+            470,
+            1053
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            978,
+            427,
+            1117
+          ],
+          "pixel": [
+            388,
+            1090
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            426,
+            978,
+            490,
+            1079
+          ],
+          "pixel": [
+            426,
+            1077
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            501,
+            940,
+            552,
+            1091
+          ],
+          "pixel": [
+            522,
+            1072
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            652,
+            902,
+            690,
+            1041
+          ],
+          "pixel": [
+            677,
+            1028
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            764,
+            953,
+            803,
+            1091
+          ],
+          "pixel": [
+            768,
+            1072
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            802,
+            940,
+            853,
+            1054
+          ],
+          "pixel": [
+            837,
+            1053
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            827,
+            978,
+            966,
+            1117
+          ],
+          "pixel": [
+            961,
+            1092
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            965,
+            978,
+            1091,
+            1117
+          ],
+          "pixel": [
+            973,
+            1092
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1116,
+            940,
+            1154,
+            1079
+          ],
+          "pixel": [
+            1129,
+            1054
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1166,
+            927,
+            1204,
+            1041
+          ],
+          "pixel": [
+            1180,
+            1023
+          ]
+        }
+      ]
+    },
+    "unit111-112": {
+      "file": "unit111-112-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.01594896331738437,
+        0.17464114832535885,
+        0.9840510366826156,
+        0.8628389154704944
+      ],
+      "sha256": "0a529c1c1e3b5281ae64a9b1dfc5c5d0164a7ddabb871e744f1a12d5d91ebf63",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            75,
+            978,
+            214,
+            1104
+          ],
+          "pixel": [
+            164,
+            1080
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            225,
+            978,
+            377,
+            1091
+          ],
+          "pixel": [
+            318,
+            1071
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            965,
+            502,
+            1104
+          ],
+          "pixel": [
+            477,
+            1078
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            501,
+            965,
+            627,
+            1091
+          ],
+          "pixel": [
+            501,
+            1074
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            639,
+            978,
+            778,
+            1091
+          ],
+          "pixel": [
+            679,
+            1076
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            802,
+            978,
+            928,
+            1091
+          ],
+          "pixel": [
+            883,
+            1073
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            927,
+            965,
+            954,
+            1079
+          ],
+          "pixel": [
+            931,
+            1065
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            978,
+            965,
+            1004,
+            1054
+          ],
+          "pixel": [
+            982,
+            1047
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            1178,
+            978,
+            1204,
+            1091
+          ],
+          "pixel": [
+            1182,
+            1065
+          ]
+        },
+        {
+          "kind": "stand-leg",
+          "sourceRect": [
+            1216,
+            965,
+            1236,
+            1066
+          ],
+          "pixel": [
+            1216,
+            1047
+          ]
+        }
+      ]
+    },
+    "unit113-114": {
+      "file": "unit113-114-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.017543859649122806,
+        0.14274322169059012,
+        0.9856459330143541,
+        0.9457735247208932
+      ],
+      "sha256": "a00ab28f0afc90ebab7483ea301ea80d3b46f844ce0603ca1285c2261ea9af57",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            112,
+            1065,
+            276,
+            1204
+          ],
+          "pixel": [
+            214,
+            1184
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1065,
+            464,
+            1179
+          ],
+          "pixel": [
+            400,
+            1162
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            501,
+            1065,
+            640,
+            1192
+          ],
+          "pixel": [
+            585,
+            1167
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            652,
+            1053,
+            841,
+            1167
+          ],
+          "pixel": [
+            758,
+            1150
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            877,
+            1065,
+            1054,
+            1179
+          ],
+          "pixel": [
+            1053,
+            1175
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1053,
+            1078,
+            1204,
+            1204
+          ],
+          "pixel": [
+            1095,
+            1183
+          ]
+        }
+      ]
+    },
+    "unit115-116": {
+      "file": "unit115-116-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.05901116427432217,
+        0.17783094098883573,
+        0.960127591706539,
+        0.9186602870813397
+      ],
+      "sha256": "cf8c6521ba28af0d025622633f6aa6448938b70569a6dba7466d418fad7a9e5e",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            163,
+            1028,
+            289,
+            1167
+          ],
+          "pixel": [
+            244,
+            1150
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            288,
+            1028,
+            377,
+            1154
+          ],
+          "pixel": [
+            327,
+            1134
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            438,
+            1040,
+            552,
+            1167
+          ],
+          "pixel": [
+            497,
+            1150
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            589,
+            1040,
+            765,
+            1154
+          ],
+          "pixel": [
+            686,
+            1136
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            890,
+            1040,
+            1066,
+            1154
+          ],
+          "pixel": [
+            941,
+            1140
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1090,
+            1040,
+            1204,
+            1179
+          ],
+          "pixel": [
+            1134,
+            1150
+          ]
+        }
+      ]
+    },
+    "unit117-118": {
+      "file": "unit117-118-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.058213716108452954,
+        0.11004784688995216,
+        0.9808612440191388,
+        0.9393939393939394
+      ],
+      "sha256": "03fad65fd51a95f7ec17552682b1769fb18fa4852d0690618d0a9454ec875884",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            112,
+            1065,
+            314,
+            1204
+          ],
+          "pixel": [
+            241,
+            1176
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            313,
+            1053,
+            502,
+            1167
+          ],
+          "pixel": [
+            432,
+            1142
+          ]
+        },
+        {
+          "kind": "coin-on-floor",
+          "sourceRect": [
+            507,
+            1116,
+            571,
+            1192
+          ],
+          "pixel": [
+            542,
+            1163
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            639,
+            1053,
+            765,
+            1154
+          ],
+          "pixel": [
+            764,
+            1147
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            764,
+            1053,
+            878,
+            1179
+          ],
+          "pixel": [
+            795,
+            1153
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            902,
+            1053,
+            1041,
+            1154
+          ],
+          "pixel": [
+            931,
+            1134
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1065,
+            1053,
+            1179,
+            1179
+          ],
+          "pixel": [
+            1081,
+            1156
+          ]
+        }
+      ]
+    },
+    "unit119-120": {
+      "file": "unit119-120-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.12599681020733652,
+        0.07256778309409888,
+        0.9274322169059012,
+        0.9633173843700159
+      ],
+      "sha256": "8647ce03452fec7594083239df72d9831fe7e32b258b711f5ecdad3fbffa4f49",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            250,
+            1078,
+            439,
+            1229
+          ],
+          "pixel": [
+            354,
+            1207
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            463,
+            1078,
+            690,
+            1204
+          ],
+          "pixel": [
+            599,
+            1184
+          ]
+        },
+        {
+          "kind": "perch-base",
+          "sourceRect": [
+            852,
+            1078,
+            1016,
+            1217
+          ],
+          "pixel": [
+            941,
+            1187
+          ]
+        }
+      ]
+    },
+    "unit121-122": {
+      "file": "unit121-122-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.017543859649122806,
+        0.14992025518341306,
+        0.9736842105263158,
+        0.9290271132376395
+      ],
+      "sha256": "a3b0de65a7ab95cd03506fd148ab0c1f89f4a0a3133305f2905446c791a5da38",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            119,
+            1053,
+            264,
+            1179
+          ],
+          "pixel": [
+            195,
+            1163
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            313,
+            1053,
+            515,
+            1154
+          ],
+          "pixel": [
+            442,
+            1146
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            526,
+            1040,
+            703,
+            1142
+          ],
+          "pixel": [
+            586,
+            1127
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1053,
+            878,
+            1154
+          ],
+          "pixel": [
+            807,
+            1140
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            953,
+            1053,
+            1079,
+            1154
+          ],
+          "pixel": [
+            1068,
+            1153
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1078,
+            1053,
+            1192,
+            1179
+          ],
+          "pixel": [
+            1090,
+            1163
+          ]
+        }
+      ]
+    },
+    "unit123-124": {
+      "file": "unit123-124-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.10446570972886762,
+        0.10047846889952153,
+        0.9011164274322169,
+        0.9593301435406698
+      ],
+      "sha256": "946b60d2c8d881db4bb77bf3cd60e2622cd37ac667bd7bb4907920f1de8e9f2d",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            188,
+            1065,
+            389,
+            1217
+          ],
+          "pixel": [
+            308,
+            1199
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            627,
+            1179
+          ],
+          "pixel": [
+            529,
+            1172
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            702,
+            1065,
+            928,
+            1192
+          ],
+          "pixel": [
+            773,
+            1174
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            978,
+            1065,
+            1142,
+            1229
+          ],
+          "pixel": [
+            1026,
+            1201
+          ]
+        }
+      ]
+    },
+    "unit125-126": {
+      "file": "unit125-126-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.04146730462519936,
+        0.10925039872408293,
+        0.9585326953748007,
+        0.9258373205741627
+      ],
+      "sha256": "d8d864bf924e25078675ab58f6faec79ebdc80de578ffd49ea3b7c2443736996",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            100,
+            953,
+            151,
+            1091
+          ],
+          "pixel": [
+            123,
+            1073
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            213,
+            990,
+            251,
+            1129
+          ],
+          "pixel": [
+            233,
+            1117
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            300,
+            1040,
+            490,
+            1167
+          ],
+          "pixel": [
+            404,
+            1147
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            438,
+            1003,
+            602,
+            1129
+          ],
+          "pixel": [
+            523,
+            1128
+          ]
+        },
+        {
+          "kind": "table-base",
+          "sourceRect": [
+            501,
+            1040,
+            615,
+            1179
+          ],
+          "pixel": [
+            518,
+            1160
+          ]
+        },
+        {
+          "kind": "table-base",
+          "sourceRect": [
+            652,
+            1040,
+            765,
+            1179
+          ],
+          "pixel": [
+            736,
+            1160
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            764,
+            953,
+            816,
+            1091
+          ],
+          "pixel": [
+            790,
+            1090
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            764,
+            1015,
+            878,
+            1154
+          ],
+          "pixel": [
+            874,
+            1147
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            865,
+            1040,
+            991,
+            1167
+          ],
+          "pixel": [
+            882,
+            1147
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1009,
+            965,
+            1054,
+            1154
+          ],
+          "pixel": [
+            1025,
+            1130
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1128,
+            953,
+            1167,
+            1104
+          ],
+          "pixel": [
+            1136,
+            1083
+          ]
+        }
+      ]
+    },
+    "unit127-128": {
+      "file": "unit127-128-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.0861244019138756,
+        0.14912280701754385,
+        0.94896331738437,
+        0.9258373205741627
+      ],
+      "sha256": "c5803ef988c1284e7b80bb72eac106484de74da76f7d04a038047393f23f2e7a",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            125,
+            978,
+            176,
+            1129
+          ],
+          "pixel": [
+            147,
+            1119
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            250,
+            1003,
+            289,
+            1154
+          ],
+          "pixel": [
+            269,
+            1149
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            338,
+            1003,
+            377,
+            1117
+          ],
+          "pixel": [
+            373,
+            1116
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            501,
+            990,
+            540,
+            1117
+          ],
+          "pixel": [
+            509,
+            1116
+          ]
+        },
+        {
+          "kind": "visible-shoe",
+          "sourceRect": [
+            376,
+            1065,
+            540,
+            1179
+          ],
+          "pixel": [
+            486,
+            1159
+          ]
+        },
+        {
+          "kind": "table-base",
+          "sourceRect": [
+            589,
+            1078,
+            715,
+            1179
+          ],
+          "pixel": [
+            653,
+            1157
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            752,
+            990,
+            791,
+            1117
+          ],
+          "pixel": [
+            756,
+            1116
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            827,
+            1040,
+            954,
+            1167
+          ],
+          "pixel": [
+            857,
+            1152
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            953,
+            1040,
+            1029,
+            1167
+          ],
+          "pixel": [
+            979,
+            1151
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1034,
+            990,
+            1066,
+            1154
+          ],
+          "pixel": [
+            1043,
+            1136
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1141,
+            978,
+            1179,
+            1129
+          ],
+          "pixel": [
+            1151,
+            1104
+          ]
+        }
+      ]
+    },
+    "unit129-130": {
+      "file": "unit129-130-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03349282296650718,
+        0.14433811802232854,
+        0.981658692185008,
+        0.937799043062201
+      ],
+      "sha256": "3ed63f7fc91afed1718ab82fa9277cd3950e1c8718177776d3f4c2df9ef2a39a",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            112,
+            1065,
+            239,
+            1179
+          ],
+          "pixel": [
+            200,
+            1166
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            238,
+            1065,
+            364,
+            1167
+          ],
+          "pixel": [
+            310,
+            1158
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            552,
+            1192
+          ],
+          "pixel": [
+            497,
+            1174
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            564,
+            1053,
+            740,
+            1167
+          ],
+          "pixel": [
+            660,
+            1156
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            852,
+            1065,
+            1029,
+            1167
+          ],
+          "pixel": [
+            1021,
+            1166
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1028,
+            1065,
+            1179,
+            1192
+          ],
+          "pixel": [
+            1061,
+            1173
+          ]
+        }
+      ]
+    },
+    "unit131-132": {
+      "file": "unit131-132-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.018341307814992026,
+        0.15231259968102073,
+        0.9832535885167464,
+        0.9218500797448166
+      ],
+      "sha256": "7e2be8c261907a9d4c7f3d5bebf0beff977fac92c54b1266ae19e779b63bba57",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            62,
+            927,
+            113,
+            1041
+          ],
+          "pixel": [
+            87,
+            1022
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            163,
+            953,
+            214,
+            1091
+          ],
+          "pixel": [
+            178,
+            1075
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            539,
+            927,
+            577,
+            1041
+          ],
+          "pixel": [
+            558,
+            1040
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            263,
+            1028,
+            439,
+            1154
+          ],
+          "pixel": [
+            364,
+            1141
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            426,
+            1003,
+            615,
+            1117
+          ],
+          "pixel": [
+            527,
+            1097
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            664,
+            927,
+            715,
+            1054
+          ],
+          "pixel": [
+            699,
+            1053
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            677,
+            1003,
+            878,
+            1129
+          ],
+          "pixel": [
+            866,
+            1128
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            865,
+            1040,
+            1016,
+            1179
+          ],
+          "pixel": [
+            912,
+            1154
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1065,
+            953,
+            1117,
+            1091
+          ],
+          "pixel": [
+            1093,
+            1080
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1153,
+            927,
+            1192,
+            1054
+          ],
+          "pixel": [
+            1164,
+            1031
+          ]
+        }
+      ]
+    },
+    "unit133-134": {
+      "file": "unit133-134-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.12998405103668262,
+        0.094896331738437,
+        0.8755980861244019,
+        0.9545454545454546
+      ],
+      "sha256": "99fcd2c28258e250fe98ad563835b1a956137823b553ad6757bb64b21249c4a4",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            250,
+            1065,
+            402,
+            1217
+          ],
+          "pixel": [
+            351,
+            1195
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            401,
+            1065,
+            552,
+            1192
+          ],
+          "pixel": [
+            497,
+            1178
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            752,
+            1065,
+            928,
+            1192
+          ],
+          "pixel": [
+            916,
+            1191
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            915,
+            1065,
+            1041,
+            1217
+          ],
+          "pixel": [
+            932,
+            1196
+          ]
+        }
+      ]
+    },
+    "unit135-136": {
+      "file": "unit135-136-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03827751196172249,
+        0.1682615629984051,
+        0.9872408293460925,
+        0.9465709728867624
+      ],
+      "sha256": "5510f3e976d40355a46434e37d3da7477ab075e07f7419f430d11cde882dd301",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            75,
+            1065,
+            239,
+            1204
+          ],
+          "pixel": [
+            172,
+            1182
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            238,
+            1065,
+            414,
+            1179
+          ],
+          "pixel": [
+            337,
+            1157
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            470,
+            1065,
+            571,
+            1204
+          ],
+          "pixel": [
+            530,
+            1179
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            589,
+            1065,
+            728,
+            1179
+          ],
+          "pixel": [
+            677,
+            1165
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            852,
+            1065,
+            1041,
+            1192
+          ],
+          "pixel": [
+            907,
+            1164
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1065,
+            1065,
+            1204,
+            1217
+          ],
+          "pixel": [
+            1144,
+            1185
+          ]
+        }
+      ]
+    },
+    "unit137-138": {
+      "file": "unit137-138-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.0342902711323764,
+        0.12200956937799043,
+        0.967304625199362,
+        0.9314194577352473
+      ],
+      "sha256": "202347d24399a713891906396297c066909e7f15c1541444d94dd2ab05edcd54",
+      "contacts": [
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            62,
+            953,
+            126,
+            1104
+          ],
+          "pixel": [
+            83,
+            1084
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            163,
+            965,
+            214,
+            1142
+          ],
+          "pixel": [
+            184,
+            1123
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            225,
+            1040,
+            414,
+            1179
+          ],
+          "pixel": [
+            342,
+            1160
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            489,
+            1015,
+            565,
+            1129
+          ],
+          "pixel": [
+            500,
+            1117
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            413,
+            1003,
+            452,
+            1192
+          ],
+          "pixel": [
+            431,
+            1166
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            790,
+            978,
+            816,
+            1091
+          ],
+          "pixel": [
+            815,
+            1090
+          ]
+        },
+        {
+          "kind": "table-leg",
+          "sourceRect": [
+            840,
+            1003,
+            878,
+            1192
+          ],
+          "pixel": [
+            848,
+            1166
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            890,
+            1040,
+            1004,
+            1167
+          ],
+          "pixel": [
+            979,
+            1161
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            1003,
+            1053,
+            1104,
+            1179
+          ],
+          "pixel": [
+            1004,
+            1158
+          ]
+        },
+        {
+          "kind": "chair-leg",
+          "sourceRect": [
+            1147,
+            965,
+            1192,
+            1104
+          ],
+          "pixel": [
+            1172,
+            1084
+          ]
+        }
+      ]
+    },
+    "unit139-140": {
+      "file": "unit139-140-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.04226475279106858,
+        0.15709728867623604,
+        0.9832535885167464,
+        0.9043062200956937
+      ],
+      "sha256": "e6846b6940d5c5aeb43fc373823083e595bc1d00e9d8735510caa3569a06d453",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            112,
+            1040,
+            264,
+            1154
+          ],
+          "pixel": [
+            177,
+            1132
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            313,
+            1040,
+            502,
+            1142
+          ],
+          "pixel": [
+            430,
+            1123
+          ]
+        },
+        {
+          "kind": "cabinet-base",
+          "sourceRect": [
+            526,
+            1015,
+            627,
+            1129
+          ],
+          "pixel": [
+            601,
+            1106
+          ]
+        },
+        {
+          "kind": "cabinet-base",
+          "sourceRect": [
+            677,
+            990,
+            709,
+            1091
+          ],
+          "pixel": [
+            678,
+            1069
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            727,
+            1040,
+            903,
+            1154
+          ],
+          "pixel": [
+            777,
+            1132
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            940,
+            1040,
+            1104,
+            1154
+          ],
+          "pixel": [
+            1046,
+            1133
+          ]
+        },
+        {
+          "kind": "phone-post-base",
+          "sourceRect": [
+            1116,
+            1028,
+            1192,
+            1142
+          ],
+          "pixel": [
+            1151,
+            1115
+          ]
+        }
+      ]
+    },
+    "unit141-142": {
+      "file": "unit141-142-landmark-v2.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.011961722488038277,
+        0.19059011164274323,
+        0.9880382775119617,
+        0.9066985645933014
+      ],
+      "sha256": "490d546d4c23cccbf01f9a29915fd989259a751562fc253cef1c0a45574a48d6",
+      "contacts": [
+        {
+          "kind": "左侧座椅底座",
+          "pixel": [
+            185,
+            1079
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        },
+        {
+          "kind": "母亲左鞋底",
+          "pixel": [
+            367,
+            1134
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        },
+        {
+          "kind": "母亲右鞋底",
+          "pixel": [
+            455,
+            1116
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        },
+        {
+          "kind": "女士左鞋底",
+          "pixel": [
+            805,
+            1124
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        },
+        {
+          "kind": "女士右鞋底",
+          "pixel": [
+            896,
+            1135
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        },
+        {
+          "kind": "右侧座椅底座",
+          "pixel": [
+            1081,
+            1080
+          ],
+          "source": "journey-ground-contact.json, existing independently viewed source points"
+        }
+      ]
+    },
+    "unit143-144": {
+      "file": "unit143-144-landmark-v1.webp",
+      "width": 1254,
+      "height": 1254,
+      "alpha16Bounds": [
+        0.03668261562998405,
+        0.13476874003189793,
+        0.981658692185008,
+        0.9290271132376395
+      ],
+      "sha256": "ff4802663163377b6e10da96928711f92d51d913d5b5d1bb5daf586c4c8f0a08",
+      "contacts": [
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            175,
+            1053,
+            339,
+            1167
+          ],
+          "pixel": [
+            258,
+            1148
+          ]
+        },
+        {
+          "kind": "shoe",
+          "sourceRect": [
+            338,
+            1040,
+            527,
+            1142
+          ],
+          "pixel": [
+            454,
+            1124
+          ]
+        },
+        {
+          "kind": "bin-base",
+          "sourceRect": [
+            564,
+            990,
+            665,
+            1104
+          ],
+          "pixel": [
+            614,
+            1103
+          ]
+        },
+        {
+          "kind": "discarded-paper",
+          "sourceRect": [
+            664,
+            1103,
+            765,
+            1179
+          ],
+          "pixel": [
+            764,
+            1161
+          ]
+        },
+        {
+          "kind": "discarded-bottle",
+          "sourceRect": [
+            865,
+            1090,
+            941,
+            1179
+          ],
+          "pixel": [
+            893,
+            1152
+          ]
+        },
+        {
+          "kind": "discarded-can",
+          "sourceRect": [
+            1040,
+            1078,
+            1154,
+            1167
+          ],
+          "pixel": [
+            1122,
+            1138
+          ]
+        }
+      ]
+    }
+  }
+}

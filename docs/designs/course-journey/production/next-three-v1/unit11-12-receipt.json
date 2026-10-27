@@ -1,0 +1,189 @@
+{
+  "version": "unit11-12-shirt-return-v1",
+  "date": "2026-10-22",
+  "tool": "image_gen.imagegen",
+  "mode": "built-in",
+  "transparent_background": true,
+  "originals": {
+    "initial": {
+      "path": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-d3a9-7761-b2fc-6b9a36da6bb5/exec-775e8283-e804-4cd3-8d1e-e4ed0f623856.png",
+      "sha256": "762de1d4911c90fb3617d46177c016a91f4cb8a324c86da2dbfe4ee1448f4728",
+      "selected": false,
+      "reason": "Bottom margin and Tim stripe visibility corrected in final generation."
+    },
+    "selected": {
+      "path": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-d3a9-7761-b2fc-6b9a36da6bb5/exec-0507d64e-ec38-4ec7-8bbf-26b4cfea6681.png",
+      "sha256": "c2803788c506d45fb4220d7e7ee44d836edc515c07ece0aab58105b4ffc94168"
+    }
+  },
+  "outputs": {
+    "png": {
+      "path": "assets/course-journey/shirt-return-v1.png",
+      "sha256": "c2803788c506d45fb4220d7e7ee44d836edc515c07ece0aab58105b4ffc94168",
+      "bytes": 1574373
+    },
+    "webp": {
+      "path": "assets/course-journey/shirt-return-v1.webp",
+      "sha256": "c741eedb1b795fe6260db04853f68587790b2ec36b507e882d5ca26df5d29480",
+      "bytes": 186850,
+      "encoding": {
+        "quality": 92,
+        "alphaQuality": 100,
+        "resize": false,
+        "crop": false
+      },
+      "alphaValidation": {
+        "sameCanvas": true,
+        "alphaPixelsChanged": 0,
+        "maxAlphaDifference": 0
+      }
+    }
+  },
+  "originalSize": {
+    "width": 1536,
+    "height": 1024
+  },
+  "alpha": {
+    "transparentPixels": 950671,
+    "opaquePixels": 0,
+    "partialPixels": 622193,
+    "totalPixels": 1572864,
+    "thresholds": {
+      "0": {
+        "bounds": [
+          41,
+          41,
+          1413,
+          979
+        ],
+        "normalized": [
+          0.026692708333333332,
+          0.0400390625,
+          0.9205729166666666,
+          0.95703125
+        ],
+        "pixels": 622193
+      },
+      "8": {
+        "bounds": [
+          264,
+          89,
+          1310,
+          949
+        ],
+        "normalized": [
+          0.171875,
+          0.0869140625,
+          0.853515625,
+          0.927734375
+        ],
+        "pixels": 608366
+      },
+      "32": {
+        "bounds": [
+          265,
+          89,
+          1310,
+          949
+        ],
+        "normalized": [
+          0.17252604166666666,
+          0.0869140625,
+          0.853515625,
+          0.927734375
+        ],
+        "pixels": 606615
+      },
+      "128": {
+        "bounds": [
+          265,
+          90,
+          1310,
+          949
+        ],
+        "normalized": [
+          0.17252604166666666,
+          0.087890625,
+          0.853515625,
+          0.927734375
+        ],
+        "pixels": 602960
+      },
+      "240": {
+        "bounds": [
+          266,
+          90,
+          1309,
+          948
+        ],
+        "normalized": [
+          0.17317708333333334,
+          0.087890625,
+          0.8528645833333334,
+          0.9267578125
+        ],
+        "pixels": 597833
+      }
+    }
+  },
+  "recommendedPlacement": {
+    "visibleBounds": [
+      0.17252604166666666,
+      0.0869140625,
+      0.853515625,
+      0.927734375
+    ],
+    "visibleThreshold": 32,
+    "footAnchor": [
+      0.51,
+      0.927734375
+    ],
+    "note": "Full group centered near x=0.51. Anchor y uses lowest visible shoe; no programmatic crop or matte removal."
+  },
+  "orderedReferences": [
+    {
+      "order": 1,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/docs/designs/course-journey/references/approved-mobile-v1.png",
+      "sha256": "2497505dda0afae854e47d2bee003f70e96fb8650979c168369905a30fd17b7f"
+    },
+    {
+      "order": 2,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/course-journey/handbag-couple.png",
+      "sha256": "e7c61bb8f317f109fc42aac6715a2db7d38320567cad3cda6f9a388c192bfb68"
+    },
+    {
+      "order": 3,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit11-12/keepsake-story-v1.webp",
+      "sha256": "2bfabc4d5811e2f3717151af2ad61d11800d0de6df5263b1d49fa2c5b44d1d6d"
+    },
+    {
+      "order": 4,
+      "path": "C:/Users/duanxiaodong/Documents/ChatGPT/canranstudio-release-worktrees/release-canranstudio/assets/unit11-12/cast-returned-v1.webp",
+      "sha256": "148fb2fcf4837694ad411e97acf1e7083f2aff5c3f067f302cdc0c8c90e03b6d"
+    }
+  ],
+  "visualReview": {
+    "reviewed": true,
+    "identities": "Teacher gray-brown side part and rectangular glasses; Dave curls, yellow top and blue-gray overalls; Tim dark spiky hair, two pale-yellow bands and olive trousers.",
+    "story": "Exactly one blue shirt held by Dave and one white shirt shared by teacher and Tim.",
+    "composition": "All three complete bodies and six shoes visible; round compact proportions, warm brown outlines; clear bottom and top transparent margins.",
+    "transparency": "Native alpha preserved. RGB in transparent pixels may look like a glow in viewers that ignore alpha; representative gaps were verified transparent.",
+    "limitations": "Teacher is taller and Dave stands slightly behind, with feet a little above front baseline; placement uses lowest front shoe.",
+    "actualVisibleOccupancy": {
+      "width": 0.6809895833333334,
+      "height": 0.8408203125,
+      "note": "Final group occupies a narrower width than requested to preserve full-body height and top/bottom margins; use measured visible bounds for map placement."
+    }
+  },
+  "portableReplay": {
+    "note": "Original request prompts and referenced_image_paths are preserved verbatim. For replay on another checkout, resolve repository-relative paths from the repository root and apply only this source-path mapping to the refinement input.",
+    "mappings": [
+      {
+        "requestField": "refinement.referenced_image_paths[0]",
+        "originalPath": "C:/Users/duanxiaodong/.codex/generated_images/01a160c5-d3a9-7761-b2fc-6b9a36da6bb5/exec-775e8283-e804-4cd3-8d1e-e4ed0f623856.png",
+        "repositoryRelativePath": "docs/designs/course-journey/production/next-three-v1/unit11-12-initial.png",
+        "sha256": "762de1d4911c90fb3617d46177c016a91f4cb8a324c86da2dbfe4ee1448f4728"
+      }
+    ]
+  }
+}

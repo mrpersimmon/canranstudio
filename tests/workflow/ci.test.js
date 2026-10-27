@@ -59,8 +59,10 @@ test('merge gate requires all named groups; failure, cancellation, skip and miss
 });
 
 test('full CI runs on PRs and protected pushes; feature push has only a distinct quick gate', () => {
-  const full = fs.readFileSync(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8');
-  const quick = fs.readFileSync(path.join(ROOT, '.github/workflows/quick.yml'), 'utf8');
+  // Git may check YAML out with CRLF on Windows; compare the same workflow
+  // content without making its platform-specific line endings part of the gate.
+  const full = fs.readFileSync(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8').replace(/\r\n/g, '\n');
+  const quick = fs.readFileSync(path.join(ROOT, '.github/workflows/quick.yml'), 'utf8').replace(/\r\n/g, '\n');
   assert.match(full, /push:\n    branches: \[main, codex\/release-canranstudio\]/);
   assert.match(full, /\n  pull_request:\n/);
   assert.match(full, /\n  workflow_dispatch:\n/);

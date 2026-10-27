@@ -1,0 +1,422 @@
+{
+  "seasons": {
+    "file": "modules-v7/seasons-market-v2.webp",
+    "png": "modules-v7/seasons-market-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit49-50",
+      "unit51-52",
+      "unit53-54"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "四季市集",
+    "description": "白墙蓝窗之间的连续石路，连接市集、四季庭院与天气花园"
+  },
+  "everyday": {
+    "file": "modules-v7/everyday-evening-v2.webp",
+    "png": "modules-v7/everyday-evening-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit55-56",
+      "unit57-58",
+      "unit59-60"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "灯火邻里",
+    "description": "暖灯下的石路连接家庭阅读角、书架与文具店"
+  },
+  "caring": {
+    "file": "modules-v7/caring-veranda-v2.webp",
+    "png": "modules-v7/caring-veranda-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit61-62",
+      "unit63-64",
+      "unit65-66"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "安心花园",
+    "description": "同层花园铺地连接家庭会客处、休息门廊和家门",
+    "floors": {
+      "unit65-66": [
+        0.28,
+        0.48,
+        0.69,
+        0.61
+      ]
+    }
+  },
+  "memories": {
+    "file": "modules-v7/memories-arcade-v1.webp",
+    "png": "modules-v7/memories-arcade-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit67-68",
+      "unit69-70",
+      "unit71-72"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "街角时光廊",
+    "description": "弧形砖墙与绿条纹遮阳棚串起商店、照片橱窗与会客门廊"
+  },
+  "appointments": {
+    "file": "modules-v7/appointments-street-v2.webp",
+    "png": "modules-v7/appointments-street-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit73-74",
+      "unit75-76",
+      "unit77-78"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "车站服务街",
+    "description": "站台雨棚、鞋店橱窗与诊所门口沿着连续铺地展开",
+    "floors": {
+      "unit73-74": [
+        0.28,
+        0.53,
+        0.68,
+        0.61
+      ],
+      "unit75-76": [
+        0.28,
+        0.51,
+        0.73,
+        0.61
+      ],
+      "unit77-78": [
+        0.26,
+        0.51,
+        0.73,
+        0.61
+      ]
+    }
+  },
+  "preparations": {
+    "file": "modules-v7/preparations-home-v3.webp",
+    "png": "modules-v7/preparations-home-v3.png",
+    "width": 724,
+    "height": 2171,
+    "ids": [
+      "unit79-80",
+      "unit81-82",
+      "unit83-84"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "出发前的家",
+    "description": "蜂蜜色木地板连接厨房、餐厅侧厅与出发前的家门"
+  },
+  "decisions": {
+    "file": "modules-v7/decisions-block-v1.webp",
+    "png": "modules-v7/decisions-block-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit85-86",
+      "unit87-88",
+      "unit89-90"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "城市工坊街",
+    "description": "电影院、修理工坊与待售住宅旁的连续石街"
+  },
+  "departures": {
+    "file": "modules-v7/departures-promenade-v2.webp",
+    "png": "modules-v7/departures-promenade-v2.png",
+    "width": 724,
+    "height": 2171,
+    "ids": [
+      "unit91-92",
+      "unit93-94",
+      "unit95-96"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "启程长廊",
+    "description": "邻里门廊、弧形候机玻璃与车站雨棚旁的同层步道"
+  },
+  "messages": {
+    "file": "modules-v7/messages-courtyard-v1.webp",
+    "png": "modules-v7/messages-courtyard-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit97-98",
+      "unit99-100",
+      "unit101-102"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "书信问候庭",
+    "description": "寄存小屋、家庭走廊与阅读门廊之间的问候庭院"
+  },
+  "learning": {
+    "file": "modules-v7/learning-atrium-v1.webp",
+    "png": "modules-v7/learning-atrium-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit103-104",
+      "unit105-106",
+      "unit107-108"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "学堂与书香街",
+    "description": "天窗与柱廊下的连续地面连接学堂、办公室和布料店"
+  },
+  "choices": {
+    "file": "modules-v7/choices-transit-v3.webp",
+    "png": "modules-v7/choices-transit-v3.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit109-110",
+      "unit111-112",
+      "unit113-114"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "咖啡与出行街",
+    "description": "咖啡街、商店与公交停靠处之间的同层步行街",
+    "floors": {
+      "unit109-110": [
+        0.24,
+        0.5,
+        0.76,
+        0.61
+      ]
+    }
+  },
+  "surprises": {
+    "file": "modules-v7/surprises-house-v2.webp",
+    "png": "modules-v7/surprises-house-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit115-116",
+      "unit117-118",
+      "unit119-120"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "家园小故事",
+    "description": "花园、早餐侧厅与夜窗书房沿着同层家庭走廊展开"
+  },
+  "stories": {
+    "file": "modules-v7/stories-rain-gallery-v1.webp",
+    "png": "modules-v7/stories-rain-gallery-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit121-122",
+      "unit123-124",
+      "unit125-126"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "雨窗旧书廊",
+    "description": "雨窗外的柔光照进旧书店、照片廊与茶室"
+  },
+  "possibilities": {
+    "file": "modules-v7/possibilities-plane-trees-v1.webp",
+    "png": "modules-v7/possibilities-plane-trees-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit127-128",
+      "unit129-130",
+      "unit131-132"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "梧桐漫想街",
+    "description": "梧桐下的石路连接咖啡馆、路边停车区和家庭门廊"
+  },
+  "news": {
+    "file": "modules-v7/news-terraces-v1.webp",
+    "png": "modules-v7/news-terraces-v1.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit133-134",
+      "unit135-136",
+      "unit137-138"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "城市会客露台",
+    "description": "城镇露台连接读报处、旅店接待口和家庭会客角"
+  },
+  "woodland": {
+    "file": "modules-v7/woodland-station-v2.webp",
+    "png": "modules-v7/woodland-station-v2.png",
+    "width": 724,
+    "height": 2172,
+    "ids": [
+      "unit139-140",
+      "unit141-142",
+      "unit143-144"
+    ],
+    "floor": [
+      0.24,
+      0.46,
+      0.76,
+      0.61
+    ],
+    "patchRadii": [
+      0.28,
+      0.075
+    ],
+    "alignSilhouette": true,
+    "theme": "林间车站",
+    "description": "办公室与户外线路旁的步道穿过车站窗口，通向林间空地"
+  }
+}
