@@ -34,7 +34,15 @@ export function Landmark({course,character,position,src,selected,tap,celebration
     ],{duration:1000,easing:'ease-in-out'});
     return()=>animation.cancel();
   },[celebration,reduced,course.id]);
-  function release(cancel=false){if(pointer.current)bounce.current?.cancel();setPressed(false);if(cancel)suppress.current=true;pointer.current=null;}
+  function release(cancel=false){
+    if(pointer.current){
+      bounce.current?.cancel();
+      // Touch sends pointerleave after a normal pointerup, before click.
+      // Only an unfinished press can be cancelled by leaving the target.
+      if(cancel)suppress.current=true;
+    }
+    setPressed(false);pointer.current=null;
+  }
   function press(event){
     if(event.button!==0||event.isPrimary===false)return;
     suppress.current=false;pointer.current={id:event.pointerId,x:event.clientX,y:event.clientY};bounce.current?.cancel();setPressed(true);

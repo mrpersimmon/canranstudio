@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-28",
+  "baseRelease": "e796c723bda826cd729031eb2512238247ea6b80",
+  "scope": "two homepage runtime files; user explicitly requested affected checks only, PR merge and production release; album redesign deferred",
+  "freshBrowser": [
+    {
+      "file": "chromium-impact.json",
+      "sha256": "0b5ba794d28192ad52e27a2197bc84425f479f568ed935e297736a80640c76d5",
+      "stats": {
+        "startTime": "2026-10-28T11:03:06.387Z",
+        "duration": 56889.459,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "webkit-impact-recheck.json",
+      "sha256": "ce2ea233988733c8fe3f74d521ea981162b483cedd645ab539ff82becc1340bf",
+      "stats": {
+        "startTime": "2026-10-28T11:06:23.245Z",
+        "duration": 33942.735,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "reusedBrowser": [
+    {
+      "file": "chromium-prefix.json",
+      "browser": "chromium",
+      "basePath": "/lesson/",
+      "sha256": "124bb7672c4b5248b840dbdb8a04ea77679e4284c355048adfe300bfb13f8207",
+      "stats": {
+        "startTime": "2026-10-28T05:45:53.614Z",
+        "duration": 21996.211000000003,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "webkit-prefix.json",
+      "browser": "webkit",
+      "basePath": "/lesson/",
+      "sha256": "5ff5e098f34cbdf6934767d0b4f8448d97bd53a06b9b86a9d82ee78275d377dc",
+      "stats": {
+        "startTime": "2026-10-28T05:45:53.625Z",
+        "duration": 41955.094,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "firstWebKitAttempt": {
+    "file": "webkit-impact.json",
+    "sha256": "f8b85e1b0edfa354fd2930d9b50e6ce50a4987532eff050143196b36b43e30d3",
+    "stats": {
+      "startTime": "2026-10-28T11:03:06.387Z",
+      "duration": 38086.469000000005,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    }
+  },
+  "firstWebKitFailure": "Reduced-motion immediate animation-count assertion saw 1; unchanged file rerun independently passed all 4; original failure retained",
+  "unitChecks": 20,
+  "workflowChecks": 26,
+  "sources": {
+    "course-journey/Landmark.jsx": {
+      "workingTreeSha256": "9e665751d11b784854b585a05a0336d3a0d8ff4c7466bc7e975365a9faf5e2e4",
+      "gitBlobSha256": "9e665751d11b784854b585a05a0336d3a0d8ff4c7466bc7e975365a9faf5e2e4"
+    },
+    "course-journey/styles.css": {
+      "workingTreeSha256": "d857961e60c58e40476fb19b2bffa1bc5ee385f3b47f311f7658665910ca8dc1",
+      "gitBlobSha256": "d857961e60c58e40476fb19b2bffa1bc5ee385f3b47f311f7658665910ca8dc1"
+    },
+    "tests/login/journey-touch.spec.js": {
+      "workingTreeSha256": "b30815f63f98c142f8ea5e7283b8ea4e5e978f3bba12ac4ad2b8760280c5f01a",
+      "gitBlobSha256": "b30815f63f98c142f8ea5e7283b8ea4e5e978f3bba12ac4ad2b8760280c5f01a"
+    },
+    "playwright.recovery.config.js": {
+      "workingTreeSha256": "c9c459e37a50d57813e786f5225f818beeaf312c8bcabf877fd1e22d832114ed",
+      "gitBlobSha256": "bb2c60053476c5f367599536b5a71842010d88e7ce456b67bc5a6ed2db471c4f"
+    }
+  },
+  "gitLineEndingNormalizationOnly": true,
+  "fullCI": "not run by user request; never represented as passing",
+  "physicalAndroidWeChatQuark": "not verified in this run"
+}

@@ -1,0 +1,115 @@
+{
+  "date": "2026-10-28",
+  "regressions": [
+    "J45",
+    "J46",
+    "J47"
+  ],
+  "baseRelease": "e796c723bda826cd729031eb2512238247ea6b80",
+  "sources": {
+    "course-journey/Landmark.jsx": "9e665751d11b784854b585a05a0336d3a0d8ff4c7466bc7e975365a9faf5e2e4",
+    "course-journey/styles.css": "d857961e60c58e40476fb19b2bffa1bc5ee385f3b47f311f7658665910ca8dc1",
+    "tests/login/journey-touch.spec.js": "b30815f63f98c142f8ea5e7283b8ea4e5e978f3bba12ac4ad2b8760280c5f01a",
+    "playwright.recovery.config.js": "c9c459e37a50d57813e786f5225f818beeaf312c8bcabf877fd1e22d832114ed"
+  },
+  "runs": [
+    {
+      "file": "chromium-root-verified.json",
+      "browser": "chromium",
+      "basePath": "/",
+      "sha256": "8ff7d81c023cd80ad5682ef8225e0c3905e172302e93c5ed029af469421b0eeb",
+      "stats": {
+        "startTime": "2026-10-28T05:55:06.013Z",
+        "duration": 16374.676,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "chromium-prefix.json",
+      "browser": "chromium",
+      "basePath": "/lesson/",
+      "sha256": "124bb7672c4b5248b840dbdb8a04ea77679e4284c355048adfe300bfb13f8207",
+      "stats": {
+        "startTime": "2026-10-28T05:45:53.614Z",
+        "duration": 21996.211000000003,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "webkit-root-final.json",
+      "browser": "webkit",
+      "basePath": "/",
+      "sha256": "65021ea33322e66975778795667b86fa33aae23101522aaa8f648d3d95507aeb",
+      "stats": {
+        "startTime": "2026-10-28T05:41:24.103Z",
+        "duration": 33413.354999999996,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "webkit-prefix.json",
+      "browser": "webkit",
+      "basePath": "/lesson/",
+      "sha256": "5ff5e098f34cbdf6934767d0b4f8448d97bd53a06b9b86a9d82ee78275d377dc",
+      "stats": {
+        "startTime": "2026-10-28T05:45:53.625Z",
+        "duration": 41955.094,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "file": "feedback.json",
+      "browser": "chromium",
+      "basePath": "/",
+      "sha256": "7d9fea6fb95255dc50075db127415bf5e931a1e5b75d05b8b2438ad7053f268b",
+      "stats": {
+        "startTime": "2026-10-28T05:45:53.614Z",
+        "duration": 48262.037,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "redBeforeFix": {
+    "tests": 2,
+    "failures": [
+      "native touch left selected course at unit1-2",
+      "native highlight remained rgba(51, 181, 229, 0.4)"
+    ]
+  },
+  "additionalChecks": {
+    "nodeUnit": 20,
+    "workflow": 26,
+    "courseBuild": 72,
+    "ciInventoryCourses": 2985,
+    "ciInventoryAccounts": 719,
+    "inventoryOnly": true,
+    "sitePhoneChapters": 24
+  },
+  "preview": {
+    "url": "https://canran-journey-phone-20261028.wiry-crow-9013.chatgpt.site",
+    "version": 1,
+    "sourceCommit": "6f9e56211edb056ab7f5278844ac1a9148debff5",
+    "private": true
+  },
+  "limits": [
+    "WebKit desktop port lacks tap-highlight-color support; Chromium checks its actual computed transparency",
+    "native pan and post-cancel tap checked separately from inertia stopping gestures",
+    "not physical Android WeChat or Quark",
+    "not full remote CI or production deployment"
+  ]
+}
