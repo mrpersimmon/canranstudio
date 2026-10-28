@@ -74,7 +74,7 @@
    Lesson text on cream; retain movement and shadow feedback without that flash. */
 .journey-home .journey-node{position:absolute;display:flex;gap:8px;align-items:center;min-height:72px;max-width:42%;padding:10px 20px;background:#fffcf1f5;border:1px solid #f4e6cc;border-radius:22px;box-shadow:0 4px 12px #684c2620;text-align:left;transition:box-shadow 180ms,transform 180ms;color:#513422}
 .journey-node:hover{box-shadow:0 6px 18px #684c2638;transform:translateY(-2px)}
-.journey-home .journey-node{z-index:4}
+.journey-home .journey-node{z-index:4;-webkit-tap-highlight-color:transparent}
 .journey-node.is-selected{color:#fff;background:#246b45;border-color:#195636;box-shadow:0 0 0 3px #fffbed,0 0 0 5px #246b45,0 7px 18px #174c3840}
 .journey-node-heading{display:flex;align-items:center;gap:5px;white-space:nowrap}
 .journey-node .journey-node-dot{position:static;transform:none;flex:none;display:inline-flex;align-items:center;justify-content:center;color:#628356;line-height:1}
