@@ -1,4 +1,5 @@
 'use strict';
+const {chooseJourneyChapter}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {viewports}=require('../support/journey-viewports');
@@ -31,7 +32,7 @@ test('六课精确搜索、跨段定位、人物选择、实际进入与刷新�
    const result=p.locator('.journey-course:visible');await expect(result).toHaveCount(1);
    const id='unit'+n+'-'+(n+1);await expect(result).toHaveAttribute('data-unit',id);
    await result.locator('.journey-locate').click();
-   await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue(n<25?'kindness':'home');
+   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',n<25?'kindness':'home');
    await waitForModulesReady(p,n<25?ids.slice(0,3):ids.slice(3));
    await p.locator('[data-landmark-select="'+id+'"]').click();
    await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
@@ -39,7 +40,7 @@ test('六课精确搜索、跨段定位、人物选择、实际进入与刷新�
    await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
    await p.getByRole('link',{name:'我的课程',exact:true}).click();
   }
-  await p.reload();await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('home');
+  await p.reload();await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','home');
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit29-30');
   expect(results(await(await p.request.get(base+'api/me')).json())).toEqual(results(before));
  }finally{await student.context.close();}
@@ -52,7 +53,7 @@ for(const [chapter,courseIds] of chapters)test(chapter+' 三课在完整尺寸�
  try{
   const before=await(await p.request.get(base+'api/me')).json();
   await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption(chapter);
+  await chooseJourneyChapter(p,chapter);
   let stars=0;
   // UI geometry samples only: real authorization remains intact and no grade
   // endpoint is written. They do not claim actual learning or award issuance.
@@ -85,9 +86,9 @@ test('跨两段稀疏授权不泄露课程，缺图可切段和搜索，重试�
   await p.reload();await expect(p.locator('[data-module-course="unit23-24"]')).toHaveAttribute('data-art-state','error');expect(hits).toBeGreaterThan(0);
   await p.getByLabel('查找 Lesson',{exact:true}).fill('30');
   const result=p.locator('.journey-course:visible');await expect(result).toHaveAttribute('data-unit','unit29-30');await result.locator('.journey-locate').click();
-  await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('home');await waitForModulesReady(p,['unit29-30']);
+  await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','home');await waitForModulesReady(p,['unit29-30']);
   await expect(p.locator('[data-map-course]')).toHaveCount(1);await expect(p.locator('.journey-map-message')).toHaveCount(0);
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('kindness');await expect(p.locator('[data-module-course="unit23-24"]')).toHaveAttribute('data-art-state','error');
+  await chooseJourneyChapter(p,'kindness');await expect(p.locator('[data-module-course="unit23-24"]')).toHaveAttribute('data-art-state','error');
   await p.unroute('**/assets/course-journey/shelf-glasses-pair-v1.webp*');await p.getByRole('button',{name:'重新加载 Lesson 23–24 场景',exact:true}).click();await waitForModulesReady(p,['unit23-24']);
   expect(results(await(await p.request.get(base+'api/me')).json())).toEqual(results(before));
  }finally{await student.context.close();}
@@ -102,7 +103,7 @@ test('新六课人物有点击回弹，金章可重看，减少动态立即停�
   await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars:5}))}});});
   await p.reload();await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
   for(const [chapter,courseIds] of chapters){
-   await p.getByLabel('旅程地图范围',{exact:true}).selectOption(chapter);await waitForModulesReady(p,courseIds);await expect(p.locator('[data-completion-medal]')).toHaveCount(3);
+   await chooseJourneyChapter(p,chapter);await waitForModulesReady(p,courseIds);await expect(p.locator('[data-completion-medal]')).toHaveCount(3);
    for(const id of courseIds){
     const hit=p.locator('[data-landmark-select="'+id+'"]'),motion=hit.locator('.journey-story-motion');await hit.click();
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);

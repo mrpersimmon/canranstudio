@@ -5,6 +5,7 @@ const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const { finishZone, readStory } = require('../support/unit1-2-award-flow');
 const tasks = require('../support/units1-30-tasks');
+const {inspectGifEdges}=require('../support/gif-edges');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
 test.use({ reducedMotion: 'reduce' });
 
@@ -45,6 +46,7 @@ async function saveMotion(page, button, fileName, full) {
   expect(info.pages).toBe(60); expect(info.loop).toBe(0);
   expect(info.delay.every(delay => delay === 80)).toBe(true);
   expect((await fs.stat(path)).size).toBeLessThan(6 * 1024 * 1024);
+  await inspectGifEdges(path,{full});
   const crop = (pageIndex, region) => sharp(path, { page: pageIndex }).extract(region).raw().toBuffer();
   const stars = { left: 40, top: 330, width: 400, height: 100 };
   expect((await crop(0, stars)).equals(await crop(15, stars)), '导出的星星在不同帧中必须变化').toBe(false);
@@ -96,7 +98,7 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
     await lights(p.locator('.certificate'), 5);
     await p.getByRole('button', { name: '我的', exact: true }).click();
-    const turnSwitch = p.getByRole('switch', { name: '界面动效' });
+    const turnSwitch = p.getByRole('switch', { name: '纪念册动效' });
     if (await turnSwitch.getAttribute('aria-checked') === 'true') await turnSwitch.click();
     await p.getByRole('button', { name: '关闭我的', exact: true }).click();
     await lights(p.locator('.certificate'), 5);

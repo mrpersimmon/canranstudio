@@ -5,10 +5,10 @@
   const e = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const channel = typeof BroadcastChannel === 'function' ? new BroadcastChannel('canran-lesson-identity') : null;
   let state, currentClass, selectedStudents = new Set();
-  let directoryFontController, resumeDirectoryFonts, courseCacheScript, directoryStyles;
+  let directoryFontController, courseCacheScript, directoryStyles;
+  let sessionTurn=0,legacyNotice='';
   const stopDirectoryFonts = () => directoryFontController?.abort();
   window.addEventListener('pagehide', stopDirectoryFonts);
-  window.addEventListener('pageshow', event => { if(event.persisted)resumeDirectoryFonts?.(); });
   document.addEventListener('click', event => {
     // Cancel before a same-tab course navigation can freeze this directory.
     // Keep the link's native timing, modifiers and new-tab behavior intact.
@@ -43,10 +43,24 @@
     return directoryStyles;
   }
   let clearHeader, clearHome;
-  function studentHeader(who=null){
+  function studentHeader(who=null,onAccount=null){
     clearHeader?.();
-    clearHeader=window.CanranStudentShell.mount(document.getElementById('siteHeader'),{base:'/lesson/',student:who?.student,current:'courses',preview:!!who?.preview});
+    clearHeader=window.CanranStudentShell.mount(document.getElementById('siteHeader'),{base:'/lesson/',student:who?.student,current:'courses',preview:!!who?.preview,onAccount});
     document.body.classList.toggle('student-portal',!!who&&!who.preview);
+  }
+  function sessionScreen(kind,message='',retry=()=>start()){
+    stopDirectoryFonts();clearHome?.();clearHome=null;studentHeader();
+    app.dataset.sessionState=kind;app.setAttribute('aria-busy',String(kind==='checking'));
+    app.style.visibility='';document.getElementById('siteHeader').style.visibility='';
+    app.innerHTML=kind==='checking'?'<section class="portal-loading" role="status" aria-live="polite"><span class="portal-spinner" aria-hidden="true"></span><h1>正在打开工作室…</h1><p>请稍候，或<a href="">重新加载</a>。</p></section>':'<section class="portal-loading"><h1>暂时无法连接工作室</h1><p role="status">'+e(message||'请检查网络后重试，学习成果会保留。')+'</p><button type="button" id="retrySession">重试</button></section>';
+    document.getElementById('retrySession')?.addEventListener('click',retry);
+  }
+  function authenticated(){app.dataset.sessionState='authenticated';app.setAttribute('aria-busy','false');app.style.visibility='';document.getElementById('siteHeader').style.visibility='';}
+  function sessionFailure(error,admin=false){
+    // A student session is not a teacher session: admin/state returns 403 for
+    // that role boundary, while the student's own 403 is never a logout.
+    if(error.status===401||(admin&&error.status===403))login(admin,admin?'':legacyNotice);
+    else sessionScreen('error','暂时无法连接，请稍后重试。学习成果会保留。');
   }
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
@@ -67,6 +81,7 @@
   async function attempt(action) { try { await action(); } catch(error) { status(error.message || '暂时无法连接，请重试'); } }
   const logo='<img class="hero-logo" src="/lesson/assets/brand/starflower.png" alt="">';
   function login(admin = false, message = '') {
+    app.dataset.sessionState='anonymous';app.setAttribute('aria-busy','false');app.style.visibility='';document.getElementById('siteHeader').style.visibility='';
     clearHome?.(); clearHome=null;
     studentHeader();
     app.innerHTML=`<section class="login panel">${logo}<h1>${admin?'班级管理':'开始你的小冒险'}</h1><form id="loginForm" method="post">${admin?'<label for="username">管理员账号或老师工号</label><input id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required><label for="password">管理员密码 / 老师密码</label><input id="password" name="password" type="password" autocomplete="current-password" required>':'<label for="studentNumber">学号</label><input id="studentNumber" name="studentNumber" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="例如 d00000001" maxlength="32" required><label for="password">密码</label><input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required>'}<button class="primary">${admin?'登录管理页':'进入我的课程'}</button><p role="status" aria-live="polite">${e(message)}</p></form>${admin?'<a href="/lesson/">返回学生入口</a>':'<button class="compact" id="forgot">忘记学号或密码</button><p class="muted">第一次登录，使用老师发放的一次性初始密码。</p><a class="muted" href="/lesson/admin/">老师管理入口</a>'}</section>`;
@@ -110,6 +125,7 @@
     };
   }
   function passwordForm(who, required) {
+    authenticated();
     clearHome?.(); clearHome=null;
     studentHeader(who);
     app.innerHTML=`<section class="login panel">${logo}<h1>${required?'设置你的新密码':'修改密码'}</h1><p>${e(who.student.name)} · <span class="student-number">${e(who.student.studentNumber)}</span></p><p class="muted">${required?'初始密码已使用，请在 15 分钟内设置新密码。关闭页面后可在原浏览器继续；超时或切换学生后，请联系老师重置。':''}使用 8–64 位字符，包含字母和数字。</p><form id="passwordForm" method="post">${required?'':'<label for="currentPassword">当前密码</label><input id="currentPassword" name="currentPassword" type="password" autocomplete="current-password" maxlength="128" required>'}<label for="newPassword">新密码</label><input id="newPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><label for="confirmPassword">再输一次新密码</label><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="64" required><button class="primary">${required?'保存新密码，开始学习':'保存新密码'}</button><p role="status" aria-live="polite"></p></form><button id="cancelPassword" class="compact">${required?'切换学生':'返回课程'}</button></section>`;
@@ -174,6 +190,7 @@
   function prepareDirectory(hasCourses, waiting) {
     stopDirectoryFonts();
     const note=app.querySelector('[data-home-status]')||app.querySelector('p[role="status"]'),retry=document.createElement('button');
+    if(!note)return;
     const pending=waiting?'还有学习成果保存在本机，联网后将继续同步。':'';
     retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(retry);
     delete document.documentElement.dataset.sharedFontsReady;
@@ -197,9 +214,6 @@
     };
     const startPreparation=()=>{preparation=prepare();return preparation;};
     retry.onclick=startPreparation;
-    resumeDirectoryFonts=()=>{
-      if(note.isConnected)void Promise.resolve(preparation).then(()=>{if(note.isConnected)return startPreparation();});
-    };
     // A directory is a choice of courses, not a package containing every
     // course. Background preparation must never remove its working links.
     for(const card of app.querySelectorAll('.course')){
@@ -216,34 +230,35 @@
     void startPreparation();
   }
   async function home() {
-    stopDirectoryFonts();
-    let who;try{who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));}catch(error){return login(false,error.status===401?'':error.message);}
-    if(who.mustChangePassword)return passwordForm(who,true);
-    if(['/lesson/awards','/lesson/awards/'].includes(location.pathname)||(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/'))){location.reload();return;}
-    if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
-    const waiting=who.preview?0:await syncPending(who.student.id,who.systemUpgrade);
-    if(!who.preview)who=await api('me');
-    studentHeader(who);
-    if(!who.preview&&new URLSearchParams(location.search).get('account')==='password'){
-      const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);passwordForm(who,false);return;
-    }
-    clearHome?.(); clearHome=null;
-    // Mount usable navigation first. Font bytes prepare in the background.
-    if(!window.CanranCourseJourney){app.innerHTML='<section class="login panel"><h1>画面还没准备好</h1><button id="retry">再试一次</button></section>';document.getElementById('retry').onclick=home;return;}
-    app.innerHTML='';
-    const openLegacy=!who.preview&&new URLSearchParams(location.search).get('account')==='history';
-    if(openLegacy){const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);}
-    clearHome=window.CanranCourseJourney.mount(app,{who,base:'/lesson/',preview,waiting,onRefresh:home,openLegacy});
-    const list=document.getElementById('legacy');let found=false;
-    if(list){
-    for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!/^canran:(?:lesson:)?(?:unit\d+-\d+:learning|l\d+:progress|soundmark:progress)/.test(key))continue;try{const value=JSON.parse(localStorage.getItem(key));const item=document.createElement('li');const unit=key.match(/unit\d+-\d+|l\d+/)?.[0];item.textContent=unit+' · '+(value.activity?.unitCompleted?Object.keys(value.activity.unitCompleted).length+' 项活动完成':Object.values(value.ratings||{}).reduce((sum,n)=>sum+(Number(n)||0),0)+' 颗星');list.append(item);found=true;}catch{}}
-    if(!found)list.textContent='这台设备没有旧记录。';
-    }
-    window.CanranSystemUpgrade?.notice(who,app);
-    prepareDirectory(who.courses.length>0,waiting);
+    const turn=++sessionTurn;sessionScreen('checking');
+    try{
+      let who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));
+      if(turn!==sessionTurn)return;
+      if(who.mustChangePassword)return passwordForm(who,true);
+      if(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/')){location.reload();return;}
+      if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
+      const waiting=who.preview?0:await syncPending(who.student.id,who.systemUpgrade);
+      if(turn!==sessionTurn)return;
+      if(!who.preview)who=await api('me');
+      if(turn!==sessionTurn)return;
+      const account=new URLSearchParams(location.search).get('account');
+      if(!who.preview&&account==='password'){
+        const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);passwordForm(who,false);return;
+      }
+      if(!window.CanranCourseJourney){sessionScreen('error','画面暂时没有准备好，请重新加载页面。',()=>location.reload());return;}
+      const openLegacy=!who.preview&&account==='history',openProfile=!who.preview&&account==='profile';
+      if(openLegacy||openProfile){const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);}
+      studentHeader(who,()=>window.dispatchEvent(new Event('canran:open-account')));
+      app.innerHTML='';
+      const resolveWho=async()=>{let next=await api('me');if(!next.mustChangePassword){const remaining=await syncPending(next.student.id,next.systemUpgrade);next={...await api('me'),directoryWaiting:remaining};}return next;};
+      const onPageActive=(page,next)=>{if(page==='courses')prepareDirectory(next.courses.length>0,next.directoryWaiting??waiting);else stopDirectoryFonts();};
+      clearHome=window.CanranCourseJourney.mount(app,{who,base:'/lesson/',preview,waiting,onRefresh:home,resolveWho,onPageActive,onSessionError:error=>sessionFailure(error,false),openLegacy,openProfile});
+      authenticated();window.CanranSystemUpgrade?.notice(who,app);
+      if(who.preview)prepareDirectory(who.courses.length>0,waiting);
+    }catch(error){if(turn===sessionTurn)sessionFailure(error,false);}
   }
-  async function loadAdmin(selected=currentClass) {
-    state=await api('admin/state');currentClass=selected==='all'||state.classes.some(c=>c.id===selected)?selected:undefined;
+  async function loadAdmin(selected=currentClass,guard=()=>true) {
+    const next=await api('admin/state');if(!guard())return;state=next;authenticated();currentClass=selected==='all'||state.classes.some(c=>c.id===selected)?selected:undefined;
     if(state.identity?.mustChangePassword){window.CanranAdminTeachers.password(teacherConfig(),state.identity,true);return;}
     if(location.hash.startsWith('#learning'))await openLearning();else renderAdmin();
   }
@@ -411,11 +426,15 @@
     document.getElementById('back').onclick=()=>attempt(()=>loadAdmin());
   }
   async function start(){
-    if(adminMode){try{await loadAdmin();}catch(error){login(true,error.status===401?'':error.message);}return;}
+    if(adminMode){const turn=++sessionTurn;state=null;sessionScreen('checking');try{await loadAdmin(currentClass,()=>turn===sessionTurn);}catch(error){if(turn===sessionTurn)sessionFailure(error,true);}return;}
     const card=new URLSearchParams(location.hash.slice(1)).get('card');
-    if(card){history.replaceState(null,'',location.pathname+location.search);login(false,'已改为学号和密码登录，请向老师领取账号。旧学习码不再使用。');return;}
+    if(card){history.replaceState(null,'',location.pathname+location.search);legacyNotice='已改为学号和密码登录，请向老师领取账号。旧学习码不再使用。';}
     await home();
   }
-  channel?.addEventListener('message',()=>{if(!adminMode)location.reload();});
-  start().catch(error=>login(adminMode,error.message));
+  // A cached personal page is never an identity authority. Recheck on return
+  // without exposing the login form before the server has answered.
+  window.addEventListener('pagehide',()=>{sessionTurn++;app.style.visibility='hidden';document.getElementById('siteHeader').style.visibility='hidden';});
+  window.addEventListener('pageshow',event=>{if(event.persisted)void start();});
+  channel?.addEventListener('message',()=>{if(!adminMode){sessionTurn++;sessionScreen('checking');location.reload();}});
+  start().catch(error=>sessionFailure(error,adminMode));
 })();

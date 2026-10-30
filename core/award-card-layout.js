@@ -43,15 +43,19 @@
     const { scene, paper, earned, empty } = images;
     const canvas = document.createElement('canvas'); canvas.width = WIDTH; canvas.height = HEIGHT;
     const ctx = canvas.getContext('2d');
-    ctx.beginPath(); ctx.roundRect(8, 8, 1624, 864, 34); ctx.fillStyle = '#fffcf5'; ctx.fill();
+    // The four-pixel outline reaches the canvas edges. Keep the original
+    // 1640x880 content coordinates; only remove the old exterior margin.
+    ctx.beginPath(); ctx.roundRect(2, 2, WIDTH - 4, HEIGHT - 4, 32); ctx.fillStyle = '#fffcf5'; ctx.fill();
     ctx.save(); ctx.clip(); ctx.fillStyle = ctx.createPattern(paper, 'repeat'); ctx.fillRect(0, 0, WIDTH, HEIGHT);
     // Same 45–99% illustration region as the horizontal page card; never crop.
     const scale = Math.min(WIDTH * .54 / scene.naturalWidth, HEIGHT * .88 / scene.naturalHeight);
     ctx.drawImage(scene, WIDTH * .99 - scene.naturalWidth * scale, HEIGHT * .96 - scene.naturalHeight * scale, scene.naturalWidth * scale, scene.naturalHeight * scale);
     ctx.restore(); ctx.strokeStyle = '#4a3226'; ctx.lineWidth = 4; ctx.stroke();
     if (stars === 5) {
-      ctx.beginPath(); ctx.roundRect(15, 15, 1610, 850, 29); ctx.strokeStyle = '#f4bd55'; ctx.lineWidth = 10; ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(23, 23, 1594, 834, 23); ctx.strokeStyle = '#ac741e'; ctx.lineWidth = 1.5; ctx.stroke();
+      // Concentric frame: dark outline 0–4, gold 4–15, inner line 15–16.5.
+      // There is no extra paper-colored strip outside or between these bands.
+      ctx.beginPath(); ctx.roundRect(9.5, 9.5, 1621, 861, 24.5); ctx.strokeStyle = '#f4bd55'; ctx.lineWidth = 11; ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(15.75, 15.75, 1608.5, 848.5, 18.25); ctx.strokeStyle = '#ac741e'; ctx.lineWidth = 1.5; ctx.stroke();
     }
     function text(value, y, size, ink, family = faces.roundFont, maxWidth = WIDTH * .37, weight = 400) {
       ctx.textAlign = 'left'; ctx.textBaseline = 'middle';

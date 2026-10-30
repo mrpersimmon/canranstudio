@@ -203,7 +203,7 @@ test('账号改变时正在展示的奖励立即关闭，不遮住身份核验',
   await adminLogin(page,base);const account=await createStudent(page,'奖励隐私验收班','小雨',[/Lesson 5–6/]);
   const student=await studentLogin(browser,account,base),p=student.page;
   await tasks.activity(p,'5-6','listen',options);const reveal=p.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal).toBeVisible();
-  const switcher=await student.context.newPage();await switcher.goto(base);await switcher.locator('.student-account > summary').click();await switcher.getByRole('button',{name:'退出登录',exact:true}).click();
+  const switcher=await student.context.newPage();await switcher.goto(base);await switcher.getByRole('button',{name:'我的',exact:true}).click();await switcher.getByRole('button',{name:'退出登录',exact:true}).click();
   await expect(reveal).not.toBeVisible();await expect(p.getByRole('alertdialog',{name:'课程访问'})).toBeVisible();
   await student.context.close();
 });

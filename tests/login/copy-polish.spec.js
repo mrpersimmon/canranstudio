@@ -36,7 +36,7 @@ test('账号课程与纪念册文案统一，短记录同步、目录状态和�
     await expect(directory.getByText('手提包的故事', { exact: true })).toHaveCount(0);
     await directory.getByRole('button',{name:'关闭搜索纪念卡',exact:true}).click();
     await p.getByRole('button',{name:'我的',exact:true}).click();
-    const motion = p.getByRole('switch', { name: '界面动效', exact: true });
+    const motion = p.getByRole('switch', { name: '纪念册动效', exact: true });
     const on = await motion.getAttribute('aria-checked') === 'true';
     await expect(motion).toHaveText(on ? '已开启' : '已关闭');
     await motion.click(); await expect(motion).toHaveText(on ? '已关闭' : '已开启');

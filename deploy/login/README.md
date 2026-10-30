@@ -38,6 +38,8 @@ LESSON_BASE_PATH=/ npm run build:login
 
 ## 首次部署或升级
 
+2026-10-30起，课程与纪念册的共享页面框架及账号面板位于`student-ui/`。发布包须一并保留该目录，不能沿用只包含`course-journey/`与`award-book/`的旧白名单。两条主入口使用共享`journey.js`／`journey.css`，纪念册哈希素材和原卡完整字体继续保留。发布验收需覆盖双向软切换、直接纪念册URL、身份失效、手机目录滚动和实际下载GIF的透明轮廓；具体规范见[纪念册统一设计标准](../../docs/award-version/纪念册统一设计标准.md)。
+
 1. 记录并备份当前站点配置、首页发布目录和 `/lesson/` 发布目录；保留旧版本在非公开位置。
 2. 从原首页完整发布包制作迁移产物：`node scripts/migrate-exercise.js <原首页目录> <新的迁移输出目录>`。脚本先核对原发布清单，重写 `/exercise/` 地址，再重算媒体清单、课包、首页及发布清单的校验值。不可禁用完整性校验来解决加载失败。
 3. 上传并核对已提交的账号服务与迁移产物。安装 [systemd 服务](canran-lesson.service)，先在回环地址 `/health` 检查服务，尚不切换公网。

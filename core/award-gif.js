@@ -43,7 +43,7 @@
     const angle = time / (FRAMES * DELAY) * Math.PI * 2;
     const gradient = ctx.createConicGradient(angle, 820, 440);
     for (const [degrees, color] of GOLD) gradient.addColorStop(degrees / 360, color);
-    ctx.save(); ctx.beginPath(); ctx.roundRect(15, 15, 1610, 850, 29);
+    ctx.save(); ctx.beginPath(); ctx.roundRect(9.5, 9.5, 1621, 861, 24.5);
     ctx.strokeStyle = gradient; ctx.lineWidth = 11; ctx.stroke(); ctx.restore();
   }
   async function encode(canvas, { stars, earnedImage, starX = 85, starY = 593, starSize = 101, starStep = 126, signal } = {}) {
@@ -51,8 +51,9 @@
     const output = surface(WIDTH, HEIGHT), ctx = output.getContext('2d', { willReadFrequently: true });
     const mask = surface(starSize, starSize), scale = WIDTH / 1640;
     const frame = time => {
-      // An opaque warm-paper background avoids one-bit alpha edge artifacts.
-      ctx.fillStyle = '#fffdf6'; ctx.fillRect(0, 0, WIDTH, HEIGHT); ctx.drawImage(canvas, 0, 0, WIDTH, HEIGHT);
+      // Preserve the card's actual alpha. An opaque matte here permanently
+      // bakes pale corners/strips into the downloaded file, regardless of CSS.
+      ctx.clearRect(0, 0, WIDTH, HEIGHT); ctx.drawImage(canvas, 0, 0, WIDTH, HEIGHT);
       ctx.save(); ctx.scale(scale, scale);
       for (let i = 0; i < stars; i++) starLight(ctx, earnedImage, mask, { x: starX + i*starStep, y: starY, size: starSize }, i, time);
       if (stars === 5) goldRim(ctx, time);
@@ -64,13 +65,18 @@
     const first = frame(0), palette = codec.quantize(first, 224);
     for (const [, hex] of GOLD) palette.push([1,3,5].map(start => parseInt(hex.slice(start, start+2), 16)));
     palette.push([255,252,232], [255,253,245], [255,234,165]);
-    const transparentIndex = palette.length, gifPalette = [...palette, [0,0,0]];
+    // Index 0 also matches the GIF logical-screen background. Opaque black
+    // and white remain ordinary palette colors; never use color-key removal.
+    const transparentIndex = 0, gifPalette = [[0,0,0], ...palette];
     const gif = codec.GIFEncoder(); let previous, previousSource;
     for (let index = 0; index < FRAMES; index++) {
       signal?.throwIfAborted();
       const rgba = index === 0 ? first : frame(index * DELAY);
       const source = new Uint32Array(rgba.buffer, rgba.byteOffset, rgba.byteLength / 4);
       const pixels = codec.applyPalette(rgba, palette);
+      // GIF has one-bit transparency. Threshold the un-matted source alpha
+      // so antialiased rounded edges cannot acquire a white fringe.
+      for(let i=0;i<pixels.length;i++)pixels[i]=rgba[i*4+3]<128?transparentIndex:pixels[i]+1;
       // The encoder's RGB565 cache uses the first encountered color in each
       // bucket. A moving rim can change that choice for otherwise static text.
       // Keep the prior palette index wherever the actual source pixel is fixed.
@@ -80,7 +86,7 @@
       const delta = pixels.slice();
       if (previous) for (let i = 0; i < delta.length; i++) if (pixels[i] === previous[i]) delta[i] = transparentIndex;
       gif.writeFrame(delta, WIDTH, HEIGHT, { palette: index === 0 ? gifPalette : undefined, delay: DELAY,
-        repeat: 0, dispose: 1, transparent: index > 0, transparentIndex });
+        repeat: 0, dispose: 1, transparent: true, transparentIndex });
       previous = pixels;
       previousSource = source;
       // Encode one frame at a time; neither 60 RGBA frames nor a background

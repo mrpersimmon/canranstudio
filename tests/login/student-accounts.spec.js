@@ -4,13 +4,15 @@ const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentL
 const {openMyAccount}=require('./helpers');
 const { completeActivity } = require('../support/account-course13');
 
-test('脚本不可用时禁用登录提交，不把密码写入地址', async ({ browser }) => {
+test('脚本不可用时不呈现凭据表单，仍可重新加载且不把密码写入地址', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   try {
-    const page = await context.newPage(); await page.goto('/lesson/');
-    await expect(page.getByRole('button', { name: '进入我的课程' })).toBeDisabled();
-    await expect(page.getByLabel('密码', { exact: true })).toBeDisabled();
-    await expect(page.getByText('登录页面尚未准备好，请刷新页面或启用 JavaScript 后重试。')).toBeVisible();
+    const page = await context.newPage(),response=await page.goto('/lesson/');
+    await expect(page.locator('form,input[type=password]')).toHaveCount(0);
+    await expect(page.getByRole('link',{name:'重新加载',exact:true})).toBeVisible();
+    // Execution-disabled Chromium does not expose noscript content as visible
+    // DOM; preserve its real HTML fallback as well as the usable reload link.
+    expect(await response.text()).toContain('<noscript><p>请开启浏览器的 JavaScript 后使用学号和密码进入课程。</p></noscript>');
     expect(new URL(page.url()).search).toBe('');
   } finally { await context.close(); }
 });

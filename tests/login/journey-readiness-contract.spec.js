@@ -7,7 +7,7 @@ const pixel='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.
 // This exercises the test helper against real DOM nodes and decoded images.
 // It does not modify the application, course data, or student results.
 async function fixture(page,courses=ids){
- await page.setContent(`<select aria-label="旅程地图范围"><option value="chapter-a">A</option></select>
+ await page.setContent(`<section class="journey-map" data-chapter="chapter-a"></section>
   <section class="journey-map-scene" data-chapter="chapter-a" data-composition="modules">
   ${courses.length?`<div data-route-world data-world-state="ready"><img data-route-terrain src="${pixel}">
   ${courses.map(id=>`<article data-module-course="${id}" data-art-state="ready"><img data-module-ground src="${pixel}"><img data-story-course src="${pixel}"></article>`).join('')}</div>`:''}</section>`);
@@ -28,7 +28,9 @@ test('就绪快检保留切换、课程顺序、真实解码与空目录的原�
   await fixture(page,expected||ids);
   const probe=observe(page);
   await waitForModulesReady(probe.page,expected);
-  expect({snapshots:probe.reads,waitingLocators:probe.calls.locators},'stable readiness is read once without repeating the waiting sequence').toEqual({snapshots:[true],waitingLocators:0});
+  // The removed chapter select was read through getByLabel. Its replacement
+  // is one locator read of the map identity, not an extra readiness wait.
+  expect({snapshots:probe.reads,locatorCalls:probe.calls.locators},'one chapter read and one readiness snapshot; no waiting sequence').toEqual({snapshots:[true],locatorCalls:1});
  }
  const faults=[
   ['missing scene',()=>document.querySelector('.journey-map-scene').remove()],
@@ -57,7 +59,7 @@ test('就绪快检保留切换、课程顺序、真实解码与空目录的原�
   expect(probe.reads[0],'incomplete DOM must take the original waiting path').toBe(false);
   expect(resolved,'incomplete DOM is not accepted before restoration').toBe(false);
   await fixture(page);await pending;
-  expect(probe.calls.locators,'original waiting checks remain active').toBeGreaterThan(0);
+  expect(probe.calls.locators,'original waiting checks remain active after the chapter read').toBeGreaterThan(1);
   await waitForModulesReady(page,ids);
  });
  for(const ghost of ['<img data-route-terrain>','<div class="journey-world-passage"></div>']){

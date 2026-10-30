@@ -1,4 +1,5 @@
 'use strict';
+const {chooseJourneyChapter}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {viewports}=require('../support/journey-viewports');
@@ -18,7 +19,7 @@ test('第三段三课按精确Lesson搜索、定位和实际进课，刷新恢�
       const result=p.locator('.journey-course:visible');await expect(result).toHaveCount(1);
       await expect(result).toHaveAttribute('data-unit','unit'+(n-1)+'-'+n);
       await result.locator('.journey-locate').click();
-      await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('visits');
+      await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','visits');
       await waitForModulesReady(p,ids);
       await p.locator('[data-landmark-select="unit'+(n-1)+'-'+n+'"]').click();
       await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit'+(n-1)+'-'+n);
@@ -27,7 +28,7 @@ test('第三段三课按精确Lesson搜索、定位和实际进课，刷新恢�
       await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
       await p.getByRole('link',{name:'我的课程',exact:true}).click();
     }
-    await p.reload();await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('visits');
+    await p.reload();await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','visits');
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit17-18');
     const after=await(await p.request.get(base+'api/me')).json();
     expect(after.courses.map(c=>[c.id,c.stars,c.firstFullStarAt])).toEqual(before.courses.map(c=>[c.id,c.stars,c.firstFullStarAt]));
@@ -44,7 +45,7 @@ test('第三段连续长廊在完整矩阵和三种星级下人地绑定、信�
   const bounds={'unit13-14':[.089314,.124402,.927432,.917863],'unit15-16':[.146484,.102539,.904948,.926758],'unit17-18':[.093099,.078125,.923177,.959961]};
   try{
     await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption('visits');
+    await chooseJourneyChapter(p,'visits');
     let stars=0;
     // Geometry-only fixtures do not save grades or replace real earning tests.
     await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars}))}});});
@@ -73,7 +74,7 @@ test('只授权17–18时显示第三段唯一入口，不泄露另两课',async
   try{
     await expect(p.locator('[data-map-course]')).toHaveCount(1);
     await expect(p.locator('[data-map-course]')).toHaveAttribute('data-map-course','unit17-18');
-    await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('visits');
+    await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','visits');
     expect((await p.request.get(base+'unit13-14/')).status()).toBe(403);
   }finally{await student.context.close();}
 });

@@ -7,9 +7,11 @@
   const pending=new Map(),controllers=new Set();
   function pageKind(){
     if(kind!=='portal')return kind;
-    if(document.querySelector('.login-fallback'))return null;
+    if(document.querySelector('.login-fallback,[data-session-state="checking"],[data-session-state="error"]'))return null;
     if(document.querySelector('#loginForm,#passwordForm,#teacherPassword'))return 'login';
     if(location.pathname.startsWith(base+'admin'))return 'admin';
+    const workspace=document.querySelector('[data-student-workspace]');
+    if(workspace)return workspace.dataset.page==='courses'?'home':workspace.dataset.page==='awards'?'album':null;
     return document.querySelector('[data-journey-ready]')?'home':'other';
   }
   function measure(){

@@ -1,0 +1,275 @@
+{
+  "date": "2026-10-30",
+  "state": "local uncommitted fix; production unchanged",
+  "runs": [
+    {
+      "file": "output/gif-edge-chromium-final.json",
+      "sha256": "3a7a92251135b6a73d76a15559fbd77e6f467cf3def28f050b5860221e4b1cf0",
+      "stats": {
+        "startTime": "2026-10-30T11:10:56.859Z",
+        "duration": 22173.969999999998,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "实际下载GIF的60帧均无白边，圆角透明且卡框贴齐画布，保留原卡信息",
+          "results": [
+            "passed"
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "course": "unit1-2",
+          "stars": 1,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 164423,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0
+        },
+        {
+          "course": "unit3-4",
+          "stars": 3,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 221132,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0
+        },
+        {
+          "course": "unit5-6",
+          "stars": 5,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 574420,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0,
+          "rimColors": [
+            22,
+            22,
+            22,
+            22
+          ]
+        },
+        {
+          "course": "unit45-46",
+          "stars": 5,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 574003,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0,
+          "rimColors": [
+            20,
+            19,
+            22,
+            23
+          ]
+        },
+        {
+          "course": "unit143-144",
+          "stars": 5,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 563054,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0,
+          "rimColors": [
+            19,
+            18,
+            18,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "file": "output/gif-edge-webkit.json",
+      "sha256": "510ff345fb678122e0bc438c4f359b563f2c84d1720e9c72cb1a905d203139c4",
+      "stats": {
+        "startTime": "2026-10-30T11:13:25.810Z",
+        "duration": 44035.853,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "实际下载GIF的60帧均无白边，圆角透明且卡框贴齐画布，保留原卡信息",
+          "results": [
+            "passed"
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "course": "unit1-2",
+          "stars": 1,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 162612,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0
+        },
+        {
+          "course": "unit143-144",
+          "stars": 5,
+          "width": 984,
+          "height": 528,
+          "frames": 60,
+          "delay": 80,
+          "bytes": 505083,
+          "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+          "checkedFrames": 60,
+          "whiteBoundaryPixels": 0,
+          "rimColors": [
+            18,
+            17,
+            18,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "file": "output/gif-edge-course-regression.json",
+      "sha256": "2b263f2654aca97a32bc8311ceb0eb1d999adb70f5f9225a5a4109168035a69e",
+      "stats": {
+        "startTime": "2026-10-30T11:13:25.855Z",
+        "duration": 48445.808000000005,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "title": "课程底部、纪念册和保存动图保持部分星与满星光效，刷新和导出不改变获星记录",
+          "results": [
+            "passed"
+          ]
+        }
+      ],
+      "receipts": []
+    }
+  ],
+  "automatedFiles": 10,
+  "automatedDecodedFrames": 600,
+  "workflowChecks": 1,
+  "actualDownload": {
+    "beforeSha256": "05a0665cce4583067edce2c6d9942c044d142c60d07e2e8c7d6e876d3f326950",
+    "afterSha256": "098ffc3cc24a6a503d3a7371aafab28e3b185a29e3731896cb0a18d8b48a790b",
+    "before": {
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "metadataAlpha": true,
+      "pixels": {
+        "corner": [
+          255,
+          253,
+          245,
+          255
+        ],
+        "top": [
+          255,
+          253,
+          245,
+          255
+        ],
+        "top4": [
+          74,
+          50,
+          38,
+          255
+        ],
+        "top5": [
+          114,
+          82,
+          53,
+          255
+        ],
+        "left": [
+          255,
+          253,
+          245,
+          255
+        ],
+        "left4": [
+          74,
+          50,
+          38,
+          255
+        ]
+      }
+    },
+    "after": {
+      "width": 984,
+      "height": 528,
+      "frames": 60,
+      "delay": 80,
+      "bytes": 546794,
+      "alphaHash": "eab1f0ad844a2ff68ba422b1f545b601f56df20d9838d81ae6f5479b3386855d",
+      "checkedFrames": 60,
+      "whiteBoundaryPixels": 0,
+      "rimColors": [
+        19,
+        19,
+        20,
+        20
+      ],
+      "pixels": {
+        "corner": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "top": [
+          74,
+          49,
+          38,
+          255
+        ],
+        "left": [
+          74,
+          49,
+          38,
+          255
+        ]
+      }
+    }
+  },
+  "sources": {
+    "core/award-gif.js": "65d7de6c60e5ccfbbd4fe6ed4bd4748fe724307e6d53b87e91181d97a3de53e9",
+    "core/award-card-layout.js": "de32c281a977627fc9e82665bb851f114a3e277060e5703af8081fb5906dcee1",
+    "tests/support/gif-edges.js": "d6e258842e39e5c742399c5bee85d542fa6217c0c368667b6f20c7f86e26c5d7"
+  },
+  "limits": [
+    "No full CI",
+    "Physical Android WeChat/Quark and system album viewers not tested"
+  ]
+}

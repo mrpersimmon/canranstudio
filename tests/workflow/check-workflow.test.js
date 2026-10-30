@@ -121,6 +121,14 @@ test('a documentation-only plan avoids runtime tests; source changes retain rele
   assert.ok(planChecks(config, ['some-new-runtime.js']).includes('unit'));
   assert.ok(planChecks(config, ['award-book/App.jsx']).includes('browser-login'));
   assert.ok(config.tasks(process.cwd(), [])['browser-login']?.inputs?.includes('award-book'));
+  assert.ok(planChecks(config, ['student-ui/AccountDialog.jsx']).includes('browser-login'));
+  assert.ok(planChecks(config, ['student-ui/AccountDialog.jsx']).includes('browser-recovery-webkit'));
+  assert.ok(config.tasks(process.cwd(), [])['browser-login']?.inputs?.includes('student-ui'));
+  assert.ok(require('../../playwright.recovery.config').testMatch.includes('student-navigation.spec.js'));
+  assert.ok(require('../../playwright.recovery.config').testMatch.includes('student-transition.spec.js'));
+  assert.ok(require('../../playwright.recovery.config').testMatch.includes('award-gif-edges.spec.js'));
+  assert.ok(planChecks(config, ['core/award-gif.js']).includes('browser-award-gif-webkit'));
+  assert.ok(planChecks(config, ['core/award-card-layout.js']).includes('browser-award-gif-webkit'));
 });
 
 test('shared completion changes always include legacy, paired-unit and authenticated record checks', () => {

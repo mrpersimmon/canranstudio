@@ -6,7 +6,7 @@ const distance=(a,b)=>Math.hypot(Math.max(0,a.left-b.right,b.left-a.right),Math.
 // Usable Lesson UI is distinct from the shared terrain and each original
 // character finishing decode. Failure of one character must stay local.
 async function waitForModulesReady(page,ids){
- const chapter=await page.getByLabel('旅程地图范围',{exact:true}).inputValue();
+ const chapter=await page.locator('.journey-map').getAttribute('data-chapter');
  // A resize usually leaves the same decoded scene ready. Check every existing
  // readiness condition in one DOM snapshot instead of repeatedly recording
  // locator snapshots for thousands of settled viewport samples. If anything

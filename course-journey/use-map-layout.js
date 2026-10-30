@@ -10,7 +10,7 @@ export function useMapLayout(mapRef,desktop,scenes=artwork.scenes,contentKey='')
   useLayoutEffect(()=>{
     const map=mapRef.current,home=map?.closest('.journey-home');
     if(!map||!home)return;
-    const header=document.querySelector('#siteHeader'),sidebar=home.querySelector('.journey-sidebar'),tools=home.querySelector('.journey-tools'),dock=home.querySelector('.journey-dock'),nav=home.querySelector('.journey-bottom-nav');
+    const header=document.querySelector('#siteHeader'),sidebar=home.querySelector('.journey-sidebar'),tools=home.querySelector('.journey-tools'),dock=home.querySelector('.journey-dock'),nav=home.querySelector('.journey-bottom-nav')||document.querySelector('[data-student-bottom-nav]');
     const height=element=>element?.getBoundingClientRect().height||0;
     // Scroll avoidance and painted page space serve different purposes. The
     // existing scene tail can sit behind the rounded dock without hiding a

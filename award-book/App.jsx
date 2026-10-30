@@ -10,7 +10,7 @@ async function request(endpoint,value){
     const result=await response.json();if(!response.ok)throw Object.assign(Error(result.error),{status:response.status});return result;
   }finally{clearTimeout(timer);}
 }
-async function collection(){
+export async function loadCollection(){
   let result=await request('awards'),changed=false,pending=0;
   // Only synchronize the authenticated student's queue. Never fabricate a card
   // from browser storage or display another student's cached personal data.
@@ -44,7 +44,7 @@ export function App(){
   const [data,setData]=useState(null),[error,setError]=useState(null),[revision,setRevision]=useState(0);
   useEffect(()=>{
     let active=true,run=0;
-    const refresh=async()=>{const id=++run;setData(null);setError(null);try{const next=await collection();if(active&&id===run)setData(next);}catch(e){if(active&&id===run)setError(e);}finally{if(active&&id===run)document.getElementById('root').style.visibility='';}};
+    const refresh=async()=>{const id=++run;setData(null);setError(null);try{const next=await loadCollection();if(active&&id===run)setData(next);}catch(e){if(active&&id===run)setError(e);}finally{if(active&&id===run)document.getElementById('root').style.visibility='';}};
     const hide=()=>{document.getElementById('root').style.visibility='hidden';setData(null);run++;};
     const visibility=()=>{if(document.hidden)hide();else refresh();};
     const resume=e=>{if(e.persisted)refresh();};

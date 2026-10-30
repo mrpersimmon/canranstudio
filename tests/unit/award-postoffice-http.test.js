@@ -23,7 +23,7 @@ for(const basePath of ['/','/lesson/'])test('postoffice real HTTP retains owners
   assert.equal((await get(basePath+'unit5-6/')).status,403,'closed courses remain inaccessible even though their earned card is retained');
   assert.deepEqual((await(await get(basePath+'api/awards?studentId='+owner.id,{headers:{cookie:'canran_student='+otherToken}})).json()).cards,[]);
   const html=await(await get(basePath+'awards/')).text();assert.ok(html.includes('name="award-base" content="'+basePath+'"'));
-  const css=html.match(/href="([^"]+album-[^"]+\.css)"/)[1];assert.equal((await get(css)).status,200);
+  const css=html.match(/href="([^"]+journey\.css)"/)[1];assert.equal((await get(css)).status,200,'direct album navigation boots the shared workspace');
   const art=await get(data.cards[1].scene);assert.equal(art.status,200);assert.match(art.headers.get('cache-control'),/immutable/);assert.ok((await art.arrayBuffer()).byteLength>1000);
   const verify=openStore(dataDir);assert.deepEqual(verify.awards(owner.id),before);verify.close();
  }finally{

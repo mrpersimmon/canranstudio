@@ -1,0 +1,348 @@
+{
+  "date": "2026-10-30",
+  "branch": "codex/book-version",
+  "state": "uncommitted local implementation; no production changes",
+  "counts": {
+    "chromium": 18,
+    "webkit": 5
+  },
+  "frameCounts": {
+    "chromium": {
+      "switches": 8,
+      "samples": 201,
+      "movingSamples": 126
+    },
+    "webkit": {
+      "switches": 8,
+      "samples": 332,
+      "movingSamples": 38
+    }
+  },
+  "runs": [
+    {
+      "browser": "chromium",
+      "file": "output/transition-chromium-verified.json",
+      "sha256": "3c0628e4bca216e68075e5518070cfe2e599ddf11d2dd9e4db18389e63e694b4",
+      "stats": {
+        "startTime": "2026-10-30T10:40:23.946Z",
+        "duration": 32560.202999999998,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-transition.spec.js",
+          "title": "课程和纪念册软切换保留导航节点与原位置，正常动效和浏览器前后退一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "慢网保留原画面，失败可重试，快速改选不提交过时页面",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "减少动态时取消页面位移，直接纪念册入口与桌面导航保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "非空纪念册切入时原卡完整可见，保存与原课号保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "过渡中间帧始终有已准备的画面，导航几何在手机和平板电脑尺寸保持稳定",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/transition-chromium.json",
+      "sha256": "42cc7da52aa01adaa982f47c0257c3d8a1326741165115df30a5d1fec054fd6d",
+      "stats": {
+        "startTime": "2026-10-30T10:24:08.567Z",
+        "duration": 130735.772,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "award-book.spec.js",
+          "title": "三单元真实获星入册、跨设备、邮局切卡与动图不重复请求、账号隔离",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "award-book.spec.js",
+          "title": "素材失败只显示可重试加载页，网络恢复后整册显示",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "copy-polish.spec.js",
+          "title": "账号课程与纪念册文案统一，短记录同步、目录状态和保存动图清楚",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "后台字体未完成也能立即点课，返回目录后继续准备且成绩不变",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "课程与纪念册共用我的面板、旧记录和动效设置，历史入口可跨页打开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "未登录、过期和旧学习码的入口只在身份明确后显示登录",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "课程和纪念册软切换保留导航节点与原位置，正常动效和浏览器前后退一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "减少动态时取消页面位移，直接纪念册入口与桌面导航保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "非空纪念册切入时原卡完整可见，保存与原课号保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/transition-login-guard.json",
+      "sha256": "b911b27f15e652aefbb6a0d99ef8df880a32157d728da188a789b420c215e060",
+      "stats": {
+        "startTime": "2026-10-30T10:26:21.264Z",
+        "duration": 12502.878,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录返回课程、刷新和改密入口不闪登录表单，网络失败允许原位重试",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/transition-metrics.json",
+      "sha256": "cafda8c351c6d35a77edc813c545abd03f345e2175c6e7bcef182f5d2a68a2af",
+      "stats": {
+        "startTime": "2026-10-30T10:28:51.129Z",
+        "duration": 29825.774,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "身份等待和连接失败不是已确认页面，不污染登录与首页尺寸统计",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "实际页面上报尺寸，旋转回原尺寸去重，管理员可查看并导出待验证环境",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "来源、载荷、预览排除及统计失败不影响正常找课",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/transition-media-final.json",
+      "sha256": "b5e126964e4757a21f769233a8706cb8d2a3011cdd44872d6bc8f4e8da06d46d",
+      "stats": {
+        "startTime": "2026-10-30T10:32:31.692Z",
+        "duration": 46524.151,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "award-postoffice.spec.js",
+          "title": "原生轻点搜索结果与清空按钮在输入框聚焦时仍有效",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "award-postoffice.spec.js",
+          "title": "原卡完整字库冷载超过20秒时继续等待，恢复后保留原名原星数",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "award-postoffice.spec.js",
+          "title": "界面字体持续等待也不能阻止原卡出现和保存",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "非空纪念册切入时原卡完整可见，保存与原课号保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "file": "output/transition-webkit-verified.json",
+      "sha256": "36f309500e94960014bbfd33f63a0b4bf0a91192e3ab74a2d713f22a96406c41",
+      "stats": {
+        "startTime": "2026-10-30T10:40:23.851Z",
+        "duration": 66430.696,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-transition.spec.js",
+          "title": "课程和纪念册软切换保留导航节点与原位置，正常动效和浏览器前后退一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "慢网保留原画面，失败可重试，快速改选不提交过时页面",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "减少动态时取消页面位移，直接纪念册入口与桌面导航保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "非空纪念册切入时原卡完整可见，保存与原课号保持一致",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-transition.spec.js",
+          "title": "过渡中间帧始终有已准备的画面，导航几何在手机和平板电脑尺寸保持稳定",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "No full CI",
+    "Physical Android WeChat/Quark and real soft keyboard not re-tested"
+  ],
+  "build": {
+    "journeyFiles": 14,
+    "journeyJavaScriptBytes": 415927,
+    "albumFiles": 86,
+    "identicalSharedAssets": 12
+  },
+  "nodeChecks": {
+    "unitAndHTTP": 8,
+    "workflow": 13
+  },
+  "staticChecks": {
+    "documentLinks": 7,
+    "scriptSyntax": 34,
+    "whitespace": "passed"
+  }
+}

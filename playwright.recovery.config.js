@@ -6,7 +6,7 @@ const login = require('./playwright.login.config');
 // a substitute for physical iPhone / WeChat acceptance on the deployed build.
 module.exports = defineConfig({
   ...login,
-  testMatch: ['course-loading-recovery.spec.js', 'course-update-choice.spec.js', 'course-update-performance.spec.js', 'course-worker-upgrade.spec.js', 'journey-touch.spec.js'],
+  testMatch: ['course-loading-recovery.spec.js', 'course-update-choice.spec.js', 'course-update-performance.spec.js', 'course-worker-upgrade.spec.js', 'journey-touch.spec.js', 'student-navigation.spec.js', 'student-transition.spec.js', 'award-gif-edges.spec.js'],
   outputDir: './output/test-recovery-webkit',
   use: { ...login.use, ...devices['iPhone 13'], browserName: 'webkit' }
 });

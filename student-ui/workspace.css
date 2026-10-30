@@ -1,0 +1,40 @@
+html.student-workspace-root{scrollbar-gutter:stable}
+.student-workspace{position:relative;min-height:calc(100dvh - 86px);isolation:isolate;background:#fffaf0}
+.student-page{width:100%;min-width:0;background:#fffaf0}
+.student-page[data-page='awards']{background:#f8f3e7;min-height:calc(100dvh - 86px)}
+.student-page[data-phase='preparing']{position:fixed;left:0;right:0;top:86px;width:min(1440px,100%);margin:auto;visibility:hidden;pointer-events:none;z-index:-1}
+.student-page[data-phase='leaving']{position:fixed;z-index:1;pointer-events:none;opacity:1}
+.student-page[data-phase='positioning']{position:relative;z-index:2;opacity:0}
+.student-page[data-phase='entering']{position:relative;z-index:2;animation:student-page-in 240ms ease both}
+.student-page[data-phase='entering'] :is(.journey-map,.postoffice-layout){animation:student-page-rise 240ms cubic-bezier(.2,.7,.2,1) both}
+@keyframes student-page-in{from{opacity:0}to{opacity:1}}
+@keyframes student-page-rise{from{transform:translateY(6px)}to{transform:translateY(0)}}
+body.student-workspace-page #siteHeader{position:sticky;top:0;z-index:35;background:#fffcf5}
+body.student-workspace-page #siteHeader .student-header{margin:0 auto;max-width:1440px;height:86px;min-height:86px;padding:10px 30px}
+body.student-workspace-page #siteHeader :is(a,button){transition:color 160ms ease,background-color 160ms ease}
+body.student-workspace-page .journey-sidebar{top:86px}
+.student-workspace .postoffice-main{margin:0;padding:0;max-width:none}
+.student-workspace .postoffice-mobile-brand{display:none}
+.student-workspace .postoffice-sidebar{top:114px}
+.student-bottom-nav{display:none}
+.student-bottom-nav :focus-visible{outline:3px solid #207d9c;outline-offset:3px}
+.workspace-loading{min-height:65dvh;display:grid;place-content:center;padding:24px;text-align:center;color:#735b44;font-family:'Student Shell',sans-serif}
+.workspace-loading h1{font-size:24px;font-weight:400}
+.student-navigation-status{position:fixed;z-index:45;left:50%;top:96px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);padding:10px 12px 10px 18px;border:1px solid #d5dfcf;border-radius:18px;background:#fffcf5;color:#385f40;box-shadow:0 5px 24px #463c261c;font:400 15px/1.5 'Student Shell',sans-serif}
+.student-navigation-status>span{min-width:0}.student-navigation-status button{font:inherit;display:inline-flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;min-height:44px;padding:6px 10px;border:0;border-radius:12px;background:#e8efdf;color:#246b45;box-shadow:none;transform:none}
+.student-navigation-status .navigation-cancel{width:44px;flex:none;background:transparent;padding:0}
+.student-nav a[aria-busy='true']::before,.student-bottom-nav a[aria-busy='true']::before{content:'';width:8px;height:8px;border-radius:50%;background:#8cac72;position:absolute;right:-10px;top:14px}
+@media(max-width:1023px){
+ body.student-workspace-page #siteHeader .student-header{height:60px;min-height:60px;padding:8px 18px}
+ body.student-workspace-page .journey-sidebar{top:calc(60px - var(--journey-sticky-offset,86px))}
+ .student-workspace,.student-page[data-page='awards']{min-height:calc(100dvh - 60px)}
+ .student-page[data-phase='preparing']{top:60px}
+ .student-workspace .postoffice-heading{top:8%}
+ .student-workspace .postoffice-layout{margin-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+ .student-bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:40;min-height:calc(64px + env(safe-area-inset-bottom,0px));padding:5px 14px calc(4px + env(safe-area-inset-bottom,0px));background:#fffcf6;border-top:1px solid #e7ddcb;display:grid;grid-template-columns:repeat(3,1fr)}
+ .student-bottom-nav>a,.student-bottom-nav>button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:400 14px/1.4 'Student Shell',sans-serif;min-height:54px;padding:0;border:0;color:#8d877b;border-radius:10px;background:transparent;box-shadow:none;transform:none;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:color 160ms ease}
+ .student-bottom-nav [aria-current='page']{color:#246b45}.student-bottom-nav [aria-current='page']::after{content:'';position:absolute;width:38px;height:3px;border-radius:3px;background:#246b45;bottom:0}
+ .student-bottom-nav a[aria-busy='true']::before{right:calc(50% - 24px);top:7px}
+ .student-navigation-status{top:auto;bottom:calc(76px + env(safe-area-inset-bottom,0px));font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.student-page[data-phase],.student-page[data-phase='entering'] :is(.journey-map,.postoffice-layout){animation:none!important}.student-bottom-nav>a,.student-bottom-nav>button,body.student-workspace-page #siteHeader :is(a,button){transition:none}}

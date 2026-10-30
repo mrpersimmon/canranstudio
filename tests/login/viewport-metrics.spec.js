@@ -2,9 +2,21 @@
 const {test,expect}=require('@playwright/test');
 const crypto=require('node:crypto');
 const {adminLogin,createStudent,signIn}=require('./helpers');
+const {courseResponse}=require('../support/course-response-faults');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 test.skip(process.env.VIEWPORT_TEST_ENABLED!=='1','独立采集开关与数据隔离由 playwright.viewport.config.js 启用');
 const api=async page=>(await page.request.get(base+'api/admin/viewport-metrics')).json();
+
+test('身份等待和连接失败不是已确认页面，不污染登录与首页尺寸统计',async({page})=>{
+ const sent=[];page.on('request',request=>{if(request.url().endsWith('/api/client-viewports'))sent.push(request.postDataJSON());});
+ try{
+  await courseResponse(page,base+'api/me',{hold:true});await page.goto(base);await expect(page.locator('#app')).toHaveAttribute('data-session-state','checking');await page.evaluate(()=>document.fonts.ready);
+  // Negative assertion must span the client's 750ms sampling debounce.
+  await page.waitForTimeout(1100);expect(sent).toEqual([]);
+  await courseResponse(page,base+'api/me',null,{resumeHeld:true});await expect(page.locator('#loginForm')).toBeVisible();await expect.poll(()=>sent.some(item=>item.pageKind==='login')).toBe(true);
+  sent.length=0;await courseResponse(page,base+'api/me',{status:503,json:{error:'temporary'}});await page.reload();await expect(page.locator('#app')).toHaveAttribute('data-session-state','error');await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(1100);expect(sent).toEqual([]);
+ }finally{await page.request.post('/__test__/course-responses',{data:{reset:true}});}
+});
 
 test('实际页面上报尺寸，旋转回原尺寸去重，管理员可查看并导出待验证环境',async({page,browser})=>{
   test.setTimeout(90000);await adminLogin(page,base);
@@ -34,6 +46,9 @@ test('实际页面上报尺寸，旋转回原尺寸去重，管理员可查看�
     expect(download.suggestedFilename()).toMatch(/^viewport-candidates-/);
     const report=await api(page);expect(report.coverage.percent).toBeNull();expect(report.candidates.length).toBeGreaterThan(0);
     expect(JSON.stringify(report)).not.toContain(account.number);
+    if(await p.getByRole('button',{name:'关闭课程目录',exact:true}).isVisible())await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
+    await p.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect.poll(()=>sent.some(item=>item.pageKind==='album')).toBe(true);
+    await p.getByRole('link',{name:'我的课程',exact:true}).click();await expect.poll(()=>sent.filter(item=>item.pageKind==='home'&&item.reason==='initial').length).toBe(2);
     await p.goto(base+'unit1-2/');await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
     await expect.poll(()=>sent.some(item=>item.pageKind==='lesson')).toBe(true);
     await p.goto(base+'awards/');await expect.poll(()=>sent.some(item=>item.pageKind==='album')).toBe(true);

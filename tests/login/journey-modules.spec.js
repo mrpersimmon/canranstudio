@@ -1,4 +1,5 @@
 'use strict';
+const {chooseJourneyChapter}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {waitForModulesReady,inspectModules,assertModuleGeometry,assertStableModule}=require('../support/journey-modules');
@@ -56,7 +57,7 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
   // Delay the real terrain request. The previous implementation removed the
   // old chapter immediately and painted loading placeholders, even on revisits.
   await p.route(target,async route=>{const current=waiting;requests++;await current.promise;await route.continue();});
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');
+  await chooseJourneyChapter(p,'neighborhood');
   await expect.poll(()=>requests).toBeGreaterThan(0);
   await expect(p.locator('[data-route-world="opening"] [data-route-terrain]')).toBeVisible();
   await expect(p.locator('.journey-panorama-layer[data-staging=true]')).toHaveCSS('opacity','0');
@@ -76,11 +77,11 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
    window.__releaseModuleDecode=()=>{window.__holdModuleDecode=false;window.__modulePending.splice(0).forEach(resolve=>resolve());};
   },currentWorlds.neighborhood.file);
   // Return to the still-decoded garden before the stale decode finishes.
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('opening');await readyModules(p,pilot[0].ids);
+  await chooseJourneyChapter(p,'opening');await readyModules(p,pilot[0].ids);
   await p.evaluate(()=>{window.__holdModuleDecode=true;});
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');
+  await chooseJourneyChapter(p,'neighborhood');
   await expect.poll(()=>p.evaluate(()=>window.__modulePending.length)).toBeGreaterThan(0);
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('opening');
+  await chooseJourneyChapter(p,'opening');
   await p.evaluate(()=>window.__releaseModuleDecode());await readyModules(p,pilot[0].ids);await settle(p);
   await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-chapter','opening');
   await expect(p.locator('[data-module-course="unit7-8"]')).toHaveCount(0);
@@ -115,7 +116,7 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   unmountRoutes=await mountLiveJourneyProps(p,base);
   await expect(p.getByLabel('读取次数',{exact:true})).toHaveText('1');reads=1;
   await closeDirectory(p);
-  await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');
+  await chooseJourneyChapter(p,'neighborhood');
   await readyModules(p,pilot[1].ids);
   await p.locator('[data-map-course="unit9-10"]').click();
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit9-10');
@@ -137,7 +138,7 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   await expect(p.locator('.journey-course:visible')).toHaveCount(1);
   await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit','unit5-6');
   await closeDirectory(p);
-  await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('opening');
+  await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','opening');
   await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-chapter','opening');
   await readyModules(p,allowed);
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit1-2');
@@ -179,7 +180,7 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   await expect(p.getByLabel('读取次数',{exact:true})).toHaveText(String(++reads));
   await readyModules(p,pilot[0].ids);
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit1-2');
-  await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('opening');
+  await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','opening');
   expect(errors,'no maximum-depth loop or stale-course rendering error').toEqual([]);
   await p.unroute('**/api/me');
   expect(results(await(await p.request.get(base+'api/me')).json())).toEqual(results(before));
@@ -288,7 +289,7 @@ test('代表章节完整场景在手机优先尺寸和两种动效模式下保�
   const before=await(await p.request.get(base+'api/me')).json();
   await closeDirectory(p);
   for(const chapter of pilot){
-   await p.getByLabel('旅程地图范围',{exact:true}).selectOption(chapter.chapter);
+   await chooseJourneyChapter(p,chapter.chapter);
    await readyModules(p,chapter.ids);
    await p.emulateMedia({reducedMotion:'reduce'});await settle(p);
    const reference=await geometry(p);checkGeometry(reference);
@@ -376,7 +377,7 @@ test('模块零星部分星满星均来自课程数据，重看只改变反馈�
   for(stars of [0,2,5]){
    await p.reload();
    for(const chapter of pilot){
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption(chapter.chapter);await readyModules(p,chapter.ids);
+    await chooseJourneyChapter(p,chapter.chapter);await readyModules(p,chapter.ids);
     const view=await geometry(p);checkGeometry(view);
     for(const id of chapter.ids){
      const module=p.locator('[data-module-course="'+id+'"]'),row=module.locator('[data-stars-course="'+id+'"]');
@@ -430,11 +431,11 @@ test('稀疏授权只渲染本班入口，共享地形和单课人物故障按�
    await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit11-12');
    await expect(p.locator('.journey-start')).toHaveAttribute('href',base+'unit11-12/#learn/words');
    // A failure in the pilot must not leak into another chapter.
-   await p.getByLabel('旅程地图范围',{exact:true}).selectOption('woodland');
+   await chooseJourneyChapter(p,'woodland');
    await expect(p.locator('.journey-module-status')).toHaveCount(0);
    await expect(p.locator('[data-map-course]')).toHaveCount(1);
    await expect(p.locator('[data-map-course]')).toHaveAttribute('data-map-course','unit143-144');
-   await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');
+   await chooseJourneyChapter(p,'neighborhood');
    await expect(failed).toHaveAttribute('data-art-state','error');
    await expect(failed.getByRole('status')).toContainText('场景暂时没准备好');
    await p.unroute(missing);
@@ -448,7 +449,7 @@ test('稀疏授权只渲染本班入口，共享地形和单课人物故障按�
    await expect(p.locator('.journey-course:visible')).toHaveCount(1);
    await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
    await p.locator('.journey-course:visible .journey-locate').click();
-   await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue(chapter);
+   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',chapter);
    await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
    await expect(p.locator('[data-map-course="'+id+'"]')).toHaveAttribute('aria-pressed','true');
    await p.locator('.journey-start').click();
