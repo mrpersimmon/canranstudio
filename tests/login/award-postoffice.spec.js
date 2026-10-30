@@ -8,15 +8,30 @@ const base=process.env.AWARD_TEST_BASE||'/lesson/';
 
 // Presentation contract only. Real earning, permanent dates, legacy certificates
 // and owner isolation remain covered by award-book.spec.js and upgrade tests.
-async function collectionFixture(page,browser){
+async function collectionFixture(page,browser,{holdInterfaceFont=false}={}){
  await adminLogin(page,base);const account=await createStudent(page,'邮局交互样本','收藏同学',[/Lesson 1–2/]);
  const session=await studentLogin(browser,account,base),p=session.page;
  const actual=await(await p.request.get(base+'api/awards')).json(),bundle=await createAwardBook(path.resolve(__dirname,'../..'),base);
  const cards=Object.entries(bundle.editions).map(([course,editions])=>{const [edition,meta]=Object.entries(editions).at(-1);return {...meta,course,edition,id:course+':'+edition,current:true,name:'收藏同学',stars:5,firstFullStarAt:'2026-10-16T03:00:00.000Z'};}).sort((a,b)=>+a.course.match(/\d+/)[0]- +b.course.match(/\d+/)[0]);
- await courseResponse(p,base+'api/awards',{json:{...actual,cards}});await p.goto(base+'awards/');
+ await courseResponse(p,base+'api/awards',{json:{...actual,cards}});
+ const fontFile=[...bundle.files.keys()].find(file=>/postoffice-ui-500-.*\.woff2$/.test(file));expect(fontFile).toBeTruthy();
+ const interfaceFont=base+fontFile;
+ if(holdInterfaceFont)await courseResponse(p,interfaceFont,{hold:true});
+ await p.goto(base+'awards/',{waitUntil:'domcontentloaded'});
  await expect(p.locator('.postoffice-hero-card .certificate')).toHaveAttribute('data-unit','unit1-2');
- return {...session,cards,cleanup:()=>p.request.post('/__test__/course-responses',{data:{reset:true}})};
+ return {...session,cards,interfaceFont,cleanup:()=>p.request.post('/__test__/course-responses',{data:{reset:true}})};
 }
+
+test('界面字体持续等待也不能阻止原卡出现和保存',async({page,browser})=>{
+ test.setTimeout(90000);const fixture=await collectionFixture(page,browser,{holdInterfaceFont:true}),p=fixture.page;
+ try{
+  await expect.poll(async()=>await(await p.request.get('/__test__/course-held')).json()).toContain(fixture.interfaceFont);
+  const hero=p.locator('.postoffice-hero-card');await expect(hero.locator('.certificate')).toHaveAttribute('data-unit','unit1-2');
+  await hero.click();const modal=p.getByRole('dialog',{name:'Lesson 1–2 纪念卡'});
+  const saved=p.waitForEvent('download');await modal.getByRole('button',{name:'保存动图',exact:true}).click();expect((await saved).suggestedFilename()).toMatch(/\.gif$/);
+  await expect(modal.locator('.card-name')).toHaveText('收藏同学');
+ }finally{await fixture.cleanup();await fixture.context.close();}
+});
 
 test('72主卡跨章搜索、全角课号、范围与本章记忆，无重复查看入口',async({page,browser})=>{
  test.setTimeout(90000);const fixture=await collectionFixture(page,browser),p=fixture.page;

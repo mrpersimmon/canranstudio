@@ -27,8 +27,8 @@ export async function prepareCards(cards){
  const work=Promise.all([
   ...resources.map(loadPicture),
   ...cards.map(card=>cardLayout.prepareFonts(card.course,card.name,'Award Book','Baloo Book')),
-  document.fonts.load('500 32px "Postoffice Heading"','我的纪念册'),
-  document.fonts.load('400 16px "Postoffice Text"','纪念册章节搜索保存'),
+  // Interface typography uses font-display:swap. Only the original card's
+  // fonts are required for its display/export; decoration must never gate it.
  ]);
  try{await Promise.race([work,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('timeout')),20000);})]);}
  finally{clearTimeout(timer);}
