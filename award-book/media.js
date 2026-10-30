@@ -15,7 +15,7 @@ function loadPicture(src){
   const image=new Image();let settled=false;
   const fail=()=>{if(settled)return;settled=true;clearTimeout(timer);image.onload=null;image.onerror=null;image.removeAttribute('src');reject(new Error('image'));};
   // End an unresponsive request too, so Retry never reuses a stuck promise.
-  const timer=setTimeout(fail,18000);
+  const timer=setTimeout(fail,45000);
   image.onload=async()=>{try{await image.decode();if(settled)return;settled=true;clearTimeout(timer);remember(src,image);resolve(image);}catch{fail();}};
   image.onerror=fail;image.src=src;
  }).finally(()=>loading.delete(src));
@@ -30,7 +30,9 @@ export async function prepareCards(cards){
   // Interface typography uses font-display:swap. Only the original card's
   // fonts are required for its display/export; decoration must never gate it.
  ]);
- try{await Promise.race([work,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('timeout')),20000);})]);}
+ // Original name fonts retain complete character coverage. Their first
+ // transfer can exceed 20 seconds on the deployed 3 Mbps connection.
+ try{await Promise.race([work,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('timeout')),60000);})]);}
  finally{clearTimeout(timer);}
 }
 export async function saveCard(card,signal){
