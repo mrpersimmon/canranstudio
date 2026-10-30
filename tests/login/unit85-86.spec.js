@@ -86,7 +86,7 @@ test('真实账号全流程：五颗星同步、纪念册放大、GIF、跨设�
     const date=await learner.locator('#certificateDate').textContent();
     await learner.locator('.stage-certificate').screenshot({path:info.outputPath('five-star-card.png')});
     await learner.getByRole('link',{name:'我的纪念册',exact:true}).click();
-    const card=learner.getByRole('button',{name:'放大 Lesson 85–86 旅行见闻小达人',exact:true});
+    const card=learner.getByRole('button',{name:'查看并保存纪念卡：Lesson 85–86 旅行见闻小达人',exact:true});
     await expect(card.locator('.certificate')).toHaveAttribute('data-stars','5',{timeout:30000});
     await card.click();
     const modal=learner.getByRole('dialog',{name:'Lesson 85–86 纪念卡'});
@@ -198,11 +198,11 @@ test('同姓名同星数对照认可卡：新卡、书页和一星动图显示�
     expect((await sharp(file,{page:0}).extract(area).raw().toBuffer()).equals(await sharp(file,{page:15}).extract(area).raw().toBuffer())).toBe(false);
     await sharp(file,{page:15}).png().toFile(info.outputPath('one-star-frame.png'));
     await p.getByRole('link',{name:'我的纪念册',exact:true}).click();
-    await p.getByRole('button',{name:'目录',exact:true}).click();
+    await p.getByRole('button',{name:'搜索 Lesson 或纪念卡名称',exact:true}).click();
     await p.getByRole('button',{name:/Lesson 85–86/}).click();
-    const cover=p.getByRole('button',{name:'放大 Lesson 85–86 旅行见闻小达人',exact:true});
+    const cover=p.getByRole('button',{name:'查看并保存纪念卡：Lesson 85–86 旅行见闻小达人',exact:true});
     await expect(cover.locator('.certificate')).toHaveAttribute('data-stars','1');
-    await p.locator('.book').screenshot({path:info.outputPath('comparison-book.png')});
+    await p.locator('.postoffice-scene').screenshot({path:info.outputPath('comparison-book.png')});
     await cover.click();await p.getByRole('dialog',{name:'Lesson 85–86 纪念卡'}).screenshot({path:info.outputPath('one-star-book-closeup.png')});
   }finally{await student.context.close();}
 });

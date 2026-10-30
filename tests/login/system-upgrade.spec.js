@@ -54,11 +54,11 @@ test('真实全星与未通关一次性升级：备份、原证归档、清零�
     // Five-star cards keep their ordinary album placement. Preserving their
     // migration snapshot must not also classify them as old 15-star papers.
     await p.goto(base + 'awards/');
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false', { timeout: 30000 });
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false', { timeout: 30000 });
     await expect(p.getByRole('heading', { name: '已获得的原证书', exact: true })).toHaveCount(0);
     await expect(p.getByRole('link', { name: '查看原证书', exact: true })).toHaveCount(0);
-    await p.getByRole('button', { name: '目录', exact: true }).click();
-    const albumDirectory=p.getByRole('dialog', { name: '目录', exact: true });
+    await p.getByRole('button', { name: '搜索 Lesson 或纪念卡名称', exact: true }).click();
+    const albumDirectory=p.getByRole('dialog', { name: '搜索纪念卡', exact: true });
     await expect(albumDirectory.locator('.directory-row')).toHaveCount(2);
     await expect(albumDirectory).toContainText('Lesson 1–2');
     await expect(albumDirectory).toContainText('Lesson 3–4');

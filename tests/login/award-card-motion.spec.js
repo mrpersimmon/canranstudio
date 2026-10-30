@@ -77,7 +77,7 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-one-star', false);
     await student.context.setOffline(false);
     await p.getByRole('link', { name: '我的纪念册', exact: true }).click();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false');
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
     await lights(p.locator('.certificate'), 1);
     await readStory(p, course);
     for (const id of ['roles', 'trans', 'manners', 'exam']) {
@@ -93,14 +93,14 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-full-stars', true);
     expect(requests).toEqual([]);
     await p.getByRole('link', { name: '我的纪念册', exact: true }).click();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false');
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
     await lights(p.locator('.certificate'), 5);
-    await p.getByRole('button', { name: '目录', exact: true }).click();
-    const turnSwitch = p.getByRole('switch', { name: '翻页动画' });
+    await p.getByRole('button', { name: '我的', exact: true }).click();
+    const turnSwitch = p.getByRole('switch', { name: '界面动效' });
     if (await turnSwitch.getAttribute('aria-checked') === 'true') await turnSwitch.click();
-    await p.getByRole('button', { name: '关闭目录', exact: true }).click();
+    await p.getByRole('button', { name: '关闭我的', exact: true }).click();
     await lights(p.locator('.certificate'), 5);
-    await p.getByRole('button', { name: '放大 Lesson 1–2 礼貌小帮手', exact: true }).click();
+    await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
     const modal = p.getByRole('dialog', { name: 'Lesson 1–2 纪念卡', exact: true });
     await lights(modal.locator('.certificate'), 5);
     // Closing during generation must not leave a delayed download behind.
@@ -108,7 +108,7 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await modal.getByRole('button', { name: '保存动图', exact: true }).click();
     await expect(modal.getByRole('button', { name: '正在保存…', exact: true })).toBeDisabled();
     await modal.getByRole('button', { name: '关闭纪念卡', exact: true }).click();
-    await p.getByRole('button', { name: '放大 Lesson 1–2 礼貌小帮手', exact: true }).click();
+    await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
     await saveMotion(p, modal.getByRole('button', { name: '保存动图', exact: true }), 'album-full-stars', true);
     expect(downloads).toHaveLength(1);
     await modal.getByRole('button', { name: '关闭纪念卡', exact: true }).click();

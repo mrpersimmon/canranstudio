@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-29",
+  "checks": [
+    {
+      "case": "card masks in all display surfaces",
+      "files": [
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        }
+      ],
+      "hero": [
+        {
+          "clip": "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+          "src": "/art/unit1-2.gif"
+        },
+        {
+          "clip": "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+          "src": "/art/unit3-4.gif"
+        },
+        {
+          "clip": "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+          "src": "/art/unit5-6.gif"
+        }
+      ],
+      "shellScroll": 0,
+      "thumbs": [
+        "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+        "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+        "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)"
+      ]
+    },
+    {
+      "case": "original download unchanged",
+      "sha256": "d2d463f2b40f46b78582267ec8306e7f090deb6e4d6bda4b845e9cf936b4be74",
+      "passed": true
+    },
+    {
+      "case": "Pixel 10 third card",
+      "clip": "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+      "height": 952,
+      "selected": "查看原卡：Lesson 5–6 新朋友小使者",
+      "shellScroll": 0,
+      "width": 427
+    },
+    {
+      "case": "console",
+      "logs": []
+    }
+  ],
+  "realDeviceTested": false
+}

@@ -190,7 +190,7 @@ test('服务器确认第五颗星后显示金边和固定日期，卡片与纪�
       await expect.poll(()=>reveal.locator('.gold-light-ring').evaluate(el=>getComputedStyle(el).getPropertyValue('--gold-angle'))).not.toBe(angle);
       await dismissRewardDialog(p,'Escape');await p.goto(base+'unit3-4/#learn/certificate');
       await expect(p.locator('#certificateDate')).toHaveText(date);
-      await p.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(p.locator('.book')).toHaveAttribute('aria-busy','false');await expect(p.locator('.certificate')).toHaveAttribute('data-stars','5');
+      await p.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy','false');await expect(p.locator('.certificate')).toHaveAttribute('data-stars','5');
       await expect(p.getByRole('heading',{name:'我的纪念册'})).toBeVisible();
       continue;
     }

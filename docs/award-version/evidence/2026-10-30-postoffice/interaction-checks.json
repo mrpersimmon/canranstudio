@@ -1,0 +1,40 @@
+{
+  "delay": {
+    "kept": "unit1-2",
+    "targetChapter": "Lesson 7–12",
+    "lateImageDidNotOverride": "unit13-14"
+  },
+  "failure": {
+    "kept": "unit13-14",
+    "retryRecovered": "unit19-20"
+  },
+  "timeout": {
+    "retryRecovered": true,
+    "fixtureCleanup": "First recovery waited because a second paused request remained; releasing all matching requests restored the original card."
+  },
+  "identity": {
+    "logoutClearedOtherPage": true,
+    "remainingCertificates": 0,
+    "originalCookieRestored": true
+  },
+  "emptyAndSparse": {
+    "emptyHasNoCards": true,
+    "partialStars": 1,
+    "fullStarDateAbsentForPartial": true,
+    "missingSlotDisabled": true,
+    "nextSkipsMissing": true,
+    "longNameFits": true
+  },
+  "history": {
+    "versions": 2,
+    "mainSelectionPreserved": true
+  },
+  "download": {
+    "width": 984,
+    "height": 528,
+    "frames": 60,
+    "loop": 0,
+    "sha256": "05a0665cce4583067edce2c6d9942c044d142c60d07e2e8c7d6e876d3f326950",
+    "byteIdenticalToOriginal": true
+  }
+}

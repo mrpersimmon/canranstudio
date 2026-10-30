@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-30",
+  "scope": "Lesson 1–12 / two chapters / six original cards",
+  "checks": [
+    {
+      "case": "open second chapter",
+      "chapter": "邻里来信·Lesson 7–12",
+      "count": 3,
+      "selected": "查看并保存纪念卡：Lesson 7–8 新朋友小记者",
+      "thumbnails": [
+        "选择 Lesson 7–8 新朋友小记者",
+        "选择 Lesson 9–10 暖心问候小伙伴",
+        "选择 Lesson 11–12 归还物品小能手"
+      ]
+    },
+    {
+      "case": "removed enlarge feature",
+      "externalLinks": 0,
+      "enlargeText": 0,
+      "passivePreview": 1
+    },
+    {
+      "case": "download unit7-8",
+      "sha256": "b4d1d9ecdffe5a8a403cd0082f3bd45495a80bca4d85d7200ab6a4a700e64a0d",
+      "passed": true
+    },
+    {
+      "case": "download unit9-10",
+      "sha256": "3512ff3c9597ec9a3842a19d984813a1a4b8c39af92fc6802d3cc6d586fa46cf",
+      "passed": true
+    },
+    {
+      "case": "download unit11-12",
+      "sha256": "575723862bfb9cd52fa94728d065b924cea9018e523a1489fc27e9c95cdbcc73",
+      "passed": true
+    },
+    {
+      "case": "chapter end boundary",
+      "nextDisabled": true,
+      "position": "3 / 3",
+      "date": "珍藏于 2026.10.22"
+    },
+    {
+      "case": "restore second chapter selection",
+      "selected": "查看并保存纪念卡：Lesson 11–12 归还物品小能手"
+    },
+    {
+      "case": "restore first chapter selection",
+      "selected": "查看并保存纪念卡：Lesson 3–4 认领小达人"
+    },
+    {
+      "case": "numeric 11",
+      "results": [
+        "Lesson 11–12归还物品小能手邻里来信 · 已珍藏"
+      ]
+    },
+    {
+      "case": "same word across chapters",
+      "results": [
+        "Lesson 5–6新朋友小使者初识小镇 · 已珍藏",
+        "Lesson 7–8新朋友小记者邻里来信 · 已珍藏"
+      ]
+    },
+    {
+      "case": "search enters another chapter",
+      "chapter": "邻里来信·Lesson 7–12",
+      "keyboard": "false",
+      "selected": "查看并保存纪念卡：Lesson 7–8 新朋友小记者",
+      "thumbs": [
+        "Lesson 7–8",
+        "Lesson 9–10",
+        "Lesson 11–12"
+      ]
+    },
+    {
+      "case": "delayed image retains old card",
+      "pending": "正在准备 Lesson 9–10…",
+      "ready": true,
+      "selected": "查看并保存纪念卡：Lesson 7–8 新朋友小记者",
+      "visibleImage": "/art/unit7-8.gif"
+    },
+    {
+      "case": "late result cannot overwrite newer selection",
+      "lateImageReady": true,
+      "lateImageWidth": 984,
+      "selected": "查看并保存纪念卡：Lesson 11–12 归还物品小能手"
+    },
+    {
+      "case": "failed target retains old selection and offers retry",
+      "message": "这张纪念暂时无法打开，当前卡片已保留。重新加载 Lesson 9–10",
+      "ready": true,
+      "selected": "查看并保存纪念卡：Lesson 7–8 新朋友小记者"
+    },
+    {
+      "case": "retry recovers after releasing test interception",
+      "pending": false,
+      "ready": true,
+      "selected": "查看并保存纪念卡：Lesson 9–10 暖心问候小伙伴",
+      "width": 984,
+      "fixtureNote": "Clearing interception patterns did not release the already-paused thumbnail request; released it explicitly before the successful retry."
+    },
+    {
+      "case": "Pixel layout",
+      "externalOriginalLinks": 0,
+      "mask": "inset(0.757576% 0.406504% round 2.15447% / 4.01515%)",
+      "overflow": false,
+      "screen": [
+        427,
+        952
+      ],
+      "selected": "查看并保存纪念卡：Lesson 11–12 归还物品小能手",
+      "threeCards": 3
+    },
+    {
+      "case": "all six searchable after clear",
+      "count": 6
+    },
+    {
+      "case": "Pixel search height after fix",
+      "aboveKeyboard": true,
+      "clientHeight": 482,
+      "dialogBottom": 782,
+      "dialogTop": 210,
+      "keyboardTop": 783,
+      "screenTop": 146,
+      "scrollHeight": 671,
+      "touchAction": "pan-y",
+      "withinSafeArea": true
+    },
+    {
+      "case": "long search list scrolls to last card",
+      "keyboardTop": 783,
+      "lastBottom": 740.421875,
+      "lastVisible": true,
+      "scrollTop": 189
+    },
+    {
+      "case": "iPhone search height after fix",
+      "aboveKeyboard": true,
+      "dialogBottom": 710,
+      "dialogTop": 250,
+      "keyboardTop": 711,
+      "screenTop": 196,
+      "withinSafeArea": true
+    },
+    {
+      "case": "normal preview console",
+      "logs": []
+    }
+  ],
+  "searchHeightBeforeFix": {
+    "device": "Pixel 10",
+    "screenTop": 146,
+    "dialogTop": 105,
+    "overlap": 41
+  },
+  "limitations": [
+    "Browser device models only; no real WeChat or Quark.",
+    "No full CI, production publishing or 95% usage coverage claim."
+  ],
+  "faultCleanup": "Interception patterns cleared, paused thumbnail resumed, cache setting restored, test tab closed."
+}

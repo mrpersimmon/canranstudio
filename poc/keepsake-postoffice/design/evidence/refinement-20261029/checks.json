@@ -1,0 +1,98 @@
+{
+  "date": "2026-10-29",
+  "scope": "Lesson 1–6 selected original-card carrier refinement",
+  "checks": [
+    {
+      "case": "iPhone geometry",
+      "cardInsideScene": true,
+      "height": 852,
+      "sceneImage": "/art/postoffice-scene-v3.png",
+      "searchAboveEnvelope": true,
+      "searchSize": [
+        44,
+        44
+      ],
+      "tagRemoved": true,
+      "width": 393
+    },
+    {
+      "case": "compact search still finds card name",
+      "results": [
+        "Lesson 3–4认领小达人初识小镇 · 已珍藏"
+      ]
+    },
+    {
+      "case": "pointer result with keyboard open after fix",
+      "selected": "查看原卡：Lesson 3–4 认领小达人",
+      "keyboard": "false"
+    },
+    {
+      "case": "Pixel geometry",
+      "cardInsideScene": true,
+      "cardRatio": 1.8651162790697675,
+      "deviceScroll": 114,
+      "searchSize": [
+        44,
+        44
+      ],
+      "selection": "查看原卡：Lesson 5–6 新朋友小使者",
+      "tagRemoved": true
+    },
+    {
+      "case": "native pointer card selection",
+      "allImages": [
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        }
+      ],
+      "portal": 0,
+      "selected": "查看原卡：Lesson 5–6 新朋友小使者"
+    },
+    {
+      "case": "Pixel native result click with keyboard open",
+      "keyboard": "false",
+      "portal": 1,
+      "selected": "查看原卡：Lesson 1–2 礼貌小帮手"
+    },
+    {
+      "case": "clear retains input focus",
+      "count": 1,
+      "focus": null,
+      "keyboard": "false"
+    },
+    {
+      "case": "clear after keyboard settled",
+      "count": 3,
+      "focus": "搜索 Lesson 或卡名",
+      "keyboard": "true",
+      "value": ""
+    },
+    {
+      "case": "keyboard Tab still dismisses keyboard",
+      "focus": "清空搜索",
+      "keyboard": "false"
+    },
+    {
+      "case": "console",
+      "logs": []
+    }
+  ],
+  "notes": [
+    "Search blur originally closed keyboard before pointer click completed; fixed and retested.",
+    "before.png was rejected as a full-view baseline because a stale tab had been automatically scrolled.",
+    "Initial Pixel locator-centered screenshot and one clear-button coordinate captured during keyboard motion were rejected; final captures use settled native pointer actions.",
+    "No real Android, WeChat or Quark verification."
+  ]
+}

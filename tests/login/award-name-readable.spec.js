@@ -55,9 +55,9 @@ test('最小字号16px时，真实长姓名在课程、奖励与纪念册中完�
     await p.setViewportSize({width:1280,height:1000});
     await p.goto(base+'unit1-2/#learn/certificate');
     await p.getByRole('link',{name:'我的纪念册',exact:true}).click();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy','false');
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy','false');
     await checkName(p.locator('.certificate'),info,'book');
-    await p.getByRole('button',{name:/^放大 Lesson 1–2 /}).click();
+    await p.getByRole('button',{name:/^查看并保存纪念卡：Lesson 1–2 /}).click();
     const modal=p.getByRole('dialog',{name:'Lesson 1–2 纪念卡',exact:true});
     for(const width of [1280,768,390,320]){
       await p.setViewportSize({width,height:1000});
