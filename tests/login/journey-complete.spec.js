@@ -1,4 +1,5 @@
 'use strict';
+const {chooseJourneyChapter}=require('../support/journey-navigation');
 const fs=require('node:fs'),path=require('node:path');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
@@ -53,7 +54,7 @@ test('新增入口在完整尺寸与三种获星状态下保持人物、星章�
   for(stars of [0,2,5]){
    await p.reload();await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-map-state','ready');
    for(const chapter of chapters){
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption(chapter.id);
+    await chooseJourneyChapter(p,chapter.id);
     if(continuous[chapter.id])await waitForModulesReady(p,chapter.courses);else await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-map-state','ready');
     await expect(p.locator('[data-completion-medal]')).toHaveCount(stars===5?3:0);
     await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -115,7 +116,7 @@ test('每个新增单元支持奇偶 Lesson 搜索、地图定位、人物反馈
     await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
    }
    await p.locator('.journey-course:visible .journey-locate').click();
-   await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue(chapter.id);
+   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',chapter.id);
    if(continuous[chapter.id])await waitForModulesReady(p,chapter.courses);else await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-map-state','ready');
    const hit=p.locator('[data-landmark-select="'+id+'"]');await clickWithVisibleMotion(hit);
    await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
@@ -142,7 +143,7 @@ test('末课与跨段稀疏授权可独立定位，缺图重试和满星重看�
   const last=selected.at(-1),lastChapter=chapters.at(-1).id;
   let stars=5;
   await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars}))}});});
-  await p.reload();await p.getByLabel('旅程地图范围',{exact:true}).selectOption(lastChapter);
+  await p.reload();await chooseJourneyChapter(p,lastChapter);
   await expect(p.locator('[data-map-course]')).toHaveCount(1);await expect(p.locator('[data-map-course]')).toHaveAttribute('data-map-course',last);
   const medal=p.locator('[data-completion-medal="'+last+'"]');await medal.click();
   await expect.poll(()=>medal.locator('.journey-medal-face').evaluate(e=>e.getAnimations().length)).toBeGreaterThan(0);

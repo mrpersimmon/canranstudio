@@ -1,4 +1,5 @@
 'use strict';
+const {chooseJourneyChapter}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {viewports}=require('../support/journey-viewports');
@@ -14,7 +15,7 @@ test('第二段三课可切换、点人物、按Lesson定位和实际进入，�
   try{
     await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
     const before=await(await p.request.get(base+'api/me')).json();
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');await ready(p);
+    await chooseJourneyChapter(p,'neighborhood');await ready(p);
     await expect(p.locator('[data-map-course]')).toHaveCount(3);
     for(const id of ['unit7-8','unit9-10','unit11-12']){
       await p.locator(`[data-landmark-select="${id}"]`).click();
@@ -25,12 +26,12 @@ test('第二段三课可切换、点人物、按Lesson定位和实际进入，�
     // Searching an even lesson must land on the exact pair, even when the
     // student starts in the other map district. Enter the actual course route.
     for(const n of [8,10,12]){
-      await p.getByLabel('旅程地图范围',{exact:true}).selectOption('opening');
+      await chooseJourneyChapter(p,'opening');
       await openCourseDirectory(p);await p.getByLabel('查找 Lesson',{exact:true}).fill(String(n));
       const result=p.locator('.journey-course:visible');await expect(result).toHaveCount(1);
       await expect(result).toHaveAttribute('data-unit',`unit${n-1}-${n}`);
       await result.locator('.journey-locate').click();await ready(p);
-      await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('neighborhood');
+      await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');
       await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
       await p.locator('.journey-dock .journey-start').click();
       await expect(p).toHaveURL(new RegExp(`unit${n-1}-${n}/#learn/words$`));
@@ -39,7 +40,7 @@ test('第二段三课可切换、点人物、按Lesson定位和实际进入，�
       await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
     }
     await p.reload();await ready(p);
-    await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('neighborhood');
+    await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit11-12');
     const after=await(await p.request.get(base+'api/me')).json();
     expect(after.courses.map(c=>[c.id,c.stars,c.firstFullStarAt])).toEqual(before.courses.map(c=>[c.id,c.stars,c.firstFullStarAt]));
@@ -52,7 +53,7 @@ test('第二段完整局部场景和点击区适配统一尺寸，缺图可恢�
   const bounds={'unit7-8':[.106858,.074163,.933014,.974482],'unit9-10':[.187400,.193780,.830941,.850080],'unit11-12':[.172526,.086914,.853516,.927734]};
   try{
     await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');await ready(p);
+    await chooseJourneyChapter(p,'neighborhood');await ready(p);
     await p.locator('[data-map-course="unit11-12"]').click();
     let moduleReference;
     for(const [width,height] of viewports()){
@@ -67,8 +68,8 @@ test('第二段完整局部场景和点击区适配统一尺寸，缺图可恢�
     await expect(failed().locator('[data-landmark-select]')).toBeHidden();
     await expect(failed().locator('[data-map-course]')).toBeVisible();
     for(const id of ['unit7-8','unit9-10'])await expect(p.locator('[data-module-course="'+id+'"]')).toHaveAttribute('data-art-state','ready');
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption('opening');await ready(p);await expect(p.locator('[data-module-course][data-art-state="error"]')).toHaveCount(0);
-    await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');await expect(p.locator('[data-module-course]')).toHaveCount(3);await expect(failed()).toHaveAttribute('data-art-state','error');
+    await chooseJourneyChapter(p,'opening');await ready(p);await expect(p.locator('[data-module-course][data-art-state="error"]')).toHaveCount(0);
+    await chooseJourneyChapter(p,'neighborhood');await expect(p.locator('[data-module-course]')).toHaveCount(3);await expect(failed()).toHaveAttribute('data-art-state','error');
     await p.unroute('**/assets/course-journey/shirt-return-v1.webp*');await p.getByRole('button',{name:'重新加载 Lesson 11–12 场景',exact:true}).click();
     await ready(p);await expect(failed().getByRole('status')).toHaveCount(0);await expect(p.locator('[data-story-course="unit11-12"]')).toBeVisible();
   }finally{await student.context.close();}
@@ -85,8 +86,8 @@ test('只开放Lesson11–12时直接展示第二段且不泄露未授权课程�
     await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await ready(p);
     // Lesson 31–32 is also authorized and now has its own map district.
     // Assert the exact two allowed districts, not the pre-expansion count.
-    expect(await p.getByLabel('旅程地图范围',{exact:true}).locator('option').evaluateAll(options=>options.map(option=>option.value))).toEqual(['neighborhood','outdoors']);
-    await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveValue('neighborhood');
+    await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveCount(0);expect(await p.locator('.journey-course').evaluateAll(rows=>rows.map(row=>row.dataset.unit))).toEqual(['unit11-12','unit31-32']);
+    await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');
     await p.goto(base+'unit7-8/');await expect(p.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();
   }finally{await student.context.close();}
 });
@@ -97,7 +98,7 @@ test('第二段三课的星章统一跟随人物，零星部分星满星不串�
   const bounds={'unit7-8':[.106858,.074163,.933014,.974482],'unit9-10':[.187400,.193780,.830941,.850080],'unit11-12':[.172526,.086914,.853516,.927734]};
   try{
     const before=await(await p.request.get(base+'api/me')).json();
-    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');
+    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await chooseJourneyChapter(p,'neighborhood');
     let stars=0;await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars}))}});});
     let moduleReference;
     for(stars of [0,2,5]){
@@ -118,7 +119,7 @@ test('第二段人物绑定同一连续地形的原始区段，真实鞋底位�
   // foot frame would silently mix source and section coordinates.
   const floors={'unit9-10':[.24,.46,.78,.61],'unit11-12':[.24,.46,.78,.61]};
   try{
-    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');await ready(p);
+    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await chooseJourneyChapter(p,'neighborhood');await ready(p);
     let reference;
     for(const [width,height] of viewports()){
       await p.setViewportSize({width,height});
@@ -144,7 +145,7 @@ test('小屏点击和键盘定位只滚动页面，不滚动地图内部裁切�
   await adminLogin(page,base);const account=await createStudent(page,'地图内部滚动','小川',lessons);
   const student=await studentLogin(browser,account,base,{viewport:{width:390,height:844},reducedMotion:'reduce'}),p=student.page;
   try{
-    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await p.getByLabel('旅程地图范围',{exact:true}).selectOption('neighborhood');await ready(p);
+    await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();await chooseJourneyChapter(p,'neighborhood');await ready(p);
     await p.setViewportSize({width:320,height:568});
     for(const id of ['unit11-12','unit9-10','unit7-8']){
       await p.locator(`[data-map-course="${id}"]`).click();

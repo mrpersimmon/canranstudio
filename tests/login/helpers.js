@@ -87,6 +87,6 @@ async function waitForCourseReady(page) {
 async function openMyAccount(page){
   const mobile=page.locator('.journey-bottom-nav button');
   if(await mobile.isVisible())await mobile.click();
-  else await page.locator('.student-account > summary').click();
+  else await page.getByRole('button',{name:'我的',exact:true}).click();
 }
 module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };

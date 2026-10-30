@@ -2,7 +2,6 @@
 
 .student-number,.initial-password{font-family:ui-monospace,monospace;overflow-wrap:anywhere}.account-number{font-size:26px;font-weight:800;letter-spacing:1px}.initial-password{font-size:22px}.account-url{font-size:14px;overflow-wrap:anywhere}.spelling-row{display:grid;gap:8px;padding:16px;border:1px solid var(--line);border-radius:14px}.toolbar .actions{margin-top:0}#studentSearch{margin-top:10px}#searchResults{margin-top:12px}
 
-.login-fallback{display:grid;gap:14px;min-width:0;border:0;padding:0;margin:0}
 
 .course-directory{display:block}.course-directory .featured-course{width:100%}.course-directory .featured-copy>h2{margin:0}.course-directory .featured-copy>p.course-intro{margin-top:14px}.course-directory .featured-copy>p.resume-location{margin-top:10px}
 
@@ -49,3 +48,6 @@ body.student-portal{background:#fdfbf5;color:#513422}
 .viewport-metrics-table th,.viewport-metrics-table td{padding:10px 12px;border-bottom:1px solid #e7ddce;white-space:nowrap}
 .viewport-metrics-table th{background:#f4f0e7;font-weight:600}
 .viewport-metrics-table tbody tr:last-child td{border-bottom:0}
+
+/* No credential controls are rendered until the server confirms an anonymous session. */
+.portal-loading{min-height:55dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px 12px;color:#513422}.portal-loading h1{font-size:25px;margin:0}.portal-loading p{font-size:15px;color:#8c7662;margin:0}.portal-loading a{color:#216d4e}.portal-spinner{width:30px;height:30px;border:3px solid #e8e0cf;border-top-color:#216d4e;border-radius:50%;animation:portal-spin 1s linear infinite}@keyframes portal-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.portal-spinner{animation:none}}

@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-30",
+  "baseCommit": "febf8d2c7df2075524bed0e2958e1fcb22646b77",
+  "branch": "codex/book-version",
+  "scope": "Local uncommitted fix; no production changes; unique scenarios, not sum of reruns",
+  "counts": {
+    "chromium": 19,
+    "webkit": 5
+  },
+  "runs": [
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-complete-chromium.json",
+      "sha256": "04bf82a9bbda3ec8d1b573c279677feb9e08fc3e7c8bca65cc24f0096dfc00c6",
+      "stats": {
+        "startTime": "2026-10-30T06:28:13.304Z",
+        "duration": 30049.549,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录学生可打开老师登录入口，两个角色的身份判断分开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录返回课程、刷新和改密入口不闪登录表单，网络失败允许原位重试",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "课程与纪念册共用我的面板、旧记录和动效设置，历史入口可跨页打开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "手机目录只有一个滚动区域，长目录、短结果和末课均可操作",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "未登录、过期和旧学习码的入口只在身份明确后显示登录",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-regression.json",
+      "sha256": "d3d690bd2456a65c6b0c6e93f55b52533e7a597404fff7fbea7c13dcf58a5b54",
+      "stats": {
+        "startTime": "2026-10-30T06:12:46.219Z",
+        "duration": 125238.231,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "award-book.spec.js",
+          "title": "三单元真实获星入册、跨设备、邮局切卡与动图不重复请求、账号隔离",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "copy-polish.spec.js",
+          "title": "账号课程与纪念册文案统一，短记录同步、目录状态和保存动图清楚",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "字体下载失败不封锁目录，后台重试不改学习成果",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "directory-font-preparation.spec.js",
+          "title": "后台字体未完成也能立即点课，返回目录后继续准备且成绩不变",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "journey-next-three.spec.js",
+          "title": "只开放Lesson11–12时直接展示第二段且不泄露未授权课程入口",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "journey-readiness-contract.spec.js",
+          "title": "就绪快检保留切换、课程顺序、真实解码与空目录的原等待边界",
+          "status": "unexpected",
+          "results": [
+            "failed"
+          ]
+        },
+        {
+          "file": "recovery.spec.js",
+          "title": "旧公开缓存在线迁移后要求登录，真实匿名成果保留而不认领",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-final.json",
+      "sha256": "fdce1d8d43a862fe315722fad874e72741d473c7fdca96f87cf7ba8fae234ef7",
+      "stats": {
+        "startTime": "2026-10-30T06:15:58.883Z",
+        "duration": 27807.008,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "journey-readiness-contract.spec.js",
+          "title": "就绪快检保留切换、课程顺序、真实解码与空目录的原等待边界",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录返回课程、刷新和改密入口不闪登录表单，网络失败允许原位重试",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "课程与纪念册共用我的面板、旧记录和动效设置，历史入口可跨页打开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "手机目录只有一个滚动区域，长目录、短结果和末课均可操作",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "未登录、过期和旧学习码的入口只在身份明确后显示登录",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-auth-regression.json",
+      "sha256": "466ad1ae3e9866fc620d8dc8b705808d86551bf4dc0aedaf35595f02f5d0142a",
+      "stats": {
+        "startTime": "2026-10-30T06:16:09.128Z",
+        "duration": 24956.344,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "auth-cooldown.spec.js",
+          "title": "student：真实429显示剩余时间和北京时间，客户端时钟错误也能到期，且不会自动重试",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "auth-cooldown.spec.js",
+          "title": "账号冷却不阻止切换另一学生；来源冷却不能通过改学号解除",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-metrics.json",
+      "sha256": "8e978966f047f378d868e71b696a9a8cdd8ecc550c346fe81b69d87a99ba2283",
+      "stats": {
+        "startTime": "2026-10-30T06:18:51.876Z",
+        "duration": 23146.592,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "身份等待和连接失败不是已确认页面，不污染登录与首页尺寸统计",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "实际页面上报尺寸，旋转回原尺寸去重，管理员可查看并导出待验证环境",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "viewport-metrics.spec.js",
+          "title": "来源、载荷、预览排除及统计失败不影响正常找课",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-account-regression.json",
+      "sha256": "caace32c5c07413a8dd7d70a783fe6f9a55bd1e48e76915f4ba2c6e93a78f5ad",
+      "stats": {
+        "startTime": "2026-10-30T06:19:02.096Z",
+        "duration": 16557.907,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-accounts.spec.js",
+          "title": "脚本不可用时不呈现凭据表单，提示启用脚本且不把密码写入地址",
+          "status": "unexpected",
+          "results": [
+            "failed"
+          ]
+        },
+        {
+          "file": "student-accounts.spec.js",
+          "title": "手机核对多音字和 ü，必填拼音阻止部分添加；主动改密撤销其他设备",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "chromium",
+      "file": "output/student-shell-noscript-final.json",
+      "sha256": "a9151163f277e1810d91a589d32519ebcafb8be935b2822f1abd600b542a54dc",
+      "stats": {
+        "startTime": "2026-10-30T06:21:51.873Z",
+        "duration": 6248.956,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-accounts.spec.js",
+          "title": "脚本不可用时不呈现凭据表单，仍可重新加载且不把密码写入地址",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    },
+    {
+      "browser": "webkit",
+      "file": "output/student-shell-complete-webkit.json",
+      "sha256": "183126a4441f381644121d0898c116d9c2c05d30f5f5213f565a5495e3223063",
+      "stats": {
+        "startTime": "2026-10-30T06:28:13.247Z",
+        "duration": 59385.878,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "entries": [
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录学生可打开老师登录入口，两个角色的身份判断分开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "已登录返回课程、刷新和改密入口不闪登录表单，网络失败允许原位重试",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "课程与纪念册共用我的面板、旧记录和动效设置，历史入口可跨页打开",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "手机目录只有一个滚动区域，长目录、短结果和末课均可操作",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        },
+        {
+          "file": "student-navigation.spec.js",
+          "title": "未登录、过期和旧学习码的入口只在身份明确后显示登录",
+          "status": "expected",
+          "results": [
+            "passed"
+          ]
+        }
+      ]
+    }
+  ],
+  "nodeChecks": {
+    "unitPassed": 3,
+    "workflowPassed": 13
+  },
+  "build": {
+    "journey": {
+      "files": 2,
+      "bytes": 383950
+    },
+    "album": {
+      "files": 86,
+      "bytes": 22393291
+    }
+  },
+  "limitations": [
+    "Physical Android WeChat and Quark not re-tested",
+    "No physical soft-keyboard or OS sleep-resume test",
+    "Mobile WebKit wheel API unavailable; direct outer-scroll prevention and native focus scrolling checked",
+    "Full CI and production release not run"
+  ],
+  "finalStaticChecks": {
+    "documents": 6,
+    "modifiedJavaScriptSyntax": 26,
+    "gitDiffWhitespace": "passed"
+  }
+}

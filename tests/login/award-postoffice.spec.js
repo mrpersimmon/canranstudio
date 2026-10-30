@@ -41,8 +41,8 @@ test('原卡完整字库冷载超过20秒时继续等待，恢复后保留原名
   await expect.poll(async()=>await(await p.request.get('/__test__/course-held')).json()).toContain(fixture.originalFont);
   // Deliberately cross the former deadline; this is a controlled HTTP hold.
   await p.waitForTimeout(21000);
-  await expect(p.getByRole('heading',{name:'正在准备你的纪念卡…',exact:true})).toBeVisible();
-  await expect(p.getByRole('heading',{name:'暂时打不开纪念卡',exact:true})).toHaveCount(0);
+  await expect(p.getByRole('heading',{name:'正在打开纪念册…',exact:true})).toBeVisible();
+  await expect(p.getByRole('heading',{name:'暂时无法打开纪念册',exact:true})).toHaveCount(0);
   await courseResponse(p,fixture.originalFont,null,{resumeHeld:true});
   const card=p.locator('.postoffice-hero-card .certificate');await expect(card).toHaveAttribute('data-unit','unit7-8');await expect(card).toHaveAttribute('data-stars','5');await expect(card.locator('.card-name')).toHaveText('收藏同学');
  }finally{await fixture.cleanup();await fixture.context.close();}

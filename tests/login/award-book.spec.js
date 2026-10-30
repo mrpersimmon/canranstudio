@@ -69,7 +69,7 @@ test('三单元真实获星入册、跨设备、邮局切卡与动图不重复�
  }
  await learner.setViewportSize({width:1280,height:844});
  await learner.getByRole('button',{name:'我的',exact:true}).click();
- if(await learner.getByRole('switch',{name:'界面动效'}).getAttribute('aria-checked')==='false')await learner.getByRole('switch',{name:'界面动效'}).click();
+ if(await learner.getByRole('switch',{name:'纪念册动效'}).getAttribute('aria-checked')==='false')await learner.getByRole('switch',{name:'纪念册动效'}).click();
  await learner.getByRole('button',{name:'关闭我的',exact:true}).click();
  await expect(learner.locator('.postoffice-scene')).toHaveAttribute('data-motion','full');
  await learner.getByRole('button',{name:'选择 Lesson 5–6 新朋友小使者',exact:true}).click();
@@ -83,7 +83,7 @@ test('三单元真实获星入册、跨设备、邮局切卡与动图不重复�
  const guest=await browser.newContext(),anonymous=await guest.newPage();expect((await anonymous.request.get(base+'api/awards')).status()).toBe(401);await anonymous.goto(base+'awards/');await expect(anonymous.getByRole('button',{name:'进入我的课程'})).toBeVisible();await guest.close();
  const someone=await studentLogin(browser,other,base);await someone.page.goto(base+'awards/');await expect(someone.page.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(someone.page.locator('.certificate')).toHaveCount(0);
  const isolated=await(await someone.page.request.get(base+'api/awards?studentId='+saved.student.id)).json();expect(isolated.cards).toEqual([]);
- const switcher=await first.context.newPage();await switcher.goto(base);await switcher.locator('.student-account > summary').click();await switcher.getByRole('button',{name:'退出登录',exact:true}).click();await expect(learner.locator('.certificate')).toHaveCount(0);await expect(learner.getByRole('heading',{name:'请重新登录'})).toBeVisible();await signIn(switcher,other,base);await expect(learner.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(learner.locator('.certificate')).toHaveCount(0);
+ const switcher=await first.context.newPage();await switcher.goto(base);await switcher.getByRole('button',{name:'我的',exact:true}).click();await switcher.getByRole('button',{name:'退出登录',exact:true}).click();await expect(learner.locator('.certificate')).toHaveCount(0);await expect(learner.locator('#loginForm')).toBeVisible();await signIn(switcher,other,base);await expect(learner.getByRole('heading',{name:'我的纪念册'})).toBeVisible();await expect(learner.locator('.certificate')).toHaveCount(0);
  expect(errors).toEqual([]);await first.context.close();await second.context.close();await someone.context.close();
 });
 
@@ -93,8 +93,8 @@ test('素材失败只显示可重试加载页，网络恢复后整册显示',asy
  const card=(await(await learner.page.request.get(base+'api/awards')).json()).cards[0];
  try{
   await courseResponse(learner.page,card.scene,{status:503});
-  await learner.page.goto(base+'awards/');await expect(learner.page.getByRole('heading',{name:'暂时打不开纪念卡'})).toBeVisible();await expect(learner.page.locator('.postoffice-hero-card')).toHaveCount(0);
-  await courseResponse(learner.page,card.scene,null);await learner.page.getByRole('button',{name:'再试一次',exact:true}).click();await expect(learner.page.locator('.postoffice-hero-card')).toBeVisible();
+  await learner.page.goto(base+'awards/');await expect(learner.page.getByRole('heading',{name:'暂时无法打开纪念册'})).toBeVisible();await expect(learner.page.locator('.postoffice-hero-card')).toHaveCount(0);
+  await courseResponse(learner.page,card.scene,null);await learner.page.getByRole('button',{name:'重试切换',exact:true}).click();await expect(learner.page.locator('.postoffice-hero-card')).toBeVisible();
  }finally{await learner.page.request.post('/__test__/course-responses',{data:{reset:true}});await learner.context.close();}
 });
 

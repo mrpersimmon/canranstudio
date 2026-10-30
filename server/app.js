@@ -124,7 +124,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       if (relative === 'health') return json(response, { ok: true, access: 'class-v1' });
       if (['GET','HEAD'].includes(request.method) && journey.files.has(relative)) {
         const file=journey.files.get(relative);
-        response.writeHead(200,{'Content-Type':file.type,'Cache-Control':'no-cache'});
+        response.writeHead(200,{'Content-Type':file.type,'Cache-Control':relative.startsWith('awards/static/')?'public, max-age=31536000, immutable':'no-cache'});
         return response.end(request.method==='HEAD'?undefined:file.body);
       }
       if (journeyAssets.has(relative) || ['assets/course-journey/opening-mobile.webp','assets/course-journey/opening-desktop.webp','assets/course-journey/handbag-couple.webp','assets/course-journey/opening-mobile-v2.webp','assets/course-journey/opening-desktop-v2.webp','assets/course-journey/umbrella-counter-v1.webp','assets/course-journey/friends-trio-v1.webp','assets/course-journey/starflower-medal-v1.webp','assets/course-journey/neighborhood-mobile-v1.webp','assets/course-journey/neighborhood-desktop-v1.webp','assets/course-journey/interview-couple-v1.webp','assets/course-journey/greeting-neighbors-v1.webp','assets/course-journey/shirt-return-v1.webp','assets/course-journey/dress-friends-v1.webp','assets/course-journey/passport-travelers-v1.webp','assets/course-journey/office-introduction-v1.webp','assets/course-journey/visits-mobile-v1.webp','assets/course-journey/visits-mobile-v2.webp','assets/course-journey/visits-desktop-v1.webp','assets/course-journey/icecream-family-v1.webp','assets/course-journey/red-book-pair-v1.webp','assets/course-journey/shelf-glasses-pair-v1.webp','assets/course-journey/kitchen-host-v1.webp','assets/course-journey/living-room-host-v1.webp','assets/course-journey/tidy-room-pair-v1.webp','assets/course-journey/kindness-mobile-v1.webp','assets/course-journey/kindness-desktop-v1.webp','assets/course-journey/home-mobile-v1.webp','assets/course-journey/home-desktop-v1.webp'].includes(relative)) {
@@ -350,8 +350,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if (error.status===401 || error.message==='请先设置新密码') return publicFile(response,'index.html','text/html; charset=utf-8');
           throw error;
         }
-        response.writeHead(200, {'Content-Type':'text/html; charset=utf-8'});
-        return response.end(request.method==='HEAD'?undefined:instrument(awardBook.html,'album',url.searchParams.has('preview')));
+        return publicFile(response,'index.html','text/html; charset=utf-8',200,url.searchParams.has('preview'));
       }
       const courseRoute = relative.match(/^(unit\d+-\d+)(?:\/(?:index\.html)?)?$/);
       if (courseRoute) {
