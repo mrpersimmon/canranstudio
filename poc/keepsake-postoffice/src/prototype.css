@@ -1,0 +1,105 @@
+@font-face{font-family:CanranBody;src:url('/art/body.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:CanranHeading;src:url('/art/heading.woff2') format('woff2');font-weight:500;font-display:swap}
+.postoffice-app{--ink:#51331f;--green:#216d4e;--paper:#fff9eb;--muted:#8a715b;position:absolute;inset:0;background:var(--paper);color:var(--ink);font-family:CanranBody,'Microsoft YaHei',sans-serif;container-type:inline-size}
+.postoffice-app button,.postoffice-app a,.postoffice-sheet button,.postoffice-sheet a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.postoffice-app button,.postoffice-sheet button{color:inherit}
+.device-screen .postoffice-app button:focus-visible,.device-screen .postoffice-app a:focus-visible,.device-screen .postoffice-sheet button:focus-visible,.device-screen .postoffice-sheet a:focus-visible{outline:3px solid #2b805b!important;outline-offset:3px}
+.post-icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:24px;height:24px}
+.post-icon svg{width:100%;height:100%;display:block}
+.postoffice-content{padding-bottom:calc(var(--mobile-safe-area-height) + 78px)}
+.postoffice-scene{position:relative;width:100%;aspect-ratio:1070/1470;isolation:isolate}
+.scene-art{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none}
+.postoffice-heading{position:absolute;z-index:1;top:calc(var(--post-safe-top) + 7px);left:6%;right:6%}
+.postoffice-brand{display:flex;align-items:center;gap:8px;font-family:CanranHeading,serif;font-size:16px;font-weight:500;line-height:27px}
+.postoffice-brand img{width:24px;height:31px;object-fit:contain}
+.postoffice-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 5px}
+.postoffice-heading h1{margin:0;font-family:CanranHeading,serif;font-size:37px;font-weight:500;line-height:1.24;letter-spacing:1px}
+.chapter-label{display:flex;align-items:center;gap:7px;margin:0;font-size:15px;line-height:1.6}
+.search-trigger{display:flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;padding:10px;background:#fffcf2ed;border:1px solid #d9c4a5;border-radius:50%;box-shadow:0 2px 6px #52351e12;color:var(--green);transition:background .16s,transform .16s}
+.search-trigger:hover{background:#fffdf6}
+.search-trigger:active{transform:scale(.95)}
+.search-trigger .post-icon{width:22px;height:22px;color:var(--green)}
+.hero-card{position:absolute;z-index:2;top:57.3%;left:3%;width:94%;aspect-ratio:984/528;padding:0;border:0;background:transparent;border-radius:0;box-shadow:none;filter:drop-shadow(0 4px 3px #4d2e1655);transform:rotate(1.1deg);transition:transform .18s ease;overflow:visible}
+.hero-card:active{transform:rotate(1.1deg) scale(.985)}
+/* The unchanged 984x528 GIF has an opaque export matte outside its paper.
+   Source contour: core/award-card-layout.js, roundRect(8,8,1624,864,34)
+   with a 4px outer stroke at 1640x880, then scaled by .6. The first solid
+   ink pixel is at 4px; its rounded center is 25.2px => radius 21.2px.
+   Mask only that exterior matte. Keep the gold rim and original file bytes. */
+.hero-card img,.thumbnail img,.search-result>img,.chapter-result>img,.card-preview>img{clip-path:inset(.757576% .406504% round 2.154472% / 4.015152%)}
+.hero-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:translateY(6px);transition:opacity .18s ease,transform .22s ease;pointer-events:none}
+.hero-card img.is-selected{opacity:1;transform:translateY(0)}
+.postoffice-selection-status{position:absolute!important;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+.card-load-state{position:absolute;z-index:3;left:5%;top:57%;width:90%;padding:30px 15px;text-align:center;font-size:14px;background:var(--paper)}
+.card-load-state button{padding:10px 20px;border:1px solid #216d4e;border-radius:20px;background:white}
+.chapter-keepsakes{position:relative;z-index:3;margin-top:-10px;padding:18px 14px 10px;border-radius:48% 48% 0 0 / 20px 20px 0 0;background:var(--paper)}
+.chapter-keepsakes h2{display:flex;align-items:center;justify-content:center;gap:13px;margin:0 0 14px;font:500 17px/1.4 CanranHeading,serif}
+.chapter-keepsakes h2:before,.chapter-keepsakes h2:after{content:'';width:31px;border-top:1px solid #d8c5a4}
+.card-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.card-option{min-width:0;padding:0;border:0;background:transparent;font-size:12px;line-height:1.5}
+.thumbnail{display:block;aspect-ratio:984/528;border-radius:5px;box-shadow:0 2px 5px #53351f21;outline:1px solid #d5bd98;outline-offset:2px;transition:outline-color .15s}
+.thumbnail img{display:block;width:100%;height:100%;object-fit:contain;border-radius:0}
+.thumbnail-label{display:block;margin:9px 0 0;padding:5px 2px;border-radius:18px;background:#f0e5cf;white-space:nowrap}
+.card-option[aria-pressed=true] .thumbnail{outline:3px solid #2f845b}
+.card-option[aria-pressed=true] .thumbnail-label{background:var(--green);color:white}
+.primary-action{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;width:100%;padding:10px 20px;background:var(--green,#216d4e);border:0;border-radius:28px;text-decoration:none;color:#fffdf5!important;font-size:17px;line-height:1.5;box-shadow:0 3px 8px #216d4e16;transition:transform .16s,background .16s}
+.primary-action:active{transform:scale(.98);background:#19583d}
+.chapters-action{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;min-height:44px;margin-top:18px;padding:4px;border:0;background:transparent;font-size:15px}
+.chapters-action .post-icon{width:21px;height:21px}
+.chapters-action small{font-size:11px;color:#8b725b}
+.demo-note{text-align:center;margin:5px 0 1px;font-size:10px;color:#8a7864}
+.postoffice-nav{position:absolute;z-index:12;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(3,1fr);background:#fffcf4;border-top:1px solid #dfd1b8}
+.postoffice-nav button{position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;min-height:58px;border:0;background:transparent;font-size:12px;color:#85715c}
+.postoffice-nav .post-icon{width:26px;height:26px}
+.postoffice-nav button[aria-current=page]{color:var(--green)}
+.postoffice-nav button[aria-current=page]:after{content:'';position:absolute;bottom:3px;left:calc(50% - 20px);width:40px;border-bottom:2px solid var(--green);border-radius:2px}
+.postoffice-toast{position:absolute;z-index:35;left:18px;right:18px;display:flex;gap:8px;align-items:center;justify-content:center;padding:12px 14px;border-radius:16px;background:#254f3deb;color:#fffdf5;font-size:12px;box-shadow:0 3px 15px #17332520;pointer-events:none}
+.postoffice-toast .post-icon{width:18px;height:18px}
+.postoffice-sheet{--green:#216d4e;--ink:#51331f;font-family:CanranBody,'Microsoft YaHei',sans-serif;color:var(--ink);padding:0 0 18px}
+.bottom-sheet:has(.postoffice-sheet){background:#fff9ed;color:#51331f;font-family:CanranBody,'Microsoft YaHei',sans-serif;touch-action:pan-y}
+.bottom-sheet:has(.postoffice-sheet) .sheet-content{touch-action:pan-y;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#c8b89c transparent}
+.bottom-sheet:has(.postoffice-sheet) .sheet-title{font:500 22px/1.4 CanranHeading,serif;color:#51331f}
+.bottom-sheet:has(.postoffice-sheet) .sheet-description{font:400 12px/1.7 CanranBody,sans-serif;color:#8a725b}
+.postoffice-sheet .sheet-toolbar{display:flex;justify-content:space-between;align-items:center;margin:-6px 0 10px;font-size:12px;color:#88735f}
+.icon-button{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:44px;height:44px;padding:10px;border:0;border-radius:50%;background:#f4ecdc;color:#6c5239}
+.icon-button:disabled{opacity:.32;cursor:default}
+.search-field{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 6px 0 13px;border:1px solid #c9b493;border-radius:14px;background:#fffcf5}
+.search-field:focus-within{outline:2px solid #2d7855;outline-offset:1px}
+.search-field input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#51331f;font-size:16px;line-height:1.5;padding:12px 0;-webkit-appearance:none}
+.search-field input::-webkit-search-cancel-button{display:none}
+.search-field .post-icon{width:21px;height:21px;color:#85705a}
+.search-field .icon-button{width:44px;height:44px;background:transparent}
+.results-count{font-size:12px;color:#8a725b;margin:17px 0 10px}
+.search-results{display:flex;flex-direction:column;gap:8px}
+.search-result{display:flex;align-items:center;gap:11px;padding:11px 8px;width:100%;border:1px solid #e7dac5;border-radius:12px;background:#fffaf0;text-align:left}
+.search-result>img{width:94px;aspect-ratio:984/528;object-fit:contain;box-shadow:0 1px 5px #60472c12}
+.search-result>span:not(.post-icon){display:flex;min-width:0;flex:1;flex-direction:column;gap:3px}
+.search-result small{font-size:12px;color:#287051}
+.search-result strong{font-family:CanranHeading,serif;font-size:15px;font-weight:500}
+.search-result .result-caption{font-size:10px;color:#917c66}
+.search-result>.post-icon{width:16px;height:16px}
+.empty-state{padding:16px 6px 12px;text-align:center}
+.empty-state>.post-icon{width:34px;height:34px;color:#a58e6a}
+.empty-state h3{font-size:16px;margin:12px 0 8px;font-weight:500}
+.empty-state p,.scope-note,.scope-panel p{font-size:13px;line-height:1.8;color:#88745e}
+.secondary-action{min-height:44px;padding:10px 18px;border:1px solid #bda98e;border-radius:22px;background:#fffcf4;font-size:13px}
+.card-preview{display:block;filter:drop-shadow(0 3px 6px #60472c1f)}
+.card-preview>img{display:block;width:100%;height:auto;aspect-ratio:984/528;object-fit:contain}
+.card-paging{display:flex;justify-content:space-between;align-items:center;margin:13px 0 17px;font-size:13px;color:#8d765c}
+.save-hint{text-align:center;font-size:11px;line-height:1.8;color:#907d66;margin:14px 0 0}
+.chapter-result{display:flex;align-items:center;gap:13px;width:100%;padding:14px 10px;border:1px solid #decbb1;border-radius:18px;background:#fff8e9;text-align:left}
+.chapter-result>img{width:66px;height:82px;object-fit:cover;object-position:50% 65%;border-radius:6px}
+.chapter-result>span:not(.post-icon){display:flex;flex:1;flex-direction:column;gap:7px}
+.chapter-result small{font-size:11px;color:#8e765a}
+.chapter-result strong{font:500 20px CanranHeading,serif}
+.chapter-result>span>span{font-size:12px;color:#24704e}
+.scope-note{margin:18px 2px}
+.scope-panel .primary-action{margin-top:24px}
+.chapter-list{display:grid;gap:12px}
+.chapter-result[aria-pressed=true]{border-color:#2f8059;background:#f0f5e9}
+.chapter-result>img{width:96px;height:auto;aspect-ratio:984/528;object-fit:contain;border-radius:0;filter:drop-shadow(0 2px 3px #60472c20)}
+.chapter-result>.post-icon{width:20px;height:20px;color:#216d4e}
+.selection-notice{margin:10px 0;padding:10px 12px;border-radius:10px;background:#f1eadb;color:#6d553e;font-size:12px;line-height:1.6}
+.selection-notice p{margin:0 0 8px}
+@media(prefers-reduced-motion:reduce){.hero-card,.hero-card img,.primary-action,.thumbnail{transition:none!important}.hero-card:active{transform:rotate(1.1deg)}}
+@container(max-width:360px){.postoffice-heading h1{font-size:32px}.postoffice-brand{font-size:14px}.chapter-label{font-size:13px}.postoffice-heading{left:5%;right:5%}.thumbnail-label{font-size:11px}.card-options{gap:8px}}

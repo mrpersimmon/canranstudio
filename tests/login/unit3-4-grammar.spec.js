@@ -74,7 +74,7 @@ test('语法新版真实账号全程：五星同步、跨设备、纪念册、�
     await expect(learner.locator('#certificateName')).toHaveText('小雨');
     const date = await learner.locator('#certificateDate').textContent();
     await learner.getByRole('link', { name: '我的纪念册', exact: true }).click();
-    const card = learner.getByRole('button', { name: '放大 Lesson 3–4 认领小达人', exact: true });
+    const card = learner.getByRole('button', { name: '查看并保存纪念卡：Lesson 3–4 认领小达人', exact: true });
     await expect(card.locator('.certificate')).toHaveAttribute('data-stars', '5');
     await card.click();
     const modal = learner.getByRole('dialog', { name: 'Lesson 3–4 纪念卡' });

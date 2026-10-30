@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-29",
+  "purpose": "Narrow envelope behind unchanged real keepsake cards; remove exposed white corners",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a187ae-99b7-7482-b92b-c74be8d6b020/exec-9cb40adc-d238-4f0b-b09f-8f5aa3fd5dec.png",
+  "output": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/poc/keepsake-postoffice/public/art/postoffice-scene-v3.png",
+  "edit_target": "public/art/postoffice-scene-v2.png",
+  "composition_reference": "design/selected-reference.png",
+  "prompt": "Edit the FIRST image only. The SECOND image is a style and composition reference, never copy its UI or cards. Produce a high quality 1070 x 1470 portrait raster environment plate for the same warm illustrated time-travel post office.\nPreserve the existing upper cream wall, right teal arched window, sunny terracotta village outside, forest-green POST mailbox, brass stamp, wood desk, green blotter, flowers, lighting, viewing angle and painterly detail as closely as possible.\nONLY change the open cream envelope geometry. The current envelope body is too wide and exposes awkward white side triangles around the real card that will be added later in HTML. Make the entire envelope narrower, including ALL paper side corners: its leftmost extent must be at x=8% (86px), rightmost extent at x=92% (984px), or inside that range. Envelope lower edge must stay above y=84% (1235px). The raised triangular rear flap peak stays at x=50%, y=36% (about535,529). Keep its round sepia village postmark without any new words. The upper edge of its sage-green inner lining should extend gently down toward the right from y=52.5% to54%, so a thin meaningful band of inner green paper remains visible above the future card. Natural thick paper edges and soft contact shadows on the desk.\nVERY IMPORTANT future DOM card placement: x3% through97%, top y56%, width94%, landscape ratio984:528, clockwise angle1.1degrees. This future card will entirely cover the lower white envelope body. Keep the paper envelope and corners comfortably INSIDE that future card width. Use the second reference only to understand the pleasing relationship of an original keepsake card resting IN FRONT of the envelope with the upper flap and green lining behind.\nDO NOT draw the future card. DO NOT draw any card, certificate, people, stars, placeholder rectangles, empty card-shaped plaques, white tags, UI, buttons, page titles, search boxes, text labels, phone frames or status bars. The only permitted legible text is the existing POST on the environmental mailbox. Keep left upper x0-64%, y0-35% as the current uncluttered warm cream wall for actual HTML text. No new foliage or objects in that text safe area. No transparency. No cropping or stretching.",
+  "transparent_background": false,
+  "inspection": {
+    "width": 1070,
+    "height": 1470,
+    "paper_extents_approx": {
+      "left": "7.3%",
+      "right": "92.2%",
+      "bottom": "82.7%",
+      "peak": "36.4%"
+    },
+    "green_lining_upper_edge_approx": {
+      "left": "54%",
+      "right": "56.3%"
+    },
+    "recommended_card_top": "57–57.5% if a visible green band is desired; measure in final DOM combination",
+    "notes": [
+      "No card, placeholder or UI drawn into background",
+      "Upper-left cream wall retained",
+      "White envelope body is safely narrower than future x3–97% card",
+      "Slight outboard tolerance versus requested x8–92%; still over 4% inside DOM card edges",
+      "Generated source retained; no source code or browser changed"
+    ]
+  }
+}

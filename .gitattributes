@@ -29,3 +29,5 @@ docs/designs/course-journey/recipes/** -whitespace
 docs/designs/course-journey/evidence/** -whitespace
 docs/designs/course-journey/evidence/**/*.zip binary
 assets/course-journey/** -text
+# The approved prototype verifies protected runtime bytes across Windows and CI.
+poc/keepsake-postoffice/** text=auto eol=lf

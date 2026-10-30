@@ -26,7 +26,7 @@ test('真实旧纸证独立归档后原名日期PNG和打印不变，关课仍�
   const archive=store.certificateArchives(student.id,'unit49-50')[0],raw=JSON.stringify(archive),generation=store.progress(student.id,'unit49-50').generation;
   expect(archive.name).toBe(name);expect(archive.kind).toBe('legacy-paper');expect(store.progress(student.id,'unit49-50').value).toEqual({});
   store.updateClass(student.classId,'原件归档验收班',[]);store.close();await start(false);
-  await page.goto(base+'awards/');await expect(page.getByRole('heading',{name:'已获得的原证书'})).toBeVisible({timeout:30000});
+  await page.goto(base+'awards/');await page.getByRole('button',{name:'我的',exact:true}).click();await page.getByRole('button',{name:/^历史收藏/}).click();await expect(page.getByRole('heading',{name:'已获得的原证书'})).toBeVisible({timeout:30000});
   await expect(page.locator('#historicalCertificates li')).toHaveCount(1);
   await expect(page.locator('#historicalCertificates')).toContainText('15星原版通关证书');
   await page.getByRole('link',{name:'查看原证书',exact:true}).click();const dialog=page.locator('#legacyCertificateDialog');await expect(dialog).toBeVisible({timeout:30000});
@@ -72,7 +72,7 @@ test('仅本机未同步旧纸证可独立查看下载原件，未知匿名键�
   const local=await page.evaluate(()=>{const key='canran:student:'+CanranStudentAccess.student.id+':canran:lesson:unit49-50:learning:v1';return{key,value:localStorage.getItem(key)};});
   await stop();store=openStore(dataDir);const student=store.students().find(row=>row.studentNumber===account.number);expect(store.progress(student.id,'unit49-50').value.activity.unitCertificateIssuedAt).toBeUndefined();
   await store.applySystemUpgrade({backupDirectory:path.join(temporary,'backup'),root});expect(store.certificateArchives(student.id)).toHaveLength(0);store.close();await start(false);await page.unroute('**/api/progress');
-  await page.goto(base+'awards/');await expect(page.getByRole('heading',{name:'这台设备保留的旧证资料'})).toBeVisible({timeout:30000});
+  await page.goto(base+'awards/');await page.getByRole('button',{name:'我的',exact:true}).click();await page.getByRole('button',{name:/^历史收藏/}).click();await expect(page.getByRole('heading',{name:'这台设备保留的旧证资料'})).toBeVisible({timeout:30000});
   // Copy the genuinely earned receipt into unrelated test-only namespaces as
   // negative ownership controls. No achievement or answer is fabricated.
   await page.evaluate(book=>{localStorage.setItem('canran:lesson:unit49-50:learning:v1',book);localStorage.setItem('canran:student:another-test-owner:canran:lesson:unit49-50:learning:v1',book);},local.value);
@@ -81,7 +81,7 @@ test('仅本机未同步旧纸证可独立查看下载原件，未知匿名键�
   const preserved=await png(page,'local-preserved.png');expect(preserved.info).toEqual(original.info);expect(preserved.data.equals(original.data)).toBe(true);await dialog.screenshot({path:info.outputPath('local-paper-view.png')});
   expect(await page.evaluate(key=>localStorage.getItem(key),local.key)).toBe(local.value);
   store=openStore(dataDir);expect(store.certificateArchives(student.id)).toHaveLength(0);expect(store.courseUpgrade(student.id,'unit49-50').stars).toBe(0);expect(store.progress(student.id,'unit49-50').value).toEqual({});store.close();
-  await page.goto(base+'awards/');const download=page.waitForEvent('download');await page.getByRole('button',{name:'下载保留副本',exact:true}).click();await(await download).saveAs(info.outputPath('local-certificate-copy.json'));const copy=JSON.parse(await fs.readFile(info.outputPath('local-certificate-copy.json'),'utf8'));expect(copy.certificate.snapshot.activity.unitCertificateIssuedAt).toBe(JSON.parse(local.value).activity.unitCertificateIssuedAt);
+  await page.goto(base+'awards/');await page.getByRole('button',{name:'我的',exact:true}).click();await page.getByRole('button',{name:/^历史收藏/}).click();const download=page.waitForEvent('download');await page.getByRole('button',{name:'下载保留副本',exact:true}).click();await(await download).saveAs(info.outputPath('local-certificate-copy.json'));const copy=JSON.parse(await fs.readFile(info.outputPath('local-certificate-copy.json'),'utf8'));expect(copy.certificate.snapshot.activity.unitCertificateIssuedAt).toBe(JSON.parse(local.value).activity.unitCertificateIssuedAt);
   // The collector's exact owner prefix is observable from its source contract;
   // an anonymous copy never becomes an account award or enters this list.
   expect(copies.every(item=>item.sourceKey.startsWith('canran:student:'+student.id+':'))).toBe(true);

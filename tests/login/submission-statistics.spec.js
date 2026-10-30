@@ -165,7 +165,7 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     await other.goto(base + 'unit1-2/#learn/certificate');
     await expect(other.locator('#certificateDate')).toHaveText(date); await expect(other.locator('#certificateName')).toHaveText('小禾');
     await other.getByRole('link', { name: '我的纪念册', exact: true }).click();
-    await expect(other.locator('.book')).toHaveAttribute('aria-busy', 'false');
+    await expect(other.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
     await expect(other.locator('.certificate')).toHaveAttribute('data-stars', '5');
   } finally {
     await first?.close(); await second?.close();

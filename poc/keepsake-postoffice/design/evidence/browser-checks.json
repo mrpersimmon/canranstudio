@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-29",
+  "browser": "Codex in-app Chromium",
+  "viewport": "iPhone 393x852 / Pixel 10 427x952 simulated",
+  "cases": [
+    {
+      "case": "fullwidth 2",
+      "results": [
+        "Lesson 1–2礼貌小帮手初识小镇 · 已珍藏"
+      ]
+    },
+    {
+      "case": "outside demo",
+      "message": "这一段旅程还未放入演示\n\n当前体验 Lesson 1–6。完整版本将在全部已授权收藏中搜索。\n\n查看这三张纪念"
+    },
+    {
+      "case": "no match",
+      "message": "还没找到这张纪念\n\n试试课号「2」、范围「3–4」，或卡名「新朋友」。\n\n查看这三张纪念"
+    },
+    {
+      "case": "clear",
+      "results": 3
+    },
+    {
+      "case": "Enter finds Chinese title",
+      "selected": "查看原卡：Lesson 3–4 认领小达人",
+      "keyboard": "false"
+    },
+    {
+      "case": "download original unit3-4",
+      "sha256": "d2d463f2b40f46b78582267ec8306e7f090deb6e4d6bda4b845e9cf936b4be74",
+      "passed": true
+    },
+    {
+      "case": "detail next last",
+      "nextDisabled": true,
+      "original": "/art/unit5-6.gif"
+    },
+    {
+      "case": "rapid close reopen focus",
+      "active": "关闭章节信箱",
+      "dialogs": 1,
+      "insideDialog": true
+    },
+    {
+      "case": "pixel geometry",
+      "appWidth": 427,
+      "images": [
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        },
+        {
+          "complete": true,
+          "height": 528,
+          "width": 984
+        }
+      ],
+      "overflow": false,
+      "screenWidth": 427
+    },
+    {
+      "case": "Pixel keyboard avoids result",
+      "keyboardTop": 760,
+      "resultBottom": 717,
+      "selectedCount": 1,
+      "visible": true
+    },
+    {
+      "case": "thumbnail selection",
+      "selected": "查看原卡：Lesson 3–4 认领小达人",
+      "pressed": 1
+    },
+    {
+      "case": "portal baseline",
+      "scrollTop": 0
+    },
+    {
+      "case": "search returns without moving device shell",
+      "keyboardTop": 1076,
+      "keyboardVisible": "false",
+      "screenBottom": 1076,
+      "scrollTop": 1,
+      "passed": true
+    },
+    {
+      "case": "drag on original scrolls without opening",
+      "contentScroll": 62,
+      "deviceScroll": 1,
+      "dialogs": 0
+    },
+    {
+      "case": "tap after drag opens original",
+      "dialogs": 1
+    },
+    {
+      "case": "blur hides keyboard and preserves keyboard focus ring",
+      "focus": null,
+      "keyboard": "false",
+      "outline": "none",
+      "outlineColor": "rgb(81, 51, 31)",
+      "phase": "before deferred blur fix"
+    },
+    {
+      "case": "blur and visible focus after fix",
+      "phase": "after fix",
+      "keyboard": "false",
+      "focus": "清空搜索",
+      "outline": "solid",
+      "outlineColor": "rgb(43, 128, 91)"
+    },
+    {
+      "case": "iphone keyboard final",
+      "clearTarget": [
+        44,
+        44
+      ],
+      "resultVisible": true,
+      "screenScroll": 1
+    }
+  ],
+  "finalConsole": [],
+  "limitations": [
+    "No real Android / WeChat / Quark",
+    "No desktop production layout or all-72 integration",
+    "No 95% coverage claim"
+  ]
+}

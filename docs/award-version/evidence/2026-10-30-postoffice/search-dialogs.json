@@ -1,0 +1,113 @@
+{
+  "searchChecks": [
+    {
+      "query": "Lesson ８",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "query": "7—12",
+      "expected": 3,
+      "actual": 3
+    },
+    {
+      "query": "12-7",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "query": "145",
+      "expected": 0,
+      "actual": 0
+    },
+    {
+      "query": "新朋友",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "query": "",
+      "expected": 72,
+      "actual": 72
+    }
+  ],
+  "dialogSizeChecks": [
+    {
+      "bottom": 568,
+      "dialogOverflow": false,
+      "height": 568,
+      "inputSize": "16px",
+      "left": 0,
+      "listScrollable": true,
+      "right": 320,
+      "top": 73.84375,
+      "width": 320
+    },
+    {
+      "bottom": 844,
+      "dialogOverflow": false,
+      "height": 844,
+      "inputSize": "16px",
+      "left": 0,
+      "listScrollable": true,
+      "right": 390,
+      "top": 109.734375,
+      "width": 390
+    },
+    {
+      "bottom": 300,
+      "dialogOverflow": false,
+      "height": 300,
+      "inputSize": "16px",
+      "left": 0,
+      "listScrollable": true,
+      "right": 390,
+      "top": 39,
+      "width": 390
+    },
+    {
+      "bottom": 600,
+      "dialogOverflow": false,
+      "height": 600,
+      "inputSize": "16px",
+      "left": 0,
+      "listScrollable": true,
+      "right": 600,
+      "top": 78,
+      "width": 600
+    },
+    {
+      "bottom": 938,
+      "dialogOverflow": false,
+      "height": 900,
+      "inputSize": "16px",
+      "left": 74,
+      "listScrollable": false,
+      "right": 694,
+      "top": 70,
+      "width": 768
+    },
+    {
+      "bottom": 752,
+      "dialogOverflow": false,
+      "height": 768,
+      "inputSize": "16px",
+      "left": 202,
+      "listScrollable": false,
+      "right": 822,
+      "top": 16,
+      "width": 1024
+    },
+    {
+      "bottom": 938,
+      "dialogOverflow": false,
+      "height": 900,
+      "inputSize": "16px",
+      "left": 410,
+      "listScrollable": false,
+      "right": 1030,
+      "top": 70,
+      "width": 1440
+    }
+  ]
+}

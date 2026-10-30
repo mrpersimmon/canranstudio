@@ -94,9 +94,9 @@ test('长姓名和六种卡面：课程、悬浮卡、纪念册放大与实际�
     await p.getByRole('button',{name:'保存动图',exact:true}).click();
     await (await pending).saveAs(info.outputPath('course.gif'));
     await p.getByRole('link',{name:'我的纪念册',exact:true}).click();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy','false');
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy','false');
     await readable(p.locator('.certificate'));
-    await p.getByRole('button',{name:'放大 Lesson 45–46 沟通小能手',exact:true}).click();
+    await p.getByRole('button',{name:'查看并保存纪念卡：Lesson 45–46 沟通小能手',exact:true}).click();
     const modal=p.getByRole('dialog',{name:'Lesson 45–46 纪念卡',exact:true});
     for(const width of [1280,768,390,320]) {
       await p.setViewportSize({width,height:1000});

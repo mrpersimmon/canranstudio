@@ -98,9 +98,9 @@ test('不支持较新取消接口时仍可查看自己的已获纪念卡', async
     await dismissRewardDialog(p);
     await expect(reward).toHaveCount(0);
     await p.goto(base + 'awards/');
-    await expect(p.locator('.book')).toBeVisible();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false');
-    await p.getByRole('button', { name: '放大 Lesson 1–2 礼貌小帮手', exact: true }).click();
+    await expect(p.locator('.postoffice-scene')).toBeVisible();
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
+    await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
     const card = p.getByRole('dialog', { name: 'Lesson 1–2 纪念卡', exact: true });
     await expect(card.locator('.certificate')).toHaveAttribute('data-stars', '1');
     await card.getByRole('button', { name: '关闭纪念卡', exact: true }).click();
@@ -333,7 +333,7 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
     await expect(p.locator('#certificateName')).toHaveText('小禾');
     await expect(p.locator('#certificateDate')).toHaveText(date);
     await p.getByRole('link', { name: '我的纪念册', exact: true }).click();
-    await expect(p.locator('.book')).toHaveAttribute('aria-busy', 'false');
-    await expect(p.getByRole('button', { name: '放大 Lesson 1–2 礼貌小帮手', exact: true })).toBeVisible();
+    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
+    await expect(p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true })).toBeVisible();
   } finally { await student.context.close(); }
 });
