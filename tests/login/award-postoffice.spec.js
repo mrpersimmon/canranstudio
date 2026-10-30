@@ -8,19 +8,34 @@ const base=process.env.AWARD_TEST_BASE||'/lesson/';
 
 // Presentation contract only. Real earning, permanent dates, legacy certificates
 // and owner isolation remain covered by award-book.spec.js and upgrade tests.
-async function collectionFixture(page,browser,{holdInterfaceFont=false}={}){
+async function collectionFixture(page,browser,{holdInterfaceFont=false,holdOriginalFont=false}={}){
  await adminLogin(page,base);const account=await createStudent(page,'邮局交互样本','收藏同学',[/Lesson 1–2/]);
  const session=await studentLogin(browser,account,base),p=session.page;
  const actual=await(await p.request.get(base+'api/awards')).json(),bundle=await createAwardBook(path.resolve(__dirname,'../..'),base);
  const cards=Object.entries(bundle.editions).map(([course,editions])=>{const [edition,meta]=Object.entries(editions).at(-1);return {...meta,course,edition,id:course+':'+edition,current:true,name:'收藏同学',stars:5,firstFullStarAt:'2026-10-16T03:00:00.000Z'};}).sort((a,b)=>+a.course.match(/\d+/)[0]- +b.course.match(/\d+/)[0]);
- await courseResponse(p,base+'api/awards',{json:{...actual,cards}});
+ await courseResponse(p,base+'api/awards',{json:{...actual,cards:holdOriginalFont?cards.filter(card=>card.course==='unit7-8'):cards}});
  const fontFile=[...bundle.files.keys()].find(file=>/postoffice-ui-500-.*\.woff2$/.test(file));expect(fontFile).toBeTruthy();
  const interfaceFont=base+fontFile;
+ const originalFont=base+[...bundle.files.keys()].find(file=>/award-gothic-500-.*\.woff2$/.test(file));
  if(holdInterfaceFont)await courseResponse(p,interfaceFont,{hold:true});
+ if(holdOriginalFont)await courseResponse(p,originalFont,{hold:true});
  await p.goto(base+'awards/',{waitUntil:'domcontentloaded'});
- await expect(p.locator('.postoffice-hero-card .certificate')).toHaveAttribute('data-unit','unit1-2');
- return {...session,cards,interfaceFont,cleanup:()=>p.request.post('/__test__/course-responses',{data:{reset:true}})};
+ if(!holdOriginalFont)await expect(p.locator('.postoffice-hero-card .certificate')).toHaveAttribute('data-unit','unit1-2');
+ return {...session,cards,interfaceFont,originalFont,cleanup:()=>p.request.post('/__test__/course-responses',{data:{reset:true}})};
 }
+
+test('原卡完整字库冷载超过20秒时继续等待，恢复后保留原名原星数',async({page,browser})=>{
+ test.setTimeout(90000);const fixture=await collectionFixture(page,browser,{holdOriginalFont:true}),p=fixture.page;
+ try{
+  await expect.poll(async()=>await(await p.request.get('/__test__/course-held')).json()).toContain(fixture.originalFont);
+  // Deliberately cross the former deadline; this is a controlled HTTP hold.
+  await p.waitForTimeout(21000);
+  await expect(p.getByRole('heading',{name:'正在准备你的纪念卡…',exact:true})).toBeVisible();
+  await expect(p.getByRole('heading',{name:'暂时打不开纪念卡',exact:true})).toHaveCount(0);
+  await courseResponse(p,fixture.originalFont,null,{resumeHeld:true});
+  const card=p.locator('.postoffice-hero-card .certificate');await expect(card).toHaveAttribute('data-unit','unit7-8');await expect(card).toHaveAttribute('data-stars','5');await expect(card.locator('.card-name')).toHaveText('收藏同学');
+ }finally{await fixture.cleanup();await fixture.context.close();}
+});
 
 test('界面字体持续等待也不能阻止原卡出现和保存',async({page,browser})=>{
  test.setTimeout(90000);const fixture=await collectionFixture(page,browser,{holdInterfaceFont:true}),p=fixture.page;
