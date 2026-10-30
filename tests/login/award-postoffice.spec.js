@@ -8,9 +8,9 @@ const base=process.env.AWARD_TEST_BASE||'/lesson/';
 
 // Presentation contract only. Real earning, permanent dates, legacy certificates
 // and owner isolation remain covered by award-book.spec.js and upgrade tests.
-async function collectionFixture(page,browser,{holdInterfaceFont=false,holdOriginalFont=false}={}){
+async function collectionFixture(page,browser,{holdInterfaceFont=false,holdOriginalFont=false,nativeTouch=false}={}){
  await adminLogin(page,base);const account=await createStudent(page,'邮局交互样本','收藏同学',[/Lesson 1–2/]);
- const session=await studentLogin(browser,account,base),p=session.page;
+ const session=await studentLogin(browser,account,base,nativeTouch?{hasTouch:true,isMobile:true,viewport:{width:390,height:844}}:{}),p=session.page;
  const actual=await(await p.request.get(base+'api/awards')).json(),bundle=await createAwardBook(path.resolve(__dirname,'../..'),base);
  const cards=Object.entries(bundle.editions).map(([course,editions])=>{const [edition,meta]=Object.entries(editions).at(-1);return {...meta,course,edition,id:course+':'+edition,current:true,name:'收藏同学',stars:5,firstFullStarAt:'2026-10-16T03:00:00.000Z'};}).sort((a,b)=>+a.course.match(/\d+/)[0]- +b.course.match(/\d+/)[0]);
  await courseResponse(p,base+'api/awards',{json:{...actual,cards:holdOriginalFont?cards.filter(card=>card.course==='unit7-8'):cards}});
@@ -23,6 +23,17 @@ async function collectionFixture(page,browser,{holdInterfaceFont=false,holdOrigi
  if(!holdOriginalFont)await expect(p.locator('.postoffice-hero-card .certificate')).toHaveAttribute('data-unit','unit1-2');
  return {...session,cards,interfaceFont,originalFont,cleanup:()=>p.request.post('/__test__/course-responses',{data:{reset:true}})};
 }
+
+test('原生轻点搜索结果与清空按钮在输入框聚焦时仍有效',async({page,browser})=>{
+ test.setTimeout(90000);const fixture=await collectionFixture(page,browser,{nativeTouch:true}),p=fixture.page;
+ try{
+  await p.getByRole('button',{name:'搜索 Lesson 或纪念卡名称',exact:true}).tap();
+  const query=p.getByRole('searchbox',{name:'搜索 Lesson 或卡名',exact:true});await query.fill('8');await expect(query).toBeFocused();
+  await p.locator('.directory-row').tap();await expect(p.locator('.postoffice-hero-card .certificate')).toHaveAttribute('data-unit','unit7-8');
+  await p.getByRole('button',{name:'搜索 Lesson 或纪念卡名称',exact:true}).tap();await query.fill('144');await expect(query).toBeFocused();
+  await p.getByRole('button',{name:'清空搜索',exact:true}).tap();await expect(query).toHaveValue('');await expect(query).toBeFocused();await expect(p.locator('.directory-row')).toHaveCount(72);
+ }finally{await fixture.cleanup();await fixture.context.close();}
+});
 
 test('原卡完整字库冷载超过20秒时继续等待，恢复后保留原名原星数',async({page,browser})=>{
  test.setTimeout(90000);const fixture=await collectionFixture(page,browser,{holdOriginalFont:true}),p=fixture.page;
