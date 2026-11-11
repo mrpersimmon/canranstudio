@@ -22,6 +22,49 @@
   const originalUnit = (unit, retained) => retained?.kind === 'card'
     ? { ...unit, reward: { ...unit.reward, ...retained.meta, zones: unit.reward.zones } } : unit;
 
+  function courseDestinations(unitId, currentUrl, returnUrl, access) {
+    const current = new URL(currentUrl);
+    const route = current.pathname.match(/^(.*\/)unit\d+-\d+(?:\/(?:index\.html)?)?$/);
+    const base = new URL(route?.[1] || '/', current);
+    const home = new URL(returnUrl || base.href, current);
+    const preview = current.searchParams.get('preview');
+    if (preview && home.origin === current.origin) home.searchParams.set('preview', preview);
+    const pair = /^unit(\d+)-(\d+)$/.exec(unitId);
+    const first = Number(pair?.[1]);
+    const valid = pair && first >= 1 && first <= 143 && first % 2 === 1 && Number(pair[2]) === first + 1;
+    const nextId = valid && first < 143 ? 'unit' + (first + 2) + '-' + (first + 3) : null;
+    const permitted = nextId && (access === undefined || access?.nextCourse?.id === nextId);
+    if (!permitted) return { home: home.href, next: null, label: '' };
+    const next = new URL(nextId + '/', base);
+    if (preview) next.searchParams.set('preview', preview);
+    return { home: home.href, next: next.href, label: 'Lesson ' + (first + 2) + '–' + (first + 3) };
+  }
+
+  function navigation({ unit, returnUrl = document.getElementById('logo')?.href }) {
+    if (!/^unit\d+-\d+$/.test(unit?.id || '')) return null;
+    const nav = make('nav', '', 'course-ending-navigation');
+    nav.setAttribute('aria-label', '课程结束后导航');
+    const home = make('a', '返回首页', 'btn btn-yellow'); home.dataset.courseExit = 'home';
+    const next = make('a', '下一课', 'btn btn-green'); next.dataset.courseExit = 'next';
+    next.hidden = true;
+    nav.append(home, next);
+    function update(access) {
+      const targets = courseDestinations(unit.id, location.href, returnUrl, access);
+      home.href = targets.home;
+      next.hidden = !targets.next;
+      nav.dataset.hasNext = String(Boolean(targets.next));
+      if (targets.next) {
+        next.href = targets.next;
+        next.setAttribute('aria-label', '下一课：' + targets.label);
+      } else next.removeAttribute('href');
+    }
+    // Account entry supplies permission for the adjacent unit. Static course
+    // previews use the published 72-unit sequence without an account session.
+    update(root.CanranAccessReady ? null : root.CanranStudentAccess);
+    root.CanranAccessReady?.then(update).catch(() => update(null));
+    return nav;
+  }
+
   // One card renderer for the course, its settlement and the saved artwork.
   // The caller supplies the account identity; never collect another name.
   function card({ unit, label = unit.copy?.compact ? '我的纪念卡' : '我的单元纪念卡' }) {
@@ -55,6 +98,9 @@
     const date = make('time');
     foot.append(make('span', lesson), date);
     paper.append(brand, title, name, stars, illustration, foot);
+    const frame = make('div', '', 'card-frame'), plane = make('div', '', 'card-design-plane');
+    plane.append(paper); frame.append(plane);
+    const sizing = layout.observeFrame(frame);
     function identity(recipient, identityLabel = '登录后显示姓名') {
       if (retained?.kind === 'card') recipient = retained.name;
       name.textContent = recipient || identityLabel;
@@ -70,7 +116,7 @@
       date.textContent = date.hidden ? '' : dateLabel(state.firstFullStarAt);
       if (date.hidden) date.removeAttribute('datetime'); else date.dateTime = state.firstFullStarAt;
     }
-    return { element: paper, name, date, starImages, ready, update, identity };
+    return { element: paper, frame, resize: sizing.update, name, date, starImages, ready, update, identity };
   }
 
   function mount({ element, unit, go, returnUrl, progress, restart }) {
@@ -87,6 +133,7 @@
       const album = make('a', '我的纪念册', 'btn btn-yellow'); album.href = new URL('awards/', returnUrl).href;
       const actions = make('div', '', 'story-award-actions'); actions.append(link, album);
       section.append(name, date, make('p', '本课通关成果已保留。再次学习使用新的练习记录，原证书和领取日期不变。'), actions);
+      if (progress) { const ending = navigation({unit,returnUrl}); if (ending) section.append(ending); }
       element.append(section); return { update() {} };
     }
     unit = originalUnit(unit, retained);
@@ -115,19 +162,8 @@
     const back = make('a', '返回课程', 'btn btn-yellow'); back.href = returnUrl;
     const backIcon = picture('/assets/awards/return.svg'); backIcon.className = 'shop-icon'; back.prepend(backIcon); controls.append(save, back);
     const status = make('p', '', 'story-award-status'); status.setAttribute('role', 'status');
-    const tasks = make('details', '', 'story-award-tasks'); tasks.append(make('summary', '星星进度'));
-    const explanation = make('p', '每组练习一颗星：同一轮中，每题第一次都答对。');
-    const list = make('ul'); list.setAttribute('aria-label', '五星任务');
-    const items = unit.reward.zones.map(zone => {
-      const item = make('li'), text = make('span'), link = make('button', '去挑战', 'btn btn-mini btn-yellow');
-      link.type = 'button'; link.addEventListener('click', () => {
-        const current = progress?.(zone.id);
-        if (current?.completed && !state.zones[zone.id] && !state.pendingZones?.includes(zone.id)) restart?.(zone.id);
-        go('learn/' + zone.id);
-      });
-      item.append(text, link); list.append(item); return { zone, text, link };
-    });
-    tasks.append(explanation, list); panel.append(paper, controls, status, tasks); element.append(panel);
+    panel.append(view.frame, controls, status); element.append(panel); view.resize();
+    if (progress) { const ending = navigation({unit,returnUrl}); if (ending) controls.after(ending); }
 
     function showName() {
       view.identity(recipient, identityLabel);
@@ -144,15 +180,6 @@
       if (retained?.kind === 'card') next = { ...next, stars: 5, firstFullStarAt: retained.issuedAt };
       state = next; view.update(state);
       slots.forEach((slot, i) => { slot.dataset.earned = String(i < state.stars); });
-      items.forEach(({ zone, text, link }) => {
-        const current = progress?.(zone.id);
-        const [status, action] = state.zones[zone.id] ? ['已获星', '查看']
-          : state.pendingZones?.includes(zone.id) ? ['待同步', '查看']
-          : current?.completed ? ['已完成 · 未获星', '再练一轮']
-          : current?.started ? ['进行中', '继续']
-          : current ? ['未开始', '开始'] : ['待挑战', '去挑战'];
-        text.textContent = zone.title + ' · ' + status; link.textContent = action;
-      });
       showName();
     }
 
@@ -182,5 +209,5 @@
     update(state); return { update };
   }
 
-  core.storyCertificate = { mount, card };
+  core.storyCertificate = { mount, card, navigation, courseDestinations };
 })(globalThis);

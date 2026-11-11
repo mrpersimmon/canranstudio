@@ -1,0 +1,35 @@
+/* Keep each accepted world and its moving props. Only the dialogue/art lanes
+   change: neither a tall transcript nor legacy page spacing may hide a person. */
+body[data-learning-shell] #cover .current-cover>img{width:100%;height:100%;max-width:100%;object-fit:contain}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified{display:flex;flex-direction:column;padding:0;gap:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>.dialogue-log{position:relative;inset:auto;order:0;flex:1;min-height:90px;width:100%;max-width:none;height:auto;box-sizing:border-box;margin:0;padding:10px 14px;align-self:stretch;grid-area:auto;transform:none;background:transparent}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>.learning-story-art{position:relative;inset:auto;order:1;flex:none;width:100%;max-width:none;height:clamp(170px,36dvh,300px);min-height:0;margin:0;padding:0;border:0;box-sizing:border-box;grid-area:auto;transform:none;overflow:hidden;border-radius:0 0 20px 20px}
+body[data-learning-shell] #lessonWorkspace .learning-story-art>.learning-picture-group{position:absolute;inset:auto;left:50%;transform:translateX(-50%);margin:0;padding:0;max-width:none;aspect-ratio:auto;box-sizing:border-box}
+body[data-learning-shell] #lessonWorkspace .learning-story-art>.learning-scene-plane{position:absolute;inset:auto;left:50%;transform:translateX(-50%);margin:0;padding:0;max-width:none;box-sizing:border-box}
+body[data-learning-shell] #lessonWorkspace .learning-picture-group :is(picture,.room-furniture){width:100%;height:100%}
+body[data-learning-shell] #lessonWorkspace .learning-picture-group .room-image{display:block;width:100%;height:100%;max-width:none;object-fit:contain}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified .story-lead{margin:0}
+/* Same speech hierarchy as Lesson1–2: speaker and translation control share
+   the first row, followed by English and the optional complete translation. */
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble{--dialogue-paper:#fffdf7;--dialogue-line:#cbb69a;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 9px;background:var(--dialogue-paper);border-color:var(--dialogue-line);color:#513a2b}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .speaker-right .bubble{--dialogue-paper:#fff6e9}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble .bname{grid-column:1;grid-row:1;align-self:center;margin:0;font-weight:600;line-height:18px;overflow-wrap:anywhere}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble .bbtns{grid-column:2;grid-row:1;align-self:center;justify-self:end;display:block;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble .bbtns .btn{min-width:62px;min-height:44px;padding:4px 10px;white-space:nowrap}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble .btext{grid-column:1/-1;grid-row:2;min-width:0;margin:0;font-weight:700}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble .bcn{grid-column:1/-1;grid-row:3;margin:6px 0 0;padding:6px 0 0;border-top:1px solid #ded0b9}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .bubble::before{content:'';position:absolute;left:-5px;bottom:17px;width:8px;height:8px;background:var(--dialogue-paper);border-left:1px solid var(--dialogue-line);border-bottom:1px solid var(--dialogue-line);transform:rotate(45deg)}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .speaker-right .bubble::before{left:auto;right:-5px;transform:rotate(225deg)}
+body[data-learning-shell] #lessonWorkspace .learning-scene-unified .speaker-center .bubble::before{left:calc(50% - 4px);right:auto;bottom:-5px;transform:rotate(-45deg)}
+body[data-learning-shell] #lessonWorkspace .learning-story-art>p[class$='-location']{position:absolute;inset:6px auto auto 50%;transform:translateX(-50%);max-width:calc(100% - 16px);padding:3px 8px;margin:0;font-size:12px;line-height:16px;z-index:5;white-space:normal}
+/* The final woods chapter used a 420px transcript offset for its notice.
+   Give the narrator and the changing original notice their own art lanes. */
+body[data-learning-shell] #lessonWorkspace .forest-world.learning-story-art .forest-group{left:25%;bottom:28px;width:43%;height:calc(100% - 48px);aspect-ratio:auto}
+body[data-learning-shell] #lessonWorkspace .forest-world.learning-story-art .forest-props{left:73%;top:36px;width:48%;height:calc(100% - 64px)}
+body[data-learning-shell] #lessonWorkspace .forest-world.learning-story-art .forest-object{height:100%;max-height:100%;object-fit:contain}
+body[data-learning-shell] #lessonWorkspace .forest-world.learning-story-art .forest-debris{bottom:18px;height:40px}
+@media(orientation:landscape) and (max-height:480px){
+ body[data-learning-shell] .learning-story-content:has(.learning-scene-unified){overflow:auto;justify-content:flex-start}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified{flex:0 0 320px;min-height:320px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>.learning-story-art{height:210px}
+}

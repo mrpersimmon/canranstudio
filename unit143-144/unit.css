@@ -66,3 +66,7 @@
 @media(max-width:360px){.unit143144-workspace .unit-word>strong{font-size:17px}}
 
 .unit143144-workspace .forest-debris{position:absolute;z-index:1;bottom:42px;left:5%;width:90%;height:70px;object-fit:contain}.unit143144-workspace .forest-group{z-index:3}
+/* One continuous setting like Lesson1–2. The background stays aligned with
+   the foreground art slot, so changing dialogue height cannot move the ground. */
+body.unit143144-workspace[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified{background:#edf0df url('/assets/unit143-144/woods-world-continuous.svg') center bottom/100% var(--learning-story-art-height,240px) no-repeat}
+body.unit143144-workspace[data-learning-shell] #lessonWorkspace .learning-surface .learning-story-art{background:transparent}

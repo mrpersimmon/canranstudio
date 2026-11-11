@@ -18,12 +18,12 @@ test('账号课程与纪念册文案统一，短记录同步、目录状态和�
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     const reveal = p.getByRole('dialog', { name: /纪念卡结算/ });
     await expect(reveal).toBeVisible(); await require('../support/reward-dialog').dismissRewardDialog(p);
-    await p.getByRole('button', { name: '学习记录', exact: true }).click();
+    await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button', { name: '学习记录', exact: true }).click();
     const record = p.getByRole('dialog', { name: '学习记录', exact: true });
-    await expect(record.getByText('首次答对', { exact: true })).toHaveCount(5);
+    await expect(record.getByText('本轮首答正确', { exact: true })).toHaveCount(5);
     await expect(record.locator('#learningSaveStatus')).toHaveText('已同步');
     await record.getByRole('button', { name: '关闭', exact: true }).click();
-    await p.getByRole('button', { name: '学习设置', exact: true }).click();
+    await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button', { name: '学习设置', exact: true }).click();
     const settings = p.getByRole('dialog', { name: '学习设置', exact: true });
     await expect(settings.getByText('小禾', { exact: true })).toBeVisible();
     await settings.getByRole('button', { name: '关闭', exact: true }).click();

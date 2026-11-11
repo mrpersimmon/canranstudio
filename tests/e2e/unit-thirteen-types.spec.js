@@ -20,7 +20,7 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
 });
 test('辨认问句保存选择，错误只重试，新题保持未答',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans'),check=room.getByRole('button',{name:'检查答案',exact:true});
- await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看。');
+ await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
  await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'Is this your book?');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
  await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
  await page.getByRole('button',{name:'学习记录',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('订正完成');

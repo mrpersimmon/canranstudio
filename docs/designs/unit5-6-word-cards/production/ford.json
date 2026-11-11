@@ -1,0 +1,100 @@
+{
+  "asset": "ford",
+  "status": "selected",
+  "documented_at_utc": "2026-10-30 13:48:00 UTC",
+  "mode": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "use_case": "style-transfer",
+  "model": "Not exposed by built-in tool",
+  "transparent_background": true,
+  "input_images": [
+    {
+      "role": "edit_target",
+      "path": "docs/designs/unit5-6-word-cards/references/ford-before.png",
+      "sha256": "5edb36c26934d6cbb8f2ae4bf5c4764e7d42e5d225ec342508f8dcd2e7cc370e",
+      "width": 240,
+      "height": 240,
+      "absolute_path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/ford-before.png"
+    },
+    {
+      "role": "approved_storybook_style_reference",
+      "path": "assets/awards/unit5-6-friends.webp",
+      "sha256": "5e14f4b2b4ec86ede7bc586e0df14de4fe50adaefc55659c799eb5b8dfbe06bd",
+      "width": 880,
+      "height": 859,
+      "absolute_path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+    },
+    {
+      "role": "companion_car_style_reference",
+      "path": "assets/unit5-6-word-cards/raw/volvo-v1.png",
+      "sha256": "183364fc02e43fc687b80bb3fd22f8e44447455e95be0fd2302c097ce6a87c8e",
+      "width": 1700,
+      "height": 1060,
+      "absolute_path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/volvo-v1.png"
+    }
+  ],
+  "prompt": "Use case: style-transfer\nAsset type: single transparent vocabulary-card illustration, displayed at about 140 x 110 CSS pixels.\nInput images: Image 1 is the EDIT TARGET, the simple gray-blue sedan with Ford written beneath it. Image 2 is the approved children's storybook STYLE REFERENCE ONLY. Image 3 is the finished companion gray-teal wagon asset and the matching CAR-ILLUSTRATION STYLE REFERENCE. Use Images 2 and 3 for identical linework, surface texture, painted volume and warmth. Do not copy the wagon's body shape; the new vehicle must remain a sedan.\nPrimary request: Redraw the car from Image 1 as a polished illustration from the same picture book as Images 2 and 3. Preserve its muted gray-blue color, simple compact three-box sedan identity, relatively long front hood and separate short rear trunk. Remove the word Ford entirely.\nStyle/medium: Detailed but highly readable 2D children's storybook illustration. Warm dark-brown hand-drawn outlines, gently organic contours, soft matte paper-textured painted fills, subtle dimensional shading, restrained cream highlights, and warm soft light. Match the friendly gouache-like finish of Image 3. Not a photograph, glossy product render, 3D toy, or crude geometric symbol.\nSubject/perspective: One complete gray-blue sedan faces RIGHT, in a mild front-side three-quarter perspective, nearly side-on with a small view of the grille. Distinct hood, raised passenger cabin, sloped rear window and separate rear trunk. Clear windows with no occupants, modest simple grille and headlights, complete side mirror, complete bumper and body. Show two complete near-side wheels resting on the same ground level. A small physically correct far-side tire fragment is permissible if required by perspective, but no duplicate, detached or floating wheels. Keep all wheel placement mechanically coherent.\nComposition: Landscape transparent canvas. Center the whole car. Subject should occupy approximately 84% of the canvas width, with at least 8% fully clear margin on the left and right and ample clear space above and below. Do not crop wheels, body, mirror, bumper or shadow.\nBackground/edges: Genuinely transparent RGBA background. Only one small soft low-opacity neutral gray-brown contact shadow immediately under the vehicle. NO backdrop, colored glow, haze, dark vignette, white halo, sticker outline, scenery, road or floor.\nText: None.\nConstraints: No word Ford or other writing, no letters, no numbers, no brand logo, no badge, no watermark, no people, no extra objects, no environment, no border or frame. Preserve gray-blue sedan identity and distinguish it clearly from the wagon reference. Output one finished isolated illustration only.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "selected": true,
+      "prompt": "Use case: style-transfer\nAsset type: single transparent vocabulary-card illustration, displayed at about 140 x 110 CSS pixels.\nInput images: Image 1 is the EDIT TARGET, the simple gray-blue sedan with Ford written beneath it. Image 2 is the approved children's storybook STYLE REFERENCE ONLY. Image 3 is the finished companion gray-teal wagon asset and the matching CAR-ILLUSTRATION STYLE REFERENCE. Use Images 2 and 3 for identical linework, surface texture, painted volume and warmth. Do not copy the wagon's body shape; the new vehicle must remain a sedan.\nPrimary request: Redraw the car from Image 1 as a polished illustration from the same picture book as Images 2 and 3. Preserve its muted gray-blue color, simple compact three-box sedan identity, relatively long front hood and separate short rear trunk. Remove the word Ford entirely.\nStyle/medium: Detailed but highly readable 2D children's storybook illustration. Warm dark-brown hand-drawn outlines, gently organic contours, soft matte paper-textured painted fills, subtle dimensional shading, restrained cream highlights, and warm soft light. Match the friendly gouache-like finish of Image 3. Not a photograph, glossy product render, 3D toy, or crude geometric symbol.\nSubject/perspective: One complete gray-blue sedan faces RIGHT, in a mild front-side three-quarter perspective, nearly side-on with a small view of the grille. Distinct hood, raised passenger cabin, sloped rear window and separate rear trunk. Clear windows with no occupants, modest simple grille and headlights, complete side mirror, complete bumper and body. Show two complete near-side wheels resting on the same ground level. A small physically correct far-side tire fragment is permissible if required by perspective, but no duplicate, detached or floating wheels. Keep all wheel placement mechanically coherent.\nComposition: Landscape transparent canvas. Center the whole car. Subject should occupy approximately 84% of the canvas width, with at least 8% fully clear margin on the left and right and ample clear space above and below. Do not crop wheels, body, mirror, bumper or shadow.\nBackground/edges: Genuinely transparent RGBA background. Only one small soft low-opacity neutral gray-brown contact shadow immediately under the vehicle. NO backdrop, colored glow, haze, dark vignette, white halo, sticker outline, scenery, road or floor.\nText: None.\nConstraints: No word Ford or other writing, no letters, no numbers, no brand logo, no badge, no watermark, no people, no extra objects, no environment, no border or frame. Preserve gray-blue sedan identity and distinguish it clearly from the wagon reference. Output one finished isolated illustration only.",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef\\exec-f49e119c-92be-4791-864a-cd30f2415fc3.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "source_path": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef\\exec-f49e119c-92be-4791-864a-cd30f2415fc3.png"
+    }
+  ],
+  "source": {
+    "path": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef\\exec-f49e119c-92be-4791-864a-cd30f2415fc3.png",
+    "sha256": "a9588bfca8187c13aa094482b3da9d8552c9a020fa780d5a4789e303b72b16aa",
+    "width": 1589,
+    "height": 990
+  },
+  "output": {
+    "path": "assets/unit5-6-word-cards/raw/ford-v1.png",
+    "absolute_path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/ford-v1.png",
+    "format": "PNG",
+    "width": 1745,
+    "height": 990,
+    "mode": "RGBA",
+    "bytes": 1201817,
+    "sha256": "950ad5c96d76c7d494b15fddd76067b9fa464a35a02732a14605b6e5749e1678",
+    "postprocessing": [
+      {
+        "operation": "transparent_canvas_padding",
+        "left_px": 78,
+        "right_px": 78,
+        "top_px": 0,
+        "bottom_px": 0,
+        "description": "Added only transparent horizontal canvas space with SourceCopy. No redrawing or resizing."
+      }
+    ]
+  },
+  "validation": {
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "fully_transparent_pixels": 1123040,
+    "opaque_pixels": 785,
+    "partially_transparent_pixels": 603725,
+    "visible_alpha_threshold": 8,
+    "visible_alpha_bounds_inclusive": [
+      147,
+      222,
+      1604,
+      817
+    ],
+    "visible_subject_width_percent": 83.55,
+    "visible_left_margin_percent": 8.42,
+    "visible_right_margin_percent": 8.02,
+    "visually_inspected": true,
+    "findings": [
+      "Muted gray-blue three-box sedan with distinct front hood and separate rear trunk.",
+      "Warm brown hand-drawn contours and soft matte paper-textured fills match the companion Volvo.",
+      "Right-facing mild front-side perspective; complete two near-side wheels and a coherent partially hidden far-side front tire.",
+      "Complete body, bumpers and side mirror inside the canvas; no floating or duplicate tires.",
+      "No word Ford, other text, brand badges, logos, people, scenery, borders or white sticker outline.",
+      "Real alpha transparency and local contact shadows verified after PNG save.",
+      "One generation only; no targeted regeneration was required.",
+      "No application code, browser or deployment work was performed in this asset-only subtask."
+    ]
+  }
+}

@@ -34,7 +34,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 工坊十二题与结�
       await page.evaluate(() => scrollTo({top:0,behavior:'instant'}));
       await page.screenshot({ path: `output/playwright/unit1-2-grammar-v4/${width}-q${i + 1}.png`, fullPage:true, clip:await room.boundingBox() });
     }
-    await room.getByRole('button', { name: i === 11 ? '完成这一组' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 11 ? '完成练习' : '下一题', exact: true }).click();
   }
   await finishRewardPresentation(page, room);
   await expect(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-number')).toHaveText(['12', '12', '0']);
@@ -50,19 +50,19 @@ test('原有礼貌表达和十个替换物品保留；跨章节和键盘操作�
   await first.getByRole('button', { name: 'Yes?', exact: true }).click();
   await page.goto('/unit1-2/#learn/phrases'); const room = page.locator('.stage-trans');
   await room.getByRole('button', { name: 'Is this your book?', exact: true }).press('Enter');
-  await expect(room.locator('.fb')).toBeEmpty();
+  await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeEnabled();
   await page.goto('/unit1-2/#cover'); await page.getByRole('button', { name: '继续冒险', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/trans$/);
   await expect(room.getByRole('button', { name: 'Is this your book?', exact: true })).toHaveAttribute('aria-pressed','true');
   await page.goto('/unit1-2/#learn/manners'); const application = page.locator('.stage-manners');
-  await application.getByText('礼貌用语', { exact: true }).click();
-  await expect(application.locator('.grammar-expression-list dt')).toHaveText(['Excuse me!', 'Yes?', 'Pardon?', 'Yes, it is.', 'Thank you very much.']);
-  await application.getByText('换个物品问一问', { exact: true }).click();
-  await expect(application.locator('.reference-card')).toHaveCount(10);
-  for (const word of ['pen', 'pencil', 'book', 'watch', 'coat', 'dress', 'skirt', 'shirt', 'car', 'house']) await expect(application.getByText(`Is this your ${word}?`, { exact: true })).toBeVisible();
+  await page.getByRole('button',{name:'更多学习操作'}).click();await page.getByRole('button',{name:'礼貌用语',exact:true}).click();
+  const phrases=page.getByRole('dialog',{name:'礼貌用语',exact:true});await expect(phrases.locator('.grammar-expression-list dt')).toHaveText(['Excuse me!', 'Yes?', 'Pardon?', 'Yes, it is.', 'Thank you very much.']);await phrases.press('Escape');
+  await page.getByRole('button',{name:'更多学习操作'}).click();await page.getByRole('button',{name:'换个物品问一问',exact:true}).click();const models=page.getByRole('dialog',{name:'换个物品问一问',exact:true});
+  await expect(models.locator('.reference-card')).toHaveCount(10);
+  for (const word of ['pen', 'pencil', 'book', 'watch', 'coat', 'dress', 'skirt', 'shirt', 'car', 'house']) await expect(models.getByText(`Is this your ${word}?`, { exact: true })).toBeVisible();await models.press('Escape');
   await page.goto('/unit1-2/#learn/exam');
   await expect(first.getByRole('button', { name: 'Yes?', exact: true })).toHaveAttribute('aria-pressed','true');
   await expect(exam.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-  await expect(exam.locator('.fb')).toBeEmpty(); await expect(page.locator('#starCount')).toHaveText('0');
+  await expect(exam.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/); await expect(page.locator('#starCount')).toHaveText('0');
 });

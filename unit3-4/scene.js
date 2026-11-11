@@ -17,7 +17,7 @@
     return element;
   }
   function showUmbrella(image, name, description, exchange = false) {
-    const source = '/assets/unit3-4/' + name + '.svg';
+    const source = root.CanranCore.unit34Current?.image(name) || '/assets/unit3-4/' + name + '.svg';
     image.alt = description;
     // The course loader can rewrite src to a blob URL; compare the artwork
     // identity rather than repeatedly replacing that prepared resource.
@@ -113,7 +113,7 @@
       if (beats[q.id].item === 'coat') prop.append(picture('umbrella-red', '红色纯色雨伞'));
       status = node('span', 'counter-item-status scene-caption');
       scene.append(speech, prop, status);
-      content.prepend(intro); content.insertBefore(scene, options); answer(false);
+      content.prepend(intro);content.insertBefore(scene, options); answer(false);
     }
     return { present, answer, heading: () => questionStart?.isConnected?questionStart:heading, finish() {}, completion: () => receipt.element };
   }

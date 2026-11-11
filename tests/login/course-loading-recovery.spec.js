@@ -152,7 +152,7 @@ for (const { name, serviceWorkers, unwritable } of [
     const room = p.getByRole('region', { name: '帮忙还手提包', exact: true });
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await flow.select(room, { fills: ['it'] }); await check.click();
-    await expect(room.getByRole('status')).toHaveText('再看看。');
+    await expect(room.getByRole('status')).toHaveText('答错了，再试试。');
     await room.getByRole('button', { name: '再试一次', exact: true }).click();
     await flow.select(room, { fills: ['me'] }); await check.click();
     await room.getByRole('button', { name: '下一题', exact: true }).click();

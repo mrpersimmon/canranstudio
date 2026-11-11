@@ -1,38 +1,31 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
-async function showStarProgress(page) {
-  const tasks = page.locator('.story-award-tasks');
-  if (await tasks.getAttribute('open') === null) await tasks.getByText('星星进度', { exact: true }).click();
-}
-
-test('星星进度区分开始、继续、订正后重练和已获星查看', async ({ page }) => {
+test('顶部阶段入口保留开始、继续与重练，绿色对号只表示已获星', async ({ page }) => {
   await page.goto('/unit1-2/#learn/certificate');
-  await showStarProgress(page);
-  const task = page.locator('.story-award-tasks li').filter({ hasText: '帮忙还手提包' });
-  await expect(task).toContainText('未开始');
-  await task.getByRole('button', { name: '开始', exact: true }).click();
+  await expect(page.locator('.story-award-tasks')).toHaveCount(0);
+  const task = page.locator('.learning-milestones [data-zone="manners"]');
+  await expect(task).not.toHaveClass(/is-complete/);
+  await task.getByRole('link').click();
   const room = page.locator('.stage-manners');
   await flow.select(room, { fills: ['it'] });
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await page.goto('/unit1-2/#learn/certificate');
-  await showStarProgress(page);
-  await expect(task).toContainText('进行中');
-  await task.getByRole('button', { name: '继续', exact: true }).click();
+  await expect(task).not.toHaveClass(/is-complete/);
+  await task.getByRole('link').click();
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
   await room.getByRole('button', { name: '下一站：综合挑战', exact: true }).click();
   await page.goto('/unit1-2/#learn/certificate');
-  await showStarProgress(page);
-  await expect(task).toContainText('已完成 · 未获星');
-  await task.getByRole('button', { name: '再练一轮', exact: true }).click();
+  await expect(task).toHaveAttribute('aria-label',/已学完，未获星/);
+  await task.getByRole('link').click();
+  await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await flow.activity(page, '1-2', 'manners');
   await page.goto('/unit1-2/#learn/certificate');
-  await showStarProgress(page);
-  await expect(task).toContainText('已获星');
-  await task.getByRole('button', { name: '查看', exact: true }).click();
+  await expect(task).toHaveAttribute('aria-label',/已获星/);
+  await task.getByRole('link').click();
   await expect(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['5', '5', '0']);
 });
 
@@ -48,9 +41,9 @@ test('短题干、阅读摘录和语法示范保留必要条件，所有题仍�
     if (i === 1) {
       const reading = room.getByRole('region', { name: '手提包的故事', exact: true });
       await expect(reading.locator('.task-reading-turn:visible')).toHaveCount(3);
-      await reading.getByText('完整故事', { exact: true }).click();
-      await expect(reading.locator('.task-reading-turn:visible')).toHaveCount(7);
-      await reading.getByText('完整故事', { exact: true }).click();
+      await room.getByRole('button',{name:'查看全文',exact:true}).click();
+      const full=page.getByRole('dialog',{name:'完整故事',exact:true});await expect(full.locator('.task-reading-turn:visible')).toHaveCount(7);
+      await full.getByRole('button',{name:'关闭学习参考',exact:true}).click();
     }
     if (i === 2) {
       await expect(room.getByRole('heading', { name: '哪一组词表示“非常”？', exact: true })).toBeVisible();
@@ -61,7 +54,7 @@ test('短题干、阅读摘录和语法示范保留必要条件，所有题仍�
     if (state !== 'blank') return;
     await expect(page.getByRole('heading', { name: '语法小工坊', exact: true })).toHaveCount(1);
     await expect(room.locator('.grammar-phase')).toHaveCount(0);
-    if (i === 4) await expect(room.getByRole('heading', { name: '猜猜自己的身份：我是学生吗？', exact: true })).toBeVisible();
+    if (i === 4) await expect(room.getByRole('heading', { name: '用词块问：我是学生吗？', exact: true })).toBeVisible();
     if (i === 5) {
       await expect(room.getByText('I 指说话人；you 指听话人。', { exact: true })).toBeVisible();
       await expect(room.getByText('I am a student.', { exact: true })).toBeVisible();
@@ -127,7 +120,7 @@ test('仅更新文案保留中途作答，继续全对仍获星且不提示课�
   await page.unroute('**/unit1-2/content.js*'); await page.reload();
   await expect(room.locator('.progress-copy')).toHaveText('第 3 / 5 题');
   await expect(room.getByRole('button', { name: 'house', exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.locator('.fb')).toBeEmpty();
+  await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await room.getByRole('button', { name: '下一题', exact: true }).click();
   await flow.activity(page, '1-2', 'listen');

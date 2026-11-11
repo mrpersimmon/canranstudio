@@ -286,7 +286,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
           if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
-          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
+          const nextId = UNITS[UNITS.indexOf(course) + 1];
+          const nextCourse = who.courses.includes(nextId) ? {id:nextId} : null;
+          return json(response, { student: who.student, preview: who.preview, nextCourse, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
           const {auth} = studentSession(request), course = input.course;

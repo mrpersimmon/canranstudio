@@ -48,7 +48,7 @@ for(const [course,stage,right,wrong] of [['unit1-2','trans','Is this your book?'
     if(course==='unit41-42'){const f=require('../support/unit4142-v153');for(let i=0;i<3;i++){await f.select(room,f.ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}}
     const wrongOption=wrong?room.getByRole('button',{name:wrong,exact:true}):room.locator('.practice-options button').filter({hasNotText:right}).first();
     await wrongOption.click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-    await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');
+    await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '答错了，再试试。' : '再看看，试一次。');
     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
     await room.getByRole('button',{name:right,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();

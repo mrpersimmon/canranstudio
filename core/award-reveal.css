@@ -3,7 +3,7 @@ body:has(dialog.award-reveal[open]){overflow:hidden}
 dialog.award-reveal{position:fixed;inset:0;border:0;padding:0;margin:0;background:transparent;color:#4a3226;width:100%;height:100%;max-width:none;max-height:none;overflow:hidden;outline:none;cursor:pointer;touch-action:manipulation}
 dialog.award-reveal::backdrop{background:rgba(33,43,41,.78);backdrop-filter:blur(3px)}
 .award-reveal-stage{height:100%;overflow:auto;padding:32px 24px;display:flex;justify-content:center;align-items:center;overscroll-behavior:contain;box-sizing:border-box}
-.award-reveal-panel{position:relative;width:min(620px,100%);flex-shrink:0;text-align:center}
+.award-reveal-panel{position:relative;width:min(620px,100%);max-width:calc((100dvh - 140px) * 1.86363636);margin-block:auto;flex-shrink:0;text-align:center}
 .award-confirmation{margin:16px 0 0;color:#fff9eb;font:500 16px/1.6 'Award Round',system-ui,sans-serif;min-height:1.6em}
 dialog.award-reveal[data-dismissible='false']{cursor:default}
 .award-reveal-card{position:relative;width:100%;margin:0 auto;filter:drop-shadow(0 16px 24px #1e1b1850)}
@@ -14,14 +14,10 @@ dialog.award-reveal[data-dismissible='false']{cursor:default}
 .award-upgrade-reminder span{display:inline-block}
 @media(max-width:600px){
  .award-reveal-stage{padding:28px 20px}
- .award-reveal-card{max-width:min(320px,calc((100dvh - 160px) * .86))}
- .award-reveal .story-award-paper{aspect-ratio:.86;border-radius:20px;border-width:2px}
- .award-reveal .story-award-name.is-placeholder{font-size:5cqw}
  .award-reveal .star-source{width:62px;height:62px;top:-36px;right:6px}
  .award-upgrade-reminder{margin-top:20px;font-size:16px;line-height:1.8}
  .award-upgrade-reminder span{display:block}
 }
-@media(max-height:520px) and (min-width:601px){.award-reveal-panel{max-width:calc((100dvh - 140px) * 1.88)}}
 /* Light lives on the awarded stars and the full-star rim, never across the text. */
 @property --gold-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
 .award-reveal .award-star{position:relative;display:inline-flex;flex:none;isolation:isolate}
@@ -48,8 +44,8 @@ dialog.award-reveal[open][data-motion='full'] .award-star[data-earned='true'] .s
 .award-reveal .star-trail{position:fixed;z-index:19;pointer-events:none;width:8px;height:8px;border-radius:50%;background:#fff8cd;box-shadow:0 0 7px 2px #ffc655a6}
 .award-reveal .sparkle{width:10px;height:10px;border-radius:0;background:#fff4c2;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%);filter:drop-shadow(0 0 3px #ffce63)}
 .award-reveal .star-bloom{position:fixed;z-index:18;width:90px;height:90px;pointer-events:none;border-radius:50%;background:radial-gradient(circle,#fffce485 0%,#ffe49a55 25%,#e9b63800 68%)}
-.award-reveal .story-award-paper[data-stars='5']{box-shadow:inset 0 0 0 6px #f4bd55,inset 0 0 0 8px #b17c29,0 0 12px #fbc96366,0 0 38px #e4a52c33}
-.award-reveal .gold-light-ring{position:absolute;inset:0;z-index:4;padding:6px;border-radius:inherit;pointer-events:none;opacity:0;background:conic-gradient(from var(--gold-angle),#d7962e 0deg,#edba52 40deg,#ffe7a1 58deg,#fffde5 70deg,#ffe098 81deg,#dca33b 105deg,#b97922 170deg,#eeb94c 220deg,#fff5cf 247deg,#e3a33d 275deg,#b97922 325deg,#d7962e 360deg);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor}
+.award-reveal .story-award-paper[data-stars='5']{box-shadow:inset 0 0 0 11px #f4bd55,inset 0 0 0 13px #b17c29,0 0 12px #fbc96366,0 0 38px #e4a52c33}
+.award-reveal .gold-light-ring{position:absolute;inset:0;z-index:4;padding:13px;border-radius:inherit;pointer-events:none;opacity:0;background:conic-gradient(from var(--gold-angle),#d7962e 0deg,#edba52 40deg,#ffe7a1 58deg,#fffde5 70deg,#ffe098 81deg,#dca33b 105deg,#b97922 170deg,#eeb94c 220deg,#fff5cf 247deg,#e3a33d 275deg,#b97922 325deg,#d7962e 360deg);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor}
 .award-reveal .story-award-paper[data-stars='5'] .gold-light-ring{opacity:1}
 dialog.award-reveal[open][data-motion='full'] .story-award-paper[data-stars='5'] .gold-light-ring{animation:gold-orbit 5.8s linear infinite,gold-arrive .75s ease-out both!important}
 @keyframes gold-orbit{from{--gold-angle:0deg}to{--gold-angle:360deg}}

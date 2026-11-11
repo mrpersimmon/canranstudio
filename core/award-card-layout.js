@@ -5,6 +5,20 @@
 })(globalThis, function () {
   'use strict';
   const WIDTH = 1640, HEIGHT = 880;
+  // Album, in-course card and star reveal scale the same fixed design plane.
+  // Observe the untransformed frame, not the tilted/animated card bounds.
+  function observeFrame(frame) {
+    const scale = width => frame.style.setProperty('--card-scale', String(width / WIDTH));
+    const update = () => scale(frame.clientWidth);
+    update();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', update);
+      return { update, disconnect: () => window.removeEventListener('resize', update) };
+    }
+    const observer = new ResizeObserver(entries => scale(entries[0].contentRect.width));
+    observer.observe(frame);
+    return { update, disconnect: () => observer.disconnect() };
+  }
   const starLayout = { starX: 90.2, starY: 624.8, starSize: 100, starStep: 123 };
   // Full-width glyph budgets also leave room for Latin names and punctuation.
   const fit = (value, maximum, area) => Math.min(maximum, area / Math.max(1, Array.from(value || '').length));
@@ -71,5 +85,5 @@
     text(lesson + (stars === 5 && date ? ' · ' + date : ''), HEIGHT * .94 - WIDTH * .022 * .825, WIDTH * .022, '#795a46', faces.latinFont, WIDTH * .38, faces.footWeight);
     return canvas;
   }
-  return { typography, prepareFonts, draw, starLayout };
+  return { typography, prepareFonts, draw, starLayout, observeFrame };
 });

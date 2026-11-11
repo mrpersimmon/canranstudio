@@ -29,7 +29,7 @@ test('结算完成信号等待三张卡实际入场结束，较慢动画不提�
   await expect(room.locator('.completion-number')).toHaveText(['5', '5', '0']);
 });
 
-test('三张统计卡按实际提交计次，订正参与连续答对且默认依次入场和跳数', async ({ page }) => {
+test('三张统计卡区分首答题数，订正参与连续答对且默认依次入场和跳数', async ({ page }) => {
   await page.addInitScript(() => {
     window.completionMotionFrames = [];
     window.completionOverflowFrames = [];
@@ -57,13 +57,13 @@ test('三张统计卡按实际提交计次，订正参与连续答对且默认�
       await activity.getByRole('button', { name: '再试一次', exact: true }).click();
     }
   } });
-  await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
-  // 对、对、错、错、对、对、对：订正计正确，重复错答各计一次。
-  await expect(room.locator('.completion-number')).toHaveText(['3', '5', '2']);
-  await expect(room.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+  await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对', '首答正确', '订正完成']);
+  // 对、对、错、错、对、对、对：连续3次；首答正确4题，订正1题。
+  await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
+  await expect(room.locator('.completion-unit')).toHaveText(['次', '题', '题']);
   await expect(room.locator('.stat-streak')).toHaveAccessibleName('本轮最高连续答对 3 次');
-  await expect(room.locator('.stat-correct')).toHaveAccessibleName('本轮实际提交答对，包含订正 5 次');
-  await expect(room.locator('.stat-incorrect')).toHaveAccessibleName('本轮实际提交答错，重复错答分别计数 2 次');
+  await expect(room.locator('.stat-correct')).toHaveAccessibleName('本轮首答正确题数 4 题');
+  await expect(room.locator('.stat-incorrect')).toHaveAccessibleName('本轮订正完成题数 1 题');
   await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'finished');
   await expect.poll(() => page.evaluate(() => window.completionMotionFrames.length)).toBeGreaterThan(30);
   const frames = await page.evaluate(() => window.completionMotionFrames);
@@ -73,7 +73,7 @@ test('三张统计卡按实际提交计次，订正参与连续答对且默认�
   expect(new Set(frames.map(frame => frame[1].number)).size, '答对数字应从 0 递增到最终值').toBeGreaterThan(2);
   expect(await page.evaluate(() => Math.max(...window.completionOverflowFrames)), '统计卡入场全过程不能横向溢出').toBeLessThanOrEqual(1);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.screenshot({ path: OUT + '/actual-submissions-3-5-2.png' });
+  await room.screenshot({ path: OUT + '/question-counts-3-4-1.png' });
 });
 
 test('390×500 短屏结束后从插画顶部露出，不被固定导航遮挡', async ({ page }) => {
@@ -149,7 +149,10 @@ for (const base of ['', '/lesson']) test(`${base || 'root'} 五个答题环节�
   expect(errors).toEqual([]);
 });
 
-test('同题错两次各计一次，订正后刷新保留十次错误，再练重新统计', async ({ page }) => {
+test('同题重复错答不增加题数，原十次错误保留且重练重新统计', async ({ page }) => {
+  // Ten error/reload cycles, then a full new round and real reward animation.
+  // Keep per-action assertions strict; allow the complete workflow to finish.
+  test.setTimeout(90000);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/unit1-2/#learn/manners'); const room = page.locator('.stage-manners');
   for (const [i, wrong] of [{fills:['it']}, 'Yes, it is.', 'Pardon?', '男士', ['you','Thank','very much']].entries()) {
@@ -159,15 +162,18 @@ test('同题错两次各计一次，订正后刷新保留十次错误，再练�
       // Choice questions clear their selection; token selection is rebuilt.
       if (repeat === 0 || !wrong?.fills) await flow.select(room, wrong);
       await expect(check).toBeEnabled(); await check.click();
-      await expect(room.locator('.fb')).toHaveText('再看看。');
+      await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
       await page.reload(); await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
     await flow.select(room, flow.ANSWERS['1-2'].manners[i]); await check.click();
-    await room.getByRole('button', { name: i === 4 ? '完成这一组' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 4 ? '完成练习' : '下一题', exact: true }).click();
   }
   await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion', 'playing');
-  await expectResults(room, [1, 5, 10]);
-  await page.reload(); await expectResults(room, [1, 5, 10]);
+  await expectResults(room, [1, 0, 5]);
+  await page.reload(); await expectResults(room, [1, 0, 5]);
+  const raw=await page.evaluate(()=>JSON.parse(localStorage.getItem(CanranCore.unit12.progress.learningKey)));
+  const round=Object.values(raw.groups).find(g=>g.signature?.includes('u12-types-v1-t04'));
+  expect(round.states.reduce((sum,state)=>sum+state.attempts-Number(state.correct),0)).toBe(10);
   await expect(page.locator('#starCount')).toHaveText('0');
   await expect(room.locator('.completion-card')).not.toHaveClass(/is-celebrating/);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();

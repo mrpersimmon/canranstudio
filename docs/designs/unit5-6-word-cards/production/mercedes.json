@@ -1,0 +1,624 @@
+{
+  "schema_version": 1,
+  "asset": "mercedes",
+  "created_at_utc": "2026-10-30 13:46:01 UTC",
+  "generation_method": "built-in image_gen.imagegen",
+  "model": null,
+  "model_note": "The built-in tool did not expose a model name or seed.",
+  "initial_inputs": [
+    {
+      "role": "edit_target",
+      "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/mercedes-before.png"
+    },
+    {
+      "role": "style_reference",
+      "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+    }
+  ],
+  "transparent_background": true,
+  "selected_attempt": 4,
+  "attempts": [
+    {
+      "attempt": 1,
+      "use_case": "style-transfer",
+      "prompt": "Use case: style-transfer.\nAsset type: one transparent PNG illustration for a children's English vocabulary card displayed at about 140 x 110 CSS pixels.\nInput images: Image 1 is the edit target: a pale lavender-gray long-bodied sedan with two visible wheels and the word \"Mercedes\". Image 2 is the style reference only: a warm, detailed children's storybook commemorative card. Do not copy any people or classroom scenery from Image 2.\nPrimary request: redraw the car from Image 1 as a polished illustration in the same visual family as Image 2. Preserve the car's pale lavender-gray color and recognizable long three-box sedan identity, while replacing the simple geometric icon rendering with carefully drawn storybook detail.\nSubject and composition: one complete sedan, front pointing right, shown in a mild front-side three-quarter view. A long elegant but friendly car body, clearly separated hood, cabin and trunk, exactly two visible wheels; all tires, mirrors, bumper corners and every part of the silhouette entirely inside the canvas. Center the car on a horizontal transparent canvas. The complete car should occupy approximately 84% of canvas width, with about 8% clear safety space on both left and right and comfortable clear space above and below.\nStyle/medium: detailed hand-drawn children's picture-book art matching Image 2: clear warm dark-brown hand-drawn contours, soft paper-like painted fills with a little volume, subtle highlights, gentle warm lighting, restrained tactile texture, soft grounding shadow. The drawing must remain clear and charming when reduced to a small vocabulary card.\nColor palette and materials: pale lavender-gray painted body, light cool translucent-looking window color, dark warm-brown tires and outlines, understated warm cream highlights. Natural storybook shading rather than glossy rendering.\nScene/backdrop: genuinely transparent alpha background, no backdrop, no floor scene. Only the car and a small soft semi-transparent grounding shadow.\nText: no text anywhere. Remove the original word \"Mercedes\" completely. No badges, emblems, logos, license plate letters, watermark or decorative lettering.\nConstraints and avoid: do not create a photograph, photorealistic vehicle, 3D toy render, plastic collectible, simplistic geometric icon or flat diagram. No people, no scenery, no framing, no border, no white sticker outline. Do not crop any part. Do not turn the car left. Do not add extra vehicles. Preserve actual transparency.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/mercedes-before.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent_background": true,
+      "generated_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-5ff320c3-d89a-403c-8ab4-620215f70190.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f\\exec-5ff320c3-d89a-403c-8ab4-620215f70190.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selection_note": "Initial storybook illustration; superseded by targeted removal of the small far-side wheel."
+    },
+    {
+      "attempt": 2,
+      "use_case": "style-transfer",
+      "prompt": "Use case: style-transfer.\nAsset type: one transparent PNG illustration for a children's English vocabulary card displayed at about 140 x 110 CSS pixels.\nInput images: Image 1 is the edit target: a pale lavender-gray long-bodied sedan with two visible wheels and the word \"Mercedes\". Image 2 is the style reference only: a warm, detailed children's storybook commemorative card. Do not copy any people or classroom scenery from Image 2.\nPrimary request: redraw the car from Image 1 as a polished illustration in the same visual family as Image 2. Preserve the car's pale lavender-gray color and recognizable long three-box sedan identity, while replacing the simple geometric icon rendering with carefully drawn storybook detail.\nSubject and composition: one complete sedan, front pointing right, shown in a mild front-side three-quarter view. A long elegant but friendly car body, clearly separated hood, cabin and trunk, exactly two visible wheels; all tires, mirrors, bumper corners and every part of the silhouette entirely inside the canvas. Center the car on a horizontal transparent canvas. The complete car should occupy approximately 84% of canvas width, with about 8% clear safety space on both left and right and comfortable clear space above and below.\nStyle/medium: detailed hand-drawn children's picture-book art matching Image 2: clear warm dark-brown hand-drawn contours, soft paper-like painted fills with a little volume, subtle highlights, gentle warm lighting, restrained tactile texture, soft grounding shadow. The drawing must remain clear and charming when reduced to a small vocabulary card.\nColor palette and materials: pale lavender-gray painted body, light cool translucent-looking window color, dark warm-brown tires and outlines, understated warm cream highlights. Natural storybook shading rather than glossy rendering.\nScene/backdrop: genuinely transparent alpha background, no backdrop, no floor scene. Only the car and a small soft semi-transparent grounding shadow.\nText: no text anywhere. Remove the original word \"Mercedes\" completely. No badges, emblems, logos, license plate letters, watermark or decorative lettering.\nConstraints and avoid: do not create a photograph, photorealistic vehicle, 3D toy render, plastic collectible, simplistic geometric icon or flat diagram. No people, no scenery, no framing, no border, no white sticker outline. Do not crop any part. Do not turn the car left. Do not add extra vehicles. Preserve actual transparency.\n\nComposition refinement, essential: use a nearly side-on camera with only a slight glimpse of the RIGHT-facing front bumper, so only the near-side front and rear wheels are visible. Hide ALL far-side wheels fully behind the body; there must be exactly two tire silhouettes in the entire image. Do not reveal any third tire beneath the front bumper. Place the entire illustration, including its shadow, comfortably inside a central safe rectangle from 9% to 91% of canvas width and 16% to 84% of canvas height. Leave generous actual transparent padding on all sides. Keep the long sedan identity. Make the warm brown outer contour as clear and gently hand-drawn as the people in the second reference, and keep the material softly painted and pictorial.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/mercedes-before.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent_background": true,
+      "generated_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-d48de1ff-a5bd-45bb-a27f-d943ba6f42a4.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f\\exec-d48de1ff-a5bd-45bb-a27f-d943ba6f42a4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selection_note": "Rejected: warm halo and extra far-side tire remained."
+    },
+    {
+      "attempt": 3,
+      "use_case": "precise-object-edit",
+      "prompt": "Use case: precise-object-edit.\nAsset type: transparent children's vocabulary-card car illustration.\n\nImage 1 is the edit target, the already illustrated lavender-gray sedan. Image 2 is style guidance only. Keep Image 1's warm brown hand-drawn contours, softly painted paper texture, lavender-gray long sedan body, glass, lighting, right-facing pose, two large near-side wheels and all car details.\n\nMake one precise correction: remove the small extra far-side tire beneath the RIGHTMOST front bumper. It is the dark-brown curved crescent under the grille, to the right of the large front wheel. Remove that entire far-side tire silhouette so the finished car has EXACTLY TWO visible wheels: the large rear wheel on the left and the large front wheel near the center-right. The under-bumper area must show only transparent background and the existing small soft grounding shadow. Keep the two main wheels complete, round, and unchanged. Do not add another tire.\n\nFraming: preserve the car as a complete centered object on a horizontal canvas, with at least 8% transparent margin on the left and right. It is okay to reduce the car's overall scale slightly to achieve this. All mirrors, tires, body corners and shadow must remain within the canvas.\nBackground: actual transparent alpha. No opaque background, no colored glow or halo, no white contour, no paper rectangle. Only the car and a restrained soft semitransparent shadow immediately underneath.\nNo text, no logo, no badge, no people or scenery. Keep the illustration style and right-facing orientation.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-5ff320c3-d89a-403c-8ab4-620215f70190.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "transparent_background": true,
+      "generated_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-a4d09346-8b08-45d6-89a9-7f95c8c304a9.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f\\exec-a4d09346-8b08-45d6-89a9-7f95c8c304a9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selection_note": "Selected: same hand-painted lavender-gray sedan; the small far-side tire was removed by the image tool."
+    },
+    {
+      "attempt": 4,
+      "use_case": "style-transfer",
+      "requested_scope": "One directed style revision only; this was the sole image generation call for the revision.",
+      "prompt": "Use case: style-transfer.\nAsset type: one transparent children's vocabulary-card car illustration, part of a matched six-car set, displayed around 140 x 110 CSS pixels.\n\nInput image roles:\nImage 1 is the edit target, the pale lavender-gray long sedan currently rendered with too much realistic detail.\nImage 2 is the completed Volvo from the same set. This is a primary style and detail-level reference.\nImage 3 is the completed Ford from the same set. This is a primary style and detail-level reference.\nImage 4 is the original children's storybook commemorative card and confirms the warm, friendly, hand-drawn illustration style. Do not import its people or background.\n\nPrimary request: redraw Image 1 so it belongs naturally beside Images 2 and 3. Preserve its pale lavender-gray identity, recognizably LONG THREE-BOX SEDAN shape, separated hood/cabin/trunk, front pointing RIGHT, mild front-side view, and complete centered car. Change the rendering language to match the finished set: slightly rounder friendly body contours, noticeably THICK warm DARK-BROWN hand-drawn outlines, softly painted paper-textured fills, simple warm volume and restrained highlights.\n\nRequired simplification:\n- Replace the many thin wheel spokes with SIMPLE CREAM HUBCAPS and a single small dark central circle, like the wheels in Images 2 and 3. Solid warm brown tires, no intricate spokes or polished alloy metal.\n- Make the headlights simple softly rounded cream shapes with a gentle warm fill. Remove realistic projector bulbs, lenses and tiny reflective lamp details.\n- Simplify the front grille and bumper to a few broad dark-brown shapes, with no shiny chrome surround, no fine metal rods or luxury detailing.\n- Use a few broad gentle painted planes on the body. Remove bright sharp strip reflections, glossy metal effects and photographic shading.\n- Simplify the windows to pale blue paper-like fills with one or two broad soft highlight shapes, as in Images 2 and 3. Reduce detailed seats, steering wheel and interior shapes.\n- Keep simple readable door handles, door seams and complete mirrors, with the same bold but warm contour weight as the reference cars.\n\nComposition and transparency: one full car on a genuinely transparent horizontal canvas. Preserve the right-facing long-sedan composition. Center the complete car, including all wheels, mirrors and bumper corners, with approximately 8% clear transparent safety margin on both left and right. Two main wheels must remain complete and grounded; any small naturally hidden far-wheel portion may be retained only if visually coherent. Add only small soft semitransparent grounding shadows, like the reference cars. All edges must be complete.\nColor: keep the pale lavender-gray body of Image 1; do not turn it blue like Ford or gray-green like Volvo. Warm dark-brown line work, cream lamps and simple hubcaps, pale soft blue windows.\nAvoid: automotive catalog illustration, realistic luxury-car details, polished chrome, bright specular reflections, intricate wheel spokes, thin precise vector-like lines, photography, 3D plastic toys, crude geometric placeholders. No text, letters, numbers, logos, badges, branding, white outlines, border, scenery or people. No colored background or halo.\nPriority: consistency with the warm, rounded, thick-outlined, paper-painted vocabulary-car set is more important than realistic brand/model accuracy.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mercedes-v1.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/volvo-v1.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/ford-v1.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+      ],
+      "edit_target_sha256_at_generation": "09eeaa0d3c6203e4b341d37727a91b333dce66d783acb9044bcdd5157737c5c2",
+      "edit_target_generated_ancestor_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-a4d09346-8b08-45d6-89a9-7f95c8c304a9.png",
+      "transparent_background": true,
+      "generated_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-be07028e-b3c3-4a1e-8088-84b7cad51925.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f\\exec-be07028e-b3c3-4a1e-8088-84b7cad51925.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selection_note": "Selected: thicker warm brown contours; simpler cream hubcaps, lamps, grille and windows; softer paper-painted lavender-gray long sedan. Matched against the finished Volvo and Ford."
+    }
+  ],
+  "output": {
+    "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mercedes-v1.png",
+    "width": 1712,
+    "height": 1152,
+    "crop": [
+      52,
+      213,
+      1436,
+      621
+    ],
+    "placement": [
+      138,
+      265
+    ],
+    "alpha": {
+      "width": 1712,
+      "height": 1152,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "alpha_bounds": [
+        138,
+        265,
+        1574,
+        886
+      ],
+      "visible_bounds_alpha_8": [
+        140,
+        267,
+        1572,
+        884
+      ],
+      "transparent_pixels": 1336690,
+      "partial_alpha_pixels": 635534,
+      "opaque_pixels": 0,
+      "border_nontransparent_pixels": 0
+    },
+    "previous_sha256": "09eeaa0d3c6203e4b341d37727a91b333dce66d783acb9044bcdd5157737c5c2",
+    "sha256": "11a820846af8fa7159b22a2731e774bdb9c5a53740533e3433f58c57afef2456",
+    "bytes": 1576747
+  },
+  "source_image_alpha": {
+    "width": 1536,
+    "height": 1024,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "alpha_bounds": [
+      23,
+      19,
+      1488,
+      1024
+    ],
+    "visible_bounds_alpha_8": [
+      54,
+      215,
+      1486,
+      832
+    ],
+    "transparent_pixels": 936605,
+    "partial_alpha_pixels": 636259,
+    "opaque_pixels": 0,
+    "border_nontransparent_pixels": 14
+  },
+  "postprocessing": {
+    "method": "Lossless crop and transparent padding only",
+    "source_crop_xywh": [
+      52,
+      213,
+      1436,
+      621
+    ],
+    "crop_basis": "Bounds at alpha >= 8 with 2 px margin; near-transparent disconnected fringe outside the crop was trimmed.",
+    "canvas_size": [
+      1712,
+      1152
+    ],
+    "placement_xy": [
+      138,
+      265
+    ],
+    "resampling": false,
+    "repainting": false,
+    "content_pixel_values_preserved": true
+  },
+  "verification": {
+    "alpha": {
+      "width": 1712,
+      "height": 1152,
+      "alpha_min": 0,
+      "alpha_max": 254,
+      "alpha_bounds": [
+        138,
+        265,
+        1574,
+        886
+      ],
+      "visible_bounds_alpha_8": [
+        140,
+        267,
+        1572,
+        884
+      ],
+      "transparent_pixels": 1336690,
+      "partial_alpha_pixels": 635534,
+      "opaque_pixels": 0,
+      "border_nontransparent_pixels": 0
+    },
+    "visual_checks": {
+      "complete_car": true,
+      "right_facing": true,
+      "mild_front_side_view": true,
+      "two_main_wheels_complete": true,
+      "natural_occluded_far_wheel_portion": true,
+      "mirrors_complete": true,
+      "lavender_gray_long_three_box_sedan": true,
+      "thicker_warm_dark_brown_contours": true,
+      "slightly_rounder_body": true,
+      "simple_cream_hubcaps_without_spokes": true,
+      "simplified_cream_headlights": true,
+      "simplified_grille_without_chrome": true,
+      "simplified_windows": true,
+      "reduced_realistic_reflections": true,
+      "paper_like_painted_fills": true,
+      "no_text_logo_or_badge": true,
+      "no_scene_or_people": true,
+      "no_white_outline": true,
+      "soft_small_grounding_shadows": true,
+      "white_background_alpha_composite_has_no_visible_halo": true
+    },
+    "subject_width_fraction": 0.8387850467289719,
+    "horizontal_safety_margin_fraction": 0.08060747663551401,
+    "notes": "Viewed the edit target, Volvo and Ford references. The commemorative-card reference was already inspected. Reopened the saved output for alpha verification and inspected a 300 x 200 in-memory white-background composite to confirm real transparency. The image tool preview shows hidden RGB fringe, but proper alpha compositing shows a clean cutout. One generation call only. No application code, browser or deployment changes."
+  },
+  "updated_at_utc": "2026-10-30 14:04:58 UTC",
+  "output_history": [
+    {
+      "selected_attempt": 3,
+      "superseded_at_utc": "2026-10-30 14:04:58 UTC",
+      "superseded_reason": "Requested one-pass style simplification to match the completed Volvo and Ford illustrations.",
+      "generated_source_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-a4d09346-8b08-45d6-89a9-7f95c8c304a9.png",
+      "verified_sha256_before_overwrite": "09eeaa0d3c6203e4b341d37727a91b333dce66d783acb9044bcdd5157737c5c2",
+      "output": {
+        "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mercedes-v1.png",
+        "width": 1608,
+        "height": 1072,
+        "crop": [
+          44,
+          288,
+          1350,
+          620
+        ],
+        "placement": [
+          129,
+          226
+        ],
+        "method": "Lossless pixel crop and transparent canvas padding; no resampling or repainting",
+        "sha256": "09eeaa0d3c6203e4b341d37727a91b333dce66d783acb9044bcdd5157737c5c2",
+        "bytes": 1445356
+      },
+      "source_image_alpha": {
+        "width": 1419,
+        "height": 1109,
+        "bounds": [
+          {
+            "threshold": 1,
+            "box": [
+              0,
+              107,
+              1395,
+              1109
+            ]
+          },
+          {
+            "threshold": 8,
+            "box": [
+              46,
+              290,
+              1392,
+              906
+            ]
+          },
+          {
+            "threshold": 16,
+            "box": [
+              46,
+              290,
+              1392,
+              906
+            ]
+          },
+          {
+            "threshold": 32,
+            "box": [
+              46,
+              290,
+              1392,
+              905
+            ]
+          },
+          {
+            "threshold": 128,
+            "box": [
+              46,
+              291,
+              1391,
+              903
+            ]
+          },
+          {
+            "threshold": 240,
+            "box": [
+              47,
+              292,
+              1390,
+              902
+            ]
+          },
+          {
+            "threshold": 255,
+            "box": [
+              48,
+              292,
+              1390,
+              901
+            ]
+          }
+        ],
+        "histogram": {
+          "0": 940957,
+          "1": 4213,
+          "2": 1132,
+          "3": 881,
+          "4": 816,
+          "5": 612,
+          "6": 362,
+          "7": 255,
+          "8": 163,
+          "9": 135,
+          "10": 150,
+          "11": 125,
+          "12": 120,
+          "13": 110,
+          "14": 102,
+          "15": 118,
+          "16": 102,
+          "17": 116,
+          "18": 91,
+          "19": 95,
+          "20": 93,
+          "21": 77,
+          "22": 73,
+          "23": 84,
+          "24": 74,
+          "25": 77,
+          "26": 71,
+          "27": 80,
+          "28": 99,
+          "29": 68,
+          "30": 83,
+          "31": 77,
+          "32": 70,
+          "33": 61,
+          "34": 60,
+          "35": 80,
+          "36": 67,
+          "37": 90,
+          "38": 60,
+          "39": 79,
+          "40": 57,
+          "41": 76,
+          "42": 60,
+          "43": 62,
+          "44": 53,
+          "45": 66,
+          "46": 67,
+          "47": 53,
+          "48": 59,
+          "49": 48,
+          "50": 51,
+          "51": 52,
+          "52": 61,
+          "53": 53,
+          "54": 52,
+          "55": 54,
+          "56": 45,
+          "57": 50,
+          "58": 46,
+          "59": 55,
+          "60": 62,
+          "61": 56,
+          "62": 61,
+          "63": 50,
+          "64": 58,
+          "65": 53,
+          "66": 43,
+          "67": 48,
+          "68": 40,
+          "69": 51,
+          "70": 64,
+          "71": 56,
+          "72": 47,
+          "73": 67,
+          "74": 59,
+          "75": 46,
+          "76": 52,
+          "77": 45,
+          "78": 54,
+          "79": 42,
+          "80": 50,
+          "81": 45,
+          "82": 66,
+          "83": 43,
+          "84": 48,
+          "85": 46,
+          "86": 40,
+          "87": 28,
+          "88": 43,
+          "89": 47,
+          "90": 39,
+          "91": 49,
+          "92": 49,
+          "93": 33,
+          "94": 46,
+          "95": 43,
+          "96": 40,
+          "97": 49,
+          "98": 53,
+          "99": 34,
+          "100": 40,
+          "101": 42,
+          "102": 41,
+          "103": 36,
+          "104": 42,
+          "105": 44,
+          "106": 44,
+          "107": 44,
+          "108": 31,
+          "109": 52,
+          "110": 43,
+          "111": 46,
+          "112": 52,
+          "113": 46,
+          "114": 52,
+          "115": 63,
+          "116": 41,
+          "117": 50,
+          "118": 39,
+          "119": 46,
+          "120": 46,
+          "121": 50,
+          "122": 50,
+          "123": 39,
+          "124": 53,
+          "125": 39,
+          "126": 61,
+          "127": 42,
+          "128": 54,
+          "129": 45,
+          "130": 39,
+          "131": 43,
+          "132": 47,
+          "133": 45,
+          "134": 45,
+          "135": 44,
+          "136": 48,
+          "137": 39,
+          "138": 46,
+          "139": 36,
+          "140": 47,
+          "141": 51,
+          "142": 37,
+          "143": 42,
+          "144": 40,
+          "145": 42,
+          "146": 35,
+          "147": 45,
+          "148": 37,
+          "149": 33,
+          "150": 42,
+          "151": 33,
+          "152": 40,
+          "153": 35,
+          "154": 34,
+          "155": 47,
+          "156": 43,
+          "157": 38,
+          "158": 55,
+          "159": 41,
+          "160": 47,
+          "161": 47,
+          "162": 53,
+          "163": 37,
+          "164": 57,
+          "165": 38,
+          "166": 41,
+          "167": 51,
+          "168": 45,
+          "169": 56,
+          "170": 42,
+          "171": 39,
+          "172": 49,
+          "173": 41,
+          "174": 53,
+          "175": 48,
+          "176": 48,
+          "177": 40,
+          "178": 51,
+          "179": 52,
+          "180": 48,
+          "181": 54,
+          "182": 51,
+          "183": 64,
+          "184": 56,
+          "185": 48,
+          "186": 52,
+          "187": 46,
+          "188": 59,
+          "189": 60,
+          "190": 56,
+          "191": 71,
+          "192": 54,
+          "193": 64,
+          "194": 48,
+          "195": 49,
+          "196": 49,
+          "197": 63,
+          "198": 55,
+          "199": 66,
+          "200": 70,
+          "201": 49,
+          "202": 72,
+          "203": 52,
+          "204": 65,
+          "205": 55,
+          "206": 65,
+          "207": 58,
+          "208": 68,
+          "209": 67,
+          "210": 60,
+          "211": 71,
+          "212": 63,
+          "213": 68,
+          "214": 71,
+          "215": 66,
+          "216": 57,
+          "217": 70,
+          "218": 79,
+          "219": 79,
+          "220": 79,
+          "221": 67,
+          "222": 76,
+          "223": 73,
+          "224": 85,
+          "225": 74,
+          "226": 78,
+          "227": 78,
+          "228": 89,
+          "229": 96,
+          "230": 92,
+          "231": 92,
+          "232": 111,
+          "233": 112,
+          "234": 121,
+          "235": 124,
+          "236": 144,
+          "237": 132,
+          "238": 178,
+          "239": 181,
+          "240": 155,
+          "241": 166,
+          "242": 189,
+          "243": 215,
+          "244": 238,
+          "245": 338,
+          "246": 419,
+          "247": 557,
+          "248": 851,
+          "249": 1212,
+          "250": 2019,
+          "251": 4206,
+          "252": 14265,
+          "253": 548827,
+          "254": 35794,
+          "255": 920
+        }
+      },
+      "postprocessing": {
+        "method": "Lossless crop and transparent padding only",
+        "source_crop_xywh": [
+          44,
+          288,
+          1350,
+          620
+        ],
+        "crop_basis": "Bounds at alpha >= 8 with 2 px margin; disconnected near-transparent fringe outside the crop was trimmed.",
+        "canvas_size": [
+          1608,
+          1072
+        ],
+        "placement_xy": [
+          129,
+          226
+        ],
+        "resampling": false,
+        "repainting": false,
+        "content_pixel_values_preserved": true
+      },
+      "verification": {
+        "alpha": {
+          "width": 1608,
+          "height": 1072,
+          "pixelFormat": "Format32bppArgb",
+          "alphaMin": 0,
+          "alphaMax": 255,
+          "alphaBounds": [
+            129,
+            226,
+            1479,
+            846
+          ],
+          "transparentPixels": 1091598,
+          "partialAlphaPixels": 631258,
+          "opaquePixels": 920,
+          "borderNontransparentPixels": 0
+        },
+        "visual_checks": {
+          "complete_car": true,
+          "right_facing": true,
+          "mild_front_side_three_quarter": true,
+          "two_visible_wheels": true,
+          "mirrors_complete": true,
+          "lavender_gray_long_sedan": true,
+          "text_removed": true,
+          "no_logo_or_badge": true,
+          "no_scene_or_people": true,
+          "no_white_outline": true,
+          "storybook_paper_fill_and_warm_brown_contour": true,
+          "soft_grounding_shadow": true
+        },
+        "subject_width_fraction": 0.8395522388059702,
+        "horizontal_safety_margin_fraction": 0.08022388059701492,
+        "notes": "Viewed both original inputs, the selected generated image, and the saved output. No application code, browser session, deployment, or Git operation was performed."
+      }
+    }
+  ]
+}
+

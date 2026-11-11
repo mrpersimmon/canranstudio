@@ -1,0 +1,28 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "ago": "/assets/learning-words/unit75-76/ago-321dafd7.svg",
+  "buy": "/assets/learning-words/unit75-76/buy-d51854b3.svg",
+  "fashion": "/assets/learning-words/unit75-76/fashion-37265d1f.svg",
+  "wear": "/assets/learning-words/unit75-76/wear-ed00aa3e.svg",
+  "bought": "/assets/learning-words/unit75-76/buy-d51854b3.svg",
+  "wore": "/assets/learning-words/unit75-76/wear-ed00aa3e.svg",
+  "size": "/assets/learning-words/unit75-76/size-ba40dddf.svg",
+  "in fashion": "/assets/learning-words/unit75-76/fashion-37265d1f.svg",
+  "this week": "/assets/learning-words/unit75-76/week-7737b91c.svg",
+  "last week": "/assets/learning-words/unit75-76/week-7737b91c.svg",
+  "last month": "/assets/learning-words/unit75-76/month-c5976e46.svg",
+  "last year": "/assets/learning-words/unit75-76/year-d781bac2.svg",
+  "yesterday": "/assets/learning-words/unit75-76/day-5c6abd33.svg",
+  "yesterday evening": "/assets/learning-words/unit75-76/evening-3ed66337.svg",
+  "the day before yesterday": "/assets/learning-words/unit75-76/day-5c6abd33.svg",
+  "the week before last": "/assets/learning-words/unit75-76/week-7737b91c.svg",
+  "the month before last": "/assets/learning-words/unit75-76/month-c5976e46.svg",
+  "the year before last": "/assets/learning-words/unit75-76/year-d781bac2.svg",
+  "a minute ago": "/assets/learning-words/unit75-76/clock-9fb3e8ce.svg",
+  "an hour ago": "/assets/learning-words/unit75-76/clock-9fb3e8ce.svg",
+  "two days ago": "/assets/learning-words/unit75-76/ago-321dafd7.svg",
+  "three weeks ago": "/assets/learning-words/unit75-76/ago-321dafd7.svg",
+  "in 2010": "/assets/learning-words/unit75-76/year-d781bac2.svg",
+  "When did …?": "/assets/learning-words/unit75-76/clock-9fb3e8ce.svg",
+  "comfortable": "/assets/learning-words/unit75-76/comfortable-142849be.svg"
+};

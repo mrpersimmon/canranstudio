@@ -1,0 +1,26 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "look": "/assets/learning-words/unit61-62/look-1c7c8e19.svg",
+  "must": "/assets/learning-words/unit61-62/must-10cf30b9.svg",
+  "call": "/assets/learning-words/unit61-62/call-5d7a7e85.svg",
+  "doctor": "/assets/unit61-62/doctor.webp",
+  "telephone": "/assets/learning-words/unit61-62/telephone-5d7a7e85.svg",
+  "remember": "/assets/learning-words/unit61-62/remember-0c7c3137.svg",
+  "mouth": "/assets/learning-words/unit61-62/mouth-51956e1d.svg",
+  "tongue": "/assets/learning-words/unit61-62/tongue-24f71ec7.svg",
+  "bad": "/assets/learning-words/unit61-62/bad-51c09610.svg",
+  "news": "/assets/learning-words/unit61-62/news-5c836433.svg",
+  "headache": "/assets/learning-words/unit61-62/headache-64eda9bb.svg",
+  "aspirin": "/assets/learning-words/unit61-62/aspirin-cd58c55a.svg",
+  "earache": "/assets/learning-words/unit61-62/earache-eb4a3882.svg",
+  "toothache": "/assets/learning-words/unit61-62/toothache-caca5b91.svg",
+  "dentist": "/assets/learning-words/unit61-62/dentist-2d9e0fe0.svg",
+  "stomach ache": "/assets/learning-words/unit61-62/stomach-ache-5edd42e2.svg",
+  "medicine": "/assets/learning-words/unit61-62/medicine-1dea6074.svg",
+  "temperature": "/assets/learning-words/unit61-62/temperature-f6d65f7b.svg",
+  "flu": "/assets/learning-words/unit61-62/flu-3bbe096d.svg",
+  "measles": "/assets/learning-words/unit61-62/measles-b8f98e54.svg",
+  "mumps": "/assets/learning-words/unit61-62/mumps-0e9bb7d7.svg",
+  "because": "/assets/learning-words/unit61-62/because-684bdfd8.svg",
+  "so": "/assets/learning-words/unit61-62/so-b7642992.svg"
+};

@@ -13,10 +13,10 @@
 
   function create({ unit }) {
     const dialog = node('dialog', 'award-reveal'); dialog.tabIndex = -1;
-    dialog.setAttribute('aria-label', '纪念卡结算；点击任意位置，或按回车、空格、Esc 关闭');
+    dialog.setAttribute('aria-label', '纪念卡结算');
     const stage = node('div', 'award-reveal-stage'), panel = node('div', 'award-reveal-panel');
     const view = core.storyCertificate.card({ unit, label: unit.reward.title + '纪念卡' });
-    const wrap = node('div', 'award-reveal-card'); wrap.append(view.element);
+    const wrap = node('div', 'award-reveal-card'); wrap.append(view.frame);
     const slots = view.starImages.map((image, i) => {
       const slot = decorative('award-star'); slot.style.setProperty('--star-order', i);
       image.replaceWith(slot); slot.append(image, decorative('star-glint')); return slot;
@@ -70,7 +70,10 @@
       release(current?.round);
       current = null;
       if (dialog.open) dialog.close();
-      if (restore && focusTarget?.isConnected && !focusTarget.closest('[inert]')) focusTarget.focus({ preventScroll: true });
+      const actions=focusTarget?.closest('.practice-finish-actions');
+      const onward=actions?.querySelector('.station-actions button, .station-actions a, [data-station-next]');
+      const target=onward||focusTarget;
+      if (restore && target?.isConnected && !target.closest('[inert]')) target.focus({ preventScroll: true });
       focusTarget = null;
       queueMicrotask(showNext);
     }
@@ -79,6 +82,7 @@
       dialog.dataset.phase = value;
       dialog.dataset.dismissible = String(value === 'ready');
       dialog.setAttribute('aria-busy', String(value !== 'ready'));
+      dialog.setAttribute('aria-label',value==='ready'?'纪念卡结算；点击任意位置，或按回车、空格、Esc 关闭':'纪念卡结算，请稍候');
       confirmation.textContent = value === 'pending' ? '正在确认星星，请稍候。' : value === 'ready' ? '点击任意位置继续' : '';
     }
     async function land(item, token) {
@@ -108,7 +112,7 @@
       dialog.dataset.motion = 'full';
       phase(current.kind === 'pending' ? 'pending' : 'animating');
       paint(current.kind === 'upgrade' ? current.state : current.before);
-      dialog.showModal(); dialog.focus({ preventScroll: true });
+      dialog.showModal(); view.resize(); dialog.focus({ preventScroll: true });
       const item = current;
       try { await panel.animate([{ opacity: 0, transform: 'translateY(10px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' }).finished; }
       catch { /* Cancellation releases the foreground round separately. */ }
@@ -154,7 +158,7 @@
       let message;
       if (state.pendingZones.includes(id)) message = pendingMessage();
       else if (state.zones[id]) message = unit.copy?.compact ? '已获星' : '这颗星已经点亮。';
-      else if (states.some(item => item.firstCorrect === false)) message = unit.copy?.compact ? '这轮有过答错，再挑战一轮争取星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。';
+      else if (states.some(item => item.firstCorrect === false)) message = unit.copy?.correctedCompletion || (unit.copy?.compact ? '这轮有过答错，再挑战一轮争取星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。');
       else if (round.roundPolicy !== unit.reward.edition) {
         message = UPGRADE;
         if (foreground) enqueue({ kind: 'upgrade', before: state, state, round: foreground,

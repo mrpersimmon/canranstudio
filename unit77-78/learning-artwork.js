@@ -1,0 +1,26 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "appointment": "/assets/learning-words/unit77-78/appointment-2ce285e7.svg",
+  "urgent": "/assets/learning-words/unit77-78/urgent-fbcadaee.svg",
+  "till": "/assets/learning-words/unit77-78/till-a95c6f77.svg",
+  "dentist": "/assets/learning-words/unit77-78/tooth-7455854e.svg",
+  "toothache": "/assets/learning-words/unit77-78/toothache-280b4c11.svg",
+  "awful": "/assets/learning-words/unit77-78/awful-de5484f7.svg",
+  "busy": "/assets/learning-words/unit77-78/busy-149df6e2.svg",
+  "wait": "/assets/learning-words/unit77-78/wait-43772efb.svg",
+  "moment": "/assets/learning-words/unit77-78/moment-d22b689b.svg",
+  "now": "/assets/learning-words/unit77-78/now-c45be969.svg",
+  "earlier": "/assets/learning-words/unit77-78/earlier-09e2c256.svg",
+  "a.m.": "/assets/learning-words/unit77-78/am-b5cf642c.svg",
+  "p.m.": "/assets/learning-words/unit77-78/pm-13d156bf.svg",
+  "o’clock": "/assets/learning-words/unit77-78/clock-3aef07e6.svg",
+  "half past": "/assets/learning-words/unit77-78/half-79a932d9.svg",
+  "a quarter past": "/assets/learning-words/unit77-78/quarter-past-4a51cb48.svg",
+  "a quarter to": "/assets/learning-words/unit77-78/quarter-to-35b1f52e.svg",
+  "April": "/assets/learning-words/unit77-78/april-fec3301b.svg",
+  "Monday": "/assets/learning-words/unit77-78/monday-bbf85a4b.svg",
+  "buy": "/assets/learning-words/unit77-78/buy-d51854b3.svg",
+  "bought": "/assets/learning-words/unit77-78/buy-d51854b3.svg",
+  "lose": "/assets/learning-words/unit77-78/lose-ff31ddbd.svg",
+  "lost": "/assets/learning-words/unit77-78/lose-ff31ddbd.svg"
+};

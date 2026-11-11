@@ -1,0 +1,26 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "garden": "/assets/learning-words/unit31-32/garden-0a9edbe8.svg",
+  "under": "/assets/learning-words/unit31-32/under-3d95f0eb.svg",
+  "tree": "/assets/learning-words/unit31-32/tree-e2c5bd13.svg",
+  "climb": "/assets/learning-words/unit31-32/climb-45c7cede.svg",
+  "who": "/assets/learning-words/unit31-32/who-91a71ada.svg",
+  "run": "/assets/learning-words/unit31-32/run-ef594020.svg",
+  "grass": "/assets/learning-words/unit31-32/grass-a7499e69.svg",
+  "after": "/assets/learning-words/unit31-32/after-20b089b2.svg",
+  "across": "/assets/learning-words/unit31-32/across-5bbe202f.svg",
+  "cat": "/assets/learning-words/unit31-32/cat-27e0db5c.svg",
+  "type": "/assets/learning-words/unit31-32/type-e874995f.svg",
+  "letter": "/assets/learning-words/unit31-32/letter-67cba435.svg",
+  "basket": "/assets/learning-words/unit31-32/basket-159cd1fa.svg",
+  "eat": "/assets/learning-words/unit31-32/eat-4edea2ef.svg",
+  "bone": "/assets/learning-words/unit31-32/bone-652d2358.svg",
+  "clean": "/assets/learning-words/unit31-32/clean-641468f5.svg",
+  "cook": "/assets/learning-words/unit31-32/cook-2e212718.svg",
+  "milk": "/assets/learning-words/unit31-32/milk-c6790d94.svg",
+  "meal": "/assets/learning-words/unit31-32/meal-af9269f7.svg",
+  "drink": "/assets/learning-words/unit31-32/drink-a2d47943.svg",
+  "tap": "/assets/learning-words/unit31-32/tap-b790efa5.svg",
+  "sit": "/assets/learning-words/unit31-32/sit-86add766.svg",
+  "dog": "/assets/learning-words/unit31-32/dog-3e98d08e.svg"
+};

@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-31",
+  "engines": [
+    {
+      "engine": "chromium",
+      "cases": [
+        {
+          "unit": "1-2",
+          "questions": 37,
+          "samples": 163,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 0,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        },
+        {
+          "unit": "3-4",
+          "questions": 33,
+          "samples": 147,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 0,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        },
+        {
+          "unit": "5-6",
+          "questions": 36,
+          "samples": 159,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 1,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        }
+      ]
+    },
+    {
+      "engine": "webkit",
+      "cases": [
+        {
+          "unit": "1-2",
+          "questions": 37,
+          "samples": 163,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 0,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        },
+        {
+          "unit": "3-4",
+          "questions": 33,
+          "samples": 147,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 0,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        },
+        {
+          "unit": "5-6",
+          "questions": 36,
+          "samples": 159,
+          "viewports": [
+            "375x667",
+            "320x568",
+            "390x844",
+            "768x1024",
+            "1366x768"
+          ],
+          "maxContentOverflow": 1,
+          "clippedControls": 0,
+          "offscreenActions": 0
+        }
+      ]
+    }
+  ]
+}

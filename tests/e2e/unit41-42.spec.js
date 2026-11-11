@@ -77,10 +77,9 @@ test('词块撤回、重复错答与提示：本次统计按提交，重练归�
   await expect(page.locator('#starCount')).toHaveText('0');
   await page.reload();await expect(room.locator('.completion-number')).toHaveText(['12','12','2']);
   await page.goto('/unit41-42/#learn/certificate');
-  await page.getByText('星星进度',{exact:true}).click();
-  const retry=page.getByRole('list',{name:'五星任务'}).getByRole('listitem').filter({hasText:'语法小工坊'});
-  await expect(retry).toContainText('已完成 · 未获星');
-  await retry.getByRole('button',{name:'再练一轮',exact:true}).click();
+  await expect(page.locator('.story-award-tasks')).toHaveCount(0);
+  await page.goto('/unit41-42/#learn/grammar');
+  await room.getByRole('button',{name:'再练一轮',exact:true}).click();
   await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');
   await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');
 });

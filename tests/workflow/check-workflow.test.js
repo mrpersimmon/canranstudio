@@ -22,6 +22,22 @@ function fixture(t) {
   return root;
 }
 const context = { node: 'test', browser: 'test-browser-1' };
+test('shared course endings include authenticated navigation checks in both engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/story-certificate.js','unit1-2/completion.js','server/app.js']){
+  const selected=config.select([file]);assert(selected.includes('browser-course-ending'));assert(selected.includes('browser-course-ending-webkit'));
+ }
+});
+test('the isolated review bench has dedicated Node and two-engine checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['review-bench/runtime.js','scripts/review-bench.js','playwright.review.config.js','tests/review/bench.spec.js']){
+  const plan=config.select([file]);for(const id of ['review-unit','browser-review','browser-review-webkit'])assert(plan.includes(id),file+' '+id);
+  assert(!plan.includes('browser-smoke'),file+' should not run unrelated production journeys');
+ }
+ const tasks=config.tasks(path.resolve(__dirname,'../..'),[]);
+ assert(tasks['browser-review'].inputs.includes('review-bench'));
+ assert(tasks['browser-review-webkit'].args.includes('--project=webkit'));
+});
 const task = {
   args: ['-e', "require('node:fs').appendFileSync('test-results/count', 'x')"],
   inputs: ['src', 'package-lock.json', 'tests'],
@@ -160,6 +176,38 @@ test('reward ordering and result changes keep the WebKit settlement regression i
   assert.ok(browserConfig.testMatch.includes('submission-statistics.spec.js'));
 });
 
+test('next-station and word art changes retain phone checks in both browser engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit5-6/current.js','unit5-6/word-cards.css','assets/unit5-6-word-cards/volvo-v1.webp','unit1-2/completion.js','unit143-144/unit.js','core/lesson49-experience.js','tests/login/unit56-word-cards.spec.js']){
+  const plan=planChecks(config,[file]);
+  for(const name of ['browser-word-cards','browser-word-cards-webkit'])assert.ok(plan.includes(name),`${file} must check ${name}`);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('unit56-word-cards.spec.js'));
+});
+
+test('shared card geometry keeps course, reveal and album ratio regressions in scope',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/award-card-layout.js','core/award-card-layout.css','core/story-certificate.js','core/story-certificate.css','core/award-reveal.js','core/award-reveal.css','award-book/Card.jsx','award-book/styles.css']){
+  const plan=planChecks(config,[file]);
+  for(const name of ['browser-card-aspect','browser-card-aspect-webkit'])assert.ok(plan.includes(name),`${file} must check ${name}`);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('award-card-aspect.spec.js'));
+});
+
+test('single-screen practice checks cover its shared renderer and the three opted-in units',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/practice-screen.js','core/practice-screen.css','core/lesson49-practice.js','core/lesson49-task-inputs.css','unit1-2/index.html','unit3-4/unit.css','unit5-6/current.js','tests/login/practice-screen.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-practice-screen','browser-practice-screen-webkit'])assert.ok(plan.includes(name),`${file} must check ${name}`);
+ }
+ assert.ok(!planChecks(config,['unit7-8/unit.js']).includes('browser-practice-screen'));
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('practice-screen.spec.js'));
+});
+
+test('learning flow polish retains continuity and reduced-motion checks in both engines',()=>{
+ const config=require('../../scripts/check-workflow.config');for(const file of ['unit1-2/learning-flow.js','unit1-2/learning-flow.css','unit1-2/index.html','core/practice-screen.js','assets/learning-ui/back.svg']){const plan=planChecks(config,[file]);for(const name of ['browser-learning-flow','browser-learning-flow-webkit'])assert.ok(plan.includes(name),file);}
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('learning-flow.spec.js'));
+});
+
 test('update entry and predecessor changes retain choice, real certificate and WebKit checks', () => {
   const config = require('../../scripts/check-workflow.config');
   for (const file of ['core/course-loader.js','server/public/portal.js','server/public/portal.css','tests/login/course-update-choice.spec.js','tests/login/course-update-performance.spec.js','server/app.js','scripts/course-packages.js','tests/fixtures/course-loader-before-update-choice/course-loader.js']) {
@@ -180,4 +228,123 @@ test('expired evidence reruns, while clearing browser reports does not erase unr
   assert.equal(count(root), 2);
   fs.rmSync(path.join(root, 'test-results'), { recursive: true });
   assert.equal((await run(root)).cached, true);
+});
+
+test('mobile reading, card and record presentation retains both full surface checks',()=>{
+ const config=require('../../scripts/check-workflow.config'),root=path.resolve(__dirname,'../..');
+ for(const file of ['core/learning-flow.css','core/story-certificate.js','unit3-4/unit.css','unit5-6/word-cards.css','tests/review/mobile-surface-audit.spec.js','tests/review/page-types-audit.spec.js','tests/review/worksheet-panel.spec.js']){
+  const plan=planChecks(config,[file]),definitions=config.tasks(root,[file]);
+  for(const name of ['browser-mobile-surface','browser-mobile-surface-webkit']){assert.ok(plan.includes(name),file);assert.ok(definitions[name].args.includes('tests/review/mobile-surface-audit.spec.js'));assert.ok(definitions[name].args.includes('tests/review/page-types-audit.spec.js'));assert.ok(definitions[name].args.includes('tests/review/worksheet-panel.spec.js'));}
+ }
+});
+
+test('shared cover geometry and unit artwork retain both responsive cover checks',()=>{
+ const config=require('../../scripts/check-workflow.config'),root=path.resolve(__dirname,'../..');
+ for(const file of ['core/learning-flow.css','core/practice-screen.js','unit1-2/scene.css','unit3-4/unit.css','unit3-4/journey-visual.css','unit5-6/current.css','tests/review/cover-layout.spec.js']){
+  const plan=planChecks(config,[file]),definitions=config.tasks(root,[file]);
+  for(const name of ['browser-cover-layout','browser-cover-layout-webkit']){assert.ok(plan.includes(name),file);assert.ok(definitions[name].args.includes('tests/review/cover-layout.spec.js'));}
+ }
+});
+
+test('scene prop and route control changes keep both frame-stability checks',()=>{
+ const config=require('../../scripts/check-workflow.config'),root=path.resolve(__dirname,'../..');
+ for(const file of ['core/learning-flow.css','core/practice-screen.css','core/practice-screen.js','unit1-2/scene.js','unit1-2/scene.css','unit1-2/learning-flow.css','tests/review/scene-exit-stability.spec.js']){
+  const plan=planChecks(config,[file]),definitions=config.tasks(root,[file]);
+  for(const name of ['browser-scene-exit','browser-scene-exit-webkit']){assert.ok(plan.includes(name),file);assert.ok(definitions[name].args.includes('tests/review/scene-exit-stability.spec.js'));}
+ }
+});
+
+test('read-only question review checks cover state ownership and both browser engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/lesson49-practice.js','core/lesson49-task-inputs.js','core/practice-screen.js','unit1-2/unit.js','unit1-2/grammar.js','unit1-2/learning-flow.css','tests/login/lesson-review.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-lesson-review','browser-lesson-review-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('lesson-review.spec.js'));
+});
+
+test('learning UI and fixed phone preset changes retain required-device checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/practice-screen.css','unit1-2/learning-flow.js','tests/support/required-phone-devices.json','tests/support/journey-viewports.json','tests/login/practice-screen.spec.js'])assert.ok(planChecks(config,[file]).includes('browser-required-phones'),file);
+});
+
+test('learning references keep result isolation and mobile dialog checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit1-2/grammar.js','unit1-2/learning-flow.js','unit1-2/learning-flow.css','core/practice-screen.js','tests/support/required-phone-devices.json','tests/login/practice-references.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-practice-references','browser-practice-references-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('practice-references.spec.js'));
+});
+
+test('story presentation changes cover tall desktop and mandatory phone layouts',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit1-2/learning-flow.css','unit1-2/unit.js','unit1-2/current.css','unit1-2/scene.css','core/unit-theme.css','core/practice-screen.js','tests/support/required-phone-devices.json','tests/login/story-layout.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-story-layout','browser-story-layout-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('story-layout.spec.js'));
+});
+
+test('accepted audit changes retain cross-surface contracts and the explicit error wording',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit1-2/learning-copy.js','core/lesson49-practice.js','core/award-reveal.js','unit1-2/learning-flow.css','course-journey/model.js','course-journey/App.jsx','award-book/Postoffice.jsx','tests/login/accepted-ux.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-accepted-ux','browser-accepted-ux-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('accepted-ux.spec.js'));
+});
+
+test('question transitions and result wording retain frame, question-count and stage-navigation checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit1-2/learning-copy.js','unit1-2/learning-flow.js','unit1-2/learning-flow.css','unit1-2/unit.js','core/lesson49-practice.js','core/practice-screen.js','tests/login/learning-transitions.spec.js','tests/login/learning-polish.spec.js','tests/support/required-phone-devices.json']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-learning-transitions','browser-learning-transitions-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('learning-transitions.spec.js'));
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('learning-polish.spec.js'));
+ const tasks=config.tasks(process.cwd(),[]);
+ for(const id of ['browser-learning-transitions','browser-learning-transitions-webkit'])assert.ok(tasks[id].args.includes('tests/login/learning-polish.spec.js'));
+});
+
+test('course image readiness changes verify the actual page guard and recovery in both engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/course-loader.js','core/course-cache.js','core/course-worker.js','core/lesson49-practice.js','unit1-2/current.js','scripts/course-packages.js','tests/login/course-picture-guard.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-picture-guard','browser-picture-guard-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('course-picture-guard.spec.js'));
+});
+
+test('shared learning shell and Lesson3-6 changes keep expansion coverage in both engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/learning-flow.js','core/learning-flow.css','core/practice-screen.js','unit3-4/learning-flow.css','unit3-4/unit.js','unit5-6/index.html','unit5-6/unit.js','tests/support/unit34-v154.js','tests/login/learning-expansion.spec.js']){
+  const plan=planChecks(config,[file]);for(const id of ['browser-learning-expansion','browser-learning-expansion-webkit'])assert.ok(plan.includes(id),file);
+ }
+ for(const file of ['core/learning-flow.js','core/learning-flow.css']){
+  const plan=planChecks(config,[file]);
+  for(const id of ['browser-practice-screen','browser-learning-flow','browser-lesson-review','browser-story-layout','browser-learning-transitions','browser-practice-references','browser-required-phones'])assert.ok(plan.includes(id),file+' '+id);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('learning-expansion.spec.js'));
+ const tasks=config.tasks(process.cwd(),[]);
+ for(const id of ['browser-learning-expansion','browser-learning-expansion-webkit'])assert.ok(tasks[id].args.includes('tests/login/learning-expansion.spec.js'));
+});
+
+test('Lesson3-4 visual assets and composition keep story, question and original-card regressions',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit3-4/journey-visual.css','unit3-4/current.js','unit3-4/scene.js','unit3-4/unit.js','assets/unit3-4-journey/visitor-v1.webp','tests/login/unit34-journey-visual.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-unit34-journey','browser-unit34-journey-webkit'])assert.ok(plan.includes(name),file);
+ }
+ assert.ok(require('../../playwright.recovery.config').testMatch.includes('unit34-journey-visual.spec.js'));
+});
+
+test('learning layout checks include text ink, short material budgets and shared render changes',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/learning-flow.js','core/learning-flow.css','core/practice-screen.js','core/lesson49-task-inputs.css','unit3-4/journey-visual.css','tests/support/learning-layout-audit.js','tests/login/learning-layout-audit.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-learning-layout-audit','browser-learning-layout-audit-webkit'])assert.ok(plan.includes(name),file);
+ }
+ const tasks=config.tasks(process.cwd(),[]);for(const name of ['browser-learning-layout-audit','browser-learning-layout-audit-webkit'])assert(tasks[name].args.includes('tests/login/practice-screen.spec.js'));
+ assert(require('../../playwright.recovery.config').testMatch.includes('learning-layout-audit.spec.js'));
+});
+
+test('word meaning, story and progress/material changes retain the focused three-phone regressions',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/learning-flow.css','core/learning-scenes.js','core/learning-scenes.css','core/practice-screen.js','unit143-144/scene.js','unit143-144/unit.css','assets/unit143-144/woods-world-continuous.svg','review-bench/state-model.js','review-bench/runtime.js','tests/support/learning-layout-audit.js']){
+  const plan=planChecks(config,[file]);for(const name of ['browser-layout-refinement','browser-layout-refinement-webkit'])assert.ok(plan.includes(name),file);
+ }
+ const tasks=config.tasks(process.cwd(),[]);for(const name of ['browser-layout-refinement','browser-layout-refinement-webkit'])assert.ok(tasks[name].args.includes('tests/review/layout-refinement.spec.js'));
 });

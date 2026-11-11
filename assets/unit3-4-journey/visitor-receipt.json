@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-01",
+  "mode": "built-in image_gen",
+  "asset": "visitor-v1",
+  "purpose": "Lesson3–4 shared story/customer actor; map identity retained; empty hands allow original teaching prop sequence",
+  "sourceGeneratedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-5ed3-7cd1-9aec-1e2fc3d1918d/exec-b4162f18-be99-4365-98dd-65c3ccfd04b2.png",
+  "files": {
+    "original": "visitor-v1.png",
+    "runtime": "visitor-v1.webp"
+  },
+  "dimensions": {
+    "width": 1024,
+    "height": 1536
+  },
+  "transparentBackground": true,
+  "references": [
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "role": "Exact left-customer identity, compact proportions and warm rendering; not a composite target"
+    }
+  ],
+  "prompt": "Create a production character cutout for a children's illustrated English learning game. Use the attached image ONLY as the exact character-identity and rendering reference: the LEFT customer, not the moustached attendant. Recreate the SAME friendly young male customer, identical yellow flat cap, brown side-swept hair, round warm face with simple dot eyes and rosy cheeks, ivory long-sleeved shirt, teal waistcoat, yellow tie, navy trousers and brown rounded shoes. Match its warm dark-brown contours, rounded large head and compact approximately 2.8-head-tall body, gentle warm upper-left light and very subtle illustrated paper texture. Do not drift to long thin body, realism, anime, or a different character.\n\nRequired output: ONE full-body character in a vertical 1024x1536 image on a genuinely transparent alpha background, clean edge, no white halo, no baked checkerboard. Full cap, hands and complete shoes, a small clear margin on all sides, feet on one level. Face and body turn three-quarter toward the viewer's RIGHT, where the attendant will stand. He is friendly and attentive. The hand toward the RIGHT is extended at around chest/waist level, fingers softly curled to receive a separate umbrella handle or ticket; that hand must be visibly EMPTY. His other forearm is bent in front of his torso so a separate coat can later be placed over it, also EMPTY. Nothing held, no umbrella, coat, ticket, sign, counter, attendant, floor, shadow patch or scenery. A single unobstructed character only. The supplied image is reference, not a composite target; omit all its other objects. Preserve the approved character identity, palette and proportions.",
+  "inspection": {
+    "iterations": 1,
+    "accepted": true,
+    "alphaGreaterThan16BoundsPixels": [
+      182,
+      104,
+      957,
+      1463
+    ],
+    "alphaGreaterThan16BoundsNormalized": [
+      0.177734375,
+      0.06770833333333333,
+      0.935546875,
+      0.953125
+    ],
+    "feetNormalized": {
+      "leftFoot": [
+        0.389,
+        0.951
+      ],
+      "rightFoot": [
+        0.612,
+        0.926
+      ],
+      "lowestGroundY": 0.953125
+    },
+    "propAnchorsNormalized": {
+      "rightHandGrip": [
+        0.847,
+        0.516
+      ],
+      "leftForearmCoat": [
+        0.415,
+        0.572
+      ]
+    },
+    "pose": "Turns three-quarter right, empty right hand extended, left forearm bent, complete shoes. Body approximately 2.8 heads tall.",
+    "alphaNotes": "Real RGBA, transparent corners, alpha>16 bounds are tight. Opaque interior alpha approximately253-254; low-alpha pixels are edge antialiasing. On-paper flatten used only as inspection artifact, not final runtime art.",
+    "preview": "output/u34-visitor-qa/visitor-on-paper.png",
+    "limitations": "Hand anchors are manually estimated from inspected image; consuming layout must validate actual prop contact at phone sizes."
+  },
+  "processing": "Original PNG copied unchanged. Runtime WebP generated with sharp quality92 alphaQuality100 effort6; no crop, matte removal or redraw."
+}

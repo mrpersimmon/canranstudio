@@ -1,0 +1,87 @@
+{
+  "id": "unit34-journey-visual-v1",
+  "createdAt": "2026-11-01",
+  "generation": "Built-in image_gen; no fixed seed/model revision exposed",
+  "references": [
+    {
+      "file": "assets/course-journey/umbrella-counter-v1.webp",
+      "sha256": "c1a9f4d258a4caf9134403a2171924e643e177b792b7f3ff4f12829da8732a92"
+    },
+    {
+      "file": "assets/course-journey/modules-v3/opening-world-v1.webp",
+      "sha256": "d903bc4ebb797e3fdb26e45d18ffa7d10e9dde0b43f215f842e5a5887bf3ac86"
+    },
+    {
+      "file": "assets/awards/unit3-4-umbrella.webp",
+      "sha256": "c36f3c84e55f3b97db64e2fc8b9d2735a5587fb2734ab314f61afa1102eebc3f"
+    }
+  ],
+  "assets": [
+    {
+      "file": "attendant-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 111016,
+      "sha256": "0e33f69d92e792c1bbb629a53f7b506e31306f44ec721d59c30a1811112c0972"
+    },
+    {
+      "file": "cloakroom-interior-v1.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 147596,
+      "sha256": "9d48720577c5ba1d585a05cbfc944996af0cffa0ae68500c6195b7d4e21096bd"
+    },
+    {
+      "file": "coat-v1.webp",
+      "width": 1122,
+      "height": 1402,
+      "bytes": 90278,
+      "sha256": "832a728cfb1fc793cf91cfb9cea9bd99d7e46459a47b7a1c3ff2f69ae01280f3"
+    },
+    {
+      "file": "counter-v1.webp",
+      "width": 1586,
+      "height": 992,
+      "bytes": 94368,
+      "sha256": "0e72339f0e1d462548e3082905157ae7f26ac4633d5021282420dca951ebe026"
+    },
+    {
+      "file": "ticket-v1.webp",
+      "width": 1122,
+      "height": 1402,
+      "bytes": 72164,
+      "sha256": "38b0d6fc902f1f700e80064b928a0eea8e5f8752aa944e29336068176dde0387"
+    },
+    {
+      "file": "umbrella-purple-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 71478,
+      "sha256": "2e897278a24927b36230887214e82737ce53f34ec5073f8c01b4f7d52bcc9ea7"
+    },
+    {
+      "file": "umbrella-red-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 73296,
+      "sha256": "1322a2558c09567ffbeabe3fb603c22751d085d98bb16ed4e78be7e082076eea"
+    },
+    {
+      "file": "umbrella-yellow-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 91322,
+      "sha256": "8c7144df5128fb087f428b85322e36bd5d14cbb4557911e0814191832c1d9a61"
+    },
+    {
+      "file": "visitor-v1.webp",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 111462,
+      "sha256": "36d847a0eba32a466eef1de95c09b66c7a0e857a85f10374f682840517add582"
+    }
+  ],
+  "runtimeBytes": 862980,
+  "originalSources": "Sibling PNG files and *-receipt.json; not runtime dependencies",
+  "geometry": "3:2 shared scene plane; authored asset padding retained; UI text outside raster"
+}

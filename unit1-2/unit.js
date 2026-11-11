@@ -10,7 +10,9 @@
     const element = document.createElement(tag); element.textContent = text; element.className = className; return element;
   };
   function button(text, action, className = 'btn btn-green') {
-    const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action); return element;
+    const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action);
+    if(text.startsWith('下一站：')){element.textContent='下一站';element.setAttribute('aria-label',text);element.dataset.stationNext='true';}
+    return element;
   }
   function art(name, label = '') {
     if (!['man', 'woman', ...unit.objects.map(word => word.en)].includes(name)) return icon(name, label);
@@ -65,6 +67,7 @@
     document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
   }
   $('#lessonWorkspace').addEventListener('click', event => {
+    if(event.target.closest('[data-practice-review], [data-practice-review-navigation]'))return;
     const surface = event.target.closest('.shop-stage'); if (!surface) return;
     markLocation(surface.id);
     if (location.hash !== '#' + surface.id) history.replaceState(null, '', '#' + surface.id);
@@ -76,7 +79,7 @@
     const saved = routeAlias(practice.activity('unitLocation')); navigate(routes.has(saved) && saved !== 'cover' ? saved : unit.start);
   });
   document.querySelectorAll('[data-close]').forEach(control => control.addEventListener('click', () => control.closest('dialog').close()));
-  $('#notebookButton').addEventListener('click', () => $('#unitNotebook').showModal());
+  $('#notebookButton').addEventListener('click', () => {core.learningFlow?.prepareNotebook(document.querySelector('.learning-surface'));$('#unitNotebook').showModal();});
 
   const signatures = Object.fromEntries(Object.entries(questions).map(([id, items]) => [id, JSON.stringify([unit.version, items])]));
   signatures.text = JSON.stringify([unit.version, content.DIALOGUE]);
@@ -103,7 +106,9 @@
   function nextStation(id, actions) {
     if (!actions || actions.querySelector('.station-actions')) return;
     const next = activities[activities.findIndex(item => item.id === id) + 1]; if (!next) return;
-    const group = node('div', '', 'station-actions'); group.append(button(next.id === 'certificate' ? '查看纪念卡' : '下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
+    const group = node('div', '', 'station-actions');
+    if(next.id!=='certificate')group.append(node('span','接下来：'+next.title,'station-destination'));
+    group.append(button(next.id === 'certificate' ? '查看纪念卡' : '下一站：' + next.title, () => navigate('learn/' + next.id))); actions.append(group);
   }
   function mountPractice(id, settings = {}) {
     const element = node('div'); element.id = 'unit12-' + id + '-practice'; surfaces.get(id).append(element);
@@ -113,7 +118,7 @@
     if (id === 'trans') settings.sceneView = core.unit12Current.grammar({ element, art });
     const predecessors = unit.activityPredecessors[id];
     const runner = practice.mount({ element, questions: questions[id], sessionId: unit.taskSessions?.[id] || (predecessors ? 'v2' : 'v' + unit.version),
-      inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition, finalLabel: '完成这一组',
+      inputViews:core.lesson49TaskInputs, roundPolicy: unit.reward.edition, finalLabel: '完成练习', allowReview:true, onResumeResult:updateProgress,
       previousGroups: unit.taskPredecessors?.[id] || predecessors?.map(old => ({ key: 'unit12-' + old + '-practice/v1', questions: unit.previousQuestions[old] })), ...settings,
       onAnswer: (question,state) => {
         if(settings.sceneView?.hasVisibleModel?.()){state.revealed=true;practice.record(question,state);}
@@ -149,16 +154,16 @@
   const finish = node('div', '', 'practice-finish'), finishActions = node('div', '', 'practice-finish-actions');
   finishActions.setAttribute('role', 'group'); finishActions.setAttribute('aria-label', '完成后的操作');
   finishActions.append(button('重看故事', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
-  finish.append(node('p', '故事看完了！'), finishActions); story.append(stage, status, controls, finish);
+  finish.append(finishActions); story.append(stage, status, controls, finish);
   const gate = node('div', '', 'activity-actions'); gate.append(button('先读故事', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
   function saveDialogue() { practice.activity('unitDialogue', { ...dialogue, signature: signatures.text }); }
   function refreshDialogue() {
-    advance.textContent = dialogue.i < 0 ? '开始故事' : dialogue.i === content.DIALOGUE.length - 1 ? '读完了' : '下一句';
+    advance.textContent = dialogue.i < 0 ? '开始故事' : dialogue.i === content.DIALOGUE.length - 1 ? '去练习' : '下一句';
     controls.dataset.state = dialogue.i < 0 ? 'ready' : 'reading'; tools.hidden = dialogue.i < 0;
     controls.hidden = dialogue.done; finish.hidden = !dialogue.done;
-    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}`;
+    status.textContent = dialogue.i < 0 ? '' : `${dialogue.i + 1} / ${content.DIALOGUE.length}${dialogue.done ? ' · 故事看完了' : ''}`;
     status.setAttribute('aria-label', dialogue.i < 0 ? '尚未开始阅读' : `已读 ${dialogue.i + 1} / ${content.DIALOGUE.length} 句课文`);
     log.querySelectorAll('.bubble-row').forEach((row, index) => row.classList.toggle('is-current', index === dialogue.i));
     const returned = dialogue.viewed[5] === true;
@@ -179,7 +184,7 @@
     if (dialogue.done) return;
     if (dialogue.i === content.DIALOGUE.length - 1) {
       if (!content.DIALOGUE.every((_, index) => dialogue.viewed[index] === true)) return;
-      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete'); return;
+      dialogue.done = true; saveDialogue(); complete('text'); unlockStory(); refreshDialogue(); core.lesson49Feedback.play('complete'); navigate('learn/roles'); return;
     }
     if (dialogue.i < 0) log.replaceChildren(); dialogue.i++; dialogue.viewed[dialogue.i] = true; saveDialogue(); appendLine(dialogue.i); refreshDialogue(); log.scrollTop = log.scrollHeight;
   }
@@ -230,8 +235,8 @@
     }
     previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
     nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组');
-    if (wordPage === pageCount - 1) nextWords.replaceChildren(node('span', '下一站：'), node('span', '单词寻宝'));
-    else nextWords.textContent = '下一组';
+    if (wordPage === pageCount - 1) { nextWords.textContent = '下一站'; nextWords.dataset.stationNext = 'true'; }
+    else { nextWords.textContent = '下一组'; delete nextWords.dataset.stationNext; }
   }
   renderWords();
   mountPractice('listen', { allowHints: false });
@@ -240,12 +245,13 @@
   mountPractice('manners');
   core.unit12Grammar.references({ element: surfaces.get('manners'), content });
 
-  const examResults = node('div', '', 'unit-results');
-  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '完成挑战', completionDetails: examResults, onComplete: states => {
-    examResults.replaceChildren();
-    const targets = states.flatMap((state, index) => !state.firstCorrect || state.hintUsed || state.ruleUsed || state.revealed ? [unit.copy.recordNames.exam[index]] : []);
-    if (targets.length) { const details = node('details'), list = node('ul'); details.append(node('summary', '下次再练')); targets.forEach(target => list.append(node('li', target))); details.append(list); examResults.append(details); }
-  } });
+  // Per-question mistakes and help remain in the learning record; the result
+  // screen does not repeat them in a separate "practice next time" disclosure.
+  mountPractice('exam', { chunkSize: questions.exam.length, finalLabel: '完成挑战' });
+  // Only a valid completion of this manuscript marks a learned stage. A fresh
+  // practice round may restart without erasing that learning or using old stars.
+  core.unit12LearningProgress = () => unit.reward.zones.map(zone => ({ id:zone.id, completed:passed(zone.id)||Boolean(runners.get(zone.id)?.progress().completed), earned:Boolean(awardState.zones[zone.id]) }));
+  core.learningProgress = core.unit12LearningProgress;
   certificateView = core.storyCertificate.mount({
     element: surfaces.get('certificate'), unit, go: navigate, returnUrl: $('#logo').href,
     progress: id => runners.get(id)?.progress() || { started: false, completed: false },

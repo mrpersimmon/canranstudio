@@ -5,7 +5,7 @@
   const base = entryScript.dataset.base, courseId = entryScript.dataset.course;
   const store = CanranCourseCache.open(base);
   const updates = typeof BroadcastChannel === 'function' ? new BroadcastChannel(store.prefix) : null;
-  const memoryUrls = new Map(), heldImages = new Map();
+  const memoryUrls = new Map(), heldImages = new Map(), decodedImages = new Map();
   const cancellation = new AbortController();
   const taskKey = 'preparing:' + crypto.randomUUID();
   // A partly executed course must restart in a clean document. Carry only the
@@ -205,8 +205,13 @@
   }
   async function holdImage(src) {
     if (!heldImages.has(src)) heldImages.set(src, imageReady(src));
-    try { return await heldImages.get(src); }
-    catch (error) { heldImages.delete(src); throw error; }
+    try {
+      const image = await heldImages.get(src);
+      // Retain the exact successfully decoded display URL, not merely a
+      // downloaded-byte flag or another temporary validation blob URL.
+      decodedImages.set(image.src, image);
+      return image;
+    } catch (error) { heldImages.delete(src); decodedImages.delete(src); throw error; }
   }
   async function prepare(pack, foreground = true) {
     await store.maintain(() => store.put('meta', leaseKey(pack), { pack: pack.id + '@' + pack.revision, expires: Date.now() + 30 * 60 * 1000, resources: [...pack.required, ...pack.audio].map(item => item.sha256) })).catch(() => {});
@@ -447,28 +452,64 @@
   }
   function setupPageGuard(overlay) {
     let generation = 0, paintFailed = false;
+    const checkingImages = new WeakMap();
+    function failPainting(error) {
+      if (paintFailed || withdrawn || cancellation.signal.aborted) return;
+      paintFailed = true; generation++;
+      document.documentElement.setAttribute('data-course-painting', '');
+      if (!overlay.isConnected) document.body.append(overlay);
+      showFailure(error, 'L05');
+    }
+    function preparedSource(image) {
+      // Responsive candidates require their own readiness check. A completed
+      // but broken DOM image must never be excused by a formerly good source.
+      if (image.hasAttribute('srcset') || image.closest('picture') || (image.complete && !image.naturalWidth)) return false;
+      const prepared = decodedImages.get(image.src);
+      return Boolean(prepared?.complete && prepared.naturalWidth > 0);
+    }
+    function checkPreparedImage(image) {
+      const src = image.src;
+      if (checkingImages.get(image) === src) return;
+      checkingImages.set(image, src);
+      image.loading = 'eager'; image.decoding = 'sync';
+      // A new <img> can report complete=false for an already held, decoded
+      // source. Keep the lesson painted while validating that particular node.
+      // Do not suppress a real decode error, or report a detached/replaced
+      // node's cancellation as a failure of the question now on screen.
+      image.decode().catch(error => {
+        if (image.isConnected && image.src === src) failPainting(error);
+      });
+    }
     const inspect = async () => {
-      if (painting || withdrawn || paintFailed) return;
+      if (painting || withdrawn || paintFailed || cancellation.signal.aborted) return;
       const images = [...document.images].filter(image => image.getAttribute('src') && !image.closest('#courseLoader'));
-      if (images.every(image => image.complete && image.naturalWidth > 0)) return;
+      const pending = images.filter(image => {
+        if (image.complete && image.naturalWidth > 0) return false;
+        if (preparedSource(image)) { checkPreparedImage(image); return false; }
+        return true;
+      });
+      if (!pending.length) return;
       painting = true; const current = ++generation;
       document.documentElement.setAttribute('data-course-painting', '');
       document.body.append(overlay); preparing('正在准备画面…');
       try {
-        for (const image of images) {
+        for (const image of pending) {
           image.loading = 'eager';
           if (!controlled && memoryUrls.has(new URL(image.src).pathname)) image.src = resourceAddress(image.src);
         }
-        await Promise.all(images.map(image => image.decode()));
+        await Promise.all(pending.map(image => image.decode()));
         if (generation !== current) return;
         overlay.remove(); document.documentElement.removeAttribute('data-course-painting');
       } catch (error) {
-        paintFailed = true;
-        showFailure(error, 'L05');
+        if (generation === current) failPainting(error);
       } finally { painting = false; if (!paintFailed) queueMicrotask(inspect); }
     };
     observer = new MutationObserver(inspect);
     observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'srcset'] });
+    document.addEventListener('error', event => {
+      // An existing element can fail without another src/DOM mutation.
+      if (event.target instanceof HTMLImageElement && event.target.isConnected && !event.target.closest('#courseLoader')) void inspect();
+    }, true);
     window.addEventListener('pageshow', event => { if (event.persisted) inspect(); });
     document.addEventListener('visibilitychange', async () => {
       if (document.visibilityState !== 'visible' || !controlled || painting) return;
@@ -520,6 +561,7 @@
     updates?.close();
     for (const image of heldImages.values()) image.then(value => value.removeAttribute('src'), () => {});
     heldImages.clear();
+    decodedImages.clear();
     store.memory.clear();
     for (const url of memoryUrls.values()) if (url.startsWith('blob:')) URL.revokeObjectURL(url);
     memoryUrls.clear();

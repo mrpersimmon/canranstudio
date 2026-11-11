@@ -1,0 +1,27 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "live": "/assets/learning-words/unit55-56/live-6f4f9729.svg",
+  "stay": "/assets/learning-words/unit55-56/stay-25598a20.svg",
+  "home": "/assets/learning-words/unit55-56/home-4b37ecdd.svg",
+  "housework": "/assets/learning-words/unit55-56/housework-a7ce61d4.svg",
+  "lunch": "/assets/learning-words/unit55-56/lunch-42a458ce.svg",
+  "afternoon": "/assets/learning-words/unit55-56/afternoon-ac1e1e2c.svg",
+  "usually": "/assets/learning-words/unit55-56/usually-02b0390d.svg",
+  "together": "/assets/learning-words/unit55-56/together-6788cc3f.svg",
+  "evening": "/assets/learning-words/unit55-56/evening-1cc7f5dd.svg",
+  "arrive": "/assets/learning-words/unit55-56/arrive-24be8db6.svg",
+  "night": "/assets/learning-words/unit55-56/night-69bc86f1.svg",
+  "morning": "/assets/learning-words/unit55-56/morning-2c507f1a.svg",
+  "noon": "/assets/learning-words/unit55-56/noon-9043432c.svg",
+  "homework": "/assets/learning-words/unit55-56/homework-8dfe2d5d.svg",
+  "dust": "/assets/learning-words/unit55-56/dust-399ac95f.svg",
+  "make the bed": "/assets/learning-words/unit55-56/make-bed-5bf1577d.svg",
+  "shave": "/assets/learning-words/unit55-56/shave-24e0e46e.svg",
+  "listen": "/assets/learning-words/unit55-56/listen-d206525a.svg",
+  "clean": "/assets/learning-words/unit55-56/clean-c1f9c541.svg",
+  "wash": "/assets/learning-words/unit55-56/wash-053d70a5.svg",
+  "type": "/assets/learning-words/unit55-56/type-72a8d273.svg",
+  "read": "/assets/learning-words/unit55-56/read-2d23b03a.svg",
+  "watch": "/assets/learning-words/unit55-56/watch-f3a385cc.svg",
+  "go to bed": "/assets/learning-words/unit55-56/go-bed-30c9e35c.svg"
+};

@@ -1,0 +1,27 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "umbrella": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
+  "ticket": "/assets/unit3-4-journey/ticket-v1.webp",
+  "cloakroom": "/assets/learning-words/unit3-4/cloakroom-2c286280.svg",
+  "suit": "/assets/learning-words/unit3-4/suit-86e3ec4d.svg",
+  "school": "/assets/learning-words/unit3-4/school-5196a5af.svg",
+  "teacher": "/assets/learning-words/unit3-4/teacher-b83022e5.svg",
+  "son": "/assets/learning-words/unit3-4/son-f226a91c.svg",
+  "daughter": "/assets/learning-words/unit3-4/daughter-d0c76458.svg",
+  "pen": "/assets/learning-words/unit3-4/pen-42a16c5f.svg",
+  "pencil": "/assets/learning-words/unit3-4/pencil-38d5508b.svg",
+  "book": "/assets/learning-words/unit3-4/book-5e3bf849.svg",
+  "watch": "/assets/learning-words/unit3-4/watch-197a3ddb.svg",
+  "coat": "/assets/unit3-4-journey/coat-v1.webp",
+  "dress": "/assets/learning-words/unit3-4/dress-0de3c9a8.svg",
+  "skirt": "/assets/learning-words/unit3-4/skirt-c7999c10.svg",
+  "shirt": "/assets/learning-words/unit3-4/shirt-7efe6aa1.svg",
+  "car": "/assets/learning-words/unit3-4/car-0e3a9e1c.svg",
+  "house": "/assets/learning-words/unit3-4/house-df6be3ec.svg",
+  "here": "/assets/learning-words/unit3-4/give-09943101.svg",
+  "my": "/assets/learning-words/unit3-4/people-3745ebf9.svg",
+  "number": "/assets/learning-words/unit3-4/number-01f07470.svg",
+  "five": "/assets/learning-words/unit3-4/five-ade22dfa.svg",
+  "sorry": "/assets/learning-words/unit3-4/heart-cdaa4550.svg",
+  "sir": "/assets/learning-words/unit3-4/people-3745ebf9.svg"
+};

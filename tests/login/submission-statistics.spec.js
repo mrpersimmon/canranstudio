@@ -14,11 +14,11 @@ function deviceSettings() {
     .filter(key => use[key] !== undefined).map(key => [key, use[key]]));
 }
 
-async function twoErrors(room) {
+async function twoErrors(room,message='答错了，再试试。') {
   for (let repeat = 0; repeat < 2; repeat++) {
     await flow.select(room, 'Pardon?');
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
-    await expect(room.locator('.fb')).toHaveText('再看看。');
+    await expect(room.locator('.fb')).toHaveText(message);
     if (!repeat) await room.getByRole('button', { name: '再试一次', exact: true }).click();
   }
 }
@@ -130,7 +130,7 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
       await flow.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await room.getByRole('button', { name: '下一题', exact: true }).click();
     }
-    await twoErrors(room);
+    await twoErrors(room,'再看看。');
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     await new Promise(resolve => server.close(resolve)); server = null; await start(false);
     // An open course deliberately keeps its cached edition. The public retry
@@ -139,17 +139,17 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     await courseReadyForAssertions(p);
     // Versioned resource hashes and real drafts both survive the deployment boundary.
     await expect(room.locator('.progress-copy')).toHaveText('第 3 / 5 题');
-    await expect(room.locator('.fb')).toHaveText('再看看。');
+    await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
     await expect(p.locator('#starCount')).toHaveText('5');
     await room.getByRole('button', { name: '再试一次', exact: true }).click();
     await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1) });
-    await expect(room.locator('.completion-number')).toHaveText(['3', '5', '2']);
-    await expect(room.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+    await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
+    await expect(room.locator('.completion-unit')).toHaveText(['次', '题', '题']);
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
-    await p.getByRole('button', { name: '学习记录', exact: true }).click();
-    const section = p.locator('#learningRecord section').filter({ has: p.getByRole('heading', { name: '帮忙还手提包', exact: true }) });
-    await expect(section.getByText('订正完成', { exact: true })).toHaveCount(1);
-    await expect(section.getByText('首次答对', { exact: true })).toHaveCount(4);
+    if(await p.getByRole('button',{name:'更多学习操作'}).isVisible())await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button', { name: '学习记录', exact: true }).click();
+    const section = p.locator('.learning-record-group[data-activity="manners"]');
+    await expect(section.getByText('本轮订正完成', { exact: true })).toHaveCount(1);
+    await expect(section.getByText('本轮首答正确', { exact: true })).toHaveCount(4);
     await section.getByText('本轮详情', { exact: true }).click();
     await expect(section).toContainText('连续答对 3 次 · 本次答对 5 次 · 本次答错 2 次');
     await p.getByRole('dialog', { name: '学习记录', exact: true }).getByRole('button', { name: '关闭', exact: true }).click();
@@ -160,8 +160,8 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     second = await browser.newContext({ ...deviceSettings(), baseURL: origin }); const other = await second.newPage();
     await signIn(other, account, base); await other.goto(base + 'unit1-2/#learn/manners');
     await courseReadyForAssertions(other);
-    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
-    await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
+    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
+    await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await other.goto(base + 'unit1-2/#learn/certificate');
     await expect(other.locator('#certificateDate')).toHaveText(date); await expect(other.locator('#certificateName')).toHaveText('小禾');
     await other.getByRole('link', { name: '我的纪念册', exact: true }).click();
@@ -209,7 +209,7 @@ test('有错轮次同步到另一设备仍为零星，重复传输不增加统�
       mark('wrong-answer reload ready');
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     } });
-    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
+    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state', 'retry');
     mark('corrected round with lost response');
     // Resend/merge the same accepted proof without another learner submission.
@@ -220,14 +220,14 @@ test('有错轮次同步到另一设备仍为零星，重复传输不增加统�
     mark('second retry reload ready');
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     expect(completedTransmissions).toBeGreaterThanOrEqual(2);
-    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
+    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(p.locator('#starCount')).toHaveText('0');
     second = await studentLogin(browser, account, base, deviceSettings()); const other = second.page;
     mark('second login ready');
     await other.goto(base + 'unit1-2/#learn/manners');
     await courseReadyForAssertions(other);
     mark('second course ready');
-    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '5', '2']);
+    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(other.locator('#starCount')).toHaveText('0');
     await other.locator('.stage-manners').getByRole('button', { name: '再练一轮', exact: true }).click();
     await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .progress-copy')).toHaveText('第 1 / 5 题');

@@ -28,4 +28,9 @@ function restore(courses,saved){
 function href(course,base,preview=''){
   return base+course.id+'/'+(preview?'?preview='+encodeURIComponent(preview):'')+'#learn/'+encodeURIComponent(course.next||'words');
 }
-module.exports={MAP_COURSES,MAP_CHAPTERS,chapterFor,mapChapters,lesson,groups,filter,restore,href};
+function actionLabel(course,upgraded=false){
+  if(course.next==='certificate')return '查看纪念卡';
+  if(upgraded&&course.completed)return '再次学习';
+  return course.started||course.stars?'继续学习':'开始学习';
+}
+module.exports={MAP_COURSES,MAP_CHAPTERS,chapterFor,mapChapters,lesson,groups,filter,restore,href,actionLabel};

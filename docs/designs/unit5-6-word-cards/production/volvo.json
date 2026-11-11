@@ -1,0 +1,94 @@
+{
+  "asset": "volvo",
+  "status": "selected",
+  "documented_at_utc": "2026-10-30 13:43:58 UTC",
+  "mode": "built-in image_gen",
+  "tool": "image_gen.imagegen",
+  "use_case": "style-transfer",
+  "model": "Not exposed by built-in tool",
+  "transparent_background": true,
+  "input_images": [
+    {
+      "role": "edit_target",
+      "path": "docs/designs/unit5-6-word-cards/references/volvo-before.png"
+    },
+    {
+      "role": "style_reference",
+      "path": "assets/awards/unit5-6-friends.webp"
+    }
+  ],
+  "prompt": "Use case: style-transfer\nAsset type: transparent vocabulary-card car illustration, intended display about 140 x 110 CSS pixels.\nInput images: Image 1 is the EDIT TARGET: gray-teal boxy car with Volvo text. Image 2 is the approved STYLE REFERENCE ONLY. Use its warm dark-brown hand-drawn outlines, soft painterly paper-like color, subtle volume and approachable 2D children's storybook finish. Do not copy its people, classroom, background or vignette.\nPrimary request: Repaint the car from Image 1 as an illustration from the same children's picture book as Image 2. Preserve the muted gray-teal color and unmistakably boxy small estate/station-wagon silhouette. Remove the Volvo text. Single isolated car only.\nStyle: Highly readable 2D storybook gouache illustration with warmly colored, gently irregular dark-brown linework, soft matte paper-textured fills, restrained highlights and subtle painted shading. The finish should match the illustrated characters in Image 2, with similar simplicity and softness. Not photorealistic, not a glossy product render, not a 3D toy, not a crude geometric icon.\nPerspective and subject: Whole car faces RIGHT. Almost side-on, with only a very slight front three-quarter turn showing a narrow glimpse of the front grille. Precisely TWO visible wheels: the near-side rear wheel and the near-side front wheel. Far-side wheels must be completely hidden behind the body; no extra tire fragments under the car. Boxy gray-teal body and roof, windows, two simple doors, subtle grille, headlights and a small intact side mirror. No occupants or logos.\nComposition: Horizontal canvas. The car must be centered and must occupy ONLY 84% of canvas width. Reserve fully transparent margins of at least 8% at left and right, including the bumper and mirror. Plenty of clear space above and below. Entire wheels, mirror, bumpers and body fully within frame.\nBackground and edges: TRUE TRANSPARENT RGBA BACKGROUND. Absolutely no backdrop, no brown glow, no atmosphere, no halo, no dark vignette, no spotlight, no colored haze or color outside the object. All pixels outside the car silhouette must be fully transparent, except ONE very small, low-opacity neutral gray-brown contact shadow immediately beneath the two tires. That shadow must stay narrow and local; never surround the car. Crisp clean alpha edges, no white sticker outline.\nText: None.\nConstraints: No Volvo word, no writing, no letters, no numbers, no badge, no brand logo, no watermark, no people, no environment, no frame, no border, no added objects. One finished car illustration only.",
+  "attempts": [
+    {
+      "prompt": "Use case: style-transfer\nAsset type: transparent vocabulary-card illustration, displayed at about 140 x 110 CSS pixels.\nInput images: Image 1 is the EDIT TARGET, the gray-teal boxy car with the word Volvo below it. Image 2 is STYLE REFERENCE ONLY: the already approved warm children's storybook commemorative illustration. Do not copy its characters or classroom.\nPrimary request: Redraw only the car from Image 1 in exactly the visual language of Image 2. Preserve its distinctive muted gray-teal color and boxy estate/station-wagon identity. Remove the word Volvo entirely. Deliver one isolated car as a polished illustrated asset.\nStyle/medium: Detailed but very readable 2D children's picture-book illustration. Clear, warm dark-brown hand-drawn outlines like the reference; slightly organic linework; soft paper-like painted fills with subtle volume, restrained surface texture, small gentle highlights and warm soft lighting. The finish must feel like the same artist and same illustrated book as Image 2. It must not resemble a photograph, a 3D toy render, a glossy product render, or a crude geometric icon.\nSubject and perspective: Whole car, facing RIGHT, gently viewed from the front-side in a mild three-quarter perspective. Exactly two clearly visible near-side wheels, complete tires and wheel hubs. Show the complete boxy gray-teal body, clear windows, modest front grille and lights, and complete side mirror. No occupants. Keep the recognizable squared roof and body proportions of Image 1, while improving the illustration's detail and gentle dimensionality.\nComposition/framing: Landscape transparent canvas. Center the car, approximately 84–85% of canvas width. Keep about 8% safe clear margin on each side and generous breathing room above and below. Every wheel, mirror, bumper, and body edge must be fully inside the canvas. Add only a subtle soft translucent grounding shadow directly under the car.\nScene/backdrop: Genuinely transparent RGBA background, no scenery, no floor, no sky, no color backdrop. Transparency must be real alpha, not a baked checkerboard.\nText: None.\nConstraints: No word Volvo, no text of any kind, no letters, no badge, no brand logo, no watermark, no people, no extra objects, no scene, no frame, no border, no white sticker outline or halo. Preserve the gray-teal car identity. Output one finished illustration only.",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef\\exec-52ec4a96-643d-438e-95c4-4facd56c368d.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selected": false,
+      "reason": "Broad warm translucent vignette, framing too tight, far-side wheel fragments visible."
+    },
+    {
+      "prompt": "Use case: style-transfer\nAsset type: transparent vocabulary-card car illustration, intended display about 140 x 110 CSS pixels.\nInput images: Image 1 is the EDIT TARGET: gray-teal boxy car with Volvo text. Image 2 is the approved STYLE REFERENCE ONLY. Use its warm dark-brown hand-drawn outlines, soft painterly paper-like color, subtle volume and approachable 2D children's storybook finish. Do not copy its people, classroom, background or vignette.\nPrimary request: Repaint the car from Image 1 as an illustration from the same children's picture book as Image 2. Preserve the muted gray-teal color and unmistakably boxy small estate/station-wagon silhouette. Remove the Volvo text. Single isolated car only.\nStyle: Highly readable 2D storybook gouache illustration with warmly colored, gently irregular dark-brown linework, soft matte paper-textured fills, restrained highlights and subtle painted shading. The finish should match the illustrated characters in Image 2, with similar simplicity and softness. Not photorealistic, not a glossy product render, not a 3D toy, not a crude geometric icon.\nPerspective and subject: Whole car faces RIGHT. Almost side-on, with only a very slight front three-quarter turn showing a narrow glimpse of the front grille. Precisely TWO visible wheels: the near-side rear wheel and the near-side front wheel. Far-side wheels must be completely hidden behind the body; no extra tire fragments under the car. Boxy gray-teal body and roof, windows, two simple doors, subtle grille, headlights and a small intact side mirror. No occupants or logos.\nComposition: Horizontal canvas. The car must be centered and must occupy ONLY 84% of canvas width. Reserve fully transparent margins of at least 8% at left and right, including the bumper and mirror. Plenty of clear space above and below. Entire wheels, mirror, bumpers and body fully within frame.\nBackground and edges: TRUE TRANSPARENT RGBA BACKGROUND. Absolutely no backdrop, no brown glow, no atmosphere, no halo, no dark vignette, no spotlight, no colored haze or color outside the object. All pixels outside the car silhouette must be fully transparent, except ONE very small, low-opacity neutral gray-brown contact shadow immediately beneath the two tires. That shadow must stay narrow and local; never surround the car. Crisp clean alpha edges, no white sticker outline.\nText: None.\nConstraints: No Volvo word, no writing, no letters, no numbers, no badge, no brand logo, no watermark, no people, no environment, no frame, no border, no added objects. One finished car illustration only.",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-4e3d-7581-a562-bf0068a63aef\\exec-abfc3d0d-dd4b-4488-bf44-ab8835db8f42.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selected": true,
+      "source_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-4e3d-7581-a562-bf0068a63aef/exec-abfc3d0d-dd4b-4488-bf44-ab8835db8f42.png"
+    }
+  ],
+  "source": {
+    "path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-4e3d-7581-a562-bf0068a63aef/exec-abfc3d0d-dd4b-4488-bf44-ab8835db8f42.png",
+    "width": 1484,
+    "height": 1060
+  },
+  "output": {
+    "path": "assets/unit5-6-word-cards/raw/volvo-v1.png",
+    "absolute_path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/volvo-v1.png",
+    "format": "PNG",
+    "width": 1700,
+    "height": 1060,
+    "mode": "RGBA",
+    "bytes": 1469111,
+    "sha256": "183364fc02e43fc687b80bb3fd22f8e44447455e95be0fd2302c097ce6a87c8e",
+    "postprocessing": [
+      {
+        "operation": "transparent_canvas_padding",
+        "left_px": 108,
+        "right_px": 108,
+        "top_px": 0,
+        "bottom_px": 0,
+        "description": "Added transparent horizontal canvas space with SourceCopy; no redrawing or resizing."
+      }
+    ]
+  },
+  "validation": {
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "fully_transparent_pixels": 1079952,
+    "opaque_pixels": 544,
+    "partially_transparent_pixels": 721504,
+    "nonzero_alpha_bounds_inclusive": [
+      142,
+      8,
+      1563,
+      1059
+    ],
+    "visible_alpha_threshold": 8,
+    "visible_alpha_bounds_inclusive": [
+      145,
+      190,
+      1558,
+      866
+    ],
+    "visible_subject_width_percent": 83.18,
+    "visible_left_margin_percent": 8.53,
+    "visible_right_margin_percent": 8.29,
+    "visually_inspected": true,
+    "findings": [
+      "Muted gray-teal, boxy car identity preserved.",
+      "Warm brown outlines and soft matte paper-textured painted fills match the approved storybook direction.",
+      "Car faces right in a mild front-side view with precisely two visible wheels.",
+      "Complete vehicle, wheels, mirror and bumpers remain inside the canvas.",
+      "No text, Volvo word, logo, people, scenery, frame, border or white sticker outline.",
+      "True alpha transparency verified; small local contact shadows retained.",
+      "Final PNG inspected after transparent padding.",
+      "No browser or application integration verification performed in this asset-only subtask."
+    ]
+  }
+}

@@ -7,6 +7,9 @@
   },
   "scripts": {
     "preview:cached": "node scripts/preview-courses.js",
+    "preview:review": "node scripts/review-bench.js",
+    "test:cloud": "node scripts/cloud/check.js",
+    "test:review": "playwright test -c playwright.review.config.js --grep-invert \"all questions and phone layouts|complete presentation on required phones|story poses, preserved text\"",
     "build:static": "node scripts/build-static.js",
     "sync:home-fallback": "node scripts/home-course-fallback.js",
     "verify:live": "node scripts/verify-live.js https://www.canranstudio.cn",
@@ -35,7 +38,8 @@
     "test:journey:layout": "playwright test -c playwright.login.config.js tests/login/course-banners.spec.js tests/login/journey-next-three.spec.js tests/login/journey-visits.spec.js tests/login/journey-daily-life.spec.js tests/login/journey-complete.spec.js --grep @journey-layout",
     "test:recovery:webkit": "playwright test -c playwright.recovery.config.js",
     "test:statistics": "playwright test -c playwright.statistics.config.js",
-    "admin:login": "node server/manage.js"
+    "admin:login": "node server/manage.js",
+    "test:review:whole-book": "playwright test -c playwright.review.config.js tests/review/rollout-audit.spec.js tests/review/rollout-pages.spec.js tests/review/rollout-stories.spec.js --project=chromium --workers=3"
   },
   "devDependencies": {
     "@fontsource/baloo-2": "5.3.0",

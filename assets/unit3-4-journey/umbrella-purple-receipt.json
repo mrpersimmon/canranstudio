@@ -1,0 +1,113 @@
+{
+  "asset": "Lesson 3–4 purple polka-dot umbrella",
+  "createdAt": "2026-11-01",
+  "mode": "built-in image_gen",
+  "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-0d7f-74b3-8311-27b4e2c81757/exec-a0e7a0c2-5a38-4296-a6b9-49738cdc9be6.png",
+  "prompt": "Create a single production cutout asset of the SAME purple cream-polka-dot umbrella in the attached approved Canran Studio character illustration.\nREFERENCE ROLE: the attached image is the authoritative reference for umbrella identity, its lavender-purple fabric, large warm cream polka dots, dark warm-brown outline, wood shaft, rounded friendly storybook drawing and soft volume. Extract/reconstruct ONLY this umbrella as an independent complete object; remove all people, hands, counter, coat and background.\nOUTPUT: one 1024 × 1536 portrait PNG with REAL transparent alpha, not a white background, not a checkerboard pattern. Only the umbrella and its clean antialiased silhouette are visible. Leave a small transparent safety margin around every part. The full object must fit without cropping.\nGEOMETRY: front-facing opened round arched canopy, left-right balanced, slightly scalloped lower edge, three clearly readable curved fabric panels. The canopy top is near y=100 and canopy lower edge near y=650, spanning approximately x=80 to x=944. A short small brown finial extends above the canopy. The wooden shaft descends STRAIGHT VERTICALLY at x=512 from the canopy center to the lower grip, not diagonally. At the bottom the handle curls toward the viewer's LEFT into a clearly visible J-shaped hook, returning upwards near x=370; the hook's inner opening stays transparent. The lowest handle point is near y=1440. Keep the main straight gripping segment immediately above the curl unobstructed so a separate character's hand can be overlaid there. No detached pieces.\nCOLOR AND STYLE: the exact same friendly storybook object as the reference: soft lavender-purple canopy with large cream circular polka dots following the curved fabric, warm dark-brown outlines, softly shaded but still simple readable color blocks, warm brown wooden pole and rounded hook. Slight light from upper left, gentle volume. No photorealistic gloss, no neon, no painted watercolor wash around the silhouette.\nABSOLUTE EXCLUSIONS: no people, no hand, no clothing, no stand, no counter, no scene, no ground or cast shadow, no rain, no stars, no sparkles, no text, no numbers, no logo, no white halo or baked opaque matte.",
+  "references": [
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "role": "Umbrella identity, color, texture, outline and material reference",
+      "attached": true
+    },
+    {
+      "path": "assets/unit3-4/umbrella.svg",
+      "role": "Read-only original geometry reference: opened arched canopy, vertical pole, left hook",
+      "attached": false
+    },
+    {
+      "path": "assets/unit3-4/umbrella-held.svg",
+      "role": "Read-only held umbrella long shaft geometry",
+      "attached": false
+    }
+  ],
+  "dimensions": {
+    "width": 1024,
+    "height": 1536,
+    "transparent": true
+  },
+  "alpha": {
+    "bboxThreshold": 16,
+    "bboxHalfOpen": [
+      21,
+      157,
+      1003,
+      1360
+    ],
+    "bboxNormalized": [
+      0.0205078125,
+      0.10221354166666667,
+      0.9794921875,
+      0.8854166666666666
+    ],
+    "zeroPixels": 1152351,
+    "partialPixels": 420513,
+    "max": 254,
+    "bodyTypical": 253,
+    "note": "Built-in output has near-opaque body (typically alpha253); outside object and hook opening transparent. Do not flatten runtime assets."
+  },
+  "anchors": {
+    "poleGrip": {
+      "x": 510,
+      "y": 1160,
+      "normalized": [
+        0.498046875,
+        0.7552083333333334
+      ],
+      "purpose": "Recommended hand overlay point on straight wood segment just below gold collar"
+    },
+    "hookInnerBottom": {
+      "x": 430,
+      "y": 1270,
+      "normalized": [
+        0.419921875,
+        0.8268229166666666
+      ],
+      "purpose": "Approximate lowest inner opening for hook alignment"
+    },
+    "hookOuterBottom": {
+      "x": 430,
+      "y": 1355,
+      "normalized": [
+        0.419921875,
+        0.8821614583333334
+      ]
+    },
+    "canopyBottomCenter": {
+      "x": 512,
+      "y": 628,
+      "normalized": [
+        0.5,
+        0.4088541666666667
+      ]
+    }
+  },
+  "files": [
+    {
+      "path": "assets/unit3-4-journey/umbrella-purple-v1.png",
+      "bytes": 1193241,
+      "sha256": "5cd9ede5abbce6b1e9264e27ea64d0151ac465fae8e528cc877d81beb3937449",
+      "purpose": "Unmodified selected generation"
+    },
+    {
+      "path": "assets/unit3-4-journey/umbrella-purple-v1.webp",
+      "bytes": 71478,
+      "sha256": "2e897278a24927b36230887214e82737ce53f34ec5073f8c01b4f7d52bcc9ea7",
+      "purpose": "Runtime WebP quality90 alphaQuality100 effort6; no art edits or resizing"
+    }
+  ],
+  "validation": {
+    "alphaChecked": true,
+    "sourceInspected": true,
+    "compositePreview": "output/unit34-asset-qa/umbrella-purple-on-paper.png",
+    "compositePreviewPurpose": "QA only, renders existing alpha on #fffaf0 at 50 percent size; source and runtime alpha unchanged",
+    "findings": "Complete isolated canopy/pole/left J hook, cream polka dots, no cut-off, no visible halo on cream paper. No people, text or scene.",
+    "renderedCourseAndDeviceChecks": "Parent integration task"
+  },
+  "status": {
+    "sourceCodeChanged": false,
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  }
+}

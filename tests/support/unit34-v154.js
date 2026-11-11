@@ -3,7 +3,7 @@ const fs=require('fs/promises'),{expect}=require('@playwright/test');
 const original=require('./unit3-4-flow'),tasks=require('./units1-30-tasks');
 const ANSWERS=original.ANSWERS;
 const OLD25={...ANSWERS,reply:tasks.CASES['3-4'].changes.find(x=>x.group==='reply').answers.map(q=>q.answer),exam:tasks.CASES['3-4'].old.exam.map(q=>q.answer)};
-const ready=p=>expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+const ready=p=>expect(p.locator('#wordPageProgress:visible,.practice-screen-stage .practice-content:visible,.learning-surface:visible').first()).toBeVisible({timeout:30000});
 async function installPrevious(page,folder='unit3-4-before-v154'){
  const patterns=[];
  for(const name of ['index.html','content.js','unit.js','unit.css','scene.js']){
@@ -15,20 +15,20 @@ async function installPrevious(page,folder='unit3-4-before-v154'){
 async function story(p,base=''){
  await p.goto(base+'/unit3-4/#learn/text');await ready(p);const room=p.locator('.stage-text');
  if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
- if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ if(await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).isVisible())await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await room.getByRole('button',{name:/^(完成课文|去练习)$/,exact:true}).click();
 }
 async function activity(p,id,{base='',old25=false,capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);
  if(navigate)await p.goto(base+'/unit3-4/#learn/'+id);await ready(p);
- const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];if(await room.locator('.practice-finish').count()){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;}
+ const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];await expect(room).toBeVisible({timeout:30000});if(await room.locator('.practice-finish').count()){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;}
  const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
  for(let i=first;i<answers.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await tasks.select(room,answers[i]);await check.click();}
   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');
-  await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();
+  await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?/^(查看本次记录|完成挑战)$/:/^(完成这一站|完成练习)$/,exact:true}).click();
  }
  if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;
 }

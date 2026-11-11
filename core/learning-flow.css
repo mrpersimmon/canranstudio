@@ -1,0 +1,330 @@
+/* A single warm learning surface, from reading to practice and results. */
+body[data-learning-shell]{background:#faf7ef;overflow:hidden;--learning-paper:#fffdf7;--learning-line:#dbcfb9;--learning-green:#286a4e;--learning-header-height:92px}
+body[data-learning-shell] #topbar{display:none}
+body[data-learning-shell] :is(#cover,#lessonWorkspace){visibility:hidden}
+/* Hidden legacy worlds can retain their previous fitted width after a resize.
+   They remain measurable for their controller, but cannot widen another page. */
+body[data-learning-shell] .shop-stage:not(.learning-surface){overflow:clip}
+body[data-learning-shell] .practice-screen-toolbar{height:48px;padding-block:2px;background:#fffcf5;border-color:#e3dac8;padding-inline:max(10px,calc((100% - 920px)/2 + 14px))}
+body[data-learning-shell] .practice-screen-toolbar img{display:block;width:24px;height:24px}
+.learning-route{display:flex;align-items:center;justify-content:center;flex:1;min-width:0;max-width:600px;height:44px;margin-inline:auto}
+.learning-course{font-size:14px;line-height:20px;color:#79644c;white-space:nowrap}
+body[data-learning-shell] .learning-surface,body[data-learning-shell] #lessonWorkspace .learning-surface{visibility:visible;position:fixed;left:50%;top:calc(var(--practice-screen-top,0px) + var(--learning-header-height));transform:translateX(-50%)!important;display:flex;flex-direction:column;gap:6px;width:min(920px,100%);max-width:none;height:calc(var(--practice-screen-height,100dvh) - var(--learning-header-height));margin:0!important;padding:12px 14px max(12px,env(safe-area-inset-bottom));border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden;box-sizing:border-box}
+body[data-learning-shell] #cover.learning-surface{visibility:visible;display:flex}
+body[data-learning-shell] #lessonWorkspace .learning-surface>.stage-heading{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden;clip-path:inset(50%);border:0}
+/* Control identity is stable while routes are inactive. Applying these colors
+   only on .learning-surface animated old orange/green into the new palette. */
+body[data-learning-shell] :is(.unit-cover,.shop-stage) .btn,body[data-learning-shell] #lessonWorkspace .shop-stage .opt-btn{border:2px solid #d6c8b2;box-shadow:0 2px 0 #c3b39a55;border-radius:16px;transition:background-color 120ms ease,border-color 120ms ease,box-shadow 120ms ease;transform:none}
+body[data-learning-shell] :is(.unit-cover,.shop-stage) :is(.btn-green,#startBtn){background:var(--learning-green);border-color:var(--learning-green);color:#fffdf7;box-shadow:0 3px 9px #286a4e18}
+body[data-learning-shell] :is(.unit-cover,.shop-stage) .btn-yellow{background:#fffcf5;color:#5d4936;border-color:#d7cbb7}
+body[data-learning-shell] #lessonWorkspace .shop-stage .opt-btn[aria-pressed='true']{background:#eaf4f7;border-color:#6094a6;box-shadow:0 2px 0 #6094a633}
+body[data-learning-shell] :is(.unit-cover,.shop-stage) .btn-green:disabled{background:#eee7d9;border-color:#e2d7c5;box-shadow:none;color:#978a74;opacity:1}
+body[data-learning-shell] .shop-stage .practice-submit-row .practice-hint-button{background:#f5eddb;border-color:#e4d5b8;box-shadow:none}
+body[data-learning-shell] .learning-surface .practice-actions{border-color:transparent!important}
+/* References belong to the More dialog in every view, including results. */
+body[data-learning-shell] #lessonWorkspace .learning-surface>.grammar-reference{display:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-screen-runner{position:relative;isolation:isolate;max-width:740px;gap:6px}
+body[data-learning-shell][data-learning-view='question'] .practice-screen-runner::before{content:'';position:absolute;z-index:-1;inset:0 0 auto;height:var(--learning-paper-height,0px);box-sizing:border-box;border:1px solid var(--learning-line);border-radius:22px;background:var(--learning-paper) url('/assets/awards/paper.webp') center/512px;box-shadow:0 5px 20px #5a402709;pointer-events:none}
+body[data-learning-shell][data-learning-view='question'] #lessonWorkspace .learning-surface .practice-content{flex:0 1 auto;width:100%;margin:0;padding:14px 12px;border:1px solid transparent;border-radius:22px;background:transparent;box-shadow:none;max-height:calc(100% - 94px);scroll-padding:10px;box-sizing:border-box}
+body[data-learning-shell] .learning-surface .practice-progress{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px 8px;margin-bottom:14px}
+body[data-learning-shell] .learning-surface .practice-screen-title{max-width:none;font-size:15px;line-height:22px;color:#745d42;text-align:left}
+body[data-learning-shell] .learning-surface .progress-copy{font-size:12px;color:#8d7c63;text-align:right}
+body[data-learning-shell] .learning-surface .practice-meter{grid-column:1/-1;width:100%;height:6px}
+body[data-learning-shell] .learning-surface .practice-step{height:100%;min-height:0;box-sizing:border-box;border-radius:5px}
+body[data-learning-shell] .learning-surface .practice-step.is-current{outline:0;box-shadow:none;background:#e4c47d;border-color:#e4c47d}
+body[data-learning-shell] .learning-surface .practice-step.is-complete{background:#81a888;border-color:#81a888}
+body[data-learning-shell] .learning-surface .grammar-model{background:#f0f4ef;border-color:#d6e2d6}
+body[data-learning-shell] .learning-surface .practice-answer-note .fb{transition:color 120ms ease}
+/* Results keep their reward gate and animations; only their content wrapper changes. */
+body[data-learning-shell][data-learning-view='result'] .learning-surface>.practice-runner{flex:1;min-height:0;width:100%;max-width:740px;margin:0 auto;display:flex}
+body[data-learning-shell] #lessonWorkspace .learning-surface .completion-card{position:relative;display:flex;flex-direction:column;flex:1;min-height:0;gap:6px;padding:0;margin:0;border:0;box-shadow:none;background:transparent;border-radius:0}
+.learning-result-content{flex:0 1 auto;max-height:calc(100% - 88px);width:100%;margin-block:auto;padding:18px 14px;border:1px solid var(--learning-line);border-radius:22px;background:var(--learning-paper) url('/assets/awards/paper.webp') center/512px;box-shadow:0 5px 20px #5a402709;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:12px;box-sizing:border-box}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .current-completion{flex:none;height:120px;width:100%;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-title{font-size:25px;line-height:1.3;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-stats{width:100%;max-width:450px;margin:0;gap:8px}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-stat{min-height:100px;border-width:2px;border-radius:16px;box-shadow:none}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-stat-label{font-size:13px;padding:6px 2px}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-stat-value{font-size:30px;gap:4px}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-stat-value img{width:26px;height:26px}
+body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-award{font-size:16px;margin:0;color:#527952}
+body[data-learning-shell] #lessonWorkspace .learning-surface .completion-card>.practice-finish-actions{flex:none;height:88px;min-height:88px;box-sizing:border-box;align-items:end;display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin:0;padding:0 2px 6px;width:100%}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-finish-actions .btn{height:48px;min-height:48px;padding:8px 12px;margin:0;font-size:17px;width:100%}
+/* Read the dialogue in its own bounded log, with full characters on the same ground. */
+body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text{max-width:760px;--story-person-height:clamp(140px,21dvh,180px);--story-scene-max:640px}
+.learning-story-content{display:flex;flex-direction:column;justify-content:center;gap:6px;flex:1;min-height:0;width:100%}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-stacked{position:relative;display:block;flex:1;min-height:0;max-height:var(--story-scene-max);width:100%;max-width:none;margin:0;padding:0;box-sizing:border-box;border:1px solid var(--learning-line);border-radius:22px;box-shadow:0 5px 20px #5a402709;overflow:hidden}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-stacked .dialogue-log{position:absolute;z-index:5;inset:10px 10px calc(var(--story-person-height) + 64px);width:auto;height:auto;min-height:0;align-self:stretch;grid-area:auto;transform:none;display:block;margin:0;padding:4px 12px;background:transparent;border:0;scroll-behavior:auto;scrollbar-gutter:stable;overflow:auto}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bubble-row{display:flex;flex:none;margin:0 0 8px;animation:none}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bubble{width:fit-content;max-width:96%;border-width:1px;border-radius:14px;padding:8px 10px;box-shadow:none}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bname{font-size:12px;line-height:18px}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .btext{font-size:18px;line-height:1.35;min-height:26px;padding:2px 0;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bcn{font-size:15px;line-height:1.4;margin:4px 0}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bbtns{margin-top:4px}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bbtns .btn{min-height:44px;font-size:13px;padding:3px 12px;border:0;background:#efe7d5;box-shadow:none;border-radius:10px}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .story-lead{padding:12px;border-width:1px;border-radius:14px}
+body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .story-lead p{font-size:17px;line-height:1.4}
+/* Preserve the original scene: only individual speech bubbles have a paper fill. */
+body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text .dialogue-status{flex:none;height:20px;min-height:20px;margin:0;padding:0;font-size:12px;line-height:20px;color:#86745a}
+body[data-learning-shell] .learning-surface.stage-text>.stage-ctrl,body[data-learning-shell] .learning-surface.stage-text>.practice-finish{flex:none;height:88px;min-height:88px;margin:0;padding:0 2px 6px;box-sizing:border-box;justify-content:end;align-items:stretch;gap:4px}
+body[data-learning-shell] .learning-surface.stage-text>.stage-ctrl{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:end;gap:10px;width:100%;max-width:none}
+body[data-learning-shell] .learning-surface.stage-text>.stage-ctrl .stage-tools{flex:1;min-width:0;margin:0;display:flex}
+body[data-learning-shell] .learning-surface.stage-text>.stage-ctrl>.btn{flex:1.4;min-width:0}
+body[data-learning-shell] .learning-surface.stage-text>.practice-finish>p{font-size:17px;line-height:24px;margin:0;color:#557a59}
+body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text>.practice-finish{border:0}
+body[data-learning-shell] .learning-surface.stage-text :is(.stage-ctrl,.practice-finish-actions) .btn{height:48px;min-height:48px;font-size:17px;padding:8px 10px;width:100%}
+body[data-learning-shell] .learning-surface.stage-text .practice-finish-actions{width:100%;margin:0;display:grid;grid-template-columns:1fr 1.4fr;align-items:end;gap:10px}
+/* Non-assessment reading surfaces retain natural scrolling under the same header. */
+body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-surface,body[data-learning-shell][data-learning-view='certificate'] #lessonWorkspace .learning-surface{display:block;overflow:auto;overscroll-behavior:contain;padding-top:16px}
+body[data-learning-shell][data-learning-view='words'] .learning-surface .unit-words{margin:0}
+body[data-learning-shell][data-learning-view='certificate'] #lessonWorkspace .learning-surface{max-width:740px}
+/* Cover spacing belongs to the learning shell. Old unit covers used important
+   padding and all-side auto margins, which pinned the CTA to the screen edge.
+   Only outer auto margins center the group; on a short screen they become zero
+   so both the beginning and the last action remain reachable by scrolling. */
+body[data-learning-shell][data-learning-view='cover'] #cover.learning-surface{overflow:auto;overscroll-behavior:contain;justify-content:flex-start;align-items:stretch;min-height:0;max-width:740px;gap:18px;padding:20px 18px max(20px,env(safe-area-inset-bottom))!important;scroll-padding-block:20px}
+body[data-learning-shell][data-learning-view='cover'] .current-cover{background:#edf1e7}
+body[data-learning-shell][data-learning-view='cover'] #cover .current-cover{width:100%;max-width:none;height:clamp(148px,32dvh,300px);min-height:0;flex:none;margin:auto 0 0;padding:12px;box-sizing:border-box;border-radius:22px}
+body[data-learning-shell][data-learning-view='cover'] #cover .cover-copy{display:flex;flex-direction:column;align-items:center;flex:none;width:100%;min-width:0;box-sizing:border-box;margin:0 0 auto;padding:0;text-align:center}
+body[data-learning-shell][data-learning-view='cover'] #cover .unit-source{font-size:14px;line-height:20px;margin:0 0 10px}
+body[data-learning-shell][data-learning-view='cover'] #cover h1{font-size:clamp(28px,8.4vw,36px);line-height:1.3;margin:0}
+body[data-learning-shell][data-learning-view='cover'] #cover :is(.unit-intro,.cover-story-title){max-width:38ch;font-size:16px;line-height:1.55;margin:12px 0 0}
+body[data-learning-shell][data-learning-view='cover'] #cover #startBtn{flex:none;width:min(100%,280px);min-height:52px;margin:20px 0 0;padding:10px 18px;font-size:18px;line-height:1.3;box-sizing:border-box}
+body[data-learning-shell][data-learning-view='gate'] .learning-surface{justify-content:center;align-items:center}
+@media(max-height:620px){
+ body[data-learning-shell] .learning-surface,body[data-learning-shell] #lessonWorkspace .learning-surface{padding:6px 8px max(6px,env(safe-area-inset-bottom))}
+ body[data-learning-shell][data-learning-view='question'] #lessonWorkspace .learning-surface .practice-content{padding:6px;border-radius:18px;max-height:calc(100% - 86px)}
+ body[data-learning-shell] .learning-surface .practice-progress{display:flex;gap:6px;margin-bottom:6px}
+ body[data-learning-shell] .learning-surface .practice-screen-title{font-size:14px}
+ body[data-learning-shell] .learning-surface .practice-meter{flex:1}
+ body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text{--story-person-height:110px}
+ body[data-learning-shell] #lessonWorkspace .learning-result-content .current-completion{height:78px}
+ body[data-learning-shell] .learning-result-content{gap:8px;padding:12px;max-height:calc(100% - 80px)}
+ body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-title{font-size:23px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .completion-card>.practice-finish-actions{height:80px;min-height:80px}
+}
+body[data-learning-reduced] .learning-surface :is(.btn,.opt-btn,.fb){transition:none}
+/* The five learned-stage links are the single visible chapter navigation. */
+.learning-milestones{position:fixed;z-index:14;top:calc(var(--practice-screen-top,0px) + 48px);left:0;right:0;height:44px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:0;margin:0;padding:0 max(10px,calc((100% - 740px)/2 + 8px));list-style:none;background:#fffcf5;border-bottom:1px solid #e3dac8;color:#8a806f;font:12px/1.2 var(--lesson-font,inherit)}
+.learning-milestones li{position:relative;display:flex;align-items:center;gap:4px;white-space:nowrap;flex:1;justify-content:center}
+.learning-milestones a{display:flex;align-items:center;justify-content:center;gap:4px;min-height:44px;min-width:44px;width:100%;box-sizing:border-box;padding:4px;border-radius:8px;text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+.learning-milestones a:focus-visible{outline:2px solid #387d72;outline-offset:-3px}
+.learning-milestones li::before{content:'';position:absolute;right:calc(100% - 2px);width:8px;height:2px;background:#e1d9ca}
+.learning-milestones li:first-child::before{display:none}
+.learning-milestones li.is-connected::before{background:#6c997e}
+.milestone-point{display:inline-flex;align-items:center;justify-content:center;width:17px;height:17px;border:1px solid #d9cfbd;border-radius:50%;font:11px/1 sans-serif;background:#fffdf7}
+.learning-milestones .is-complete{color:#527959}
+.learning-milestones .is-complete .milestone-point{background:#e4eee2;border-color:#b1c8b1;color:#39714c}
+.learning-milestones .is-current{color:#225f47;font-weight:600}
+.learning-milestones .is-current .milestone-point{border-color:#286a4e;box-shadow:0 0 0 2px #286a4e19}
+body[data-learning-shell] .learning-surface .learning-question-heading{grid-column:1;margin:0 0 8px;min-width:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-question-heading h3{margin:0 0 5px;text-align:left}
+body[data-learning-shell] .learning-surface .learning-question-heading .practice-context{margin:0;padding:0;border:0;background:transparent;box-shadow:none;border-radius:0;color:#79644c;font-size:15px;line-height:1.45;text-align:left}
+/* The original rule is the source of truth, never an automatic overlay. */
+body[data-learning-shell] .learning-surface .grammar-rule{display:none!important}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-submit-row>.practice-previous{order:0;flex:0 0 76px;padding-inline:8px;background:transparent;border-color:#d6c8b2;font-size:15px;color:#725d45;box-shadow:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-submit-row>.btn:not(.practice-previous){order:2}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-submit-row>.btn:is(.practice-hint-button,.learning-explanation-button){order:1;flex:0 0 48px;max-width:48px;padding:8px;font-size:13px;box-shadow:none;display:inline-flex;align-items:center;justify-content:center}
+body[data-learning-shell] .learning-explanation-button .shop-icon{width:28px;height:28px;display:block}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-submit-row>.practice-previous:disabled{opacity:.4}
+body[data-learning-shell] #lessonWorkspace [data-practice-review] .opt-btn:disabled{opacity:1;cursor:default}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-compact-wordbank{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:row;align-items:stretch;gap:6px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-compact-wordbank>.word-token{grid-column:span var(--wordbank-columns,1);width:100%;height:auto;min-height:44px;min-width:0;padding:4px 6px;white-space:normal;overflow-wrap:anywhere;box-sizing:border-box}
+.learning-explanation-sheet{position:fixed;inset:0;margin:auto;box-sizing:border-box;width:min(440px,calc(100% - 28px));max-width:calc(100% - 28px);max-height:calc(100dvh - 40px);padding:22px;border:1px solid #d7c9ad;border-radius:22px;background:#fffaf0;color:#56412e;box-shadow:0 16px 60px #4b35262b;overflow:auto}
+.learning-explanation-sheet::backdrop{background:#263a3066}
+.learning-explanation-sheet h2{font-size:20px;margin:0 0 14px}
+.learning-explanation-sheet p{font-size:17px;line-height:1.75;margin:0 0 20px}
+.learning-explanation-sheet .btn{width:100%;min-height:44px;background:#286a4e;border:0;box-shadow:none;border-radius:14px;color:#fffdf7;font-size:16px}
+.learning-reference-sheet{position:fixed;inset:0;margin:auto;width:min(520px,calc(100% - 28px));max-width:calc(100% - 28px);max-height:calc(100dvh - 32px);height:fit-content;box-sizing:border-box;padding:0;border:1px solid #d7c9ad;border-radius:22px;background:#fffaf0;color:#56412e;font-family:inherit;overflow:hidden;box-shadow:0 16px 60px #4b35262b}
+.learning-reference-sheet[open]{display:flex;flex-direction:column}
+.learning-reference-sheet::backdrop{background:#263a3066}
+.learning-reference-header{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid #e6ddca}
+.learning-reference-header h2{margin:0;font-size:20px;line-height:1.4;font-weight:500}
+.learning-reference-header button{flex:none;min-width:52px;min-height:44px;padding:8px;border:0;border-radius:12px;box-shadow:none;background:#efe7d5;color:#6b5740;font-family:inherit;font-size:15px;font-weight:500;line-height:1.4;cursor:pointer}
+.learning-reference-content{min-height:0;overflow:auto;overscroll-behavior:contain;padding:14px 16px;scroll-padding:14px}
+.learning-reference-content .grammar-expression-list{display:grid;grid-template-columns:1fr;gap:8px;margin:0}
+.learning-reference-entry{padding:10px 12px;border:1px solid #e3d8c3;border-radius:14px;background:#fffdf7}
+.learning-reference-content .grammar-expression-list dt{margin:0;font-family:inherit;font-size:18px;font-weight:600;line-height:1.4;color:#365e4b;overflow-wrap:anywhere}
+.learning-reference-content .grammar-expression-list dd{margin:4px 0 0;font-size:15px;line-height:1.5;color:#79644c}
+/* Reference clones must not retain the large teaching-card minimums or car
+   showcase image sizes. Each image owns its column; numbering owns a row. */
+body[data-learning-shell] .learning-reference-content .phrase-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+body[data-learning-shell] .learning-reference-content>.phrase-card+.phrase-grid{margin-top:10px}
+body[data-learning-shell] .learning-reference-content .phrase-card{display:grid;grid-template-columns:56px minmax(0,1fr);grid-template-rows:auto auto;gap:4px 12px;align-items:center;align-content:center;padding:12px;margin:0;border:1px solid #e3d8c3;border-radius:14px;background:#fffdf7;box-shadow:none;text-align:left;min-width:0;min-height:0;height:auto}
+body[data-learning-shell] .learning-reference-content .phrase-card>img{grid-column:1;grid-row:1/3;width:56px;height:56px;max-width:100%;object-fit:contain;margin:0}
+body[data-learning-shell] .learning-reference-content .phrase-card>strong{grid-column:2;grid-row:1;display:block;font-size:17px;line-height:1.4;font-weight:600;overflow-wrap:anywhere;margin:0}
+body[data-learning-shell] .learning-reference-content .phrase-card>span{grid-column:2;grid-row:2;font-size:14px;line-height:1.5;color:#79644c;margin:0}
+body[data-learning-shell] .learning-reference-content .phrase-card:has(>.reference-number){grid-template-rows:auto auto auto}
+body[data-learning-shell] .learning-reference-content .phrase-card>.reference-number{grid-row:1;font-size:12px;line-height:16px;text-align:left}
+body[data-learning-shell] .learning-reference-content .phrase-card:has(>.reference-number)>img{grid-row:1/4}
+body[data-learning-shell] .learning-reference-content .phrase-card:has(>.reference-number)>strong{grid-row:2}
+body[data-learning-shell] .learning-reference-content .phrase-card:has(>.reference-number)>span:not(.reference-number){grid-row:3}
+body[data-learning-shell] .learning-reference-content .phrase-card:not(:has(>img)){grid-template-columns:minmax(0,1fr)}
+body[data-learning-shell] .learning-reference-content .phrase-card:not(:has(>img))>:is(strong,span){grid-column:1}
+.learning-reference-sheet :focus-visible{outline:3px solid #387d72;outline-offset:2px}
+/* Handoff tasks use two compact shelves. All people remain visible beside
+   their names; the delivered prop stays in that person's coordinate plane. */
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-request{padding:6px 10px;gap:10px;border-width:1px;border-radius:14px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-speech{font-size:17px;line-height:1.4}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-request .source-speaker img{height:40px;width:34px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-board{grid-template-columns:1fr;gap:2px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-label{margin:4px 0;font-size:13px;line-height:18px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-objects{gap:6px;padding-bottom:4px;border-bottom-width:3px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-object-slot{height:48px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-people{grid-template-columns:repeat(var(--recipients),minmax(0,1fr));gap:6px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-people>.opt-btn{flex-direction:column;gap:0;padding:4px;min-height:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-person-art{width:100%;max-width:100%;height:68px;flex:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-hand{width:44px;height:44px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-person-name{min-height:22px;font-size:13px;line-height:18px;overflow-wrap:anywhere}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content [class$='-task-status']{display:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-scene{grid-template-columns:1fr;gap:4px;margin:8px 0;padding:8px;border-width:1px;border-radius:16px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-friend{gap:8px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-friend>img{width:48px;height:76px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-bubble{margin:2px 0;padding:4px 7px;font-size:17px;line-height:1.35;border-width:1px;border-radius:10px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-discovery{min-height:50px;display:flex;justify-content:center;align-items:center;gap:8px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-discovery>img{width:50px;height:50px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-discovery p{font-size:13px;line-height:18px;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-question{font-size:40px;line-height:50px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .pantry-application{width:min(100%,230px);margin:6px auto;padding-top:42px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .pantry-application .bag-inventory{inset:4px 4px auto;padding:3px;font-size:13px;line-height:17px;min-height:34px}
+/* Scenario notes support the task rather than occupying a second full stage.
+   Dynamic inventory and every authored line remain present. */
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content [class$='-application']:has(>.application-prop){height:auto;min-height:0;padding:8px 10px;margin:6px 0;gap:12px;border-width:1px;border-radius:14px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content .application-prop{width:56px;height:64px;flex:none;object-fit:contain}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content [class$='-application']>:is(.diary-page,.visit-card,.receipt,.scenario-note){min-height:0;padding:6px 8px;font-size:15px;line-height:1.4}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content.learning-tight-question{padding:6px 10px}
+body[data-learning-shell] #lessonWorkspace .learning-tight-question .practice-progress{margin-bottom:6px;gap:4px 8px}
+body[data-learning-shell] #lessonWorkspace .learning-surface .practice-progress{margin-bottom:12px}
+body[data-learning-shell] #lessonWorkspace .learning-tight-question .learning-question-heading{margin-bottom:3px}
+body[data-learning-shell] #lessonWorkspace .learning-tight-question .match-column{gap:5px}
+body[data-learning-shell] #lessonWorkspace .learning-tight-question .match-column .opt-btn{min-height:48px;padding:5px 6px}
+body[data-learning-shell] #lessonWorkspace .learning-tight-question .practice-options{margin-block:5px;gap:6px}
+.learning-context-source{display:contents}
+.learning-context-preview{display:none}
+@media(max-height:700px){
+ body[data-learning-shell] #lessonWorkspace .learning-context-source>[class$='-application']{display:none}
+ body[data-learning-shell] #lessonWorkspace .learning-context-preview{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:6px 12px;margin:4px 0 8px;border:1px solid #d8cbb5;border-radius:14px;background:#faf3e4;color:#57412e;font:inherit;text-align:left;cursor:pointer;box-shadow:none}
+ .learning-context-preview>img{width:48px;height:52px;object-fit:contain;flex:none}
+ .learning-context-preview-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+ .learning-context-preview-copy>span{font-size:15px;line-height:20px;overflow-wrap:anywhere}
+ .learning-context-preview-copy>small{font-size:12px;line-height:16px;color:#286a4e}
+ .learning-context-preview:focus-visible{outline:3px solid #387d72;outline-offset:2px}
+}
+/* The full scene retains its authored labels and dynamic inventory in the
+   reference sheet. This selector never changes a question's interactive map. */
+.learning-reference-content>[class$='-application']{max-width:100%;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-preview{display:flex;align-items:center;gap:12px;width:100%;min-height:88px;margin:4px 0 12px;padding:6px 12px;border:1px solid #d8cbb5;border-radius:14px;background:#faf3e4;color:#286a4e;font-family:inherit;font-weight:500;font-size:16px;line-height:1.4;text-align:left;cursor:pointer;box-shadow:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-thumb{display:block;width:76px;height:72px;object-fit:contain;flex:none}
+.learning-material-preview>span:last-child{margin-left:auto;font-size:24px}
+.learning-reference-content>.learning-material-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0 auto 14px}
+.learning-reference-content>.practice-context{max-height:none!important;overflow:visible;padding:0;margin:0;border:0;background:none;font-size:16px;line-height:1.6;white-space:pre-line}
+/* Every course's authored reference is readable in the same sheet. Image and
+   copy own separate columns, regardless of the old two/three-column grid. */
+body[data-learning-shell] .learning-reference-content .reference-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:10px 0;padding:0;border:0;background:none;box-shadow:none}
+body[data-learning-shell] .learning-reference-content .learning-reference-card{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;min-height:0;height:auto;min-width:0;margin:0;padding:12px;border:1px solid #e3d8c3;border-radius:14px;background:#fffdf7;box-shadow:none;text-align:left}
+body[data-learning-shell] .learning-reference-content .learning-reference-card>:is(img,svg,picture){display:block;width:64px;height:72px;max-width:64px;max-height:72px;object-fit:contain;margin:0;position:static;transform:none}
+body[data-learning-shell] .learning-reference-content .learning-reference-card:not(:has(>img,>svg,>picture)){grid-template-columns:minmax(0,1fr)}
+.learning-reference-copy{min-width:0;overflow-wrap:anywhere}
+body[data-learning-shell] .learning-reference-copy>:is(p,strong,span){margin:3px 0;font-size:17px;line-height:1.45;text-align:left}
+body[data-learning-shell] .learning-reference-copy>small{position:static;display:block;width:auto;height:auto;margin:0;color:#8d765a;font-size:12px;line-height:16px;background:none;border:0}
+body[data-learning-shell] .learning-reference-content table{font-size:15px;max-width:100%;border-collapse:collapse}
+body[data-learning-shell] .learning-reference-content :is(th,td){overflow-wrap:anywhere;padding:8px}
+@media(max-height:620px){
+ body[data-learning-shell] .learning-surface .learning-question-heading{margin-bottom:2px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-question-heading h3{margin-bottom:0}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .street-stage{height:180px;min-height:180px;max-height:180px}
+}
+@media(min-width:700px),(orientation:landscape) and (max-height:480px){
+ body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text{--story-person-height:clamp(150px,28dvh,220px);--story-scene-max:560px}
+}
+/* Accepted UX review: reading and transient help have their own scroll areas. */
+body[data-learning-shell] #unitNotebook.learning-record-sheet{position:fixed;inset:0;margin:auto;width:min(640px,calc(100% - 28px));max-width:calc(100% - 28px);max-height:calc(100dvh - 32px);padding:0;overflow:hidden;border:1px solid #d7c9ad;border-radius:22px;background:#fffaf0;box-shadow:0 16px 60px #4b35262b}
+body[data-learning-shell] #unitNotebook[open]{display:flex;flex-direction:column}
+.learning-record-sheet>.unit-dialog-heading{flex:none;padding:12px 16px;margin:0;border-bottom:1px solid #e6ddca}
+.learning-record-sheet>.unit-dialog-heading h2{font-size:20px;margin:0}
+.learning-record-sheet>.unit-dialog-heading button{min-height:44px;min-width:52px;padding:8px;border:0;border-radius:12px;background:#efe7d5;box-shadow:none;color:#6b5740;font-size:15px}
+.learning-record-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:14px 16px;scroll-padding:14px}
+body[data-learning-shell] #unitNotebook .learning-record-overview{white-space:pre-line;margin:0 0 12px;font-size:14px;color:#79644c;line-height:1.6}
+.learning-record-group{margin:8px 0;border:1px solid #e3d8c3;border-radius:14px;background:#fffdf7;padding:0 12px}
+.learning-record-group>summary{min-height:48px;padding:10px 0;color:#365e4b;font-size:17px;cursor:pointer}
+body[data-learning-shell] #learningRecord .learning-record-group ul{margin:0;padding:0;list-style:none}
+body[data-learning-shell] #learningRecord .learning-record-group li{margin:0}
+body[data-learning-shell] #learningRecord .learning-record-group li summary{font-size:14px;gap:6px 10px}
+.learning-record-content #learningSaveStatus{font-size:13px;color:#79644c}
+body[data-learning-shell] .learning-surface .learning-question-heading :is(.practice-context,.task-reference){margin:0;padding:0;border:0;background:transparent;box-shadow:none;text-align:left;color:#79644c;font-size:15px;line-height:1.45}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-full-story{min-height:44px;padding:6px 12px;font-size:14px;margin:0 0 4px;align-self:flex-end;border-width:1px;box-shadow:none}
+.learning-reference-content .task-reading-turn{display:flex;align-items:baseline;gap:10px;padding:10px 0;margin:0;border-bottom:1px solid #e3d8c3;font-size:18px;line-height:1.5}
+.learning-reference-content .task-reading-turn small{flex:none;min-width:30px;font-size:13px;color:#79644c}
+.learning-reference-content .task-reading-turn span{min-width:0;overflow-wrap:anywhere}
+/* Names and speech share a first-line grid, with equal insets on every turn. */
+body[data-learning-shell] #lessonWorkspace .learning-surface .task-reading{max-height:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .task-reading .task-reading-turn{display:grid;grid-template-columns:min(var(--reading-speaker-width,32px),30%) minmax(0,1fr);align-items:start;gap:8px;margin:0 0 4px;padding:6px 8px;line-height:24px;text-align:left}
+body[data-learning-shell] #lessonWorkspace .learning-surface .task-reading .task-reading-turn:last-child{margin-bottom:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface .task-reading-turn small{width:auto;min-width:0;font-size:13px;line-height:24px;white-space:normal;overflow-wrap:anywhere}
+body[data-learning-shell] #lessonWorkspace .learning-surface .task-reading-turn span{min-width:0;font-size:18px;line-height:24px;overflow-wrap:anywhere}
+body[data-learning-shell] .learning-review-progress .practice-screen-title{display:none}
+.learning-review-return{grid-column:1;justify-self:start;min-height:44px;padding:4px 10px;border:1px solid #b8c9b9;border-radius:10px;background:#edf4e9;color:#286a4e;font-family:inherit;font-size:14px;cursor:pointer}
+.learning-review-return:focus-visible{outline:3px solid #387d72;outline-offset:2px}
+body[data-learning-shell] .learning-surface .fb:not(.good):not(.bad){font-size:13px;color:#79644c}
+body[data-learning-shell] .learning-surface .station-actions{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0;width:100%}
+.station-destination{font-size:12px;line-height:16px;color:#79644c;text-align:center}
+body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-surface{display:flex;overflow:hidden;padding-top:12px}
+.learning-word-content{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scroll-padding:8px;padding:0 2px 4px}
+body[data-learning-shell] #lessonWorkspace .learning-word-content .unit-words{gap:10px;margin:0}
+body[data-learning-shell] #lessonWorkspace .learning-word-content .unit-word{height:auto;min-height:148px;padding:12px 8px;gap:4px;border:1px solid #d6c8b2;border-radius:16px;background:#fffdf7;box-shadow:0 2px 6px #5a402709}
+body[data-learning-shell] .learning-word-content .unit-word>img{width:56px;height:56px}
+body[data-learning-shell] #lessonWorkspace .learning-word-content .unit-word{background:#fffdf7 url('/assets/awards/paper.webp') center/512px;box-shadow:inset 0 0 0 3px #fffdf7,0 2px 6px #5a402709}
+body[data-learning-shell] .learning-word-content .unit-word>img{object-fit:contain;filter:drop-shadow(0 2px 1px #65472d14);flex:0 1 56px;min-height:28px;max-height:56px}
+body[data-learning-shell] .learning-word-content .unit-word>:is(strong,small,span){flex:none}
+/* Reviewed painted vignettes need readable image area, not the old 56px icon
+   slot. The image yields to long words; typography and card height stay fixed. */
+body[data-learning-shell] .learning-word-content .unit-word[data-word-art='illustration']>img{width:100%;height:84px;max-height:160px;min-height:36px;flex:1 1 84px;filter:none}
+body[data-learning-shell] .learning-word-content .unit-word>strong{font-weight:500;color:#533b29;overflow-wrap:anywhere}
+body[data-learning-shell] .learning-word-content .unit-word>strong{font-size:20px;line-height:1.3}
+body[data-learning-shell] .learning-word-content .unit-word>.word-phonetic{font-size:14px;line-height:1.4}
+body[data-learning-shell] .learning-word-content .unit-word>.word-example{display:none;font-size:14px;padding:0;line-height:1.4}
+body[data-learning-shell] #lessonWorkspace .learning-word-content .unit-word[aria-expanded='true']{background:#edf4e9;border-color:#8ca88e;justify-content:flex-start}
+/* Equal flexible spacers center the whole definition. When the original
+   example is taller than the card, both become zero and its first line stays
+   reachable at the top; ordinary center alignment would clip that line. */
+body[data-learning-shell] .learning-word-content .unit-word[aria-expanded='true']::before,
+body[data-learning-shell] .learning-word-content .unit-word[aria-expanded='true']::after{content:'';display:block;flex:1 0 0;min-height:0;width:0}
+body[data-learning-shell] .learning-word-content .unit-word[aria-expanded='true']>img{display:none}
+body[data-learning-shell] .learning-word-content .unit-word[aria-expanded='true']>:is(strong,.word-phonetic,.word-example){display:block}
+body[data-learning-shell] .learning-word-content .word-meaning{font-size:16px;line-height:1.4;padding:0}
+body[data-learning-shell] #lessonWorkspace .learning-surface>.word-controls{flex:none;min-height:60px;width:100%;max-width:none;margin:0;padding:8px 0 0;border-top:1px solid #dfd3bf;gap:12px}
+body[data-learning-shell] .learning-surface>.word-controls .btn{min-height:44px;padding:7px 10px;font-size:16px}
+body[data-learning-shell] .learning-surface>.learning-word-destination{flex:none;margin:0;text-align:right;font-size:12px;line-height:16px;color:#79644c}
+/* Reserve one line for export feedback without stacking an empty 61px gap. */
+body[data-learning-shell] .stage-certificate .story-award-status{min-height:20px;font-size:14px;line-height:20px;margin:6px 0 0}
+body[data-learning-shell] #lessonWorkspace .stage-certificate>.offline-task{margin:6px 0 0}
+@media(max-width:600px){
+ /* Three rows share the actual content height. Short pressure viewports may
+    scroll, but a normal phone never loses the third row to fixed tall cards. */
+ body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-word-content>.unit-words{height:min(100%,calc(var(--learning-word-height,148px) * 3 + 20px));grid-template-rows:repeat(3,minmax(140px,1fr));align-content:start}
+ body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-word-content>.unit-words:has(>.unit-word[data-word-art='illustration']){height:100%}
+ body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-word-content>.unit-words>.unit-word{height:auto;min-height:140px;overflow:auto;padding:8px 6px;gap:3px}
+ body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-word-content>.unit-words>.unit-word[aria-expanded='true']{justify-content:flex-start}
+ body[data-learning-shell][data-learning-view='words'] #lessonWorkspace .learning-word-content>.unit-words .word-art{height:clamp(60px,12dvh,86px);min-height:48px;max-height:86px;flex:1 1 auto}
+}
+@media(min-width:1024px){
+ body[data-learning-shell] .learning-surface,body[data-learning-shell] #lessonWorkspace .learning-surface{height:min(720px,calc(var(--practice-screen-height,100dvh) - var(--learning-header-height)));top:calc(var(--practice-screen-top,0px) + var(--learning-header-height) + max(0px,(var(--practice-screen-height,100dvh) - var(--learning-header-height) - 720px)/2))}
+}
+@media print{
+ body[data-learning-shell]{overflow:visible}
+ body[data-learning-shell] :is(.practice-screen-toolbar,.learning-milestones){display:none!important}
+ body[data-learning-shell].print-writing #lessonWorkspace .learning-surface{position:static!important;transform:none!important;height:auto!important;max-height:none!important;overflow:visible!important;display:block!important;width:100%!important;padding:0!important}
+}
+/* Short phones reserve the controls first; spacing yields before touch targets. */
+@media(max-height:700px){
+ body[data-learning-shell][data-learning-view='question'] #lessonWorkspace .learning-surface .practice-content{padding-block:10px}
+ body[data-learning-shell] .learning-surface .grammar-model{margin-bottom:6px}
+ body[data-learning-shell] .learning-surface .learning-question-heading{margin-bottom:6px}
+}
+@media(max-height:620px){
+ body[data-learning-shell][data-learning-view='question'] #lessonWorkspace .learning-surface .practice-content{padding:4px;max-height:calc(100% - 82px)}
+ body[data-learning-shell] #lessonWorkspace .practice-screen-runner>.practice-actions{height:76px;min-height:76px;padding:2px 2px 3px}
+ body[data-learning-shell] .learning-surface .learning-question-heading{margin-bottom:2px}
+ body[data-learning-shell] .learning-surface .grammar-model{margin-bottom:4px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .translation-answer{padding:4px 18px 4px 4px;gap:4px;margin-bottom:4px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .word-answer{height:96px;min-height:96px;max-height:96px}
+}

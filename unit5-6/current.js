@@ -33,5 +33,18 @@
   },answer:base.answer,finish:base.finish,heading:base.heading,hasVisibleModel(){return Boolean(element.querySelector('.grammar-model:not([hidden])'));}};
  }
  function completion(){const div=node('div','','completion-art current-completion'),im=node('img');im.src='/assets/awards/unit5-6-friends.webp';im.alt='';div.setAttribute('aria-hidden','true');div.append(im);return div;}
- core.unit56Current={image,picture,photo,view,completion};
+ // Word-card art is presentation-only. Exercises keep their original labeled
+ // diagrams, and content/audio/answer signatures stay unchanged.
+ const wordCars={Volvo:'/assets/unit5-6-word-cards/volvo-v1.webp',Peugeot:'/assets/unit5-6-word-cards/peugeot-v1.webp',Mercedes:'/assets/unit5-6-word-cards/mercedes-v1.webp',Toyota:'/assets/unit5-6-word-cards/toyota-v1.webp',Ford:'/assets/unit5-6-word-cards/ford-v1.webp',Mini:'/assets/unit5-6-word-cards/mini-v1.webp'};
+ function wordArtwork(word){
+  if(wordCars[word.en])return {kind:'car',sources:[wordCars[word.en]]};
+  if(['morning','good'].includes(word.en))return {kind:'symbol',sources:['/assets/unit5-6-word-cards/morning-v1.webp']};
+  if(word.en==='new')return {kind:'person',sources:[portraits.sophie]};
+  if(['nice','meet'].includes(word.en))return {kind:'scene',sources:['/assets/awards/unit5-6-friends.webp']};
+  if(word.en==='too')return {kind:'pair',sources:[portraits.luming,portraits.xiaohui]};
+  if(word.en==='make')return {kind:'car-pair',sources:[wordCars.Volvo,wordCars.Peugeot]};
+  const flag=['French','German','Japanese','South Korean','Chinese','Swedish','English','American'].includes(word.en);
+  return {kind:flag?'flag':'person',sources:[image(word.en)||word.image]};
+ }
+ core.unit56Current={image,picture,photo,view,completion,wordArtwork};
 })(globalThis.CanranCore);

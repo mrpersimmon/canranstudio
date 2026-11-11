@@ -36,7 +36,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   await expect(exam).toContainText('Excuse me!');
   await require('../support/units1-30-tasks').select(exam,{fills:['Yes, it is.','Yes?']});
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看。');
+  await expect(exam.getByRole('status')).toHaveText('答错了，再试试。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, {fills:['Yes?','Yes, it is.']});
   await expect(exam.locator('.practice-content > h3')).toHaveText('手表不是你的，你怎么回答？');

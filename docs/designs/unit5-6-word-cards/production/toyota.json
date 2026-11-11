@@ -1,0 +1,103 @@
+{
+  "asset": "toyota",
+  "tool": "built-in image_gen",
+  "intent": "style-transfer",
+  "generated_on": "2026-10-30",
+  "input_images": [
+    {
+      "path": "docs/designs/unit5-6-word-cards/references/toyota-before.png",
+      "sha256": "4B936021F302CFDA30A37E11D7189E26577D7FB929C936184955848164492A58",
+      "role": "edit target"
+    },
+    {
+      "path": "assets/awards/unit5-6-friends.webp",
+      "sha256": "5E14F4B2B4EC86EDE7BC586E0DF14DE4FE50ADAEFC55659C799EB5B8DFBE06BD",
+      "role": "primary style reference"
+    },
+    {
+      "path": "assets/unit5-6-word-cards/raw/peugeot-v1.png",
+      "sha256": "EC1ABB263F611B76C7E1DB31C747C1C69FE66EC5B676EA26C0EFC8EDBE153A88",
+      "role": "approved sibling style reference"
+    }
+  ],
+  "tool_parameters": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/toyota-before.png",
+      "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp",
+      "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/peugeot-v1.png"
+    ]
+  },
+  "prompt": "Use case: style-transfer.\nAsset type: a single transparent PNG car illustration for a children's English word card, displayed at approximately 140 by 110 CSS pixels.\n\nInput images:\n- Image 1 is the EDIT TARGET: a muted terracotta-coral-red compact three-box sedan. Preserve its distinctive terracotta-coral body color and compact sedan identity, including its short separate rear trunk, raised passenger cabin and front hood, while upgrading the primitive icon into a detailed children's picture-book illustration. Remove the existing word \"Toyota\".\n- Image 2 is the PRIMARY STYLE REFERENCE ONLY: match its warm children's storybook illustration style, with clear warm dark-brown hand-drawn outlines, soft paper-like textured color fills, restrained volume, subtle highlights and warm gentle light. Do not copy its people, classroom, background or white border.\n- Image 3 is the APPROVED SIBLING CAR ILLUSTRATION: match its level of detail, warm brown outlines, textured hand-painted color, friendly car proportions, window treatment, gentle shading and small soft contact shadow. Preserve the Toyota sedan silhouette and terracotta-coral color from image 1; do not turn it into the sibling yellow round hatchback.\n\nPrimary request: draw one complete small terracotta-coral-red three-box sedan facing RIGHT, in a very slight front-side three-quarter view, predominantly a side view. Both near-side wheels must be complete and grounded; a small naturally occluded far-side tire may be visible if perspective requires it, with no duplicated, floating or misplaced wheels. Include the whole car, mirrors, wheels and bumpers. Make the silhouette friendly and clean, with a short distinct trunk at the left rear, a softly rounded but recognizable sedan cabin, and a hood extending toward the right. Windows are softly pale blue-grey. Apply subtle volumetric shading, paper-like texture, a few restrained highlights and a small soft translucent contact shadow immediately beneath the wheels.\nComposition: landscape transparent canvas with approximately a 14:11 aspect ratio, car centered, visible subject about 84% of the canvas width, and at least 8% comfortable transparent safety margin on every side. Remain readable and polished when reduced to 140 by 110 CSS pixels.\nBackground: genuinely transparent alpha everywhere outside the car and its small soft grounding shadow. No white or colored background, no scenery, no checkerboard baked into the image.\nConstraints: one car only; no text, letters, numbers, emblems, brand logos, watermark, people, border, sticker outline or white halo. Keep the terracotta-coral-red color and compact three-box sedan identity of image 1. Hand-drawn children's picture-book art only: no photograph, no 3D toy render, and no crude flat geometric icon.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "prompt": "Use case: style-transfer.\nAsset type: a single transparent PNG car illustration for a children's English word card, displayed at approximately 140 by 110 CSS pixels.\n\nInput images:\n- Image 1 is the EDIT TARGET: a muted terracotta-coral-red compact three-box sedan. Preserve its distinctive terracotta-coral body color and compact sedan identity, including its short separate rear trunk, raised passenger cabin and front hood, while upgrading the primitive icon into a detailed children's picture-book illustration. Remove the existing word \"Toyota\".\n- Image 2 is the PRIMARY STYLE REFERENCE ONLY: match its warm children's storybook illustration style, with clear warm dark-brown hand-drawn outlines, soft paper-like textured color fills, restrained volume, subtle highlights and warm gentle light. Do not copy its people, classroom, background or white border.\n- Image 3 is the APPROVED SIBLING CAR ILLUSTRATION: match its level of detail, warm brown outlines, textured hand-painted color, friendly car proportions, window treatment, gentle shading and small soft contact shadow. Preserve the Toyota sedan silhouette and terracotta-coral color from image 1; do not turn it into the sibling yellow round hatchback.\n\nPrimary request: draw one complete small terracotta-coral-red three-box sedan facing RIGHT, in a very slight front-side three-quarter view, predominantly a side view. Both near-side wheels must be complete and grounded; a small naturally occluded far-side tire may be visible if perspective requires it, with no duplicated, floating or misplaced wheels. Include the whole car, mirrors, wheels and bumpers. Make the silhouette friendly and clean, with a short distinct trunk at the left rear, a softly rounded but recognizable sedan cabin, and a hood extending toward the right. Windows are softly pale blue-grey. Apply subtle volumetric shading, paper-like texture, a few restrained highlights and a small soft translucent contact shadow immediately beneath the wheels.\nComposition: landscape transparent canvas with approximately a 14:11 aspect ratio, car centered, visible subject about 84% of the canvas width, and at least 8% comfortable transparent safety margin on every side. Remain readable and polished when reduced to 140 by 110 CSS pixels.\nBackground: genuinely transparent alpha everywhere outside the car and its small soft grounding shadow. No white or colored background, no scenery, no checkerboard baked into the image.\nConstraints: one car only; no text, letters, numbers, emblems, brand logos, watermark, people, border, sticker outline or white halo. Keep the terracotta-coral-red color and compact three-box sedan identity of image 1. Hand-drawn children's picture-book art only: no photograph, no 3D toy render, and no crude flat geometric icon.",
+      "selected": true,
+      "source_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-8e6c-7372-a813-209af1df5eaa/exec-22ee2976-07bc-45ad-938f-5955cd50f9f4.png",
+      "source_sha256": "C50055CF5B032DD3C8D0B1A193871C2C58437702C5F28C31C0E390F961E86E7E",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-8e6c-7372-a813-209af1df5eaa as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-8e6c-7372-a813-209af1df5eaa\\exec-22ee2976-07bc-45ad-938f-5955cd50f9f4.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ],
+  "source_dimensions": {
+    "width": 1415,
+    "height": 1111
+  },
+  "source_sha256": "C50055CF5B032DD3C8D0B1A193871C2C58437702C5F28C31C0E390F961E86E7E",
+  "output_path": "assets/unit5-6-word-cards/raw/toyota-v1.png",
+  "output_dimensions": {
+    "width": 1593,
+    "height": 1252
+  },
+  "output_bytes": 1454387,
+  "output_sha256": "5244DE6E68770918D4F0E83A6DAF3F777DA5321F4C67D98488785C41A155DC82",
+  "post_processing": {
+    "operation": "transparent canvas padding",
+    "description": "Original generated pixels placed unscaled at x=81, y=50 on a 1593x1252 transparent canvas. No repainting, object changes or resizing.",
+    "source_alpha_bounds_threshold_8": [
+      46,
+      240,
+      1384,
+      912
+    ],
+    "output_visible_bounds_threshold_8": [
+      127,
+      290,
+      1465,
+      962
+    ]
+  },
+  "qa": {
+    "alpha": true,
+    "pixel_format": "Format32bppArgb",
+    "source_alpha_range": [
+      0,
+      255
+    ],
+    "source_transparent_pixels": 886224,
+    "source_partial_alpha_pixels": 684944,
+    "source_opaque_pixels": 897,
+    "output_corner_alpha": [
+      0,
+      0
+    ],
+    "visible_width_fraction": 0.839924670433145,
+    "visible_horizontal_safety_margin": [
+      0.07972379158819837,
+      0.08035153797865663
+    ],
+    "visible_vertical_safety_margin": [
+      0.23162939297124602,
+      0.23162939297124602
+    ],
+    "visual_checks": [
+      "Terracotta-coral-red compact three-box sedan identity preserved, including a short separate rear trunk",
+      "Warm dark-brown hand-drawn contours, paper-like fills, window shading and gentle highlights match the supplied style references",
+      "Car faces right in a slight front-side three-quarter view",
+      "Both near-side wheels complete; naturally occluded far-side tires visible in perspective",
+      "Car, mirrors, wheels and bumpers are fully inside frame",
+      "No Toyota word, other text, brand logo, people, scenery, border or white sticker outline",
+      "Small soft contact shadow remains on genuinely transparent background"
+    ]
+  }
+}

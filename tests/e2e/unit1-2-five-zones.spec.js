@@ -36,7 +36,7 @@ for (const selected of [false, true]) test(`六区旧版${selected ? '选中未�
   if (selected) await flow.select(page.locator('.stage-manners'), { fills: ['me'] });
   await restore(); await page.reload();
   const room = page.locator('.stage-manners');
-  await expect(room.locator('.fb')).toBeEmpty();
+  await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
   if (selected) {
     await expect(room.getByRole('button', { name: 'me', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
@@ -73,7 +73,7 @@ test('六区旧记录迁入：未改题保留，改写题未答，历史结果�
     await page.goto('/unit1-2/#learn/' + id); const room = page.locator('.stage-' + id);
     await expect(room.locator('.progress-copy')).toHaveText(progress);
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-    await expect(room.locator('.fb')).toBeEmpty();
+    await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
     await flow.activity(page, '1-2', id);
   }
   await page.goto('/unit1-2/#learn/listen'); const listen = page.locator('.stage-listen');

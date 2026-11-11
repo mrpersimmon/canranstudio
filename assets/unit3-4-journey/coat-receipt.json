@@ -1,0 +1,64 @@
+{
+  "asset": "coat-v1",
+  "date": "2026-11-01",
+  "engine": "built-in image_gen.imagegen",
+  "reference": "assets/course-journey/umbrella-counter-v1.webp",
+  "files": {
+    "png": "assets/unit3-4-journey/coat-v1.png",
+    "webp": "assets/unit3-4-journey/coat-v1.webp"
+  },
+  "sourceGeneratedFile": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-a6b4-7c02-b7d8-1c41ed24eb54/exec-b63ab830-e440-4e5f-892d-4eced94d1809.png",
+  "prompt": "Create ONE isolated transparent cloakroom prop for the same children's storybook learning town as the attached reference. STRICT reference: the single light camel/tan overcoat draped over the young customer's LEFT forearm on the LEFT side of the attached image. Extract its visual identity into a new independent asset, with NO hand, arm, person, umbrella, desk, hanger, hook, background or ground.\nA complete single light camel overcoat naturally folded and draped over an invisible short horizontal forearm support near the upper center. Rounded folded top, one folded hanging sleeve with a few small brown buttons, a broad soft hanging coat body and clearly defined hem. It must clearly be ONE overcoat, not a suit, not trousers, not a pile of clothing, not a cardigan on a hanger. Warm thick dark-brown storybook outline, softly modeled golden-camel fabric, restrained lighter highlights and warm fold shadows, matching the reference's playful illustration style and rendering finish. No photorealism.\nPortrait 1024x1280 composition, centered complete object with small clean alpha margins. Leave a sensible drape/contact apex around x 0.5 y 0.15 of the canvas so this object can be layered onto an arm or counter. No text, branding, label, numbers, decorative motifs, badge or extra props. True transparent RGBA background with alpha 0 outside the crisp antialiased outline, opaque fabric, no glow, no external shadow, no baked checkerboard or white background.",
+  "transparentBackground": true,
+  "requestedCanvas": [
+    1024,
+    1280
+  ],
+  "metrics": {
+    "width": 1122,
+    "height": 1402,
+    "channels": 4,
+    "alphaBoundsThreshold": 16,
+    "alphaBounds": [
+      128,
+      115,
+      994,
+      1286
+    ],
+    "normalizedBounds": [
+      0.1140819964349376,
+      0.08202567760342368,
+      0.8859180035650623,
+      0.9172610556348074
+    ],
+    "transparentFraction": 0.5302070380739509,
+    "maxAlpha": 255,
+    "pngBytes": 1013122,
+    "webpBytes": 90278,
+    "pngSha256": "f9a93154cffd3b2c68593e4f8478b5d99b2c4dfe5319279fde93ac0de2edce10"
+  },
+  "anchorsNormalizedToFullCanvas": {
+    "supportContact": [
+      0.66,
+      0.15
+    ],
+    "topFoldApex": [
+      0.64,
+      0.09
+    ],
+    "hemBottom": [
+      0.51,
+      0.917
+    ]
+  },
+  "inspection": {
+    "accepted": true,
+    "notes": [
+      "Complete single camel overcoat with rounded drape, cuff, brown buttons and soft warm folds; no body, hand, hanger or unrelated prop.",
+      "Inspected on cream background; alpha clean, no white halo or ground shadow.",
+      "Built-in returned 1122x1402, within one source pixel of the requested 4:5 ratio. Original pixels preserved; no stretching/cropping.",
+      "WebP is format/compression conversion only; original PNG retained."
+    ],
+    "qaComposite": "output/unit34-attendant-qa/coat-cream-composite.png"
+  }
+}

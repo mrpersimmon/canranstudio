@@ -10,7 +10,9 @@
     const element = document.createElement(tag); element.textContent = text; element.className = className; return element;
   };
   function button(text, action, className = 'btn btn-green') {
-    const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action); return element;
+    const element = node('button', text, className); element.type = 'button'; element.addEventListener('click', action);
+    if(text.startsWith('下一站：')){element.textContent='下一站';element.setAttribute('aria-label',text);element.dataset.stationNext='true';}
+    return element;
   }
   function art(name, label = '') {
     const word = unit.objects.find(word => word.en === name);
@@ -119,7 +121,7 @@
       settings.completionDetails = settings.sceneView.completion();
     }
     if (id === 'grammar') settings.sceneView = core.unit4546Grammar.create({ element, art });
-    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,...settings,
+    const runner = practice.mount({element,questions:questions[id],sessionId:unit.taskSessions?.[id]||'v1',previousGroups:unit.taskPredecessors?.[id]||[],inputViews:core.lesson49TaskInputs,roundPolicy:unit.reward.edition,allowReview:true,finalLabel:'完成练习',onResumeResult:updateProgress,...settings,
       onAnswer:(question,state)=>{if(question.workshop?.model){state.revealed=true;practice.record(question,state);}settings.onAnswer?.(question,state);},
       onComplete: (states,round) => {
         const { perfect, message } = settlement.complete({ id, states, round, awards, element });
@@ -150,7 +152,7 @@
   finishActions.append(button('再看一遍', resetDialogue, 'btn btn-yellow')); nextStation('text', finishActions);
   finish.append(node('p', '课文看完了！'), finishActions);
   const reader=node('div','','office-reader');reader.append(log,status,controls);stage.append(reader);story.append(stage,finish);
-  function alignReader(){const b=reader.getBoundingClientRect(),nav=$('#topbar').getBoundingClientRect();if(b.height>innerHeight-nav.height-16)return;if(b.top<nav.bottom+8)root.scrollBy({top:b.top-nav.bottom-8,behavior:'instant'});else if(b.bottom>innerHeight-8)root.scrollBy({top:b.bottom-innerHeight+8,behavior:'instant'});}
+  function alignReader(){if(document.body.hasAttribute('data-learning-shell'))return;const b=reader.getBoundingClientRect(),nav=$('#topbar').getBoundingClientRect();if(b.height>innerHeight-nav.height-16)return;if(b.top<nav.bottom+8)root.scrollBy({top:b.top-nav.bottom-8,behavior:'instant'});else if(b.bottom>innerHeight-8)root.scrollBy({top:b.bottom-innerHeight+8,behavior:'instant'});}
   const gate = node('div', '', 'activity-actions'); gate.append(button('先看课文', () => navigate('learn/text'))); surfaces.get('roles').append(gate);
   let storyStarted = false, dialogue = { i: -1, viewed: [], done: false };
   function unlockStory() { if (!passed('text') || storyStarted) return; storyStarted = true; gate.remove(); mountPractice('roles'); }
@@ -228,14 +230,15 @@
     }
     previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
     nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组词卡');
-    if (wordPage === pageCount - 1) nextWords.replaceChildren(node('span', '下一站：'), node('span', '单词寻宝'));
-    else nextWords.textContent = '下一组词卡';
+    if (wordPage === pageCount - 1) { nextWords.textContent = '下一站'; nextWords.dataset.stationNext = 'true'; }
+    else { nextWords.textContent = '下一组词卡'; delete nextWords.dataset.stationNext; }
   }
   renderWords();
   mountPractice('listen', { allowHints: false });
 
   mountPractice('grammar'); mountPractice('apply');
   mountPractice('exam');
+  core.learningProgress = () => unit.reward.zones.map(zone => ({id:zone.id,completed:passed(zone.id)||Boolean(runners.get(zone.id)?.progress().completed),earned:Boolean(awardState.zones[zone.id])}));
   certificateView=core.storyCertificate.mount({element:surfaces.get('certificate'),unit,go:navigate,returnUrl:$('#logo').href,
     progress:id=>runners.get(id)?.progress() || {started:false,completed:false},
     restart:id=>runners.get(id)?.restart()});
@@ -252,6 +255,6 @@
   // name intact when the /lesson/ publisher prefixes persistent storage keys.
   const readyEvent = ['canran', 'course-ready'].join(':');
   document.addEventListener(readyEvent, revealSavedLine, { once: true });
-  root.addEventListener('resize',()=>{if(active==='learn/text'||active==='l2')requestAnimationFrame(revealSavedLine);});
+  root.addEventListener('resize',()=>{if(!document.body.hasAttribute('data-learning-shell')&&(active==='learn/text'||active==='l2'))requestAnimationFrame(revealSavedLine);});
   document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

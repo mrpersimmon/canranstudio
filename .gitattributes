@@ -31,3 +31,7 @@ docs/designs/course-journey/evidence/**/*.zip binary
 assets/course-journey/** -text
 # The approved prototype verifies protected runtime bytes across Windows and CI.
 poc/keepsake-postoffice/** text=auto eol=lf
+scripts/cloud/*.sh text eol=lf
+.nvmrc text eol=lf
+# Preserve the original artwork generation receipts, including trailing newlines.
+docs/designs/unit5-6-word-cards/production/** -text -whitespace

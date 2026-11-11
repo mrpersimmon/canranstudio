@@ -1,0 +1,101 @@
+{
+  "asset": "peugeot",
+  "tool": "built-in image_gen",
+  "intent": "style-transfer",
+  "generated_on": "2026-10-30",
+  "input_images": [
+    {
+      "path": "docs/designs/unit5-6-word-cards/references/peugeot-before.png",
+      "role": "edit target"
+    },
+    {
+      "path": "assets/awards/unit5-6-friends.webp",
+      "role": "style reference"
+    }
+  ],
+  "tool_parameters": {
+    "transparent_background": true,
+    "referenced_image_paths": [
+      "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/peugeot-before.png",
+      "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+    ]
+  },
+  "prompt": "Use case: style-transfer.\nAsset type: a single transparent PNG illustration for a children's English word card, displayed at approximately 140 by 110 CSS pixels.\n\nInput images:\n- Image 1 is the EDIT TARGET: the small honey-yellow rounded compact car. Preserve its honey-yellow identity, compact domed body and approachable silhouette, but redraw it with richer children's storybook illustration craftsmanship. Remove the existing word \"Peugeot\" completely.\n- Image 2 is the STYLE REFERENCE ONLY: match the same warm, detailed children's storybook illustration style as its characters. Match clear warm dark-brown hand-drawn outlines, soft paper-textured fills, restrained shading, subtle highlights and warm gentle light. Do not copy any characters, classroom, background, white border, frame or text from this reference.\n\nPrimary request: draw only the complete honey-yellow compact car, facing to the RIGHT in a gentle front-side three-quarter view. Keep exactly two clearly visible complete wheels on the visible side; show the front face slightly. The car should feel rounded and friendly, with a domed compact roof, softly blue-grey windows, legible warm-brown linework, small natural details and subtle volumetric shading. Include a very soft, small contact shadow immediately underneath the car, with translucent edges on the real transparent background.\nComposition: a landscape transparent canvas, the car centered and occupying about 84–85% of the canvas width; maintain about 8% safe margin around the complete silhouette, with all wheels, bumpers and mirrors inside the frame. Keep the illustration simple enough to remain clear at 140 by 110 pixels, while avoiding flat primitive geometry.\nBackground: genuinely transparent alpha everywhere outside the car and its small soft grounding shadow. No white or colored background, no scenery, no checkerboard pattern baked into pixels.\nConstraints: one car only; no people; no text, letters, numbers, emblems, brand logos, watermark, border, sticker outline or white halo. The yellow color and domed compact identity must remain recognizable. This is a hand-drawn children's picture-book illustration with paper-like color, NOT a photograph, NOT a 3D toy render and NOT a crude geometric icon.\nCritical correction: use a VERY SLIGHT front-side three-quarter angle, predominantly a side profile facing right. There must be EXACTLY TWO visible wheels TOTAL in the whole image: the near-side rear wheel and near-side front wheel. The far-side wheels must be entirely hidden behind the body and the near-side wheels, with NO sliver of any third tire visible anywhere, especially not under the far-right front bumper. Keep the entire car and contact shadow comfortably within an eight-percent transparent safety margin on every side.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "prompt": "Use case: style-transfer.\nAsset type: a single transparent PNG illustration for a children's English word card, displayed at approximately 140 by 110 CSS pixels.\n\nInput images:\n- Image 1 is the EDIT TARGET: the small honey-yellow rounded compact car. Preserve its honey-yellow identity, compact domed body and approachable silhouette, but redraw it with richer children's storybook illustration craftsmanship. Remove the existing word \"Peugeot\" completely.\n- Image 2 is the STYLE REFERENCE ONLY: match the same warm, detailed children's storybook illustration style as its characters. Match clear warm dark-brown hand-drawn outlines, soft paper-textured fills, restrained shading, subtle highlights and warm gentle light. Do not copy any characters, classroom, background, white border, frame or text from this reference.\n\nPrimary request: draw only the complete honey-yellow compact car, facing to the RIGHT in a gentle front-side three-quarter view. Keep exactly two clearly visible complete wheels on the visible side; show the front face slightly. The car should feel rounded and friendly, with a domed compact roof, softly blue-grey windows, legible warm-brown linework, small natural details and subtle volumetric shading. Include a very soft, small contact shadow immediately underneath the car, with translucent edges on the real transparent background.\nComposition: a landscape transparent canvas, the car centered and occupying about 84–85% of the canvas width; maintain about 8% safe margin around the complete silhouette, with all wheels, bumpers and mirrors inside the frame. Keep the illustration simple enough to remain clear at 140 by 110 pixels, while avoiding flat primitive geometry.\nBackground: genuinely transparent alpha everywhere outside the car and its small soft grounding shadow. No white or colored background, no scenery, no checkerboard pattern baked into pixels.\nConstraints: one car only; no people; no text, letters, numbers, emblems, brand logos, watermark, border, sticker outline or white halo. The yellow color and domed compact identity must remain recognizable. This is a hand-drawn children's picture-book illustration with paper-like color, NOT a photograph, NOT a 3D toy render and NOT a crude geometric icon.",
+      "source_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-8e6c-7372-a813-209af1df5eaa/exec-548009cd-0059-4c20-afae-108552d50cb6.png",
+      "selected": false,
+      "reason": "A partly visible far-side tire; retained in generated_images only."
+    },
+    {
+      "attempt": 2,
+      "prompt": "Use case: style-transfer.\nAsset type: a single transparent PNG illustration for a children's English word card, displayed at approximately 140 by 110 CSS pixels.\n\nInput images:\n- Image 1 is the EDIT TARGET: the small honey-yellow rounded compact car. Preserve its honey-yellow identity, compact domed body and approachable silhouette, but redraw it with richer children's storybook illustration craftsmanship. Remove the existing word \"Peugeot\" completely.\n- Image 2 is the STYLE REFERENCE ONLY: match the same warm, detailed children's storybook illustration style as its characters. Match clear warm dark-brown hand-drawn outlines, soft paper-textured fills, restrained shading, subtle highlights and warm gentle light. Do not copy any characters, classroom, background, white border, frame or text from this reference.\n\nPrimary request: draw only the complete honey-yellow compact car, facing to the RIGHT in a gentle front-side three-quarter view. Keep exactly two clearly visible complete wheels on the visible side; show the front face slightly. The car should feel rounded and friendly, with a domed compact roof, softly blue-grey windows, legible warm-brown linework, small natural details and subtle volumetric shading. Include a very soft, small contact shadow immediately underneath the car, with translucent edges on the real transparent background.\nComposition: a landscape transparent canvas, the car centered and occupying about 84–85% of the canvas width; maintain about 8% safe margin around the complete silhouette, with all wheels, bumpers and mirrors inside the frame. Keep the illustration simple enough to remain clear at 140 by 110 pixels, while avoiding flat primitive geometry.\nBackground: genuinely transparent alpha everywhere outside the car and its small soft grounding shadow. No white or colored background, no scenery, no checkerboard pattern baked into pixels.\nConstraints: one car only; no people; no text, letters, numbers, emblems, brand logos, watermark, border, sticker outline or white halo. The yellow color and domed compact identity must remain recognizable. This is a hand-drawn children's picture-book illustration with paper-like color, NOT a photograph, NOT a 3D toy render and NOT a crude geometric icon.\nCritical correction: use a VERY SLIGHT front-side three-quarter angle, predominantly a side profile facing right. There must be EXACTLY TWO visible wheels TOTAL in the whole image: the near-side rear wheel and near-side front wheel. The far-side wheels must be entirely hidden behind the body and the near-side wheels, with NO sliver of any third tire visible anywhere, especially not under the far-right front bumper. Keep the entire car and contact shadow comfortably within an eight-percent transparent safety margin on every side.",
+      "source_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-8e6c-7372-a813-209af1df5eaa/exec-6cd6fb5f-0eda-45aa-8207-1444876a17bd.png",
+      "selected": true,
+      "source_sha256": "9CFBAE57F30365E8ECA8EA0994A4620EB3724071246D8DCBCD15BB3B9EE810C6",
+      "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-8e6c-7372-a813-209af1df5eaa as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-8e6c-7372-a813-209af1df5eaa\\exec-6cd6fb5f-0eda-45aa-8207-1444876a17bd.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ],
+  "source_dimensions": {
+    "width": 1419,
+    "height": 1108
+  },
+  "output_path": "assets/unit5-6-word-cards/raw/peugeot-v1.png",
+  "output_dimensions": {
+    "width": 1585,
+    "height": 1245
+  },
+  "output_bytes": 1735304,
+  "output_sha256": "EC1ABB263F611B76C7E1DB31C747C1C69FE66EC5B676EA26C0EFC8EDBE153A88",
+  "post_processing": {
+    "operation": "transparent canvas padding",
+    "description": "Original generated pixels placed unscaled at x=79, y=62 on a 1585x1245 transparent canvas. No repainting, object changes or resizing.",
+    "source_alpha_bounds_threshold_8": [
+      48,
+      139,
+      1379,
+      982
+    ],
+    "output_visible_bounds_threshold_8": [
+      127,
+      201,
+      1458,
+      1044
+    ]
+  },
+  "qa": {
+    "alpha": true,
+    "pixel_format": "Format32bppArgb",
+    "source_alpha_range": [
+      0,
+      255
+    ],
+    "source_transparent_pixels": 690720,
+    "source_partial_alpha_pixels": 880777,
+    "source_opaque_pixels": 755,
+    "output_corner_alpha": [
+      0,
+      0
+    ],
+    "visible_width_fraction": 0.8397476340694007,
+    "visible_horizontal_safety_margin": [
+      0.08012618296529968,
+      0.08012618296529968
+    ],
+    "visible_vertical_safety_margin": [
+      0.1614457831325301,
+      0.1614457831325301
+    ],
+    "visual_checks": [
+      "Honey-yellow rounded compact identity retained",
+      "Warm dark-brown hand-drawn contours and textured paper-like fills match style reference",
+      "Car faces right in a slight front-side three-quarter angle",
+      "Exactly two visible complete wheels",
+      "Full car silhouette, mirror, wheels and bumpers inside frame",
+      "No Peugeot word, other text, emblem, people, scenery, border or white sticker outline",
+      "Soft contact shadow remains on transparent background"
+    ]
+  }
+}

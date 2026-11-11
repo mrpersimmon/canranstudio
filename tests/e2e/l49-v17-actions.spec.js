@@ -86,7 +86,7 @@ for(const width of [1280,390])test(`${width} 宽度逐站完成、重练与导�
     await page.reload();
     await expect(stage.locator('.practice-finish')).toBeVisible();
     const onward=stage.getByRole('button',{name:/^下一站：/});
-    const nextTitle=(await onward.innerText()).replace('下一站：','');
+    const nextTitle=(await onward.getAttribute('aria-label')).replace('下一站：','');
     await onward.click();await expect(page.getByRole('heading',{name:nextTitle,exact:true})).toBeFocused();
     await stage.getByRole('button',{name:'再练一轮',exact:true}).click();
     await expect(stage.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
@@ -139,12 +139,14 @@ test('320 窄屏全页按钮不横溢出，词卡成对，证书操作按主次�
   const prev=await page.getByRole('button',{name:'上一组词卡',exact:true}).boundingBox();
   const next=await page.getByRole('button',{name:'下一站：听音寻宝',exact:true}).boundingBox();
   expect(prev.y).toBe(next.y);expect(prev.height).toBe(next.height);
-  const activityNameLines=await page.getByRole('button',{name:'下一站：听音寻宝',exact:true}).evaluate(button=>{
+  const onward=page.getByRole('button',{name:'下一站：听音寻宝',exact:true});
+  await expect(onward).toHaveText('下一站');
+  const activityNameLines=await onward.evaluate(button=>{
     const walker=document.createTreeWalker(button,NodeFilter.SHOW_TEXT);
     let text;while((text=walker.nextNode())){
-      const start=text.textContent.indexOf('听音寻宝');
+      const start=text.textContent.indexOf('下一站');
       if(start<0)continue;
-      const range=document.createRange();range.setStart(text,start);range.setEnd(text,start+4);
+      const range=document.createRange();range.setStart(text,start);range.setEnd(text,start+3);
       return new Set([...range.getClientRects()].map(rect=>Math.round(rect.top))).size;
     }
     return 0;

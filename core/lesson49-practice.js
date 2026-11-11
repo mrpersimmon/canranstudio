@@ -7,6 +7,7 @@
   let notebook = { version: 1, groups: {}, records: {}, activity: {} };
   let loadMessage = '';
   const activeDraftKeys = new Set();
+  const controllers = new WeakMap();
   let lastSaveFailed = false;
   const isRecord = value => value && typeof value === 'object' && !Array.isArray(value);
   const unifiedSystem = Boolean(root.CanranStudentAccess?.systemUpgrade?.epoch);
@@ -39,22 +40,26 @@
     return { best, correct, incorrect };
   }
   function renderStatistics({ states, submissions, incomplete = false }) {
-    const counts = incomplete ? null : submissions ? submissionStatistics(submissions) : roundStatistics(states);
+    let counts = incomplete ? null : submissions ? submissionStatistics(submissions) : roundStatistics(states);
+    const byQuestions=context.copy?.completionStatistics==='questions'&&Array.isArray(states);
+    // Display each completed question once. The original attempts and the
+    // submission-based streak/ledger remain untouched, including repeated errors.
+    if(byQuestions&&counts)counts={...counts,correct:states.filter(state=>state.firstCorrect).length,incorrect:states.filter(state=>!state.firstCorrect).length};
     const list = document.createElement('ul'); list.className = 'completion-stats';
-    list.setAttribute('aria-label', '本轮成果'); list.dataset.statisticsVersion = counts ? 'submissions-v1' : 'legacy-partial';
+    list.setAttribute('aria-label', '本轮成果'); list.dataset.statisticsVersion = counts ? (byQuestions?'questions-v1':'submissions-v1') : 'legacy-partial';
     const metrics = [
-      ['连续答对', 'best', '本轮最高连续答对', '/assets/unit1-2/completion/streak-v1.png'],
-      ['本次答对', 'correct', '本轮实际提交答对，包含订正', '/assets/unit1-2/completion/correct-v1.png'],
-      ['本次答错', 'incorrect', '本轮实际提交答错，重复错答分别计数', '/assets/unit1-2/completion/incorrect-v1.png']
+      ['连续答对', 'best', '本轮最高连续答对', '/assets/unit1-2/completion/streak-v1.png','次'],
+      [byQuestions?'首答正确':'本次答对', 'correct', byQuestions?'本轮首答正确题数':'本轮实际提交答对，包含订正', '/assets/unit1-2/completion/correct-v1.png',byQuestions?'题':'次'],
+      [byQuestions?'订正完成':'本次答错', 'incorrect', byQuestions?'本轮订正完成题数':'本轮实际提交答错，重复错答分别计数', byQuestions?'/assets/lesson49/icons/retry.svg':'/assets/unit1-2/completion/incorrect-v1.png',byQuestions?'题':'次']
     ];
-    for (const [label, key, meaning, src] of metrics) {
+    for (const [label, key, meaning, src, suffix] of metrics) {
       const card = document.createElement('li'), heading = document.createElement('span'), body = document.createElement('div');
       const icon = document.createElement('img'), number = document.createElement('strong'), unit = document.createElement('span');
       card.className = 'completion-stat stat-' + (key === 'best' ? 'streak' : key); heading.className = 'completion-stat-label'; heading.textContent = label;
-      card.setAttribute('aria-label', counts ? meaning + ' ' + counts[key] + ' 次' : label + '：旧记录次数不完整');
+      card.setAttribute('aria-label', counts ? meaning + ' ' + counts[key] + ' '+suffix : label + '：旧记录次数不完整');
       body.className = 'completion-stat-value'; icon.className = 'shop-icon'; icon.src = src; icon.alt = ''; icon.width = icon.height = 128;
       icon.setAttribute('aria-hidden', 'true'); number.className = 'completion-number'; number.textContent = counts ? String(counts[key]) : '—';
-      unit.className = 'completion-unit'; unit.textContent = '次';
+      unit.className = 'completion-unit'; unit.textContent = suffix;
       body.append(icon, number, unit); card.append(heading, body); list.append(card);
     }
     return list;
@@ -136,11 +141,15 @@
   }
   function renderCompactRecord(box) {
     const valid = record => isRecord(record) && typeof record.attempts === 'number' && typeof record.firstCorrect === 'boolean';
-    const row = (id, record, label) => {
+    const row = (id, record, label, round = null) => {
       const item = document.createElement('li'), details = document.createElement('details'), summary = document.createElement('summary');
       const name = document.createElement('span'); name.textContent = label;
       const state = document.createElement('strong');
       state.textContent = !record.correct ? '待完成' : record.firstCorrect ? '首次答对' : '订正完成';
+      if(context.copy?.recordScope){
+        const prefix=round?.runId&&record.runId===round.runId?'本轮':'此前';
+        state.textContent=prefix+(!record.correct?'待订正':record.firstCorrect?'首答正确':'订正完成');
+      }
       summary.append(name, state);
       if (record.hintUsed || record.ruleUsed || record.revealed) {
         const hint = document.createElement('small'); hint.textContent = record.revealed ? '看过示范' : record.ruleUsed ? '看过规则' : '用过线索'; summary.append(hint);
@@ -154,17 +163,26 @@
     const seen = new Set(); let count = 0;
     for (const { id: activity } of context.reward.zones) {
       const questions = context.questions[activity];
-      const records = questions.map((q, index) => ({ q, index, record: notebook.records[q.id] })).filter(({ record }) => valid(record));
+      const round = [...activeDraftKeys].map(key => notebook.groups[key]).find(group => group?.signature === questions.map(q => q.id).join('|'));
+      const records = questions.map((q, index) => {
+        const current = round?.states[index];
+        // A validated resumed/merged draft can have a new run identity while
+        // the historical notebook still owns the original record. Read this
+        // round's submitted state first; never rewrite either stored object.
+        const inRound = context.copy?.recordScope && valid(current) && current.attempts > 0 &&
+          current.questionId === q.id && current.runId === round.runId;
+        return { q, index, record: inRound ? current : notebook.records[q.id] };
+      }).filter(({ record }) => valid(record));
       if (!records.length) continue;
       const section = document.createElement('section'), heading = document.createElement('h3'), list = document.createElement('ul');
+      section.dataset.activity=activity;
       heading.textContent = context.reward.zones.find(zone => zone.id === activity)?.title || activity;
       records.forEach(({ q, index, record }) => {
         seen.add(q.id); count++;
         const shortName = context.copy.recordNames[activity]?.[index];
-        list.append(row(q.id, record, `第 ${index + 1} 题${shortName ? ' · ' + shortName : ''}`));
+        list.append(row(q.id, record, `第 ${index + 1} 题${shortName ? ' · ' + shortName : ''}`,round));
       });
       section.append(heading, list);
-      const round = [...activeDraftKeys].map(key => notebook.groups[key]).find(group => group?.signature === questions.map(q => q.id).join('|'));
       if (round?.states.some(state => state?.attempts > 0)) {
         const counts = round.statisticsIncomplete || round.runId?.startsWith('merged:') ? null : roundStatistics(round.states);
         const details = document.createElement('details'), summary = document.createElement('summary'), metric = document.createElement('p');
@@ -238,6 +256,7 @@
     requestAnimationFrame(() => {
       const target = heading || element.querySelector('h3, .practice-finish > p');
       if (!target?.isConnected) return;
+      if (root.CanranCore.practiceScreen?.reveal(element, target)) return;
       target.tabIndex = -1;
       // A completion reward may open before this frame; keep its keyboard focus.
       if (!document.querySelector('[role="dialog"][aria-modal="true"]:not([hidden])')) target.focus({ preventScroll: true });
@@ -271,7 +290,7 @@
     solved.forEach(()=>{const step=document.createElement('span');step.className='practice-step';step.setAttribute('aria-hidden','true');meter.append(step);});
     label.append(copy,meter);updateProgress(label,solved,currentIndex);return label;
   }
-  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null, roundPolicy = null }) {
+  function mount({ element, questions, onComplete = () => {}, onAnswer = () => {}, onProgress = () => {}, onResumeResult = () => {}, playAudio, chunkSize = 0, finalLabel = '完成这一站', sessionId = '', legacySessionIds = [], previousQuestionSets = [], previousGroups = [], optionImages = null, allowHints = true, sceneView = null, completionDetails = null, presentation = 'choice', inputViews = null, roundPolicy = null, allowReview = false }) {
     if (root.CanranStudentAccess?.systemUpgrade?.epoch) {
       legacySessionIds = []; previousQuestionSets = []; previousGroups = [];
     }
@@ -423,6 +442,23 @@
     // revision onward a changed prompt cannot silently re-award completion.
     group.contentSignature=contentSignature;
     save();
+    // The browsing cursor is deliberately outside the persisted draft. Moving
+    // group.index backwards would truncate real answers in normalizeDraft().
+    let reviewIndex = null, cachedResult = null;
+    const notifyNavigation = () => root.dispatchEvent(new Event('lesson-practice:navigation'));
+    function review(index) {
+      if (!allowReview || !Number.isInteger(index) || index < 0 || index >= group.index || !passed(group.states[index], questions[index])) return false;
+      const finish = element.querySelector('.practice-finish');
+      if (finish?.inert || finish?.dataset.resultMotion === 'pending') return false;
+      if (finish) cachedResult = { nodes: [...element.childNodes], className: element.className, kind: element.dataset.kind, sceneBeat: element.dataset.sceneBeat };
+      reviewIndex = index; render(); revealQuestion(element, sceneView?.heading()); return true;
+    }
+    function returnCurrent() {
+      if (reviewIndex === null) return;
+      reviewIndex = null; render();
+      const heading = group.index === questions.length ? element.querySelector('.completion-title') || element.querySelector('.practice-finish') : sceneView?.heading();
+      revealQuestion(element, heading);
+    }
     function button(label, action, className = 'btn btn-green') {
       const item = document.createElement('button');
       item.type = 'button'; item.className = className; item.textContent = label;
@@ -430,17 +466,25 @@
       return item;
     }
     function restart() {
+      reviewIndex = null; cachedResult = null;
       group.index = 0; group.states = []; delete group.carriedStates;
       delete group.statisticsIncomplete;
       group.runId = newRunId(); group.roundPolicy = roundPolicy;
       save(); render(); revealQuestion(element, sceneView?.heading());
     }
     function render(userCompleted = false) {
+      const readOnly = reviewIndex !== null, displayIndex = readOnly ? reviewIndex : group.index;
+      element.toggleAttribute('data-practice-review', readOnly);
       element.replaceChildren();
       element.classList.add('practice-runner');
       element.classList.toggle('role-runner', Boolean(sceneView));
-      if(group.index<questions.length)onProgress();
-      if (group.index === questions.length) {
+      if(!readOnly && group.index<questions.length)onProgress();
+      if (!readOnly && group.index === questions.length) {
+        if (cachedResult) {
+          element.className = cachedResult.className;
+          for (const name of ['kind','sceneBeat']) { if (cachedResult[name] === undefined) delete element.dataset[name]; else element.dataset[name] = cachedResult[name]; }
+          element.append(...cachedResult.nodes); onResumeResult(); notifyNavigation(); return;
+        }
         if(!questions.every((q,i)=>passed(group.states[i],q))){normalizeDraft();save();render();return;}
         const summary = document.createElement('p');
         summary.textContent = sceneView ? '破案完成！' : optionImages ? '寻宝完成！' : chunkSize ? '挑战完成！' : '这一组完成了！';
@@ -454,9 +498,9 @@
         finishActions.setAttribute('role','group');finishActions.setAttribute('aria-label','完成后的操作');
         finishActions.append(again);finish.append(finishActions);
         element.append(finish);
-        onComplete(group.states, { runId: group.runId, roundPolicy: group.roundPolicy, index: group.index, contentSignature, userCompleted }); return;
+        onComplete(group.states, { runId: group.runId, roundPolicy: group.roundPolicy, index: group.index, contentSignature, userCompleted }); notifyNavigation(); return;
       }
-      const q = questions[group.index];
+      const q = questions[displayIndex];
       const activeScene = sceneView && (!sceneView.supports || sceneView.supports(q)) ? sceneView : null;
       element.classList.toggle('role-runner', Boolean(activeScene));
       if(sceneView?.supports){element.classList.remove('handbag-runner');delete element.dataset.sceneBeat;}
@@ -468,14 +512,18 @@
       const hintsEnabled = allowHints && copyOptions.hint !== false && !q.audioText && typeof q.hint === 'string' && q.hint.trim().length > 0;
       const content = document.createElement('div'); content.className = 'practice-content';
       const actions = document.createElement('div'); actions.className = 'practice-actions';
-      const carried = group.carriedStates?.[group.index];
-      if (!group.states[group.index] && usableState(carried, q)) group.states[group.index] = carried;
-      if (group.carriedStates) delete group.carriedStates[group.index];
-      const previous = group.states[group.index];
-      const state = usableState(previous,q) ? previous : emptyState(q);
-      group.states[group.index] = state;
+      if (!readOnly) {
+        const carried = group.carriedStates?.[group.index];
+        if (!group.states[group.index] && usableState(carried, q)) group.states[group.index] = carried;
+        if (group.carriedStates) delete group.carriedStates[group.index];
+      }
+      const previous = group.states[displayIndex];
+      // Input adapters may normalize their local fields on mount. A deep copy
+      // keeps even those presentation writes away from the submitted answers.
+      const state = readOnly ? JSON.parse(JSON.stringify(previous)) : usableState(previous,q) ? previous : emptyState(q);
+      if (!readOnly) group.states[group.index] = state;
       const solvedQuestions = () => questions.map((question, index) => passed(group.states[index], question));
-      const progress = progressLabel(`第 ${group.index + 1} / ${questions.length} 题`, solvedQuestions(), group.index);
+      const progress = progressLabel(readOnly ? `回看 ${displayIndex + 1} / ${questions.length}` : `第 ${group.index + 1} / ${questions.length} 题`, solvedQuestions(), displayIndex);
       const copy = questionCopy(q, presentation);
       const prompt = document.createElement('h3'); prompt.textContent = copy.title; prompt.tabIndex = -1;
       if(element.dataset.kind === 'reply') {
@@ -500,14 +548,14 @@
       const feedback = document.createElement('div'); feedback.className = 'fb'; feedback.setAttribute('role', 'status'); feedback.setAttribute('aria-live','polite'); feedback.setAttribute('aria-atomic','true');
       const hintCopy = document.createElement('p'); hintCopy.className = 'practice-hint'; hintCopy.hidden = !state.hintUsed; hintCopy.textContent = q.hint || '';
       hintCopy.id=element.id+'-hint';
-      const hint = button('给点线索', () => { state.hintUsed = true; hintCopy.hidden = false; hint.setAttribute('aria-expanded','true'); save(); }, 'btn btn-mini btn-yellow');
+      const hint = button('给点线索', () => { if(readOnly||state.checked)return; state.hintUsed = true; hintCopy.hidden = false; hint.setAttribute('aria-expanded','true'); save(); }, 'btn btn-mini btn-yellow');
       hint.setAttribute('aria-controls',hintCopy.id);hint.setAttribute('aria-expanded',String(!hintCopy.hidden));
       hint.classList.add('practice-hint-button');hint.setAttribute('aria-label','给点线索');hint.title='给点线索';
       hint.replaceChildren(root.CanranCore.lesson49Icons.create('hint'));
       let audioReady = !q.audioText || state.checked;
       let audioGeneration = 0;
       function canCheck(){
-        return !state.checked&&audioReady&&state.selection!==null&&(q.type!=='order'||state.tokens?.length===q.tokens.length);
+        return !readOnly&&!state.checked&&audioReady&&state.selection!==null&&(q.type!=='order'||state.tokens?.length===q.tokens.length);
       }
       const audioNote = document.createElement('p'); audioNote.className = 'practice-audio-status';
       audioNote.setAttribute('aria-live','polite');
@@ -526,12 +574,12 @@
       replay.setAttribute('aria-label','听一遍');
       replay.append(root.CanranCore.lesson49Icons.create('audio'));
       const modelCopy=document.createElement('p');modelCopy.textContent=q.model||'';modelCopy.hidden=!state.revealed;
-      const model=button('看原句',()=>{state.revealed=true;state.hintUsed=true;modelCopy.hidden=false;save();},'btn btn-mini btn-yellow');model.hidden=!q.model;
+      const model=button('看原句',()=>{if(readOnly)return;state.revealed=true;state.hintUsed=true;modelCopy.hidden=false;save();},'btn btn-mini btn-yellow');model.hidden=!q.model;model.disabled=readOnly;
       const check = button('检查答案', submit);
-      const retry = button('再试一次', () => { if(!input){state.selection = null; state.tokens = [];} state.checked = false; save(); render(); });
+      const retry = button('再试一次', () => { if(readOnly)return; if(!input){state.selection = null; state.tokens = [];} state.checked = false; save(); render(); });
       const questionIndex = group.index;
       const next = button(group.index===questions.length-1?finalLabel:'下一题', () => {
-        if(group.index!==questionIndex||!passed(state,q))return;
+        if(readOnly||group.index!==questionIndex||!passed(state,q))return;
         group.states.length=group.index+1;
         group.index++;
         save(); render(true);
@@ -543,7 +591,7 @@
       function wordToken(tokenIndex, placed=false){
         const text=q.tokens[tokenIndex];
         const token=button('',()=>{
-          if(state.checked)return;
+          if(readOnly||state.checked)return;
           if(placed)state.tokens=state.tokens.filter(index=>index!==tokenIndex);
           else if(!state.tokens.includes(tokenIndex))state.tokens.push(tokenIndex);
           updateTokens();save();
@@ -570,18 +618,19 @@
       const stableOrder=Array.isArray(savedOrder)&&savedOrder.length===values.length&&new Set(savedOrder).size===values.length&&savedOrder.every(value=>values.includes(value));
       if(stableOrder)values.splice(0,values.length,...savedOrder);
       else{
-        for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]];}
-        if(!input){state[orderKey]=values.slice();save();}
+        if(!readOnly)for(let i=values.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[values[i],values[j]]=[values[j],values[i]];}
+        if(!input){state[orderKey]=values.slice();if(!readOnly)save();}
       }
       if(input){
         const displayedQuestion = copyOptions.reference === undefined ? q : {...q, reference:copyOptions.reference};
-        inputController=input.mount({element:options,question:displayedQuestion,state,changed:()=>{check.disabled=!canCheck();save();}});
+        inputController=input.mount({element:options,question:displayedQuestion,state,changed:()=>{check.disabled=!canCheck();if(!readOnly)save();}});
       } else if(q.type === 'order') {
         state.tokens = state.tokens || [];
         values.forEach(tokenIndex=>bank.append(wordToken(tokenIndex)));
         options.append(answerLine,bank);updateTokens();
       } else values.forEach(value => {
         const option = button(value, () => {
+          if(readOnly||state.checked)return;
           state.selection = value;
           options.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === option)));
           check.disabled = !canCheck(); save();
@@ -621,7 +670,7 @@
       },'btn btn-yellow');
       function showFeedback() {
         inputController?.update();
-        updateProgress(progress, solvedQuestions(), passed(state,q) ? -1 : group.index);
+        updateProgress(progress, solvedQuestions(), passed(state,q) ? -1 : displayIndex);
         activeScene?.answer(state.checked && state.correct ? state.selection : null);
         if(q.delivery){
           const delivered=state.checked&&state.correct;
@@ -633,12 +682,14 @@
           deliverySuccess.textContent=delivered ? q.successText || '' : '';
         }
         check.disabled = !canCheck();
-        check.hidden = state.checked; retry.hidden = !state.checked || state.correct; next.hidden = !state.checked || !state.correct;
+        check.hidden = readOnly || state.checked; retry.hidden = readOnly || !state.checked || state.correct; next.hidden = readOnly || !state.checked || !state.correct;
         model.hidden=!q.model;model.classList.toggle('is-idle',state.checked);
         hint.disabled=state.checked;hintCopy.hidden=state.checked||!state.hintUsed;
         hint.setAttribute('aria-expanded',String(!hintCopy.hidden));
         morph.hidden = !q.morph || !state.checked || !state.correct;
-        feedback.textContent = state.checked ? (state.correct ? '答对了！' : context.copy?.compact ? '再看看。' : '再看看，试一次。') : '';
+        feedback.textContent = readOnly ? (state.firstCorrect ? context.copy?.reviewCorrect || '首答正确 · 只读回看' : context.copy?.reviewCorrected || '订正后答对 · 只读回看')
+          : state.checked ? (state.correct ? '答对了！' : context.copy?.incorrectFeedback || (context.copy?.compact ? '再看看。' : '再看看，试一次。'))
+          : displayIndex===0&&state.attempts===0 ? context.copy?.roundIntro || '' : '';
         // Feedback never supplies the answer, including after repeated errors
         // or a restored draft. Only the child can solve the current question.
         feedback.className = 'fb ' + (state.checked ? (state.correct ? 'good' : 'bad') : '');
@@ -701,6 +752,14 @@
       note.append(feedback);
       if(hintsEnabled)note.append(hintCopy);
       const row=document.createElement('div');row.className='practice-submit-row';row.setAttribute('role','group');row.setAttribute('aria-label','作答操作');
+      if(allowReview){
+        const previousButton=button('上一题',()=>review(displayIndex-1),'btn btn-yellow practice-previous');
+        previousButton.disabled=displayIndex===0;previousButton.setAttribute('data-practice-review-navigation','');row.append(previousButton);
+        if(readOnly){
+          const forward=button(displayIndex===questions.length-1?'查看本轮结果':'下一题',()=>displayIndex+1<group.index?review(displayIndex+1):returnCurrent());
+          forward.setAttribute('data-practice-review-navigation','');row.append(forward);
+        }
+      }
       if(hintsEnabled)row.append(hint);else row.classList.add('without-hint');
       row.append(check,retry,next);actions.append(note,row);
       element.append(content,actions);
@@ -709,15 +768,18 @@
         sceneView.present({...q,prompt:copy.title}, progress);
       }
       showFeedback();
+      notifyNavigation();
     }
     render();
-    return {
-      restart,
+    const controller = {
+      restart, review, returnCurrent,
       progress: () => ({
         completed: group.index === questions.length && questions.every((q,i) => passed(group.states[i],q)),
-        started: group.index > 0 || group.states.some(state => state && (state.attempts > 0 || state.selection !== null))
+        started: group.index > 0 || group.states.some(state => state && (state.attempts > 0 || state.selection !== null)),
+        reviewEnabled: allowReview, reviewing: reviewIndex !== null, index: group.index, total: questions.length
       })
     };
+    controllers.set(element,controller); return controller;
   }
   function initializeNotebook() {
     const status = document.getElementById('learningSaveStatus');
@@ -727,5 +789,5 @@
     refreshSaveStatus();
   }
   root.CanranCore = root.CanranCore || {};
-  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature, renderStatistics };
+  root.CanranCore.lesson49Practice = { mount, activity, record, initializeNotebook, revealQuestion, progressLabel, sameContentSignature, renderStatistics, controllerFor: element => controllers.get(element) };
 })(globalThis);

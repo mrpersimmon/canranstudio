@@ -11,8 +11,9 @@ test('新纪念卡显示五个答题区，未获星时没有满星日期', async
   await expect(card.locator('time')).toBeHidden();
   await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
   await expect(page.locator('.practice-runner')).toHaveCount(4); // 原文阅读后才开放故事理解。
-  await page.getByText('星星进度', { exact: true }).click();
-  await expect(page.getByRole('list', { name: '五星任务' }).getByRole('listitem')).toHaveCount(5);
+  await expect(page.locator('.story-award-tasks')).toHaveCount(0);
+  await expect(page.locator('.learning-milestones li')).toHaveCount(5);
+  await expect(page.locator('.learning-milestones .is-complete')).toHaveCount(0);
   await expect(page.locator('#starCountWrap')).toContainText('/5');
 });
 
@@ -20,7 +21,7 @@ test('错答订正、刷新不获星；重练整区零错才获星，已获星�
   await page.goto('/unit1-2/#learn/trans'); const room = page.locator('.stage-trans');
   await room.getByRole('button', { name:'This is your book.', exact:true }).click();
   await room.getByRole('button', { name:'检查答案', exact:true }).click();
-  await expect(room.locator('.fb')).toHaveText('再看看。');
+  await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
   await page.reload();
   await expect(room.getByRole('button', { name:'再试一次', exact:true })).toBeVisible();
   await room.getByRole('button', { name:'再试一次', exact:true }).click();

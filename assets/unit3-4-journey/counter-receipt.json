@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-01",
+  "mode": "built-in image_gen",
+  "asset": "counter-v1",
+  "purpose": "Independent wooden cloakroom counter shared by story and practice; same approved map prop",
+  "sourceGeneratedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-5ed3-7cd1-9aec-1e2fc3d1918d/exec-ed828cc0-7ffa-474e-80bb-e6fe685ea13f.png",
+  "files": {
+    "original": "counter-v1.png",
+    "runtime": "counter-v1.webp"
+  },
+  "requestedDimensions": {
+    "width": 1024,
+    "height": 640
+  },
+  "actualDimensions": {
+    "width": 1586,
+    "height": 992
+  },
+  "transparentBackground": true,
+  "references": [
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "role": "Exact honey-colored wooden counter shape and rendering reference"
+    }
+  ],
+  "prompt": "Production prop asset for a warm illustrated children's English-learning game. The attached image is the EXACT style and shape reference for the wooden cloakroom COUNTER at the bottom right. Generate ONLY that single counter as a standalone cutout; no people or hands, no items, no umbrellas or coats, no signs, no numbers or text, no scenery, no floor. Match the reference very closely: honey-warm orange wood, rounded thick countertop with gently chamfered corners, simple recessed rectangular front panel outlined in warm dark brown, slightly visible right side panel and upper surface, shallow three-quarter perspective with the front dominant, subtle soft top-left lighting and illustrated wooden shading. Friendly, smooth, rounded shapes, not photorealistic, not thin line-vector art. It must visually match the exact reference counter, without changing to a table with thin legs or adding multiple cabinets.\n\nOutput a single horizontal 1024x640 PNG asset with genuine transparent alpha background, not white or a checkerboard. Counter silhouette occupies about 85% of canvas width, 75% of height, centered, fully visible plinth/base and all corners with safe transparent margin. Top edge near-horizontal with only the same subtle depth perspective as the reference; adequate clear visible top surface for separately composited lesson props. No large ground shadow, glow, opaque rectangle or white fringe. Preserve warm browns and honey wood, no purple or green recoloring. This cutout will be composited with separately generated visitor and attendant on one shared stage.",
+  "inspection": {
+    "iterations": 1,
+    "accepted": true,
+    "alphaGreaterThan16BoundsPixels": [
+      72,
+      124,
+      1519,
+      908
+    ],
+    "alphaGreaterThan16BoundsNormalized": [
+      0.04539722572509458,
+      0.125,
+      0.9583858764186634,
+      0.9163306451612904
+    ],
+    "tableTopCenterNormalized": [
+      0.509,
+      0.26
+    ],
+    "tableTopApproxCornersNormalized": [
+      [
+        0.06,
+        0.227
+      ],
+      [
+        0.223,
+        0.138
+      ],
+      [
+        0.94,
+        0.28
+      ],
+      [
+        0.814,
+        0.394
+      ]
+    ],
+    "groundLowestY": 0.9163306451612904,
+    "notes": "Single warm wooden counter, full base, shallow three-quarter right face, no people/items/text/ground shadow. True alpha; inspected against cream paper with no white edge. Generator returned higher dimensions at almost the requested aspect ratio; original kept without resizing.",
+    "preview": "output/u34-visitor-qa/counter-on-paper.png",
+    "limitations": "Top-surface anchors estimated by visual inspection; validate final placement against character hands."
+  },
+  "processing": "PNG copied unchanged. WebP format conversion only, sharp quality92 alphaQuality100 effort6. No crop/redraw/background removal."
+}

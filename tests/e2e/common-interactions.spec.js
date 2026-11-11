@@ -22,7 +22,8 @@ for(const width of [320,1280])test(`${width} 所有无配音单元共用简洁�
   const n=await next.boundingBox(),r=await reset.boundingBox();expect(Math.abs(n.y-r.y)).toBeLessThan(2);expect(r.x+r.width).toBeLessThan(n.x);
   await page.reload();await expect(room.getByRole('status')).toHaveText(/^1 \/ \d+$/);
   while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
-  await room.getByRole('button',{name:pair==='1-2'?'读完了':'完成课文',exact:true}).click();
+  await room.getByRole('button',{name:pair==='1-2'?'去练习':'完成课文',exact:true}).click();
+  if(pair==='1-2'){await expect(page).toHaveURL(/#learn\/roles$/);await page.goBack();}
   const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish.getByRole('button')).toHaveCount(2);
   const a=await finish.getByRole('button').first().boundingBox(),b=await finish.getByRole('button').last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(2);expect(a.x+a.width).toBeLessThan(b.x);
   await expect(page.locator('.practice-options input,.practice-options textarea')).toHaveCount(0);
