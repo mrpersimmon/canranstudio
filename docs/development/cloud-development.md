@@ -5,9 +5,11 @@
 ## 环境配置
 
 - 仓库：`mrpersimmon/canranstudio`。
-- 开发分支：`codex/book-version`；启动前核对远端提交号，不能继续使用保存环境中的 `main`。
+- 开发分支：`codex/book-version`；环境采用已验收的精确提交，更新代码后必须重新核对提交号，不能自动混入其他任务的修改。
 - Node.js：24（[版本声明](../../.nvmrc)）。
-- 安装命令：`bash scripts/cloud/install.sh`，安装锁定的 npm 依赖，以及 Chromium、WebKit 和所需系统依赖。
+- 完整环境安装：`bash scripts/cloud/install.sh`，安装锁定的 npm 依赖、Chromium／WebKit及系统依赖。需要平台提供系统包安装权限和相应下载域名访问能力。
+- 当前受限云端安装：`CLOUD_BROWSER_PROFILE=system-chromium bash scripts/cloud/install.sh`，使用已安装的系统Chromium并实际验证启动。不会尝试sudo，不会静默跳过WebKit后声称双引擎就绪。
+- 非默认安装路径用`CLOUD_CHROMIUM_EXECUTABLE_PATH`指定绝对路径；默认Linux路径为`/usr/bin/chromium`。npm缓存默认放在仓库内已忽略的`output/cloud-cache/npm`，也可由环境显式指定可写位置。
 - 启动命令：`bash scripts/cloud/start.sh`，默认端口 4401。
 - 访问权限保持个人私有；网络只需 GitHub、npm、Playwright 浏览器下载及系统软件包源。安装失败时记录实际受阻域名，再补充网络配置。
 - 无需生产密钥。验收台使用独立演示数据，不读取 `.data`，不启动线上账号服务。
@@ -26,14 +28,38 @@
 
 ## 有限影响性检查
 
-运行 `npm run test:cloud`：
+默认 `npm run test:cloud` 保留双引擎。其他配置必须显式选择，并分别保存结果：
+
+| 配置 | 命令 | 实际浏览器范围 |
+| --- | --- | --- |
+| 完整检查 | `npm run test:cloud` | Chromium＋WebKit |
+| 当前受限云端 | `node scripts/cloud/check.js --profile=system-chromium` | 系统Chromium，WebKit不计作通过 |
+| 远端WebKit专项 | `node scripts/cloud/check.js --profile=webkit --browser-only` | 原四文件的WebKit用例 |
+
+`--browser-only`只用于已有基础／构建证据时的明确专项；普通命令仍包括以下检查：
 
 - Node：验收台完整目录与隔离边界、72 单元教学基线和素材引用、词卡美术采用约束、课程末页导航、工作流约束。
 - 构建：正式账号版本构建，核对资源完整性；仅生成本地构建输出，不发布。
 - Chromium／WebKit：词义居中、连续故事与长材料、原地切换状态、原纪念卡和末页按钮、已采用的词卡素材。
 - 使用 [统一手机清单](../../tests/support/required-phone-devices.json) 的 375×667、430×932、440×956；所选用例保留已有 320×568 压力场景。
 
-结果写入 `output/cloud-development/checks.json`；失败截图与 trace 在同目录 `browser/`。本命令遇到失败会终止，不能把尚未执行的后续步骤记为通过。失败后的独立复验单列，不抹去首轮失败。
+结果写入 `output/cloud-development/<配置>/checks.json`，记录提交、工作区是否有修改、实际浏览器路径和未执行的引擎；浏览器JSON结果、截图及trace在同配置目录。复验前保留首轮证据，不把未执行步骤、平台失败或不同配置的成功合并成一次全绿。
+
+`playwright.cloud.config.js`完整继承原验收台配置，仅允许系统Chromium路径覆盖；原四个测试文件、单worker、断言和三档手机尺寸保持。配置现在随Git保存，不再依赖云端仓库外的临时适配文件。
+
+## WebKit专项CI
+
+[cloud-webkit.yml](../../.github/workflows/cloud-webkit.yml)在开发分支的相关文件推送时运行，保留手动入口。使用Ubuntu、Node.js24及锁文件对应的WebKit依赖，运行受影响的Node契约、原32项WebKit验收，以及私有验收站的三档手机访问流程。
+
+纯云端／私有验收改动由该工作流负责；`quick.yml`的排除路径与专项入口逐项匹配并有测试拦截。混合改动仍运行原quick检查，PR及main／release的完整verify工作流不变。不会为了执行新专项而关闭受保护分支检查。
+
+推送后核对运行的提交号、用例数和结果，失败截图／trace保留7天。新增workflow_dispatch工作流在尚未进入默认分支时可能没有可用的手动入口；本次通过开发分支push执行。不要给需要执行此专项的提交加`[skip ci]`。
+
+## 手机可访问的私有验收站
+
+使用[独立验收站方案](../../deploy/preview/README.md)。该站点由单独的Node服务、口令会话及HTTPS入口承载，来源检查和资源允许清单继续保留；不会将云端回环地址当成手机访问地址，也不触碰官网发布目录及学生数据。
+
+手机可以进入“实测模式”：原课程iframe按当前浏览器可用宽高显示，不缩成小卡片；顶部保留返回验收台入口。只改变预览承载方式，不修改题目、学习记录或原纪念卡。
 
 这套命令用于本次云端接入，不代替完整 `check:commit`、全站 CI、真实账号全链或正式发布验收。日常功能变更仍先执行 `npm run check:plan`，按实际影响追加相应检查。三档浏览器模拟尺寸不等于实体 iPhone、安卓微信／夸克、软键盘和安全区验收。
 
@@ -56,4 +82,16 @@
 - 249 个变更的 JavaScript 文件语法检查、变更文档本地链接、暂存补丁空白检查通过；Bash 安装／启动脚本语法检查通过。
 - 首轮日志和后续结果分别保留在 `output/cloud-setup/`；本地结果不计作云端 Linux 实测。
 
-未执行完整 `check:commit`、全站 CI、实体手机与官网发布。云端配置与启动仍须在真实云端任务中单独验证。
+以上为首次提交前的本地检查记录，未执行完整 `check:commit`、全站CI、实体手机或官网发布。
+
+## 2026-11-11云端实测与环境发布
+
+基线提交为`3659c1abb91bad6656d28de0278632211d78054a`。真实Linux环境为Debian13／Node.js24.19.0：基础63项及72单元构建通过。原64项双引擎用例首轮因浏览器不可用而启动失败，不能记为页面断言通过；默认npm缓存不可写、安装系统依赖无权限及浏览器下载403的首轮日志均保留。
+
+改用平台已安装的Chromium151后，继承原配置的32项检查全部通过（0失败、0跳过），安装脚本重新执行通过。新增的下载域名已撤回，保留包管理器预设与“仅限我自己”。环境快照已发布；新任务成功恢复到相同提交，使用持久终端启动4401验收台，复验72单元和三档尺寸的状态切换／材料弹层通过。
+
+共享桌面当时报告`enabled: true / unknown`，但任务未挂载桌面控制／展示和私有预览工具，客户端也未显示Desktop入口。实际验收截图已在云端任务中打开；普通本机localhost浏览器不是云端服务。WebKit仍需具备系统依赖的环境验证。
+
+本轮新增的仓库内运行配置、WebKit专项CI及私有验收服务，是在上述已验证基线上补齐可复用能力；远端CI、DNS、HTTPS部署和实体手机结果分别记录，不能由本地页面通过推定已上线。
+
+本地补齐验证：受影响Node契约30项通过；私有验收页面Chromium／WebKit各3项通过，覆盖375×667、430×932、440×956下的登录、深链接、状态切换、材料、实测模式与退出。首轮发现并修复了同源表单Origin被Referrer-Policy清空、代理响应头大小写冲突、旧Worker策略重复，以及新增头部引发的布局溢出；另修正测试将“加载元素尚不存在”误当作就绪的时序问题。首轮日志／trace和复验分别保留在`output/cloud-completion/`及各`output/private-preview-*`目录。尚未据此宣称DNS、服务器部署或实体设备验证完成。

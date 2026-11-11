@@ -1,0 +1,59 @@
+name: cloud-webkit
+
+on:
+  push:
+    branches-ignore: [main, codex/release-canranstudio]
+    paths:
+      - 'scripts/cloud/**'
+      - 'scripts/private-preview.js'
+      - 'scripts/preview-access.js'
+      - 'playwright.cloud.config.js'
+      - 'playwright.preview.config.js'
+      - 'review-bench/private-*'
+      - 'deploy/preview/**'
+      - 'tests/preview/**'
+      - 'tests/unit/cloud-development.test.js'
+      - 'tests/unit/private-preview.test.js'
+      - 'docs/development/**'
+      - '.github/workflows/cloud-webkit.yml'
+      - '.github/workflows/quick.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-webkit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  affected-webkit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Check affected preview and workflow contracts
+        run: node --test tests/unit/cloud-development.test.js tests/unit/private-preview.test.js tests/unit/review-bench.test.js tests/workflow/ci.test.js tests/deploy/workflow-contract.test.js
+      - run: node scripts/ci/prepare-ubuntu-mirrors.js
+      - run: npx playwright install --with-deps webkit
+      - name: Run the original 32 WebKit review cases
+        run: node scripts/cloud/check.js --profile=webkit --browser-only
+      - name: Exercise private entry on the three required phones
+        run: npx playwright test -c playwright.preview.config.js --project=webkit --reporter=line,json --global-timeout=600000 --forbid-only
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: output/private-preview-tests/report.json
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: cloud-webkit-${{ github.sha }}
+          path: |
+            output/cloud-development/webkit/
+            output/private-preview-tests/
+          retention-days: 7

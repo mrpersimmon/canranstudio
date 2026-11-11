@@ -3,6 +3,22 @@ name: quick
 on:
   push:
     branches-ignore: [main, codex/release-canranstudio]
+    # Pure cloud/preview changes use the matching focused workflow below.
+    # Mixed commits still run this existing gate; protected branches/PRs keep verify.yml.
+    paths-ignore:
+      - 'scripts/cloud/**'
+      - 'scripts/private-preview.js'
+      - 'scripts/preview-access.js'
+      - 'playwright.cloud.config.js'
+      - 'playwright.preview.config.js'
+      - 'review-bench/private-*'
+      - 'deploy/preview/**'
+      - 'tests/preview/**'
+      - 'tests/unit/cloud-development.test.js'
+      - 'tests/unit/private-preview.test.js'
+      - 'docs/development/**'
+      - '.github/workflows/cloud-webkit.yml'
+      - '.github/workflows/quick.yml'
 
 permissions:
   contents: read
