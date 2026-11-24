@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
 // Historical expectations run on a complete frozen HTTP course package.
@@ -9,7 +10,7 @@ for(const base of ['', '/lesson'])test(`unit9-10 词卡翻面、示范阅读和�
  await page.goto(base+'/unit9-10/#learn/words');const room=page.locator('.stage-words');
  for(let i=0;i<22;i+=6){
   for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeHidden();await expect(card.locator('.word-phonetic')).toBeVisible();}
-  if(i+6<22)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+  if(i+6<22)await courseButton(room, "nextWords").click();
  }
  await page.reload();await expect(room.locator('.word-phonetic').first()).toBeVisible();
  for(const activity of ['phrases','models']){await page.goto(base+'/unit9-10/#learn/'+activity);const section=page.locator('.stage-'+activity);for(const summary of await section.locator('summary').all())await summary.click();await expect(section.locator('button.phrase-card')).toHaveCount(0);await expect(section.locator('article.phrase-card')).not.toHaveCount(0);}

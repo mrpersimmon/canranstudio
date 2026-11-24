@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const { test, expect } = require('@playwright/test');
@@ -42,7 +43,7 @@ test('课文无配音也能浏览全部原文、刷新续读并主动完成', as
     await story.getByRole('button', { name: i ? '下一句' : /开始[听看]课文/, exact: true }).click();
     await expect(story.locator('.btext span')).toHaveText(DIALOGUE.slice(0, i + 1));
     await expect(story.locator('.bname')).toHaveText(SPEAKERS.slice(0, i + 1));
-    await expect(story.getByRole('button', { name: i === 15 ? '完成课文' : '下一句', exact: true })).toBeEnabled();
+    await expect(courseButton(story, i === 15 ? "finishStory" : '下一句')).toBeEnabled();
     if (i === 3) {
       await story.locator('.bubble-row').first().getByRole('button', { name: '看中文', exact: true }).click();
       await expect(story.locator('.bubble-row').first()).toContainText('我是一名新学生。');
@@ -53,7 +54,7 @@ test('课文无配音也能浏览全部原文、刷新续读并主动完成', as
   await expect(page.locator('#starCount')).toHaveText('0');
   await expect(story.getByRole('button', { name: /听|播放/ })).toHaveCount(0);
   await expect(story.locator('button.btext')).toHaveCount(0);
-  await story.getByRole('button', { name: '完成课文', exact: true }).click();
+  await courseButton(story, "finishStory").click();
   await expect(story.getByText('故事看完了！', { exact: true })).toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('1');
   await story.getByRole('button', { name: '下一站：朋友资料卡', exact: true }).click();
@@ -89,7 +90,7 @@ test('单词寻宝以13个新词的词义和图片作答，不需播放且末题
     await require('../support/units1-30-tasks').select(room, answers[i]);
     await expect(check).toBeEnabled(); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
-    await room.getByRole('button', { name: i === answers.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, i === answers.length - 1 ? "finishPractice" : '下一题').click();
   }
   await expect(room.getByRole('heading', { name: '单词寻宝', exact: true })).toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('3');
@@ -104,7 +105,7 @@ test('图鉴和示范供阅读，挑战读英文作答，正误反馈音仍正�
   const requests = await blockVoices(page); await observeSound(page);
   await page.goto('/lesson/unit7-8/#learn/words');
   const words = page.locator('.stage-words');
-  for (let i = 0; i < 2; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  for (let i = 0; i < 2; i++) await courseButton(words, "nextWords").click();
   const card = words.getByRole('button', { name: 'I', exact: true });
   await expect(card).toContainText('/aɪ/'); await card.click();
   await expect(card.locator('.word-meaning')).toHaveText('我；说话的人指自己');
@@ -128,7 +129,7 @@ test('图鉴和示范供阅读，挑战读英文作答，正误反馈音仍正�
   await expect(exam.getByRole('region', {name:'题目材料',exact:true})).toHaveText("I'm Italian. I'm a nurse.");
   await expect(exam.getByRole('button', { name: /听一遍|再听/ })).toHaveCount(0);
   await exam.getByRole('button', { name: '法国人；护士', exact: true }).click();
-  await check.click(); await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
+  await check.click(); await expect(exam.getByRole('status')).toHaveText(await incorrectFeedback(exam));
   await expect.poll(() => page.evaluate(() => window.classroomSounds.some(x => x.ended && x.src.endsWith('/assets/feedback/duolingo-incorrect.mp3')))).toBe(true);
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await exam.getByRole('button', { name: '意大利人；护士', exact: true }).click(); await check.click();
@@ -180,7 +181,7 @@ async function finishVoicedActivity(page, id) {
     else await room.locator('.practice-options').getByRole('button', { name: answers[i], exact: true }).click();
     const check = room.getByRole('button', { name: '检查答案', exact: true });
     await expect(check).toBeEnabled({ timeout: 15000 }); await check.click();
-    await room.getByRole('button', { name: i === answers.length - 1 ? id === 'exam' ? '查看本次记录' : '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, i === answers.length - 1 ? id === 'exam' ? "finishExam" : "finishPractice" : '下一题').click();
   }
 }
 
@@ -197,7 +198,7 @@ test('旧配音中断的位置可续读，未改练习与选择保留，旧听�
   await vocab.getByRole('button', { name: '检查答案', exact: true }).click();
   await page.goto('/unit7-8/#learn/text');
   const story = page.locator('.stage-text');
-  await story.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(story, "startVoicedStory").click();
   await expect(story.getByRole('button', { name: '下一句', exact: true })).toBeEnabled({ timeout: 15000 });
   await page.route('**/unit7-8/audio/l07-d02.mp3', route => route.abort());
   await story.getByRole('button', { name: '下一句', exact: true }).click();
@@ -225,10 +226,10 @@ test('旧15星不填满新词汇和阅读挑战，其他活动保留，重做后
   await page.goto('/unit7-8/#learn/text');
   const story = page.locator('.stage-text');
   for (let i = 0; i < 16; i++) {
-    await story.getByRole('button', { name: i ? '下一句' : '开始听课文', exact: true }).click();
-    await expect(story.getByRole('button', { name: i === 15 ? '完成课文学习' : '下一句', exact: true })).toBeEnabled({ timeout: 15000 });
+    await courseButton(story, i ? '下一句' : "startVoicedStory").click();
+    await expect(courseButton(story, i === 15 ? "finishVoicedStory" : '下一句')).toBeEnabled({ timeout: 15000 });
   }
-  await story.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  await courseButton(story, "finishVoicedStory").click();
   for (const id of ['roles', 'reply', 'be', 'interview', 'trans', 'exam']) await finishVoicedActivity(page, id);
   await page.goto('/unit7-8/#learn/certificate');
   await expect(page.locator('#starCount')).toHaveText('15');
@@ -257,7 +258,7 @@ async function finishChangedInterview(page) {
  for(let i=2;i<4;i++){
   await page.reload();
   await expect(room).toContainText(`第 ${i+1} / 4 题`);await expect(room.getByRole('status')).toContainText('答对了！');
-  await room.getByRole('button',{name:i===3?'完成这一站':'下一题',exact:true}).click();
+  await courseButton(room, i===3?"finishPractice":'下一题').click();
  }
 }
 
@@ -287,10 +288,10 @@ test('人物资源未齐先等待，同页离线阅读与词卡完整，断网�
  await expect(page.locator('#courseLoader')).toHaveCount(0);await context.setOffline(true);
  const story=page.locator('.stage-text');
  for(let i=0;i<16;i++){
-  await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  await courseButton(story, i?'下一句':"startStory").click();
   if([3,13,15].includes(i)){const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});}
  }
- await story.getByRole('button',{name:'完成课文',exact:true}).click();await expect(story.getByRole('group',{name:'随课文填写的采访档案',exact:true})).toContainText('keyboard operator');
+ await courseButton(story, "finishStory").click();await expect(story.getByRole('group',{name:'随课文填写的采访档案',exact:true})).toContainText('keyboard operator');
  await page.goto('/lesson/unit7-8/#learn/words');await expect(page.locator('#courseLoader')).toHaveCount(0);
  await page.evaluate(()=>{
   window.unit78PaintFailures=[];
@@ -300,7 +301,7 @@ test('人物资源未齐先等待，同页离线阅读与词卡完整，断网�
   };
   new MutationObserver(inspect).observe(document.body,{childList:true,subtree:true,attributes:true});
  });
- for(let i=0;i<3;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+ for(let i=0;i<3;i++)await courseButton(page.locator('.stage-words'), "nextWords").click();
  expect(await page.evaluate(()=>window.unit78PaintFailures)).toEqual([]);
  await reloadWithLatestCheck(page,context);await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');expect(voices).toEqual([]);
 });

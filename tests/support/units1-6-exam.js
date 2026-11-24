@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 // Independent manuscript: textbook paper pages 2–13 and the reviewed coverage
@@ -67,7 +68,7 @@ async function finishExam(page, unit, start = 0) {
     await choose(room, questions[i]);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
-    await room.getByRole('button', { name: i === questions.length - 1 ? unit === '1-2' ? '完成挑战' : '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === questions.length - 1 ? unit === '1-2' ? '完成挑战' : "finishExam" : '下一题').click();
   }
 }
 module.exports = { EXAMS, choose, finishExam };

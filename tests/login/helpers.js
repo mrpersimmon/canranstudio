@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const { expect } = require('@playwright/test');
 async function adminLogin(page, base = '/lesson/') {
   await page.goto(base + 'admin/');
@@ -81,7 +82,7 @@ async function studentLogin(browser, account, base = '/lesson/', contextOptions 
 async function waitForCourseReady(page) {
   // Match the protected-course readiness boundary already used by later
   // units. Initial zero-star markup is not an interactive, restored course.
-  await expect(page.locator('html:not([data-course-preparing]) #wordPageProgress')).toBeVisible({ timeout: 30000 });
+  await readyCourse(page);
   await expect(page.locator('#courseLoader')).toHaveCount(0);
 }
 async function openMyAccount(page){

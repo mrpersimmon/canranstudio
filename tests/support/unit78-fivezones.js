@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const {select:commonSelect}=require('./units1-30-tasks');
 // Independently reviewed manuscript, not extracted from the course answer fields.
@@ -14,11 +15,11 @@ const SPEAKERS=['Robert','Robert','Sophie','Sophie','Robert','Sophie','Sophie','
 async function select(room,answer){await commonSelect(room,answer);}
 async function story(page,base=''){
  await page.goto(base+'/unit7-8/#learn/text');const room=page.locator('.stage-text');await expect(room).toBeVisible({timeout:30000});
- if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
- if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ if(await room.locator(':scope > .practice-finish').isVisible())return;
+ if(await courseButton(room, "startStory").isVisible())await courseButton(room, "startStory").click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
  await expect(room.locator('.btext span')).toHaveText(DIALOGUE);await expect(room.locator('.bname')).toHaveText(SPEAKERS);
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await courseButton(room, "finishStory").click();
 }
 async function activity(page,id,{base='',inspect,keepAward=false,expectPerfect=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
@@ -29,7 +30,7 @@ async function activity(page,id,{base='',inspect,keepAward=false,expectPerfect=t
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);await inspect?.(room,i,'before');
   if(await check.isEnabled()){ /* a genuine restored draft can already be selected */ }
   await select(room,answers[i]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await inspect?.(room,i,'correct');
-  await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();
+  await courseButton(room, i===answers.length-1?"finishPractice":'下一题').click();
  }
  if(expectPerfect)await expect(room.locator('.completion-number')).toHaveText([String(answers.length),String(answers.length),'0']);
  if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);return room;

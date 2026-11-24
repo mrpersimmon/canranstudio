@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const previous = require('../support/unit12-grammar-predecessor');
@@ -13,7 +14,7 @@ test('前版27题已完成：语法新题从空白开始，八道未改综合题
     for (const [index, answer] of items.entries()) {
       await flow.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await expect(room.locator('.fb')).toHaveText('答对了！');
-      await room.getByRole('button', { name: index < items.length - 1 ? '下一题' : id === 'exam' ? '查看本次记录' : '完成这一站', exact: true }).click();
+      await courseButton(room, index < items.length - 1 ? '下一题' : id === 'exam' ? "finishExam" : "finishPractice").click();
     }
   }
   await page.goto('/unit1-2/#learn/certificate');

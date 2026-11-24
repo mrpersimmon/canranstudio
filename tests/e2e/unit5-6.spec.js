@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const { completeUnit56 } = require('../support/unit5-6-flow');
@@ -54,7 +55,7 @@ test('新单元从图鉴开始，24 个词的音标与翻面可见，末组主�
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('/frentʃ/');
   await words.getByRole('button', { name: 'French', exact: true }).click();
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('法国');
-  for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  for (let i = 0; i < 3; i++) await courseButton(words, "nextWords").click();
   await expect(words.locator('.unit-word')).toHaveCount(6);
   await expect(words.locator('.word-phonetic')).toHaveCount(6);
   await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
@@ -69,7 +70,7 @@ test('首页与 lesson 子目录有新单元入口，独立继续并保留资源
   await page.getByRole('link',{name:'开始学习：新朋友见面会',exact:true}).click();
   await expect(page).toHaveURL(/\/lesson\/unit5-6\/#learn\/words$/);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.getByRole('link',{name:'介绍有办法',exact:true}).click();
   await page.locator('.stage-introduce').getByRole('button',{name:"It's a Toyota.",exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);

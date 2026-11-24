@@ -11,7 +11,7 @@
  function restoreStoryScroll(log,state){
   const key=storySize(log);if(!state.restore&&key===state.key)return;
   state.key=key;
-  if(state.bottom)log.scrollTop=log.scrollHeight;
+  if(state.bottom)log.scrollTop=log.firstElementChild?.classList.contains('story-lead')?0:log.scrollHeight;
   else if(state.restore)log.scrollTop=state.position;
   state.restore=false;state.position=log.scrollTop;
  }
@@ -19,7 +19,7 @@
  let currentPanel=null,lastBubble=null,animation=null;
  const milestoneLabels=['词汇','故事','语法','应用','挑战'];
  let milestones,courseLabel,explanation,explanationText,explanationSource;
- let referenceSheet,referenceTitle,referenceContent,referenceSource,referenceFocus;
+ let referenceSheet,referenceTitle,referenceContent,referenceSource,referenceFocus,liveReference;
  let recordSheet,recordBody,recordSummary;
  const nameMeasure=document.createElement('canvas').getContext('2d');
  function prepareReadingColumns(scope){
@@ -59,7 +59,11 @@
   referenceTitle=document.createElement('h2');referenceTitle.id='learning-reference-title';
   const referenceClose=document.createElement('button');referenceClose.type='button';referenceClose.textContent='关闭';referenceClose.setAttribute('aria-label','关闭学习参考');referenceClose.onclick=()=>referenceSheet.close();
   referenceHeader.append(referenceTitle,referenceClose);referenceContent=make('learning-reference-content');referenceSheet.append(referenceHeader,referenceContent);body.append(referenceSheet);
-  referenceSheet.addEventListener('close',()=>{if(referenceFocus?.isConnected&&!document.querySelector('dialog[open]'))referenceFocus.focus({preventScroll:true});});
+  referenceSheet.addEventListener('close',()=>{
+   if(referenceSheet.open)return;
+   restoreLiveReference();
+   if(referenceFocus?.isConnected&&!document.querySelector('dialog[open]'))referenceFocus.focus({preventScroll:true});
+  });
   referenceSheet.addEventListener('click',event=>{if(event.target===referenceSheet){const box=referenceSheet.getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)referenceSheet.close();}});
   recordSheet=document.getElementById('unitNotebook');recordSheet.classList.add('learning-record-sheet');
   document.getElementById('notebookButton').textContent='学习记录';
@@ -84,10 +88,22 @@
   }
   if(reset){for(const group of document.querySelectorAll('.learning-record-group'))group.open=group.dataset.activity===active;recordBody.scrollTop=0;}
  }
+ function restoreLiveReference(){
+  if(!liveReference)return;
+  const {source,anchor,open}=liveReference;liveReference=null;
+  source.open=open;source.classList.remove('learning-live-reference');anchor.replaceWith(source);
+ }
  function openReference(source,focus){
-  // Reference text stays authored in grammar.js. Copy only its reading content;
-  // the original details never participates in the fixed learning surface.
+  restoreLiveReference();
   referenceSource=source;referenceFocus=focus;referenceTitle.textContent=source.querySelector('summary').textContent;
+  // Paged references own their event handlers and saved reading position.
+  // Keep that original widget mounted while the learner uses the sheet.
+  if(source.classList.contains('grammar-reference')&&source.querySelector('button,input,select,textarea')){
+   const anchor=document.createComment('course-reference');
+   liveReference={source,anchor,open:source.open};source.before(anchor);
+   source.open=true;source.classList.add('learning-live-reference');referenceContent.replaceChildren(source);
+   referenceSheet.showModal();referenceContent.scrollTop=0;return;
+  }
   const parts=[...source.children].filter(item=>item.tagName!=='SUMMARY').map(item=>item.cloneNode(true));
   referenceContent.replaceChildren(...parts);
   referenceContent.querySelectorAll('[id]').forEach(item=>item.removeAttribute('id'));
@@ -204,7 +220,7 @@
  }
  function prepare(surface,runner,view){
   for(const reference of document.querySelectorAll('.shop-stage:not(.stage-certificate)>details.offline-task'))reference.classList.add('grammar-reference');
-  if(referenceSheet?.open&&!surface.contains(referenceSource))referenceSheet.close();
+  if(referenceSheet?.open&&!surface.contains(liveReference?.anchor||referenceSource))referenceSheet.close();
   updateMilestones(surface);
   if(view==='question')prepareQuestion(runner);
   if(view==='result'){

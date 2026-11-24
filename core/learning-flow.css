@@ -65,6 +65,11 @@ body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bbtns{margin
 body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .bbtns .btn{min-height:44px;font-size:13px;padding:3px 12px;border:0;background:#efe7d5;box-shadow:none;border-radius:10px}
 body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .story-lead{padding:12px;border-width:1px;border-radius:14px}
 body[data-learning-shell] #lessonWorkspace .learning-scene-stacked .story-lead p{font-size:17px;line-height:1.4}
+@media(max-width:600px) and (max-height:640px){
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-stacked .story-lead{display:flex;flex-direction:row;align-items:center;gap:8px;padding:6px 8px;text-align:start}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-stacked .story-lead>img{flex:none;width:34px;height:34px;object-fit:contain}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-stacked .story-lead>p{margin:0;font-size:15px;line-height:1.4}
+}
 /* Preserve the original scene: only individual speech bubbles have a paper fill. */
 body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text .dialogue-status{flex:none;height:20px;min-height:20px;margin:0;padding:0;font-size:12px;line-height:20px;color:#86745a}
 body[data-learning-shell] .learning-surface.stage-text>.stage-ctrl,body[data-learning-shell] .learning-surface.stage-text>.practice-finish{flex:none;height:88px;min-height:88px;margin:0;padding:0 2px 6px;box-sizing:border-box;justify-content:end;align-items:stretch;gap:4px}
@@ -143,6 +148,8 @@ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-compact-w
 .learning-reference-header h2{margin:0;font-size:20px;line-height:1.4;font-weight:500}
 .learning-reference-header button{flex:none;min-width:52px;min-height:44px;padding:8px;border:0;border-radius:12px;box-shadow:none;background:#efe7d5;color:#6b5740;font-family:inherit;font-size:15px;font-weight:500;line-height:1.4;cursor:pointer}
 .learning-reference-content{min-height:0;overflow:auto;overscroll-behavior:contain;padding:14px 16px;scroll-padding:14px}
+.learning-reference-content>.learning-live-reference{display:block;margin:0;padding:0;background:transparent;border:0;box-shadow:none}
+.learning-reference-content>.learning-live-reference>summary{display:none}
 .learning-reference-content .grammar-expression-list{display:grid;grid-template-columns:1fr;gap:8px;margin:0}
 .learning-reference-entry{padding:10px 12px;border:1px solid #e3d8c3;border-radius:14px;background:#fffdf7}
 .learning-reference-content .grammar-expression-list dt{margin:0;font-family:inherit;font-size:18px;font-weight:600;line-height:1.4;color:#365e4b;overflow-wrap:anywhere}

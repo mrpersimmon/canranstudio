@@ -1,4 +1,5 @@
 "use strict";
+const {expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 test.use({ actionTimeout: 5000, reducedMotion: 'reduce' });
@@ -82,8 +83,8 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
     await room.getByRole('button', { name: i === 11 ? '完成练习' : '下一题', exact: true }).click();
   }
   const result = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(result.locator('.completion-number')).toHaveText(['9', '12', '2']);
-  await page.reload(); await expect(result.locator('.completion-number')).toHaveText(['9', '12', '2']);
+  await expectRoundCounts(result.locator('.completion-number'), ['9', '12', '2']);
+  await page.reload(); await expectRoundCounts(result.locator('.completion-number'), ['9', '12', '2']);
   await room.getByRole('button', { name: '下一站：帮忙还手提包', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/manners$/);
   await page.goto('/unit1-2/#learn/trans');

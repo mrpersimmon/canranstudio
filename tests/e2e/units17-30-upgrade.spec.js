@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict}=require('../support/course-controls');
 // Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
 require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
@@ -16,7 +17,7 @@ for(const[pair,answers]of Object.entries(EXAMS)){
  test(`${pair} 真实旧两题通关升级保留姓名日期和旧练习，新题必须补做`,async({page})=>{
   test.setTimeout(90000);const flow=require(`../fixtures/unit${pair}-classroom-before/flow`),upgrade=await oldEdition(page,pair);await flow[`completeUnit${pair.replace('-','')}`](page);
   await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
-  await page.goto(`/unit${pair}/#learn/words`);await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();upgrade();await page.reload();
+  await page.goto(`/unit${pair}/#learn/words`);await courseButton(page.locator('.stage-words'), "nextWords").click();upgrade();await page.reload();
   await expect(page.locator('#starCount')).toHaveText(String(TASK_UPGRADES[pair][0]));await expect(page.locator('#wordPageProgress')).toHaveText(/^2 \/ /);await expect(page.locator('.stage-text .btext')).toHaveCount(flow.DIALOGUE.length);
   for(const id of Object.keys(flow.ANSWERS).filter(x=>!['exam',...TASK_UPGRADES[pair][1]].includes(x)))await expect(page.locator('.stage-'+id).getByRole('group',{name:'完成后的操作',exact:true})).toBeAttached();
   await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('升级小伙伴');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
@@ -46,12 +47,12 @@ for(const[pair,answers]of Object.entries(EXAMS)){
   for(const name of ['下一组词卡','下一组词卡','上一组词卡','上一组词卡']){await page.locator('.stage-words').getByRole('button',{name,exact:true}).click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
   const cardFailures=await page.evaluate(()=>{window.watchCourse=false;window.paintObserver.disconnect();return window.paintFailures;});expect(cardFailures).toEqual([]);
   await page.goto(`/lesson/unit${pair}/#learn/text`);const text=page.locator('.stage-text'),total=require(`../support/unit${pair}-flow`).DIALOGUE.length;
-  for(let i=0;i<total;i++)await text.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  for(let i=0;i<total;i++)await courseButton(text, i?'下一句':"startStory").click();
   await expect.poll(()=>text.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   await reloadWithLatestCheck(page,context);await expect(text.getByRole('log').locator('.bubble-row').last()).toBeInViewport({ratio:1});
   await page.goto(`/lesson/unit${pair}/#learn/exam`);const room=page.locator('.stage-exam'),order=answers.findIndex(Array.isArray);
   for(const answer of answers.slice(0,order)){await selectAnswer(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
-  await selectAnswer(room,[answers[order][0]]);await reloadWithLatestCheck(page,context);await expect(room.getByRole('status')).toBeEmpty();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(order));await expect(room.getByRole('button',{name:'撤回 '+answers[order][0],exact:true})).toBeVisible();
+  await selectAnswer(room,[answers[order][0]]);await reloadWithLatestCheck(page,context);await expectNoVerdict(room.getByRole('status'));await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(order));await expect(room.getByRole('button',{name:'撤回 '+answers[order][0],exact:true})).toBeVisible();
   // Resume the retained draft through the bank; the full-answer helper clears
   // existing tokens for retries and would discard the first restored token.
   const chosen=room.getByRole('group',{name:'已选词块',exact:true}).getByRole('button');

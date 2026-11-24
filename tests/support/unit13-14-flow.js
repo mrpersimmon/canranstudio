@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const {expect} = require('@playwright/test');
 const {EXAM}=require('./unit13-14-exam');
@@ -9,11 +10,11 @@ const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['13-14'].old).map(i
 async function completeStory(page,base='') {
   await page.goto(base+'/unit13-14/#learn/text'); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++) {
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   }
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
+  await courseButton(room, "finishStory").click();
   await expect(room).toContainText('故事看完了！');
 }
 async function completeActivity(page,id,base='') {
@@ -27,7 +28,7 @@ async function completeActivity(page,id,base='') {
     else await room.getByRole('button',{name:answer,exact:true}).click();
     await check.click(); await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+    await courseButton(room, i===answers.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
   }
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }

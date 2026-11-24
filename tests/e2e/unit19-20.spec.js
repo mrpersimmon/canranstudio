@@ -1,3 +1,4 @@
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -8,7 +9,7 @@ test('导航进入冰淇淋休息站，先看音标词卡，整卡翻义无需�
   await page.goto('/');await page.getByRole('link',{name:'开始学习：冰淇淋休息站',exact:true}).click();
   await expect(page).toHaveURL(/\/unit19-20\/#learn\/words$/);
   const room=page.getByRole('region',{name:'公园小图鉴',exact:true});
-  await expect(room.getByRole('button',{name:'上一组词卡',exact:true})).toBeDisabled();
+  await expect(courseButton(room, "previousWords")).toBeDisabled();
   const card=room.getByRole('button',{name:'tired',exact:true});await expect(card).toContainText('/taɪrd/');
   await card.click();await expect(card.locator('.word-meaning')).toHaveText('累的；疲倦的');await expect(card).toHaveAccessibleDescription('累的；疲倦的');
   await card.click();await expect(card.locator('.word-meaning')).toBeHidden();
@@ -52,8 +53,8 @@ test('15题覆盖两课新词，错答不泄题，最后三题刷新不代答，
   if(i>=12)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 15 题');
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
-  if(i===0){await room.getByRole('button',{name:'忙碌的',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await room.getByRole('button',{name:'再试一次',exact:true}).click();}
-  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===14?'完成这一站':'下一题',exact:true}).click();
+  if(i===0){await room.getByRole('button',{name:'忙碌的',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await courseButton(room, i===14?"finishPractice":'下一题').click();
  }
  await expect(page.locator('#starCount')).toHaveText('3');await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(page.locator('#starCount')).toHaveText('3');
@@ -63,12 +64,12 @@ test('原文13段完整保留，分角色接话与合说准确，最后一段后
  await page.goto('/unit19-20/#learn/roles');await page.getByRole('button',{name:'先看故事',exact:true}).click();const room=page.locator('.stage-text');
  await expect(room).toContainText('孩子们为什么向妈妈道谢？');
  for(let i=0;i<DIALOGUE.length;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   await expect(room.locator('.scene-speaker')).toHaveCount(SPEAKERS[i]==='孩子们'?2:1);
   await expect(room.getByRole('status')).toHaveText((i+1)+' / 13');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).first().click();await expect(room.locator('.bcn').first()).toHaveText('怎么啦，孩子们？');await expect(room.locator('.bcn').first()).toBeVisible();await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
  }
- await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();await expect(page.getByRole('button',{name:'先看故事',exact:true})).toHaveCount(0);
+ await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await courseButton(room, "finishStory").click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();await expect(page.getByRole('button',{name:'先看故事',exact:true})).toHaveCount(0);
 });
 
 const WORDS=['tired','thirsty','children','boy','mum','ice cream','matter','sit down','right','child','all right','big','small','open','shut','light','heavy','long','shoe','grandfather','grandmother','clean','dirty','hot','cold','fat','thin','old','young','new','short','tall','them','nice'];
@@ -78,7 +79,7 @@ test('34张卡片默认音标、翻面词义可访问，图片完整加载，末
  for(let p=0;p<6;p++){
   await expect(room.locator('.unit-word strong')).toHaveText(WORDS.slice(p*6,p*6+6));await expect(room.locator('.word-phonetic')).toHaveText(PH.slice(p*6,p*6+6));await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();await expect(card).toHaveAccessibleDescription(await card.locator('.word-meaning').innerText());await card.click();await expect(card.locator('.word-meaning')).toBeHidden();}
-  if(p<5)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+  if(p<5)await courseButton(room, "nextWords").click();
  }
  await page.reload();await expect(room).toContainText('6 / 6');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen$/);expect(audio).toEqual([]);
 });
@@ -100,5 +101,5 @@ test('教材20幅对比图、A六题、B十组与数字完整，练习纸实际�
 
 test('同词依语境判断，体形无好坏暗示，否定不能补出未说的信息',async({page})=>{
  await page.goto('/unit19-20/#learn/phrases');const room=page.locator('.stage-phrases');await room.getByText('看对象，选意思',{exact:true}).click();await expect(room).toContainText('grandfather 可以指祖父或外祖父');await expect(room).toContainText('short 形容身高是矮的');await room.getByText('把话放回故事里',{exact:true}).click();await expect(room).toContainText('休息不等于懒惰');await expect(room).toContainText('不代表一个人的好坏');
- await completeStory(page);await page.goto('/unit19-20/#learn/roles');const roles=page.locator('.stage-roles');await roles.getByRole('button',{name:ANSWERS.roles[0],exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await roles.getByRole('button',{name:'下一题',exact:true}).click();await roles.getByRole('button',{name:'Yes, we are, thank you!',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText('再看看，试一次。');await expect(roles.locator('.practice-options .is-correct')).toHaveCount(0);
+ await completeStory(page);await page.goto('/unit19-20/#learn/roles');const roles=page.locator('.stage-roles');await roles.getByRole('button',{name:ANSWERS.roles[0],exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await roles.getByRole('button',{name:'下一题',exact:true}).click();await roles.getByRole('button',{name:'Yes, we are, thank you!',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText(await incorrectFeedback(roles));await expect(roles.locator('.practice-options .is-correct')).toHaveCount(0);
 });

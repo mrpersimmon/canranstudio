@@ -1,4 +1,5 @@
 'use strict';
+const {courseToolbar}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {completeUnit12}=require('../support/unit1-2-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -42,7 +43,7 @@ test('练习纸仍独立打印，不包含纪念卡姓名输入',async({page})=>
   await page.emulateMedia({media:'print'});
   await expect(page.locator('.writing-lines li')).toHaveCount(7);
   for(const line of await page.locator('.writing-lines li').all())await expect(line).toBeVisible();
-  await expect(page.locator('#topbar')).toBeHidden();
+  await expect(courseToolbar(page)).toBeHidden();
   const sheet=await page.pdf({path:'output/playwright/unit1-2-writing.pdf',preferCSSPageSize:true,printBackground:true});
   expect(sheet.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });

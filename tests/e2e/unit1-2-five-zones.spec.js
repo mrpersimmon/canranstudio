@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const previous = require('../support/unit12-six-zones-predecessor');
@@ -57,7 +58,7 @@ test('六区旧记录迁入：未改题保留，改写题未答，历史结果�
     for (const [i, answer] of items.entries()) {
       await flow.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await expect(room.locator('.fb')).toHaveText('答对了！');
-      await room.getByRole('button', { name: i < items.length - 1 ? '下一题' : id === 'exam' ? '查看本次记录' : '完成这一站', exact: true }).click();
+      await courseButton(room, i < items.length - 1 ? '下一题' : id === 'exam' ? "finishExam" : "finishPractice").click();
     }
   }
   await page.goto('/unit1-2/#learn/certificate');
@@ -99,7 +100,7 @@ test('学习内容不发星；每区整轮首次零错得一星，改正后完�
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number')).toHaveText(['5', '5', '1']);
+  await expectRoundCounts(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number'), ['5', '5', '1']);
   await expect(room.locator('.completion-award')).toContainText('这轮有过答错');
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');

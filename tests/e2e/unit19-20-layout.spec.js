@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/unit1920-legacy').historicalSuite(test);
 const {ANSWERS}=require('../support/unit19-20-flow');
@@ -26,7 +27,7 @@ test('320 窄屏34张词卡展开后字义和音标不裁切，图册成对对�
       expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);
       await card.click();await expect(card.locator('.word-phonetic')).toBeVisible();
     }
-    if(p<5)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+    if(p<5)await courseButton(room, "nextWords").click();
   }
   await page.goto('/unit19-20/#learn/models');await page.getByText('看看二十幅对比图',{exact:true}).click();const gallery=page.locator('.comparison-gallery');
   await gallery.screenshot({path:'output/playwright/unit19-20/comparison-gallery-320.png'});
@@ -40,7 +41,7 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
   // The new context-matching question intentionally has no redundant hint.
   await expect(hint).toHaveCount(0);
   await select(room,{pairs:[['old hats','年老的男士'],['old men','旧帽子'],['short trousers','矮个男士'],['short men','短的裤子']],rightLabel:'这里的意思'});
-  await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
+  await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));expect(await top()).toBeCloseTo(before,0);
   await expect(room.locator('.is-correct')).toHaveCount(0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.observe.entries()){
@@ -50,7 +51,7 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
     }
     await select(room,answer);await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===ANSWERS.observe.length-1?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===ANSWERS.observe.length-1?"finishPractice":'下一题').click();
   }
   const group=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(group.getByRole('button')).toHaveCount(2);
   for(const b of await group.getByRole('button').all()){const box=await b.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);}
@@ -61,12 +62,12 @@ test('390短屏阅读内部滚动，下一句与重新上演同行，展开中�
   await page.setViewportSize({width:390,height:500});await page.goto('/unit19-20/#learn/text');await page.evaluate(()=>document.fonts.ready);const room=page.locator('.stage-text');
   const buttons=room.locator('.stage-ctrl'),before=await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY);
   for(let i=0;i<13;i++){
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
   }
   await room.locator('.bbtns').last().getByRole('button').click();
   expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
-  const advance=await room.getByRole('button',{name:'完成课文',exact:true}).boundingBox(),replay=await room.getByRole('button',{name:'重新上演',exact:true}).boundingBox();
+  const advance=await courseButton(room, "finishStory").boundingBox(),replay=await room.getByRole('button',{name:'重新上演',exact:true}).boundingBox();
   expect(Math.abs(advance.y-replay.y)).toBeLessThan(2);
   await room.screenshot({path:'output/playwright/unit19-20/story-short-screen.png'});
 });

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const {select}=require('./units1-30-tasks');
 // Independent reviewed answer manuscript: textbook pp86–89, Guide p79,
@@ -12,10 +13,10 @@ const ANSWERS={
 };
 async function story(page,base=''){
  await page.goto(base+'/unit43-44/#learn/text');const room=page.locator('.stage-text');await expect(room).toBeVisible();
- if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
- if(await room.getByRole('button',{name:'开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ if(await room.locator(':scope > .practice-finish').isVisible())return;
+ if(await courseButton(room, "startStory").isVisible())await courseButton(room, "startStory").click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await courseButton(room, "finishStory").click();
 }
 async function activity(page,id,{base='',inspect,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
@@ -27,7 +28,7 @@ async function activity(page,id,{base='',inspect,keepAward=false}={}){
   await expect(check).toBeDisabled();await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);
   await inspect?.(room,i,'before');await select(room,answers[i]);await check.click();
   await expect(room.locator('.fb')).toHaveText('答对了！');await inspect?.(room,i,'correct');
-  await room.getByRole('button',{name:i===answers.length-1?'完成这一站':'下一题',exact:true}).click();
+  await courseButton(room, i===answers.length-1?"finishPractice":'下一题').click();
  }
  await expect(room.locator('.completion-number')).toHaveText([String(answers.length),String(answers.length),'0']);
  if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);

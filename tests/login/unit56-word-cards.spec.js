@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,waitForCourseReady}=require('./helpers');
 const flow=require('../support/unit56-v154');
@@ -27,7 +28,7 @@ test('词卡保留24词与释义，汽车图使用绘本素材，窄屏展开不
   await p.goto(base+'unit5-6/#learn/words');await flow.ready(p);const seen=[];
   for(const {width,height} of [{width:320,height:568},...devices.map(d=>d.viewport)]){
    await p.setViewportSize({width,height});
-   if(width!==320)for(let n=0;n<3;n++)await p.getByRole('button',{name:'上一组词卡',exact:true}).click();
+   if(width!==320)for(let n=0;n<3;n++)await courseButton(p, "previousWords").click();
    for(let group=0;group<4;group++){
    await expect(p.locator('#wordPageProgress')).toHaveText((group+1)+' / 4');await expect(p.locator('.unit-word')).toHaveCount(6);
    if(width===320)seen.push(...await p.locator('.unit-word').evaluateAll(cards=>cards.map(c=>c.getAttribute('aria-label'))));
@@ -36,7 +37,7 @@ test('词卡保留24词与释义，汽车图使用绘本素材，窄屏展开不
     const geometry=await card.evaluate(el=>{const r=el.getBoundingClientRect();return {label:el.getAttribute('aria-label'),overflow:[...el.children].filter(c=>!c.hidden&&c.getClientRects().length).filter(c=>{const b=c.getBoundingClientRect();return b.bottom>r.bottom-2||b.left<r.left||b.right>r.right||c.scrollWidth>c.clientWidth+1;}).map(c=>c.className||c.tagName)};});
     expect(geometry.overflow,`${width}px ${geometry.label} 的词义/例句不可裁切`).toEqual([]);await card.tap();
    }
-   if(group<3)await p.getByRole('button',{name:'下一组词卡',exact:true}).click();
+   if(group<3)await courseButton(p, "nextWords").click();
    }
   }
   expect(seen).toHaveLength(24);expect(new Set(seen).size).toBe(24);await expect(p.getByRole('button',{name:'下一站：单词寻宝',exact:true})).toHaveText('下一站');

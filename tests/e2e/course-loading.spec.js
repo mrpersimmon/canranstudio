@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs');
@@ -17,7 +18,7 @@ test('课程只准备自己的场景，独立样式仍在完整加载后显示�
     if (/\/assets\/unit(?:1-2|3-4|49-50)\/story-background\./.test(request.url())) unrelated.push(request.url());
   });
   await page.goto('/lesson/unit29-30/#learn/words');
-  await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+  await expect(courseButton(page.locator('.stage-words'), "nextWords")).toBeVisible();
   expect(unrelated).toEqual([]);
   for (const [unit, selector, art] of [
     ['unit1-2', '#unit12-dialogue', 'unit1-2/street.svg'],
@@ -37,11 +38,11 @@ test('服务器实际使用的 JavaScript 类型仍能完成准备', async ({ pa
     await route.fulfill({ response, contentType: 'application/javascript; charset=utf-8' });
   });
   await page.goto('/lesson/unit29-30/#learn/words');
-  await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+  await expect(courseButton(page.locator('.stage-words'), "nextWords")).toBeVisible();
 });
 test('清理课程资源保留学习位置、活动课程和官网缓存', async ({ page, context }) => {
   await page.goto('/lesson/unit29-30/#learn/words');
-  await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   const other = await context.newPage();
   await other.goto('/lesson/unit1-2/#learn/words');
   await expect(other.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
@@ -99,7 +100,7 @@ test('浏览器禁止保存资源仍能在本次会话断网换词卡，不假�
   await expect(page.getByText('这次可正常学习，下次可能需要重新准备。', { exact: true })).toBeVisible();
   await context.setOffline(true);
   const words = page.locator('.stage-words');
-  for (let i = 0; i < 4; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  for (let i = 0; i < 4; i++) await courseButton(words, "nextWords").click();
   await expect(words).toContainText('5 / 5');
   await expect.poll(() => words.locator('img').evaluateAll(images => images.length > 0 && images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await context.close();
@@ -142,8 +143,8 @@ test('整课的手提包尚未准备好时留在加载页，准备好后完整�
 test('准备过的无配音课断网刷新须联网核验，恢复后词卡位置与缓存完整', async ({ page, context }) => {
   await page.goto('/lesson/unit29-30/#learn/words', { waitUntil: 'domcontentloaded' });
   const words = page.locator('.stage-words');
-  await expect(words.getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
-  await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await expect(courseButton(words, "nextWords")).toBeVisible();
+  await courseButton(words, "nextWords").click();
   await expect(words).toContainText('2 / 5');
   await expect(page.getByText('这次可正常学习，下次可能需要重新准备。', { exact: true })).toHaveCount(0);
   const saved = await page.evaluate(() => localStorage.getItem('canran:lesson:unit29-30:learning:v1'));
@@ -160,7 +161,7 @@ test('准备过的无配音课断网刷新须联网核验，恢复后词卡位�
   expect(requiredDownloads).toEqual([]);
   // The already opened, fully prepared page remains usable offline.
   await context.setOffline(true);
-  await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(words, "nextWords").click();
   await expect(words).toContainText('3 / 5');
   await expect.poll(() => words.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await expect(page.locator('#starCount')).toHaveText('0');

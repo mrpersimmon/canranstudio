@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const {expect}=require('@playwright/test');
 // Independent transcription from PDF 75–78 and the authored question draft.
 const DIALOGUE=['Give me a book please, Jane.','Which book?','This one?','No, not that one. The red one.','This one?','Yes, please.','Here you are.','Thank you.'];
@@ -15,8 +16,8 @@ async function chooseTokens(room,tokens){const bank=room.getByRole('group',{name
 ANSWERS.exam=require('./units17-30-exam').EXAMS['21-22'];
 async function completeStory(page,base=''){
  await page.goto(base+'/unit21-22/#learn/text');const room=page.locator('.stage-text');
- for(let i=0;i<DIALOGUE.length;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));}
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('故事看完了！');
+ for(let i=0;i<DIALOGUE.length;i++){await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));}
+ await courseButton(room, "finishStory").click();await expect(room).toContainText('故事看完了！');
 }
 async function completeActivity(page,id,base=''){
  await page.goto(base+'/unit21-22/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
@@ -24,7 +25,7 @@ async function completeActivity(page,id,base=''){
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
   await require('./units17-30-exam').selectAnswer(room,answer);
   await check.click();await expect(room.getByRole('status')).toContainText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-  await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+  await courseButton(room, i===answers.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
@@ -41,7 +42,7 @@ async function finishRemainingActivity(page,id,base=''){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   if(await check.isVisible()){await require('./units17-30-exam').selectAnswer(room,ANSWERS[id][i]);await check.click();}
   await expect(room.getByRole('status')).toHaveText('答对了！');
-  await room.getByRole('button',{name:i===ANSWERS[id].length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+  await courseButton(room, i===ANSWERS[id].length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
  }
 }
 module.exports={finishRemainingActivity,DIALOGUE,SPEAKERS,ANSWERS,chooseTokens,completeStory,completeActivity,completeUnit2122};

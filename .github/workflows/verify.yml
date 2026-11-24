@@ -139,6 +139,7 @@ jobs:
       fail-fast: false
       matrix:
         base: ['/', '/lesson/']
+        shard: [1, 2, 3, 4, 5, 6]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -150,11 +151,11 @@ jobs:
       - run: npm ci
       - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps webkit
-      - run: npm run test:recovery:webkit -- --reporter=line,json
+      - run: node scripts/ci/browser-suite.js run recovery ${{ matrix.shard }}
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
-          PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/webkit-recovery.json
       - run: npm run test:statistics -- --project=webkit-phone --reporter=line,json
+        if: matrix.shard == 1
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
           PLAYWRIGHT_JSON_OUTPUT_FILE: output/ci/webkit-statistics.json
@@ -164,7 +165,7 @@ jobs:
           name: recovery-webkit-${{ strategy.job-index }}
           path: |
             output/ci/webkit-*.json
-            output/test-recovery-webkit/
+            output/ci/recovery-*/
             output/test-statistics/
           retention-days: 7
 

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 // Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
 require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
@@ -11,7 +12,7 @@ test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('挑战错答与提示分别记账，刷新续做保留选择，不提前发证',async({page})=>{
   await page.goto('/unit17-18/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});
   await room.getByRole('button',{name:'We are keyboard operators.',exact:true}).click();await check.click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'They are keyboard operators.',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"women · nurses / men · engineers",exact:true}).click();
   await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
@@ -38,7 +39,7 @@ test('正误和完成反馈音实际播放结束，任何英语声音请求和�
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('incorrect')&&x.ended))).toBe(true);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'They are keyboard operators.',exact:true}).click();await check.click();
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('correct')&&!x.src.includes('incorrect')&&x.ended))).toBe(true);
-  await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"women · engineers / men · nurses",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"women · engineers / men · nurses",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"women · nurses / men · engineers",exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await require('../support/units17-30-exam').finishExamFrom(page,'17-18',2);
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('complete')&&x.ended))).toBe(true);
   expect(voices).toEqual([]);expect(speechCalls).toBe(0);
@@ -62,7 +63,7 @@ test('首页续学、同一位置继续冒险、重开取消与确认均遵守�
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(room.getByRole('heading').first()).toBeInViewport();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);await page.getByRole('link',{name:'继续学习：办公室探访记',exact:true}).click();
   await expect(page).toHaveURL(/#learn\/refer$/);await expect(room.getByRole('button',{name:"Who is this young man?",exact:true})).toHaveAttribute('aria-pressed','true');
-  await page.goto('/lesson/unit17-18/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+  await page.goto('/lesson/unit17-18/#learn/words');await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
   for(const confirm of [false,true]){
     await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();
@@ -76,7 +77,7 @@ test('首页续学、同一位置继续冒险、重开取消与确认均遵守�
 
 test('更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿',async({page})=>{
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'refer');
-  await page.goto('/unit17-18/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+  await page.goto('/unit17-18/#learn/words');await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.goto('/unit17-18/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'What',exact:true}).click();
   await page.route('**/unit17-18/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit17-18-before-fivezones/content.js','utf8')).replace("q('story-jobs',","q('story-jobs-v2',")}));
   await page.goto('/unit17-18/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');
@@ -99,7 +100,7 @@ test('保存失败如实提示，恢复存储后可重试，刷新仍保留真�
   });
   await page.goto('/unit17-18/#learn/refer');const room=page.locator('.stage-refer');
   await room.getByRole('button',{name:'Who is this young man?',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
-  await expect(page.locator('#learningSaveWarning')).toBeVisible();await page.getByRole('button',{name:'学习手记',exact:true}).click();
+  await expect(page.locator('#learningSaveWarning')).toBeVisible();await openLearningRecord(page);
   await expect(page.locator('#learningSaveRetry')).toBeVisible();await page.evaluate(()=>window.testStorageBlocked=false);await page.getByRole('button',{name:'重试保存',exact:true}).click();
   await expect(page.locator('#learningSaveRetry')).toBeHidden();await expect(page.locator('#learningSaveWarning')).toBeHidden();await page.keyboard.press('Escape');
   await page.reload();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');await expect(room.getByRole('status')).toContainText('答对了！');

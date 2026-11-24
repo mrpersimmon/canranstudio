@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 
 const { saveCourses, adminLogin,createStudent,fillLogin,setPassword,signIn,studentLogin}=require('./helpers');
@@ -112,7 +113,7 @@ test('离线完成归原学生、联网同步；缓存复访不重复下载，�
  const flow=require('../support/unit1314-fivezones');
  for(const [i,answer] of flow.ANSWERS.grammar.entries()){
   await flow.select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
-  await room.getByRole('button',{name:i===flow.ANSWERS.grammar.length-1?'完成这一站':'下一题',exact:true}).click();
+  await courseButton(room, i===flow.ANSWERS.grammar.length-1?"finishPractice":'下一题').click();
  }
  await expect(a.page.locator('#studentSyncStatus')).toContainText('本机');await a.context.setOffline(false);await expect(a.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
  const b=await studentLogin(browser,code);await b.page.goto('/lesson/unit13-14/#learn/grammar');await expect(b.page.locator('#starCount')).toHaveText('1');

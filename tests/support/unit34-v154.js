@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const fs=require('fs/promises'),{expect}=require('@playwright/test');
 const original=require('./unit3-4-flow'),tasks=require('./units1-30-tasks');
 const ANSWERS=original.ANSWERS;
@@ -14,7 +15,7 @@ async function installPrevious(page,folder='unit3-4-before-v154'){
 }
 async function story(p,base=''){
  await p.goto(base+'/unit3-4/#learn/text');await ready(p);const room=p.locator('.stage-text');
- if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
+ if(await room.locator(':scope > .practice-finish').isVisible())return;
  if(await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).isVisible())await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
  await room.getByRole('button',{name:/^(完成课文|去练习)$/,exact:true}).click();

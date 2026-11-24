@@ -1,4 +1,5 @@
 'use strict';
+const {expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const { completeUnit34, completeActivity } = require('../support/unit3-4-flow');
@@ -21,20 +22,20 @@ test('实际提交统计跨设备保留：同题两次错答计两次，重练�
       await select(room, { fills: ['is not', 'am not'] });
       for (let attempt = 0; attempt < 2; attempt++) {
         await check.click();
-        await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+        await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
         await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
         await learner.reload();
         // Reload decrypts and prepares the course before mounting its exercises.
         await expect(learner.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
         await expect(room.locator('.progress-copy')).toHaveText('第 4 / 10 题');
-        await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+        await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
         await room.getByRole('button', { name: '再试一次', exact: true }).click();
         // Retry keeps the selected wrong answer. Submitting it again is a new
         // mistake; changing the selection itself must not count as an attempt.
         await expect(check).toBeEnabled();
       }
     } });
-    await expect(learner.locator('.stage-reply .completion-number')).toHaveText(['7', '10', '2']);
+    await expectRoundCounts(learner.locator('.stage-reply .completion-number'), ['7', '10', '2']);
     await expect(learner.locator('#starCount')).toHaveText('0');
     await expect(learner.locator('dialog.award-reveal[open]')).toHaveCount(0);
     await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
@@ -43,7 +44,7 @@ test('实际提交统计跨设备保留：同题两次错答计两次，重练�
     await second.page.goto(base + 'unit3-4/#learn/reply');
     await expect(second.page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
     const room = second.page.locator('.stage-reply');
-    await expect(room.locator('.completion-number')).toHaveText(['7', '10', '2']);
+    await expectRoundCounts(room.locator('.completion-number'), ['7', '10', '2']);
     await expect(room.locator('.completion-unit')).toHaveText(['次', '次', '次']);
     await expect(second.page.locator('#starCount')).toHaveText('0');
     await room.getByRole('button', { name: '再练一轮', exact: true }).click();

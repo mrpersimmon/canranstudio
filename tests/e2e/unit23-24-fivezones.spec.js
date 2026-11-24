@@ -1,4 +1,6 @@
 'use strict';
+const {expectContinuousTheatre}=require('../support/continuous-theatre');
+const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit2324-fivezones');
 const {expectCompactCompletion}=require('../support/completion-layout');
@@ -9,7 +11,7 @@ test('45题、完整8句、五区五星与逐题未答材料可完成',async({pa
  await story(page);
  for(const id of Object.keys(ANSWERS))await activity(page,id,{inspect:async(room,index,state)=>{
   if(state!=='before')return;
-  const material=room.locator('.practice-context');if(await material.count())await expect(material).toBeVisible();
+  const material=room.locator('.practice-context');if(await material.count())await withReadingMaterial(room,'.practice-context',async view=>{await expect(view.locator('.practice-context')).toBeVisible();});
   await room.screenshot({path:info.outputPath(id+'-'+String(index+1).padStart(2,'0')+'-unanswered.png')});
  }});
  await expect(page.locator('#starCount')).toHaveText('5');await page.goto('/unit23-24/#learn/certificate');await expect(page.locator('.story-award-panel')).toContainText('细心寻物小达人');await expect(page.locator('.historical-learning')).toHaveCount(0);await expect(page.locator('.legacy-learning')).toHaveCount(0);
@@ -18,9 +20,9 @@ test('45题、完整8句、五区五星与逐题未答材料可完成',async({pa
 
 test('单选连续错答、订正、刷新和重练保留实际统计与旧星',async({page})=>{
  test.setTimeout(150000);await page.goto('/unit23-24/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
- for(let i=0;i<2;i++){await select(room,'in');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');if(i===0)await room.getByRole('button',{name:'再试一次',exact:true}).click();}
- await page.reload();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[0]);await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
- await activity(page,'grammar',{expectPerfect:false});await expect(room.locator('.completion-number')).toHaveText(['9','9','2']);await expect(page.locator('#starCount')).toHaveText('0');
+ for(let i=0;i<2;i++){await select(room,'in');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));if(i===0)await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+ await page.reload();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[0]);await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
+ await activity(page,'grammar',{expectPerfect:false});await expectRoundCounts(room.locator('.completion-number'), ['9','9','2']);await expect(page.locator('#starCount')).toHaveText('0');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await select(room,'in');await check.click();await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
 });
@@ -29,13 +31,12 @@ for(const width of [320,390,768,1280])test('完整场景、中文与杯组交接
  await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit23-24/#learn/text');const room=page.locator('.stage-text');
  await expect(room.locator('.story-lead')).toHaveText("Which glasses does the man want?");
  for(let i=0;i<DIALOGUE.length;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   await expect(room.locator('.desk-world')).toHaveAttribute('data-phase',i<2?'ready':i<3?'table':i<4?'shelf':i<6?'holding':'received');
   if(i<4)await expect(room.locator('.shelf-set')).toBeVisible();else await expect(room.locator('.shelf-set')).toBeHidden();
   await expect(room.locator('.cast-image[data-holding="true"]')).toHaveCount(i<2?0:1);await expect(room.locator('.table-set'))[i===2||i===3?'toBeHidden':'toBeVisible']();
   const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(1);expect(Math.abs(after.height-before.height)).toBeLessThan(1);
-  const frame=await room.locator('.desk-world').boundingBox(),reader=await room.locator('.desk-reader').boundingBox();
-  for(const img of await room.locator('.desk-world .cast-image:visible').all()){const box=await img.boundingBox();expect(box.x).toBeGreaterThanOrEqual(frame.x);expect(box.x+box.width).toBeLessThanOrEqual(frame.x+frame.width+1);expect(box.y).toBeGreaterThan(reader.y+reader.height+8);expect(box.y+box.height).toBeLessThanOrEqual(frame.y+frame.height);expect(box.height).toBeGreaterThan(150);}
+  await expectContinuousTheatre(room,'shelf-world-v1.webp');
   if([0,2,3,4,5,6,7].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});
  }
  await page.reload();await expect(room.locator('.btext span')).toHaveCount(8);await expect(room.locator('.bcn:visible')).toHaveCount(0);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -55,17 +56,17 @@ for(const [width,height]of [[320,568],[390,500]])test('短屏三卡、继续操�
 test('双空未齐、撤回、错答与刷新保持草稿和错误',async({page})=>{
  await page.goto('/unit23-24/#learn/grammar');const room=page.locator('.stage-grammar');
  for(let i=0;i<3;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
- const check=room.getByRole('button',{name:'检查答案',exact:true});await select(room,{fills:['a']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'a',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ const check=room.getByRole('button',{name:'检查答案',exact:true});await select(room,{fills:['a']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'a',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeEnabled();await select(room,ANSWERS.grammar[3]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
 });
 
 test('30张词卡音标及完整10幅物品图、10组问答和六个书写原题',async({page})=>{
  await page.goto('/unit23-24/#learn/words');const seen=[];
- for(let n=0;n<5;n++){await expect(page.locator('#wordPageProgress')).toHaveText((n+1)+' / 5');for(const card of await page.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await expect(card.locator('.word-phonetic')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(n<4)await page.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(new Set(seen).size).toBe(30);
- await page.goto('/unit23-24/#learn/apply');await page.getByText('课本小参考 · 第24课',{exact:true}).click();
- const numbers=[1117,1218,1319,1420,1521,1622,1723,1824,1925,2000].map(n=>n.toLocaleString('en-US'));for(let n=0;n<10;n++){await expect(page.locator('.gallery-current small')).toHaveText(numbers.slice(n,n+1));if(n<9)await page.getByRole('button',{name:'下一组物品图',exact:true}).click();}
- for(let n=0;n<10;n++){await expect(page.locator('.model-current + .reference-pager span')).toHaveText((n+1)+' / 10');if(n<9)await page.getByRole('button',{name:'下一份问答',exact:true}).click();}
- await page.reload();await page.getByText('课本小参考 · 第24课',{exact:true}).click();await expect(page.locator('.gallery-current small')).toHaveText(['2,000']);await expect(page.locator('.model-current + .reference-pager span')).toHaveText('10 / 10');
+ for(let n=0;n<5;n++){await expect(page.locator('#wordPageProgress')).toHaveText((n+1)+' / 5');for(const card of await page.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await expect(card.locator('.word-phonetic')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(n<4)await courseButton(page, "nextWords").click();}expect(new Set(seen).size).toBe(30);
+ await page.goto('/unit23-24/#learn/apply');await openCourseReference(page,'课本小参考 · 第24课');
+ const numbers=[1117,1218,1319,1420,1521,1622,1723,1824,1925,2000].map(n=>n.toLocaleString('en-US'));for(let n=0;n<10;n++){await expect(courseReference(page).locator(".gallery-current small")).toHaveText(numbers.slice(n,n+1));if(n<9)await page.getByRole('button',{name:'下一组物品图',exact:true}).click();}
+ for(let n=0;n<10;n++){await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText((n+1)+' / 10');if(n<9)await page.getByRole('button',{name:'下一份问答',exact:true}).click();}
+ await page.reload();await openCourseReference(page,'课本小参考 · 第24课');await expect(courseReference(page).locator(".gallery-current small")).toHaveText(['2,000']);await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('10 / 10');
 });
 
 test('声音全坏仍能完整学习，未出现英语声音请求',async({page},info)=>{

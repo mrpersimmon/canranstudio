@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const previous = require('../support/unit12-grammar-predecessor');
@@ -12,7 +13,7 @@ for (const version of [1, 2]) test(`更早 v${version} 的真实旧轮次升级�
     for (const [i, answer] of items.entries()) {
       await flow.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await expect(room.locator('.fb')).toHaveText('答对了！');
-      await room.getByRole('button', { name: i < items.length - 1 ? '下一题' : id === 'exam' ? '查看本次记录' : '完成这一站', exact: true }).click();
+      await courseButton(room, i < items.length - 1 ? '下一题' : id === 'exam' ? "finishExam" : "finishPractice").click();
     }
   }
   await page.goto('/unit1-2/#learn/certificate'); const claim = page.getByRole('button', { name: '领取单元证书', exact: true });

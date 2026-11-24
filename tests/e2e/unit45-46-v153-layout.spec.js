@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 
 test.use({actionTimeout:7000,...(process.env.UNIT4546_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -37,7 +38,7 @@ test('办公室开场问题、地点和翻译使用同一套中文字体',async(
  const headingFont=await room.locator('.stage-heading h3').evaluate(el=>getComputedStyle(el).fontFamily.split(',')[0].replaceAll('"','').trim());
  for(const target of [room.locator('.story-lead p'),room.locator('.office-location')])
   await expect(target).toHaveCSS('font-family',new RegExp(headingFont));
- await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ await courseButton(room, "startStory").click();
  await room.getByRole('button',{name:'看中文',exact:true}).click();
  await expect(room.locator('.bcn')).toHaveCSS('font-family',new RegExp(headingFont));
 });
@@ -45,7 +46,7 @@ test('办公室开场问题、地点和翻译使用同一套中文字体',async(
 test('第6句老板仍持信，实际人物与纸张完整',async({page},info)=>{
  await page.goto('/unit45-46/#learn/text');
  const room=page.locator('.stage-text');
- await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ await courseButton(room, "startStory").click();
  for(let i=1;i<6;i++)await room.getByRole('button',{name:'下一句',exact:true}).click();
  await expect(room.locator('.bubble-row').last().locator('.btext')).toHaveText('Yes, sir.');
  const image=room.locator('.actor-boss .office-person>.office-figure');
@@ -69,12 +70,12 @@ for(const width of [320,390,768,1280])test(`${width}宽：对白在场景内、1
  expect(logBox.y+logBox.height,'对白不能另起一块排在场景下方').toBeLessThanOrEqual(worldBox.y+worldBox.height);
  const locationBox=await room.locator('.office-location').boundingBox();
  expect(locationBox.width,'地点是紧凑标牌，不是铺满地板的横条').toBeLessThan(worldBox.width*.8);
- await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ await courseButton(room, "startStory").click();
  for(let i=0;i<14;i++){
   const latest=room.locator('.bubble-row').last();
   await expect(room.locator('.bubble-row')).toHaveCount(i+1);
   await assertBobFacesPartner(world);
-  const next=room.getByRole('button',{name:i===13?'完成课文':'下一句',exact:true});
+  const next=courseButton(room, i===13?"finishStory":'下一句');
   // Read with the transcript below the sticky navigation. Centering just the
   // next button can put the translation control behind that navigation.
   await log.evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
@@ -112,7 +113,7 @@ for(const width of [320,390,768,1280])test(`${width}宽：对白在场景内、1
  }
  await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(14);
  await assertBobFacesPartner(world);
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await courseButton(room, "finishStory").click();
  await expect(room.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeVisible();
  await expect(page.locator('#starCount')).toHaveText('0');
 });

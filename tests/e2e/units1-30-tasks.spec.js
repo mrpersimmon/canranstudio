@@ -1,4 +1,5 @@
 'use strict';
+const {incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/classroom-history').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -7,7 +8,7 @@ test('7–8 逐空补完介绍，未填完不能检查，错答后可改且恢�
  await room.getByRole('button',{name:"I'm Italian.",exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
  const first=room.getByRole('group',{name:'第1处填空',exact:true}),second=room.getByRole('group',{name:'第2处填空',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});
  await first.getByRole('button',{name:'am',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(first.getByRole('button',{name:'am',exact:true})).toHaveAttribute('aria-pressed','true');
- await second.getByRole('button',{name:'am',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await second.getByRole('button',{name:'am',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await first.getByRole('button',{name:'is',exact:true}).press('Enter');await check.press('Enter');await expect(room.getByRole('status')).toHaveText('答对了！');
  await expect(room.locator('.cloze-sentence').first()).toHaveText('My name is Robert.');await expect(room.locator('.cloze-sentence').nth(1)).toHaveText('I am Italian.');
 });

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { EXAM, selectAnswer, finishExamFrom } = require('../support/unit9-10-exam');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
@@ -27,7 +28,7 @@ test('9–10 十题覆盖问候、回问、告别、缩写和观察，全部声�
     await expect(check).toBeDisabled();
     if (i === 0) {
       await selectAnswer(room, question.wrong); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.locator('.practice-options .correct,.practice-options .good')).toHaveCount(0);
       await expect(room.getByRole('button', { name: '下一题', exact: true })).toHaveCount(0);
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -36,12 +37,12 @@ test('9–10 十题覆盖问候、回问、告别、缩写和观察，全部声�
     if (i >= 7) {
       await page.reload(); await expect(check).toBeDisabled();
       await expect(room.locator('.practice-options button[aria-pressed="true"]')).toHaveCount(0);
-      await expect(room.getByRole('status')).toBeEmpty();
+      await expectNoVerdict(room.getByRole('status'));
     }
     await selectAnswer(room, question.answer); await check.click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === 9 ? "finishExam" : '下一题').click();
   }
   await expect(room).toContainText('首次独立答对 8 / 10');
   await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
@@ -80,7 +81,7 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十题的题面、长�
     if (i >= 6) await room.screenshot({ path: `output/playwright/unit9-10-exam/q${i + 1}-${width}.png` });
     await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
     expect(await position()).toBeCloseTo(before, 0);
-    await room.getByRole('button', { name: i === 9 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === 9 ? "finishExam" : '下一题').click();
   }
   const finish = room.getByRole('group', { name: '完成后的操作', exact: true }); await expect(finish.getByRole('button')).toHaveCount(2);
   for (const control of await finish.getByRole('button').all()) {

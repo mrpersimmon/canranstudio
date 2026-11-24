@@ -1,3 +1,4 @@
+const {courseButton,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 'use strict';const{test,expect}=require('@playwright/test');const{select,activity,ANSWERS}=require('../support/unit4142-v153');test.use({actionTimeout:7000,...(process.env.UNIT4142_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 test('场景先选后检查：数量改变有依据，第三题两次错答结算为3／5／2',async({page})=>{
   await page.goto('/unit41-42/#learn/apply');const room=page.locator('.stage-apply');
@@ -19,7 +20,7 @@ test('场景先选后检查：数量改变有依据，第三题两次错答结�
   await room.getByRole('button',{name:'下一题',exact:true}).click();
   for(let i=0;i<2;i++){
     await select(room,'Yes, there is.');await check.click();
-    await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+    await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
     await expect(room.locator('.bag-inventory')).toContainText('袋子里：一条面包、两瓶牛奶');
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
   }
@@ -27,9 +28,9 @@ test('场景先选后检查：数量改变有依据，第三题两次错答结�
     await select(room,ANSWERS.apply[i]);await check.click();
     await expect(room.locator('.fb')).toHaveText('答对了！');
     if(i===4){await expect(room.locator('.progress-copy')).toHaveText('第 5 / 5 题');await expect(room.locator('.practice-finish')).toHaveCount(0);}
-    await room.getByRole('button',{name:i===4?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===4?"finishPractice":'下一题').click();
   }
-  await expect(room.locator('.completion-number')).toHaveText(['3','5','2']);
+  await expectRoundCounts(room.locator('.completion-number'), ['3','5','2']);
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 
@@ -42,7 +43,7 @@ test('同一批物品连续整理：错答和选择不移动，一瓶移出后�
  expect(instructions.y+instructions.height).toBeLessThanOrEqual(stage.y);
  const bag=room.locator('.bag-contents');const table=room.locator('.pantry-item');
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
- await select(room,'椅子上');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await select(room,'椅子上');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
  await room.getByRole('button',{name:'再试一次',exact:true}).click();const milk=await bag.locator('[data-item="milk-2"]').elementHandle();await select(room,'桌上');
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
@@ -54,5 +55,5 @@ test('同一批物品连续整理：错答和选择不移动，一瓶移出后�
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img')).toHaveCount(1);
  await expect(room.getByText('翻译这句话',{exact:true})).toHaveCount(0);
  await select(room,['There is','a bottle','of milk','on the table']);await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await room.getByRole('button',{name:'完成这一站',exact:true}).click();await expect(room.locator('.completion-number')).toHaveText(['3','5','1']);await expect(page.locator('#starCount')).toHaveText('0');
+ await courseButton(room, "finishPractice").click();await expectRoundCounts(room.locator('.completion-number'), ['3','5','1']);await expect(page.locator('#starCount')).toHaveText('0');
 });

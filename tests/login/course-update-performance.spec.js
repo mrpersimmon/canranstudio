@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test'),crypto=require('node:crypto');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {courseResponse}=require('../support/course-response-faults');
@@ -6,7 +7,7 @@ const base=process.env.AWARD_TEST_BASE||'/lesson/',course='unit1-2';
 test.use({...process.env.UPDATE_REVIEW_BROWSER?{browserName:process.env.UPDATE_REVIEW_BROWSER}:{}});
 test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
 async function learner(page,browser){await adminLogin(page,base);const account=await createStudent(page,'更新性能检查','小禾',[/Lesson 1–2/]);return studentLogin(browser,account,base);}
-async function ready(p){await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);}
+async function ready(p){await readyCourse(p);await expect(p.locator('#courseLoader')).toHaveCount(0);}
 test('无更新时只轮询单课元数据，普通检测错峰，撤回仍及时且304没有响应体',async({page,browser},info)=>{
  test.setTimeout(90000);const student=await learner(page,browser),p=student.page,requests=[];
  try{

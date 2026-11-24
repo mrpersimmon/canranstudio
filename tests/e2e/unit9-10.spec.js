@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const {test,expect}=require('@playwright/test');
 const {completeUnit910,completeActivity}=require('../support/unit9-10-flow');
@@ -12,7 +13,7 @@ test('从带音标词卡开始，浏览14句并完成33题才取得15星课堂�
  await page.getByRole('button',{name:'开始冒险',exact:true}).click();await expect(page).toHaveURL(/#learn\/words$/);
  const room=page.locator('.stage-words'),hello=room.getByRole('button',{name:'hello',exact:true});
  await expect(hello).toContainText('/heˈloʊ/');await hello.click();await expect(hello.locator('.word-meaning')).toBeVisible();await expect(hello).not.toContainText('录音暂时');
- for(let i=0;i<3;i++)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(room.locator('.unit-word')).toHaveCount(4);
+ for(let i=0;i<3;i++)await courseButton(room, "nextWords").click();await expect(room.locator('.unit-word')).toHaveCount(4);
  await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page.locator('.stage-listen')).toContainText('第 1 / 13 题');await expect(page.locator('.stage-listen').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  await page.goto('/unit9-10/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
  await completeUnit910(page);await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('暖心的小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const dialog=page.getByRole('dialog',{name:'街角问候站纪念',exact:true});await expect(dialog.locator('#certificateName')).toHaveText('暖心的小伙伴');
@@ -36,7 +37,7 @@ test('纸笔保留教材 A 六题与 B 十二题，真实输出一张有足够�
 });
 
 test('挑战错答、提示、刷新续做与独立拼句分别记录，不提前发证',async({page})=>{
- test.setTimeout(45000);await page.goto('/unit9-10/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});await room.getByRole('button',{name:'Tony · cold',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'Tony · fine',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
+ test.setTimeout(45000);await page.goto('/unit9-10/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});await room.getByRole('button',{name:'Tony · cold',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'Tony · fine',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
  await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:'他不觉得冷',exact:true}).click();await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);await expect(room.getByRole('button',{name:'他不觉得冷',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();for(const token of ['Look at','that umbrella.',"It's",'dirty.'])await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,3);await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');await page.goto('/unit9-10/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
 });
 

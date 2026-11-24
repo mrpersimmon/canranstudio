@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const {expect}=require('@playwright/test');
 // Expected language was transcribed from PDF 95–98 and the reviewed question draft,
 // deliberately independent of the runtime question/answer objects.
@@ -17,7 +18,7 @@ async function select(room,answer){
  else if(answer.cloze){for(const [i,value]of answer.cloze.entries())await room.getByRole('group',{name:'第'+(i+1)+'处填空',exact:true}).getByRole('button',{name:value,exact:true}).click();}
  else await room.getByRole('button',{name:answer,exact:true}).click();
 }
-async function advance(room,last,exam=false){await room.getByRole('button',{name:last?(exam?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();}
+async function advance(room,last,exam=false){await courseButton(room, last?(exam?"finishExam":"finishPractice"):'下一题').click();}
 async function activity(page,id,base=''){
  await page.goto(base+'/unit31-32/#learn/'+id);const room=page.locator('.stage-'+id);
  for(const [i,answer]of ANSWERS[id].entries()){
@@ -27,8 +28,8 @@ async function activity(page,id,base=''){
 }
 async function story(page,base=''){
  await page.goto(base+'/unit31-32/#learn/text');const room=page.locator('.stage-text');
- for(let i=0;i<DIALOGUE.length;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('课文看完了！');
+ for(let i=0;i<DIALOGUE.length;i++){await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
+ await courseButton(room, "finishStory").click();await expect(room).toContainText('课文看完了！');
 }
 async function complete(page,base=''){await activity(page,'listen',base);await story(page,base);for(const id of ['roles','observe','be','trans','exam'])await activity(page,id,base);await page.goto(base+'/unit31-32/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
 module.exports={DIALOGUE,ANSWERS,select,advance,activity,story,complete};

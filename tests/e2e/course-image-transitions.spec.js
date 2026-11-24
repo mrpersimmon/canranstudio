@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { reloadWithLatestCheck } = require('../support/offline-reentry');
 
@@ -37,8 +38,8 @@ for (const width of course === 'unit5-6' ? [390, 1280] : [390]) test(`${course} 
   await page.setViewportSize({ width, height: 900 });
   await page.goto('/lesson/' + course + '/#learn/words');
   await expect(page.locator('#courseLoader')).toHaveCount(0);
-  const next = page.getByRole('button', { name: course === 'unit1-2' ? '下一组' : '下一组词卡', exact: true });
-  const previous = page.getByRole('button', { name: course === 'unit1-2' ? '上一组' : '上一组词卡', exact: true });
+  const next = courseButton(page, course === 'unit1-2' ? '下一组' : "nextWords");
+  const previous = courseButton(page, course === 'unit1-2' ? '上一组' : "previousWords");
   // Cold and revisited pages, then offline: all movement comes from real buttons.
   for (let visit = 0; visit < 2; visit++) {
     if (visit) { await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1'); }
@@ -65,7 +66,7 @@ test.describe('会话降级', () => {
     await page.goto('/lesson/unit5-6/#learn/words');
     await expect(page.getByText('这次可正常学习，下次可能需要重新准备。', { exact: true })).toBeVisible();
     await context.setOffline(true);
-    await watchTransition(page, () => page.getByRole('button', { name: '下一组词卡', exact: true }).click(), testInfo, 'memory-fallback');
+    await watchTransition(page, () => courseButton(page, "nextWords").click(), testInfo, 'memory-fallback');
     await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
   });
 });

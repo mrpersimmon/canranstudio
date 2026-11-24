@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const { expect } = require('@playwright/test');
 // Independent manuscript: textbook PDF 51–54 and the v2.1 coverage table.
 // These answers never come from the application question definitions.
@@ -25,7 +26,7 @@ async function finishExamFrom(page, start = 0) {
     await selectAnswer(room, EXAM[i].answer);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
-    await room.getByRole('button', { name: i === EXAM.length - 1 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === EXAM.length - 1 ? "finishExam" : '下一题').click();
   }
 }
 module.exports = { EXAM, selectAnswer, finishExamFrom };

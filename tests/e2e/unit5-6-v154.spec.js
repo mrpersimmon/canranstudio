@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const flow=require('../support/unit56-v154');
 test.use({browserName:process.env.UNIT56_REVIEW_BROWSER||'chromium',reducedMotion:'reduce',actionTimeout:10000});
@@ -11,16 +12,16 @@ for(const width of [320,390,768,1280])test(`${width}宽首页、24词卡、20句
  test.setTimeout(90000);await page.setViewportSize({width,height:900});await page.goto('/');await page.locator('[data-unit="unit5-6"]').screenshot({path:info.outputPath('home.png')});
  await page.goto('/unit5-6/#cover');await flow.ready(page);await page.locator('#cover').screenshot({path:info.outputPath('cover.png')});
  await page.goto('/unit5-6/#learn/words');const words=page.locator('.stage-words'),names=[];
- for(let i=0;i<4;i++){names.push(...await words.locator('.unit-word strong').allTextContents());await words.locator('.unit-word').first().click();await expect(words.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);if(i===0||i===3)await words.screenshot({path:info.outputPath('words-'+i+'.png')});if(i<3)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(names).toHaveLength(24);expect(new Set(names).size).toBe(24);
+ for(let i=0;i<4;i++){names.push(...await words.locator('.unit-word strong').allTextContents());await words.locator('.unit-word').first().click();await expect(words.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);if(i===0||i===3)await words.screenshot({path:info.outputPath('words-'+i+'.png')});if(i<3)await courseButton(words, "nextWords").click();}expect(names).toHaveLength(24);expect(new Set(names).size).toBe(24);
  await page.goto('/unit5-6/#learn/text');const room=page.locator('.stage-text');await expect(room.locator('.story-lead')).toContainText('Is Chang-woo Chinese?');
  for(let i=0;i<20;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));await expect(room.locator('.classroom-classmate span')).toHaveText(flow.PEOPLE[i]);await expect(room.locator('.bcn:visible')).toHaveCount(0);
   const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width);expect(log.y+log.height).toBeLessThan(world.y+world.height);
   for(const actor of await room.locator('.classroom-person>img').all()){const b=await actor.boundingBox();expect(b.x).toBeGreaterThanOrEqual(world.x);expect(b.x+b.width).toBeLessThanOrEqual(world.x+world.width);expect(b.y).toBeGreaterThanOrEqual(log.y+log.height);}
   if([0,4,7,10,13,16,19].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.dialogue-stage').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
   if(i===12){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,13));}
  }
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
+ await courseButton(room, "finishStory").click();await expect(room.locator('.photo-people>figure')).toHaveCount(7);await room.locator('.current-photo').screenshot({path:info.outputPath('class-photo.png')});
  await flow.activity(page,'cars',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('application-'+state+'.png')});}});
  await page.goto('/unit5-6/#learn/certificate');await page.getByRole('article',{name:'我的单元纪念卡',exact:true}).screenshot({path:info.outputPath('card.png')});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
 });
@@ -38,7 +39,7 @@ for(const[width,height]of [[320,568],[390,500]])test(`${width}x${height}短屏�
 
 test('原26题五星、词卡和错答草稿保留，新增题未答且旧帮助不追写',async({page})=>{
  test.setTimeout(120000);const restore=await flow.installPrevious(page);await flow.complete(page,'','before');const original=await flow.book(page),date=await page.locator('#certificateDate').getAttribute('datetime');
- await page.goto('/unit5-6/#learn/words');await page.getByRole('button',{name:'下一组词卡',exact:true}).click();await page.getByRole('button',{name:'下一组词卡',exact:true}).click();
+ await page.goto('/unit5-6/#learn/words');await courseButton(page, "nextWords").click();await courseButton(page, "nextWords").click();
  await page.goto('/unit5-6/#learn/introduce');const grammar=page.locator('.stage-introduce');await grammar.getByRole('button',{name:'再练一轮',exact:true}).click();await grammar.getByRole('button',{name:'It',exact:true}).click();await grammar.getByRole('button',{name:'检查答案',exact:true}).click();await grammar.getByRole('button',{name:'再试一次',exact:true}).click();await grammar.getByRole('button',{name:'She',exact:true}).click();const draft=await flow.book(page);
  await restore();await page.reload();await flow.ready(page);const upgraded=await flow.book(page);expect(upgraded.activity.unit56HistorySnapshot.records).toEqual(draft.records);expect(upgraded.activity.unit56HistorySnapshot.groups).toEqual(draft.groups);expect(upgraded.activity.unit56HistorySnapshot.activity.unitWordPage).toBe(2);await expect(page.locator('#starCount')).toHaveText('5');await expect(grammar.locator('.progress-copy')).toHaveText('第 1 / 11 题');await expect(grammar.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  await page.goto('/unit5-6/#learn/roles');await expect(page.locator('.stage-roles .progress-copy')).toHaveText('第 1 / 3 题');await flow.activity(page,'roles');await page.goto('/unit5-6/#learn/cars');await expect(page.locator('.stage-cars .progress-copy')).toHaveText('第 4 / 4 题');await flow.activity(page,'cars');
@@ -48,5 +49,5 @@ test('原26题五星、词卡和错答草稿保留，新增题未答且旧帮助
 
 test('显示过短示范的新提交记帮助，独立题不记帮助；双空草稿可续做',async({page})=>{
  await flow.activity(page,'introduce',{capture:async(room,i,state)=>{if(state==='blank'&&i===10){const first=room.getByRole('group',{name:'第1处填空',exact:true});await first.getByRole('button',{name:'She is Sophie.',exact:true}).click();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await flow.ready(page);await expect(first.getByRole('button',{name:'She is Sophie.',exact:true})).toHaveAttribute('aria-pressed','true');}}});
- const book=await flow.book(page);expect(book.records['u56-v154-wh-meaning'].revealed).toBe(true);expect(book.records['u56-v154-wh-independent'].revealed).not.toBe(true);await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('看过示范');
+ const book=await flow.book(page);expect(book.records['u56-v154-wh-meaning'].revealed).toBe(true);expect(book.records['u56-v154-wh-independent'].revealed).not.toBe(true);await openLearningRecord(page);await expect(page.locator('#learningRecord')).toContainText('看过示范');
 });

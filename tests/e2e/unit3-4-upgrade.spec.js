@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const legacy = require('../fixtures/unit3-4-voiced-before/flow');
@@ -15,9 +16,9 @@ async function voicedEdition(page) {
 test('真实旧录音中断后续读，不再卡住，也不伪称听完', async ({ page }) => {
   const upgrade = await voicedEdition(page);
   await page.goto('/unit3-4/#learn/words');
-  await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.goto('/unit3-4/#learn/text'); const room = page.locator('.stage-text');
-  await room.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(room, "startVoicedStory").click();
   await expect(room.getByRole('button', { name: '下一句', exact: true })).toBeEnabled({ timeout: 15000 });
   await page.route('**/unit3-4/audio/l03-d02.mp3', route => route.abort());
   await room.getByRole('button', { name: '下一句', exact: true }).click();
@@ -48,7 +49,7 @@ test('真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);
   }
-  await page.getByRole('button', { name: '学习手记', exact: true }).click();
+  await openLearningRecord(page);
   await expect(page.locator('#learningRecord')).toContainText('听辨 umbrella');
 });
 

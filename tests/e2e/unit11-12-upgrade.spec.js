@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const{test,expect}=require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
@@ -29,17 +30,17 @@ test('旧课堂未提交的选择和词块保留，不能变成正确答案',asy
  await page.goto('/unit11-12/#learn/owner');await page.locator('.stage-owner').getByRole('button',{name:'her',exact:true}).click();
  await page.goto('/unit11-12/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Whose',exact:true}).click();
  upgrade();await page.reload();const trans=page.locator('.stage-trans');await expect(trans.getByRole('button',{name:'撤回 Whose',exact:true})).toBeVisible();await expect(trans.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
- await page.goto('/unit11-12/#learn/owner');const owner=page.locator('.stage-owner');await expect(owner.getByRole('button',{name:'her',exact:true})).toHaveAttribute('aria-pressed','true');await expect(owner.getByRole('status')).toBeEmpty();await expect(owner.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(owner.locator('.claim-task-result')).toBeEmpty();await expect(page.locator('#starCount')).toHaveText('0');
+ await page.goto('/unit11-12/#learn/owner');const owner=page.locator('.stage-owner');await expect(owner.getByRole('button',{name:'her',exact:true})).toHaveAttribute('aria-pressed','true');await expectNoVerdict(owner.getByRole('status'));await expect(owner.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(owner.locator('.claim-task-result')).toBeEmpty();await expect(page.locator('#starCount')).toHaveText('0');
 });
 test('人物未齐不显示课件，同页离线翻档案和词卡，断网刷新受阻并联网续读',async({page,context})=>{
  const voices=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url())&&!isFeedbackAudio(r.url()))voices.push(r.url());});
  let release;const held=new Promise(resolve=>{release=resolve;});await page.route(/tim\.svg(?:\?|$)/,async route=>{await held;await route.continue();});
  try{await page.goto('/lesson/unit11-12/#learn/text',{waitUntil:'domcontentloaded'});await expect(page.getByRole('status',{name:'课程准备状态',exact:true})).toContainText('准备');await expect(page.locator('.stage-text')).not.toBeVisible();}finally{release();}
  await expect(page.locator('#courseLoader')).toHaveCount(0);await context.setOffline(true);const story=page.locator('.stage-text');
- for(let i=0;i<10;i++)await story.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
+ for(let i=0;i<10;i++)await courseButton(story, i?'下一句':"startStory").click();const response=await reloadWithLatestCheck(page,context);expect(response.headers()['x-course-offline']).toBe('1');await expect(story.locator('.bubble-row').last()).toBeInViewport({ratio:1});
  await page.goto('/lesson/unit11-12/#learn/models');
  for(let i=0;i<11;i++){await page.getByRole('button',{name:'下一份档案',exact:true}).click();await expect.poll(()=>page.locator('.claim-record img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);}
  await page.goto('/lesson/unit11-12/#learn/words');await expect(page.locator('#courseLoader')).toHaveCount(0);
  await page.evaluate(()=>{window.wordPaintFailures=[];new MutationObserver(()=>{if(document.querySelector('#courseLoader')||document.documentElement.hasAttribute('data-course-painting'))window.wordPaintFailures.push('loader');for(const img of document.querySelectorAll('.stage-words img'))if(img.getClientRects().length&&(!img.complete||!img.naturalWidth))window.wordPaintFailures.push(img.getAttribute('src'));}).observe(document.body,{childList:true,subtree:true,attributes:true});});
- for(let i=0;i<2;i++)await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();expect(await page.evaluate(()=>window.wordPaintFailures)).toEqual([]);expect(voices).toEqual([]);
+ for(let i=0;i<2;i++)await courseButton(page.locator('.stage-words'), "nextWords").click();expect(await page.evaluate(()=>window.wordPaintFailures)).toEqual([]);expect(voices).toEqual([]);
 });

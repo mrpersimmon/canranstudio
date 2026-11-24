@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -19,15 +20,15 @@ for(const width of [320,390,768,1280])test(`${width} 各站无横向溢出，图
 test('18 张词卡在窄屏可翻面、读音标，末组刷新后仍有下一站',async({page})=>{
  await page.setViewportSize({width:320,height:740});await page.goto('/unit11-12/#learn/words');const room=page.locator('.stage-words');
  const ipa=['/huːz/','/bluː/','/pɚˈhæps/','/waɪt/','/kætʃ/','/ˈfɑːðɚ/','/ˈmʌðɚ/','/blaʊs/','/ˈsɪstɚ/','/taɪ/','/ˈbrʌðɚ/','/hɪz/','/hɝː/','/ʃɝːt/','/suːt/','/skɝːt/','/sʌn/','/ˈdɑːt̬ɚ/'];
- for(let i=0;i<18;i+=6){await expect(room.locator('.word-phonetic')).toHaveText(ipa.slice(i,i+6));for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);await card.click();await expect(card).toHaveAttribute('aria-expanded','false');await expect(card.locator('.word-phonetic')).toBeVisible();}if(i<12)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();}
+ for(let i=0;i<18;i+=6){await expect(room.locator('.word-phonetic')).toHaveText(ipa.slice(i,i+6));for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);await card.click();await expect(card).toHaveAttribute('aria-expanded','false');await expect(card.locator('.word-phonetic')).toBeVisible();}if(i<12)await courseButton(room, "nextWords").click();}
  await page.reload();await expect(room.getByRole('button',{name:'daughter',exact:true})).toContainText('/ˈdɑːt̬ɚ/');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page.locator('.stage-listen')).toContainText('第 1 / 10 题');await expect(page.locator('.stage-listen').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 for(const width of [320,1280])test(`${width} 灯泡在检查左边，反馈不推移操作，最后一题明确完成再结算`,async({page})=>{
  await page.setViewportSize({width,height:740});await page.goto('/unit11-12/#learn/owner');await page.evaluate(()=>document.fonts.ready);const room=page.locator('.stage-owner'),actions=room.getByRole('group',{name:'作答操作',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true}),hint=room.getByRole('button',{name:'给点线索',exact:true});
- const y=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await y(),h=await hint.boundingBox(),c=await check.boundingBox();expect(h.x+h.width).toBeLessThan(c.x);await hint.click();expect(await y()).toBeCloseTo(before,0);await room.getByRole('button',{name:'his',exact:true}).click();await check.click();expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();
+ const y=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await y(),h=await hint.boundingBox(),c=await check.boundingBox();expect(h.x+h.width).toBeLessThan(c.x);await hint.click();expect(await y()).toBeCloseTo(before,0);await room.getByRole('button',{name:'his',exact:true}).click();await check.click();expect(await y()).toBeCloseTo(before,0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();
  for(const [i,answer]of ['her','your',"shirt's"].entries()){
 
-  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));if(i===2)await expect(room.getByRole('button',{name:'下一站：认领小画册',exact:true})).toHaveCount(0);await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
+  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));if(i===2)await expect(room.getByRole('button',{name:'下一站：认领小画册',exact:true})).toHaveCount(0);await courseButton(room, i===2?"finishPractice":'下一题').click();
  }
  const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish.getByRole('button')).toHaveCount(2);for(const b of await finish.getByRole('button').all()){const box=await b.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);}await room.screenshot({path:`output/playwright/unit11-12/finish-${width}.png`});
 });

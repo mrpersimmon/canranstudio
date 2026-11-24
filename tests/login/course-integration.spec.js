@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
@@ -34,7 +35,7 @@ test('7–8 旧服务器真实完成记录换新设备后保留未改成绩，�
     await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await current.reload();
     await current.goto('/unit7-8/#learn/interview');const room=current.locator('.stage-interview');await expect(room).toContainText('第 2 / 4 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
     await room.getByRole('button',{name:"What's her job?",exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
-    for(let i=2;i<4;i++){await current.reload();await expect(room.getByRole('status')).toContainText('答对了！');await room.getByRole('button',{name:i===3?'完成这一站':'下一题',exact:true}).click();}
+    for(let i=2;i<4;i++){await current.reload();await expect(room.getByRole('status')).toContainText('答对了！');await courseButton(room, i===3?"finishPractice":'下一题').click();}
     for(const id of ['listen','reply'])await require('../support/units1-30-tasks').activity(current,'7-8',id);
     await current.goto('/unit7-8/#learn/exam');await expect(current.locator('.stage-exam')).toContainText('第 4 / 11 题');await require('../support/unit7-8-exam').finishExamFrom(current,3);
     await expect(current.locator('#starCount')).toHaveText('15');await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');

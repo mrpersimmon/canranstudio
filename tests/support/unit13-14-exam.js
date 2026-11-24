@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const {expect}=require('@playwright/test');
 // Independent manuscript: textbook pp.26–29 and the approved v2.0 coverage table.
@@ -26,7 +27,7 @@ async function finishExamFrom(page,start=0){
  for(let i=start;i<EXAM.length;i++){
   await expect(room).toContainText(`第 ${i+1} / 10 题`);await selectAnswer(room,EXAM[i].answer);
   await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
-  await room.getByRole('button',{name:i===9?'查看本次记录':'下一题',exact:true}).click();
+  await courseButton(room, i===9?"finishExam":'下一题').click();
  }
 }
 module.exports={EXAM,selectAnswer,finishExamFrom};

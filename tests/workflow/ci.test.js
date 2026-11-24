@@ -74,8 +74,11 @@ test('full CI runs on PRs and protected pushes; feature push has only a distinct
   assert.match(full, /node scripts\/ci\/browser-suite.js verify/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run courses/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run accounts/);
-  for(const suite of ['courses','accounts']){
-    const matrix=full.match(new RegExp('\\n  '+suite+':[\\s\\S]*?shard: \\[([^\\]]+)\\]'));
+  assert.match(full, /node scripts\/ci\/browser-suite.js run recovery/);
+  assert.match(full, /run: npm run test:statistics[^\n]*\n\s+if: matrix\.shard == 1/);
+  for(const suite of ['courses','accounts','recovery']){
+    const job=suite==='recovery'?'recovery-webkit':suite;
+    const matrix=full.match(new RegExp('\\n  '+job+':[\\s\\S]*?shard: \\[([^\\]]+)\\]'));
     assert.ok(matrix,suite+' has a workflow matrix');
     const scheduled=matrix[1].split(',').map(n=>Number(n.trim()));
     const count=require('../../scripts/ci/browser-suite').definition(suite).shards;

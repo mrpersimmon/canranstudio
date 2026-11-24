@@ -1,4 +1,5 @@
 'use strict';
+const {expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 test('顶部阶段入口保留开始、继续与重练，绿色对号只表示已获星', async ({ page }) => {
@@ -82,10 +83,10 @@ test('订正完成明确区分首次结果，学习记录收起详细信息', as
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
   const result = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(result.locator('.completion-number')).toHaveText(['5', '5', '1']);
+  await expectRoundCounts(result.locator('.completion-number'), ['5', '5', '1']);
   await expect(room.getByText('本次答错', { exact: true })).toBeVisible();
   await page.reload();
-  await expect(result.locator('.completion-number')).toHaveText(['5', '5', '1']);
+  await expectRoundCounts(result.locator('.completion-number'), ['5', '5', '1']);
   await expect(page.locator('#starCount')).toHaveText('0');
   await page.getByRole('button', { name: '学习记录', exact: true }).click();
   const log = page.getByRole('dialog', { name: '学习记录', exact: true });

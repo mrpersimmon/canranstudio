@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectRoundCounts}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {courseReadyForAssertions}=require('../support/completion-layout');
@@ -18,7 +19,7 @@ for(const c of cases)for(const device of devices)test(`${c.pair} ${device.name}�
   await p.addInitScript(()=>{window.learningGuardEntries=0;let ready=false;document.addEventListener('canran:course-ready',()=>ready=true);new MutationObserver(rows=>{if(ready)for(const r of rows)if(r.attributeName==='data-course-painting'&&r.oldValue===null)window.learningGuardEntries++;}).observe(document,{subtree:true,attributes:true,attributeOldValue:true,attributeFilter:['data-course-painting']});});
   await p.goto(base+'unit'+c.pair+'/#learn/words');await courseReadyForAssertions(p);await p.screenshot({path:info.outputPath('words.png'),scale:'css'});
   await expect(p.locator('body')).toHaveAttribute('data-learning-shell','');await expect(p.locator('.learning-milestones a')).toHaveCount(5);await expect(p.getByRole('combobox',{name:'切换学习关卡'})).toHaveCount(0);
-  await expect(p.getByRole('button',{name:'下一组词卡',exact:true})).toBeInViewport({ratio:1});const word=p.locator('.unit-word').first();await word.click();await expect(word.locator('.word-meaning')).toBeVisible();await word.click();
+  await expect(courseButton(p, "nextWords")).toBeInViewport({ratio:1});const word=p.locator('.unit-word').first();await word.click();await expect(word.locator('.word-meaning')).toBeVisible();await word.click();
   await p.locator('.learning-milestones').getByRole('link',{name:'故事',exact:true}).click();const story=p.locator('.stage-text');await expect(story).toHaveClass(/learning-surface/);
   await story.getByRole('button',{name:'开始故事',exact:true}).click();for(let i=1;i<flows[c.pair].DIALOGUE.length;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
   const log=story.getByRole('log',{name:'课文对话',exact:true}),last=log.locator('.bubble-row').last();
@@ -48,7 +49,7 @@ for(const c of cases)test(`${c.pair}：订正、题数统计、重练里程碑�
   await p.goto(base+'unit'+c.pair+'/#learn/'+c.grammar);await courseReadyForAssertions(p);const room=p.locator('.stage-'+c.grammar),right=answer(c.pair,c.grammar,0);
   await room.locator('.practice-options').getByRole('button').filter({hasNotText:right}).first().click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答错了，再试试。');await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await flows[c.pair].activity(p,c.grammar,{base:base.slice(0,-1),navigate:false});const total=c.pair==='3-4'?10:11;
-  await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对','首答正确','订正完成']);await expect(room.locator('.completion-number')).toHaveText([String(total),String(total-1),'1']);await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(0);await expect(p.locator('.learning-course')).toContainText('已学 1/5');
+  await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对','首答正确','订正完成']);await expectRoundCounts(room.locator('.completion-number'), [String(total),String(total-1),'1']);await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(0);await expect(p.locator('.learning-course')).toContainText('已学 1/5');
   await p.screenshot({path:info.outputPath('corrected-result.png'),scale:'css'});const saved=await snapshot(p);await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button',{name:'回看本轮答题',exact:true}).click();await expect(room.locator('.fb')).toHaveText('订正后答对');await room.getByRole('button',{name:'返回结果',exact:true}).click();expect(await snapshot(p)).toEqual(saved);
   await room.getByRole('button',{name:'再练一轮',exact:true}).click();await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(0);await expect(p.locator('.learning-course')).toContainText('已学 1/5');await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button',{name:'学习记录',exact:true}).click();await expect(p.locator('#unitNotebook')).toContainText('此前订正完成');await p.locator('#unitNotebook').getByRole('button',{name:'关闭',exact:true}).click();await p.reload();await courseReadyForAssertions(p);await expect(room.locator('.progress-copy')).toHaveText(`第 1 / ${total} 题`);await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(0);await expect(p.locator('.learning-course')).toContainText('已学 1/5');
  }finally{await s.context.close();}

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 
 test.use({ viewport: { width: 1100, height: 900 }, reducedMotion: 'reduce' });
@@ -94,7 +95,7 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     await page.goto(`/${unit}/#learn/text`);
     await page.evaluate(() => document.fonts.ready);
     const story = page.locator('.stage-text');
-    await story.getByRole('button', { name: unit==='unit1-2'?'开始故事':'开始看课文', exact: true }).click();
+    await courseButton(story, unit==='unit1-2'?'开始故事':"startStory").click();
     await story.getByRole('button', { name: '下一句', exact: true }).click();
     await story.screenshot({ path: `output/playwright/unit-theme/${unit}-story-${width}.png` });
     const people = story.locator('.char,.dialogue-actor');
@@ -114,7 +115,7 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     await page.goto(`/${unit}/#learn/words`);
     const words = page.locator('.stage-words');
     await words.screenshot({ path: `output/playwright/unit-theme/${unit}-words-${width}.png` });
-    const prev = words.getByRole('button', { name: unit === 'unit1-2' ? '上一组' : '上一组词卡', exact: true }), next = words.getByRole('button', { name: unit === 'unit1-2' ? '下一组' : '下一组词卡', exact: true });
+    const prev = courseButton(words, unit === 'unit1-2' ? '上一组' : "previousWords"), next = courseButton(words, unit === 'unit1-2' ? '下一组' : "nextWords");
     await expect(prev).toBeDisabled();
     const a = await prev.boundingBox(), b = await next.boundingBox();
     expect(a.y).toBeCloseTo(b.y, 0); expect(Math.min(a.height, b.height)).toBeGreaterThanOrEqual(44);

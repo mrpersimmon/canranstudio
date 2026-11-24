@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 require('../support/unit2122-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -25,9 +26,9 @@ test('配对先完整选择再检查，错配和刷新保留原位，修改后�
  await room.getByRole('group',{name:'词义',exact:true}).getByRole('button',{name:'瓶子',exact:true}).press('Enter');await expect(check).toBeDisabled();
  await page.reload();await expect(room.locator('.match-count')).toHaveText('已配 1 / 3 对');await expect(check).toBeDisabled();
  await pair(room,'bottle','盒子；箱子');await pair(room,'tin','罐头盒');
- await expect(room.getByRole('status')).toBeEmpty();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','6');
- await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
- await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await expectNoVerdict(room.getByRole('status'));await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','6');
+ await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
+ await page.reload();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await expect(room.locator('.is-correct')).toHaveCount(0);
  await room.getByRole('button',{name:'再试一次',exact:true}).click();
  expect(await room.getByRole('group',{name:'词义',exact:true}).getByRole('button').evaluateAll(xs=>xs.map(x=>x.getAttribute('aria-label')))).toEqual(labels);
@@ -35,7 +36,7 @@ test('配对先完整选择再检查，错配和刷新保留原位，修改后�
  await pair(room,'tin','罐头盒');await expect(room.locator('.match-count')).toHaveText('已配 1 / 3 对');await pair(room,'tin','罐头盒');
  await pair(room,'bottle','瓶子');await check.click();
  await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','7');
- await page.getByRole('button',{name:'学习手记',exact:true}).click();
+ await openLearningRecord(page);
  await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('修正后完成');
 });
 test('原文定位保留完整句子，错选只提示重试，点选不直接判分',async({page})=>{
@@ -44,9 +45,9 @@ test('原文定位保留完整句子，错选只提示重试，点选不直接�
  const text=room.getByRole('group',{name:'原文选词',exact:true});
  await expect(text).toContainText('No, not that one. The red one.');
  await text.getByRole('button',{name:'not that one',exact:true}).click();
- await expect(room.getByRole('status')).toBeEmpty();
+ await expectNoVerdict(room.getByRole('status'));
  await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await page.reload();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
  await room.getByRole('button',{name:'再试一次',exact:true}).click();
  await text.getByRole('button',{name:'The red one',exact:true}).press('Enter');
@@ -68,7 +69,7 @@ test('交接先选物再选人，错送不移动；离开、刷新和改选后�
  await people.getByRole('button',{name:'男士',exact:true}).click();
  await expect(room.getByRole('img',{name:'小瓶子',exact:true})).toBeVisible();
  await expect(room.locator('.handoff-arrived')).toHaveCount(0);await check.click();
- await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await expect(room.locator('.handoff-arrived')).toHaveCount(0);await page.reload();
  await room.getByRole('button',{name:'再试一次',exact:true}).click();
  await people.getByRole('button',{name:'简（Jane）',exact:true}).press('Enter');
@@ -101,12 +102,12 @@ for(const width of [320,390,768,1280])test(width+' 新题型布局、稳定操�
  await room.getByRole('button',{name:'给点线索',exact:true}).click();expect(await top()).toBeCloseTo(before,0);
  await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:'大瓶子',exact:true}).click();await inspect(room,'handoff-partial');
  await room.getByRole('group',{name:'接收者',exact:true}).getByRole('button',{name:'简（Jane）',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);await inspect(room,'handoff-wrong');
+ await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));expect(await top()).toBeCloseTo(before,0);await inspect(room,'handoff-wrong');
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('group',{name:'待选物品',exact:true}).getByRole('button',{name:'小瓶子',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
  await expect(room.getByRole('status')).toHaveText('答对了！');expect(await top()).toBeCloseTo(before,0);await inspect(room,'handoff-correct');
  await page.goto('/unit21-22/#learn/observe');room=page.locator('.stage-observe');
  for(const answer of ['说话的人和他的同伴','Give her a cup, please.']){await room.getByRole('button',{name:answer,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
- await inspect(room,'handoff-group');await require('../support/units17-30-exam').selectAnswer(room,{object:'盒子',recipient:'简和男士'});await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'完成这一站',exact:true}).click();await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:dir+'/finish-'+width+'.png',fullPage:true,clip:await room.boundingBox()});
+ await inspect(room,'handoff-group');await require('../support/units17-30-exam').selectAnswer(room,{object:'盒子',recipient:'简和男士'});await room.getByRole('button',{name:'检查答案',exact:true}).click();await courseButton(room, "finishPractice").click();await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));await page.screenshot({path:dir+'/finish-'+width+'.png',fullPage:true,clip:await room.boundingBox()});
  await require('../support/unit21-22-flow').completeStory(page);await page.goto('/unit21-22/#learn/roles');room=page.locator('.stage-roles');await inspect(room,'locate-blank');
  await room.getByRole('group',{name:'原文选词',exact:true}).getByRole('button',{name:'The red one',exact:true}).click();await inspect(room,'locate-selected');
 });

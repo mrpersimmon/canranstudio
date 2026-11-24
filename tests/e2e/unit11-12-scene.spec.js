@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -11,7 +12,7 @@ test('白衬衫等待本人确认再归还，蓝衬衫不提前出现，刷新�
  await page.goto('/unit11-12/#learn/text');const room=page.locator('.stage-text'),white=room.getByRole('img',{name:/白衬衫/}),blue=room.getByRole('img',{name:/蓝衬衫/});
  await expect(white).toHaveAttribute('alt','凳子上待认领的白衬衫');await expect(blue).toBeHidden();
  for(let i=0;i<16;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  await courseButton(room, i?'下一句':"startStory").click();
   if(i===3)await expect(blue).toBeHidden();
   if(i===4)await expect(blue).toBeVisible();
   if(i>=1&&i<=12)await expect(white).toHaveAttribute('alt','老师举着待认领的白衬衫');
@@ -20,7 +21,7 @@ test('白衬衫等待本人确认再归还，蓝衬衫不提前出现，刷新�
   if(i===14)await expect(white).toHaveAttribute('alt','老师抛向 Tim 的白衬衫');
  }
  await expect(white).toHaveAttribute('alt','Tim 接到自己的白衬衫');await expect(page.locator('#starCount')).toHaveText('0');await capture(page,'story-returned-1280');
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await room.getByRole('button',{name:'再看一遍',exact:true}).click();await expect(white).toHaveAttribute('alt','凳子上待认领的白衬衫');await expect(blue).toBeHidden();
+ await courseButton(room, "finishStory").click();await courseButton(room, "replayStory").click();await expect(white).toHaveAttribute('alt','凳子上待认领的白衬衫');await expect(blue).toBeHidden();
 });
 test('手机对白占满一行，三人同地面，中文展开与刷新不丢当前句',async({page})=>{
  test.setTimeout(60000);
@@ -28,8 +29,8 @@ test('手机对白占满一行，三人同地面，中文展开与刷新不丢�
   await page.setViewportSize({width,height:844});await page.goto('/unit11-12/#learn/text');const room=page.locator('.stage-text'),log=room.getByRole('log'),stage=room.locator('.dialogue-stage');
   const s=await stage.boundingBox(),l=await log.boundingBox(),actors=await room.locator('.dialogue-actor').all();expect(l.width).toBeGreaterThan(s.width*.85);
   const bottoms=[];for(const actor of actors){const b=await actor.boundingBox();expect(b.y).toBeGreaterThanOrEqual(l.y+l.height);bottoms.push(b.y+b.height);}expect(Math.max(...bottoms)-Math.min(...bottoms)).toBeLessThan(3);
-  if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();
-  for(let i=0;i<9;i++)await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(courseButton(room, "startStory")).toBeVisible();
+  for(let i=0;i<9;i++)await courseButton(room, i?'下一句':"startStory").click();
   const ctrl=room.locator('.stage-ctrl'),before=await ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY);
   await log.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();
   const cn=await log.locator('.bubble-row').last().locator('.bcn').boundingBox(),b=await log.boundingBox();expect(cn.y+cn.height).toBeLessThanOrEqual(b.y+b.height-2);expect(await ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
@@ -45,5 +46,5 @@ test('十二组认领档案一次展示一件，翻页完整并可直接下一�
 });
 test('Perhaps 题只在正确提交后记录先确认，不把猜测画成归还',async({page})=>{
  await page.goto('/unit11-12/#learn/exam');const room=page.locator('.stage-exam');await room.getByRole('button',{name:'my brother · pen',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
- const record=room.locator('.claim-task-result');await expect(record).toHaveText('');await room.getByRole('button',{name:'直接认定是 Tim 的',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(record).toHaveText('');await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'请 Tim 确认',exact:true}).click();await expect(record).toHaveText('');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(record).toHaveText('下一步：请 Tim 确认');await expect(room.getByRole('img',{name:'Tim 接到自己的白衬衫',exact:true})).toHaveCount(0);await capture(page,'perhaps-confirm');
+ const record=room.locator('.claim-task-result');await expect(record).toHaveText('');await room.getByRole('button',{name:'直接认定是 Tim 的',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(record).toHaveText('');await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'请 Tim 确认',exact:true}).click();await expect(record).toHaveText('');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(record).toHaveText('下一步：请 Tim 确认');await expect(room.getByRole('img',{name:'Tim 接到自己的白衬衫',exact:true})).toHaveCount(0);await capture(page,'perhaps-confirm');
 });

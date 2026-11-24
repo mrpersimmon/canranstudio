@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin: loginStudent } = require('./helpers');
 const {defaultBrowserType,...mobileProfile}=require('@playwright/test').devices['iPhone 13'];
@@ -151,7 +152,7 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();
     await ready(p);await expect(p.locator('.unit-word')).toHaveCount(6);await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
-    await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
+    await courseButton(p, "nextWords").click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
     await p.getByRole('link',{name:'我的课程',exact:true}).click();
     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
     await p.locator('.course').getByRole('link',{name:/学习/}).click();
@@ -219,7 +220,7 @@ test('长姓名手机卡、另一学生隔离、教师预览不能保存个人�
 });
 
 // Course preparation and the content assertion have separate contracts.
-async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+async function ready(page){const start=Date.now();await readyCourse(page);test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
 test('关课重开保留收藏，导出故障可重试且离开取消下载',async({page,browser},info)=>{
  test.setTimeout(150000);const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1);
  const {saveCourses}=require('./helpers');await adminLogin(page,base);const account=await createStudent(page,'消息成果保留班','小溪',[/Lesson 45–46/]);

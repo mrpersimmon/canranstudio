@@ -1,4 +1,5 @@
 'use strict';
+const {incorrectFeedback,readyCourse}=require('../support/course-controls');
 // Frozen paper certificates used the learner's local date. Generate the
 // historical original in Shanghai; compare its current copy on a UTC device.
 const {test,expect}=require('@playwright/test');
@@ -16,7 +17,7 @@ test('45题原五星更新：全部有效轮次、原卡全帧、姓名日期与
  const root=path.resolve(__dirname,'../..'),temporary=await fs.mkdtemp(path.join(os.tmpdir(),'canran-u2122-review-')),oldRoot=path.join(temporary,'old-site'),dataDir=path.join(temporary,'accounts');
  const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1),ports=require('../support/login-test-ports'),origin=ports.origin(4271),chain=process.env.UNIT2122_CHAIN_LEGACY==='1';
  let server,first,second,oldIssuedAt,oldDate;
- const ready=async p=>expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+ const ready=async p=>readyCourse(p);
  const ledger=()=>{const {DatabaseSync}=require('node:sqlite'),db=new DatabaseSync(path.join(dataDir,'learning.sqlite'),{readOnly:true});try{return db.prepare('SELECT edition,value FROM unit_awards WHERE course=? ORDER BY edition').all('unit21-22');}finally{db.close();}};
  const restore45=async()=>{for(const n of await fs.readdir(path.join(root,'unit21-22')))if(n!=='README.md')await fs.copyFile(path.join(root,FILES.includes(n)?'tests/fixtures/unit21-22-before-teaching-review':'unit21-22',n),path.join(oldRoot,'unit21-22',n));};
  try{
@@ -36,7 +37,7 @@ test('45题原五星更新：全部有效轮次、原卡全帧、姓名日期与
   second=await browser.newContext({baseURL:origin,timezoneId:'UTC',...(process.env.UNIT2122_BROWSER==='webkit'?mobileProfile:{})});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit21-22/#learn/certificate');await ready(other);await expect(other.locator('#starCount')).toHaveText('5');await expect(other.locator('#certificateDate')).toHaveText(date);await expect(other.locator('#certificateName')).toHaveText('小禾');
   const after=await readLearning(other);await fs.writeFile(info.outputPath('after45-progress.json'),JSON.stringify(after));expect(after.records).toEqual(before.records);
   for(const id of Object.keys(old.ANSWERS)){await other.goto(base+'unit21-22/#learn/'+id);await ready(other);await expect(other.locator('.stage-'+id+' .completion-number')).toHaveText([String(old.ANSWERS[id].length),String(old.ANSWERS[id].length),'0']);const key='unit2122-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);}
-  await other.goto(base+'unit21-22/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.select(room,'I');await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);
+  await other.goto(base+'unit21-22/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.select(room,'I');await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);
   if(chain){for(const tab of [p,other]){await tab.goto(base+'unit21-22/#learn/certificate');await ready(tab);await tab.locator('.legacy-learning>summary').click();await expect(tab.locator('.legacy-issued-date')).toHaveAttribute('data-issued-at',oldIssuedAt);await tab.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(tab.locator('#legacyCertificateDate')).toHaveText(oldDate);await expect(tab.locator('#legacyCertificateName')).toHaveText('小禾');await tab.keyboard.press('Escape');}await p.locator('.legacy-learning').screenshot({path:info.outputPath('retained-15-star-history.png')});}
  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u2122-review-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}
 });

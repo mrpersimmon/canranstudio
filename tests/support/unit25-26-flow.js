@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const {expect}=require('@playwright/test');
 // Independently transcribed from PDF 83–86 and the reviewed draft, not product answers.
@@ -8,8 +9,8 @@ async function chooseTokens(room,tokens){const bank=room.getByRole('group',{name
 
 async function completeStory(page,base=''){
  await page.goto(base+'/unit25-26/#learn/text');const room=page.locator('.stage-text');
- for(let i=0;i<DIALOGUE.length;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('课文看完了！');
+ for(let i=0;i<DIALOGUE.length;i++){await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}
+ await courseButton(room, "finishStory").click();await expect(room).toContainText('课文看完了！');
 }
 async function completeActivity(page,id,base=''){
  await page.goto(base+'/unit25-26/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
@@ -18,7 +19,7 @@ async function completeActivity(page,id,base=''){
   if(answer&&typeof answer==='object'&&!Array.isArray(answer))await require('./thirteen-types-flow').select(room,answer);
     else if(Array.isArray(answer))await chooseTokens(room,answer);else await room.getByRole('button',{name:answer,exact:true}).click();
   await check.click();await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-  await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+  await courseButton(room, i===answers.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }

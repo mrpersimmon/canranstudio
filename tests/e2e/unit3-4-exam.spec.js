@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { EXAMS } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
@@ -15,7 +16,7 @@ test('3–4 十一题认领综合练习，全声音失败仍可逐题完成，�
     const check = room.getByRole('button', { name: '检查答案', exact: true }); await expect(check).toBeDisabled();
     if (i === 0) {
       await room.getByRole('button', { name: question.wrong, exact: true }).click(); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.locator('.practice-options .correct')).toHaveCount(0);
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
@@ -23,7 +24,7 @@ test('3–4 十一题认领综合练习，全声音失败仍可逐题完成，�
     if (i >= 6) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
     await require('../support/units1-30-tasks').select(room, question.answer); await check.click(); await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 10 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === 10 ? "finishExam" : '下一题').click();
   }
   await expect(room).toContainText('首次独立答对 9 / 11');
   await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 test.describe('历史课包的离线作答与原证书', () => {
@@ -22,7 +23,7 @@ for (const first of [1, ...Array.from({ length: 12 }, (_, i) => 7 + i * 2)]) {
       requestAnimationFrame(inspect);
     });
     await page.goto('/lesson/' + id + '/#learn/words');
-    await expect(page.locator('.stage-words').getByRole('button', { name: first === 1 ? '下一组' : '下一组词卡', exact: true })).toBeVisible();
+    await expect(courseButton(page.locator('.stage-words'), first === 1 ? '下一组' : "nextWords")).toBeVisible();
     await context.setOffline(true);
     // These three historical flows explicitly exercise a mid-round reload.
     // Revalidate the latest release for that new document, then continue the

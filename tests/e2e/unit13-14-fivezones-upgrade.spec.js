@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit1314-legacy');
 const {completeUnit1314}=require('../support/unit13-14-flow');
@@ -17,15 +18,15 @@ for(const selected of [false,true])test(`旧${selected?'仅选择':'空白'}升�
 test('旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答',async({page})=>{
  const upgrade=await legacy(page);await page.goto('/unit13-14/#learn/listen');const room=page.locator('.stage-listen');
  await room.getByRole('button',{name:'姓名',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await page.goto('/unit13-14/#learn/words');await page.getByRole('button',{name:'下一组词卡',exact:true}).click();
+ await page.goto('/unit13-14/#learn/words');await courseButton(page, "nextWords").click();
  await page.goto('/unit13-14/#learn/models');for(let i=0;i<2;i++)await page.getByRole('button',{name:'下一幅配色图',exact:true}).click();await page.getByText('看看完整问答',{exact:true}).click();for(let i=0;i<3;i++)await page.getByRole('button',{name:'下一份问答',exact:true}).click();
- await page.goto('/unit13-14/#learn/text');await page.getByRole('button',{name:'开始看课文',exact:true}).click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
+ await page.goto('/unit13-14/#learn/text');await courseButton(page, "startStory").click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
  const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit13-14:learning:v1')));
  await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit13-14/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
- await page.goto('/unit13-14/#learn/listen');await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await page.goto('/unit13-14/#learn/listen');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  const archived=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit13-14:learning:v1')).activity.unit1314LegacySnapshot);
  expect(archived.records).toEqual(before.records);expect(archived.groups).toEqual(before.groups);expect(archived.activity.unitDialogue).toEqual(before.activity.unitDialogue);
- await page.goto('/unit13-14/#learn/models');await page.getByText('课本小参考 · 第14课',{exact:true}).click();await expect(page.locator('.gallery-current + .reference-pager span')).toHaveText('3 / 10');await expect(page.locator('.gallery-current small')).toHaveText('40');await expect(page.locator('.model-current + .reference-pager span')).toHaveText('4 / 12');await expect(page.locator('.model-current')).toContainText('Mrs. White / carpet / red');
+ await page.goto('/unit13-14/#learn/models');await openCourseReference(page,'课本小参考 · 第14课');await expect(courseReference(page).locator(".gallery-current + .reference-pager span")).toHaveText('3 / 10');await expect(courseReference(page).locator(".gallery-current small")).toHaveText('40');await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('4 / 12');await expect(courseReference(page).locator(".model-current")).toContainText('Mrs. White / carpet / red');
  await page.goto('/unit13-14/#learn/grammar');await expect(page.locator('.stage-grammar .progress-copy')).toHaveText('第 1 / 11 题');await expect(page.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 test('旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证',async({page},info)=>{

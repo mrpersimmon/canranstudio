@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
@@ -32,7 +33,7 @@ for (const unit of ['1-2', '3-4', '5-6']) for (const width of [320, 390, 768, 12
       if (Array.isArray(question.answer) || i === questions.length - 1 || (unit === '5-6' && i === 7)) await room.screenshot({ path: `output/playwright/units1-6-exam/unit${unit}-q${i + 1}-${width}.png` });
       await room.getByRole('button', { name: '检查答案', exact: true }).click(); await expect(room.getByRole('status')).toHaveText('答对了！');
       expect(await position()).toBeCloseTo(before, 0);
-      await room.getByRole('button', { name: i === questions.length - 1 ? (unit === '1-2' ? '完成挑战' : '查看本次记录') : '下一题', exact: true }).click();
+      await courseButton(room, i === questions.length - 1 ? (unit === '1-2' ? '完成挑战' : "finishExam") : '下一题').click();
     }
     const reward = page.locator('dialog.award-reveal[open]');
     await expect(reward).toBeVisible(); await expect(reward).not.toHaveAttribute('data-dismissible', 'false'); await reward.press('Escape');
@@ -50,7 +51,7 @@ for (const unit of ['1-2', '3-4', '5-6']) test(`${unit} 断网刷新受阻，联
   await context.setOffline(true);
   const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
-  await expect(room.getByRole('status')).toBeEmpty();
+  await expectNoVerdict(room.getByRole('status'));
   const answer = EXAMS[unit][0].answer;
   if (answer.fills) {
     for (const [i, text] of answer.fills.entries()) await expect(room.getByRole('group', { name: `第${i + 1}处填空`, exact: true }).getByRole('button', { name: text, exact: true })).toHaveAttribute('aria-pressed', 'true');

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { createHash } = require('node:crypto');
 const fs = require('node:fs/promises');
@@ -40,10 +41,10 @@ async function prepare(page, item, base) {
   const stage = item.kind === 'word' ? 'words' : item.kind === 'model' ? 'models' : 'text';
   await page.goto(`${base}/${item.course}/#learn/${stage}`);
   if (item.kind === 'word') {
-    await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+    await courseButton(page.locator('.stage-words'), "nextWords").click();
   } else if (item.kind === 'dialogue') {
     for (let i = 1; i <= 11; i++) {
-      await heard(page, page.locator('.stage-text').getByRole('button', { name: i === 1 ? '开始听课文' : '下一句', exact: true }), `${base}/unit5-6/audio/l05-d${String(i).padStart(2, '0')}.mp3`);
+      await heard(page, courseButton(page.locator('.stage-text'), i === 1 ? "startVoicedStory" : '下一句'), `${base}/unit5-6/audio/l05-d${String(i).padStart(2, '0')}.mp3`);
     }
   }
   return control(page, item, item.kind === 'dialogue');
@@ -142,8 +143,8 @@ for (const completed of [false, true]) test(`历史配音版只更换录音时�
   await expect(listen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   await page.goto('/unit5-6/#learn/text');
   const story = page.locator('.stage-text'), count = completed ? 20 : 12;
-  for (let i = 1; i <= count; i++) await heard(page, story.getByRole('button', { name: i === 1 ? '开始听课文' : '下一句', exact: true }), '/unit5-6/audio/l05-d' + String(i).padStart(2, '0') + '.mp3');
-  if (completed) await story.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  for (let i = 1; i <= count; i++) await heard(page, courseButton(story, i === 1 ? "startVoicedStory" : '下一句'), '/unit5-6/audio/l05-d' + String(i).padStart(2, '0') + '.mp3');
+  if (completed) await courseButton(story, "finishVoicedStory").click();
   const stars = await page.locator('#starCount').textContent();
   legacy = false; await page.reload();
   await expect(story.locator('.bubble-row')).toHaveCount(count);

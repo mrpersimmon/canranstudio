@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectRoundCounts,incorrectFeedback,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin: loginStudent } = require('./helpers');
 // Student windows are fresh contexts: carry mobile settings into them too.
@@ -8,7 +9,7 @@ const { activity, story } = require('../support/unit115116');
 const {courseResponse}=require('../support/course-response-faults');
 // Wait for real course readiness before examining content. Windows WebKit can
 // spend more than five seconds preparing the complete protected package.
-async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+async function ready(page){const start=Date.now();await readyCourse(page);test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
 
 test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
 test.use({actionTimeout:10000,...(process.env.UNIT115_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
@@ -161,7 +162,7 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();
     await expect(p.locator('.unit-word')).toHaveCount(6,{timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
-    await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 6');
+    await courseButton(p, "nextWords").click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 6');
     await p.getByRole('link',{name:'我的课程',exact:true}).click();
     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
     await p.locator('.course').getByRole('link',{name:/学习/}).click();await ready(p);
@@ -242,10 +243,10 @@ test('最终查找图在完整账号可见：先读图，错答续做，正确�
   await expect(map).toBeVisible();await map.evaluate(i=>i.decode());await expect(room.locator('.garden-intro h3')).toHaveText('查看图中标记，哪句符合查找记录？');
   await room.screenshot({path:info.outputPath('map-unanswered.png')});
   await require('../support/unit115116').select(room,'She went nowhere yesterday.');await room.getByRole('button',{name:'检查答案',exact:true}).click();
-  await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(room.locator('.garden-application')).toHaveAttribute('data-recorded','false');
+  await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.garden-application')).toHaveAttribute('data-recorded','false');
   await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(map).toBeVisible();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
   await require('../support/unit115116').select(room,'She looked everywhere on this map.');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await expect(room.locator('.garden-application')).toHaveAttribute('data-recorded','true');await room.getByRole('button',{name:'下一题',exact:true}).click();
-  for(let i=2;i<8;i++){if(i===4)await expect(room.getByRole('img',{name:'打开的空盒子。',exact:true})).toBeVisible();await require('../support/unit115116').select(room,require('../support/unit115116').ANSWERS.apply[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===7?'完成这一站':'下一题',exact:true}).click();}
-  await expect(room.locator('.completion-number')).toHaveText(['7','8','1']);await expect(p.locator('#starCount')).toHaveText('0');
+  for(let i=2;i<8;i++){if(i===4)await expect(room.getByRole('img',{name:'打开的空盒子。',exact:true})).toBeVisible();await require('../support/unit115116').select(room,require('../support/unit115116').ANSWERS.apply[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await courseButton(room, i===7?"finishPractice":'下一题').click();}
+  await expectRoundCounts(room.locator('.completion-number'), ['7','8','1']);await expect(p.locator('#starCount')).toHaveText('0');
  }finally{await student.context.close();}
 });

@@ -34,7 +34,9 @@ async function expectCompactCompletion(page, room, { illustrated = false } = {})
     }
   }
   await expect(results).toBeInViewport({ ratio: 1 });
-  await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
+  const byQuestion = await page.locator('body[data-learning-shell]').count() > 0;
+  await expect(results.locator('.completion-stat-label')).toHaveText(byQuestion
+    ? ['连续答对', '首答正确', '订正完成'] : ['连续答对', '本次答对', '本次答错']);
   const cards = await results.locator('.completion-stat').evaluateAll(items => items.map(el => {
     const box = el.getBoundingClientRect();
     return { x: box.x, y: box.y, right: box.right, bottom: box.bottom,
@@ -56,7 +58,7 @@ async function expectCompactCompletion(page, room, { illustrated = false } = {})
     expect(box.height).toBeGreaterThanOrEqual(44);
     expect(box.y).toBeGreaterThanOrEqual(cards[0].bottom);
   }
-  const topbarBottom = await page.locator('#topbar').evaluate(el => el.getBoundingClientRect().bottom);
+  const topbarBottom = await page.locator(byQuestion ? '.learning-milestones' : '#topbar').evaluate(el => el.getBoundingClientRect().bottom);
   expect(cards[0].y).toBeGreaterThanOrEqual(topbarBottom);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 }

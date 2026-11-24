@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 // Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
 test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
@@ -71,7 +72,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   await expect(asking).toContainText('问 Sam');
   await asking.getByRole('button', { name: 'Does she like peaches?', exact: true }).click();
   await asking.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(asking.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(asking.getByRole('status')).toHaveText(await incorrectFeedback(asking));
   await asking.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(asking, 'Does she want peaches?', '完成这一站');
 
@@ -82,7 +83,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   for (const answer of base) await submitSubject(subjects, answer);
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
   await submitSubject(subjects, '第一人称', false);
-  await expect(subjects.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(subjects.getByRole('status')).toHaveText(await incorrectFeedback(subjects));
   await subjects.getByRole('button', { name: '再试一次', exact: true }).click();
   await expect(subjects).toContainText('第 11 / 11 题');
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
@@ -103,7 +104,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   await expect(exam).toContainText('B 喜欢鸡肉');
   await exam.getByRole('button', { name: 'I like chicken, too.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(exam.getByRole('status')).toHaveText(await incorrectFeedback(exam));
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, 'I like chicken.');
   await expect(exam).toContainText("Sam doesn't likes grapes.");
@@ -157,9 +158,9 @@ async function priorGroup(page, unit, activity, answers) {
 async function priorStory(page, unit, count) {
   await page.goto('/' + unit + '/#learn/text');
   const room = page.locator('.stage-text');
-  await room.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(room, "startVoicedStory").click();
   for (let i = 1; i < count; i++) await room.getByRole('button', { name: '下一句', exact: true }).click();
-  await room.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  await courseButton(room, "finishVoicedStory").click();
 }
 async function expectFresh(page, unit, activity, count) {
   await page.goto('/' + unit + '/#learn/' + activity);

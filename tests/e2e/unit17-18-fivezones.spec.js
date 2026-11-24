@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit1718-fivezones');
 const {expectCompactCompletion}=require('../support/completion-layout');
@@ -9,7 +10,7 @@ test('62题、完整16句、五区五星与逐题未答材料可完成',async({p
  await story(page);
  for(const id of Object.keys(ANSWERS))await activity(page,id,{inspect:async(room,index,state)=>{
   if(state!=='before')return;
-  const material=room.locator('.practice-context');if(await material.count())await expect(material).toBeVisible();
+  const material=room.locator('.practice-context');if(await material.count())await withReadingMaterial(room,'.practice-context',async view=>{await expect(view.locator('.practice-context')).toBeVisible();});
   await room.screenshot({path:info.outputPath(id+'-'+String(index+1).padStart(2,'0')+'-unanswered.png')});
  }});
  await expect(page.locator('#starCount')).toHaveText('5');await page.goto('/unit17-18/#learn/certificate');await expect(page.locator('.story-award-panel')).toContainText('同事介绍小达人');
@@ -18,9 +19,9 @@ test('62题、完整16句、五区五星与逐题未答材料可完成',async({p
 
 test('单选连续错答、订正、刷新和重练保留实际统计与旧星',async({page})=>{
  test.setTimeout(150000);await page.goto('/unit17-18/#learn/grammar');const room=page.locator('.stage-grammar'),check=room.getByRole('button',{name:'检查答案',exact:true});
- for(let i=0;i<2;i++){await select(room,'She is a nurse.');await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');if(i===0)await room.getByRole('button',{name:'再试一次',exact:true}).click();}
- await page.reload();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[0]);await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
- await activity(page,'grammar',{expectPerfect:false});await expect(room.locator('.completion-number')).toHaveText(['20','20','2']);await expect(page.locator('#starCount')).toHaveText('0');
+ for(let i=0;i<2;i++){await select(room,'She is a nurse.');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));if(i===0)await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+ await page.reload();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeDisabled();await select(room,ANSWERS.grammar[0]);await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
+ await activity(page,'grammar',{expectPerfect:false});await expectRoundCounts(room.locator('.completion-number'), ['20','20','2']);await expect(page.locator('#starCount')).toHaveText('0');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await select(room,'She is a nurse.');await check.click();await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
 });
@@ -29,7 +30,7 @@ for(const width of [320,390,768,1280])test('完整场景、中文与同事切换
  await page.setViewportSize({width,height:width<500?568:900});await page.goto('/unit17-18/#learn/text');const room=page.locator('.stage-text');
  await expect(room.locator('.story-lead')).toHaveText("What are Michael Baker and Jeremy Short's jobs?");await expect(room.locator('.office-colleagues:visible')).toHaveCount(0);
  for(let i=0;i<DIALOGUE.length;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   await expect(room.locator('.office-world')).toHaveAttribute('data-phase',i<2?'welcome':i<7?'women':i<13?'men':'jim');await expect(room.locator('.office-colleagues:visible')).toHaveCount(i<2?0:1);
   const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(1);expect(Math.abs(after.height-before.height)).toBeLessThan(1);
   const frame=await room.locator('.office-world').boundingBox(),reader=await room.locator('.office-reader').boundingBox();
@@ -53,17 +54,17 @@ for(const [width,height]of [[320,568],[390,500]])test('短屏三卡、继续操�
 test('双空未齐、撤回、错答与刷新保持草稿和错误',async({page})=>{
  await page.goto('/unit17-18/#learn/grammar');const room=page.locator('.stage-grammar');
  for(let i=0;i<2;i++){await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
- const check=room.getByRole('button',{name:'检查答案',exact:true});await select(room,{fills:['are']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'is',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ const check=room.getByRole('button',{name:'检查答案',exact:true});await select(room,{fills:['are']});await expect(check).toBeDisabled();await page.reload();await expect(check).toBeDisabled();await room.getByRole('group',{name:'第2处填空',exact:true}).getByRole('button',{name:'is',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(check).toBeEnabled();await select(room,ANSWERS.grammar[2]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
 });
 
 test('30张词卡音标及完整15幅职业图、10组问答和六个书写原题',async({page})=>{
  await page.goto('/unit17-18/#learn/words');const seen=[];
- for(let n=0;n<5;n++){await expect(page.locator('#wordPageProgress')).toHaveText((n+1)+' / 5');for(const card of await page.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await expect(card.locator('.word-phonetic')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(n<4)await page.getByRole('button',{name:'下一组词卡',exact:true}).click();}expect(new Set(seen).size).toBe(30);
- await page.goto('/unit17-18/#learn/apply');await page.getByText('课本小参考 · 第18课',{exact:true}).click();
- const numbers=['100','200','300','400','500','600','700','800','900','1,000','1,001','1,002','1,003','1,004','1,005'];for(let n=0;n<15;n++){await expect(page.locator('.gallery-current small')).toHaveText(numbers[n]);if(n<14)await page.getByRole('button',{name:'下一幅职业图',exact:true}).click();}
- for(let n=0;n<10;n++){await expect(page.locator('.model-current + .reference-pager span')).toHaveText((n+1)+' / 10');if(n<9)await page.getByRole('button',{name:'下一份问答',exact:true}).click();}
- await page.reload();await page.getByText('课本小参考 · 第18课',{exact:true}).click();await expect(page.locator('.gallery-current small')).toHaveText('1,005');await expect(page.locator('.model-current + .reference-pager span')).toHaveText('10 / 10');
+ for(let n=0;n<5;n++){await expect(page.locator('#wordPageProgress')).toHaveText((n+1)+' / 5');for(const card of await page.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await expect(card.locator('.word-phonetic')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(n<4)await courseButton(page, "nextWords").click();}expect(new Set(seen).size).toBe(30);
+ await page.goto('/unit17-18/#learn/apply');await openCourseReference(page,'课本小参考 · 第18课');
+ const numbers=['100','200','300','400','500','600','700','800','900','1,000','1,001','1,002','1,003','1,004','1,005'];for(let n=0;n<15;n++){await expect(courseReference(page).locator(".gallery-current small")).toHaveText(numbers[n]);if(n<14)await page.getByRole('button',{name:'下一幅职业图',exact:true}).click();}
+ for(let n=0;n<10;n++){await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText((n+1)+' / 10');if(n<9)await page.getByRole('button',{name:'下一份问答',exact:true}).click();}
+ await page.reload();await openCourseReference(page,'课本小参考 · 第18课');await expect(courseReference(page).locator(".gallery-current small")).toHaveText('1,005');await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('10 / 10');
 });
 
 test('声音全坏仍能完整学习，未出现英语声音请求',async({page},info)=>{

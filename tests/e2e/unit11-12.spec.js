@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const {test,expect}=require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
@@ -12,7 +13,7 @@ test('从音标图鉴开始，浏览16句并完成27题才取得15星课堂配�
  test.setTimeout(210000);await page.goto('/unit11-12/');await expect(page).toHaveTitle('失物招领小侦探 · Lesson 11–12');
  await page.getByRole('button',{name:'开始冒险',exact:true}).click();await expect(page).toHaveURL(/#learn\/words$/);
  const room=page.locator('.stage-words'),word=room.getByRole('button',{name:'whose',exact:true});await expect(word).toContainText('/huːz/');await word.click();await expect(word.locator('.word-meaning')).toBeVisible();await expect(word).not.toContainText('录音暂时');
- for(let i=0;i<2;i++)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(room.locator('.unit-word')).toHaveCount(6);await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page.locator('.stage-listen')).toContainText('第 1 / 10 题');
+ for(let i=0;i<2;i++)await courseButton(room, "nextWords").click();await expect(room.locator('.unit-word')).toHaveCount(6);await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page.locator('.stage-listen')).toContainText('第 1 / 10 题');
  await page.goto('/unit11-12/#learn/certificate');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();await completeUnit1112(page);
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('归还小能手');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const dialog=page.getByRole('dialog',{name:'失物招领小侦探纪念',exact:true});await expect(dialog.locator('#certificateName')).toHaveText('归还小能手');const day=await dialog.locator('#certificateDate').innerText();
  await dialog.screenshot({path:'output/playwright/unit11-12/certificate-desktop.png'});const download=page.waitForEvent('download');await dialog.getByRole('button',{name:'保存图片',exact:true}).click();await(await download).saveAs('output/playwright/unit11-12/certificate-saved.png');const pdf=await page.pdf({path:'output/playwright/unit11-12/certificate-print.pdf',preferCSSPageSize:true,printBackground:true});expect(pdf.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
@@ -34,7 +35,7 @@ test('纸笔保留教材 A 四题与 B 十二题，真实打印一张 A4 且每�
 });
 
 test('挑战错答、提示、刷新续做与独立作答分别记录，不提前发证',async({page})=>{
- test.setTimeout(45000);await page.goto('/unit11-12/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});await room.getByRole('button',{name:'my sister · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'my brother · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
+ test.setTimeout(45000);await page.goto('/unit11-12/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});await room.getByRole('button',{name:'my sister · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'my brother · pen',exact:true}).click();await expect(check).toBeEnabled({timeout:10000});await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
  await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:'请 Tim 确认',exact:true}).click();await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);await expect(room.getByRole('button',{name:'请 Tim 确认',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:'her',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,3);await expect(room).toContainText('首次独立答对 8 / 10');await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');await page.goto('/unit11-12/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('3');await expect(page.getByRole('button',{name:'领取单元证书',exact:true})).toBeDisabled();
 });
 

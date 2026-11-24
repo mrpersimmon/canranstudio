@@ -1,4 +1,5 @@
 'use strict';
+const {expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const tasks = require('../support/units1-30-tasks');
@@ -69,16 +70,16 @@ test('旧版49–50 分拣按真实回练顺序计算，订正后仍保留首次
   for (const [index, answer] of unitSubjectAnswers.entries()) {
     if (index === 2) for (let repeat = 0; repeat < 2; repeat++) {
       await submitSubject(room, '第一人称', false);
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await page.reload();
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
     await submitSubject(room, answer);
   }
   // 对、对、错、错、对，再连续答对剩余八题。
-  await expect(room.locator('.completion-number')).toHaveText(['9', '11', '2']);
+  await expectRoundCounts(room.locator('.completion-number'), ['9', '11', '2']);
   await expect(room).toContainText('基础题首次答对 10 / 11');
-  await page.reload(); await expect(room.locator('.completion-number')).toHaveText(['9', '11', '2']);
+  await page.reload(); await expectRoundCounts(room.locator('.completion-number'), ['9', '11', '2']);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   for (const answer of unitSubjectAnswers) await submitSubject(room, answer);
   await expect(room.locator('.completion-number')).toHaveText(['11', '11', '0']);

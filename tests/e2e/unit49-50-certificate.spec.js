@@ -1,4 +1,5 @@
 'use strict';
+const {courseToolbar,expectNoVerdict}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { completeUnit } = require('../support/unit49-50-flow');
@@ -62,7 +63,7 @@ test('领奖后保留姓名与首次领取日，五关徽章、角色和真实 P
   await expect(page.getByRole('textbox', { name: '证书上的名字', exact: true })).toHaveValue('小小采购员');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
   await expect(dialog.locator('#certificateDate')).toHaveText(date);
-  await expect(dialog.getByRole('status')).toBeEmpty();
+  await expectNoVerdict(dialog.getByRole('status'));
   await dialog.getByRole('button', { name: '关闭', exact: true }).press('Escape');
   await expect(dialog).not.toBeVisible();
 });
@@ -92,7 +93,7 @@ for (const width of [320, 390, 768]) test(`${width} 像素下长名字不越界�
 test('只打印奖状本身，保留名字、角色和徽章，A4 单页无操作按钮', async ({ page }) => {
   const dialog = await openCertificate(page, '小小采购员');
   await page.emulateMedia({ media: 'print' });
-  await expect(page.locator('#topbar')).not.toBeVisible();
+  await expect(courseToolbar(page)).not.toBeVisible();
   await expect(dialog.getByRole('button', { name: '保存图片', exact: true })).not.toBeVisible();
   await expect(dialog.getByRole('heading', { name: '采购纪念', exact: true })).not.toBeVisible();
   await expect(dialog.locator('#certificateName')).toBeVisible();

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 // Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
 require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
@@ -14,7 +15,7 @@ for(const [pair,total] of Object.entries(totals))for(const width of [320,390,768
   await expect(log).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
   const top=()=>ctrl.evaluate(e=>e.getBoundingClientRect().top+scrollY),before=await top();
   for(let i=0;i<total;i++){
-   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
+   await courseButton(room, i?'下一句':"startStory").click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
    const line=log.locator('.bubble-row').last();
    if(i===Math.floor(total/2)||i===total-1||(turningPoints[pair]||[]).includes(i)){
     await line.getByRole('button',{name:'看中文',exact:true}).click();await expect(line.locator('.bcn')).toBeVisible();
@@ -27,8 +28,8 @@ for(const [pair,total] of Object.entries(totals))for(const width of [320,390,768
     await room.screenshot({path:`output/playwright/theatre-v21/${pair}-${width}-${i+1}.png`});
    }
   }
-  await page.reload();await expect(log.locator('.btext')).toHaveCount(total);await expect(room.getByRole('button',{name:'完成课文',exact:true})).toBeVisible();
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish).toBeVisible();
+  await page.reload();await expect(log.locator('.btext')).toHaveCount(total);await expect(courseButton(room, "finishStory")).toBeVisible();
+  await courseButton(room, "finishStory").click();const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish).toBeVisible();
   const roomBounds=await room.boundingBox();
   for(const button of await finish.getByRole('button').all()){
    const box=await button.boundingBox();expect(box.x).toBeGreaterThanOrEqual(roomBounds.x);expect(box.x+box.width).toBeLessThanOrEqual(roomBounds.x+roomBounds.width);expect(box.y+box.height).toBeLessThanOrEqual(roomBounds.y+roomBounds.height);

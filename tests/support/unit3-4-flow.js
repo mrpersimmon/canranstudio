@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
@@ -16,11 +17,11 @@ async function completeStory(page, prefix = '') {
   await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
   const room = page.getByRole('region', { name: '衣帽间小剧场', exact: true });
   for (let i = 0; i < DIALOGUE.length; i++) {
-    await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+    await courseButton(room, i ? '下一句' : "startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0, i + 1));
-    await expect(room.getByRole('button', { name: i === 11 ? '完成课文' : '下一句', exact: true })).toBeEnabled({ timeout: 10000 });
+    await expect(courseButton(room, i === 11 ? "finishStory" : '下一句')).toBeEnabled({ timeout: 10000 });
   }
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
+  await courseButton(room, "finishStory").click();
   await expect(room).toContainText('故事看完了！');
 }
 async function completeActivity(page, id, { exerciseRecovery = false, prefix = '', inspect } = {}) {
@@ -55,7 +56,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
       await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
       await expect(room.getByRole('status')).toContainText('答对了！');
     }
-    await room.getByRole('button', { name: i === answers.length - 1 ? (id === 'exam' ? '查看本次记录' : '完成这一站') : '下一题', exact: true }).click();
+    await courseButton(room, i === answers.length - 1 ? (id === 'exam' ? "finishExam" : "finishPractice") : '下一题').click();
   }
   await expect(room.getByRole('button', { name: '再练一轮', exact: true })).toBeVisible();
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);

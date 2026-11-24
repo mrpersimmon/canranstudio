@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const fs=require('fs/promises'),{expect}=require('@playwright/test'),{CURRENT,BEFORE,CLASSROOM}=require('./unit56-answers'),tasks=require('./units1-30-tasks');
 const original=require('./unit5-6-flow');
 async function ready(p){await expect(p.locator('#wordPageProgress:visible,.practice-screen-stage .practice-content:visible,.learning-surface:visible').first()).toBeVisible({timeout:30000});await expect(p.locator('html')).not.toHaveAttribute('data-course-painting','',{timeout:30000});}
@@ -6,7 +7,7 @@ async function installPrevious(page,folder='unit5-6-before-v154'){
  const patterns=[];for(const name of ['index.html','content.js','unit.js','unit.css','scene.js']){let file='tests/fixtures/'+folder+'/'+name;if(!require('fs').existsSync(file))file='tests/fixtures/unit5-6-before-v154/'+name;const pattern=name==='index.html'?'**/unit5-6/':'**/unit5-6/'+name+'*',body=await fs.readFile(file);await page.route(pattern,r=>r.fulfill({body,contentType:name.endsWith('.html')?'text/html':name.endsWith('.css')?'text/css':'text/javascript'}));patterns.push(pattern);}return async()=>{for(const pattern of patterns)await page.unroute(pattern);};
 }
 async function story(p,base=''){
- await p.goto(base+'/unit5-6/#learn/text');await ready(p);const room=p.locator('.stage-text');if(await room.getByRole('button',{name:'再看一遍',exact:true}).isVisible())return;
+ await p.goto(base+'/unit5-6/#learn/text');await ready(p);const room=p.locator('.stage-text');if(await room.locator(':scope > .practice-finish').isVisible())return;
  if(await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).isVisible())await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();await room.getByRole('button',{name:/^(完成课文|去练习)$/,exact:true}).click();
 }
