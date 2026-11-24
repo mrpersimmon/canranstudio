@@ -57,6 +57,9 @@ async function incorrectFeedback(scope){
 function courseToolbar(page){
   return page.locator('body[data-learning-shell] .practice-screen-toolbar, body:not([data-learning-shell]) #topbar');
 }
+function courseTimeline(page){
+  return page.locator('body[data-learning-shell] .learning-milestones, body:not([data-learning-shell]) #topbar');
+}
 async function openLearningRecord(page){
   if(await page.locator('body[data-learning-shell]').count()){
     await page.getByRole('button',{name:'更多学习操作',exact:true}).click();
@@ -192,4 +195,4 @@ async function expectMobileStageNavigation(page){
     expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(44);
   }
 }
-module.exports={courseButton,readyCourse,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};
+module.exports={courseButton,readyCourse,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};

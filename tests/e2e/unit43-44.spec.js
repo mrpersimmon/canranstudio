@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectResultIcons,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,courseReference,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {activity,story,ANSWERS}=require('../support/unit4344');
 const {select}=require('../support/units1-30-tasks');
@@ -95,8 +95,8 @@ test('配对部分不能检查；已配可撤销；刷新不代答',async({page}
 });
 
 test('Lesson44全部12组替换、10个复数和7+10书写题有入口',async({page})=>{
- await page.goto('/unit43-44/#learn/grammar');await page.getByText('换个物品问一问',{exact:true}).click();await expect(page.locator('.reference-card')).toHaveCount(12);await expect(page.locator('.reference-card').first()).toContainText('70 · seventy');await expect(page.locator('.reference-card').last()).toContainText('900 · nine hundred');
- await page.getByText('名词变复数',{exact:true}).click();await expect(page.locator('.plural-reference dt')).toHaveCount(10);await expect(page.locator('.plural-reference')).toContainText('wives');
+ await page.goto('/unit43-44/#learn/grammar');await openCourseReference(page,'换个物品问一问');await expect(courseReference(page).locator(".reference-card")).toHaveCount(12);await expect(courseReference(page).locator(".reference-card").first()).toContainText('70 · seventy');await expect(courseReference(page).locator(".reference-card").last()).toContainText('900 · nine hundred');
+ await openCourseReference(page,'名词变复数');await expect(courseReference(page).locator(".plural-reference dt")).toHaveCount(10);await expect(courseReference(page).locator(".plural-reference")).toContainText('wives');
  await page.goto('/unit43-44/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(7);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(10);await expect(page.locator('#starCount')).toHaveText('0');
 });
 

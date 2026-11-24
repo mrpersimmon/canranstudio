@@ -62,7 +62,7 @@ test('全部声音失效也能完成五区',async({page})=>{test.setTimeout(1600
 test('74课八场景与A5/B8完整练习纸、Grammar参考',async({page})=>{
  await page.goto('/unit73-74/#learn/apply');await openCourseReference(page,'课本小参考 · 动作与方式');await expect(courseReference(page).locator(".reference-card")).toHaveCount(8);await expect(courseReference(page).locator(".reference-card").first()).toContainText('shaved hurriedly');await expect(courseReference(page).locator(".reference-card").last()).toContainText('swam very well');
  await page.goto('/unit73-74/#learn/grammar');await openCourseReference(page,'语法小参考');for(const str of ['hardly是','lately是','过去式/red/','心中暗想','仍不了解伦敦'])await expect(courseReference(page).first()).toContainText(str);
- await page.getByText('更多不规则形式',{exact:true}).click();await expect(courseReference(page).locator(".past-reference")).toContainText('write → wrote');
+ await openCourseReference(page,'更多不规则形式');await expect(courseReference(page).locator(".past-reference")).toContainText('write → wrote');
  await page.goto('/unit73-74/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(5);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(8);for(const text of ['does not know','London','enjoyed ourselves','very much'])await expect(page.locator('.writing-bank')).toContainText(text);
 });
 for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三卡、字体及操作`,async({page},info)=>{

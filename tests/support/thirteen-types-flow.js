@@ -41,7 +41,9 @@ async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=t
  if(navigate)await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
  if(await room.locator('.practice-finish').isVisible())return;
- const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const loadingCopy=room.locator('.progress-copy');
+ await expect(loadingCopy).toHaveText(/第\s*\d+\s*\/\s*\d+\s*题/);
+ const first=Number((await loadingCopy.innerText()).match(/第\s*(\d+)/)[1])-1;
  for(let i=first;i<items.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   // A new scene can briefly hide its controls while the next question renders.

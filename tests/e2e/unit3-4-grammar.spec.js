@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectNoVerdict,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,expectNoVerdict,expectRoundCounts,expectResultIcons,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { select } = require('../support/units1-30-tasks');
 const { GRAMMAR, TRANSFER, predecessor } = require('../support/unit34-grammar');
@@ -75,7 +75,7 @@ test('十题完成：拼句撤回、逐空选择、配对、提示、错答和�
   await expect(cards.locator('li')).toHaveCount(3);
   await expectRoundCounts(cards.locator('.completion-number'), ['7', '10', '1']);
   await expect(page.locator('#starCount')).toHaveText('0');
-  for (const [i, name] of ['streak', 'correct', 'incorrect'].entries()) await expect(cards.locator('img').nth(i)).toHaveAttribute('src', `/assets/unit1-2/completion/${name}-v1.png`);
+  await expectResultIcons(room);
   await page.reload(); await expectRoundCounts(cards.locator('.completion-number'), ['7', '10', '1']);
   await room.getByRole('button', { name: '下一站：认领柜台', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/manners$/);

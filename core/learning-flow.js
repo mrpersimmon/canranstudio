@@ -96,6 +96,7 @@
  function openReference(source,focus){
   restoreLiveReference();
   referenceSource=source;referenceFocus=focus;referenceTitle.textContent=source.querySelector('summary').textContent;
+  /* @bench:reference */
   // Paged references own their event handlers and saved reading position.
   // Keep that original widget mounted while the learner uses the sheet.
   if(source.classList.contains('grammar-reference')&&source.querySelector('button,input,select,textarea')){
@@ -117,7 +118,6 @@
    const text=unit.copy.references?.[term.textContent];if(text&&meaning?.tagName==='DD')meaning.textContent=text;
   }
   referenceSheet.showModal();referenceContent.scrollTop=0;
-  /* @bench:reference */
  }
  function updateMilestones(surface){
   if(!milestones)return;

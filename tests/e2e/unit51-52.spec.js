@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit5152');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:7000});
 test('56题、五区五星、统一三卡、示范记录与零英语配音',async({page},info)=>{
@@ -60,7 +60,7 @@ test('明信片只在检查正确后完成，订正统计为4／8／2',async({pa
 });
 test('全部声音失效也能完成五区',async({page})=>{test.setTimeout(150000);let failures=0;await page.route(/\.(mp3|wav|ogg)(?:\?|$)/,r=>{failures++;return r.abort();});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id);await expect(page.locator('#starCount')).toHaveText('5');expect(failures).toBeGreaterThan(0);});
 test('Lesson52十二组完整国籍来源与20th–31st、七加十组书写材料',async({page})=>{
- await page.goto('/unit51-52/#learn/apply');await page.getByText('国家与国籍 · 12张旅行卡',{exact:true}).click();await expect(page.locator('.reference-card')).toHaveCount(12);await expect(page.locator('.reference-card').first()).toContainText('20th · twentieth');await expect(page.locator('.reference-card').last()).toContainText('31st · thirty-first');await expect(page.locator('.reference-card').nth(2)).toContainText('She comes from the Netherlands.');
+ await page.goto('/unit51-52/#learn/apply');await openCourseReference(page,'国家与国籍 · 12张旅行卡');await expect(courseReference(page).locator(".reference-card")).toHaveCount(12);await expect(courseReference(page).locator(".reference-card").first()).toContainText('20th · twentieth');await expect(courseReference(page).locator(".reference-card").last()).toContainText('31st · thirty-first');await expect(courseReference(page).locator(".reference-card").nth(2)).toContainText('She comes from the Netherlands.');
  await page.goto('/unit51-52/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(7);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(10);
 });
 for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三卡、字体及操作`,async({page},info)=>{

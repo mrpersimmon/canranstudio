@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,finishStoryAndReturn,readyCourse}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
@@ -14,20 +14,20 @@ const DIALOGUE = [
 const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['3-4'].old).map(id=>[id,taskCases.answers('3-4',id).map(q=>q.answer)]));
 async function completeStory(page, prefix = '') {
   await page.goto(prefix + '/unit3-4/#learn/text');
-  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+  await readyCourse(page);
   const room = page.getByRole('region', { name: '衣帽间小剧场', exact: true });
   for (let i = 0; i < DIALOGUE.length; i++) {
     await courseButton(room, i ? '下一句' : "startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0, i + 1));
     await expect(courseButton(room, i === 11 ? "finishStory" : '下一句')).toBeEnabled({ timeout: 10000 });
   }
-  await courseButton(room, "finishStory").click();
-  await expect(room).toContainText('故事看完了！');
+  await finishStoryAndReturn(room);
+  await expect(room.locator('.btext span')).toHaveText(DIALOGUE);
 }
 async function completeActivity(page, id, { exerciseRecovery = false, prefix = '', inspect } = {}) {
   await require('./reward-dialog').handleRewardDialog(page);
   await page.goto(prefix + '/unit3-4/#learn/' + id);
-  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+  await readyCourse(page);
   const room = page.locator('.stage-' + id), answers = ANSWERS[id];
   for (let i = 0; i < answers.length; i++) {
     const answer = answers[i], check = room.getByRole('button', { name: '检查答案', exact: true });
@@ -43,7 +43,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     if (exerciseRecovery && i === 0 && id === 'exam') {
       await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0);
       await page.reload();
-      await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+      await readyCourse(page);
       await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
       await expect(room.getByRole('button', { name: answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
 
@@ -53,7 +53,7 @@ async function completeActivity(page, id, { exerciseRecovery = false, prefix = '
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     if (exerciseRecovery && id === 'listen' && i === 6) {
       await page.reload();
-      await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+      await readyCourse(page);
       await expect(room.getByRole('status')).toContainText('答对了！');
     }
     await courseButton(room, i === answers.length - 1 ? (id === 'exam' ? "finishExam" : "finishPractice") : '下一题').click();
@@ -70,7 +70,7 @@ async function completeUnit34(page, prefix = '') {
   await completeStory(page, prefix);
   for (const id of ['roles', 'reply', 'manners', 'exam']) await completeActivity(page, id, { exerciseRecovery: true, prefix });
   await page.goto(prefix + '/unit3-4/#learn/certificate');
-  await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+  await readyCourse(page);
   await expect(page.locator('#starCount')).toHaveText('5');
 }
 module.exports = { DIALOGUE, ANSWERS, completeStory, completeActivity, completeUnit34 };

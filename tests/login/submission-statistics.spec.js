@@ -1,5 +1,4 @@
 'use strict';
-const {expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises'), os = require('node:os'), path = require('node:path');
 const { adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
@@ -144,7 +143,7 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     await expect(p.locator('#starCount')).toHaveText('5');
     await room.getByRole('button', { name: '再试一次', exact: true }).click();
     await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1) });
-    await expectRoundCounts(room.locator('.completion-number'), ['3', '4', '1']);
+    await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
     await expect(room.locator('.completion-unit')).toHaveText(['次', '题', '题']);
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     if(await p.getByRole('button',{name:'更多学习操作'}).isVisible())await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button', { name: '学习记录', exact: true }).click();
@@ -161,8 +160,8 @@ test('旧课包升级保留中途错答、既有五星和首次满星日期，�
     second = await browser.newContext({ ...deviceSettings(), baseURL: origin }); const other = await second.newPage();
     await signIn(other, account, base); await other.goto(base + 'unit1-2/#learn/manners');
     await courseReadyForAssertions(other);
-    await expectRoundCounts(other.locator('.stage-manners .completion-number'), ['3', '4', '1']);
-    await other.reload(); await courseReadyForAssertions(other); await expectRoundCounts(other.locator('.stage-manners .completion-number'), ['3', '4', '1']);
+    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
+    await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await other.goto(base + 'unit1-2/#learn/certificate');
     await expect(other.locator('#certificateDate')).toHaveText(date); await expect(other.locator('#certificateName')).toHaveText('小禾');
     await other.getByRole('link', { name: '我的纪念册', exact: true }).click();
@@ -210,7 +209,7 @@ test('有错轮次同步到另一设备仍为零星，重复传输不增加统�
       mark('wrong-answer reload ready');
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     } });
-    await expectRoundCounts(p.locator('.stage-manners .completion-number'), ['3', '4', '1']);
+    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state', 'retry');
     mark('corrected round with lost response');
     // Resend/merge the same accepted proof without another learner submission.
@@ -221,14 +220,14 @@ test('有错轮次同步到另一设备仍为零星，重复传输不增加统�
     mark('second retry reload ready');
     await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
     expect(completedTransmissions).toBeGreaterThanOrEqual(2);
-    await expectRoundCounts(p.locator('.stage-manners .completion-number'), ['3', '4', '1']);
+    await expect(p.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(p.locator('#starCount')).toHaveText('0');
     second = await studentLogin(browser, account, base, deviceSettings()); const other = second.page;
     mark('second login ready');
     await other.goto(base + 'unit1-2/#learn/manners');
     await courseReadyForAssertions(other);
     mark('second course ready');
-    await expectRoundCounts(other.locator('.stage-manners .completion-number'), ['3', '4', '1']);
+    await expect(other.locator('.stage-manners .completion-number')).toHaveText(['3', '4', '1']);
     await expect(other.locator('#starCount')).toHaveText('0');
     await other.locator('.stage-manners').getByRole('button', { name: '再练一轮', exact: true }).click();
     await other.reload(); await courseReadyForAssertions(other); await expect(other.locator('.stage-manners .progress-copy')).toHaveText('第 1 / 5 题');

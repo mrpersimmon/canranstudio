@@ -33,7 +33,24 @@ async function expectCompactCompletion(page, room, { illustrated = false } = {})
       await expect(finish).toHaveAttribute('data-result-motion', 'finished');
     }
   }
-  await expect(results).toBeInViewport({ ratio: 1 });
+  // The intersection API rounds a fractional stroke at some viewport scales.
+  // Check all four edges in CSS pixels and the actual text, including nested clips.
+  const visible = await results.evaluate(list => new Promise(resolve => {
+    const observer = new IntersectionObserver(([entry]) => {
+      observer.disconnect();
+      const box = entry.boundingClientRect, clip = entry.intersectionRect;
+      const text = [...list.querySelectorAll('.completion-stat-label, .completion-number, .completion-unit')];
+      resolve({ edges: Math.max(clip.left - box.left, clip.top - box.top, box.right - clip.right, box.bottom - clip.bottom),
+        readable: text.length === 9 && text.every(el => {
+          const range = document.createRange(); range.selectNodeContents(el);
+          const r = range.getBoundingClientRect();
+          return r.width > 0 && r.height > 0 && r.left >= clip.left && r.right <= clip.right && r.top >= clip.top && r.bottom <= clip.bottom;
+        }) });
+    });
+    observer.observe(list);
+  }));
+  expect(visible.edges, '完整统计区域的四边').toBeLessThanOrEqual(1);
+  expect(visible.readable, '所有统计标签、数字和单位都在可视范围内').toBe(true);
   const byQuestion = await page.locator('body[data-learning-shell]').count() > 0;
   await expect(results.locator('.completion-stat-label')).toHaveText(byQuestion
     ? ['连续答对', '首答正确', '订正完成'] : ['连续答对', '本次答对', '本次答错']);

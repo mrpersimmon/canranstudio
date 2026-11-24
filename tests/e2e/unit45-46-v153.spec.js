@@ -111,7 +111,7 @@ test('所有声音失败仍能完成故事和五个答题区',async({page})=>{
 });
 
 test('Lesson46八组对比、全部数字和7+8书写题有入口',async({page})=>{
- await page.goto('/unit45-46/#learn/grammar');await page.getByText('本领对比与数字',{exact:true}).click();await expect(page.locator('.reference-card')).toHaveCount(8);await expect(page.locator('.reference-card').first()).toContainText('1,000 · a thousand');await expect(page.locator('.reference-card').last()).toContainText('1,000,000 · a million');
+ await page.goto('/unit45-46/#learn/grammar');await openCourseReference(page,'本领对比与数字');await expect(courseReference(page).locator(".reference-card")).toHaveCount(8);await expect(courseReference(page).locator(".reference-card").first()).toContainText('1,000 · a thousand');await expect(courseReference(page).locator(".reference-card").last()).toContainText('1,000,000 · a million');
  await openCourseReference(page,'语法小参考');await expect(courseReference(page).locator(".grammar-reference")).toContainText('can not');
  await page.goto('/unit45-46/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(7);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(8);await expect(page.locator('#starCount')).toHaveText('0');
 });

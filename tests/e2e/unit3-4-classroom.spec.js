@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
+const {courseButton,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
@@ -117,7 +117,7 @@ test('25张音标词卡可翻面，15问和10组否定回应仍供阅读', async
   await page.reload(); await expect(room).toContainText('5 / 5');
   await room.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click(); await expect(page).toHaveURL(/#learn\/listen$/);
   await page.goto('/unit3-4/#learn/phrases'); const phrases = page.locator('.stage-reply');
-  await phrases.getByText('认领表达参考', { exact: true }).click();
+  await openCourseReference(phrases,'认领表达参考');
   await expect(phrases.locator('button.phrase-card')).toHaveCount(0);
   await phrases.getByText('换个人或物问一问', { exact: true }).click();
   await expect(phrases.locator('.sentence-models').first().locator('.reference-card')).toHaveCount(15);

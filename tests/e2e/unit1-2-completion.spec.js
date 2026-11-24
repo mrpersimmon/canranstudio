@@ -1,5 +1,4 @@
 "use strict";
-const {expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const fs = require('node:fs/promises');
@@ -60,7 +59,7 @@ test('三张统计卡区分首答题数，订正参与连续答对且默认依�
   } });
   await expect(room.locator('.completion-stat-label')).toHaveText(['连续答对', '首答正确', '订正完成']);
   // 对、对、错、错、对、对、对：连续3次；首答正确4题，订正1题。
-  await expectRoundCounts(room.locator('.completion-number'), ['3', '4', '1']);
+  await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
   await expect(room.locator('.completion-unit')).toHaveText(['次', '题', '题']);
   await expect(room.locator('.stat-streak')).toHaveAccessibleName('本轮最高连续答对 3 次');
   await expect(room.locator('.stat-correct')).toHaveAccessibleName('本轮首答正确题数 4 题');

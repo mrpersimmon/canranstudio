@@ -103,8 +103,17 @@ test('点击三课人物可选中并回弹，重复点击不叠加动画，键�
     await keyboard.focus();await keyboard.press('Enter');
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit5-6');
     expect(await p.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
-    await p.emulateMedia({reducedMotion:'reduce'});await keyboard.press('Space');
-    expect(await keyboard.locator('.journey-story-motion').evaluate(el=>el.getAnimations().length)).toBe(0);
+    await p.emulateMedia({reducedMotion:'reduce'});
+    const motion=keyboard.locator('.journey-story-motion');
+    await expect.poll(()=>motion.evaluate(el=>el.getAnimations().length)).toBe(0);
+    const load=await motion.evaluateHandle(el=>{
+      const events=[];const paint=()=>{events.push(el.getAnimations().length);if(events.length<12)requestAnimationFrame(paint);};
+      el.closest('[data-landmark-select]').addEventListener('keydown',()=>requestAnimationFrame(paint),{once:true});return events;
+    });
+    await keyboard.press('Space');
+    await p.waitForFunction(list=>list.length===12,load);
+    expect(await load.evaluate(list=>Math.max(...list))).toBe(0);
+    await load.dispose();
     const after=await(await p.request.get(base+'api/me')).json();
     expect(after.courses.map(c=>[c.id,c.stars,c.firstFullStarAt])).toEqual(before.courses.map(c=>[c.id,c.stars,c.firstFullStarAt]));
   }finally{await student.context.close();}

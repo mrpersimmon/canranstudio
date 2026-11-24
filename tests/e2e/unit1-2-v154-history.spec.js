@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseToolbar}=require('../support/course-controls');
+const {courseButton,courseReference,courseToolbar,openCourseReference}=require('../support/course-controls');
 const fs=require('fs/promises'),sharp=require('sharp');
 const {test,expect}=require('@playwright/test');
 const flow=require('../support/thirteen-types-flow'),old25=require('../fixtures/unit1-2-before-awards/flow');
@@ -38,7 +38,7 @@ for(const version of [25,37])test(`旧${version}题真实领取的证书原文�
  await page.reload();await page.getByText('之前的学习记录与证书',{exact:true}).click();await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateDate')).toHaveText(date);
 });
 test('教材七句抄写独立成页，替换例句保持十组',async({page,browserName})=>{
- await page.goto('/unit1-2/#learn/manners');await page.getByText('换个物品问一问',{exact:true}).click();await expect(page.locator('.grammar-reference .reference-card')).toHaveCount(10);
+ await page.goto('/unit1-2/#learn/manners');await openCourseReference(page,'换个物品问一问');await expect(courseReference(page).locator(".grammar-reference .reference-card")).toHaveCount(10);
  await page.goto('/unit1-2/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('Copy these sentences.');
  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});
  await expect(page.locator('#unitWriting .writing-lines li')).toHaveCount(7);for(const li of await page.locator('#unitWriting .writing-lines li').all())await expect(li).toBeVisible();

@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,readyCourse}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
@@ -8,7 +8,7 @@ const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophi
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
 const ANSWERS=Object.fromEntries(Object.entries(require('./unit56-answers').CURRENT).map(([id,rows])=>[id,rows.map(q=>q.answer)]));
 async function completeStory(page, base = '') {
-  await page.goto(base + '/unit5-6/#learn/text'); await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000}); const room=page.locator('.stage-text');
+  await page.goto(base + '/unit5-6/#learn/text'); await readyCourse(page); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++){
     await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
@@ -20,7 +20,7 @@ async function completeStory(page, base = '') {
 }
 async function completeActivity(page,id,{recovery=false,base=''}={}){
   await require('./reward-dialog').handleRewardDialog(page);
-  await page.goto(base + '/unit5-6/#learn/'+id);await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});const room=page.locator('.stage-'+id),answers=ANSWERS[id];
+  await page.goto(base + '/unit5-6/#learn/'+id);await readyCourse(page);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
   for(let i=0;i<answers.length;i++){
     const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));

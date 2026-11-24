@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, PEOPLE, ANSWERS, completeActivity, completeUnit56 } = require('../support/unit5-6-flow');
@@ -134,9 +134,9 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
   const restart = await room.getByRole('button', { name: '重新上演', exact: true }).boundingBox(), start = await room.getByRole('button', { name: '下一句', exact: true }).boundingBox();
   expect(restart.x + restart.width).toBeLessThan(start.x); expect(restart.y).toBeCloseTo(start.y, 0);
   await page.goto('/unit5-6/#learn/models');
-  await page.getByText('汽车与选择问答参考',{exact:true}).click();await expect(page.locator('.car-showroom article')).toHaveCount(6);
-  await expect(page.locator('.stage-cars .car-reference button').filter({ hasText: 'What make' })).toHaveCount(0);
-  await page.locator('.stage-cars .car-reference').screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
+  await openCourseReference(page,'汽车与选择问答参考');await expect(page.locator('.car-showroom article')).toHaveCount(6);
+  await expect(courseReference(page).locator(".car-reference button").filter({ hasText: 'What make' })).toHaveCount(0);
+  await courseReference(page).locator(".car-reference").screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
 });
 
 test('后段人物缺图时先等待，同页离线可读20句，断网刷新受阻并联网恢复最新句', async ({ page, context }) => {

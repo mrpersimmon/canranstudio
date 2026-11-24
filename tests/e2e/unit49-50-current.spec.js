@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit4950');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:6000});
 test('60题、五区五星、统一结算及零英语配音请求',async({page},info)=>{
@@ -72,7 +72,7 @@ test('全部声音失效也能完成五区',async({page})=>{
  test.setTimeout(120000);let failures=0;await page.route(/\.(mp3|wav|ogg)(?:\?|$)/,r=>{failures++;return r.abort();});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id);await expect(page.locator('#starCount')).toHaveText('5');expect(failures).toBeGreaterThan(0);
 });
 test('Lesson50十二组替换与序数词、六加十道书写材料',async({page})=>{
- await page.goto('/unit49-50/#learn/grammar');await page.getByText('蔬果摊与序数词',{exact:true}).click();await expect(page.locator('.reference-card')).toHaveCount(12);await expect(page.locator('.reference-card').first()).toContainText('13th · thirteenth');await expect(page.locator('.reference-card').last()).toContainText('24th · twenty-fourth');
+ await page.goto('/unit49-50/#learn/grammar');await openCourseReference(page,'蔬果摊与序数词');await expect(courseReference(page).locator(".reference-card")).toHaveCount(12);await expect(courseReference(page).locator(".reference-card").first()).toContainText('13th · thirteenth');await expect(courseReference(page).locator(".reference-card").last()).toContainText('24th · twenty-fourth');
  await page.goto('/unit49-50/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(6);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(10);
 });
 for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、结算、字体和操作`,async({page},info)=>{

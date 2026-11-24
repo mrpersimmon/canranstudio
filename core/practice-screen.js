@@ -231,6 +231,9 @@
  };
  new MutationObserver(schedule).observe(workspace,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','aria-expanded','data-result-motion','inert']});
  root.addEventListener('hashchange',schedule);root.addEventListener('resize',size);
+ // The chapter may canonicalize a saved or older URL after the first paint.
+ // Its local marker is also fired when replaceState keeps the browser silent.
+ if(flow)root.addEventListener('lesson49:leave-activity',schedule);
  root.visualViewport?.addEventListener('resize',size);root.visualViewport?.addEventListener('scroll',size);
  root.addEventListener('lesson-sync:status',syncNavigation);
  // The runner emits after the complete new question DOM is ready. Lay it out

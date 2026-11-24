@@ -1,4 +1,4 @@
-const {courseButton,expectResultIcons,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,courseReference,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 require('../support/unit4142-v153-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const { test, expect } = require('@playwright/test');
@@ -189,8 +189,8 @@ test('场景先选后检查：数量改变有依据，第三题两次错答结�
 
 test('教材替换和书写保留为参考，不增加答题区',async({page})=>{
   await page.goto('/unit41-42/#learn/grammar');
-  await page.getByText('换个物品问一问',{exact:true}).click();
-  const cards=page.locator('.reference-card');await expect(cards).toHaveCount(16);
+  await openCourseReference(page,'换个物品问一问');
+  const cards=courseReference(page).locator(".reference-card");await expect(cards).toHaveCount(16);
   await expect(cards.filter({hasText:'19 · nineteen'})).toContainText('Is there any tea on that table?');
   await expect(cards.last()).toContainText('100 · a hundred');
   await page.goto('/unit41-42/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();

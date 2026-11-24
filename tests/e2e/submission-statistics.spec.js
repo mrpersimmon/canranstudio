@@ -26,9 +26,9 @@ for (const [pair, count] of [
   else if (Number(pair.split('-')[0]) >= 31) await require('../support/unit' + pair + '-flow').activity(page, 'listen', '/lesson');
   else await (pair === '25-26' ? flow : tasks).activity(page, pair, 'listen', { base: '/lesson' });
   const room = page.locator('.stage-listen'), results = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
+  await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '首答正确', '订正完成']);
   await expect(results.locator('.completion-number')).toHaveText([String(count), String(count), '0']);
-  await expect(results.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+  await expect(results.locator('.completion-unit')).toHaveText(['次', '题', '题']);
   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);

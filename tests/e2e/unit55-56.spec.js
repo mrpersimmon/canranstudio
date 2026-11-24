@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit5556');const {select}=require('../support/unit5556');
 test.use({actionTimeout:7000});
 test('62题、五区五星、统一三卡、示范记录与零英语配音',async({page},info)=>{
@@ -60,7 +60,7 @@ test('日程记录只在检查正确后完成，订正统计为4／8／2',async(
 });
 test('全部声音失效也能完成五区',async({page})=>{test.setTimeout(150000);let failures=0;await page.route(/\.(mp3|wav|ogg)(?:\?|$)/,r=>{failures++;return r.abort();});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id);await expect(page.locator('#starCount')).toHaveText('5');expect(failures).toBeGreaterThan(0);});
 test('Lesson56十二幅活动与序数词、五加十一组书写材料',async({page})=>{
- await page.goto('/unit55-56/#learn/apply');await page.getByText('日常活动 · 12张参考卡',{exact:true}).click();await expect(page.locator('.reference-card')).toHaveCount(12);await expect(page.locator('.reference-card').first()).toContainText('1st · first');await expect(page.locator('.reference-card').last()).toContainText('34th · thirty-fourth');await expect(page.locator('.reference-card').nth(2)).toContainText('He shaves in the morning.');
+ await page.goto('/unit55-56/#learn/apply');await openCourseReference(page,'日常活动 · 12张参考卡');await expect(courseReference(page).locator(".reference-card")).toHaveCount(12);await expect(courseReference(page).locator(".reference-card").first()).toContainText('1st · first');await expect(courseReference(page).locator(".reference-card").last()).toContainText('34th · thirty-fourth');await expect(courseReference(page).locator(".reference-card").nth(2)).toContainText('He shaves in the morning.');
  await page.goto('/unit55-56/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(5);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(11);
 });
 for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三卡、字体及操作`,async({page},info)=>{
