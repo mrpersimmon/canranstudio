@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('./course-controls');
+const {courseButton,incorrectFeedback,restoredPracticeIndex}=require('./course-controls');
 const {expect}=require('@playwright/test');
 // Frozen predecessor answers navigate already-reviewed content. New expectations
 // were transcribed from the v4 teaching draft; never read answers from the page.
@@ -44,8 +44,8 @@ async function activity(page,pair,group,{base='',old=false,capture,beforeFinish,
  await page.goto(`${base}/unit${pair}/#learn/${group}`);const room=page.locator('.stage-'+group),items=answers(pair,group,old);
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});
  await expect(room).toBeVisible();
- if(await room.locator('.practice-finish').isVisible())return;
- const copy=await room.locator('.progress-copy').innerText();const first=Number(copy.match(/第 (\d+)/)[1])-1;
+ const first=await restoredPracticeIndex(room,room.locator('.practice-finish:visible'));
+ if(first===null)return;
  for(let i=first;i<items.length;i++){
   const q=items[i],check=room.getByRole('button',{name:'检查答案',exact:true});
   if(await check.isVisible()){

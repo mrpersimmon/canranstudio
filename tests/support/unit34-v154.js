@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,readyCourse}=require('./course-controls');
+const {courseButton,readyCourse,restoredPracticeIndex}=require('./course-controls');
 const fs=require('fs/promises'),{expect}=require('@playwright/test');
 const original=require('./unit3-4-flow'),tasks=require('./units1-30-tasks');
 const ANSWERS=original.ANSWERS;
@@ -28,8 +28,9 @@ async function story(p,base=''){
 async function activity(p,id,{base='',old25=false,capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);
  if(navigate)await p.goto(base+'/unit3-4/#learn/'+id);await ready(p);
- const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];await expect(room).toBeVisible({timeout:30000});if(await room.locator('.practice-finish').count()){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;}
- const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const room=p.locator('.stage-'+id),answers=(old25?OLD25:ANSWERS)[id];await expect(room).toBeVisible({timeout:30000});
+ const first=await restoredPracticeIndex(room);
+ if(first===null){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(p,room);return room;}
  for(let i=first;i<answers.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await tasks.select(room,answers[i]);await check.click();}

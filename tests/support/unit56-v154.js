@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,restoredPracticeIndex}=require('./course-controls');
 const fs=require('fs/promises'),{expect}=require('@playwright/test'),{CURRENT,BEFORE,CLASSROOM}=require('./unit56-answers'),tasks=require('./units1-30-tasks');
 const original=require('./unit5-6-flow');
 async function ready(p){await expect(p.locator('#wordPageProgress:visible,.practice-screen-stage .practice-content:visible,.learning-surface:visible').first()).toBeVisible({timeout:30000});await expect(p.locator('html')).not.toHaveAttribute('data-course-painting','',{timeout:30000});}
@@ -15,9 +15,11 @@ async function select(room,answer){if(answer?.fills){for(let i=0;i<answer.fills.
 async function activity(p,id,{base='',edition='current',capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);if(navigate)await p.goto(base+'/unit5-6/#learn/'+id);await ready(p);
  const room=p.locator('.stage-'+id),answers=({current:CURRENT,before:BEFORE,classroom:CLASSROOM}[edition])[id];await expect(room).toBeVisible({timeout:30000});let guard=0;
- while(!await room.locator('.practice-finish').count()){
+ while(true){
+  const i=await restoredPracticeIndex(room);
+  if(i===null)break;
   if(++guard>answers.length+1)throw Error('Practice did not advance: '+id);
-  const i=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1,check=room.getByRole('button',{name:'检查答案',exact:true});
+  const check=room.getByRole('button',{name:'检查答案',exact:true});
   const retry=room.getByRole('button',{name:'再试一次',exact:true});if(await retry.isVisible())await retry.click();
   if(await check.isVisible()){if(capture)await capture(room,i,'blank');await select(room,answers[i].answer);await check.click();}
   await expect(room.locator('.fb')).toHaveText('答对了！');if(capture)await capture(room,i,'correct');

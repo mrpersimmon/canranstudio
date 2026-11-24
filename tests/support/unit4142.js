@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,restoredPracticeIndex}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const {select}=require('./units1-30-tasks');
 // Manually reviewed against the three source PDFs and the teaching manuscript.
@@ -21,8 +21,8 @@ async function story(page,base=''){
 async function activity(page,id,{base='',inspect,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
  await page.goto(base+'/unit41-42/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
- if(await room.locator('.practice-finish').isVisible())return;
- const index=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const index=await restoredPracticeIndex(room,room.locator('.practice-finish:visible'));
+ if(index===null)return;
  for(let i=index;i<answers.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   await expect(check).toBeDisabled();

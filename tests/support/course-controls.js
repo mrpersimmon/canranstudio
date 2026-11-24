@@ -29,10 +29,10 @@ async function readyCourse(page){
     .toBeVisible({timeout:30000});
 }
 // Reloading can briefly attach the exercise before the saved round is rendered.
-async function restoredPracticeIndex(room){
+async function restoredPracticeIndex(room,finish=room.locator('.practice-finish')){
   const current=room.locator('.progress-copy').filter({hasText:/第\s*\d+\s*\/\s*\d+\s*题/});
-  return current.or(room.locator('.practice-finish')).first().evaluate(el=>{
-    if(el.matches('.practice-finish'))return null;
+  return current.or(finish).first().evaluate(el=>{
+    if(!el.matches('.progress-copy'))return null;
     return Number(el.textContent.match(/第\s*(\d+)/)[1])-1;
   });
 }

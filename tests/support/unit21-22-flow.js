@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,restoredPracticeIndex}=require('./course-controls');
 const {expect}=require('@playwright/test');
 // Independent transcription from PDF 75–78 and the authored question draft.
 const DIALOGUE=['Give me a book please, Jane.','Which book?','This one?','No, not that one. The red one.','This one?','Yes, please.','Here you are.','Thank you.'];
@@ -36,8 +36,9 @@ async function completeUnit2122(page,base=''){
 }
 async function finishRemainingActivity(page,id,base=''){
  await page.goto(base+'/unit21-22/#learn/'+id);const room=page.locator('.stage-'+id);
- if(await room.getByRole('group',{name:'完成后的操作',exact:true}).isVisible())return;
- const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const finish=room.getByRole('group',{name:'完成后的操作',exact:true}).filter({visible:true});
+ const first=await restoredPracticeIndex(room,finish);
+ if(first===null)return;
  for(let i=first;i<ANSWERS[id].length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   if(await check.isVisible()){await require('./units17-30-exam').selectAnswer(room,ANSWERS[id][i]);await check.click();}
