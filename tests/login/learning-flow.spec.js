@@ -69,6 +69,12 @@ test('减少动态时保留稳定页面，下一题和返回不改变已选答�
   const before=await p.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit1-2:learning:v1')));await p.locator('.learning-milestones').getByRole('link',{name:'故事',exact:true}).click();await header(p);await p.goBack();await expect(choice).toHaveAttribute('aria-pressed','true');
   const after=await p.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit1-2:learning:v1')));expect(after.groups).toEqual(before.groups);expect(after.records).toEqual(before.records);
   expect(await p.locator('.learning-surface').evaluate(el=>el.getAnimations({subtree:true}).filter(a=>a.effect.getTiming().iterations!==Infinity&&a.playState==='running').length)).toBe(0);
+  // A sub-frame transition can finish before the count above samples it.
+  const transitioningDecorations=await choice.evaluate(button=>['::before','::after'].filter(pseudo=>{
+   const style=getComputedStyle(button,pseudo);
+   return style.transitionProperty!=='none'&&style.transitionDuration.split(',').some(duration=>parseFloat(duration)>0);
+  }));
+  expect(transitioningDecorations,'系统减少动态时，选项的伪元素也不能启动过渡').toEqual([]);
   await p.screenshot({path:info.outputPath('reduced-motion-selected.png')});
  }finally{await s.context.close();}
 });

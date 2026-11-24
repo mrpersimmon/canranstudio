@@ -344,7 +344,8 @@ footer{text-align:center;padding:30px 10px 50px;font-weight:700;opacity:.75}
   .cert-btns{display:none}
 }
 @media (prefers-reduced-motion: reduce){
-  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
 }
 /* Lesson 49 teaching controls keep the original warm shop palette. */
 [hidden]{display:none!important}
@@ -376,4 +377,3 @@ button:disabled{cursor:default;opacity:.65}
 .fback .word-context{margin-top:8px}
 .fb{margin:14px 0;white-space:pre-line}
 .practice-options+button{margin:6px 0}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
