@@ -1,9 +1,9 @@
 'use strict';
-const {courseButton}=require('../support/course-controls');
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const {devices}=require('../support/required-phone-devices');
 
-const {adminLogin, createStudent, fillLogin, openCourseSettings, openMyAccount, saveCourses, setPassword, signIn, studentLogin}=require('./helpers');
+const {adminLogin, createStudent, fillLogin, openCourseSettings, openMyAccount, saveCourses, setPassword, signIn, studentLogin, waitForCourseReady}=require('./helpers');
 
 test('未登录先看到学号密码入口，不能直接进入教学单元', async ({ page }) => {
   await page.goto('/lesson/');
@@ -157,9 +157,9 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
  // The helper checks matching labels one by one, so select all in the management UI.
  await page.getByRole('button',{name:'管理 课程回归班'}).click();for(const box of await page.locator('#courses').getByRole('checkbox').all())await box.check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');
  const a=await studentLogin(browser,code);await a.page.setViewportSize({width:390,height:844});const errors=[];a.page.on('pageerror',e=>errors.push(e.message));
- const answers={'unit1-2':'Excuse me!','unit3-4':'My umbrella, please.', 'unit5-6':'Sophie','unit7-8':'工程师','unit9-10':'成年女子','unit11-12':'Whose','unit13-14':'颜色','unit15-16':'雇员；受雇的人','unit17-18':'man','unit19-20':'累的；疲倦的','unit21-22':'给','unit23-24':'哪些','unit25-26':'厨房','unit27-28':'客厅','unit29-30':'关上；关闭','unit49-50':'要豌豆还是豆角'};
- for(const id of Object.keys(answers)){
-  await a.page.goto('/lesson/'+id+'/#learn/words');await expect(a.page.locator('.unit-word').first()).toBeVisible();await expect(a.page.locator('#courseLoader')).toHaveCount(0);
+ const courses=[...Array.from({length:15},(_,i)=>`unit${i*2+1}-${i*2+2}`),'unit49-50'];
+ for(const id of courses){
+  await a.page.goto('/lesson/'+id+'/#learn/words');await waitForCourseReady(a.page);await expect(a.page.locator('.unit-word').first()).toBeVisible();
   expect(await a.page.evaluate(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete&&i.naturalWidth>0))).toBe(true);
   expect(await a.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await a.page.locator('.unit-word').first().click();
   await a.page.screenshot({path:'output/login/'+id+'-mobile.png'});
@@ -168,10 +168,16 @@ test('16 个教学单元冷启动、图片完整、词卡和一道真实作答�
   const room=a.page.locator('.stage-'+(id==='unit49-50'?'grammar':id==='unit1-2'?'manners':'listen'));await expect(room.locator('.practice-options button').first()).toBeVisible();
   if(['unit3-4','unit5-6'].includes(id))await expect(room.getByRole('button',{name:'听一遍',exact:true})).toHaveCount(0);
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();
-  if(['unit1-2','unit49-50'].includes(id))await room.locator('.practice-options button').first().click();
+  const correct=id!=='unit49-50';
+  if(id==='unit1-2')await room.getByRole('button',{name:'me',exact:true}).click();
+  else if(!correct)await room.getByRole('button',{name:'是不是喜欢所有蔬菜',exact:true}).click();
   else if(id==='unit25-26')await require('../support/thirteen-types-flow').select(room,require('../support/thirteen-types-flow').ANSWERS['25-26'].listen[0]);
   else {const{answers,select}=require('../support/units1-30-tasks');await select(room,answers(id.slice(4),'listen')[0].answer);}
-  await expect(check).toBeEnabled();await check.click();await expect(room.getByRole('status')).toHaveText(/答对了|再看看/);
+  await expect(check).toBeEnabled();await check.click();
+  await expect(room.getByRole('status')).toHaveText(correct?'答对了！':await incorrectFeedback(room));
+  const records=await a.page.evaluate(id=>Object.values(JSON.parse(localStorage.getItem('canran:lesson:'+id+':learning:v1')).records),id);
+  expect(records,id).toHaveLength(1);
+  expect(records[0],id).toMatchObject({checked:true,attempts:1,correct,firstCorrect:correct});
  }
  expect(errors).toEqual([]);await a.context.close();
 });
