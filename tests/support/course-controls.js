@@ -107,6 +107,20 @@ async function expectCorrectedCompletion(room){
   else await expect(card).toContainText('本轮有过错答');
 }
 let reviewedWords;
+async function courseWord(room,word){
+  const target=room.getByRole('button',{name:word,exact:true});
+  const journey=room.locator('#wordPageProgress');
+  await expect(journey).toHaveText(/\d+\s*\/\s*\d+/);
+  const [at,total]=(await journey.textContent()).split('/').map(Number);
+  const previous=courseButton(room,'previousWords');
+  for(let index=at;index>1;index--)await previous.click();
+  for(let index=1;index<=total;index++){
+    await expect(journey).toHaveText(index+' / '+total);
+    if(await target.isVisible())return target;
+    if(index<total)await courseButton(room,'nextWords').click();
+  }
+  throw Error('未能在 '+room.page().url()+' 的词卡中找到 '+word);
+}
 async function expectVocabulary(page,displayed,original){
   if(!await page.locator('body[data-learning-shell]').count()){
     expect(displayed).toEqual(original);return;
@@ -117,6 +131,21 @@ async function expectVocabulary(page,displayed,original){
   const ordered=['illustration','context'].flatMap(kind=>original.filter(word=>classification[word]?.kind===kind));
   expect(ordered).toHaveLength(original.length);
   expect(displayed).toEqual(ordered);
+}
+async function expectLessonAfterPreviousRecord(page,legacyCount){
+  const view=page.locator('#wordPageProgress');
+  const [oldPage,chapterCount]=legacyCount.split('/').map(Number);
+  const root=new URL(page.url()),name=root.pathname.match(/\/(unit\d+-\d+)\//)?.[1];
+  if(!name||!await page.locator('body[data-learning-shell]').count()){
+    await expect(view).toHaveText(legacyCount);return;
+  }
+  const course=require('../../server/progress').definition(process.cwd(),name,'/');
+  const words=course.learning.WORDS.map(word=>word.en),end=words[(oldPage-1)*6];
+  expect(oldPage).toBeGreaterThan(0);expect(chapterCount).toBe(Math.ceil(words.length/6));
+  const evidence=(reviewedWords??=require('../../scripts/prepare-word-decks').reviewedUnits(process.cwd()))[name];
+  const expected=['illustration','context'].flatMap(type=>words.filter(word=>evidence[word].kind===type));
+  await expect(view).toHaveText((Math.floor(expected.indexOf(end)/6)+1)+' / '+chapterCount);
+  await expect(page.locator('.unit-word').filter({has:page.getByText(end,{exact:true})})).toHaveCount(1);
 }
 // Older results show submissions. The new result shows question counts, while
 // the saved round still has to account for every accepted and rejected attempt.
@@ -195,4 +224,4 @@ async function expectMobileStageNavigation(page){
     expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(44);
   }
 }
-module.exports={courseButton,readyCourse,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};
+module.exports={courseButton,readyCourse,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,courseWord,expectLessonAfterPreviousRecord,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};

@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {expectLessonAfterPreviousRecord,courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy,readLearning}=require('../support/unit2324-v153-legacy');
 const old=require('../support/unit2324-before-v153'),fresh=require('../support/unit2324-fivezones');
@@ -17,7 +17,7 @@ test('45题版双空草稿、综合错答、词卡阅读与两种单图分页保
  await upgrade();await page.reload();const after=await readLearning(page),snapshot=after.activity.unit2324V153Snapshot;expect(snapshot.records).toEqual(before.records);expect(snapshot.groups).toEqual(before.groups);for(const key of ['unitWordPage','unitDialogue','unitGalleryPage','unitModelPage'])expect(snapshot.activity[key]).toEqual(before.activity[key]);
  await page.goto('/unit23-24/#learn/grammar');await expect(grammar.locator('.progress-copy')).toHaveText('第 4 / 9 题');await expect(grammar.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(grammar.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'a',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.goto('/unit23-24/#learn/exam');await expect(exam.locator('.fb')).toHaveText(await incorrectFeedback(exam));await exam.getByRole('button',{name:'再试一次',exact:true}).click();await fresh.activity(page,'exam',{expectPerfect:false});await expect(page.locator('#starCount')).toHaveText('0');await exam.getByRole('button',{name:'再练一轮',exact:true}).click();await fresh.activity(page,'exam');await expect(page.locator('#starCount')).toHaveText('1');
- await page.goto('/unit23-24/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('3 / 5');await page.goto('/unit23-24/#learn/text');await expect(page.locator('.btext span')).toHaveCount(4);await expect(page.locator('.jane .cast-image')).toHaveAttribute('data-holding','true');
+ await page.goto('/unit23-24/#learn/words');await expectLessonAfterPreviousRecord(page,'3 / 5');await page.goto('/unit23-24/#learn/text');await expect(page.locator('.btext span')).toHaveCount(4);await expect(page.locator('.jane .cast-image')).toHaveAttribute('data-holding','true');
  await page.goto('/unit23-24/#learn/apply');await openCourseReference(page,'课本小参考 · 第24课');await expect(courseReference(page).locator(".gallery-current + .reference-pager span")).toHaveText('5 / 10');await expect(courseReference(page).locator(".gallery-current small")).toHaveText(['1,521']);await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('3 / 10');expect((await readLearning(page)).activity.unit2324V153Snapshot.records).toEqual(before.records);
 });
 test('原45题五星与三个未改轮次保留，两道修订题未答，完成后旧历史仍在',async({page})=>{

@@ -4,7 +4,7 @@
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
-const {adminLogin,createStudent,signIn}=require('./helpers');
+const {openCanranAward,adminLogin,createStudent,signIn}=require('./helpers');
 const {activity}=require('../support/unit4950');
 test.use({actionTimeout:10000,...(process.env.UNIT49_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
 test('真实旧账号15星升级：保留历史与日期，跨设备新题空白、首星独立入册',async({browser},info)=>{
@@ -31,7 +31,7 @@ test('真实旧账号15星升级：保留历史与日期，跨设备新题空白
   await history.screenshot({path:info.outputPath('retained-history.png')});
   second=await browser.newContext({baseURL:origin,timezoneId:'UTC'});const other=await second.newPage();await signIn(other,account,base);await other.goto(base+'unit49-50/#learn/certificate');await other.locator('.legacy-learning summary').click();await expect(other.locator('.legacy-learning')).toContainText('15 / 15');expect((await other.locator('.legacy-issued-date').innerText()).match(/\d+/g)).toEqual(date);
   await other.goto(base+'unit49-50/#learn/roles');await expect(other.locator('.stage-roles .progress-copy')).toHaveText('第 1 / 6 题');await expect(other.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(other.locator('#starCount')).toHaveText('0');
-  await activity(other,'listen',{base:prefix,keepAward:true});const reward=other.getByRole('dialog',{name:/纪念卡结算/});await expect(reward.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();await expect(reward).not.toHaveAttribute('data-dismissible','false');await reward.press('Escape');await expect(other.locator('#starCount')).toHaveText('1');await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await other.getByRole('link',{name:'我的纪念册',exact:true}).click();await expect(other.getByRole('button',{name:'查看并保存纪念卡：Lesson 49–50 晚餐采购小达人',exact:true}).locator('.certificate')).toHaveAttribute('data-stars','1');
+  await activity(other,'listen',{base:prefix,keepAward:true});const reward=other.getByRole('dialog',{name:/纪念卡结算/});await expect(reward.getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();await expect(reward).not.toHaveAttribute('data-dismissible','false');await reward.press('Escape');await expect(other.locator('#starCount')).toHaveText('1');await expect(other.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await openCanranAward(other);await expect(other.getByRole('button',{name:'查看并保存纪念卡：Lesson 49–50 晚餐采购小达人',exact:true}).locator('.certificate')).toHaveAttribute('data-stars','1');
   await p.reload();await expect(p.locator('#starCount')).toHaveText('1');await p.locator('.legacy-learning summary').click();await expect(p.locator('.legacy-learning')).toContainText('15 / 15');expect((await p.locator('.legacy-issued-date').innerText()).match(/\d+/g)).toEqual(date);
  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});await fs.rm(temporary,{recursive:true,force:true});}
 });

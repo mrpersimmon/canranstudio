@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {expectLessonAfterPreviousRecord,courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit1112-legacy');
 const {completeUnit1112}=require('../support/unit11-12-flow');
@@ -22,7 +22,7 @@ test('旧版中途错答、词卡和阅读位置保留；新语法不由旧题�
  await page.goto('/unit11-12/#learn/models');for(let i=0;i<3;i++)await page.getByRole('button',{name:'下一份档案',exact:true}).click();
  await page.goto('/unit11-12/#learn/text');await courseButton(page, "startStory").click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
  const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit11-12:learning:v1')));
- await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit11-12/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 3');
+ await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit11-12/#learn/words');await expectLessonAfterPreviousRecord(page,'2 / 3');
  await page.goto('/unit11-12/#learn/listen');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  const archived=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit11-12:learning:v1')).activity.unit1112LegacySnapshot);
  expect(archived.records).toEqual(before.records);expect(archived.groups).toEqual(before.groups);expect(archived.activity.unitDialogue).toEqual(before.activity.unitDialogue);

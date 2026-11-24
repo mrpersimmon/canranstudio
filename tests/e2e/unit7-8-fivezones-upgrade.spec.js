@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {expectLessonAfterPreviousRecord,courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit78-legacy');
 const {completeUnit78}=require('../support/unit7-8-flow');
@@ -21,7 +21,7 @@ test('旧版中途错答、词卡和阅读位置保留；新语法不由旧题�
  await page.goto('/unit7-8/#learn/words');await courseButton(page, "nextWords").click();
  await page.goto('/unit7-8/#learn/text');await courseButton(page, "startStory").click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
  const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit7-8:learning:v1')));
- await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit7-8/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 4');
+ await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit7-8/#learn/words');await expectLessonAfterPreviousRecord(page,'2 / 4');
  await page.goto('/unit7-8/#learn/listen');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  const archived=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit7-8:learning:v1')).activity.unit78LegacySnapshot);
  expect(archived.records).toEqual(before.records);expect(archived.groups).toEqual(before.groups);expect(archived.activity.unitDialogue).toEqual(before.activity.unitDialogue);

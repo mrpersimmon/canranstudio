@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 // Frozen paper certificates used the learner's local date. Generate the
 // historical original in Shanghai; compare its current copy on a UTC device.
 const { test, expect } = require('@playwright/test');
@@ -60,7 +61,7 @@ test('7–8三题旧挑战先升十一题再升五星版，跨设备保留原证
 
     await new Promise(resolve => {server.close(resolve);server.closeAllConnections();});server=null;await start(root);
     await restored.goto('/unit7-8/?course-retry=1#learn/certificate');
-    await expect(restored.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+    await readyCourse(restored);
     await expect(restored.locator('#starCount')).toHaveText('0');
     const history=restored.locator('.legacy-learning');
     await history.locator('summary').first().click();
@@ -75,7 +76,7 @@ test('7–8三题旧挑战先升十一题再升五星版，跨设备保留原证
     await second.close();second=await browser.newContext({baseURL:origin,timezoneId:'UTC'});
     const fresh=await second.newPage();await signIn(fresh,account,'/');
     await fresh.goto('/unit7-8/#learn/certificate');
-    await expect(fresh.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+    await readyCourse(fresh);
     await expect(fresh.locator('#starCount')).toHaveText('0');
     await expect(fresh.locator('#certificateName')).toHaveText('采访班');
     await expect(fresh.locator('#certificateDate')).toBeHidden();

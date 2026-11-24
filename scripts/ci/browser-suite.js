@@ -6,8 +6,8 @@ const timings = require('./timings.json');
 const ROOT = path.resolve(__dirname, '../..');
 const CLI = path.join(ROOT, 'node_modules/@playwright/test/cli.js');
 const SUITES = {
-  courses: { config: 'playwright.config.js', directory: 'tests/e2e', shards: 9, filters: ['--grep-invert', '@cache-performance'] },
-  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 6, filters: [] },
+  courses: { config: 'playwright.config.js', directory: 'tests/e2e', shards: 12, filters: ['--grep-invert', '@cache-performance'] },
+  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 8, filters: [] },
   recovery: { config: 'playwright.recovery.config.js', directory: 'tests/login', shards: 6, history: 'accounts', filters: [] }
 };
 

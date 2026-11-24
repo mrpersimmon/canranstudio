@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withQuestionMaterial}=require('../support/course-controls');
+const {courseWord,courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withQuestionMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit1516-fivezones');
 test.use({actionTimeout:7000,...(process.env.UNIT1516_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -48,7 +48,7 @@ for(const width of [320,390,768,1280])test(`场景与词卡 ${width}：完整18�
 
  }
  expect(await room.locator('.btext').first().evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Award Nunito');await room.screenshot({path:info.outputPath('story-'+width+'.png')});await page.reload();await expect(room.locator('.btext span')).toHaveCount(18);await expect(room.locator('.bcn:visible')).toHaveCount(0);
- await page.goto('/unit15-16/#learn/words');await expect(page.locator('.unit-word')).toHaveCount(6);await page.getByRole('button',{name:'customs',exact:true}).click();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.goto('/unit15-16/#learn/words');await expect(page.locator('.unit-word')).toHaveCount(6);await (await courseWord(page.locator('.stage-words'),'customs')).click();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.goto('/unit15-16/#learn/forms');await expect(page).toHaveURL(/#learn\/grammar$/);await page.goto('/unit15-16/#learn/trans');await expect(page).toHaveURL(/#learn\/apply$/);
 });
 for(const [width,height]of [[320,568],[390,500]])test(`短屏 ${width}x${height}：五区三卡和操作完整可见`,async({page},info)=>{

@@ -1,4 +1,4 @@
-const {courseButton}=require('../support/course-controls');
+const {expectLessonAfterPreviousRecord,courseButton}=require('../support/course-controls');
 'use strict';const{test,expect}=require('@playwright/test');const{legacy}=require('../support/unit4546-v153-legacy'),old=require('../support/unit4546'),fresh=require('../support/unit4546-v153');
 test.use({actionTimeout:7000,...(process.env.UNIT4546_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 for(const selected of [false,true])test(`真实旧${selected?'仅选择':'空白'}升级：不虚构提交并可零错获星`,async({page})=>{
@@ -9,7 +9,7 @@ test('原错答、双空草稿、词卡页与阅读位置保留，服务器只�
  await page.goto('/unit45-46/#learn/words');for(let i=0;i<3;i++)await courseButton(page, "nextWords").click();await page.goto('/unit45-46/#learn/text');await courseButton(page, "startStory").click();for(let i=0;i<7;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit45-46:learning:v1')));
  // This is an unfinished local round, not a previously synced completion.
  const p=require('../../server/progress'),path=require('node:path'),unit=p.definition(path.resolve(__dirname,'../..'),'unit45-46'),n=p.normalize(before,unit,'unit45-46');expect(n.activity.unit4546V153Progress).toBeUndefined();expect(n.records).toEqual({});
- await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(8);await page.goto('/unit45-46/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');const snapshot=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit45-46:learning:v1')).activity.unit4546V153Snapshot);expect(snapshot.groups).toEqual(before.groups);expect(snapshot.records).toEqual(before.records);expect(snapshot.activity.unitDialogue).toEqual(before.activity.unitDialogue);
+ await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(8);await page.goto('/unit45-46/#learn/words');await expectLessonAfterPreviousRecord(page,'4 / 4');const snapshot=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit45-46:learning:v1')).activity.unit4546V153Snapshot);expect(snapshot.groups).toEqual(before.groups);expect(snapshot.records).toEqual(before.records);expect(snapshot.activity.unitDialogue).toEqual(before.activity.unitDialogue);
  await page.goto('/unit45-46/#learn/grammar');await expect(room.locator('.progress-copy')).toHaveText('第 2 / 16 题');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'isn’t',exact:true})).toHaveAttribute('aria-pressed','true');await page.goto('/unit45-46/#learn/certificate');await page.getByText('改版前的学习记录',{exact:true}).click();await expect(page.locator('.historical-learning')).toContainText('提交1次');
 });
 test('实际49题旧五星保留；未改listen轮不重开；新增与修订题未答',async({page})=>{

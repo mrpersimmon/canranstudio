@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {courseWord,courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit910-fivezones');
 test.use({actionTimeout:7000,...(process.env.UNIT910_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -32,7 +32,7 @@ for(const width of [320,390,768,1280])test(`场景与词卡 ${width}：完整14�
   const bounds=await room.locator('.greeting-world').boundingBox(),actor=await room.locator('.cast-image:visible').boundingBox(),log=await room.locator('.dialogue-log').boundingBox(),frame=await room.locator('.dialogue-stage').boundingBox();expect(actor.x).toBeGreaterThanOrEqual(bounds.x);expect(actor.x+actor.width).toBeLessThanOrEqual(bounds.x+bounds.width+1);expect(log.y+log.height).toBeLessThan(actor.y+15);expect(bounds.y+bounds.height).toBeLessThanOrEqual(frame.y+frame.height+1);expect(actor.y+actor.height).toBeLessThanOrEqual(bounds.y+bounds.height);
  }
  expect(await room.locator('.btext').first().evaluate(e=>getComputedStyle(e).fontFamily)).toContain('Award Nunito');await room.screenshot({path:info.outputPath('story-'+width+'.png')});await page.reload();await expect(room.locator('.btext span')).toHaveCount(14);await expect(room.locator('.bcn:visible')).toHaveCount(0);
- await page.goto('/unit9-10/#learn/words');await expect(page.locator('.unit-word')).toHaveCount(6);await page.getByRole('button',{name:'hello',exact:true}).click();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.goto('/unit9-10/#learn/words');await expect(page.locator('.unit-word')).toHaveCount(6);await (await courseWord(page.locator('.stage-words'),'hello')).click();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.goto('/unit9-10/#learn/reply');await expect(page).toHaveURL(/#learn\/grammar$/);await page.goto('/unit9-10/#learn/trans');await expect(page).toHaveURL(/#learn\/apply$/);
 });
 for(const [width,height]of [[320,568],[390,500]])test(`短屏 ${width}x${height}：五区三卡和操作完整可见`,async({page},info)=>{

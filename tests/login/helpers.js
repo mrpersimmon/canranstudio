@@ -90,4 +90,9 @@ async function openMyAccount(page){
   if(await mobile.isVisible())await mobile.click();
   else await page.getByRole('button',{name:'我的',exact:true}).click();
 }
-module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };
+async function openCanranAward(page){
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();
+  await page.getByRole('link',{name:'我的纪念册',exact:true}).click();
+  await expect(page).toHaveURL(/\/awards\/(?:[?#].*)?$/);
+}
+module.exports = { openCanranAward, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };
