@@ -14,7 +14,11 @@ for(const [unit,id]of cases)test(id+' uses available space and preserves materia
    await page.locator('#state-buttons [data-state="'+state+'"]').click();await expect(page.locator('#frame-shell')).not.toHaveAttribute('aria-busy','true');
    const content=frame.locator('.learning-surface .practice-content');expect(await content.evaluate(e=>e.scrollHeight-e.clientHeight),device.id+' '+state).toBeLessThanOrEqual(2);
    const actions=await frame.locator('.learning-surface .practice-submit-row').boundingBox();if(top!==undefined)expect(actions.y).toBeCloseTo(top,0);top=actions.y;
-   if(q.image)expect((await content.locator(':scope>img.practice-scene').boundingBox()).height).toBeGreaterThanOrEqual(128);
+   if(q.image){
+    const illustration=content.locator('img.practice-scene:visible');
+    await expect(illustration).toHaveCount(1);
+    expect((await illustration.boundingBox()).height).toBeGreaterThanOrEqual(128);
+   }
   }
   if(q.display?.material){
    const saved=await frame.evaluate(()=>localStorage.getItem(CanranCore.learningContext.progress.learningKey));
