@@ -26,7 +26,7 @@ test('完整缓存 20 次重新打开导航并点课恢复学习位置', { tag: 
     }, true);
     if (!location.pathname.endsWith('/unit29-30/')) return;
     const sample = () => {
-      const next = [...document.querySelectorAll('.stage-words button')].find(button => button.textContent === '下一组词卡');
+      const next = document.querySelector('.learning-surface.stage-words .word-controls button:last-of-type');
       if (next && !next.disabled && next.checkVisibility({ visibilityProperty: true, opacityProperty: true })
           && !document.querySelector('#courseLoader') && document.fonts.status === 'loaded'
           && [...document.images].every(image => !image.getAttribute('src') || image.complete && image.naturalWidth > 0)) {
@@ -40,8 +40,8 @@ test('完整缓存 20 次重新打开导航并点课恢复学习位置', { tag: 
   });
   try {
     await page.goto('/lesson/unit29-30/#learn/words');
-    await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
-    await expect(page.locator('.stage-words')).toContainText('2 / 5');
+    await page.locator('.learning-surface.stage-words').getByRole('button', { name: '下一组', exact: true }).click();
+    await expect(page.locator('.learning-surface.stage-words')).toContainText('2 / 5');
     await page.getByRole('link', { name: '我的课程', exact: true }).click();
     // Finish the real initial cache preparation before measuring revisits.
     // The 20 timed visits, zero-download assertion and 1.5s P95 are unchanged.
@@ -64,11 +64,11 @@ test('完整缓存 20 次重新打开导航并点课恢复学习位置', { tag: 
         await visit.waitForFunction(() => window.courseUsableAt?.click > 0, null, { timeout: 5000 });
         const ready = await visit.evaluate(() => window.courseUsableAt);
         samples.push(ready.click); navigationSamples.push(ready.navigation); driverSamples.push(Date.now() - start);
-        const words = visit.locator('.stage-words');
+        const words = visit.locator('.learning-surface.stage-words');
         const position = i % 2 === 0 ? 2 : 3;
         await expect(words).toContainText(position + ' / 5');
         // Save a different real position for the next visit, without seeding storage.
-        await words.getByRole('button', { name: position === 2 ? '下一组词卡' : '上一组词卡', exact: true }).click();
+        await words.getByRole('button', { name: position === 2 ? '下一组' : '上一组', exact: true }).click();
         await expect(words).toContainText((position === 2 ? 3 : 2) + ' / 5');
         await expect(visit.locator('#courseLoader')).toHaveCount(0);
       } finally { await visit.close(); }
@@ -92,8 +92,8 @@ test('同一标签连续刷新 20 次仍保留位置、完整图片与可操作�
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (message.type() === 'warning' || message.type() === 'error') errors.push(message.text()); });
   await page.goto('/lesson/unit29-30/#learn/words');
-  const words = page.locator('.stage-words');
-  const next = words.getByRole('button', { name: '下一组词卡', exact: true });
+  const words = page.locator('.learning-surface.stage-words');
+  const next = words.getByRole('button', { name: '下一组', exact: true });
   await next.click();
   await expect(words).toContainText('2 / 5');
   page.on('request', request => { if (/\/resources\/.*\.(?:svg|png|webp|avif|jpe?g|woff2|css|js|html)(?:[?#]|$)/.test(request.url())) fetched.push(request.url()); });

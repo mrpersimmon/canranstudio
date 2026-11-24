@@ -26,7 +26,11 @@ for(const device of devices)test(`${device.name}：固定翻组、简短错答�
   // Matching retries preserve correct pairs; clicking that same pair again
   // would deliberately unpair it. Correct only the two changed associations.
   await flow.select(room,{pairs:[['coat','外套'],['dress','连衣裙']]});await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:'下一题',exact:true}).click();
-  await flow.activity(p,'1-2','listen',{base:base.slice(0,-1),navigate:false});await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(1);await expect(p.locator('#starCount')).toHaveText('0');
+  await flow.activity(p,'1-2','listen',{base:base.slice(0,-1),navigate:false});
+  const milestones=p.locator('.learning-milestones');
+  await expect(milestones).toHaveAttribute('aria-label','学习进度：已学 1 / 5 个阶段');
+  await expect(milestones.getByRole('listitem').first()).toHaveAttribute('aria-label',/词汇：已学完，未获星/);
+  await expect(milestones.locator('.is-complete')).toHaveCount(0);await expect(p.locator('#starCount')).toHaveText('0');
   await expect(room.locator('.stat-streak img')).toBeVisible();await expect(room.locator('.completion-award')).toHaveText('已完成！再练一轮全对，可点亮星星。');
   await expect(room.locator('.station-destination')).toHaveText('接下来：相遇小剧场');
   const before=await saved(p);await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button',{name:'学习记录',exact:true}).click();
@@ -37,7 +41,9 @@ for(const device of devices)test(`${device.name}：固定翻组、简短错答�
   await room.getByRole('button',{name:'返回结果',exact:true}).click();expect(await saved(p)).toEqual(before);
   await room.getByRole('button',{name:'再练一轮',exact:true}).click();await expect(p.getByRole('list',{name:'学习进度：已学 1 / 5 个阶段',exact:true})).toBeVisible();await expect(p.locator('#starCount')).toHaveText('0');
   await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button',{name:'学习记录',exact:true}).click();await expect(notebook).toContainText('此前订正完成');await notebook.press('Escape');
-  await p.reload();await courseReadyForAssertions(p);await expect(p.locator('.learning-milestones .is-complete')).toHaveCount(1);await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
+  await p.reload();await courseReadyForAssertions(p);
+  await expect(milestones.getByRole('listitem').first()).toHaveAttribute('aria-label',/词汇：已学完，未获星/);
+  await expect(milestones.locator('.is-complete')).toHaveCount(0);await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
  }finally{await s.context.close();}
 });
 

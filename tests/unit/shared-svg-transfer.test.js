@@ -2,6 +2,25 @@
 const test=require('node:test'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const {createCoursePackages}=require('../../scripts/course-packages');
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+for(const basePath of ['/','/lesson/'])test('first lesson carries its small icons with intact hashes and original URLs at '+basePath,async()=>{
+ const pack=await createCoursePackages({root:process.cwd(),basePath,courseIds:['unit1-2','unit3-4'],isolatedDefinitions:true});
+ const icons=id=>{
+  const url=pack.index.courses[id].manifest;
+  const manifest=JSON.parse(pack.generated.get(url.slice(basePath.length)).body);
+  return manifest.required.filter(item=>item.key.startsWith(basePath+'assets/lesson49/icons/'));
+ };
+ const inline=icons('unit1-2').filter(item=>item.svgParts);
+ assert.ok(inline.length>=30);
+ assert.ok(inline.reduce((sum,item)=>sum+item.bytes,0)<=32*1024);
+ for(const item of inline){
+  assert.equal(item.svgParts.length,1);
+  const body=Buffer.from(item.svgParts[0],'utf8');
+  assert.equal(body.length,item.bytes);
+  assert.equal(sha(body),item.sha256);
+  assert.deepEqual(body,pack.generated.get(item.url.slice(basePath.length)).body);
+ }
+ assert.ok(icons('unit3-4').length&&icons('unit3-4').every(item=>!item.svgParts));
+});
 for(const basePath of ['/','/lesson/'])test('shared artwork transfers reproduce the exact original SVG bytes at '+basePath,async()=>{
  const pack=await createCoursePackages({root:process.cwd(),basePath,courseIds:['unit45-46','unit47-48','unit49-50'],isolatedDefinitions:true});
  for(const [id,count,minSaving] of [['unit45-46',3,5000000],['unit47-48',1,1300000],['unit49-50',0,0]]){

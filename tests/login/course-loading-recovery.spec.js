@@ -188,7 +188,10 @@ for (const { name, serviceWorkers, unwritable } of [
     await expect(p.locator('#starCount')).toHaveText('1');
     await flow.activity(p, '1-2', 'manners', { base: base.replace(/\/$/, '') });
     await expect(p.locator('#starCount')).toHaveText('1');
-    await expect(room.getByText('本次答错', { exact: true }).locator('..')).toContainText('1');
+    const corrected=room.locator('.completion-stats .stat-incorrect');
+    await expect(corrected.locator('.completion-stat-label')).toHaveText('订正完成');
+    await expect(corrected.locator('.completion-number')).toHaveText('1');
+    await expect(corrected.locator('.completion-unit')).toHaveText('题');
     await p.screenshot({ path: testInfo.outputPath('recovered-course.png') });
   } finally { await student.context.close(); }
 });

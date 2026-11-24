@@ -54,7 +54,10 @@ test('已打开页仅提示刷新，下一次进入自动使用最新课包，�
   await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(card.locator('.primary-button')).toBeVisible();
   await expect(card.locator('.course-update-choice')).toHaveCount(0);
   await expect(card.getByRole('link',{name:'进入新版',exact:true})).toHaveCount(0);
-  await card.locator('.primary-button').click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  const entry=card.locator('.primary-button'),destination=new URL(await entry.getAttribute('href'),p.url()).href;
+  await entry.click();await expect(p).toHaveURL(destination);
+  await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
+  await expect(p.locator('.learning-surface')).toBeVisible();await expect(p).toHaveTitle('新版课程选择验收');
  }finally{await student.context.close();}
 });
 

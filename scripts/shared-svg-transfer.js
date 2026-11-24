@@ -5,6 +5,21 @@ const pngSignature=Buffer.from([137,80,78,71,13,10,26,10]);
 // A transport recipe only: old clients and old print/export paths can still
 // request the original standalone SVG. Never rewrite its viewport or pixels.
 function shareIllustrations(id,required,generated,base){
+ if(id==='unit1-2'){
+  // Most of these button and legacy word icons are only a few hundred bytes.
+  // A literal recipe retains the individual cache key and original URL while
+  // avoiding a separate network round trip for each on the first lesson.
+  const prefix=base+'assets/lesson49/icons/';
+  let remaining=32*1024;
+  return required.map(item=>{
+   if(item.type!=='image/svg+xml'||!item.key.startsWith(prefix)||item.bytes>2048||item.bytes>remaining)return item;
+   const body=generated.get(item.url.slice(base.length)).body;
+   const source=body.toString('utf8');
+   if(!Buffer.from(source,'utf8').equals(body))return item;
+   remaining-=item.bytes;
+   return {...item,svgParts:[source]};
+  });
+ }
  if(id!=='unit45-46'&&id!=='unit47-48')return required;
  const prefix=base+'assets/'+id+'/',seenFiles=new Set(),recipes=new Map(),layers=new Map();
  for(const item of required){
