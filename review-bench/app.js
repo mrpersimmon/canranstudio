@@ -3,12 +3,15 @@
  const $=id=>document.getElementById(id),model=globalThis.CanranReviewState,key='canran-review-position-v1';
  let catalog,selection,active,pending,request=0,readyTimer,stateTimer,filtered=[];
  let questionPreset = null;
+ const liveHistoryWrites=[];
+ let liveHistoryTimer=0;
  const note=text=>{$('notice').textContent=text;};
  const defaultNote=$('notice').textContent;
  function settled(){clearTimeout(readyTimer);clearTimeout(stateTimer);$('state-status').textContent='';$('frame-shell').setAttribute('aria-busy','false');if(active)active.inert=false;}
  function error(message){settled();$('loading').hidden=true;$('error').hidden=false;$('error').querySelector('p').textContent=message;}
  const forceKey='canran-review-refresh-once';
- $('refresh').onclick=()=>{sessionStorage.setItem(forceKey,'1');location.reload();};$('retry').onclick=() => location.reload();
+ const reloadPositionKey='canran-review-pending-reload';
+ $('refresh').onclick=()=>{flushLivePosition();sessionStorage.setItem(forceKey,'1');location.reload();};$('retry').onclick=() => location.reload();
  const force=sessionStorage.getItem(forceKey)==='1';sessionStorage.removeItem(forceKey);
  try{const response=await fetch('/review/catalog.json'+(force?'?refresh=1':''));if(!response.ok)throw Error();catalog=await response.json();}catch{error('课程目录加载失败。请确认本地验收服务已启动，然后刷新。');return;}
  const all=catalog.courses.flatMap(course=>course.entries.map(entry=>({course,entry})));
@@ -16,16 +19,42 @@
  function option(value,label){const el=document.createElement('option');el.value=value;el.textContent=label;return el;}
  catalog.courses.forEach(c=>$('unit').append(option(c.id,c.title)));
  catalog.devices.forEach(d=>$('device').append(option(d.id,d.name+' · '+d.width+'×'+d.height)));
- function readLocation(){
+ function readLocation(initialLoad=false){
   const params=Object.fromEntries(new URLSearchParams(location.search));
   let saved={};
   if(!params.unit&&!params.page){try{saved=JSON.parse(localStorage.getItem(key))||{};}catch{}}
   const input={...saved,...params};
+  try{
+   const queued=JSON.parse(sessionStorage.getItem(reloadPositionKey));sessionStorage.removeItem(reloadPositionKey);
+   if(initialLoad&&queued?.search===location.search&&performance.getEntriesByType('navigation')[0]?.type==='reload')Object.assign(input,queued.position);
+  }catch{}
   questionPreset=questionPresets.has(input.preset)?input.preset:null;
   return model.normalize(catalog,input);
  }
  function savedPosition(){return questionPreset ? {...selection,preset:questionPreset} : selection;}
- function persist(mode){const position=savedPosition(),params=new URLSearchParams(position);history[mode==='push'?'pushState':'replaceState'](null,'','?'+params);try{localStorage.setItem(key,JSON.stringify(position));}catch{}}
+ function persist(mode,live=false){
+  clearTimeout(liveHistoryTimer);liveHistoryTimer=0;
+  const position=savedPosition(),search='?'+new URLSearchParams(position);
+  try{localStorage.setItem(key,JSON.stringify(position));}catch{}
+  if(mode==='replace'&&location.search===search)return;
+  if(live){
+   // A fast run through questions can exhaust WebKit's History API quota.
+   // Keep the live controls current and combine only rapid address changes.
+   const now=performance.now();
+   while(liveHistoryWrites.length&&now-liveHistoryWrites[0]>=1000)liveHistoryWrites.shift();
+   if(liveHistoryWrites.length>=4){
+    liveHistoryTimer=setTimeout(()=>persist('replace',true),Math.ceil(1000-(now-liveHistoryWrites[0])));
+    return;
+   }
+   liveHistoryWrites.push(now);
+  }
+  try{history[mode==='push'?'pushState':'replaceState'](null,'',search);}
+  catch(error){
+   if(mode!=='replace'||error.name!=='SecurityError')throw error;
+   liveHistoryTimer=setTimeout(()=>persist('replace',true),1000);
+  }
+ }
+ function flushLivePosition(){if(liveHistoryTimer)persist('replace');}
  function current(){const course=catalog.courses.find(c=>c.id===selection.unit);return {course,entry:course.entries.find(e=>e.id===selection.page)};}
  function supportsPreset(entry){return entry.kind==='question' && entry.states.includes(questionPreset);}
  function visitEntry(course,entry){choose({unit:course.id,page:entry.id,state:supportsPreset(entry)?questionPreset:entry.states[0]},'push');}
@@ -84,9 +113,10 @@
  function syncPosition(position){
   if(!position||position.unit!==selection.unit||!catalog.courses.find(c=>c.id===position.unit)?.entries.some(e=>e.id===position.page))return;
   const next=model.normalize(catalog,{...selection,page:position.page,state:position.state,stars:position.stars}),moved=next.page!==selection.page;
-  selection=next;if(active)active.dataset.page=next.page;persist('replace');renderControls();if(moved)directory();
+  selection=next;if(active)active.dataset.page=next.page;persist('replace',true);renderControls();if(moved)directory();
  }
  function choose(next={},mode='replace',followPosition=false){
+  if(mode==='push')flushLivePosition();
   const previous=selection;selection=model.normalize(catalog,{...selection,...next});const samePage=previous.unit===selection.unit&&previous.page===selection.page;
   const target=current().entry,fastPage=previous.unit===selection.unit&&((['question','result','award','words'].includes(target.kind)&&active?.dataset.kind!=='word-concept')||(target.kind==='word-concept'&&active?.dataset.kind==='word-concept'));
   persist(mode);renderControls();if(!samePage)directory();
@@ -141,13 +171,18 @@
   event.preventDefault();event.stopPropagation();
   const next=event.key==='Home'?0:event.key==='End'?buttons.length-1:(index+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;buttons[next].focus();buttons[next].click();
  };
- $('device').onchange=()=>{selection=model.normalize(catalog,{...selection,device:$('device').value});persist('replace');size();};
+ $('device').onchange=()=>{selection=model.normalize(catalog,{...selection,device:$('device').value});size();persist('replace');};
  $('zoom').onchange=size;$('search').oninput=directory;
  $('previous').onclick=()=>step(-1);$('next').onclick=()=>step(1);$('reset').onclick=()=>{openFrame();note('本页已重置，演示作答不保存到真实记录。');};$('retry').onclick=openFrame;
- $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);note('已复制本项链接，打开即可复现所选页面和展示状态。');}catch{$('copy-address').value=location.href;$('copy-dialog').showModal();$('copy-address').select();}};$('close-copy').onclick=()=>$('copy-dialog').close();
+ $('copy').onclick=async()=>{const address=new URL('?'+new URLSearchParams(savedPosition()),location.href).href;try{await navigator.clipboard.writeText(address);note('已复制本项链接，打开即可复现所选页面和展示状态。');}catch{$('copy-address').value=address;$('copy-dialog').showModal();$('copy-address').select();}};$('close-copy').onclick=()=>$('copy-dialog').close();
  function placeDirectory(){const dialog=$('directory-dialog'),directory=$('directory');if(matchMedia('(max-width:720px)').matches){if(directory.parentElement!==dialog)dialog.append(directory);}else{if(dialog.open)dialog.close();if(directory.parentElement!==document.querySelector('.bench-body'))document.querySelector('.bench-body').prepend(directory);}}
  $('open-directory').onclick=()=>$('directory-dialog').showModal();$('close-directory').onclick=()=>$('directory-dialog').close();addEventListener('resize',placeDirectory);new ResizeObserver(size).observe($('preview-area'));
- addEventListener('popstate',()=>{selection=readLocation();renderControls();directory();openFrame();});
+ // Reload already has its destination URL by pagehide. Carry a pending
+ // position only to a reload of that URL in this tab.
+ addEventListener('pagehide',()=>{
+  if(liveHistoryTimer)try{sessionStorage.setItem(reloadPositionKey,JSON.stringify({search:location.search,position:savedPosition()}));}catch{}
+ });
+ addEventListener('popstate',()=>{clearTimeout(liveHistoryTimer);liveHistoryTimer=0;selection=readLocation();renderControls();directory();openFrame();});
  addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.shiftKey||event.target.closest('input,textarea,select,[contenteditable=true]')||document.querySelector('dialog[open]'))return;if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();step(event.key==='ArrowRight'?1:-1);}});
- selection=readLocation();persist('replace');renderControls();directory();placeDirectory();openFrame();
+ selection=readLocation(true);persist('replace');renderControls();directory();placeDirectory();openFrame();
 })();

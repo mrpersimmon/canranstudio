@@ -39,3 +39,30 @@ test('live position follows readonly previous questions and resolves immediate s
  await expect(frame.locator('.practice-answer-note:visible')).toContainText('答对了');
  await expect(page.locator('#current-title')).toContainText('第 8 题');
 });
+
+test('native reload keeps the current question when rapid turns have a pending address',async({page,context})=>{
+ const unit='unit125-126',exam=require('../../server/progress').definition(process.cwd(),unit,'/').questions.exam;
+ const target='q:'+exam[5].id;
+ await page.goto('/?'+new URLSearchParams({unit,page:'q:'+exam[0].id,state:'review',device:initial.device}));await ready(page);
+ const active=page.locator('#frame-shell iframe:not(.pending)'),course=active.contentFrame();
+ // WebKit refused this same-origin replace during rapid question changes.
+ // Keep that one address pending until reload, independent of runner speed.
+ await page.evaluate(target=>{
+  const replace=history.replaceState.bind(history);
+  history.replaceState=(state,title,url)=>{
+   if(new URL(url,location.href).searchParams.get('page')===target)throw new DOMException('History updates are limited','SecurityError');
+   return replace(state,title,url);
+  };
+ },target);
+ for(let i=0;i<5;i++)await course.getByRole('button',{name:'下一题',exact:true}).click();
+ await expect(course.locator('.progress-copy:visible')).toContainText('回看 6 / 25');
+ await expect(active).toHaveAttribute('data-page',target);
+ const actual=await active.getAttribute('data-page'),oldLink=page.url(),oldPage=new URL(oldLink).searchParams.get('page');
+ expect(oldPage).not.toBe(actual);
+ await page.reload();await ready(page);
+ await expect(course.locator('.progress-copy:visible')).toContainText('回看 6 / 25');
+ expect(new URL(page.url()).searchParams.get('page')).toBe(actual);
+ const other=await context.newPage();await other.goto(oldLink);await ready(other);
+ await expect(other.locator('#frame-shell iframe:not(.pending)')).toHaveAttribute('data-page',oldPage);
+ await page.goto(oldLink);await ready(page);await expect(active).toHaveAttribute('data-page',oldPage);
+});
