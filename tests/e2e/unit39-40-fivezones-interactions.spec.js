@@ -14,23 +14,45 @@ test('词块草稿可撤回和恢复；短示范计帮助，独立综合不展�
 });
 const {devices}=require('../support/required-phone-devices');
 const handoffScreens=[{label:'320',viewport:{width:320,height:800}},...devices.map(device=>({label:device.id,viewport:device.viewport}))];
+function watchVaseArrival(button){
+ const frames=new Promise(resolve=>{
+  const observer=new MutationObserver(()=>{
+   const parcel=button.querySelector('.handoff-arrived');
+   if(!parcel)return;
+   observer.disconnect();
+   const person=button.querySelector('.handoff-cast img'),points=[];
+   function measure(){
+    const actor=person.getBoundingClientRect(),vase=parcel.getBoundingClientRect();
+    points.push({x:(vase.x+vase.width/2-actor.x)/actor.width,y:(vase.bottom-actor.y)/actor.height});
+    if(parcel.getAnimations().some(animation=>animation.pending||animation.playState==='running'))requestAnimationFrame(measure);
+    else resolve(points);
+   }
+   measure();
+  });
+  observer.observe(button,{childList:true,subtree:true});
+ });
+ return {frames};
+}
 for(const {label,viewport} of handoffScreens)test(label+'手机交接花瓶保持直立，完整人物和落点可见',async({page},info)=>{
- await page.setViewportSize(viewport);await story(page);const room=await reach(page,'roles',1);
- await room.screenshot({path:info.outputPath('handoff-before.png')});await select(room,ANSWERS.roles[1]);await room.getByRole('button',{name:'检查答案',exact:true}).click();
- const recipient=room.getByRole('button',{name:'Sam',exact:true});await expect(recipient.locator('.handoff-arrived')).toBeVisible();
+ await page.setViewportSize(viewport);await page.emulateMedia({reducedMotion:'no-preference'});await story(page);const room=await reach(page,'roles',1);
+ await room.screenshot({path:info.outputPath('handoff-before.png')});await select(room,ANSWERS.roles[1]);
+ const recipient=room.getByRole('button',{name:'Sam',exact:true}),arrival=await recipient.evaluateHandle(watchVaseArrival);
+ await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(recipient.locator('.handoff-arrived')).toBeVisible();
+ const points=await arrival.evaluate(watch=>watch.frames);await arrival.dispose();
  const geometry=await recipient.evaluate(button=>{
   const person=button.querySelector('.handoff-cast img'),parcel=button.querySelector('.handoff-arrived');
-  const actor=person.getBoundingClientRect(),frame=person.parentElement.getBoundingClientRect(),vase=parcel.getBoundingClientRect();
+  const actor=person.getBoundingClientRect(),frame=person.parentElement.getBoundingClientRect();
   return {fit:getComputedStyle(person).objectFit,rotate:getComputedStyle(parcel).rotate,actorHeight:actor.height,
    fullPortrait:actor.top>=frame.top-1&&actor.bottom<=frame.bottom+1&&actor.left>=frame.left-1&&actor.right<=frame.right+1,
-   feetAndHead:Math.abs(actor.width/actor.height-person.naturalWidth/person.naturalHeight)<.02,
-   handX:(vase.x+vase.width/2-actor.x)/actor.width,handY:(vase.bottom-actor.y)/actor.height};
+   feetAndHead:Math.abs(actor.width/actor.height-person.naturalWidth/person.naturalHeight)<.02};
  });
  expect(geometry.fullPortrait,'全身图应完整落在可见人物栏内').toBe(true);expect(geometry.feetAndHead).toBe(true);
  expect(geometry.actorHeight).toBeGreaterThanOrEqual(68);expect(geometry.fit).toBe('contain');expect(geometry.rotate).toBe('none');
  // The vase rests between Sam's two open palms in the original portrait.
- expect(geometry.handX).toBeGreaterThan(.56);expect(geometry.handX).toBeLessThan(.78);
- expect(geometry.handY).toBeGreaterThan(.48);expect(geometry.handY).toBeLessThan(.60);
+ for(const point of points){
+  expect(point.x).toBeGreaterThan(.56);expect(point.x).toBeLessThan(.78);
+  expect(point.y).toBeGreaterThan(.48);expect(point.y).toBeLessThan(.60);
+ }
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  await room.screenshot({path:info.outputPath('handoff-correct.png')});
 });
