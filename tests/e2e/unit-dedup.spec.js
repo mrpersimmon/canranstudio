@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 // Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
 test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
@@ -47,7 +47,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
-  await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['10', '10', '1']);
+  await expectRoundCounts(exam.getByRole('list', { name: '本轮成果' }).locator('.completion-number'), ['10', '10', '1']);
   await expect(exam.getByRole('button', { name: '查看纪念卡', exact: true })).toBeVisible();
 });
 
@@ -55,11 +55,16 @@ test('Lesson 3–4 五区33题，语法与综合挑战保留各自判断', async
   const { completeActivity } = require('../support/unit3-4-flow');
   await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
+  await page.goto('/unit3-4/#learn/listen');
   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
+  await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+  await page.goto('/unit3-4/#learn/exam');
   await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
-  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 11 / 11');
+  const earned=page.locator('.stage-exam .completion-stats');
+  await expect(earned.locator('.completion-stat-label')).toHaveText(['连续答对','首答正确','订正完成']);
+  await expect(earned.locator('.completion-number')).toHaveText(['11','11','0']);
 });
 
 test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
