@@ -13,7 +13,7 @@ function storyProps(){
  furniture.append(svg);scene.append(furniture);
  const cast=node('div','desk-cast'),pictures={};
  for(const[id,name]of [['man','男士'],['jane','简（Jane）']]){const actor=node('div','dialogue-actor '+id),picture=node('img','cast-image');actor.dataset.actor=id;pictures[id]=picture;actor.append(picture,node('span','actor-label',name));cast.append(actor);}
- scene.append(cast);element.append(node('p','desk-location','房间里'),scene);
+ scene.append(cast);element.append(scene);
  return{element,update(index){const phase=index<2?'ready':index<3?'table':index<4?'shelf':index<6?'holding':'received';element.dataset.phase=phase;
   const shelf=svg.querySelector('.shelf-set'),table=svg.querySelector('.table-set'),candidateHeld=index===2||index===3;shelf.style.display=index<4?'':'none';table.style.display=candidateHeld?'none':'';
   table.classList.toggle('is-focus',index===2);shelf.classList.toggle('is-focus',index===3);

@@ -1,6 +1,6 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "conductor": "/assets/learning-words/unit113-114/conductor-c7bddaba.svg",
+  "conductor": "/assets/unit113-114/conductor.webp",
   "fare": "/assets/learning-words/unit113-114/fare-c26f153c.svg",
   "change": "/assets/learning-words/unit113-114/change-30af0408.svg",
   "note": "/assets/learning-words/unit113-114/note-ae044ec8.svg",
@@ -20,12 +20,26 @@ CanranCore.learningWordArtwork={
   "some": "/assets/learning-words/unit113-114/some-a47437f2.svg",
   "money": "/assets/learning-words/unit113-114/money-8e7b577c.svg",
   "pound": "/assets/learning-words/unit113-114/pound-e7ec7438.svg",
-  "bus": "/assets/learning-words/unit113-114/bus-8a136e9b.svg",
-  "ticket": "/assets/learning-words/unit113-114/ticket-f47f9fda.svg",
-  "chocolate": "/assets/learning-words/unit113-114/chocolate-fddce6ab.svg",
-  "envelope": "/assets/learning-words/unit113-114/envelope-7e2666b4.svg",
-  "cake": "/assets/learning-words/unit113-114/cake-7d2dc714.svg",
-  "biscuit": "/assets/learning-words/unit113-114/biscuit-adc1decc.svg",
-  "coin": "/assets/learning-words/unit113-114/coin-009fc475.svg",
+  "bus": "/assets/word-art-v2/whole-book/bus-v1.webp",
+  "ticket": "/assets/unit3-4-journey/ticket-v1.webp",
+  "chocolate": "/assets/word-art-v2/whole-book/chocolate-v1.webp",
+  "envelope": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+  "cake": "/assets/word-art-v2/whole-book/cake-v1.webp",
+  "biscuit": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+  "coin": "/assets/word-art-v2/whole-book/coin-v1.webp",
   "Trafalgar Square": "/assets/learning-words/unit113-114/square-07a6b898.svg"
+};
+CanranCore.learningWordPresentation={
+  "conductor": "illustration",
+  "bus": "illustration",
+  "ticket": "illustration",
+  "chocolate": "illustration",
+  "envelope": "illustration",
+  "cake": "illustration",
+  "biscuit": "illustration",
+  "coin": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit113-114/ticket.svg": "/assets/unit3-4-journey/ticket-v1.webp",
+  "/assets/unit113-114/coin.svg": "/assets/word-art-v2/whole-book/coin-v1.webp"
 };

@@ -5,6 +5,64 @@
  const previous=core.learningFlowOptions||{};
  const originals=new WeakMap(),textStyles=new WeakMap(),watched=new WeakSet();
  const shown=el=>el.getClientRects().length&&!el.closest('[hidden]')&&getComputedStyle(el).visibility!=='hidden'&&Number(getComputedStyle(el).opacity)!==0;
+ const captionCasts={'unit7-8':'.interview-cast','unit9-10':'.greeting-cast','unit11-12':'.claim-cast','unit13-14':'.colour-cast'};
+ function reserveNames(world,bounds){
+  const selector=captionCasts[document.documentElement.dataset.unit],cast=selector&&world.querySelector(':scope>'+selector);
+  if(!cast)return;
+  // Composite portraits and their labels need separate vertical space. A
+  // negative bottom offset overlaps feet once fitting keeps names readable.
+  cast.classList.add('learning-caption-cast');
+  const captions=[...cast.querySelectorAll('.actor-label')];
+  const captionHeight=Math.ceil(Math.max(0,...captions.map(label=>label.getBoundingClientRect().height)));
+  const gap=parseFloat(getComputedStyle(cast).getPropertyValue('--story-name-gap'))||8;
+  const space=captionHeight+gap+8,size=Math.max(0,Math.min(430,bounds.width*.96,bounds.height-space));
+  Object.assign(cast.style,{width:size+'px',height:size+'px',bottom:space+'px'});
+ }
+ function prepareReviewedWorld(scene,world){
+  const spec=core.learningVisual;if(!spec)return;
+  world.dataset.worldLayout=spec.layout;
+  let background=spec.background,shade='transparent';
+  for(const [key,values]of Object.entries(spec.backgroundStates||{}))background=values[world.dataset[key]]||background;
+  for(const [key,values]of Object.entries(spec.shadeStates||{}))shade=values[world.dataset[key]]||shade;
+  if(spec.fullScene){
+   const source=world.querySelector('.room-image');
+   background=spec.fullScene.image||source?.getAttribute('src')||background;
+   world.dataset.fullScene='true';scene.dataset.fullScene='true';
+   scene.style.setProperty('--scene-caption-space',(spec.fullScene.captionSpace||0)+'px');
+   scene.style.setProperty('--sample-bg-lift',(spec.fullScene.captionSpace||0)+'px');
+   scene.style.setProperty('--sample-bg-fade','12px');
+   if(source){if(!source.hidden)source.hidden=true;world.setAttribute('aria-description',source.alt);}
+   for(const label of world.querySelectorAll('.workshop-names>span'))label.classList.add('actor-label');
+  }
+  scene.style.setProperty('--sample-world',background?'url("'+background+'")':'none');
+  scene.style.setProperty('--sample-shade',shade);
+  for(const label of world.querySelectorAll(':scope>p[class$="-location"]')){
+   if(spec.location==='decorative'){if(!label.hidden)label.hidden=true;if(label.getAttribute('aria-hidden')!=='true')label.setAttribute('aria-hidden','true');}
+   else{label.classList.add('learning-story-setting');scene.insertBefore(label,world);}
+  }
+  if(spec.layout==='cast')for(const actor of world.querySelectorAll(':scope>.dialogue-actor')){
+   for(const label of actor.querySelectorAll(':scope>span'))if(!label.childElementCount&&label.textContent.trim())label.classList.add('actor-label');
+   if(actor.querySelector(':scope>img')&&actor.querySelector(':scope>.actor-label'))actor.classList.add('learning-caption-actor');
+  }
+  if(spec.cast){
+   const cast=world.querySelector(':scope>.'+spec.cast);if(cast){
+    if(spec.layout==='composite'){
+     let row=cast.querySelector(':scope>.learning-cast-names');
+     if(!row){row=document.createElement('div');row.className='learning-cast-names';const labels=[...cast.children].filter(e=>e.classList.contains('dialogue-actor'));row.append(...labels);cast.append(row);}
+     cast.dataset.captionLayout='measured';row.style.setProperty('--cast-name-count',Math.max(1,[...row.children].filter(shown).length));
+     const image=[...cast.querySelectorAll(':scope>img')].find(shown),bounds=world.getBoundingClientRect(),height=Math.max(0,bounds.height-16);
+     if(image?.naturalWidth){
+      const ratio=image.naturalWidth/image.naturalHeight;cast.classList.add('learning-caption-cast');
+      Object.assign(cast.style,{width:Math.min(bounds.width*.96,height*ratio)+'px',height:height+'px',bottom:'8px'});
+      for(let pass=0;pass<3;pass++){const imageHeight=Math.max(0,height-row.getBoundingClientRect().height-8);cast.style.width=Math.min(bounds.width*.96,imageHeight*ratio)+'px';}
+     }
+     return;
+    }
+    cast.classList.add('learning-caption-cast');const height=Math.max(0,...[...cast.querySelectorAll('.actor-label')].map(e=>e.getBoundingClientRect().height));
+    Object.assign(cast.style,{width:spec.castWidth||'96%',height:Math.max(0,world.getBoundingClientRect().height-(spec.castLabels==='flow'?16:height+24))+'px',bottom:(spec.castLabels==='flow'?8:height+16)+'px'});
+   }
+  }
+ }
  function fitWorld(world){
   if(!originals.has(world))originals.set(world,{width:world.style.width,height:world.style.height,zoom:world.style.zoom});
   Object.assign(world.style,originals.get(world));
@@ -14,6 +72,8 @@
    Object.assign(label.style,textStyles.get(label));
   }
   const base=world.getBoundingClientRect();if(!base.width||!base.height)return;
+  world.style.setProperty('--story-world-width',base.width+'px');
+  reserveNames(world,base);
   const artPlane=[...world.children].find(child=>/(?:^|\s)[\w-]+-visual(?:\s|$)/.test(child.className));
   if(artPlane){
    const [w,h=1]=getComputedStyle(artPlane).aspectRatio.split('/').map(Number),ratio=w/h;
@@ -21,7 +81,7 @@
   }
   // Room illustrations and their percentage hotspots must share the same
   // aspect-ratio frame. Shrinking only the picture would detach the hotspots.
-  const pictureGroup=[...world.children].find(child=>child.querySelector('picture'));
+  const pictureGroup=core.learningVisual?.layout==='room-cast'||core.learningVisual?.fullScene?null:[...world.children].find(child=>child.querySelector('picture'));
   if(pictureGroup){
    const image=pictureGroup.querySelector('picture img'),ratio=image?.naturalWidth/image?.naturalHeight||1;
    const height=Math.max(100,base.height-36),width=Math.min(base.width,height*ratio);
@@ -51,11 +111,11 @@
    const controls=oldReader.querySelector('.stage-ctrl');if(controls)surface.append(controls);
    if(!oldReader.childElementCount)oldReader.remove();
   }
-  const world=[...scene.children].find(child=>child!==log&&!child.contains(log));
+  const world=scene.querySelector(':scope>.learning-story-art')||[...scene.children].find(child=>child!==log&&!child.contains(log));
   if(world){
-   scene.classList.add('learning-scene-stacked','learning-scene-unified');world.classList.add('learning-story-art');fitWorld(world);
+   scene.classList.add('learning-scene-stacked','learning-scene-unified');world.classList.add('learning-story-art');prepareReviewedWorld(scene,world);fitWorld(world);
    const artHeight=world.getBoundingClientRect().height+'px';if(scene.style.getPropertyValue('--learning-story-art-height')!==artHeight)scene.style.setProperty('--learning-story-art-height',artHeight);
-   for(const image of world.querySelectorAll('picture img'))if(!watched.has(image)){watched.add(image);image.addEventListener('load',()=>{if(scene.closest('.learning-surface'))prepare(scene);});}
+   for(const image of world.querySelectorAll('picture img,.room-image,.learning-caption-cast>img'))if(!watched.has(image)){watched.add(image);image.addEventListener('load',()=>{if(scene.closest('.learning-surface'))prepare(scene);});}
   }
   for(const button of log.querySelectorAll('.bbtns button[aria-expanded]')){
    const expanded=button.getAttribute('aria-expanded')==='true',label=expanded?'收起中文':'看中文',text=expanded?'收起':'中文';
@@ -91,5 +151,5 @@
  core.learningFlowOptions={...previous,prepareStory(scene){
   prepare(scene);
   previous.prepareStory?.(scene);
- },resizeStory(scene){if(scene)prepare(scene);previous.resizeStory?.(scene);}};
+ },resizeStory(scene,prepared){if(scene&&!prepared)prepare(scene);previous.resizeStory?.(scene,prepared);}};
 })(globalThis.CanranCore);

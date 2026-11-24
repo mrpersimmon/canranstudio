@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "greengrocer": "/assets/learning-words/unit67-68/greengrocer-3fc14d35.svg",
   "absent": "/assets/learning-words/unit67-68/absent-846cb357.svg",
@@ -14,7 +14,7 @@ CanranCore.learningWordArtwork={
   "Sunday": "/assets/learning-words/unit67-68/sunday-89729b41.svg",
   "country": "/assets/learning-words/unit67-68/country-ee890f44.svg",
   "lucky": "/assets/learning-words/unit67-68/lucky-bf7a256f.svg",
-  "church": "/assets/learning-words/unit67-68/church-1e49c416.svg",
+  "church": "/assets/word-art-v2/whole-book/church-v1.webp",
   "dairy": "/assets/learning-words/unit67-68/dairy-cdb49a03.svg",
   "baker": "/assets/learning-words/unit67-68/baker-8976a65b.svg",
   "grocer": "/assets/learning-words/unit67-68/grocer-620ed7d8.svg",
@@ -31,3 +31,7 @@ CanranCore.learningWordArtwork={
   "where": "/assets/learning-words/unit67-68/where-0bcf3d8d.svg",
   "when": "/assets/learning-words/unit67-68/when-15005593.svg"
 };
+CanranCore.learningWordPresentation={
+  "church": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

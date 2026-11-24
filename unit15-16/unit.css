@@ -117,3 +117,4 @@
 .unit1516-workspace .stage-text .travel-reader .stage-ctrl{width:100%;padding-top:8px;background:#edf4ef;border-radius:12px}
 @media(max-width:600px){.unit1516-workspace .travel-reader{width:calc(100% - 16px);margin-top:55px}}
 .unit1516-workspace .pronunciation-note .reference-phonetic{white-space:nowrap}
+body.unit1516-workspace{--sample-world:url('/assets/learning-sample-v2/customs-world-v1.webp')}

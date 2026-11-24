@@ -103,3 +103,4 @@
 .unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:144px}
 @media(max-width:580px){.unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:202px}}
 @media(max-width:360px){.unit56-workspace .stage-exam .sentence-options:has(.wordbank>.word-token:nth-child(5)) .word-answer{height:260px}}
+body.unit56-workspace{--sample-world:url('/assets/learning-sample-v1/classroom-world-v1.webp')}

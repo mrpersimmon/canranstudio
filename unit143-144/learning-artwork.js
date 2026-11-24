@@ -8,21 +8,21 @@ CanranCore.learningWordArtwork={
   "through": "/assets/word-art-v2/through-v1.webp",
   "visitor": "/assets/learning-words/unit143-144/visitor-ab3c8913.svg",
   "tidy": "/assets/learning-words/unit143-144/tidy-afb878c5.svg",
-  "litter": "/assets/learning-words/unit143-144/litter-ff656c1c.svg",
-  "litter basket": "/assets/learning-words/unit143-144/litter-basket-baf530b5.svg",
+  "litter": "/assets/word-art-v2/whole-book/litter-v1.webp",
+  "litter basket": "/assets/word-art-v2/whole-book/litter-basket-v1.webp",
   "place": "/assets/learning-words/unit143-144/place-ef037d50.svg",
   "throw": "/assets/learning-words/unit143-144/throw-f1aefb2b.svg",
-  "rubbish": "/assets/learning-words/unit143-144/rubbish-bfc322b6.svg",
+  "rubbish": "/assets/word-art-v2/whole-book/rubbish-v1.webp",
   "count": "/assets/learning-words/unit143-144/count-36ed5721.svg",
   "cover": "/assets/learning-words/unit143-144/cover-b438d6d3.svg",
   "piece": "/assets/learning-words/unit143-144/piece-184e290f.svg",
-  "tyre": "/assets/learning-words/unit143-144/tyre-90a4cd62.svg",
+  "tyre": "/assets/word-art-v2/whole-book/tyre-v1.webp",
   "rusty": "/assets/learning-words/unit143-144/rusty-ebf47c79.svg",
   "among": "/assets/learning-words/unit143-144/among-70f91a49.svg",
   "prosecute": "/assets/learning-words/unit143-144/prosecute-6b67dfc9.svg",
-  "refrigerator": "/assets/learning-words/unit143-144/refrigerator-4293978b.svg",
-  "sign": "/assets/learning-words/unit143-144/sign-13a29fb2.svg",
-  "tin": "/assets/learning-words/unit143-144/tin-2ea2eb16.svg",
+  "refrigerator": "/assets/word-art-v2/whole-book/refrigerator-v1.webp",
+  "sign": "/assets/word-art-v2/whole-book/sign-v1.webp",
+  "tin": "/assets/word-art-v2/sample13-24/tin-v1.webp",
   "serve": "/assets/learning-words/unit143-144/serve-6869b8b8.svg"
 };
 CanranCore.learningWordPresentation={
@@ -31,5 +31,13 @@ CanranCore.learningWordPresentation={
   "beauty spot": "illustration",
   "hundred": "illustration",
   "city": "illustration",
-  "through": "illustration"
+  "through": "illustration",
+  "litter": "illustration",
+  "litter basket": "illustration",
+  "rubbish": "illustration",
+  "tyre": "illustration",
+  "refrigerator": "illustration",
+  "sign": "illustration",
+  "tin": "illustration"
 };
+CanranCore.learningQuestionArtwork={};

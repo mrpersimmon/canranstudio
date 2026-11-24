@@ -7,8 +7,10 @@
  const defaultNote=$('notice').textContent;
  function settled(){clearTimeout(readyTimer);clearTimeout(stateTimer);$('state-status').textContent='';$('frame-shell').setAttribute('aria-busy','false');if(active)active.inert=false;}
  function error(message){settled();$('loading').hidden=true;$('error').hidden=false;$('error').querySelector('p').textContent=message;}
- $('refresh').onclick=() => location.reload();$('retry').onclick=() => location.reload();
- try{const response=await fetch('/review/catalog.json');if(!response.ok)throw Error();catalog=await response.json();}catch{error('课程目录加载失败。请确认本地验收服务已启动，然后刷新。');return;}
+ const forceKey='canran-review-refresh-once';
+ $('refresh').onclick=()=>{sessionStorage.setItem(forceKey,'1');location.reload();};$('retry').onclick=() => location.reload();
+ const force=sessionStorage.getItem(forceKey)==='1';sessionStorage.removeItem(forceKey);
+ try{const response=await fetch('/review/catalog.json'+(force?'?refresh=1':''));if(!response.ok)throw Error();catalog=await response.json();}catch{error('课程目录加载失败。请确认本地验收服务已启动，然后刷新。');return;}
  const all=catalog.courses.flatMap(course=>course.entries.map(entry=>({course,entry})));
  const questionPresets = new Set(all.filter(({entry}) => entry.kind === 'question').flatMap(({entry}) => entry.states));
  function option(value,label){const el=document.createElement('option');el.value=value;el.textContent=label;return el;}
@@ -73,8 +75,9 @@
  function openFrame(){
   settled();pending?.remove();$('error').hidden=true;$('loading').hidden=false;$('frame-shell').setAttribute('aria-busy','true');if(active)active.inert=true;
   const {entry}=current(),id=String(++request),frame=document.createElement('iframe');frame.className='pending';frame.title='真实课程预览';frame.dataset.request=id;
-  frame.dataset.frameId=id;frame.dataset.unit=selection.unit;frame.dataset.page=selection.page;
-  const params=new URLSearchParams({...savedPosition(),request:id});frame.src='/lesson/'+selection.unit+'/?'+params+'#'+entry.route;
+  frame.dataset.frameId=id;frame.dataset.unit=selection.unit;frame.dataset.page=selection.page;frame.dataset.kind=entry.kind;
+  const params=new URLSearchParams({...savedPosition(),request:id});frame.src=entry.kind==='word-concept'?'/review/word-concept/?'+params:'/lesson/'+selection.unit+'/?'+params+'#'+entry.route;
+  if(entry.kind==='word-concept')frame.title='词卡设计样板';
   $('frame-shell').append(frame);pending=frame;size();
   readyTimer=setTimeout(()=>{error('本页准备时间较长，请重试。原画面已保留。');},60000);
  }
@@ -85,7 +88,7 @@
  }
  function choose(next={},mode='replace',followPosition=false){
   const previous=selection;selection=model.normalize(catalog,{...selection,...next});const samePage=previous.unit===selection.unit&&previous.page===selection.page;
-  const target=current().entry,fastPage=previous.unit===selection.unit&&['question','result','award'].includes(target.kind);
+  const target=current().entry,fastPage=previous.unit===selection.unit&&((['question','result','award','words'].includes(target.kind)&&active?.dataset.kind!=='word-concept')||(target.kind==='word-concept'&&active?.dataset.kind==='word-concept'));
   persist(mode);renderControls();if(!samePage)directory();
   if((samePage||fastPage)&&active&&!pending&&active.dataset.fastStates==='true'&&active.dataset.unit===selection.unit&&(fastPage||active.dataset.page===selection.page)){
    settled();$('error').hidden=true;$('loading').hidden=true;$('frame-shell').setAttribute('aria-busy','true');active.inert=true;
@@ -140,7 +143,7 @@
  };
  $('device').onchange=()=>{selection=model.normalize(catalog,{...selection,device:$('device').value});persist('replace');size();};
  $('zoom').onchange=size;$('search').oninput=directory;
- $('previous').onclick=()=>step(-1);$('next').onclick=()=>step(1);$('reset').onclick=()=>{openFrame();note('本页已重置，演示作答不保存到真实记录。');};$('retry').onclick=openFrame;$('refresh').onclick=()=>location.reload();
+ $('previous').onclick=()=>step(-1);$('next').onclick=()=>step(1);$('reset').onclick=()=>{openFrame();note('本页已重置，演示作答不保存到真实记录。');};$('retry').onclick=openFrame;
  $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(location.href);note('已复制本项链接，打开即可复现所选页面和展示状态。');}catch{$('copy-address').value=location.href;$('copy-dialog').showModal();$('copy-address').select();}};$('close-copy').onclick=()=>$('copy-dialog').close();
  function placeDirectory(){const dialog=$('directory-dialog'),directory=$('directory');if(matchMedia('(max-width:720px)').matches){if(directory.parentElement!==dialog)dialog.append(directory);}else{if(dialog.open)dialog.close();if(directory.parentElement!==document.querySelector('.bench-body'))document.querySelector('.bench-body').prepend(directory);}}
  $('open-directory').onclick=()=>$('directory-dialog').showModal();$('close-directory').onclick=()=>$('directory-dialog').close();addEventListener('resize',placeDirectory);new ResizeObserver(size).observe($('preview-area'));

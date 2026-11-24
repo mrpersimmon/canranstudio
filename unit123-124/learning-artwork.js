@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "during": "/assets/learning-words/unit123-124/during-29d9c195.svg",
   "trip": "/assets/learning-words/unit123-124/trip-2aa8d2b0.svg",
@@ -7,10 +7,10 @@ CanranCore.learningWordArtwork={
   "job": "/assets/learning-words/unit123-124/job-72176859.svg",
   "guess": "/assets/learning-words/unit123-124/guess-512abbcd.svg",
   "grow": "/assets/learning-words/unit123-124/grow-db574d9b.svg",
-  "kitten": "/assets/learning-words/unit123-124/kitten-e6d8dd7b.svg",
-  "photograph": "/assets/learning-words/unit123-124/photograph-8148be46.svg",
-  "Australia": "/assets/learning-words/unit123-124/australia-cf0fdb9f.svg",
-  "ship": "/assets/learning-words/unit123-124/ship-2e03b437.svg",
+  "kitten": "/assets/word-art-v2/whole-book/kitten-v1.webp",
+  "photograph": "/assets/word-art-v2/whole-book/photograph-v1.webp",
+  "Australia": "/assets/unit123-124/australia.svg",
+  "ship": "/assets/word-art-v2/whole-book/ship-v1.webp",
   "shave off": "/assets/learning-words/unit123-124/shave-off-da4d5211.svg",
   "come home": "/assets/learning-words/unit123-124/come-home-e38d8ee0.svg",
   "beautiful": "/assets/learning-words/unit123-124/beautiful-241159fa.svg",
@@ -20,7 +20,21 @@ CanranCore.learningWordArtwork={
   "about": "/assets/learning-words/unit123-124/about-f9514bb9.svg",
   "decide": "/assets/learning-words/unit123-124/decide-303253f8.svg",
   "test": "/assets/learning-words/unit123-124/test-3cc71d6e.svg",
-  "village": "/assets/learning-words/unit123-124/village-a6917d01.svg",
+  "village": "/assets/word-art-v2/whole-book/village-v1.webp",
   "umbrella": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
-  "medicine": "/assets/learning-words/unit123-124/medicine-eec5f5bb.svg"
+  "medicine": "/assets/word-art-v2/whole-book/medicine-v1.webp",
+  "beard": "/assets/word-art-v2/whole-book/beard-v2-padded.webp"
+};
+CanranCore.learningWordPresentation={
+  "beard": "illustration",
+  "kitten": "illustration",
+  "photograph": "illustration",
+  "ship": "illustration",
+  "village": "illustration",
+  "umbrella": "illustration",
+  "medicine": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit123-124/beard-photo.webp": "/assets/word-art-v2/whole-book/beard-v2-padded.webp",
+  "/assets/unit123-124/kitten.svg": "/assets/word-art-v2/whole-book/kitten-v1.webp"
 };

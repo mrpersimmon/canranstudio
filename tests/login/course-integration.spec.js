@@ -100,11 +100,13 @@ for (const { id, lesson, complete } of [
 });
 
 test('登录后的词卡首访与复访换组不闪屏，授权课程内断网仍能翻卡', async ({ page, browser }, testInfo) => {
+  test.setTimeout(120000);
   await adminLogin(page);
   const account = await createStudent(page, '整合词卡验收', '翻卡体验', [/Lesson 5–6 /]);
   const student = await studentLogin(browser, account);
   try {
-    await student.page.setViewportSize({ width: 390, height: 844 });
+   for(const device of require('../support/required-phone-devices').devices){
+    await student.page.setViewportSize(device.viewport);
     for (let visit = 0; visit < 2; visit++) {
       await student.page.goto('/lesson/unit5-6/#learn/words');
       await expect(student.page.locator('#courseLoader')).toHaveCount(0);
@@ -125,10 +127,11 @@ test('登录后的词卡首访与复访换组不闪屏，授权课程内断网�
         window.wordsObserver.observe(document.documentElement, { attributes: true, childList: true, subtree: true });
         const frame = () => { if (window.watchWords) { sample(true); requestAnimationFrame(frame); } }; requestAnimationFrame(frame);
       });
-      for (const [label, pages] of [['下一组词卡', [2, 3, 4]], ['上一组词卡', [3, 2, 1]]]) {
-        for (const group of pages) {
-          await student.page.getByRole('button', { name: label, exact: true }).click();
-          await expect(student.page.locator('#wordPageProgress')).toHaveText(`${group} / 4`);
+      const deckPages=await student.page.evaluate(()=>CanranCore.wordDeck.createPages(CanranCore.learningContext.learning.WORDS,CanranCore.learningWordCards));
+      for (const [forward, targets] of [[true,deckPages.map((_,i)=>i).slice(1)],[false,deckPages.map((_,i)=>i).slice(0,-1).reverse()]]) {
+        for (const index of targets) {
+          const controls=student.page.locator('.word-controls button');await (forward?controls.last():controls.first()).click();
+          await expect(student.page.locator('#wordPageProgress')).toHaveText(`${deckPages[index].local+1} / ${deckPages[index].count}`);
           await student.page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
         }
       }
@@ -136,5 +139,7 @@ test('登录后的词卡首访与复访换组不闪屏，授权课程内断网�
       await testInfo.attach(`word-visit-${visit}.json`, { body: JSON.stringify(failures), contentType: 'application/json' });
       expect(failures).toEqual([]);
     }
+    await student.context.setOffline(false);
+   }
   } finally { await student.context.close(); }
 });

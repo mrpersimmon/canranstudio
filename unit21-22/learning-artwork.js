@@ -1,27 +1,27 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "give": "/assets/learning-words/unit21-22/give-7fe88094.svg",
   "one": "/assets/learning-words/unit21-22/one-eb938be7.svg",
   "which": "/assets/learning-words/unit21-22/which-3d7b2427.svg",
-  "book": "/assets/learning-words/unit21-22/book-d5537479.svg",
-  "red": "/assets/learning-words/unit21-22/red-37d53f6d.svg",
-  "blue": "/assets/learning-words/unit21-22/blue-728f8374.svg",
-  "empty": "/assets/learning-words/unit21-22/empty-608445f6.svg",
-  "full": "/assets/learning-words/unit21-22/full-e0d3ae8b.svg",
-  "large": "/assets/learning-words/unit21-22/large-53e3fb4b.svg",
-  "little": "/assets/learning-words/unit21-22/little-f0020e72.svg",
-  "sharp": "/assets/learning-words/unit21-22/sharp-84dd4c53.svg",
-  "blunt": "/assets/learning-words/unit21-22/blunt-a1c588f8.svg",
-  "big": "/assets/learning-words/unit21-22/big-0dc167fb.svg",
-  "small": "/assets/learning-words/unit21-22/small-58a4bf07.svg",
-  "box": "/assets/learning-words/unit21-22/box-0dc167fb.svg",
-  "glass": "/assets/learning-words/unit21-22/glass-608445f6.svg",
-  "cup": "/assets/learning-words/unit21-22/cup-0c5648e1.svg",
-  "bottle": "/assets/learning-words/unit21-22/bottle-53e3fb4b.svg",
-  "tin": "/assets/learning-words/unit21-22/tin-e8bfb483.svg",
-  "knife": "/assets/learning-words/unit21-22/knife-7afa59c6.svg",
-  "fork": "/assets/learning-words/unit21-22/fork-1b172eb4.svg",
-  "spoon": "/assets/learning-words/unit21-22/spoon-910fbeae.svg",
+  "book": "/assets/word-art-v2/sample1-12/book-v1.webp",
+  "red": "/assets/unit21-22/red.svg",
+  "blue": "/assets/unit21-22/blue.svg",
+  "empty": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+  "full": "/assets/word-art-v2/sample13-24/full-glass-v1.webp",
+  "large": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+  "little": "/assets/word-art-v2/sample13-24/box-v1.webp",
+  "sharp": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+  "blunt": "/assets/word-art-v2/sample13-24/knife-blunt-v1.webp",
+  "big": "/assets/word-art-v2/sample13-24/box-v1.webp",
+  "small": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+  "box": "/assets/word-art-v2/sample13-24/box-v1.webp",
+  "glass": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+  "cup": "/assets/word-art-v2/sample13-24/cup-v1.webp",
+  "bottle": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+  "tin": "/assets/word-art-v2/sample13-24/tin-v1.webp",
+  "knife": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+  "fork": "/assets/word-art-v2/sample13-24/fork-v1.webp",
+  "spoon": "/assets/word-art-v2/sample13-24/spoon-v1.webp",
   "me": "/assets/learning-words/unit21-22/me-157a444c.svg",
   "him": "/assets/learning-words/unit21-22/him-3f93cc8e.svg",
   "her": "/assets/learning-words/unit21-22/her-a769ca95.svg",
@@ -30,10 +30,89 @@ CanranCore.learningWordArtwork={
   "his": "/assets/learning-words/unit21-22/his-16187cac.svg",
   "our": "/assets/learning-words/unit21-22/our-44360069.svg",
   "their": "/assets/learning-words/unit21-22/their-44360069.svg",
-  "dirty": "/assets/learning-words/unit21-22/dirty-09f76c73.svg",
-  "clean": "/assets/learning-words/unit21-22/clean-0c5648e1.svg",
+  "dirty": "/assets/word-art-v2/sample1-12/dirty-v1.webp",
+  "clean": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
   "new": "/assets/learning-words/unit21-22/new-e8bfb483.svg",
   "old": "/assets/learning-words/unit21-22/old-a5992267.svg",
   "this": "/assets/learning-words/unit21-22/this-358db9a5.svg",
   "that": "/assets/learning-words/unit21-22/that-66911144.svg"
+};
+CanranCore.learningWordPresentation={
+  "book": "illustration",
+  "red": "fact",
+  "blue": "fact",
+  "empty": "illustration",
+  "full": "illustration",
+  "large": "relation",
+  "little": "relation",
+  "sharp": "illustration",
+  "blunt": "illustration",
+  "big": "relation",
+  "small": "relation",
+  "box": "illustration",
+  "glass": "illustration",
+  "cup": "illustration",
+  "bottle": "illustration",
+  "tin": "illustration",
+  "knife": "illustration",
+  "fork": "illustration",
+  "spoon": "illustration",
+  "dirty": "illustration",
+  "clean": "illustration"
+};
+CanranCore.learningWordComposition={
+  "large": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 0
+  },
+  "little": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/box-v1.webp",
+      "/assets/word-art-v2/sample13-24/box-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 1
+  },
+  "big": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/box-v1.webp",
+      "/assets/word-art-v2/sample13-24/box-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 0
+  },
+  "small": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 1
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit21-22/book.svg": "/assets/word-art-v2/sample1-12/book-v1.webp",
+  "/assets/unit21-22/box.svg": "/assets/word-art-v2/sample13-24/box-v1.webp",
+  "/assets/unit21-22/glass.svg": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+  "/assets/unit21-22/cup.svg": "/assets/word-art-v2/sample13-24/cup-v1.webp"
 };

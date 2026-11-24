@@ -32,7 +32,7 @@ for(const device of devices){
     for(const unit of ['unit1-2','unit3-4','unit5-6']){
       const frame=await open(page,unit,'words-0',device.id,'collapsed');
       const catalog=await(await page.request.get('/review/catalog.json')).json();
-      const groups=catalog.courses.find(c=>c.id===unit).entries.filter(e=>e.kind==='words').length;
+      const entries=catalog.courses.find(c=>c.id===unit).entries.filter(e=>e.kind==='words'),groups=entries.length;
       for(let group=0;group<groups;group++){
         const region=frame.locator('.learning-word-content');
         await expect(frame.locator('#wordPageProgress')).toHaveText(`${group+1} / ${groups}`);
@@ -55,8 +55,8 @@ for(const device of devices){
           expect(Math.abs((await controls.boundingBox()).y-before.y)).toBeLessThanOrEqual(1);
           await card.click();await expect(card).toHaveAttribute('aria-expanded','false');
         }
-        await expect(frame.getByRole('button',{name:/^(下一组(?:词卡)?|下一站：)/})).toBeVisible();
-        if(group<groups-1)await frame.getByRole('button',{name:/^下一组(?:词卡)?$/,exact:true}).click();
+        await expect(frame.locator('.word-controls button').last()).toBeVisible();
+        if(group<groups-1)await frame.locator('.word-controls button').last().click();
       }
     }
   });

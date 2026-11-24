@@ -8,7 +8,8 @@ function storyProps(){
  const focus=node('span','kitchen-focus');focus.setAttribute('aria-hidden','true');frame.append(picture,focus);element.append(node('p','desk-location','厨房 · 从画面正面看'),frame);
  const desktop={fridge:[78.5,35,17,51],cooker:[6,45,18,41],table:[34,60,33,26],bottle:[43,46,5,18],cup:[53,54,7,10]};
  const phone={fridge:[71,30,28,47],cooker:[2,43,29,34],table:[30,59,42,25],bottle:[41,47,8,16],cup:[54,54,11,9]};
- let index=-1;function draw(){const target=index<1?'room':index<4?'fridge':index<7?'cooker':index===7?'table':index<10?'bottle':'cup';element.dataset.focus=target;focus.hidden=target==='room';if(target!=='room'){const[x,y,w,h]=(matchMedia('(max-width:600px)').matches?phone:desktop)[target];Object.assign(focus.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});}}
+ const illustrated={fridge:[76,33,21,49],cooker:[4,44,23,38],table:[31,57,38,27],bottle:[41,44,6,17],cup:[53,51,9,11]};
+ let index=-1;function draw(){const target=index<1?'room':index<4?'fridge':index<7?'cooker':index===7?'table':index<10?'bottle':'cup';element.dataset.focus=target;focus.hidden=target==='room';if(target!=='room'){const[x,y,w,h]=(core.learningVisual?.fullScene?illustrated:matchMedia('(max-width:600px)').matches?phone:desktop)[target];Object.assign(focus.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});}}
  addEventListener('resize',draw);return{element,update(i){index=i;draw();}};
 }
 function restyle(element){for(const image of element.querySelectorAll('img[src="/assets/unit25-26/Mrs.svg"]'))image.src='/assets/unit25-26/cast-mrs-v1.webp';}

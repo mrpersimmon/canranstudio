@@ -1,7 +1,7 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "Scotland": "/assets/learning-words/unit101-102/scotland-ca873411.svg",
-  "card": "/assets/learning-words/unit101-102/card-0bbf998c.svg",
+  "card": "/assets/word-art-v2/whole-book/card-v1.webp",
   "youth": "/assets/learning-words/unit101-102/youth-00f1f6ad.svg",
   "hostel": "/assets/learning-words/unit101-102/hostel-c043f929.svg",
   "association": "/assets/learning-words/unit101-102/association-e3b45280.svg",
@@ -13,7 +13,7 @@ CanranCore.learningWordArtwork={
   "Y.H.A.": "/assets/learning-words/unit101-102/association-e3b45280.svg",
   "member": "/assets/learning-words/unit101-102/member-6419a5e6.svg",
   "speak up": "/assets/learning-words/unit101-102/speak-up-6273f91d.svg",
-  "letter": "/assets/learning-words/unit101-102/letter-fe9595a9.svg",
+  "letter": "/assets/word-art-v2/whole-book/letter-v1.webp",
   "hear": "/assets/learning-words/unit101-102/hear-a35e84b5.svg",
   "hope": "/assets/learning-words/unit101-102/hope-a237e496.svg",
   "well": "/assets/learning-words/unit101-102/well-4c2a8d7b.svg",
@@ -24,8 +24,16 @@ CanranCore.learningWordArtwork={
   "hardly": "/assets/learning-words/unit101-102/hardly-f9b5cdd3.svg",
   "few": "/assets/learning-words/unit101-102/few-7a5a0736.svg",
   "a few": "/assets/learning-words/unit101-102/few-7a5a0736.svg",
-  "little": "/assets/learning-words/unit101-102/little-53986edc.svg",
+  "little": "/assets/word-art-v2/sample13-24/box-v1.webp",
   "a little": "/assets/learning-words/unit101-102/little-53986edc.svg",
   "unhappy": "/assets/learning-words/unit101-102/unhappy-0ea36a22.svg",
   "impossible": "/assets/learning-words/unit101-102/impossible-6af8b5aa.svg"
+};
+CanranCore.learningWordPresentation={
+  "card": "illustration",
+  "letter": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit101-102/card.svg": "/assets/word-art-v2/whole-book/card-v1.webp",
+  "/assets/unit101-102/letter.svg": "/assets/word-art-v2/whole-book/letter-v1.webp"
 };

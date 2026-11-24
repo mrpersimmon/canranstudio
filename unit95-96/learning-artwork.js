@@ -1,16 +1,16 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "return": "/assets/learning-words/unit95-96/tickets-a493b218.svg",
-  "train": "/assets/learning-words/unit95-96/train-484780a1.svg",
-  "platform": "/assets/learning-words/unit95-96/platform-18cab4e5.svg",
+  "train": "/assets/word-art-v2/whole-book/train-v1.webp",
+  "platform": "/assets/word-art-v2/whole-book/platform-v1.webp",
   "plenty": "/assets/learning-words/unit95-96/plenty-8a60ae40.svg",
   "bar": "/assets/learning-words/unit95-96/bar-d4ae01c4.svg",
-  "station": "/assets/learning-words/unit95-96/station-860a4ac4.svg",
-  "catch": "/assets/learning-words/unit95-96/catch-b8987825.svg",
+  "station": "/assets/word-art-v2/whole-book/station-v1.webp",
+  "catch": "/assets/unit11-12/cast-catch-v1.webp",
   "caught": "/assets/learning-words/unit95-96/catch-b8987825.svg",
   "miss": "/assets/learning-words/unit95-96/miss-747b6fc6.svg",
-  "ticket": "/assets/learning-words/unit95-96/tickets-a493b218.svg",
-  "bridge": "/assets/learning-words/unit95-96/bridge-324ea330.svg",
+  "ticket": "/assets/unit3-4-journey/ticket-v1.webp",
+  "bridge": "/assets/word-art-v2/whole-book/bridge-v1.webp",
   "slow": "/assets/learning-words/unit95-96/slow-a6ef3f80.svg",
   "fast": "/assets/learning-words/unit95-96/fast-0186e0d3.svg",
   "exact": "/assets/learning-words/unit95-96/clock-d468edf6.svg",
@@ -33,5 +33,19 @@ CanranCore.learningWordArtwork={
   "Seoul": "/assets/learning-words/unit95-96/seoul-8f5fdf08.svg",
   "Stockholm": "/assets/learning-words/unit95-96/stockholm-0681efcf.svg",
   "Sydney": "/assets/learning-words/unit95-96/sydney-bf5619c1.svg",
-  "Tokyo": "/assets/learning-words/unit95-96/tokyo-bef8e01a.svg"
+  "Tokyo": "/assets/learning-words/unit95-96/tokyo-bef8e01a.svg",
+  "porter": "/assets/unit95-96/porter.webp"
+};
+CanranCore.learningWordPresentation={
+  "train": "illustration",
+  "platform": "illustration",
+  "station": "illustration",
+  "porter": "illustration",
+  "ticket": "illustration",
+  "bridge": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit95-96/porter.webp": "/assets/unit95-96/porter.webp",
+  "/assets/unit95-96/tickets.svg": "/assets/unit3-4-journey/ticket-v1.webp",
+  "/assets/unit95-96/bridge.svg": "/assets/word-art-v2/whole-book/bridge-v1.webp"
 };

@@ -70,3 +70,4 @@
 .unit12-workspace .word-example mark{color:inherit;background:#f6e5b1;border-radius:3px;padding:0 2px}
 .unit12-workspace .reading-full>summary{width:fit-content;margin:12px auto 0;padding:7px 14px;min-height:44px;border:1.5px solid #91acb6;border-radius:12px;cursor:pointer;font-size:14px;background:#fffdf8}
 .unit12-workspace .reading-full[open]>summary{margin-bottom:12px}
+body.unit12-workspace{--sample-world:url('/assets/learning-sample-v1/street-world-v1.webp')}

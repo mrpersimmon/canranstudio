@@ -1,11 +1,11 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "awful": "/assets/learning-words/unit71-72/awful-6bdf5a0c.svg",
-  "telephone": "/assets/learning-words/unit71-72/telephone-1d150ed0.svg",
+  "telephone": "/assets/word-art-v2/whole-book/telephone-v1.webp",
   "time": "/assets/learning-words/unit71-72/times-c4053420.svg",
   "answer": "/assets/learning-words/unit71-72/answer-72bf5c7b.svg",
   "last": "/assets/learning-words/unit71-72/last-51952c61.svg",
-  "phone": "/assets/learning-words/unit71-72/phone-1d150ed0.svg",
+  "phone": "/assets/word-art-v2/whole-book/telephone-v1.webp",
   "again": "/assets/learning-words/unit71-72/again-6051beda.svg",
   "say": "/assets/learning-words/unit71-72/say-2665b7af.svg",
   "aired": "/assets/learning-words/unit71-72/air-e2088826.svg",
@@ -34,4 +34,11 @@ CanranCore.learningWordArtwork={
   "yesterday afternoon": "/assets/learning-words/unit71-72/afternoon-8a970b14.svg",
   "last night": "/assets/learning-words/unit71-72/night-590a90a0.svg",
   "the night before last": "/assets/learning-words/unit71-72/before-night-674a3725.svg"
+};
+CanranCore.learningWordPresentation={
+  "telephone": "illustration",
+  "phone": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit71-72/phone.svg": "/assets/word-art-v2/whole-book/telephone-v1.webp"
 };

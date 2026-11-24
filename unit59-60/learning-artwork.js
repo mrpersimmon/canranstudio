@@ -1,36 +1,178 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "envelope": "/assets/learning-words/unit59-60/envelope-fcb56491.svg",
-  "writing paper": "/assets/learning-words/unit59-60/writing-paper-7d73adc9.svg",
+  "envelope": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+  "writing paper": "/assets/word-art-v2/whole-book/writing-paper-v1.webp",
   "size": "/assets/learning-words/unit59-60/size-b4977b64.svg",
-  "pad": "/assets/learning-words/unit59-60/pad-3b133623.svg",
-  "glue": "/assets/learning-words/unit59-60/glue-66cb819b.svg",
-  "chalk": "/assets/learning-words/unit59-60/chalk-5dbd685c.svg",
+  "pad": "/assets/word-art-v2/whole-book/pad-v1.webp",
+  "glue": "/assets/word-art-v2/whole-book/glue-v1.webp",
+  "chalk": "/assets/word-art-v2/whole-book/chalk-v1.webp",
   "change": "/assets/learning-words/unit59-60/change-398c43dc.svg",
-  "large": "/assets/learning-words/unit59-60/large-f9f06e1f.svg",
-  "small": "/assets/learning-words/unit59-60/small-6c74c740.svg",
-  "cheese": "/assets/learning-words/unit59-60/cheese-07af69af.svg",
-  "butter": "/assets/learning-words/unit59-60/butter-1cf98465.svg",
-  "eggs": "/assets/learning-words/unit59-60/eggs-d38260ab.svg",
-  "jam": "/assets/learning-words/unit59-60/jam-d3369a48.svg",
-  "honey": "/assets/learning-words/unit59-60/honey-19925586.svg",
-  "bread": "/assets/learning-words/unit59-60/bread-bf5c5962.svg",
-  "biscuits": "/assets/learning-words/unit59-60/biscuits-d69be543.svg",
-  "potatoes": "/assets/learning-words/unit59-60/potatoes-04cadb32.svg",
-  "tomatoes": "/assets/learning-words/unit59-60/tomatoes-0c98c683.svg",
-  "peas": "/assets/learning-words/unit59-60/peas-b06e3259.svg",
-  "beans": "/assets/learning-words/unit59-60/beans-ba0079c0.svg",
-  "cabbages": "/assets/learning-words/unit59-60/cabbages-11f6b20c.svg",
-  "lettuces": "/assets/learning-words/unit59-60/lettuces-ca3b2e32.svg",
-  "bananas": "/assets/learning-words/unit59-60/bananas-1a94ad03.svg",
-  "grapes": "/assets/learning-words/unit59-60/grapes-e1e6be5e.svg",
-  "peaches": "/assets/learning-words/unit59-60/peaches-03c4c085.svg",
-  "steak": "/assets/learning-words/unit59-60/steak-1beb961f.svg",
-  "mince": "/assets/learning-words/unit59-60/mince-d83f8d4b.svg",
-  "chicken": "/assets/learning-words/unit59-60/chicken-a6f0a4cf.svg",
-  "whisky": "/assets/learning-words/unit59-60/whisky-5f1ae136.svg",
-  "beer": "/assets/learning-words/unit59-60/beer-10e566c7.svg",
-  "wine": "/assets/learning-words/unit59-60/wine-e5c633dc.svg",
-  "tobacco": "/assets/learning-words/unit59-60/tobacco-cdde7244.svg",
-  "soap": "/assets/learning-words/unit59-60/soap-152a510d.svg"
+  "large": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+  "small": "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+  "cheese": "/assets/word-art-v2/whole-book/cheese-v1.webp",
+  "butter": "/assets/word-art-v2/whole-book/butter-v1.webp",
+  "eggs": "/assets/word-art-v2/whole-book/egg-v1.webp",
+  "jam": "/assets/word-art-v2/whole-book/jam-v1.webp",
+  "honey": "/assets/word-art-v2/whole-book/honey-v1.webp",
+  "bread": "/assets/word-art-v2/whole-book/bread-v1.webp",
+  "biscuits": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+  "potatoes": "/assets/word-art-v2/whole-book/potato-v1.webp",
+  "tomatoes": "/assets/word-art-v2/whole-book/tomato-v1.webp",
+  "peas": "/assets/word-art-v2/whole-book/pea-v1.webp",
+  "beans": "/assets/word-art-v2/whole-book/bean-v1.webp",
+  "cabbages": "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+  "lettuces": "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+  "bananas": "/assets/word-art-v2/whole-book/banana-v1.webp",
+  "grapes": "/assets/word-art-v2/whole-book/grape-v1.webp",
+  "peaches": "/assets/word-art-v2/whole-book/peach-v1.webp",
+  "steak": "/assets/word-art-v2/whole-book/steak-v1.webp",
+  "mince": "/assets/word-art-v2/whole-book/mince-v1.webp",
+  "chicken": "/assets/word-art-v2/whole-book/chicken-v1.webp",
+  "whisky": "/assets/word-art-v2/whole-book/whisky-v1.webp",
+  "beer": "/assets/word-art-v2/whole-book/beer-v1.webp",
+  "wine": "/assets/word-art-v2/whole-book/wine-v1.webp",
+  "tobacco": "/assets/word-art-v2/whole-book/tobacco-v1.webp",
+  "soap": "/assets/word-art-v2/whole-book/soap-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "envelope": "illustration",
+  "writing paper": "illustration",
+  "pad": "illustration",
+  "glue": "illustration",
+  "chalk": "illustration",
+  "large": "relation",
+  "small": "relation",
+  "cheese": "illustration",
+  "butter": "illustration",
+  "eggs": "relation",
+  "jam": "illustration",
+  "honey": "illustration",
+  "bread": "illustration",
+  "biscuits": "relation",
+  "potatoes": "relation",
+  "tomatoes": "relation",
+  "peas": "relation",
+  "beans": "relation",
+  "cabbages": "relation",
+  "lettuces": "relation",
+  "bananas": "relation",
+  "grapes": "relation",
+  "peaches": "relation",
+  "steak": "illustration",
+  "mince": "illustration",
+  "chicken": "illustration",
+  "beer": "illustration",
+  "wine": "illustration",
+  "tobacco": "illustration",
+  "soap": "illustration",
+  "whisky": "illustration"
+};
+CanranCore.learningWordComposition={
+  "large": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 0
+  },
+  "small": {
+    "kind": "comparison",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+    ],
+    "scales": [
+      1,
+      0.58
+    ],
+    "focus": 1
+  },
+  "eggs": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/egg-v1.webp",
+      "/assets/word-art-v2/whole-book/egg-v1.webp"
+    ]
+  },
+  "biscuits": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "/assets/word-art-v2/whole-book/biscuit-v1.webp"
+    ]
+  },
+  "potatoes": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/potato-v1.webp",
+      "/assets/word-art-v2/whole-book/potato-v1.webp"
+    ]
+  },
+  "tomatoes": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/tomato-v1.webp",
+      "/assets/word-art-v2/whole-book/tomato-v1.webp"
+    ]
+  },
+  "peas": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/pea-v1.webp",
+      "/assets/word-art-v2/whole-book/pea-v1.webp"
+    ]
+  },
+  "beans": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/bean-v1.webp",
+      "/assets/word-art-v2/whole-book/bean-v1.webp"
+    ]
+  },
+  "cabbages": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+      "/assets/word-art-v2/whole-book/cabbage-v1.webp"
+    ]
+  },
+  "lettuces": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+      "/assets/word-art-v2/whole-book/lettuce-v1.webp"
+    ]
+  },
+  "bananas": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/banana-v1.webp",
+      "/assets/word-art-v2/whole-book/banana-v1.webp"
+    ]
+  },
+  "grapes": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/grape-v1.webp",
+      "/assets/word-art-v2/whole-book/grape-v1.webp"
+    ]
+  },
+  "peaches": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/peach-v1.webp",
+      "/assets/word-art-v2/whole-book/peach-v1.webp"
+    ]
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit59-60/envelope.svg": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+  "/assets/unit59-60/pad.svg": "/assets/word-art-v2/whole-book/pad-v1.webp",
+  "/assets/unit59-60/glue.svg": "/assets/word-art-v2/whole-book/glue-v1.webp",
+  "/assets/unit59-60/chalk.svg": "/assets/word-art-v2/whole-book/chalk-v1.webp"
 };

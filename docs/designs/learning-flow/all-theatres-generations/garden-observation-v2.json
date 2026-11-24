@@ -1,0 +1,27 @@
+{
+  "id": "garden-observation-v2",
+  "unit": "unit31-32",
+  "prompt": "Create one 3:2 landscape continuous children's picture-book garden background for Lesson31–32. Reference1 is the exact story cast and actions. Reference2 is the approved theatre environment style. Preserve girl Sally's original identity: brown braided hair, green pinafore and yellow top, sitting UNDER a tree. Preserve boy Tim's identity: curly blond hair, yellow striped shirt, blue trousers, CLIMBING that tree with hands gripping it. Preserve an orange cat running RIGHT with a brown dog running RIGHT BEHIND it (dog to the cat's LEFT). Keep all four fully visible, no duplicates, no extra people or pets, no words or labels. Compose these story subjects in the MIDDLE DISTANCE: Sally around x40%, Tim on a tree trunk around x65%, their bodies roughly central 40% of frame height; dog and cat across center x35%–65% in the lower middle, not at left or right edges. Leave clear grassy foreground at lower left x0–27% and lower right x74–100% for two separate speaking adults that will be overlaid by the app. Do not draw these adults. Bottom20% clear continuous grass. Open tree canopy at top, warm garden path, fence and soft plants in background; exact same friendly brown outlines, warm painted texture and soft daylight as references. This is a spatially coherent garden, not an inset image, no white border.",
+  "refs": [
+    "assets/unit31-32/garden-story-v1.webp",
+    "assets/learning-sample-v2/park-world-v1.webp"
+  ],
+  "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-fea8fe45-ee18-4b9f-9065-322e6b9f260a.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "tool": "built-in image_gen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-fea8fe45-ee18-4b9f-9065-322e6b9f260a.png",
+  "raw": "assets/learning-whole-book-v1/raw/garden-observation-v2.png",
+  "adopted": "assets/unit31-32/garden-observation-v2.webp",
+  "status": "adopted-local-preview",
+  "sha256": "a282881f0e6752f208af158d3bd864b671ca453a7e47f5b5f758104d53fee025",
+  "screenEvidence": [
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/first-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/first-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/first-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/middle-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/middle-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/middle-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/last-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/last-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit31-32/last-chrome-iphone-16-pro-max.jpg"
+  ]
+}

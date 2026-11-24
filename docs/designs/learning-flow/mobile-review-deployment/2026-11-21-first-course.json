@@ -1,0 +1,326 @@
+{
+  "date": "2026-11-21",
+  "verifiedAt": "2026-11-21T09:00:51.638Z",
+  "scope": "isolated mobile test site only",
+  "url": "https://preview.canranstudio.cn/",
+  "snapshot": "review-first-course-20261121-f1cf3c9367fd",
+  "previousSnapshot": "review-local-stars-20261117-357a3334ca26",
+  "workingTreeHead": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "workingTreeBranch": "codex/book-version",
+  "snapshotIsNotAGitCommit": true,
+  "sourceFilesVerified": 8451,
+  "changedRuntimeAllowlistFiles": 177,
+  "teachingUnits": 72,
+  "snapshotManifestSha256": "3ba1b4f2766007bac63c757b7a34f56a451a350aa3d68f1fe656567fbe0a358f",
+  "deliveryArchiveSha256": "bcfb37a581435466174808b4f7cf607cbb17aee0d63fe7aa9c423bf6923ecbbe",
+  "publicationSha256": "d484f8992c6001adb024a780fd597de6475911c7a3c954bd194cc0f7648a2dfe",
+  "rollback": {
+    "previousReleaseRetained": true,
+    "backup": "/var/backups/canran-mobile-review-first-course-20261121-f1cf3c9367fd/before",
+    "codeRollback": "/var/backups/canran-mobile-review-first-course-20261121-f1cf3c9367fd/rollback.sh",
+    "automaticActivationGuard": true,
+    "rollbackNeeded": false
+  },
+  "dataProtection": {
+    "baselineRows": {
+      "classes": 4,
+      "students": 17,
+      "student_numbers": 17,
+      "admin": 1,
+      "progress": 18,
+      "unit_awards": 18,
+      "learning_courses": 18,
+      "learning_submissions": 179,
+      "learning_students": 17,
+      "learning_availability": 76,
+      "system_upgrades": 0,
+      "course_upgrade_state": 0,
+      "certificate_archives": 0
+    },
+    "allBaselineRowsPreserved": true,
+    "earnedZones": 20,
+    "firstFullStarDates": 1,
+    "keyUnchanged": true,
+    "sqliteIntegrity": true,
+    "priorCourseManifestAndRemovedImageIntact": true
+  },
+  "publicVerification": {
+    "origin": "https://preview.canranstudio.cn",
+    "anonymousProtected": true,
+    "existingStudentLogin": true,
+    "courseManifestsMatched": 72,
+    "verified": {
+      "unit1-2": {
+        "revision": "9c89226ac15ce2125a0de0d97e068228e9309bcc4d1e2d23c77f10b7afa861a2",
+        "manifestSha256": "1a69ced6bcc17e3d193255a5797202a1390143b7dcc2104bd2fbf05e8859018c",
+        "uniqueRequired": 146,
+        "requiredBytes": 8659419,
+        "fontBytes": 7032808
+      },
+      "unit49-50": {
+        "revision": "6f6a8162c31c710b85648b7da8b91b357f2e29910921e2c28b5b91e796f51abc",
+        "manifestSha256": "7fd8eae04c611699a4a471a155f63721a5b9ac2e898420c3e56796618ab4d0e1",
+        "uniqueRequired": 195,
+        "requiredBytes": 12328953,
+        "fontBytes": 7032808
+      }
+    },
+    "previousAuthorizedBundleAndImage": true,
+    "existingStudentAlbum": true,
+    "viewableCards": 2,
+    "archivedCertificates": 0
+  },
+  "browserFlow": {
+    "realSite": "https://preview.canranstudio.cn",
+    "earnedAndConfirmed": 1,
+    "refreshPreserved": true,
+    "gif": {
+      "width": 984,
+      "height": 528,
+      "bytes": 162902
+    },
+    "phones": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "albumSaveButtonVisible": true,
+        "homeShowsOneStar": true,
+        "cookiesOnly": false
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "albumSaveButtonVisible": true,
+        "homeShowsOneStar": true,
+        "cookiesOnly": true
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "albumSaveButtonVisible": true,
+        "homeShowsOneStar": true,
+        "cookiesOnly": true
+      }
+    ],
+    "temporaryStudentDisabled": true
+  },
+  "automationAccountsDisabled": 4,
+  "primaryPhoneTestAccountPreserved": true,
+  "publicTiming": {
+    "baseline": "review-local-stars-20261117-357a3334ca26",
+    "method": "One sample per device and condition for each public version; same authenticated portal, page CDP 10 Mbps / 150 ms and verified external HTTPS route, no separate worker shaping; user-input time before login excluded. Device emulation, not physical browsers or p95.",
+    "results": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "browser": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "previousQuestionMs": 26763,
+            "newQuestionMs": 23096,
+            "deltaMs": -3667,
+            "previousWordMs": 26596,
+            "newWordMs": 22929,
+            "previousRequiredRequests": 156,
+            "newRequiredRequests": 146,
+            "previousRequiredPayloadBytes": 10025967,
+            "newRequiredPayloadBytes": 8659419,
+            "verifiedBodyLengths": 146,
+            "newFirstObjectMs": 1641,
+            "newLastObjectMs": 22209,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 4,
+            "networkEnterMs": 176
+          },
+          "directory-ready": {
+            "previousQuestionMs": 12564,
+            "newQuestionMs": 8862,
+            "deltaMs": -3702,
+            "previousWordMs": 12398,
+            "newWordMs": 8695,
+            "previousRequiredRequests": 151,
+            "newRequiredRequests": 141,
+            "previousRequiredPayloadBytes": 3846871,
+            "newRequiredPayloadBytes": 2480323,
+            "verifiedBodyLengths": 141,
+            "newFirstObjectMs": 800,
+            "newLastObjectMs": 7986,
+            "fontsReadyAtClick": 5,
+            "wordPageTaps": 4,
+            "networkEnterMs": 181
+          },
+          "revisit": {
+            "previousQuestionMs": 1429,
+            "newQuestionMs": 1295,
+            "deltaMs": -134,
+            "previousWordMs": 1362,
+            "newWordMs": 1229,
+            "previousRequiredRequests": 0,
+            "newRequiredRequests": 0,
+            "previousRequiredPayloadBytes": 0,
+            "newRequiredPayloadBytes": 0,
+            "verifiedBodyLengths": 0,
+            "newFirstObjectMs": null,
+            "newLastObjectMs": null,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 1,
+            "networkEnterMs": 183
+          }
+        }
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "browser": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "previousQuestionMs": 27144,
+            "newQuestionMs": 23362,
+            "deltaMs": -3782,
+            "previousWordMs": 26979,
+            "newWordMs": 23195,
+            "previousRequiredRequests": 156,
+            "newRequiredRequests": 146,
+            "previousRequiredPayloadBytes": 10025967,
+            "newRequiredPayloadBytes": 8659419,
+            "verifiedBodyLengths": 146,
+            "newFirstObjectMs": 1724,
+            "newLastObjectMs": 22490,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 4,
+            "networkEnterMs": 176
+          },
+          "directory-ready": {
+            "previousQuestionMs": 12680,
+            "newQuestionMs": 8864,
+            "deltaMs": -3816,
+            "previousWordMs": 12514,
+            "newWordMs": 8697,
+            "previousRequiredRequests": 151,
+            "newRequiredRequests": 141,
+            "previousRequiredPayloadBytes": 3846871,
+            "newRequiredPayloadBytes": 2480323,
+            "verifiedBodyLengths": 141,
+            "newFirstObjectMs": 775,
+            "newLastObjectMs": 8005,
+            "fontsReadyAtClick": 5,
+            "wordPageTaps": 4,
+            "networkEnterMs": 176
+          },
+          "revisit": {
+            "previousQuestionMs": 1427,
+            "newQuestionMs": 1346,
+            "deltaMs": -81,
+            "previousWordMs": 1360,
+            "newWordMs": 1280,
+            "previousRequiredRequests": 0,
+            "newRequiredRequests": 0,
+            "previousRequiredPayloadBytes": 0,
+            "newRequiredPayloadBytes": 0,
+            "verifiedBodyLengths": 0,
+            "newFirstObjectMs": null,
+            "newLastObjectMs": null,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 1,
+            "networkEnterMs": 178
+          }
+        }
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "browser": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "previousQuestionMs": 27080,
+            "newQuestionMs": 23294,
+            "deltaMs": -3786,
+            "previousWordMs": 26913,
+            "newWordMs": 23128,
+            "previousRequiredRequests": 156,
+            "newRequiredRequests": 146,
+            "previousRequiredPayloadBytes": 10025967,
+            "newRequiredPayloadBytes": 8659419,
+            "verifiedBodyLengths": 146,
+            "newFirstObjectMs": 1617,
+            "newLastObjectMs": 22392,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 4,
+            "networkEnterMs": 174
+          },
+          "directory-ready": {
+            "previousQuestionMs": 12896,
+            "newQuestionMs": 8513,
+            "deltaMs": -4383,
+            "previousWordMs": 12730,
+            "newWordMs": 8345,
+            "previousRequiredRequests": 151,
+            "newRequiredRequests": 141,
+            "previousRequiredPayloadBytes": 3846871,
+            "newRequiredPayloadBytes": 2480323,
+            "verifiedBodyLengths": 141,
+            "newFirstObjectMs": 852,
+            "newLastObjectMs": 7655,
+            "fontsReadyAtClick": 5,
+            "wordPageTaps": 4,
+            "networkEnterMs": 186
+          },
+          "revisit": {
+            "previousQuestionMs": 1413,
+            "newQuestionMs": 1312,
+            "deltaMs": -101,
+            "previousWordMs": 1346,
+            "newWordMs": 1244,
+            "previousRequiredRequests": 0,
+            "newRequiredRequests": 0,
+            "previousRequiredPayloadBytes": 0,
+            "newRequiredPayloadBytes": 0,
+            "verifiedBodyLengths": 0,
+            "newFirstObjectMs": null,
+            "newLastObjectMs": null,
+            "fontsReadyAtClick": 0,
+            "wordPageTaps": 1,
+            "networkEnterMs": 179
+          }
+        }
+      }
+    ]
+  },
+  "physicalAcceptance": {
+    "androidWeChat": "pending current snapshot",
+    "androidQuark": "pending current snapshot",
+    "userFeedback": {
+      "date": "2026-11-23",
+      "snapshot": "review-first-course-20261121-f1cf3c9367fd",
+      "message": "尚未实测"
+    }
+  },
+  "official": {
+    "domain": "www.canranstudio.cn",
+    "release": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+    "unchangedRelease": true,
+    "unchangedServiceProcess": true,
+    "unchangedNginxConfig": true
+  },
+  "fullCI": false,
+  "gitCommitted": false,
+  "gitPushed": false
+}

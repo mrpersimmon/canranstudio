@@ -1,0 +1,1170 @@
+{
+  "date": "2026-11-21",
+  "build": "local working tree; not a public deployment",
+  "head": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "method": "Independent authenticated local HTTP server and isolated browser storage. Font benchmarks sequential under page CDP 10 Mbps / 150 ms, with ordinary word-control interactions up to the first question. Service worker not separately shaped. One sample per device and dwell per arm, with a reverse SE control; not p95 or physical phones.",
+  "contracts": {
+    "unit1-2": {
+      "originalRevision": "d16a5a51027fcd69712b9d732bbaa3fb48d056266e8cf0de928ec4044c95085b",
+      "candidateRevision": "8982b7b9a993e76c1bd58e30e6dfedc09bac4a5d764ce127f515ed4c9a2d537c",
+      "logicalFontAndArtworkUnchanged": true,
+      "controlRequiredBytes": 8660866,
+      "candidateEffectiveRequiredBytes": 8665876,
+      "logicalImageCount": 78,
+      "fontFiles": 14,
+      "svgRecipes": [],
+      "layers": []
+    },
+    "unit45-46": {
+      "originalRevision": "8cb7114c6181c7646644d65205ae6bff33d05fe1f1bda2df9933568aaeb6e151",
+      "candidateRevision": "ef626f09fb4758ce64fef92b885fa49cb87e2ea33016b64dc1c376fae160b8ab",
+      "logicalFontAndArtworkUnchanged": true,
+      "controlRequiredBytes": 15136993,
+      "candidateEffectiveRequiredBytes": 9346062,
+      "logicalImageCount": 142,
+      "fontFiles": 14,
+      "svgRecipes": [
+        {
+          "key": "/lesson/assets/unit45-46/ask.svg",
+          "bytes": 499775,
+          "sha256": "c2adf1aa001074fb83c4cdf9dac2e04e94ee054e85cb8bfe7940bf2001bd0a7c"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/bob-point.svg",
+          "bytes": 499462,
+          "sha256": "f4f65f43bf8b90e765c29f20b28630717aa03883662c67bccf5d7af6f648909e"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/bob-read.svg",
+          "bytes": 499462,
+          "sha256": "9d5eff62ef05ec8b421e5d4357f38ab38b591d1ec3fd260a5d3eb87a2cb6ea1e"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/bob.svg",
+          "bytes": 499460,
+          "sha256": "f015c276fcfe990d018e64589e6474d416c29b6ba3ffe2f78df0cc5b6cd612e4"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/boss-point.svg",
+          "bytes": 261184,
+          "sha256": "159d7efc5d28da2da16556a8a88c64008f5ccf2e503d7d693e86921883466767"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/boss-read.svg",
+          "bytes": 261174,
+          "sha256": "a425d0a43d384b46503182f5cde9e67768aa67754b62f75d3b55bede958b57fc"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/boss.svg",
+          "bytes": 261172,
+          "sha256": "5081fc00ca39e0eee7b8a7c3bada2475a4313cc419e1c3870b54ebe87bec0244"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/can.svg",
+          "bytes": 499744,
+          "sha256": "d502cd0c7d39e6c17f0dbe56dc9912a5b28ecba562e1cacf370930c8a9c3ffa1"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/completion-scene.svg",
+          "bytes": 873462,
+          "sha256": "5b5c26241dcd100b496180c9ef680b1434e07d2c89ab32287cd226db4d3d78c6"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/cover-scene.svg",
+          "bytes": 874208,
+          "sha256": "65a3c61a9a1baa9e21f0066da294d39ddbf885b8e226d1ce8930e7c71e8cb244"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/pamela-hold.svg",
+          "bytes": 371933,
+          "sha256": "df4fe88aff1a0a8278310fa4559558d7c5179854416e59d8e846cf8c2d26695b"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/pamela-point.svg",
+          "bytes": 371933,
+          "sha256": "df4fe88aff1a0a8278310fa4559558d7c5179854416e59d8e846cf8c2d26695b"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/pamela-read.svg",
+          "bytes": 371934,
+          "sha256": "893e5740f3f3fcc20aaf704fb21f2476212b511872cf3e718cba2c94a7b18be5"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/pamela.svg",
+          "bytes": 371933,
+          "sha256": "9ba0691d34778693888bceae4b1a279bad8a56aef32f3005d286597f2a7892cc"
+        },
+        {
+          "key": "/lesson/assets/unit45-46/who.svg",
+          "bytes": 499773,
+          "sha256": "b6ebf5a0d5ceba55e35b94836ceb20b2e85f05cf0712b95d281efa540df21257"
+        }
+      ],
+      "layers": [
+        {
+          "bytes": 374365,
+          "sha256": "9fc305a5604b677ca5b114480cbeddbc64d6f3f62b6dd888747c599da3a2f907"
+        },
+        {
+          "bytes": 195650,
+          "sha256": "df6c6408e48659453b7dabbc860d3781ce46cc8a1a6f384d7f6d5d452d7514d9"
+        },
+        {
+          "bytes": 278720,
+          "sha256": "b28abef2311dac3bcd973ec60acf362f2ba11df8d5b6a425f5b735f159ca5a2f"
+        }
+      ]
+    },
+    "unit47-48": {
+      "originalRevision": "8f15fd11f6c8a76750048919123760830ba8a5b5bfc849e4e465ea5aebd883c9",
+      "candidateRevision": "559cc8cb8560a0ea6a7514e366b36a56d1675c45f4b3dcb164ab037b5a784ac4",
+      "logicalFontAndArtworkUnchanged": true,
+      "controlRequiredBytes": 12571622,
+      "candidateEffectiveRequiredBytes": 10929233,
+      "logicalImageCount": 129,
+      "fontFiles": 14,
+      "svgRecipes": [
+        {
+          "key": "/lesson/assets/unit47-48/completion-scene.svg",
+          "bytes": 1317809,
+          "sha256": "83d4e9474590d76bdad236dfae446764e5ad4d669c8c6dddc60148ca6e861b6e"
+        },
+        {
+          "key": "/lesson/assets/unit47-48/cover-scene.svg",
+          "bytes": 1317809,
+          "sha256": "f916ec3f1e94078c735ce8c1ddf14b0431ad4ffd777c9818115e13b868a08ce9"
+        }
+      ],
+      "layers": [
+        {
+          "bytes": 988219,
+          "sha256": "ec0a302653170e05a800b2d3485834aed17856d8eefbe21f915b925afbcce4bd"
+        }
+      ]
+    }
+  },
+  "cases": [
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "artwork": [
+        {
+          "unit": "unit45-46",
+          "before": {
+            "unit": "unit45-46",
+            "requests": 209,
+            "requiredBodyBytes": 15136993,
+            "manifestBytes": 59687
+          },
+          "after": {
+            "unit": "unit45-46",
+            "requests": 198,
+            "requiredBodyBytes": 9346062,
+            "manifestBytes": 76045
+          },
+          "netSavingIncludingManifest": 5774573
+        },
+        {
+          "unit": "unit47-48",
+          "before": {
+            "unit": "unit47-48",
+            "requests": 194,
+            "requiredBodyBytes": 12571622,
+            "manifestBytes": 55955
+          },
+          "after": {
+            "unit": "unit47-48",
+            "requests": 193,
+            "requiredBodyBytes": 10929233,
+            "manifestBytes": 56823
+          },
+          "netSavingIncludingManifest": 1641521
+        }
+      ],
+      "font": [
+        {
+          "dwellMs": 0,
+          "control": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10450,
+            "clickToQuestionMs": 9600,
+            "homeBytes": 45528,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 45528,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 45528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10517,
+            "clickToQuestionMs": 9684,
+            "homeBytes": 42528,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 42528,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 42528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 2000,
+          "control": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 11967,
+            "clickToQuestionMs": 9099,
+            "homeBytes": 1473528,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 1473528,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1473528
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 411528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              },
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 11681,
+            "clickToQuestionMs": 8816,
+            "homeBytes": 1481028,
+            "courseBytes": 3408080,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 1048576,
+            "repeatedBytes": 432452,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1481028
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 417528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=1048576-",
+                "contentRange": "bytes 1048576-4456655/4456656",
+                "bytes": 3408080
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 206,
+                "range": "bytes=262144-",
+                "contentRange": "bytes 262144-1296315/1296316",
+                "bytes": 1034172
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 5000,
+          "control": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 13870,
+            "clickToQuestionMs": 8022,
+            "homeBytes": 4233304,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 4233304,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4233304
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 12970,
+            "clickToQuestionMs": 7088,
+            "homeBytes": 4276804,
+            "courseBytes": 262352,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 4194304,
+            "repeatedBytes": 82500,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4276804
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=4194304-",
+                "contentRange": "bytes 4194304-4456655/4456656",
+                "bytes": 262352
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "artwork": [
+        {
+          "unit": "unit45-46",
+          "before": {
+            "unit": "unit45-46",
+            "requests": 209,
+            "requiredBodyBytes": 15136993,
+            "manifestBytes": 59687
+          },
+          "after": {
+            "unit": "unit45-46",
+            "requests": 198,
+            "requiredBodyBytes": 9346062,
+            "manifestBytes": 76045
+          },
+          "netSavingIncludingManifest": 5774573
+        },
+        {
+          "unit": "unit47-48",
+          "before": {
+            "unit": "unit47-48",
+            "requests": 194,
+            "requiredBodyBytes": 12571622,
+            "manifestBytes": 55955
+          },
+          "after": {
+            "unit": "unit47-48",
+            "requests": 193,
+            "requiredBodyBytes": 10929233,
+            "manifestBytes": 56823
+          },
+          "netSavingIncludingManifest": 1641521
+        }
+      ],
+      "font": [
+        {
+          "dwellMs": 0,
+          "control": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10681,
+            "clickToQuestionMs": 9814,
+            "homeBytes": 62028,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 62028,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 62028
+              }
+            ],
+            "course": [
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              },
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10497,
+            "clickToQuestionMs": 9649,
+            "homeBytes": 41028,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 41028,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 41028
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 2000,
+          "control": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 12015,
+            "clickToQuestionMs": 9147,
+            "homeBytes": 1464528,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 1464528,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1464528
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 393528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              },
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 11664,
+            "clickToQuestionMs": 8815,
+            "homeBytes": 1430028,
+            "courseBytes": 3408080,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 1048576,
+            "repeatedBytes": 381452,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1430028
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 381528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=1048576-",
+                "contentRange": "bytes 1048576-4456655/4456656",
+                "bytes": 3408080
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 206,
+                "range": "bytes=262144-",
+                "contentRange": "bytes 262144-1296315/1296316",
+                "bytes": 1034172
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 5000,
+          "control": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 14048,
+            "clickToQuestionMs": 8201,
+            "homeBytes": 4240804,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 4240804,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4240804
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 13081,
+            "clickToQuestionMs": 7216,
+            "homeBytes": 4251304,
+            "courseBytes": 262352,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 4194304,
+            "repeatedBytes": 57000,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4251304
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=4194304-",
+                "contentRange": "bytes 4194304-4456655/4456656",
+                "bytes": 262352
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "artwork": [
+        {
+          "unit": "unit45-46",
+          "before": {
+            "unit": "unit45-46",
+            "requests": 209,
+            "requiredBodyBytes": 15136993,
+            "manifestBytes": 59687
+          },
+          "after": {
+            "unit": "unit45-46",
+            "requests": 198,
+            "requiredBodyBytes": 9346062,
+            "manifestBytes": 76045
+          },
+          "netSavingIncludingManifest": 5774573
+        },
+        {
+          "unit": "unit47-48",
+          "before": {
+            "unit": "unit47-48",
+            "requests": 194,
+            "requiredBodyBytes": 12571622,
+            "manifestBytes": 55955
+          },
+          "after": {
+            "unit": "unit47-48",
+            "requests": 193,
+            "requiredBodyBytes": 10929233,
+            "manifestBytes": 56823
+          },
+          "netSavingIncludingManifest": 1641521
+        }
+      ],
+      "font": [
+        {
+          "dwellMs": 0,
+          "control": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10712,
+            "clickToQuestionMs": 9847,
+            "homeBytes": 41028,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 41028,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 41028
+              }
+            ],
+            "course": [
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              },
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 0,
+            "loginToQuestionMs": 10514,
+            "clickToQuestionMs": 9649,
+            "homeBytes": 50028,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 50028,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 50028
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 2000,
+          "control": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 11949,
+            "clickToQuestionMs": 9098,
+            "homeBytes": 1461528,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 1461528,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1461528
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 380028
+              }
+            ],
+            "course": [
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              },
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 2000,
+            "loginToQuestionMs": 11564,
+            "clickToQuestionMs": 8716,
+            "homeBytes": 1427028,
+            "courseBytes": 3408080,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 1048576,
+            "repeatedBytes": 378452,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1427028
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 405528
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=1048576-",
+                "contentRange": "bytes 1048576-4456655/4456656",
+                "bytes": 3408080
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 206,
+                "range": "bytes=262144-",
+                "contentRange": "bytes 262144-1296315/1296316",
+                "bytes": 1034172
+              }
+            ]
+          }
+        },
+        {
+          "dwellMs": 5000,
+          "control": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 13865,
+            "clickToQuestionMs": 7999,
+            "homeBytes": 4303804,
+            "courseBytes": 4456656,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 4303804,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4303804
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4456656
+              }
+            ]
+          },
+          "candidate": {
+            "dwellMs": 5000,
+            "loginToQuestionMs": 12881,
+            "clickToQuestionMs": 7032,
+            "homeBytes": 4234804,
+            "courseBytes": 262352,
+            "largeFontBytes": 4456656,
+            "reusedBytes": 4194304,
+            "repeatedBytes": 40500,
+            "home": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 4234804
+              },
+              {
+                "font": "award-round.woff2",
+                "status": 200,
+                "range": null,
+                "contentRange": null,
+                "bytes": 1296316
+              }
+            ],
+            "course": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=4194304-",
+                "contentRange": "bytes 4194304-4456655/4456656",
+                "bytes": 262352
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "reverseControl": {
+    "device": "iPhone SE",
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "engine": "151.0.7922.34",
+    "rows": [
+      {
+        "dwellMs": 0,
+        "loginToQuestionMs": 10582,
+        "clickToQuestionMs": 9732,
+        "homeBytes": 53028,
+        "courseBytes": 4456656,
+        "largeFontBytes": 4456656,
+        "reusedBytes": 0,
+        "repeatedBytes": 53028,
+        "home": [
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 53028
+          }
+        ],
+        "course": [
+          {
+            "font": "award-round.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 1296316
+          },
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 4456656
+          }
+        ]
+      },
+      {
+        "dwellMs": 2000,
+        "loginToQuestionMs": 12014,
+        "clickToQuestionMs": 9146,
+        "homeBytes": 1448028,
+        "courseBytes": 4456656,
+        "largeFontBytes": 4456656,
+        "reusedBytes": 0,
+        "repeatedBytes": 1448028,
+        "home": [
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 1448028
+          },
+          {
+            "font": "award-round.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 392028
+          }
+        ],
+        "course": [
+          {
+            "font": "award-round.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 1296316
+          },
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 4456656
+          }
+        ]
+      },
+      {
+        "dwellMs": 5000,
+        "loginToQuestionMs": 13965,
+        "clickToQuestionMs": 8081,
+        "homeBytes": 4266304,
+        "courseBytes": 4456656,
+        "largeFontBytes": 4456656,
+        "reusedBytes": 0,
+        "repeatedBytes": 4266304,
+        "home": [
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 4266304
+          },
+          {
+            "font": "award-round.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 1296316
+          }
+        ],
+        "course": [
+          {
+            "font": "award-gothic-500.woff2",
+            "status": 200,
+            "range": null,
+            "contentRange": null,
+            "bytes": 4456656
+          }
+        ]
+      }
+    ]
+  },
+  "rendering": {
+    "engines": [
+      "Chromium",
+      "WebKit"
+    ],
+    "viewports": [
+      {
+        "width": 375,
+        "height": 667
+      },
+      {
+        "width": 430,
+        "height": 932
+      },
+      {
+        "width": 440,
+        "height": 956
+      }
+    ],
+    "logicalSVGs": 17,
+    "comparisons": 102,
+    "changedPixels": 0,
+    "chrome": [
+      {
+        "id": "unit45-46",
+        "logicalImages": 15,
+        "originalSvgBytes": 6644676,
+        "layerTransfers": 3,
+        "layerBytes": 848735,
+        "allPixelsEqual": true
+      },
+      {
+        "id": "unit47-48",
+        "logicalImages": 2,
+        "originalSvgBytes": 2635618,
+        "layerTransfers": 1,
+        "layerBytes": 988219,
+        "allPixelsEqual": true
+      }
+    ],
+    "webkit": [
+      {
+        "id": "unit45-46",
+        "logicalImages": 15,
+        "originalSvgBytes": 6644676,
+        "layerTransfers": 3,
+        "layerBytes": 848735,
+        "allPixelsEqual": true
+      },
+      {
+        "id": "unit47-48",
+        "logicalImages": 2,
+        "originalSvgBytes": 2635618,
+        "layerTransfers": 1,
+        "layerBytes": 988219,
+        "allPixelsEqual": true
+      }
+    ]
+  },
+  "checks": {
+    "wholeFontHash": true,
+    "rangeMatchedCommittedOffset": true,
+    "corruptionAndUnsupportedRangeFallback": true,
+    "archiveAndClassIsolation": true,
+    "oldCardAndFirstStarDateAfterResourceRecovery": true,
+    "originalFontAndSVGBytesPreserved": true,
+    "fullCI": false,
+    "physicalAndroidWeChatQuark": false,
+    "committed": false,
+    "pushed": false,
+    "deployed": false
+  }
+}

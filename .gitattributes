@@ -35,3 +35,30 @@ scripts/cloud/*.sh text eol=lf
 .nvmrc text eol=lf
 # Preserve the original artwork generation receipts, including trailing newlines.
 docs/designs/unit5-6-word-cards/production/** -text -whitespace
+
+# Reviewed SVG inputs below carry approval hashes over their exact bytes.
+assets/unit11-12/blue.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit11-12/white.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit127-128/danish.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit127-128/swedish.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/black.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/blue.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/brown.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/colour.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/green.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/grey.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/orange.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/red.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/white.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit13-14/yellow.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/black.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/brown.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/grey.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/orange.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/red.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit15-16/yellow.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit45-46/boss.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/unit7-8/italian.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/word-art-v2/sample13-24/flags/american.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/word-art-v2/sample13-24/flags/english.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/word-art-v2/sample13-24/flags/swedish.svg -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

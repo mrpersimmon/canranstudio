@@ -80,3 +80,4 @@
 .unit910-workspace{--unit-page:#f4f5ee;--unit-wash:#e6eadb;--unit-line:#c3c9b3;--unit-accent:#636e55}
 
 .unit910-workspace .observation-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.unit910-workspace .observation-tabs button{min-height:44px}.unit910-workspace .observation-tabs button[aria-pressed='true']{background:#dce9cd}
+body.unit910-workspace{--sample-world:url('/assets/learning-sample-v1/greeting-world-v1.webp')}

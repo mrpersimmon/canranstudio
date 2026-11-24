@@ -9,6 +9,9 @@ function inspectLearningLayout(root){
   const boxes=[],walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let node;
   while((node=walker.nextNode())){
    if(!node.textContent.trim()||!shown(node.parentElement))continue;
+   // A hint is an independent positioned surface, not ink belonging to the
+   // one-line feedback region that hosts it. Audit its own bounds below.
+   if(el.classList.contains('practice-answer-note')&&node.parentElement.closest('.practice-hint'))continue;
    const range=document.createRange();range.selectNodeContents(node);
    for(const r of range.getClientRects())if(r.width>0&&r.height>0)boxes.push(r);
   }
@@ -20,6 +23,15 @@ function inspectLearningLayout(root){
   if(names.some(a=>lines.some(b=>Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1&&a.right+gap>b.left+1)))issues.push({type:'speaker-overlap',name:name.textContent,text:text.textContent});
  }
  const content=root.querySelector('.practice-content'),options=content?.querySelector('.practice-options');
+ for(const preview of root.querySelectorAll('.learning-context-preview,.learning-material-preview')){
+  if(!shown(preview))continue;const box=preview.getBoundingClientRect();
+  for(const image of preview.querySelectorAll('img')){const r=image.getBoundingClientRect();if(r.left<box.left-1||r.right>box.right+1||r.top<box.top-1||r.bottom>box.bottom+1)issues.push({type:'preview-image-outside-entry',src:image.getAttribute('src'),box:box.toJSON(),image:r.toJSON()});}
+ }
+ for(const hint of root.querySelectorAll('.practice-hint')){
+  if(!shown(hint))continue;const r=hint.getBoundingClientRect(),close=hint.querySelector('.practice-screen-hint-close');
+  if(r.left<0||r.right>innerWidth+1||r.top<0||r.bottom>innerHeight+1||hint.scrollWidth>hint.clientWidth+1)issues.push({type:'hint-outside-viewport',box:r.toJSON()});
+  if(shown(close)){const b=close.getBoundingClientRect();if(b.width<44||b.height<44)issues.push({type:'hint-close-too-small',box:b.toJSON()});}
+ }
  for(const meter of root.querySelectorAll('.practice-meter')){
   if(!shown(meter))continue;const b=meter.getBoundingClientRect();
   for(const step of meter.querySelectorAll('.practice-step')){

@@ -233,7 +233,7 @@ export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,op
       </div>
       {dock}
       <p className="journey-preview-note">{who.preview?'班级预览 · 不记录成绩':who.className}</p>
-      <p className="journey-home-status" role="status" data-home-status>{waiting>0?'还有学习成果保存在本机，联网后将继续同步。':''}</p>
+      <p className="journey-home-status" role="status" data-home-status>{waiting>0?'还有学习成果保存在本机，联网后将继续同步。':who.directoryReviewMessage||''}</p>
     </aside>
     <section className="journey-map" data-chapter={chapter.id} aria-label={chapter.label+' 旅程地图'} ref={mapRef}>
       {modular?<ModuleJourney scopeKey={JSON.stringify([who.student.id,base,courses.map(course=>course.id)])} generation={moduleGeneration} chapter={chapter} courses={mapped} base={base} selected={selected} tap={tap} celebration={celebration} onChoose={choose} onArtReady={moduleArtReady} onPresented={setModulePresentation} renderInfo={course=><MapCourseInfo course={course} placement={{rewards:{width:desktop?184:148,height:desktop?48:44},label:{width:desktop?156:132,height:44,beside:false,multiline:false},starSize:desktop?20:17,starGap:2}} base={base} selected={selected===course.id} celebration={celebration} onChoose={choose} onReplay={replay}/>}/>:

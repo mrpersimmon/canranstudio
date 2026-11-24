@@ -1,0 +1,3166 @@
+{
+  "date": "2026-11-21",
+  "unit": "unit1-2",
+  "trialOrder": [
+    "local-control",
+    "local-candidate",
+    "published-preview-control",
+    "local-candidate-repeat",
+    "local-control-repeat"
+  ],
+  "remoteRelease": "review-local-stars-20261117-357a3334ca26",
+  "temporaryPreviewStudentsDisabled": 3,
+  "method": "Origin-confirmed local mandatory response payloads, exclusive of headers, TLS, sync APIs, pre-click transfers and optional background audio; cache hits listed separately. Public bodies measured in Chromium against the published manifest. Page CDP 10 Mbps / 150 ms; worker networking not separately shaped. Each phone/context/state one sample per trial; this is not p95.",
+  "deduplicatedPackageColumns": [
+    "id",
+    "beforeObjects",
+    "afterObjects",
+    "beforeBytes",
+    "afterBytes"
+  ],
+  "packages": [
+    [
+      "unit1-2",
+      157,
+      146,
+      10028235,
+      8660866
+    ],
+    [
+      "unit3-4",
+      188,
+      176,
+      11251376,
+      9910302
+    ],
+    [
+      "unit5-6",
+      208,
+      197,
+      10462086,
+      9052860
+    ],
+    [
+      "unit7-8",
+      186,
+      175,
+      10597075,
+      9211985
+    ],
+    [
+      "unit9-10",
+      196,
+      185,
+      10892959,
+      9584663
+    ],
+    [
+      "unit11-12",
+      181,
+      170,
+      11242750,
+      9877068
+    ],
+    [
+      "unit13-14",
+      200,
+      189,
+      11098142,
+      9736863
+    ],
+    [
+      "unit15-16",
+      202,
+      191,
+      10485305,
+      9146765
+    ],
+    [
+      "unit17-18",
+      228,
+      217,
+      11281517,
+      9925476
+    ],
+    [
+      "unit19-20",
+      233,
+      222,
+      11318088,
+      10022953
+    ],
+    [
+      "unit21-22",
+      217,
+      206,
+      10796883,
+      9442577
+    ],
+    [
+      "unit23-24",
+      232,
+      221,
+      10575442,
+      9205438
+    ],
+    [
+      "unit25-26",
+      229,
+      217,
+      10465939,
+      8989611
+    ],
+    [
+      "unit27-28",
+      218,
+      207,
+      10751585,
+      9395441
+    ],
+    [
+      "unit29-30",
+      242,
+      230,
+      10579630,
+      9103302
+    ],
+    [
+      "unit31-32",
+      224,
+      212,
+      10880074,
+      9403746
+    ],
+    [
+      "unit33-34",
+      210,
+      198,
+      10691680,
+      9215352
+    ],
+    [
+      "unit35-36",
+      211,
+      199,
+      10578869,
+      9102541
+    ],
+    [
+      "unit37-38",
+      196,
+      184,
+      10510807,
+      9034479
+    ],
+    [
+      "unit39-40",
+      199,
+      187,
+      10294225,
+      8817897
+    ],
+    [
+      "unit41-42",
+      237,
+      225,
+      10831401,
+      9355073
+    ],
+    [
+      "unit43-44",
+      220,
+      208,
+      10353946,
+      8877618
+    ],
+    [
+      "unit45-46",
+      220,
+      209,
+      16493137,
+      15136993
+    ],
+    [
+      "unit47-48",
+      206,
+      194,
+      14047950,
+      12571622
+    ],
+    [
+      "unit49-50",
+      244,
+      195,
+      17731706,
+      12330302
+    ],
+    [
+      "unit51-52",
+      224,
+      213,
+      10552795,
+      9257559
+    ],
+    [
+      "unit53-54",
+      199,
+      188,
+      10015793,
+      8720557
+    ],
+    [
+      "unit55-56",
+      202,
+      191,
+      10557572,
+      9190102
+    ],
+    [
+      "unit57-58",
+      201,
+      191,
+      10494772,
+      9308394
+    ],
+    [
+      "unit59-60",
+      225,
+      213,
+      11432545,
+      9956217
+    ],
+    [
+      "unit61-62",
+      194,
+      182,
+      10669534,
+      9193206
+    ],
+    [
+      "unit63-64",
+      193,
+      181,
+      10306467,
+      8830139
+    ],
+    [
+      "unit65-66",
+      197,
+      185,
+      10404273,
+      8927945
+    ],
+    [
+      "unit67-68",
+      220,
+      209,
+      10857399,
+      9489929
+    ],
+    [
+      "unit69-70",
+      231,
+      220,
+      10596058,
+      9228588
+    ],
+    [
+      "unit71-72",
+      212,
+      200,
+      10353383,
+      8877055
+    ],
+    [
+      "unit73-74",
+      212,
+      201,
+      10034475,
+      8667005
+    ],
+    [
+      "unit75-76",
+      189,
+      177,
+      10042285,
+      8565957
+    ],
+    [
+      "unit77-78",
+      202,
+      190,
+      10045244,
+      8568916
+    ],
+    [
+      "unit79-80",
+      222,
+      210,
+      10437017,
+      8960689
+    ],
+    [
+      "unit81-82",
+      194,
+      182,
+      10226346,
+      8750018
+    ],
+    [
+      "unit83-84",
+      204,
+      192,
+      10580643,
+      9104315
+    ],
+    [
+      "unit85-86",
+      207,
+      196,
+      10062987,
+      8695517
+    ],
+    [
+      "unit87-88",
+      194,
+      182,
+      10019186,
+      8542858
+    ],
+    [
+      "unit89-90",
+      186,
+      175,
+      9886050,
+      8518580
+    ],
+    [
+      "unit91-92",
+      197,
+      186,
+      10104858,
+      8737388
+    ],
+    [
+      "unit93-94",
+      206,
+      194,
+      10008802,
+      8532474
+    ],
+    [
+      "unit95-96",
+      226,
+      214,
+      10933775,
+      9457447
+    ],
+    [
+      "unit97-98",
+      208,
+      196,
+      10579087,
+      9102759
+    ],
+    [
+      "unit99-100",
+      213,
+      201,
+      10527445,
+      9051117
+    ],
+    [
+      "unit101-102",
+      206,
+      194,
+      10093553,
+      8617225
+    ],
+    [
+      "unit103-104",
+      217,
+      206,
+      9827086,
+      8417756
+    ],
+    [
+      "unit105-106",
+      203,
+      192,
+      10011277,
+      8655133
+    ],
+    [
+      "unit107-108",
+      222,
+      211,
+      10272577,
+      8911193
+    ],
+    [
+      "unit109-110",
+      231,
+      219,
+      10528504,
+      9052176
+    ],
+    [
+      "unit111-112",
+      217,
+      205,
+      10410445,
+      8934117
+    ],
+    [
+      "unit113-114",
+      208,
+      196,
+      10869084,
+      9392756
+    ],
+    [
+      "unit115-116",
+      210,
+      199,
+      10401008,
+      9105772
+    ],
+    [
+      "unit117-118",
+      215,
+      204,
+      10746787,
+      9390643
+    ],
+    [
+      "unit119-120",
+      201,
+      189,
+      11049394,
+      9573066
+    ],
+    [
+      "unit121-122",
+      194,
+      183,
+      10891897,
+      9537487
+    ],
+    [
+      "unit123-124",
+      206,
+      194,
+      11002857,
+      9526529
+    ],
+    [
+      "unit125-126",
+      200,
+      188,
+      10932087,
+      9455759
+    ],
+    [
+      "unit127-128",
+      190,
+      178,
+      10494300,
+      9017972
+    ],
+    [
+      "unit129-130",
+      190,
+      178,
+      10689901,
+      9213573
+    ],
+    [
+      "unit131-132",
+      183,
+      171,
+      10493147,
+      9016819
+    ],
+    [
+      "unit133-134",
+      178,
+      167,
+      10694998,
+      9327528
+    ],
+    [
+      "unit135-136",
+      178,
+      167,
+      10787102,
+      9419632
+    ],
+    [
+      "unit137-138",
+      179,
+      167,
+      10471921,
+      8995593
+    ],
+    [
+      "unit139-140",
+      177,
+      166,
+      10500607,
+      9144463
+    ],
+    [
+      "unit141-142",
+      192,
+      180,
+      10867641,
+      9391313
+    ],
+    [
+      "unit143-144",
+      212,
+      200,
+      11714601,
+      10238273
+    ]
+  ],
+  "removedFromFirstCourse": [
+    {
+      "key": "/lesson/assets/learning-sample-v1/claim-world-v1.webp",
+      "sha256": "293fc1d8275687b432df3d9ec364405bb741773e398708015e0de80ab7d97804",
+      "bytes": 110544
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v1/classroom-world-v1.webp",
+      "sha256": "2f8798952fca7e5a3641ad7ec8c8924112dcc49587795a91e029538ed2f00a76",
+      "bytes": 66998
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v1/greeting-world-v1.webp",
+      "sha256": "91dc3cf48819ec039be5ca4b645b45a9ebf30bce8d7a44ee09d95b7acc57e05b",
+      "bytes": 167928
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v1/interview-world-v1.webp",
+      "sha256": "0697975755a80e53009ede295bea847fddec25091b225daa2b4c530cd82aaac2",
+      "bytes": 91134
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/customs-world-v1.webp",
+      "sha256": "a8068a13f728e28127d919b94fb3d292bd8a79025b15a6e327e6434c6cee5c8a",
+      "bytes": 137684
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/dressing-world-v1.webp",
+      "sha256": "e8e2f4b2d7722ab685977caea57cba134d7df2f159b286837fe05b3479d9f286",
+      "bytes": 114944
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/office-world-v1.webp",
+      "sha256": "a1eab200e4a56a414af71f201d83801da332dedb590a1098cc88767780c5e958",
+      "bytes": 120184
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/park-world-v1.webp",
+      "sha256": "631d2e294f886662939ca37ad8e7019ed2054e38e9eb04620c60affdb7e6e56a",
+      "bytes": 181092
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/reading-world-v1.webp",
+      "sha256": "97d366fc65073556c08361e18dabb766106377d62c87fd70bd8bc1b3d04b228c",
+      "bytes": 121918
+    },
+    {
+      "key": "/lesson/assets/learning-sample-v2/shelf-world-v1.webp",
+      "sha256": "a71935b591f23e2b0974366c296b591c59acac3069ee35fdef3c6d0f7cf384ed",
+      "bytes": 106222
+    },
+    {
+      "key": "/lesson/assets/unit3-4-journey/cloakroom-interior-v1.webp",
+      "sha256": "9d48720577c5ba1d585a05cbfc944996af0cffa0ae68500c6195b7d4e21096bd",
+      "bytes": 147596
+    }
+  ],
+  "fontBytes": 7032808,
+  "results": {
+    "local-control": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 11196,
+            "questionMs": 11364,
+            "decodedImageActiveMs": 555,
+            "requiredRequests": 157,
+            "decodedBodyBytes": 10028235,
+            "encodedBodyBytes": 10028235,
+            "originRequiredBodyBytes": 10028235,
+            "verifiedReceipts": 157,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 598,
+            "lastObjectMs": 10399,
+            "enterMs": 186,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 8396,
+            "questionMs": 8564,
+            "decodedImageActiveMs": 528,
+            "requiredRequests": 152,
+            "decodedBodyBytes": 3849139,
+            "encodedBodyBytes": 3849139,
+            "originRequiredBodyBytes": 3849139,
+            "verifiedReceipts": 152,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 601,
+            "lastObjectMs": 7619,
+            "enterMs": 186,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1147,
+            "questionMs": 1213,
+            "decodedImageActiveMs": 241,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 173,
+            "workerPermitMs": 1
+          }
+        }
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 11397,
+            "questionMs": 11564,
+            "decodedImageActiveMs": 543,
+            "requiredRequests": 157,
+            "decodedBodyBytes": 10028235,
+            "encodedBodyBytes": 10028235,
+            "originRequiredBodyBytes": 10028235,
+            "verifiedReceipts": 157,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 606,
+            "lastObjectMs": 10619,
+            "enterMs": 180,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 8330,
+            "questionMs": 8498,
+            "decodedImageActiveMs": 525,
+            "requiredRequests": 152,
+            "decodedBodyBytes": 3849139,
+            "encodedBodyBytes": 3849139,
+            "originRequiredBodyBytes": 3849139,
+            "verifiedReceipts": 152,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 573,
+            "lastObjectMs": 7572,
+            "enterMs": 173,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1163,
+            "questionMs": 1230,
+            "decodedImageActiveMs": 252,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 181,
+            "workerPermitMs": 1
+          }
+        }
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 11280,
+            "questionMs": 11447,
+            "decodedImageActiveMs": 532,
+            "requiredRequests": 157,
+            "decodedBodyBytes": 10028235,
+            "encodedBodyBytes": 10028235,
+            "originRequiredBodyBytes": 10028235,
+            "verifiedReceipts": 157,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 582,
+            "lastObjectMs": 10514,
+            "enterMs": 183,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 8330,
+            "questionMs": 8497,
+            "decodedImageActiveMs": 542,
+            "requiredRequests": 152,
+            "decodedBodyBytes": 3849139,
+            "encodedBodyBytes": 3849139,
+            "originRequiredBodyBytes": 3849139,
+            "verifiedReceipts": 152,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 614,
+            "lastObjectMs": 7547,
+            "enterMs": 182,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1178,
+            "questionMs": 1245,
+            "decodedImageActiveMs": 258,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 176,
+            "workerPermitMs": 1
+          }
+        }
+      }
+    ],
+    "local-candidate": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 9446,
+            "questionMs": 9614,
+            "decodedImageActiveMs": 323,
+            "requiredRequests": 146,
+            "decodedBodyBytes": 8660866,
+            "encodedBodyBytes": 8660866,
+            "originRequiredBodyBytes": 8660866,
+            "verifiedReceipts": 146,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 602,
+            "lastObjectMs": 8781,
+            "enterMs": 180,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 6931,
+            "questionMs": 7098,
+            "decodedImageActiveMs": 295,
+            "requiredRequests": 141,
+            "decodedBodyBytes": 2481770,
+            "encodedBodyBytes": 2481770,
+            "originRequiredBodyBytes": 2481770,
+            "verifiedReceipts": 141,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 605,
+            "lastObjectMs": 6292,
+            "enterMs": 175,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1047,
+            "questionMs": 1113,
+            "decodedImageActiveMs": 137,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 189,
+            "workerPermitMs": 1
+          }
+        }
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 9429,
+            "questionMs": 9597,
+            "decodedImageActiveMs": 303,
+            "requiredRequests": 146,
+            "decodedBodyBytes": 8660866,
+            "encodedBodyBytes": 8660866,
+            "originRequiredBodyBytes": 8660866,
+            "verifiedReceipts": 146,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 577,
+            "lastObjectMs": 8767,
+            "enterMs": 181,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 7080,
+            "questionMs": 7249,
+            "decodedImageActiveMs": 287,
+            "requiredRequests": 141,
+            "decodedBodyBytes": 2481770,
+            "encodedBodyBytes": 2481770,
+            "originRequiredBodyBytes": 2481770,
+            "verifiedReceipts": 141,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 604,
+            "lastObjectMs": 6418,
+            "enterMs": 177,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1062,
+            "questionMs": 1129,
+            "decodedImageActiveMs": 141,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 174,
+            "workerPermitMs": 1
+          }
+        }
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 9596,
+            "questionMs": 9763,
+            "decodedImageActiveMs": 307,
+            "requiredRequests": 146,
+            "decodedBodyBytes": 8660866,
+            "encodedBodyBytes": 8660866,
+            "originRequiredBodyBytes": 8660866,
+            "verifiedReceipts": 146,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 602,
+            "lastObjectMs": 8922,
+            "enterMs": 181,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 6863,
+            "questionMs": 7029,
+            "decodedImageActiveMs": 312,
+            "requiredRequests": 141,
+            "decodedBodyBytes": 2481770,
+            "encodedBodyBytes": 2481770,
+            "originRequiredBodyBytes": 2481770,
+            "verifiedReceipts": 141,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 598,
+            "lastObjectMs": 6176,
+            "enterMs": 185,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1079,
+            "questionMs": 1146,
+            "decodedImageActiveMs": 143,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 170,
+            "workerPermitMs": 1
+          }
+        }
+      }
+    ],
+    "local-candidate-repeat": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 9647,
+            "questionMs": 9814,
+            "decodedImageActiveMs": 321,
+            "requiredRequests": 146,
+            "decodedBodyBytes": 8660866,
+            "encodedBodyBytes": 8660866,
+            "originRequiredBodyBytes": 8660866,
+            "verifiedReceipts": 146,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 581,
+            "lastObjectMs": 8974,
+            "enterMs": 172,
+            "workerPermitMs": 2
+          },
+          "directory-ready": {
+            "wordMs": 6963,
+            "questionMs": 7132,
+            "decodedImageActiveMs": 305,
+            "requiredRequests": 141,
+            "decodedBodyBytes": 2481770,
+            "encodedBodyBytes": 2481770,
+            "originRequiredBodyBytes": 2481770,
+            "verifiedReceipts": 141,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 19,
+                "bodyBytes": 818228
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 321928
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 590,
+            "lastObjectMs": 6291,
+            "enterMs": 176,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1079,
+            "questionMs": 1146,
+            "decodedImageActiveMs": 137,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 97,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 182,
+            "workerPermitMs": 1
+          }
+        }
+      }
+    ],
+    "local-control-repeat": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 11380,
+            "questionMs": 11564,
+            "decodedImageActiveMs": 560,
+            "requiredRequests": 157,
+            "decodedBodyBytes": 10028235,
+            "encodedBodyBytes": 10028235,
+            "originRequiredBodyBytes": 10028235,
+            "verifiedReceipts": 157,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 592,
+            "lastObjectMs": 10554,
+            "enterMs": 186,
+            "workerPermitMs": 1
+          },
+          "directory-ready": {
+            "wordMs": 8365,
+            "questionMs": 8531,
+            "decodedImageActiveMs": 574,
+            "requiredRequests": 152,
+            "decodedBodyBytes": 3849139,
+            "encodedBodyBytes": 3849139,
+            "originRequiredBodyBytes": 3849139,
+            "verifiedReceipts": 152,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 31,
+                "bodyBytes": 362345
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 323053
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 54723
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 617,
+            "lastObjectMs": 7534,
+            "enterMs": 189,
+            "workerPermitMs": 1
+          },
+          "revisit": {
+            "wordMs": 1179,
+            "questionMs": 1247,
+            "decodedImageActiveMs": 249,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": 0,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 176,
+            "workerPermitMs": 1
+          }
+        }
+      }
+    ],
+    "published-preview-control": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 26596,
+            "questionMs": 26763,
+            "decodedImageActiveMs": 559,
+            "requiredRequests": 156,
+            "decodedBodyBytes": 10025967,
+            "encodedBodyBytes": 10025967,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 156,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 1497,
+            "lastObjectMs": 25740,
+            "enterMs": 155,
+            "workerPermitMs": 42
+          },
+          "directory-ready": {
+            "wordMs": 12398,
+            "questionMs": 12564,
+            "decodedImageActiveMs": 531,
+            "requiredRequests": 151,
+            "decodedBodyBytes": 3846871,
+            "encodedBodyBytes": 3846871,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 151,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 109,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 812,
+            "lastObjectMs": 11588,
+            "enterMs": 180,
+            "workerPermitMs": 29
+          },
+          "revisit": {
+            "wordMs": 1362,
+            "questionMs": 1429,
+            "decodedImageActiveMs": 227,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 179,
+            "workerPermitMs": 31
+          }
+        }
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 26979,
+            "questionMs": 27144,
+            "decodedImageActiveMs": 568,
+            "requiredRequests": 156,
+            "decodedBodyBytes": 10025967,
+            "encodedBodyBytes": 10025967,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 156,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 109,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 2043,
+            "lastObjectMs": 26130,
+            "enterMs": 175,
+            "workerPermitMs": 42
+          },
+          "directory-ready": {
+            "wordMs": 12514,
+            "questionMs": 12680,
+            "decodedImageActiveMs": 539,
+            "requiredRequests": 151,
+            "decodedBodyBytes": 3846871,
+            "encodedBodyBytes": 3846871,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 151,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 109,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 915,
+            "lastObjectMs": 11711,
+            "enterMs": 178,
+            "workerPermitMs": 38
+          },
+          "revisit": {
+            "wordMs": 1360,
+            "questionMs": 1427,
+            "decodedImageActiveMs": 231,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 183,
+            "workerPermitMs": 32
+          }
+        }
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "engine": "151.0.7922.34",
+        "cases": {
+          "fresh-login": {
+            "wordMs": 26913,
+            "questionMs": 27080,
+            "decodedImageActiveMs": 556,
+            "requiredRequests": 156,
+            "decodedBodyBytes": 10025967,
+            "encodedBodyBytes": 10025967,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 156,
+            "byFormat": {
+              "woff2": {
+                "count": 14,
+                "bodyBytes": 7032808
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 109,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": 1918,
+            "lastObjectMs": 26099,
+            "enterMs": 223,
+            "workerPermitMs": 29
+          },
+          "directory-ready": {
+            "wordMs": 12730,
+            "questionMs": 12896,
+            "decodedImageActiveMs": 521,
+            "requiredRequests": 151,
+            "decodedBodyBytes": 3846871,
+            "encodedBodyBytes": 3846871,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 151,
+            "byFormat": {
+              "woff2": {
+                "count": 9,
+                "bodyBytes": 853712
+              },
+              "webp": {
+                "count": 30,
+                "bodyBytes": 2184472
+              },
+              "js": {
+                "count": 30,
+                "bodyBytes": 361163
+              },
+              "css": {
+                "count": 21,
+                "bodyBytes": 322906
+              },
+              "html": {
+                "count": 2,
+                "bodyBytes": 53784
+              },
+              "png": {
+                "count": 5,
+                "bodyBytes": 37917
+              },
+              "svg": {
+                "count": 54,
+                "bodyBytes": 32917
+              }
+            },
+            "workerDisplayHits": 109,
+            "fontsReadyAtClick": 5,
+            "firstObjectMs": 709,
+            "lastObjectMs": 11945,
+            "enterMs": 177,
+            "workerPermitMs": 29
+          },
+          "revisit": {
+            "wordMs": 1346,
+            "questionMs": 1413,
+            "decodedImageActiveMs": 219,
+            "requiredRequests": 0,
+            "decodedBodyBytes": 0,
+            "encodedBodyBytes": 0,
+            "originRequiredBodyBytes": null,
+            "verifiedReceipts": 0,
+            "byFormat": {},
+            "workerDisplayHits": 108,
+            "fontsReadyAtClick": 0,
+            "firstObjectMs": null,
+            "lastObjectMs": null,
+            "enterMs": 186,
+            "workerPermitMs": 31
+          }
+        }
+      }
+    ]
+  },
+  "publishedSEWaterfall": {
+    "columns": [
+      "file",
+      "sha256",
+      "decoded_body_bytes",
+      "request_start_ms_from_click",
+      "wait_for_headers_ms",
+      "finished_ms_from_click"
+    ],
+    "rows": [
+      [
+        "award-gothic-500.woff2",
+        "8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f",
+        4456656,
+        1497,
+        168,
+        25740
+      ],
+      [
+        "award-round.woff2",
+        "9d463c37580598bd9485f03000fbdbef1495e2b9a565b7b9dda34dc0ce622a28",
+        1296316,
+        1497,
+        168,
+        17919
+      ],
+      [
+        "zcool-kuaile-chinese-simplified-400.woff2",
+        "843e756c6f01753694d4f5a4e1a91ab295848131e0ce971580dd876d035713fd",
+        726052,
+        1497,
+        168,
+        8775
+      ],
+      [
+        "lesson-gothic-body-400.woff2",
+        "41cc3e55107da5ccb8644cd3d5e7b437411eaf8bc92dbec2fb1e01d29039081c",
+        323072,
+        1497,
+        168,
+        7596
+      ],
+      [
+        "park-world-v1.webp",
+        "631d2e294f886662939ca37ad8e7019ed2054e38e9eb04620c60affdb7e6e56a",
+        181092,
+        1497,
+        276,
+        3964
+      ],
+      [
+        "unit1-2-handbag-closeup.webp",
+        "db5610ec1a4b1c6f0e6455d40054eca9240be0c26d6cc677a7d81e71e5b51826",
+        177460,
+        1498,
+        367,
+        5152
+      ],
+      [
+        "greeting-world-v1.webp",
+        "91dc3cf48819ec039be5ca4b645b45a9ebf30bce8d7a44ee09d95b7acc57e05b",
+        167928,
+        3984,
+        164,
+        5865
+      ],
+      [
+        "cloakroom-interior-v1.webp",
+        "9d48720577c5ba1d585a05cbfc944996af0cffa0ae68500c6195b7d4e21096bd",
+        147596,
+        5169,
+        155,
+        7011
+      ],
+      [
+        "customs-world-v1.webp",
+        "a8068a13f728e28127d919b94fb3d292bd8a79025b15a6e327e6434c6cee5c8a",
+        137684,
+        5883,
+        156,
+        6920
+      ],
+      [
+        "reading-world-v1.webp",
+        "97d366fc65073556c08361e18dabb766106377d62c87fd70bd8bc1b3d04b228c",
+        121918,
+        6936,
+        153,
+        9988
+      ],
+      [
+        "office-world-v1.webp",
+        "a1eab200e4a56a414af71f201d83801da332dedb590a1098cc88767780c5e958",
+        120184,
+        7030,
+        194,
+        8835
+      ],
+      [
+        "dressing-world-v1.webp",
+        "e8e2f4b2d7722ab685977caea57cba134d7df2f159b286837fe05b3479d9f286",
+        114944,
+        7601,
+        156,
+        9214
+      ],
+      [
+        "claim-world-v1.webp",
+        "293fc1d8275687b432df3d9ec364405bb741773e398708015e0de80ab7d97804",
+        110544,
+        8784,
+        170,
+        9421
+      ],
+      [
+        "street-world-v1.webp",
+        "db260caa43cb64f1bcb606ae30077c9f4cfc9b28cb4d2f848a17b9d4ba7d4932",
+        108858,
+        8849,
+        167,
+        10771
+      ],
+      [
+        "shelf-world-v1.webp",
+        "a71935b591f23e2b0974366c296b591c59acac3069ee35fdef3c6d0f7cf384ed",
+        106222,
+        9229,
+        158,
+        11820
+      ],
+      [
+        "award-nunito.woff2",
+        "69241bae0907bb4c8d3c8bc0a30219083552572588f0447c86f06e38b450d279",
+        101104,
+        9438,
+        166,
+        10560
+      ],
+      [
+        "interview-world-v1.webp",
+        "0697975755a80e53009ede295bea847fddec25091b225daa2b4c530cd82aaac2",
+        91134,
+        10000,
+        163,
+        11398
+      ],
+      [
+        "coat-v1.webp",
+        "832a728cfb1fc793cf91cfb9cea9bd99d7e46459a47b7a1c3ff2f69ae01280f3",
+        90278,
+        10562,
+        154,
+        11356
+      ],
+      [
+        "classroom-world-v1.webp",
+        "2f8798952fca7e5a3641ad7ec8c8924112dcc49587795a91e029538ed2f00a76",
+        66998,
+        10783,
+        182,
+        11693
+      ],
+      [
+        "lesson49-practice.js",
+        "7646084c98e0a3bb46089af7b4169e1fc276e1c78c447358b1e0682305c16f09",
+        56774,
+        11373,
+        177,
+        11671
+      ],
+      [
+        "completion.css",
+        "ae6900310a7782d539d4f0f85c65ca3e9dcab620aefbf2cd728475c50c71655e",
+        56194,
+        11409,
+        162,
+        12497
+      ],
+      [
+        "man-v154.webp",
+        "a99883b710774d629be1161a2e5d3fe1829ff758dfa4d1a96479dcee84d48f80",
+        51800,
+        11676,
+        172,
+        12565
+      ],
+      [
+        "woman-v154.webp",
+        "d203d36129b1fbc1dba1bb772766e36c08d87e9db1ae7d093084b6c1efe1d11b",
+        50586,
+        11705,
+        161,
+        12206
+      ],
+      [
+        "content.js",
+        "a89f2179876a9a4e807f7a97075a5a54f7ec48170b194d29c1535cc48c8be434",
+        49812,
+        11832,
+        173,
+        12267
+      ],
+      [
+        "unit1-2.html",
+        "5c958d4888cfd71b7ac82f18dd0d6bbc38b9b1efa4ad003eaaa6ffc78e9d8f50",
+        48771,
+        12214,
+        155,
+        12823
+      ],
+      [
+        "house-v1.webp",
+        "3185a885c028ddb4ea547228a47a5bc03ddb20a1bd8a2374424b303f9c9870c1",
+        48340,
+        12272,
+        157,
+        12792
+      ],
+      [
+        "mini-v1.webp",
+        "99bcaa3c89bfb671b496ec4b8afac5e63952ee45f08dc7164730dc30230d3334",
+        46100,
+        12498,
+        387,
+        14048
+      ],
+      [
+        "learning-flow.css",
+        "0e6d66783c1e91206d5449d1e75e1a36632b6b584171708338ea196f38592628",
+        45073,
+        12575,
+        156,
+        12887
+      ],
+      [
+        "lesson49-experience.css",
+        "17a85c12b5a43ede08e1bcb0d14d18f91b5250dec23c15b811950059962f81f5",
+        39045,
+        12799,
+        175,
+        13426
+      ],
+      [
+        "learning-sample.css",
+        "95f7b3ef7f4c470287cebac76e76a123a0d9570dc68702f83377f34fc2a21938",
+        36733,
+        12826,
+        170,
+        13128
+      ],
+      [
+        "course-loader.js",
+        "a80688e0e5eec38d658a23d11aa34eb84c9e70e4b51f7b1d427e8c91c3dba3d5",
+        36719,
+        12889,
+        170,
+        13105
+      ],
+      [
+        "shirt-v1.webp",
+        "1647a98f65e6986980f80c7b98b169eb6290c3ba935223173ce1991cbc3ea66f",
+        34562,
+        13108,
+        177,
+        13326
+      ],
+      [
+        "dress-v1.webp",
+        "5db94faae9fb00f9618ce7c86175716089dcc22c3b3067ddb6361c554ca102bc",
+        30678,
+        13129,
+        157,
+        13399
+      ],
+      [
+        "watch-v1.webp",
+        "e6d0a348a5628f37551c0d88910cd0c0dc99af861e410b44380a8177f2be684f",
+        27788,
+        13334,
+        155,
+        14050
+      ],
+      [
+        "learning-flow.js",
+        "8d278184318b15ecad6897f26b61afc4710f1f5bbe909e2ae65fb42ea9977d46",
+        26993,
+        13407,
+        161,
+        13673
+      ],
+      [
+        "skirt-v1.webp",
+        "a7a9b6904ae151b94d202b480f954515e1e637d0bda0c11ce158b36e11f144b5",
+        26898,
+        13428,
+        156,
+        13877
+      ],
+      [
+        "lesson49-base.css",
+        "8fd38e78b186befe75dc96283783c55d21962884a9894ef651d5a86387f2aa0d",
+        25459,
+        13675,
+        167,
+        14033
+      ],
+      [
+        "book-v1.webp",
+        "708de0d76ffd85ea3f3e71524205bef8e07830dab75c950e5f89494fad9c762a",
+        24826,
+        13885,
+        163,
+        14437
+      ],
+      [
+        "practice-screen.css",
+        "278f9022855870bfc6c42f4b7b5a3faeba16ec292b4195a8acfc9a61a84696cf",
+        22267,
+        14036,
+        154,
+        14420
+      ],
+      [
+        "pen-v1.webp",
+        "3bc4cad720f0bdba6182efdb2d70ca3fa1a7966e40fe6e503161cd29f74ff84d",
+        21478,
+        14057,
+        154,
+        14308
+      ],
+      [
+        "practice-screen.js",
+        "9315b037c35ef090940a9fb27d41dc897ec9b92ccd8050472f0c39cadaa0bcbe",
+        20449,
+        14060,
+        175,
+        14490
+      ],
+      [
+        "pencil-v1.webp",
+        "80ec3f11fa6c1d4e4082df764f2d2e893a4a1693e7334df851167a232cc6a6f1",
+        19950,
+        14315,
+        160,
+        14490
+      ],
+      [
+        "handbag-v1.webp",
+        "325bea590ba99f8d3e695cf211537077d8ecaa07a23cf702804531f23cf73dee",
+        19850,
+        14422,
+        165,
+        14627
+      ],
+      [
+        "baloo-2-latin-500.woff2",
+        "b533661a076cc6e6ecd387f4665a02e923f94eec48bfe5bcecaf29213eb29a36",
+        19556,
+        14443,
+        157,
+        14778
+      ],
+      [
+        "baloo-2-latin-700.woff2",
+        "8e7ffc9b993aa8caa89bcab81e103c9eb2da4e3e042f37b7a5115d0ddbff12c0",
+        19436,
+        14492,
+        166,
+        14792
+      ],
+      [
+        "scene.css",
+        "9de20a2baf24ab6162a7ac508e635bc171bab1b77e5f5bc3c8f55ebbf07db9fc",
+        19338,
+        14495,
+        163,
+        14679
+      ],
+      [
+        "baloo-2-latin-800.woff2",
+        "3e36c57e37bda5b5f28cf10636d6d3aed4de5250df923f1b203b64ad857c79a7",
+        18632,
+        14632,
+        186,
+        14944
+      ],
+      [
+        "unit.js",
+        "23a81a973bbcc9c3b7d9560fdff727834312a602540f44e8258f19df8cb524c1",
+        18143,
+        14681,
+        163,
+        14945
+      ],
+      [
+        "award-reveal.js",
+        "526f65fab3aeae74cf6f4738a1b3c68a099bcb7d6044e9cb2a715a0156395dbf",
+        17743,
+        14780,
+        164,
+        15010
+      ],
+      [
+        "fredoka-latin-600.woff2",
+        "b62f2898de150f019961f4884a49f83dcd2ce74375be5e0992c594ebb8f30294",
+        16468,
+        14793,
+        449,
+        15723
+      ],
+      [
+        "fredoka-latin-500.woff2",
+        "7d76e44a94b02894b384fc98c124ccf521d8460bf0e0bbe31c1b6b4be6099620",
+        16248,
+        14946,
+        171,
+        15126
+      ],
+      [
+        "fredoka-latin-400.woff2",
+        "9cf74f703532ef61311d6c6dd32a582b6e410727f5fce1dbf5570cbe6b023c2f",
+        16076,
+        14947,
+        170,
+        15425
+      ],
+      [
+        "fredoka-latin-700.woff2",
+        "ee61b48acab42fcfee4e1c398b03bbae7e09d1be8471779c440a97dc85118c16",
+        15900,
+        15013,
+        153,
+        15212
+      ],
+      [
+        "starflower-apple-touch.png",
+        "c6a00115ef8559523e18124cae2f6642b37e2946c5dce40e1360787b41a8564e",
+        14833,
+        15129,
+        171,
+        15321
+      ],
+      [
+        "lesson49-task-inputs.js",
+        "2ebe7327375d1dc17cb46fb5f0377bdf124c303400a02c3d01448fed84fefa09",
+        14735,
+        15215,
+        168,
+        15382
+      ],
+      [
+        "story-certificate.js",
+        "074013366d3ca316e36d19667580282d3d045ec14bcaace98cb14e2818d2833a",
+        14251,
+        15327,
+        155,
+        15610
+      ],
+      [
+        "course-cache.js",
+        "3be307625089a6857aa5ba21b8b90743899104a7dca69a8eaa5f65f2e9a152fc",
+        13768,
+        15387,
+        159,
+        15629
+      ],
+      [
+        "legacy-certificate.js",
+        "ea76ef4331c0b515990c1887e23c26b1a493108f2f296e4280951cfc231e59de",
+        13526,
+        15427,
+        155,
+        15612
+      ],
+      [
+        "star-empty.webp",
+        "269a1b0c28b6b69f1f7167802399625bba0043fff7715f20574a882465c6cb2c",
+        13200,
+        15611,
+        159,
+        15798
+      ],
+      [
+        "story-background.webp",
+        "5faeeb130a49f2a187b22cc0e9c4bf4b1758b643f2579b4c2a55f4f5d46b2c73",
+        12446,
+        15613,
+        186,
+        15907
+      ],
+      [
+        "unit.css",
+        "d0b60b23327a50828349de5e3ddb44b1f052edebca016411e4a3c41d6e01f08a",
+        12168,
+        15631,
+        156,
+        15815
+      ],
+      [
+        "star-earned.webp",
+        "7f85b26d34ea732a0c0f8561b74b604bb8e4fbca297a7d432a9864f059226107",
+        11876,
+        15725,
+        160,
+        15888
+      ],
+      [
+        "story-certificate.css",
+        "2c87b5310aed4eb8319a15b7c48e695df3e46e34f659a41f43f750766a29795d",
+        11634,
+        15802,
+        170,
+        15971
+      ],
+      [
+        "lesson49-task-inputs.css",
+        "9ee3984ed1ada2859a25a9859403fab46b9734442ba99a586bee4a22bf2ebede",
+        10729,
+        15817,
+        156,
+        16081
+      ],
+      [
+        "gifenc.js",
+        "cdd63f08cfb3d4feb40376d128f767e5fb05840181d4d3bba809ca5b71af552d",
+        9709,
+        15891,
+        163,
+        16111
+      ],
+      [
+        "unit-theme.css",
+        "4461af36abcac8edcc4e69671cc78b2a36902d716c66b096126943e4efd6f249",
+        8921,
+        15912,
+        153,
+        16092
+      ],
+      [
+        "incorrect-v1.png",
+        "c17f2950493c39bc62b7c4ff6b8a9e1964f1e735774d319c930a63af0f65d415",
+        7692,
+        15974,
+        169,
+        16142
+      ],
+      [
+        "unit.css",
+        "1f80f722660a68959ccafbaa54680c2b083395936cff4ca556d9a6dc18c2246f",
+        7519,
+        16083,
+        163,
+        16245
+      ],
+      [
+        "award-card-layout.js",
+        "d58815a71dfeff1a9de72e981961776cd22f946d58304dfb355248b7999359b1",
+        7480,
+        16094,
+        188,
+        16311
+      ],
+      [
+        "streak-v1.png",
+        "191ac671ac5823aba3b0a71f4311ecf9233fadc19403abc5a63f33cd420a7cd9",
+        7317,
+        16112,
+        155,
+        16277
+      ],
+      [
+        "completion.js",
+        "892a4cbebade4da4e26870eeb03d32ba06e022edbfcb3160cb776ab040e4496f",
+        6994,
+        16147,
+        161,
+        16308
+      ],
+      [
+        "learning-sample.js",
+        "9ccf358e6d8b7b40eed8d87309e2491e2ff7faab6da8f5310ae749ef25d24c20",
+        6820,
+        16249,
+        158,
+        16412
+      ],
+      [
+        "word-deck.js",
+        "891fbc376b002319f933a14379e860dd357ac7dfd062100ad629632f73e3a4a3",
+        6534,
+        16280,
+        157,
+        16443
+      ],
+      [
+        "award-reveal.css",
+        "d1e51f9b787bd5e74a1e4da4734425440c862a2a736dc8ff72fd24c80ecdfd3a",
+        6491,
+        16310,
+        158,
+        16484
+      ],
+      [
+        "award-gif.js",
+        "65d7de6c60e5ccfbbd4fe6ed4bd4748fe724307e6d53b87e91181d97a3de53e9",
+        6345,
+        16313,
+        156,
+        16486
+      ],
+      [
+        "unit-awards.js",
+        "6aa1e8c8fd3c5f765f16e5d43c6256a3da9397101e6a3bb76ee42f21cdcb9446",
+        6068,
+        16415,
+        163,
+        16578
+      ],
+      [
+        "scene.js",
+        "44cf6d126a7287ee5bf09803e82fcfa59eede6d96a3b59699f993ecf0b779374",
+        6047,
+        16445,
+        160,
+        16608
+      ],
+      [
+        "correct-v1.png",
+        "c4b0f7c536b2b901b3d554111e79ba163d643f22e63d1681cc58bbbc93887f5b",
+        5381,
+        16485,
+        159,
+        16655
+      ],
+      [
+        "zcool-kuaile-latin-400.woff2",
+        "8cfcedbad8bb0e17b233ca99a456e55bb1032c86e820d69073bfc152b1a95a93",
+        5344,
+        16487,
+        158,
+        16656
+      ],
+      [
+        "index.html",
+        "0c3005e95b0b27176916b6d2d639e3e458fa68ab0c10f2d7d360d8eee709f043",
+        5013,
+        16580,
+        184,
+        16766
+      ],
+      [
+        "history.js",
+        "acfa2e9a7f1fd086ba0422d55f13d22f175627d0565fda33892312a4d210cffd",
+        4785,
+        16610,
+        156,
+        16768
+      ],
+      [
+        "current.css",
+        "28269d661362c1dc52c9f342645e699752f5bb462f01ab8cb3ae24a97fbe746c",
+        4454,
+        16659,
+        166,
+        16827
+      ],
+      [
+        "learning-flow.css",
+        "d748b71a7e717631952056df72448abe65cee00b0cb0a023882a3e5040e295b7",
+        4026,
+        16660,
+        155,
+        16825
+      ],
+      [
+        "grammar.js",
+        "11be2f0a048273b1db5c8ec7f6a513ca0fddbf7b588d1bc55fdfe21fdea387b5",
+        3780,
+        16770,
+        165,
+        16942
+      ],
+      [
+        "learning-artwork.js",
+        "1040f82110b9d09665815accc1073e6ce9ca852407417619ad5252812f38c818",
+        3705,
+        16771,
+        164,
+        16941
+      ],
+      [
+        "award-rules.js",
+        "5c523f3209a4c089b2cb9a5393e6fd15355c2e6d42bfa13d0512bc3a63aa6892",
+        3290,
+        16828,
+        154,
+        16996
+      ],
+      [
+        "fonts.css",
+        "4a73ca0ee5700febdacdd69c1cab1efa387306a6d8e3506370a6640751512d8f",
+        3061,
+        16829,
+        155,
+        16996
+      ],
+      [
+        "typography.css",
+        "c2ee286a7a2896610ed54475c8c542d97806c1895d12ee2f42b730178436dd15",
+        2881,
+        16943,
+        168,
+        17111
+      ],
+      [
+        "starflower-favicon.png",
+        "0a99ce9dcd4bcdb30ca2ce03e8af600df34ee075138d365024a1a7cda1930b28",
+        2694,
+        16944,
+        168,
+        17110
+      ],
+      [
+        "grammar.css",
+        "82beb3d7c05bd964fb4416336e9d2d67c2e57557af0ac95522a1735baae7738e",
+        2186,
+        17000,
+        167,
+        17166
+      ],
+      [
+        "award-card-layout.css",
+        "3279e68ffc0aa3c8e27fe9841b66f5f8c27eeec6fcca8b4b867ac2655013f51a",
+        2167,
+        17000,
+        167,
+        17167
+      ],
+      [
+        "butcher.svg",
+        "5711db4c97f71a46492e46daed9bb6b952dd01c5e424996fd33df3220e8f7419",
+        2094,
+        17115,
+        169,
+        17284
+      ],
+      [
+        "bird.svg",
+        "31e554f0b06c93faf85bc49f853801585d411433cce23e712d44c539908bdca1",
+        2042,
+        17115,
+        169,
+        17284
+      ],
+      [
+        "word-deck.css",
+        "2b4be8749f1651fabff7f468f12b036bb21d742d4a533ad2410b3e5ec6df3c3c",
+        1975,
+        17171,
+        167,
+        17337
+      ],
+      [
+        "award-gothic-brand-400.woff2",
+        "29d6d18cf8920876328c7ad635ad3706a10d74211cba89e8ea32b10df937d237",
+        1948,
+        17172,
+        166,
+        17337
+      ],
+      [
+        "woman.svg",
+        "79e6a3c78be61015ae53ed364e25e815c7a26137b55a222a99825d2fdaaa8399",
+        1741,
+        17291,
+        161,
+        17452
+      ],
+      [
+        "current.js",
+        "bed2ec864046f242bbeb5cc7447f7b15446288ac6056a38aefc1e49e00d4b2fc",
+        1684,
+        17291,
+        162,
+        17452
+      ],
+      [
+        "man.svg",
+        "0e61d8dee8605ceac5c93e07c5c0967e4e6315462fc4d49eda26787f7f18e7ed",
+        1599,
+        17339,
+        168,
+        17507
+      ],
+      [
+        "mince.svg",
+        "d83f8d4b304358ce3ff39da15c7fd7b63e207b342afe954c92d8df0c8d998eec",
+        1356,
+        17339,
+        168,
+        17507
+      ],
+      [
+        "learning-words.js",
+        "0f1fcf0cae0ab8b2a86bbb90329552810c3d0fd380e03f1973cad687a79fc347",
+        1349,
+        17456,
+        169,
+        17623
+      ],
+      [
+        "learning-copy.js",
+        "5bfc013445384ef19e24214d3854868ecdac8dcd355fb42934807aa282f53de6",
+        1264,
+        17457,
+        166,
+        17623
+      ],
+      [
+        "paper.webp",
+        "2d2f456c7b3c74cc27a521c2bfa2706da3ca07d431cc70a8afec75f08dae54ce",
+        1254,
+        17512,
+        153,
+        17676
+      ],
+      [
+        "truth.svg",
+        "078f998a228441711e90334faf2b5eebb73cb1556a56792a66bdda013260541b",
+        1137,
+        17512,
+        165,
+        17676
+      ],
+      [
+        "street.svg",
+        "37c63923a79ad795c41801626565bee33b5703dca3bc81475698889d65bccdff",
+        1082,
+        17627,
+        162,
+        17788
+      ],
+      [
+        "either.svg",
+        "b9b74f4e509c15cb598807c64d3ae96fd0e41e68527464a729fc76f7b51cf689",
+        1078,
+        17627,
+        162,
+        17791
+      ],
+      [
+        "lesson49-feedback.js",
+        "1f51f6fc83756cdbc3240c382d0c0b3f4db441a7f8e3e5b7be4453aae59873e1",
+        1053,
+        17681,
+        154,
+        17839
+      ],
+      [
+        "people.svg",
+        "3745ebf9800b7bd43ad9d6458858d68d52dd47b5207b023d9dcebd05a9296ff3",
+        1027,
+        17681,
+        154,
+        17839
+      ],
+      [
+        "lamb.svg",
+        "3a053ca937213b8a15681c980556ef0bbdeb266160507854890200b26d26f051",
+        873,
+        17795,
+        163,
+        17959
+      ],
+      [
+        "woman.svg",
+        "07c8a01a13153976a714c6fe59b3acb16660c09e6848919ac3c00079fac80bb9",
+        870,
+        17795,
+        163,
+        17957
+      ],
+      [
+        "dog.svg",
+        "a6ea4ef5afe22950017393a607ab2b4cf7ee4267cb9af438c94723590598b36d",
+        868,
+        17842,
+        160,
+        18001
+      ],
+      [
+        "man.svg",
+        "2f5e0dbbc78c450ec6aec2d333364cd9c556cfe2b7aa54a881ce7ce39c40c839",
+        842,
+        17842,
+        154,
+        17996
+      ],
+      [
+        "beef.svg",
+        "690c0d29a987885f9da793b50986f40ad87d7a43edd547ad1e79ed9d2bfc62fb",
+        702,
+        17928,
+        158,
+        18084
+      ],
+      [
+        "hint.svg",
+        "72a68841efda6929ae8179333daf8d4a6a9bc3741ad432ac9e9d3ce60cbe410e",
+        658,
+        17963,
+        164,
+        18125
+      ],
+      [
+        "pound.svg",
+        "0002326a49f8e184414fa226f7960e43a30d6ab13b63bf0074a17f87a1a06d8a",
+        616,
+        17963,
+        162,
+        18124
+      ],
+      [
+        "mutton.svg",
+        "9ac5c41828a20b70c38a0a4ad0214f6b179f3b5b27b44dd6d2227376f6541bbd",
+        612,
+        18000,
+        163,
+        18163
+      ],
+      [
+        "typography-45-46.css",
+        "1ad872fd5bf80b7e1e66f99b4546503e776721da3e38aaa62f2f9cea423bda17",
+        585,
+        18004,
+        161,
+        18163
+      ],
+      [
+        "lily.svg",
+        "aa5d54a97b3965f6b31125a86899b89c8949587f0eed5b29c1f3a41896104121",
+        548,
+        18091,
+        155,
+        18246
+      ],
+      [
+        "husband.svg",
+        "8331a6dcb686884f7d7c5182696f2e5b63c09accf5378df12cf8995cab04965a",
+        542,
+        18131,
+        163,
+        18294
+      ],
+      [
+        "tom.svg",
+        "049f60c605152193018092556bae6862ac29f06028d3af2cb125bae711db0750",
+        542,
+        18131,
+        164,
+        18293
+      ],
+      [
+        "course-catalog.js",
+        "ceef359768e376c2e56d538b75206cae98f81347fdd2b87507f5eb601c105aac",
+        529,
+        18169,
+        172,
+        18340
+      ],
+      [
+        "pork.svg",
+        "edc04bf4b1e34b92545dea1cb55481cee3a7d69fd0f4f7d2bc63f5729578a732",
+        527,
+        18169,
+        171,
+        18340
+      ],
+      [
+        "car.svg",
+        "0e3a9e1c40230b12918d754f16c7ebcf61372a67189eddd206271dc03c6fdbd9",
+        522,
+        18251,
+        167,
+        18417
+      ],
+      [
+        "hotpot.svg",
+        "51928103e84e0cebe8e6de477cd1b906a0381dc6a4f3825f95e3195e1320ae06",
+        502,
+        18300,
+        160,
+        18459
+      ],
+      [
+        "house.svg",
+        "df6be3ecd7be231b81c8b9f27705b4af321e83801f232fb0d1f8ec5710567497",
+        471,
+        18300,
+        156,
+        18456
+      ],
+      [
+        "coat.svg",
+        "2b183de2b46b2cb49f4c845c819ac9f38b16cd29c03f9ec90c9c401157b8d2c5",
+        450,
+        18344,
+        171,
+        18515
+      ],
+      [
+        "learning-flow.js",
+        "5b681a6f332dd702b03800ac30ec9bf1f76ad87c0f545adccb24a8e464afe5cf",
+        445,
+        18344,
+        172,
+        18515
+      ],
+      [
+        "handbag.svg",
+        "84b024c921dc6afc4097de81f334a2899787ce0860fcc34f009c27794ade3fd4",
+        441,
+        18424,
+        157,
+        18580
+      ],
+      [
+        "meat.svg",
+        "1beb961fea2cbc785fa9687f3cbf8139fbe7066bcddf3899249fbea4d2d33d77",
+        430,
+        18459,
+        153,
+        18611
+      ],
+      [
+        "pen.svg",
+        "42a16c5f5275fce57007e7049d4d7e03f53ac14d60a291785674277222e1d60b",
+        428,
+        18518,
+        166,
+        18683
+      ],
+      [
+        "shirt.svg",
+        "7efe6aa1c04fdc75b4a3a1fd85d0028f2044debe78c97f6c21454445a19b0be9",
+        416,
+        18584,
+        163,
+        18745
+      ],
+      [
+        "pencil.svg",
+        "38d5508b6fd947fba88b3c9c0febb0c22b092c08eb23906dec316ff146c2dbb0",
+        410,
+        18617,
+        159,
+        18776
+      ],
+      [
+        "book.svg",
+        "5e3bf8493ef78012dc83e032289cfb66417b49f7b7c8b40898a6cedb296bfe5f",
+        398,
+        18617,
+        161,
+        18776
+      ],
+      [
+        "watch.svg",
+        "197a3ddb004a806e1e4c8bc792c38c3bed6d6b2d63cfeee0204e6989b584349e",
+        390,
+        18617,
+        159,
+        18776
+      ],
+      [
+        "cards.svg",
+        "c058f54c5bad8f7cecb4f60c54058d4eaef84b2c3cddf6d884d6a5478be891af",
+        389,
+        18688,
+        176,
+        18863
+      ],
+      [
+        "order.svg",
+        "4b7d19b1997ee43966828ce74dea335b9293c35ecd701103bc5788bb0a061469",
+        381,
+        18751,
+        162,
+        18913
+      ],
+      [
+        "chicken.svg",
+        "a6f0a4cf996a788d35bbb9bbc8aedaa147341624bdc2cb1e81aca601ce31dd88",
+        377,
+        18782,
+        174,
+        18953
+      ],
+      [
+        "give.svg",
+        "09943101fe4bea19b6f4c5e3ac4838ed3b7cdf3482be8fd44ea8952f132881a2",
+        377,
+        18782,
+        172,
+        18953
+      ],
+      [
+        "lesson49-icons.js",
+        "904e75625f7b90b1bd5057c73a68408158e19dbb5dd5f43c772a8e48472533f7",
+        369,
+        18782,
+        172,
+        18954
+      ],
+      [
+        "dress.svg",
+        "0de3c9a856666fae33db0755cb9f5ad7b30bf97265758ba9d978afeb90520c67",
+        368,
+        18868,
+        171,
+        19039
+      ],
+      [
+        "fish.svg",
+        "d21123b09d92b87190450da57303042f74992ce93de2bdd8e56164dff6297d1b",
+        364,
+        18916,
+        154,
+        19068
+      ],
+      [
+        "book.svg",
+        "2511abea4926694c34f73580676fa186ffeb7647cbbd25ce429fdbcd511820a6",
+        350,
+        18961,
+        166,
+        19126
+      ],
+      [
+        "skirt.svg",
+        "c7999c10b5f2d428a6b370e7259bbd4c8e468ade20f4fbf4ec9879af6d946acf",
+        323,
+        18961,
+        167,
+        19126
+      ],
+      [
+        "question.svg",
+        "e754f6c352d7c031f3b2cd6b9b849953f82180742ce1037d3be92aeab668e694",
+        320,
+        18962,
+        165,
+        19128
+      ],
+      [
+        "download.svg",
+        "3ca0b8bba15633eb29f9818fe3670d6438bcbc897649c767e491a411e696e2d3",
+        316,
+        19048,
+        164,
+        19210
+      ],
+      [
+        "map.svg",
+        "4968234ef155063be66e9908feea2fc0a13baab8d582a60bcbe7e6c144bdcef6",
+        294,
+        19076,
+        173,
+        19247
+      ],
+      [
+        "audio.svg",
+        "379047ad41a62f5ad3b302c019729f71bd917b069563fdac6436f9bfa326bdf1",
+        291,
+        19135,
+        170,
+        19303
+      ],
+      [
+        "return.svg",
+        "1fcbd00a2254c082401322d0f67e6fbe5a3be765568df14969037cdd79552306",
+        290,
+        19135,
+        170,
+        19302
+      ],
+      [
+        "retry.svg",
+        "de7767150d09b346866baca694c135699859ded83e73c2b7cdaddbadf5b98692",
+        281,
+        19135,
+        167,
+        19301
+      ],
+      [
+        "speech.svg",
+        "c49e9e31cd5676359fd74540826b9f04993774c0c6ec2ccbd076383237ff7196",
+        273,
+        19217,
+        161,
+        19377
+      ],
+      [
+        "back.svg",
+        "cf88d69d8a30fa8e38bf2c27891d5d837e93a0240fde6e9985c06bb00de42562",
+        272,
+        19311,
+        163,
+        19473
+      ],
+      [
+        "star.svg",
+        "d7a0c4bac6bcf2a44738538c8e7135eb62bc802ac3c1b1ca5d4176a1ff970672",
+        262,
+        19311,
+        163,
+        19473
+      ],
+      [
+        "more.svg",
+        "73a8b3abc8a69c9714b9e8f8985e912410998fbae9bc8706eba72dc6791ea551",
+        261,
+        19311,
+        162,
+        19474
+      ],
+      [
+        "heart.svg",
+        "cdaa455084df04fe174ce0bc4db75ede3265db4bf7743a460bd0b9708fa2909f",
+        255,
+        19383,
+        160,
+        19542
+      ],
+      [
+        "check.svg",
+        "6ec53f0412d833066abadb546a89566a4b822d4cf2e7f72cd146c1d3489bc5a0",
+        231,
+        19383,
+        161,
+        19543
+      ],
+      [
+        "back.svg",
+        "3e2ecc5a92e08e66168960276878ef1a09a91f3d3a55f8228f260512d7c655f6",
+        215,
+        19479,
+        169,
+        19644
+      ],
+      [
+        "close.svg",
+        "65287b502bd78ade2b6dc793f18ad6bf87bf3553f4fd9c4761222ddd1c61db37",
+        213,
+        19479,
+        165,
+        19643
+      ]
+    ]
+  }
+}

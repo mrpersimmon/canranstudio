@@ -15,7 +15,7 @@ async function ready(page){
  return frame;
 }
 for(const unit of selected)test(unit+' all questions and phone layouts',async({page},info)=>{
- test.setTimeout(600000);const errors=[],findings=[],counts={questions:0,layouts:0};
+ test.setTimeout(600000);const errors=[],findings=[],materials=[],counts={questions:0,layouts:0};
  page.on('pageerror',error=>errors.push(error.message));
  const catalog=await(await page.request.get('/review/catalog.json')).json(),course=catalog.courses.find(c=>c.id===unit);
  const questions=course.entries.filter(e=>e.kind==='question'&&(!process.env.ROLLOUT_ACTIVITIES||process.env.ROLLOUT_ACTIVITIES.split(',').includes(e.activity)));
@@ -24,6 +24,7 @@ for(const unit of selected)test(unit+' all questions and phone layouts',async({p
  let frame=await ready(page);
  for(const entry of questions){
   await page.locator('.entry[data-page="'+entry.id+'"]').evaluate(el=>el.click());frame=await ready(page);counts.questions++;
+  if(await frame.locator('.learning-surface [data-reviewed-material]').count())materials.push(entry.id.slice(2));
   for(const device of devices){
    await page.locator('#device').selectOption(device.id);
    await frame.waitForFunction(size=>document.body.dataset.practiceViewport===size,device.viewport.width+'x'+device.viewport.height);
@@ -41,7 +42,7 @@ for(const unit of selected)test(unit+' all questions and phone layouts',async({p
    counts.layouts++;
   }
  }
- await fs.writeFile(info.outputPath('findings.json'),JSON.stringify({unit,counts,errors,findings},null,2));
+ await fs.writeFile(info.outputPath('findings.json'),JSON.stringify({unit,counts,errors,findings,materials},null,2));
  expect(errors).toEqual([]);
  expect(findings.filter(f=>f.issues.some(i=>i.type!=='content-scroll')),unit+' blocking layout findings').toEqual([]);
 });

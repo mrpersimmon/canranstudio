@@ -1,0 +1,14 @@
+{
+  "id": "world-cafe",
+  "kind": "world",
+  "references": [
+    "output/whole-book-design/keepsake-reference-24.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a cosy cream-and-sage cafe interior with a large window showing flowers and town buildings, a small plant at far edge and muted wood shelving far back; empty foreground for original people and their tea table; NO foreground chairs, tables, cups, people, menus, text or clocks.",
+  "raw": "assets/learning-whole-book-v1/raw/world-cafe.png",
+  "adopted": "assets/learning-whole-book-v1/world-cafe-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-d0335ccd-0ea4-4949-a4c9-2a585638ad02.png"
+}

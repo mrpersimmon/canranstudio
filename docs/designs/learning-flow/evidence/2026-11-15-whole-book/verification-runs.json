@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-15",
+  "scope": "Local targeted presentation and authenticated regression, no full CI or release acceptance",
+  "runs": {
+    "layout": [
+      "  180 passed (1.0h)"
+    ],
+    "phone-final": [
+      "  127 passed (19.8m)"
+    ],
+    "word-text-final": [
+      "    output\\whole-book-design\\word-text-final\\word-text-layout-unit139-1-d3678-eeps-its-own-readable-space-chromium\\test-failed-1.png",
+      "  1 failed",
+      "  71 passed (3.8m)"
+    ],
+    "word-text-139": [
+      "  1 passed (6.9s)"
+    ],
+    "final-recheck": [
+      "  6 passed (1.4m)"
+    ],
+    "accounts": [
+      "  8 failed",
+      "  112 passed (46.1m)"
+    ],
+    "accounts-recheck": [
+      "  15 passed (2.0m)"
+    ],
+    "account123-final": [
+      "  1 passed (29.2s)"
+    ],
+    "extra-devices": [
+      "  8 passed (2.3m)"
+    ],
+    "component-final": [
+      "  18 passed (55.2s)"
+    ],
+    "webkit-navigation": [
+      "  4 passed (1.9m)"
+    ],
+    "webkit-complete": [
+      "    output\\whole-book-design\\webkit-complete\\word-text-layout-unit139-1-d3678-eeps-its-own-readable-space-webkit\\test-failed-1.png",
+      "  1 failed",
+      "  94 passed (34.2m)"
+    ],
+    "contracts-complete": [
+      "34 tests passed, 0 failed"
+    ],
+    "workflow-complete": [
+      "38 tests passed, 0 failed"
+    ]
+  },
+  "contracts": {
+    "tests": 34,
+    "passed": 34,
+    "failed": 0
+  },
+  "followups": {
+    "word-text-final": "unit139-140 passed in word-text-139; unit69-70 and unit139-140 passed in final-recheck",
+    "webkit-complete": "unit139-140 passed in final-recheck; final unit119-120 night states also passed",
+    "accounts": "8 initial helper/legacy-page assumptions corrected; accounts-recheck 15 passed and account123-final 1 passed"
+  },
+  "limitations": [
+    "Batched checks with targeted rechecks after subsequent changes, not one immutable-head full suite",
+    "Physical phones, WeChat, Quark, native keyboard and safe areas not tested",
+    "Early interrupted WebKit runs retained and excluded from pass totals"
+  ],
+  "logs": "output/whole-book-design",
+  "documents": "5 updated design/testing documents: local links valid",
+  "whitespace": "git diff --check exited 0",
+  "preview": {
+    "url": "http://127.0.0.1:4401/?unit=unit25-26&page=words-0&state=collapsed&device=chrome-iphone-se",
+    "observedReady": true,
+    "screenshot": "delivery.jpg"
+  }
+}

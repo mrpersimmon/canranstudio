@@ -1,0 +1,978 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-11-14",
+  "scope": "Lesson1–12: 132 original words; no change to curriculum or reward data",
+  "units": {
+    "unit1-2": {
+      "handbag": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：与原卡红色手提包相同的拎把、红色包身和金色锁扣"
+      },
+      "pen": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "pencil": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "book": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "watch": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "coat": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：沿用认领亭原外套，领口、袖子和衣摆完整"
+      },
+      "dress": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "skirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "shirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "car": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：复用已采用的小汽车插画，不附加品牌题目标签"
+      },
+      "house": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "excuse": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            11,
+            "example"
+          ],
+          "quote": "Excuse me!"
+        },
+        "reviewNote": "按本课义项“原谅；本句用于礼貌招呼”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "me": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            12,
+            "example"
+          ],
+          "quote": "Excuse me!"
+        },
+        "reviewNote": "按本课义项“我（宾格）”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "yes": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            1,
+            "text"
+          ],
+          "lineId": "L01-D02",
+          "quote": "Yes?"
+        },
+        "reviewNote": "按本课义项“是的；Yes? 在本句中是“什么事？””用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "is": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            14,
+            "example"
+          ],
+          "quote": "Is this your handbag?"
+        },
+        "reviewNote": "功能词在原问句中理解，不用物品图代替be的作用。"
+      },
+      "this": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            15,
+            "example"
+          ],
+          "quote": "Is this your handbag?"
+        },
+        "reviewNote": "按本课义项“这；本句指眼前的手提包”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "your": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            16,
+            "example"
+          ],
+          "quote": "Is this your handbag?"
+        },
+        "reviewNote": "按本课义项“你的；也可表示“你们的””用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "pardon": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            17,
+            "example"
+          ],
+          "quote": "Pardon?"
+        },
+        "reviewNote": "按本课义项“请再说一遍”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "it": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            18,
+            "example"
+          ],
+          "quote": "Yes, it is."
+        },
+        "reviewNote": "按本课义项“它；本句指手提包”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "thank you": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            19,
+            "example"
+          ],
+          "quote": "Thank you very much."
+        },
+        "reviewNote": "按本课义项“谢谢你（们）”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "very much": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            20,
+            "example"
+          ],
+          "quote": "Thank you very much."
+        },
+        "reviewNote": "按本课义项“非常地”用原表达说明，避免仅凭人物或物品猜词义。"
+      }
+    },
+    "unit3-4": {
+      "umbrella": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：原紫色米白圆点伞、金棕弯柄，与本课原卡相同"
+      },
+      "ticket": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：本课是寄存牌5，不是车票"
+      },
+      "cloakroom": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：外套、紫色圆点伞、柜台和准确寄存牌5共同说明衣帽寄存处，避免空房间误解"
+      },
+      "suit": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：西服上衣与同色长裤同时完整出现"
+      },
+      "school": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：学校门窗与校舍整体完整"
+      },
+      "teacher": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：复用已认可教师职业角色，教材与教师服装明确"
+      },
+      "son": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确父子关系，儿子被突出，不能仅用男孩代替关系"
+      },
+      "daughter": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确母女关系，女儿被突出"
+      },
+      "pen": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "pencil": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "book": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "watch": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "coat": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：沿用认领亭原外套，领口、袖子和衣摆完整"
+      },
+      "dress": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "skirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "shirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "car": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：复用已采用的小汽车插画，不附加品牌题目标签"
+      },
+      "house": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：完整物品单体，造型、用途及暖棕绘本轮廓逐张核对"
+      },
+      "please": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            18,
+            "example"
+          ],
+          "quote": "My coat and my umbrella please."
+        },
+        "reviewNote": "按本课义项“请；让请求更礼貌”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "here": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            19,
+            "example"
+          ],
+          "quote": "Here is my ticket."
+        },
+        "reviewNote": "出示东西的here用原句，不能等同寄存牌。"
+      },
+      "my": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            20,
+            "example"
+          ],
+          "quote": "Here is my ticket."
+        },
+        "reviewNote": "按本课义项“我的；指说话人的”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "number": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            21,
+            "example"
+          ],
+          "quote": "Number five."
+        },
+        "reviewNote": "号码这一概念用Number five，避免数字5同时代替number和five。"
+      },
+      "five": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：只出现原寄存牌上的准确数字5"
+      },
+      "sorry": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            23,
+            "example"
+          ],
+          "quote": "Sorry, sir."
+        },
+        "reviewNote": "按本课义项“对不起的；本句表示歉意”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "sir": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            24,
+            "example"
+          ],
+          "quote": "Thank you, sir."
+        },
+        "reviewNote": "按本课义项“先生；对男士的礼貌称呼”用原表达说明，避免仅凭人物或物品猜词义。"
+      }
+    },
+    "unit5-6": {
+      "French": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "German": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "Japanese": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "South Korean": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "Chinese": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "Swedish": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "English": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "American": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：保留原旗面比例、图案及国家标签"
+      },
+      "student": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：本课女同学Sophie，原人物复用"
+      },
+      "Mr.": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            1,
+            "text"
+          ],
+          "lineId": "L05-D02",
+          "quote": "Good morning, Mr. Blake."
+        },
+        "reviewNote": "按本课义项“先生；放在姓氏或姓名前”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "Miss": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            2,
+            "text"
+          ],
+          "lineId": "L05-D03",
+          "quote": "This is Miss Sophie Dupont."
+        },
+        "reviewNote": "按本课义项“小姐；本课对 Sophie 的称呼”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "morning": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：本课Good morning对应早晨太阳，保持原语境"
+      },
+      "good": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            0,
+            "text"
+          ],
+          "lineId": "L05-D01",
+          "quote": "Good morning."
+        },
+        "reviewNote": "Good morning中的good按问候语境解释，不能等同太阳。"
+      },
+      "new": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            3,
+            "text"
+          ],
+          "lineId": "L05-D04",
+          "quote": "Sophie is a new student."
+        },
+        "reviewNote": "新同学的new不能只由女孩头像说明，保留原介绍句。"
+      },
+      "nice": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            7,
+            "text"
+          ],
+          "lineId": "L05-D08",
+          "quote": "Nice to meet you."
+        },
+        "reviewNote": "按本课义项“美好的；在见面语中表达高兴”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "meet": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            7,
+            "text"
+          ],
+          "lineId": "L05-D08",
+          "quote": "Nice to meet you."
+        },
+        "reviewNote": "按本课义项“结识；见到”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "too": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            18,
+            "text"
+          ],
+          "lineId": "L05-D19",
+          "quote": "She's Chinese, too."
+        },
+        "reviewNote": "同样情况中的也要依靠原句理解，双人图不足以说明。"
+      },
+      "make": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "questions",
+            "introduce",
+            1,
+            "answer"
+          ],
+          "quote": "What make is it?"
+        },
+        "reviewNote": "本课是品牌这一名词，用原问句区分品牌与国籍。"
+      },
+      "Volvo": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      },
+      "Peugeot": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      },
+      "Mercedes": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      },
+      "Toyota": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      },
+      "Ford": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      },
+      "Mini": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张复核已采用品牌汽车，保留英文品牌名和原题识别图"
+      }
+    },
+    "unit7-8": {
+      "Italian": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：意大利三色国旗原比例、方向与颜色保真"
+      },
+      "keyboard operator": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "engineer": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "policeman": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "policewoman": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "taxi driver": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "air hostess": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "postman": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "nurse": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "mechanic": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "hairdresser": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "housewife": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "milkman": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "I": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            13,
+            "example"
+          ],
+          "quote": "I am Robert."
+        },
+        "reviewNote": "按本课义项“我；说话的人指自己”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "am": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            14,
+            "example"
+          ],
+          "quote": "I am a student."
+        },
+        "reviewNote": "与I连用的完整原例句；不用人物头像代替用法。"
+      },
+      "are": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            15,
+            "example"
+          ],
+          "quote": "Are you French?"
+        },
+        "reviewNote": "通过原问句展示与you的搭配。"
+      },
+      "name": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            16,
+            "example"
+          ],
+          "quote": "My name’s Robert."
+        },
+        "reviewNote": "按本课义项“名字”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "what": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            17,
+            "example"
+          ],
+          "quote": "What’s your job?"
+        },
+        "reviewNote": "按本课义项“什么”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "nationality": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            8,
+            "text"
+          ],
+          "lineId": "L07-D09",
+          "quote": "What nationality are you?"
+        },
+        "reviewNote": "国籍概念用完整问句，不能等同某一面国旗。"
+      },
+      "job": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            12,
+            "text"
+          ],
+          "lineId": "L07-D13",
+          "quote": "What's your job?"
+        },
+        "reviewNote": "工作这一概念用原问句，不能等同工程师。"
+      },
+      "keyboard": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：逐张核对职业服饰、关键工具、人物数量与完整轮廓；不用同一人物图泛指所有职业"
+      },
+      "operator": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            13,
+            "text"
+          ],
+          "lineId": "L07-D14",
+          "quote": "I'm a keyboard operator."
+        },
+        "reviewNote": "操作人员用keyboard operator的原句呈现，明确词组中的角色。"
+      }
+    },
+    "unit9-10": {
+      "hello": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            0,
+            "text"
+          ],
+          "lineId": "L09-D01",
+          "quote": "Hello, Helen."
+        },
+        "reviewNote": "按本课义项“你好；打招呼”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "hi": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            1,
+            "text"
+          ],
+          "lineId": "L09-D02",
+          "quote": "Hi, Steven."
+        },
+        "reviewNote": "按本课义项“嗨；你好”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "how": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            2,
+            "example"
+          ],
+          "quote": "How are you?"
+        },
+        "reviewNote": "按本课义项“怎样；本课用于问候”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "today": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            2,
+            "text"
+          ],
+          "lineId": "L09-D03",
+          "quote": "How are you today?"
+        },
+        "reviewNote": "时间词用原问候句，撤下容易被理解成morning的太阳图。"
+      },
+      "well": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            4,
+            "example"
+          ],
+          "quote": "I'm very well."
+        },
+        "reviewNote": "按本课义项“本课指身体好的”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "fine": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            5,
+            "example"
+          ],
+          "quote": "I'm fine."
+        },
+        "reviewNote": "按本课义项“本课指身体好、状态不错”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "thanks": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            5,
+            "text"
+          ],
+          "lineId": "L09-D06",
+          "quote": "I'm fine, thanks."
+        },
+        "reviewNote": "按本课义项“谢谢”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "goodbye": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            13,
+            "text"
+          ],
+          "lineId": "L09-D14",
+          "quote": "Goodbye."
+        },
+        "reviewNote": "按本课义项“再见”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "see": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "WORDS",
+            8,
+            "example"
+          ],
+          "quote": "Nice to see you."
+        },
+        "reviewNote": "按本课义项“见到；看见”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "fat": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "woman": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "thin": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "tall": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "short": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "dirty": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "clean": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：白衬衫干净无污迹，与dirty脏衬衫形成明确对照"
+      },
+      "hot": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：原Steven扇扇子与太阳，保留已认可的觉得热场景"
+      },
+      "cold": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "old": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "young": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "busy": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：按本课原词义审查，体貌比较中人物完整且无贬损；冷／忙等动作与道具明确"
+      },
+      "lazy": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "MODELS",
+            11,
+            "en"
+          ],
+          "quote": "She's very lazy."
+        },
+        "reviewNote": "休息画面不能证明懒惰，改用原教材句子及原释义。"
+      }
+    },
+    "unit11-12": {
+      "whose": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            0,
+            "text"
+          ],
+          "lineId": "L11-D01",
+          "quote": "Whose shirt is that?"
+        },
+        "reviewNote": "按本课义项“谁的”用原表达说明，避免仅凭人物或物品猜词义。"
+      },
+      "blue": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：准确颜色色块保真，白色保留深边界避免消失"
+      },
+      "perhaps": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "DIALOGUE",
+            7,
+            "text"
+          ],
+          "lineId": "L11-D08",
+          "quote": "Perhaps it is, sir."
+        },
+        "reviewNote": "不确定性用原句表示，不给模糊表情图强加含义。"
+      },
+      "white": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：准确颜色色块保真，白色保留深边界避免消失"
+      },
+      "catch": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：本课老师抛白衬衫、Tim接住，完整原动作"
+      },
+      "father": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确父子关系，父亲被突出"
+      },
+      "mother": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确母女关系，母亲被突出"
+      },
+      "blouse": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：衣物轮廓完整，与前课同类道具使用同一采用版本"
+      },
+      "sister": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确兄弟姐妹关系，姐妹目标被突出"
+      },
+      "tie": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：衣物轮廓完整，与前课同类道具使用同一采用版本"
+      },
+      "brother": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：明确兄弟姐妹关系，兄弟目标被突出"
+      },
+      "his": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "MODEL_EXAMPLE",
+            "en"
+          ],
+          "quote": "It's his shirt."
+        },
+        "reviewNote": "原完整短句突出his，保留原his shirt例句与释义。"
+      },
+      "her": {
+        "kind": "context",
+        "source": {
+          "path": [
+            "learning",
+            "MODELS",
+            8,
+            "en"
+          ],
+          "quote": "It's her blouse."
+        },
+        "reviewNote": "原完整短句突出her，保留原her blouse例句与释义。"
+      },
+      "shirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：衣物轮廓完整，与前课同类道具使用同一采用版本"
+      },
+      "suit": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：衣物轮廓完整，与前课同类道具使用同一采用版本"
+      },
+      "skirt": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：衣物轮廓完整，与前课同类道具使用同一采用版本"
+      },
+      "son": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：复用相同父子关系图，突出儿子"
+      },
+      "daughter": {
+        "kind": "illustration",
+        "reviewNote": "保留已审图示：复用相同母女关系图，突出女儿"
+      }
+    }
+  }
+}

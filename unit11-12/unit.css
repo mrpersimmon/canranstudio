@@ -85,3 +85,4 @@
 .unit1112-workspace .claim-cast [data-actor="teacher"]{left:23%}.unit1112-workspace .claim-cast [data-actor="dave"]{left:55%}.unit1112-workspace .claim-cast [data-actor="tim"]{left:83%}
 .unit1112-workspace .claim-cast[data-pose="catch"] [data-actor="teacher"]{left:20%}.unit1112-workspace .claim-cast[data-pose="catch"] [data-actor="dave"]{left:47%}.unit1112-workspace .claim-cast[data-pose="catch"] [data-actor="tim"]{left:87%}
 .unit1112-workspace .reference-pager{display:flex;justify-content:center;align-items:center;gap:10px;margin:15px auto}.unit1112-workspace .reference-grid.models{grid-template-columns:1fr}.unit1112-workspace .reference-grid.models img{width:110px;height:110px}
+body.unit1112-workspace{--sample-world:url('/assets/learning-sample-v1/claim-world-v1.webp')}

@@ -165,9 +165,14 @@
     panel.append(view.frame, controls, status); element.append(panel); view.resize();
     if (progress) { const ending = navigation({unit,returnUrl}); if (ending) controls.after(ending); }
 
+    let awaitingConfirmation = false;
     function showName() {
       view.identity(recipient, identityLabel);
-      save.disabled = exporting || state.stars === 0 || !recipient;
+      const pending = !!state.pendingZones?.length;
+      const rejected = state.rejectionMessages?.[state.rejectedZones?.[0]];
+      save.disabled = exporting || state.stars === 0 || !recipient || pending;
+      if(!exporting){if(pending)status.textContent='星星待同步，确认后即可保存动图。';else if(rejected)status.textContent=rejected;else if(awaitingConfirmation)status.textContent='';}
+      awaitingConfirmation=pending||!!rejected;
     }
     root.CanranAccessReady?.then(access => {
       recipient = access.preview ? '' : retained?.kind === 'card' ? retained.name : String(access.student.name || '').trim();
@@ -177,7 +182,7 @@
     }).catch(() => { recipient = ''; showName(); });
 
     function update(next) {
-      if (retained?.kind === 'card') next = { ...next, stars: 5, firstFullStarAt: retained.issuedAt };
+      if (retained?.kind === 'card') next = { ...next, stars: 5, confirmedStars: 5, pendingZones: [], rejectedZones: [], rejectionMessages: {}, firstFullStarAt: retained.issuedAt };
       state = next; view.update(state);
       slots.forEach((slot, i) => { slot.dataset.earned = String(i < state.stars); });
       showName();

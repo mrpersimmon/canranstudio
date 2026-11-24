@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "week": "/assets/learning-words/unit73-74/week-d55f0cfd.svg",
   "London": "/assets/learning-words/unit73-74/london-b0423f93.svg",
@@ -8,16 +8,16 @@ CanranCore.learningWordArtwork={
   "pleasantly": "/assets/learning-words/unit73-74/smile-cb539ed7.svg",
   "understand": "/assets/learning-words/unit73-74/understand-51546e8b.svg",
   "speak": "/assets/learning-words/unit73-74/speak-bb528c37.svg",
-  "hand": "/assets/learning-words/unit73-74/hand-a04e7b8e.svg",
-  "pocket": "/assets/learning-words/unit73-74/pocket-2acb977a.svg",
-  "phrasebook": "/assets/learning-words/unit73-74/phrasebook-a0a46574.svg",
+  "hand": "/assets/word-art-v2/whole-book/hand-v1.webp",
+  "pocket": "/assets/word-art-v2/whole-book/pocket-v1.webp",
+  "phrasebook": "/assets/word-art-v2/whole-book/phrasebook-v1.webp",
   "phrase": "/assets/learning-words/unit73-74/phrase-4f2f17ec.svg",
   "slowly": "/assets/learning-words/unit73-74/slowly-3c1ba5ae.svg",
   "hurriedly": "/assets/learning-words/unit73-74/hurriedly-507384f4.svg",
   "cut": "/assets/learning-words/unit73-74/cut-8b8b4491.svg",
   "thirstily": "/assets/learning-words/unit73-74/drink-fffc1f7e.svg",
   "greet": "/assets/learning-words/unit73-74/greet-3ca71caa.svg",
-  "tourist": "/assets/unit73-74/tourist.webp",
+  "tourist": "/assets/unit15-16/cast-girl-v1.webp",
   "lose": "/assets/learning-words/unit73-74/lost-4f6d5a6f.svg",
   "lost": "/assets/learning-words/unit73-74/lost-4f6d5a6f.svg",
   "saw": "/assets/learning-words/unit73-74/see-03a9d49f.svg",
@@ -39,3 +39,10 @@ CanranCore.learningWordArtwork={
   "enjoyed ourselves": "/assets/learning-words/unit73-74/enjoy-ab0d3a27.svg",
   "the way to": "/assets/learning-words/unit73-74/way-748cfa08.svg"
 };
+CanranCore.learningWordPresentation={
+  "hand": "illustration",
+  "pocket": "illustration",
+  "phrasebook": "illustration",
+  "tourist": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

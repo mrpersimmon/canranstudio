@@ -1,0 +1,27 @@
+{
+  "id": "kitchen-continuous-v2",
+  "unit": "unit25-26",
+  "prompt": "Create one 3:2 landscape children's storybook kitchen environment for an English learning theatre. Reference 1 is the original lesson facts and layout; reference 2 is the accepted Lesson1–2 illustration style. Preserve these exact facts: ONE BLUE electric cooker at the LEFT, ONE WHITE refrigerator at the RIGHT, ONE small wooden table in the MIDDLE, exactly ONE transparent pale green EMPTY bottle and exactly ONE CLEAN WHITE handled cup standing on the tabletop. One closed simple window on the wall behind the central table. All appliances and table feet fully visible on the same warm tile floor. No other cups/bottles, no additional cooker or fridge. Retain obvious left/middle/right from the viewer. No people, no labels or letters, no UI, no border. Warm cream plaster, warm brown soft outlines, painted shading and gentle texture, rounded storybook forms matching reference 2. Full-width continuous room, neither a flat schematic nor an inset thumbnail. Eye-level shallow perspective. Bottom15% clear warm floor. Soft daylight.",
+  "refs": [
+    "assets/unit25-26/kitchen-room-v1.webp",
+    "assets/learning-sample-v1/street-world-v1.webp"
+  ],
+  "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-635ed7cb-8005-48cf-82b9-f59f558fb27b.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "tool": "built-in image_gen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-635ed7cb-8005-48cf-82b9-f59f558fb27b.png",
+  "raw": "assets/learning-whole-book-v1/raw/kitchen-continuous-v2.png",
+  "adopted": "assets/unit25-26/kitchen-continuous-v2.webp",
+  "status": "adopted-local-preview",
+  "sha256": "50a4e2e95aaf72839346be6a4a1e2039cd739a28d29df73c736a656d5f030adc",
+  "screenEvidence": [
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/first-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/first-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/first-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/middle-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/middle-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/middle-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/last-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/last-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit25-26/last-chrome-iphone-16-pro-max.jpg"
+  ]
+}

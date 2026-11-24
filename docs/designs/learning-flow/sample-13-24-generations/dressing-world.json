@@ -1,0 +1,18 @@
+{
+  "id": "dressing-world",
+  "kind": "world",
+  "references": [
+    "output/sample-13-24/original-card-reference.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. An airy upstairs dressing room in a Mediterranean storybook town. Pale cream plaster walls, a tall wooden mirror and small wardrobe ONLY at the far edges, sage curtains, a sunny window with a glimpse of flowers. A broad empty honey wooden floor covering the bottom 45 percent. No clothes, hats or characters; those are separate interactive sprites. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-c96f1ee3-72a2-4a7a-bb35-82655e4e42b1.png",
+  "raw": "assets/learning-sample-v2/raw/dressing-world.png",
+  "adopted": "assets/learning-sample-v2/dressing-world-v1.webp",
+  "projectReferenceCopies": [
+    "docs/designs/learning-flow/sample-13-24-generations/references/original-keepsakes.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ]
+}

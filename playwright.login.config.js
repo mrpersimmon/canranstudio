@@ -9,5 +9,5 @@ module.exports = defineConfig({
   outputDir: './output/test-login',
   expect: { timeout: 5000 }, reporter: [['list']],
   use: { baseURL: testUrl, browserName: 'chromium', trace: 'retain-on-failure' },
-  webServer: { command: 'node tests/login/server.js', url: testUrl + (process.env.AWARD_TEST_BASE || '/lesson/'), reuseExistingServer: false, timeout: 30000 }
+  webServer: { command: 'node tests/login/server.js', url: testUrl + (process.env.AWARD_TEST_BASE || '/lesson/'), reuseExistingServer: false, timeout: Number(process.env.LOGIN_SERVER_TIMEOUT) || 30000 }
 });

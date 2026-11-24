@@ -1,12 +1,12 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "appointment": "/assets/learning-words/unit77-78/appointment-2ce285e7.svg",
   "urgent": "/assets/learning-words/unit77-78/urgent-fbcadaee.svg",
   "till": "/assets/learning-words/unit77-78/till-a95c6f77.svg",
   "dentist": "/assets/learning-words/unit77-78/tooth-7455854e.svg",
-  "toothache": "/assets/learning-words/unit77-78/toothache-280b4c11.svg",
+  "toothache": "/assets/word-art-v2/whole-book/toothache-v1.webp",
   "awful": "/assets/learning-words/unit77-78/awful-de5484f7.svg",
-  "busy": "/assets/learning-words/unit77-78/busy-149df6e2.svg",
+  "busy": "/assets/word-art-v2/sample1-12/busy-v1.webp",
   "wait": "/assets/learning-words/unit77-78/wait-43772efb.svg",
   "moment": "/assets/learning-words/unit77-78/moment-d22b689b.svg",
   "now": "/assets/learning-words/unit77-78/now-c45be969.svg",
@@ -22,5 +22,14 @@ CanranCore.learningWordArtwork={
   "buy": "/assets/learning-words/unit77-78/buy-d51854b3.svg",
   "bought": "/assets/learning-words/unit77-78/buy-d51854b3.svg",
   "lose": "/assets/learning-words/unit77-78/lose-ff31ddbd.svg",
-  "lost": "/assets/learning-words/unit77-78/lose-ff31ddbd.svg"
+  "lost": "/assets/learning-words/unit77-78/lose-ff31ddbd.svg",
+  "nurse": "/assets/word-art-v2/sample1-12/nurse-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "nurse": "illustration",
+  "toothache": "illustration",
+  "busy": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit77-78/toothache.svg": "/assets/word-art-v2/whole-book/toothache-v1.webp"
 };

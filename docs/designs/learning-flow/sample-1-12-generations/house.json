@@ -1,0 +1,13 @@
+{
+  "id": "house",
+  "references": [
+    "assets/awards/unit1-2-handbag-closeup.webp",
+    "assets/awards/unit3-4-umbrella.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Create ONE educational vocabulary illustration of A charming small two-story cream town house with coral terracotta roof, teal front door and two flower pots, three-quarter view. One house only, full roof and base visible. No street or scenery outside the compact vignette. Match the supplied original keepsake references: warm dark-brown hand-drawn rounded contours, soft gouache-like flat fills, restrained painted volume, subtle paper grain, warm gentle lighting. Child-friendly illustrated storybook, not a flat UI symbol, photograph, 3D render or plastic toy. Centered in a square, entire subject occupies 74–82% of the frame, generous clear margin all around. Transparent background with clean alpha, no white halo, no card, no border, no text, no watermark. References provide style only; do not include their people or umbrella. Preserve clear semantic identification at phone vocabulary-card size.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-6881f682-96db-4b6a-98c2-9b56669584f5.png",
+  "raw": "assets/learning-sample-v1/raw/house.png",
+  "adopted": "assets/word-art-v2/sample1-12/house-v1.webp"
+}

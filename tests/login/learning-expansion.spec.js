@@ -59,21 +59,21 @@ test('3-4：完整词库展开、固定分页与桌面课文均可用',async({pa
  try{
   await p.goto(base+'unit3-4/#learn/words');await courseReadyForAssertions(p);
   const source=await p.evaluate(()=>CanranCore.learningContext.learning.WORDS.map(w=>({en:w.en,cn:w.cn,ph:w.ph,example:w.example||''})));
-  const pages=Math.ceil(source.length/6);
+  const deckPages=await p.evaluate(()=>CanranCore.wordDeck.createPages(CanranCore.learningContext.learning.WORDS,CanranCore.learningWordCards)),pages=deckPages.length;
   for(const {width,height}of [{width:320,height:568},...devices.map(d=>d.viewport)]){
    await p.setViewportSize({width,height});
-   while(await p.getByRole('button',{name:'上一组词卡',exact:true}).isEnabled())await p.getByRole('button',{name:'上一组词卡',exact:true}).click();
+   while(await p.locator('.word-controls button').first().isEnabled())await p.locator('.word-controls button').first().click();
    for(let group=0;group<pages;group++){
-    await expect(p.locator('#wordPageProgress')).toHaveText(`${group+1} / ${pages}`);
+    await expect(p.locator('#wordPageProgress')).toHaveText(`${deckPages[group].local+1} / ${deckPages[group].count}`);
     const cards=await p.locator('.unit-word').all();
     for(let i=0;i<cards.length;i++){
-     const card=cards[i],word=source[group*6+i],heightBefore=(await card.boundingBox()).height;
+     const card=cards[i],word=source.find(w=>w.en===deckPages[group].words[i].en),heightBefore=(await card.boundingBox()).height;
      await card.click();await expect(card.locator('strong')).toHaveText(word.en);await expect(card.locator('.word-meaning')).toHaveText(word.cn);await expect(card.locator('.word-phonetic')).toHaveText(word.ph);if(word.example)await expect(card.locator('.word-example')).toHaveText(word.example);
      expect((await card.boundingBox()).height).toBe(heightBefore);
      expect(await card.evaluate(el=>{const box=el.getBoundingClientRect();return [...el.children].filter(c=>c.getClientRects().length&&!c.hidden).filter(c=>{const b=c.getBoundingClientRect();return b.top<box.top||b.bottom>box.bottom||b.left<box.left||b.right>box.right||c.scrollWidth>c.clientWidth+1;}).map(c=>c.textContent);})).toEqual([]);
      await card.click();
     }
-    const next=p.getByRole('button',{name:group===pages-1?'下一站：单词寻宝':'下一组词卡',exact:true});await expect(next).toBeInViewport({ratio:1});
+    const next=p.locator('.word-controls button').last();await expect(next).toBeInViewport({ratio:1});
     if(group<pages-1)await next.click();
    }
   }

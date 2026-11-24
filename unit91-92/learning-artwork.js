@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "still": "/assets/learning-words/unit91-92/still-00e576d5.svg",
   "move": "/assets/learning-words/unit91-92/move-74224376.svg",
@@ -12,8 +12,8 @@ CanranCore.learningWordArtwork={
   "tonight": "/assets/learning-words/unit91-92/night-4231235b.svg",
   "regards": "/assets/learning-words/unit91-92/regards-e058ed5b.svg",
   "will": "/assets/learning-words/unit91-92/future-1b88aea9.svg",
-  "rain": "/assets/learning-words/unit91-92/rain-2d0ce388.svg",
-  "snow": "/assets/learning-words/unit91-92/snow-3b832d6e.svg",
+  "rain": "/assets/word-art-v2/whole-book/rain-v1.webp",
+  "snow": "/assets/word-art-v2/whole-book/snow-v1.webp",
   "leave": "/assets/learning-words/unit91-92/leave-e2d9e677.svg",
   "get up": "/assets/learning-words/unit91-92/bed-dbadcd56.svg",
   "arrive": "/assets/learning-words/unit91-92/arrive-019ca201.svg",
@@ -30,4 +30,11 @@ CanranCore.learningWordArtwork={
   "make an appointment": "/assets/learning-words/unit91-92/calendar-40db5313.svg",
   "shall": "/assets/learning-words/unit91-92/future-1b88aea9.svg",
   "soon": "/assets/learning-words/unit91-92/clock-212d3519.svg"
+};
+CanranCore.learningWordPresentation={
+  "rain": "illustration",
+  "snow": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit91-92/rain.svg": "/assets/word-art-v2/whole-book/rain-v1.webp"
 };

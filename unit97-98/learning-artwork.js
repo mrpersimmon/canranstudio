@@ -1,16 +1,16 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "leave": "/assets/learning-words/unit97-98/left-case-c2566bf3.svg",
   "left": "/assets/learning-words/unit97-98/left-case-c2566bf3.svg",
   "describe": "/assets/learning-words/unit97-98/describe-b97f4253.svg",
-  "zip": "/assets/learning-words/unit97-98/zip-9d408f3c.svg",
-  "label": "/assets/learning-words/unit97-98/label-d4ba3a78.svg",
-  "handle": "/assets/learning-words/unit97-98/handle-e1364e5d.svg",
+  "zip": "/assets/word-art-v2/whole-book/zip-v1.webp",
+  "label": "/assets/word-art-v2/whole-book/label-v1.webp",
+  "handle": "/assets/word-art-v2/whole-book/handle-v1.webp",
   "address": "/assets/learning-words/unit97-98/address-f29d51cd.svg",
   "pence": "/assets/learning-words/unit97-98/pence-b2068f84.svg",
   "belong": "/assets/learning-words/unit97-98/belong-dafc2a30.svg",
   "suitcase": "/assets/learning-words/unit97-98/blue-case-f12f545a.svg",
-  "case": "/assets/learning-words/unit97-98/blue-case-f12f545a.svg",
+  "case": "/assets/word-art-v2/whole-book/case-blue-v1.webp",
   "the other day": "/assets/learning-words/unit97-98/calendar-b311fc64.svg",
   "belong to": "/assets/learning-words/unit97-98/belong-dafc2a30.svg",
   "mine": "/assets/learning-words/unit97-98/mine-056e37c7.svg",
@@ -20,16 +20,75 @@ CanranCore.learningWordArtwork={
   "ours": "/assets/learning-words/unit97-98/ours-5aefcdfc.svg",
   "theirs": "/assets/learning-words/unit97-98/theirs-1874b18c.svg",
   "whose": "/assets/learning-words/unit97-98/whose-821fca7c.svg",
-  "keys": "/assets/learning-words/unit97-98/keys-240c4794.svg",
-  "letter": "/assets/learning-words/unit97-98/letter-2fecd1d3.svg",
+  "keys": "/assets/word-art-v2/whole-book/key-v1.webp",
+  "letter": "/assets/word-art-v2/whole-book/letter-v1.webp",
   "clothes": "/assets/learning-words/unit97-98/clothes-9081a023.svg",
-  "passport": "/assets/learning-words/unit97-98/passport-6b816723.svg",
-  "tickets": "/assets/learning-words/unit97-98/tickets-48951cd7.svg",
-  "watch": "/assets/learning-words/unit97-98/watch-db20c1d1.svg",
-  "flowers": "/assets/learning-words/unit97-98/flowers-bf9186bb.svg",
-  "boat": "/assets/learning-words/unit97-98/boat-fec50763.svg",
-  "phrasebook": "/assets/learning-words/unit97-98/phrasebook-cdca02a9.svg",
-  "hammers": "/assets/learning-words/unit97-98/hammers-0c46704d.svg",
-  "car": "/assets/learning-words/unit97-98/car-b1e2268e.svg",
-  "pens": "/assets/learning-words/unit97-98/pens-e6099d1e.svg"
+  "passport": "/assets/word-art-v2/sample13-24/passport-v1.webp",
+  "tickets": "/assets/unit3-4-journey/ticket-v1.webp",
+  "watch": "/assets/word-art-v2/sample1-12/watch-v1.webp",
+  "flowers": "/assets/word-art-v2/whole-book/flower-v1.webp",
+  "boat": "/assets/word-art-v2/whole-book/boat-v1.webp",
+  "phrasebook": "/assets/word-art-v2/whole-book/phrasebook-v1.webp",
+  "hammers": "/assets/word-art-v2/whole-book/hammer-v1.webp",
+  "car": "/assets/unit5-6-word-cards/volvo-v1.webp",
+  "pens": "/assets/word-art-v2/sample1-12/pen-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "zip": "illustration",
+  "label": "illustration",
+  "handle": "illustration",
+  "case": "illustration",
+  "keys": "relation",
+  "letter": "illustration",
+  "passport": "illustration",
+  "tickets": "relation",
+  "watch": "illustration",
+  "flowers": "relation",
+  "boat": "illustration",
+  "phrasebook": "illustration",
+  "hammers": "relation",
+  "car": "illustration",
+  "pens": "relation"
+};
+CanranCore.learningWordComposition={
+  "keys": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/key-v1.webp",
+      "/assets/word-art-v2/whole-book/key-v1.webp"
+    ]
+  },
+  "tickets": {
+    "kind": "pair",
+    "sources": [
+      "/assets/unit3-4-journey/ticket-v1.webp",
+      "/assets/unit3-4-journey/ticket-v1.webp"
+    ]
+  },
+  "flowers": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/flower-v1.webp",
+      "/assets/word-art-v2/whole-book/flower-v1.webp"
+    ]
+  },
+  "hammers": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/whole-book/hammer-v1.webp",
+      "/assets/word-art-v2/whole-book/hammer-v1.webp"
+    ]
+  },
+  "pens": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/sample1-12/pen-v1.webp",
+      "/assets/word-art-v2/sample1-12/pen-v1.webp"
+    ]
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit97-98/zip.svg": "/assets/word-art-v2/whole-book/zip-v1.webp",
+  "/assets/unit97-98/label.svg": "/assets/word-art-v2/whole-book/label-v1.webp",
+  "/assets/unit97-98/handle.svg": "/assets/word-art-v2/whole-book/handle-v1.webp"
 };

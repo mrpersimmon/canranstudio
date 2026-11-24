@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-15",
+  "branch": "codex/book-version",
+  "head": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "workingTreeChanges": true,
+  "sources": {
+    "core/learning-flow.js": "efd1f251b938a028293c6a43782e4c032479a90952e52dce2cc99aef5fca973e",
+    "core/learning-flow.css": "623bcc8ebcfc85667741c74e9da83f815ad249674c6cd008e6779a401510346d",
+    "core/practice-screen.js": "403f0225e7c79e308e8b48ef3c71c34f87ab8f88667eac479e03d57832d865b4",
+    "core/learning-sample.js": "9ccf358e6d8b7b40eed8d87309e2491e2ff7faab6da8f5310ae749ef25d24c20",
+    "review-bench/state-model.js": "169604d9e3c7d21d74dd66aaa8c444a7ee9e867f3f5735cbafe272b90f003051",
+    "scripts/setup-mobile-review.js": "a2e66787fdfbc9e8e037ff7ef339f6cfdc459fd797a720b1b3fef6cc36bd8857"
+  },
+  "chromium": {
+    "stateAndSpaceAndPaint": {
+      "passed": 113,
+      "log": "output/question-experience-final.log"
+    },
+    "materialMapFollowup": {
+      "passed": 11,
+      "log": "output/question-material-map.log"
+    },
+    "pressure": {
+      "passed": 3,
+      "log": "output/question-pressure.log"
+    }
+  },
+  "webkit": {
+    "focusedStatesSpacePaint": {
+      "passed": 26,
+      "log": "output/question-webkit.log"
+    },
+    "mapAndPressure": {
+      "passed": 7,
+      "log": "output/question-map-webkit.log"
+    },
+    "latestModelFollowup": {
+      "passed": 2,
+      "log": "output/question-webkit-material-final.log"
+    }
+  },
+  "realAccounts": {
+    "passed": 6,
+    "questions": 353,
+    "storyLines": 77,
+    "log": "output/complete-learning-journey-verified.log"
+  },
+  "contracts": {
+    "learningAndWorkflow": 44,
+    "wholeBookPresentation": 7,
+    "learningAndWorkflowLog": "output/question-final-contracts.log",
+    "wholeBookPresentationLog": "output/question-content-contract.log"
+  },
+  "phones": [
+    {
+      "model": "Chrome iPhone SE",
+      "width": 375,
+      "height": 667
+    },
+    {
+      "model": "Chrome iPhone 14/15 Pro Max",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "model": "Chrome iPhone 16 Pro Max",
+      "width": 440,
+      "height": 956
+    }
+  ],
+  "physicalPhones": false,
+  "androidWeChatQuark": false,
+  "fullCI": false,
+  "submitted": false,
+  "pushed": false,
+  "merged": false,
+  "productionPublished": false,
+  "publicPreview": {
+    "host": "preview.canranstudio.cn",
+    "dns": "NXDOMAIN",
+    "tlsVerified": false,
+    "deployed": false
+  },
+  "localFullSite": {
+    "url": "http://127.0.0.1:4404/",
+    "accountsIsolated": true,
+    "anonymousGrantDenied": true,
+    "existingDataBootstrapRejected": true
+  }
+}

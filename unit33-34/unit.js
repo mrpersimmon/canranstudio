@@ -23,7 +23,7 @@
   const surfaces = new Map(), runners = new Map();
   const activities = stages.flatMap(stage => stage.activities.map(([id, title]) => ({ id, title, chapter: stage.id })));
   const routes = new Set(['cover', ...stages.map(stage => stage.id), ...activities.map(item => 'learn/' + item.id)]);
-  let active = '', certificateView;
+  let certificateView;
   for (const stage of stages) {
     const section = node('section', '', 'shop-chapter'); section.id = stage.id;
     const heading = node('header', '', 'chapter-heading'); heading.append(node('h2', stage.title), node('span', '☆', 'lvl-stars')); section.append(heading);
@@ -46,18 +46,8 @@
     if (location.hash === '#' + id) route();
     else location.hash = id;
   };
-  function markLocation(id) {
-    if (!routes.has(id)) return;
-    if (active !== id) { root.dispatchEvent(new Event('lesson49:leave-activity')); active = id; }
-    if (id === 'cover') return;
-    practice.activity('unitLocation', id);
-    const chapter = document.getElementById(id).closest('.shop-chapter');
-    document.querySelectorAll('.chapter-links a').forEach(link => {
-      if (link.hash === '#' + chapter?.id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current');
-    });
-    if (chapter) $('.chapter-select select').value = chapter.id;
-    $('#startBtn').textContent = '继续冒险';
-  }
+  const locationTracker = core.unitSession.location(routes, practice);
+  const markLocation = locationTracker.mark;
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
     id = normalizeRoute(id);
@@ -102,7 +92,7 @@
     });
     certificateView?.update(awardState);
   }
-  function complete(id) { completed[id] = signatures[id]; practice.activity('unitCompleted', completed); updateProgress(); }
+  const complete = core.unitSession.completion(completed, signatures, practice, updateProgress);
   const settlement = core.awardReveal.create({ unit });
   const awards = core.unitAwards.create({ unit, practice, onAward: settlement.earned, onChange: state => { awardState = state; updateProgress(); } });
   function nextStation(id, actions) {
@@ -217,34 +207,8 @@
   if (dialogue.i < 0) lead();
   refreshDialogue(); unlockStory();
 
-  const wordHost = surfaces.get('words'), wordGrid = node('div', '', 'unit-words');
-  const wordControls = node('div', '', 'word-controls'), wordProgress = node('span');
-  const pageCount = Math.ceil(content.WORDS.length / 6), savedPage = practice.activity('unitWordPage');
-  let wordPage = Number.isInteger(savedPage) ? Math.max(0, Math.min(pageCount - 1, savedPage)) : 0;
-  const previousWords = button('上一组词卡', () => changeWordPage(-1), 'btn btn-yellow');
-  const nextWords = button('下一组词卡', () => wordPage === pageCount - 1 ? navigate('learn/listen') : changeWordPage(1));
-  wordProgress.id = 'wordPageProgress'; wordControls.append(previousWords, wordProgress, nextWords); wordHost.append(wordGrid, wordControls);
-  function changeWordPage(delta) { wordPage += delta; renderWords(); practice.revealQuestion(wordHost, wordHost.querySelector('h3')); }
-  function renderWords() {
-    wordGrid.replaceChildren(); practice.activity('unitWordPage', wordPage);
-    for (const word of content.WORDS.slice(wordPage * 6, wordPage * 6 + 6)) {
-      const picture = node('img'); picture.src = word.image; picture.alt = '';
-      const pronunciation = node('small', word.ph, 'word-phonetic'); pronunciation.lang = 'en-US';
-      const meaning = node('span', word.cn, 'word-meaning'); meaning.hidden = true;
-      const example = node('small', word.example || '', 'word-example'); example.hidden = !word.example;
-      const card = button('', () => {
-        const expanded = card.getAttribute('aria-expanded') !== 'true';
-        card.setAttribute('aria-expanded', String(expanded)); meaning.hidden = !expanded;
-      }, 'opt-btn unit-word');
-      card.setAttribute('aria-label', word.en); card.setAttribute('aria-expanded', 'false');
-      card.append(picture, node('strong', word.en), pronunciation, meaning, example); wordGrid.append(card);
-    }
-    previousWords.disabled = wordPage === 0; wordProgress.textContent = `${wordPage + 1} / ${pageCount}`;
-    nextWords.setAttribute('aria-label', wordPage === pageCount - 1 ? '下一站：单词寻宝' : '下一组词卡');
-    if (wordPage === pageCount - 1) { nextWords.textContent = '下一站'; nextWords.dataset.stationNext = 'true'; }
-    else { nextWords.textContent = '下一组词卡'; delete nextWords.dataset.stationNext; }
-  }
-  renderWords();
+  core.wordDeck.mount({ host: surfaces.get('words'), unit, practice, navigate });
+
   mountPractice('listen', { allowHints: false });
 
   mountPractice('grammar'); mountPractice('apply');
@@ -266,6 +230,6 @@
   // name intact when the /lesson/ publisher prefixes persistent storage keys.
   const readyEvent = ['canran', 'course-ready'].join(':');
   document.addEventListener(readyEvent, revealSavedLine, { once: true });
-  root.addEventListener('resize',()=>{if(!document.body.hasAttribute('data-learning-shell')&&(active==='learn/text'||active==='l2'))requestAnimationFrame(revealSavedLine);});
+  root.addEventListener('resize',()=>{if(!document.body.hasAttribute('data-learning-shell')&&(locationTracker.active==='learn/text'||locationTracker.active==='l2'))requestAnimationFrame(revealSavedLine);});
   document.fonts.ready.then(() => requestAnimationFrame(() => { route(); revealSavedLine(); }));
 })(globalThis);

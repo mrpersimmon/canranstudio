@@ -90,6 +90,14 @@
 .unit2930-workspace .action-picture p{font-size:20px;line-height:1.45}
 .unit2930-workspace .gallery-current{display:block}
 @media(max-width:600px){.unit2930-workspace .desk-cast{height:260px;padding:0 0 10px;width:100%}.unit2930-workspace .desk-cast .dialogue-actor{width:49%}.unit2930-workspace .room-focus{border-width:2px;box-shadow:0 0 0 2px #fff9}.unit2930-workspace .action-gallery{grid-template-columns:1fr}.unit2930-workspace .action-picture img{width:160px;height:140px}}
+/* Match the Lesson 1–2 theatre: one full-width room, two standing actors on
+   its foreground floor, and names below their feet. The room is not a card. */
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .room-scene{position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;padding:0;background:transparent;overflow:visible;border-radius:0}
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .room-furniture{position:absolute;inset:auto 0 0;width:100%;height:var(--sample-bg-height);margin:0;line-height:0}
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .desk-cast{position:absolute;inset:auto 3% 8px;width:94%;height:min(calc(var(--sample-bg-height) * .76),calc(100% - 16px));display:flex;align-items:end;justify-content:space-between;gap:0;margin:0;padding:0;pointer-events:none}
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .desk-cast>.dialogue-actor{position:static;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) max-content;gap:8px;align-items:end;justify-items:center;justify-content:stretch;flex:0 0 28%;width:28%;height:100%;min-width:0;max-width:none}
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .cast-image{position:static;width:100%;height:100%;min-height:0;max-height:none;object-fit:contain;object-position:center bottom;transform:none}
+body.unit2930-workspace[data-learning-shell] #lessonWorkspace .stage-text .learning-story-art[data-continuous-room] .actor-label{position:static;inset:auto;transform:none;margin:0;width:fit-content;max-width:100%;font-size:12px;line-height:16px;padding:3px 5px}
 @media print{
  body.unit2930-workspace.print-writing #unitWriting>p{font-size:15px;line-height:1.45;margin:6px 0}
  body.unit2930-workspace.print-writing #unitWriting h3{font-size:20px;margin:8px 0}

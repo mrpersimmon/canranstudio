@@ -1,13 +1,13 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "dining room": "/assets/learning-words/unit117-118/dining-room-icon-cbf04a40.svg",
-  "coin": "/assets/learning-words/unit117-118/coin-b0e72f0c.svg",
-  "mouth": "/assets/learning-words/unit117-118/mouth-ed0d98bb.svg",
+  "dining room": "/assets/word-art-v2/whole-book/dining-room-v1.webp",
+  "coin": "/assets/word-art-v2/whole-book/coin-v1.webp",
+  "mouth": "/assets/word-art-v2/whole-book/mouth-v1.webp",
   "swallow": "/assets/learning-words/unit117-118/swallow-185267e2.svg",
   "later": "/assets/learning-words/unit117-118/later-bf930951.svg",
-  "toilet": "/assets/learning-words/unit117-118/toilet-801b7d55.svg",
+  "toilet": "/assets/word-art-v2/whole-book/toilet-v1.webp",
   "ring": "/assets/learning-words/unit117-118/ring-37861a8e.svg",
-  "breakfast": "/assets/learning-words/unit117-118/breakfast-4c19beff.svg",
+  "breakfast": "/assets/word-art-v2/whole-book/breakfast-v1.webp",
   "look for": "/assets/learning-words/unit117-118/look-for-92baa517.svg",
   "find": "/assets/learning-words/unit117-118/find-6291b01c.svg",
   "both": "/assets/learning-words/unit117-118/both-26631e1c.svg",
@@ -15,8 +15,8 @@ CanranCore.learningWordArtwork={
   "change": "/assets/learning-words/unit117-118/change-594d471b.svg",
   "housework": "/assets/learning-words/unit117-118/housework-18de8e51.svg",
   "floor": "/assets/learning-words/unit117-118/floor-5161c571.svg",
-  "phone": "/assets/learning-words/unit117-118/phone-387301e5.svg",
-  "office": "/assets/learning-words/unit117-118/office-2bb59429.svg",
+  "phone": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+  "office": "/assets/learning-sample-v2/office-world-v1.webp",
   "when": "/assets/learning-words/unit117-118/when-4ef02a6d.svg",
   "just as": "/assets/learning-words/unit117-118/just-as-6efb47bf.svg",
   "drop": "/assets/learning-words/unit117-118/drop-61a24c4f.svg",
@@ -27,4 +27,16 @@ CanranCore.learningWordArtwork={
   "dust": "/assets/learning-words/unit117-118/dust-18de8e51.svg",
   "sit": "/assets/learning-words/unit117-118/sit-aecf644e.svg",
   "lie": "/assets/learning-words/unit117-118/lie-42e9c06c.svg"
+};
+CanranCore.learningWordPresentation={
+  "dining room": "illustration",
+  "coin": "illustration",
+  "mouth": "illustration",
+  "toilet": "illustration",
+  "breakfast": "illustration",
+  "phone": "illustration",
+  "office": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit117-118/coin.svg": "/assets/word-art-v2/whole-book/coin-v1.webp"
 };

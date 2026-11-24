@@ -1,0 +1,13 @@
+/* Presentation only: preserve original story actors, poses and teaching props. */
+CanranCore.learningVisual={
+  "version": 1,
+  "background": "/assets/learning-whole-book-v1/world-airport-v1.webp",
+  "layout": "composite",
+  "location": "context",
+  "cast": "news-group",
+  "backgroundStates": {
+    "scene": {
+      "street": "/assets/learning-sample-v1/street-world-v1.webp"
+    }
+  }
+};

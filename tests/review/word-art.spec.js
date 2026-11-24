@@ -18,7 +18,8 @@ for(const device of devices)test(device.name+' reviewed word illustrations retai
   expect((await footer.boundingBox()).y).toBe(start.y);await card.click();
  }
  await page.locator('#frame-shell').screenshot({path:info.outputPath('unit143-reviewed-word-art.png')});
- await page.goto('/?'+new URLSearchParams({unit:'unit7-8',page:'words-2',state:'collapsed',device:device.id}));await expect(page.locator('#loading')).toBeHidden({timeout:45000});
- const self=frame.getByRole('button',{name:'I',exact:true});await expect(self.locator('img')).toHaveAttribute('src',/\/unit7-8\/i\.svg$/);
+ const catalog=await(await page.request.get('/review/catalog.json')).json(),selfPage=catalog.courses.find(c=>c.id==='unit7-8').entries.find(e=>e.kind==='words'&&e.wordKeys?.includes('I'));
+ await page.goto('/?'+new URLSearchParams({unit:'unit7-8',page:selfPage.id,state:'collapsed',device:device.id}));await expect(page.locator('#loading')).toBeHidden({timeout:45000});
+ const self=frame.getByRole('button',{name:'I',exact:true});await expect(self.locator('img')).toHaveCount(0);await expect(self.locator('.word-context')).toHaveText('I am Robert.');
  await self.click();await expect(self.locator('.word-meaning')).toHaveText('我；说话的人指自己');await expect(footer).toBeInViewport();
 });

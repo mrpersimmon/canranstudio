@@ -43,12 +43,14 @@
   }
  }
  const schedule=()=>{if(!frame)frame=requestAnimationFrame(refresh);};
- function size(){
+ function size(prepare=false){
   if(!active)return;
   const viewport=root.visualViewport,height=viewport?.height||root.innerHeight,top=viewport?.offsetTop||0;
   body.style.setProperty('--practice-screen-height',height+'px');body.style.setProperty('--practice-screen-top',top+'px');
   body.toggleAttribute('data-practice-short',height<500);
-  flow?.resize(active,view);
+  // Resize listeners pass an Event; only a full content refresh prepares the scene.
+  if(prepare===true)flow?.prepare(active,runner,view);
+  flow?.resize(active,view,prepare===true);
   fit();
   body.dataset.practiceViewport=root.innerWidth+'x'+Math.round(height);
  }
@@ -59,8 +61,14 @@
   if(layouts.get(content)===key)return;
   layouts.set(content,key);
   content.classList.remove('learning-tight-question');
+  const picture=flow&&content.querySelector(':scope>img.practice-scene');
+  if(picture){picture.style.removeProperty('height');picture.style.removeProperty('max-height');}
+  const map=flow&&content.querySelector('.scene-find-canvas');if(map){map.style.removeProperty('width');map.style.removeProperty('margin-inline');}
   const answer=content.querySelector('.translation-answer'),tokens=content.querySelectorAll('.translation-bank .opt-btn');
   if(answer&&tokens.length){
+   // Four slots read as two balanced rows. Three narrow columns otherwise
+   // force a long phrase to three lines and waste that height in every slot.
+   answer.style.gridTemplateColumns=answer.querySelectorAll(':scope>.opt-btn,:scope>.translation-slot').length===4?'repeat(2,minmax(0,1fr))':'';
    const sample=answer.querySelector('.opt-btn,.translation-slot'),style=sample&&getComputedStyle(sample);
    if(style){
     const width=sample.getBoundingClientRect().width-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight)-4;
@@ -94,8 +102,8 @@
   // Try equal columns only when they reduce overflow; never shrink tap targets.
   for(const choices of content.querySelectorAll('.cloze-choices')){
    choices.style.removeProperty('display');choices.style.removeProperty('grid-template-columns');
-   if(flow&&choices.children.length===3&&content.scrollHeight>content.clientHeight+2){
-    const before=content.scrollHeight;choices.style.display='grid';choices.style.gridTemplateColumns='repeat(3,minmax(0,1fr))';
+   if(flow&&[2,3].includes(choices.children.length)&&content.scrollHeight>content.clientHeight+2){
+    const before=content.scrollHeight;choices.style.display='grid';choices.style.gridTemplateColumns='repeat('+choices.children.length+',minmax(0,1fr))';
     if(content.scrollHeight>=before){choices.style.removeProperty('display');choices.style.removeProperty('grid-template-columns');}
    }
   }
@@ -117,6 +125,21 @@
    }
   }
   if(flow&&content.scrollHeight>content.clientHeight+2)content.classList.add('learning-tight-question');
+  if(map&&content.scrollHeight>content.clientHeight+2){
+   const box=map.getBoundingClientRect(),width=box.width*(box.height-(content.scrollHeight-content.clientHeight)-6)/box.height;
+   // Scale the picture AND its percentage-based targets as one board. A tiny
+   // board is worse than scrolling; retain the minimum readable map width.
+   if(width>=240&&width>=box.width*.75){map.style.width=Math.floor(width)+'px';map.style.marginInline='auto';}
+  }
+  if(picture&&content.scrollHeight<=content.clientHeight+2){
+   // Spend spare paper space on the actual recognition picture. Do this in
+   // the same pre-paint fit as the controls; maps keep their own hit geometry.
+   const box=content.getBoundingClientRect(),style=getComputedStyle(content);
+   const bottom=Math.max(...[...content.children].filter(e=>e.getClientRects().length&&!e.hidden).map(e=>e.getBoundingClientRect().bottom));
+   const spare=Math.max(0,box.bottom-parseFloat(style.paddingBottom)-bottom-12);
+   const height=Math.min(root.innerHeight>800?180:152,picture.clientHeight+spare);
+   if(height>picture.clientHeight){picture.style.height=height+'px';picture.style.maxHeight=height+'px';}
+  }
   content.dataset.screenOverflow=String(content.scrollHeight>content.clientHeight+2);
  }
  function syncNavigation(){
@@ -126,7 +149,7 @@
   if(flow&&view==='cover')chapters.value='cover';
   const status=document.getElementById('studentSyncStatus'),state=status?.dataset.syncState;
   syncBadge.hidden=!status||state==='synced'||state==='preview';
-  syncBadge.textContent=state==='pending'?'同步中':'待同步';syncBadge.title=status?.textContent||'';
+  syncBadge.textContent=state==='pending'?'同步中':state==='review'?'待核验':'待同步';syncBadge.title=status?.textContent||'';
  }
  function action(label,run){const b=make('button','practice-screen-menu-action',label);b.type='button';b.onclick=run;menuContent.append(b);}
   function reviewAction(run){menu.setAttribute('data-review-navigation','');menu.close();run();}
@@ -195,7 +218,7 @@
     requestAnimationFrame(()=>{const target=document.getElementById(id);if(target&&!body.hasAttribute('data-practice-screen')){document.documentElement.style.scrollPaddingTop=(document.getElementById('topbar').getBoundingClientRect().height+12)+'px';target.scrollIntoView({block:'start',behavior:'instant'});}});
    }
   }
-  if(active){flow?.prepare(active,runner,view);size();syncNavigation();prepareHints();flow?.present(active,runner,view);}
+  if(active){size(true);syncNavigation();prepareHints();flow?.present(active,runner,view);}
  }
  root.CanranCore.practiceScreen={
   reveal(element,target){

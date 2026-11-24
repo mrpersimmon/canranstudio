@@ -19,6 +19,8 @@ body[data-learning-shell] :is(.unit-cover,.shop-stage) :is(.btn-green,#startBtn)
 body[data-learning-shell] :is(.unit-cover,.shop-stage) .btn-yellow{background:#fffcf5;color:#5d4936;border-color:#d7cbb7}
 body[data-learning-shell] #lessonWorkspace .shop-stage .opt-btn[aria-pressed='true']{background:#eaf4f7;border-color:#6094a6;box-shadow:0 2px 0 #6094a633}
 body[data-learning-shell] :is(.unit-cover,.shop-stage) .btn-green:disabled{background:#eee7d9;border-color:#e2d7c5;box-shadow:none;color:#978a74;opacity:1}
+body[data-learning-shell] #lessonWorkspace .story-award-actions button:disabled{background:#eee7d9;border-color:#e2d7c5;box-shadow:none;color:#82755f;opacity:1;cursor:default}
+body[data-learning-shell] #lessonWorkspace .story-award-actions button:disabled .shop-icon{filter:brightness(0) saturate(100%) invert(48%) sepia(13%) saturate(540%) hue-rotate(359deg)}
 body[data-learning-shell] .shop-stage .practice-submit-row .practice-hint-button{background:#f5eddb;border-color:#e4d5b8;box-shadow:none}
 body[data-learning-shell] .learning-surface .practice-actions{border-color:transparent!important}
 /* References belong to the More dialog in every view, including results. */
@@ -194,12 +196,16 @@ body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content [
 body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content.learning-tight-question{padding:6px 10px}
 body[data-learning-shell] #lessonWorkspace .learning-tight-question .practice-progress{margin-bottom:6px;gap:4px 8px}
 body[data-learning-shell] #lessonWorkspace .learning-surface .practice-progress{margin-bottom:12px}
+/* Programmatic reading focus announces the question; it is not a control.
+   Keyboard outlines on actual buttons and links remain unchanged. */
+body[data-learning-shell] .practice-progress[tabindex='-1']:focus{outline:none}
 body[data-learning-shell] #lessonWorkspace .learning-tight-question .learning-question-heading{margin-bottom:3px}
 body[data-learning-shell] #lessonWorkspace .learning-tight-question .match-column{gap:5px}
 body[data-learning-shell] #lessonWorkspace .learning-tight-question .match-column .opt-btn{min-height:48px;padding:5px 6px}
 body[data-learning-shell] #lessonWorkspace .learning-tight-question .practice-options{margin-block:5px;gap:6px}
 .learning-context-source{display:contents}
 .learning-context-preview{display:none}
+.learning-context-preview>.learning-context-thumb{position:static;inset:auto;transform:none;float:none;margin:0;flex:none;object-fit:contain}
 @media(max-height:700px){
  body[data-learning-shell] #lessonWorkspace .learning-context-source>[class$='-application']{display:none}
  body[data-learning-shell] #lessonWorkspace .learning-context-preview{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:6px 12px;margin:4px 0 8px;border:1px solid #d8cbb5;border-radius:14px;background:#faf3e4;color:#57412e;font:inherit;text-align:left;cursor:pointer;box-shadow:none}
@@ -212,11 +218,15 @@ body[data-learning-shell] #lessonWorkspace .learning-tight-question .practice-op
 /* The full scene retains its authored labels and dynamic inventory in the
    reference sheet. This selector never changes a question's interactive map. */
 .learning-reference-content>[class$='-application']{max-width:100%;margin:0}
-body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-preview{display:flex;align-items:center;gap:12px;width:100%;min-height:88px;margin:4px 0 12px;padding:6px 12px;border:1px solid #d8cbb5;border-radius:14px;background:#faf3e4;color:#286a4e;font-family:inherit;font-weight:500;font-size:16px;line-height:1.4;text-align:left;cursor:pointer;box-shadow:none}
-body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-thumb{display:block;width:76px;height:72px;object-fit:contain;flex:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-preview{display:flex;align-items:center;gap:12px;width:100%;min-height:52px;margin:4px 0 10px;padding:6px 12px;border:1px solid #d8cbb5;border-radius:14px;background:#faf3e4;color:#286a4e;font-family:inherit;font-weight:500;font-size:16px;line-height:1.4;text-align:left;cursor:pointer;box-shadow:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-thumb{display:block;width:54px;height:48px;object-fit:contain;flex:none}
 .learning-material-preview>span:last-child{margin-left:auto;font-size:24px}
 .learning-reference-content>.learning-material-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0 auto 14px}
 .learning-reference-content>.practice-context{max-height:none!important;overflow:visible;padding:0;margin:0;border:0;background:none;font-size:16px;line-height:1.6;white-space:pre-line}
+.learning-reference-content>.grammar-model{max-height:none!important;overflow:visible;margin:0 0 12px;padding:12px;border:1px solid #d6e2d6;border-radius:14px;background:#f0f4ef}
+.learning-reference-content .grammar-model-line{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.learning-reference-content .grammar-model-line>p{font-size:17px;line-height:1.5;margin:0}
+.learning-reference-content .grammar-model-line>small{font-size:14px;line-height:1.5;margin:0}
 /* Every course's authored reference is readable in the same sheet. Image and
    copy own separate columns, regardless of the old two/three-column grid. */
 body[data-learning-shell] .learning-reference-content .reference-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin:10px 0;padding:0;border:0;background:none;box-shadow:none}

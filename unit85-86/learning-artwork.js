@@ -1,17 +1,17 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "Paris": "/assets/learning-words/unit85-86/paris-1a4e1b4c.svg",
-  "cinema": "/assets/learning-words/unit85-86/cinema-12a54de3.svg",
+  "cinema": "/assets/word-art-v2/whole-book/cinema-v1.webp",
   "film": "/assets/learning-words/unit85-86/film-54369c18.svg",
   "beautiful": "/assets/learning-words/unit85-86/beautiful-a26761ab.svg",
-  "city": "/assets/learning-words/unit85-86/city-b4ac3c68.svg",
+  "city": "/assets/word-art-v2/city-v1.webp",
   "never": "/assets/learning-words/unit85-86/never-33b37d67.svg",
   "ever": "/assets/learning-words/unit85-86/ever-f5567821.svg",
   "just": "/assets/learning-words/unit85-86/just-89366c53.svg",
   "awful": "/assets/learning-words/unit85-86/awful-6bdf5a0c.svg",
   "all the time": "/assets/learning-words/unit85-86/rain-3c0083fa.svg",
   "April": "/assets/learning-words/unit85-86/april-fec3301b.svg",
-  "spring": "/assets/learning-words/unit85-86/spring-ec240fa7.svg",
+  "spring": "/assets/word-art-v2/whole-book/spring-v1.webp",
   "been to": "/assets/learning-words/unit85-86/returned-8b2d2fcb.svg",
   "gone to": "/assets/learning-words/unit85-86/away-915ef63a.svg",
   "been in": "/assets/learning-words/unit85-86/stay-77cefdcc.svg",
@@ -30,4 +30,12 @@ CanranCore.learningWordArtwork={
   "walked": "/assets/learning-words/unit85-86/walk-5e5b55b9.svg",
   "painted": "/assets/learning-words/unit85-86/paint-e87520c6.svg",
   "dusted": "/assets/learning-words/unit85-86/dust-1c25f56b.svg"
+};
+CanranCore.learningWordPresentation={
+  "cinema": "illustration",
+  "city": "illustration",
+  "spring": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit85-86/cinema.svg": "/assets/word-art-v2/whole-book/cinema-v1.webp"
 };

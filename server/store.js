@@ -102,6 +102,15 @@ function openStore(directory) {
     const row = db.prepare('SELECT value FROM unit_awards WHERE student=? AND course=? AND edition=?').get(who, course, edition);
     return row ? JSON.parse(row.value) : { edition, zones: {}, firstFullStarAt: null };
   };
+  function applyAwards(who,course,reward,claims) {
+    const saved=award(who,course,reward.edition),now=new Date().toISOString();
+    let changed=false;
+    for(const [zone,claim] of claims)if(!saved.zones[zone]){saved.zones[zone]={runId:claim.runId,earnedAt:now};changed=true;}
+    if(!saved.firstFullStarAt && reward.zones.length===5 && reward.zones.every(z=>saved.zones[z.id])){saved.firstFullStarAt=now;changed=true;}
+    if(changed)db.prepare('INSERT INTO unit_awards VALUES (?,?,?,?) ON CONFLICT(student,course,edition) DO UPDATE SET value=excluded.value')
+      .run(who,course,reward.edition,JSON.stringify(saved));
+    return saved;
+  }
   const credentials = who => db.prepare('SELECT studentNumber,loginPinyin,passwordHash,mustChangePassword FROM students WHERE id=?').get(who);
   const authThrottle = createAuthThrottle(db);
   const clearStudentFailures = who => {
@@ -260,22 +269,19 @@ function openStore(directory) {
     activeGrant(session, course, now) { return db.prepare('SELECT * FROM grants WHERE session=? AND course=? AND expires>? ORDER BY expires DESC LIMIT 1').get(session.hash,course,now); },
     progress(who, course) { const row = db.prepare('SELECT generation,value FROM progress WHERE student=? AND course=?').get(who, course); return row ? { generation: row.generation, value: JSON.parse(row.value) } : { generation: 0, value: {} }; },
     saveProgress(who, course, generation, value) { db.prepare('INSERT INTO progress VALUES (?,?,?,?) ON CONFLICT(student,course) DO UPDATE SET generation=excluded.generation,value=excluded.value').run(who, course, generation, JSON.stringify(value)); },
-    saveLearning(who, course, generation, value, records, advanced) { return transaction(() => { this.saveProgress(who,course,generation,value);return learning.sync(who,course,generation,records,advanced); }); },
+    saveLearning(who, course, generation, value, records, advanced, reward=null, claims=[]) { return transaction(() => {
+      const awards=reward?applyAwards(who,course,reward,claims):null;
+      this.saveProgress(who,course,generation,value);
+      return {...learning.sync(who,course,generation,records,advanced),awards};
+    }); },
+    saveObservations(who,course,generation,records){return transaction(()=>learning.sync(who,course,generation,records,false));},
     resetLearning(who, course, generation) { return transaction(() => { this.saveProgress(who,course,generation,{});learning.reset(who,course,generation); }); },
     award,
     awards(who) {
       return db.prepare('SELECT course, edition, value FROM unit_awards WHERE student=?').all(who)
         .map(row => ({course:row.course, edition:row.edition, ...JSON.parse(row.value)}));
     },
-    grantAwards(who, course, reward, claims) { return transaction(() => {
-      const saved = award(who, course, reward.edition), now = new Date().toISOString();
-      for (const [zone, claim] of claims) if (!saved.zones[zone]) saved.zones[zone] = { runId: claim.runId, earnedAt: now };
-      if (!saved.firstFullStarAt && reward.zones.length === 5 && reward.zones.every(zone => saved.zones[zone.id])) saved.firstFullStarAt = now;
-      // Replay, progress reset, and newer card editions cannot rewrite this row's first full-star date.
-      db.prepare('INSERT INTO unit_awards VALUES (?,?,?,?) ON CONFLICT(student,course,edition) DO UPDATE SET value=excluded.value')
-        .run(who, course, reward.edition, JSON.stringify(saved));
-      return saved;
-    }); },
+    grantAwards(who,course,reward,claims){return transaction(()=>applyAwards(who,course,reward,claims));},
     validGrant(grantId, who, course) { return !!db.prepare('SELECT id FROM grants WHERE id=? AND student=? AND course=?').get(grantId, who, course); }
   };
 }

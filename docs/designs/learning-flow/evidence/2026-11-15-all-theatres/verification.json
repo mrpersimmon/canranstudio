@@ -1,0 +1,143 @@
+{
+  "date": "2026-11-15",
+  "final": {
+    "chromiumAllStoriesAndStates": {
+      "passed": 144,
+      "units": 72,
+      "lines": 924,
+      "lineLayouts": 2772,
+      "translatedEndings": 216
+    },
+    "contractsAndWorkflow": {
+      "passed": 57
+    },
+    "authenticatedContinuation": {
+      "passed": 6,
+      "units": [
+        "unit25-26",
+        "unit31-32",
+        "unit65-66",
+        "unit125-126",
+        "unit135-136",
+        "unit143-144"
+      ]
+    },
+    "pressureAndWide": {
+      "passed": 10,
+      "sizes": [
+        "320x568",
+        "768x1024",
+        "1366x768"
+      ]
+    },
+    "lateReflowAndManualHistory": {
+      "passed": 8,
+      "engines": [
+        "chromium",
+        "webkit"
+      ]
+    },
+    "webkitRenderedStoryFollowup": {
+      "passed": 4,
+      "units": [
+        "unit1-2",
+        "unit133-134",
+        "unit135-136",
+        "unit141-142"
+      ]
+    },
+    "counterContactFollowup": {
+      "passed": 6,
+      "engines": [
+        "chromium",
+        "webkit"
+      ]
+    },
+    "captionAnchorsFollowup": {
+      "passed": 8,
+      "engines": [
+        "chromium",
+        "webkit"
+      ]
+    },
+    "currentContractsLog": "output/story-book-final-contracts.log",
+    "checkPlan": "output/story-book-check-plan.log"
+  },
+  "earlierRuns": [
+    {
+      "name": "before",
+      "passed": 72,
+      "scope": "648 real story screenshots before changes"
+    },
+    {
+      "name": "regression-before",
+      "passed": 3,
+      "failed": 19,
+      "scope": "22 initial targeted composition checks"
+    },
+    {
+      "name": "chromium-final",
+      "passed": 165,
+      "failed": 3,
+      "closedBy": [
+        "class-ground-final",
+        "name-word-final",
+        "name-grid-final"
+      ]
+    },
+    {
+      "name": "webkit-final",
+      "passed": 51,
+      "failed": 3,
+      "closedBy": [
+        "class-ground-final",
+        "name-word-final",
+        "name-grid-final"
+      ]
+    },
+    {
+      "name": "name-word-final",
+      "passed": 23,
+      "failed": 5,
+      "closedBy": [
+        "name-grid-final",
+        "scroll-final",
+        "webkit-scroll-verified"
+      ]
+    },
+    {
+      "name": "prop-contact-before",
+      "passed": 1,
+      "failed": 1,
+      "closedBy": [
+        "prop-contact-final"
+      ]
+    },
+    {
+      "name": "caption-anchor-before",
+      "passed": 0,
+      "failed": 2,
+      "closedBy": [
+        "caption-anchor-final"
+      ]
+    }
+  ],
+  "evidenceRuns": [
+    "verified",
+    "prop-contact-final",
+    "caption-anchor-final"
+  ],
+  "uniqueVisualStates": 326,
+  "notes": [
+    "Batched checks and targeted rechecks after later fixes, not a single full-site CI run",
+    "Failed logs, screenshots and traces retained under output/story-book-review",
+    "No physical phone, WeChat, Quark, system keyboard or safe-area validation",
+    "No commit, push or production deployment"
+  ],
+  "documentation": "local links verified",
+  "preview": {
+    "url": "http://127.0.0.1:4401/?unit=unit31-32&page=story-3&state=english&device=chrome-iphone-se",
+    "observedReady": true,
+    "screenshot": "delivery.jpg"
+  }
+}

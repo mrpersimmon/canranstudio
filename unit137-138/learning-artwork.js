@@ -1,6 +1,6 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "football": "/assets/learning-words/unit137-138/football-29b02542.svg",
+  "football": "/assets/word-art-v2/whole-book/football-v1.webp",
   "pool": "/assets/learning-words/unit137-138/pool-5c55597a.svg",
   "win": "/assets/learning-words/unit137-138/win-eb7ea579.svg",
   "world": "/assets/learning-words/unit137-138/world-aadeb9f4.svg",
@@ -12,3 +12,7 @@ CanranCore.learningWordArtwork={
   "spend": "/assets/learning-words/unit137-138/spend-a9554810.svg",
   "country": "/assets/learning-words/unit137-138/country-89e0bc5f.svg"
 };
+CanranCore.learningWordPresentation={
+  "football": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

@@ -1,8 +1,8 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "future": "/assets/learning-words/unit135-136/future-12da8c15.svg",
   "get married": "/assets/learning-words/unit135-136/married-3a223f31.svg",
-  "hotel": "/assets/learning-words/unit135-136/hotel-9df58523.svg",
+  "hotel": "/assets/word-art-v2/whole-book/hotel-v1.webp",
   "latest": "/assets/learning-words/unit135-136/latest-1d8ba0c4.svg",
   "introduce": "/assets/learning-words/unit135-136/introduce-21b152f5.svg",
   "really": "/assets/learning-words/unit135-136/really-3351887b.svg",
@@ -12,3 +12,7 @@ CanranCore.learningWordArtwork={
   "husband": "/assets/learning-words/unit135-136/husband-0d792bc4.svg",
   "sixth": "/assets/learning-words/unit135-136/sixth-17c7eccc.svg"
 };
+CanranCore.learningWordPresentation={
+  "hotel": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

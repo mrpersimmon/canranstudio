@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "year": "/assets/learning-words/unit69-70/year-68418143.svg",
   "race": "/assets/learning-words/unit69-70/race-b0f335dc.svg",
@@ -23,17 +23,38 @@ CanranCore.learningWordArtwork={
   "October": "/assets/learning-words/unit69-70/october-0c0c1ebf.svg",
   "November": "/assets/learning-words/unit69-70/november-1b69fe59.svg",
   "December": "/assets/learning-words/unit69-70/december-5b58115b.svg",
-  "Australia": "/assets/learning-words/unit69-70/australia-12b0564b.svg",
-  "Canada": "/assets/learning-words/unit69-70/canada-c3cfb0c0.svg",
-  "India": "/assets/learning-words/unit69-70/india-02f406df.svg",
-  "Poland": "/assets/learning-words/unit69-70/poland-42dd23bc.svg",
-  "Turkey": "/assets/learning-words/unit69-70/turkey-3050b771.svg",
-  "Nigeria": "/assets/learning-words/unit69-70/nigeria-a2d357bb.svg",
+  "Australia": "/assets/unit69-70/australia.svg",
+  "Canada": "/assets/unit69-70/canada.svg",
+  "India": "/assets/unit69-70/india.svg",
+  "Poland": "/assets/unit69-70/poland.svg",
+  "Turkey": "/assets/unit69-70/turkey.svg",
+  "Nigeria": "/assets/unit69-70/nigeria.svg",
   "hundreds of": "/assets/learning-words/unit69-70/hundreds-5f9bf48f.svg",
   "on the way home": "/assets/learning-words/unit69-70/way-e99e38ba.svg",
-  "morning": "/assets/learning-words/unit69-70/morning-7aa0d085.svg",
+  "morning": "/assets/unit5-6-word-cards/morning-v1.webp",
   "afternoon": "/assets/learning-words/unit69-70/afternoon-41f8a5b7.svg",
   "evening": "/assets/learning-words/unit69-70/evening-3ed66337.svg",
-  "night": "/assets/learning-words/unit69-70/night-21c6fea4.svg",
-  "noon": "/assets/learning-words/unit69-70/noon-ba1207fc.svg"
+  "night": "/assets/word-art-v2/whole-book/night-v1.webp",
+  "noon": "/assets/learning-words/unit69-70/noon-ba1207fc.svg",
+  "Denmark": "/assets/unit69-70/denmark.svg",
+  "Austria": "/assets/unit69-70/austria.svg",
+  "China": "/assets/unit69-70/china.svg",
+  "Finland": "/assets/unit69-70/finland.svg",
+  "Japan": "/assets/unit69-70/japan.svg"
 };
+CanranCore.learningWordPresentation={
+  "Denmark": "fact",
+  "Australia": "fact",
+  "Austria": "fact",
+  "Canada": "fact",
+  "China": "fact",
+  "Finland": "fact",
+  "India": "fact",
+  "Poland": "fact",
+  "Turkey": "fact",
+  "Japan": "fact",
+  "Nigeria": "fact",
+  "morning": "illustration",
+  "night": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

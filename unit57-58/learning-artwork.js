@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "o’clock": "/assets/learning-words/unit57-58/clock-8-e31a6ea3.svg",
   "shop": "/assets/learning-words/unit57-58/shop-f373db50.svg",
@@ -12,10 +12,17 @@ CanranCore.learningWordArtwork={
   "usually": "/assets/learning-words/unit57-58/usually-02b0390d.svg",
   "living room": "/assets/learning-words/unit57-58/living-room-46bcd16d.svg",
   "garden": "/assets/learning-words/unit57-58/garden-a9132b3d.svg",
-  "book": "/assets/learning-words/unit57-58/book-6d2d105f.svg",
-  "newspaper": "/assets/learning-words/unit57-58/newspaper-b8409d7a.svg",
+  "book": "/assets/word-art-v2/sample1-12/book-v1.webp",
+  "newspaper": "/assets/word-art-v2/sample13-24/newspaper-v1.webp",
   "drink tea": "/assets/learning-words/unit57-58/tea-90fe84a4.svg",
   "shave": "/assets/learning-words/unit57-58/shave-24e0e46e.svg",
   "cook a meal": "/assets/learning-words/unit57-58/cook-4d5664c3.svg",
   "listen to the stereo": "/assets/learning-words/unit57-58/stereo-c263524a.svg"
+};
+CanranCore.learningWordPresentation={
+  "book": "illustration",
+  "newspaper": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit57-58/book.svg": "/assets/word-art-v2/sample1-12/book-v1.webp"
 };

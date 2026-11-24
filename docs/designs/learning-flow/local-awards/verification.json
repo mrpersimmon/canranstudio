@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-17",
+  "snapshot": "review-local-stars-20261117-357a3334ca26",
+  "sourceHead": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "branchCommitted": false,
+  "pushed": false,
+  "officialPublished": false,
+  "testSiteUpdated": true,
+  "url": "https://preview.canranstudio.cn/",
+  "nodeChecks": 62,
+  "chromiumAccountCases": 24,
+  "chromiumNote": "23 passed in regression2; the remaining legacy readiness assertion was corrected and passed in an isolated rerun.",
+  "webkitAccountCases": 11,
+  "reviewCases": {
+    "chromium": 3,
+    "webkit": 3
+  },
+  "liveCases": 3,
+  "localTimings": [
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "flightStartMs": 283.5,
+      "serverResponseHeld": true
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "flightStartMs": 285.80000019073486,
+      "serverResponseHeld": true
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "flightStartMs": 280.30000019073486,
+      "serverResponseHeld": true
+    }
+  ],
+  "liveTimings": [
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "flightStartMs": 272.30000019073486,
+      "confirmedMs": 8110.300000190735,
+      "artificialRequestDelayMs": 8000,
+      "noDuplicateFlight": true,
+      "refreshPreserved": true
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "flightStartMs": 259.69999980926514,
+      "confirmedMs": 8091,
+      "artificialRequestDelayMs": 8000,
+      "noDuplicateFlight": true,
+      "refreshPreserved": true
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "flightStartMs": 269.90000009536743,
+      "confirmedMs": 8110.099999904633,
+      "artificialRequestDelayMs": 8000,
+      "noDuplicateFlight": true,
+      "refreshPreserved": true
+    }
+  ],
+  "artificialDelayNotRealUserNetwork": true,
+  "physicalAndroidWeChatQuark": true,
+  "originalQuestionsAndCardAssetsPreserved": true,
+  "historicalAwardZonesVerified": 16,
+  "historicalDatesPreserved": true,
+  "cardKeyPreserved": true,
+  "backup": "/var/backups/canran-mobile-review-local-stars-20261117/before",
+  "disabledLiveSmokeAccounts": 3,
+  "officialRelease": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+  "fullCI": false,
+  "physicalDeviceEvidence": "user-confirmed; not agent-operated",
+  "userAcceptance": {
+    "date": "2026-11-17",
+    "source": "user reply in this conversation",
+    "statement": "两个浏览器都已通过",
+    "os": "Android",
+    "browsers": [
+      "微信",
+      "夸克"
+    ],
+    "scope": "最新得星修复在当前独立测试站的实机体验",
+    "deviceModelReported": false,
+    "browserVersionsReported": false
+  }
+}

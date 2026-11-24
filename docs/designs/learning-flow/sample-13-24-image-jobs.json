@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "dressing-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. An airy upstairs dressing room in a Mediterranean storybook town. Pale cream plaster walls, a tall wooden mirror and small wardrobe ONLY at the far edges, sage curtains, a sunny window with a glimpse of flowers. A broad empty honey wooden floor covering the bottom 45 percent. No clothes, hats or characters; those are separate interactive sprites. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "customs-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. A friendly vintage travel-terminal customs hall. Cream plaster, teal windows, a distant arch and luggage-storage cubbies only at the far edges. Broad empty tiled floor occupying the lower 45 percent. No counter, people, suitcases or passports; those are separate dynamic sprites. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "office-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. A welcoming storybook office, cream walls, soft sage filing cabinets and bookshelves at the far edges, a sunny wood-framed window. Broad unobstructed wooden floor in the bottom 45 percent for several standing colleagues. Desks only far back at edges; no foreground desk or chairs and no people. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "park-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. A small sunny garden park in a storybook town with leafy trees, flowers and a distant cream stone arch. Wide warm stone pavement across the lower 45 percent. No bench, no cart, no people, no ice cream: existing character sprites already include the needed bench and props. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "reading-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. A cosy home reading room, cream plaster walls, softly painted sage bookcases at far edges, a sunlit window and flowers. Broad empty honey wood floor at bottom 45 percent. No foreground table, no people, no loose books: existing story sprites include the desk and interactive books. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "shelf-world",
+      "kind": "world",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. An airy cosy room in a storybook home, cream plaster, a wood-framed sunny window at far left and a small potted plant at far right. Empty wall across the middle and wide empty honey wooden floor across bottom 45 percent. NO shelves, tables, glassware, furniture in the centre or people: exact interactive furniture and glass sets are layered separately. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character."
+    },
+    {
+      "id": "green-hat",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One forest-green broad-brimmed women hat with a pale peach flower and green ribbon, matching the hat worn by the dark-haired woman in the top-left reference keepsake. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "green-dress",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One forest-green short-sleeve fit-and-flare dress on a small plain wooden hanger, matching the dress held in the top-left keepsake. The full dress is clearly visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "suitcase",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One brown vintage travel suitcase with handle and rounded corners, closed and upright, leather straps and restrained metal clasps, no stickers or writing. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "carpet",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One small rectangular woven rust-red and sage rug with a simple border and short tassels, shown at gentle three-quarter angle, entire rug visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "dog",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One friendly small brown-and-white pet dog sitting, complete body and tail visible, clear canine ears and snout, warm rounded forms. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "passport",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One closed dark-green travel passport booklet with a small generic gold globe emblem and rounded corners. No readable text, no national coat of arms or personal details. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "tired",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One child visibly tired after walking, gently slumped shoulders, drooping eyelids, relaxed arms and small backpack, feet visible. No sickness symbols or words; warm empathetic expression. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "thirsty",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One child visibly thirsty, holding an EMPTY clear water bottle tilted toward the open mouth and looking at the empty bottle. Clear empty bottle, no filled drink, full child visible, no words or thought bubbles. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "ice-cream",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One strawberry-pink scoop of ice cream in a golden waffle cone, clear single cone and scoop, no extra objects. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "open-door",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One small teal wooden door in a cream frame standing clearly OPEN inward, showing a light warm interior gap; entire door and frame visible, no wall scene. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "closed-door",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One small teal wooden door in a cream frame firmly CLOSED, full frame visible, warm brown small handle, no wall scene. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "long-trousers",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One pair of full-length soft blue trousers, both legs stretched all the way to the ankles, front view, no wearer, no labels. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "shoe",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE tan-brown casual lace-up shoe, three-quarter side view, full shoe visible, no person and not a pair. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "box",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. One closed small warm brown cardboard storage box, simple lid and rounded illustrated edges, no text. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "glass",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE empty clear drinking tumbler with straight gently tapered sides and softly teal-tinted glass edges, open rim visible, NO handle, NO liquid, transparent background. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "full-glass",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE clear drinking tumbler filled with water almost to its rim, visible water level just below rim, gently teal-tinted transparent glass, NO handle. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "cup",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE clean cream ceramic tea cup with one curved handle, simple sage rim, no saucer, no writing. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "bottle",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE clear pale-green glass bottle with short neck and plain stopper, no label or text, full silhouette visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "tin",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE closed cylindrical food tin can with a simple plain sage paper band and ridged metal ends, no text or images on label. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "knife-sharp",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE kitchen table knife with warm wooden handle, straight steel blade ending in a clearly pointed triangular tip, no food or hands. Educational cutlery object. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "knife-blunt",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE ordinary blunt butter knife with warm wooden handle and steel blade with a visibly round broad tip, no sharp point, no food or hands. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "fork",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE stainless steel dinner fork with four clear tines and a warm wooden handle, diagonal composition, full object visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "spoon",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE stainless steel tablespoon with an oval bowl and warm wooden handle, diagonal composition, full object visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "shelf",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE wall-mounted honey-brown wooden shelf plank with two simple supporting brackets, EMPTY, no wall surrounding it. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "desk",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE small honey-brown writing desk with a knee opening and a drawer pedestal on one side, EMPTY desktop, no chair or accessories; clearly a writing desk. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "table",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE simple honey-brown rectangular dining table with four legs, EMPTY top, NO drawers, no chairs or accessories; clearly distinguishable from a writing desk. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "plate",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE cream ceramic dinner plate with a gentle sage rim, viewed at a slight angle, empty, no cup or cutlery. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "cupboard",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE freestanding honey-brown kitchen cupboard with two cabinet doors below and two glass-front doors above, shelves subtly visible, full cabinet on small feet; no extra scene. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "cigarette",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE unlit plain white cigarette with a tan filter, isolated diagonal object for neutral vocabulary identification, no smoke, fire, packaging, branding or people. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "television",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE compact television with a dark blank screen, sage casing and small wooden stand feet, no text or content on screen. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "dressing-table",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE honey-brown dressing table with drawers, an attached upright oval mirror and a small stool tucked under it; complete furniture, no person or accessories. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "magazine",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE slim glossy illustrated magazine, slightly open, cover showing ONLY abstract floral shapes in warm colours, visible thin pages, NO text. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "bed",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE cosy single bed with honey-brown wooden headboard, cream pillow and sage quilt, three-quarter view, entire bed visible, no person. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "newspaper",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE folded newspaper with orderly grey PRINT-LIKE short horizontal rules in columns and two neutral picture blocks, no readable letters or words; clearly thin folded newspaper, not a book. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "stereo",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE home stereo set with a central receiver and two matching separate speakers, warm dark wood casing, simple circular speaker drivers, no writing. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    },
+    {
+      "id": "chair",
+      "kind": "word",
+      "references": [
+        "output/sample-13-24/original-card-reference.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE simple honey-brown wooden chair with a sage upholstered seat, three-quarter angle, full chair and four legs visible. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration."
+    }
+  ]
+}

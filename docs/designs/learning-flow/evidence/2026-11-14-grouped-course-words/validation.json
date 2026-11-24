@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-14",
+  "scope": "Lesson1–12 real course grouped word cards",
+  "vocabulary": {
+    "total": 132,
+    "illustration": 86,
+    "context": 46,
+    "pages": 27
+  },
+  "requiredDevices": [
+    {
+      "id": "chrome-iphone-se",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "chrome-iphone-14-pro-max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "id": "chrome-iphone-16-pro-max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      }
+    }
+  ],
+  "runs": [
+    {
+      "name": "words-final",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "authenticated-final",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "real-word-paint",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "extra-sizes",
+      "status": "passed",
+      "failedTests": []
+    }
+  ],
+  "screenshots": 81,
+  "limitations": [
+    "No physical mobile/WeChat/Quark test",
+    "No unrelated full CI",
+    "No commit, push or deployment"
+  ]
+}

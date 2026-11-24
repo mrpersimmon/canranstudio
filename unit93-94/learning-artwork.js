@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "return": "/assets/learning-words/unit93-94/return-0dd04dc0.svg",
   "fly": "/assets/learning-words/unit93-94/plane-7501d66e.svg",
@@ -34,5 +34,12 @@ CanranCore.learningWordArtwork={
   "the week after next": "/assets/learning-words/unit93-94/calendar-ef1e6986.svg",
   "the month after next": "/assets/learning-words/unit93-94/calendar-ef1e6986.svg",
   "the year after next": "/assets/learning-words/unit93-94/calendar-ef1e6986.svg",
-  "the R.A.F.": "/assets/learning-words/unit93-94/wings-38ccdcd7.svg"
+  "the R.A.F.": "/assets/learning-words/unit93-94/wings-38ccdcd7.svg",
+  "pilot": "/assets/unit93-94/nigel.webp"
+};
+CanranCore.learningWordPresentation={
+  "pilot": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit93-94/nigel.webp": "/assets/unit93-94/nigel.webp"
 };

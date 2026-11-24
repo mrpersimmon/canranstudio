@@ -16,7 +16,7 @@ for(const device of require('../support/required-phone-devices.json').devices)te
 test('live position follows word pages, story lines and a restarted round instead of the original entry',async({page})=>{
  const frame=await start(page);
  await frame.getByRole('link',{name:'词汇',exact:true}).click();await expect(page.locator('#current-title')).toContainText('词卡 · 第 1 组');
- await frame.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(page.locator('#current-title')).toContainText('词卡 · 第 2 组');
+ await frame.locator('.word-controls').getByRole('button',{name:'下一组',exact:true}).click();await expect(page.locator('#current-title')).toContainText('词卡 · 第 2 组');
  const time=await frame.locator('body').evaluate(()=>performance.timeOrigin);
  await page.locator('#state-buttons [data-state=expanded]').click();await ready(page);
  expect(new URL(page.url()).searchParams.get('page')).toBe('words-1');expect(await frame.locator('body').evaluate(()=>performance.timeOrigin)).toBe(time);

@@ -1,27 +1,127 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "umbrella": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
   "ticket": "/assets/unit3-4-journey/ticket-v1.webp",
-  "cloakroom": "/assets/learning-words/unit3-4/cloakroom-2c286280.svg",
-  "suit": "/assets/learning-words/unit3-4/suit-86e3ec4d.svg",
-  "school": "/assets/learning-words/unit3-4/school-5196a5af.svg",
-  "teacher": "/assets/learning-words/unit3-4/teacher-b83022e5.svg",
-  "son": "/assets/learning-words/unit3-4/son-f226a91c.svg",
-  "daughter": "/assets/learning-words/unit3-4/daughter-d0c76458.svg",
-  "pen": "/assets/learning-words/unit3-4/pen-42a16c5f.svg",
-  "pencil": "/assets/learning-words/unit3-4/pencil-38d5508b.svg",
-  "book": "/assets/learning-words/unit3-4/book-5e3bf849.svg",
-  "watch": "/assets/learning-words/unit3-4/watch-197a3ddb.svg",
+  "cloakroom": "/assets/word-art-v2/sample1-12/cloakroom-vocabulary-v1.webp",
+  "suit": "/assets/word-art-v2/sample1-12/suit-v1.webp",
+  "school": "/assets/word-art-v2/sample1-12/school-v1.webp",
+  "teacher": "/assets/unit5-6-current/blake-v154.webp",
+  "son": "/assets/unit5-6-current/hans-v154.webp",
+  "daughter": "/assets/unit5-6-current/sophie-v154.webp",
+  "pen": "/assets/word-art-v2/sample1-12/pen-v1.webp",
+  "pencil": "/assets/word-art-v2/sample1-12/pencil-v1.webp",
+  "book": "/assets/word-art-v2/sample1-12/book-v1.webp",
+  "watch": "/assets/word-art-v2/sample1-12/watch-v1.webp",
   "coat": "/assets/unit3-4-journey/coat-v1.webp",
-  "dress": "/assets/learning-words/unit3-4/dress-0de3c9a8.svg",
-  "skirt": "/assets/learning-words/unit3-4/skirt-c7999c10.svg",
-  "shirt": "/assets/learning-words/unit3-4/shirt-7efe6aa1.svg",
-  "car": "/assets/learning-words/unit3-4/car-0e3a9e1c.svg",
-  "house": "/assets/learning-words/unit3-4/house-df6be3ec.svg",
-  "here": "/assets/learning-words/unit3-4/give-09943101.svg",
-  "my": "/assets/learning-words/unit3-4/people-3745ebf9.svg",
-  "number": "/assets/learning-words/unit3-4/number-01f07470.svg",
-  "five": "/assets/learning-words/unit3-4/five-ade22dfa.svg",
-  "sorry": "/assets/learning-words/unit3-4/heart-cdaa4550.svg",
-  "sir": "/assets/learning-words/unit3-4/people-3745ebf9.svg"
+  "dress": "/assets/word-art-v2/sample1-12/dress-v1.webp",
+  "skirt": "/assets/word-art-v2/sample1-12/skirt-v1.webp",
+  "shirt": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
+  "car": "/assets/unit5-6-word-cards/mini-v1.webp",
+  "house": "/assets/word-art-v2/sample1-12/house-v1.webp",
+  "here": "/assets/unit3-4-journey/ticket-v1.webp",
+  "my": "/assets/unit3-4-journey/coat-v1.webp",
+  "number": "/assets/unit3-4-journey/ticket-v1.webp",
+  "five": "/assets/unit3-4-journey/ticket-v1.webp",
+  "sorry": "/assets/unit3-4-journey/attendant-v1.webp",
+  "sir": "/assets/unit3-4-journey/visitor-v1.webp",
+  "please": "/assets/unit3-4-journey/visitor-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "umbrella": "illustration",
+  "ticket": "illustration",
+  "cloakroom": "illustration",
+  "suit": "illustration",
+  "school": "illustration",
+  "teacher": "illustration",
+  "son": "diagram",
+  "daughter": "diagram",
+  "pen": "illustration",
+  "pencil": "illustration",
+  "book": "illustration",
+  "watch": "illustration",
+  "coat": "illustration",
+  "dress": "illustration",
+  "skirt": "illustration",
+  "shirt": "illustration",
+  "car": "illustration",
+  "house": "illustration",
+  "please": "diagram",
+  "here": "diagram",
+  "my": "diagram",
+  "number": "illustration",
+  "five": "illustration",
+  "sorry": "diagram",
+  "sir": "diagram"
+};
+CanranCore.learningWordComposition={
+  "son": {
+    "kind": "family",
+    "sources": [
+      "/assets/unit61-62/father.webp",
+      "/assets/unit5-6-current/hans-v154.webp"
+    ],
+    "labels": [
+      "father",
+      "son"
+    ],
+    "focus": 1
+  },
+  "daughter": {
+    "kind": "family",
+    "sources": [
+      "/assets/unit61-62/mother.webp",
+      "/assets/unit5-6-current/sophie-v154.webp"
+    ],
+    "labels": [
+      "mother",
+      "daughter"
+    ],
+    "focus": 1
+  },
+  "please": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit3-4-journey/visitor-v1.webp"
+    ],
+    "text": "Please."
+  },
+  "here": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit3-4-journey/ticket-v1.webp"
+    ],
+    "text": "Here."
+  },
+  "my": {
+    "kind": "ownership",
+    "sources": [
+      "/assets/unit3-4-journey/visitor-v1.webp",
+      "/assets/unit3-4-journey/coat-v1.webp"
+    ],
+    "labels": [
+      "my",
+      ""
+    ]
+  },
+  "sorry": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit3-4-journey/attendant-v1.webp"
+    ],
+    "text": "Sorry."
+  },
+  "sir": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit3-4-journey/visitor-v1.webp"
+    ],
+    "text": "sir"
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit1-2/coat.svg": "/assets/unit3-4-journey/coat-v1.webp",
+  "/assets/unit3-4/umbrella.svg": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
+  "/assets/unit3-4/ticket.svg": "/assets/unit3-4-journey/ticket-v1.webp",
+  "/assets/unit3-4/suit.svg": "/assets/word-art-v2/sample1-12/suit-v1.webp",
+  "/assets/unit3-4/teacher.svg": "/assets/unit5-6-current/blake-v154.webp"
 };

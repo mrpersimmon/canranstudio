@@ -1,0 +1,102 @@
+{
+  "date": "2026-11-12",
+  "scope": "Lesson 1–12 sample; simulated phone sizes, not physical phones",
+  "devices": [
+    {
+      "id": "chrome-iphone-se",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "chrome-iphone-14-pro-max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "id": "chrome-iphone-16-pro-max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      }
+    }
+  ],
+  "runs": [
+    {
+      "name": "words-accepted",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "questions-complete",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "presentation-first",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "questions-stories",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "extra-sizes-final",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "authenticated",
+      "status": "failed",
+      "failedTests": [
+        "cc01141d6392aa044f9c-492fe33af974fbfc5c8a"
+      ],
+      "note": "Five units passed; unit1-2 test label fallback failed then passed separately in authenticated-unit12"
+    },
+    {
+      "name": "authenticated-unit12",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "picture-guard",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "object-layout-final",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "visual-regression",
+      "status": "passed",
+      "failedTests": []
+    }
+  ],
+  "nodeChecks": {
+    "passed": 52,
+    "log": "output/sample-1-12/contracts-final.log"
+  },
+  "questions": 262,
+  "questionLayouts": 786,
+  "storyLines": 85,
+  "storyPoses": 255,
+  "pageEntries": 108,
+  "pageLayouts": 324,
+  "reviewedWords": 132,
+  "generatedAssets": {
+    "words": 40,
+    "backgrounds": 5
+  },
+  "limits": [
+    "No full-site CI",
+    "No physical iPhone/Android/WeChat/Quark",
+    "No commit, push or deployment"
+  ]
+}

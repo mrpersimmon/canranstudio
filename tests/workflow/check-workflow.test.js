@@ -348,3 +348,90 @@ test('word meaning, story and progress/material changes retain the focused three
  }
  const tasks=config.tasks(process.cwd(),[]);for(const name of ['browser-layout-refinement','browser-layout-refinement-webkit'])assert.ok(tasks[name].args.includes('tests/review/layout-refinement.spec.js'));
 });
+
+test('Lesson 1–12 artwork and composition retain both browser visual checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/learning-sample.js','core/learning-sample.css','assets/word-art-v2/adoptions.json','assets/learning-sample-v1/street-world-v1.webp','unit7-8/learning-artwork.js','tests/review/sample-words.spec.js','tests/review/word-display.spec.js']){
+  const plan=planChecks(config,[file]);for(const id of ['browser-learning-sample','browser-learning-sample-webkit'])assert.ok(plan.includes(id),file);
+ }
+ const tasks=config.tasks(process.cwd(),[]);
+ for(const id of ['browser-learning-sample','browser-learning-sample-webkit'])for(const file of ['tests/review/sample-words.spec.js','tests/review/sample-visual.spec.js','tests/review/word-display.spec.js'])assert.ok(tasks[id].args.includes(file));
+});
+test('grouped course cards keep classification, migration and signed-in persistence checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/word-deck.js','core/word-deck.css','unit1-2/learning-words.js','scripts/prepare-word-decks.js','docs/designs/word-cards/lesson1-12-classification.json','server/public/access-client.js','server/progress.js']){
+  const plan=planChecks(config,[file]);for(const name of ['word-deck-unit','browser-word-deck-account'])assert.ok(plan.includes(name),file+' '+name);
+ }
+ const tasks=config.tasks(process.cwd(),[]);assert.ok(tasks['browser-word-deck-account'].args.includes('tests/login/word-deck-position.spec.js'));
+});
+
+test('flag assets and their adapter keep caption-leak checks in both browser engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit5-6/current.js','assets/unit5-6-current/french-v154.svg','assets/unit5-6-word-cards/flags/french.svg','scripts/prepare-word-flags.js','core/word-deck.js','tests/review/word-flags.spec.js']){
+  const plan=planChecks(config,[file]);for(const name of ['word-flags-unit','browser-word-flags','browser-word-flags-webkit'])assert.ok(plan.includes(name),file+' '+name);
+ }
+ const tasks=config.tasks(process.cwd(),[]);for(const name of ['browser-word-flags','browser-word-flags-webkit'])assert.ok(tasks[name].args.includes('tests/review/word-flags.spec.js'));
+});
+
+test('Lesson 13–24 presentation retains targeted phones, original content and account checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit13-14/index.html','core/learning-sample.css','assets/learning-sample-v2/park-world-v1.webp','assets/word-art-v2/sample13-24/glass-v1.webp','docs/designs/word-cards/lesson13-24-classification.json']){
+  const plan=planChecks(config,[file]);for(const name of ['sample-expansion-unit','browser-expanded-sample','browser-expanded-sample-webkit','browser-expanded-accounts'])assert.ok(plan.includes(name),file+' '+name);
+ }
+ const tasks=config.tasks(process.cwd(),[]);for(const name of ['browser-expanded-sample','browser-expanded-sample-webkit','browser-expanded-accounts'])assert.deepEqual(tasks[name].args.slice(0,2),['--require','./tests/support/expanded-sample-scope.js']);
+});
+
+test('decorative story-label edits retain the focused two-engine checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit7-8/scene.js','unit13-14/scene.js','unit23-24/scene.js','core/learning-scenes.css','core/learning-sample.css','tests/review/story-labels.spec.js','tests/review/story-name-clearance.spec.js','tests/support/story-name-clearance.js']){
+  const plan=planChecks(config,[file]);for(const id of ['browser-story-labels','browser-story-labels-webkit'])assert.ok(plan.includes(id),file+' '+id);
+ }
+ for(const id of ['browser-story-labels','browser-story-labels-webkit'])for(const file of ['tests/review/story-labels.spec.js','tests/review/story-name-clearance.spec.js'])assert.ok(config.tasks(process.cwd(),[])[id].args.includes(file));
+});
+
+test('theatre composition checks follow individual units and shared scene changes',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['unit31-32/scene.js','core/learning-scenes.js','core/learning-flow.js','core/learning-sample.css','tests/review/theatre-composition.spec.js']){
+  const plan=planChecks(config,[file]);for(const task of ['browser-theatre-composition','browser-theatre-composition-webkit','browser-theatre-preservation'])assert.ok(plan.includes(task),file+' '+task);
+ }
+ const task=config.tasks(process.cwd(),['unit31-32/scene.js'])['browser-theatre-composition'];assert.ok(task.args.includes('--course-scope=unit31-32'));
+});
+
+test('question presentation fixes retain space and frame checks in both engines',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/practice-screen.js','core/learning-flow.js','core/learning-flow.css','core/learning-sample.js']){
+  const plan=planChecks(config,[file]);for(const task of ['browser-question-space','browser-question-space-webkit'])assert.ok(plan.includes(task),file+' '+task);
+ }
+ for(const name of ['browser-question-space','browser-question-space-webkit'])for(const file of ['tests/review/question-space.spec.js','tests/review/question-paint.spec.js'])assert.ok(config.tasks(process.cwd(),[])[name].args.includes(file));
+});
+test('local award and background synchronization changes retain focused ledger and browser checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/unit-awards.js','core/award-reveal.js','core/story-certificate.js','server/app.js','server/public/access-client.js','server/public/portal.js','student-ui/Workspace.jsx']){
+  const plan=planChecks(config,[file]);for(const name of ['local-awards-unit','browser-local-awards','browser-local-awards-webkit'])assert.ok(plan.includes(name),file+' '+name);
+ }
+});
+
+test('reading refresh and both outbox consumers select their targeted regression gates',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/practice-screen.js','core/learning-scenes.js','core/word-deck.js']){
+  const ids=planChecks(config,[file]);for(const id of ['browser-reading-idle','browser-reading-idle-webkit'])assert.ok(ids.includes(id),file+' '+id);
+ }
+ for(const file of ['server/store.js','server/public/access-client.js','server/public/portal.js','server/public/learning-observer.js']){
+  const ids=planChecks(config,[file]);for(const id of ['learning-receipt-unit','browser-learning-outbox'])assert.ok(ids.includes(id),file+' '+id);
+ }
+});
+
+test('package visual dependencies run both phone engines without adding a timing benchmark to ordinary checks',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['core/learning-sample.css','unit19-20/unit.css','scripts/course-packages.js','scripts/course-registry.js']){
+  const tasks=planChecks(config,[file]);for(const task of ['course-visual-deps','browser-course-visual-ready','browser-course-visual-ready-webkit'])assert.ok(tasks.includes(task),file+' '+task);
+  assert.ok(!tasks.includes('measure:first-course'));
+ }
+});
+
+test('shared image delivery and font checkpoints run the targeted integrity and real-browser gates',()=>{
+ const config=require('../../scripts/check-workflow.config');
+ for(const file of ['assets/unit45-46/bob.svg','assets/unit47-48/cover-scene.svg','scripts/shared-svg-transfer.js','core/course-cache.js','server/bundles.js','server/public/portal.js']){
+  const plan=planChecks(config,[file]);for(const id of ['shared-transfer-unit','browser-shared-transfer','browser-shared-transfer-webkit'])assert.ok(plan.includes(id),file+' '+id);
+ }
+});

@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "certainly": "/assets/learning-words/unit63-64/certainly-30c5f5e2.svg",
   "get up": "/assets/learning-words/unit63-64/get-up-84309faa.svg",
@@ -7,9 +7,9 @@ CanranCore.learningWordArtwork={
   "food": "/assets/learning-words/unit63-64/food-ccfa3e77.svg",
   "remain": "/assets/learning-words/unit63-64/remain-f3f11746.svg",
   "play": "/assets/learning-words/unit63-64/play-fc2b37d0.svg",
-  "match": "/assets/learning-words/unit63-64/match-05a5d8aa.svg",
+  "match": "/assets/word-art-v2/whole-book/match-v1.webp",
   "talk": "/assets/learning-words/unit63-64/talk-332b405e.svg",
-  "library": "/assets/learning-words/unit63-64/library-b62c8cdd.svg",
+  "library": "/assets/word-art-v2/whole-book/library-v1.webp",
   "drive": "/assets/learning-words/unit63-64/drive-3dec7881.svg",
   "so": "/assets/learning-words/unit63-64/so-ca6ad0b8.svg",
   "quickly": "/assets/learning-words/unit63-64/quickly-118aa853.svg",
@@ -20,4 +20,11 @@ CanranCore.learningWordArtwork={
   "for": "/assets/learning-words/unit63-64/for-7ec79a9b.svg",
   "another": "/assets/learning-words/unit63-64/another-2ef1361d.svg",
   "warm": "/assets/learning-words/unit63-64/warm-04cf833d.svg"
+};
+CanranCore.learningWordPresentation={
+  "match": "illustration",
+  "library": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit63-64/library.svg": "/assets/word-art-v2/whole-book/library-v1.webp"
 };

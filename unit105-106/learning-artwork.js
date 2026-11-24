@@ -1,10 +1,10 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "spell": "/assets/learning-words/unit105-106/spell-031260f2.svg",
   "intelligent": "/assets/learning-words/unit105-106/intelligent-f35f8c0f.svg",
   "mistake": "/assets/learning-words/unit105-106/mistake-ff31cefd.svg",
-  "present": "/assets/learning-words/unit105-106/present-b1b1e303.svg",
-  "dictionary": "/assets/learning-words/unit105-106/dictionary-ea17f856.svg",
+  "present": "/assets/word-art-v2/whole-book/present-v1.webp",
+  "dictionary": "/assets/word-art-v2/whole-book/dictionary-v1.webp",
   "carry": "/assets/learning-words/unit105-106/carry-b58fcac2.svg",
   "correct": "/assets/learning-words/unit105-106/correct-4436fc6d.svg",
   "keep": "/assets/learning-words/unit105-106/keep-8cef2a13.svg",
@@ -27,4 +27,12 @@ CanranCore.learningWordArtwork={
   "drive": "/assets/learning-words/unit105-106/drive-3dec7881.svg",
   "lose": "/assets/learning-words/unit105-106/lose-ff31ddbd.svg",
   "cut yourself": "/assets/learning-words/unit105-106/cut-8b8b4491.svg"
+};
+CanranCore.learningWordPresentation={
+  "present": "illustration",
+  "dictionary": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit105-106/present.svg": "/assets/word-art-v2/whole-book/present-v1.webp",
+  "/assets/unit105-106/dictionary.svg": "/assets/word-art-v2/whole-book/dictionary-v1.webp"
 };

@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "totalQuestions": 4329,
+  "families": 55,
+  "cases": [
+    {
+      "unit": "unit1-2",
+      "activity": "exam",
+      "index": 0,
+      "family": "cloze:reference:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-tasks-v4-exam-attention",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "listen",
+      "index": 0,
+      "family": "match:pairs3",
+      "reason": "基础题型代表",
+      "id": "u12-types-v1-t01",
+      "type": "match"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "manners",
+      "index": 0,
+      "family": "cloze:blanks1",
+      "reason": "基础题型代表",
+      "id": "u12-types-v1-t04",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "roles",
+      "index": 0,
+      "family": "wordbank:reading:tokensshort",
+      "reason": "基础题型代表",
+      "id": "u12-types-v1-t05",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "roles",
+      "index": 1,
+      "family": "choice:reading",
+      "reason": "基础题型代表",
+      "id": "u12-types-v1-t06",
+      "type": "choice"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "exam",
+      "index": 1,
+      "family": "choice:reading:material",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v3-new-owner-no",
+      "type": "choice"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "exam",
+      "index": 2,
+      "family": "cloze:reading:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v2-meaning-reference",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "roles",
+      "index": 2,
+      "family": "locate",
+      "reason": "基础题型代表",
+      "id": "u12-tasks-v4-thanks-degree",
+      "type": "locate"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 3,
+      "family": "cloze:reading:material:model:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v4-move-are",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "listen",
+      "index": 4,
+      "family": "choice:illustration:reading",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-types-v1-t09",
+      "type": "choice"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 5,
+      "family": "choice:reading:material:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v4-change-addressee",
+      "type": "choice"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 6,
+      "family": "cloze:reading:model:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v4-affirmative-replies",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 7,
+      "family": "choice:reading:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v4-negative-reply",
+      "type": "choice"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 8,
+      "family": "match:material:pairs2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-five-zones-v1-reply-pairs",
+      "type": "match"
+    },
+    {
+      "unit": "unit1-2",
+      "activity": "trans",
+      "index": 11,
+      "family": "cloze:reading:material:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u12-grammar-v4-independent-answer-self",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit3-4",
+      "activity": "exam",
+      "index": 4,
+      "family": "order:tokensshort",
+      "reason": "基础题型代表",
+      "id": "u34-final-v2-show-ticket",
+      "type": "order"
+    },
+    {
+      "unit": "unit3-4",
+      "activity": "reply",
+      "index": 5,
+      "family": "cloze:model:reference:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u34-grammar-v1-speaker",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit5-6",
+      "activity": "roles",
+      "index": 2,
+      "family": "choice:picture-choices:reading",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u56-v154-story-too",
+      "type": "choice"
+    },
+    {
+      "unit": "unit5-6",
+      "activity": "exam",
+      "index": 9,
+      "family": "order:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u56-final-v2-correction",
+      "type": "order"
+    },
+    {
+      "unit": "unit5-6",
+      "activity": "introduce",
+      "index": 10,
+      "family": "cloze:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u56-v154-wh-independent",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit7-8",
+      "activity": "exam",
+      "index": 10,
+      "family": "cloze:reference:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u78-tasks-v4-exam-confirm-you",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit9-10",
+      "activity": "exam",
+      "index": 2,
+      "family": "order:illustration:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u910-v1-exam-object",
+      "type": "order"
+    },
+    {
+      "unit": "unit9-10",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:illustration:material:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u910-five-a-umbrella",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit9-10",
+      "activity": "exam",
+      "index": 9,
+      "family": "match:pairs2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u910-five-e-expand",
+      "type": "match"
+    },
+    {
+      "unit": "unit11-12",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:material:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u1112-five-a-pronoun",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit13-14",
+      "activity": "apply",
+      "index": 0,
+      "family": "order:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u1314-v1-build-merge",
+      "type": "order"
+    },
+    {
+      "unit": "unit15-16",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u1516-v1-reply-negative",
+      "type": "choice"
+    },
+    {
+      "unit": "unit17-18",
+      "activity": "apply",
+      "index": 5,
+      "family": "order:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u1718-v1-build-correct",
+      "type": "order"
+    },
+    {
+      "unit": "unit19-20",
+      "activity": "apply",
+      "index": 6,
+      "family": "wordbank:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u1920-five-a-many",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit21-22",
+      "activity": "apply",
+      "index": 2,
+      "family": "handoff",
+      "reason": "基础题型代表",
+      "id": "u2122-v3-receive-them",
+      "type": "handoff"
+    },
+    {
+      "unit": "unit23-24",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:reading:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u2324-five-a-meaning",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit25-26",
+      "activity": "apply",
+      "index": 4,
+      "family": "choice:inquiry",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u2526-types-v1-t13",
+      "type": "choice"
+    },
+    {
+      "unit": "unit27-28",
+      "activity": "roles",
+      "index": 0,
+      "family": "scene-find:reference",
+      "reason": "基础题型代表",
+      "id": "u2728-tasks-v4-story-find",
+      "type": "scene-find"
+    },
+    {
+      "unit": "unit29-30",
+      "activity": "roles",
+      "index": 1,
+      "family": "order:material:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u2930-tasks-v4-story-sequence-v153",
+      "type": "order"
+    },
+    {
+      "unit": "unit31-32",
+      "activity": "roles",
+      "index": 1,
+      "family": "locate",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3132-v1-chasing",
+      "type": "locate"
+    },
+    {
+      "unit": "unit31-32",
+      "activity": "exam",
+      "index": 7,
+      "family": "choice:illustration",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3132-v1-no-correction",
+      "type": "choice"
+    },
+    {
+      "unit": "unit33-34",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice:illustration",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u3334-v1-waiting-reply",
+      "type": "choice"
+    },
+    {
+      "unit": "unit35-36",
+      "activity": "exam",
+      "index": 9,
+      "family": "cloze:illustration:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3536-v1-final-over-under",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit37-38",
+      "activity": "exam",
+      "index": 0,
+      "family": "choice:illustration",
+      "reason": "当前页面与单图识词样例",
+      "id": "u3738-v1-final-bookcase",
+      "type": "choice"
+    },
+    {
+      "unit": "unit37-38",
+      "activity": "roles",
+      "index": 1,
+      "family": "handoff",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3738-v1-hammer-handoff",
+      "type": "handoff"
+    },
+    {
+      "unit": "unit37-38",
+      "activity": "exam",
+      "index": 23,
+      "family": "match:pairs4",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3738-five-e-for-mixed",
+      "type": "match"
+    },
+    {
+      "unit": "unit39-40",
+      "activity": "exam",
+      "index": 1,
+      "family": "scene-find:reference",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u3940-v1-final-place",
+      "type": "scene-find"
+    },
+    {
+      "unit": "unit41-42",
+      "activity": "roles",
+      "index": 2,
+      "family": "match:material:pairs3",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u4142-v1-r-weights-v153",
+      "type": "match"
+    },
+    {
+      "unit": "unit41-42",
+      "activity": "apply",
+      "index": 2,
+      "family": "choice:reference",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u4142-v1-a-check",
+      "type": "choice"
+    },
+    {
+      "unit": "unit43-44",
+      "activity": "roles",
+      "index": 1,
+      "family": "choice:picture-choices",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u4344-v1-r-pronouns",
+      "type": "choice"
+    },
+    {
+      "unit": "unit43-44",
+      "activity": "apply",
+      "index": 2,
+      "family": "choice:material:reference",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u4344-v1-a-cups",
+      "type": "choice"
+    },
+    {
+      "unit": "unit45-46",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice:picture-choices:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u4546-v1-a-person-v153",
+      "type": "choice"
+    },
+    {
+      "unit": "unit47-48",
+      "activity": "apply",
+      "index": 2,
+      "family": "choice:picture-choices",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u4748-v1-a-decline",
+      "type": "choice"
+    },
+    {
+      "unit": "unit49-50",
+      "activity": "apply",
+      "index": 4,
+      "family": "cloze:model:blanks2",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u4950-v2-a-ellipsis",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit51-52",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:model",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u5152-v1-a-source",
+      "type": "choice"
+    },
+    {
+      "unit": "unit53-54",
+      "activity": "exam",
+      "index": 0,
+      "family": "cloze:illustration:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u5354-v1-e-directions",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit53-54",
+      "activity": "apply",
+      "index": 6,
+      "family": "match:model:pairs4",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u5354-v1-a-ordinal",
+      "type": "match"
+    },
+    {
+      "unit": "unit55-56",
+      "activity": "apply",
+      "index": 7,
+      "family": "choice",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u5556-v1-a-send",
+      "type": "choice"
+    },
+    {
+      "unit": "unit57-58",
+      "activity": "apply",
+      "index": 6,
+      "family": "match:model:pairs4",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u5758-v1-a-number",
+      "type": "match"
+    },
+    {
+      "unit": "unit59-60",
+      "activity": "apply",
+      "index": 2,
+      "family": "cloze:model:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u5960-v1-a-we",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit59-60",
+      "activity": "apply",
+      "index": 3,
+      "family": "wordbank:model:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u5960-v1-a-they",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit61-62",
+      "activity": "grammar",
+      "index": 7,
+      "family": "locate:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u6162-v1-g-reason-part",
+      "type": "locate"
+    },
+    {
+      "unit": "unit63-64",
+      "activity": "apply",
+      "index": 1,
+      "family": "cloze:blanks1",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u6364-v1-a-window",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit65-66",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u6566-v1-a-when",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit65-66",
+      "activity": "grammar",
+      "index": 8,
+      "family": "choice:illustration:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u6566-v1-g-oclock",
+      "type": "choice"
+    },
+    {
+      "unit": "unit67-68",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u6768-v1-a-place",
+      "type": "choice"
+    },
+    {
+      "unit": "unit69-70",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u6970-v1-a-stamp",
+      "type": "choice"
+    },
+    {
+      "unit": "unit71-72",
+      "activity": "grammar",
+      "index": 1,
+      "family": "cloze:model:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u7172-v1-g-past-habit",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit73-74",
+      "activity": "apply",
+      "index": 0,
+      "family": "cloze:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u7374-v1-a-note",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit75-76",
+      "activity": "apply",
+      "index": 5,
+      "family": "choice",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u7576-v1-a-week",
+      "type": "choice"
+    },
+    {
+      "unit": "unit77-78",
+      "activity": "grammar",
+      "index": 13,
+      "family": "match:model:pairs3",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u7778-v1-g-surprise",
+      "type": "match"
+    },
+    {
+      "unit": "unit79-80",
+      "activity": "apply",
+      "index": 4,
+      "family": "choice:picture-choices:material",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u7980-v1-a-shop",
+      "type": "choice"
+    },
+    {
+      "unit": "unit81-82",
+      "activity": "apply",
+      "index": 7,
+      "family": "match:pairs3",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u8182-v1-a-routine",
+      "type": "match"
+    },
+    {
+      "unit": "unit83-84",
+      "activity": "apply",
+      "index": 4,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u8384-v1-a-one",
+      "type": "choice"
+    },
+    {
+      "unit": "unit85-86",
+      "activity": "apply",
+      "index": 4,
+      "family": "match:pairs3",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u8586-v1-a-questions",
+      "type": "match"
+    },
+    {
+      "unit": "unit87-88",
+      "activity": "apply",
+      "index": 3,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u8788-v1-a-no-proof",
+      "type": "choice"
+    },
+    {
+      "unit": "unit89-90",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u8990-v1-a-permission",
+      "type": "choice"
+    },
+    {
+      "unit": "unit91-92",
+      "activity": "apply",
+      "index": 4,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u9192-v1-a-plan",
+      "type": "choice"
+    },
+    {
+      "unit": "unit93-94",
+      "activity": "grammar",
+      "index": 8,
+      "family": "choice:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u9394-v1-g-join",
+      "type": "choice"
+    },
+    {
+      "unit": "unit95-96",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u9596-v1-a-tickets",
+      "type": "choice"
+    },
+    {
+      "unit": "unit97-98",
+      "activity": "apply",
+      "index": 2,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u9798-v1-a-label",
+      "type": "choice"
+    },
+    {
+      "unit": "unit99-100",
+      "activity": "apply",
+      "index": 3,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u99100-v1-a-need",
+      "type": "choice"
+    },
+    {
+      "unit": "unit101-102",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:material:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u101102-v1-a-update",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit103-104",
+      "activity": "apply",
+      "index": 4,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u103104-v1-a-past",
+      "type": "choice"
+    },
+    {
+      "unit": "unit105-106",
+      "activity": "apply",
+      "index": 3,
+      "family": "cloze:material:blanks2",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u105106-v1-a-two",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit107-108",
+      "activity": "apply",
+      "index": 3,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u107108-v1-a-label",
+      "type": "choice"
+    },
+    {
+      "unit": "unit109-110",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:picture-choices:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u109110-v1-a-recipe",
+      "type": "choice"
+    },
+    {
+      "unit": "unit111-112",
+      "activity": "apply",
+      "index": 5,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u111112-v1-a-plan",
+      "type": "choice"
+    },
+    {
+      "unit": "unit113-114",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:material:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u113114-v1-a-except",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit115-116",
+      "activity": "apply",
+      "index": 3,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u115116-v1-a-offer",
+      "type": "choice"
+    },
+    {
+      "unit": "unit117-118",
+      "activity": "apply",
+      "index": 3,
+      "family": "cloze:material:blanks2",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u117118-v1-a-correct",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit119-120",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:illustration:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u119120-v1-a-train",
+      "type": "choice"
+    },
+    {
+      "unit": "unit121-122",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u121122-v1-a-person",
+      "type": "choice"
+    },
+    {
+      "unit": "unit123-124",
+      "activity": "apply",
+      "index": 6,
+      "family": "wordbank:material:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u123124-v1-a-decision",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit125-126",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:material:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u125126-v1-a-tomorrow",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit127-128",
+      "activity": "apply",
+      "index": 6,
+      "family": "cloze:material:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u127128-v1-a-reply",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit129-130",
+      "activity": "apply",
+      "index": 5,
+      "family": "wordbank:material:tokensshort",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u129130-v1-a-advice",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit131-132",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u131132-v1-a-plan",
+      "type": "choice"
+    },
+    {
+      "unit": "unit133-134",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:illustration:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u133134-v1-a-source",
+      "type": "choice"
+    },
+    {
+      "unit": "unit135-136",
+      "activity": "apply",
+      "index": 0,
+      "family": "choice:illustration:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u135136-v1-a-week",
+      "type": "choice"
+    },
+    {
+      "unit": "unit137-138",
+      "activity": "apply",
+      "index": 3,
+      "family": "choice:material",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u137138-v1-a-reply",
+      "type": "choice"
+    },
+    {
+      "unit": "unit139-140",
+      "activity": "apply",
+      "index": 6,
+      "family": "cloze:material:blanks2",
+      "reason": "覆盖本单元的情境呈现",
+      "id": "u139140-v1-a-question",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit141-142",
+      "activity": "grammar",
+      "index": 12,
+      "family": "choice:material:model",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u141142-v1-g-time",
+      "type": "choice"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "apply",
+      "index": 1,
+      "family": "choice:illustration:material",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-a-past",
+      "type": "choice"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "grammar",
+      "index": 10,
+      "family": "cloze:material:model:blanks2",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-g-reply",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "grammar",
+      "index": 11,
+      "family": "wordbank:material:model:tokensshort",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-g-future",
+      "type": "wordbank"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "grammar",
+      "index": 13,
+      "family": "cloze:material:model:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-g-reported",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "exam",
+      "index": 15,
+      "family": "cloze:material:blanks1",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-e-reported",
+      "type": "cloze"
+    },
+    {
+      "unit": "unit143-144",
+      "activity": "exam",
+      "index": 20,
+      "family": "choice:material",
+      "reason": "该结构中可见文字最多的代表",
+      "id": "u143144-v1-e-count",
+      "type": "choice"
+    }
+  ]
+}

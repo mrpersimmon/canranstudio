@@ -129,8 +129,9 @@ test('search, keyboard, history, copied links, rapid selection and reset keep de
  const requests=[];page.on('request',r=>{if(r.method()!=='GET'||new URL(r.url()).pathname.startsWith('/api/'))requests.push(r.url());});
  let frame=await open(page);
  await page.evaluate(()=>localStorage.setItem('review-isolation-sentinel','keep'));
- await page.getByRole('searchbox').fill('Lesson 1-2');await expect(page.locator('#entries button')).toHaveCount(67);
- await page.getByRole('searchbox').fill('第 2 题');const results=await page.locator('#entries button').count();expect(results).toBe(15);
+ const currentCatalog=await(await page.request.get('/review/catalog.json')).json();
+ await page.getByRole('searchbox').fill('Lesson 1-2');await expect(page.locator('#entries button')).toHaveCount(currentCatalog.courses.find(c=>c.id==='unit1-2').entries.length);
+ await page.getByRole('searchbox').fill('第 2 题');await expect(page.locator('#entries button')).toHaveCount(currentCatalog.courses.flatMap(c=>c.entries).filter(e=>e.kind==='question'&&e.index===1).length);
  await page.locator('#entries button').first().click();await ready(page);const firstUrl=page.url();
  await page.getByRole('searchbox').press('ArrowRight');expect(page.url()).toEqual(firstUrl);
  await page.getByRole('button',{name:'下一页',exact:true}).click();await ready(page);expect(page.url()).not.toEqual(firstUrl);
@@ -143,8 +144,8 @@ test('search, keyboard, history, copied links, rapid selection and reset keep de
  expect(await frame.locator('body').evaluate(()=>localStorage.getItem('review-isolation-sentinel'))).toBeNull();
  const storage=await page.evaluate(()=>Object.keys(localStorage));expect(storage.filter(k=>k.includes('learning')||k.includes('awards'))).toEqual([]);
  await page.getByRole('button',{name:'复制本项链接',exact:true}).click();
- await expect.poll(async()=>await page.locator('#notice').textContent()).toMatch(/已复制|尺寸模拟/);
- if(await page.locator('#copy-dialog').isVisible())await page.getByRole('button',{name:'关闭',exact:true}).click();
+ await expect.poll(async()=>/已复制/.test(await page.locator('#notice').textContent())||await page.locator('#copy-dialog').isVisible()).toBe(true);
+ if(await page.locator('#copy-dialog').isVisible()){await expect(page.locator('#copy-address')).toHaveValue(page.url());await page.getByRole('button',{name:'关闭',exact:true}).click();}
  const location=page.url();await page.reload();await ready(page);expect(page.url()).toEqual(location);await expect(frame.locator('.practice-answer-note:visible')).toContainText('答错了');
  await page.locator('#state-buttons [data-state="before"]').click();await page.locator('#state-buttons [data-state="corrected"]').click();await ready(page);
  await expect(frame.locator('.practice-answer-note:visible')).toContainText('答对了');

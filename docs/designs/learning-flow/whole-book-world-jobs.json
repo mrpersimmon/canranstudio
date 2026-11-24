@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "world-kitchen",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a welcoming cream-and-sage storybook kitchen, wooden cabinets only along the far wall and edges, a sunny teal-framed window, a broad completely empty warm tiled floor in the lower 45 percent; NO foreground table, cups, bottles, kettle, cooker or refrigerator because these are exact separate story props.",
+      "raw": "assets/learning-whole-book-v1/raw/world-kitchen.png",
+      "adopted": "assets/learning-whole-book-v1/world-kitchen-v1.webp"
+    },
+    {
+      "id": "world-bedroom",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a calm cream bedroom with soft sage curtains, a sunny window and a small wardrobe at the far edge, broad empty honey wooden floor across the lower 45 percent; NO bed, chair or people because the original patient or family sprites supply these.",
+      "raw": "assets/learning-whole-book-v1/raw/world-bedroom.png",
+      "adopted": "assets/learning-whole-book-v1/world-bedroom-v1.webp"
+    },
+    {
+      "id": "world-market",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an old-fashioned food shop with cream tile walls, red-and-cream striped canopy near the top edge and blank wooden shelving far back, broad empty lower stage; NO service counter, scale, meat, shopping bag, people, prices or signs.",
+      "raw": "assets/learning-whole-book-v1/raw/world-market.png",
+      "adopted": "assets/learning-whole-book-v1/world-market-v1.webp"
+    },
+    {
+      "id": "world-shop",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a welcoming small shop interior with cream walls, muted green shelves and closed wooden cupboards at the edges, generous empty wooden floor and clear centre; shelves carry only low-detail neutral boxes, NO foreground service counter, people, product labels, prices or exact readable signs.",
+      "raw": "assets/learning-whole-book-v1/raw/world-shop.png",
+      "adopted": "assets/learning-whole-book-v1/world-shop-v1.webp"
+    },
+    {
+      "id": "world-clinic",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a friendly clinic room with pale cream and muted sage walls, a sunny window, a modest closed storage cupboard at far right and small plant at far left, completely empty foreground floor; NO people, bed, desk, medicine, medical text, cross logos or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-clinic.png",
+      "adopted": "assets/learning-whole-book-v1/world-clinic-v1.webp"
+    },
+    {
+      "id": "world-station",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty vintage railway station concourse with teal iron arches and broad windows looking onto a distant rail line, warm cream stone and gentle sun, broad empty platform floor at the bottom; NO people, luggage, clocks, numbers, departure boards or readable signs.",
+      "raw": "assets/learning-whole-book-v1/raw/world-station.png",
+      "adopted": "assets/learning-whole-book-v1/world-station-v1.webp"
+    },
+    {
+      "id": "world-bus",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty vintage public bus interior, warm green-and-cream panels, side windows and a few seats pushed to far edges, spacious unobstructed aisle floor as the foreground stage; NO passengers, driver, tickets, route numbers or writing.",
+      "raw": "assets/learning-whole-book-v1/raw/world-bus.png",
+      "adopted": "assets/learning-whole-book-v1/world-bus-v1.webp"
+    },
+    {
+      "id": "world-carriage",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty traditional train carriage with warm wooden wall panels and a broad window showing softly painted countryside; seats only at the far edges, clear foreground for original seated people and their seat sprites; NO people, luggage, table, text or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-carriage.png",
+      "adopted": "assets/learning-whole-book-v1/world-carriage-v1.webp"
+    },
+    {
+      "id": "world-airport",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty airy airport waiting hall with large windows and a distant runway, warm cream flooring, muted teal frames, low-detail terminal structures far back; generous clear foreground; NO people, aeroplanes in the foreground, luggage, desk, flight boards, text or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-airport.png",
+      "adopted": "assets/learning-whole-book-v1/world-airport-v1.webp"
+    },
+    {
+      "id": "world-hotel",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a welcoming small hotel lobby with cream plaster, a gentle arch, warm wood trim, a plant at the far edge and a distant staircase, broad empty floor and clear centre; NO people, front desk, luggage, text, star symbols or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-hotel.png",
+      "adopted": "assets/learning-whole-book-v1/world-hotel-v1.webp"
+    },
+    {
+      "id": "world-cafe",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a cosy cream-and-sage cafe interior with a large window showing flowers and town buildings, a small plant at far edge and muted wood shelving far back; empty foreground for original people and their tea table; NO foreground chairs, tables, cups, people, menus, text or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-cafe.png",
+      "adopted": "assets/learning-whole-book-v1/world-cafe-v1.webp"
+    },
+    {
+      "id": "world-evening-home",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a cosy cream living room in the EARLY EVENING, blue twilight visible through a wood-framed window and a small warm lamp set far back at an edge, broad empty wooden foreground for original family sprites; NO people, furniture in the centre, clock or text.",
+      "raw": "assets/learning-whole-book-v1/raw/world-evening-home.png",
+      "adopted": "assets/learning-whole-book-v1/world-evening-home-v1.webp"
+    },
+    {
+      "id": "world-night-home",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a storybook home interior at NIGHT, deep blue darkness and a small moon visible through a side window, warm dim lamplight and cream walls readable in low light, broad empty wooden floor; NO people, foreground furniture, animals, torch, text or clocks.",
+      "raw": "assets/learning-whole-book-v1/raw/world-night-home.png",
+      "adopted": "assets/learning-whole-book-v1/world-night-home-v1.webp"
+    },
+    {
+      "id": "world-forest",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a peaceful woodland clearing around a broad earth path, leafy green trees framing the edges, distant warm town rooftops faintly visible through foliage, clear lower ground for the original narrator and precise teaching diagrams; NO people, bins, litter, tyres, cars, refrigerator, notice board, words or numbers.",
+      "raw": "assets/learning-whole-book-v1/raw/world-forest.png",
+      "adopted": "assets/learning-whole-book-v1/world-forest-v1.webp"
+    },
+    {
+      "id": "world-roadside",
+      "kind": "world",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/learning-sample-v1/claim-world-v1.webp"
+      ],
+      "transparent": false,
+      "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a sunny town roadside with a muted grey road and wide pale pavement, cream houses and greenery set far back, open lower foreground for original police officer, couple and car; NO people, cars, road signs, speed numbers, road text or foreground obstructions.",
+      "raw": "assets/learning-whole-book-v1/raw/world-roadside.png",
+      "adopted": "assets/learning-whole-book-v1/world-roadside-v1.webp"
+    },
+    {
+      "id": "whisky",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample13-24/cup-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. One small plain bottle of amber whisky beside a low whisky tumbler with a small amount of amber liquid. Neutral English vocabulary identification, no brand, advertising, text, people, drinking action or props. Match references: warm dark-brown hand-drawn contour, softly painted colours, gentle paper grain, restrained volume. Complete isolated objects centred on genuinely transparent square background with generous margins, no outside shadow, white halo, background or card frame. Not a wine glass; the tumbler is low and straight-sided.",
+      "raw": "assets/learning-whole-book-v1/raw/whisky.png",
+      "adopted": "assets/word-art-v2/whole-book/whisky-v1.webp"
+    }
+  ]
+}

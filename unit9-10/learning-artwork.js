@@ -1,24 +1,72 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "hello": "/assets/learning-words/unit9-10/hello-97a927dc.svg",
-  "hi": "/assets/learning-words/unit9-10/hi-00affff9.svg",
-  "how": "/assets/learning-words/unit9-10/how-9a566b44.svg",
-  "today": "/assets/learning-words/unit9-10/today-edd59c4b.svg",
-  "well": "/assets/learning-words/unit9-10/well-8e36d93d.svg",
-  "fine": "/assets/learning-words/unit9-10/fine-8e36d93d.svg",
-  "thanks": "/assets/learning-words/unit9-10/thanks-71417848.svg",
-  "goodbye": "/assets/learning-words/unit9-10/goodbye-7bd13a75.svg",
-  "see": "/assets/learning-words/unit9-10/see-05629883.svg",
-  "fat": "/assets/learning-words/unit9-10/fat-89b40a38.svg",
-  "woman": "/assets/learning-words/unit9-10/woman-4d35fcad.svg",
-  "thin": "/assets/learning-words/unit9-10/thin-89e3219d.svg",
-  "tall": "/assets/learning-words/unit9-10/tall-96bca004.svg",
-  "short": "/assets/learning-words/unit9-10/short-1d491cc8.svg",
-  "dirty": "/assets/learning-words/unit9-10/dirty-669b531f.svg",
-  "clean": "/assets/learning-words/unit9-10/clean-c5651051.svg",
-  "cold": "/assets/learning-words/unit9-10/cold-4ac41ce7.svg",
-  "old": "/assets/learning-words/unit9-10/old-306638fa.svg",
-  "young": "/assets/learning-words/unit9-10/young-88c217ff.svg",
-  "busy": "/assets/learning-words/unit9-10/busy-f8c02cef.svg",
-  "lazy": "/assets/learning-words/unit9-10/lazy-8bbd67b0.svg"
+  "hello": "/assets/unit9-10/cast-wave-v1.webp",
+  "hi": "/assets/unit9-10/cast-wave-v1.webp",
+  "how": "/assets/unit9-10/cast-talk-v1.webp",
+  "today": "/assets/unit5-6-word-cards/morning-v1.webp",
+  "well": "/assets/word-art-v2/sample1-12/well-v1.webp",
+  "fine": "/assets/word-art-v2/sample1-12/well-v1.webp",
+  "thanks": "/assets/unit9-10/cast-talk-v1.webp",
+  "goodbye": "/assets/unit9-10/cast-wave-v1.webp",
+  "see": "/assets/unit9-10/cast-wave-v1.webp",
+  "fat": "/assets/word-art-v2/sample1-12/fat-v1.webp",
+  "woman": "/assets/word-art-v2/sample1-12/woman-v1.webp",
+  "thin": "/assets/word-art-v2/sample1-12/thin-v1.webp",
+  "tall": "/assets/word-art-v2/sample1-12/tall-v1.webp",
+  "short": "/assets/word-art-v2/sample1-12/short-v1.webp",
+  "dirty": "/assets/word-art-v2/sample1-12/dirty-v1.webp",
+  "clean": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
+  "cold": "/assets/word-art-v2/sample1-12/cold-v1.webp",
+  "old": "/assets/word-art-v2/sample1-12/old-v1.webp",
+  "young": "/assets/word-art-v2/sample1-12/young-v1.webp",
+  "busy": "/assets/word-art-v2/sample1-12/busy-v1.webp",
+  "lazy": "/assets/word-art-v2/sample1-12/lazy-v1.webp",
+  "hot": "/assets/unit9-10/hot-character-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "hello": "illustration",
+  "hi": "illustration",
+  "how": "diagram",
+  "today": "diagram",
+  "well": "illustration",
+  "fine": "illustration",
+  "thanks": "illustration",
+  "goodbye": "illustration",
+  "see": "illustration",
+  "fat": "illustration",
+  "woman": "illustration",
+  "thin": "illustration",
+  "tall": "illustration",
+  "short": "illustration",
+  "dirty": "illustration",
+  "clean": "illustration",
+  "hot": "illustration",
+  "cold": "illustration",
+  "old": "illustration",
+  "young": "illustration",
+  "busy": "illustration",
+  "lazy": "illustration"
+};
+CanranCore.learningWordComposition={
+  "how": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit9-10/cast-talk-v1.webp"
+    ],
+    "text": "How…?"
+  },
+  "today": {
+    "kind": "speech",
+    "sources": [
+      "/assets/unit5-6-word-cards/morning-v1.webp"
+    ],
+    "text": "today"
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit3-4/umbrella.svg": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
+  "/assets/unit9-10/dirty.svg": "/assets/word-art-v2/sample1-12/dirty-v1.webp",
+  "/assets/unit9-10/clean.svg": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
+  "/assets/unit9-10/hot.svg": "/assets/unit9-10/hot-character-v1.webp",
+  "/assets/unit9-10/busy.svg": "/assets/word-art-v2/sample1-12/busy-v1.webp"
 };

@@ -1,3 +1,43 @@
+## 2026-11-14姓名遮挡人物
+
+`story-name-clearance.spec.js`使用`story-name-clearance.js`在手机frame内测量姓名牌与人物图的交叠，不按外层验收台缩放像素判断。Lesson7–24九课逐句覆盖三手机和两引擎；根因涉及7–14四课的方形合成人物图，额外保留320压力、平板与电脑检查。新用例接入原`browser-story-labels`及WebKit影响任务。[修正与证据](../docs/designs/learning-flow/2026-11-14-story-name-clearance.md)。
+
+## 2026-11-14剧场装饰文字清理
+
+`tests/review/story-labels.spec.js`检查Lesson7–24九个单元在三档必测手机下不再创建地点悬浮牌，人物姓名与原对白仍在、中文可展开；额外覆盖Lesson13–14从Anna家到楼上阶段的语义。源文件和共享剧场布局变化自动触发两引擎定向任务。逐句人物／道具／继续学习复用`rollout-stories.spec.js`，以`ROLLOUT_UNITS`限于这九课；不扩大到全书测试。[审查和验证记录](../docs/designs/learning-flow/2026-11-14-story-label-cleanup.md)。
+
+## 2026-11-14 Lesson13–24整体优化
+
+`sample-expansion.test.js`核对176词的逐词安排、原句来源、编译输出、连续页、词位置同步和七张国旗的原旗面像素。`SAMPLE_UNITS`限定`sample-words`／`sample-visual`；`ROLLOUT_UNITS`限定全部题面、逐句故事、页面种类和真实账号检查；`WORD_DECK_UNITS`限定旧位置、新登录与待同步恢复。本批均只取unit13-14至unit23-24。
+
+`expanded-layout.spec.js`拦截三道常规短题在三手机的外层滚动、短示范裁切、反馈跳位和点击目标不足；尺寸在手机frame内以CSS px测量。`learning-rollout.spec.js`通过真实按钮操作交接题，原题、记录、结果与原卡基线继续使用既有检查。新影响任务用`expanded-sample-scope.js`预载固定范围，不能误跑旧六课冒充本批通过。[实施与证据](../docs/designs/learning-flow/2026-11-14-lessons13-24-visual-expansion.md)。
+
+## 2026-11-14 Lesson5–6国旗词卡正面
+
+`tests/unit/word-flags.test.js`检查全部8张国旗正面无中文铭牌／文字轮廓、旗面逐像素不变，以及练习继续引用原带标签图。`tests/review/word-flags.spec.js`在三种必测手机、Chromium与WebKit下检查两页国旗的收起／展开、原释义、翻页、卡片和底部按钮稳定；素材变化自动进入定向检查。采用文件和页面证据见[修正记录](../docs/designs/learning-flow/2026-11-14-word-flags.md)。
+
+## 2026-11-14 Lesson1–12真实词卡分组
+
+最新交互按用户要求改为连续序列：先插画后语境、每6张统一分页，取消分类入口，末行从左上自然排布。更新`word-deck`、`word-display`、`sample-words`及账号续学回归，拦截类型边界空槽、分类内页码、孤立卡片居中与重排后续学错页。当前24页，实际结果见[最新修订记录](../docs/designs/learning-flow/2026-11-14-linear-word-cards.md)。下方27页接入说明保留为历史。
+
+`word-deck.test.js`检查132词唯一分类、原句来源、编译结果一致性、旧页锚点迁移、新用户与旧第0页的区别，以及位置元数据不能授星。`sample-words.spec.js`改为遍历真实27页分组，覆盖全部原文／音标／释义、三档手机、无混排、末组居中、完整短语、正常练习入口及记录不变。原宽屏／事实图／末组检查同步采用实际分类页。
+
+`word-deck-position.spec.js`通过真实授权协议种入旧页位置，检查本地刷新、新登录、待同步位置及无虚构成果；六课综合挑战仍由`learning-rollout.spec.js`验证，新增语境组往返与刷新。`course-integration.spec.js`的词卡首访／复访／断网翻组现使用三档固定手机尺寸。相关结果、首错和物理设备边界见[正式接入记录](../docs/designs/learning-flow/2026-11-14-grouped-course-words.md)。
+
+新增`word-deck-unit`和`browser-word-deck-account`影响任务；分类JSON视为运行数据源，不能当作文档变更跳过检查。原72课教学定义与原卡基线继续保留，未展开无关全站CI。
+
+## 2026-11-12 Lesson1–12完整视觉样板
+
+新增语境词卡设计样板：`word-concept.test.js`验证六个词的原释义／音标／短句来源及数据不变；`word-concept.spec.js`验证六档尺寸、点击／键盘展开、固定短语不拆行、无文档重载的状态切换，以及返回真实课程。2026-11-13根据用户要求增加“两组类型各自唯一、每组六张”的拦截，插画与无图语境不再混排。它们分别接入`review-unit`及验收台两引擎检查。[样板设计已获认可](../docs/designs/learning-flow/2026-11-12-context-word-sample.md)，但不代表正式课程已替换或真实课程集成检查已完成。
+
+同日词卡展示复查新增`tests/review/word-display.spec.js`：电脑卡片／图片面积、展开前后每张卡片完整几何、国旗与人物的文字基线，以及三手机／320压力／平板／电脑下末组居中和稳定尺寸。复用132词逐组回归，接入两引擎`browser-learning-sample`任务；[发现、修复与截图](../docs/designs/learning-flow/2026-11-12-word-display.md)独立记录，不以此前不溢出断言替代本次展示验收。
+
+新增`sample-art-coverage.test.js`要求六课132词逐项审查；`word-art-approval.test.js`补充事实图独立核对、关系图源文件SHA、跨课明确物品图映射、歧义／共享符号／品牌图保护和正式资源包。原72课题稿／词义／答案／版本／原卡基线继续执行。
+
+`tests/review/sample-words.spec.js`遍历六课每组及三手机，使用学生实际翻组操作，检查展开原信息、图文边界、图片就绪、无内部滚动、奇数末卡居中、翻组按钮稳定和无整页加载遮罩。`sample-visual.spec.js`检查连续剧场背景、透明对白、姓名与中文按钮、人物边界、题内物品复用和SE普通拼句题无需额外滚动。新增`browser-learning-sample`与WebKit任务，样板样式、素材、映射及测试变动均触发；固定手机尺寸只读统一helper。
+
+本轮还定向执行六课262题、85句故事、108类页面入口、320压力／平板／电脑和真实账号续做／授星，并复用图片就绪及原卡按钮首帧配色回归。实际执行、首错和未测实体设备见[样板记录](../docs/designs/learning-flow/2026-11-12-lessons1-12-visual-sample.md)。不扩展为全站CI或全72课美术验收。
+
 ## 2026-11-11 云端开发接入检查
 
 `npm run test:cloud`执行有限的开发接入检查：验收台／教学基线／素材采用／课程末页／工作流的Node检查、账号版本构建，以及Chromium与WebKit下的布局修正、原地展示状态、末页入口和词卡素材。保留三档必测手机尺寸与所选用例的320压力场景；不展开全站CI。环境安装、启动和检查边界见[云端开发说明](../docs/development/cloud-development.md)。
@@ -1488,3 +1528,59 @@ Lesson 91–92的小剧场提示修正按v1.50第3、8节检查：`unit91-92-sto
 账号fivezones与fivezones-upgrade分别在AWARD_TEST_BASE=/、/lesson/运行；独立kitchen-room-v1.webp须真实返回404后再验恢复。四个更早版本（23题、30题、28题、键盘27题）在login/unit25-26-older-editions.spec.js经过真实27题点击版再升五星，承接通用旧测试的三设备契约，撤销此前“无正式学生”的本课历史豁免，不注入完成数据。
 
 原unit25-26、state、layout、十三题型及共同交互旧版检查由冻结27题HTTP服务承载；新的五星题与旧15星断言分别验证。旧证书须核对原文字／日期／图像资源，以及原尺寸与object-fit等呈现结果；本课遗漏尺寸样式曾只在WebKit的PNG边缘表现为差异，隔离复现后修复并保留日志，未放宽像素断言。27–28／29–30曾作为15星管理样本是v3.0当时状态；现行72课均已五星，旧完成制检查使用真实冻结定义，25–26五星上限断言保留。
+
+## 2026-11-15 Lesson25–144整体优化
+
+`whole-book-presentation`和`whole-book-word-model`检查60单元的1601词、原句来源、变化词形、纯文字卡以及原记录契约。`whole-book-scope.js`接收影响检查给出的课程范围，分类JSON属于运行数据，不能按普通文档跳过。
+
+`sample-words`逐页验证三档手机、翻卡原义／音标、顺序与稳定尺寸；`rollout-stories`新增姓名／人物不交叠与叙事背景检查；`whole-book-paint`在真实按钮翻页期间逐帧检查未解码图片、可见性和整页加载层。`rollout-audit`、`rollout-pages`覆盖所有原题、结算、原卡、参考、记录与弹层；账号回归包括重复词块和场景位置题，验证真实判分、只读回看、刷新与新登录续学。
+
+`word-text-layout`检查句子、词名和音标的真实文字边界，以及16px语境字号下限，弥补只测外框的缺口。共享文字适配改动应设置SAMPLE_UNITS覆盖受影响的全部72单元。`whole-book-short-tasks`固定15个易溢出短题，检查反馈不位移、材料原图比例、关闭后题文和记录不变；`whole-book-scene-theme`覆盖题内及展开材料的统一背景。`word-page-navigation`验证验收台目录切页和状态复用同一课程页面。31个材料题的full状态写入material-entries.json，并由原题资源校验。
+
+新增整册影响任务仅选择本次受影响的后续单元；共享布局／分类变化覆盖60单元，不展开无关官网业务CI。执行结果和实体设备边界见[本轮记录](../docs/designs/learning-flow/2026-11-15-lessons25-144-visual-expansion.md)。
+
+### Lesson29–30连续剧场修正（2026-11-15）
+
+`room-story-continuity.spec.js`覆盖三档必测手机及320×568压力场景：完整背景、房间与舞台同宽、人物可读尺寸与左右分布、中文展开、切句外框稳定及教学提示。配合`ROLLOUT_UNITS=unit1-2,unit29-30`的`rollout-stories.spec.js`检查原句与逐姿态、单步进入练习；Chrome与WebKit分开记录。该构图检查接入对应课程／背景／共享剧场文件的影响任务，防止只靠越界检查误判画风一致。详见[修正与证据](../docs/designs/learning-flow/2026-11-15-lesson29-story-continuity.md)。
+
+### 全72单元剧场复查（2026-11-15）
+
+`story-composition-inventory`按原目录采集各单元开场／中段／末句与三档手机尺寸；`rollout-stories`实际逐句操作并验证原文、人物完整、图片就绪和单步进入练习，设置STORY_CAPTURE=1时归档不同姿态。`theatre-composition`拦截内嵌缩略场景、姓名远离人物、英文拆词、黑板上的人物、过大家具、悬空道具与钥匙归属。`theatre-pressure`检查320×568、768×1024、1366×768的真实可见主按钮。
+
+`theatre-preservation`使用独立本地测试账号，核对刷新续读、离开返回、完整原文、完成进入练习及原作答记录不变。场景变更按课程选择检查；共用剧场文件覆盖全部72单元，账号采用六个代表单元。实际执行范围与未测边界见[本轮记录](../docs/designs/learning-flow/2026-11-15-all-theatres-review.md)。
+
+本轮追加`story-follow-resize`：捕获WebKit绘制后的文字高度变化，验证末句跟随及手动回看不被抢走。`theatre-composition`还以原SVG的alpha边界检查台面接触，并按已审人物锚点检查透明侧边较宽的合成图。作用域预加载器启用末句中文展开检查。截图归档脚本只读取已成功的原始运行和定向复验，不自动判定视觉合格。
+
+### 2026-11-15 答题体验与完整链路
+
+- `tests/review/question-experience-audit.spec.js`：104道代表题、55种结构、72单元，各可用状态覆盖三档必测手机；默认拦截真实布局、图片和按钮问题。`QUESTION_UNITS`可限定单元；仅定位首错时可用`QUESTION_CAPTURE=1`采集，采集完成不等于验收通过。
+- `question-space.spec.js`检查插图利用空间、材料完整与开关记录不变；`question-paint.spec.js`逐帧检查历史连续切题，不闪加载层、未就绪图片或移动底栏；`question-map.spec.js`检查全部4道场景指认及真实点击；`question-pressure.spec.js`保留320×568压力。上述定向检查已接入影响性检查的Chromium与WebKit任务。
+- `tests/login/complete-learning-journey.spec.js`：默认6个代表单元，真实独立账号从首页走完词卡、故事、全部答题区、错答订正、回看、刷新、结算、原卡和课程出口。可用`JOURNEY_UNITS`限定范围。冷构建全册课包时可设`LOGIN_SERVER_TIMEOUT=120000`；只延长测试服务启动期限，不改变页面操作超时。
+- 测试结果与限制见[本轮复查](../docs/designs/learning-flow/2026-11-15-question-experience.md)。实体手机测试站与本地验收台分别记录，不能用尺寸模拟代替微信／夸克实测。
+
+### 2026-11-17 本机即时得星与后台确认
+
+- `tests/unit/local-awards.test.js`验证持久化后即时反馈、确认不重播、刷新恢复、存储失败、逐轮拒绝与旧响应隔离、满星正式日期。
+- `tests/login/local-awards.spec.js`覆盖挂起确认、离线、刷新、真实服务器拒绝、队列重建、后台退避重试和待同步返回首页；固定三档手机尺寸。`playwright.local-awards.config.js`提供Chromium/WebKit入口，相关共用文件已接入影响性检查。
+- `tests/review/local-awards.spec.js`检查验收台“待同步”得星与满星卡状态；正式保存只在确认态启用。
+- 原结算/飞星专项保留防误触、先卡后统计、错误订正、迟到确认、复练和账号隔离；当前版本辅助流程用`current-award-flow.js`，冻结的旧内容辅助流程保持不变。
+- 测试站用独立账号和8秒人为请求延迟复核真实API，详见[本轮证据](../docs/designs/learning-flow/local-awards/verification.json)。这些不是实体安卓的计时，不替代手机验收。
+## 2026-11-20 学习流程可靠性
+
+共享插画和字体续传：`tests/unit/shared-svg-transfer.test.js` 核验原SVG逐字节还原、归属与旧版保留；`verified-resource-handoff.test.js` 覆盖续传、整包回退、坏数据、拒绝访问、配额及共享图失败。`tests/login/optimized-assets.spec.js` 在三档规定手机上比较原图像素，实际操作封面／词卡／剧场／结算，并用受控中断验证真实HTTP 206。Chromium 使用 `playwright.login.config.js`，WebKit 使用 `playwright.recovery.config.js`。性能另行串行执行 `npm run measure:font-handoff`、`npm run measure:illustration-transfer`；后者用独立HTTP发送记录核对空缓存必需资源。可用 `FIRST_COURSE_REFERENCE_ROOT` 对照可信旧版，`FONT_HANDOFF_EXPECT_RESUME=1` 为候选版额外校验。参见[口径与结果](../docs/designs/learning-flow/2026-11-21-art-font-handoff.md)。
+
+需要逐课验收入口时，设置 `COURSE_VISUAL_SCOPE=all` 后运行 `course-visual-ready.spec.js`。每档固定手机尺寸在独立本地账号上从词卡翻到首题、实际提交、切换剧场并展开中文；按12课分批，不写公网学生记录。默认仍只运行原来的14课画面专项。[公网课包覆盖清单](../docs/designs/learning-flow/2026-11-21-all-course-coverage.md)
+
+2026-11-21 增补：`course-visual-dependencies.test.js` 在两种部署路径核对72课的背景归属、真实借图、动态引用回退及旧版本字节；`course-visual-ready.spec.js` 在三档规定手机上操作实际课文、中文展开和借用图片。`npm run measure:first-course` 另写逐文件 `first-course-network.json`。参考组可显式指定可信的本地 `FIRST_COURSE_REFERENCE_ROOT`；公网仅在显式提供测试站专用账号文件时测 `preview.canranstudio.cn`，使用临时账号的模式每例结束后停用。性能对照单独串行运行，见[测量说明](../docs/designs/learning-flow/2026-11-21-first-course-network.md)。
+
+读屏静止检查在 `tests/review/story-idle.spec.js` 与 `word-idle.spec.js`；保持相同台词／词组30个显示帧，随后切换台词、翻组或展开。使用三档固定手机，并保留 Chromium、WebKit 的结果。正常修改不触发静止测量时的写入。
+
+`tests/unit/learning-commit.test.js` 以临时数据库实际制造写入失败，分别检查数据库事务和真实进度接口。`learning-upload.test.js` 检查多轮离线、分批、重载、上传中订正与旧代次回执；`tests/login/offline-learning-queue.spec.js` 从课程和首页恢复相同规模的队列，核对请求、学生星数、教师视图和首次满星日期。`lesson-session.test.js` 检查共享位置／完成记录，原题和原卡沿用 `learning-rollout.test.js` 的内容指纹。
+
+`npm run measure:first-course` 在独立本地账号站串行跑三档手机。仅单独测速，不与其他浏览器任务同时执行。每个尺寸分别输出三种状态的 `first-course.json`，不是正式站性能 P95。用例和边界见[本次验收说明](../docs/designs/learning-flow/2026-11-20-learning-reliability.md)。
+
+### 弱网进课与测试站测量
+
+`tests/login/course-permit-latency.spec.js` 在真实测试服务器暂停一次已经登录学生的授权请求。超过本地消息的 1.2 秒等待时间后，仍须显示准备页。放行真实响应后，三档手机尺寸都必须能打开首组词卡并展开词义。此项已接入课程更新的 Chromium 和 WebKit 回归。
+
+`playwright.font-transfer.config.js` 默认使用隔离的本地账号站。显式设置 `ART_FONT_PREVIEW_ADMIN_FILE` 才会访问固定的手机测试站。每个测试使用专用班级的临时学生，结束后停用。两课插画测量核对当前清单与实际收到的必需资源正文。字体测量从可点击的首页分别停留 0、2、5 秒，记录首页和课程各自读取的字节，以及到首题可操作的用时。进入失败单独记录。`FONT_HANDOFF_CHECKPOINT_TRIAL=1` 额外验证已写入至少 512 KiB 字体断点后点课的情况，在该试验中核对剩余范围与完整字体摘要。

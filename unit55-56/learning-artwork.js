@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "live": "/assets/learning-words/unit55-56/live-6f4f9729.svg",
   "stay": "/assets/learning-words/unit55-56/stay-25598a20.svg",
@@ -10,8 +10,8 @@ CanranCore.learningWordArtwork={
   "together": "/assets/learning-words/unit55-56/together-6788cc3f.svg",
   "evening": "/assets/learning-words/unit55-56/evening-1cc7f5dd.svg",
   "arrive": "/assets/learning-words/unit55-56/arrive-24be8db6.svg",
-  "night": "/assets/learning-words/unit55-56/night-69bc86f1.svg",
-  "morning": "/assets/learning-words/unit55-56/morning-2c507f1a.svg",
+  "night": "/assets/word-art-v2/whole-book/night-v1.webp",
+  "morning": "/assets/unit5-6-word-cards/morning-v1.webp",
   "noon": "/assets/learning-words/unit55-56/noon-9043432c.svg",
   "homework": "/assets/learning-words/unit55-56/homework-8dfe2d5d.svg",
   "dust": "/assets/learning-words/unit55-56/dust-399ac95f.svg",
@@ -25,3 +25,8 @@ CanranCore.learningWordArtwork={
   "watch": "/assets/learning-words/unit55-56/watch-f3a385cc.svg",
   "go to bed": "/assets/learning-words/unit55-56/go-bed-30c9e35c.svg"
 };
+CanranCore.learningWordPresentation={
+  "night": "illustration",
+  "morning": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

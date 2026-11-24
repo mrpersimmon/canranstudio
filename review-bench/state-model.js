@@ -1,6 +1,6 @@
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.CanranReviewState=api;})(globalThis,function(){
  'use strict';
- const labels={view:'查看页面',collapsed:'收起词义',english:'英文对白',before:'未作答',selected:'已选未检查',correct:'答对',wrong:'答错',corrected:'订正完成',review:'只读回看',hint:'线索',explanation:'讲解',full:'完整材料',expanded:'展开词义',translated:'显示中文',perfect:'全对结算',earned:'新得星',replay:'重看纪念',open:'打开',card:'纪念卡'};
+ const labels={view:'查看页面',collapsed:'收起词义',english:'英文对白',before:'未作答',selected:'已选未检查',correct:'答对',wrong:'答错',corrected:'订正完成',review:'只读回看',hint:'线索',explanation:'讲解',full:'完整材料',expanded:'展开词义',translated:'显示中文',perfect:'全对结算',earned:'新得星',replay:'重看纪念',pending:'待同步',open:'打开',card:'纪念卡'};
  const types={choice:'选择',match:'配对',cloze:'填空',wordbank:'词块组句',order:'词块排序',locate:'指认',handoff:'交接',write:'拼写','scene-find':'场景指认'};
  const rotate=items=>items.length>1?[...items.slice(1),items[0]]:items.slice();
  function tokensFor(q){
@@ -40,7 +40,8 @@
   for(const stage of unit.stages)for(const [activity,title]of stage.activities){
    const route='learn/'+activity;
    if(activity==='words'){
-    const words=unit.learning.WORDS;for(let i=0;i<Math.ceil(words.length/6);i++)add('words-'+i,'words',stage.title,`词卡 · 第 ${i+1} 组`,route,{index:i,subtitle:words.slice(i*6,i*6+6).map(w=>w.en).join(' · '),states:['collapsed','expanded']});
+    if(unit.reviewWordPages)for(const page of unit.reviewWordPages)add('words-'+page.index,'words',stage.title,`${page.label} · 第 ${page.local+1} 组`,route,{index:page.index,wordKind:page.kind,wordKeys:page.words,anchor:page.anchor,subtitle:page.words.join(' · '),states:['collapsed','expanded']});
+    else {const words=unit.learning.WORDS;for(let i=0;i<Math.ceil(words.length/6);i++)add('words-'+i,'words',stage.title,`词卡 · 第 ${i+1} 组`,route,{index:i,subtitle:words.slice(i*6,i*6+6).map(w=>w.en).join(' · '),states:['collapsed','expanded']});}
    }else if(activity==='text'){
     add('story-start','story-start',stage.title,'剧场 · 开始阅读',route);
     unit.learning.DIALOGUE.forEach((line,i)=>add('story-'+i,'story-line',stage.title,`课文 · 第 ${i+1} 句`,route,{index:i,subtitle:line.text,states:['english','translated']}));
@@ -48,13 +49,13 @@
    }else if(unit.questions[activity]){
     unit.questions[activity].forEach((q,index)=>{
      const copy=unit.copy?.questions?.[q.id]||{},states=['before','selected','correct','wrong','corrected','review'];
-     if(activity!=='listen'&&q.hint&&copy.hint!==false)states.push('hint');if(q.workshop?.rule)states.push('explanation');if(copy.readingExcerpt||(unit.id==='unit143-144'&&q.image&&q.display?.material?.length>120))states.push('full');
+     if(activity!=='listen'&&q.hint&&copy.hint!==false)states.push('hint');if(q.workshop?.rule)states.push('explanation');if(unit.reviewMaterialQuestions?.includes(q.id)||copy.readingExcerpt||q.display?.material?.trim().length>120||q.reference?.trim?.().length>120||(activity==='apply'&&q.workshop?.model?.lines?.flat().join('').length>60))states.push('full');
      add('q:'+q.id,'question',stage.title,`${title} · 第 ${index+1} 题`,route,{activity,index,questionId:q.id,subtitle:copy.title||q.display?.title||q.prompt,type:types[q.type]||'选择',states});
     });
     add('result:'+activity,'result',stage.title,title+' · 结算',route,{activity,states:['perfect','corrected']});
-    add('award:'+activity,'award',stage.title,title+' · 得星纪念',route,{activity,states:['earned','replay']});
+    add('award:'+activity,'award',stage.title,title+' · 得星纪念',route,{activity,states:['earned','pending','replay']});
    }else if(activity==='certificate'){
-    add('card','card',stage.title,'我的纪念卡',route,{states:['card']});add('writing','writing','资料与弹层','书面练习',route,{states:['open']});
+    add('card','card',stage.title,'我的纪念卡',route,{states:['card','pending']});add('writing','writing','资料与弹层','书面练习',route,{states:['open']});
    }
   }
   const refs={
@@ -72,7 +73,7 @@
   const entry=course.entries.find(e=>e.id===input.page)||course.entries[0];
   const state=entry.states.includes(input.state)?input.state:entry.states[0];
   const device=catalog.devices.find(d=>d.id===input.device)||catalog.devices[0];
-  const stars=Number.isInteger(Number(input.stars))&&input.stars!==null&&input.stars!==''?Math.max(entry.kind==='award'?1:0,Math.min(5,Number(input.stars))):entry.kind==='award'?1:5;
+  const stars=Number.isInteger(Number(input.stars))&&input.stars!==null&&input.stars!==''?Math.max(entry.kind==='award'||state==='pending'?1:0,Math.min(5,Number(input.stars))):entry.kind==='award'?1:5;
   return {unit:course.id,page:entry.id,state,device:device.id,stars};
  }
  function seedGroup({unit,questions,key,draftVersion,contentSignature,roundPolicy},selection,entry){

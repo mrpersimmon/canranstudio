@@ -1,0 +1,14 @@
+{
+  "id": "world-shop",
+  "kind": "world",
+  "references": [
+    "output/whole-book-design/keepsake-reference-24.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a welcoming small shop interior with cream walls, muted green shelves and closed wooden cupboards at the edges, generous empty wooden floor and clear centre; shelves carry only low-detail neutral boxes, NO foreground service counter, people, product labels, prices or exact readable signs.",
+  "raw": "assets/learning-whole-book-v1/raw/world-shop.png",
+  "adopted": "assets/learning-whole-book-v1/world-shop-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-7f831ae7-4c13-4b53-b8ed-ecaaaf254ff1.png"
+}

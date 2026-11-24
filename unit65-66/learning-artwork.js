@@ -1,7 +1,7 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
-  "key": "/assets/learning-words/unit65-66/key-32aee9e4.svg",
-  "baby": "/assets/learning-words/unit65-66/baby-864d42d7.svg",
+  "key": "/assets/word-art-v2/whole-book/key-v1.webp",
+  "baby": "/assets/word-art-v2/whole-book/baby-v1.webp",
   "hear": "/assets/learning-words/unit65-66/hear-a56e034a.svg",
   "enjoy": "/assets/learning-words/unit65-66/enjoy-6e490b8b.svg",
   "yourself": "/assets/learning-words/unit65-66/self-0817fedb.svg",
@@ -27,5 +27,28 @@ CanranCore.learningWordArtwork={
   "third": "/assets/learning-words/unit65-66/year-381128b8.svg",
   "eleventh": "/assets/learning-words/unit65-66/year-381128b8.svg",
   "twelfth": "/assets/learning-words/unit65-66/year-381128b8.svg",
-  "sixteenth": "/assets/learning-words/unit65-66/year-381128b8.svg"
+  "sixteenth": "/assets/learning-words/unit65-66/year-381128b8.svg",
+  "mum": "/assets/unit61-62/mother.webp"
+};
+CanranCore.learningWordPresentation={
+  "key": "illustration",
+  "baby": "illustration",
+  "mum": "relation"
+};
+CanranCore.learningWordComposition={
+  "mum": {
+    "kind": "family",
+    "sources": [
+      "/assets/unit61-62/mother.webp",
+      "/assets/word-art-v2/sample13-24/tired-v1.webp"
+    ],
+    "labels": [
+      "Mum",
+      "child"
+    ],
+    "focus": 0
+  }
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit65-66/key.svg": "/assets/word-art-v2/whole-book/key-v1.webp"
 };

@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "shut": "/assets/learning-words/unit29-30/shut-539b1cf0.svg",
   "bedroom": "/assets/learning-words/unit29-30/bedroom-c771be9f.svg",
@@ -8,7 +8,7 @@ CanranCore.learningWordArtwork={
   "air": "/assets/learning-words/unit29-30/air-0b9daa61.svg",
   "put": "/assets/learning-words/unit29-30/put-68d5ee8b.svg",
   "clothes": "/assets/learning-words/unit29-30/clothes-15afec5c.svg",
-  "wardrobe": "/assets/learning-words/unit29-30/wardrobe-7043bb19.svg",
+  "wardrobe": "/assets/word-art-v2/whole-book/wardrobe-v1.webp",
   "dust": "/assets/learning-words/unit29-30/dust-54b07a67.svg",
   "sweep": "/assets/learning-words/unit29-30/sweep-f194fffb.svg",
   "empty": "/assets/learning-words/unit29-30/empty-acaaaee2.svg",
@@ -21,12 +21,23 @@ CanranCore.learningWordArtwork={
   "make the bed": "/assets/learning-words/unit29-30/make-the-bed-6b8fe324.svg",
   "then": "/assets/learning-words/unit29-30/then-3eb9ea5e.svg",
   "clean": "/assets/learning-words/unit29-30/clean-24f6e0e1.svg",
-  "window": "/assets/learning-words/unit29-30/window-43030482.svg",
-  "door": "/assets/learning-words/unit29-30/door-9c11f608.svg",
-  "bed": "/assets/learning-words/unit29-30/bed-3198f50f.svg",
+  "window": "/assets/word-art-v2/whole-book/window-v1.webp",
+  "door": "/assets/word-art-v2/sample13-24/closed-door-v1.webp",
+  "bed": "/assets/word-art-v2/sample13-24/bed-v1.webp",
   "floor": "/assets/learning-words/unit29-30/floor-845c81bc.svg",
-  "dressing table": "/assets/learning-words/unit29-30/dressing-table-155e98f2.svg",
-  "lamp": "/assets/learning-words/unit29-30/lamp-8498a880.svg",
-  "tap": "/assets/learning-words/unit29-30/tap-b790efa5.svg",
-  "book": "/assets/learning-words/unit29-30/book-b2904cd4.svg"
+  "dressing table": "/assets/word-art-v2/sample13-24/dressing-table-clean-v1.webp",
+  "lamp": "/assets/word-art-v2/whole-book/lamp-v1.webp",
+  "tap": "/assets/word-art-v2/whole-book/tap-v1.webp",
+  "book": "/assets/word-art-v2/sample1-12/book-v1.webp"
 };
+CanranCore.learningWordPresentation={
+  "wardrobe": "illustration",
+  "window": "illustration",
+  "door": "illustration",
+  "bed": "illustration",
+  "dressing table": "illustration",
+  "lamp": "illustration",
+  "tap": "illustration",
+  "book": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

@@ -6,12 +6,12 @@ const preview=new URLSearchParams(location.search).get('preview');
 const native={get:Storage.prototype.getItem,set:Storage.prototype.setItem,remove:Storage.prototype.removeItem};
 const read=k=>native.get.call(localStorage,k),write=(k,v)=>native.set.call(localStorage,k,v);
 const key='canran:lesson:'+course+':learning:v1';
-let access,owner,prefix,timer,pending,lastSnapshot='',renewing=false,flushing=false,hiddenAt=0,renewAt=0,locked=false;
+let access,owner,prefix,timer,retryTimer,pending,pendingWriteFailed=false,lastSnapshot='',urgentPending=false,retryDelay=1000,renewing=false,flushing=false,hiddenAt=0,renewAt=0,locked=false;
 const memory=new Map();
 const privacyStyle=document.createElement('style');privacyStyle.textContent='html[data-access-locked] body>[data-access-inert]{visibility:hidden!important}';document.head.append(privacyStyle);
 const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('canran-lesson-identity'):null;
 const isCourseKey=k=>/^canran:lesson:/.test(k)||/^lesson:(?:l\d+|phonics-magic)-stars/.test(k);
-async function api(route,data){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);try{const response=await fetch('/lesson/api/'+route,{cache:'no-store',signal:controller.signal,...(data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})});const value=await response.json();if(!response.ok)throw Object.assign(new Error(value.error),{status:response.status});return value;}finally{clearTimeout(timeout);}}
+async function api(route,data){const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),15000);try{const response=await fetch('/lesson/api/'+route,{cache:'no-store',signal:controller.signal,...(data===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})});if(!response.ok){const error=await response.json().catch(()=>({}));throw Object.assign(new Error(error.error||response.statusText),{status:response.status});}return await response.json();}finally{clearTimeout(timeout);}}
 function syncStatus(text,state='failed'){
  const tag=document.getElementById('studentSyncStatus');
  if(!tag)return;
@@ -26,6 +26,14 @@ function completedSnapshot(book){
  for(const [id,group] of Object.entries(book.groups||{}))if(group.index===group.signature?.split('|').length&&group.states?.every(s=>s?.checked&&s.correct)){groups[id]=group;for(const state of group.states)if(book.records?.[state.questionId])records[state.questionId]=book.records[state.questionId];}
  for(const id of ['unitDialogue','subjectRound'])if(book.activity?.[id]?.done)activity[id]=book.activity[id];
  for(const id of ['unitName','unitCertificateIssuedAt','unitClassroomCertificateIssuedAt'])if(book.activity?.[id])activity[id]=book.activity[id];
+ // Reading position is synchronized separately from completion evidence.
+ // The server validates the word anchor; this metadata never awards a star.
+ // All paired courses now use the shared word deck. Authorization and the
+ // valid anchor list remain checked by the server, independent of this UI.
+ if(course){
+  if(book.activity?.unitWordDeck?.version===1)activity.unitWordDeck=book.activity.unitWordDeck;
+  if(Number.isInteger(book.activity?.unitWordPage)&&book.activity.unitWordPage>=0)activity.unitWordPage=book.activity.unitWordPage;
+ }
  if(book.activity?.unitAwardClaims)activity.unitAwardClaims=book.activity.unitAwardClaims;
  if(access?.systemUpgrade?.epoch)return {version:1,groups,records,activity};
  if(course==='unit1-2'){
@@ -71,8 +79,50 @@ function completedSnapshot(book){
  }
  return {version:1,groups,records,activity};
 }
-function saveQueue(){if(access?.preview)return;const value=read(prefix+key);if(!value)return;try{const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;lastSnapshot=snapshot;pending={studentId:owner,course,epoch:access.systemUpgrade?.epoch,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(pending?.observations,observations)};write(prefix+'pending:'+course,JSON.stringify(pending));notifyPending();clearTimeout(timer);timer=setTimeout(flush,400);}catch{syncStatus('暂未保存，请先别关闭页面');}}
-async function flush(){if(!pending||flushing||access?.preview)return;flushing=true;const sent=pending;try{const result=await api('progress',sent);if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock(result.systemUpgrade?.message||'学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}if(result.awards){access.awards=result.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:result.awards}));}if(pending===sent){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}notifyPending();}catch{syncStatus('已保存到本机 · 联网后同步','retry');}finally{flushing=false;if(pending&&pending!==sent)setTimeout(flush,400);}}
+function saveQueue(){
+ if(access?.preview)return;const value=read(prefix+key);if(!value)return;
+ try{
+  const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;
+  const prior=lastSnapshot?JSON.parse(lastSnapshot)[0]:{},claims=completed.activity?.unitAwardClaims||{};
+  urgentPending ||= Object.entries(claims).some(([id,claim])=>typeof claim?.runId==='string'&&claim.runId!==prior.activity?.unitAwardClaims?.[id]?.runId);
+  const stored=pendingWriteFailed?pending:JSON.parse(read(prefix+'pending:'+course)||'null');
+  pending={studentId:owner,course,epoch:access.systemUpgrade?.epoch,generation:access.progress.generation,grant:access.grant,value:completed,observations:CanranLearningObserver.merge(stored?.generation===access.progress.generation?stored.observations:null,observations)};
+  pendingWriteFailed=true;write(prefix+'pending:'+course,JSON.stringify(pending));pendingWriteFailed=false;lastSnapshot=snapshot;notifyPending();clearTimeout(timer);
+  // A microtask includes the remaining completion writes in this same click.
+  // Keep one in-flight request; only ordinary observations use the debounce.
+  if(urgentPending)queueMicrotask(flush);else timer=setTimeout(flush,400);
+ }catch{syncStatus('暂未保存，请先别关闭页面');}
+}
+async function flush(){
+ if(!pending||flushing||access?.preview||locked)return;
+ if(navigator.onLine===false){syncStatus('已保存到本机 · 联网后同步','retry');return;}
+ clearTimeout(retryTimer);
+ const outbox=prefix+'pending:'+course;
+ try{const stored=read(outbox);if(stored&&!pendingWriteFailed)pending=JSON.parse(stored);pending.grant=access.grant;write(outbox,JSON.stringify(pending));pendingWriteFailed=false;}catch{syncStatus('暂未保存，请先别关闭页面');return;}
+ flushing=true;const sent=pending;urgentPending=false;
+ try{
+  const chunk=CanranLearningObserver.nextUpload(sent),result=await api('progress',chunk);
+  retryDelay=1000;
+  if(result.stale){pending=null;native.remove.call(localStorage,prefix+'pending:'+course);lock(result.systemUpgrade?.message||'学习记录已在另一台设备重置，请重新进入课程。',()=>location.reload());return;}
+  if(result.awards){access.awards=result.awards;access.awardReviews=result.awardReviews||[];window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:{...result.awards,reviews:access.awardReviews}}));}
+  const raw=read(outbox),remaining=CanranLearningObserver.afterUpload(pendingWriteFailed?pending:JSON.parse(raw),chunk);
+  if(remaining)write(outbox,JSON.stringify(remaining));else native.remove.call(localStorage,outbox);
+  pending=remaining;pendingWriteFailed=false;notifyPending();
+  const latest=JSON.parse(read(prefix+key)||'{}').activity?.unitAwardClaims||{};
+  if(result.awardReviews?.some(item=>!item.accepted&&latest[item.zone]?.runId===item.runId&&!result.awards?.zones?.[item.zone]))syncStatus('本轮得星未获确认，请查看本轮结果。','review');
+ }catch(error){
+  if(error.status===401||error.status===403){
+   const reviews=Object.entries(sent.value?.activity?.unitAwardClaims||{}).map(([zone,claim])=>({zone,runId:claim.runId,edition:claim.edition,accepted:false,reason:'access'}));
+   access.awardReviews=reviews;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:{...access.awards,reviews}}));
+   lock('请重新进入课程核验学习身份，作答记录已保留。',renew);
+  }else if(error.code==='UPLOAD_TOO_LARGE'||error.status===413){
+   syncStatus('这份记录暂时无法上传，已保存在本机。','review');
+  }else{
+   syncStatus('已保存到本机 · 联网后同步','retry');
+   if(navigator.onLine!==false&&(!error.status||error.status>=500||error.status===429)){retryTimer=setTimeout(flush,retryDelay);retryDelay=Math.min(30000,retryDelay*2);}
+  }
+ }finally{flushing=false;if(pending&&pending!==sent){clearTimeout(retryTimer);if(urgentPending)queueMicrotask(flush);else timer=setTimeout(flush,400);}}
+}
 function lock(message,retry=()=>location.reload()){
  locked=true;document.documentElement.setAttribute('data-access-locked','');
  let gate=document.getElementById('accessGate');if(!gate){gate=document.createElement('div');gate.id='accessGate';gate.setAttribute('role','alertdialog');gate.setAttribute('aria-label','课程访问');gate.style='position:fixed;inset:0;z-index:2147483646;background:#fcf8ef;display:grid;place-items:center;padding:24px;color:#4b3428;font:18px/1.7 system-ui';document.body.append(gate);}
@@ -84,6 +134,7 @@ async function renew(){if(renewing)return;renewing=true;for(const child of docum
 async function pinAgain(){const controller=navigator.serviceWorker?.controller;if(!controller||!window.CanranCourseCache)return;const pack=await window.CanranCourseCache.open('/lesson/').current(course);if(pack)controller.postMessage({type:'course:pin',id:course,revision:pack.revision});}
 function mergeRemote(local,remote){
  const v=local&&typeof local==='object'?local:{version:1,groups:{},records:{},activity:{}};
+ const localWordPosition=v.activity?.unitWordDeck,localWordPage=v.activity?.unitWordPage;
  const groups={...v.groups,...remote.groups};
  // A restarted round is a local draft. An older completed round from the
  // server must not replace it on reload; the earned star is kept separately.
@@ -94,7 +145,13 @@ function mergeRemote(local,remote){
     Number.isInteger(draft.index)&&draft.index>=0&&draft.index<draft.signature.split('|').length)groups[id]=draft;
  }
  v.groups=groups;v.records={...v.records,...remote.records};
- v.activity={...v.activity,...remote.activity,unitCompleted:{...v.activity?.unitCompleted,...remote.activity?.unitCompleted},...(v.activity?.unitAwardClaims||remote.activity?.unitAwardClaims?{unitAwardClaims:{...v.activity?.unitAwardClaims,...remote.activity?.unitAwardClaims}}:{})};return v;
+ v.activity={...v.activity,...remote.activity,unitCompleted:{...v.activity?.unitCompleted,...remote.activity?.unitCompleted},...(v.activity?.unitAwardClaims||remote.activity?.unitAwardClaims?{unitAwardClaims:{...v.activity?.unitAwardClaims,...remote.activity?.unitAwardClaims}}:{})};
+ // A queued reading position is newer than the server snapshot. Preserve only
+ // that navigation metadata; score merging and reset-generation rules stay intact.
+ if(pending?.course===course&&localWordPosition?.version===1&&pending.value?.activity?.unitWordDeck?.anchor===localWordPosition.anchor){
+  v.activity.unitWordDeck=localWordPosition;if(Number.isInteger(localWordPage))v.activity.unitWordPage=localWordPage;
+ }
+ return v;
 }
 function installStorage(){
  Storage.prototype.getItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.get.call(this,k);return access.preview?(memory.get(k)??null):native.get.call(this,prefix+k);};
@@ -109,12 +166,18 @@ window.CanranAccessReady=(async()=>{
   if(oldGeneration!==access.progress.generation){local=null;pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}
   write(prefix+key,JSON.stringify(mergeRemote(local,access.progress.value)));write(generationKey,String(access.progress.generation));
  }
- const initial=JSON.parse(read(prefix+key)||'{}');lastSnapshot=JSON.stringify([completedSnapshot(initial),CanranLearningObserver.snapshot(initial)]);installStorage();window.CanranStudentAccess=access;return access;
+ const initial=JSON.parse(read(prefix+key)||'{}');lastSnapshot=JSON.stringify([completedSnapshot(initial),CanranLearningObserver.snapshot(initial)]);installStorage();window.CanranStudentAccess=access;
+ // The notebook is the durable evidence source. Rebuild an outbox that could
+ // not be saved earlier, without resurrecting an explicitly rejected round.
+ let rejected={};try{rejected=JSON.parse(read(prefix+key+':awards:'+access.awards?.edition)||'{}').rejected||{};}catch{}
+ if(!access.preview&&!pending&&Object.entries(initial.activity?.unitAwardClaims||{}).some(([id,claim])=>typeof claim?.runId==='string'&&!access.awards?.zones?.[id]&&rejected[id]?.runId!==claim.runId)){lastSnapshot='';saveQueue();}
+ return access;
 })();
 window.CanranAccessReady.catch(error=>{const show=()=>lock(error.status===403?error.message:'请联网后重新进入课程。');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show,{once:true});else show();});
 channel?.addEventListener('message',()=>lock('学习身份已改变，请重新进入课程。'));
 navigator.serviceWorker?.addEventListener('message',event=>{if(event.data?.type==='identity:changed')lock('学习身份已改变，请重新进入课程。');});
-window.addEventListener('online',flush);
+window.addEventListener('online',()=>{retryDelay=1000;flush();});
+window.addEventListener('offline',()=>clearTimeout(retryTimer));
 window.addEventListener('pagehide',event=>{if(event.persisted)lock('正在核验课程…',renew);});
 window.addEventListener('pageshow',event=>{if(event.persisted)renew();});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)hiddenAt=Date.now();else if(access&&Date.now()-hiddenAt>1800000)renew();});

@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-12",
+  "scope": "Lesson1–12 vocabulary presentation",
+  "browserResult": {
+    "status": "passed",
+    "failedTests": []
+  },
+  "browserTests": 28,
+  "nodeTests": 46,
+  "words": 132,
+  "devices": [
+    {
+      "id": "chrome-iphone-se",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "chrome-iphone-14-pro-max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "id": "chrome-iphone-16-pro-max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      }
+    }
+  ],
+  "extraSizes": [
+    {
+      "width": 320,
+      "height": 568
+    },
+    {
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "width": 1366,
+      "height": 768
+    }
+  ],
+  "limits": [
+    "Physical devices not tested",
+    "No unrelated full-site CI",
+    "No commit, push or deployment"
+  ]
+}

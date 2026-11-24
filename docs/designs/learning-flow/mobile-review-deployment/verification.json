@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-17",
+  "url": "https://preview.canranstudio.cn/",
+  "dns": {
+    "provider": "AliDNS",
+    "host": "preview",
+    "type": "A",
+    "value": "59.110.217.36",
+    "ttl": 600,
+    "enabled": true,
+    "verifiedResolvers": [
+      "Google",
+      "Cloudflare"
+    ]
+  },
+  "source": {
+    "snapshot": "review-20261117-6c39e798fd56",
+    "head": "e4b024c3243e59760c18e90c21d2b31aea315104",
+    "baseCommit": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+    "baseManifestSha256": "c7151ff4f4bc40955b41a3eab80e5e08a7f652a070d9426ff65d2e941d9177ed",
+    "manifestSha256": "3502085307dfe32544b94510f1e0fe14a0bcd85cce3f18df7a6a254079a28119",
+    "archiveSha256": "bbfe0c710482f353edd35ac1467f7f001880169ae80461163035ddaba6a4199c",
+    "archiveBytes": 351841175,
+    "files": 8449,
+    "changed": 4839,
+    "units": 72
+  },
+  "official": {
+    "release": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+    "configHashesUnchanged": true,
+    "active": true,
+    "restarts": 0
+  },
+  "preview": {
+    "service": "canran-mobile-review",
+    "active": true,
+    "restarts": 0,
+    "independentData": true
+  },
+  "tls": {
+    "valid": true,
+    "expires": "2027-02-15",
+    "timerActive": true,
+    "deployHookVerified": true,
+    "renewalDryRun": "not-passed: staging CA read timeout; bounded retry ended during Certbot randomized delay",
+    "actualIssuanceSucceeded": true
+  },
+  "browserTests": [
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "origin": "https://preview.canranstudio.cn",
+      "anonymousProtected": true,
+      "course": "unit37-38",
+      "studyPreserved": true,
+      "originalCard": true,
+      "album": true,
+      "errors": []
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "origin": "https://preview.canranstudio.cn",
+      "anonymousProtected": true,
+      "course": "unit37-38",
+      "studyPreserved": true,
+      "originalCard": true,
+      "album": true,
+      "errors": []
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "origin": "https://preview.canranstudio.cn",
+      "anonymousProtected": true,
+      "course": "unit37-38",
+      "studyPreserved": true,
+      "originalCard": true,
+      "album": true,
+      "errors": []
+    }
+  ],
+  "accounts": {
+    "units": 72,
+    "activeAcceptanceAccounts": 1,
+    "disabledSmokeAccounts": 3,
+    "userProgressCourses": 0,
+    "userAwardCards": 0
+  },
+  "anonymousProtectedResourceStatus": 401,
+  "physicalAndroidWeChatQuark": false,
+  "fullCI": false,
+  "branchCommitted": false,
+  "pushed": false,
+  "merged": false,
+  "officialPublished": false,
+  "networkNote": "Default workstation route had TLS disconnects and loading timeouts. Automated checks used an isolated CONNECT tunnel via the approved outbound interface; the real HTTPS hostname, origin and certificate verification were preserved. The in-app browser independently logged in to the public site."
+}

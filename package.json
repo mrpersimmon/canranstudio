@@ -7,7 +7,10 @@
   },
   "scripts": {
     "preview:cached": "node scripts/preview-courses.js",
-    "preview:review": "node scripts/review-bench.js",
+    "preview:review": "node --watch scripts/review-bench.js",
+    "measure:first-course": "playwright test -c playwright.login.config.js first-course-baseline --workers=1",
+    "measure:font-handoff": "playwright test -c playwright.font-transfer.config.js font-navigation --workers=1",
+    "measure:illustration-transfer": "playwright test -c playwright.font-transfer.config.js illustration-transport --workers=1",
     "test:cloud": "node scripts/cloud/check.js",
     "test:review": "playwright test -c playwright.review.config.js --grep-invert \"all questions and phone layouts|complete presentation on required phones|story poses, preserved text\"",
     "build:static": "node scripts/build-static.js",

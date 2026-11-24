@@ -20,7 +20,8 @@ test('whole-book review catalog includes all 72 units and their original questio
 test('every paired course opts into the shared learning shell and exposes presentation progress',()=>{
   for(const id of UNITS){
     const html=fs.readFileSync(id+'/index.html','utf8'),source=fs.readFileSync(id+'/unit.js','utf8');
-    for(const file of ['core/learning-flow.js','core/learning-flow.css','core/practice-screen.js','core/practice-screen.css'])assert.ok(html.includes('/'+file),id+' loads '+file);
+    for(const file of ['core/unit-session.js','core/learning-flow.js','core/learning-flow.css','core/practice-screen.js','core/practice-screen.css'])assert.ok(html.includes('/'+file),id+' loads '+file);
+    assert.ok(html.indexOf('/core/unit-session.js')<html.indexOf('/'+id+'/unit.js'),id+' loads the session before its controller');
     assert.match(source,/core\.learningProgress\s*=/,id+' publishes readonly progress');
     assert.match(source,/allowReview:\s*true/,id+' exposes readonly current-round history');
   }
@@ -33,7 +34,8 @@ test('word-card derivatives preserve teaching geometry and leave original assets
   assert.ok(fs.existsSync('.'+art.original),art.original);assert.ok(fs.existsSync('.'+art.adopted),art.adopted);
   if(art.method!=='native-vector-lighting')continue;
   const original=fs.readFileSync('.'+art.original,'utf8'),adopted=fs.readFileSync('.'+art.adopted,'utf8');
-  const geometry=svg=>svg.replace(/<defs>[\s\S]*?<\/defs>/g,'').replace(/fill="[^"]*"/g,'fill="unchanged"');
+  // Approved originals can retain CRLF while the generated SVG uses LF.
+  const geometry=svg=>svg.replace(/\r\n/g,'\n').replace(/<defs>[\s\S]*?<\/defs>/g,'').replace(/fill="[^"]*"/g,'fill="unchanged"');
   assert.equal(geometry(adopted),geometry(original),art.word+' retains all silhouettes, text and teaching positions');
  }
 });

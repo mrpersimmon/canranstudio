@@ -1,4 +1,4 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "ago": "/assets/learning-words/unit75-76/ago-321dafd7.svg",
   "buy": "/assets/learning-words/unit75-76/buy-d51854b3.svg",
@@ -24,5 +24,21 @@ CanranCore.learningWordArtwork={
   "three weeks ago": "/assets/learning-words/unit75-76/ago-321dafd7.svg",
   "in 2010": "/assets/learning-words/unit75-76/year-d781bac2.svg",
   "When did …?": "/assets/learning-words/unit75-76/clock-9fb3e8ce.svg",
-  "comfortable": "/assets/learning-words/unit75-76/comfortable-142849be.svg"
+  "comfortable": "/assets/learning-words/unit75-76/comfortable-142849be.svg",
+  "black": "/assets/unit13-14/black.svg",
+  "a pair of shoes": "/assets/word-art-v2/sample13-24/shoe-v1.webp"
 };
+CanranCore.learningWordPresentation={
+  "black": "fact",
+  "a pair of shoes": "relation"
+};
+CanranCore.learningWordComposition={
+  "a pair of shoes": {
+    "kind": "pair",
+    "sources": [
+      "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+    ]
+  }
+};
+CanranCore.learningQuestionArtwork={};

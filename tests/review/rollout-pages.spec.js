@@ -25,7 +25,7 @@ for(const unit of selected)test(unit+' complete presentation on required phones'
    await page.locator('#device').selectOption(device.id);
    await frame.waitForFunction(size=>document.body.dataset.practiceViewport===size,device.viewport.width+'x'+device.viewport.height);
    await frame.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-   const issues=await frame.evaluate(({kind,index})=>{
+   const issues=await frame.evaluate(({kind,index,wordKeys})=>{
     const issues=[],shown=e=>e.getClientRects().length&&!e.closest('[hidden]')&&getComputedStyle(e).visibility!=='hidden';
     const surface=document.querySelector('.learning-surface'),dialog=document.querySelector('dialog[open]'),root=dialog||surface;
     if(document.documentElement.scrollWidth>innerWidth+1)issues.push({type:'horizontal-overflow'});
@@ -39,18 +39,19 @@ for(const unit of selected)test(unit+' complete presentation on required phones'
      if(card.scrollWidth>card.clientWidth+2)issues.push({type:'word-overflow',text:card.textContent});
      if(card.scrollHeight>card.clientHeight+1)issues.push({type:'word-inner-scroll',text:card.textContent,pixels:card.scrollHeight-card.clientHeight});
      const b=card.getBoundingClientRect(),c=card.closest('.learning-word-content').getBoundingClientRect();if(innerHeight>=667&&b.bottom>c.bottom+2)issues.push({type:'word-offscreen',text:card.textContent});
-     const nth=[...root.querySelectorAll('.unit-word')].indexOf(card),word=CanranCore.learningContext.learning.WORDS[index*6+nth];
+     const nth=[...root.querySelectorAll('.unit-word')].indexOf(card),word=wordKeys?CanranCore.learningContext.learning.WORDS.find(w=>w.en===wordKeys[nth]):CanranCore.learningContext.learning.WORDS[index*6+nth];
      const footer=root.querySelector('.word-controls').getBoundingClientRect();card.click();
-     for(const [selector,value]of [['strong',word.en],['.word-phonetic',word.ph],['.word-meaning',word.cn],['.word-example',word.example]])if(value){const node=card.querySelector(selector);if(!node||node.hidden||node.textContent!==value)issues.push({type:'word-detail-missing',word:word.en,selector});}
+     for(const [selector,value]of [['strong',word.en],['.word-phonetic',word.ph],['.word-meaning',word.cn],['.word-example',word.example]])if(value){const node=card.querySelector(selector),onFront=selector==='.word-example'&&card.dataset.wordKind==='context'&&card.querySelector('.word-context')?.textContent===value;if(!onFront&&(!node||node.hidden||node.textContent!==value))issues.push({type:'word-detail-missing',word:word.en,selector});}
      if(Math.abs(footer.top-root.querySelector('.word-controls').getBoundingClientRect().top)>1)issues.push({type:'word-expansion-moves-actions',word:word.en});card.click();
     }
     if(dialog){const b=dialog.getBoundingClientRect();if(b.left<0||b.right>innerWidth+1||b.top<0||b.bottom>innerHeight+1)issues.push({type:'dialog-outside'});
      if(dialog.scrollWidth>dialog.clientWidth+2)issues.push({type:'dialog-horizontal-scroll'});
     }
     return issues;
-   },{kind:entry.kind,index:entry.index});
+   },{kind:entry.kind,index:entry.index,wordKeys:entry.wordKeys});
    if(issues.length)findings.push({page:entry.id,device:device.id,issues});layouts++;
-   if(device===devices[0]&&(['cover','story-complete','card'].includes(entry.id)||entry.id==='words-0'||issues.length&&findings.length<5))await page.locator('#frame-shell').screenshot({path:info.outputPath(entry.id.replace(/[^a-z0-9-]/gi,'_')+'.png')});
+   if(process.env.SAMPLE_CAPTURE==='1'&&['words','result','certificate','story-complete','cover'].includes(entry.kind))await page.locator('#frame-shell').screenshot({path:info.outputPath(entry.id.replace(/[^a-z0-9-]/gi,'_')+'-'+device.id+'.png')});
+   else if(device===devices[0]&&(['cover','story-complete','card'].includes(entry.id)||entry.id==='words-0'||issues.length&&findings.length<5))await page.locator('#frame-shell').screenshot({path:info.outputPath(entry.id.replace(/[^a-z0-9-]/gi,'_')+'.png')});
   }
  }
  await fs.writeFile(info.outputPath('findings.json'),JSON.stringify({unit,entries:entries.length,layouts,findings,errors},null,2));

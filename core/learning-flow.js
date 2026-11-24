@@ -7,6 +7,14 @@
  if(!pair||first<1||first>143||first%2!==1||Number(pair[2])!==first+1)return;
  unit.copy=Object.assign({questions:{},recordNames:{}},unit.copy||{},{compact:true,incorrectFeedback:'答错了，再试试。',roundIntro:'本组每题一次答对，可点亮一颗星。',reviewCorrect:'首答正确',reviewCorrected:'订正后答对',recordScope:true,completionStatistics:'questions',correctedCompletion:'已完成！再练一轮全对，可点亮星星。'});
  const body=document.body,media=matchMedia('(prefers-reduced-motion: reduce)'),seen=new WeakSet(),motions=new WeakMap(),logs=new WeakMap();
+ const storySize=log=>[log.clientWidth,log.clientHeight,log.scrollHeight].join(':');
+ function restoreStoryScroll(log,state){
+  const key=storySize(log);if(!state.restore&&key===state.key)return;
+  state.key=key;
+  if(state.bottom)log.scrollTop=log.scrollHeight;
+  else if(state.restore)log.scrollTop=state.position;
+  state.restore=false;state.position=log.scrollTop;
+ }
  const make=cls=>{const el=document.createElement('div');el.className=cls;return el;};
  let currentPanel=null,lastBubble=null,animation=null;
  const milestoneLabels=['词汇','故事','语法','应用','挑战'];
@@ -93,6 +101,7 @@
    const text=unit.copy.references?.[term.textContent];if(text&&meaning?.tagName==='DD')meaning.textContent=text;
   }
   referenceSheet.showModal();referenceContent.scrollTop=0;
+  /* @bench:reference */
  }
  function updateMilestones(surface){
   if(!milestones)return;
@@ -112,28 +121,36 @@
   });
  }
  function groupQuestionMaterials(content){
-  if(!options.combineQuestionMaterials||content.querySelector('.learning-material-source'))return;
-  const image=content.querySelector('img.practice-scene:not(.practice-options img)'),notes=[...content.querySelectorAll('.practice-context,.task-reference')].filter(e=>!e.closest('.learning-context-source'));
-  if(!image||!notes.some(e=>e.textContent.length>120))return;
+  if(content.querySelector('.learning-material-source'))return;
+  const image=content.querySelector(':scope>img.practice-scene'),notes=[...content.querySelectorAll('.practice-context,.task-reference')].filter(e=>!e.closest('.learning-context-source'));
+  const longNotes=notes.some(e=>e.textContent.trim().length>120),model=content.querySelector('.grammar-model'),longModel=model&&model.textContent.trim().length>60&&content.querySelector('.learning-context-source');
+  if(!longNotes&&!longModel)return;
   const source=document.createElement('details');source.className='learning-material-source';source.hidden=true;
   const summary=document.createElement('summary');summary.textContent='题目材料';source.append(summary);
   const button=document.createElement('button');button.type='button';button.className='learning-material-preview';button.setAttribute('aria-label','查看题目材料');button.setAttribute('aria-haspopup','dialog');
-  const thumb=image.cloneNode(false);thumb.className='learning-material-thumb';thumb.alt='';const label=document.createElement('span');label.textContent='查看题目材料';const arrow=document.createElement('span');arrow.textContent='›';arrow.setAttribute('aria-hidden','true');button.append(thumb,label,arrow);
-  const heading=content.querySelector('h3');heading.after(button,source);image.classList.add('learning-material-image');source.append(image,...notes);
-  for(const note of notes){note.classList.remove('practice-screen-material');note.style.removeProperty('max-height');note.removeAttribute('tabindex');note.removeAttribute('aria-description');}
-  // The generic scenario helper describes this same task; its extra tile is
-  // redundant when the authored record and text have their own single entry.
-  for(const old of content.querySelectorAll('.learning-context-preview,.learning-context-source'))old.hidden=true;
+  const label=document.createElement('span');label.textContent='查看题目材料';const arrow=document.createElement('span');arrow.textContent='›';arrow.setAttribute('aria-hidden','true');
+  if(image){const thumb=image.cloneNode(false);thumb.className='learning-material-thumb';thumb.alt='';button.append(thumb);}
+  button.append(label,arrow);
+  const heading=content.querySelector('h3');heading.after(button,source);
+  if(image){image.classList.add('learning-material-image');source.append(image);}
+  const materials=[...(model&&(longModel||longNotes)?[model]:[]),...(longNotes?notes:[])];source.append(...materials);
+  for(const note of materials){note.classList.remove('practice-screen-material');note.style.removeProperty('max-height');note.removeAttribute('tabindex');note.removeAttribute('aria-description');}
+  // Move the original scenario too: one entry preserves its authored text,
+  // illustration and live feedback, without a duplicate tile in the question.
+  for(const old of content.querySelectorAll('.learning-context-source')){
+   source.append(...[...old.children].filter(child=>child.tagName!=='SUMMARY'));old.remove();
+  }
+  for(const old of content.querySelectorAll('.learning-context-preview'))old.remove();
   button.onclick=()=>openReference(source,button);
  }
  function prepareQuestion(runner){
   const content=runner.querySelector('.practice-content');
   for(const scene of content.querySelectorAll('[class$="-application"]')){
-   if(scene.closest('.learning-context-source')||scene.querySelector('button,input,select,textarea,a'))continue;
+   if(scene.closest('.learning-context-source,.learning-material-source')||scene.querySelector('button,input,select,textarea,a'))continue;
    const source=document.createElement('details');source.className='learning-context-source';source.open=true;
    const summary=document.createElement('summary');summary.hidden=true;summary.textContent=scene.getAttribute('aria-label')||'情境图';source.append(summary);scene.before(source);source.append(scene);
    const button=document.createElement('button');button.type='button';button.className='learning-context-preview';button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-label','查看情境：'+summary.textContent);
-   const image=scene.querySelector('img');if(image){const thumb=image.cloneNode(false);thumb.alt='';button.append(thumb);}
+   const image=scene.querySelector('img');if(image){const thumb=image.cloneNode(false);thumb.className='learning-context-thumb';thumb.removeAttribute('style');thumb.alt='';button.append(thumb);}
    const copy=make('learning-context-preview-copy'),title=document.createElement('span'),hint=document.createElement('small');title.textContent=summary.textContent;hint.textContent='查看完整情境 ›';copy.append(title,hint);button.append(copy);source.before(button);button.onclick=()=>openReference(source,button);
   }
   groupQuestionMaterials(content);
@@ -207,8 +224,25 @@
    let content=surface.querySelector(':scope > .learning-story-content');
    if(!content){content=make('learning-story-content');scene.before(content);content.append(scene,surface.querySelector('.dialogue-status'));}
    const log=scene.querySelector('.dialogue-log');
-   if(!logs.has(log)){const state={bottom:true,key:'',position:0,restore:true};logs.set(log,state);log.addEventListener('scroll',()=>{if(!surface.classList.contains('learning-surface')||body.dataset.learningView!=='story')return;state.bottom=log.scrollHeight-log.clientHeight-log.scrollTop<4;state.position=log.scrollTop;});}
+   if(!logs.has(log)){
+    const state={bottom:true,key:'',position:0,restore:true,userScrollUntil:0,rows:new Set()};logs.set(log,state);
+    const active=()=>surface.classList.contains('learning-surface')&&body.dataset.learningView==='story';
+    const userScroll=event=>{if(!event.target.closest?.('button'))state.userScrollUntil=performance.now()+200;};
+    for(const type of ['wheel','touchmove','pointerdown'])log.addEventListener(type,userScroll,{passive:true});
+    log.addEventListener('keydown',event=>{if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End'].includes(event.key))userScroll(event);});
+    log.addEventListener('scroll',()=>{
+     if(!active())return;
+     // WebKit can resolve another text line at paint time. That layout scroll
+     // must not be mistaken for the learner deliberately reading earlier text.
+     if(state.bottom&&state.key&&storySize(log)!==state.key&&performance.now()>state.userScrollUntil){restoreStoryScroll(log,state);return;}
+     state.bottom=log.scrollHeight-log.clientHeight-log.scrollTop<4;state.position=log.scrollTop;
+    });
+    state.observer=new ResizeObserver(()=>{if(active())restoreStoryScroll(log,state);});state.observer.observe(log);
+   }
    options.prepareStory?.(scene);
+   const state=logs.get(log);
+   for(const row of state.rows)if(row.parentElement!==log){state.observer.unobserve(row);state.rows.delete(row);}
+   for(const row of log.children)if(!state.rows.has(row)){state.rows.add(row);state.observer.observe(row);}
   }
   if(view==='words'){
    // Restoring completed reading mounts its practice before the word UI.
@@ -219,6 +253,7 @@
    // word signatures stay byte-for-byte identical. The loader decodes these
    // declared assets before presenting the newly mounted card.
    for(const card of grid.querySelectorAll('.unit-word')){
+    if(card.dataset.wordKind==='context')continue;
     const image=card.querySelector(':scope>img'),target=root.CanranCore.learningWordArtwork?.[card.getAttribute('aria-label')];
     if(image&&target&&image.getAttribute('src')!==target)image.src=target;
     const artKind=root.CanranCore.learningWordPresentation?.[card.getAttribute('aria-label')];
@@ -227,8 +262,8 @@
    if(!surface.querySelector('.learning-word-content')){const content=make('learning-word-content');grid.before(content);content.append(grid);}
    let label=surface.querySelector('.learning-word-destination');
    if(!label){label=document.createElement('p');label.className='learning-word-destination';controls.before(label);}
-   const next=controls.lastElementChild.getAttribute('aria-label')||'',text=next.startsWith('下一站：')?'接下来：'+next.slice(4):'';
-   if(label.textContent!==text)label.textContent=text;if(label.hidden!==!text)label.hidden=!text;
+   const next=controls.lastElementChild.getAttribute('aria-label')||'',text=next.startsWith('下一站：')?'接下来：'+next.slice(4):'点词卡，看词义';
+   if(label.textContent!==text)label.textContent=text;
   }
  }
  function present(surface,runner,view){
@@ -252,7 +287,7 @@
   view(surface,runner,question){if(!surface)return '';if(question)return 'question';if(runner?.querySelector('.practice-finish'))return 'result';if(surface.id==='cover')return 'cover';if(surface.classList.contains('stage-text'))return 'story';if(surface.classList.contains('stage-words'))return 'words';if(surface.classList.contains('stage-certificate'))return 'certificate';return 'gate';},
   prepare,present,mountNavigation,openReference,prepareNotebook,
   leave(surface,view){if(view!=='story')return;const log=surface.querySelector('.dialogue-log'),state=logs.get(log);if(!state)return;state.position=log.scrollTop;state.bottom=log.scrollHeight-log.clientHeight-log.scrollTop<4;state.restore=true;},
-  resize(surface,view){if(view!=='story')return;options.resizeStory?.(surface.querySelector(options.storySelector||'.dialogue-stage'));const log=surface.querySelector('.dialogue-log'),state=logs.get(log);if(!state)return;const key=[log.clientWidth,log.clientHeight,log.scrollHeight].join(':');if(state.restore||key!==state.key){state.key=key;if(state.bottom)log.scrollTop=log.scrollHeight;else if(state.restore)log.scrollTop=state.position;state.restore=false;}},
+  resize(surface,view,prepared){if(view!=='story')return;options.resizeStory?.(surface.querySelector(options.storySelector||'.dialogue-stage'),prepared);const log=surface.querySelector('.dialogue-log'),state=logs.get(log);if(state)restoreStoryScroll(log,state);},
   sizeQuestion(content,available){
    // The paper belongs to the stable runner, not to a newly created question.
    // Different task lengths must not resize/recenter that paper on every Next.

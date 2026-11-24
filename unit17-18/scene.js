@@ -14,7 +14,7 @@ function storyProps(){
   for(const name of names)labels.append(node('span','actor-label',name));
   group.append(picture('cast-'+id,alt,'cast-image'),labels);groups.set(id,group);guests.append(group);
  }
- element.append(node('p','office-location','办公室'),cast,guests);
+ element.append(cast,guests);
  return{element,update(index){const phase=index<2?'welcome':index<7?'women':index<13?'men':'jim';element.dataset.phase=phase;for(const[id,group]of groups)group.hidden=id!==phase;}};
 }
 function create({element}){let status,heading;return{

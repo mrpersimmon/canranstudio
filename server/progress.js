@@ -5,12 +5,10 @@ const vm = require('node:vm');
 const catalog = require('../core/course-catalog');
 const awardRules = require('../core/award-rules');
 const {relocateSource}=require('../scripts/public-base-path');
+const {teachingDefinition}=require('../scripts/course-registry');
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
 function definition(root, course, basePath = '/lesson/') {
-  const sandbox = { CanranCore: { courseCatalog: catalog }, document: { documentElement: { dataset: { unit:course } } } };
-  vm.runInNewContext(relocateSource(fs.readFileSync(path.join(root, course, 'content.js'), 'utf8'),course+'/content.js',basePath), sandbox);
-  const unit=sandbox.CanranCore['unit' + course.slice(4).replace('-', '')];
-  return unit;
+  return teachingDefinition(relocateSource(fs.readFileSync(path.join(root,course,'content.js'),'utf8'),course+'/content.js',basePath),course);
 }
 function sameSignature(saved,current){if(saved===current)return true;if(typeof saved!=='string'||typeof current!=='string')return false;try{const clean=s=>JSON.stringify(JSON.parse(s),(key,value)=>key==='hint'?undefined:typeof value==='string'?value.replace(/^\/lesson\/(?=assets\/)/,'/'):value);return clean(saved)===clean(current);}catch{return false;}}
 let legacyButcher;
@@ -444,6 +442,14 @@ function normalize(value, unit, course, currentOnly = false) {
   for(const key of ['unitCertificateIssuedAt','unitClassroomCertificateIssuedAt']) {
     const date=value.activity[key];
     if(typeof date==='string'&&date.length<=50&&Number.isFinite(Date.parse(date)))result.activity[key]=new Date(date).toISOString();
+  }
+  // Reading position is non-scoring metadata. Validate it against original
+  // words; it cannot add completed activities, submissions or award claims.
+  if(/^unit\d+-\d+$/.test(course)&&Array.isArray(unit.learning?.WORDS)){
+    const position=require('../core/word-deck').sanitizePosition(value.activity.unitWordDeck,unit.learning.WORDS);
+    if(position)result.activity.unitWordDeck=position;
+    const page=value.activity.unitWordPage;
+    if(Number.isInteger(page)&&page>=0&&page<Math.ceil(unit.learning.WORDS.length/6))result.activity.unitWordPage=page;
   }
   return result;
 }

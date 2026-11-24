@@ -256,7 +256,11 @@
     startAttempted = true;
     status('正在准备画面…');
     const persistent = await store.commit(pack, !pack.lastUsed);
-    controlled = controlled && persistent && (await rpc(navigator.serviceWorker.controller, { type: 'course:pin', id: pack.id, revision: pack.revision })).ok;
+    // Pinning includes the server's course permission check and a local write.
+    // Give that round trip the same deadline as other course network requests.
+    controlled = controlled && persistent && (await rpc(navigator.serviceWorker.controller,
+      { type: 'course:pin', id: pack.id, revision: pack.revision }, 15000
+    ).catch(() => { throw failure('L01', '课程连接失败，请再试一次。'); })).ok;
     await store.remove('meta', leaseKey(pack)).catch(() => {});
     if (!controlled) {
       for (const { item, buffer } of resources.values()) {

@@ -1,13 +1,13 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "bring": "/assets/learning-words/unit87-88/bring-b8c3351b.svg",
-  "garage": "/assets/learning-words/unit87-88/garage-a81d8072.svg",
+  "garage": "/assets/word-art-v2/whole-book/garage-v1.webp",
   "crash": "/assets/learning-words/unit87-88/crash-c2e482eb.svg",
-  "lamp-post": "/assets/learning-words/unit87-88/lamp-post-960a0ab9.svg",
+  "lamp-post": "/assets/word-art-v2/whole-book/lamp-post-v1.webp",
   "repair": "/assets/learning-words/unit87-88/repair-29a38f8c.svg",
   "try": "/assets/learning-words/unit87-88/try-14fd2b5a.svg",
   "brought": "/assets/learning-words/unit87-88/bring-b8c3351b.svg",
-  "mechanic": "/assets/learning-words/unit87-88/repair-29a38f8c.svg",
+  "mechanic": "/assets/word-art-v2/sample1-12/mechanic-v1.webp",
   "ready": "/assets/learning-words/unit87-88/ready-2f533d96.svg",
   "yet": "/assets/learning-words/unit87-88/yet-f3251cf8.svg",
   "still": "/assets/learning-words/unit87-88/still-08b1d130.svg",
@@ -25,4 +25,14 @@ CanranCore.learningWordArtwork={
   "sent": "/assets/learning-words/unit87-88/letter-b2ae7717.svg",
   "swept": "/assets/learning-words/unit87-88/sweep-f8a2c23d.svg",
   "told": "/assets/learning-words/unit87-88/truth-3d24b6fd.svg"
+};
+CanranCore.learningWordPresentation={
+  "garage": "illustration",
+  "lamp-post": "illustration",
+  "mechanic": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit87-88/garage.svg": "/assets/word-art-v2/whole-book/garage-v1.webp",
+  "/assets/unit87-88/lamp-post.svg": "/assets/word-art-v2/whole-book/lamp-post-v1.webp",
+  "/assets/unit87-88/repair.svg": "/assets/word-art-v2/sample1-12/mechanic-v1.webp"
 };

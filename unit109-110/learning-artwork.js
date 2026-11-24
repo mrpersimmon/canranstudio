@@ -1,8 +1,8 @@
-/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
 CanranCore.learningWordArtwork={
   "idea": "/assets/learning-words/unit109-110/idea-3fa1a785.svg",
   "a little": "/assets/learning-words/unit109-110/a-little-2f2892f9.svg",
-  "teaspoonful": "/assets/learning-words/unit109-110/teaspoonful-66c47b73.svg",
+  "teaspoonful": "/assets/word-art-v2/whole-book/teaspoonful-v1.webp",
   "less": "/assets/learning-words/unit109-110/less-ebfd740d.svg",
   "a few": "/assets/learning-words/unit109-110/a-few-35bf3c02.svg",
   "pity": "/assets/learning-words/unit109-110/pity-b49167aa.svg",
@@ -15,7 +15,7 @@ CanranCore.learningWordArtwork={
   "worst": "/assets/learning-words/unit109-110/worst-1966a190.svg",
   "much": "/assets/learning-words/unit109-110/much-614f1a97.svg",
   "many": "/assets/learning-words/unit109-110/many-631e0696.svg",
-  "little": "/assets/learning-words/unit109-110/little-9e331185.svg",
+  "little": "/assets/word-art-v2/sample13-24/box-v1.webp",
   "few": "/assets/learning-words/unit109-110/few-841cb9f0.svg",
   "more": "/assets/learning-words/unit109-110/more-f1870e69.svg",
   "fewer": "/assets/learning-words/unit109-110/fewer-841cb9f0.svg",
@@ -28,11 +28,23 @@ CanranCore.learningWordArtwork={
   "further": "/assets/learning-words/unit109-110/further-74292c05.svg",
   "farthest": "/assets/learning-words/unit109-110/farthest-c6e9fbba.svg",
   "furthest": "/assets/learning-words/unit109-110/furthest-c6e9fbba.svg",
-  "coffee": "/assets/learning-words/unit109-110/coffee-a762de3d.svg",
-  "milk": "/assets/learning-words/unit109-110/milk-778bd9d8.svg",
-  "sugar": "/assets/learning-words/unit109-110/sugar-9e4dc711.svg",
-  "biscuit": "/assets/learning-words/unit109-110/biscuit-adc1decc.svg",
-  "empty": "/assets/learning-words/unit109-110/empty-22c534f1.svg",
+  "coffee": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+  "milk": "/assets/word-art-v2/whole-book/milk-v1.webp",
+  "sugar": "/assets/word-art-v2/whole-book/sugar-v1.webp",
+  "biscuit": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+  "empty": "/assets/word-art-v2/sample13-24/glass-v1.webp",
   "half": "/assets/learning-words/unit109-110/half-0c56fded.svg",
   "enough": "/assets/learning-words/unit109-110/enough-046e0ea8.svg"
+};
+CanranCore.learningWordPresentation={
+  "teaspoonful": "illustration",
+  "coffee": "illustration",
+  "milk": "illustration",
+  "sugar": "illustration",
+  "biscuit": "illustration",
+  "empty": "illustration"
+};
+CanranCore.learningQuestionArtwork={
+  "/assets/unit109-110/teaspoonful.svg": "/assets/word-art-v2/whole-book/teaspoonful-v1.webp",
+  "/assets/unit109-110/biscuit.svg": "/assets/word-art-v2/whole-book/biscuit-v1.webp"
 };

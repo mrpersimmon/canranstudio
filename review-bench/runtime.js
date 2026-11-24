@@ -21,21 +21,34 @@
   const signature=JSON.stringify([unit.version,unit.learning.DIALOGUE]),last=unit.learning.DIALOGUE.length-1;
   const i=entry.kind==='story-line'?entry.index:entry.kind==='story-complete'?last:-1;
   const activity={unitCompleted:{text:signature},unitDialogue:{i,viewed:unit.learning.DIALOGUE.map((_,n)=>n<=i),done:entry.kind==='story-complete',signature},unitWordPage:entry.kind==='words'?entry.index:0};
+  if(entry.kind==='words'&&entry.anchor){activity.unitWordPage=Math.floor(unit.learning.WORDS.findIndex(w=>w.en===entry.anchor)/6);activity.unitWordDeck={version:1,anchor:entry.anchor,anchors:{[entry.wordKind]:entry.anchor}};}
+  else if(course.entries.some(item=>item.kind==='words'&&item.anchor))delete activity.unitWordPage;
   localStorage.setItem(unit.progress.learningKey,JSON.stringify({version:1,groups:{},records:{},activity}));
   prepareAwards(unit);
  }
  function prepareAwards(unit){
   const zones={},zoneIds=unit.reward.zones.map(z=>z.id),at='2026-11-02T00:00:00.000Z';
   let earned=[];
-  if(entry.kind==='card')earned=zoneIds.slice(0,selection.stars);
+  if(entry.kind==='card')earned=zoneIds.slice(0,Math.max(0,selection.stars-(selection.state==='pending'?1:0)));
   if(entry.kind==='award'){
    earned=zoneIds.filter(id=>id!==entry.activity).slice(0,selection.stars-1);
    if(selection.state==='replay')earned.push(entry.activity);
   }
   earned.forEach(id=>{zones[id]={runId:'review-existing-'+id,earnedAt:at};});
-  localStorage.setItem(unit.progress.learningKey+':awards:'+unit.reward.edition,JSON.stringify({edition:unit.reward.edition,zones,firstFullStarAt:earned.length===5?at:null}));
+  const ledger={edition:unit.reward.edition,zones,firstFullStarAt:earned.length===5?at:null};
+  root.CanranStudentAccess.awards=ledger;
+  const book=JSON.parse(localStorage.getItem(unit.progress.learningKey)||'{"activity":{}}');book.activity||={};book.activity.unitAwardClaims={};
+  if(entry.kind==='card'&&selection.state==='pending'&&selection.stars){
+   const id=zoneIds[selection.stars-1],questions=unit.questions[id],runId='review-pending-'+id;
+   book.activity.unitAwardClaims[id]={edition:unit.reward.edition,roundPolicy:unit.reward.edition,runId,index:questions.length,contentSignature:JSON.stringify([unit.version??null,questions]),states:questions.map(q=>model.questionState(q,runId,'correct'))};
+   ledger.zones[id]={runId,pending:true};
+   root.CanranStudentAccess.awards={...ledger,zones:{...zones}};delete root.CanranStudentAccess.awards.zones[id];
+  }
+  localStorage.setItem(unit.progress.learningKey,JSON.stringify(book));
+  localStorage.setItem(unit.progress.learningKey+':awards:'+unit.reward.edition,JSON.stringify(ledger));
  }
  root.CanranReviewRuntime={prepareUnit,
+  awardAccess:()=>selection.state==='pending'?root.CanranStudentAccess:null,
   registerCompletionReset:reset=>{resetCompletion=reset;},
   referenceOpened:source=>{
    const route=source.closest('.shop-stage')?.id,items=[...source.parentElement.querySelectorAll(':scope>details.offline-task,:scope>details.grammar-reference')];
@@ -69,20 +82,20 @@
   const runner=surface.querySelector('.practice-runner'),snapshot=runner&&practices.get(runner.id)?.read?.();
   if(snapshot){
    if(dialog?.classList.contains('award-reveal')){
-    const card=dialog.querySelector('.award-card');return position(candidates.find(e=>e.kind==='award'),dialog.dataset.kind==='replay'?'replay':'earned',Number(card?.dataset.stars)||selection.stars);
+    const card=dialog.querySelector('.award-card'),stars=dialog.dataset.phase==='ready'?Number(card?.dataset.stars)||selection.stars:selection.stars;return position(candidates.find(e=>e.kind==='award'),selection.state==='pending'?'pending':dialog.dataset.kind==='replay'?'replay':'earned',stars);
    }
    if(snapshot.result)return position(candidates.find(e=>e.kind==='result'),snapshot.corrected?'corrected':'perfect');
    const item=candidates.find(e=>e.questionId===snapshot.questionId),state=snapshot.state||{};
    const mode=dialog?.classList.contains('learning-explanation-sheet')?'explanation':dialog?.id==='learning-reference-sheet'&&item?.states.includes('full')?'full':snapshot.review?'review':state.checked?(state.correct?(state.firstCorrect?'correct':'corrected'):'wrong'):state.hintUsed?'hint':state.selection!==null&&state.selection!==undefined||state.tokens?.length||state.pairs?.some(Boolean)||state.fills?.some(Boolean)?'selected':'before';
    return position(item,mode);
   }
-  if(route==='learn/words')return position(candidates.find(e=>e.kind==='words'&&e.index===(practice.activity('unitWordPage')||0)),surface.querySelector('.unit-word[aria-expanded=true]')?'expanded':'collapsed');
+  if(route==='learn/words')return position(candidates.find(e=>e.kind==='words'&&e.index===(root.CanranCore.wordDeck?.current()?.page??practice.activity('unitWordPage')??0)),surface.querySelector('.unit-word[aria-expanded=true]')?'expanded':'collapsed');
   if(route==='learn/text'){
    const story=practice.activity('unitDialogue')||{};
    const item=story.done?candidates.find(e=>e.kind==='story-complete'):story.i>=0?candidates.find(e=>e.kind==='story-line'&&e.index===story.i):candidates.find(e=>e.kind==='story-start');
    return position(item,surface.querySelector('.bubble-row:last-child [aria-expanded=true]')?'translated':'english');
   }
-  if(route==='learn/certificate')return position(candidates.find(e=>e.kind==='card'),'card',Number(surface.querySelector('.award-card')?.dataset.stars)||0);
+  if(route==='learn/certificate')return position(candidates.find(e=>e.kind==='card'),selection.state==='pending'?'pending':'card',Number(surface.querySelector('.award-card')?.dataset.stars)||0);
   return position(candidates.find(e=>e.kind==='cover'),'view');
  }
  function inheritedOverlay(practice,target,preset,runId){
@@ -137,7 +150,7 @@
    if(entry.kind==='question'){
     if(selection.state==='hint')clickButton(runner,'给点线索');
     if(selection.state==='explanation')clickButton(runner,'讲解');
-    if(selection.state==='full')clickButton(runner,runner.querySelector('.learning-material-preview')?'查看题目材料':'查看全文');
+    if(selection.state==='full')clickButton(runner,runner.querySelector('.learning-material-preview,[data-reviewed-material]')?'查看题目材料':'查看全文');
    }
    if(entry.kind==='reference'){
     const scope=document.getElementById(entry.route),references=[...scope.querySelectorAll(':scope>details.offline-task,:scope>details.grammar-reference')];
@@ -182,9 +195,9 @@
   requestId=data.requestId;generation++;if(launchListener)removeEventListener('message',launchListener);launchListener=null;
   applying=true;
   const target=course.entries.find(item=>item.id===next.page),moving=next.page!==entry.id;
-  const canMove=moving&&target&&['question','result','award'].includes(target.kind)&&practices.has(selection.unit.replace('-','')+'-'+target.activity+'-practice');
+  const canMove=moving&&target&&((['question','result','award'].includes(target.kind)&&practices.has(selection.unit.replace('-','')+'-'+target.activity+'-practice'))||(target.kind==='words'&&typeof root.CanranCore.wordDeck?.goPage==='function'));
   const supported=['question','result','award','words','story-line','card'].includes(entry.kind);
-  const positioned=currentRoute()===entry.route&&(entry.kind!=='words'||practice.activity('unitWordPage')===entry.index)&&(entry.kind!=='story-line'||practice.activity('unitDialogue')?.i===entry.index);
+  const positioned=currentRoute()===entry.route&&(entry.kind!=='words'||(root.CanranCore.wordDeck?.current()?.page??practice.activity('unitWordPage'))===entry.index)&&(entry.kind!=='story-line'||practice.activity('unitDialogue')?.i===entry.index);
   if(next.unit!==selection.unit||(!canMove&&(moving||!supported||!positioned))||!resetAwards||!practices.size){send('review-reload',{selection:next});return;}
   // Cancel the old animation/foreground result before replacing isolated demo data.
   root.dispatchEvent(new Event('lesson49:leave-activity'));
@@ -195,6 +208,7 @@
    if(moving){history.replaceState(null,'','#'+entry.route);dispatchEvent(new HashChangeEvent('hashchange'));}
    prepareAwards(currentUnit);resetAwards();
    for(const {reset} of practices.values())reset();
+   if(moving&&entry.kind==='words')root.CanranCore.wordDeck.goPage(entry.index);
    activate(generation);
   }catch(error){send('review-error',{message:error.message});}
  });

@@ -2,7 +2,7 @@
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,addStudent,studentLogin}=require('./helpers');
 const flow=require('../support/thirteen-types-flow');
-const tasks=require('../support/units1-30-tasks');
+const tasks=require('../support/current-award-flow');
 const {waitForRewardDismissal,dismissRewardDialog}=require('../support/reward-dialog');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 const options={base:base.replace(/\/$/,''),keepAward:true};
@@ -114,7 +114,7 @@ for (const [pair, width, motion] of [
   } finally { await student.context.close(); }
 });
 
-test('真实账号离线零错不预发星，恢复同步不打断结算，主动复练显示原星与当前姓名',async({page,browser})=>{
+test('真实账号离线零错显示本机待同步星，确认不打断结算，复练保留原星与姓名',async({page,browser})=>{
   test.setTimeout(120000);
   await adminLogin(page,base);const name='热爱探险和英语学习的小朋友李明小明';
   const account=await createStudent(page,'悬浮卡同步验收班',name,[/Lesson 1–2/]);const other=await addStudent(page,'另一位同学');
@@ -125,8 +125,8 @@ test('真实账号离线零错不预发星，恢复同步不打断结算，主�
   await first.context.setOffline(true);
   // The cached course remains usable; all answers are genuine page actions.
   await flow.activity(p,'1-2','listen',options);
-  await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('.stage-listen .award-round-result')).toContainText('联网后同步星星');
-  const reveal=p.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal).not.toBeVisible();
+  await expect(p.locator('#starCount')).toHaveText('1');await expect(p.locator('.stage-listen .award-round-result')).toContainText('待同步');
+  const reveal=p.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal).toBeVisible();await dismissRewardDialog(p,'Escape');
   const finish=p.locator('.stage-listen .completion-card');
   await expect(finish).toHaveAttribute('data-result-motion','finished');
   await first.context.setOffline(false);

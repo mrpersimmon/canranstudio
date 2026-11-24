@@ -1,0 +1,29 @@
+{
+  "id": "forest-baskets-v2",
+  "unit": "unit143-144",
+  "transparent": true,
+  "refs": [
+    "assets/unit143-144/keepsake-story-v1.webp",
+    "output/story-book-review/baskets-reference.png"
+  ],
+  "prompt": "Create a transparent-background storybook prop asset: exactly TWO empty wire-mesh waste baskets standing on the same ground baseline side by side, a little space between them. Match the warm brown outlines, softly painted metal rims and subtle texture of the waste basket in reference1 original keepsake. Reference2 establishes exactly two empty bins. Do NOT draw the two simplified trees from reference2: the app already has a forest background. No ground tile or ground patch, no landscape, no people, no garbage inside or outside, no labels. True transparent alpha everywhere around and inside the open mesh, no white halo, no baked rectangular backdrop. Full rims and bottom feet visible with generous transparent margins. 3:2 horizontal composition, not a flat vector symbol.",
+  "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-9e1e4612-10ab-4af0-b9a7-8b921107b544.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "tool": "built-in image_gen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-9e1e4612-10ab-4af0-b9a7-8b921107b544.png",
+  "raw": "assets/learning-whole-book-v1/raw/forest-baskets-v2.png",
+  "adopted": "assets/unit143-144/forest-baskets-v2.webp",
+  "status": "adopted-local-preview",
+  "alphaReview": "Actual alpha and cream-background composition inspected; built-in preview RGB haze is outside fully transparent alpha.",
+  "sha256": "a629599c9934c862b815c16c5a9447481de69f3ab376c14eb276b1e36527806a",
+  "screenEvidence": [
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-16-pro-max.jpg"
+  ]
+}

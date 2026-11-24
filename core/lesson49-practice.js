@@ -297,6 +297,7 @@
     const key = sessionId ? element.id+'/'+sessionId : element.id;
     activeDraftKeys.add(key);
     const contentSignature = JSON.stringify([context.version ?? null, questions], (field, value) => field === 'hint' ? undefined : value);
+    /* @bench:seed */
     let group = notebook.groups[key];
     // Explicit activity consolidation only. An existing destination (including
     // a restarted round) always owns its draft. Never import notebook scores.
@@ -779,6 +780,7 @@
         reviewEnabled: allowReview, reviewing: reviewIndex !== null, index: group.index, total: questions.length
       })
     };
+    /* @bench:practice */
     controllers.set(element,controller); return controller;
   }
   function initializeNotebook() {

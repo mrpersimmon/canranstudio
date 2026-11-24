@@ -65,7 +65,7 @@
   async function api(endpoint, value, timeoutMs = 15000) {
     const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),timeoutMs);
     try{const response = await fetch('/lesson/api/' + endpoint, { signal:controller.signal,cache:'no-store', ...(value === undefined ? {} : { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(value) }) });
-    const result = await response.json(); if (!response.ok) { if(adminMode && state && response.status===401 && endpoint!=='admin/login'){state=null;document.querySelectorAll('.teacher-dialog,.admin-save-dialog').forEach(d=>d.close());login(true,'登录已失效，请重新登录；若账号被禁用，请联系管理员。');} throw Object.assign(new Error(result.error), { status:response.status, cooldown:response.status===429?result.cooldown:null }); } return result;}finally{clearTimeout(timeout);}
+    if (!response.ok) { const result=await response.json().catch(()=>({}));if(adminMode && state && response.status===401 && endpoint!=='admin/login'){state=null;document.querySelectorAll('.teacher-dialog,.admin-save-dialog').forEach(d=>d.close());login(true,'登录已失效，请重新登录；若账号被禁用，请联系管理员。');} throw Object.assign(new Error(result.error||response.statusText), { status:response.status, cooldown:response.status===429?result.cooldown:null }); } return await response.json();}finally{clearTimeout(timeout);}
   }
   async function worker() { try {
     const api = navigator.serviceWorker;
@@ -137,10 +137,46 @@
   }
   async function syncPending(studentId,upgrade){
     const prefix=window.CanranSystemUpgrade?.namespace(studentId,upgrade)||'canran:student:'+studentId+':'+(upgrade?.epoch?'epoch:'+upgrade.epoch+':':'');let remaining=0;
+    let reviewMessage='';
     const keys=Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).filter(k=>k.startsWith(prefix+'pending:'));
-    for(const key of keys){try{const pending=JSON.parse(localStorage.getItem(key));if(pending.studentId!==studentId||upgrade&&pending.epoch!==upgrade.epoch)continue;const result=await api('progress',pending);if(result.stale){localStorage.removeItem(prefix+'canran:lesson:'+pending.course+':learning:v1');localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}localStorage.removeItem(key);}catch{remaining++;}}
-    return remaining;
+    for(const key of keys){try{for(;;){
+      const raw=localStorage.getItem(key);if(!raw)break;
+      const pending=JSON.parse(raw);if(pending.studentId!==studentId||upgrade&&pending.epoch!==upgrade.epoch)break;
+      const chunk=CanranLearningObserver.nextUpload(pending),result=await api('progress',chunk),bookKey=prefix+'canran:lesson:'+pending.course+':learning:v1';
+      if(result.stale){if(Number(localStorage.getItem(prefix+'generation:'+pending.course)||0)<result.generation){localStorage.removeItem(bookKey);localStorage.setItem(prefix+'generation:'+pending.course,String(result.generation));}}
+      else {
+        const claims=JSON.parse(localStorage.getItem(bookKey)||'{}').activity?.unitAwardClaims||{};
+        for(const review of result.awardReviews||[]){
+          if(review.accepted||claims[review.zone]?.runId!==review.runId||result.awards?.zones?.[review.zone])continue;
+          const awardKey=bookKey+':awards:'+review.edition,ledger=JSON.parse(localStorage.getItem(awardKey)||'{}');ledger.edition=review.edition;ledger.zones||={};ledger.rejected||={};
+          if(ledger.zones[review.zone]?.pending)delete ledger.zones[review.zone];ledger.rejected[review.zone]={runId:review.runId,reason:review.reason};localStorage.setItem(awardKey,JSON.stringify(ledger));
+          reviewMessage='有星星尚未通过复核，作答已保留，请进入课程查看。';
+        }
+      }
+      // Another course tab may have written a newer snapshot during this POST.
+      if(localStorage.getItem(key)!==raw){remaining++;break;}
+      const rest=result.stale?null:CanranLearningObserver.afterUpload(pending,chunk);
+      if(!rest){localStorage.removeItem(key);break;}
+      localStorage.setItem(key,JSON.stringify(rest));
+    }}catch(error){remaining++;if(error.code==='UPLOAD_TOO_LARGE'||error.status===413)reviewMessage='有一份记录暂时无法上传，已保存在本机。';}}
+    return {remaining,reviewMessage};
   }
+  let backgroundSync,lastSyncOwner;
+  function pendingCount(who){
+    if(who.preview)return 0;const prefix=window.CanranSystemUpgrade?.namespace(who.student.id,who.systemUpgrade)||'canran:student:'+who.student.id+':';
+    return Array.from({length:localStorage.length},(_,i)=>localStorage.key(i)).filter(key=>key?.startsWith(prefix+'pending:')).length;
+  }
+  function syncInBackground(who){
+    lastSyncOwner={who,turn:sessionTurn};if(who.preview||backgroundSync||!pendingCount(who))return;
+    const turn=sessionTurn,job={};backgroundSync=job;
+    void (async()=>{
+      const result=await syncPending(who.student.id,who.systemUpgrade);if(turn!==sessionTurn)return;
+      const next=await api('me');if(turn!==sessionTurn||next.student.id!==who.student.id||next.mustChangePassword||next.systemUpgrade?.epoch!==who.systemUpgrade?.epoch)return;
+      next.directoryWaiting=result.remaining;next.directoryReviewMessage=result.reviewMessage;
+      window.dispatchEvent(new CustomEvent('canran:progress-synced',{detail:next}));
+    })().catch(()=>{}).finally(()=>{if(backgroundSync===job)backgroundSync=null;});
+  }
+  window.addEventListener('online',()=>{if(lastSyncOwner?.turn===sessionTurn)syncInBackground(lastSyncOwner.who);});
   async function prepareSharedFonts(signal){
     checkDirectoryActive(signal);
     if(!window.CanranCourseCache){
@@ -176,7 +212,7 @@
     // Wait for both workers to stop: an already-started native cache write
     // finishes under its lock even when the other worker is cancelled first.
     const results=await Promise.allSettled(Array.from({length:2},async()=>{while(queue.length){
-      checkDirectoryActive(signal);const item=queue.shift(),bytes=await store.obtain(item,{signal});checkDirectoryActive(signal);
+      checkDirectoryActive(signal);const item=queue.shift(),bytes=await store.obtain(item,{signal,checkpointFonts:true});checkDirectoryActive(signal);
       for(const [family,weight] of families[item.key.split('/').pop()]||[]){
         if([...document.fonts].some(face=>face.family===family&&face.weight===weight&&face.status==='loaded'))continue;
         const face=new FontFace(family,bytes,{weight,display:'swap'});
@@ -187,29 +223,31 @@
     checkDirectoryActive(signal);
     document.documentElement.dataset.sharedFontsReady=String(fonts.length);
   }
-  function prepareDirectory(hasCourses, waiting) {
+  function prepareDirectory(hasCourses) {
     stopDirectoryFonts();
-    const note=app.querySelector('[data-home-status]')||app.querySelector('p[role="status"]'),retry=document.createElement('button');
+    const note=app.querySelector('[data-home-status]')||app.querySelector('p[role="status"]');
     if(!note)return;
-    const pending=waiting?'还有学习成果保存在本机，联网后将继续同步。':'';
-    retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(retry);
+    // The course directory owns the live learning-sync message. A later font
+    // response must never restore the pending status from the time of entry.
+    const retry=note.parentElement.querySelector('#directoryPrepareRetry')||document.createElement('button');
+    const warning=note.parentElement.querySelector('.directory-font-warning')||document.createElement('span');
+    warning.className='directory-font-warning';warning.setAttribute('role','status');warning.hidden=true;
+    retry.type='button';retry.className='compact';retry.id='directoryPrepareRetry';retry.textContent='重新准备';retry.hidden=true;note.after(warning,retry);
     delete document.documentElement.dataset.sharedFontsReady;
     let busy=false,preparation;
     const prepare=async()=>{
-      if(busy)return;busy=true;retry.hidden=true;
+      if(busy)return;busy=true;warning.hidden=true;retry.hidden=true;
       delete document.documentElement.dataset.sharedFontsReady;
       const controller=new AbortController();directoryFontController=controller;
-      note.textContent=pending;
       try{
         if(hasCourses){
           await directoryRead(loadDirectoryStyles(),controller.signal);
           const results=await Promise.allSettled([prepareSharedFonts(controller.signal),directoryRead(document.fonts.load('600 20px "Baloo 2"'),controller.signal),directoryRead(document.fonts.load('24px "ZCOOL KuaiLe"'),controller.signal)]);
           const failed=results.find(result=>result.status==='rejected');if(failed)throw failed.reason;
         }else document.documentElement.dataset.sharedFontsReady='0';
-        if(note.isConnected)note.textContent=pending;
       }catch{
         if(controller.signal.aborted)return;
-        if(note.isConnected){note.textContent=pending+'部分内容还没准备好，可以进入课程继续加载。';retry.hidden=false;}
+        if(note.isConnected){warning.textContent='部分内容还没准备好，可以进入课程继续加载。';warning.hidden=false;retry.hidden=false;}
       }finally{busy=false;if(directoryFontController===controller)directoryFontController=null;}
     };
     const startPreparation=()=>{preparation=prepare();return preparation;};
@@ -237,10 +275,7 @@
       if(who.mustChangePassword)return passwordForm(who,true);
       if(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/')){location.reload();return;}
       if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
-      const waiting=who.preview?0:await syncPending(who.student.id,who.systemUpgrade);
-      if(turn!==sessionTurn)return;
-      if(!who.preview)who=await api('me');
-      if(turn!==sessionTurn)return;
+      const waiting=pendingCount(who);who.directoryWaiting=waiting;
       const account=new URLSearchParams(location.search).get('account');
       if(!who.preview&&account==='password'){
         const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);passwordForm(who,false);return;
@@ -250,11 +285,12 @@
       if(openLegacy||openProfile){const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);}
       studentHeader(who,()=>window.dispatchEvent(new Event('canran:open-account')));
       app.innerHTML='';
-      const resolveWho=async()=>{let next=await api('me');if(!next.mustChangePassword){const remaining=await syncPending(next.student.id,next.systemUpgrade);next={...await api('me'),directoryWaiting:remaining};}return next;};
-      const onPageActive=(page,next)=>{if(page==='courses')prepareDirectory(next.courses.length>0,next.directoryWaiting??waiting);else stopDirectoryFonts();};
+      const resolveWho=async()=>{const next=await api('me');if(!next.mustChangePassword){next.directoryWaiting=pendingCount(next);syncInBackground(next);}return next;};
+      const onPageActive=(page,next)=>{if(page==='courses')prepareDirectory(next.courses.length>0);else stopDirectoryFonts();};
       clearHome=window.CanranCourseJourney.mount(app,{who,base:'/lesson/',preview,waiting,onRefresh:home,resolveWho,onPageActive,onSessionError:error=>sessionFailure(error,false),openLegacy,openProfile});
       authenticated();window.CanranSystemUpgrade?.notice(who,app);
-      if(who.preview)prepareDirectory(who.courses.length>0,waiting);
+      if(who.preview)prepareDirectory(who.courses.length>0);
+      else setTimeout(()=>{if(turn===sessionTurn)syncInBackground(who);},0);
     }catch(error){if(turn===sessionTurn)sessionFailure(error,false);}
   }
   async function loadAdmin(selected=currentClass,guard=()=>true) {
