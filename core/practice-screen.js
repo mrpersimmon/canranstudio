@@ -61,7 +61,7 @@
   if(layouts.get(content)===key)return;
   layouts.set(content,key);
   content.classList.remove('learning-tight-question');
-  const picture=flow&&content.querySelector(':scope>img.practice-scene');
+  const picture=flow&&content.querySelector(':scope>img.practice-scene,:scope>.learning-picture-preview>img.practice-scene');
   if(picture){picture.style.removeProperty('height');picture.style.removeProperty('max-height');}
   const map=flow&&content.querySelector('.scene-find-canvas');if(map){map.style.removeProperty('width');map.style.removeProperty('margin-inline');}
   const answer=content.querySelector('.translation-answer'),tokens=content.querySelectorAll('.translation-bank .opt-btn');

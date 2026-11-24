@@ -99,7 +99,7 @@ for (const unit of units) test(`${unit.title} 单词寻宝覆盖13个新词，�
     await expect(check).toBeDisabled(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
     if (i >= vocabularyAnswers[unit.id].length - 3) { await page.reload(); await expect(check).toBeDisabled(); await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0); }
     if (unit.id === 'unit9-10' && i === 5 || unit.id === 'unit11-12' && i === 6) {
-      await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();}); await expect(room.locator('.practice-options img')).toHaveCount(0);
+      await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();}); await expect(room.locator('.practice-options img')).toHaveCount(0);
     }
     if (i === 0) {
       await room.getByRole('button', { name: unit.id === 'unit9-10' ? '母亲' : '谁', exact: true }).click(); await check.click();

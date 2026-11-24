@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,expectRoundCounts,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
@@ -25,8 +25,14 @@ test('5–6 十四题介绍综合练习，全声音失败仍可逐题完成，�
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     await courseButton(room, i === 13 ? "finishExam" : '下一题').click();
   }
-  await expect(room).toContainText('首次独立答对 12 / 14');
-  await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await expectRoundCounts(room.locator('.completion-number'), ['14', '14', '1']);
+  await openLearningRecord(page);
+  const entries=page.locator('.learning-record-group[data-activity="exam"] li summary');
+  await expect(entries).toHaveCount(14);
+  await expect(entries.filter({hasText:'本轮首答正确'}).filter({hasNotText:'用过线索'})).toHaveCount(12);
+  await expect(entries.filter({hasText:'用过线索'})).toHaveCount(1);
+  await expect(entries.filter({hasText:'本轮订正完成'})).toHaveCount(1);
+  await page.getByRole('dialog',{name:'学习记录',exact:true}).getByRole('button',{name:'关闭',exact:true}).click();
   await expect(room.getByRole('group', { name: '完成后的操作', exact: true }).getByRole('button')).toHaveCount(2);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click(); await page.reload();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');

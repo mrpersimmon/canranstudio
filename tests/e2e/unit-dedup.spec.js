@@ -128,12 +128,13 @@ async function priorEdition(page, unit) {
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
     : unit==='unit49-50'?route.fallback():route.continue());
   if (unit === 'unit1-2') {
-    await page.route(/\/unit1-2\/(?:index\.html)?$/,async route=>{if(!prior)return route.continue();const response=await route.fetch();return route.fulfill({response,body:(await response.text()).replace('<script src="/core/lesson49-icons.js">','<script src="/core/audio-player.js"></script><script src="/core/lesson49-icons.js">')});});
-    // Keep the predecessor runner with the predecessor content. Mixing the
-    // current runner into a historical edition invents an unsupported release.
-    await page.route('**/unit1-2/unit.js*', route => prior
-      ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit1-2-short-exam-before/unit.js'), contentType: 'text/javascript' })
-      : route.continue());
+    const folder=require('node:path').join(__dirname,'../fixtures/unit1-2-short-exam-before');
+    for(const name of ['index.html','unit.js','scene.js','unit.css']){
+      const pattern=name==='index.html'?/\/unit1-2\/(?:index\.html)?$/:('**/unit1-2/'+name+'*');
+      await page.route(pattern, route=>prior
+        ?route.fulfill({path:require('node:path').join(folder,name),contentType:name.endsWith('.html')?'text/html':name.endsWith('.css')?'text/css':'text/javascript'})
+        :route.continue());
+    }
   }
   if (unit === 'unit3-4') {
     for (const name of ['index.html', 'unit.js']) {
@@ -211,7 +212,9 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   const retainedRecords = await page.evaluate(() => JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')).activity.unit34HistorySnapshot.records);
   expect(retainedRecords).toEqual(originalRecords);
-  await expect(page.locator('.stage-text')).toContainText('故事看完了！');
+  await page.goto('/unit3-4/#learn/text');
+  await expect(page.locator('.stage-text .dialogue-status')).toContainText('12 / 12');
+  await expect(page.locator('.stage-text > .practice-finish')).toBeVisible();
   // Reading and compatible answers survive, but neither establishes a zero-error
   // round in the new five-zone award edition.
   await expect(page.locator('#starCount')).toHaveText('0');

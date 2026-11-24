@@ -1,4 +1,5 @@
 'use strict';
+const {openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const flow = require('../support/thirteen-types-flow');
@@ -66,7 +67,7 @@ test('草稿、正在同步与联网后同步分别提示，不把未提交到�
     const room = p.locator('.stage-manners');
     await flow.select(room, { fills: ['me'] });
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
-    await p.getByRole('button', { name: '学习记录', exact: true }).click();
+    await openLearningRecord(p);
     const record = p.getByRole('dialog', { name: '学习记录', exact: true });
     await expect(record.locator('#learningSaveStatus')).toHaveText('本轮草稿已保存到本机。');
     await record.getByRole('button', { name: '关闭', exact: true }).click();
@@ -76,12 +77,15 @@ test('草稿、正在同步与联网后同步分别提示，不把未提交到�
     // Deliberately hold server confirmation: leave the foreground keepsake in
     // place until this test releases the request, rather than auto-dismiss it.
     await flow.activity(p, '1-2', 'manners', { base: base.slice(0, -1), keepAward: true });
-    await expect(room.locator('.award-round-result')).toHaveText('正在同步星星…');
+    await expect(room.locator('.award-round-result')).toHaveText('已在本机获得 · 待同步');
+    await expect(p.getByRole('dialog',{name:/纪念卡结算/})).toBeVisible();
+    await require('../support/reward-dialog').dismissRewardDialog(p);
     await expect.poll(() => Boolean(held)).toBe(true);
     await held.abort();
-    await expect(room.locator('.award-round-result')).toHaveText('已保存，联网后同步星星。');
-    await expect(p.locator('#starCount')).toHaveText('0');
-    await p.getByRole('button', { name: '学习记录', exact: true }).click();
+    await expect(room.locator('.award-round-result')).toHaveText('已在本机获得 · 待同步');
+    await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','retry');
+    await expect(p.locator('#starCount')).toHaveText('1');
+    await openLearningRecord(p);
     await expect(record.locator('#learningSaveStatus')).toHaveText('已保存到本机 · 联网后同步');
     await record.getByRole('button', { name: '关闭', exact: true }).click();
     await p.unroute('**/api/progress');

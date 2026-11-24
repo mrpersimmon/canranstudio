@@ -53,7 +53,7 @@ test('lesson 子目录直接显示导航，组合单元和返回导航都留在�
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
   await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
   await expect(page).toHaveURL(/\/lesson\/unit49-50\/#learn\/words$/);
-  await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: '采购小图鉴', exact: true }).getByRole('button', {name:'下一组',exact:true})).toBeVisible();
   await expect.poll(() => page.locator('.unit-word img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
   await page.getByRole('link', { name: '我的课程', exact: true }).click();await directoryReady(page);
   await expect(page).toHaveURL(/\/lesson\/$/);
@@ -125,6 +125,6 @@ test('手机 lesson 导航与单元没有横向溢出，旧首页入口返回新
   await expect(page.getByRole('heading', { name: '今天，去哪儿冒险？' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
   await page.locator('[data-unit="unit49-50"]').getByRole('link', { name: '开始学习', exact: true }).click();
-  await expect(page.getByRole('heading', { name: '采购小图鉴', exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: '采购小图鉴', exact: true }).getByRole('button', {name:'下一组',exact:true})).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
 });

@@ -108,6 +108,11 @@
   const parts=[...source.children].filter(item=>item.tagName!=='SUMMARY').map(item=>item.cloneNode(true));
   referenceContent.replaceChildren(...parts);
   referenceContent.querySelectorAll('[id]').forEach(item=>item.removeAttribute('id'));
+  // An inline diagram may be fitted to the space above the answer buttons.
+  // The reading sheet has its own scroll area and shows the full diagram.
+  for(const image of referenceContent.querySelectorAll('.learning-material-image')){
+   image.style.removeProperty('height');image.style.removeProperty('max-height');
+  }
   for(const card of referenceContent.querySelectorAll('.reference-card')){
    const copy=make('learning-reference-copy');
    for(const child of [...card.childNodes])if(!(child.nodeType===1&&['IMG','SVG','PICTURE'].includes(child.tagName)))copy.append(child);
@@ -140,15 +145,33 @@
   if(content.querySelector('.learning-material-source'))return;
   const image=content.querySelector(':scope>img.practice-scene'),notes=[...content.querySelectorAll('.practice-context,.task-reference')].filter(e=>!e.closest('.learning-context-source'));
   const longNotes=notes.some(e=>e.textContent.trim().length>120),model=content.querySelector('.grammar-model'),longModel=model&&model.textContent.trim().length>60&&content.querySelector('.learning-context-source');
-  if(!longNotes&&!longModel)return;
+  const comparisons=[...content.querySelectorAll('.picture-option[aria-description]>img')];
+  const detailImage=image&&content.closest('.stage-grammar,.stage-exam')&&!content.querySelector('.learning-context-source');
+  if(!longNotes&&!longModel&&!comparisons.length&&!detailImage)return;
   const source=document.createElement('details');source.className='learning-material-source';source.hidden=true;
   const summary=document.createElement('summary');summary.textContent='题目材料';source.append(summary);
   const button=document.createElement('button');button.type='button';button.className='learning-material-preview';button.setAttribute('aria-label','查看题目材料');button.setAttribute('aria-haspopup','dialog');
+  button.setAttribute('data-practice-review-navigation','');
+  button.onclick=()=>openReference(source,button);
+  if(detailImage&&!longNotes&&!longModel&&!comparisons.length){
+   // Keep the illustrated prompt on the page. Its existing image is the tap target.
+   const large=image.cloneNode(false);large.className='learning-material-image';source.append(large);
+   button.className='learning-picture-preview';image.before(button,source);button.append(image);return;
+  }
   const label=document.createElement('span');label.textContent='查看题目材料';const arrow=document.createElement('span');arrow.textContent='›';arrow.setAttribute('aria-hidden','true');
   if(image){const thumb=image.cloneNode(false);thumb.className='learning-material-thumb';thumb.alt='';button.append(thumb);}
   button.append(label,arrow);
   const heading=content.querySelector('h3');heading.after(button,source);
   if(image){image.classList.add('learning-material-image');source.append(image);}
+  if(comparisons.length){
+   const gallery=make('learning-comparison');
+   for(const illustration of comparisons){
+    const figure=document.createElement('figure'),caption=document.createElement('figcaption');
+    caption.textContent=illustration.closest('button').getAttribute('aria-label');
+    figure.append(illustration.cloneNode(false),caption);gallery.append(figure);
+   }
+   source.append(gallery);
+  }
   const materials=[...(model&&(longModel||longNotes)?[model]:[]),...(longNotes?notes:[])];source.append(...materials);
   for(const note of materials){note.classList.remove('practice-screen-material');note.style.removeProperty('max-height');note.removeAttribute('tabindex');note.removeAttribute('aria-description');}
   // Move the original scenario too: one entry preserves its authored text,
@@ -157,7 +180,6 @@
    source.append(...[...old.children].filter(child=>child.tagName!=='SUMMARY'));old.remove();
   }
   for(const old of content.querySelectorAll('.learning-context-preview'))old.remove();
-  button.onclick=()=>openReference(source,button);
  }
  function prepareQuestion(runner){
   const content=runner.querySelector('.practice-content');
@@ -216,6 +238,10 @@
   if(!previous||!motion()||!animate)return;
   panel.dataset.learningMotion='entering';
   const own=panel.animate([{opacity:.72,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:190,easing:'cubic-bezier(.2,.7,.3,1)'});
+  // A busy WebView can finish laying out the destination after the animation
+  // would already have elapsed. Start its clock from the next rendered frame.
+  own.pause();own.currentTime=0;
+  requestAnimationFrame(()=>{if(animation===own&&motion())own.play();});
   animation=own;motions.set(panel,own);own.finished.catch(()=>{}).finally(()=>{if(motions.get(panel)===own){delete panel.dataset.learningMotion;motions.delete(panel);}if(animation===own)animation=null;});
  }
  function prepare(surface,runner,view){

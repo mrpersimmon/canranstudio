@@ -44,8 +44,9 @@
   const height=Math.floor(Math.max(surface.hasAttribute('data-word-deck')?132:140,Math.min(280,(available-gap*(fullRows-1))/fullRows)));
   grid.style.setProperty('--word-columns',String(columns*2));
   grid.style.setProperty('--word-rows',String(rows));
-  grid.style.setProperty('--word-card-height',height+'px');
   for(const card of cards)card.style.gridColumn='span 2';
+  const textHeight=surface.hasAttribute('data-word-deck')?core.wordDeck.minimumHeight(cards[0].getBoundingClientRect().width):0;
+  grid.style.setProperty('--word-card-height',Math.max(height,textHeight)+'px');
   for(const card of cards){
    const context=card.querySelector('.word-context');if(!context||card.getAttribute('aria-expanded')==='true')continue;
    context.style.removeProperty('font-size');

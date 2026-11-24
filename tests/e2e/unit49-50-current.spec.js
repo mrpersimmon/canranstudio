@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit4950');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:6000});
 test('60题、五区五星、统一结算及零英语配音请求',async({page},info)=>{
@@ -10,7 +10,9 @@ test('60题、五区五星、统一结算及零英语配音请求',async({page},
   await expect(page.locator('#starCount')).toHaveText(String(++n));await expect(room.getByRole('list',{name:'本轮成果'}).locator('li')).toHaveCount(3);
   await expectResultIcons(room);
   await expect(room.getByRole('group',{name:'完成后的操作'}).getByRole('button')).toHaveCount(2);
-  expect(await room.locator('.completion-next-prefix').evaluate(e=>e.getBoundingClientRect().height<=parseFloat(getComputedStyle(e).lineHeight)+2)).toBe(true);
+  const onward=room.locator('.practice-finish-actions button').last();
+  await expect(onward).toHaveText(id==='exam'?'查看纪念卡':'下一站');
+  expect(await onward.evaluate(el=>{const range=document.createRange();range.selectNodeContents(el);return [...range.getClientRects()].filter(r=>r.width>0).every(r=>r.height<=parseFloat(getComputedStyle(el).lineHeight)+2);})).toBe(true);
  }
  await openLearningRecord(page);
 
@@ -81,7 +83,7 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、结�
   const room=await activity(page,id,{inspect:async(room,i,phase)=>{if(phase==='before'){
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await room.locator('img').evaluateAll(els=>els.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);
    for(const btn of await room.locator('button:visible').all()){const b=await btn.boundingBox();expect(b.height).toBeGreaterThanOrEqual(43);}
-   if(id==='apply'&&i<7)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(1);
+   if(id==='apply'&&i<7)await withReadingMaterial(room,'.grammar-model',async view=>{await expect(view.getByRole('region',{name:'短示范'})).toHaveCount(1);});
    else if(id!=='grammar')await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
    if((id==='grammar'&&[0,8,10,13].includes(i))||(id==='apply'&&[3,5].includes(i)))await room.screenshot({path:info.outputPath(`${id}-${i}.png`)});
   }}});

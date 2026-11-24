@@ -49,7 +49,7 @@
    }else if(unit.questions[activity]){
     unit.questions[activity].forEach((q,index)=>{
      const copy=unit.copy?.questions?.[q.id]||{},states=['before','selected','correct','wrong','corrected','review'];
-     if(activity!=='listen'&&q.hint&&copy.hint!==false)states.push('hint');if(q.workshop?.rule)states.push('explanation');if(unit.reviewMaterialQuestions?.includes(q.id)||copy.readingExcerpt||q.display?.material?.trim().length>120||q.reference?.trim?.().length>120||(activity==='apply'&&q.workshop?.model?.lines?.flat().join('').length>60))states.push('full');
+     if(activity!=='listen'&&q.hint&&copy.hint!==false)states.push('hint');if(q.workshop?.rule)states.push('explanation');if(unit.reviewMaterialQuestions?.includes(q.id)||q.optionImageAlts||(['grammar','exam'].includes(activity)&&q.image&&!q.delivery)||copy.readingExcerpt||q.display?.material?.trim().length>120||q.reference?.trim?.().length>120||(activity==='apply'&&q.workshop?.model?.lines?.flat().join('').length>60))states.push('full');
      add('q:'+q.id,'question',stage.title,`${title} · 第 ${index+1} 题`,route,{activity,index,questionId:q.id,subtitle:copy.title||q.display?.title||q.prompt,type:types[q.type]||'选择',states});
     });
     add('result:'+activity,'result',stage.title,title+' · 结算',route,{activity,states:['perfect','corrected']});

@@ -1,5 +1,6 @@
 'use strict';
-const {courseButton}=require('../support/course-controls');
+const {expectContinuousTheatre}=require('../support/continuous-theatre');
+const {courseButton,finishStoryAndReturn}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 
 test.use({actionTimeout:7000,...(process.env.UNIT4546_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -61,15 +62,10 @@ for(const width of [320,390,768,1280])test(`${width}宽：对白在场景内、1
  await page.setViewportSize({width,height:width<400?568:900});
  await page.goto('/unit45-46/#learn/text');
  const room=page.locator('.stage-text'),world=room.locator('.office-world'),log=room.getByRole('log');
- const worldBox=await world.boundingBox(),logBox=await log.boundingBox();
+ await expectContinuousTheatre(room,'office-world-v1.webp');
  await room.screenshot({path:info.outputPath('intro.png')});
  await assertBobFacesPartner(world);
- expect(logBox.x,'对白留在场景内').toBeGreaterThanOrEqual(worldBox.x);
- expect(logBox.x+logBox.width).toBeLessThanOrEqual(worldBox.x+worldBox.width);
- expect(logBox.y).toBeGreaterThanOrEqual(worldBox.y);
- expect(logBox.y+logBox.height,'对白不能另起一块排在场景下方').toBeLessThanOrEqual(worldBox.y+worldBox.height);
- const locationBox=await room.locator('.office-location').boundingBox();
- expect(locationBox.width,'地点是紧凑标牌，不是铺满地板的横条').toBeLessThan(worldBox.width*.8);
+ await expect(room.locator('.office-location')).toBeHidden();
  await courseButton(room, "startStory").click();
  for(let i=0;i<14;i++){
   const latest=room.locator('.bubble-row').last();
@@ -89,18 +85,14 @@ for(const width of [320,390,768,1280])test(`${width}宽：对白在场景内、1
   for(const person of await world.locator('.office-actor:visible').all()){
    await assertUncut(person.locator('.office-person>.office-figure'));
    const b=await person.boundingBox(),w=await world.boundingBox();
-   const caption=await world.locator('.office-location').boundingBox();
    expect(bounds.y+bounds.height,'对白不能遮住人物').toBeLessThanOrEqual(b.y);
-   expect(caption.y+caption.height,'地点标牌不能遮住对白').toBeLessThanOrEqual(bounds.y);
-   expect(caption.y+caption.height,'地点标牌不能压住人物头部').toBeLessThanOrEqual(b.y);
    expect(b.x).toBeGreaterThanOrEqual(w.x);
    expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);
    expect(b.y).toBeGreaterThanOrEqual(w.y);
    expect(b.y+b.height).toBeLessThanOrEqual(w.y+w.height);
   }
   if(await world.locator('.office-machine').isVisible()){
-   const caption=await world.locator('.office-location').boundingBox(),machine=await world.locator('.office-machine').boundingBox();
-   expect(caption.y+caption.height,'地点标牌不能遮挡打字机').toBeLessThanOrEqual(machine.y);
+   const machine=await world.locator('.office-machine').boundingBox();
    expect(bounds.y+bounds.height,'对白不能遮住打字机').toBeLessThanOrEqual(machine.y);
   }
   if([0,5,6,13].includes(i)){
@@ -113,7 +105,7 @@ for(const width of [320,390,768,1280])test(`${width}宽：对白在场景内、1
  }
  await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(14);
  await assertBobFacesPartner(world);
- await courseButton(room, "finishStory").click();
+ await finishStoryAndReturn(room);
  await expect(room.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeVisible();
  await expect(page.locator('#starCount')).toHaveText('0');
 });

@@ -1,4 +1,5 @@
 'use strict';
+const {checkWordAndReturn}=require('../support/word-card-checks');
 const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS,select}=require('../support/unit6970');
 test.use({actionTimeout:7000});
@@ -17,7 +18,8 @@ test('72题、五区五星、统一三卡、示范记录与零英语配音',asyn
  expect(await page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 test('42张赛车图鉴、完整IPA、末组推进与刷新',async({page})=>{
- await page.goto('/unit69-70/#learn/words');await expect(page.locator('.unit-intro')).toHaveText('翻开1995年的观赛相册，找出冠军，记准哪天、几时、在哪里。');const room=page.locator('.stage-words'),first=room.getByRole('button',{name:'year',exact:true});await expect(first).toContainText('/jɪə/');await expect(first.locator('.word-meaning')).toBeHidden();await first.press('Enter');await expect(first.locator('.word-meaning')).toHaveText('年');await expect(courseButton(room, "previousWords")).toBeDisabled();const words=[];
+ await page.goto('/unit69-70/#learn/words');await expect(page.locator('.unit-intro')).toHaveText('翻开1995年的观赛相册，找出冠军，记准哪天、几时、在哪里。');const room=page.locator('.stage-words');
+ await checkWordAndReturn(room,'year','/jɪə/','年');const words=[];
  for(let i=0;i<7;i++){await expect(room.locator('.unit-word')).toHaveCount(6);words.push(...await room.locator('.unit-word strong').allTextContents());expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);if(i<6)await courseButton(room, "nextWords").click();}
  await expectVocabulary(page, words, ['year','race','town','crowd','stand','exciting','just','finish','winner','behind','way','stationer','Denmark','January','February','March','April','May','June','July','August','September','October','November','December','Australia','Austria','Canada','China','Finland','India','Poland','Turkey','Japan','Nigeria','hundreds of','on the way home','morning','afternoon','evening','night','noon']);
  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('7 / 7');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
@@ -80,9 +82,9 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三�
  }
 });
 for(const width of [320,390,768,1280])test(`${width}宽：长词组音标翻卡不截断`,async({page},info)=>{
- await page.setViewportSize({width,height:844});await page.goto('/unit69-70/#learn/words');const room=page.locator('.stage-words');await expect(room.getByRole('button',{name:'year',exact:true})).toBeVisible();
+ await page.setViewportSize({width,height:844});await page.goto('/unit69-70/#learn/words');const room=page.locator('.stage-words');const seen=[];
  for(let i=0;i<7;i++){
-  for(const card of await room.locator('.unit-word').all()){await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}
+  for(const card of await room.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);if(i===6)await room.screenshot({path:info.outputPath('long-word.png')});if(i<6)await courseButton(room, "nextWords").click();
  }
 });

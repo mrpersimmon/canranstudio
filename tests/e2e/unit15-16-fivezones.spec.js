@@ -13,7 +13,7 @@ test('55题、完整原文、五区五星及教材参考均可真实完成',asyn
    if(id==='exam'&&[2,3,4,5,7,8,11,12,13,14,16,17,18,19,20].includes(i))await expect(room.locator('.practice-context')).not.toBeEmpty();
    if(id==='apply'&&i===0)await expect(room).toContainText('两位姑娘都是游客');
    if(id==='apply'&&i===5)await expect(room.locator('.practice-context')).not.toBeEmpty();
-   if(id==='exam'&&i===6){await withQuestionMaterial(room,async material=>{const image=material.locator('.practice-scene');await expect(image).toBeVisible();await expect(image).toHaveAttribute('alt','两顶灰色帽子，都带黑色帽带');expect(await image.evaluate(e=>e.complete&&e.naturalWidth>0)).toBe(true);});}
+   if(id==='exam'&&i===6){await withQuestionMaterial(room,async(material,image)=>{await expect(image).toBeVisible();await expect(image).toHaveAttribute('alt','两顶灰色帽子，都带黑色帽带');expect(await image.evaluate(e=>e.complete&&e.naturalWidth>0)).toBe(true);});}
   }}});
   await expect(room.locator('.completion-stat')).toHaveCount(3);await room.locator('.completion-card').scrollIntoViewIfNeeded();await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');await room.screenshot({path:info.outputPath(id+'-completed.png')});
  }

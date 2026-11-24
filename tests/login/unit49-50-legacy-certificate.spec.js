@@ -1,8 +1,9 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
 const {DatabaseSync}=require('node:sqlite'),{createApp}=require('../../server/app'),{openStore}=require('../../server/store');
 const {adminLogin,createStudent,signIn}=require('./helpers'),fixture=require('../support/unit49-50-legacy-site');
-const ready=page=>expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+const ready=readyCourse;
 test.use({browserName:process.env.UNIT49_BROWSER||'chromium',actionTimeout:10000});
 test('真实旧证原件、PNG、打印与跨时区日期保留，新版获星不重写旧记录',async({browser,browserName},info)=>{
  test.setTimeout(240000);const root=path.resolve(__dirname,'../..'),temporary=await fs.mkdtemp(path.join(os.tmpdir(),'canran-u4950-certificate-')),oldRoot=path.join(temporary,'old-site'),dataDir=path.join(temporary,'accounts');

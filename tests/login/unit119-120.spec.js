@@ -239,13 +239,13 @@ test('时间图在账号中真实可见：未答读图、错答刷新与两空�
  try{
   await p.goto(base+'unit119-120/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===4){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'昨天：火车09:00离站，我09:10到站；两个事件按时间位置标在轴线上。':'昨天：May17:00完成工作，17:20外出；先后标在时间轴。');
+   if(i===0||i===4){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'昨天：火车09:00离站，我09:10到站；两个事件按时间位置标在轴线上。':'昨天：May17:00完成工作，17:20外出；先后标在时间轴。');
     await material.screenshot({path:info.outputPath('timeline-'+i+'-unanswered.png')});
    });}
    if(i===0){
     await select(room,'The train was still at the platform.');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.night-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===2){
     await select(room,{fills:['have']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('first time in your life');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'have',exact:true}).click();

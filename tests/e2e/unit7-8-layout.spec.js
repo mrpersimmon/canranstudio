@@ -17,7 +17,7 @@ for(const width of [320,1280])test(`${width} 无配音课文翻句时按钮稳�
  await page.screenshot({path:`output/playwright/unit7-8-classroom/story-${width}.png`});
  await page.goto('/unit7-8/#learn/listen');const room=page.locator('.stage-listen');
  await room.getByRole('button',{name:'意大利（人）的',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
- await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(room.locator('.practice-options img')).toHaveCount(0);
+ await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(room.locator('.practice-options img')).toHaveCount(0);
  for(const b of await room.locator('.practice-options button').all())expect(await b.evaluate(el=>el.scrollWidth<=el.clientWidth&&el.scrollHeight<=el.clientHeight)).toBe(true);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await page.screenshot({path:`output/playwright/unit7-8-classroom/picture-${width}.png`,fullPage:false});

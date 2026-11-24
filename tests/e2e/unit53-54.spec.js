@@ -1,5 +1,6 @@
 'use strict';
-const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {checkWordAndReturn}=require('../support/word-card-checks');
+const {courseButton,courseReference,courseWord,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit5354');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:7000});
 test('69题、五区五星、统一三卡、示范记录与零英语配音',async({page},info)=>{
@@ -18,8 +19,8 @@ test('69题、五区五星、统一三卡、示范记录与零英语配音',asyn
  expect(await page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 test('42张图鉴、方位与国家完整、IPA、末组推进与刷新',async({page})=>{
- await page.goto('/unit53-54/#learn/words');const room=page.locator('.stage-words'),first=room.getByRole('button',{name:'mild',exact:true});await expect(first).toContainText('/maɪld/');await expect(first.locator('.word-meaning')).toBeHidden();await first.press('Enter');await expect(first.locator('.word-meaning')).toHaveText('温和的');
- await expect(courseButton(room, "previousWords")).toBeDisabled();const words=[];
+ await page.goto('/unit53-54/#learn/words');const room=page.locator('.stage-words');
+ await checkWordAndReturn(room,'mild','/maɪld/','温和的');const words=[];
  for(let i=0;i<7;i++){await expect(room.locator('.unit-word')).toHaveCount(6);words.push(...await room.locator('.unit-word strong').allTextContents());expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);if(i<6)await courseButton(room, "nextWords").click();}
  await expectVocabulary(page, words, ['mild','always','north','east','wet','west','south','season','best','night','rise','early','set','late','interesting','subject','conversation','day','Australia','Australian','Austria','Austrian','Canada','Canadian','China','Chinese','Finland','Finnish','India','Indian','Japan','Japanese','South Korea','South Korean','Nigeria','Nigerian','Poland','Polish','Thailand','Thai','Turkey','Turkish']);
  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('7 / 7');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
@@ -80,5 +81,5 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三�
 });
 for(const width of [320,390,768,1280])test(`${width}宽：长国籍词与音标不截断`,async({page},info)=>{
  await page.setViewportSize({width,height:844});await page.goto('/unit53-54/#learn/words');const room=page.locator('.stage-words');for(let i=0;i<5;i++)await courseButton(room, "nextWords").click();
- await expect(room.getByRole('button',{name:'South Korean',exact:true})).toBeVisible();expect(await room.locator('.unit-word strong,.word-phonetic').evaluateAll(els=>els.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await room.screenshot({path:info.outputPath('long-words.png')});
+ await expect(await courseWord(room,'South Korean')).toBeVisible();expect(await room.locator('.unit-word strong,.word-phonetic').evaluateAll(els=>els.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await room.screenshot({path:info.outputPath('long-words.png')});
 });

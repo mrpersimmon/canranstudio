@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,readyCourse}=require('./course-controls');
 const fs=require('fs/promises'),{expect}=require('@playwright/test');
 const original=require('./unit3-4-flow'),tasks=require('./units1-30-tasks');
 const ANSWERS=original.ANSWERS;
@@ -14,11 +14,16 @@ async function installPrevious(page,folder='unit3-4-before-v154'){
  return async()=>{for(const pattern of patterns)await page.unroute(pattern);};
 }
 async function story(p,base=''){
- await p.goto(base+'/unit3-4/#learn/text');await ready(p);const room=p.locator('.stage-text');
- if(await room.locator(':scope > .practice-finish').isVisible())return;
- if(await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).isVisible())await room.getByRole('button',{name:/^(开始看课文|开始故事)$/,exact:true}).click();
- while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await room.getByRole('button',{name:/^(完成课文|去练习)$/,exact:true}).click();
+ await p.goto(base+'/unit3-4/#learn/text');await readyCourse(p);const room=p.locator('.stage-text');
+ const complete=room.locator(':scope > .practice-finish:visible');
+ const advance=room.getByRole('button',{name:/^(开始看课文|开始故事|下一句|完成课文|去练习)$/,exact:true});
+ await expect(advance.or(complete).first()).toBeVisible();
+ if(await complete.isVisible())return;
+ for(let clicks=0;clicks<=original.DIALOGUE.length;clicks++){
+  const label=await advance.innerText();await advance.click();
+  if(label==='完成课文'||label==='去练习')return;
+ }
+ throw Error('完整的原文读完后应当可以进入练习');
 }
 async function activity(p,id,{base='',old25=false,capture,navigate=true,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(p,keepAward);

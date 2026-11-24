@@ -1,5 +1,5 @@
 'use strict';
-const {expectRoundCounts}=require('../support/course-controls');
+const {expectRoundCounts,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 test('顶部阶段入口保留开始、继续与重练，绿色对号只表示已获星', async ({ page }) => {
@@ -84,14 +84,14 @@ test('订正完成明确区分首次结果，学习记录收起详细信息', as
   await flow.activity(page, '1-2', 'manners');
   const result = room.getByRole('list', { name: '本轮成果', exact: true });
   await expectRoundCounts(result.locator('.completion-number'), ['5', '5', '1']);
-  await expect(room.getByText('本次答错', { exact: true })).toBeVisible();
+  await expect(room.getByText('订正完成', { exact: true })).toBeVisible();
   await page.reload();
   await expectRoundCounts(result.locator('.completion-number'), ['5', '5', '1']);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await page.getByRole('button', { name: '学习记录', exact: true }).click();
+  await openLearningRecord(page);
   const log = page.getByRole('dialog', { name: '学习记录', exact: true });
-  await expect(log.getByText('订正完成', { exact: true })).toBeVisible();
-  await expect(log.getByText('首次答对', { exact: true })).toHaveCount(4);
+  await expect(log.getByText('本轮订正完成', { exact: true })).toBeVisible();
+  await expect(log.getByText('本轮首答正确', { exact: true })).toHaveCount(4);
   await expect(log.getByText('连续答对 5 次 · 本次答对 5 次 · 本次答错 1 次', { exact: true })).toBeHidden();
   await log.getByText('本轮详情', { exact: true }).click();
   await expect(log.getByText('连续答对 5 次 · 本次答对 5 次 · 本次答错 1 次', { exact: true })).toBeVisible();

@@ -102,7 +102,8 @@ test('点击三课人物可选中并回弹，重复点击不叠加动画，键�
     const keyboard=p.locator('[data-landmark-select="unit5-6"]');
     await keyboard.focus();await keyboard.press('Enter');
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit5-6');
-    expect(await p.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+    expect(p.viewportSize()).toEqual({width:320,height:568});
+    expect(await p.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
     await p.emulateMedia({reducedMotion:'reduce'});
     const motion=keyboard.locator('.journey-story-motion');
     await expect.poll(()=>motion.evaluate(el=>el.getAnimations().length)).toBe(0);

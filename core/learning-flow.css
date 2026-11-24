@@ -105,11 +105,13 @@ body[data-learning-shell][data-learning-view='gate'] .learning-surface{justify-c
  body[data-learning-shell] .learning-surface .practice-meter{flex:1}
  body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text{--story-person-height:110px}
  body[data-learning-shell] #lessonWorkspace .learning-result-content .current-completion{height:78px}
+ body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-art:has(>img:only-child){max-height:min(130px,23dvh);min-height:0;flex:none}
+ body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-art>img:only-child{max-width:100%;max-height:100%;object-fit:contain}
  body[data-learning-shell] .learning-result-content{gap:8px;padding:12px;max-height:calc(100% - 80px)}
  body[data-learning-shell] #lessonWorkspace .learning-result-content .completion-title{font-size:23px}
  body[data-learning-shell] #lessonWorkspace .learning-surface .completion-card>.practice-finish-actions{height:80px;min-height:80px}
 }
-body[data-learning-reduced] .learning-surface :is(.btn,.opt-btn,.fb){transition:none}
+body[data-learning-shell][data-learning-reduced] :is(#lessonWorkspace,#cover) :is(.btn,.opt-btn,.fb){transition:none}
 /* The five learned-stage links are the single visible chapter navigation. */
 .learning-milestones{position:fixed;z-index:14;top:calc(var(--practice-screen-top,0px) + 48px);left:0;right:0;height:44px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:0;margin:0;padding:0 max(10px,calc((100% - 740px)/2 + 8px));list-style:none;background:#fffcf5;border-bottom:1px solid #e3dac8;color:#8a806f;font:12px/1.2 var(--lesson-font,inherit)}
 .learning-milestones li{position:relative;display:flex;align-items:center;gap:4px;white-space:nowrap;flex:1;justify-content:center}
@@ -182,7 +184,12 @@ body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-object-slo
 body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-people{grid-template-columns:repeat(var(--recipients),minmax(0,1fr));gap:6px}
 body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-people>.opt-btn{flex-direction:column;gap:0;padding:4px;min-height:0}
 body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-person-art{width:100%;max-width:100%;height:68px;flex:none}
+body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-cast>img{height:100%;object-fit:contain}
 body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-hand{width:44px;height:44px}
+/* The hands in these two full-length portraits are registered to the 2:3
+   artwork. The button can grow without moving the vase away from its owner. */
+body.unit3940-workspace[data-learning-shell] #lessonWorkspace .learning-surface .handoff-person-art{width:auto;aspect-ratio:2/3;height:clamp(68px,12dvh,100px)}
+body.unit3940-workspace[data-learning-shell] #lessonWorkspace .learning-surface .handoff-hand{width:55%;height:30%}
 body[data-learning-shell] #lessonWorkspace .learning-surface .handoff-person-name{min-height:22px;font-size:13px;line-height:18px;overflow-wrap:anywhere}
 body[data-learning-shell] #lessonWorkspace .learning-surface .practice-content [class$='-task-status']{display:none}
 body[data-learning-shell] #lessonWorkspace .learning-surface .inquiry-scene{grid-template-columns:1fr;gap:4px;margin:8px 0;padding:8px;border-width:1px;border-radius:16px}
@@ -229,6 +236,13 @@ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-
 body[data-learning-shell] #lessonWorkspace .learning-surface .learning-material-thumb{display:block;width:54px;height:48px;object-fit:contain;flex:none}
 .learning-material-preview>span:last-child{margin-left:auto;font-size:24px}
 .learning-reference-content>.learning-material-image{display:block;width:100%;max-width:100%;height:auto;max-height:none;object-fit:contain;margin:0 auto 14px}
+body[data-learning-shell] .learning-picture-preview{position:relative;display:block;width:fit-content;max-width:100%;margin:0 auto;padding:0;border:0;background:transparent;color:#365e4b;cursor:pointer}
+.learning-picture-preview::after{content:'放大';position:absolute;right:0;bottom:0;padding:2px 6px;border-radius:5px;background:#fffaf1;color:#365e4b;font-size:12px;line-height:16px}
+.learning-picture-preview:focus-visible{outline:2px solid #347357;outline-offset:2px}
+.learning-comparison{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:14px}
+.learning-comparison figure{min-width:0;margin:0;text-align:center}
+.learning-comparison figure>img{display:block;width:100%;height:auto;object-fit:contain}
+.learning-comparison figcaption{margin:4px 0;font-weight:600}
 .learning-reference-content>.practice-context{max-height:none!important;overflow:visible;padding:0;margin:0;border:0;background:none;font-size:16px;line-height:1.6;white-space:pre-line}
 .learning-reference-content>.grammar-model{max-height:none!important;overflow:visible;margin:0 0 12px;padding:12px;border:1px solid #d6e2d6;border-radius:14px;background:#f0f4ef}
 .learning-reference-content .grammar-model-line{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
@@ -343,5 +357,6 @@ body[data-learning-shell] #lessonWorkspace .stage-certificate>.offline-task{marg
  body[data-learning-shell] .learning-surface .learning-question-heading{margin-bottom:2px}
  body[data-learning-shell] .learning-surface .grammar-model{margin-bottom:4px}
  body[data-learning-shell] #lessonWorkspace .learning-surface .translation-answer{padding:4px 18px 4px 4px;gap:4px;margin-bottom:4px}
- body[data-learning-shell] #lessonWorkspace .learning-surface .word-answer{height:96px;min-height:96px;max-height:96px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-tight-question .practice-progress{margin-bottom:4px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-tight-question .sentence-options{margin-block:2px;row-gap:3px}
 }

@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,courseWord,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit5960');const {select}=require('../support/unit5960');
 test.use({actionTimeout:7000});
 test('60题、五区五星、统一三卡、示范记录与零英语配音',async({page},info)=>{
@@ -81,5 +81,5 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三�
 });
 for(const width of [320,390,768,1280])test(`${width}宽：长词组与音标不截断`,async({page},info)=>{
  await page.setViewportSize({width,height:844});await page.goto('/unit59-60/#learn/words');const room=page.locator('.stage-words');
- await expect(room.getByRole('button',{name:'shop assistant',exact:true})).toBeVisible();expect(await room.locator('.unit-word strong,.word-phonetic').evaluateAll(els=>els.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await room.screenshot({path:info.outputPath('long-words.png')});
+ await expect(await courseWord(room,'shop assistant')).toBeVisible();expect(await room.locator('.unit-word strong,.word-phonetic').evaluateAll(els=>els.every(e=>e.scrollWidth<=e.clientWidth+1))).toBe(true);await room.screenshot({path:info.outputPath('long-words.png')});
 });

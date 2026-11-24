@@ -239,13 +239,13 @@ test('照片记录与双船图在账号中真实可见：未答读图、错答�
  try{
   await p.goto(base+'unit123-124/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===4){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'照片记录：A由Maya在Monday拍摄，B由Leo在Monday拍摄，C由Maya在Tuesday拍摄。':'明信片中有两条完整的船，上下各一条，海面中没有其他船。');
+   if(i===0||i===4){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'照片记录：A由Maya在Monday拍摄，B由Leo在Monday拍摄，C由Maya在Tuesday拍摄。':'明信片中有两条完整的船，上下各一条，海面中没有其他船。');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===4){
     await select(room,'What a beautiful ship!');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.photo-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===3){
     await select(room,{fills:['on']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('I travelled on this ship.');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'on',exact:true}).click();

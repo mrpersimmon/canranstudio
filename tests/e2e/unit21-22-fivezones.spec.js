@@ -1,4 +1,5 @@
 'use strict';
+const {expectContinuousTheatre}=require('../support/continuous-theatre');
 const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit2122-fivezones');
@@ -33,8 +34,10 @@ for(const width of [320,390,768,1280])test('完整场景、中文与红书交接
   await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   await expect(room.locator('.desk-world')).toHaveAttribute('data-phase',i<2?'ready':i<4?'first':i<6?'red':'received');
   const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(1);expect(Math.abs(after.height-before.height)).toBeLessThan(1);
-  const frame=await room.locator('.desk-world').boundingBox(),reader=await room.locator('.desk-reader').boundingBox();
-  for(const img of await room.locator('.desk-world .cast-image:visible').all()){const box=await img.boundingBox();expect(box.x).toBeGreaterThanOrEqual(frame.x);expect(box.x+box.width).toBeLessThanOrEqual(frame.x+frame.width+1);expect(box.y).toBeGreaterThan(reader.y+reader.height+8);expect(box.y+box.height).toBeLessThanOrEqual(frame.y+frame.height);expect(box.height).toBeGreaterThan(150);}
+  await expectContinuousTheatre(room,'reading-world-v1.webp');
+  const cast=room.locator('.learning-story-art .cast-image:visible');
+  expect(await cast.count()).toBeGreaterThan(0);
+  for(const image of await cast.all())expect((await image.boundingBox()).height).toBeGreaterThan(90);
   if([0,2,3,4,5,6,7].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});
  }
  await page.reload();await expect(room.locator('.btext span')).toHaveCount(8);await expect(room.locator('.bcn:visible')).toHaveCount(0);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

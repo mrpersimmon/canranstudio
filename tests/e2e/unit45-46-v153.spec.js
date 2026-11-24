@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {courseButton,courseReference,finishStoryAndReturn,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {activity,story,ANSWERS}=require('../support/unit4546-v153');
 const {select}=require('../support/units1-30-tasks');
@@ -47,7 +47,7 @@ test('14段三人原文：隔壁切景、只有一封信、接到信后才发现
   if([4,6,8,13].includes(i))await room.screenshot({path:info.outputPath('story-'+i+'.png')});
   if(i<13)await room.getByRole('button',{name:'下一句',exact:true}).click();
  }
- await courseButton(room, "finishStory").click();await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.completion-stats')).toHaveCount(0);
+ await finishStoryAndReturn(room);await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.completion-stats')).toHaveCount(0);
  for(const width of [390,1280]){await page.setViewportSize({width,height:844});await page.reload();const box=await room.getByRole('log').boundingBox();await expect.poll(async()=>{const last=await room.locator('.bubble-row').last().locator('.btext').boundingBox();return last.y>=box.y&&last.y+last.height<=box.y+box.height;}).toBe(true);}
 });
 

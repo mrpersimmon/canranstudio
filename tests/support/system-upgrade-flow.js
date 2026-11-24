@@ -63,7 +63,10 @@ async function finishOpenCarsOffline(page) {
     await expect(room.getByRole('status')).toHaveText('答对了！');
     await courseButton(room, index === answers.length - 1 ? "finishPractice" : '下一题').click();
   }
-  await expect(page.getByRole('dialog', { name: /纪念卡结算/ })).not.toBeVisible();
+  const reward=page.getByRole('dialog',{name:/纪念卡结算/});
+  await expect(reward).toBeVisible();
+  await dismissRewardDialog(page);
+  await expect(reward).toBeHidden();
   await expect(page.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state', 'retry');
   return page.evaluate(() => {
     const access = CanranStudentAccess, prefix = CanranSystemUpgrade.namespace(access.student.id, access.systemUpgrade);

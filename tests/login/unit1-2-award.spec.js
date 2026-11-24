@@ -1,14 +1,15 @@
 'use strict';
+const {courseTimeline,readyCourse}=require('../support/course-controls');
 const sharp = require('sharp');
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, addStudent, studentLogin } = require('./helpers');
+const { adminLogin, createStudent, addStudent, studentLogin, openCourseSettings } = require('./helpers');
 const { finishZone, readStory } = require('../support/unit1-2-award-flow');
 
 test.use({ actionTimeout: 10000, browserName: process.env.UNIT12_REVIEW_BROWSER || 'chromium' });
 
 // Exercise page behaviour only after the loader exposes the actual page.
 // Keep the ordinary assertion/action deadlines; the loader owns preparation.
-async function readyUnit(page){await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(page.locator('html')).not.toHaveAttribute('data-course-painting','',{timeout:30000});}
+async function readyUnit(page){await readyCourse(page);await expect(page.locator('html')).not.toHaveAttribute('data-course-painting','',{timeout:30000});}
 async function gotoUnit(page,url){await page.goto(url);await readyUnit(page);}
 
 async function expectManagedLearning(page, account, mount, status, stars) {
@@ -39,14 +40,16 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   // Continue answering the already open page while offline. Reloading this
   // same URL tests a separate offline-entry contract, not offline submission.
   await finishZone(learner, 'trans', { base, keepAward: true, navigate: false });
-  await expect(learner.locator('.stage-trans .award-round-result')).toContainText('联网后同步星星');
-  await expect(learner.locator('#starCount')).toHaveText('0');
+  await expect(learner.locator('.stage-trans .award-round-result')).toHaveText('已在本机获得 · 待同步');
+  await expect(learner.locator('#starCount')).toHaveText('1');
+  const reveal=learner.getByRole('dialog',{name:/纪念卡结算/});
+  await expect(reveal).toBeVisible();
+  await require('../support/reward-dialog').dismissRewardDialog(learner);
   const offlineResult = learner.locator('.stage-trans .completion-card');
   await offlineResult.locator('.completion-stats').scrollIntoViewIfNeeded();
   await expect(offlineResult).toHaveAttribute('data-result-motion', 'finished');
   await first.context.setOffline(false);
   await expect(learner.locator('#starCount')).toHaveText('1');
-  const reveal = learner.getByRole('dialog', { name: /纪念卡结算/ });
   await expect(learner.locator('#studentSyncStatus')).toHaveText('已同步');
   // This offline round has already presented its result. The later real
   // confirmation updates the award ledger without replaying a foreground card.
@@ -91,15 +94,16 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
     await expect(learner.getByLabel('纪念卡上的名字')).toHaveCount(0);
     await expect.poll(()=>card.locator('img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0))).toBe(true);
     await learner.evaluate(()=>document.fonts.ready);
-    const heading=await learner.locator('.stage-certificate > .stage-heading').boundingBox();
-    const topbar=await learner.locator('#topbar').boundingBox();
-    expect(heading.y).toBeGreaterThanOrEqual(topbar.y+topbar.height);
+    const toolbar=await courseTimeline(learner).boundingBox();
     const bounds=await card.boundingBox();
-    expect(bounds.width).toBeLessThanOrEqual(width<=540?340:720);
-    expect(Math.abs(bounds.x+bounds.width/2-width/2)).toBeLessThan(2);
+    const contentWidth=await learner.evaluate(()=>document.documentElement.clientWidth);
+    expect(bounds.y).toBeGreaterThanOrEqual(toolbar.y+toolbar.height-1);
+    expect(bounds.width).toBeLessThanOrEqual(Math.min(contentWidth,720));
+    expect(Math.abs(bounds.width/bounds.height-1640/880)).toBeLessThan(.02);
+    expect(Math.abs(bounds.x+bounds.width/2-contentWidth/2)).toBeLessThan(2);
     const actions=await learner.locator('.story-award-actions').boundingBox();
     expect(actions.y+actions.height).toBeLessThanOrEqual(width>=768?720:844);
-    expect(await learner.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
+    expect(await learner.evaluate(()=>document.documentElement.scrollWidth)).toBe(contentWidth);
     await learner.screenshot({path:`output/login/award-compact-${width}.png`});
     const download=learner.waitForEvent('download');
     await learner.getByRole('button',{name:'保存动图',exact:true}).click();
@@ -120,7 +124,7 @@ test('账号姓名、跨设备五星、首次日期、重开练习与学生隔�
   const retryDownload=learner.waitForEvent('download');await save.click();await retryDownload;
   await learner.clock.setFixedTime(new Date(Date.now() + 3 * 86400000));
   await learner.reload(); await readyUnit(learner); await expect(learner.locator('#certificateDate')).toHaveText(firstDate);
-  await learner.getByRole('button', { name:'学习设置' }).click();
+  await openCourseSettings(learner);
   await learner.getByRole('button', { name:'重开本课', exact:true }).click();
   await Promise.all([
     learner.waitForEvent('load'),

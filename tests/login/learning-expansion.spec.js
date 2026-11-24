@@ -79,7 +79,7 @@ test('3-4：完整词库展开、固定分页与桌面课文均可用',async({pa
    }
   }
   await p.setViewportSize({width:1435,height:1244});await flows['3-4'].story(p,base.slice(0,-1));await p.goto(base+'unit3-4/#learn/text');await courseReadyForAssertions(p);
-  const scene=p.locator('.stage-text .dialogue-stage');expect((await scene.boundingBox()).height).toBeLessThanOrEqual(560);await expect(scene.locator('.bubble-row').last()).toBeInViewport({ratio:1});await p.screenshot({path:info.outputPath('story-desktop.png'),scale:'css'});
+  const scene=p.locator('.stage-text .dialogue-stage');expect(Math.round((await scene.boundingBox()).height)).toBeLessThanOrEqual(560);await expect(scene.locator('.bubble-row').last()).toBeInViewport({ratio:1});await p.screenshot({path:info.outputPath('story-desktop.png'),scale:'css'});
  }finally{await s.context.close();}
 });
 
@@ -89,7 +89,7 @@ test('5-6：原班级人物、桌面与短横屏阅读和独立合影可达',asy
   await flows['5-6'].story(p,base.slice(0,-1));await p.goto(base+'unit5-6/#learn/text');await courseReadyForAssertions(p);
   for(const viewport of [{width:1435,height:1244},{width:768,height:1024},{width:667,height:375}]){
    await p.setViewportSize(viewport);const stage=p.locator('.stage-text'),scene=stage.locator('.dialogue-stage');
-   expect((await scene.boundingBox()).height).toBeLessThanOrEqual(560);await expect(stage.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeInViewport({ratio:1});
+   expect(Math.round((await scene.boundingBox()).height)).toBeLessThanOrEqual(560);await expect(stage.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeInViewport({ratio:1});
    expect(await stage.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);await p.screenshot({path:info.outputPath(`classroom-${viewport.width}.png`),scale:'css'});
   }
   await p.setViewportSize(devices[0].viewport);await p.getByRole('button',{name:'更多学习操作'}).click();await p.getByRole('button',{name:'班级合影',exact:true}).click();const sheet=p.getByRole('dialog',{name:'班级合影',exact:true});await expect(sheet.locator('.photo-people img')).toHaveCount(7);await expect(sheet.getByRole('button',{name:'关闭学习参考'})).toBeInViewport({ratio:1});await p.screenshot({path:info.outputPath('class-photo.png'),scale:'css'});

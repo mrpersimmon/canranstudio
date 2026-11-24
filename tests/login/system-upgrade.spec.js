@@ -82,6 +82,12 @@ test('真实全星与未通关一次性升级：备份、原证归档、清零�
     await expect(p.locator('#starCount')).toHaveText('0'); await expect(p.locator('.stage-introduce .progress-copy')).toContainText('第 1 /');
     await expect(p.locator('.stage-introduce').getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     await expect(p.getByText('继续当前版本', { exact: true })).toHaveCount(0);
+    await flow.waitSynced(p);
+    const savedProgress=()=>JSON.parse(read('SELECT value FROM progress WHERE student=? AND course=?',student.id,'unit5-6')[0].value);
+    const resetProgress=savedProgress();
+    expect(Object.keys(resetProgress.records||{})).toHaveLength(0);
+    expect(Object.keys(resetProgress.groups||{})).toHaveLength(0);
+    expect(Object.keys(resetProgress.activity?.unitAwardClaims||{})).toHaveLength(0);
     await stale.setOffline(false);
     await expect(oldPage.getByRole('alertdialog', { name: '课程访问', exact: true })).toBeVisible({ timeout: 15000 });
     // Explicit replay uses the very same genuinely generated old queue, not a
@@ -89,7 +95,7 @@ test('真实全星与未通关一次性升级：备份、原证归档、清零�
     const replay = await p.request.post(base + 'api/progress', { headers: { Origin: origin }, data: oldPending });
     expect(replay.status()).toBe(200); expect((await replay.json()).stale).toBe(true);
     expect(read('SELECT value FROM unit_awards WHERE student=? AND course=?', student.id, 'unit5-6')).toEqual([]);
-    expect(JSON.parse(read('SELECT value FROM progress WHERE student=? AND course=?', student.id, 'unit5-6')[0].value)).toEqual({});
+    expect(savedProgress()).toEqual(resetProgress);
     await paired.activity(p, '5-6', 'listen', { base: prefix, keepAward: true });
     await expect(p.locator('#starCount')).toHaveText('1'); await dismissRewardDialog(p); await flow.waitSynced(p);
     await stop(); store = openStore(dataDir);

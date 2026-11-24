@@ -30,7 +30,10 @@ for(const pair of ['3-4','5-6'])test(`${pair} 五答题区整轮零错才获星�
  await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('本轮有过错答');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await tasks.activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText('1');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await room.getByRole('button',{name:wrong,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('.story-award-tasks')).toHaveCount(0);await expect(page.locator('.learning-milestones li')).toHaveCount(5);await expect(page.locator('.learning-milestones .is-complete')).toHaveCount(1);
+ await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('.story-award-tasks')).toHaveCount(0);await expect(page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','1');
+ await expect(page.locator('.stage-certificate').getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();
+ const zones=await page.evaluate(()=>Object.keys(CanranCore.lesson49Practice.activity('unitAwardClaims')||{}));
+ expect(zones).toEqual([id]);
 });
 
 for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练`,async({page})=>{

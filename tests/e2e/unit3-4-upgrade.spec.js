@@ -50,7 +50,13 @@ test('真实旧15星保留有效题前缀和姓名，新的阅读题不会被旧
     await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);
   }
   await openLearningRecord(page);
-  await expect(page.locator('#learningRecord')).toContainText('听辨 umbrella');
+  await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toBeVisible();
+  await page.getByRole('dialog',{name:'学习记录',exact:true}).getByRole('button',{name:'关闭',exact:true}).click();
+  await page.goto('/unit3-4/#learn/certificate');
+  const archive=page.locator('.legacy-learning');
+  await archive.locator(':scope > summary').click();
+  await archive.getByText(/^查看原作答/).click();
+  await expect(archive.locator('li').filter({hasText:'听辨 umbrella'}).first()).toBeVisible();
 });
 
 test('旧重练的空白状态优先于历史成绩，不复活旧回合答案', async ({ page }) => {

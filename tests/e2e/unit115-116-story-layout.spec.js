@@ -26,7 +26,7 @@ async function pose(world,i){
  await expect(world.locator('.garden-cast:visible')).toHaveCount(2);
  await expect(world).toHaveAttribute('data-place',i<6?'door':'garden');
  await expect(world).toHaveAttribute('data-view',i===3||i===4?'window':'door');
- if(i===3||i===4)expect(await world.evaluate(e=>getComputedStyle(e).backgroundImage)).toContain('house-window.svg');
+ await expect(world.locator('..')).toHaveCSS('background-image',i===3||i===4?/world-evening-home-v1\.webp/:/park-world-v1\.webp/);
  for(const[selector,visible]of [['.jim-knock',i===1],['.jim-look',i===3||i===4],['.tom-beer',i===13]]){if(visible)await expect(world.locator(selector)).toBeVisible();else await expect(world.locator(selector)).toBeHidden();}
  const jim=world.locator('.jim-talk');if(await jim.isVisible())expect(await jim.evaluate(e=>getComputedStyle(e).transform)).toBe(i>=6?'matrix(-1, 0, 0, 1, 0, 0)':'none');
  if(i>=0)expect(await world.locator('.dialogue-actor.is-current:visible').getAttribute('data-actor')).toBe(lines[i][0].toLowerCase());

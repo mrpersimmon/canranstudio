@@ -50,7 +50,7 @@ function questionArtwork(registry,definitions,maps){
   collect(unit.questions);
   const protectedSources=new Set();
   if(Number(id.match(/\d+/)?.[0])>=25){
-   const factual=/\b(colou?r|red|blue|white|black|green|yellow|purple|brown|pink|grey|gray|orange|count|how many|o.clock|clock|minutes?|left|right|between|under|behind|in front|on top|pounds?|pence|price|cost)\b|颜色|数量|几个|几只|多少|红色|白色|蓝色|左边|右边|上面|下面|中间|时钟|几点|价钱|费用/i;
+   const factual=/\b(colou?r|red|blue|white|black|green|yellow|purple|brown|pink|grey|gray|orange|count|how many|o.clock|clock|minutes?|left|right|between|under|behind|in front|on top|pounds?|pence|price|cost)\b|颜色|数量|几个|几只|多少|红色|白色|蓝色|左边|右边|上面|下面|中间|时钟|几点|价钱|费用|往返|箭头/i;
    for(const question of Object.values(unit.questions).flat()){if(!factual.test(JSON.stringify(question)))continue;const found=new Set();(function protect(value){if(typeof value==='string'&&value.startsWith('/assets/'))found.add(value);else if(value&&typeof value==='object')Object.values(value).forEach(protect);})(question);for(const source of found)protectedSources.add(source);}
   }
   result[id]=id==='unit5-6'?{}:Object.fromEntries([...candidates].filter(([source])=>sources.has(source)&&!protectedSources.has(source)));

@@ -156,6 +156,6 @@ test('Lesson13–14首次和连续答错只提示重试，刷新不泄题，改�
   }
   await room.getByRole('button',{name:'颜色',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
   await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
-  await openLearningRecord(page);await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('修正后完成');
-  await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('提交 3 次');
+  await openLearningRecord(page);await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toContainText('本轮订正完成');
+  await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toContainText('提交 3 次');
 });

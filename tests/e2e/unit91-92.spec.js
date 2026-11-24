@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,courseToolbar,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,courseToolbar,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,story,activity}=require('../support/unit9192');
 test.use({actionTimeout:7000,...(process.env.UNIT91_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -17,7 +17,7 @@ test('66题完整通关：五区、三卡、独立题与零英语录音',async({
   await expectResultIcons(room);
   await room.screenshot({path:info.outputPath(id+'-complete.png')});
  }
- await openLearningRecord(page);await expect(page.locator('#learningRecord li').filter({hasText:'will后接动词原形'})).toContainText('看过示范后完成');await expect(page.locator('#learningRecord li').filter({hasText:'独立表达将来状态'})).not.toContainText('看过示范');await page.getByRole('button',{name:'关闭',exact:true}).click();
+ await openLearningRecord(page);await expectRecordExample(page,'will后接动词原形',true);await expectRecordExample(page,'独立表达将来状态',false);await page.getByRole('button',{name:'关闭',exact:true}).click();
  await page.reload();await page.goto('/unit91-92/#learn/certificate');await expect(page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','5');expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 test('30张音标词卡、完整时间表、16动作与书写A4／B8',async({page},info)=>{
@@ -25,7 +25,7 @@ test('30张音标词卡、完整时间表、16动作与书写A4／B8',async({pag
  for(let n=0;n<5;n++){await expect(words.locator('.unit-word')).toHaveCount(6);seen.push(...await words.locator('.unit-word strong').allTextContents());for(const card of await words.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();}if(n<4)await courseButton(words, "nextWords").click();}
  await expectVocabulary(page, seen, ['still','move','miss','neighbour','person','people','poor','tomorrow','the day after tomorrow','tonight','regards','will','rain','snow','leave','get up','arrive','finish work','have a holiday','drive home','have a haircut','telephone me','have a shave','pack his bags','sweep the floor','paint this room','repair my car','make an appointment','shall','soon']);
  await page.reload();await expect(words.locator('#wordPageProgress')).toHaveText('5 / 5');await words.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
- await page.goto('/unit91-92/#learn/apply');await openCourseReference(page,'课本小参考 · 时间表与16组动作');await expect(courseReference(page).locator(".reference-card")).toHaveCount(16);await expect(courseReference(page).locator(".time-reference tr")).toHaveCount(5);await expect(courseReference(page).locator(".time-reference")).toContainText('the night after next');await courseReference(page).locator(".offline-task").screenshot({path:info.outputPath('reference.png')});
+ await page.goto('/unit91-92/#learn/apply');await openCourseReference(page,'课本小参考 · 时间表与16组动作');await expect(courseReference(page).locator(".reference-card")).toHaveCount(16);await expect(courseReference(page).locator(".time-reference tr")).toHaveCount(5);await expect(courseReference(page).locator(".time-reference")).toContainText('the night after next');await courseReference(page).screenshot({path:info.outputPath('reference.png')});
  await page.goto('/unit91-92/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(4);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(8);for(const text of ['He will not believe me.','She swept the floor yesterday.','这不是从昨天推断明天一定相同'])await expect(page.locator('#unitWriting')).toContainText(text);
 });
 test('错两次、刷新、撤销、线索与重练：错误不会被洗掉',async({page})=>{
@@ -67,8 +67,8 @@ for(const width of [320,390,768,1280])test(`${width}宽／短屏：所有题型�
   await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');await room.screenshot({path:info.outputPath(id+'-completed.png')});const ys=await room.locator('.completion-stat').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().y));expect(Math.max(...ys)-Math.min(...ys)).toBeLessThan(2);
   for(const btn of await room.getByRole('group',{name:'完成后的操作'}).getByRole('button').all())await btn.scrollIntoViewIfNeeded();expect(await room.locator('.completion-stat,.practice-finish-actions button').evaluateAll(els=>els.every(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight;}))).toBe(true);
  }
- await page.goto('/unit91-92/#learn/words');const room=page.locator('.stage-words'),heading=room.getByRole('heading').first();
- await expect(heading).toBeInViewport({ratio:1});
+ await page.goto('/unit91-92/#learn/words');const room=page.locator('.stage-words'),progress=room.locator('#wordPageProgress');
+ await expect(progress).toBeInViewport({ratio:1});
  for(let i=0;i<5;i++){
   await expect(room.locator('#wordPageProgress')).toHaveText(`${i+1} / 5`);
   for(const card of await room.locator('.unit-word').all()){
@@ -81,7 +81,7 @@ for(const width of [320,390,768,1280])test(`${width}宽／短屏：所有题型�
    await expect(room.locator('#wordPageProgress')).toHaveText(`${i+2} / 5`);
    // Page changes deliberately focus/reveal the word heading. Do not race
    // that scroll by immediately clicking the next page's first card.
-   await expect(heading).toBeFocused();await expect(heading).toBeInViewport({ratio:1});
+   await expect(progress).toBeFocused();await expect(progress).toBeInViewport({ratio:1});
   }
  }
  expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);

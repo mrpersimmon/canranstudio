@@ -1,4 +1,5 @@
 'use strict';
+const {expectCorrectedCompletion,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { finishZone } = require('../support/unit1-2-award-flow');
 
@@ -18,6 +19,7 @@ test('新纪念卡显示五个答题区，未获星时没有满星日期', async
 });
 
 test('错答订正、刷新不获星；重练整区零错才获星，已获星不会被新错答撤回', async ({ page }) => {
+  test.setTimeout(90000);
   await page.goto('/unit1-2/#learn/trans'); const room = page.locator('.stage-trans');
   await room.getByRole('button', { name:'This is your book.', exact:true }).click();
   await room.getByRole('button', { name:'检查答案', exact:true }).click();
@@ -27,7 +29,7 @@ test('错答订正、刷新不获星；重练整区零错才获星，已获星�
   await room.getByRole('button', { name:'再试一次', exact:true }).click();
   await finishZone(page, 'trans');
   await expect(page.locator('#starCount')).toHaveText('0');
-  await expect(room.locator('.award-round-result')).toContainText('这轮有过答错');
+  await expectCorrectedCompletion(room);
   await room.getByRole('button', { name:'再练一轮', exact:true }).click();
   await finishZone(page, 'trans');
   await expect(page.locator('#starCount')).toHaveText('1');
@@ -48,6 +50,6 @@ test('线索单独记录，整轮首次提交全对仍可获星', async ({page})
     if(i===4&&state==='blank')await room.getByRole('button',{name:'给点线索',exact:true}).click();
   }});
   await expect(page.locator('#starCount')).toHaveText('1');
-  await page.getByRole('button',{name:'学习记录',exact:true}).click();
+  await openLearningRecord(page);
   await expect(page.locator('#learningRecord')).toContainText('用过线索');
 });

@@ -104,7 +104,7 @@
    const current=practice.read();
    if(token!==generation||applying||questionPreset!==preset||currentRoute()!==target.route||
       current.review||current.questionId!==target.questionId||current.state?.runId!==runId||document.querySelector('dialog[open]'))return;
-   const label=preset==='explanation'?'讲解':practice.element.querySelector('.learning-material-preview')?'查看题目材料':'查看全文';
+   const label=preset==='explanation'?'讲解':practice.element.querySelector('[aria-label="查看题目材料"]')?'查看题目材料':'查看全文';
    clickButton(practice.element,label);schedulePosition();
   }).catch(error=>{if(token===generation)send('review-error',{message:error.message});});
  }
@@ -150,7 +150,7 @@
    if(entry.kind==='question'){
     if(selection.state==='hint')clickButton(runner,'给点线索');
     if(selection.state==='explanation')clickButton(runner,'讲解');
-    if(selection.state==='full')clickButton(runner,runner.querySelector('.learning-material-preview,[data-reviewed-material]')?'查看题目材料':'查看全文');
+    if(selection.state==='full')clickButton(runner,runner.querySelector('[aria-label="查看题目材料"]')?'查看题目材料':'查看全文');
    }
    if(entry.kind==='reference'){
     const scope=document.getElementById(entry.route),references=[...scope.querySelectorAll(':scope>details.offline-task,:scope>details.grammar-reference')];

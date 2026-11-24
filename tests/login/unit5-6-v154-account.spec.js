@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
+const {courseWord,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test'),fs=require('fs'),crypto=require('crypto'),sharp=require('sharp');
 const {adminLogin,createStudent,addStudent,studentLogin,openCourseDirectory}=require('./helpers'),flow=require('../support/unit56-v154'),{courseResponse}=require('../support/course-response-faults'),{landmarks,referenceArtworkPixels}=require('../support/home-banners-1730');
 const pixels=locator=>locator.evaluate(async im=>{await im.decode();const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const ctx=c.getContext('2d');ctx.drawImage(im,0,0);return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',ctx.getImageData(0,0,c.width,c.height).data)),v=>v.toString(16).padStart(2,'0')).join('');});
@@ -12,8 +12,11 @@ test('账号首页四宽、真实人物503、无Worker恢复与原选择续做',
   let failures=0;p.on('response',r=>{if(/\/resources\/[^/]+\/blake-v154.webp/.test(r.url())&&r.status()===503)failures++;});await courseResponse(page,resource,{status:503});await home.locator('.primary-button').click();await expect(p.locator('#courseLoadingRetry')).toBeVisible({timeout:30000});expect(failures).toBeGreaterThan(0);await expect(p.locator('#lessonWorkspace')).toBeHidden();await p.screenshot({path:info.outputPath('actual-503.png')});
   await courseResponse(page,resource,null);await p.locator('#courseLoadingRetry').click();await flow.ready(p);expect(await pixels(p.locator('#cover .unit-cover-art img'))).toBe(reference);expect(await pixels(p.locator('.stage-certificate .story-award-illustration'))).toBe(reference);await expect(p.locator('.legacy-learning')).toHaveCount(0);
   await p.goto(base+'unit5-6/#learn/introduce');await flow.ready(p);const room=p.locator('.stage-introduce');await room.getByRole('button',{name:"It's a Toyota.",exact:true}).click();await p.reload();await flow.ready(p);await expect(room.getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','true');
-  await p.getByRole('link',{name:'我的课程',exact:true}).click();await p.reload();await openCourseDirectory(p);await home.locator('.primary-button').click();await flow.ready(p);await expect(room.getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','true');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
-  await p.goto(base+'unit5-6/#learn/words');await flow.ready(p);await courseButton(p, "nextWords").click();expect(await pixels(p.getByRole('button',{name:'Mr.',exact:true}).locator('img'))).toBe(await pixels(p.locator('.stage-text [data-person="blake"]>img')));
+  await p.getByRole('link',{name:'我的课程',exact:true}).click();await p.reload();await openCourseDirectory(p);await home.locator('.primary-button').click();await flow.ready(p);await expect(p.locator('.stage-words')).toBeVisible();await p.getByRole('link',{name:'语法',exact:true}).click();await expect(room.getByRole('button',{name:"It's a Toyota.",exact:true})).toHaveAttribute('aria-pressed','true');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
+  await p.goto(base+'unit5-6/#learn/words');await flow.ready(p);const words=p.locator('.stage-words'),title=await courseWord(words,'Mr.');
+  await expect(title).toHaveAttribute('data-word-kind','context');await expect(title).toContainText('Good morning, Mr. Blake.');
+  const portrait=await courseWord(words,'student');await expect(portrait).toHaveAttribute('data-word-kind','illustration');
+  expect(await pixels(portrait.locator('img'))).toBe(await pixels(p.locator('.stage-text [data-person="sophie"]>img')));
   await p.goto(base+'unit7-8/');await expect(p.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();info.annotations.push({type:'actual-503',description:String(failures)});
  }finally{await courseResponse(page,resource,null);await s.context.close();}
 });

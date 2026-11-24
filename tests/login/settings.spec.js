@@ -1,6 +1,7 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
-const { saveCourses, adminLogin, createStudent, studentLogin, signIn } = require('./helpers');
+const {devices}=require('../support/required-phone-devices');
+const { saveCourses, adminLogin, createStudent, studentLogin, signIn, waitForCourseReady } = require('./helpers');
 
 async function appearance(dialog) {
   return dialog.evaluate(element => {
@@ -21,7 +22,7 @@ async function appearance(dialog) {
 }
 
 async function openSettings(page) {
-  const trigger=page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/});
+  const trigger=page.getByRole('button',{name:'更多学习操作',exact:true});
   await expect(trigger).toBeVisible();
   const rect=await trigger.boundingBox();
   // A real tap on the visible sticky header; locator.click's automatic scrolling
@@ -29,6 +30,7 @@ async function openSettings(page) {
   expect(rect.y).toBeGreaterThanOrEqual(0);
   expect(rect.y+rect.height).toBeLessThanOrEqual(page.viewportSize().height);
   await page.mouse.click(rect.x+rect.width/2,rect.y+rect.height/2);
+  await page.getByRole('button',{name:'学习设置',exact:true}).click();
   const dialog=page.getByRole('dialog',{name:/^(界面体验的\s*)?学习设置$/});
   await expect(dialog).toBeVisible();
   return dialog;
@@ -57,6 +59,7 @@ test('学习设置在屏幕中间，按钮文字清晰且关闭不改变学习',
   try {
     await student.page.setViewportSize({width:1180,height:720});
     await student.page.goto('/lesson/unit1-2/#learn/words');
+    await waitForCourseReady(student.page);
     await expect(student.page.locator('.unit-word').first()).toBeVisible();
     await student.page.evaluate(async()=>{await document.fonts.ready;await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));});
     const before={url:student.page.url(),stars:await student.page.locator('#starCount').textContent(),scroll:await student.page.evaluate(()=>scrollY)};
@@ -68,12 +71,13 @@ test('学习设置在屏幕中间，按钮文字清晰且关闭不改变学习',
     await expect(dialog).toHaveCount(0);
     expect(student.page.url()).toBe(before.url);await expect(student.page.locator('#starCount')).toHaveText(before.stars);
     expect(await student.page.evaluate(()=>scrollY)).toBe(before.scroll);
-    await expect(student.page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/})).toBeFocused();
+    await expect(student.page.getByRole('button',{name:'更多学习操作',exact:true})).toBeFocused();
   } finally { await student.context.close(); }
 });
 
 test('16 个单元的学习设置在桌面和手机均清晰居中，Escape 返回原课程',async({page,browser})=>{
-  test.setTimeout(120000);
+  // Each course opens its real protected package once during this 35-viewport run.
+  test.setTimeout(240000);
   await adminLogin(page);
   const account=await createStudent(page,'设置全课班','界面体验',[/Lesson 1–2 /]);
   await page.getByRole('button',{name:'管理 设置全课班'}).click();
@@ -83,9 +87,10 @@ test('16 个单元的学习设置在桌面和手机均清晰居中，Escape 返�
   const student=await studentLogin(browser,account);
   try{
     const courses=[...Array.from({length:15},(_,i)=>`unit${i*2+1}-${i*2+2}`),'unit49-50'];
-    for(const course of courses)for(const viewport of [{width:1180,height:720},{width:390,height:844}])await test.step(`${course} ${viewport.width}px`,async()=>{
+    for(const course of courses)for(const viewport of [{width:1180,height:720},{width:390,height:844},...(course==='unit1-2'?devices.map(device=>device.viewport):[])])await test.step(`${course} ${viewport.width}px`,async()=>{
       await student.page.setViewportSize(viewport);
       await student.page.goto(`/lesson/${course}/#learn/words`);
+      await waitForCourseReady(student.page);
       await expect(student.page.locator('.unit-word').first()).toBeVisible();
       const dialog=await openSettings(student.page);
       await expectUsable(dialog);
@@ -93,7 +98,7 @@ test('16 个单元的学习设置在桌面和手机均清晰居中，Escape 返�
       await student.page.keyboard.press('Escape');
       await expect(dialog).toHaveCount(0);
       await expect(student.page).toHaveURL(new RegExp(`/${course}/#learn/words$`));
-      await expect(student.page.getByRole('button',{name:/(^学习设置$|^界面体验 · 学习设置$)/})).toBeFocused();
+      await expect(student.page.getByRole('button',{name:'更多学习操作',exact:true})).toBeFocused();
     });
   }finally{await student.context.close();}
 });

@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {courseButton,expectLessonAfterPreviousRecord,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,activity}=require('../support/unit2122-fivezones');
 const {beforeReview,readLearning}=require('../support/unit2122-teaching-review');
@@ -19,7 +19,7 @@ test('当前45题版交接错答和语法草稿、阅读词卡及两个分页原
  await page.goto('/unit21-22/#learn/apply');await openCourseReference(page,'课本小参考 · 第22课');for(let i=0;i<3;i++)await page.getByRole('button',{name:'下一组物品图',exact:true}).click();for(let i=0;i<2;i++)await page.getByRole('button',{name:'下一份问答',exact:true}).click();const before=await readLearning(page);
  await upgrade();await page.reload();const after=await readLearning(page);expect(after.groups).toEqual(before.groups);expect(after.records).toEqual(before.records);for(const key of ['unitDialogue','unitWordPage','unitGalleryPage','unitModelPage','unit2122LegacySnapshot'])expect(after.activity[key]).toEqual(before.activity[key]);
  await page.goto('/unit21-22/#learn/grammar');await expect(grammar.locator('.progress-copy')).toHaveText('第 2 / 10 题');await expect(grammar.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(grammar.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'he',exact:true})).toHaveAttribute('aria-pressed','true');
- await page.goto('/unit21-22/#learn/exam');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.handoff-arrived')).toHaveCount(0);await page.goto('/unit21-22/#learn/text');await expect(page.locator('.btext span')).toHaveCount(4);await page.goto('/unit21-22/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('3 / 6');
+ await page.goto('/unit21-22/#learn/exam');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.handoff-arrived')).toHaveCount(0);await page.goto('/unit21-22/#learn/text');await expect(page.locator('.btext span')).toHaveCount(4);await page.goto('/unit21-22/#learn/words');await expectLessonAfterPreviousRecord(page,'3 / 6');
  await page.goto('/unit21-22/#learn/apply');await openCourseReference(page,'课本小参考 · 第22课');await expect(courseReference(page).locator(".gallery-current + .reference-pager span")).toHaveText('4 / 8');await expect(courseReference(page).locator(".gallery-current small")).toHaveText(['1,007','1,008']);await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('3 / 8');
 });
 test('现有完整语法轮次和星星保留，不向旧独立作答追记示范',async({page})=>{

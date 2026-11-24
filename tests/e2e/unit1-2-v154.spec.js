@@ -1,4 +1,5 @@
 'use strict';
+const {openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const flow=require('../support/thirteen-types-flow');
 const {installPrevious,book,noOverflow,currentArt}=require('../support/unit12-v154');
@@ -13,7 +14,7 @@ test('首页与封面沿用已确认纪念卡故事插画',async({page})=>{
 test('实际显示的短示范写入本次提交，独立题不补记示范',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
  await flow.select(room,'Is this your book?');await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await page.getByRole('button',{name:'学习记录',exact:true}).click();
+ await openLearningRecord(page);
  await expect(page.locator('#learningRecord')).toContainText('看过示范');
  await page.getByRole('button',{name:'关闭',exact:true}).click();
  await room.getByRole('button',{name:'下一题',exact:true}).click();

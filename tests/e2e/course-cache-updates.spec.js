@@ -28,7 +28,7 @@ test('两个标签页同时准备同课，关掉一页后另一页仍能完整�
   await second.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await expect(second.getByRole('status', { name: '课程准备状态', exact: true })).toBeVisible();
   await first.close(); release();
-  await expect(second.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
+  await expect(second.getByRole('region',{name:'单词小图鉴',exact:true}).getByRole('button',{name:'下一组',exact:true})).toBeVisible();
   await expect.poll(() => second.locator('.stage-words img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
 });
 
@@ -151,6 +151,9 @@ test('浏览器重启后必须联网核验最新版，已有资源与进度保�
     let page = await context.newPage();
     await page.goto(origin + '/lesson/unit29-30/#learn/words');
     await courseButton(page.locator('.stage-words'), "nextWords").click();
+    const savedPage=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity);
+    await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');
+    await expect(page.getByRole('button',{name:savedPage.unitWordDeck.anchor,exact:true})).toBeVisible();
     await context.close();
     await new Promise(resolve => { server.close(resolve); server.closeAllConnections(); });
     context = await chromium.launchPersistentContext(profile, { headless: true, offline: true });
@@ -158,7 +161,9 @@ test('浏览器重启后必须联网核验最新版，已有资源与进度保�
     await page.goto(origin + '/lesson/unit29-30/#learn/words');
     await expect(page.locator('#courseLoader')).toContainText('错误编号：L06');
     await expect(page.locator('.stage-words')).not.toBeVisible();
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity.unitWordPage)).toBe(1);
+    const retained=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity);
+    expect(retained.unitWordDeck).toEqual(savedPage.unitWordDeck);
+    expect(retained.unitWordPage).toBe(savedPage.unitWordPage);
     await page.goto(origin + '/lesson/unit27-28/');
     await expect(page.getByRole('heading', { name: '这节课还没准备好', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();

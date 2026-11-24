@@ -239,13 +239,13 @@ test('过去时间区间与日期图在账号中真实可见：未答读图、�
  try{
   await p.goto(base+'unit129-130/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===4){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'昨天09:00开始步行，10:00结束，中间无休息，标记要判断的09:30':'故事日期卡：TODAY MAY 21；需判断YESTERDAY，不给出昨天的数字');
+   if(i===0||i===4){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'昨天09:00开始步行，10:00结束，中间无休息，标记要判断的09:30':'故事日期卡：TODAY MAY 21；需判断YESTERDAY，不给出昨天的数字');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===4){
     await select(room,'It must be the 20th today.');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.road-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===2){
     await select(room,{fills:['had to']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('buying a replacement was necessary');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'had to',exact:true}).click();

@@ -46,6 +46,5 @@ CanranCore.learningWordPresentation={
 };
 CanranCore.learningQuestionArtwork={
   "/assets/unit95-96/porter.webp": "/assets/unit95-96/porter.webp",
-  "/assets/unit95-96/tickets.svg": "/assets/unit3-4-journey/ticket-v1.webp",
   "/assets/unit95-96/bridge.svg": "/assets/word-art-v2/whole-book/bridge-v1.webp"
 };

@@ -1,4 +1,5 @@
 'use strict';
+const {expectContinuousTheatre}=require('../support/continuous-theatre');
 const {courseButton,courseReference,expectRoundCounts,incorrectFeedback,openCourseReference,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,DIALOGUE,SPEAKERS,select,story,activity}=require('../support/unit1718-fivezones');
@@ -33,8 +34,10 @@ for(const width of [320,390,768,1280])test('完整场景、中文与同事切换
   await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
   await expect(room.locator('.office-world')).toHaveAttribute('data-phase',i<2?'welcome':i<7?'women':i<13?'men':'jim');await expect(room.locator('.office-colleagues:visible')).toHaveCount(i<2?0:1);
   const before=await room.locator('.stage-ctrl').boundingBox();await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const after=await room.locator('.stage-ctrl').boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(1);expect(Math.abs(after.height-before.height)).toBeLessThan(1);
-  const frame=await room.locator('.office-world').boundingBox(),reader=await room.locator('.office-reader').boundingBox();
-  for(const img of await room.locator('.office-world .cast-image:visible').all()){const box=await img.boundingBox();expect(box.x).toBeGreaterThanOrEqual(frame.x);expect(box.x+box.width).toBeLessThanOrEqual(frame.x+frame.width+1);expect(box.y).toBeGreaterThan(reader.y+reader.height+8);expect(box.y+box.height).toBeLessThanOrEqual(frame.y+frame.height);expect(box.height).toBeGreaterThan(150);}
+  await expectContinuousTheatre(room,'office-world-v1.webp');
+  const cast=room.locator('.learning-story-art .cast-image:visible');
+  expect(await cast.count()).toBeGreaterThan(0);
+  for(const image of await cast.all())expect((await image.boundingBox()).height).toBeGreaterThan(90);
   if([0,2,6,7,12,13,15].includes(i))await room.screenshot({path:info.outputPath('story-'+width+'-'+i+'.png')});
  }
  await page.reload();await expect(room.locator('.btext span')).toHaveCount(16);await expect(room.locator('.bcn:visible')).toHaveCount(0);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

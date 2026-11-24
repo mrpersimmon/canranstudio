@@ -1,4 +1,5 @@
 'use strict';
+const {checkWordAndReturn}=require('../support/word-card-checks');
 const {courseButton,courseReference,expectNoVerdict,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use(process.env.UNIT79_BROWSER==='webkit'?{browserName:'webkit'}:{});const {activity,story,ANSWERS,select}=require('../support/unit7980');
@@ -18,7 +19,8 @@ test('62题、五区五星、统一三卡、示范记录与零英语配音',asyn
  expect(await page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 test('36张购物图鉴、完整IPA、末组推进与刷新',async({page})=>{
- await page.goto('/unit79-80/#learn/words');const room=page.locator('.stage-words'),first=room.getByRole('button',{name:'shopping',exact:true});await expect(first).toContainText('/ˈʃɒpɪŋ/');await expect(first.locator('.word-meaning')).toBeHidden();await first.press('Enter');await expect(first.locator('.word-meaning')).toHaveText('购物');await expect(courseButton(room, "previousWords")).toBeDisabled();const words=[];
+ await page.goto('/unit79-80/#learn/words');const room=page.locator('.stage-words');
+ await checkWordAndReturn(room,'shopping','/ˈʃɒpɪŋ/','购物');const words=[];
  for(let i=0;i<6;i++){await expect(room.locator('.unit-word')).toHaveCount(6);words.push(...await room.locator('.unit-word strong').allTextContents());expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);if(i<5)await courseButton(room, "nextWords").click();}
  await expectVocabulary(page, words, ['shopping','list','vegetable','need','hope','thing','money','groceries','fruit','stationery','newsagent','chemist','the grocer’s','the greengrocer’s','the butcher’s','the newsagent’s','the baker’s','the chemist’s','much','many','a lot of','some','any','at all','envelopes','glue','writing paper','medicine','cheese','bread','butter','jam','honey','beans','peas','cabbages']);
  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('6 / 6');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
@@ -65,9 +67,9 @@ test('两处填空未完成时不允许提交；刷新不代答',async({page})=>
 });
 test('全部声音失效也能完成五区',async({page})=>{test.setTimeout(160000);let failures=0;await page.route(/\.(mp3|wav|ogg)(?:\?|$)/,r=>{failures++;return r.abort();});await story(page);for(const id of Object.keys(ANSWERS))await activity(page,id);await expect(page.locator('#starCount')).toHaveText('5');expect(failures).toBeGreaterThan(0);});
 test('80课六类商店26种物品、语义边界与A5/B7完整参考',async({page},info)=>{
- await page.goto('/unit79-80/#learn/apply');await openCourseReference(page,'课本小参考 · 六类商店与26种物品');await expect(courseReference(page).locator(".reference-card")).toHaveCount(6);await expect(page.locator('.shop-goods li')).toHaveCount(26);
+ await page.goto('/unit79-80/#learn/apply');await openCourseReference(page,'课本小参考 · 六类商店与26种物品');await expect(courseReference(page).locator(".reference-card")).toHaveCount(6);await expect(courseReference(page).locator('.shop-goods li')).toHaveCount(26);
  const expected=['cheese','eggs','butter','honey','jam','biscuits','pears','oranges','bananas','beans','peas','cabbages','lamb','beef','steak','mince','chicken','glue','envelopes','writing paper','newspapers','magazines','bread','cakes','aspirins','medicine'];
- expect(await page.locator('.shop-goods li>span').allTextContents()).toEqual(expected);await courseReference(page).locator(".reference-grid").screenshot({path:info.outputPath('six-shops.png')});
+ expect(await courseReference(page).locator('.shop-goods li>span').allTextContents()).toEqual(expected);await courseReference(page).locator(".reference-grid").screenshot({path:info.outputPath('six-shops.png')});
  await page.goto('/unit79-80/#learn/grammar');await openCourseReference(page,'语法小参考');for(const str of ['mustn’t','needn’t','Need he come','She needs','Does he need','not much'])await expect(courseReference(page).first()).toContainText(str);
  await page.goto('/unit79-80/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('#unitWriting ol').nth(0).locator('li')).toHaveCount(5);await expect(page.locator('#unitWriting ol').nth(1).locator('li')).toHaveCount(7);for(const text of ['I don’t have any eggs.','I haven’t got many eggs.','He hasn’t got much coffee.','Has he got any medicine?','意思'])await expect(page.locator('#unitWriting')).toContainText(text);
 });
@@ -88,9 +90,9 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、三�
  }
 });
 for(const width of [320,390,768,1280])test(`${width}宽：长词组音标翻卡不截断`,async({page},info)=>{
- await page.setViewportSize({width,height:844});await page.goto('/unit79-80/#learn/words');const room=page.locator('.stage-words');await expect(room.getByRole('button',{name:'shopping',exact:true})).toBeVisible();
+ await page.setViewportSize({width,height:844});await page.goto('/unit79-80/#learn/words');const room=page.locator('.stage-words');const seen=[];
  for(let i=0;i<6;i++){
-  for(const card of await room.locator('.unit-word').all()){await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}
+  for(const card of await room.locator('.unit-word').all()){seen.push(await card.getAttribute('aria-label'));await card.click();expect(await card.evaluate(e=>e.scrollHeight<=e.clientHeight+2)).toBe(true);}
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);if(i===2)await room.screenshot({path:info.outputPath('long-word.png')});if(i<5)await courseButton(room, "nextWords").click();
  }
 });

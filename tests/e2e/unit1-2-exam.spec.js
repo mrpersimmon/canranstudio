@@ -1,5 +1,5 @@
 'use strict';
-const {expectRoundCounts}=require('../support/course-controls');
+const {expectRoundCounts,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { EXAMS, choose } = require('../support/units1-6-exam');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
@@ -24,7 +24,7 @@ test('1–2 十题覆盖礼貌话轮、指代、词义以及 is are am 的独立
   }
   await expectRoundCounts(room.getByRole('list', { name: '本轮成果', exact: true }).locator('.completion-number'), ['10', '10', '1']);
   await expect(room.getByText(/首次独立答对/)).toHaveCount(0);
-  await page.getByRole('button', { name: '学习记录', exact: true }).click();
+  await openLearningRecord(page);
   await expect(page.locator('#learningRecord')).toContainText('用过线索');
   await expect(page.locator('#learningRecord')).toContainText('订正完成');
   await page.locator('#unitNotebook').getByRole('button', { name: '关闭', exact: true }).click();

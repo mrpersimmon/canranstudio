@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {courseButton,courseReference,finishStoryAndReturn,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {activity,story,ANSWERS}=require('../support/unit4344-v153');
 const {select}=require('../support/units1-30-tasks');
@@ -46,7 +46,7 @@ test('15句课文完整历史：找到茶叶与杯子、最后水开；原文没
   if(i===9)await expect(world).toHaveAttribute('data-found','true');
   if(i<14)await room.getByRole('button',{name:'下一句',exact:true}).click();
  }
- await courseButton(room, "finishStory").click();await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.completion-stats')).toHaveCount(0);
+ await finishStoryAndReturn(room);await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.completion-stats')).toHaveCount(0);
  for(const width of [390,1280]){await page.setViewportSize({width,height:844});await page.reload();const box=await room.getByRole('log').boundingBox();await expect.poll(async()=>{const last=await room.locator('.bubble-row').last().locator('.btext').boundingBox();return last.y>=box.y&&last.y+last.height<=box.y+box.height;}).toBe(true);}
 });
 

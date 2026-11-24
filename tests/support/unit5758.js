@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,restoredPracticeIndex}=require('./course-controls');
 const {expect}=require('@playwright/test'); const {select:commonSelect}=require('./units1-30-tasks');
 // Independent manuscript: sourced from textbook pp114–117 and Grammar p104.
 // Expected answers never come from runtime question data.
@@ -21,8 +21,8 @@ async function story(page,base=''){
 async function activity(page,id,{base='',inspect,keepAward=false}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
  await page.goto(base+'/unit57-58/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
- if(await room.locator('.practice-finish').count()){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);return room;}
- const index=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const index=await restoredPracticeIndex(room);
+ if(index===null){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);return room;}
  for(let i=index;i<answers.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();
   await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);await inspect?.(room,i,'before');await select(room,answers[i]);await check.click();

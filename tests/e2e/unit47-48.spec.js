@@ -1,5 +1,6 @@
 'use strict';
-const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {checkWordAndReturn}=require('../support/word-card-checks');
+const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit4748');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:6000});
 test('53题、五区五星、统一结算及零英语配音请求',async({page},info)=>{
@@ -23,9 +24,8 @@ test('53题、五区五星、统一结算及零英语配音请求',async({page},
  expect(await page.locator('img').evaluateAll(imgs=>imgs.every(i=>i.complete&&i.naturalWidth>0))).toBe(true);expect(errors).toEqual([]);expect(voices).toEqual([]);
 });
 test('26张图鉴：首组翻义、IPA完整、末组推进与刷新',async({page})=>{
- await page.goto('/unit47-48/#learn/words');const room=page.locator('.stage-words'),first=room.getByRole('button',{name:'like',exact:true});
- await expect(first).toContainText('/laɪk/');await expect(first.locator('.word-meaning')).toBeHidden();await first.press('Enter');await expect(first.locator('.word-meaning')).toHaveText('喜欢');
- await expect(courseButton(room, "previousWords")).toBeDisabled();
+ await page.goto('/unit47-48/#learn/words');const room=page.locator('.stage-words');
+ await checkWordAndReturn(room,'like','/laɪk/','喜欢');
  const words=[];for(let i=0;i<5;i++){await expect(room.locator('.unit-word')).toHaveCount(i===4?2:6);words.push(...await room.locator('.unit-word strong').allTextContents());expect(await room.locator('.word-phonetic').evaluateAll(els=>els.every(e=>getComputedStyle(e).fontFamily.startsWith('Arial')))).toBe(true);if(i<4)await courseButton(room, "nextWords").click();}
  await expectVocabulary(page, words, ['like','want','coffee','cup','sugar','milk','fresh','egg','butter','pure','honey','ripe','banana','jam','sweet','orange','choice','apple','biscuit','ice cream','black coffee','tea','Scotch whisky','wine','beer','blackboard']);
  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText('5 / 5');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen/);
@@ -81,7 +81,7 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、结�
   const room=await activity(page,id,{inspect:async(room,i,phase)=>{if(phase==='before'){
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);expect(await room.locator('img').evaluateAll(els=>els.every(e=>e.complete&&e.naturalWidth>0))).toBe(true);
    for(const btn of await room.locator('button:visible').all()){const b=await btn.boundingBox();expect(b.height).toBeGreaterThanOrEqual(43);}
-   if(id==='apply'&&i===3)await expect(room.getByRole('region',{name:'短示范'})).toContainText('I like eggs, but I don’t want one.');
+   if(id==='apply'&&i===3)await withReadingMaterial(room,'.grammar-model',async view=>{await expect(view.getByRole('region',{name:'短示范'})).toContainText('I like eggs, but I don’t want one.');});
    else if(id!=='grammar')await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
    if((id==='grammar'&&[0,8,10,13].includes(i))||(id==='apply'&&[3,5].includes(i)))await room.screenshot({path:info.outputPath(`${id}-${i}.png`)});
   }}});

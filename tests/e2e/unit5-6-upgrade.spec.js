@@ -47,7 +47,13 @@ test('配音旧15星不自动获得新版星星，未改题与姓名保留，新
   await expect(room.locator('.practice-options button[aria-pressed="true"]')).toHaveCount(0);
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await openLearningRecord(page);
-  await expect(page.locator('#learningRecord')).toContainText('听辨 French');
+  await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toBeVisible();
+  await page.getByRole('dialog',{name:'学习记录',exact:true}).getByRole('button',{name:'关闭',exact:true}).click();
+  await page.goto('/unit5-6/#learn/certificate');
+  const archive=page.locator('.legacy-learning');
+  await archive.locator(':scope > summary').click();
+  await archive.getByText(/^查看原作答/).click();
+  await expect(archive.locator('li').filter({hasText:'听辨 French'}).first()).toBeVisible();
 });
 
 test('旧版重练空白回合优先，删去前题不会复活品牌题的历史答案', async ({ page }) => {

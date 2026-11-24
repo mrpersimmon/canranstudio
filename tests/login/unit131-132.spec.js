@@ -239,13 +239,13 @@ test('行程比较与照看状态图在账号中真实可见：未答读图、�
  try{
   await p.goto(base+'unit131-132/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===2){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'虚构行程资料：SEA费用£120用时20小时；AIR费用£180用时3小时，尚未订票':'照看记录：DOG asked, no reply；HOUSE agreed；GARDEN not asked');
+   if(i===0||i===2){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'虚构行程资料：SEA费用£120用时20小时；AIR费用£180用时3小时，尚未订票':'照看记录：DOG asked, no reply；HOUSE agreed；GARDEN not asked');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===2){
     await select(room,'照看狗');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.holiday-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===5){
     await select(room,{fills:['seen']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('note sent yesterday');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'seen',exact:true}).click();

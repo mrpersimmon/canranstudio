@@ -28,6 +28,14 @@ async function readyCourse(page){
   await expect(page.locator('body[data-learning-shell] .learning-surface, body:not([data-learning-shell]) #wordPageProgress'))
     .toBeVisible({timeout:30000});
 }
+// Reloading can briefly attach the exercise before the saved round is rendered.
+async function restoredPracticeIndex(room){
+  const current=room.locator('.progress-copy').filter({hasText:/第\s*\d+\s*\/\s*\d+\s*题/});
+  return current.or(room.locator('.practice-finish')).first().evaluate(el=>{
+    if(el.matches('.practice-finish'))return null;
+    return Number(el.textContent.match(/第\s*(\d+)/)[1])-1;
+  });
+}
 async function finishStoryAndReturn(room){
   const page=room.page(),current=await page.locator('body[data-learning-shell]').count();
   await courseButton(room,'finishStory').click();
@@ -70,7 +78,10 @@ async function openCourseReference(scope,title){
   const page=typeof scope.page==='function'?scope.page():scope;
   if(await page.locator('body[data-learning-shell]').count()){
     const previous=page.locator('#learning-reference-sheet[open]');
-    if(await previous.count())await previous.getByRole('button',{name:'关闭学习参考'}).click();
+    if(await previous.isVisible()){
+      await page.keyboard.press('Escape');
+      await expect(previous).toBeHidden();
+    }
     await page.getByRole('button',{name:'更多学习操作',exact:true}).click();
     await page.getByRole('button',{name:title,exact:true}).click();
     await expect(page.getByRole('dialog',{name:title,exact:true})).toBeVisible();
@@ -80,12 +91,14 @@ function courseReference(scope){
   const page=typeof scope.page==='function'?scope.page():scope;
   return page.locator('body[data-learning-shell] #learning-reference-sheet[open], body:not([data-learning-shell]) .shop-stage:visible > details.offline-task[open]');
 }
-async function expectRecordExample(page,target,used){
+async function expectRecordExample(page,target,used,count=1){
   const book=page.locator('#learningRecord');
   if(!await page.locator('body[data-learning-shell]').count()){
     const row=book.locator('li').filter({hasText:target+' ·'});
-    await expect(row).toHaveCount(1);
-    if(used)await expect(row).toContainText('看过示范后完成');else await expect(row).not.toContainText('看过示范');
+    await expect(row).toHaveCount(count);
+    for(const entry of await row.all()){
+      if(used)await expect(entry).toContainText('看过示范后完成');else await expect(entry).not.toContainText('看过示范');
+    }
     return;
   }
   const entries=await page.evaluate(target=>{
@@ -93,13 +106,15 @@ async function expectRecordExample(page,target,used){
     return Object.entries(context.questions).flatMap(([activity,questions])=>questions.flatMap((q,index)=>
       q.target===target&&saved.records[q.id] ? [{activity,index,example:Boolean(saved.records[q.id].revealed)}] : []));
   },target);
-  expect(entries,'原题在学习记录中应有唯一可核对的记录').toHaveLength(1);
-  const [{activity,index,example}]=entries;expect(example).toBe(used);
-  const group=book.locator('details.learning-record-group').filter({has:page.locator('li')}).and(page.locator('[data-activity="'+activity+'"]'));
-  if(!await group.evaluate(el=>el.open))await group.locator(':scope > summary').click();
-  const row=group.locator('li details > summary').filter({hasText:new RegExp('^第 '+(index+1)+' 题(?:\\D|$)')});
-  await expect(row).toBeVisible();
-  await expect(row.getByText('看过示范',{exact:true})).toHaveCount(used?1:0);
+  expect(entries,'每道原题都要有可核对的记录').toHaveLength(count);
+  for(const {activity,index,example} of entries){
+    expect(example).toBe(used);
+    const group=book.locator('details.learning-record-group[data-activity="'+activity+'"]');
+    if(!await group.evaluate(el=>el.open))await group.locator(':scope > summary').click();
+    const row=group.locator('li details > summary').filter({hasText:new RegExp('^第 '+(index+1)+' 题(?:\\D|$)')});
+    await expect(row).toBeVisible();
+    await expect(row.getByText('看过示范',{exact:true})).toHaveCount(used?1:0);
+  }
 }
 async function expectCorrectedCompletion(room){
   const card=room.locator('.completion-award');
@@ -208,12 +223,25 @@ async function withReadingMaterial(room,selector,inspect){
 }
 async function withQuestionMaterial(room,inspect){
   const selector='img.practice-scene',original=room.locator(selector);
-  await withReadingMaterial(room,selector,async surface=>{
-    const image=surface.locator(selector);
+  await expect(original).toBeAttached();
+  const trigger=room.getByRole('button',{name:'查看题目材料',exact:true});
+  if(!await trigger.isVisible()){
+    await expect(original).toBeVisible();
+    return inspect(room,original);
+  }
+  await trigger.click();
+  const sheet=room.page().getByRole('dialog',{name:'题目材料',exact:true});
+  const image=sheet.locator('img.learning-material-image, img.practice-scene');
+  try{
+    await expect(image).toBeVisible();
     await expect(image).toHaveAttribute('src',await original.getAttribute('src'));
     await expect(image).toHaveAttribute('alt',await original.getAttribute('alt'));
-    return inspect(surface);
-  });
+    return await inspect(sheet,image);
+  }finally{
+    await sheet.getByRole('button',{name:'关闭学习参考',exact:true}).click();
+    await expect(sheet).toBeHidden();
+    await expect(trigger).toBeFocused();
+  }
 }
 async function expectMobileStageNavigation(page){
   const current=await page.locator('body[data-learning-shell]').count();
@@ -224,4 +252,4 @@ async function expectMobileStageNavigation(page){
     expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(44);
   }
 }
-module.exports={courseButton,readyCourse,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,courseWord,expectLessonAfterPreviousRecord,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};
+module.exports={courseButton,readyCourse,restoredPracticeIndex,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,courseWord,expectLessonAfterPreviousRecord,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};

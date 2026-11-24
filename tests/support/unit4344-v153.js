@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton}=require('./course-controls');
+const {courseButton,finishStoryAndReturn}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const {select:commonSelect}=require('./units1-30-tasks');
 const {ANSWERS:OLD}=require('./unit4344');
@@ -14,7 +14,7 @@ async function story(page,base=''){
  if(await room.locator(':scope > .practice-finish').isVisible())return;
  if(await courseButton(room, "startStory").isVisible())await courseButton(room, "startStory").click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await expect(room.locator('.btext span')).toHaveText(DIALOGUE);await expect(room.locator('.bname')).toHaveText(SPEAKERS);await courseButton(room, "finishStory").click();
+ await expect(room.locator('.btext span')).toHaveText(DIALOGUE);await expect(room.locator('.bname')).toHaveText(SPEAKERS);await finishStoryAndReturn(room);
 }
 async function activity(page,id,{base='',inspect,keepAward=false,expectPerfect=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);

@@ -90,9 +90,17 @@ async function openMyAccount(page){
   if(await mobile.isVisible())await mobile.click();
   else await page.getByRole('button',{name:'我的',exact:true}).click();
 }
+async function openCourseSettings(page){
+  const more=page.getByRole('button',{name:'更多学习操作',exact:true});
+  await more.click();
+  await page.getByRole('button',{name:'学习设置',exact:true}).click();
+  const dialog=page.getByRole('dialog',{name:/学习设置$/});
+  await expect(dialog).toBeVisible();
+  return dialog;
+}
 async function openCanranAward(page){
   await page.getByRole('link',{name:'我的课程',exact:true}).click();
   await page.getByRole('link',{name:'我的纪念册',exact:true}).click();
   await expect(page).toHaveURL(/\/awards\/(?:[?#].*)?$/);
 }
-module.exports = { openCanranAward, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };
+module.exports = { openCanranAward, openCourseSettings, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };

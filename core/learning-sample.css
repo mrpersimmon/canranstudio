@@ -153,7 +153,7 @@ body.unit143144-workspace[data-learning-shell] #lessonWorkspace .learning-story-
 body.unit143144-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .forest-debris{bottom:28px;left:6%;width:88%;height:66px;object-position:center bottom}
 body.unit143144-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .forest-props:has(.inventory-view:not([hidden])){padding:6px;box-sizing:border-box;border:1px solid #d4c2a6;border-radius:12px;background:#fff8ed}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .learning-caption-actor{height:calc(100% - 16px);bottom:8px;display:grid;grid-template-rows:minmax(0,1fr) max-content;gap:8px;justify-items:center;align-items:end}
-body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .learning-caption-actor>img{position:static;display:block;width:100%;height:100%;min-height:0;max-height:none;object-fit:contain;object-position:center bottom;transform:none}
+body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .learning-caption-actor>img{position:static;display:block;width:100%;height:100%;min-height:0;max-height:none;object-fit:contain;object-position:center bottom}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .learning-caption-actor>.actor-label{position:static;inset:auto;transform:none}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-caption-cast>img{object-position:center bottom}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art[data-world-layout='picture']>.room-scene:not(.learning-picture-group){position:absolute;inset:0;display:flex;align-items:center;justify-content:center;width:100%;height:100%;margin:0;padding:0;background:transparent;overflow:visible}
@@ -170,16 +170,30 @@ body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .l
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .showroom-displays{top:8px;height:32%;object-fit:contain}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .cafe-guests{top:8px;height:45%;object-fit:contain}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art .parked-car{top:0;height:40%;object-fit:contain}
+/* Foreground people and the supporting illustration share one horizon.
+   Leave each a readable strip even on the 320px classroom viewport. */
+body.unit127128-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .cafe-actor[data-position]{width:32%}
+body.unit127128-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .cafe-actor[data-position='left']{left:1%}
+body.unit127128-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .cafe-actor[data-position='right']{right:1%}
+body.unit127128-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .cafe-guests{width:32%}
+body.unit129130-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .road-group{left:34%;max-width:66%}
+body.unit129130-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .parked-car{left:83%;width:32%;top:30%}
 
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art>.learning-scene-plane{background:transparent}
 
 /* Photo evidence and weather props get their own space beside the cast. */
 body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .photo-actor[data-position]{width:28%;height:calc(100% - 16px);bottom:8px}
+body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .photo-actor[data-position='left']{left:1%}
+body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .photo-actor[data-position='right']{right:1%}
 body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .travel-photo-display{top:20%;width:40%;max-height:70%;padding:4px;box-sizing:border-box}
 body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .travel-photo-image{height:100px;max-height:30dvh;object-fit:contain}
 body.unit123124-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .travel-photo-caption{font-size:12px;line-height:16px;margin-top:2px}
 body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .garden-group{left:37%}
 body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .rain-window{top:8px;left:auto;right:2%;transform:none;width:24%;height:40%;object-fit:contain}
+body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art[data-phase='rain'] .garden-actor[data-position]{width:32%}
+body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art[data-phase='rain'] .garden-actor[data-position='left']{left:1%}
+body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art[data-phase='rain'] .garden-actor[data-position='right']{right:1%}
+body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art[data-phase='rain'] .rain-window{left:50%;right:auto;transform:translateX(-50%)}
 body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .garden-door{height:75%;width:28%;bottom:30px;right:0}
 body.unit125126-workspace[data-learning-shell] #lessonWorkspace .learning-story-art .garden-planter{height:23%;width:26%;bottom:30px;left:38%}
 body[data-learning-shell][data-learning-sample='whole-book'] #lessonWorkspace .learning-story-art[data-world-layout='picture']:has(.workshop-names) .room-furniture{height:calc(100% - 24px);align-self:flex-start}

@@ -1,4 +1,5 @@
 'use strict';
+const {expectTheatrePortrait}=require('../support/continuous-theatre');
 const {courseButton,finishStoryAndReturn}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use(process.env.UNIT143_BROWSER==='webkit'?{browserName:'webkit'}:{});
@@ -29,8 +30,13 @@ for(const width of [320,390,768,1280])test(width+'：13步完整原文、七辆�
   await expect(room.locator('.story-note,.story-timeline')).toHaveCount(0);await expect(world.locator('aside')).toHaveCount(0);
   await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=courseButton(room, i===12?"finishStory":'下一句'),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();expect(Math.abs((await next.boundingBox()).y-before.y)).toBeLessThan(2);
   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
-  const materialBottom=b.y+b.height;const prop=world.locator('.forest-object:visible');await prop.evaluate(el=>el.decode());const pb=await prop.boundingBox();expect(pb.y).toBeGreaterThanOrEqual(materialBottom);expect(pb.x).toBeGreaterThanOrEqual(w.x);expect(pb.x+pb.width).toBeLessThanOrEqual(w.x+w.width);const person=await world.locator('.forest-cast:visible').boundingBox();expect(pb.y+pb.height).toBeLessThanOrEqual(person.y);if(i===8)await expect(prop).toHaveAttribute('alt','七辆旧汽车和三台旧冰箱');
-  for(const img of await world.locator('.forest-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+  let propBox=null;
+  if(i>=4){
+   const prop=world.locator('.forest-object:visible');await prop.evaluate(el=>el.decode());propBox=await prop.boundingBox();
+   expect(propBox.y).toBeGreaterThanOrEqual(b.y+b.height);expect(propBox.x).toBeGreaterThanOrEqual(w.x-1);expect(propBox.x+propBox.width).toBeLessThanOrEqual(w.x+w.width+1);
+   if(i===8)await expect(prop).toHaveAttribute('alt','七辆旧汽车和三台旧冰箱');
+  }
+  for(const img of await world.locator('.forest-cast:visible').all()){await uncut(img);await expectTheatrePortrait(img,w,b.y+b.height,propBox);}
   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}));for(let j=0;j<labels.length;j++)for(let k=j+1;k<labels.length;k++)expect(labels[j].x+labels[j].width<=labels[k].x||labels[k].x+labels[k].width<=labels[j].x).toBe(true);
   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
   if([0,2,3,4,5,6,7,8,9,10,11,12].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<12)await next.click();

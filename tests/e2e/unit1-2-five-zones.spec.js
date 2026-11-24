@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRoundCounts}=require('../support/course-controls');
+const {courseButton,expectCorrectedCompletion,expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const previous = require('../support/unit12-six-zones-predecessor');
@@ -101,7 +101,7 @@ test('学习内容不发星；每区整轮首次零错得一星，改正后完�
   await flow.activity(page, '1-2', 'manners');
   await expect(page.locator('#starCount')).toHaveText('0');
   await expectRoundCounts(room.getByRole('list', { name: '本轮成果' }).locator('.completion-number'), ['5', '5', '1']);
-  await expect(room.locator('.completion-award')).toContainText('这轮有过答错');
+  await expectCorrectedCompletion(room);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   await flow.activity(page, '1-2', 'manners');
   await expect(page.locator('#starCount')).toHaveText('1');

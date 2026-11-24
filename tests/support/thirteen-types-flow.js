@@ -30,11 +30,12 @@ async function story(page,pair,base=''){
  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
  if(await room.locator(':scope > .practice-finish').isVisible())return;
- const start=pair==='1-2'?room.getByRole('button',{name:'开始故事',exact:true}):courseButton(room,'startStory');
+ const legacyFirst=pair==='1-2'&&!await page.locator('body[data-learning-shell]').count();
+ const start=legacyFirst?room.locator('.stage-ctrl').getByRole('button',{name:/^(开始故事|开始看课文)$/}):courseButton(room,'startStory');
  if(await start.isVisible())await start.click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- const end=pair==='1-2'&&!await page.locator('body[data-learning-shell]').count()?'读完了':'finishStory';
- await courseButton(room,end).click();
+ const end=legacyFirst?room.locator('.stage-ctrl').getByRole('button',{name:/^(读完了|完成课文)$/}):courseButton(room,'finishStory');
+ await end.click();
 }
 async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);

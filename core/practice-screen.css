@@ -88,7 +88,10 @@ body[data-practice-screen] .practice-screen-stage .practice-hint[data-screen-dis
 body[data-practice-screen] #lessonWorkspace .practice-screen-stage .translation-answer{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:var(--answer-row-height,44px);gap:6px;min-height:0;padding:6px 18px 6px 6px;margin:0 0 8px;border-radius:12px}
 body[data-practice-screen] #lessonWorkspace .practice-screen-stage .translation-answer :is(.opt-btn,.translation-slot){height:var(--answer-row-height,44px);min-height:44px;min-width:0;padding:4px 2px;font-size:16px;line-height:1.1;overflow-wrap:anywhere}
 body[data-practice-screen] .practice-screen-stage .translation-bank{padding:2px 0 4px}
-body[data-practice-screen] #lessonWorkspace .practice-screen-stage .word-answer{height:100px;min-height:100px;max-height:100px;gap:6px;padding:4px 0;margin:0}
+/* Placed tokens keep a placeholder in the bank. The answer's 2px border
+   matches the bank's padding so filling either row doesn't resize both. */
+body[data-practice-screen] #lessonWorkspace .practice-screen-stage .sentence-options:has(>.word-answer){grid-template-rows:repeat(2,1fr)}
+body[data-practice-screen] #lessonWorkspace .practice-screen-stage .sentence-options>.word-answer{height:auto;min-height:44px;max-height:none;align-self:stretch;align-content:flex-start;gap:6px;padding:0;margin:0}
 body[data-practice-screen] #lessonWorkspace .practice-screen-stage .wordbank{gap:6px;padding:2px 0;min-height:0}
 body[data-practice-screen] #lessonWorkspace .practice-screen-stage .word-token{min-height:44px;height:44px;font-size:16px;line-height:1.2;padding:5px 8px;gap:4px;border-width:2px}
 body[data-practice-screen] .practice-screen-stage .word-token-mark{display:none}
@@ -151,7 +154,7 @@ body[data-practice-screen] .practice-screen-stage .grammar-intro .grammar-cast i
  body[data-practice-screen] .practice-screen-stage .practice-answer-note .fb{font-size:16px;line-height:22px;min-height:22px}
  body[data-practice-screen] .practice-screen-stage .practice-submit-row{height:44px}
  body[data-practice-screen] #lessonWorkspace .practice-screen-stage .practice-submit-row>.btn{height:44px;min-height:44px;max-height:44px;padding-block:5px}
- body[data-practice-screen] #lessonWorkspace .practice-screen-stage .word-answer{height:100px;min-height:100px;max-height:100px;padding-block:2px;gap:4px}
+ body[data-practice-screen] #lessonWorkspace .practice-screen-stage .sentence-options>.word-answer{gap:4px}
  body[data-practice-screen] #lessonWorkspace .practice-screen-runner>.practice-content{padding-bottom:4px}
  body[data-practice-screen] .practice-screen-stage .translation-bank{margin-bottom:0;padding-bottom:2px}
  body[data-practice-screen] .practice-screen-stage .cloze-row:last-child{margin-bottom:0}

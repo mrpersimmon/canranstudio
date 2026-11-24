@@ -12,7 +12,7 @@ test('54题、完整原文、五区五星及教材参考均可真实完成',asyn
  }
  await expect(page.locator('#starCount')).toHaveText('5');await page.goto('/unit9-10/#learn/certificate');await expect(page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','5');
  await page.goto('/unit9-10/#learn/apply');await openCourseReference(page,'课本小参考 · 第10课');await expect(courseReference(page).locator(".reference-card")).toHaveCount(12);await expect(courseReference(page).locator(".reference-card small")).toHaveText(Array.from({length:12},(_,i)=>String(i+11)));
- for(const label of ['胖瘦','高矮','整洁','冷暖','年龄','忙闲']){await page.getByRole('button',{name:label,exact:true}).click();await expect(courseReference(page).locator(".reference-card:visible")).toHaveCount(2);}await expect(page.locator('.stage-apply')).toContainText("Look at that housewife! She's very lazy.");
+ for(const label of ['胖瘦','高矮','整洁','冷暖','年龄','忙闲']){await page.getByRole('button',{name:label,exact:true}).click();await expect(courseReference(page).locator(".reference-card:visible")).toHaveCount(2);}await expect(courseReference(page)).toContainText("Look at that housewife! She's very lazy.");
  await page.goto('/unit9-10/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();await expect(page.locator('.writing-a li')).toHaveCount(6);await expect(page.locator('.writing-b li')).toHaveCount(12);await expect(page.locator('.writing-rule')).toHaveCount(30);
  expect(errors).toEqual([]);expect(voices).toEqual([]);
 });

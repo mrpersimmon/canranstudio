@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,finishStoryAndReturn,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { ANSWERS, DIALOGUE } = require('../support/unit3-4-flow');
 test.use({ reducedMotion: 'reduce' });
@@ -18,7 +18,10 @@ for (const width of [390, 1280]) test(width + '衣帽间人物站在前景，正
   const visitor = stage.locator('.counter-visitor > img');
   const person = await visitor.boundingBox(), scene = await stage.boundingBox();
   // These detect the actual reported small/floating actors, not CSS class names.
-  expect(person.height).toBeGreaterThanOrEqual(width < 600 ? 126 : 190);
+  const actor=await stage.locator('.counter-visitor').boundingBox();
+  await expect(visitor).toHaveAttribute('src',/visitor-v1\.webp$/);
+  expect(actor.height,'柜台场景预留上部对白，人物至少占其高度的一半').toBeGreaterThanOrEqual(scene.height*.5);
+  expect(person.height,'人物与其下的姓名共同填满人物栏').toBeGreaterThanOrEqual(actor.height-19);
   expect(scene.y + scene.height - person.y - person.height).toBeLessThan(70);
   await capture(room, 'counter-start-' + width + '.png');
   const positions = [];
@@ -83,7 +86,7 @@ for (const width of [390, 1280]) test(width + '课文的柜台与人物、短长
       await capture(room, 'story-line-' + (i + 1) + '-' + width + '.png');
     }
   }
-  await courseButton(room, "finishStory").click();
+  await finishStoryAndReturn(room);
   await capture(room, 'story-finish-' + width + '.png');
   await courseButton(room, "replayStory").click();
   await expect(room.locator('.cloakroom-props')).not.toContainText('客人确认：是这把');

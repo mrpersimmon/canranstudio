@@ -2,7 +2,7 @@
 const fs = require('node:fs/promises');
 const sharp = require('sharp');
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, studentLogin } = require('./helpers');
+const { adminLogin, createStudent, studentLogin, openCanranAward } = require('./helpers');
 const { finishZone, readStory } = require('../support/unit1-2-award-flow');
 const tasks = require('../support/units1-30-tasks');
 const {inspectGifEdges}=require('../support/gif-edges');
@@ -78,9 +78,9 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await student.context.setOffline(true);
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-one-star', false);
     await student.context.setOffline(false);
-    await p.getByRole('link', { name: '我的纪念册', exact: true }).click();
+    await openCanranAward(p);
     await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
-    await lights(p.locator('.certificate'), 1);
+    await lights(p.locator('.postoffice-hero-card .certificate'), 1);
     await readStory(p, course);
     for (const id of ['roles', 'trans', 'manners', 'exam']) {
       await finishZone(p, id, { base: course, keepAward: true });
@@ -94,14 +94,14 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     requests.length = 0;
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-full-stars', true);
     expect(requests).toEqual([]);
-    await p.getByRole('link', { name: '我的纪念册', exact: true }).click();
+    await openCanranAward(p);
     await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
-    await lights(p.locator('.certificate'), 5);
+    await lights(p.locator('.postoffice-hero-card .certificate'), 5);
     await p.getByRole('button', { name: '我的', exact: true }).click();
     const turnSwitch = p.getByRole('switch', { name: '纪念册动效' });
     if (await turnSwitch.getAttribute('aria-checked') === 'true') await turnSwitch.click();
     await p.getByRole('button', { name: '关闭我的', exact: true }).click();
-    await lights(p.locator('.certificate'), 5);
+    await lights(p.locator('.postoffice-hero-card .certificate'), 5);
     await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
     const modal = p.getByRole('dialog', { name: 'Lesson 1–2 纪念卡', exact: true });
     await lights(modal.locator('.certificate'), 5);

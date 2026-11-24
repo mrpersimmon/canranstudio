@@ -50,9 +50,10 @@
   }
   function sessionScreen(kind,message='',retry=()=>start()){
     stopDirectoryFonts();clearHome?.();clearHome=null;studentHeader();
-    app.dataset.sessionState=kind;app.setAttribute('aria-busy',String(kind==='checking'));
+    app.dataset.sessionState=kind==='forbidden'?'error':kind;app.setAttribute('aria-busy',String(kind==='checking'));
     app.style.visibility='';document.getElementById('siteHeader').style.visibility='';
-    app.innerHTML=kind==='checking'?'<section class="portal-loading" role="status" aria-live="polite"><span class="portal-spinner" aria-hidden="true"></span><h1>正在打开工作室…</h1><p>请稍候，或<a href="">重新加载</a>。</p></section>':'<section class="portal-loading"><h1>暂时无法连接工作室</h1><p role="status">'+e(message||'请检查网络后重试，学习成果会保留。')+'</p><button type="button" id="retrySession">重试</button></section>';
+    const title=kind==='forbidden'?'暂时无法进入工作室':'暂时无法连接工作室';
+    app.innerHTML=kind==='checking'?'<section class="portal-loading" role="status" aria-live="polite"><span class="portal-spinner" aria-hidden="true"></span><h1>正在打开工作室…</h1><p>请稍候，或<a href="">重新加载</a>。</p></section>':'<section class="portal-loading"><h1>'+title+'</h1><p role="status">'+e(message||'请检查网络后重试，学习成果会保留。')+'</p><button type="button" id="retrySession">重试</button></section>';
     document.getElementById('retrySession')?.addEventListener('click',retry);
   }
   function authenticated(){app.dataset.sessionState='authenticated';app.setAttribute('aria-busy','false');app.style.visibility='';document.getElementById('siteHeader').style.visibility='';}
@@ -60,6 +61,7 @@
     // A student session is not a teacher session: admin/state returns 403 for
     // that role boundary, while the student's own 403 is never a logout.
     if(error.status===401||(admin&&error.status===403))login(admin,admin?'':legacyNotice);
+    else if(error.status===403)sessionScreen('forbidden',error.message);
     else sessionScreen('error','暂时无法连接，请稍后重试。学习成果会保留。');
   }
   async function api(endpoint, value, timeoutMs = 15000) {

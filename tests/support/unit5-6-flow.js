@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,readyCourse}=require('./course-controls');
+const {courseButton, finishStoryAndReturn, readyCourse}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
@@ -15,8 +15,8 @@ async function completeStory(page, base = '') {
     await expect(room.locator('.classroom-classmate span')).toHaveText(PEOPLE[i]);
     await expect(courseButton(room, i===19?"finishStory":'下一句')).toBeEnabled({timeout:10000});
   }
-  await courseButton(room, "finishStory").click();
-  await expect(room).toContainText('新朋友都认识了！');
+  await finishStoryAndReturn(room);
+  await expect(room.locator('.btext span')).toHaveText(DIALOGUE);
 }
 async function completeActivity(page,id,{recovery=false,base=''}={}){
   await require('./reward-dialog').handleRewardDialog(page);

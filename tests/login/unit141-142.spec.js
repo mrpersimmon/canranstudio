@@ -239,13 +239,13 @@ test('动作与邀请记录图在账号中真实可见：未答读图、错答�
  try{
   await p.goto(base+'unit141-142/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===1){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'记录时刻16 October 2026 10:00：Room A cleaned，15 Oct，finished；Room B painting，now，in progress；letter send，17 Oct，planned':'15 October 2026：Mia为邀请人，箭头指向收到邀请的Sam；两人姓名和角色均明确');
+   if(i===0||i===1){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'记录时刻16 October 2026 10:00：Room A cleaned，15 Oct，finished；Room B painting，now，in progress；letter send，17 Oct，planned':'15 October 2026：Mia为邀请人，箭头指向收到邀请的Sam；两人姓名和角色均明确');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===1){
     await select(room,'Mia was invited by Sam.');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.rail-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===3){
     await select(room,{fills:['will be']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('sending has not started');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'will be',exact:true}).click();

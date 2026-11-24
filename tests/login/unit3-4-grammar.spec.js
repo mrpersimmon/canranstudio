@@ -1,5 +1,5 @@
 'use strict';
-const {expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
+const {expectRoundCounts, incorrectFeedback, readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin } = require('./helpers');
 const { completeUnit34, completeActivity } = require('../support/unit3-4-flow');
@@ -26,7 +26,7 @@ test('实际提交统计跨设备保留：同题两次错答计两次，重练�
         await expect(learner.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
         await learner.reload();
         // Reload decrypts and prepares the course before mounting its exercises.
-        await expect(learner.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+        await readyCourse(learner);
         await expect(room.locator('.progress-copy')).toHaveText('第 4 / 10 题');
         await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
         await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -42,10 +42,10 @@ test('实际提交统计跨设备保留：同题两次错答计两次，重练�
 
     second = await studentLogin(browser, account, base);
     await second.page.goto(base + 'unit3-4/#learn/reply');
-    await expect(second.page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+    await readyCourse(second.page);
     const room = second.page.locator('.stage-reply');
     await expectRoundCounts(room.locator('.completion-number'), ['7', '10', '2']);
-    await expect(room.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+    await expect(room.locator('.completion-unit')).toHaveText(['次', '题', '题']);
     await expect(second.page.locator('#starCount')).toHaveText('0');
     await room.getByRole('button', { name: '再练一轮', exact: true }).click();
     await expect(room.locator('.progress-copy')).toHaveText('第 1 / 10 题');
@@ -54,7 +54,7 @@ test('实际提交统计跨设备保留：同题两次错答计两次，重练�
     await expect(second.page.locator('#starCount')).toHaveText('1');
     await expect(second.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await learner.reload();
-    await expect(learner.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+    await readyCourse(learner);
     await expect(learner.locator('.stage-reply .completion-number')).toHaveText(['10', '10', '0']);
     await expect(learner.locator('#starCount')).toHaveText('1');
   } finally { await first.context.close(); await second?.context.close(); }
@@ -85,10 +85,10 @@ test('语法新版真实账号全程：五星同步、跨设备、纪念册、�
     second = await studentLogin(browser, account, base);
     await expect(second.page.locator('.course')).toContainText('5 / 5');
     await second.page.goto(base + 'unit3-4/#learn/certificate');
-    await expect(second.page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+    await readyCourse(second.page);
     await expect(second.page.locator('#certificateDate')).toHaveText(date);
     await second.page.goto(base + 'unit3-4/#learn/reply');
-    await expect(second.page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+    await readyCourse(second.page);
     await expect(second.page.locator('.stage-reply .completion-number')).toHaveText(['10', '10', '0']);
     await second.page.locator('.stage-reply').getByRole('button', { name: '再练一轮', exact: true }).click();
     const room = second.page.locator('.stage-reply');
@@ -139,7 +139,7 @@ test('语法新版真实账号全程：五星同步、跨设备、纪念册、�
       await second.context.setOffline(false);
       await second.page.getByRole('button', { name: '再试一次', exact: true }).click();
     }
-    await expect(second.page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+    await readyCourse(second.page);
     await expect(room.locator('.progress-copy')).toHaveText('第 2 / 10 题');
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
     await expect(second.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');

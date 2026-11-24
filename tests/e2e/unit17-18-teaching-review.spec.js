@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
+const {courseButton,expectLessonAfterPreviousRecord,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,activity}=require('../support/unit1718-fivezones');
 const {beforeReview,readLearning}=require('../support/unit1718-teaching-review');
@@ -35,7 +35,7 @@ test('当前62题版错答、两空草稿、阅读词卡与两处参考分页原
  for(const key of ['unitWordPage','unitDialogue','unitGalleryPage','unitModelPage','unit1718LegacySnapshot','unit1718FiveZoneMigration'])expect(after.activity[key]).toEqual(before.activity[key]);
  await expect(room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'are',exact:true})).toHaveAttribute('aria-pressed','true');
  await page.goto('/unit17-18/#learn/listen');await expect(listen.locator('.fb')).toHaveText(await incorrectFeedback(listen));await page.goto('/unit17-18/#learn/text');await expect(page.locator('.btext span')).toHaveCount(7);
- await page.goto('/unit17-18/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('4 / 5');
+ await page.goto('/unit17-18/#learn/words');await expectLessonAfterPreviousRecord(page,'4 / 5');
  await page.goto('/unit17-18/#learn/apply');await openCourseReference(page,'课本小参考 · 第18课');await expect(courseReference(page).locator(".gallery-current + .reference-pager span")).toHaveText('5 / 15');await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('4 / 10');
 });
 

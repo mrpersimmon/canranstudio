@@ -24,4 +24,24 @@ async function expectContinuousTheatre(room,background){
   for(const portrait of layout.portraits)expect(portrait).toEqual({loaded:true,inStage:true});
   expect(await room.evaluate(inspectWholeBookScene)).toEqual([]);
 }
-module.exports={expectContinuousTheatre};
+async function expectTheatrePortrait(image,world,dialogueBottom,prop){
+  const painted=await image.evaluate(el=>{
+    const box=el.getBoundingClientRect();
+    const scale=Math.min(box.width/el.naturalWidth,box.height/el.naturalHeight);
+    const width=el.naturalWidth*scale,height=el.naturalHeight*scale;
+    const [horizontal,vertical]=getComputedStyle(el).objectPosition.split(' ').map(value=>parseFloat(value)/100);
+    const left=box.x+(box.width-width)*horizontal,top=box.y+(box.height-height)*vertical;
+    return {left,top,right:left+width,bottom:top+height,height};
+  });
+  expect(painted.left).toBeGreaterThanOrEqual(world.x-1);
+  expect(painted.right).toBeLessThanOrEqual(world.x+world.width+1);
+  expect(painted.top).toBeGreaterThanOrEqual(Math.max(world.y,dialogueBottom)-1);
+  expect(painted.bottom).toBeLessThanOrEqual(world.y+world.height+1);
+  expect(painted.height,'人物应占据舞台的主要高度').toBeGreaterThan(Math.min(220,world.height*.6)-1);
+  if(prop){
+    const overlapX=Math.min(painted.right,prop.x+prop.width)-Math.max(painted.left,prop.x);
+    const overlapY=Math.min(painted.bottom,prop.y+prop.height)-Math.max(painted.top,prop.y);
+    expect(Math.min(overlapX,overlapY),'独立的照片、场景道具与人物均应可见').toBeLessThanOrEqual(1);
+  }
+}
+module.exports={expectContinuousTheatre,expectTheatrePortrait};

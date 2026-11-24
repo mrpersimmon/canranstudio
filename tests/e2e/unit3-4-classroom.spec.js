@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
+const {courseButton,courseReference,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
@@ -26,7 +26,7 @@ test('全部声音失败仍能完成33题与完整原文并领奖，零英语配
   await page.goto('/lesson/unit3-4/#learn/certificate');
   await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
   await completeUnit34(page, '/lesson');
-  await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+  await expect(page.getByRole('article',{name:'我的纪念卡',exact:true})).toBeVisible();
   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
   await page.reload();await expect(page.locator('#starCount')).toHaveText('5');
   await expect(page.getByRole('button', { name: /听一遍|重听|播放|开始听/ })).toHaveCount(0);
@@ -52,7 +52,7 @@ test('反馈音真实结束，错答只重试且不泄题', async ({ page }) => 
   await room.getByRole('button', { name: '再试一次', exact: true }).click(); await choose(room, 'umbrella');
   await expect.poll(() => page.evaluate(() => window.soundEvents.some(event => event.ended && event.src.endsWith('duolingo-correct.mp3')))).toBe(true);
   await openLearningRecord(page);
-  await expect(page.locator('#learningRecord')).toContainText('修正后完成'); expect(voices).toEqual([]);
+  await expect(page.locator('#learningRecord')).toContainText('本轮订正完成'); expect(voices).toEqual([]);
 });
 
 test('12句原文可续读和翻译，末句主动完成，只有对话内部滚动', async ({ page }) => {
@@ -103,21 +103,33 @@ test('七个词义任务不以图配图，末三题刷新不代答，重练清�
 test('25张音标词卡可翻面，15问和10组否定回应仍供阅读', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 }); await page.goto('/unit3-4/#learn/words');
   const room = page.locator('.stage-words');
-  const phonetics = ['/ʌmˈbrelə/','/ˈtɪkɪt/','/ˈkloʊkruːm/','/suːt/','/skuːl/','/ˈtiːtʃɚ/','/sʌn/','/ˈdɑːt̬ɚ/','/pen/','/ˈpensəl/','/bʊk/','/wɑːtʃ/','/koʊt/','/dres/','/skɝːt/','/ʃɝːt/','/kɑːr/','/haʊs/','/pliːz/','/hɪr/','/maɪ/','/ˈnʌmbɚ/','/faɪv/','/ˈsɔːri/','/sɝː/'];
+  const phonetics={
+    'umbrella':'/ʌmˈbrelə/', 'ticket':'/ˈtɪkɪt/', 'cloakroom':'/ˈkloʊkruːm/', 'suit':'/suːt/',
+    'school':'/skuːl/', 'teacher':'/ˈtiːtʃɚ/', 'son':'/sʌn/', 'daughter':'/ˈdɑːt̬ɚ/',
+    'pen':'/pen/', 'pencil':'/ˈpensəl/', 'book':'/bʊk/', 'watch':'/wɑːtʃ/',
+    'coat':'/koʊt/', 'dress':'/dres/', 'skirt':'/skɝːt/', 'shirt':'/ʃɝːt/',
+    'car':'/kɑːr/', 'house':'/haʊs/', 'please':'/pliːz/', 'here':'/hɪr/',
+    'my':'/maɪ/', 'number':'/ˈnʌmbɚ/', 'five':'/faɪv/', 'sorry':'/ˈsɔːri/',
+    'sir':'/sɝː/'
+  };
+  const visited=[];
   await expect(courseButton(room, "previousWords")).toBeDisabled();
   for (let start = 0; start < 25; start += 6) {
-    const cards = room.locator('.unit-word'); await expect(cards.locator('.word-phonetic')).toHaveText(phonetics.slice(start, start + 6));
+    const cards = room.locator('.unit-word');
     for (const card of await cards.all()) {
+      const word=await card.getAttribute('aria-label');visited.push(word);
+      await expect(card.locator('.word-phonetic')).toHaveText(phonetics[word]);
       await card.click(); await expect(card.locator('.word-meaning')).toBeVisible();
       expect(await card.evaluate(el => el.scrollWidth <= el.clientWidth + 2 && el.scrollHeight <= el.clientHeight + 2)).toBe(true);
       await card.click(); await expect(card.locator('.word-meaning')).toBeHidden();
     }
     if (start < 24) await courseButton(room, "nextWords").click();
   }
+  await expectVocabulary(page,visited,Object.keys(phonetics));
   await page.reload(); await expect(room).toContainText('5 / 5');
   await room.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click(); await expect(page).toHaveURL(/#learn\/listen$/);
-  await page.goto('/unit3-4/#learn/phrases'); const phrases = page.locator('.stage-reply');
-  await openCourseReference(phrases,'认领表达参考');
+  await page.goto('/unit3-4/#learn/phrases'); const phrases = courseReference(page);
+  await openCourseReference(page,'认领表达参考');
   await expect(phrases.locator('button.phrase-card')).toHaveCount(0);
   await phrases.getByText('换个人或物问一问', { exact: true }).click();
   await expect(phrases.locator('.sentence-models').first().locator('.reference-card')).toHaveCount(15);

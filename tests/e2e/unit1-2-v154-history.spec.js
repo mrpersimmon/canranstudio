@@ -35,10 +35,10 @@ for(const version of [25,37])test(`旧${version}题真实领取的证书原文�
  await flow.activity(page,'1-2','trans');const saved=await book(page);
  expect(saved.activity.unitName).toBe(old.activity.unitName);expect(saved.activity.unitCertificateIssuedAt).toBe(old.activity.unitCertificateIssuedAt);
  expect(saved.activity.unit12HistorySnapshot.records).toEqual(old.records);
- await page.reload();await page.getByText('之前的学习记录与证书',{exact:true}).click();await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateDate')).toHaveText(date);
+ await page.goto('/unit1-2/#learn/certificate');await page.reload();await page.getByText('之前的学习记录与证书',{exact:true}).click();await page.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(page.locator('#legacyCertificateDate')).toHaveText(date);
 });
 test('教材七句抄写独立成页，替换例句保持十组',async({page,browserName})=>{
- await page.goto('/unit1-2/#learn/manners');await openCourseReference(page,'换个物品问一问');await expect(courseReference(page).locator(".grammar-reference .reference-card")).toHaveCount(10);
+ await page.goto('/unit1-2/#learn/manners');await openCourseReference(page,'换个物品问一问');await expect(courseReference(page).locator(".reference-card")).toHaveCount(10);
  await page.goto('/unit1-2/#learn/certificate');await page.getByText('和家人再试试',{exact:true}).click();await expect(page.locator('#unitWriting')).toContainText('Copy these sentences.');
  await page.evaluate(()=>{window.print=()=>{};});await page.getByRole('button',{name:'打印练习纸',exact:true}).click();await page.emulateMedia({media:'print'});
  await expect(page.locator('#unitWriting .writing-lines li')).toHaveCount(7);for(const li of await page.locator('#unitWriting .writing-lines li').all())await expect(li).toBeVisible();

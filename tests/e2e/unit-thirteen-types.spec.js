@@ -1,4 +1,4 @@
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -24,7 +24,7 @@ test('辨认问句保存选择，错误只重试，新题保持未答',async({pa
  await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
  await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'Is this your book?');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
  await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
- await page.getByRole('button',{name:'学习记录',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('订正完成');
+ await openLearningRecord(page);await expect(page.locator('#learningRecord')).toContainText('订正完成');
 });
 test('中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正',async({page})=>{
  await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe'),bank=room.getByRole('group',{name:'待选词块',exact:true}),chosen=room.getByRole('group',{name:'已选词块',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});

@@ -239,13 +239,13 @@ test('位置与服务图在账号中真实可见：未答读图、错答刷新�
  try{
   await p.goto(base+'unit121-122/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===4){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'书店位置图：A是柜台台面上的绿色书，B是柜台下地板上的蓝色书，C是右侧墙架上的红色书。':'服务记录：Pat指向Lee的箭头标served，Mia指向Tom的箭头标served；箭头由接待者指向顾客。');
+   if(i===0||i===4){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'书店位置图：A是柜台台面上的绿色书，B是柜台下地板上的蓝色书，C是右侧墙架上的红色书。':'服务记录：Pat指向Lee的箭头标served，Mia指向Tom的箭头标served；箭头由接待者指向顾客。');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===4){
     await select(room,'Lee is the person who served Pat.');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.bookshop-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===3){
     await select(room,{fills:['it']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('hat in his hand');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'it',exact:true}).click();

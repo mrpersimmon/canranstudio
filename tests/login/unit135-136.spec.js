@@ -239,13 +239,13 @@ test('周范围与介绍关系图在账号中真实可见：未答读图、错�
  try{
   await p.goto(base+'unit135-136/#learn/apply');await ready(p);const room=p.locator('.stage-apply'),check=room.getByRole('button',{name:'检查答案',exact:true});
   for(let i=0;i<8;i++){
-   if(i===0||i===2){await withQuestionMaterial(room,async material=>{
-    const img=material.locator('.practice-scene');await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'2026年按周一至周日排列的三周：19–25 October；26 October–1 November；2–8 November':'介绍关系：Mia负责介绍，Ben是被介绍的人，Sue是听介绍的人');
+   if(i===0||i===2){await withQuestionMaterial(room,async(material,img)=>{
+    await expect(img).toBeVisible();await img.evaluate(el=>el.decode());await expect(img).toHaveAttribute('alt',i===0?'2026年按周一至周日排列的三周：19–25 October；26 October–1 November；2–8 November':'介绍关系：Mia负责介绍，Ben是被介绍的人，Sue是听介绍的人');
     await material.screenshot({path:info.outputPath('material-'+i+'-unanswered.png')});
    });}
    if(i===2){
     await select(room,'Mia');await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.report-application')).toHaveAttribute('data-recorded','false');
-    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async material=>{await expect(material.locator('.practice-scene')).toBeVisible();});await expect(check).toBeDisabled();
+    await p.reload();await ready(p);await room.getByRole('button',{name:'再试一次',exact:true}).click();await withQuestionMaterial(room,async(material,diagram)=>{await expect(diagram).toBeVisible();});await expect(check).toBeDisabled();
    }
    if(i===5){
     await select(room,{fills:['might']});await expect(check).toBeDisabled();await p.reload();await ready(p);await expect(check).toBeDisabled();await expect(room.locator('.practice-context')).toContainText('Tom may have taken my book');await room.getByRole('group',{name:'第1处填空',exact:true}).getByRole('button',{name:'might',exact:true}).click();

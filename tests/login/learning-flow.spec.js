@@ -10,10 +10,32 @@ async function header(p){
  expect(size.old).toBe(0);expect(size.current).toBeCloseTo(48,0);expect(size.icons).toBe(2);
 }
 test('Lesson1–2课文、答题、得星结算和返回保持同一导航与操作位置',async({page,browser},info)=>{
- test.setTimeout(120000);await adminLogin(page,base);const a=await createStudent(page,'学习流程打磨','小禾',[/Lesson 1–2 /]),s=await studentLogin(browser,a,base,{viewport:{width:375,height:667},hasTouch:true}),p=s.page;
+ test.setTimeout(120000);await adminLogin(page,base);const a=await createStudent(page,'学习流程打磨','小禾',[/Lesson 1–2 /]),s=await studentLogin(browser,a,base,{viewport:{width:375,height:667},hasTouch:true,reducedMotion:'no-preference'}),p=s.page;
  try{
-  await p.addInitScript(()=>{window.learningFrames=[];const frame=()=>{if(document.body?.hasAttribute('data-learning-shell')&&!document.querySelector('#courseLoader')&&window.learningFrames.length<1600){const nav=document.querySelector('.practice-screen-toolbar'),panel=document.querySelector('[data-learning-motion="entering"]');window.learningFrames.push({view:document.body.dataset.learningView,height:nav?.getBoundingClientRect().height,legacy:document.querySelector('#topbar')?.getBoundingClientRect().height,moving:!!panel,opacity:panel?Number(getComputedStyle(panel).opacity):1});}requestAnimationFrame(frame);};requestAnimationFrame(frame);});
+  await p.addInitScript(()=>{
+   const samples={count:0,headerChanges:0,opacities:[]};window.learningFrames=samples;
+   const frame=()=>{
+    if(document.body?.hasAttribute('data-learning-shell')&&!document.querySelector('#courseLoader')){
+     const nav=document.querySelector('.practice-screen-toolbar'),old=document.getElementById('topbar');
+     if(nav&&old){
+      samples.count++;
+      if(Math.abs(nav.getBoundingClientRect().height-48)>.5||old.getBoundingClientRect().height!==0)samples.headerChanges++;
+      const panel=document.querySelector('.learning-surface [data-learning-motion="entering"]');
+      if(panel&&samples.opacities.length<120){
+       const opacity=Number(getComputedStyle(panel).opacity);
+       if(opacity<1&&!samples.opacities.includes(opacity))samples.opacities.push(opacity);
+      }
+     }
+    }
+    requestAnimationFrame(frame);
+   };
+   requestAnimationFrame(frame);
+  });
   await p.goto(base+'unit1-2/#learn/text');await courseReadyForAssertions(p);await header(p);
+  await p.getByRole('link',{name:'词汇',exact:true}).click();
+  await expect(p.locator('.stage-words.learning-surface')).toBeInViewport();
+  await expect.poll(()=>p.evaluate(()=>window.learningFrames.opacities.length)).toBeGreaterThan(1);
+  await p.getByRole('link',{name:'故事',exact:true}).click();
   const story=p.locator('.stage-text');await p.screenshot({path:info.outputPath('story-start-375.png')});
   for(const[width,height]of [[320,568],[667,375],[375,667]]){await p.setViewportSize({width,height});await header(p);await expect(story.getByRole('button',{name:'开始故事',exact:true})).toBeInViewport({ratio:1});expect(await story.locator('.dialogue-actor>img:not(.dialogue-handbag)').evaluateAll(images=>images.every(image=>{const b=image.getBoundingClientRect(),s=image.closest('.dialogue-stage').getBoundingClientRect();return b.top>=s.top&&b.bottom<=s.bottom&&b.left>=s.left&&b.right<=s.right;}))).toBe(true);}
   await story.getByRole('button',{name:'开始故事',exact:true}).click();await story.getByRole('button',{name:'看中文',exact:true}).click();await expect(story.locator('.bcn')).toBeInViewport({ratio:1});await header(p);await story.getByRole('button',{name:'收起中文',exact:true}).click();for(let i=1;i<7;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
@@ -33,7 +55,7 @@ test('Lesson1–2课文、答题、得星结算和返回保持同一导航与操
   await p.screenshot({path:info.outputPath('result-375.png')});const before=(await(await p.request.get(base+'api/awards')).json()).cards;
   await next.click();await expect(p).toHaveURL(/#learn\/trans$/);await header(p);await p.screenshot({path:info.outputPath('grammar-375.png')});
   await p.goBack();await expect(next).toBeVisible();await header(p);expect((await(await p.request.get(base+'api/awards')).json()).cards).toEqual(before);
-  const frames=await p.evaluate(()=>window.learningFrames);expect(frames.length).toBeGreaterThan(20);expect(frames.every(x=>x.height===48&&x.legacy===0)).toBe(true);expect(new Set(frames.filter(x=>x.moving&&x.opacity<1).map(x=>x.opacity)).size).toBeGreaterThan(1);
+  const frames=await p.evaluate(()=>window.learningFrames);expect(frames.count).toBeGreaterThan(20);expect(frames.headerChanges).toBe(0);expect(frames.opacities.length).toBeGreaterThan(1);
   for(const[width,height]of [[320,568],[768,1024],[1366,768]]){await p.setViewportSize({width,height});await header(p);await expect(next).toBeInViewport({ratio:1});await expect(room.getByRole('list',{name:'本轮成果'})).toBeInViewport({ratio:1});}
   await p.setViewportSize({width:375,height:667});await room.getByRole('button',{name:'再练一轮',exact:true}).click();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');await header(p);await expect(p.locator('#starCount')).toHaveText('1');expect((await(await p.request.get(base+'api/awards')).json()).cards).toEqual(before);
  }finally{await s.context.close();}

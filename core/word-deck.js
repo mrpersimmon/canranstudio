@@ -39,12 +39,10 @@
    saved={version:1,anchor,anchors:{...saved?.anchors,[profiles[anchor].kind]:anchor}};practice.activity('unitWordDeck',saved);
    if(legacy)practice.activity('unitWordPage',Math.floor(words.findIndex(w=>w.en===anchor)/6));
   }
-  function show(next){index=Math.max(0,Math.min(pages.length-1,next));save(pages[index].words[0].en,true);render();practice.revealQuestion(host,host.querySelector('h3'));}
+  function show(next){index=Math.max(0,Math.min(pages.length-1,next));save(pages[index].words[0].en,true);render();practice.revealQuestion(host,progress);}
   const previous=button('上一组',()=>show(index-1),'btn btn-yellow'),next=button('下一组',()=>index===pages.length-1?navigate('learn/listen'):show(index+1));
   controls.append(previous,progress,next);host.append(grid,controls);
-  function render(){
-   const page=pages[index];grid.replaceChildren();grid.dataset.wordKind=page.kind;
-   for(const [number,word]of page.words.entries()){
+  function makeCard(word,number,measureOnly=false){
     const profile=profiles[word.en],card=button('',()=>{},'opt-btn unit-word');card.dataset.wordKind=profile.kind;card.setAttribute('aria-label',word.en);card.setAttribute('aria-expanded','false');
     const id=unit.id+'-deck-'+number,phonetic=node('small','word-phonetic',word.ph),meaning=node('span','word-meaning',word.cn),example=node('small','word-example',word.example||'');
     phonetic.lang='en-US';phonetic.id=id+'-phonetic';meaning.id=id+'-meaning';meaning.hidden=true;example.hidden=true;
@@ -54,20 +52,51 @@
       const sentence=node('span','word-context');sentence.lang='en';sentence.id=id+'-context';
       for(const part of contextParts(profile.sentence,profile.focus||word.en)){if(part.mark){const mark=node('mark','',part.text);if(/\s/.test(part.text))mark.dataset.phrase='true';sentence.append(mark);}else sentence.append(document.createTextNode(part.text));}card.append(sentence);
      }
-    }else if(artwork){
+    }else if(!measureOnly&&artwork){
      const art=artwork(word),slot=node('span','word-art');slot.dataset.kind=art.kind;slot.setAttribute('aria-hidden','true');for(const source of art.sources){const image=node('img','');image.src=source;image.alt='';image.draggable=false;slot.append(image);}card.append(slot);
-    }else{const image=node('img','');image.src=core.learningWordArtwork?.[word.en]||word.image;image.alt='';image.draggable=false;card.append(image);}
+    }else if(!measureOnly){const image=node('img','');image.src=core.learningWordArtwork?.[word.en]||word.image;image.alt='';image.draggable=false;card.append(image);}
     const frontDescription=[profile.kind==='context'&&profile.presentation!=='word'?id+'-context':'',phonetic.id].filter(Boolean).join(' ');
     card.setAttribute('aria-describedby',frontDescription);
-    card.onclick=()=>{const expanded=card.getAttribute('aria-expanded')!=='true';card.setAttribute('aria-expanded',String(expanded));meaning.hidden=!expanded;example.hidden=!expanded||!word.example||word.example===profile.sentence;card.setAttribute('aria-describedby',expanded?phonetic.id+' '+meaning.id:frontDescription);save(word.en,true);};
-    card.append(node('strong','',word.en),phonetic,meaning,example);grid.append(card);
-   }
+    function showFace(expanded){card.setAttribute('aria-expanded',String(expanded));meaning.hidden=!expanded;example.hidden=!expanded||!word.example||word.example===profile.sentence;card.setAttribute('aria-describedby',expanded?phonetic.id+' '+meaning.id:frontDescription);}
+    card.onclick=()=>{showFace(card.getAttribute('aria-expanded')!=='true');save(word.en,true);};
+    card.append(node('strong','',word.en),phonetic,meaning,example);
+    return {card,showFace};
+  }
+  let measurement;
+  function minimumHeight(width){
+   if(width<=0)return 0;
+   const fontStatus=document.fonts?.status;
+   if(measurement?.width===width&&measurement.fontStatus===fontStatus)return measurement.height;
+   // The same texts and type styles are laid out at their actual column width.
+   // The hidden ruler contains no artwork and does not change a learner's page.
+   const ruler=grid.cloneNode(false);
+   Object.assign(ruler.style,{position:'absolute',visibility:'hidden',pointerEvents:'none',display:'block',width:width+'px',height:'auto',inset:'0 auto auto 0'});
+   ruler.inert=true;ruler.setAttribute('aria-hidden','true');
+   const samples=words.map((word,i)=>{
+    const sample=makeCard(word,'measure-'+i,true);
+    Object.assign(sample.card.style,{width:width+'px',height:'auto',minHeight:'0',maxHeight:'none'});
+    const context=sample.card.querySelector('.word-context');if(context)context.style.fontSize='16px';
+    ruler.append(sample.card);return sample;
+   });
+   grid.after(ruler);
+   try{
+    const tallest=()=>Math.max(...samples.map(({card})=>card.getBoundingClientRect().height));
+    const front=tallest();
+    for(const sample of samples)sample.showFace(true);
+    const height=Math.ceil(Math.max(front,tallest()));
+    measurement={width,fontStatus,height};
+    return height;
+   }finally{ruler.remove();}
+  }
+  function render(){
+   const page=pages[index];grid.replaceChildren();grid.dataset.wordKind=page.kind;
+   for(const [number,word]of page.words.entries())grid.append(makeCard(word,number).card);
    previous.disabled=index===0;progress.textContent=(index+1)+' / '+pages.length;
    next.textContent=index===pages.length-1?'下一站':'下一组';
    next.setAttribute('aria-label',index===pages.length-1?'下一站：单词寻宝':next.textContent);next.toggleAttribute('data-station-next',index===pages.length-1);
   }
   save(position.anchor);render();
-  active={current:()=>({page:index,kind:pages[index].kind,anchor:saved.anchor}),goPage:show,pages};return active;
+  active={current:()=>({page:index,kind:pages[index].kind,anchor:saved.anchor}),goPage:show,minimumHeight,pages};return active;
  }
- return {createPages,sanitizePosition,restore,contextParts,mount,goPage:index=>{if(Number.isInteger(index))active?.goPage(index);},current:()=>active?.current()};
+ return {createPages,sanitizePosition,restore,contextParts,mount,minimumHeight:width=>active?.minimumHeight(width)||0,goPage:index=>{if(Number.isInteger(index))active?.goPage(index);},current:()=>active?.current()};
 });

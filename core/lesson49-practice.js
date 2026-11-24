@@ -179,7 +179,7 @@
       heading.textContent = context.reward.zones.find(zone => zone.id === activity)?.title || activity;
       records.forEach(({ q, index, record }) => {
         seen.add(q.id); count++;
-        const shortName = context.copy.recordNames[activity]?.[index];
+        const shortName = context.copy.recordNames[activity]?.[index] || context.copy.recordTargets?.[q.id];
         list.append(row(q.id, record, `第 ${index + 1} 题${shortName ? ' · ' + shortName : ''}`,round));
       });
       section.append(heading, list);

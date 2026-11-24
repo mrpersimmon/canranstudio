@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,expectRoundCounts}=require('../support/course-controls');
+const {courseButton,expectRoundCounts,finishStoryAndReturn}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, ANSWERS } = require('../support/unit3-4-flow');
@@ -43,7 +43,7 @@ for (const width of [390, 1280]) test(width + '三次询问对应不同的雨伞
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }
-  await courseButton(room, "finishStory").click();
+  await finishStoryAndReturn(room);
   await expectUmbrella(room, '紫色圆点', true);
   await courseButton(room, "replayStory").click();
   await expectUmbrella(room, '红色纯色');
@@ -76,7 +76,7 @@ test('柜台否认和最后确认展示不同的伞，紫色圆点伞确认后�
     await courseButton(room, i === 3 ? "finishPractice" : '下一题').click();
   }
   // Finishing now uses the shared result card; the same purple umbrella stays in its artwork.
-  await expect(room.locator('.current-completion>img')).toHaveAttribute('src', '/assets/awards/unit3-4-umbrella.webp');
+  await expect(room.locator('.current-completion>img')).toHaveAttribute('src', '/assets/course-journey/umbrella-counter-v1.webp');
   await expect(room.getByRole('heading', { name: '雨伞领回来了！', exact: true })).toBeVisible();
   await expectRoundCounts(room.locator('.completion-number'), ['3', '4', '1']);
 });
@@ -137,7 +137,7 @@ test('第二把伞未准备好时不进课，同页离线换伞完整，断网�
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }
-  await courseButton(room, "finishStory").click();
-  await expect(room).toContainText('故事看完了！');
+  await finishStoryAndReturn(room);
+  await expect(room.locator('.dialogue-status')).toContainText('故事看完了');
   await expectUmbrella(room, '紫色圆点', true);
 });

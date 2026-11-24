@@ -1,14 +1,16 @@
 'use strict';
-const {courseButton,incorrectFeedback}=require('../support/course-controls');
+const {courseButton,courseWord,expectVocabulary,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 for(const width of [320,390,768,1280])test(`${width} 宽度各站没有横向溢出，图片完整，帮助关闭后焦点回原处`,async({page})=>{
   test.setTimeout(60000);await page.setViewportSize({width,height:740});const errors=[];page.on('pageerror',e=>errors.push(e.message));
   for(const activity of ['words','listen','text','roles','phrases','introduce','models','cars','exam','certificate']){
     await page.goto('/unit5-6/#learn/'+activity);const room=page.locator('.stage-'+({phrases:'introduce',models:'cars'}[activity]||activity));
-    await expect(room.getByRole('heading').first()).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    await expect(room).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
     await expect.poll(()=>room.locator('img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
-    await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);await page.locator('#notebookButton').click();await page.keyboard.press('Escape');await expect(page.locator('#notebookButton')).toBeFocused();
+    await expect(room.getByRole('button',{name:'怎么玩',exact:true})).toHaveCount(0);
+    await openLearningRecord(page);await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toBeVisible();await page.keyboard.press('Escape');
+    await expect(page.getByRole('button',{name:'更多学习操作',exact:true})).toBeFocused();
     if([390,1280].includes(width)&&['words','text','listen','introduce','cars'].includes(activity))await page.screenshot({path:`output/playwright/unit5-6/${activity}-${width}.png`});
   }
   expect(errors).toEqual([]);
@@ -16,16 +18,29 @@ for(const width of [320,390,768,1280])test(`${width} 宽度各站没有横向溢
 
 test('24 张词卡的配套音标在窄屏翻面和刷新后不丢失、不裁切',async({page})=>{
   await page.setViewportSize({width:320,height:740});await page.goto('/unit5-6/#learn/words');const room=page.locator('.stage-words');
-  const phonetics=['/frentʃ/','/ˈdʒɝːmən/','/ˌdʒæpəˈniːz/','/ˌsaʊθ kəˈriːən/','/tʃaɪˈniːz/','/ˈswiːdɪʃ/','/ˈɪŋɡlɪʃ/','/əˈmerɪkən/','/ˈstuːdənt/','/ˈmɪstɚ/','/mɪs/','/ˈmɔːrnɪŋ/','/ɡʊd/','/nuː/','/naɪs/','/miːt/','/tuː/','/meɪk/','/ˈvɑːlvoʊ/','/pɜːˈʒoʊ/','/mɚˈseɪdiːz/','/tɔɪˈjoʊt̬ə/','/fɔːrd/','/ˈmɪni/'];
+  const phonetics={
+    'French':'/frentʃ/', 'German':'/ˈdʒɝːmən/', 'Japanese':'/ˌdʒæpəˈniːz/', 'South Korean':'/ˌsaʊθ kəˈriːən/',
+    'Chinese':'/tʃaɪˈniːz/', 'Swedish':'/ˈswiːdɪʃ/', 'English':'/ˈɪŋɡlɪʃ/', 'American':'/əˈmerɪkən/',
+    'student':'/ˈstuːdənt/', 'Mr.':'/ˈmɪstɚ/', 'Miss':'/mɪs/', 'morning':'/ˈmɔːrnɪŋ/',
+    'good':'/ɡʊd/', 'new':'/nuː/', 'nice':'/naɪs/', 'meet':'/miːt/',
+    'too':'/tuː/', 'make':'/meɪk/', 'Volvo':'/ˈvɑːlvoʊ/', 'Peugeot':'/pɜːˈʒoʊ/',
+    'Mercedes':'/mɚˈseɪdiːz/', 'Toyota':'/tɔɪˈjoʊt̬ə/', 'Ford':'/fɔːrd/', 'Mini':'/ˈmɪni/'
+  };
+  const visited=[];
   for(let i=0;i<24;i+=6){
-    const cards=room.locator('.unit-word');await expect(cards.locator('.word-phonetic')).toHaveText(phonetics.slice(i,i+6));
+    const cards=room.locator('.unit-word');
     for(const card of await cards.all()){
+      const word=await card.getAttribute('aria-label');visited.push(word);
+      await expect(card.locator('.word-phonetic')).toHaveText(phonetics[word]);
       await card.click();await expect(card.locator('.word-meaning')).toBeVisible();expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);
       await card.click();await expect(card).toHaveAttribute('aria-expanded','false');await expect(card.locator('.word-phonetic')).toBeVisible();
     }
     if(i<18)await courseButton(room, "nextWords").click();
   }
-  await page.reload();await expect(room.getByRole('button',{name:'Peugeot',exact:true})).toContainText('/pɜːˈʒoʊ/');
+  await expectVocabulary(page,visited,Object.keys(phonetics));
+  await expect(room.locator('#wordPageProgress')).toHaveText('4 / 4');
+  await (await courseWord(room,'Peugeot')).click();const pageNumber=await room.locator('#wordPageProgress').textContent();
+  await page.reload();await expect(room.locator('#wordPageProgress')).toHaveText(pageNumber);await expect(room.getByRole('button',{name:'Peugeot',exact:true})).toContainText('/pɜːˈʒoʊ/');
 });
 
 for(const width of [320,1280])test(`${width} 提示位于检查左侧，错答不加绿，末题与结束按钮稳定`,async({page})=>{

@@ -77,8 +77,12 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
     }
     await flow.select(room, answer); await check.click();
     await expect(room.locator('.fb')).toHaveText('答对了！');
-    if (i === 4) await expect(room.locator('.grammar-rule')).toContainText('不需要改成 you');
-    if (i === 5) await expect(room.locator('.grammar-rule')).toContainText('不是一变问句就改成 you');
+    if (i === 4 || i === 5) {
+      await room.getByRole('button', {name:'讲解',exact:true}).click();
+      const explanation=page.getByRole('dialog',{name:'这一题的讲解',exact:true});
+      await expect(explanation).toContainText(i === 4 ? 'I 不变，am 放前面：Am I a student?' : '不是一变问句就改成 you');
+      await explanation.getByRole('button',{name:'知道了',exact:true}).click();
+    }
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     await room.getByRole('button', { name: i === 11 ? '完成练习' : '下一题', exact: true }).click();
   }

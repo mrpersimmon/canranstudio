@@ -1,4 +1,5 @@
 'use strict';
+const {expectTheatrePortrait}=require('../support/continuous-theatre');
 const {courseButton,finishStoryAndReturn}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use(process.env.UNIT139_BROWSER==='webkit'?{browserName:'webkit'}:{});
@@ -45,8 +46,7 @@ for(const width of [320,390,768,1280])test(width+'：19步完整原文、电话�
   await expect(room.locator('.story-note,.story-timeline')).toHaveCount(0);await expect(world.locator('aside')).toHaveCount(0);
   await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=courseButton(room, i===18?"finishStory":'下一句'),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();expect(Math.abs((await next.boundingBox()).y-before.y)).toBeLessThan(2);
   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
-  const materialBottom=b.y+b.height;
-  for(const img of await world.locator('.phone-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+  for(const img of await world.locator('.phone-cast:visible').all()){await uncut(img);await expectTheatrePortrait(img,w,b.y+b.height);}
   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}));for(let j=0;j<labels.length;j++)for(let k=j+1;k<labels.length;k++)expect(labels[j].x+labels[j].width<=labels[k].x||labels[k].x+labels[k].width<=labels[j].x).toBe(true);
   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
   if([1,2,3,5,6,7,9,10,12,14,15,16,18].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<18)await next.click();

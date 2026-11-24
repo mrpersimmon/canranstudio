@@ -37,7 +37,7 @@ test('配对先完整选择再检查，错配和刷新保留原位，修改后�
  await pair(room,'bottle','瓶子');await check.click();
  await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','7');
  await openLearningRecord(page);
- await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('修正后完成');
+ await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toContainText('本轮订正完成');
 });
 test('原文定位保留完整句子，错选只提示重试，点选不直接判分',async({page})=>{
  await require('../support/unit2122-fivezones').story(page);

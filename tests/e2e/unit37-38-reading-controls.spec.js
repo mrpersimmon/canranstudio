@@ -1,5 +1,5 @@
 'use strict';
-const {courseButton,courseTimeline}=require('../support/course-controls');
+const {courseButton,courseTimeline,finishStoryAndReturn}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use({actionTimeout:7000,...(process.env.UNIT3738_BROWSER==='webkit'?{browserName:'webkit'}:{})});
 for(const [width,height]of [[320,568],[390,500],[1280,720]])test(`${width}x${height} 逐句阅读与中文展开时当前对白和推进按钮同屏`,async({page},info)=>{
@@ -11,5 +11,5 @@ for(const [width,height]of [[320,568],[390,500],[1280,720]])test(`${width}x${hei
   await readable();const scroll=await page.evaluate(()=>scrollY);await line.getByRole('button',{name:'看中文',exact:true}).click();await readable();expect(Math.abs(await page.evaluate(()=>scrollY)-scroll)).toBeLessThan(2);await expect(line.locator('.bcn')).toBeVisible();
  }
  await page.screenshot({path:info.outputPath(`reading-${width}x${height}.png`)});
- await courseButton(room, "finishStory").click();const next=await room.getByRole('button',{name:'下一站：工坊小侦探',exact:true}).boundingBox();expect(next.y).toBeGreaterThanOrEqual(0);expect(next.y+next.height).toBeLessThanOrEqual(height);
+ await finishStoryAndReturn(room);const next=await room.getByRole('button',{name:'下一站：工坊小侦探',exact:true}).boundingBox();expect(next.y).toBeGreaterThanOrEqual(0);expect(next.y+next.height).toBeLessThanOrEqual(height);
 });
