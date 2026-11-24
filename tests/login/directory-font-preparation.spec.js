@@ -29,9 +29,14 @@ test.describe('目录字体准备的离开和返回',()=>{
   const before=await(await page.request.get(base+'api/me')).json();
   const index=await(await page.request.get(base+'course-index.json')).json();
   const font=index.sharedFonts.find(item=>item.key.endsWith('/award-nunito.woff2'));
-  // Evict public font bytes only. The real login and learning/award stores
-  // remain unchanged; the server holds the directory's actual HTTP request.
-  await page.evaluate(async({base,font})=>{const store=CanranCourseCache.open(base);await(await store.cache).delete(base+'resources/'+font.sha256);},{base,font});
+  // The course list is usable while its first font writes are still in flight.
+  // Finish that preparation before evicting the one font the next visit needs.
+  await expect(page.locator('html')).toHaveAttribute('data-shared-fonts-ready',String(index.sharedFonts.length));
+  const evicted=await page.evaluate(async({base,font})=>{
+   const disk=await CanranCourseCache.open(base).cache;
+   return disk.delete(base+'resources/'+font.sha256);
+  },{base,font});
+  expect(evicted).toBe(true);
   await courseResponse(page,font.url,{hold:true});
   try{
    await page.goto(base);await openCourseDirectory(page);
