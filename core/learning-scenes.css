@@ -39,7 +39,7 @@ body[data-learning-shell] #lessonWorkspace .forest-world.learning-story-art .for
  body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>.dialogue-log{padding-inline:8px}
 }
 @media(max-width:400px) and (max-height:620px){
- body[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>:is(.office-world,.coffee-world,.market-world).learning-story-art{max-height:30dvh}
+ body:is(.unit4546-workspace,.unit4748-workspace,.unit4950-workspace)[data-learning-shell] #lessonWorkspace .learning-surface .learning-scene-unified>.learning-story-art{max-height:30dvh}
 }
 @media(orientation:landscape) and (max-height:480px){
  body[data-learning-shell] .learning-story-content:has(.learning-scene-unified){overflow:auto;justify-content:flex-start}

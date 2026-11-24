@@ -93,7 +93,7 @@
   const {source,anchor,open}=liveReference;liveReference=null;
   source.open=open;source.classList.remove('learning-live-reference');anchor.replaceWith(source);
  }
- function openReference(source,focus){
+ function openReference(source,focus,items=source.children){
   restoreLiveReference();
   referenceSource=source;referenceFocus=focus;referenceTitle.textContent=source.querySelector('summary').textContent;
   /* @bench:reference */
@@ -105,7 +105,7 @@
    source.open=true;source.classList.add('learning-live-reference');referenceContent.replaceChildren(source);
    referenceSheet.showModal();referenceContent.scrollTop=0;return;
   }
-  const parts=[...source.children].filter(item=>item.tagName!=='SUMMARY').map(item=>item.cloneNode(true));
+  const parts=[...items].filter(item=>item.tagName!=='SUMMARY').map(item=>item.cloneNode(true));
   referenceContent.replaceChildren(...parts);
   referenceContent.querySelectorAll('[id]').forEach(item=>item.removeAttribute('id'));
   // An inline diagram may be fitted to the space above the answer buttons.

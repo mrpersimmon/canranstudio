@@ -20,8 +20,15 @@
   const originalScene=button.nextElementSibling?.classList.contains('learning-context-source')?button.nextElementSibling.querySelector('[class$="-application"]'):null;
   button.dataset.reviewedMaterial='true';button.setAttribute('aria-label','查看题目材料');
   button.querySelector('.learning-context-preview-copy>span').textContent='查看题目材料';
-  const source=document.createElement('details');source.hidden=true;source.className='learning-material-source sample-question-details';content.append(source);
-  button.onclick=()=>{const summary=document.createElement('summary');summary.textContent='题目材料';const image=picture.cloneNode(false);image.className='learning-material-image';source.replaceChildren(summary,image,...[...content.querySelectorAll('.practice-context,.task-reference')].filter(e=>!e.closest('.sample-question-details,.learning-context-source,.learning-material-source')).map(e=>e.cloneNode(true)));if(originalScene)source.append(originalScene.cloneNode(true));core.learningFlow.openReference(source,button);};
+  const source=document.createElement('details'),summary=document.createElement('summary');
+  source.hidden=true;source.className='learning-material-source sample-question-details';summary.textContent='题目材料';source.append(summary);content.append(source);
+  button.onclick=()=>{
+   const image=picture.cloneNode(false);image.className='learning-material-image';
+   const notes=[...content.querySelectorAll('.practice-context,.task-reference')].filter(e=>!e.closest('.learning-context-source,.learning-material-source'));
+   const items=[image,...notes];
+   if(originalScene)items.push(originalScene);
+   core.learningFlow.openReference(source,button,items);
+  };
  }
  function sizeBackground(surface){
   const scene=surface.querySelector('.dialogue-stage');if(!scene)return;

@@ -2,7 +2,31 @@
 const {courseButton,courseReference,courseToolbar,expectCorrectedCompletion,expectMobileStageNavigation,expectRecordExample,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord,withQuestionMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,story,activity}=require('../support/unit121122');
+const {devices,contextOptions}=require('../support/required-phone-devices');
 test.use({actionTimeout:7000,...(process.env.UNIT121_BROWSER==='webkit'?{browserName:'webkit'}:{})});
+for(const device of devices)test.describe(device.name+' 的书店记录',()=>{
+ test.use(contextOptions(device));
+ test('查看图示后答题，再次打开能读到本题最新记录',async({page})=>{
+  await page.goto('/unit121-122/#learn/apply');
+  const room=page.locator('.stage-apply'),trigger=room.getByRole('button',{name:'查看题目材料',exact:true});
+  const record=room.locator('.bookshop-application'),sheet=page.getByRole('dialog',{name:'题目材料',exact:true});
+  for(const submitted of [false,true]){
+   if(submitted){
+    await select(room,ANSWERS.apply[0]);
+    await room.getByRole('button',{name:'检查答案',exact:true}).tap();
+    await expect(room.locator('.fb')).toHaveText('答对了！');
+   }
+   await trigger.tap();
+   const copy=sheet.getByRole('group',{name:'线索任务记录',exact:true});
+   await expect(copy).toHaveAttribute('data-recorded',String(submitted));
+   await expect(copy).toContainText(submitted?'Book A is on the counter.':'Find the described book');
+   await sheet.getByRole('button',{name:'关闭学习参考',exact:true}).tap();
+   await expect(trigger).toBeFocused();
+   await expect(record).toHaveCount(1);
+   await expect(record).toHaveAttribute('data-recorded',String(submitted));
+  }
+ });
+});
 // Independently reviewed visible facts. Runtime answer fields are never read.
 const MATERIAL={
 roles:{0:['bought two','forgot to take'],1:['lady','Caroline'],2:['on the counter'],3:['this gentleman','He says'],4:['wearing a hat','put it on'],5:['dictionaries','hat'],6:['Have you got','All right'],7:['recognize him now'],8:['recognize him now','ends here']},
