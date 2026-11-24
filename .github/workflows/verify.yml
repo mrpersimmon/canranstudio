@@ -132,7 +132,9 @@ jobs:
 
   recovery-webkit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Checkout alone took ten minutes in run 182. Reserve setup time separately
+    # so the recovery tests still receive their full execution budget.
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -150,6 +152,7 @@ jobs:
       - run: node scripts/ci/prepare-ubuntu-mirrors.js
       - run: npx playwright install --with-deps webkit
       - run: node scripts/ci/browser-suite.js run recovery ${{ matrix.shard }}
+        timeout-minutes: 15
         env:
           AWARD_TEST_BASE: ${{ matrix.base }}
       - run: npm run test:statistics -- --project=webkit-phone --reporter=line,json
