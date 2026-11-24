@@ -1,6 +1,6 @@
 'use strict';
 const {checkWordAndReturn}=require('../support/word-card-checks');
-const {courseButton,courseReference,expectRecordExample,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord,withReadingMaterial}=require('../support/course-controls');
+const {courseButton,courseReference,expectRecordExample,expectCompletionDestination,expectResultIcons,expectRoundCounts,expectVocabulary,incorrectFeedback,openCourseReference,openLearningRecord,withReadingMaterial}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');const {activity,story,ANSWERS}=require('../support/unit4748');const {select}=require('../support/units1-30-tasks');
 test.use({actionTimeout:6000});
 test('53题、五区五星、统一结算及零英语配音请求',async({page},info)=>{
@@ -11,7 +11,7 @@ test('53题、五区五星、统一结算及零英语配音请求',async({page},
   await expect(page.locator('#starCount')).toHaveText(String(++n));await expect(room.getByRole('list',{name:'本轮成果'}).locator('li')).toHaveCount(3);
   await expectResultIcons(room);
   await expect(room.getByRole('group',{name:'完成后的操作'}).getByRole('button')).toHaveCount(2);
-  expect(await room.locator('.completion-next-prefix').evaluate(e=>e.getBoundingClientRect().height<=parseFloat(getComputedStyle(e).lineHeight)+2)).toBe(true);
+  await expectCompletionDestination(room,id);
  }
  await openLearningRecord(page);
 
@@ -86,7 +86,7 @@ for(const width of [320,390,768,1280])test(`${width}宽与短屏：题型、结�
    if((id==='grammar'&&[0,8,10,13].includes(i))||(id==='apply'&&[3,5].includes(i)))await room.screenshot({path:info.outputPath(`${id}-${i}.png`)});
   }}});
   await room.locator('.completion-stats').scrollIntoViewIfNeeded();await expect(room.locator('.completion-card')).toHaveAttribute('data-result-motion','finished');await room.screenshot({path:info.outputPath(id+'-completed.png')});
-  expect(await room.locator('.completion-next-prefix,.completion-next-name').evaluateAll(els=>els.every(e=>e.getBoundingClientRect().height<=parseFloat(getComputedStyle(e).lineHeight)+2))).toBe(true);
+  await expectCompletionDestination(room,id);
   const ys=await room.locator('.completion-stat').evaluateAll(els=>els.map(e=>e.getBoundingClientRect().y));expect(Math.max(...ys)-Math.min(...ys)).toBeLessThan(2);
   for(const btn of await room.getByRole('group',{name:'完成后的操作'}).getByRole('button').all())await btn.scrollIntoViewIfNeeded();
   expect(await room.locator('.completion-stat,.practice-finish-actions button').evaluateAll(els=>els.every(e=>{const b=e.getBoundingClientRect();return b.top>=0&&b.bottom<=innerHeight;}))).toBe(true);

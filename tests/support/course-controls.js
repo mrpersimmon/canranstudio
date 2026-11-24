@@ -58,6 +58,21 @@ async function expectResultIcons(room){
     await expect(image).toBeVisible();
   }
 }
+async function expectCompletionDestination(room,activity){
+  const next=room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button').last();
+  await expect(next).toBeVisible();
+  await expect(next).toHaveText(activity==='exam'?'查看纪念卡':'下一站',{useInnerText:true});
+  const fits=await next.evaluate(button=>{
+    const walker=document.createTreeWalker(button,NodeFilter.SHOW_TEXT),bounds=button.getBoundingClientRect(),rects=[];
+    for(let node=walker.nextNode();node;node=walker.nextNode()){
+      if(!node.textContent.trim())continue;
+      const range=document.createRange();range.selectNodeContents(node);
+      rects.push(...Array.from(range.getClientRects()).filter(r=>r.width&&r.height));
+    }
+    return rects.length>0&&rects.every(r=>Math.abs(r.top-rects[0].top)<=1&&r.left>=bounds.left-1&&r.right<=bounds.right+1&&r.bottom<=bounds.bottom+1);
+  });
+  expect(fits,'结算按钮文案应在按钮内完整显示为一行').toBe(true);
+}
 async function incorrectFeedback(scope){
   const page=typeof scope.page==='function'?scope.page():scope;
   return await page.locator('body[data-learning-shell]').count()?'答错了，再试试。':'再看看，试一次。';
@@ -252,4 +267,4 @@ async function expectMobileStageNavigation(page){
     expect((await link.boundingBox()).height).toBeGreaterThanOrEqual(44);
   }
 }
-module.exports={courseButton,readyCourse,restoredPracticeIndex,finishStoryAndReturn,expectResultIcons,incorrectFeedback,courseToolbar,courseTimeline,courseWord,expectLessonAfterPreviousRecord,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};
+module.exports={courseButton,readyCourse,restoredPracticeIndex,finishStoryAndReturn,expectResultIcons,expectCompletionDestination,incorrectFeedback,courseToolbar,courseTimeline,courseWord,expectLessonAfterPreviousRecord,openLearningRecord,openCourseReference,courseReference,expectRecordExample,expectCorrectedCompletion,expectVocabulary,expectRoundCounts,expectNoVerdict,withQuestionMaterial,withReadingMaterial,expectMobileStageNavigation};
