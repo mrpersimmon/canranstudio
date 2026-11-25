@@ -57,7 +57,7 @@ function Artwork({course,base,className='',lazy=false}){
 export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,openProfile=false,embedded=false,active=true,onReady}){
   const activeRef=useRef(active),readyCallback=useRef(onReady);activeRef.current=active;readyCallback.current=onReady;
   const courses=who.courses,desktop=useDesktop();
-  const actionLabel=course=>who.systemUpgrade?.epoch&&course.completed?'再次学习':course.started||course.stars?'继续学习':'开始学习';
+  const actionLabel=course=>model.actionLabel(course,Boolean(who.systemUpgrade?.epoch));
   const storageKey='canran:journey:v1:'+who.student.id;
   const initial=useRef();
   if(!initial.current){let saved;try{saved=JSON.parse(sessionStorage.getItem(storageKey));}catch{}initial.current=model.restore(courses,saved);}
@@ -201,7 +201,7 @@ export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,op
           {!!query.trim()&&visible.includes(course)&&<Artwork course={course} base={base} className="journey-result-art" lazy/>}
           <div className="journey-course-copy"><p><span>{course.label}</span>{who.systemUpgrade?.epoch&&course.completed&&<small className="journey-completed-label">已通关</small>}</p><h3>{course.title}</h3><Stars course={course} base={base} small animate={false}/></div>
           <div className="journey-course-actions">
-            <a className="primary-button journey-course-enter" data-course-enter href={model.href(course,base,preview)} aria-label={`${actionLabel(course)}：${course.title}`} onClick={()=>enter(course)}>进入课程<ArrowRight size={18} aria-hidden="true"/></a>
+            <a className="primary-button journey-course-enter" data-course-enter href={model.href(course,base,preview)} aria-label={`${actionLabel(course)}：${course.title}`} onClick={()=>enter(course)}>{actionLabel(course)==='开始学习'?'进入课程':actionLabel(course)}<ArrowRight size={18} aria-hidden="true"/></a>
             {model.MAP_COURSES.includes(course.id)&&<button type="button" className="journey-locate" onClick={()=>locate(course)} aria-label={`地图定位：${course.title}`}><MapPin size={16} aria-hidden="true"/>地图定位</button>}
           </div>
         </article>)}
@@ -233,7 +233,7 @@ export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,op
       </div>
       {dock}
       <p className="journey-preview-note">{who.preview?'班级预览 · 不记录成绩':who.className}</p>
-      <p className="journey-home-status" role="status" data-home-status>{waiting>0?'还有学习成果保存在本机，联网后将继续同步。':''}</p>
+      <p className="journey-home-status" role="status" data-home-status>{waiting>0?'还有学习成果保存在本机，联网后将继续同步。':who.directoryReviewMessage||''}</p>
     </aside>
     <section className="journey-map" data-chapter={chapter.id} aria-label={chapter.label+' 旅程地图'} ref={mapRef}>
       {modular?<ModuleJourney scopeKey={JSON.stringify([who.student.id,base,courses.map(course=>course.id)])} generation={moduleGeneration} chapter={chapter} courses={mapped} base={base} selected={selected} tap={tap} celebration={celebration} onChoose={choose} onArtReady={moduleArtReady} onPresented={setModulePresentation} renderInfo={course=><MapCourseInfo course={course} placement={{rewards:{width:desktop?184:148,height:desktop?48:44},label:{width:desktop?156:132,height:44,beside:false,multiline:false},starSize:desktop?20:17,starGap:2}} base={base} selected={selected===course.id} celebration={celebration} onChoose={choose} onReplay={replay}/>}/>:

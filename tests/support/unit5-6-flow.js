@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton, finishStoryAndReturn, readyCourse}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const { expect } = require('@playwright/test');
 const { EXAMS } = require('./units1-6-exam');
@@ -7,19 +8,19 @@ const DIALOGUE = ['Good morning.','Good morning, Mr. Blake.','This is Miss Sophi
 const PEOPLE = ['Students','Students','Students','Students','Students','Hans','Hans','Hans','Naoko','Naoko','Naoko','Chang-woo','Chang-woo','Chang-woo','Luming','Luming','Luming','Xiaohui','Xiaohui','Xiaohui'];
 const ANSWERS=Object.fromEntries(Object.entries(require('./unit56-answers').CURRENT).map(([id,rows])=>[id,rows.map(q=>q.answer)]));
 async function completeStory(page, base = '') {
-  await page.goto(base + '/unit5-6/#learn/text'); await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000}); const room=page.locator('.stage-text');
+  await page.goto(base + '/unit5-6/#learn/text'); await readyCourse(page); const room=page.locator('.stage-text');
   for(let i=0;i<DIALOGUE.length;i++){
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.classroom-classmate span')).toHaveText(PEOPLE[i]);
-    await expect(room.getByRole('button',{name:i===19?'完成课文':'下一句',exact:true})).toBeEnabled({timeout:10000});
+    await expect(courseButton(room, i===19?"finishStory":'下一句')).toBeEnabled({timeout:10000});
   }
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
-  await expect(room).toContainText('新朋友都认识了！');
+  await finishStoryAndReturn(room);
+  await expect(room.locator('.btext span')).toHaveText(DIALOGUE);
 }
 async function completeActivity(page,id,{recovery=false,base=''}={}){
   await require('./reward-dialog').handleRewardDialog(page);
-  await page.goto(base + '/unit5-6/#learn/'+id);await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});const room=page.locator('.stage-'+id),answers=ANSWERS[id];
+  await page.goto(base + '/unit5-6/#learn/'+id);await readyCourse(page);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
   for(let i=0;i<answers.length;i++){
     const answer=answers[i],check=room.getByRole('button',{name:'检查答案',exact:true});
     await expect(check).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));
@@ -29,7 +30,7 @@ async function completeActivity(page,id,{recovery=false,base=''}={}){
     await expect(check).toBeEnabled({timeout:10000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
     if(recovery&&id==='listen'&&i===7){await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
-    await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+    await courseButton(room, i===answers.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
   }
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
   if(await page.locator('#studentSyncStatus').count())await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');

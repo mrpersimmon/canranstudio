@@ -1,0 +1,25 @@
+/* The approved story illustrations sit on quiet keepsake paper. */
+.unit56-workspace .stage-words{background:#f6f2e7;border-color:#ddd2bd}
+.unit56-workspace .unit-words{gap:14px}
+.unit56-workspace .unit-word{display:flex;flex-direction:column;justify-content:flex-start;align-items:center;gap:5px;min-width:0;height:252px;padding:12px 10px 10px;border:1.5px solid #cbbba3;border-radius:17px;background:#fffcf5 url('/assets/awards/paper.webp') center/cover;box-shadow:0 2px 0 #b7a68b55,0 5px 12px #4a32260a;color:#4a3226;overflow:hidden;transition:border-color 120ms ease,box-shadow 120ms ease;-webkit-tap-highlight-color:transparent}
+.unit56-workspace .unit-word .word-art{display:flex;align-items:center;justify-content:center;gap:0;width:100%;height:122px;max-height:132px;min-height:70px;flex:1 1 auto;pointer-events:none}
+.unit56-workspace .unit-word .word-art img{display:block;flex:0 1 auto;width:100%;height:100%;max-width:100%;object-fit:contain;object-position:center;pointer-events:none}
+.unit56-workspace .unit-word .word-art[data-kind='person'] img{object-position:center bottom}
+.unit56-workspace .unit-word .word-art[data-kind='flag'] img{max-width:110px}
+.unit56-workspace .unit-word .word-art[data-kind='pair'] img{width:50%;object-position:center bottom}
+.unit56-workspace .unit-word .word-art[data-kind='car-pair'] img{width:50%}
+.unit56-workspace .unit-word>strong{display:block;flex:none;max-width:100%;font-size:21px;line-height:1.25;font-weight:600;white-space:normal;word-break:normal;overflow-wrap:normal}
+.unit56-workspace .unit-word .word-phonetic{display:block;flex:none;max-width:100%;font:14px/1.4 Arial,sans-serif;color:#806b55;overflow-wrap:anywhere;margin:0}
+.unit56-workspace .unit-word .word-meaning{flex:none;max-width:100%;font-size:14px;line-height:1.4;padding:0 2px;color:#426c53}
+.unit56-workspace .unit-word .word-example{display:block;flex:none;max-width:100%;padding:0;font-size:12px;line-height:1.35;color:#806b55;overflow-wrap:normal}
+.unit56-workspace .word-card-hint{display:block;flex:none;margin-top:7px;padding:3px 10px;min-height:22px;border-radius:16px;background:#eef2e6;color:#557358;font-size:12px;line-height:1.4;font-weight:400}
+.unit56-workspace .unit-word[aria-expanded='true']{border-color:#56836b;background-color:#f5f8ee;box-shadow:0 2px 0 #56836b55,0 5px 12px #4a32260a}
+.unit56-workspace .unit-word[aria-expanded='true'] .word-art{flex:none;height:66px;min-height:66px}
+.unit56-workspace .unit-word[aria-expanded='true'] :is(strong,.word-phonetic,.word-example){display:block}
+.unit56-workspace .unit-word[aria-expanded='true'] .word-card-hint{background:#e4eddc;color:#426c53;margin-top:auto}
+.unit56-workspace .unit-word:active{transform:translateY(1px);box-shadow:0 1px 0 #b7a68b55}
+.unit56-workspace .unit-word:focus-visible{outline:3px solid #377a72;outline-offset:3px}
+@media(hover:hover){.unit56-workspace .unit-word:hover{border-color:#9aa985;background-color:#fffaf0;box-shadow:0 3px 0 #b7a68b55,0 6px 15px #4a32260f}}
+@media(max-width:600px){.unit56-workspace .unit-words{gap:12px}.unit56-workspace .unit-word{height:248px;padding:11px 9px 9px}.unit56-workspace .unit-word>strong{font-size:20px}.unit56-workspace .unit-word .word-meaning{font-size:13px}}
+@media(max-width:360px){.unit56-workspace .unit-word{height:254px;padding-inline:7px;gap:4px}.unit56-workspace .unit-word>strong{font-size:18px}.unit56-workspace .unit-word .word-phonetic{font-size:13px}.unit56-workspace .unit-word[aria-expanded='true'] .word-art{height:54px;min-height:54px}}
+@media(prefers-reduced-motion:reduce){.unit56-workspace .unit-word{transition:none}}

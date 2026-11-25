@@ -74,8 +74,11 @@ test('full CI runs on PRs and protected pushes; feature push has only a distinct
   assert.match(full, /node scripts\/ci\/browser-suite.js verify/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run courses/);
   assert.match(full, /node scripts\/ci\/browser-suite.js run accounts/);
-  for(const suite of ['courses','accounts']){
-    const matrix=full.match(new RegExp('\\n  '+suite+':[\\s\\S]*?shard: \\[([^\\]]+)\\]'));
+  assert.match(full, /node scripts\/ci\/browser-suite.js run recovery/);
+  assert.match(full, /run: npm run test:statistics[^\n]*\n\s+if: matrix\.shard == 1/);
+  for(const suite of ['courses','accounts','recovery']){
+    const job=suite==='recovery'?'recovery-webkit':suite;
+    const matrix=full.match(new RegExp('\\n  '+job+':[\\s\\S]*?shard: \\[([^\\]]+)\\]'));
     assert.ok(matrix,suite+' has a workflow matrix');
     const scheduled=matrix[1].split(',').map(n=>Number(n.trim()));
     const count=require('../../scripts/ci/browser-suite').definition(suite).shards;
@@ -217,13 +220,16 @@ test('mirror preparation leaves non-GitHub Linux environments alone but surfaces
   assert.deepEqual(fixture.writes, []);
 });
 
-test('all five CI browser jobs prepare mirrors before unchanged installs, deadlines and performance assertions', () => {
+test('CI browser jobs prepare mirrors before installation and bound setup and execution time', () => {
   const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8');
   for (const [job, deadline, browser] of [['foundation', 60, 'chromium'], ['courses', 60, 'chromium'],
-    ['accounts', 60, 'chromium'], ['cache-performance', 10, 'chromium'], ['recovery-webkit', 15, 'webkit']]) {
+    ['accounts', 60, 'chromium'], ['cache-performance', 10, 'chromium'], ['recovery-webkit', 25, 'webkit']]) {
     const block = workflow.match(new RegExp('\\n  ' + job + ':[\\s\\S]*?(?=\\n  [\\w-]+:|$)'))?.[0];
     assert.ok(block, job + ' remains scheduled');
-    assert.match(block, new RegExp('timeout-minutes: ' + deadline + '\\b'));
+    assert.match(block, new RegExp('^    timeout-minutes: ' + deadline + '\\r?$', 'm'));
+    if (job === 'recovery-webkit') {
+      assert.match(block, /run: node scripts\/ci\/browser-suite\.js run recovery \$\{\{ matrix\.shard \}\}\r?\n        timeout-minutes: 15\b/);
+    }
     assert.match(block, new RegExp('run: node scripts/ci/prepare-ubuntu-mirrors\\.js\\r?\\n      - run: npx playwright install --with-deps ' + browser));
     assert.equal((block.match(/prepare-ubuntu-mirrors/g) || []).length, 1);
     assert.doesNotMatch(block, /continue-on-error:|--no-deps|\|\| true/);

@@ -33,5 +33,19 @@
   },answer:base.answer,finish:base.finish,heading:base.heading,hasVisibleModel(){return Boolean(element.querySelector('.grammar-model:not([hidden])'));}};
  }
  function completion(){const div=node('div','','completion-art current-completion'),im=node('img');im.src='/assets/awards/unit5-6-friends.webp';im.alt='';div.setAttribute('aria-hidden','true');div.append(im);return div;}
- core.unit56Current={image,picture,photo,view,completion};
+ // Word-card art is presentation-only. Exercises keep their original labeled
+ // diagrams, and content/audio/answer signatures stay unchanged.
+ const wordCars={Volvo:'/assets/unit5-6-word-cards/volvo-v1.webp',Peugeot:'/assets/unit5-6-word-cards/peugeot-v1.webp',Mercedes:'/assets/unit5-6-word-cards/mercedes-v1.webp',Toyota:'/assets/unit5-6-word-cards/toyota-v1.webp',Ford:'/assets/unit5-6-word-cards/ford-v1.webp',Mini:'/assets/unit5-6-word-cards/mini-v1.webp'};
+ const wordFlags={French:'/assets/unit5-6-word-cards/flags/french.svg',German:'/assets/unit5-6-word-cards/flags/german.svg',Japanese:'/assets/unit5-6-word-cards/flags/japanese.svg','South Korean':'/assets/unit5-6-word-cards/flags/south-korean.svg',Chinese:'/assets/unit5-6-word-cards/flags/chinese.svg',Swedish:'/assets/unit5-6-word-cards/flags/swedish.svg',English:'/assets/unit5-6-word-cards/flags/english.svg',American:'/assets/unit5-6-word-cards/flags/american.svg'};
+ function wordArtwork(word){
+  if(wordFlags[word.en])return {kind:'flag',sources:[wordFlags[word.en]]};
+  if(wordCars[word.en])return {kind:'car',sources:[wordCars[word.en]]};
+  if(['morning','good'].includes(word.en))return {kind:'symbol',sources:['/assets/unit5-6-word-cards/morning-v1.webp']};
+  if(word.en==='new')return {kind:'person',sources:[portraits.sophie]};
+  if(['nice','meet'].includes(word.en))return {kind:'scene',sources:['/assets/awards/unit5-6-friends.webp']};
+  if(word.en==='too')return {kind:'pair',sources:[portraits.luming,portraits.xiaohui]};
+  if(word.en==='make')return {kind:'car-pair',sources:[wordCars.Volvo,wordCars.Peugeot]};
+  return {kind:'person',sources:[image(word.en)||word.image]};
+ }
+ core.unit56Current={image,picture,photo,view,completion,wordArtwork};
 })(globalThis.CanranCore);

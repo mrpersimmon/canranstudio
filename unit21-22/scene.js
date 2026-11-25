@@ -6,7 +6,7 @@ function storyProps(){
  const element=node('div','desk-world');element.setAttribute('role','group');element.setAttribute('aria-label','男士与简在书桌旁确认和交接书本');
  const cast=node('div','desk-cast'),picture=node('img','cast-image family-image'),labels=node('div','desk-labels');
  for(const[id,name]of [['man','男士'],['jane','简（Jane）']]){const actor=node('div','dialogue-actor '+id);actor.dataset.actor=id;actor.append(node('span','actor-label',name));labels.append(actor);}
- cast.append(picture,labels);element.append(node('p','desk-location','书桌旁'),cast);
+ cast.append(picture,labels);element.append(cast);
  return{element,update(index){const phase=index<2?'ready':index<4?'first':index<6?'red':'received';element.dataset.phase=phase;picture.src=assets+'cast-'+phase+'-v1.webp';picture.alt={ready:'男士和简双手空着，桌上放着两本书',first:'简拿起一本浅色书，红书仍在桌上',red:'简拿着红书向男士确认，浅色书已放回桌上',received:'红书在男士手中，简双手空着，浅色书留在桌上'}[phase];}};
 }
 function restyle(element){

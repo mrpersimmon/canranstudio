@@ -68,6 +68,15 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   document.title=next.page==='awards'?'我的纪念册 · 灿然英语工作室':'灿然英语工作室';setAnnouncement('我的'+title(next.page)+'已打开');
  }
  shownRef.current=shown;latest.current={navigate,cancel,savePosition};
+ useEffect(()=>{
+  const refreshed=async event=>{
+   const nextWho=event.detail,current=shownRef.current;
+   if(!alive.current||!current||pendingRef.current||!routes.sameOwner(who,nextWho)||nextWho.mustChangePassword)return;
+   if(current.page==='courses'){const next={...current,who:nextWho};shownRef.current=next;setShown(next);return;}
+   try{const collection=await loadCollection();if(!alive.current||shownRef.current?.id!==current.id||pendingRef.current||!routes.sameOwner(who,collection))return;const next={...current,collection};shownRef.current=next;setShown(next);}catch{}
+  };
+  window.addEventListener('canran:progress-synced',refreshed);return()=>window.removeEventListener('canran:progress-synced',refreshed);
+ },[]);
  useEffect(()=>{if(shown)onPageActive?.(shown.page,shown.who||who);},[shown?.id]);
  useLayoutEffect(()=>{if(initial.current.page==='courses'&&positions.current.courses)window.scrollTo({top:Number(positions.current.courses.scroll)||0,behavior:'instant'});},[]);
  useLayoutEffect(()=>{
@@ -110,7 +119,7 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
  return <div ref={root} className="student-workspace" data-student-workspace data-page={shown?.page||'loading'} data-transition={phase} style={{visibility:suspended?'hidden':undefined}}>
   {!shown&&<section className="workspace-loading" role="status"><h1>{error?'暂时无法打开'+title(pending?.page):'正在打开'+title(pending?.page||initial.current.page)+'…'}</h1></section>}
   {layers.map(layer=>{const stage=layer===candidate,old=layer===leaving,active=layer===shown;return <div key={layer.id} ref={node=>{if(node)nodes.current.set(layer.id,node);else nodes.current.delete(layer.id);}} className="student-page" data-page={layer.page} data-phase={stage?'preparing':old?'leaving':['entering','positioning'].includes(phase)?phase:'idle'} inert={!active} aria-hidden={!active||undefined} onAnimationEnd={event=>{if(active&&layer.id===shownRef.current?.id&&event.target===event.currentTarget&&event.animationName==='student-page-in'){setLeaving(null);setPhase('idle');}}} style={old?{top:layer.rect.top,left:layer.rect.left,width:layer.rect.width}:undefined}>
-   {layer.page==='courses'?<Journey who={layer.who} base={base} waiting={waiting} onRefresh={onRefresh} embedded active={active} onReady={()=>prepared(layer.id)}/>:<PostofficeAlbum collection={layer.collection} embedded active={active} onReady={()=>prepared(layer.id)} onPrepareError={reason=>fail(layer.id,reason)} onAccount={()=>setAccount('profile')} historyRequest={active?historyRequest:0}/>}
+   {layer.page==='courses'?<Journey who={layer.who} base={base} waiting={layer.who.directoryWaiting??waiting} onRefresh={onRefresh} embedded active={active} onReady={()=>prepared(layer.id)}/>:<PostofficeAlbum collection={layer.collection} embedded active={active} onReady={()=>prepared(layer.id)} onPrepareError={reason=>fail(layer.id,reason)} onAccount={()=>setAccount('profile')} historyRequest={active?historyRequest:0}/>}
   </div>;})}
   <nav className="student-bottom-nav journey-bottom-nav" data-student-bottom-nav aria-label="底部主导航">
    <a href={base} aria-label="我的课程" aria-current={shown?.page==='courses'?'page':undefined} aria-busy={pending?.page==='courses'&&!error||undefined}><House size={26} weight={shown?.page==='courses'?'fill':'regular'}/><span>课程</span></a>

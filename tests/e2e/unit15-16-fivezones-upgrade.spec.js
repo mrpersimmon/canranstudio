@@ -1,4 +1,5 @@
 'use strict';
+const {expectLessonAfterPreviousRecord,courseButton,courseReference,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy}=require('../support/unit1516-legacy');
 const {completeUnit1516}=require('../support/unit15-16-flow');
@@ -17,15 +18,15 @@ for(const selected of [false,true])test(`旧${selected?'仅选择':'空白'}升�
 test('旧版中途错答、词卡和阅读位置保留；新语法不由旧题代答',async({page})=>{
  const upgrade=await legacy(page);await page.goto('/unit15-16/#learn/listen');const room=page.locator('.stage-listen');
  await room.getByRole('button',{name:'风俗',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await page.goto('/unit15-16/#learn/words');await page.getByRole('button',{name:'下一组词卡',exact:true}).click();
+ await page.goto('/unit15-16/#learn/words');await courseButton(page, "nextWords").click();
  await page.goto('/unit15-16/#learn/models');for(let i=0;i<2;i++)await page.getByRole('button',{name:'下一幅出行图',exact:true}).click();await page.getByText('看看完整问答',{exact:true}).click();for(let i=0;i<3;i++)await page.getByRole('button',{name:'下一份问答',exact:true}).click();
- await page.goto('/unit15-16/#learn/text');await page.getByRole('button',{name:'开始看课文',exact:true}).click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
+ await page.goto('/unit15-16/#learn/text');await courseButton(page, "startStory").click();for(let i=0;i<4;i++)await page.getByRole('button',{name:'下一句',exact:true}).click();
  const before=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit15-16:learning:v1')));
- await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit15-16/#learn/words');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');
- await page.goto('/unit15-16/#learn/listen');await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await upgrade();await page.reload();await expect(page.locator('.btext span')).toHaveCount(5);await page.goto('/unit15-16/#learn/words');await expectLessonAfterPreviousRecord(page,'2 / 5');
+ await page.goto('/unit15-16/#learn/listen');await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  const archived=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit15-16:learning:v1')).activity.unit1516LegacySnapshot);
  expect(archived.records).toEqual(before.records);expect(archived.groups).toEqual(before.groups);expect(archived.activity.unitDialogue).toEqual(before.activity.unitDialogue);
- await page.goto('/unit15-16/#learn/models');await page.getByText('课本小参考 · 第16课',{exact:true}).click();await expect(page.locator('.gallery-current + .reference-pager span')).toHaveText('3 / 15');await expect(page.locator('.gallery-current small')).toHaveText('80');await expect(page.locator('.model-current + .reference-pager span')).toHaveText('4 / 12');await expect(page.locator('.model-current')).toContainText('suits / blue');
+ await page.goto('/unit15-16/#learn/models');await openCourseReference(page,'课本小参考 · 第16课');await expect(courseReference(page).locator(".gallery-current + .reference-pager span")).toHaveText('3 / 15');await expect(courseReference(page).locator(".gallery-current small")).toHaveText('80');await expect(courseReference(page).locator(".model-current + .reference-pager span")).toHaveText('4 / 12');await expect(courseReference(page).locator(".model-current")).toContainText('suits / blue');
  await page.goto('/unit15-16/#learn/grammar');await expect(page.locator('.stage-grammar .progress-copy')).toHaveText('第 1 / 16 题');await expect(page.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 test('旧15星证书保留姓名、原始日期及实际PNG；新版错答与首星不改旧证',async({page},info)=>{

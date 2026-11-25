@@ -1,0 +1,1805 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "refrigerator",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one simple closed cream refrigerator with separate freezer door, rounded handles.",
+      "raw": "assets/learning-whole-book-v1/raw/refrigerator.png",
+      "adopted": "assets/word-art-v2/whole-book/refrigerator-v1.webp"
+    },
+    {
+      "id": "cooker",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one pale blue electric cooker with four circular hotplates, oven door and control knobs; no flame.",
+      "raw": "assets/learning-whole-book-v1/raw/cooker.png",
+      "adopted": "assets/word-art-v2/whole-book/cooker-v1.webp"
+    },
+    {
+      "id": "window",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable window, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/window.png",
+      "adopted": "assets/word-art-v2/whole-book/window-v1.webp"
+    },
+    {
+      "id": "armchair",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable armchair, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/armchair.png",
+      "adopted": "assets/word-art-v2/whole-book/armchair-v1.webp"
+    },
+    {
+      "id": "picture",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one framed landscape painting of hills in a simple wooden frame.",
+      "raw": "assets/learning-whole-book-v1/raw/picture.png",
+      "adopted": "assets/word-art-v2/whole-book/picture-v1.webp"
+    },
+    {
+      "id": "wardrobe",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one tall wooden clothes wardrobe with two closed doors and handles.",
+      "raw": "assets/learning-whole-book-v1/raw/wardrobe.png",
+      "adopted": "assets/word-art-v2/whole-book/wardrobe-v1.webp"
+    },
+    {
+      "id": "lamp",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one warm cream table lamp with a sage lampshade, unlit.",
+      "raw": "assets/learning-whole-book-v1/raw/lamp.png",
+      "adopted": "assets/word-art-v2/whole-book/lamp-v1.webp"
+    },
+    {
+      "id": "tap",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one metal water tap with a cross handle, no running water.",
+      "raw": "assets/learning-whole-book-v1/raw/tap.png",
+      "adopted": "assets/word-art-v2/whole-book/tap-v1.webp"
+    },
+    {
+      "id": "tree",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable tree, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/tree.png",
+      "adopted": "assets/word-art-v2/whole-book/tree-v1.webp"
+    },
+    {
+      "id": "grass",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small bright green clump of grass with individual soft blades.",
+      "raw": "assets/learning-whole-book-v1/raw/grass.png",
+      "adopted": "assets/word-art-v2/whole-book/grass-v1.webp"
+    },
+    {
+      "id": "cat",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable cat, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/cat.png",
+      "adopted": "assets/word-art-v2/whole-book/cat-v1.webp"
+    },
+    {
+      "id": "letter",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one opened envelope with a handwritten letter represented by non-readable grey strokes.",
+      "raw": "assets/learning-whole-book-v1/raw/letter.png",
+      "adopted": "assets/word-art-v2/whole-book/letter-v1.webp"
+    },
+    {
+      "id": "basket",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable basket, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/basket.png",
+      "adopted": "assets/word-art-v2/whole-book/basket-v1.webp"
+    },
+    {
+      "id": "bone",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable bone, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/bone.png",
+      "adopted": "assets/word-art-v2/whole-book/bone-v1.webp"
+    },
+    {
+      "id": "tooth",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one clean white molar tooth with complete crown and roots.",
+      "raw": "assets/learning-whole-book-v1/raw/tooth.png",
+      "adopted": "assets/word-art-v2/whole-book/tooth-v1.webp"
+    },
+    {
+      "id": "milk",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one glass bottle filled with white milk with a plain cap, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/milk.png",
+      "adopted": "assets/word-art-v2/whole-book/milk-v1.webp"
+    },
+    {
+      "id": "cloud",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable cloud, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/cloud.png",
+      "adopted": "assets/word-art-v2/whole-book/cloud-v1.webp"
+    },
+    {
+      "id": "sky",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small rounded vignette of pale blue daytime sky with soft white clouds; edges fade to transparency.",
+      "raw": "assets/learning-whole-book-v1/raw/sky.png",
+      "adopted": "assets/word-art-v2/whole-book/sky-v1.webp"
+    },
+    {
+      "id": "sun",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one warm yellow sun with gentle illustrated rays, no face.",
+      "raw": "assets/learning-whole-book-v1/raw/sun.png",
+      "adopted": "assets/word-art-v2/whole-book/sun-v1.webp"
+    },
+    {
+      "id": "bridge",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable bridge, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/bridge.png",
+      "adopted": "assets/word-art-v2/whole-book/bridge-v1.webp"
+    },
+    {
+      "id": "boat",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable boat, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/boat.png",
+      "adopted": "assets/word-art-v2/whole-book/boat-v1.webp"
+    },
+    {
+      "id": "river",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one short curving blue river through green grassy banks in a self-contained landscape vignette.",
+      "raw": "assets/learning-whole-book-v1/raw/river.png",
+      "adopted": "assets/word-art-v2/whole-book/river-v1.webp"
+    },
+    {
+      "id": "ship",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete white passenger ship with blue trim and red funnel, side three-quarter view.",
+      "raw": "assets/learning-whole-book-v1/raw/ship.png",
+      "adopted": "assets/word-art-v2/whole-book/ship-v1.webp"
+    },
+    {
+      "id": "aeroplane",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable aeroplane, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/aeroplane.png",
+      "adopted": "assets/word-art-v2/whole-book/aeroplane-v1.webp"
+    },
+    {
+      "id": "photograph",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small printed family photograph with white edge showing a generic smiling family; no text.",
+      "raw": "assets/learning-whole-book-v1/raw/photograph.png",
+      "adopted": "assets/word-art-v2/whole-book/photograph-v1.webp"
+    },
+    {
+      "id": "valley",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a clearly low green valley BETWEEN two rounded hills with a river running through the low centre.",
+      "raw": "assets/learning-whole-book-v1/raw/valley.png",
+      "adopted": "assets/word-art-v2/whole-book/valley-v1.webp"
+    },
+    {
+      "id": "hill",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one rounded green hill with a small tree, clearly rising above flat ground.",
+      "raw": "assets/learning-whole-book-v1/raw/hill.png",
+      "adopted": "assets/word-art-v2/whole-book/hill-v1.webp"
+    },
+    {
+      "id": "water",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one clear glass jug of plain water with a blue water surface, no cup.",
+      "raw": "assets/learning-whole-book-v1/raw/water.png",
+      "adopted": "assets/word-art-v2/whole-book/water-v1.webp"
+    },
+    {
+      "id": "building",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one simple two-storey cream town building with windows and a terracotta roof, no signage.",
+      "raw": "assets/learning-whole-book-v1/raw/building.png",
+      "adopted": "assets/word-art-v2/whole-book/building-v1.webp"
+    },
+    {
+      "id": "bookcase",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one wooden OPEN bookcase with three shelves of books, no cabinet doors.",
+      "raw": "assets/learning-whole-book-v1/raw/bookcase.png",
+      "adopted": "assets/word-art-v2/whole-book/bookcase-v1.webp"
+    },
+    {
+      "id": "hammer",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable hammer, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/hammer.png",
+      "adopted": "assets/word-art-v2/whole-book/hammer-v1.webp"
+    },
+    {
+      "id": "vase",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one coral pink ceramic vase containing two small white flowers.",
+      "raw": "assets/learning-whole-book-v1/raw/vase.png",
+      "adopted": "assets/word-art-v2/whole-book/vase-v1.webp"
+    },
+    {
+      "id": "flower",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one sunflower with green stem and leaves, full stem visible.",
+      "raw": "assets/learning-whole-book-v1/raw/flower.png",
+      "adopted": "assets/word-art-v2/whole-book/flower-v1.webp"
+    },
+    {
+      "id": "cheese",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one wedge of pale yellow cheese with small holes.",
+      "raw": "assets/learning-whole-book-v1/raw/cheese.png",
+      "adopted": "assets/word-art-v2/whole-book/cheese-v1.webp"
+    },
+    {
+      "id": "bread",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one whole golden bread loaf with two slices next to it.",
+      "raw": "assets/learning-whole-book-v1/raw/bread.png",
+      "adopted": "assets/word-art-v2/whole-book/bread-v1.webp"
+    },
+    {
+      "id": "soap",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable soap, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/soap.png",
+      "adopted": "assets/word-art-v2/whole-book/soap-v1.webp"
+    },
+    {
+      "id": "chocolate",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one partly unwrapped brown chocolate bar, plain wrapper with no text.",
+      "raw": "assets/learning-whole-book-v1/raw/chocolate.png",
+      "adopted": "assets/word-art-v2/whole-book/chocolate-v1.webp"
+    },
+    {
+      "id": "sugar",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain small bowl of white sugar and two sugar cubes.",
+      "raw": "assets/learning-whole-book-v1/raw/sugar.png",
+      "adopted": "assets/word-art-v2/whole-book/sugar-v1.webp"
+    },
+    {
+      "id": "coffee",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one cream cup of black coffee with a matching saucer, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/coffee.png",
+      "adopted": "assets/word-art-v2/whole-book/coffee-v1.webp"
+    },
+    {
+      "id": "tea",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one cream cup containing amber tea with a matching saucer.",
+      "raw": "assets/learning-whole-book-v1/raw/tea.png",
+      "adopted": "assets/word-art-v2/whole-book/tea-v1.webp"
+    },
+    {
+      "id": "tobacco",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small plain pouch containing loose brown tobacco leaves, neutral educational object, no smoke, smoking person or branding.",
+      "raw": "assets/learning-whole-book-v1/raw/tobacco.png",
+      "adopted": "assets/word-art-v2/whole-book/tobacco-v1.webp"
+    },
+    {
+      "id": "bird",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable bird, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/bird.png",
+      "adopted": "assets/word-art-v2/whole-book/bird-v1.webp"
+    },
+    {
+      "id": "kettle",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one rounded yellow stove-top water kettle with curved handle and spout.",
+      "raw": "assets/learning-whole-book-v1/raw/kettle.png",
+      "adopted": "assets/word-art-v2/whole-book/kettle-v1.webp"
+    },
+    {
+      "id": "teapot",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one rounded coral ceramic teapot with lid, spout and handle.",
+      "raw": "assets/learning-whole-book-v1/raw/teapot.png",
+      "adopted": "assets/word-art-v2/whole-book/teapot-v1.webp"
+    },
+    {
+      "id": "cake",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable cake, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/cake.png",
+      "adopted": "assets/word-art-v2/whole-book/cake-v1.webp"
+    },
+    {
+      "id": "biscuit",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one round golden biscuit with small dot pattern, no bite.",
+      "raw": "assets/learning-whole-book-v1/raw/biscuit.png",
+      "adopted": "assets/word-art-v2/whole-book/biscuit-v1.webp"
+    },
+    {
+      "id": "egg",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one whole white egg beside one half eggshell; no printed label.",
+      "raw": "assets/learning-whole-book-v1/raw/egg.png",
+      "adopted": "assets/word-art-v2/whole-book/egg-v1.webp"
+    },
+    {
+      "id": "butter",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small pale yellow block of butter on plain wrapping paper.",
+      "raw": "assets/learning-whole-book-v1/raw/butter.png",
+      "adopted": "assets/word-art-v2/whole-book/butter-v1.webp"
+    },
+    {
+      "id": "honey",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one clear jar of golden honey and a wooden honey dipper; no label or text.",
+      "raw": "assets/learning-whole-book-v1/raw/honey.png",
+      "adopted": "assets/word-art-v2/whole-book/honey-v1.webp"
+    },
+    {
+      "id": "banana",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable banana, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/banana.png",
+      "adopted": "assets/word-art-v2/whole-book/banana-v1.webp"
+    },
+    {
+      "id": "jam",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small glass jar of red strawberry jam with a plain cloth lid.",
+      "raw": "assets/learning-whole-book-v1/raw/jam.png",
+      "adopted": "assets/word-art-v2/whole-book/jam-v1.webp"
+    },
+    {
+      "id": "orange-fruit",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one orange FRUIT with a green leaf and one cut half, NOT a colour swatch.",
+      "raw": "assets/learning-whole-book-v1/raw/orange-fruit.png",
+      "adopted": "assets/word-art-v2/whole-book/orange-fruit-v1.webp"
+    },
+    {
+      "id": "apple",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable apple, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/apple.png",
+      "adopted": "assets/word-art-v2/whole-book/apple-v1.webp"
+    },
+    {
+      "id": "wine",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain green wine bottle and one glass of red wine, neutral vocabulary illustration; no brand or people.",
+      "raw": "assets/learning-whole-book-v1/raw/wine.png",
+      "adopted": "assets/word-art-v2/whole-book/wine-v1.webp"
+    },
+    {
+      "id": "beer",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain clear mug of golden beer with white foam, neutral vocabulary illustration, no brand or people.",
+      "raw": "assets/learning-whole-book-v1/raw/beer.png",
+      "adopted": "assets/word-art-v2/whole-book/beer-v1.webp"
+    },
+    {
+      "id": "blackboard",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-0.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small blank sage-green classroom chalkboard with wooden frame and a piece of white chalk.",
+      "raw": "assets/learning-whole-book-v1/raw/blackboard.png",
+      "adopted": "assets/word-art-v2/whole-book/blackboard-v1.webp"
+    },
+    {
+      "id": "meat",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain plate with a clearly recognisable raw meat cut, no gore, neutral food illustration.",
+      "raw": "assets/learning-whole-book-v1/raw/meat.png",
+      "adopted": "assets/word-art-v2/whole-book/meat-v1.webp"
+    },
+    {
+      "id": "beef",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain plate with a red raw beef cut with a fine white fat edge, no gore.",
+      "raw": "assets/learning-whole-book-v1/raw/beef.png",
+      "adopted": "assets/word-art-v2/whole-book/beef-v1.webp"
+    },
+    {
+      "id": "lamb",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one raw lamb chop on a plain plate, neutral food illustration, no live animal.",
+      "raw": "assets/learning-whole-book-v1/raw/lamb.png",
+      "adopted": "assets/word-art-v2/whole-book/lamb-v1.webp"
+    },
+    {
+      "id": "steak",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one thick red steak with gentle white marbling on a plain plate, no gore.",
+      "raw": "assets/learning-whole-book-v1/raw/steak.png",
+      "adopted": "assets/word-art-v2/whole-book/steak-v1.webp"
+    },
+    {
+      "id": "mince",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain bowl containing finely minced raw beef.",
+      "raw": "assets/learning-whole-book-v1/raw/mince.png",
+      "adopted": "assets/word-art-v2/whole-book/mince-v1.webp"
+    },
+    {
+      "id": "tomato",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable tomato, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/tomato.png",
+      "adopted": "assets/word-art-v2/whole-book/tomato-v1.webp"
+    },
+    {
+      "id": "potato",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable potato, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/potato.png",
+      "adopted": "assets/word-art-v2/whole-book/potato-v1.webp"
+    },
+    {
+      "id": "cabbage",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable cabbage, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/cabbage.png",
+      "adopted": "assets/word-art-v2/whole-book/cabbage-v1.webp"
+    },
+    {
+      "id": "lettuce",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable lettuce, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/lettuce.png",
+      "adopted": "assets/word-art-v2/whole-book/lettuce-v1.webp"
+    },
+    {
+      "id": "pea",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one open pea pod showing several round green peas.",
+      "raw": "assets/learning-whole-book-v1/raw/pea.png",
+      "adopted": "assets/word-art-v2/whole-book/pea-v1.webp"
+    },
+    {
+      "id": "bean",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: three fresh long green bean pods, no dried beans.",
+      "raw": "assets/learning-whole-book-v1/raw/bean.png",
+      "adopted": "assets/word-art-v2/whole-book/bean-v1.webp"
+    },
+    {
+      "id": "pear",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable pear, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/pear.png",
+      "adopted": "assets/word-art-v2/whole-book/pear-v1.webp"
+    },
+    {
+      "id": "grape",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small bunch of purple grapes with a green leaf.",
+      "raw": "assets/learning-whole-book-v1/raw/grape.png",
+      "adopted": "assets/word-art-v2/whole-book/grape-v1.webp"
+    },
+    {
+      "id": "peach",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable peach, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/peach.png",
+      "adopted": "assets/word-art-v2/whole-book/peach-v1.webp"
+    },
+    {
+      "id": "spring",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one blossoming fruit tree with small fresh green leaves and pale pink flowers in a tiny grass patch.",
+      "raw": "assets/learning-whole-book-v1/raw/spring.png",
+      "adopted": "assets/word-art-v2/whole-book/spring-v1.webp"
+    },
+    {
+      "id": "windy",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small rounded landscape vignette of a leafy tree bending gently in wind with a few airborne leaves, no arrows or text.",
+      "raw": "assets/learning-whole-book-v1/raw/windy.png",
+      "adopted": "assets/word-art-v2/whole-book/windy-v1.webp"
+    },
+    {
+      "id": "rain",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one soft blue-grey cloud releasing clear raindrops above a small puddle.",
+      "raw": "assets/learning-whole-book-v1/raw/rain.png",
+      "adopted": "assets/word-art-v2/whole-book/rain-v1.webp"
+    },
+    {
+      "id": "summer",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one lush green leafy tree in a tiny grass patch under a small bright sun.",
+      "raw": "assets/learning-whole-book-v1/raw/summer.png",
+      "adopted": "assets/word-art-v2/whole-book/summer-v1.webp"
+    },
+    {
+      "id": "autumn",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one tree with golden and rust-orange leaves and a few fallen leaves in a tiny grass patch.",
+      "raw": "assets/learning-whole-book-v1/raw/autumn.png",
+      "adopted": "assets/word-art-v2/whole-book/autumn-v1.webp"
+    },
+    {
+      "id": "winter",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one bare tree with gentle white snow on branches and ground in a tiny snow patch.",
+      "raw": "assets/learning-whole-book-v1/raw/winter.png",
+      "adopted": "assets/word-art-v2/whole-book/winter-v1.webp"
+    },
+    {
+      "id": "snow",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one soft pale grey cloud releasing snowflakes above a small snow mound.",
+      "raw": "assets/learning-whole-book-v1/raw/snow.png",
+      "adopted": "assets/word-art-v2/whole-book/snow-v1.webp"
+    },
+    {
+      "id": "night",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small rounded deep-blue night sky vignette with crescent moon and a few stars.",
+      "raw": "assets/learning-whole-book-v1/raw/night.png",
+      "adopted": "assets/word-art-v2/whole-book/night-v1.webp"
+    },
+    {
+      "id": "envelope",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable envelope, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/envelope.png",
+      "adopted": "assets/word-art-v2/whole-book/envelope-v1.webp"
+    },
+    {
+      "id": "writing-paper",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: several plain cream letter-writing sheets, blank, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/writing-paper.png",
+      "adopted": "assets/word-art-v2/whole-book/writing-paper-v1.webp"
+    },
+    {
+      "id": "pad",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small cream writing notepad with a blue top binding, blank pages.",
+      "raw": "assets/learning-whole-book-v1/raw/pad.png",
+      "adopted": "assets/word-art-v2/whole-book/pad-v1.webp"
+    },
+    {
+      "id": "glue",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small plain glue bottle with a blue nozzle, no label.",
+      "raw": "assets/learning-whole-book-v1/raw/glue.png",
+      "adopted": "assets/word-art-v2/whole-book/glue-v1.webp"
+    },
+    {
+      "id": "chalk",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: three short white chalk sticks, no writing.",
+      "raw": "assets/learning-whole-book-v1/raw/chalk.png",
+      "adopted": "assets/word-art-v2/whole-book/chalk-v1.webp"
+    },
+    {
+      "id": "chicken",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one whole prepared roast chicken on a plain plate, food meaning, no live bird.",
+      "raw": "assets/learning-whole-book-v1/raw/chicken.png",
+      "adopted": "assets/word-art-v2/whole-book/chicken-v1.webp"
+    },
+    {
+      "id": "telephone",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one vintage teal telephone with handset and rotary dial.",
+      "raw": "assets/learning-whole-book-v1/raw/telephone.png",
+      "adopted": "assets/word-art-v2/whole-book/telephone-v1.webp"
+    },
+    {
+      "id": "mouth",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a simple friendly lower face close-up showing a clearly open smiling mouth, no words or exaggerated teeth.",
+      "raw": "assets/learning-whole-book-v1/raw/mouth.png",
+      "adopted": "assets/word-art-v2/whole-book/mouth-v1.webp"
+    },
+    {
+      "id": "tongue",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a friendly face close-up with mouth open and tongue visible, neutral educational drawing, no words.",
+      "raw": "assets/learning-whole-book-v1/raw/tongue.png",
+      "adopted": "assets/word-art-v2/whole-book/tongue-v1.webp"
+    },
+    {
+      "id": "headache",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a child gently holding their forehead with a tired uncomfortable expression; full upper body visible, no medical diagnosis labels.",
+      "raw": "assets/learning-whole-book-v1/raw/headache.png",
+      "adopted": "assets/word-art-v2/whole-book/headache-v1.webp"
+    },
+    {
+      "id": "earache",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a child gently touching one ear with an uncomfortable expression; no red symbols or medical labels.",
+      "raw": "assets/learning-whole-book-v1/raw/earache.png",
+      "adopted": "assets/word-art-v2/whole-book/earache-v1.webp"
+    },
+    {
+      "id": "toothache",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a child gently holding one cheek beside the mouth with an uncomfortable expression; no medical diagnosis labels.",
+      "raw": "assets/learning-whole-book-v1/raw/toothache.png",
+      "adopted": "assets/word-art-v2/whole-book/toothache-v1.webp"
+    },
+    {
+      "id": "stomach-ache",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a child gently holding the stomach with both hands and an uncomfortable expression; full body visible, no medical diagnosis labels.",
+      "raw": "assets/learning-whole-book-v1/raw/stomach-ache.png",
+      "adopted": "assets/word-art-v2/whole-book/stomach-ache-v1.webp"
+    },
+    {
+      "id": "medicine",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain medicine bottle with a secure cap and a blister sheet of tablets, no drug name, dosing, red-cross logo or instructions.",
+      "raw": "assets/learning-whole-book-v1/raw/medicine.png",
+      "adopted": "assets/word-art-v2/whole-book/medicine-v1.webp"
+    },
+    {
+      "id": "match",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one unlit wooden match with red tip beside a small plain matchbox; no flame, text or person.",
+      "raw": "assets/learning-whole-book-v1/raw/match.png",
+      "adopted": "assets/word-art-v2/whole-book/match-v1.webp"
+    },
+    {
+      "id": "library",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a warm miniature library interior vignette with tall bookshelves and a reading table, no people or text.",
+      "raw": "assets/learning-whole-book-v1/raw/library.png",
+      "adopted": "assets/word-art-v2/whole-book/library-v1.webp"
+    },
+    {
+      "id": "key",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete clearly recognisable key, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/key.png",
+      "adopted": "assets/word-art-v2/whole-book/key-v1.webp"
+    },
+    {
+      "id": "baby",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one smiling baby sitting on a soft blanket, fully clothed.",
+      "raw": "assets/learning-whole-book-v1/raw/baby.png",
+      "adopted": "assets/word-art-v2/whole-book/baby-v1.webp"
+    },
+    {
+      "id": "church",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-12.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small traditional stone church with arched door and steeple, no people.",
+      "raw": "assets/learning-whole-book-v1/raw/church.png",
+      "adopted": "assets/word-art-v2/whole-book/church-v1.webp"
+    },
+    {
+      "id": "hand",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete open human hand with five anatomically clear fingers, palm facing viewer, attached to a short sleeve cuff.",
+      "raw": "assets/learning-whole-book-v1/raw/hand.png",
+      "adopted": "assets/word-art-v2/whole-book/hand-v1.webp"
+    },
+    {
+      "id": "pocket",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: close-up of a blue fabric shirt pocket with a visible stitched opening, no person or text.",
+      "raw": "assets/learning-whole-book-v1/raw/pocket.png",
+      "adopted": "assets/word-art-v2/whole-book/pocket-v1.webp"
+    },
+    {
+      "id": "phrasebook",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small pocket-sized paperback with two speech bubbles on its cover, no readable text.",
+      "raw": "assets/learning-whole-book-v1/raw/phrasebook.png",
+      "adopted": "assets/word-art-v2/whole-book/phrasebook-v1.webp"
+    },
+    {
+      "id": "shopping-list",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one cream shopping list on a small clipboard with pictorial apples and bottles beside empty checkboxes; no readable words.",
+      "raw": "assets/learning-whole-book-v1/raw/shopping-list.png",
+      "adopted": "assets/word-art-v2/whole-book/shopping-list-v1.webp"
+    },
+    {
+      "id": "vegetable",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small still life of carrot, tomato and cabbage, clearly vegetables.",
+      "raw": "assets/learning-whole-book-v1/raw/vegetable.png",
+      "adopted": "assets/word-art-v2/whole-book/vegetable-v1.webp"
+    },
+    {
+      "id": "fruit",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small still life of apple, pear and bananas, clearly fruit.",
+      "raw": "assets/learning-whole-book-v1/raw/fruit.png",
+      "adopted": "assets/word-art-v2/whole-book/fruit-v1.webp"
+    },
+    {
+      "id": "stationery",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a neat small collection of pencil, notebook, eraser and ruler.",
+      "raw": "assets/learning-whole-book-v1/raw/stationery.png",
+      "adopted": "assets/word-art-v2/whole-book/stationery-v1.webp"
+    },
+    {
+      "id": "bath",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one white bathtub with brass taps and a few bubbles, no person.",
+      "raw": "assets/learning-whole-book-v1/raw/bath.png",
+      "adopted": "assets/word-art-v2/whole-book/bath-v1.webp"
+    },
+    {
+      "id": "dinner",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a simple dinner place setting with a plate of vegetables and roast food, spoon and glass.",
+      "raw": "assets/learning-whole-book-v1/raw/dinner.png",
+      "adopted": "assets/word-art-v2/whole-book/dinner-v1.webp"
+    },
+    {
+      "id": "restaurant",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small inviting restaurant exterior vignette with striped awning and simple tables, NO text signs.",
+      "raw": "assets/learning-whole-book-v1/raw/restaurant.png",
+      "adopted": "assets/word-art-v2/whole-book/restaurant-v1.webp"
+    },
+    {
+      "id": "breakfast",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a simple breakfast setting of toast, egg and a glass of orange juice.",
+      "raw": "assets/learning-whole-book-v1/raw/breakfast.png",
+      "adopted": "assets/word-art-v2/whole-book/breakfast-v1.webp"
+    },
+    {
+      "id": "case-blue",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small closed BLUE travelling case matching the blue case in Lesson 97-98: blue sides, black rounded handle, silver zip around the upper part, a blank white luggage label tied to the handle, complete case, no readable personal information.",
+      "raw": "assets/learning-whole-book-v1/raw/case-blue.png",
+      "adopted": "assets/word-art-v2/whole-book/case-blue-v1.webp"
+    },
+    {
+      "id": "cinema",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small cinema exterior vignette with two blank poster cases and a red entrance canopy; no words, numbers or people.",
+      "raw": "assets/learning-whole-book-v1/raw/cinema.png",
+      "adopted": "assets/word-art-v2/whole-book/cinema-v1.webp"
+    },
+    {
+      "id": "garage",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small car-repair garage vignette with an empty open service bay, simple tools at the side, no letters.",
+      "raw": "assets/learning-whole-book-v1/raw/garage.png",
+      "adopted": "assets/word-art-v2/whole-book/garage-v1.webp"
+    },
+    {
+      "id": "lamp-post",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one full-height old-fashioned street lamp with a warm brass lantern and dark green pole.",
+      "raw": "assets/learning-whole-book-v1/raw/lamp-post.png",
+      "adopted": "assets/word-art-v2/whole-book/lamp-post-v1.webp"
+    },
+    {
+      "id": "train",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one classic passenger train engine and a short carriage, complete side view, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/train.png",
+      "adopted": "assets/word-art-v2/whole-book/train-v1.webp"
+    },
+    {
+      "id": "platform",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small empty train-station platform beside tracks with a simple bench and canopy, no clock or text.",
+      "raw": "assets/learning-whole-book-v1/raw/platform.png",
+      "adopted": "assets/word-art-v2/whole-book/platform-v1.webp"
+    },
+    {
+      "id": "station",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-24.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small railway station building and a short stretch of tracks, no clock or text.",
+      "raw": "assets/learning-whole-book-v1/raw/station.png",
+      "adopted": "assets/word-art-v2/whole-book/station-v1.webp"
+    },
+    {
+      "id": "zip",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one clearly visible partly open metal zipper on a blue fabric panel, full slider and teeth shown.",
+      "raw": "assets/learning-whole-book-v1/raw/zip.png",
+      "adopted": "assets/word-art-v2/whole-book/zip-v1.webp"
+    },
+    {
+      "id": "label",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one blank rectangular paper luggage tag with string, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/label.png",
+      "adopted": "assets/word-art-v2/whole-book/label-v1.webp"
+    },
+    {
+      "id": "handle",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one brown suitcase handle attached to a small portion of suitcase top, handle clearly dominant.",
+      "raw": "assets/learning-whole-book-v1/raw/handle.png",
+      "adopted": "assets/word-art-v2/whole-book/handle-v1.webp"
+    },
+    {
+      "id": "card",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one postcard with a small mountain landscape image and a postage-stamp corner, no readable text.",
+      "raw": "assets/learning-whole-book-v1/raw/card.png",
+      "adopted": "assets/word-art-v2/whole-book/card-v1.webp"
+    },
+    {
+      "id": "present",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one neatly wrapped coral gift box with a sage ribbon bow.",
+      "raw": "assets/learning-whole-book-v1/raw/present.png",
+      "adopted": "assets/word-art-v2/whole-book/present-v1.webp"
+    },
+    {
+      "id": "dictionary",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one thick green dictionary with alphabet-tab marks along the edge and a small open-book emblem on the cover, no readable text.",
+      "raw": "assets/learning-whole-book-v1/raw/dictionary.png",
+      "adopted": "assets/word-art-v2/whole-book/dictionary-v1.webp"
+    },
+    {
+      "id": "teaspoonful",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small teaspoon heaped with white sugar, no other objects.",
+      "raw": "assets/learning-whole-book-v1/raw/teaspoonful.png",
+      "adopted": "assets/word-art-v2/whole-book/teaspoonful-v1.webp"
+    },
+    {
+      "id": "bus",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete vintage cream and green public bus, side three-quarter view, no signs or numbers.",
+      "raw": "assets/learning-whole-book-v1/raw/bus.png",
+      "adopted": "assets/word-art-v2/whole-book/bus-v1.webp"
+    },
+    {
+      "id": "coin",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one generic golden coin with a simple decorative star, no currency denomination or national emblem.",
+      "raw": "assets/learning-whole-book-v1/raw/coin.png",
+      "adopted": "assets/word-art-v2/whole-book/coin-v1.webp"
+    },
+    {
+      "id": "lemonade",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one tall clear glass of pale yellow lemonade with a lemon slice.",
+      "raw": "assets/learning-whole-book-v1/raw/lemonade.png",
+      "adopted": "assets/word-art-v2/whole-book/lemonade-v1.webp"
+    },
+    {
+      "id": "eyeglasses",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one pair of brown-framed eyeglasses with two clear lenses and temples, NOT drinking glasses.",
+      "raw": "assets/learning-whole-book-v1/raw/eyeglasses.png",
+      "adopted": "assets/word-art-v2/whole-book/eyeglasses-v1.webp"
+    },
+    {
+      "id": "dining-room",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a warm miniature dining-room interior vignette with a table and chairs, no people.",
+      "raw": "assets/learning-whole-book-v1/raw/dining-room.png",
+      "adopted": "assets/word-art-v2/whole-book/dining-room-v1.webp"
+    },
+    {
+      "id": "toilet",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one clean white toilet with cistern and closed seat, no person.",
+      "raw": "assets/learning-whole-book-v1/raw/toilet.png",
+      "adopted": "assets/word-art-v2/whole-book/toilet-v1.webp"
+    },
+    {
+      "id": "torch",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small green hand-held flashlight with lens and a short subtle light beam.",
+      "raw": "assets/learning-whole-book-v1/raw/torch.png",
+      "adopted": "assets/word-art-v2/whole-book/torch-v1.webp"
+    },
+    {
+      "id": "parrot",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one colourful small green parrot perched on a plain branch.",
+      "raw": "assets/learning-whole-book-v1/raw/parrot.png",
+      "adopted": "assets/word-art-v2/whole-book/parrot-v1.webp"
+    },
+    {
+      "id": "exercise-book",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-36.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one thin school exercise notebook, partly open showing simple ruled blank pages, no words.",
+      "raw": "assets/learning-whole-book-v1/raw/exercise-book.png",
+      "adopted": "assets/word-art-v2/whole-book/exercise-book-v1.webp"
+    },
+    {
+      "id": "counter",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one wooden shop service counter with a pale top, no products, text or people.",
+      "raw": "assets/learning-whole-book-v1/raw/counter.png",
+      "adopted": "assets/word-art-v2/whole-book/counter-v1.webp"
+    },
+    {
+      "id": "road",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a short curving paved country road in a grass vignette, no signs or markings that imply exact rules.",
+      "raw": "assets/learning-whole-book-v1/raw/road.png",
+      "adopted": "assets/word-art-v2/whole-book/road-v1.webp"
+    },
+    {
+      "id": "hat-brown",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one warm brown gentleman fedora hat with a dark brown ribbon, matching the hat in the Lesson 121-122 original keepsake, no feather, complete hat.",
+      "raw": "assets/learning-whole-book-v1/raw/hat-brown.png",
+      "adopted": "assets/word-art-v2/whole-book/hat-brown-v1.webp"
+    },
+    {
+      "id": "beard",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a friendly adult man face with a full clearly visible brown beard, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/beard.png",
+      "adopted": "assets/word-art-v2/whole-book/beard-v1.webp"
+    },
+    {
+      "id": "kitten",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small playful ginger kitten with complete body and tail, no other animals.",
+      "raw": "assets/learning-whole-book-v1/raw/kitten.png",
+      "adopted": "assets/word-art-v2/whole-book/kitten-v1.webp"
+    },
+    {
+      "id": "village",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a compact cluster of three warm stucco cottages with orange roofs and leafy trees.",
+      "raw": "assets/learning-whole-book-v1/raw/village.png",
+      "adopted": "assets/word-art-v2/whole-book/village-v1.webp"
+    },
+    {
+      "id": "taxi",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one complete yellow taxi car with a plain roof light, no words or numbers.",
+      "raw": "assets/learning-whole-book-v1/raw/taxi.png",
+      "adopted": "assets/word-art-v2/whole-book/taxi-v1.webp"
+    },
+    {
+      "id": "sign",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one plain wooden notice board on two posts, blank board, no words.",
+      "raw": "assets/learning-whole-book-v1/raw/sign.png",
+      "adopted": "assets/word-art-v2/whole-book/sign-v1.webp"
+    },
+    {
+      "id": "mink-coat",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one brown fur coat on a plain hanger, complete coat, no animals or people.",
+      "raw": "assets/learning-whole-book-v1/raw/mink-coat.png",
+      "adopted": "assets/word-art-v2/whole-book/mink-coat-v1.webp"
+    },
+    {
+      "id": "airport",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small airport terminal vignette with a parked passenger aeroplane in the background, no logos or writing.",
+      "raw": "assets/learning-whole-book-v1/raw/airport.png",
+      "adopted": "assets/word-art-v2/whole-book/airport-v1.webp"
+    },
+    {
+      "id": "hotel",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small warm stucco hotel building with entrance canopy and windows, no words or stars.",
+      "raw": "assets/learning-whole-book-v1/raw/hotel.png",
+      "adopted": "assets/word-art-v2/whole-book/hotel-v1.webp"
+    },
+    {
+      "id": "football",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one black-and-white football, no pitch or player.",
+      "raw": "assets/learning-whole-book-v1/raw/football.png",
+      "adopted": "assets/word-art-v2/whole-book/football-v1.webp"
+    },
+    {
+      "id": "powder",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small cosmetic powder jar with a soft powder puff, no brand.",
+      "raw": "assets/learning-whole-book-v1/raw/powder.png",
+      "adopted": "assets/word-art-v2/whole-book/powder-v1.webp"
+    },
+    {
+      "id": "compact",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one open round cosmetic compact with an attached mirror and face-powder pan, no face in mirror, no brand.",
+      "raw": "assets/learning-whole-book-v1/raw/compact.png",
+      "adopted": "assets/word-art-v2/whole-book/compact-v1.webp"
+    },
+    {
+      "id": "handbag-brown",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one small structured brown leather handbag with a rounded top handle and simple gold clasp, matching the bag in Lesson 141-142 original keepsake, complete bag, no text.",
+      "raw": "assets/learning-whole-book-v1/raw/handbag-brown.png",
+      "adopted": "assets/word-art-v2/whole-book/handbag-brown-v1.webp"
+    },
+    {
+      "id": "litter",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a few discarded paper scraps, empty bottle and crumpled tin loosely scattered together, no background.",
+      "raw": "assets/learning-whole-book-v1/raw/litter.png",
+      "adopted": "assets/word-art-v2/whole-book/litter-v1.webp"
+    },
+    {
+      "id": "litter-basket",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one woven outdoor litter basket, empty, full basket visible.",
+      "raw": "assets/learning-whole-book-v1/raw/litter-basket.png",
+      "adopted": "assets/word-art-v2/whole-book/litter-basket-v1.webp"
+    },
+    {
+      "id": "rubbish",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: a small collection of crumpled paper, used food wrapper and an empty can, no sharp or hazardous waste.",
+      "raw": "assets/learning-whole-book-v1/raw/rubbish.png",
+      "adopted": "assets/word-art-v2/whole-book/rubbish-v1.webp"
+    },
+    {
+      "id": "tyre",
+      "kind": "word",
+      "references": [
+        "output/whole-book-design/keepsake-reference-48.png",
+        "assets/word-art-v2/sample1-12/book-v1.webp"
+      ],
+      "transparent": true,
+      "prompt": "Use case: illustration-story. Production asset for an English vocabulary card. Match the approved references: warm dark-brown hand-drawn contours, rounded clear forms, softly painted colours, restrained volume and gentle paper texture. One complete recognisable subject, centred in a square with generous clear margins. Genuine transparent background. No white rectangle, outside shadow, halo, background scene, card frame, Chinese, English labels, watermarks, logos, 3D plastic rendering or photorealism. The contact sheet is style reference only; do not add its characters to object illustrations. For a person-state subject use one anonymous friendly character in this visual family. Preserve the specific semantic constraints in the subject. Subject: one black rubber car tyre with visible tread and central opening, no wheel rim.",
+      "raw": "assets/learning-whole-book-v1/raw/tyre.png",
+      "adopted": "assets/word-art-v2/whole-book/tyre-v1.webp"
+    }
+  ]
+}

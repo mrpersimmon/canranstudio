@@ -1,3 +1,4 @@
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 require('../support/unit2930-legacy').historicalSuite(require('@playwright/test').test);
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
@@ -49,8 +50,8 @@ test('10道词义题连续错答只重试，最后三题刷新不会代答，重
  await page.goto('/unit29-30/#learn/listen');const room=page.locator('.stage-listen');await expect(room.getByRole('button',{name:'给点线索',exact:true})).toHaveCount(0);
  for(const [i,answer] of ANSWERS.listen.entries()){
   if(i>=7)await page.reload();await expect(room).toContainText('第 '+(i+1)+' / 10 题');const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(check).toBeDisabled();await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
-  if(i===0||i===9)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===0?'厨房':'把铅笔擦干净',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
-  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await room.getByRole('button',{name:i===9?'完成这一站':'下一题',exact:true}).click();
+  if(i===0||i===9)for(let j=0;j<2;j++){await room.getByRole('button',{name:i===0?'厨房':'把铅笔擦干净',exact:true}).click();await check.click();if(j===1)await page.reload();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await expect(room.locator('.practice-options .is-correct')).toHaveCount(0);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i));await room.getByRole('button',{name:'再试一次',exact:true}).click();}
+  await room.getByRole('button',{name:answer,exact:true}).click();await check.click();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await courseButton(room, i===9?"finishPractice":'下一题').click();
  }
  await expect(page.locator('#starCount')).toHaveText('3');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await page.reload();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(page.locator('#starCount')).toHaveText('3');
 });
@@ -59,21 +60,21 @@ test('原文9句逐句保留，按原角色呈现，主动完成后才解锁理�
  await page.goto('/unit29-30/#learn/roles');await page.getByRole('button',{name:'先看课文',exact:true}).click();const room=page.locator('.stage-text');await expect(room).toContainText('艾米要怎样清理地板？');
  const actors=room.locator('[data-actor]:not([data-actor=""])');await expect(actors).toHaveCount(2);await expect(actors.nth(0)).toHaveAttribute('data-actor','Jones');await expect(actors.nth(1)).toHaveAttribute('data-actor','Amy');await expect(actors.nth(0)).toBeVisible();await expect(actors.nth(1)).toBeVisible();
  for(let i=0;i<9;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9');
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));await expect(room.getByRole('status')).toHaveText((i+1)+' / 9');
   if(i===4){await room.getByRole('button',{name:'看中文',exact:true}).last().click();await expect(room.locator('.bcn').last()).toHaveText('打开窗户，给房间通通风。');await page.reload();await expect(room.locator('.btext')).toHaveCount(5);}
  }
  await expect(room.locator('.dialogue-log .bname')).toHaveText(['琼斯太太','琼斯太太','琼斯太太','艾米','琼斯太太','琼斯太太','琼斯太太','琼斯太太','琼斯太太']);
- await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：课文小侦探',exact:true}).click();await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+ await expect(room.locator('.btext button')).toHaveCount(0);await expect(page.locator('#starCount')).toHaveText('0');await courseButton(room, "finishStory").click();await expect(page.locator('#starCount')).toHaveText('1');await room.getByRole('button',{name:'下一站：课文小侦探',exact:true}).click();await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
 });
 
 const WORDS=['shut','bedroom','untidy','must','open','air','put','clothes','wardrobe','dust','sweep','empty','read','sharpen','put on','take off','turn on','turn off','come in','make the bed','then','clean','window','door','bed','floor','dressing table','lamp','tap','book'];
 const PH=['/ʃʌt/','/ˈbedruːm/','/ʌnˈtaɪdi/','/mʌst/','/ˈoʊpən/','/er/','/pʊt/','/kloʊðz/','/ˈwɔːrdroʊb/','/dʌst/','/swiːp/','/ˈempti/','/riːd/','/ˈʃɑːrpən/','/pʊt ˈɑːn/','/teɪk ˈɑːf/','/tɝːn ˈɑːn/','/tɝːn ˈɑːf/','/kʌm ˈɪn/','/meɪk ðə ˈbed/','/ðen/','/kliːn/','/ˈwɪndoʊ/','/dɔːr/','/bed/','/flɔːr/','/ˈdresɪŋ ˌteɪbəl/','/læmp/','/tæp/','/bʊk/'];
 test('30张词卡完整音标、翻义、加载、五组翻页与末组续学',async({page})=>{
- const audio=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.goto('/unit29-30/#learn/words');const room=page.locator('.stage-words');await expect(room.getByRole('button',{name:'上一组词卡',exact:true})).toBeDisabled();
+ const audio=[];page.on('request',r=>{if(/\.(mp3|wav|ogg)(\?|$)/.test(r.url()))audio.push(r.url());});await page.goto('/unit29-30/#learn/words');const room=page.locator('.stage-words');await expect(courseButton(room, "previousWords")).toBeDisabled();
  for(let p=0;p<5;p++){
   await expect(room.locator('.unit-word strong')).toHaveText(WORDS.slice(p*6,p*6+6));await expect(room.locator('.word-phonetic')).toHaveText(PH.slice(p*6,p*6+6));await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
   for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();await expect(card).toHaveAccessibleDescription(await card.locator('.word-meaning').innerText());await card.click();await expect(card.locator('.word-meaning')).toBeHidden();}
-  if(p<4)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+  if(p<4)await courseButton(room, "nextWords").click();
  }
  await page.reload();await expect(room).toContainText('5 / 5');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen$/);expect(audio).toEqual([]);
 });
@@ -115,5 +116,5 @@ test('支架按语境释义，图选同等可读，错答不泄露正确状态',
  await page.goto('/unit29-30/#learn/exam');const exam=page.locator('.stage-exam');for(const [name,description] of [['甲图','灯没有发光，书摊开着'],['乙图','灯有光芒，书摊开着'],['丙图','灯没有发光，书合着']])await expect(exam.getByRole('button',{name,exact:true})).toHaveAccessibleDescription(description);
  await page.mouse.move(0,0);const styles=await exam.locator('.practice-options button').evaluateAll(xs=>xs.map(x=>{const s=getComputedStyle(x);return[s.backgroundColor,s.borderColor,s.minHeight];}));expect(styles.every(s=>JSON.stringify(s)===JSON.stringify(styles[0]))).toBe(true);
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:800});for(const img of await exam.locator('.picture-option img').all()){const box=await img.boundingBox();expect(box.width).toBeGreaterThanOrEqual(160);expect(box.height).toBeGreaterThanOrEqual(120);}expect(await exam.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);}
- await exam.screenshot({path:'output/playwright/unit29-30/picture-options.png'});for(const name of ['乙图','丙图']){await exam.getByRole('button',{name,exact:true}).click();await exam.getByRole('button',{name:'检查答案',exact:true}).click();await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');await exam.getByRole('button',{name:'再试一次',exact:true}).click();}
+ await exam.screenshot({path:'output/playwright/unit29-30/picture-options.png'});for(const name of ['乙图','丙图']){await exam.getByRole('button',{name,exact:true}).click();await exam.getByRole('button',{name:'检查答案',exact:true}).click();await expect(exam.getByRole('status')).toHaveText(await incorrectFeedback(exam));await exam.getByRole('button',{name:'再试一次',exact:true}).click();}
 });

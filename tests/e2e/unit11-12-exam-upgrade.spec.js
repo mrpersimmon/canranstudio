@@ -1,4 +1,5 @@
 'use strict';
+const {expectNoVerdict}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 require('../support/unit1112-legacy').historicalSuite(test);
@@ -45,10 +46,10 @@ test('11–12 旧草稿只是选择，升级、返回与刷新都不代为判对
   await selectAnswer(room, EXAM[0].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[1].answer); upgrade(); await page.reload();
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expectNoVerdict(room.getByRole('status'));
   await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload(); await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expectNoVerdict(room.getByRole('status'));
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
@@ -62,7 +63,7 @@ test('11–12 断网刷新受阻，联网恢复新增题的未提交词块，下
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'Whose', exact: true }).click();
   await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('button', { name: '撤回 Whose', exact: true })).toBeVisible();
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '8'); await expectNoVerdict(room.getByRole('status'));
   for (const token of ['shirt', 'is', 'that?']) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await expect(room).toContainText('第 10 / 10 题'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();

@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-01",
+  "mode": "built-in image_gen edit",
+  "asset": "umbrella-red-v1",
+  "purpose": "First incorrect cloakroom umbrella; plain red contrasts with original purple dotted correct umbrella",
+  "sourceGeneratedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-5ed3-7cd1-9aec-1e2fc3d1918d/exec-abe92b7f-532b-40eb-84fc-a45b334d13cc.png",
+  "files": {
+    "original": "umbrella-red-v1.png",
+    "runtime": "umbrella-red-v1.webp"
+  },
+  "actualDimensions": {
+    "width": 1024,
+    "height": 1536
+  },
+  "transparentBackground": true,
+  "references": [
+    {
+      "path": "assets/unit3-4-journey/umbrella-purple-v1.png",
+      "role": "Only edit target; preserve geometry, replace purple dotted fabric with plain coral red"
+    }
+  ],
+  "prompt": "Precise color-only edit of the attached umbrella PNG. This attached file is the ONLY edit target. Keep the original 1024x1536 pixel canvas and the umbrella's exact scale, position, orientation, canopy shape and scalloped lower contour, warm brown outlines, ribs, wooden tip, straight brown wooden shaft, yellow band, curved J handle, highlights, and all transparent silhouette boundaries. Do not redesign, move, rotate, crop, resize or redraw the umbrella's geometry.\n\nChange ONLY the fabric of the canopy: replace the lavender-purple fabric AND every pale round polka dot with one uniform warm CORAL RED fabric. The red canopy must be PLAIN, completely without polka dots or stripes or any decorative pattern. Retain natural illustrated light/shade and dark panel/rib lines. The former dot areas must be smoothly filled with the same red fabric; absolutely no pale circles or dot-shaped shadows remain. Keep the shaft and handle exactly brown, and the small band exactly yellow as in the target. This is an alternative wrong umbrella in a learning story, so its only distinguishing change is a plain red canopy.\n\nOutput genuine transparent RGBA PNG, same size 1024x1536 and exactly registered with the target. No background, no glow, no white matte, no people or other objects, no text. Preserve transparent alpha cleanly.",
+  "inspection": {
+    "iterations": 1,
+    "accepted": true,
+    "canopy": "Warm coral red, plain with natural shading and rib lines; no dots or stripes",
+    "alphaGreaterThan16BoundsPixels": [
+      22,
+      157,
+      1001,
+      1358
+    ],
+    "alphaGreaterThan16BoundsNormalized": [
+      0.021484375,
+      0.10221354166666667,
+      0.978515625,
+      0.884765625
+    ],
+    "geometryComparison": {
+      "sourceBoundsPixels": [
+        21,
+        157,
+        1002,
+        1359
+      ],
+      "sameCanvas": true,
+      "exactPixelIdentity": false,
+      "boundsDifferencePixels": [
+        1,
+        0,
+        -1,
+        -1
+      ],
+      "alphaMaskIoU16": 0.9965748945096576,
+      "alphaDifferentPixels": 216725,
+      "shaftAndHandleRgbMeanError": 14.929502373738416,
+      "note": "Registered same-source edit with near-identical visible outline. Generator slightly changed antialiasing and wooden highlights; do not claim bit-identical alpha or unchanged RGB. Visible alpha bounds differ by at most1px on1024×1536 canvas."
+    },
+    "preview": "output/u34-visitor-qa/umbrella-red-on-paper.png",
+    "notes": "Real alpha; inspected on warm paper, full canopy/shaft/J handle, no white border or extra objects."
+  },
+  "processing": "Original generated PNG copied unchanged; WebP conversion quality92 alphaQuality100 effort6. No manual recoloring, crop, alpha repair or redraw."
+}

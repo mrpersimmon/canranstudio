@@ -1,4 +1,6 @@
 'use strict';
+const {expectTheatrePortrait}=require('../support/continuous-theatre');
+const {courseButton,finishStoryAndReturn}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use(process.env.UNIT127_BROWSER==='webkit'?{browserName:'webkit'}:{});
 // Independently transcribed from textbook paper258/PDF291; all twelve speaker turns.
@@ -29,17 +31,17 @@ for(const width of [320,390,768,1280])test(width+'：12轮完整原文、双方�
  const room=page.locator('.stage-text'),world=room.locator('.cafe-world'),log=room.getByRole('log');
  await expect(room.getByText('Who is only twenty-nine, and why is it so unclear?（谁只有29岁？为什么这件事如此模糊不清？）',{exact:true})).toBeVisible();await pose(world,-1);await expect(room.locator('.story-lead img')).toHaveAttribute('src','/assets/unit127-128/recognize.svg');await room.locator('.story-lead img').evaluate(i=>i.decode());
  const lead=await room.locator('.story-lead').boundingBox(),introLog=await log.boundingBox();expect(lead.y).toBeGreaterThanOrEqual(introLog.y);expect(lead.y+lead.height).toBeLessThanOrEqual(introLog.y+introLog.height+1);
- await room.screenshot({path:info.outputPath('intro.png')});await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ await room.screenshot({path:info.outputPath('intro.png')});await courseButton(room, "startStory").click();
  for(let i=0;i<lines.length;i++){
   await expect(room.locator('.bubble-row')).toHaveCount(i+1);const latest=room.locator('.bubble-row').last();await expect(latest.locator('.bname')).toHaveText(lines[i][0]==='kate'?'Kate':'Liz');await expect(latest.locator('.btext')).toHaveText(lines[i][1]);await expect(latest.locator('.bcn')).toBeHidden();await expect(latest).toHaveClass(new RegExp('speaker-'+(lines[i][0]==='kate'?'left':'right')));await pose(world,i);
   await expect(room.locator('.story-note,.story-timeline')).toHaveCount(0);await expect(world.locator('aside')).toHaveCount(0);
-  await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=room.getByRole('button',{name:i===11?'完成课文':'下一句',exact:true}),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();expect(Math.abs((await next.boundingBox()).y-before.y)).toBeLessThan(2);
+  await log.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));const next=courseButton(room, i===11?"finishStory":'下一句'),before=await next.boundingBox();await latest.getByRole('button',{name:'看中文',exact:true}).click();expect(Math.abs((await next.boundingBox()).y-before.y)).toBeLessThan(2);
   const b=await log.boundingBox(),w=await world.boundingBox(),toggle=await latest.getByRole('button',{name:'收起中文',exact:true}).boundingBox();expect(b.x).toBeGreaterThanOrEqual(w.x);expect(b.x+b.width).toBeLessThanOrEqual(w.x+w.width);expect(toggle.y+toggle.height).toBeLessThanOrEqual(b.y+b.height+1);expect(await log.evaluate(e=>e.scrollWidth<=e.clientWidth)).toBe(true);
-  const guests=world.locator('.cafe-guests');await uncut(guests);const g=await guests.boundingBox();expect(g.y).toBeGreaterThanOrEqual(b.y+b.height);const materialBottom=g.y+g.height;
-  for(const img of await world.locator('.cafe-cast:visible').all()){await uncut(img);const a=await img.boundingBox();expect(a.y).toBeGreaterThanOrEqual(materialBottom);expect(a.y+a.height).toBeLessThanOrEqual(w.y+w.height);expect(a.x).toBeGreaterThanOrEqual(w.x);expect(a.x+a.width).toBeLessThanOrEqual(w.x+w.width);expect(await img.evaluate(el=>{const r=el.getBoundingClientRect();return Math.min(r.width/el.naturalWidth,r.height/el.naturalHeight)*el.naturalHeight;})).toBeGreaterThan(width<600?150:220);}
+  const guests=world.locator('.cafe-guests');await uncut(guests);const g=await guests.boundingBox();expect(g.y).toBeGreaterThanOrEqual(b.y+b.height);
+  for(const img of await world.locator('.cafe-cast:visible').all()){await uncut(img);await expectTheatrePortrait(img,w,b.y+b.height,g);}
   const labels=await world.locator('.dialogue-actor:visible .actor-label').evaluateAll(es=>es.map(e=>{const b=e.getBoundingClientRect();return{x:b.x,width:b.width};}));expect(labels[0].x+labels[0].width<=labels[1].x||labels[1].x+labels[1].width<=labels[0].x).toBe(true);
   await room.screenshot({path:info.outputPath('line-'+(i+1)+'.png')});await latest.getByRole('button',{name:'收起中文',exact:true}).click();await expect(latest.locator('.bcn')).toBeHidden();
   if([3,4,6,7,8,9,10].includes(i)){await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(i+1);await pose(world,i);}if(i<11)await next.click();
  }
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.locator('.completion-stats')).toHaveCount(0);await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(12);await expect(room.locator('.bcn:visible')).toHaveCount(0);await expect(room.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeVisible();await pose(world,11);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await finishStoryAndReturn(room);await expect(room.locator('.completion-stats')).toHaveCount(0);await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(12);await expect(room.locator('.bcn:visible')).toHaveCount(0);await expect(room.getByRole('button',{name:'下一站：故事小侦探',exact:true})).toBeVisible();await pose(world,11);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

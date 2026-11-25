@@ -1,3 +1,4 @@
+const {courseButton,finishStoryAndReturn}=require('../support/course-controls');
 require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -16,13 +17,14 @@ for(const width of [320,1280])test(`${width} 所有无配音单元共用简洁�
   await expect(controls.locator('button:visible')).toHaveCount(1);
   const initial=await controls.getByRole('button').boundingBox(),container=await controls.boundingBox();
   expect(Math.abs(initial.x+initial.width/2-container.x-container.width/2)).toBeLessThan(2);
-  await controls.getByRole('button',{name:pair==='1-2'?'开始故事':'开始看课文',exact:true}).click();
+  await courseButton(controls, pair==='1-2'?'开始故事':"startStory").click();
   await expect(room.getByRole('status')).toHaveText(/^1 \/ \d+$/);
   const next=controls.locator(':scope > button'),reset=controls.locator('.stage-tools button');
   const n=await next.boundingBox(),r=await reset.boundingBox();expect(Math.abs(n.y-r.y)).toBeLessThan(2);expect(r.x+r.width).toBeLessThan(n.x);
   await page.reload();await expect(room.getByRole('status')).toHaveText(/^1 \/ \d+$/);
   while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
-  await room.getByRole('button',{name:pair==='1-2'?'读完了':'完成课文',exact:true}).click();
+  await finishStoryAndReturn(room);
+
   const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish.getByRole('button')).toHaveCount(2);
   const a=await finish.getByRole('button').first().boundingBox(),b=await finish.getByRole('button').last().boundingBox();expect(Math.abs(a.y-b.y)).toBeLessThan(2);expect(a.x+a.width).toBeLessThan(b.x);
   await expect(page.locator('.practice-options input,.practice-options textarea')).toHaveCount(0);
@@ -78,7 +80,7 @@ for(const pair of ['1-2','25-26'])test(`${pair} 原输入版满星升级保留�
    if((pair==='1-2'&&id==='trans'&&i===0)||(pair==='25-26'&&id==='be'&&i===1))await room.getByRole('textbox',{name:'缺少的英文单词',exact:true}).fill(pair==='1-2'?'book':'clean');
    else await select(room,items[i]);
    await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
-   await room.getByRole('button',{name:i===items.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+   await courseButton(room, i===items.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
   }
  }
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧版小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');

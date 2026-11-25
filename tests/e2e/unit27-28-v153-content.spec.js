@@ -1,4 +1,5 @@
 'use strict';
+const {incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,story,activity}=require('../support/unit2728-fivezones');
 test.use({actionTimeout:7000,viewport:{width:320,height:568},...(process.env.UNIT2728_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -13,13 +14,13 @@ test('R2在未答页提供原文，区分物品与邻近参照物',async({page},
  await expect(room.locator('.practice-context')).toContainText('There are some armchairs in the room.');
  await expect(room.locator('.practice-context')).toContainText('The armchairs are near the table.');
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
- await select(room,'the window');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await select(room,'the window');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
 });
 test('E3在未答页保留三种读物的原句，独立整合位置',async({page},info)=>{
  const room=await reach(page,'exam',2);await room.screenshot({path:info.outputPath('exam-03-unanswered.png')});
  for(const line of ['There are some magazines on the television.','There are some newspapers on the table.','There are some books on the stereo.'])await expect(room.locator('.practice-context')).toContainText(line);
  await expect(room.locator('.grammar-model')).toHaveCount(0);await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await page.reload();await expect(room.locator('.practice-context')).toBeVisible();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
- await select(room,'television · stereo · table');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await select(room,'television · stereo · table');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
 });
 test('G2和G11短示范记录实际支持，G10与G12保留撤支持练习',async({page},info)=>{
  test.setTimeout(120000);await activity(page,'grammar',{inspect:async(room,index,state)=>{

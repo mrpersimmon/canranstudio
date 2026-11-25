@@ -1,0 +1,63 @@
+{
+  "asset": "umbrella-yellow-v1",
+  "date": "2026-11-01",
+  "engine": "built-in image_gen.imagegen",
+  "mode": "edit",
+  "reference": "assets/unit3-4-journey/umbrella-purple-v1.png",
+  "sourceGeneratedFile": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-a6b4-7c02-b7d8-1c41ed24eb54/exec-2a295d75-3532-4087-8a79-b3ccbed9ef32.png",
+  "files": {
+    "png": "assets/unit3-4-journey/umbrella-yellow-v1.png",
+    "webp": "assets/unit3-4-journey/umbrella-yellow-v1.webp"
+  },
+  "prompt": "Edit this exact attached umbrella PNG. Make only a canopy color-and-pattern variant. Keep the same canvas dimensions, same framing and position, same arch/curve silhouette, scalloped lower canopy edge, the same dark warm-brown ribs and outline, the exact straight brown wooden shaft, golden collar and left-curving J handle. Keep the same transparent alpha silhouette and complete umbrella tips.\nChange the PURPLE POLKA-DOT canopy to a YELLOW STRIPED canopy: alternate warm golden-yellow and pale cream-yellow BROAD VERTICAL/RADIAL STRIPES that follow the curvature from the top center down toward the scalloped edge. Clearly recognizable as yellow stripes. Remove every cream dot; absolutely NO POLKA DOTS. Soft warm highlights and shadows consistent with the original approved storybook rendering. Do not recolor the wood, alter the shape, move the handle, add objects, add text, add a character, add background or external shadow.\nDeliver a true transparent RGBA PNG, fully transparent outside the existing umbrella contour, opaque canopy and shaft, clean antialiased edges. No white background, black background or baked checkerboard. This is the second, incorrect yellow-striped umbrella in the same lesson and must occupy the same layout as the purple original.",
+  "transparentBackground": true,
+  "metrics": {
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "alphaBoundsThreshold": 16,
+    "alphaBounds": [
+      22,
+      157,
+      1003,
+      1360
+    ],
+    "normalizedBounds": [
+      0.021484375,
+      0.10221354166666667,
+      0.9794921875,
+      0.8854166666666666
+    ],
+    "transparentFraction": 0.7320473988850912,
+    "maxAlpha": 254,
+    "alphaMaskIoU": 0.9959504952893022,
+    "pngBytes": 1176121,
+    "webpBytes": 91322,
+    "pngSha256": "5c4d03c3920967a8a0fe8d6e5f72c8bafcb358809cda0d383358ac64fd6afdca"
+  },
+  "anchorsNormalizedToFullCanvas": {
+    "topFinial": [
+      0.5,
+      0.103
+    ],
+    "shaftX": 0.498,
+    "grip": [
+      0.498,
+      0.75
+    ],
+    "handleBottom": [
+      0.42,
+      0.885
+    ]
+  },
+  "inspection": {
+    "accepted": true,
+    "notes": [
+      "Warm golden-yellow and cream-yellow radial stripes replace all polka dots; brown shaft, golden collar and left J handle retained.",
+      "Alpha-mask IoU vs purple is 0.99595 at threshold 16; same 1024x1536 canvas and nearly identical silhouette.",
+      "Inspected cream-background composite: no visible external halo, no baked checkerboard, all canopy tips and handle complete.",
+      "Only format compression to WebP; no manual geometric or alpha edits."
+    ],
+    "qaComposite": "output/unit34-attendant-qa/yellow-cream-composite.png"
+  }
+}

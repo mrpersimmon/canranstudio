@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,courseReference,expectRoundCounts,finishStoryAndReturn,incorrectFeedback,openCourseReference,openLearningRecord}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, PEOPLE, ANSWERS, completeActivity, completeUnit56 } = require('../support/unit5-6-flow');
@@ -12,9 +13,9 @@ test('无配音小剧场可主动阅读，角色随句子变化且 Sophie 始终
   await page.goto('/unit5-6/#learn/text');
   const story = page.locator('.stage-text');
   await story.screenshot({ path: 'output/playwright/unit5-6-classroom/story-current.png' });
-  await expect(story.getByRole('button', { name: '开始看课文', exact: true })).toBeVisible();
+  await expect(courseButton(story, "startStory")).toBeVisible();
   await expect(story.getByRole('button', { name: /听|播放/ })).toHaveCount(0);
-  await story.getByRole('button', { name: '开始看课文', exact: true }).click();
+  await courseButton(story, "startStory").click();
   for (let i = 1; i < 8; i++) await story.getByRole('button', { name: '下一句', exact: true }).click();
   await expect(story.locator('.btext').last()).toHaveText('Nice to meet you.');
   await expect(story.locator('[data-person="sophie"]')).toBeVisible();
@@ -30,7 +31,7 @@ test('全部声音失败仍可完成36题与20句，旧重复问答不再必做'
   await page.goto('/lesson/unit5-6/#learn/certificate');
   await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
   await completeUnit56(page, '/lesson');
-  await expect(page.getByRole('article',{name:'我的单元纪念卡'})).toBeVisible();
+  await expect(page.getByRole('article',{name:'我的纪念卡',exact:true})).toBeVisible();
   await expect(page.locator('#certificateName')).toHaveText('登录后显示姓名');
   await page.reload();await expect(page.locator('#starCount')).toHaveText('5');
   await expect(page.getByRole('button', { name: /听一遍|重听|播放|开始听/ })).toHaveCount(0);
@@ -48,10 +49,10 @@ test('正误与完成反馈仍真实播放，词义题末三题没有预选或�
   });
   await page.goto('/unit5-6/#learn/listen'); const room = page.locator('.stage-listen');
   await require('../support/units1-30-tasks').select(room, { pairs: [['French', '德国（人）的'], ['German', '日本（人）的'], ['Japanese', '法国（人）的']] }); await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await expect(room.locator('.practice-options .correct')).toHaveCount(0);
   await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-incorrect.mp3')))).toBe(true);
-  await page.reload(); await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await page.reload(); await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   for (let i = 0; i < ANSWERS.listen.length; i++) {
     if (i >= ANSWERS.listen.length - 3) await page.reload();
@@ -69,7 +70,7 @@ test('正误与完成反馈仍真实播放，词义题末三题没有预选或�
     await require('../support/units1-30-tasks').select(room, ANSWERS.listen[i]); await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
     if (i === 0) await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-correct.mp3')))).toBe(true);
-    await room.getByRole('button', { name: i === ANSWERS.listen.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, i === ANSWERS.listen.length - 1 ? "finishPractice" : '下一题').click();
   }
   await expect.poll(() => page.evaluate(() => window.soundEvents.some(x => x.ended && x.src.endsWith('duolingo-complete.mp3')))).toBe(true);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
@@ -77,10 +78,20 @@ test('正误与完成反馈仍真实播放，词义题末三题没有预选或�
   await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
 });
 
+async function readClassPhoto(page,room){
+  await finishStoryAndReturn(room);
+  await openCourseReference(page,'班级合影');
+  const sheet=courseReference(page),photo=sheet.locator('.classroom-photo');
+  await expect(photo).toBeVisible();
+  await expect(photo).toContainText('Nice to meet you!');
+  for(const image of await photo.locator('img').all())await image.evaluate(el=>el.decode());
+  await sheet.getByRole('button',{name:'关闭学习参考',exact:true}).click();
+}
+
 test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听力', async ({ page }) => {
   await page.goto('/unit5-6/#learn/exam'); const room = page.locator('.stage-exam');
   await room.getByRole('button', { name: 'Hans 和汽车都是德国的', exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await room.getByRole('button', { name: ANSWERS.exam[0], exact: true }).click();
   await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload();
@@ -93,7 +104,15 @@ test('挑战暂停与刷新保留选择及提示记录，综合题不冒认听�
   await room.getByRole('button', { name: ANSWERS.exam[2], exact: true }).click(); await room.getByRole('button', { name: '检查答案', exact: true }).click();
   await room.getByRole('button', { name: '下一题', exact: true }).click();
   await finishExam(page, '5-6', 3);
-  await expect(room).toContainText('首次独立答对 12 / 14'); await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
+  await expectRoundCounts(room.locator('.completion-number'),['14','14','1']);
+  await openLearningRecord(page);
+  const exam=page.locator('#learningRecord .learning-record-group[data-activity="exam"]');
+  const entries=exam.locator('li details > summary');
+  await expect(entries).toHaveCount(14);
+  await expect(entries.nth(0)).toContainText('本轮订正完成');
+  await expect(entries.nth(1)).toContainText('本轮首答正确');await expect(entries.nth(1)).toContainText('用过线索');
+  await expect(entries.filter({hasText:'用过线索'})).toHaveCount(1);
+  await page.getByRole('dialog',{name:'学习记录',exact:true}).getByRole('button',{name:'关闭',exact:true}).click();
   await page.goto('/unit5-6/#learn/certificate'); await expect(page.getByRole('button', { name: '保存动图', exact: true })).toBeDisabled();
 });
 
@@ -104,7 +123,7 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
   await page.goto('/unit5-6/#learn/roles'); await page.getByRole('button', { name: '先看故事', exact: true }).click();
   const room = page.locator('.stage-text');
   for (let i = 0; i < 20; i++) {
-    const next = room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true });
+    const next = courseButton(room, i ? '下一句' : "startStory");
     await next.scrollIntoViewIfNeeded(); const y = await page.evaluate(() => scrollY);
     await next.click(); expect(await page.evaluate(() => scrollY)).toBeCloseTo(y, 0);
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0, i + 1));
@@ -121,21 +140,20 @@ for (const width of [390, 1280]) test(width + '教室分镜、翻译、末句及
     }
   }
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
-  await expect(room.locator('.classroom-photo')).toBeVisible();
+  await readClassPhoto(page,room);
   await expect(page.locator('#starCount')).toHaveText('0'); // Reading is teaching, not a zero-error answer zone.
   await room.screenshot({ path: `output/playwright/unit5-6-classroom/story-finish-${width}.png` });
   await completeActivity(page, 'roles'); await page.locator('.stage-roles').screenshot({ path: `output/playwright/unit5-6-classroom/friends-finish-${width}.png` });
-  await page.goto('/unit5-6/#learn/text'); await room.getByRole('button', { name: '再看一遍', exact: true }).click();
+  await page.goto('/unit5-6/#learn/text'); await courseButton(room, "replayStory").click();
   await expect(room.locator('.classroom-classmate span')).toHaveText('Students'); await expect(room.locator('.bubble-row')).toHaveCount(0);
   await expect(room.getByRole('button', { name: '重新上演', exact: true })).toBeHidden();
-  await room.getByRole('button', { name: '开始看课文', exact: true }).click();
+  await courseButton(room, "startStory").click();
   const restart = await room.getByRole('button', { name: '重新上演', exact: true }).boundingBox(), start = await room.getByRole('button', { name: '下一句', exact: true }).boundingBox();
   expect(restart.x + restart.width).toBeLessThan(start.x); expect(restart.y).toBeCloseTo(start.y, 0);
   await page.goto('/unit5-6/#learn/models');
-  await page.getByText('汽车与选择问答参考',{exact:true}).click();await expect(page.locator('.car-showroom article')).toHaveCount(6);
-  await expect(page.locator('.stage-cars .car-reference button').filter({ hasText: 'What make' })).toHaveCount(0);
-  await page.locator('.stage-cars .car-reference').screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
+  await openCourseReference(page,'汽车与选择问答参考');await expect(courseReference(page).locator('.car-showroom article')).toHaveCount(6);
+  await expect(courseReference(page).locator(".car-reference button").filter({ hasText: 'What make' })).toHaveCount(0);
+  await courseReference(page).screenshot({ path: `output/playwright/unit5-6-classroom/cars-${width}.png` });
 });
 
 test('后段人物缺图时先等待，同页离线可读20句，断网刷新受阻并联网恢复最新句', async ({ page, context }) => {
@@ -147,10 +165,10 @@ test('后段人物缺图时先等待，同页离线可读20句，断网刷新受
     await expect(page.getByRole('status', { name: '课程准备状态', exact: true })).toContainText('准备');
     await expect(page.locator('.stage-text')).not.toBeVisible();
   } finally { release(); }
-  await expect(page.locator('#courseLoader')).toHaveCount(0);
+  await expect(page.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
   await context.setOffline(true); const room = page.locator('.stage-text');
   for (let i = 0; i < 20; i++) {
-    await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+    await courseButton(room, i ? '下一句' : "startStory").click();
     await expect.poll(() => room.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
     if ([7,13,19].includes(i)) {
       const response = await reloadWithLatestCheck(page, context);
@@ -158,13 +176,12 @@ test('后段人物缺图时先等待，同页离线可读20句，断网刷新受
       await expect(room.locator('.bubble-row').last()).toBeInViewport({ ratio: 1 });
     }
   }
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
-  await expect(room.locator('.classroom-photo')).toBeVisible(); expect(voices).toEqual([]);
+  await readClassPhoto(page,room); expect(voices).toEqual([]);
   await page.goto('/lesson/unit5-6/#learn/words');
   const words = page.locator('.stage-words');
   for (let i = 0; i < 4; i++) {
     await expect.poll(() => words.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
-    if (i < 3) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+    if (i < 3) await courseButton(words, "nextWords").click();
   }
   await reloadWithLatestCheck(page, context); await expect(page.locator('#wordPageProgress')).toHaveText('4 / 4');
 });

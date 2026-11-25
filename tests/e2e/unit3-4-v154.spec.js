@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {completeStory}=require('../support/unit3-4-flow');
 const flow=require('../support/unit34-v154');
@@ -6,7 +7,7 @@ test.use({browserName:process.env.UNIT34_REVIEW_BROWSER||'chromium',actionTimeou
 test('首页入口与确认纪念卡同一故事，课文不自动显示剧情结论',async({page})=>{
  await page.goto('/');await expect(page.locator('[data-unit="unit3-4"] .featured-art img')).toHaveCount(1);
  await page.goto('/unit3-4/#learn/text');const room=page.locator('.stage-text');
- for(let i=0;i<11;i++)await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+ for(let i=0;i<11;i++)await courseButton(room, i?'下一句':"startStory").click();
  await expect(room.locator('.scene-caption')).toHaveCount(0);
  await expect(room.locator('.bcn:visible')).toHaveCount(0);
 });
@@ -16,24 +17,24 @@ test('理解题未作答时有原文依据',async({page})=>{
 });
 test('真实提交记录已显示的短示范',async({page})=>{
  await page.goto('/unit3-4/#learn/reply');const room=page.locator('.stage-reply');await room.getByRole('button',{name:'This is not my coat.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('看过示范');
+ await openLearningRecord(page);await expect(page.locator('#learningRecord')).toContainText('看过示范');
 });
 for(const width of [320,390,768,1280])test(`${width}宽首页、25词卡、12句课文与三把伞同框可读`,async({page},info)=>{
  test.setTimeout(90000);await page.setViewportSize({width,height:900});await page.goto('/');await page.locator('[data-unit="unit3-4"]').screenshot({path:info.outputPath('home.png')});
  await page.goto('/unit3-4/');await flow.ready(page);await page.locator('#cover').screenshot({path:info.outputPath('cover.png')});
  await page.goto('/unit3-4/#learn/words');const words=page.locator('.stage-words'),names=[];
- for(let i=0;i<5;i++){names.push(...await words.locator('.unit-word strong').allTextContents());await words.locator('.unit-word').first().click();await expect(words.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);if(i===0||i===4)await words.screenshot({path:info.outputPath('words-'+i+'.png')});if(i<4)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();}
+ for(let i=0;i<5;i++){names.push(...await words.locator('.unit-word strong').allTextContents());await words.locator('.unit-word').first().click();await expect(words.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);if(i===0||i===4)await words.screenshot({path:info.outputPath('words-'+i+'.png')});if(i<4)await courseButton(words, "nextWords").click();}
  expect(names).toHaveLength(25);expect(new Set(names).size).toBe(25);
  await page.goto('/unit3-4/#learn/text');const room=page.locator('.stage-text');
  for(let i=0;i<12;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));
+  await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,i+1));
   await expect(room.locator('.scene-caption')).toHaveCount(0);await expect(room.locator('.bcn:visible')).toHaveCount(0);
   const image=room.locator('.umbrella-prop>img');await expect(image).toHaveAttribute('data-umbrella-artwork',i>=10?'umbrella-held':i>=9?'umbrella':i>=7?'umbrella-yellow':'umbrella-red');
-  const world=await room.locator('.cloakroom-props').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width+1);expect(log.y+log.height).toBeLessThanOrEqual(world.y+world.height);
+  const world=await room.locator('.dialogue-stage').boundingBox(),log=await room.locator('.dialogue-log').boundingBox();expect(log.x).toBeGreaterThanOrEqual(world.x);expect(log.x+log.width).toBeLessThanOrEqual(world.x+world.width+1);expect(log.y+log.height).toBeLessThanOrEqual(world.y+world.height);
   if([0,4,7,9,10].includes(i)){await room.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();await expect(room.locator('.bcn').last()).toBeVisible();await room.locator('.cloakroom-props').screenshot({path:info.outputPath('story-'+i+'.png')});await room.locator('.bubble-row').last().getByRole('button',{name:'收起中文',exact:true}).click();}
   if(i===8){await page.reload();await flow.ready(page);await expect(room.locator('.btext span')).toHaveText(flow.DIALOGUE.slice(0,9));}
  }
- await room.getByRole('button',{name:'完成课文',exact:true}).click();
+ await courseButton(room, "finishStory").click();
  await flow.activity(page,'manners',{capture:async(host,i,state)=>{if(i===3)await host.screenshot({path:info.outputPath('counter-'+state+'.png')});}});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);await page.goto('/unit3-4/#learn/certificate');await page.locator('.stage-certificate .story-award-paper').screenshot({path:info.outputPath('card.png')});
 });

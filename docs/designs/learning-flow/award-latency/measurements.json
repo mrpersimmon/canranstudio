@@ -1,0 +1,1207 @@
+{
+  "date": "2026-11-17",
+  "deployment": "review-20261117-6c39e798fd56",
+  "unit": "unit1-2",
+  "engine": "Chromium",
+  "measurements": [
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scenario": "results:first-star",
+      "modalOpenMs": 35.6,
+      "flightStartMs": 481.2,
+      "dismissibleMs": 2100.1,
+      "requestStartMs": 426.6,
+      "serverConfirmationMs": 478.4,
+      "lastFontReadyRelativeToFinishMs": -1995.8,
+      "requests": [
+        {
+          "startMs": 481.4,
+          "durationMs": 54.8,
+          "responseBytes": 185
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "first-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 22.3,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.1,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.8,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 35.6,
+          "label": "first-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 426.6,
+          "label": "first-star",
+          "id": 76,
+          "bytes": 11314
+        },
+        {
+          "kind": "sync-headers",
+          "t": 478.1,
+          "label": "first-star",
+          "id": 76,
+          "duration": 51.40000009536743,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 478.4,
+          "label": "first-star",
+          "zones": [
+            "listen"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 481.0,
+          "label": "first-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 481.2,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 481.4,
+          "label": "first-star",
+          "id": 76,
+          "duration": 54.799999713897705,
+          "bytes": 185
+        },
+        {
+          "kind": "reveal",
+          "t": 1550.7,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2100.1,
+          "label": "first-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scenario": "results:replay",
+      "modalOpenMs": 30.5,
+      "flightStartMs": null,
+      "dismissibleMs": 263.6,
+      "requestStartMs": null,
+      "serverConfirmationMs": null,
+      "lastFontReadyRelativeToFinishMs": -6998.4,
+      "requests": [],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "replay"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 17.8,
+          "label": "replay",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 30.5,
+          "label": "replay",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "replay",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 263.6,
+          "label": "replay",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "replay",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scenario": "results:second-star",
+      "modalOpenMs": 39.4,
+      "flightStartMs": 503.5,
+      "dismissibleMs": 2121.7,
+      "requestStartMs": 433.0,
+      "serverConfirmationMs": 500.6,
+      "lastFontReadyRelativeToFinishMs": -10457.1,
+      "requests": [
+        {
+          "startMs": 503.7,
+          "durationMs": 70.7,
+          "responseBytes": 280
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "second-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.8,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 28.2,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 29.0,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 39.4,
+          "label": "second-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 433.0,
+          "label": "second-star",
+          "id": 123,
+          "bytes": 28357
+        },
+        {
+          "kind": "sync-headers",
+          "t": 500.3,
+          "label": "second-star",
+          "id": 123,
+          "duration": 67.30000019073486,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 500.6,
+          "label": "second-star",
+          "zones": [
+            "listen",
+            "roles"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 503.2,
+          "label": "second-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 503.5,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 503.7,
+          "label": "second-star",
+          "id": 123,
+          "duration": 70.7000002861023,
+          "bytes": 280
+        },
+        {
+          "kind": "reveal",
+          "t": 1572.1,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2121.7,
+          "label": "second-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "scenario": "results:first-star",
+      "modalOpenMs": 38.0,
+      "flightStartMs": 481.3,
+      "dismissibleMs": 2101.8,
+      "requestStartMs": 426.8,
+      "serverConfirmationMs": 476.9,
+      "lastFontReadyRelativeToFinishMs": -1617.3,
+      "requests": [
+        {
+          "startMs": 481.5,
+          "durationMs": 54.7,
+          "responseBytes": 185
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "first-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 22.6,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.0,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.8,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 38.0,
+          "label": "first-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 426.8,
+          "label": "first-star",
+          "id": 76,
+          "bytes": 11314
+        },
+        {
+          "kind": "sync-headers",
+          "t": 476.3,
+          "label": "first-star",
+          "id": 76,
+          "duration": 49.5,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 476.9,
+          "label": "first-star",
+          "zones": [
+            "listen"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 480.9,
+          "label": "first-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 481.3,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 481.5,
+          "label": "first-star",
+          "id": 76,
+          "duration": 54.700000286102295,
+          "bytes": 185
+        },
+        {
+          "kind": "reveal",
+          "t": 1552.6,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2101.8,
+          "label": "first-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "scenario": "results:replay",
+      "modalOpenMs": 22.8,
+      "flightStartMs": null,
+      "dismissibleMs": 261.7,
+      "requestStartMs": null,
+      "serverConfirmationMs": null,
+      "lastFontReadyRelativeToFinishMs": -6641.7,
+      "requests": [],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "replay"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 14.9,
+          "label": "replay",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 22.8,
+          "label": "replay",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "replay",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 261.7,
+          "label": "replay",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "replay",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "scenario": "results:second-star",
+      "modalOpenMs": 35.9,
+      "flightStartMs": 498.7,
+      "dismissibleMs": 2116.4,
+      "requestStartMs": 431.6,
+      "serverConfirmationMs": 496.4,
+      "lastFontReadyRelativeToFinishMs": -10086.5,
+      "requests": [
+        {
+          "startMs": 499.1,
+          "durationMs": 67.5,
+          "responseBytes": 280
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "second-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 22.2,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 24.5,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 25.2,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 35.9,
+          "label": "second-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 431.6,
+          "label": "second-star",
+          "id": 123,
+          "bytes": 28357
+        },
+        {
+          "kind": "sync-headers",
+          "t": 496.1,
+          "label": "second-star",
+          "id": 123,
+          "duration": 64.5,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 496.4,
+          "label": "second-star",
+          "zones": [
+            "listen",
+            "roles"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 498.5,
+          "label": "second-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 498.7,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 499.1,
+          "label": "second-star",
+          "id": 123,
+          "duration": 67.5,
+          "bytes": 280
+        },
+        {
+          "kind": "reveal",
+          "t": 1566.7,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2116.4,
+          "label": "second-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "results:first-star",
+      "modalOpenMs": 33.3,
+      "flightStartMs": 488.5,
+      "dismissibleMs": 2113.6,
+      "requestStartMs": 430.2,
+      "serverConfirmationMs": 485.4,
+      "lastFontReadyRelativeToFinishMs": -1733.4,
+      "requests": [
+        {
+          "startMs": 488.6,
+          "durationMs": 58.5,
+          "responseBytes": 185
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "first-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 18.2,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 20.6,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 21.3,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 33.3,
+          "label": "first-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 430.2,
+          "label": "first-star",
+          "id": 76,
+          "bytes": 11314
+        },
+        {
+          "kind": "sync-headers",
+          "t": 485.1,
+          "label": "first-star",
+          "id": 76,
+          "duration": 55,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 485.4,
+          "label": "first-star",
+          "zones": [
+            "listen"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 488.4,
+          "label": "first-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 488.5,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 488.6,
+          "label": "first-star",
+          "id": 76,
+          "duration": 58.5,
+          "bytes": 185
+        },
+        {
+          "kind": "reveal",
+          "t": 1565.0,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2113.6,
+          "label": "first-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "results:replay",
+      "modalOpenMs": 20.8,
+      "flightStartMs": null,
+      "dismissibleMs": 258.5,
+      "requestStartMs": null,
+      "serverConfirmationMs": null,
+      "lastFontReadyRelativeToFinishMs": -6789.6,
+      "requests": [],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0,
+          "label": "replay"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 11.9,
+          "label": "replay",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 20.8,
+          "label": "replay",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "replay",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 258.5,
+          "label": "replay",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "replay",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "results:second-star",
+      "modalOpenMs": 26.4,
+      "flightStartMs": 493.2,
+      "dismissibleMs": 2124.8,
+      "requestStartMs": 425.1,
+      "serverConfirmationMs": 491.2,
+      "lastFontReadyRelativeToFinishMs": -10255.6,
+      "requests": [
+        {
+          "startMs": 493.3,
+          "durationMs": 68.2,
+          "responseBytes": 280
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0,
+          "label": "second-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 11.7,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 16,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 17.3,
+          "label": "second-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 26.4,
+          "label": "second-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 425.1,
+          "label": "second-star",
+          "id": 123,
+          "bytes": 28357
+        },
+        {
+          "kind": "sync-headers",
+          "t": 490.5,
+          "label": "second-star",
+          "id": 123,
+          "duration": 65.40000009536743,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 491.2,
+          "label": "second-star",
+          "zones": [
+            "listen",
+            "roles"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 492.9,
+          "label": "second-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 493.2,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 493.3,
+          "label": "second-star",
+          "id": 123,
+          "duration": 68.19999980926514,
+          "bytes": 280
+        },
+        {
+          "kind": "reveal",
+          "t": 1575.4,
+          "label": "second-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 2124.8,
+          "label": "second-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "direct:first-star",
+      "modalOpenMs": 35.8,
+      "flightStartMs": 1822.1,
+      "dismissibleMs": 3450.2,
+      "requestStartMs": 424.9,
+      "serverConfirmationMs": 1819.8,
+      "lastFontReadyRelativeToFinishMs": -1772.9,
+      "requests": [
+        {
+          "startMs": 1822.4,
+          "durationMs": 1397.5,
+          "responseBytes": 185
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "first-star"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 20.0,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 22.7,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 24.5,
+          "label": "first-star",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 35.8,
+          "label": "first-star",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 424.9,
+          "label": "first-star",
+          "id": 76,
+          "bytes": 11314
+        },
+        {
+          "kind": "sync-headers",
+          "t": 1819.5,
+          "label": "first-star",
+          "id": 76,
+          "duration": 1394.5999999046326,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 1819.8,
+          "label": "first-star",
+          "zones": [
+            "listen"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 1822.0,
+          "label": "first-star",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 1822.1,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 1822.4,
+          "label": "first-star",
+          "id": 76,
+          "duration": 1397.5,
+          "bytes": 185
+        },
+        {
+          "kind": "reveal",
+          "t": 2900.0,
+          "label": "first-star",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 3450.2,
+          "label": "first-star",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "direct:replay",
+      "modalOpenMs": 28.7,
+      "flightStartMs": null,
+      "dismissibleMs": 267.0,
+      "requestStartMs": null,
+      "serverConfirmationMs": null,
+      "lastFontReadyRelativeToFinishMs": -8654.8,
+      "requests": [],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "replay"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 21.0,
+          "label": "replay",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 28.7,
+          "label": "replay",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "replay",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 267.0,
+          "label": "replay",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "replay",
+          "flight": false
+        }
+      ]
+    },
+    {
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "scenario": "slow:slow-sync",
+      "modalOpenMs": 46.2,
+      "flightStartMs": 4553.1,
+      "dismissibleMs": 6170.3,
+      "requestStartMs": 435.7,
+      "serverConfirmationMs": 4549.4,
+      "lastFontReadyRelativeToFinishMs": -3093.8,
+      "requests": [
+        {
+          "startMs": 4553.4,
+          "durationMs": 4117.7,
+          "responseBytes": 375
+        }
+      ],
+      "events": [
+        {
+          "kind": "finish-click",
+          "t": 0.0,
+          "label": "slow-sync"
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 29.1,
+          "label": "slow-sync",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 32.2,
+          "label": "slow-sync",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 33.9,
+          "label": "slow-sync",
+          "state": "pending",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 46.2,
+          "label": "slow-sync",
+          "open": true,
+          "phase": "pending",
+          "cardKind": "pending",
+          "flight": false
+        },
+        {
+          "kind": "sync-send",
+          "t": 435.7,
+          "label": "slow-sync",
+          "id": 80,
+          "bytes": 72389
+        },
+        {
+          "kind": "injected-delay",
+          "t": 435.9,
+          "label": "slow-sync",
+          "ms": 4000
+        },
+        {
+          "kind": "sync-headers",
+          "t": 4549.0,
+          "label": "slow-sync",
+          "id": 80,
+          "duration": 4113.299999713898,
+          "status": 200
+        },
+        {
+          "kind": "lesson-awards:synced",
+          "t": 4549.4,
+          "label": "slow-sync",
+          "zones": [
+            "listen",
+            "roles",
+            "trans"
+          ]
+        },
+        {
+          "kind": "lesson-sync:status",
+          "t": 4553.0,
+          "label": "slow-sync",
+          "state": "synced",
+          "zones": []
+        },
+        {
+          "kind": "reveal",
+          "t": 4553.1,
+          "label": "slow-sync",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": true
+        },
+        {
+          "kind": "sync-body",
+          "t": 4553.4,
+          "label": "slow-sync",
+          "id": 80,
+          "duration": 4117.699999809265,
+          "bytes": 375
+        },
+        {
+          "kind": "reveal",
+          "t": 5621.0,
+          "label": "slow-sync",
+          "open": true,
+          "phase": "animating",
+          "cardKind": "earned",
+          "flight": false
+        },
+        {
+          "kind": "reveal",
+          "t": 6170.3,
+          "label": "slow-sync",
+          "open": true,
+          "phase": "ready",
+          "cardKind": "earned",
+          "flight": false
+        }
+      ]
+    }
+  ],
+  "sourceSha256": {
+    "core/award-reveal.js": "afc654f7464a4e6ed70c016cc49a47bcd732b7a494a8f7f8c26f36a1ece68571",
+    "core/unit-awards.js": "0cae947c161fa0e9a5293afc73353e91419b3fedacd6e3c1f5f6433ec3c2146f",
+    "server/public/access-client.js": "7f1aa3a1a70b0d454b0493c6d9baab0d143b5be1d1f9c20f44e0517bf1a5ee37",
+    "unit1-2/completion.js": "892a4cbebade4da4e26870eeb03d32ba06e022edbfcb3160cb776ab040e4496f"
+  },
+  "businessCodeChanged": false,
+  "publishedFix": false,
+  "diagnosticAccountsDisabled": 4,
+  "physicalAndroidMeasured": false,
+  "limitations": [
+    "Default and verified workstation routes are not the user phone network.",
+    "The 4000ms latency experiment deliberately delays a real request and never forges a response or award.",
+    "DOM open timing is not a separate optical first-paint measurement.",
+    "No high-concurrency or real-phone CPU benchmark."
+  ]
+}

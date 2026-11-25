@@ -1,0 +1,245 @@
+{
+  "measuredOn": "2026-11-20",
+  "unit": "unit1-2",
+  "metric": "one sample per state and viewport, milliseconds from course click; do not pool into p95",
+  "livePreviewRelease": "review-local-stars-20261117-357a3334ca26",
+  "localSource": "codex/book-version working tree, uncommitted",
+  "local": [
+    {
+      "site": "isolated loopback",
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 11215,
+          "decodes": 258,
+          "decodeActiveMs": 556,
+          "questionMs": 11398
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 8030,
+          "decodes": 258,
+          "decodeActiveMs": 528,
+          "questionMs": 8196
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1162,
+          "decodes": 160,
+          "decodeActiveMs": 252,
+          "questionMs": 1229
+        }
+      ]
+    },
+    {
+      "site": "isolated loopback",
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 11430,
+          "decodes": 258,
+          "decodeActiveMs": 557,
+          "questionMs": 11598
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 8297,
+          "decodes": 258,
+          "decodeActiveMs": 545,
+          "questionMs": 8464
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1179,
+          "decodes": 160,
+          "decodeActiveMs": 251,
+          "questionMs": 1246
+        }
+      ]
+    },
+    {
+      "site": "isolated loopback",
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 11463,
+          "decodes": 258,
+          "decodeActiveMs": 539,
+          "questionMs": 11647
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 8231,
+          "decodes": 258,
+          "decodeActiveMs": 529,
+          "questionMs": 8397
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1162,
+          "decodes": 160,
+          "decodeActiveMs": 252,
+          "questionMs": 1230
+        }
+      ]
+    }
+  ],
+  "preview": [
+    {
+      "site": "preview.canranstudio.cn",
+      "device": "iPhone SE",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 26876,
+          "decodes": 258,
+          "decodeActiveMs": 571,
+          "questionMs": 27044
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 12795,
+          "decodes": 258,
+          "decodeActiveMs": 553,
+          "questionMs": 12964
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1360,
+          "decodes": 160,
+          "decodeActiveMs": 235,
+          "questionMs": 1428
+        }
+      ]
+    },
+    {
+      "site": "preview.canranstudio.cn",
+      "device": "iPhone 14 Pro Max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 26313,
+          "decodes": 258,
+          "decodeActiveMs": 573,
+          "questionMs": 26480
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 12080,
+          "decodes": 258,
+          "decodeActiveMs": 565,
+          "questionMs": 12247
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1409,
+          "decodes": 160,
+          "decodeActiveMs": 240,
+          "questionMs": 1477
+        }
+      ]
+    },
+    {
+      "site": "preview.canranstudio.cn",
+      "device": "iPhone 16 Pro Max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      },
+      "engine": "151.0.7922.34",
+      "network": "Chromium page CDP 10 Mbps / 150 ms; worker traffic is not independently shaped",
+      "samples": [
+        {
+          "kind": "fresh-login",
+          "fontsAtClick": 0,
+          "wordPageTaps": 4,
+          "wordsMs": 26613,
+          "decodes": 258,
+          "decodeActiveMs": 575,
+          "questionMs": 26778
+        },
+        {
+          "kind": "directory-ready",
+          "fontsAtClick": 5,
+          "wordPageTaps": 4,
+          "wordsMs": 12646,
+          "decodes": 258,
+          "decodeActiveMs": 539,
+          "questionMs": 12813
+        },
+        {
+          "kind": "revisit",
+          "fontsAtClick": 0,
+          "wordPageTaps": 1,
+          "wordsMs": 1330,
+          "decodes": 160,
+          "decodeActiveMs": 225,
+          "questionMs": 1395
+        }
+      ]
+    }
+  ]
+}

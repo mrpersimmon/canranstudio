@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,finishStoryAndReturn,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { ANSWERS, DIALOGUE } = require('../support/unit3-4-flow');
 test.use({ reducedMotion: 'reduce' });
@@ -17,7 +18,10 @@ for (const width of [390, 1280]) test(width + '衣帽间人物站在前景，正
   const visitor = stage.locator('.counter-visitor > img');
   const person = await visitor.boundingBox(), scene = await stage.boundingBox();
   // These detect the actual reported small/floating actors, not CSS class names.
-  expect(person.height).toBeGreaterThanOrEqual(width < 600 ? 126 : 190);
+  const actor=await stage.locator('.counter-visitor').boundingBox();
+  await expect(visitor).toHaveAttribute('src',/visitor-v1\.webp$/);
+  expect(actor.height,'柜台场景预留上部对白，人物至少占其高度的一半').toBeGreaterThanOrEqual(scene.height*.5);
+  expect(person.height,'人物与其下的姓名共同填满人物栏').toBeGreaterThanOrEqual(actor.height-19);
   expect(scene.y + scene.height - person.y - person.height).toBeLessThan(70);
   await capture(room, 'counter-start-' + width + '.png');
   const positions = [];
@@ -29,7 +33,7 @@ for (const width of [390, 1280]) test(width + '衣帽间人物站在前景，正
       positions.push(before);
       await room.getByRole('button', { name: 'Sorry, sir.', exact: true }).click();
       await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       expect((await stage.locator('.counter-item img').boundingBox()).x).toBeCloseTo(before.x, 0);
       await expect(stage).not.toContainText('客人已领回');
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -46,7 +50,7 @@ for (const width of [390, 1280]) test(width + '衣帽间人物站在前景，正
       await page.reload(); await expect(stage).toContainText('客人已领回');
       await capture(room, 'counter-returned-' + width + '.png');
     } else await capture(room, 'counter-step-' + (i + 1) + '-' + width + '.png');
-    await room.getByRole('button', { name: i === 3 ? '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, i === 3 ? "finishPractice" : '下一题').click();
   }
   await capture(room, 'counter-finish-' + width + '.png');
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
@@ -61,7 +65,7 @@ for (const width of [390, 1280]) test(width + '课文的柜台与人物、短长
   const room = page.locator('.stage-text');
   let waitingX;
   for (let i = 0; i < DIALOGUE.length; i++) {
-    await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+    await courseButton(room, i ? '下一句' : "startStory").click();
     const umbrella = room.locator('.umbrella-prop img');
     if (i === 9) {
       waitingX = (await umbrella.boundingBox()).x;
@@ -82,9 +86,9 @@ for (const width of [390, 1280]) test(width + '课文的柜台与人物、短长
       await capture(room, 'story-line-' + (i + 1) + '-' + width + '.png');
     }
   }
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
+  await finishStoryAndReturn(room);
   await capture(room, 'story-finish-' + width + '.png');
-  await room.getByRole('button', { name: '再看一遍', exact: true }).click();
+  await courseButton(room, "replayStory").click();
   await expect(room.locator('.cloakroom-props')).not.toContainText('客人确认：是这把');
 });
 
@@ -101,7 +105,7 @@ test('缓存入口刷新后显示已读末句，场景和阅读位置保持一�
   await page.goto('/lesson/unit3-4/#learn/text');
   const room = page.locator('.stage-text');
   await expect(page.locator('#courseLoader')).toHaveCount(0);
-  for (let i = 0; i < 8; i++) await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+  for (let i = 0; i < 8; i++) await courseButton(room, i ? '下一句' : "startStory").click();
   await expect(room.locator('.bubble-row').last()).toContainText('Is this your umbrella?');
   await page.reload();
   await expect(page.locator('#courseLoader')).toHaveCount(0);

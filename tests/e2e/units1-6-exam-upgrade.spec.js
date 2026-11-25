@@ -1,4 +1,5 @@
 'use strict';
+const {expectNoVerdict}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
 const { EXAMS, choose, finishExam } = require('../support/units1-6-exam');
@@ -63,7 +64,7 @@ for (const unit of units) {
     await choose(room, unit.id === '1-2' ? { answer: 'Yes, it is. Thank you very much.' } : questions[1]); upgrade(); await page.reload();
     if(unit.id==='1-2'){await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.practice-options button[aria-pressed=true]')).toHaveCount(0);return;}
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
-    await expect(room.getByRole('status')).toBeEmpty();
+    await expectNoVerdict(room.getByRole('status'));
     await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload();
     await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
     if (Array.isArray(questions[1].answer)) await expect(room.getByRole('group', { name: '已选词块', exact: true }).getByRole('button')).toHaveCount(6);

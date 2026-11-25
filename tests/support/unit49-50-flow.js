@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const { expect } = require('@playwright/test');
 const { submitSubject } = require('./l49-subject-flow');
 const subjectAnswers = ['第三人称单数','第三人称复数','第三人称单数','第一人称','第二人称','第三人称单数','第三人称复数','第一人称','第三人称复数','第三人称单数','第三人称复数'];
@@ -33,9 +34,9 @@ async function completeUnit(page, { basePath = '/', realAudio = false } = {}) {
   await group('listen', words, words.map((word, index) => index));
   await page.goto(basePath + 'unit49-50/#learn/text');
   const story = page.locator('.stage-text');
-  await story.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(story, "startVoicedStory").click();
   for (let i = 1; i < 11; i++) await story.getByRole('button', { name: '下一句', exact: true }).click();
-  await story.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  await courseButton(story, "finishVoicedStory").click();
   await group('roles', ['steak', 'Beef, please.', "To tell you the truth, Mrs. Bird, I don't like chicken either.", 'Lamb, please.']);
   await group('doare', ['Do you like meat?', 'Are you a teacher?', 'Does Penny like tomatoes?', 'Do you like peas?', 'Does she want peaches?']);
   await group('give', ['Mrs. Bird', 'that piece', 'Give that piece to me, please.', ['Give', 'that piece', 'to', 'me,', 'please.']]);

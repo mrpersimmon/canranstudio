@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,readyCourse}=require('../support/course-controls');
 // Frozen paper certificates used the learner's local date. Generate the
 // historical original in Shanghai; compare its current copy on a UTC device.
 const {test,expect,devices}=require('@playwright/test');
@@ -13,7 +14,7 @@ for(const kind of ['card','certificate'])test(`同库更新与跨设备：原${k
  const root=path.resolve(__dirname,'../..'),temp=await fs.mkdtemp(path.join(os.tmpdir(),'canran-unit12-v154-')),oldRoot=path.join(temp,'site'),dataDir=path.join(temp,'accounts');
  const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1),ports=require('../support/login-test-ports'),origin=ports.origin(4271);let server,first,second;
  const read=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit1-2:learning:v1')));
- const ready=async p=>expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+ const ready=async p=>readyCourse(p);
  const stop=async()=>{if(server){await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});server=null;}};
  const start=async old=>{server=await createApp({root:old?oldRoot:root,dataDir,origin,basePath:base});await new Promise(resolve=>server.listen(ports.port(4271),'127.0.0.1',resolve));};
  try{
@@ -32,8 +33,8 @@ for(const kind of ['card','certificate'])test(`同库更新与跨设备：原${k
   if(kind==='card')await flow.complete(p,'1-2',prefix);else{
    // The frozen 2026-10-06 helper assumed a 5-second load. Keep its independent
    // answers; explicitly wait for the historical page's real ready boundary.
-   await p.goto(base+'unit1-2/#learn/text');await ready(p);const text=p.locator('.stage-text');await text.getByRole('button',{name:'开始看课文',exact:true}).click();while(await text.getByRole('button',{name:'下一句',exact:true}).isVisible())await text.getByRole('button',{name:'下一句',exact:true}).click();await text.getByRole('button',{name:'完成课文',exact:true}).click();
-   for(const[id,answers]of Object.entries(old25.ANSWERS['1-2'])){await p.goto(base+'unit1-2/#learn/'+id);await ready(p);const room=p.locator('.stage-'+id);for(let i=0;i<answers.length;i++){await old25.select(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i<answers.length-1?'下一题':id==='exam'?'查看本次记录':'完成这一站',exact:true}).click();}}
+   await p.goto(base+'unit1-2/#learn/text');await ready(p);const text=p.locator('.stage-text');await courseButton(text, "startStory").click();while(await text.getByRole('button',{name:'下一句',exact:true}).isVisible())await text.getByRole('button',{name:'下一句',exact:true}).click();await courseButton(text, "finishStory").click();
+   for(const[id,answers]of Object.entries(old25.ANSWERS['1-2'])){await p.goto(base+'unit1-2/#learn/'+id);await ready(p);const room=p.locator('.stage-'+id);for(let i=0;i<answers.length;i++){await old25.select(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await courseButton(room, i<answers.length-1?'下一题':id==='exam'?"finishExam":"finishPractice").click();}}
    await p.goto(base+'unit1-2/#learn/certificate');await ready(p);await p.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('原证姓名');await p.clock.setFixedTime(new Date('2026-10-23T16:10:00.000Z'));await p.getByRole('button',{name:'领取单元证书',exact:true}).click();
   }
   await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');const before=await read(p);if(kind==='certificate')expect(before.activity.unitCertificateIssuedAt).toBe('2026-10-23T16:10:00.000Z');const date=await p.locator('#certificateDate').innerText(),ext=kind==='card'?'gif':'png';

@@ -7,7 +7,7 @@ function storyProps(){
  const cast=node('div','park-cast'),family=picture('cast-standing','妈妈关心站在长椅旁的两个孩子','cast-image family-image');
  const labels=node('div','park-labels');for(const[id,name]of [['mother','妈妈'],['girl','女孩'],['boy','男孩']]){const actor=node('div','dialogue-actor '+id);actor.dataset.actor=id;actor.append(node('span','actor-label',name));labels.append(actor);}
  cast.append(family,labels);const vendor=picture('cast-vendor','卖冰淇淋的人站在小车后面','cast-image park-vendor');vendor.hidden=true;
- element.append(node('p','park-location','公园'),vendor,cast);
+ element.append(vendor,cast);
  return{element,update(index){
   const phase=index<3?'standing':index<7?'resting':index===7?'offering':'received';element.dataset.phase=phase;
   const assets={standing:['cast-standing','妈妈关心站在长椅旁的两个孩子'],resting:['cast-resting','孩子们坐在长椅上，双手空着，仍显得疲倦'],offering:['cast-offer','妈妈拿着两份冰淇淋，孩子们伸出空手'],received:['cast-received','两个孩子各拿着一份冰淇淋，妈妈双手空着']};

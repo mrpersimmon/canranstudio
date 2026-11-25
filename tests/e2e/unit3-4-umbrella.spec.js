@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectRoundCounts,finishStoryAndReturn}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, ANSWERS } = require('../support/unit3-4-flow');
@@ -22,7 +23,7 @@ for (const width of [390, 1280]) test(width + '三次询问对应不同的雨伞
   const room = page.locator('.stage-text');
   const before = await room.locator('.umbrella-prop > img').boundingBox();
   for (let i = 0; i < DIALOGUE.length; i++) {
-    await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+    await courseButton(room, i ? '下一句' : "startStory").click();
     await expect(room.locator('.bubble-row').last()).toContainText(DIALOGUE[i]);
     // Literal phases come from the approved storyboard, not the application's data.
     const design = i < 7 ? '红色纯色' : i < 9 ? '黄色条纹' : '紫色圆点';
@@ -42,11 +43,11 @@ for (const width of [390, 1280]) test(width + '三次询问对应不同的雨伞
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
+  await finishStoryAndReturn(room);
   await expectUmbrella(room, '紫色圆点', true);
-  await room.getByRole('button', { name: '再看一遍', exact: true }).click();
+  await courseButton(room, "replayStory").click();
   await expectUmbrella(room, '红色纯色');
-  await expect(room.getByRole('button', { name: '开始看课文', exact: true })).toBeVisible();
+  await expect(courseButton(room, "startStory")).toBeVisible();
   expect((await room.locator('.umbrella-prop > img').boundingBox()).x).toBeCloseTo(before.x, 0);
 });
 
@@ -72,12 +73,12 @@ test('柜台否认和最后确认展示不同的伞，紫色圆点伞确认后�
       await page.reload();
       await expect(umbrella).toHaveAttribute('alt', '客人领回的紫色圆点雨伞');
     }
-    await room.getByRole('button', { name: i === 3 ? '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, i === 3 ? "finishPractice" : '下一题').click();
   }
   // Finishing now uses the shared result card; the same purple umbrella stays in its artwork.
-  await expect(room.locator('.current-completion>img')).toHaveAttribute('src', '/assets/awards/unit3-4-umbrella.webp');
+  await expect(room.locator('.current-completion>img')).toHaveAttribute('src', '/assets/course-journey/umbrella-counter-v1.webp');
   await expect(room.getByRole('heading', { name: '雨伞领回来了！', exact: true })).toBeVisible();
-  await expect(room.locator('.completion-number')).toHaveText(['3', '4', '1']);
+  await expectRoundCounts(room.locator('.completion-number'), ['3', '4', '1']);
 });
 
 test('换伞动作不阻挡连续前进，重新上演会取消过期的画面动作', async ({ page }) => {
@@ -86,7 +87,7 @@ test('换伞动作不阻挡连续前进，重新上演会取消过期的画面�
   const room = page.locator('.stage-text');
   const next = room.getByRole('button', { name: '下一句', exact: true });
   const prop = room.locator('.umbrella-prop');
-  for (let i = 0; i < 7; i++) await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+  for (let i = 0; i < 7; i++) await courseButton(room, i ? '下一句' : "startStory").click();
   const controls = await next.boundingBox();
   await next.click();
   // Observe the visible browser animation, not a private task-state function.
@@ -102,11 +103,11 @@ test('换伞动作不阻挡连续前进，重新上演会取消过期的画面�
   await expectUmbrella(room, '紫色圆点');
   expect(await prop.evaluate(el => el.getAnimations({ subtree: true }).length)).toBe(0);
   await room.getByRole('button', { name: '重新上演', exact: true }).click();
-  for (let i = 0; i < 8; i++) await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+  for (let i = 0; i < 8; i++) await courseButton(room, i ? '下一句' : "startStory").click();
   await room.getByRole('button', { name: '重新上演', exact: true }).click();
   await expectUmbrella(room, '红色纯色');
   await expect.poll(() => prop.evaluate(el => el.getAnimations({ subtree: true }).length)).toBe(0);
-  await expect(room.getByRole('button', { name: '开始看课文', exact: true })).toBeVisible();
+  await expect(courseButton(room, "startStory")).toBeVisible();
   await expect(room.locator('.dialogue-status')).toHaveText('');
 });
 
@@ -125,7 +126,7 @@ test('第二把伞未准备好时不进课，同页离线换伞完整，断网�
   await expectUmbrella(room, '红色纯色');
   await context.setOffline(true);
   for (let i = 0; i < 12; i++) {
-    await room.getByRole('button', { name: i ? '下一句' : '开始看课文', exact: true }).click();
+    await courseButton(room, i ? '下一句' : "startStory").click();
     const design = i < 7 ? '红色纯色' : i < 9 ? '黄色条纹' : '紫色圆点';
     await expectUmbrella(room, design, i >= 10);
     if ([7, 9, 10].includes(i)) {
@@ -136,7 +137,7 @@ test('第二把伞未准备好时不进课，同页离线换伞完整，断网�
       await expect(page.locator('#starCount')).toHaveText('0');
     }
   }
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
-  await expect(room).toContainText('故事看完了！');
+  await finishStoryAndReturn(room);
+  await expect(room.locator('.dialogue-status')).toContainText('故事看完了');
   await expectUmbrella(room, '紫色圆点', true);
 });

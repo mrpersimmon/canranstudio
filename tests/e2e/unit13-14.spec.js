@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 require('../support/unit1314-legacy').historicalSuite(test);
 const { DIALOGUE, SPEAKERS, ANSWERS, completeStory, completeActivity, completeUnit1314 } = require('../support/unit13-14-flow');
@@ -68,7 +69,7 @@ test('从首页进入新衣配色屋，21张音标词卡可翻义翻页，全程
   const atlas = page.getByRole('region', { name: '配色小图鉴', exact: true });
   const words = ['colour','green','come','upstairs','smart','hat','same','lovely','case','carpet','dog','black','grey','brown','red','yellow','orange','blue','white','dress','new'];
   const phonetics = ['/ˈkʌlɚ/','/ɡriːn/','/kʌm/','/ʌpˈsterz/','/smɑːrt/','/hæt/','/seɪm/','/ˈlʌvli/','/keɪs/','/ˈkɑːrpət/','/dɑːɡ/','/blæk/','/ɡreɪ/','/braʊn/','/red/','/ˈjeloʊ/','/ˈɔːrɪndʒ/','/bluː/','/waɪt/','/dres/','/nuː/'];
-  await expect(atlas.getByRole('button', { name: '上一组词卡', exact: true })).toBeDisabled();
+  await expect(courseButton(atlas, "previousWords")).toBeDisabled();
   for (let p = 0; p < 4; p++) {
     for (let i = p * 6; i < Math.min(p * 6 + 6, words.length); i++) {
       const card = atlas.getByRole('button', { name: words[i], exact: true });
@@ -77,7 +78,7 @@ test('从首页进入新衣配色屋，21张音标词卡可翻义翻页，全程
       await card.click(); await expect(card.locator('.word-meaning')).toBeVisible();
       await card.click(); await expect(card.locator('.word-meaning')).toBeHidden();
     }
-    if (p < 3) await atlas.getByRole('button', { name: '下一组词卡', exact: true }).click();
+    if (p < 3) await courseButton(atlas, "nextWords").click();
   }
   await page.reload(); await expect(atlas).toContainText('4 / 4');
   await atlas.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
@@ -97,14 +98,14 @@ test('17个新词由15个评分任务覆盖，错答可改，最后三题刷新�
     await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
     if(i===0) {
       await room.getByRole('button',{name:'职业',exact:true}).click(); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await room.getByRole('button',{name:'再试一次',exact:true}).click();
     }
     await require('../support/units1-30-tasks').select(room,answer); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===14?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===14?"finishPractice":'下一题').click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
@@ -122,7 +123,7 @@ test('无音频时逐句读完13句原文，历史中文可展开，刷新续读
   const room = page.getByRole('region',{name:'新衣小剧场',exact:true});
   await expect(room).toContainText('Anna 的帽子是什么颜色？');
   for(let i=0;i<DIALOGUE.length;i++) {
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
     await expect(room.locator('.dialogue-actor.is-current')).toHaveText(SPEAKERS[i]);
@@ -136,7 +137,7 @@ test('无音频时逐句读完13句原文，历史中文可展开，刷新续读
   }
   await expect(room.locator('.btext button')).toHaveCount(0);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
+  await courseButton(room, "finishStory").click();
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
   await expect(page.locator('#starCount')).toHaveText('1');
   await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();

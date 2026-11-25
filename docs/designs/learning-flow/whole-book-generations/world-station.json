@@ -1,0 +1,14 @@
+{
+  "id": "world-station",
+  "kind": "world",
+  "references": [
+    "output/whole-book-design/keepsake-reference-24.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty vintage railway station concourse with teal iron arches and broad windows looking onto a distant rail line, warm cream stone and gentle sun, broad empty platform floor at the bottom; NO people, luggage, clocks, numbers, departure boards or readable signs.",
+  "raw": "assets/learning-whole-book-v1/raw/world-station.png",
+  "adopted": "assets/learning-whole-book-v1/world-station-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-ddc65f51-61a8-456e-9fca-4204f76b6622.png"
+}

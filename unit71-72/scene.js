@@ -5,7 +5,7 @@ function picture(name,cls,alt,ext='svg'){const e=node('img',cls);e.src='/assets/
 function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location','Jane 与 Pauline');element.setAttribute('role','group');element.setAttribute('aria-label','Jane与Pauline面对面讲述来电的场景');
  for(const[key,label,side]of [['jane','Jane','left'],['pauline','Pauline','right']]){const wrap=node('div','dialogue-actor visit-actor actor-'+key+' at-'+side);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+(side==='left'?'面向右侧的Pauline':'面向左侧的Jane'),'webp'),node('span','actor-label',label));element.append(wrap);}
- const phone=picture('phone','story-phone','桌上的电话，听筒放在底座上');element.append(location,phone);
+ const phone=picture('phone','story-phone','桌上的电话，听筒放在底座上'),table=node('img','story-prop-surface');table.src='/assets/word-art-v2/sample13-24/table-v1.webp';table.alt='电话旁的小桌';element.append(location,table,phone);
  function update(i){element.dataset.beat=i<0?'intro':i<=1?'count':i<=4?'office':i<=5?'six':i<=9?'nine':'end';}
  update(-1);return{element,update};
 }

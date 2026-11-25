@@ -15,7 +15,9 @@
   }
   function button(label, action, className = 'workspace-back') {
     const node = document.createElement('button'); node.type = 'button'; node.className = className;
-    node.textContent = label; node.addEventListener('click', action); return node;
+    node.textContent = label; node.addEventListener('click', action);
+    if(label.startsWith('下一站：')){node.textContent='下一站';node.setAttribute('aria-label',label);node.dataset.stationNext='true';}
+    return node;
   }
   const surfaces = {
     words: group('#cardGrid'), listen: $('#listenGame'),
@@ -107,10 +109,8 @@
     wordProgress.textContent = (wordPage + 1) + ' / ' + wordPages;
     wordPrevious.disabled = wordPage === 0;
     if(wordPage===wordPages-1){
-      const prefix=document.createElement('span');prefix.textContent='下一站：';
-      const destination=document.createElement('span');destination.textContent='听音寻宝';
-      wordNext.replaceChildren(prefix,destination);wordNext.setAttribute('aria-label','下一站：听音寻宝');
-    }else{wordNext.textContent='下一组词卡';wordNext.removeAttribute('aria-label');}
+      wordNext.textContent='下一站';wordNext.setAttribute('aria-label','下一站：听音寻宝');wordNext.dataset.stationNext='true';
+    }else{wordNext.textContent='下一组词卡';wordNext.removeAttribute('aria-label');delete wordNext.dataset.stationNext;}
     learning.activity('wordPageSize',pageSize); learning.activity('wordPage',wordPage);
   }
   showWordPage();

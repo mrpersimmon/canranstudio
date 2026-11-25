@@ -44,6 +44,7 @@ body.lesson-workspace{height:auto;overflow-x:clip;overflow-anchor:none;padding:0
 .activity-surface{display:block;width:100%;margin:0!important;animation:none!important;transform:none!important}
 .activity-surface.panel,.activity-surface>.panel{border:0;box-shadow:none;border-radius:0;background:transparent;padding:0;margin:0}
 .station-actions{display:flex;justify-content:center;margin:0;padding:0;opacity:1}
+.station-actions .btn[data-station-next],.word-controls .btn[data-station-next]{white-space:nowrap;word-break:keep-all;flex-shrink:0}
 .station-actions .btn{font-size:18px;padding:9px 22px;min-height:50px}
 .lesson-workspace>.wrap:has(#learningNotebook){display:none}
 .lesson-workspace>footer{display:none}

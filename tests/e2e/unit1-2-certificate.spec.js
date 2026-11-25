@@ -1,4 +1,5 @@
 'use strict';
+const {courseToolbar}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {completeUnit12}=require('../support/unit1-2-flow');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -25,7 +26,8 @@ for(const width of [320,390,768,1280])test(`${width} 像素纪念卡居中适度
   const firstDate=await card.locator('time').textContent();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(width);
   const bounds=await card.boundingBox();
-  expect(bounds.width).toBeLessThanOrEqual(width<=540?340:720);
+  expect(bounds.width).toBeLessThanOrEqual(Math.min(width-24,720));
+  expect(bounds.width/bounds.height).toBeCloseTo(1640/880,2);
   expect(Math.abs(bounds.x+bounds.width/2-width/2)).toBeLessThan(2);
   await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
   await expect.poll(()=>card.locator('img').evaluateAll(images=>images.every(image=>image.complete&&image.naturalWidth>0))).toBe(true);
@@ -42,7 +44,7 @@ test('练习纸仍独立打印，不包含纪念卡姓名输入',async({page})=>
   await page.emulateMedia({media:'print'});
   await expect(page.locator('.writing-lines li')).toHaveCount(7);
   for(const line of await page.locator('.writing-lines li').all())await expect(line).toBeVisible();
-  await expect(page.locator('#topbar')).toBeHidden();
+  await expect(courseToolbar(page)).toBeHidden();
   const sheet=await page.pdf({path:'output/playwright/unit1-2-writing.pdf',preferCSSPageSize:true,printBackground:true});
   expect(sheet.toString('latin1').match(/\/Type \/Page\b/g)).toHaveLength(1);
 });

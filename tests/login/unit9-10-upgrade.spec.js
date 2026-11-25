@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 // Frozen paper certificates used the learner's local date. Generate the
 // historical original in Shanghai; compare its current copy on a UTC device.
 const{test,expect}=require('@playwright/test');
@@ -44,11 +45,11 @@ for(const fixture of ['classroom','short-exam'])test(`9–10 ${fixture} 旧服�
   await expect(current.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
   third=await browser.newContext({baseURL:origin,timezoneId:'Asia/Shanghai'});const restored=await third.newPage();await signIn(restored,account,'/');await expect(restored.locator('.course')).toContainText('15 / 15');await restored.goto('/unit9-10/#learn/exam');await expect(restored.locator('.stage-exam')).toContainText('首次独立答对 10 / 10');await restored.goto('/unit9-10/#learn/certificate');await expect(restored.locator('#starCount')).toHaveText('15');await expect(restored.getByRole('textbox',{name:'证书上的名字',exact:true})).toHaveValue('街角小伙伴');
   await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});server=null;await start(root);
-  await restored.goto('/unit9-10/?course-retry=1#learn/certificate');await expect(restored.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(restored.locator('#starCount')).toHaveText('0');
+  await restored.goto('/unit9-10/?course-retry=1#learn/certificate');await readyCourse(restored);await expect(restored.locator('#starCount')).toHaveText('0');
   await restored.locator('.legacy-learning summary').first().click();await expect(restored.locator('.legacy-learning')).toContainText('15 / 15');await expect(restored.locator('.legacy-name')).toContainText('街角小伙伴');expect((await restored.locator('.legacy-issued-date').innerText()).match(/\d+/g)).toEqual(date.match(/\d+/g));
   await restored.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(restored.locator('#legacyCertificateName')).toHaveText('街角小伙伴');await expect(restored.locator('#legacyCertificateDate')).toHaveText(date);
 
   // Only the current renderer is opened on this independent UTC device.
-  await first?.close();first=await browser.newContext({baseURL:origin,timezoneId:'UTC'});const crossZone=await first.newPage();await signIn(crossZone,account,'/');await crossZone.goto('/unit9-10/#learn/certificate');await expect(crossZone.locator('#wordPageProgress')).toBeVisible({timeout:30000});await crossZone.locator('.legacy-learning summary').first().click();await crossZone.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(crossZone.locator('#legacyCertificateDate')).toHaveText(date);
+  await first?.close();first=await browser.newContext({baseURL:origin,timezoneId:'UTC'});const crossZone=await first.newPage();await signIn(crossZone,account,'/');await crossZone.goto('/unit9-10/#learn/certificate');await readyCourse(crossZone);await crossZone.locator('.legacy-learning summary').first().click();await crossZone.getByRole('button',{name:'查看旧证书',exact:true}).click();await expect(crossZone.locator('#legacyCertificateDate')).toHaveText(date);
  }finally{await first?.close();await second?.close();await third?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(directory).startsWith(path.join(os.tmpdir(),'canran-unit910-upgrade-')))throw new Error('Unexpected test cleanup path');await fs.rm(directory,{recursive:true,force:true});}
 });

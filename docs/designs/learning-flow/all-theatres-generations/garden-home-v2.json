@@ -1,0 +1,28 @@
+{
+  "id": "garden-home-v2",
+  "unit": "unit125-126",
+  "transparent": false,
+  "refs": [
+    "assets/unit125-126/keepsake-story-v1.webp",
+    "assets/learning-sample-v2/park-world-v1.webp"
+  ],
+  "prompt": "Create a 3:2 landscape children's storybook garden patio background, same painted style and warm brown outlines as supplied original keepsake and approved park. NO PEOPLE, no text, no UI. One continuous setting: a warm cream cottage wall at FAR RIGHT with an open wooden door occupying x80–100%, a lush garden and distant warm town behind left/center, and a small raised wooden flower bed with living green stems and a few simple flowers in LOWER CENTER around x36–58%, y76–85%. Warm patio paving across the bottom, room for a separately overlaid man at lower left and woman by right-hand door. Leave lower-left x0–30% and lower-right x74–98% unobstructed by extra props. Soft daylight, eye-level shallow perspective, gentle paper texture, all door and flowerbed feet fully inside frame. No extra pots, no drawn watering can or stream (the existing character holds it). No border, no white padding. This complete garden replaces a detached door rectangle and tiny planter icons; keep all these objects spatially connected to one ground plane.",
+  "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2da0cee3-281c-4c31-b58b-9274cc5dd938.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "tool": "built-in image_gen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2da0cee3-281c-4c31-b58b-9274cc5dd938.png",
+  "raw": "assets/learning-whole-book-v1/raw/garden-home-v2.png",
+  "adopted": "assets/unit125-126/garden-home-v2.webp",
+  "status": "adopted-local-preview",
+  "sha256": "0b303260cc378aca2245fc58b8d8004fee363abde9601bb24d633a3d512dad17",
+  "screenEvidence": [
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/first-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/first-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/first-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/middle-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/middle-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/middle-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/last-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/last-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit125-126/last-chrome-iphone-16-pro-max.jpg"
+  ]
+}

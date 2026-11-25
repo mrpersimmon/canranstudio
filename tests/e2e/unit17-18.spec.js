@@ -1,3 +1,4 @@
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {expectPagedTexts}=require('../support/units17-30-exam');
 'use strict';
 // Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
@@ -9,7 +10,7 @@ test('导航进入办公室探访记，先看音标词卡，整卡翻义无需�
   await page.goto('/');await page.getByRole('link',{name:'开始学习：办公室探访记',exact:true}).click();
   await expect(page).toHaveURL(/\/unit17-18\/#learn\/words$/);
   const room=page.getByRole('region',{name:'职业小图鉴',exact:true});
-  await expect(room.getByRole('button',{name:'上一组词卡',exact:true})).toBeDisabled();
+  await expect(courseButton(room, "previousWords")).toBeDisabled();
   const card=room.getByRole('button',{name:'employee',exact:true});await expect(card).toContainText('/ɪmˈplɔɪiː/');
   await card.click();await expect(card.locator('.word-meaning')).toHaveText('雇员；员工');await expect(card).toHaveAccessibleDescription('雇员；员工');
   await card.click();await expect(card.locator('.word-meaning')).toBeHidden();
@@ -57,14 +58,14 @@ test('8个词各一次，错答可改，最后三题刷新不代答，重练清�
     await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
     if(i===0) {
       await room.getByRole('button',{name:'老板',exact:true}).click(); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await room.getByRole('button',{name:'再试一次',exact:true}).click();
     }
     await room.getByRole('button',{name:answer,exact:true}).click(); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===7?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===7?"finishPractice":'下一题').click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
@@ -82,7 +83,7 @@ test('无音频时逐句读完16句原文，历史中文可展开，刷新续读
   const room = page.getByRole('region',{name:'办公室小剧场',exact:true});
   await expect(room).toContainText('Michael 和 Jeremy 是做什么工作的？');
   for(let i=0;i<DIALOGUE.length;i++) {
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
     await expect(room.locator('.scene-speaker')).toHaveCount(SPEAKERS[i]==='孩子们'?2:1);
@@ -96,7 +97,7 @@ test('无音频时逐句读完16句原文，历史中文可展开，刷新续读
   }
   await expect(room.locator('.btext button')).toHaveCount(0);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
+  await courseButton(room, "finishStory").click();
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
   await expect(page.locator('#starCount')).toHaveText('1');
   await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();
@@ -114,7 +115,7 @@ test('30张词卡默认有准确音标，所有图片完整加载，末组有下
     await expect(room.locator('.word-phonetic')).toHaveText(ph.slice(p*6,p*6+6));
     await expect.poll(()=>room.locator('img').evaluateAll(xs=>xs.every(x=>x.complete&&x.naturalWidth>0))).toBe(true);
     for(const card of await room.locator('.unit-word').all()){await card.click();await expect(card.locator('.word-meaning')).toBeVisible();await card.click();await expect(card.locator('.word-meaning')).toBeHidden();}
-    if(p<4)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+    if(p<4)await courseButton(room, "nextWords").click();
   }
   await page.reload();await expect(room).toContainText('5 / 5');await room.getByRole('button',{name:'下一站：单词寻宝',exact:true}).click();await expect(page).toHaveURL(/#learn\/listen$/);expect(audio).toEqual([]);
 });
@@ -147,7 +148,7 @@ test('用完整语境区别不很忙与懒惰，保留教师带读而不冒记�
   await room.getByText('把话放回故事里',{exact:true}).click();await expect(room).toContainText('只表示他们不很忙，不能据此判断他们懒惰');await expect(room).toContainText('不是对某一种职业或性别的评价');
   await completeStory(page);await page.goto('/unit17-18/#learn/roles');const roles=page.locator('.stage-roles');
   for(const answer of ANSWERS.roles.slice(0,2)){await roles.getByRole('button',{name:answer,exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await roles.getByRole('button',{name:'下一题',exact:true}).click();}
-  await roles.getByRole('button',{name:'They',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText('再看看，试一次。');
+  await roles.getByRole('button',{name:'They',exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toHaveText(await incorrectFeedback(roles));
   await expect(roles.locator('.practice-options .is-correct')).toHaveCount(0);
   await roles.getByRole('button',{name:'再试一次',exact:true}).click();await roles.getByRole('button',{name:"aren't very busy",exact:true}).click();await roles.getByRole('button',{name:'检查答案',exact:true}).click();await expect(roles.getByRole('status')).toContainText('答对了！');
 });

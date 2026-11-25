@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
-const tasks=require('../support/units1-30-tasks');
+const tasks=require('../support/current-award-flow');
 const {courseResponse}=require('../support/course-response-faults');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 const options={base:base.replace(/\/$/,''),keepAward:true};
@@ -38,7 +38,7 @@ const reveal=page=>page.getByRole('dialog',{name:/纪念卡结算/});
 const progressPath=base+'api/progress';
 async function heldProgress(page){return (await(await page.request.get('/__test__/course-held')).json()).includes(progressPath);}
 
-test('全对等待真实确认时不闪结算，星飞完成才能关闭，关闭后仅一次结算且复练不改原星',async({page,browser},info)=>{
+test('全对本地飞星不等待真实确认，关闭后仅一次结算且复练不改原星',async({page,browser},info)=>{
  test.setTimeout(120000);
  const student=await openStudent(page,browser,'结算顺序全对班'),p=student.page;
  try{
@@ -49,12 +49,10 @@ test('全对等待真实确认时不闪结算，星飞完成才能关闭，关�
   // This is deliberately before releasing the actual server response, not a
   // longer wait that could hide the score flash once the card finally opens.
   await expect(result(p).locator('.completion-stats')).not.toBeVisible();
-  await expect(reveal(p)).toHaveAttribute('data-phase','pending');
+  await expect(reveal(p).locator('.travelling-star')).toBeVisible();
   await expect(reveal(p)).toHaveAttribute('data-dismissible','false');
   expect((await p.evaluate(()=>window.settlementFrames)).filter(frame=>frame.visible)).toEqual([]);
-  await expect(p.locator('#starCount')).toHaveText('0');
-  await courseResponse(p,progressPath,null,{resumeHeld:true});
-  await expect(reveal(p).locator('.travelling-star')).toBeVisible();
+  await expect(p.locator('#starCount')).toHaveText('1');
   await reveal(p).click({position:{x:8,y:8}});
   await expect(reveal(p)).toBeVisible();
   await expect(result(p).locator('.completion-stats')).not.toBeVisible();
@@ -65,6 +63,7 @@ test('全对等待真实确认时不闪结算，星飞完成才能关闭，关�
   await expect(reveal(p)).not.toBeVisible();
   await expect(result(p)).toHaveAttribute('data-result-motion','finished');
   await expect(result(p).getByRole('button',{name:'再练一轮',exact:true})).toBeVisible();
+  await courseResponse(p,progressPath,null,{resumeHeld:true});await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','synced');await expect(reveal(p)).not.toBeVisible();
   const firstFrames=await p.evaluate(()=>window.settlementFrames);
   expect(firstFrames.filter(frame=>frame.modal&&frame.visible)).toEqual([]);
   expect(playingRuns(firstFrames)).toBe(1);
@@ -82,7 +81,7 @@ test('全对等待真实确认时不闪结算，星飞完成才能关闭，关�
   await p.reload();
   // Refresh first rebuilds the authorized course behind its real paint guard.
   // Read the hydrated ledger only after that existing readiness boundary.
-  await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+  await expect(p.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});
   await expect(p.locator('#starCount')).toHaveText('1');
   await expect(reveal(p)).not.toBeVisible();
   await expect(result(p).locator('.completion-stats')).toBeVisible();
@@ -90,18 +89,19 @@ test('全对等待真实确认时不闪结算，星飞完成才能关闭，关�
  }finally{await courseResponse(p,progressPath).catch(()=>{});await student.context.close();}
 });
 
-test('同步失败可结束结算，恢复后的真实确认只补星不重新弹卡或播放统计',async({page,browser})=>{
+test('同步失败不拦本机得星，恢复后的真实确认不重新弹卡或播放统计',async({page,browser})=>{
  test.setTimeout(90000);
  const student=await openStudent(page,browser,'结算顺序恢复班'),p=student.page;
  try{
   await observe(p,'listen');
   await tasks.activity(p,'3-4','listen',{...options,beforeFinish:()=>courseResponse(p,progressPath,{hold:true})});
   await expect.poll(()=>heldProgress(p)).toBe(true);
-  await expect(reveal(p)).toHaveAttribute('data-phase','pending');
-  await expect(p.locator('#starCount')).toHaveText('0');
+  await expect(reveal(p)).toBeVisible();
+  await expect(p.locator('#starCount')).toHaveText('1');
   await courseResponse(p,progressPath,{status:503,json:{error:'Temporary verification outage'}});
   const finish=p.locator('.stage-listen .completion-card');
   await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','retry');
+  await expect(reveal(p)).toHaveAttribute('data-dismissible','true');await reveal(p).press('Escape');
   await expect(finish).toHaveAttribute('data-result-motion','finished');
   await expect(reveal(p)).not.toBeVisible();
   await courseResponse(p,progressPath);
@@ -127,7 +127,7 @@ test('有错订正后只显示一次结算，不弹纪念卡也不飞星',async(
   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeVisible({timeout:30000});
   await room.locator('.practice-options').getByRole('button').filter({hasNotText:'This is not my coat.'}).first().click();
   await room.getByRole('button',{name:'检查答案',exact:true}).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(room.getByRole('status')).toHaveText('答错了，再试试。');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await tasks.activity(p,'3-4','reply',options);
   await expect(result(p)).toHaveAttribute('data-result-motion','finished');
@@ -141,7 +141,7 @@ test('有错订正后只显示一次结算，不弹纪念卡也不飞星',async(
  }finally{await student.context.close();}
 });
 
-test('旧区补传与当前区一起确认时只飞当前一颗星，不重放旧区奖励',async({page,browser})=>{
+test('离线区和当前区各在本机飞星一次，合并确认不重放奖励',async({page,browser})=>{
  test.setTimeout(120000);
  const student=await openStudent(page,browser,'结算顺序合并确认班'),p=student.page;
  try{
@@ -152,17 +152,18 @@ test('旧区补传与当前区一起确认时只飞当前一颗星，不重放�
   });
   await tasks.activity(p,'3-4','listen',{...options,beforeFinish:()=>courseResponse(p,progressPath,{status:503,json:{error:'Temporary verification outage'}})});
   await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','retry');
+  await expect(reveal(p)).toHaveAttribute('data-dismissible','true');await reveal(p).press('Escape');
   await expect(p.locator('.stage-listen .completion-card')).toHaveAttribute('data-result-motion','finished');
-  await expect(p.locator('#starCount')).toHaveText('0');
+  await expect(p.locator('#starCount')).toHaveText('1');
   await expect(reveal(p)).not.toBeVisible();
   await tasks.activity(p,'3-4','reply',{...options,beforeFinish:()=>courseResponse(p,progressPath,{hold:true})});
   await expect.poll(()=>heldProgress(p)).toBe(true);
-  await expect(reveal(p)).toHaveAttribute('data-phase','pending');
+  await expect(reveal(p)).toBeVisible();
   await expect(result(p).locator('.completion-stats')).not.toBeVisible();
   await courseResponse(p,progressPath,null,{resumeHeld:true});
   await expect(reveal(p).getByRole('group',{name:'已获得 2 / 5 颗星',exact:true})).toBeVisible();
   await expect(reveal(p)).toHaveAttribute('data-dismissible','true');
-  expect(await p.evaluate(()=>window.settlementFlights)).toBe(1);
+  expect(await p.evaluate(()=>window.settlementFlights)).toBe(2);
   await reveal(p).press('Escape');
   await expect(result(p)).toHaveAttribute('data-result-motion','finished');
   await expect(p.locator('#starCount')).toHaveText('2');
@@ -194,10 +195,11 @@ test('本机待同步队列写入失败不会锁住结算，恢复后不重弹�
   await expect.poll(()=>p.evaluate(()=>window.settlementQuotaFailures)).toBeGreaterThan(0);
   await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','failed');
   await expect(p.locator('#studentSyncStatus')).toHaveText('暂未保存，请先别关闭页面');
+  await expect(reveal(p)).toHaveAttribute('data-dismissible','true');await reveal(p).press('Escape');
   const finish=p.locator('.stage-listen .completion-card');
   await expect(finish).toHaveAttribute('data-result-motion','finished');
   await expect(reveal(p)).not.toBeVisible();
-  await expect(p.locator('#starCount')).toHaveText('0');
+  await expect(p.locator('#starCount')).toHaveText('1');
   const preserved=await p.evaluate(()=>JSON.parse(localStorage.getItem(CanranCore.unit34.progress.learningKey)));
   const sampleCount=await p.evaluate(()=>window.settlementFrames.length);
   await p.evaluate(()=>{window.failSettlementQueueWrites=false;});

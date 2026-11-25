@@ -6,6 +6,7 @@ const crypto = require('node:crypto');
 const { openStore } = require('./store');
 const { UNITS, RETIRED } = require('./catalog');
 const { createCoursePackages } = require('../scripts/course-packages');
+const { sharedArtObjects } = require('../scripts/shared-svg-transfer');
 const progress = require('./progress');
 const learning = require('./learning');
 const { createManagement } = require('./management');
@@ -47,8 +48,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
       logical.set(item.key.slice(BASE.length), packages.generated.get(item.url.slice(BASE.length)));
       addOwner(item.key, course); addOwner(item.url, course);
     }
+    for(const part of sharedArtObjects(pack))addOwner(part.url,course);
   }
-  for(const pack of await retainPackages(packages,dataDir,BASE)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio])addOwner(item.url,pack.id);}
+  for(const pack of await retainPackages(packages,dataDir,BASE)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio,...sharedArtObjects(pack)])addOwner(item.url,pack.id);}
   const navigation = await fs.readFile(path.join(root, 'index.html'), 'utf8');
   const descriptions = await Promise.all(UNITS.map(async id => {
     const source = await fs.readFile(path.join(root, id, 'index.html'), 'utf8');
@@ -286,7 +288,9 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
           if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
-          return json(response, { student: who.student, preview: who.preview, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
+          const nextId = UNITS[UNITS.indexOf(course) + 1];
+          const nextCourse = who.courses.includes(nextId) ? {id:nextId} : null;
+          return json(response, { student: who.student, preview: who.preview, nextCourse, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
         }
         if (relative === 'api/progress' && input) {
           const {auth} = studentSession(request), course = input.course;
@@ -297,13 +301,21 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
           if(!store.validGrant(input.grant,auth.subject,course))throw fail(403,'学习记录不属于当前身份或课程');
           if (input.generation !== current.generation) return json(response,{stale:true,generation:current.generation});
           const before=progress.normalize(current.value,definitions[course],course,Boolean(upgrade));
+          if(input.observationsOnly===true){
+            store.saveObservations(auth.subject,course,current.generation,learning.submissions(input.observations,definitions[course],course,before));
+            return json(response,{ok:true});
+          }
           const value = progress.merge(before,progress.normalize(input.value,definitions[course],course,Boolean(upgrade)));
           const advanced=Object.keys(value.activity.unitCompleted).some(id=>!before.activity.unitCompleted[id]);
           const unit = definitions[course];
           const claims = Object.entries(input.value?.activity?.unitAwardClaims || {}).filter(([zone, claim]) => validClaim(unit, zone, claim));
-          const awards = unit.reward ? store.grantAwards(auth.subject, course, unit.reward, claims) : null;
-          store.saveLearning(auth.subject,course,current.generation,value,learning.submissions(input.observations,definitions[course],course,before),advanced);
-          return json(response,{ok:true,awards});
+          const {awards}=store.saveLearning(auth.subject,course,current.generation,value,learning.submissions(input.observations,unit,course,before),advanced,unit.reward,claims);
+          const awardReviews = Object.entries(input.value?.activity?.unitAwardClaims || {}).flatMap(([zone, claim]) => {
+            if (!unit.reward?.zones.some(item=>item.id===zone) || typeof claim?.runId !== 'string' || !claim.runId || claim.runId.length>100 || typeof claim.edition!=='string' || claim.edition.length>100) return [];
+            const accepted=validClaim(unit,zone,claim);
+            return [{zone,runId:claim.runId,edition:claim.edition,accepted,...(!accepted?{reason:claim.edition!==unit.reward.edition||claim.roundPolicy!==unit.reward.edition?'version':'evidence'}:{})}];
+          });
+          return json(response,{ok:true,awards,awardReviews});
         }
         if (relative === 'api/progress/reset' && input) {
           const who=identity(request),course=input.course;

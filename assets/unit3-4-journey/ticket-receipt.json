@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-01",
+  "mode": "built-in image_gen",
+  "asset": "ticket-v1",
+  "purpose": "Independent Lesson3–4 cloakroom number-5 claim ticket; original teaching numeral and identity retained",
+  "sourceGeneratedPath": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-5ed3-7cd1-9aec-1e2fc3d1918d/exec-dddec0bd-c3c3-424a-81de-bbcb78143e09.png",
+  "files": {
+    "original": "ticket-v1.png",
+    "runtime": "ticket-v1.webp"
+  },
+  "requestedDimensions": {
+    "width": 512,
+    "height": 640
+  },
+  "actualDimensions": {
+    "width": 1122,
+    "height": 1402
+  },
+  "transparentBackground": true,
+  "references": [
+    {
+      "path": "assets/awards/unit3-4-umbrella.webp",
+      "role": "Approved original number-5 card and warm illustrated treatment; reference only, original award remains untouched"
+    }
+  ],
+  "prompt": "Create ONE isolated illustrated cloakroom claim ticket / number card, based on the small golden ticket in the attached approved reference. The attached image is a style and ticket-design reference only. Do not include any of the people, hands, umbrella, coat, table or background.\n\nThe single card must be rectangular, portrait oriented, near front-on, made from warm creamy golden heavy paper with a subtle paper texture and just a little thickness on one edge, a thin warm brown outlined border, softly rounded corners. Match the friendly children's illustrated style, warm upper-left light, simple readable design of the source. It will be held by a separate illustrated customer in the game, so it is a FLAT HANDHELD CARD, no triangular stand or rear support. Preserve clear blank golden margin around the number. On the face, the ONLY printed text must be exactly one large dark-brown Arabic digit: \"5\". The \"5\" is central, bold, unambiguous and legible at small size. You may preserve a short row of simple brown dashed ornamental marks near the top and bottom as in the reference, but absolutely no other letters, words, numbers, icons, stars or watermark.\n\nRequested output: 512x640 portrait PNG (or nearest supported portrait dimensions), genuine transparent alpha outside the single complete card. Center it with about 8% transparent margin, no drop-shadow patch, no white rectangle, no checkerboard baked into the image. No dramatic perspective and no ground plane. One card only.",
+  "inspection": {
+    "iterations": 1,
+    "accepted": true,
+    "alphaGreaterThan16BoundsPixels": [
+      154,
+      155,
+      975,
+      1271
+    ],
+    "alphaGreaterThan16BoundsNormalized": [
+      0.13725490196078433,
+      0.11055634807417974,
+      0.8698752228163993,
+      0.9072753209700428
+    ],
+    "number": "5",
+    "numberVerifiedVisually": true,
+    "otherText": false,
+    "notes": "Flat near-frontal golden cardstock, subtle thickness, dark brown digit exactly 5, short dashed marks only. No hands, stand, extra items or scene. Complete edges and real alpha, checked on cream background without white fringe.",
+    "preview": "output/u34-visitor-qa/ticket-on-paper.png"
+  },
+  "processing": "PNG copied unchanged. WebP format conversion only with quality92 alphaQuality100 effort6. Generator returned higher dimensions close to requested 4:5; no rescale/crop/redraw."
+}

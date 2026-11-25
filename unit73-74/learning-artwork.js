@@ -1,0 +1,48 @@
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
+CanranCore.learningWordArtwork={
+  "week": "/assets/learning-words/unit73-74/week-d55f0cfd.svg",
+  "London": "/assets/learning-words/unit73-74/london-b0423f93.svg",
+  "suddenly": "/assets/learning-words/unit73-74/suddenly-d360cdb6.svg",
+  "bus stop": "/assets/learning-words/unit73-74/bus-stop-5f8f175a.svg",
+  "smile": "/assets/learning-words/unit73-74/smile-cb539ed7.svg",
+  "pleasantly": "/assets/learning-words/unit73-74/smile-cb539ed7.svg",
+  "understand": "/assets/learning-words/unit73-74/understand-51546e8b.svg",
+  "speak": "/assets/learning-words/unit73-74/speak-bb528c37.svg",
+  "hand": "/assets/word-art-v2/whole-book/hand-v1.webp",
+  "pocket": "/assets/word-art-v2/whole-book/pocket-v1.webp",
+  "phrasebook": "/assets/word-art-v2/whole-book/phrasebook-v1.webp",
+  "phrase": "/assets/learning-words/unit73-74/phrase-4f2f17ec.svg",
+  "slowly": "/assets/learning-words/unit73-74/slowly-3c1ba5ae.svg",
+  "hurriedly": "/assets/learning-words/unit73-74/hurriedly-507384f4.svg",
+  "cut": "/assets/learning-words/unit73-74/cut-8b8b4491.svg",
+  "thirstily": "/assets/learning-words/unit73-74/drink-fffc1f7e.svg",
+  "greet": "/assets/learning-words/unit73-74/greet-3ca71caa.svg",
+  "tourist": "/assets/unit15-16/cast-girl-v1.webp",
+  "lose": "/assets/learning-words/unit73-74/lost-4f6d5a6f.svg",
+  "lost": "/assets/learning-words/unit73-74/lost-4f6d5a6f.svg",
+  "saw": "/assets/learning-words/unit73-74/see-03a9d49f.svg",
+  "spoke": "/assets/learning-words/unit73-74/speak-bb528c37.svg",
+  "understood": "/assets/learning-words/unit73-74/understand-51546e8b.svg",
+  "put": "/assets/learning-words/unit73-74/put-223f959e.svg",
+  "took": "/assets/learning-words/unit73-74/take-bbf43697.svg",
+  "read": "/assets/learning-words/unit73-74/read-41004200.svg",
+  "gave": "/assets/learning-words/unit73-74/give-90e49799.svg",
+  "drank": "/assets/learning-words/unit73-74/drink-fffc1f7e.svg",
+  "ate": "/assets/learning-words/unit73-74/eat-468380ca.svg",
+  "met": "/assets/learning-words/unit73-74/greet-3ca71caa.svg",
+  "swam": "/assets/learning-words/unit73-74/swim-d9d9a8b8.svg",
+  "carefully": "/assets/learning-words/unit73-74/carefully-ffff8f52.svg",
+  "warmly": "/assets/learning-words/unit73-74/greet-3ca71caa.svg",
+  "hard": "/assets/learning-words/unit73-74/work-cdb21725.svg",
+  "late": "/assets/learning-words/unit73-74/late-3b793462.svg",
+  "well": "/assets/learning-words/unit73-74/swim-d9d9a8b8.svg",
+  "enjoyed ourselves": "/assets/learning-words/unit73-74/enjoy-ab0d3a27.svg",
+  "the way to": "/assets/learning-words/unit73-74/way-748cfa08.svg"
+};
+CanranCore.learningWordPresentation={
+  "hand": "illustration",
+  "pocket": "illustration",
+  "phrasebook": "illustration",
+  "tourist": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

@@ -1,3 +1,4 @@
+const {courseButton,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -20,15 +21,15 @@ for(const pair of ['1-2','25-26'])for(const base of ['','/lesson'])test(`${pair}
 });
 test('辨认问句保存选择，错误只重试，新题保持未答',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans'),check=room.getByRole('button',{name:'检查答案',exact:true});
- await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('再看看。');
+ await expect(room.getByRole('textbox')).toHaveCount(0);await expect(check).toBeDisabled();await select(room,'This is your book.');await page.reload();await expect(room.getByRole('button',{name:'This is your book.',exact:true})).toHaveAttribute('aria-pressed','true');await check.click();await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
  await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'Is this your book?');await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
  await page.reload();await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(check).toBeDisabled();
- await page.getByRole('button',{name:'学习记录',exact:true}).click();await expect(page.locator('#learningRecord')).toContainText('订正完成');
+ await openLearningRecord(page);await expect(page.locator('#learningRecord')).toContainText('订正完成');
 });
 test('中文词块含干扰项，刷新保持排序，错误保留草稿且可撤回修正',async({page})=>{
  await page.goto('/unit25-26/#learn/observe');const room=page.locator('.stage-observe'),bank=room.getByRole('group',{name:'待选词块',exact:true}),chosen=room.getByRole('group',{name:'已选词块',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});
  const order=await bank.locator('button').allTextContents();await bank.getByRole('button',{name:'桌子里',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(bank.locator('button')).toHaveText(order);await expect(chosen).toContainText('桌子里');
- await bank.getByRole('button',{name:'有',exact:true}).click();await bank.getByRole('button',{name:'一个瓶子',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(chosen.getByRole('button')).toHaveCount(3);
+ await bank.getByRole('button',{name:'有',exact:true}).click();await bank.getByRole('button',{name:'一个瓶子',exact:true}).click();await check.click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await expect(chosen.getByRole('button')).toHaveCount(3);
  await select(room,['桌子上','有','一个瓶子']);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');expect(await bank.locator('button').count()).toBe(6);
 });
 test('情境在确认正确答案之前不交包、不显示新位置；刷新还原真实状态',async({page})=>{
@@ -56,13 +57,13 @@ for(const pair of ['1-2','25-26'])test(`${pair} 真实旧轮次升级保留相�
  await page.addInitScript(()=>{window.Audio=class extends EventTarget{play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};});
  await require('../support/types-predecessor').installPredecessor(page,pair);
  const before=`/tests/fixtures/unit${pair}-types-before/`;
- await page.goto(before+'#learn/text');const text=page.locator('.stage-text');await text.getByRole('button',{name:pair==='1-2'?'开始听课文':'开始看课文',exact:true}).click();
- const count=pair==='1-2'?7:12;for(let i=1;i<count;i++)await text.getByRole('button',{name:'下一句',exact:true}).click();await text.getByRole('button',{name:pair==='1-2'?'完成课文学习':'完成课文',exact:true}).click();
+ await page.goto(before+'#learn/text');const text=page.locator('.stage-text');await courseButton(text, pair==='1-2'?"startVoicedStory":"startStory").click();
+ const count=pair==='1-2'?7:12;for(let i=1;i<count;i++)await text.getByRole('button',{name:'下一句',exact:true}).click();await courseButton(text, pair==='1-2'?"finishVoicedStory":"finishStory").click();
  for(const id of Object.keys(legacy.CASES[pair].old)){
   await page.goto(before+'#learn/'+id);const room=page.locator('.stage-'+id),items=legacy.answers(pair,id);
   for(let i=0;i<items.length;i++){
    if(items[i].audio)await room.getByRole('button',{name:'听一遍',exact:true}).click();
-   await legacy.select(room,items[i].answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:i===items.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+   await legacy.select(room,items[i].answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await courseButton(room, i===items.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
   }
  }
  await page.goto(before+'#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('升级小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');

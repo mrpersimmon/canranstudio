@@ -6,9 +6,14 @@
 function installCourseResponseFaults(server) {
   const handlers = server.listeners('request');
   const faults = new Map(), held = new Set(), network = []; let nextHeldId = 0;
+  let transfers=null;
   server.removeAllListeners('request');
   server.on('request', async (request, response) => {
     const target = new URL(request.url, 'http://localhost'), pathname = target.pathname;
+    if(pathname==='/__test__/first-course-network'){
+      if(request.method==='POST')transfers=[];
+      response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify(transfers||[]));return;
+    }
     if (pathname === '/__test__/course-network') {
       response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify(network));return;
     }
@@ -17,12 +22,18 @@ function installCourseResponseFaults(server) {
       const details=target.searchParams.get('details')==='1';
       response.writeHead(200,{'Content-Type':'application/json','Cache-Control':'no-store'}).end(JSON.stringify([...held].map(item=>details?{id:item.id,path:item.path}:item.path)));return;
     }
-    if (/\/course-(?:status\/|withdrawals\/|index\.json)/.test(pathname)) {
+    const countMetadata=/\/course-(?:status\/|withdrawals\/|index\.json)/.test(pathname);
+    const trace=transfers&&/\/resources\/[a-f0-9]{64}\//.test(pathname)?transfers:null;
+    if (countMetadata||trace) {
+      const start=Date.now();
       let bytes=0;const write=response.write,end=response.end;
       const count=chunk=>{if(typeof chunk==='string'||Buffer.isBuffer(chunk)||ArrayBuffer.isView(chunk))bytes+=Buffer.byteLength(chunk);};
       response.write=function(chunk,...args){count(chunk);return write.call(this,chunk,...args);};
       response.end=function(chunk,...args){count(chunk);return end.call(this,chunk,...args);};
-      response.on('finish',()=>network.push({path:pathname,status:response.statusCode,bytes,conditional:!!request.headers['if-none-match']}));
+      response.on('finish',()=>{
+        if(countMetadata)network.push({path:pathname,status:response.statusCode,bytes,conditional:!!request.headers['if-none-match']});
+        if(trace&&trace.length<2000)trace.push({path:pathname,start,end:Date.now(),status:response.statusCode,bytes});
+      });
     }
     if (pathname === '/__test__/course-responses') {
       const chunks = [];
@@ -57,6 +68,20 @@ function installCourseResponseFaults(server) {
     const entry = [...faults].find(([pattern]) => new RegExp('^' + pattern.split('*').map(value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[^/]*') + '$').test(pathname));
     if (!entry) { for (const handler of handlers) handler(request, response); return; }
     const [path, fault] = entry;
+    if(fault.paceOnce){
+      // Pace the real authorized response. Some WebKit builds coalesce a
+      // single incomplete write; completed socket writes aren't cache receipts.
+      faults.delete(path);
+      const end=response.end.bind(response),write=response.write.bind(response);
+      response.end=function(body,...args){
+        if(response.statusCode!==200||!Buffer.isBuffer(body)||body.length<1024*1024)return end(body,...args);
+        let offset=0,timer;const send=()=>{if(response.destroyed)return;
+          const next=Math.min(offset+65536,body.length);write(body.subarray(offset,next));offset=next;
+          if(offset===body.length)end();else timer=setTimeout(send,100);
+        };response.once('close',()=>clearTimeout(timer));send();return response;
+      };
+      for(const handler of handlers)handler(request,response);return;
+    }
     if (fault.hold) {
       const item = { id: ++nextHeldId, path, request, response }; held.add(item);
       response.on('close', () => held.delete(item));

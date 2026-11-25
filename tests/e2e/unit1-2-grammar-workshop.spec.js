@@ -1,4 +1,5 @@
 "use strict";
+const {expectRoundCounts}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 test.use({ actionTimeout: 5000, reducedMotion: 'reduce' });
@@ -14,7 +15,7 @@ test('旧锦囊入口进入连续十二题，短示范与答对小结嵌入题�
   const check = room.getByRole('button', { name: '检查答案', exact: true });
   await expect(check).toBeDisabled();
   await flow.select(room, 'This is your book.'); await check.click();
-  await expect(room.locator('.fb')).toHaveText('再看看。');
+  await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
   await expect(room.locator('.grammar-rule')).toBeHidden();
   await expect(room.locator('.is-correct')).toHaveCount(0);
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -41,7 +42,7 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
       await expect(room).toContainText('You are a student.');
       for (let attempt = 0; attempt < 2; attempt++) {
         await flow.select(room, { fills: [attempt ? 'Am' : 'Is'] }); await check.click();
-        await expect(room.locator('.fb')).toHaveText('再看看。');
+        await expect(room.locator('.fb')).toHaveText('答错了，再试试。');
         await expect(room.locator('.grammar-rule')).toBeHidden();
         await expect(room.locator('.is-correct')).toHaveCount(0);
         await page.reload();
@@ -50,7 +51,7 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
       }
     }
     if (i === 4) {
-      await expect(room).toContainText('猜猜自己的身份：我是学生吗？');
+      await expect(room).toContainText('用词块问：我是学生吗？');
       // This grammar scene completes next-question focus on the progress row.
       await expect(room.locator('.grammar-intro .practice-progress')).toBeFocused();
       const bank = room.getByRole('group', { name: '待选词块', exact: true });
@@ -72,18 +73,22 @@ test('十二题循序学习，are 与 am 不混教，提示和错答保留，结
     if (i >= 10) {
       await expect(room.getByRole('region', { name: '短示范' })).toHaveCount(0);
       await expect(room.locator('.grammar-phase')).toHaveCount(0);
-      await expect(room.locator('.fb')).toBeEmpty();
+      await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
     }
     await flow.select(room, answer); await check.click();
     await expect(room.locator('.fb')).toHaveText('答对了！');
-    if (i === 4) await expect(room.locator('.grammar-rule')).toContainText('不需要改成 you');
-    if (i === 5) await expect(room.locator('.grammar-rule')).toContainText('不是一变问句就改成 you');
+    if (i === 4 || i === 5) {
+      await room.getByRole('button', {name:'讲解',exact:true}).click();
+      const explanation=page.getByRole('dialog',{name:'这一题的讲解',exact:true});
+      await expect(explanation).toContainText(i === 4 ? 'I 不变，am 放前面：Am I a student?' : '不是一变问句就改成 you');
+      await explanation.getByRole('button',{name:'知道了',exact:true}).click();
+    }
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 11 ? '完成这一组' : '下一题', exact: true }).click();
+    await room.getByRole('button', { name: i === 11 ? '完成练习' : '下一题', exact: true }).click();
   }
   const result = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(result.locator('.completion-number')).toHaveText(['9', '12', '2']);
-  await page.reload(); await expect(result.locator('.completion-number')).toHaveText(['9', '12', '2']);
+  await expectRoundCounts(result.locator('.completion-number'), ['9', '12', '2']);
+  await page.reload(); await expectRoundCounts(result.locator('.completion-number'), ['9', '12', '2']);
   await room.getByRole('button', { name: '下一站：帮忙还手提包', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/manners$/);
   await page.goto('/unit1-2/#learn/trans');

@@ -6,11 +6,26 @@ const crypto = require('node:crypto');
 const catalog = require('../core/course-catalog');
 const { normalizeBasePath, relocateSource, scopeStorage } = require('./public-base-path');
 const { LESSON_HEADER_CONTRACT } = require('./http-header-contract');
+const {teachingDefinition}=require('./course-registry');
+const {shareIllustrations}=require('./shared-svg-transfer');
 
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.avif': 'image/avif', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.woff2': 'font/woff2', '.mp3': 'audio/mpeg' };
 const digest = bytes => crypto.createHash('sha256').update(bytes).digest('hex');
 const RESOURCE = /\.(?:js|css|woff2|svg|png|webp|avif|jpe?g|mp3)(?:[?#].*)?$/i;
 const IMAGE = /\.(?:svg|png|webp|avif|jpe?g)$/i;
+// Literal URLs elsewhere in a renderer are still collected normally. Only a
+// borrowed directory in pure teaching data can be narrowed to resolved URLs.
+function borrowedFiles(source,course,prefix){
+  const paths=new Set(),seen=new Set();let dataOnly=true;
+  const visit=value=>{
+    if(typeof value==='function'){dataOnly=false;return;}
+    if(typeof value==='string'&&value.startsWith(prefix)){
+      if(RESOURCE.test(value))paths.add(value);else dataOnly=false;
+    }else if(value&&typeof value==='object'&&!seen.has(value)){seen.add(value);Object.values(value).forEach(visit);}
+  };
+  try{visit(teachingDefinition(source,course));}catch{return null;}
+  return dataOnly&&paths.size?paths:null;
+}
 // Explicit teaching mode: adding a course requires a deliberate audio decision.
 const VOICED = new Set([ 'lesson49', 'lesson50', 'lesson51', 'lesson52', 'lesson53', 'lesson54', 'soundmark']);
 const CLASSROOM = new Set(['unit51-52','unit53-54','unit55-56','unit57-58','unit59-60','unit61-62','unit63-64','unit65-66','unit67-68','unit69-70','unit71-72','unit73-74','unit75-76','unit77-78','unit79-80','unit81-82','unit83-84','unit85-86','unit87-88','unit89-90','unit91-92','unit93-94','unit95-96','unit97-98','unit99-100','unit101-102','unit103-104','unit105-106','unit107-108','unit109-110','unit111-112','unit113-114','unit115-116','unit117-118','unit119-120','unit121-122','unit123-124','unit125-126','unit127-128','unit129-130','unit131-132','unit133-134','unit135-136','unit137-138','unit139-140','unit141-142','unit143-144','unit49-50','unit1-2', 'unit3-4', 'unit5-6', 'home', 'unit7-8', 'unit9-10', 'unit11-12', 'unit13-14', 'unit15-16', 'unit17-18', 'unit19-20', 'unit21-22', 'unit23-24', 'unit25-26', 'unit27-28', 'unit29-30', 'unit31-32', 'unit33-34', 'unit35-36', 'unit37-38', 'unit39-40', 'unit41-42', 'unit43-44', 'unit45-46', 'unit47-48']);
@@ -142,6 +157,10 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
           const value = match[1];
           if (value.endsWith('/')) {
             const directory = value.replace(/^\/(?:lesson\/)?/, '');
+            if(file===course.id+'/content.js'&&/^assets\/unit\d+-\d+\/$/.test(directory)&&directory!=='assets/'+course.id+'/'){
+              const used=borrowedFiles(text,course.id,value);
+              if(used){for(const key of used)add(key);continue;}
+            }
             // picture(name) in this shared renderer only creates .svg URLs.
             // Its PNG statistics icons have their own completion/ prefix;
             // unrelated retired scene WebPs are not shared dependencies.
@@ -166,10 +185,11 @@ async function createCoursePackages({ root, basePath = '/', courseIds = null, is
     const entry = Buffer.from(entryHtml(source, basePath, course, brandImage));
     const shell = virtualResource('course-shells/' + course.id + '.html', entry, TYPES['.html']);
     resources.push(shell);
-    const required = resources.filter(item => !item.type.startsWith('audio/'));
+    const required = shareIllustrations(course.id,resources.filter(item => !item.type.startsWith('audio/')),generated,basePath);
     const audio = resources.filter(item => item.type.startsWith('audio/'));
     const mode = noVoice ? 'classroom' : 'voiced';
-    const revision = digest(JSON.stringify([mode, resources.map(item => [item.key, item.sha256])]));
+    const recipes=required.filter(i=>i.svgParts).map(i=>[i.key,i.svgParts]);
+    const revision = digest(JSON.stringify([mode, resources.map(item => [item.key, item.sha256]),...(recipes.length?[recipes]:[])]));
     const manifest = { ...(isolatedDefinitions ? {accessPolicy:'class-v1'} : {}), schema: 1, protocol: 1, basePath, id: course.id, title: course.title, entry: basePath + course.entry, shell: shell.key, route: course.id === 'home' ? basePath : basePath + course.id + '/', revision, mode, required, audio, narration: audio.filter(item => !item.key.includes('/assets/feedback/')), feedback: audio.filter(item => item.key.includes('/assets/feedback/')) };
     const manifestBody = Buffer.from(JSON.stringify(manifest));
     const manifestPath = `course-packages/${course.id}/${revision}.json`;

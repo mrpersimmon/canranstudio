@@ -17,7 +17,7 @@ test('真实答题首星显示悬浮纪念卡，无按钮，点击卡片退出�
   await waitForRewardDismissal(page); await reveal.getByRole('article').click();
   await expect(reveal).not.toBeVisible();
   await expect(page.locator('#starCount')).toHaveText('1');
-  await expect(page.locator('.stage-listen').getByRole('button', { name: '再练一轮', exact: true })).toBeFocused();
+  await expect(page.locator('.stage-listen').getByRole('button', { name: /下一站/ })).toBeFocused();
   await page.reload();
   await expect(page.locator('#starCount')).toHaveText('1');
   await expect(reveal).not.toBeVisible();
@@ -95,7 +95,7 @@ test('错答订正不弹获星，重练全对展示已有卡片但不重复点�
   await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await flow.select(room,{fills:['me']});await room.getByRole('button',{name:'检查答案',exact:true}).click();
   await activity(page,'1-2','manners');
-  await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('这轮有过答错');
+  await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('再练一轮全对，可点亮星星');
   await expect(page.locator('dialog.award-reveal')).not.toBeVisible();
   await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'1-2','manners');
   await waitForRewardDismissal(page); await page.getByRole('dialog',{name:/纪念卡结算/}).click({position:{x:8,y:8}});

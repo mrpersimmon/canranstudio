@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const {select,advance}=require('./unit31-32-flow');
 // Independent expected language transcribed from textbook PDF 103–106 and the design review.
@@ -18,6 +19,6 @@ async function activity(page,id,base=''){
  for(const [i,answer]of ANSWERS[id].entries()){await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));await advance(room,i===ANSWERS[id].length-1,id==='exam');}
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }
-async function story(page,base=''){await page.goto(base+'/unit35-36/#learn/text');const room=page.locator('.stage-text');for(let i=0;i<DIALOGUE.length;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('课文看完了！');}
+async function story(page,base=''){await page.goto(base+'/unit35-36/#learn/text');const room=page.locator('.stage-text');for(let i=0;i<DIALOGUE.length;i++){await courseButton(room, i?'下一句':"startStory").click();await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));}await courseButton(room, "finishStory").click();await expect(room).toContainText('课文看完了！');}
 async function complete(page,base=''){await activity(page,'listen',base);await story(page,base);for(const id of ['roles','observe','be','trans','exam'])await activity(page,id,base);await page.goto(base+'/unit35-36/#learn/certificate');await expect(page.locator('#starCount')).toHaveText('15');}
 module.exports={DIALOGUE,ANSWERS,WRONG,select,advance,activity,story,complete};

@@ -2,6 +2,13 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const model=require('../../course-journey/model');
 const all=Array.from({length:72},(_,i)=>({id:`unit${i*2+1}-${i*2+2}`,label:`Lesson ${i*2+1}–${i*2+2}`,title:i===24?'晚餐采购大冒险':'课程 '+i,next:'words'}));
+
+test('entry wording follows the real destination without changing access or resume URLs',()=>{
+ const cases=[{course:{...all[0],started:false,stars:0},label:'开始学习'},{course:{...all[0],next:'listen',started:true,stars:5},label:'继续学习'},{course:{...all[0],next:'certificate',started:true,stars:5},label:'查看纪念卡'}];
+ for(const {course,label}of cases){const before=JSON.stringify(course),url=model.href(course,'/lesson/');assert.equal(model.actionLabel(course),label);assert.equal(model.href(course,'/lesson/'),url);assert.equal(JSON.stringify(course),before);}
+ assert.equal(model.actionLabel({...all[0],completed:true},true),'再次学习');
+ assert.equal(model.actionLabel({...all[0],completed:true,next:'certificate'},true),'查看纪念卡');
+});
 test('journey search covers all 72 pairs and exact lesson numbers without widening authorization',()=>{
   assert.deepEqual(model.filter(all,'Lesson 50','0').map(c=>c.id),['unit49-50']);
   assert.deepEqual(model.filter(all,'144').map(c=>c.id),['unit143-144']);

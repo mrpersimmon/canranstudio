@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,courseToolbar,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 // Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
 test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
@@ -43,8 +44,8 @@ test('两课共用一个采购单元与词卡，旧课满星不会完成新单�
   await page.getByRole('button', { name: '开始采购', exact: true }).click();
   const words = page.getByRole('region', { name: '采购小图鉴', exact: true });
   await expect(words.getByRole('button', { name: 'butcher', exact: true })).toBeVisible();
-  await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
-  await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(words, "nextWords").click();
+  await courseButton(words, "nextWords").click();
   const tomato = words.getByRole('button', { name: 'tomato', exact: true });
   await expect(tomato).toBeVisible();
   await tomato.click();
@@ -77,7 +78,7 @@ test('23 词连续听辨，新加入的词必须逐题作答，末题主动完�
     if (i === 13) await page.reload();
   }
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.getByRole('button', { name: '完成这一站', exact: true }).click();
+  await courseButton(room, "finishPractice").click();
   await expect(page.locator('#starCount')).toHaveText('3');
   const actions = room.getByRole('group', { name: '完成后的操作', exact: true });
   await expect(actions.getByRole('button')).toHaveCount(2);
@@ -97,7 +98,7 @@ test('课文必须听完再进入理解题，历史点读与刷新不代替当�
   await expect(roles.getByRole('button', { name: 'steak', exact: true })).toHaveCount(0);
   await roles.getByRole('button', { name: '先听故事', exact: true }).click();
   const room = page.locator('.stage-text');
-  await room.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(room, "startVoicedStory").click();
   await expect(room.getByRole('button', { name: '下一句', exact: true })).toBeDisabled();
   await page.evaluate(() => window.unitAudio.at(-1).dispatchEvent(new Event('ended')));
   await room.getByRole('button', { name: '下一句', exact: true }).click();
@@ -114,7 +115,7 @@ test('课文必须听完再进入理解题，历史点读与刷新不代替当�
     await room.getByRole('button', { name: '下一句', exact: true }).click();
     await page.evaluate(() => window.unitAudio.at(-1).dispatchEvent(new Event('ended')));
   }
-  await room.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  await courseButton(room, "finishVoicedStory").click();
   await expect(room.locator('.bubble-row')).toHaveCount(11);
   await room.getByRole('button', { name: '下一站：故事小侦探', exact: true }).click();
   await expect(roles.getByRole('button', { name: 'steak', exact: true })).toBeVisible();
@@ -128,7 +129,7 @@ test('区分喜好与当前需求，并保留 Written A 的六种否定结构', 
   await expect(room).toContainText('Penny 喜欢西红柿，但这次不想买。哪句话符合？');
   await room.getByRole('button', { name: 'She likes tomatoes, and she wants some.', exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await answer(room, "She likes tomatoes, but she doesn't want any.");
   await answer(room, "I like potatoes, but I don't want any.");
@@ -152,9 +153,9 @@ test('从空记录完成整个单元，只有末站结算后领证，保存与�
   }
   await listening.getByRole('button',{name:'下一站：老板与客人',exact:true}).click();
   const story=page.locator('.stage-text');
-  await story.getByRole('button',{name:'开始听课文',exact:true}).click();
+  await courseButton(story, "startVoicedStory").click();
   for(let i=1;i<11;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
-  await story.getByRole('button',{name:'完成课文学习',exact:true}).click();
+  await courseButton(story, "finishVoicedStory").click();
   await finishGroup(page,'roles',['steak','Beef, please.',"To tell you the truth, Mrs. Bird, I don't like chicken either.",'Lamb, please.']);
   await finishGroup(page,'doare',['Do you like meat?','Are you a teacher?','Does Penny like tomatoes?','Do you like peas?','Does she want peaches?']);
   await finishGroup(page,'give',['Mrs. Bird','that piece','Give that piece to me, please.',['Give','that piece','to','me,','please.']]);
@@ -178,7 +179,7 @@ test('从空记录完成整个单元，只有末站结算后领证，保存与�
     if(i===2)await page.reload();
   }
   await expect(page.locator('#starCount')).toHaveText('12');
-  await exam.getByRole('button',{name:'查看本次记录',exact:true}).click();
+  await courseButton(exam, "finishExam").click();
   await expect(page.locator('#starCount')).toHaveText('15');
   await expect(exam).toContainText('首次独立答对 5 / 5');
   await exam.getByRole('button',{name:'下一站：我的单元证书',exact:true}).click();
@@ -198,7 +199,7 @@ test('从空记录完成整个单元，只有末站结算后领证，保存与�
   await certificate.getByRole('button',{name:'打印证书',exact:true}).click();
   expect(await page.evaluate(()=>window.unitPrints)).toBe(1);
   await page.emulateMedia({media:'print'});
-  await expect(page.locator('#topbar')).toBeHidden();
+  await expect(courseToolbar(page)).toBeHidden();
   await expect(certificate.locator('.certificate-paper')).toBeVisible();
   await page.emulateMedia({media:'screen'});
   await certificate.getByRole('button',{name:'关闭',exact:true}).click();
@@ -215,7 +216,7 @@ test('电脑和平板手机布局不溢出，翻组后新词卡可见，结束�
     await page.goto('/unit49-50/#learn/words');
     await page.evaluate(()=>document.fonts.ready);
     const words=page.locator('.stage-words');
-    const next=words.getByRole('button',{name:'下一组词卡',exact:true});
+    const next=courseButton(words, "nextWords");
     await next.click();
     await expect(words.locator('.unit-word').first()).toBeInViewport();
     await expect(words.locator('.stage-heading')).toBeInViewport();
@@ -251,7 +252,7 @@ test('电脑和平板手机布局不溢出，翻组后新词卡可见，结束�
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     // Return to the first word group through its real controls for the next viewport.
     await page.goto('/unit49-50/#learn/words');
-    const previous=words.getByRole('button',{name:'上一组词卡',exact:true});
+    const previous=courseButton(words, "previousWords");
     while(await previous.isEnabled())await previous.click();
   }
 });
@@ -282,7 +283,7 @@ test('新增九词使用可播放的本地录音与完整图卡，听辨录音�
   await page.goto('/unit49-50/#learn/words');
   const words=page.locator('.stage-words');
   const newWords=[['tomato','potato','cabbage','lettuce'],['pea','bean','pear','grape','peach']];
-  for(let i=0;i<2;i++)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();
+  for(let i=0;i<2;i++)await courseButton(words, "nextWords").click();
   for(let group=0;group<2;group++){
     for(const word of newWords[group]){
       const card=words.getByRole('button',{name:word,exact:true});
@@ -292,7 +293,7 @@ test('新增九词使用可播放的本地录音与完整图卡，听辨录音�
       await card.click();
       await expect.poll(()=>page.evaluate(()=>window.nativeEnds)).toContain('/lesson50/audio/'+word+'.mp3');
     }
-    if(group===0)await words.getByRole('button',{name:'下一组词卡',exact:true}).click();
+    if(group===0)await courseButton(words, "nextWords").click();
   }
   let block=true;
   await page.route('**/lesson49/audio/butcher.mp3',route=>block?route.abort():route.continue());
@@ -327,7 +328,7 @@ test('从长页直接切到另一活动时停止旧录音，迟到的结束事�
   await audioBoundary(page,false);
   await page.goto('/unit49-50/#learn/text');
   const story=page.locator('.stage-text');
-  await story.getByRole('button',{name:'开始听课文',exact:true}).click();
+  await courseButton(story, "startVoicedStory").click();
   await page.locator('.stage-needs').getByRole('button',{name:"She likes tomatoes, but she doesn't want any.",exact:true}).click();
   expect(await page.evaluate(()=>window.unitAudio[0].paused)).toBe(true);
   await page.evaluate(()=>window.unitAudio[0].dispatchEvent(new Event('ended')));

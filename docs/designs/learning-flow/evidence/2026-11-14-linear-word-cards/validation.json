@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-14",
+  "scope": "Lesson1–12 continuous word pages and left aligned sparse rows",
+  "pages": 24,
+  "words": 132,
+  "runs": [
+    {
+      "name": "phones-final",
+      "status": "passed",
+      "failedTests": []
+    },
+    {
+      "name": "account-final",
+      "status": "passed",
+      "failedTests": []
+    }
+  ],
+  "browserTests": 28,
+  "accountTests": 7,
+  "nodeTests": 12,
+  "devices": [
+    {
+      "id": "chrome-iphone-se",
+      "viewport": {
+        "width": 375,
+        "height": 667
+      }
+    },
+    {
+      "id": "chrome-iphone-14-pro-max",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      }
+    },
+    {
+      "id": "chrome-iphone-16-pro-max",
+      "viewport": {
+        "width": 440,
+        "height": 956
+      }
+    }
+  ],
+  "limitations": [
+    "No physical phone/WeChat/Quark test",
+    "No unrelated full CI",
+    "No commit/push/deployment"
+  ]
+}

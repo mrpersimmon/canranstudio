@@ -34,7 +34,7 @@
           // possible. Independent transfer questions never include this panel.
           intro.insertBefore(demo, heading);
         }
-        rule = node('p', q.rule || '', 'grammar-rule'); rule.hidden = true;
+        rule = node('p', core.unit12?.copy?.questions?.[question.id]?.rule ?? q.rule ?? '', 'grammar-rule'); rule.hidden = true;
         element.querySelector('.practice-answer-note').append(rule);
       },
       answer(value) { if (rule) rule.hidden = value === null || !rule.textContent; },

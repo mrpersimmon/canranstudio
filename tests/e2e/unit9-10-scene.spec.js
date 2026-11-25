@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 // Historical expectations run on a complete frozen HTTP course package.
 require('../support/unit910-legacy').historicalSuite(test);
@@ -14,7 +15,7 @@ test('聊到的朋友按原文出现，不把 Tony 和 Emma 放进对话角色',
  await expect(friends).toHaveCount(1);
  await expect(friends.getByText('Tony',{exact:true})).not.toBeVisible();
  for(let i=0;i<10;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  await courseButton(room, i?'下一句':"startStory").click();
   if(i===5)await expect(friends.getByText('Tony',{exact:true})).not.toBeVisible();
   if(i===6){await expect(friends.getByText('Tony',{exact:true})).toBeVisible();await expect(friends).not.toContainText("He's fine.");}
   if(i===7){await expect(friends).toContainText("He's fine.");await expect(friends.getByText('Emma',{exact:true})).not.toBeVisible();}
@@ -34,9 +35,9 @@ test('手机对白占整行，人物在下方；桌面人物落在同一地面',
   if(width<701){expect(l.width).toBeGreaterThan(s.width*.85);expect(a.y).toBeGreaterThanOrEqual(l.y+l.height-2);}
   expect(await log.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  const room=page.locator('.stage-text');if(width===320)await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();else await room.getByRole('button',{name:'重新上演',exact:true}).click();
+  const room=page.locator('.stage-text');if(width===320)await expect(courseButton(room, "startStory")).toBeVisible();else await room.getByRole('button',{name:'重新上演',exact:true}).click();
   for(let i=0;i<10;i++){
-   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+   await courseButton(room, i?'下一句':"startStory").click();
    if(i===2)await capture(page,`story-3-${width}`);
    if(i===3){
     const tools=room.locator('.stage-ctrl'),before=await tools.evaluate(el=>el.getBoundingClientRect().top+scrollY);
@@ -55,7 +56,7 @@ test('问候接力包含选答和拼句，只有正确检查后才出现回应',
  await page.goto('/unit9-10/#learn/reply');const room=page.locator('.stage-reply');
  await expect(room).toContainText('第 1 / 3 题');const response=room.locator('.greeting-response');
  await room.getByRole('button',{name:"I'm Italian.",exact:true}).click();await expect(response).toBeHidden();
- await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(response).toBeHidden();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(response).toBeHidden();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"I'm fine, thanks.",exact:true}).click();await expect(response).toBeHidden();
  await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(response).toHaveText("I'm fine, thanks.");
  await page.reload();await expect(response).toHaveText("I'm fine, thanks.");await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(response).toBeHidden();
@@ -81,7 +82,7 @@ for(const width of [320,390,1280])test(`${width} 问候正确回应出现后操�
  for(const [i,answer]of answers.entries()){
   if(Array.isArray(answer)){for(const token of answer)await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();}else await room.getByRole('button',{name:answer,exact:true}).click();
   const before=await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY);await check.click();expect(await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
-  await capture(page,`reply-${i+1}-${width}`);await room.getByRole('button',{name:i===2?'完成这一站':'下一题',exact:true}).click();
+  await capture(page,`reply-${i+1}-${width}`);await courseButton(room, i===2?"finishPractice":'下一题').click();
  }
  const finish=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(finish.getByRole('button')).toHaveCount(2);await capture(page,`reply-finish-${width}`);
 });

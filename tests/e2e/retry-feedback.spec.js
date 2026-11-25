@@ -1,3 +1,4 @@
+const {courseButton,incorrectFeedback,openLearningRecord}=require('../support/course-controls');
 require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -13,7 +14,7 @@ test('只改线索保留已完成活动，内容版本变化不能沿用完成�
   const responses=[['Is','this','your','pen?'],['Yes,','it','is.']];
   for(let i=0;i<responses.length;i++){
     for(const token of responses[i])await room.getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:token,exact:true}).click();
-    await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i===responses.length-1?'完成这一站':'下一题',exact:true}).click();
+    await room.getByRole('button',{name:'检查答案',exact:true}).click();await courseButton(room, i===responses.length-1?"finishPractice":'下一题').click();
   }
   await page.goto('/tests/fixtures/unit1-2-types-before/#cover');await expect(page.locator('#starCount')).toHaveText('1');
   await page.unroute('**/tests/fixtures/unit1-2-types-before/content.js*');await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
@@ -30,7 +31,7 @@ for(const advance of [false,true])test('旧分拣真实错答记录升级，已�
   await page.unroute('**/core/lesson49-subjects.js*');await page.reload();
   await expect(room.locator('#tpItemText')).toHaveText(advance?'Mrs. Bird and her husband':'Mrs. Bird');
   if(advance){await room.getByRole('button',{name:'第一人称',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();}
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await page.reload();
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await page.reload();
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await expect(room.locator('#tpItemText')).toHaveText(advance?'Mrs. Bird and her husband':'Mrs. Bird');
   await room.getByRole('button',{name:advance?'第三人称复数':'第三人称单数',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
@@ -48,7 +49,7 @@ for(const [course,stage,right,wrong] of [['unit1-2','trans','Is this your book?'
     if(course==='unit41-42'){const f=require('../support/unit4142-v153');for(let i=0;i<3;i++){await f.select(room,f.ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}}
     const wrongOption=wrong?room.getByRole('button',{name:wrong,exact:true}):room.locator('.practice-options button').filter({hasNotText:right}).first();
     await wrongOption.click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-    await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '再看看。' : '再看看，试一次。');
+    await expect(room.getByRole('status')).toHaveText(course === 'unit1-2' ? '答错了，再试试。' : await incorrectFeedback(room));
     await expect(room.locator('.practice-options .good,.practice-options .correct')).toHaveCount(0);
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
     await room.getByRole('button',{name:right,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
@@ -133,7 +134,7 @@ for(const path of ['lesson49','unit49-50'])test(path+' 旧版分拣答错原题�
   if(path==='unit49-50')await require('../support/unit4950-legacy').legacy(page);
   await page.goto('/'+path+'/#learn/subjects');const room=page.locator('.stage-subjects');
   await room.getByRole('button',{name:'第一人称',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await page.reload();await room.getByRole('button',{name:'再试一次',exact:true}).click();
   await expect(room.locator('#tpItemText')).toHaveText('Mrs. Bird');
   await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
@@ -147,14 +148,14 @@ test('Lesson13–14首次和连续答错只提示重试，刷新不泄题，改�
   await page.goto('/unit13-14/#learn/listen');const room=page.locator('.stage-listen');
   for(const wrong of ['职业','姓名']){
     await room.getByRole('button',{name:wrong,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
-    await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+    await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
-    await page.reload();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+    await page.reload();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
     await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
   }
   await room.getByRole('button',{name:'颜色',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();
   await expect(room.getByRole('status')).toHaveText('答对了！');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','1');
-  await page.getByRole('button',{name:'学习手记',exact:true}).click();await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('修正后完成');
-  await expect(page.getByRole('dialog',{name:'学习手记',exact:true})).toContainText('提交 3 次');
+  await openLearningRecord(page);await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toContainText('本轮订正完成');
+  await expect(page.getByRole('dialog',{name:'学习记录',exact:true})).toContainText('提交 3 次');
 });

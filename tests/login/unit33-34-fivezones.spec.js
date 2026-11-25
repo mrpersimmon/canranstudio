@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin: loginStudent } = require('./helpers');
 // Student windows are fresh contexts: carry mobile settings into them too.
@@ -8,7 +9,7 @@ const { activity, story } = require('../support/unit3334-fivezones');
 const {courseResponse}=require('../support/course-response-faults');
 // Wait for real course readiness before examining content. Windows WebKit can
 // spend more than five seconds preparing the complete protected package.
-async function ready(page){const start=Date.now();await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
+async function ready(page){const start=Date.now();await readyCourse(page);test.info().annotations.push({type:'course-ready',description:String(Date.now()-start)+'ms after navigation'});}
 
 test.afterEach(async({request})=>{await request.post('/__test__/course-responses',{data:{reset:true}});});
 test.use({actionTimeout:10000,...(process.env.UNIT3334_BROWSER==='webkit'?{...require('@playwright/test').devices['iPhone 13'],browserName:'webkit'}:{})});
@@ -161,7 +162,7 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
     await courseResponse(p,pattern);await loader.getByRole('button',{name:'再试一次',exact:true}).click();
     await expect(p.locator('.unit-word')).toHaveCount(6,{timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
-    await p.getByRole('button',{name:'下一组词卡',exact:true}).click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
+    await courseButton(p, "nextWords").click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
     await p.getByRole('link',{name:'我的课程',exact:true}).click();
     const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
     await p.locator('.course').getByRole('link',{name:/学习/}).click();await ready(p);

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 
 test.use({ viewport: { width: 1100, height: 900 }, reducedMotion: 'reduce' });
@@ -13,7 +14,12 @@ function contrast(a, b) {
 }
 const appearance = locator => locator.evaluate(element => {
   const s = getComputedStyle(element);
-  return { background: s.backgroundColor, foreground: s.color, border: s.borderTopColor, borderWidth: s.borderTopWidth };
+  let coverage=0;const color=[0,0,0];
+  for(let node=element;node&&coverage<1;node=node.parentElement){
+    const values=getComputedStyle(node).backgroundColor.match(/[\d.]+/g).map(Number);
+    const weight=(1-coverage)*(values[3]??1);for(let i=0;i<3;i++)color[i]+=weight*values[i];coverage+=weight;
+  }
+  return {background:'rgb('+color.map(component=>Math.round(component+(1-coverage)*255)).join(', ')+')',foreground:s.color,border:s.borderTopColor,borderWidth:s.borderTopWidth};
 });
 
 test('两单元有清晰的冷暖场景，图鉴与答题区有层次，选项和操作仍遵循同一视觉规则', async ({ page }) => {
@@ -21,7 +27,9 @@ test('两单元有清晰的冷暖场景，图鉴与答题区有层次，选项�
   for (const unit of ['unit1-2', 'unit49-50']) {
     await page.goto(`/${unit}/#learn/text`);
     await page.evaluate(() => document.fonts.ready);
-    const story = await appearance(page.locator('.stage-text'));
+    const expected=unit==='unit1-2'?'street-world-v1.webp':'world-market-v1.webp';
+    await expect(page.locator('.stage-text .dialogue-stage').first()).toHaveCSS('background-image',new RegExp(expected));
+    const story = await appearance(page.locator('.stage-text .dialogue-stage').first());
     await page.goto(`/${unit}/#learn/words`);
     const shelf = await appearance(page.locator('.stage-words'));
     const card = await appearance(page.locator('.unit-word').first());
@@ -34,14 +42,12 @@ test('两单元有清晰的冷暖场景，图鉴与答题区有层次，选项�
     await expect(check).toBeDisabled();
     views.push({ story, shelf, card, option: options[0], action: await appearance(check) });
   }
-  // A child can distinguish the two settings without interpreting a label.
-  const blue = rgb(views[0].story.background), peach = rgb(views[1].story.background);
-  expect.soft(blue[2] - blue[0], '相遇故事使用可辨识的浅蓝场景').toBeGreaterThan(8);
-  expect.soft(peach[0] - peach[2], '采购故事使用暖桃场景').toBeGreaterThan(16);
+  // The two approved illustrations establish the destination. The studio's
+  // activity panels use the common course treatment.
   for (const view of views) {
     expect(view.shelf.background).not.toBe(view.story.background);
     expect(view.shelf.background).not.toBe(view.card.background);
-    expect(contrast(view.card.border, view.card.background)).toBeGreaterThan(contrast(view.shelf.border, view.shelf.background));
+    expect(contrast(view.card.foreground, view.card.background),'词卡上的文字必须可读').toBeGreaterThanOrEqual(4.5);
   }
   expect(views[0].option).toEqual(views[1].option);
   expect(views[0].action).toEqual(views[1].action);
@@ -94,7 +100,7 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     await page.goto(`/${unit}/#learn/text`);
     await page.evaluate(() => document.fonts.ready);
     const story = page.locator('.stage-text');
-    await story.getByRole('button', { name: unit==='unit1-2'?'开始故事':'开始看课文', exact: true }).click();
+    await courseButton(story, unit==='unit1-2'?'开始故事':"startStory").click();
     await story.getByRole('button', { name: '下一句', exact: true }).click();
     await story.screenshot({ path: `output/playwright/unit-theme/${unit}-story-${width}.png` });
     const people = story.locator('.char,.dialogue-actor');
@@ -114,7 +120,7 @@ for (const width of [320, 1100]) for (const unit of ['unit1-2', 'unit49-50']) {
     await page.goto(`/${unit}/#learn/words`);
     const words = page.locator('.stage-words');
     await words.screenshot({ path: `output/playwright/unit-theme/${unit}-words-${width}.png` });
-    const prev = words.getByRole('button', { name: unit === 'unit1-2' ? '上一组' : '上一组词卡', exact: true }), next = words.getByRole('button', { name: unit === 'unit1-2' ? '下一组' : '下一组词卡', exact: true });
+    const prev = courseButton(words, unit === 'unit1-2' ? '上一组' : "previousWords"), next = courseButton(words, unit === 'unit1-2' ? '下一组' : "nextWords");
     await expect(prev).toBeDisabled();
     const a = await prev.boundingBox(), b = await next.boundingBox();
     expect(a.y).toBeCloseTo(b.y, 0); expect(Math.min(a.height, b.height)).toBeGreaterThanOrEqual(44);

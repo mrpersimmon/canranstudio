@@ -1,0 +1,72 @@
+{
+  "asset": "attendant-v1",
+  "date": "2026-11-01",
+  "engine": "built-in image_gen.imagegen",
+  "reference": "assets/course-journey/umbrella-counter-v1.webp",
+  "identity": "Original right-side cloakroom attendant: bald, brown side hair and moustache, cream shirt, plum vest and bowtie, blank golden badge.",
+  "files": {
+    "png": "assets/unit3-4-journey/attendant-v1.png",
+    "webp": "assets/unit3-4-journey/attendant-v1.webp"
+  },
+  "sourceGeneratedFile": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-a6b4-7c02-b7d8-1c41ed24eb54/exec-a7031b3a-b3e5-42ca-8f10-c9d10bfd0a11.png",
+  "generationPrompt": "Create a production-ready transparent character asset for the children's English learning town. The attached image is the STRICT CHARACTER IDENTITY AND STYLE REFERENCE. Use only the older cloakroom attendant on the RIGHT of the reference; do not include the young customer, umbrella, coat, desk, or any surrounding object.\nExactly one full-body older male attendant, matching this same face: large round bald head, small brown hair patches at both sides, warm peach skin and rosy cheeks, distinctive broad curved brown moustache, small friendly eyes, cream-white long-sleeved shirt, plum/burgundy waistcoat, deep plum bow tie, a small blank golden rectangular name badge. Extend the lower body naturally with charcoal brown trousers and rounded brown shoes. Keep the approved stylized proportions: about 2.8 heads tall, a large round head and short compact body. Warm dark-brown hand-inked outlines, clear silhouettes, softly shaded storybook colors and subtle warm upper-left lighting, matching the supplied cartoon precisely, not a realistic 3D render, not skinny or elongated.\nPose: three-quarter body and face turned to the LEFT, facing an off-canvas customer. The hand on the LEFT side of the canvas is extended toward the customer with palm facing gently upward in a polite asking gesture. The other hand is held naturally forward near the waist, suitable for placing behind a separate counter later. Both hands must be EMPTY. All fingers and complete shoes present, no cropped limbs.\nComposition: portrait 1024x1536 canvas, centered full figure, generous enough alpha padding for every hand and shoe but no giant empty border. True transparent RGBA background including all space around and between limbs. No baked checkerboard, no white background, no floor, no cast shadow outside the figure, no panel, no caption, no text, no logo, no counter, no furniture, no second person, no prop, no umbrella, no coat, no ticket. This is a single isolated character cutout for an interactive lesson scene.",
+  "targetedEditPrompt": "Edit the attached image ONLY to clean up the alpha background. Preserve this exact attendant, pose, face, clothing, colors, shading, canvas size 1024x1536 and placement. Remove ALL brown glow, haze, vignette, blurred brown shadow and halo outside the character's hard dark-brown contour, especially around the head, extended hand and shoes. Pixels outside the closed character silhouette must be fully transparent (alpha 0), with only a very narrow antialiased outline. Inside the character must be solid opaque, including white shirt and skin. No cast shadow or floor. Do not change the drawing. Do not add a white, black or checkerboard background. Deliver clean production transparent RGBA PNG suitable for compositing over a light cream illustrated wall; the current large brown aura is unwanted.",
+  "firstGeneratedFile": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-a6b4-7c02-b7d8-1c41ed24eb54/exec-cf83e026-52d2-415a-a409-d2a56132291c.png",
+  "transparentBackground": true,
+  "metrics": {
+    "width": 1024,
+    "height": 1536,
+    "channels": 4,
+    "alphaBoundsThreshold": 16,
+    "alphaBounds": [
+      54,
+      137,
+      934,
+      1382
+    ],
+    "normalizedBounds": [
+      0.052734375,
+      0.08919270833333333,
+      0.912109375,
+      0.8997395833333334
+    ],
+    "transparentFraction": 0.6247641245524088,
+    "maxAlpha": 254,
+    "pngBytes": 1283342,
+    "webpBytes": 111016,
+    "pngSha256": "425684506d9831f06357823b9eb824aa5bf0ad8dcc06bdb3c31f010097fbe70f"
+  },
+  "anchorsNormalizedToFullCanvas": {
+    "bodyAxisX": 0.61,
+    "ground": [
+      0.61,
+      0.9
+    ],
+    "leftPalmCenter": [
+      0.143,
+      0.4
+    ],
+    "frontHandCenter": [
+      0.66,
+      0.56
+    ],
+    "leftShoeSole": [
+      0.48,
+      0.87
+    ],
+    "rightShoeSole": [
+      0.74,
+      0.895
+    ]
+  },
+  "inspection": {
+    "accepted": true,
+    "notes": [
+      "Inspected original generated image and cream-background alpha composite. Outside brown RGB was found to have alpha 0 rather than an actual visible halo; final chosen targeted revision composites cleanly.",
+      "Figure fully present with complete shoes and hands; no desk or unrelated props; about 3 heads tall and warm outlined rendering matches reference.",
+      "No code matting or geometric alteration applied. WebP is only format/compression conversion; original PNG preserved.",
+      "No browser rendering performed by asset agent; parent must verify final scale/placement with counter and other actor."
+    ],
+    "qaComposite": "output/unit34-attendant-qa/cream-composite.png"
+  }
+}

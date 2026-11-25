@@ -8,7 +8,7 @@ function storyProps(){
  const desktop={television:[[80,30,20,32]],magazines:[[84,30,14,7]],table:[[31,58,37,33]],newspapers:[[39,60,24,14]],armchairs:[[1,46,31,43],[68,54,30,42]],stereo:[[21,29,23,25]],books:[[25,29,8,10]],pictures:[[26,11,15,17],[45,15,11,15]]};
  const phone={television:[[76,34,24,24]],magazines:[[82,34,15,4]],table:[[32,60,36,26]],newspapers:[[38,61,25,11]],armchairs:[[1,51,32,33],[67,56,32,34]],stereo:[[20,33,28,20]],books:[[24,33,10,8]],pictures:[[24,16,18,15],[44,19,13,13]]};
  const targets=['room','television','television','magazines','table','newspapers','armchairs','armchairs','stereo','stereo','books','pictures','pictures'];
- let index=-1;function draw(){const target=targets[index]||'room';element.dataset.focus=target;frame.querySelectorAll('.living-room-focus').forEach(e=>e.remove());for(const[x,y,w,h]of(matchMedia('(max-width:600px)').matches?phone:desktop)[target]||[]){const focus=node('span','living-room-focus');focus.setAttribute('aria-hidden','true');Object.assign(focus.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});frame.append(focus);}}
+ let index=-1;function draw(){const target=targets[index]||'room';element.dataset.focus=target;frame.querySelectorAll('.living-room-focus').forEach(e=>e.remove());for(const[x,y,w,h]of(!core.learningVisual?.fullScene&&matchMedia('(max-width:600px)').matches?phone:desktop)[target]||[]){const focus=node('span','living-room-focus');focus.setAttribute('aria-hidden','true');Object.assign(focus.style,{left:x+'%',top:y+'%',width:w+'%',height:h+'%'});frame.append(focus);}}
  addEventListener('resize',draw);return{element,update(i){index=i;draw();}};
 }
 function create({element}){let status,heading;return{

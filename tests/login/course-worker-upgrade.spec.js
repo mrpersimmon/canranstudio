@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os'),crypto=require('node:crypto');
 const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
 const {adminLogin,createStudent,signIn}=require('./helpers');
@@ -46,7 +47,7 @@ for(const updateFails of [false,true])test((updateFails?'更新失败阻止旧Wo
       await courseResponse(p,base+'core/subpath-worker.js',null);
       await p.getByRole('button',{name:'再试一次',exact:true}).click();
     }else await courseResponse(p,base+'core/subpath-worker.js',null,{resumeHeld:true});
-    await expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
+    await readyCourse(p);await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect((await hello(p)).archiveAssets).toBe(true);
     const scene=base+'awards/history-assets/unit1-2/assets/awards/unit1-2-handbag-closeup.webp';
     const direct=await p.request.get(scene);expect(direct.status()).toBe(200);

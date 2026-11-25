@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises');
@@ -17,7 +18,7 @@ async function oldEdition(page) {
 
 test('15–16 两题旧挑战完成后保留有效题，新增题亲自补完才重新领证', async ({ page }) => {
   test.setTimeout(90000); const upgrade = await oldEdition(page); await oldFlow.completeUnit1516(page);
-  await page.goto('/unit15-16/#learn/words'); await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await page.goto('/unit15-16/#learn/words'); await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.goto('/unit15-16/#learn/certificate');
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('出行小伙伴');
   await page.getByRole('button', { name: '领取单元证书', exact: true }).click();
@@ -58,8 +59,8 @@ test('15–16 整课准备后，首次与断网复访翻词卡和剧情换物都
     for(const name of ['下一组词卡','下一组词卡','下一组词卡','上一组词卡','上一组词卡','上一组词卡']){
       await page.locator('.stage-words').getByRole('button',{name,exact:true}).click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
     }
-    await page.getByRole('link',{name:'护照小故事',exact:true}).click();const room=page.locator('.stage-text');if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();
-    for(let i=0;i<18;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
+    await page.getByRole('link',{name:'护照小故事',exact:true}).click();const room=page.locator('.stage-text');if(await room.getByRole('button',{name:'重新上演',exact:true}).isVisible())await room.getByRole('button',{name:'重新上演',exact:true}).click();else await expect(courseButton(room, "startStory")).toBeVisible();
+    for(let i=0;i<18;i++){await courseButton(room, i?'下一句':"startStory").click();await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));}
     const failures=await page.evaluate(()=>{window.watchCourse=false;window.paintObserver.disconnect();return window.paintFailures;});expect(failures).toEqual([]);
     await context.setOffline(false);
   }
@@ -70,10 +71,10 @@ test('15–16 旧草稿只是选择，升级、返回与刷新都不代为判对
   await selectAnswer(room, EXAM[0].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[1].answer); upgrade(); await page.reload();
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expectNoVerdict(room.getByRole('status'));
   await expect(room.getByRole('button', { name: '暂停，稍后继续', exact: true })).toHaveCount(0); await page.reload(); await expect(room.getByRole('button', { name: '继续挑战', exact: true })).toHaveCount(0);
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1'); await expectNoVerdict(room.getByRole('status'));
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '2'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
   await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
@@ -87,7 +88,7 @@ test('15–16 断网刷新受阻，联网恢复新增题的未提交词块，下
   await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: 'What', exact: true }).click();
   await context.setOffline(true); const response = await reloadWithLatestCheck(page, context); expect(response.headers()['x-course-offline']).toBe('1');
   await expect(room.getByRole('button', { name: '撤回 What', exact: true })).toBeVisible();
-  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '5'); await expect(room.getByRole('status')).toBeEmpty();
+  await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '5'); await expectNoVerdict(room.getByRole('status'));
   for (const token of ['colour','are','your','cases?']) await room.getByRole('group', { name: '待选词块', exact: true }).getByRole('button', { name: token, exact: true }).click();
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await expect(room).toContainText('第 7 / 11 题'); await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
@@ -104,7 +105,7 @@ test('15–16 断网刷新受阻，联网恢复对白后仍展示已读的最后
   });
   await page.goto('/lesson/unit15-16/#learn/text'); await expect(page.locator('#courseLoader')).toHaveCount(0);
   const room = page.locator('.stage-text'), log = room.getByRole('log');
-  for (let i=0; i<18; i++) await room.getByRole('button', { name:i?'下一句':'开始看课文', exact:true }).click();
+  for (let i=0; i<18; i++) await courseButton(room, i?'下一句':"startStory").click();
   await context.setOffline(true); await reloadWithLatestCheck(page, context); await expect(page.locator('#courseLoader')).toHaveCount(0);
   await expect(room.locator('.dialogue-status')).toHaveText('18 / 18');
   await expect(log.locator('.bubble-row').last()).toBeInViewport({ ratio:1 });

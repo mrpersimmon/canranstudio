@@ -1,0 +1,577 @@
+{
+  "verifiedAt": "2026-11-23T06:41:24.023027+00:00",
+  "site": "https://preview.canranstudio.cn",
+  "publicationScope": "independent phone preview",
+  "snapshot": "review-art-font-20261123-76cf98f48483",
+  "priorSnapshot": "review-first-course-20261121-f1cf3c9367fd",
+  "sourceCommit": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "sourceIsWorkingTreeSnapshot": true,
+  "snapshotManifestSha256": "2ff34c43c1d953fafbff44d62f6035022622304d2261315183977eabce38a8bd",
+  "deliverySha256": "1921cc8bca6b58994865117b32077dcb3e89f4d8c5de2388c20b374e75527655",
+  "publicationSha256": "ee5416854b05970c15635cbd25dbf3676d167206702904735c7e53792b299304",
+  "sourceFilesChecked": 8452,
+  "changedRuntimeFiles": 9,
+  "protectedUnits": 72,
+  "officialReleaseVerified": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+  "officialServiceRestarted": false,
+  "rollback": {
+    "kept": "review-first-course-20261121-f1cf3c9367fd",
+    "backup": "/var/backups/canran-mobile-review-art-font-20261123-76cf98f48483/before",
+    "overwritesNewProgress": false
+  },
+  "publicPackageBodies": {
+    "unit45-46": {
+      "before": {
+        "unit": "unit45-46",
+        "revision": "a1f628bcf68731da065796d7526c79d01565e89399211600ed668542f026e2ca",
+        "requiredHttpResponses": 209,
+        "verifiedResponseBodyBytes": 15135700,
+        "manifestBodyBytes": 56593
+      },
+      "after": {
+        "unit": "unit45-46",
+        "revision": "18babf6cdd698a3f79d9e35b51de4a49afe0a1c65a83c9c0977013fae35e617a",
+        "requiredHttpResponses": 198,
+        "verifiedResponseBodyBytes": 9345033,
+        "manifestBodyBytes": 72832
+      },
+      "requiredBytesSaved": 5790667,
+      "reductionPercent": 38.26,
+      "bytesSavedIncludingManifest": 5774428
+    },
+    "unit47-48": {
+      "before": {
+        "unit": "unit47-48",
+        "revision": "4f0472a1087639b0a3828a5b47df7128908d1b9f87b53dbeef94e18f845a8a74",
+        "requiredHttpResponses": 194,
+        "verifiedResponseBodyBytes": 12570294,
+        "manifestBodyBytes": 53043
+      },
+      "after": {
+        "unit": "unit47-48",
+        "revision": "f5965206bf4ab4fffa2e0824b6490f542e5f991f71e8eaf5e09d0ac662774123",
+        "requiredHttpResponses": 193,
+        "verifiedResponseBodyBytes": 10928169,
+        "manifestBodyBytes": 53897
+      },
+      "requiredBytesSaved": 1642125,
+      "reductionPercent": 13.06,
+      "bytesSavedIncludingManifest": 1641271
+    }
+  },
+  "publicChecks": {
+    "origin": "https://preview.canranstudio.cn",
+    "publicManifests": 72,
+    "oldManifests": 3,
+    "fullSvgKeys": 17,
+    "uniqueFullSvgDownloads": 16,
+    "sharedPngDownloads": 4,
+    "anonymousAccessProtected": true,
+    "twoHttpRanges": {
+      "prefixBytes": 1048576,
+      "suffixBytes": 3408080,
+      "verifiedCompleteBytes": 4456656,
+      "verifiedSha256": "8184a5400f5cbf86843ec3e386b7003e9b76638f43dd937747f8b83667173b7f"
+    },
+    "existingStudentOriginalCards": 2,
+    "archivedCertificates": 0
+  },
+  "afterCutoverAudit": {
+    "baselineRows": {
+      "classes": 4,
+      "students": 28,
+      "student_numbers": 28,
+      "admin": 1,
+      "progress": 26,
+      "unit_awards": 19,
+      "learning_courses": 29,
+      "learning_submissions": 187,
+      "learning_students": 28,
+      "learning_availability": 76,
+      "system_upgrades": 0,
+      "course_upgrade_state": 0,
+      "certificate_archives": 0
+    },
+    "allBaselineRowsPreserved": true,
+    "earnedZones": 22,
+    "firstFullStarDates": 1,
+    "keyUnchanged": true,
+    "sqliteIntegrity": true,
+    "previousThreeManifestsPreserved": true,
+    "originalSvgObjects": 17,
+    "verifiedLayerObjects": 4
+  },
+  "afterStudentTestsAudit": {
+    "baselineRows": {
+      "classes": 4,
+      "students": 28,
+      "student_numbers": 28,
+      "admin": 1,
+      "progress": 26,
+      "unit_awards": 19,
+      "learning_courses": 29,
+      "learning_submissions": 187,
+      "learning_students": 28,
+      "learning_availability": 76,
+      "system_upgrades": 0,
+      "course_upgrade_state": 0,
+      "certificate_archives": 0
+    },
+    "allBaselineRowsPreserved": true,
+    "earnedZones": 22,
+    "firstFullStarDates": 1,
+    "keyUnchanged": true,
+    "sqliteIntegrity": true,
+    "previousThreeManifestsPreserved": true,
+    "originalSvgObjects": 17,
+    "verifiedLayerObjects": 4
+  },
+  "studentJourney": {
+    "freshStudent": {
+      "confirmedStars": 1,
+      "reloadedStars": 1,
+      "milestones": [
+        "directory-ready",
+        "first-course-words",
+        "earned-one-star-and-synced",
+        "reloaded-one-star"
+      ]
+    },
+    "existingStudentAlbum": [
+      {
+        "device": "iPhone SE",
+        "viewport": {
+          "width": 375,
+          "height": 667
+        },
+        "retries": [],
+        "gif": {
+          "width": 984,
+          "height": 528,
+          "bytes": 536769
+        },
+        "marks": [
+          "opened-original-card",
+          "saved-original-gif",
+          "original-stars-and-date-preserved"
+        ]
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        },
+        "retries": [
+          "重试切换"
+        ],
+        "gif": {
+          "width": 984,
+          "height": 528,
+          "bytes": 536769
+        },
+        "marks": [
+          "retry-重试切换",
+          "opened-original-card",
+          "saved-original-gif",
+          "original-stars-and-date-preserved"
+        ]
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "viewport": {
+          "width": 440,
+          "height": 956
+        },
+        "retries": [],
+        "gif": {
+          "width": 984,
+          "height": 528,
+          "bytes": 536769
+        },
+        "marks": [
+          "opened-original-card",
+          "saved-original-gif",
+          "original-stars-and-date-preserved"
+        ]
+      }
+    ]
+  },
+  "testAccounts": {
+    "testStudentsCreatedAfterCutover": 11,
+    "stillActive": 0
+  },
+  "firstCourse": {
+    "networkCondition": "public HTTPS; Chromium page emulated at 10 Mbps and 150 ms additional latency; worker uses the actual connection",
+    "browserStores": "empty at start of each dwell",
+    "phones": [
+      {
+        "device": "iPhone SE",
+        "cssPixels": [
+          375,
+          667
+        ],
+        "priorFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "arrival": "L05",
+            "courseOpened": false,
+            "observedAfterClickMs": 45758,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 63079,
+            "clickToQuestionMs": 58679,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 69496,
+            "clickToQuestionMs": 62077,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          }
+        ],
+        "candidateFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "loginToQuestionMs": 65427,
+            "clickToQuestionMs": 61997,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 67212,
+            "clickToQuestionMs": 61764,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 81679,
+            "clickToQuestionMs": 73747,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "stored-prefix",
+            "dwellMs": 17113,
+            "loginToQuestionMs": 73511,
+            "clickToQuestionMs": 53976,
+            "homeBytes": 536008,
+            "courseBytes": 3932368,
+            "reusedBytes": 524288,
+            "repeatedBytes": 11720,
+            "largeFontBytes": 4456656,
+            "rangeResponses": [
+              {
+                "font": "award-gothic-500.woff2",
+                "status": 206,
+                "range": "bytes=524288-",
+                "contentRange": "bytes 524288-4456655/4456656",
+                "bytes": 3932368
+              }
+            ]
+          }
+        ],
+        "browserArtwork": [
+          {
+            "unit": "unit45-46",
+            "revision": "18babf6cdd698a3f79d9e35b51de4a49afe0a1c65a83c9c0977013fae35e617a",
+            "requests": 198,
+            "requiredBodyBytes": 9345033,
+            "manifestBytes": 72832,
+            "layerRequests": 3,
+            "originalImagesChecked": 15,
+            "encodedRequiredBodyBytes": 9345033,
+            "transferBytesIncludingHeaders": null
+          },
+          {
+            "unit": "unit47-48",
+            "revision": "f5965206bf4ab4fffa2e0824b6490f542e5f991f71e8eaf5e09d0ac662774123",
+            "requests": 193,
+            "requiredBodyBytes": 10928169,
+            "manifestBytes": 53897,
+            "layerRequests": 1,
+            "originalImagesChecked": 2,
+            "encodedRequiredBodyBytes": 10928169,
+            "transferBytesIncludingHeaders": null
+          }
+        ]
+      },
+      {
+        "device": "iPhone 14 Pro Max",
+        "cssPixels": [
+          430,
+          932
+        ],
+        "priorFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "loginToQuestionMs": 51195,
+            "clickToQuestionMs": 49314,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 62413,
+            "clickToQuestionMs": 54431,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 75213,
+            "clickToQuestionMs": 68330,
+            "homeBytes": 60872,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 60872,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          }
+        ],
+        "candidateFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "loginToQuestionMs": 60362,
+            "clickToQuestionMs": 57964,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 64197,
+            "clickToQuestionMs": 60363,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 85548,
+            "clickToQuestionMs": 77149,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          }
+        ],
+        "browserArtwork": [
+          {
+            "unit": "unit45-46",
+            "revision": "18babf6cdd698a3f79d9e35b51de4a49afe0a1c65a83c9c0977013fae35e617a",
+            "requests": 198,
+            "requiredBodyBytes": 9345033,
+            "manifestBytes": 72832,
+            "layerRequests": 3,
+            "originalImagesChecked": 15,
+            "encodedRequiredBodyBytes": 9345033,
+            "transferBytesIncludingHeaders": null
+          },
+          {
+            "unit": "unit47-48",
+            "revision": "f5965206bf4ab4fffa2e0824b6490f542e5f991f71e8eaf5e09d0ac662774123",
+            "requests": 193,
+            "requiredBodyBytes": 10928169,
+            "manifestBytes": 53897,
+            "layerRequests": 1,
+            "originalImagesChecked": 2,
+            "encodedRequiredBodyBytes": 10928169,
+            "transferBytesIncludingHeaders": null
+          }
+        ]
+      },
+      {
+        "device": "iPhone 16 Pro Max",
+        "cssPixels": [
+          440,
+          956
+        ],
+        "priorFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "arrival": "L05",
+            "courseOpened": false,
+            "observedAfterClickMs": 48737,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 77730,
+            "clickToQuestionMs": 71798,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 109877,
+            "clickToQuestionMs": 101442,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          }
+        ],
+        "candidateFontTrials": [
+          {
+            "trigger": "fixed",
+            "dwellMs": 0,
+            "loginToQuestionMs": 71578,
+            "clickToQuestionMs": 67111,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 2000,
+            "loginToQuestionMs": 67844,
+            "clickToQuestionMs": 61879,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          },
+          {
+            "trigger": "fixed",
+            "dwellMs": 5000,
+            "loginToQuestionMs": 59378,
+            "clickToQuestionMs": 52496,
+            "homeBytes": 0,
+            "courseBytes": 4456656,
+            "reusedBytes": 0,
+            "repeatedBytes": 0,
+            "largeFontBytes": 4456656,
+            "rangeResponses": []
+          }
+        ],
+        "browserArtwork": [
+          {
+            "unit": "unit45-46",
+            "revision": "18babf6cdd698a3f79d9e35b51de4a49afe0a1c65a83c9c0977013fae35e617a",
+            "requests": 198,
+            "requiredBodyBytes": 9345033,
+            "manifestBytes": 72832,
+            "layerRequests": 3,
+            "originalImagesChecked": 15,
+            "arrivalErrors": [],
+            "encodedRequiredBodyBytes": 9345033,
+            "transferBytesIncludingHeaders": null
+          },
+          {
+            "unit": "unit47-48",
+            "revision": "f5965206bf4ab4fffa2e0824b6490f542e5f991f71e8eaf5e09d0ac662774123",
+            "requests": 193,
+            "requiredBodyBytes": 10928169,
+            "manifestBytes": 53897,
+            "layerRequests": 1,
+            "originalImagesChecked": 2,
+            "arrivalErrors": [],
+            "encodedRequiredBodyBytes": 10928169,
+            "transferBytesIncludingHeaders": null
+          }
+        ]
+      }
+    ]
+  },
+  "weakNetworkRegression": {
+    "oldPage": "L05 at 90 percent when the 1200 ms local worker deadline expired before a valid course permit",
+    "newNetworkDeadlineMs": 15000,
+    "testPermitDelayMs": 2000,
+    "browsers": [
+      "Chromium",
+      "WebKit"
+    ],
+    "oldControlFailurePreserved": true,
+    "firstWebKitSELaunchFailedThenPassed": true
+  },
+  "earlierPublicFailures": [
+    "On 440x956 the first directory attempt showed its connection retry screen. A later cold Lesson 45-46 attempt hit the 15 second L01 network deadline.",
+    "One measurement account login stopped during TLS establishment, before any student was created.",
+    "The first checkpoint probe acted before storage had settled. Its zero-byte result was excluded from the stored-prefix sample.",
+    "The first full album smoke exceeded the overall test timeout. Its student was identified from its own test artifact and explicitly disabled.",
+    "The subsequent fresh student earned a star, synchronized and restored it after reload. That visit then showed the album retry screen. Existing-card export is independently verified using the designated returning student."
+  ],
+  "originalArtwork": {
+    "verifiedSvgKeys": 17,
+    "pixelComparisonsAcrossChromiumAndWebKit": 102,
+    "artAndLearningInputsChanged": false
+  },
+  "androidWeChat": "pending",
+  "androidQuark": "pending",
+  "gitCommitted": false,
+  "gitPushed": false,
+  "officialDeployed": false
+}

@@ -1,4 +1,5 @@
 'use strict';
+const {incorrectFeedback,readyCourse}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {createApp}=require('../../server/app'),{openStore}=require('../../server/store');
@@ -18,7 +19,7 @@ test('现有62题五星同库更新：有效轮次、原卡全部GIF帧、姓名
  const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1),ports=require('../support/login-test-ports'),origin=ports.origin(4271);
  let server,first,second;
  const ledger=()=>{const {DatabaseSync}=require('node:sqlite'),db=new DatabaseSync(path.join(dataDir,'learning.sqlite'),{readOnly:true});try{return db.prepare('SELECT edition,value FROM unit_awards WHERE course=? ORDER BY edition').all('unit17-18');}finally{db.close();}};
- const ready=async p=>expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+ const ready=async p=>readyCourse(p);
  try{
   // Construct the real prior presentation, including the Worker course package.
   // Unchanged assessments and the 15-star protection are shared deliberately.
@@ -48,6 +49,6 @@ test('现有62题五星同库更新：有效轮次、原卡全部GIF帧、姓名
    await other.goto(base+'unit17-18/#learn/'+id);await ready(other);const room=other.locator('.stage-'+id);await expect(room.locator('.completion-number')).toHaveText([String(ANSWERS[id].length),String(ANSWERS[id].length),'0']);
    const key='unit1718-'+id+'-practice/five-zones-v1';expect(after.groups[key].runId).toBe(before.groups[key].runId);expect(after.groups[key].states).toEqual(before.groups[key].states);
   }
-  await other.goto(base+'unit17-18/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await room.getByRole('button',{name:'She is a nurse.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText('再看看，试一次。');await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);
+  await other.goto(base+'unit17-18/#learn/grammar');const room=other.locator('.stage-grammar');await room.getByRole('button',{name:'再练一轮',exact:true}).click();await room.getByRole('button',{name:'She is a nurse.',exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await other.reload();await ready(other);await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));await expect(other.locator('#starCount')).toHaveText('5');expect(ledger()).toEqual(awards);
  }finally{await first?.close();await second?.close();if(server)await new Promise(resolve=>{server.close(resolve);server.closeAllConnections();});if(!path.resolve(temporary).startsWith(path.join(os.tmpdir(),'canran-u1718-teaching-review-')))throw Error('Unexpected test cleanup path');await fs.rm(temporary,{recursive:true,force:true});}
 });

@@ -1,0 +1,18 @@
+{
+  "id": "park-world",
+  "kind": "world",
+  "references": [
+    "output/sample-13-24/original-card-reference.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create a reusable EMPTY 3:2 English course theatre background. A small sunny garden park in a storybook town with leafy trees, flowers and a distant cream stone arch. Wide warm stone pavement across the lower 45 percent. No bench, no cart, no people, no ice cream: existing character sprites already include the needed bench and props. Exact visual family of the reference images: warm brown hand-drawn contours, rounded forms, softly painted colours, subtle paper texture and restrained depth, cream/sage/teal/wood tones. Polished warm children storybook art, not flat icon, not photography or 3D. Eye-level shallow stage perspective. Gentle low-detail upper half for dialogue overlay; generously open lower stage for existing actors. Fill a 3:2 landscape canvas edge to edge; no white border, no text, UI or badges. Image 1 is a contact sheet of the ORIGINAL immutable keepsake characters as style reference only, image 2 is an already approved theatre background; do not redraw any character.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-aca48a42-adce-41fc-b97d-4a64d0618b4c.png",
+  "raw": "assets/learning-sample-v2/raw/park-world.png",
+  "adopted": "assets/learning-sample-v2/park-world-v1.webp",
+  "projectReferenceCopies": [
+    "docs/designs/learning-flow/sample-13-24-generations/references/original-keepsakes.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ]
+}

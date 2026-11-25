@@ -1,0 +1,4509 @@
+{
+  "version": 1,
+  "status": "accepted-local-preview",
+  "entries": [
+    {
+      "unit": "unit25-26",
+      "word": "kitchen",
+      "cn": "厨房",
+      "original": "/assets/unit25-26/kitchen.svg",
+      "asset": "/assets/unit25-26/kitchen-room-mobile-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "refrigerator",
+      "cn": "冰箱",
+      "original": "/assets/unit25-26/refrigerator.svg",
+      "asset": "/assets/word-art-v2/whole-book/refrigerator-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "refrigerator"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "cooker",
+      "cn": "炉灶；炊具",
+      "original": "/assets/unit25-26/cooker.svg",
+      "asset": "/assets/word-art-v2/whole-book/cooker-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cooker"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "electric cooker",
+      "cn": "电炉",
+      "original": "/assets/unit25-26/electric-cooker.svg",
+      "asset": "/assets/word-art-v2/whole-book/cooker-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cooker"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "cup",
+      "cn": "杯子",
+      "original": "/assets/unit25-26/cup.svg",
+      "asset": "/assets/word-art-v2/sample13-24/cup-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "box",
+      "cn": "盒子",
+      "original": "/assets/unit25-26/box.svg",
+      "asset": "/assets/word-art-v2/sample13-24/box-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "glass",
+      "cn": "玻璃杯",
+      "original": "/assets/unit25-26/glass.svg",
+      "asset": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "knife",
+      "cn": "刀",
+      "original": "/assets/unit25-26/knife.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "fork",
+      "cn": "叉子",
+      "original": "/assets/unit25-26/fork.svg",
+      "asset": "/assets/word-art-v2/sample13-24/fork-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "tin",
+      "cn": "罐头；罐子",
+      "original": "/assets/unit25-26/tin.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tin-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "bottle",
+      "cn": "瓶子",
+      "original": "/assets/unit25-26/bottle.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "pencil",
+      "cn": "铅笔",
+      "original": "/assets/unit25-26/pencil.svg",
+      "asset": "/assets/word-art-v2/sample1-12/pencil-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "spoon",
+      "cn": "勺子",
+      "original": "/assets/unit25-26/spoon.svg",
+      "asset": "/assets/word-art-v2/sample13-24/spoon-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "table",
+      "cn": "桌子",
+      "original": "/assets/unit25-26/table.svg",
+      "asset": "/assets/word-art-v2/sample13-24/table-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "empty",
+      "cn": "空的",
+      "original": "/assets/unit25-26/empty.svg",
+      "asset": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "full",
+      "cn": "满的",
+      "original": "/assets/unit25-26/full.svg",
+      "asset": "/assets/word-art-v2/sample13-24/full-glass-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "clean",
+      "cn": "干净的",
+      "original": "/assets/unit25-26/clean.svg",
+      "asset": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "dirty",
+      "cn": "脏的",
+      "original": "/assets/unit25-26/dirty.svg",
+      "asset": "/assets/word-art-v2/sample1-12/dirty-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "large",
+      "cn": "大的",
+      "original": "/assets/unit25-26/large.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 0
+      }
+    },
+    {
+      "unit": "unit25-26",
+      "word": "sharp",
+      "cn": "锋利的",
+      "original": "/assets/unit25-26/sharp.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "blunt",
+      "cn": "钝的",
+      "original": "/assets/unit25-26/blunt.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-blunt-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit25-26",
+      "word": "small",
+      "cn": "小的",
+      "original": "/assets/unit25-26/small.svg",
+      "asset": "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 1
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "living room",
+      "cn": "客厅",
+      "original": "/assets/unit27-28/living-room.svg",
+      "asset": "/assets/unit27-28/living-room-mobile-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "window",
+      "cn": "窗户",
+      "original": "/assets/unit27-28/window.svg",
+      "asset": "/assets/word-art-v2/whole-book/window-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "window"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "armchair",
+      "cn": "扶手椅",
+      "original": "/assets/unit27-28/armchair.svg",
+      "asset": "/assets/word-art-v2/whole-book/armchair-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "armchair"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "door",
+      "cn": "门",
+      "original": "/assets/unit27-28/door.svg",
+      "asset": "/assets/word-art-v2/sample13-24/closed-door-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "picture",
+      "cn": "图画",
+      "original": "/assets/unit27-28/picture.svg",
+      "asset": "/assets/word-art-v2/whole-book/picture-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "picture"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "trousers",
+      "cn": "长裤（复数形式）",
+      "original": "/assets/unit27-28/trousers.svg",
+      "asset": "/assets/word-art-v2/sample13-24/long-trousers-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "television",
+      "cn": "电视机",
+      "original": "/assets/unit27-28/television.svg",
+      "asset": "/assets/word-art-v2/sample13-24/television-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "stereo",
+      "cn": "立体声音响",
+      "original": "/assets/unit27-28/stereo.svg",
+      "asset": "/assets/word-art-v2/sample13-24/stereo-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "magazines",
+      "cn": "杂志（复数）",
+      "original": "/assets/unit27-28/magazines.svg",
+      "asset": "/assets/word-art-v2/sample13-24/magazine-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/magazine-v1.webp",
+          "/assets/word-art-v2/sample13-24/magazine-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "newspapers",
+      "cn": "报纸（复数）",
+      "original": "/assets/unit27-28/newspapers.svg",
+      "asset": "/assets/word-art-v2/sample13-24/newspaper-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/newspaper-v1.webp",
+          "/assets/word-art-v2/sample13-24/newspaper-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "books",
+      "cn": "书（复数）",
+      "original": "/assets/unit27-28/books.svg",
+      "asset": "/assets/word-art-v2/sample1-12/book-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample1-12/book-v1.webp",
+          "/assets/word-art-v2/sample1-12/book-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "armchairs",
+      "cn": "扶手椅（复数）",
+      "original": "/assets/unit27-28/armchairs.svg",
+      "asset": "/assets/word-art-v2/whole-book/armchair-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "armchair",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/armchair-v1.webp",
+          "/assets/word-art-v2/whole-book/armchair-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "pictures",
+      "cn": "图画（复数）",
+      "original": "/assets/unit27-28/pictures.svg",
+      "asset": "/assets/word-art-v2/whole-book/picture-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "picture",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/picture-v1.webp",
+          "/assets/word-art-v2/whole-book/picture-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "knife",
+      "cn": "刀",
+      "original": "/assets/unit27-28/knife.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "knives",
+      "cn": "刀（复数）",
+      "original": "/assets/unit27-28/knives.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+          "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "policeman",
+      "cn": "男警察",
+      "original": "/assets/unit27-28/policeman.svg",
+      "asset": "/assets/word-art-v2/sample1-12/policeman-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "policemen",
+      "cn": "男警察（复数）",
+      "original": "/assets/unit27-28/policemen.svg",
+      "asset": "/assets/word-art-v2/sample1-12/policeman-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample1-12/policeman-v1.webp",
+          "/assets/word-art-v2/sample1-12/policeman-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "housewife",
+      "cn": "家庭主妇",
+      "original": "/assets/unit27-28/housewife.svg",
+      "asset": "/assets/word-art-v2/sample1-12/housewife-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "housewives",
+      "cn": "家庭主妇（复数）",
+      "original": "/assets/unit27-28/housewives.svg",
+      "asset": "/assets/word-art-v2/sample1-12/housewife-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample1-12/housewife-v1.webp",
+          "/assets/word-art-v2/sample1-12/housewife-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit27-28",
+      "word": "man",
+      "cn": "男人",
+      "original": "/assets/unit27-28/man.svg",
+      "asset": "/assets/unit17-18/cast-jackson-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "men",
+      "cn": "男人（复数）",
+      "original": "/assets/unit27-28/men.svg",
+      "asset": "/assets/unit17-18/cast-men-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "keyboard operator",
+      "cn": "电脑录入员",
+      "original": "/assets/unit27-28/keyboard-operator.svg",
+      "asset": "/assets/word-art-v2/sample1-12/keyboard-operator-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit27-28",
+      "word": "office",
+      "cn": "办公室",
+      "original": "/assets/unit27-28/office.svg",
+      "asset": "/assets/learning-sample-v2/office-world-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "wardrobe",
+      "cn": "衣柜",
+      "original": "/assets/unit29-30/wardrobe.svg",
+      "asset": "/assets/word-art-v2/whole-book/wardrobe-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "wardrobe"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "window",
+      "cn": "窗户",
+      "original": "/assets/unit29-30/window.svg",
+      "asset": "/assets/word-art-v2/whole-book/window-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "window"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "door",
+      "cn": "门",
+      "original": "/assets/unit29-30/door.svg",
+      "asset": "/assets/word-art-v2/sample13-24/closed-door-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "bed",
+      "cn": "床",
+      "original": "/assets/unit29-30/bed.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bed-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "dressing table",
+      "cn": "梳妆台",
+      "original": "/assets/unit29-30/dressing-table.svg",
+      "asset": "/assets/word-art-v2/sample13-24/dressing-table-clean-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "lamp",
+      "cn": "灯",
+      "original": "/assets/unit29-30/lamp.svg",
+      "asset": "/assets/word-art-v2/whole-book/lamp-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "lamp"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "tap",
+      "cn": "水龙头",
+      "original": "/assets/unit29-30/tap.svg",
+      "asset": "/assets/word-art-v2/whole-book/tap-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tap"
+    },
+    {
+      "unit": "unit29-30",
+      "word": "book",
+      "cn": "书",
+      "original": "/assets/unit29-30/book.svg",
+      "asset": "/assets/word-art-v2/sample1-12/book-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "garden",
+      "cn": "花园",
+      "original": "/assets/unit31-32/garden.svg",
+      "asset": "/assets/unit31-32/garden-story-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "tree",
+      "cn": "树",
+      "original": "/assets/unit31-32/tree.svg",
+      "asset": "/assets/word-art-v2/whole-book/tree-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tree"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "grass",
+      "cn": "草；草地",
+      "original": "/assets/unit31-32/grass.svg",
+      "asset": "/assets/word-art-v2/whole-book/grass-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "grass"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "cat",
+      "cn": "猫",
+      "original": "/assets/unit31-32/cat.svg",
+      "asset": "/assets/word-art-v2/whole-book/cat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cat"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "letter",
+      "cn": "本课：信",
+      "original": "/assets/unit31-32/letter.svg",
+      "asset": "/assets/word-art-v2/whole-book/letter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "letter"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "basket",
+      "cn": "篮子",
+      "original": "/assets/unit31-32/basket.svg",
+      "asset": "/assets/word-art-v2/whole-book/basket-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "basket"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "bone",
+      "cn": "骨头",
+      "original": "/assets/unit31-32/bone.svg",
+      "asset": "/assets/word-art-v2/whole-book/bone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bone"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "tooth",
+      "cn": "牙齿；复数 teeth /tiːθ/",
+      "original": "/assets/unit31-32/tooth.svg",
+      "asset": "/assets/word-art-v2/whole-book/tooth-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tooth"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "milk",
+      "cn": "牛奶",
+      "original": "/assets/unit31-32/milk.svg",
+      "asset": "/assets/word-art-v2/whole-book/milk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "milk"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "tap",
+      "cn": "水龙头",
+      "original": "/assets/unit31-32/tap.svg",
+      "asset": "/assets/word-art-v2/whole-book/tap-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tap"
+    },
+    {
+      "unit": "unit31-32",
+      "word": "dog",
+      "cn": "狗",
+      "original": "/assets/unit31-32/dog.svg",
+      "asset": "/assets/word-art-v2/sample13-24/dog-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "cloud",
+      "cn": "云",
+      "original": "/assets/unit33-34/cloud.svg",
+      "asset": "/assets/word-art-v2/whole-book/cloud-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cloud"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "sky",
+      "cn": "天空",
+      "original": "/assets/unit33-34/sky.svg",
+      "asset": "/assets/word-art-v2/whole-book/sky-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sky"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "sun",
+      "cn": "太阳",
+      "original": "/assets/unit33-34/sun.svg",
+      "asset": "/assets/word-art-v2/whole-book/sun-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sun"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "bridge",
+      "cn": "桥",
+      "original": "/assets/unit33-34/bridge.svg",
+      "asset": "/assets/word-art-v2/whole-book/bridge-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bridge"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "boat",
+      "cn": "小船",
+      "original": "/assets/unit33-34/boat.svg",
+      "asset": "/assets/word-art-v2/whole-book/boat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "boat"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "river",
+      "cn": "河流",
+      "original": "/assets/unit33-34/river.svg",
+      "asset": "/assets/word-art-v2/whole-book/river-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "river"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "ship",
+      "cn": "轮船；大船",
+      "original": "/assets/unit33-34/ship.svg",
+      "asset": "/assets/word-art-v2/whole-book/ship-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "ship"
+    },
+    {
+      "unit": "unit33-34",
+      "word": "aeroplane",
+      "cn": "飞机",
+      "original": "/assets/unit33-34/aeroplane.svg",
+      "asset": "/assets/word-art-v2/whole-book/aeroplane-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "aeroplane"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "photograph",
+      "cn": "照片",
+      "original": "/assets/unit35-36/photograph.svg",
+      "asset": "/assets/word-art-v2/whole-book/photograph-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "photograph"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "village",
+      "cn": "村庄",
+      "original": "/assets/unit35-36/village.svg",
+      "asset": "/assets/unit35-36/photo-village-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "valley",
+      "cn": "山谷",
+      "original": "/assets/unit35-36/valley.svg",
+      "asset": "/assets/word-art-v2/whole-book/valley-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "valley"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "hill",
+      "cn": "小山",
+      "original": "/assets/unit35-36/hill.svg",
+      "asset": "/assets/word-art-v2/whole-book/hill-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "hill"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "water",
+      "cn": "水",
+      "original": "/assets/unit35-36/water.svg",
+      "asset": "/assets/word-art-v2/whole-book/water-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "water"
+    },
+    {
+      "unit": "unit35-36",
+      "word": "building",
+      "cn": "建筑物；大楼",
+      "original": "/assets/unit35-36/building.svg",
+      "asset": "/assets/word-art-v2/whole-book/building-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "building"
+    },
+    {
+      "unit": "unit37-38",
+      "word": "bookcase",
+      "cn": "书架；书橱",
+      "original": "/assets/unit37-38/bookcase.svg",
+      "asset": "/assets/word-art-v2/whole-book/bookcase-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bookcase"
+    },
+    {
+      "unit": "unit37-38",
+      "word": "hammer",
+      "cn": "锤子",
+      "original": "/assets/unit37-38/hammer.svg",
+      "asset": "/assets/word-art-v2/whole-book/hammer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "hammer"
+    },
+    {
+      "unit": "unit37-38",
+      "word": "dish",
+      "cn": "盘子；碟子",
+      "original": "/assets/unit37-38/dish.svg",
+      "asset": "/assets/word-art-v2/sample13-24/plate-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit39-40",
+      "word": "vase",
+      "cn": "花瓶",
+      "original": "/assets/unit39-40/vase.svg",
+      "asset": "/assets/word-art-v2/whole-book/vase-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "vase"
+    },
+    {
+      "unit": "unit39-40",
+      "word": "flower",
+      "cn": "花",
+      "original": "/assets/unit39-40/flower.svg",
+      "asset": "/assets/word-art-v2/whole-book/flower-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "flower"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "cheese",
+      "cn": "乳酪；干酪",
+      "original": "/assets/unit41-42/cheese.svg",
+      "asset": "/assets/word-art-v2/whole-book/cheese-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cheese"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "bread",
+      "cn": "面包",
+      "original": "/assets/unit41-42/bread.svg",
+      "asset": "/assets/word-art-v2/whole-book/bread-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bread"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "soap",
+      "cn": "肥皂",
+      "original": "/assets/unit41-42/soap.svg",
+      "asset": "/assets/word-art-v2/whole-book/soap-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "soap"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "chocolate",
+      "cn": "巧克力",
+      "original": "/assets/unit41-42/chocolate.svg",
+      "asset": "/assets/word-art-v2/whole-book/chocolate-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "chocolate"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "sugar",
+      "cn": "糖",
+      "original": "/assets/unit41-42/sugar.svg",
+      "asset": "/assets/word-art-v2/whole-book/sugar-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sugar"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "coffee",
+      "cn": "咖啡",
+      "original": "/assets/unit41-42/coffee.svg",
+      "asset": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coffee"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "tea",
+      "cn": "茶",
+      "original": "/assets/unit41-42/tea.svg",
+      "asset": "/assets/word-art-v2/whole-book/tea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tea"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "tobacco",
+      "cn": "烟草；烟丝",
+      "original": "/assets/unit41-42/tobacco.svg",
+      "asset": "/assets/word-art-v2/whole-book/tobacco-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tobacco"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "milk",
+      "cn": "牛奶",
+      "original": "/assets/unit41-42/milk.svg",
+      "asset": "/assets/word-art-v2/whole-book/milk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "milk"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "bird",
+      "cn": "鸟",
+      "original": "/assets/unit41-42/bird.svg",
+      "asset": "/assets/word-art-v2/whole-book/bird-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bird"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "bottle",
+      "cn": "瓶；一瓶的量",
+      "original": "/assets/unit41-42/bottle.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit41-42",
+      "word": "tin",
+      "cn": "罐；一罐的量",
+      "original": "/assets/unit41-42/tin.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tin-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "kettle",
+      "cn": "水壶",
+      "original": "/assets/unit43-44/kettle.svg",
+      "asset": "/assets/word-art-v2/whole-book/kettle-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "kettle"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "teapot",
+      "cn": "茶壶",
+      "original": "/assets/unit43-44/teapot.svg",
+      "asset": "/assets/word-art-v2/whole-book/teapot-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "teapot"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "water",
+      "cn": "水",
+      "original": "/assets/unit43-44/water.svg",
+      "asset": "/assets/word-art-v2/whole-book/water-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "water"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "tea",
+      "cn": "茶；茶叶",
+      "original": "/assets/unit43-44/tea.svg",
+      "asset": "/assets/word-art-v2/whole-book/tea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tea"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "cup",
+      "cn": "杯子",
+      "original": "/assets/unit43-44/cup.svg",
+      "asset": "/assets/word-art-v2/sample13-24/cup-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit43-44",
+      "word": "cupboard",
+      "cn": "橱柜",
+      "original": "/assets/unit43-44/cupboard.svg",
+      "asset": "/assets/word-art-v2/sample13-24/cupboard-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit45-46",
+      "word": "boss",
+      "cn": "老板；上司",
+      "original": "/assets/unit45-46/boss.svg",
+      "asset": "/assets/unit45-46/boss.svg",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit45-46",
+      "word": "cake",
+      "cn": "蛋糕",
+      "original": "/assets/unit45-46/cake.svg",
+      "asset": "/assets/word-art-v2/whole-book/cake-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cake"
+    },
+    {
+      "unit": "unit45-46",
+      "word": "biscuit",
+      "cn": "饼干",
+      "original": "/assets/unit45-46/biscuit.svg",
+      "asset": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "biscuit"
+    },
+    {
+      "unit": "unit45-46",
+      "word": "letter",
+      "cn": "信",
+      "original": "/assets/unit45-46/letter.svg",
+      "asset": "/assets/word-art-v2/whole-book/letter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "letter"
+    },
+    {
+      "unit": "unit45-46",
+      "word": "office",
+      "cn": "办公室",
+      "original": "/assets/unit45-46/office.svg",
+      "asset": "/assets/learning-sample-v2/office-world-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "coffee",
+      "cn": "咖啡",
+      "original": "/assets/unit47-48/coffee.svg",
+      "asset": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coffee"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "cup",
+      "cn": "杯子",
+      "original": "/assets/unit47-48/cup.svg",
+      "asset": "/assets/word-art-v2/sample13-24/cup-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "sugar",
+      "cn": "糖",
+      "original": "/assets/unit47-48/sugar.svg",
+      "asset": "/assets/word-art-v2/whole-book/sugar-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sugar"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "milk",
+      "cn": "牛奶",
+      "original": "/assets/unit47-48/milk.svg",
+      "asset": "/assets/word-art-v2/whole-book/milk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "milk"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "egg",
+      "cn": "鸡蛋",
+      "original": "/assets/unit47-48/egg.svg",
+      "asset": "/assets/word-art-v2/whole-book/egg-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "egg"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "butter",
+      "cn": "黄油",
+      "original": "/assets/unit47-48/butter.svg",
+      "asset": "/assets/word-art-v2/whole-book/butter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "butter"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "honey",
+      "cn": "蜂蜜",
+      "original": "/assets/unit47-48/honey.svg",
+      "asset": "/assets/word-art-v2/whole-book/honey-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "honey"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "banana",
+      "cn": "香蕉",
+      "original": "/assets/unit47-48/banana.svg",
+      "asset": "/assets/word-art-v2/whole-book/banana-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "banana"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "jam",
+      "cn": "果酱",
+      "original": "/assets/unit47-48/jam.svg",
+      "asset": "/assets/word-art-v2/whole-book/jam-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "jam"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "orange",
+      "cn": "橙子",
+      "original": "/assets/unit47-48/orange.svg",
+      "asset": "/assets/word-art-v2/whole-book/orange-fruit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "orange-fruit"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "apple",
+      "cn": "苹果",
+      "original": "/assets/unit47-48/apple.svg",
+      "asset": "/assets/word-art-v2/whole-book/apple-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "apple"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "biscuit",
+      "cn": "饼干",
+      "original": "/assets/unit47-48/biscuit.svg",
+      "asset": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "biscuit"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "ice cream",
+      "cn": "冰淇淋",
+      "original": "/assets/unit47-48/ice-cream.svg",
+      "asset": "/assets/word-art-v2/sample13-24/ice-cream-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "black coffee",
+      "cn": "清咖啡；不加奶的咖啡",
+      "original": "/assets/unit47-48/black-coffee.svg",
+      "asset": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coffee"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "tea",
+      "cn": "茶",
+      "original": "/assets/unit47-48/tea.svg",
+      "asset": "/assets/word-art-v2/whole-book/tea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tea"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "wine",
+      "cn": "葡萄酒",
+      "original": "/assets/unit47-48/wine.svg",
+      "asset": "/assets/word-art-v2/whole-book/wine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "wine"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "beer",
+      "cn": "啤酒",
+      "original": "/assets/unit47-48/beer.svg",
+      "asset": "/assets/word-art-v2/whole-book/beer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beer"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "blackboard",
+      "cn": "黑板",
+      "original": "/assets/unit47-48/blackboard.svg",
+      "asset": "/assets/word-art-v2/whole-book/blackboard-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "blackboard"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "butcher",
+      "cn": "卖肉者",
+      "original": "/assets/unit49-50/butcher.svg",
+      "asset": "/assets/unit49-50/butcher.svg",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "meat",
+      "cn": "肉",
+      "original": "/assets/lesson49/icons/meat.svg",
+      "asset": "/assets/word-art-v2/whole-book/meat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "meat"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "steak",
+      "cn": "牛排",
+      "original": "/assets/lesson49/icons/steak.svg",
+      "asset": "/assets/word-art-v2/whole-book/steak-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "steak"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "mince",
+      "cn": "肉馅",
+      "original": "/assets/lesson49/icons/mince.svg",
+      "asset": "/assets/word-art-v2/whole-book/mince-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "mince"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "tomato",
+      "cn": "西红柿",
+      "original": "/assets/unit49-50/tomato.svg",
+      "asset": "/assets/word-art-v2/whole-book/tomato-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tomato"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "potato",
+      "cn": "土豆",
+      "original": "/assets/unit49-50/potato.svg",
+      "asset": "/assets/word-art-v2/whole-book/potato-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "potato"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "cabbage",
+      "cn": "卷心菜",
+      "original": "/assets/unit49-50/cabbage.svg",
+      "asset": "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cabbage"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "lettuce",
+      "cn": "莴苣",
+      "original": "/assets/unit49-50/lettuce.svg",
+      "asset": "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "lettuce"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "pea",
+      "cn": "豌豆",
+      "original": "/assets/unit49-50/pea.svg",
+      "asset": "/assets/word-art-v2/whole-book/pea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "pea"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "bean",
+      "cn": "豆角",
+      "original": "/assets/unit49-50/bean.svg",
+      "asset": "/assets/word-art-v2/whole-book/bean-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bean"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "pear",
+      "cn": "梨",
+      "original": "/assets/unit49-50/pear.svg",
+      "asset": "/assets/word-art-v2/whole-book/pear-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "pear"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "grape",
+      "cn": "葡萄",
+      "original": "/assets/unit49-50/grape.svg",
+      "asset": "/assets/word-art-v2/whole-book/grape-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "grape"
+    },
+    {
+      "unit": "unit49-50",
+      "word": "peach",
+      "cn": "桃",
+      "original": "/assets/unit49-50/peach.svg",
+      "asset": "/assets/word-art-v2/whole-book/peach-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "peach"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Greece",
+      "cn": "希腊",
+      "original": "/assets/unit51-52/greece.svg",
+      "asset": "/assets/unit51-52/greece.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "spring",
+      "cn": "春季",
+      "original": "/assets/unit51-52/spring.svg",
+      "asset": "/assets/word-art-v2/whole-book/spring-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "spring"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "windy",
+      "cn": "有风的",
+      "original": "/assets/unit51-52/windy.svg",
+      "asset": "/assets/word-art-v2/whole-book/windy-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "windy"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "rain",
+      "cn": "下雨",
+      "original": "/assets/unit51-52/rain.svg",
+      "asset": "/assets/word-art-v2/whole-book/rain-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "rain"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "summer",
+      "cn": "夏季",
+      "original": "/assets/unit51-52/summer.svg",
+      "asset": "/assets/word-art-v2/whole-book/summer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "summer"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "autumn",
+      "cn": "秋季",
+      "original": "/assets/unit51-52/autumn.svg",
+      "asset": "/assets/word-art-v2/whole-book/autumn-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "autumn"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "winter",
+      "cn": "冬季",
+      "original": "/assets/unit51-52/winter.svg",
+      "asset": "/assets/word-art-v2/whole-book/winter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "winter"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "snow",
+      "cn": "下雪",
+      "original": "/assets/unit51-52/snow.svg",
+      "asset": "/assets/word-art-v2/whole-book/snow-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "snow"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "the U.S.",
+      "cn": "美国",
+      "original": "/assets/unit51-52/us.svg",
+      "asset": "/assets/unit51-52/us.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Brazil",
+      "cn": "巴西",
+      "original": "/assets/unit51-52/brazil.svg",
+      "asset": "/assets/unit51-52/brazil.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "the Netherlands",
+      "cn": "荷兰",
+      "original": "/assets/unit51-52/netherlands.svg",
+      "asset": "/assets/unit51-52/netherlands.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "England",
+      "cn": "英格兰",
+      "original": "/assets/unit51-52/england.svg",
+      "asset": "/assets/unit51-52/england.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "France",
+      "cn": "法国",
+      "original": "/assets/unit51-52/france.svg",
+      "asset": "/assets/unit51-52/france.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Germany",
+      "cn": "德国",
+      "original": "/assets/unit51-52/germany.svg",
+      "asset": "/assets/unit51-52/germany.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Italy",
+      "cn": "意大利",
+      "original": "/assets/unit51-52/italy.svg",
+      "asset": "/assets/unit51-52/italy.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Norway",
+      "cn": "挪威",
+      "original": "/assets/unit51-52/norway.svg",
+      "asset": "/assets/unit51-52/norway.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Russia",
+      "cn": "俄罗斯",
+      "original": "/assets/unit51-52/russia.svg",
+      "asset": "/assets/unit51-52/russia.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Spain",
+      "cn": "西班牙",
+      "original": "/assets/unit51-52/spain.svg",
+      "asset": "/assets/unit51-52/spain.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "Sweden",
+      "cn": "瑞典",
+      "original": "/assets/unit51-52/sweden.svg",
+      "asset": "/assets/unit51-52/sweden.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "hot",
+      "cn": "热的",
+      "original": "/assets/unit51-52/hot.svg",
+      "asset": "/assets/unit9-10/hot-character-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit51-52",
+      "word": "cold",
+      "cn": "冷的",
+      "original": "/assets/unit51-52/cold.svg",
+      "asset": "/assets/word-art-v2/sample1-12/cold-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "night",
+      "cn": "夜晚",
+      "original": "/assets/unit53-54/night.svg",
+      "asset": "/assets/word-art-v2/whole-book/night-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "night"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Australia",
+      "cn": "澳大利亚",
+      "original": "/assets/unit53-54/australia.svg",
+      "asset": "/assets/unit53-54/australia.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Australian",
+      "cn": "澳大利亚人；澳大利亚的",
+      "original": "/assets/unit53-54/australia.svg",
+      "asset": "/assets/unit53-54/australia.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Austria",
+      "cn": "奥地利",
+      "original": "/assets/unit53-54/austria.svg",
+      "asset": "/assets/unit53-54/austria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Austrian",
+      "cn": "奥地利人；奥地利的",
+      "original": "/assets/unit53-54/austria.svg",
+      "asset": "/assets/unit53-54/austria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Canada",
+      "cn": "加拿大",
+      "original": "/assets/unit53-54/canada.svg",
+      "asset": "/assets/unit53-54/canada.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Canadian",
+      "cn": "加拿大人；加拿大的",
+      "original": "/assets/unit53-54/canada.svg",
+      "asset": "/assets/unit53-54/canada.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "China",
+      "cn": "中国",
+      "original": "/assets/unit53-54/china.svg",
+      "asset": "/assets/unit53-54/china.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Chinese",
+      "cn": "中国人；中国的",
+      "original": "/assets/unit53-54/china.svg",
+      "asset": "/assets/unit53-54/china.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Finland",
+      "cn": "芬兰",
+      "original": "/assets/unit53-54/finland.svg",
+      "asset": "/assets/unit53-54/finland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Finnish",
+      "cn": "芬兰人；芬兰的",
+      "original": "/assets/unit53-54/finland.svg",
+      "asset": "/assets/unit53-54/finland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "India",
+      "cn": "印度",
+      "original": "/assets/unit53-54/india.svg",
+      "asset": "/assets/unit53-54/india.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Indian",
+      "cn": "印度人；印度的",
+      "original": "/assets/unit53-54/india.svg",
+      "asset": "/assets/unit53-54/india.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Japan",
+      "cn": "日本",
+      "original": "/assets/unit53-54/japan.svg",
+      "asset": "/assets/unit53-54/japan.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Japanese",
+      "cn": "日本人；日本的",
+      "original": "/assets/unit53-54/japan.svg",
+      "asset": "/assets/unit53-54/japan.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "South Korea",
+      "cn": "韩国",
+      "original": "/assets/unit53-54/south-korea.svg",
+      "asset": "/assets/unit53-54/south-korea.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "South Korean",
+      "cn": "韩国人；韩国的",
+      "original": "/assets/unit53-54/south-korea.svg",
+      "asset": "/assets/unit53-54/south-korea.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Nigeria",
+      "cn": "尼日利亚",
+      "original": "/assets/unit53-54/nigeria.svg",
+      "asset": "/assets/unit53-54/nigeria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Nigerian",
+      "cn": "尼日利亚人；尼日利亚的",
+      "original": "/assets/unit53-54/nigeria.svg",
+      "asset": "/assets/unit53-54/nigeria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Poland",
+      "cn": "波兰",
+      "original": "/assets/unit53-54/poland.svg",
+      "asset": "/assets/unit53-54/poland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Polish",
+      "cn": "波兰人；波兰的",
+      "original": "/assets/unit53-54/poland.svg",
+      "asset": "/assets/unit53-54/poland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Thailand",
+      "cn": "泰国",
+      "original": "/assets/unit53-54/thailand.svg",
+      "asset": "/assets/unit53-54/thailand.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Thai",
+      "cn": "泰国人；泰国的",
+      "original": "/assets/unit53-54/thailand.svg",
+      "asset": "/assets/unit53-54/thailand.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Turkey",
+      "cn": "土耳其",
+      "original": "/assets/unit53-54/turkey.svg",
+      "asset": "/assets/unit53-54/turkey.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit53-54",
+      "word": "Turkish",
+      "cn": "土耳其人；土耳其的",
+      "original": "/assets/unit53-54/turkey.svg",
+      "asset": "/assets/unit53-54/turkey.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit55-56",
+      "word": "night",
+      "cn": "夜晚",
+      "original": "/assets/unit55-56/night.svg",
+      "asset": "/assets/word-art-v2/whole-book/night-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "night"
+    },
+    {
+      "unit": "unit55-56",
+      "word": "morning",
+      "cn": "早晨",
+      "original": "/assets/unit55-56/morning.svg",
+      "asset": "/assets/unit5-6-word-cards/morning-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit57-58",
+      "word": "book",
+      "cn": "书",
+      "original": "/assets/unit57-58/book.svg",
+      "asset": "/assets/word-art-v2/sample1-12/book-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit57-58",
+      "word": "newspaper",
+      "cn": "报纸",
+      "original": "/assets/unit57-58/newspaper.svg",
+      "asset": "/assets/word-art-v2/sample13-24/newspaper-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "envelope",
+      "cn": "信封",
+      "original": "/assets/unit59-60/envelope.svg",
+      "asset": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "envelope"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "writing paper",
+      "cn": "信纸",
+      "original": "/assets/unit59-60/writing-paper.svg",
+      "asset": "/assets/word-art-v2/whole-book/writing-paper-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "writing-paper"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "pad",
+      "cn": "信笺簿",
+      "original": "/assets/unit59-60/pad.svg",
+      "asset": "/assets/word-art-v2/whole-book/pad-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "pad"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "glue",
+      "cn": "胶水",
+      "original": "/assets/unit59-60/glue.svg",
+      "asset": "/assets/word-art-v2/whole-book/glue-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "glue"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "chalk",
+      "cn": "粉笔",
+      "original": "/assets/unit59-60/chalk.svg",
+      "asset": "/assets/word-art-v2/whole-book/chalk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "chalk"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "large",
+      "cn": "大的",
+      "original": "/assets/unit59-60/large.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 0
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "small",
+      "cn": "小的",
+      "original": "/assets/unit59-60/small.svg",
+      "asset": "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 1
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "cheese",
+      "cn": "奶酪",
+      "original": "/assets/unit59-60/cheese.svg",
+      "asset": "/assets/word-art-v2/whole-book/cheese-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cheese"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "butter",
+      "cn": "黄油",
+      "original": "/assets/unit59-60/butter.svg",
+      "asset": "/assets/word-art-v2/whole-book/butter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "butter"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "eggs",
+      "cn": "鸡蛋",
+      "original": "/assets/unit59-60/eggs.svg",
+      "asset": "/assets/word-art-v2/whole-book/egg-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "egg",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/egg-v1.webp",
+          "/assets/word-art-v2/whole-book/egg-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "jam",
+      "cn": "果酱",
+      "original": "/assets/unit59-60/jam.svg",
+      "asset": "/assets/word-art-v2/whole-book/jam-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "jam"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "honey",
+      "cn": "蜂蜜",
+      "original": "/assets/unit59-60/honey.svg",
+      "asset": "/assets/word-art-v2/whole-book/honey-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "honey"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "bread",
+      "cn": "面包",
+      "original": "/assets/unit59-60/bread.svg",
+      "asset": "/assets/word-art-v2/whole-book/bread-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bread"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "biscuits",
+      "cn": "饼干",
+      "original": "/assets/unit59-60/biscuits.svg",
+      "asset": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "biscuit",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+          "/assets/word-art-v2/whole-book/biscuit-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "potatoes",
+      "cn": "土豆",
+      "original": "/assets/unit59-60/potatoes.svg",
+      "asset": "/assets/word-art-v2/whole-book/potato-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "potato",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/potato-v1.webp",
+          "/assets/word-art-v2/whole-book/potato-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "tomatoes",
+      "cn": "西红柿",
+      "original": "/assets/unit59-60/tomatoes.svg",
+      "asset": "/assets/word-art-v2/whole-book/tomato-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "tomato",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/tomato-v1.webp",
+          "/assets/word-art-v2/whole-book/tomato-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "peas",
+      "cn": "豌豆",
+      "original": "/assets/unit59-60/peas.svg",
+      "asset": "/assets/word-art-v2/whole-book/pea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "pea",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/pea-v1.webp",
+          "/assets/word-art-v2/whole-book/pea-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "beans",
+      "cn": "豆角",
+      "original": "/assets/unit59-60/beans.svg",
+      "asset": "/assets/word-art-v2/whole-book/bean-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "bean",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/bean-v1.webp",
+          "/assets/word-art-v2/whole-book/bean-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "cabbages",
+      "cn": "卷心菜",
+      "original": "/assets/unit59-60/cabbages.svg",
+      "asset": "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "cabbage",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+          "/assets/word-art-v2/whole-book/cabbage-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "lettuces",
+      "cn": "生菜",
+      "original": "/assets/unit59-60/lettuces.svg",
+      "asset": "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "lettuce",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+          "/assets/word-art-v2/whole-book/lettuce-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "bananas",
+      "cn": "香蕉",
+      "original": "/assets/unit59-60/bananas.svg",
+      "asset": "/assets/word-art-v2/whole-book/banana-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "banana",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/banana-v1.webp",
+          "/assets/word-art-v2/whole-book/banana-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "grapes",
+      "cn": "葡萄",
+      "original": "/assets/unit59-60/grapes.svg",
+      "asset": "/assets/word-art-v2/whole-book/grape-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "grape",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/grape-v1.webp",
+          "/assets/word-art-v2/whole-book/grape-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "peaches",
+      "cn": "桃子",
+      "original": "/assets/unit59-60/peaches.svg",
+      "asset": "/assets/word-art-v2/whole-book/peach-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "peach",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/peach-v1.webp",
+          "/assets/word-art-v2/whole-book/peach-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit59-60",
+      "word": "steak",
+      "cn": "牛排",
+      "original": "/assets/unit59-60/steak.svg",
+      "asset": "/assets/word-art-v2/whole-book/steak-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "steak"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "mince",
+      "cn": "肉馅",
+      "original": "/assets/unit59-60/mince.svg",
+      "asset": "/assets/word-art-v2/whole-book/mince-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "mince"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "chicken",
+      "cn": "鸡肉",
+      "original": "/assets/unit59-60/chicken.svg",
+      "asset": "/assets/word-art-v2/whole-book/chicken-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "chicken"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "beer",
+      "cn": "啤酒",
+      "original": "/assets/unit59-60/beer.svg",
+      "asset": "/assets/word-art-v2/whole-book/beer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beer"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "wine",
+      "cn": "葡萄酒",
+      "original": "/assets/unit59-60/wine.svg",
+      "asset": "/assets/word-art-v2/whole-book/wine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "wine"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "tobacco",
+      "cn": "烟草",
+      "original": "/assets/unit59-60/tobacco.svg",
+      "asset": "/assets/word-art-v2/whole-book/tobacco-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tobacco"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "soap",
+      "cn": "肥皂",
+      "original": "/assets/unit59-60/soap.svg",
+      "asset": "/assets/word-art-v2/whole-book/soap-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "soap"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "doctor",
+      "cn": "医生",
+      "original": "/assets/unit61-62/doctor.svg",
+      "asset": "/assets/unit61-62/doctor.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "telephone",
+      "cn": "电话",
+      "original": "/assets/unit61-62/telephone.svg",
+      "asset": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "telephone"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "mouth",
+      "cn": "嘴",
+      "original": "/assets/unit61-62/mouth.svg",
+      "asset": "/assets/word-art-v2/whole-book/mouth-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "mouth"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "tongue",
+      "cn": "舌头",
+      "original": "/assets/unit61-62/tongue.svg",
+      "asset": "/assets/word-art-v2/whole-book/tongue-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tongue"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "headache",
+      "cn": "头痛",
+      "original": "/assets/unit61-62/headache.svg",
+      "asset": "/assets/word-art-v2/whole-book/headache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "headache"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "earache",
+      "cn": "耳痛",
+      "original": "/assets/unit61-62/earache.svg",
+      "asset": "/assets/word-art-v2/whole-book/earache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "earache"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "toothache",
+      "cn": "牙痛",
+      "original": "/assets/unit61-62/toothache.svg",
+      "asset": "/assets/word-art-v2/whole-book/toothache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "toothache"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "stomach ache",
+      "cn": "胃痛",
+      "original": "/assets/unit61-62/stomach-ache.svg",
+      "asset": "/assets/word-art-v2/whole-book/stomach-ache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "stomach-ache"
+    },
+    {
+      "unit": "unit61-62",
+      "word": "medicine",
+      "cn": "药",
+      "original": "/assets/unit61-62/medicine.svg",
+      "asset": "/assets/word-art-v2/whole-book/medicine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "medicine"
+    },
+    {
+      "unit": "unit63-64",
+      "word": "match",
+      "cn": "火柴",
+      "original": "/assets/unit63-64/match.svg",
+      "asset": "/assets/word-art-v2/whole-book/match-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "match"
+    },
+    {
+      "unit": "unit63-64",
+      "word": "library",
+      "cn": "图书馆",
+      "original": "/assets/unit63-64/library.svg",
+      "asset": "/assets/word-art-v2/whole-book/library-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "library"
+    },
+    {
+      "unit": "unit65-66",
+      "word": "key",
+      "cn": "钥匙",
+      "original": "/assets/unit65-66/key.svg",
+      "asset": "/assets/word-art-v2/whole-book/key-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "key"
+    },
+    {
+      "unit": "unit65-66",
+      "word": "baby",
+      "cn": "婴儿",
+      "original": "/assets/unit65-66/baby.svg",
+      "asset": "/assets/word-art-v2/whole-book/baby-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "baby"
+    },
+    {
+      "unit": "unit65-66",
+      "word": "mum",
+      "cn": "妈妈",
+      "original": "/assets/unit65-66/mother.webp",
+      "asset": "/assets/unit61-62/mother.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "family",
+        "sources": [
+          "/assets/unit61-62/mother.webp",
+          "/assets/word-art-v2/sample13-24/tired-v1.webp"
+        ],
+        "labels": [
+          "Mum",
+          "child"
+        ],
+        "focus": 0
+      }
+    },
+    {
+      "unit": "unit67-68",
+      "word": "church",
+      "cn": "教堂",
+      "original": "/assets/unit67-68/church.svg",
+      "asset": "/assets/word-art-v2/whole-book/church-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "church"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Denmark",
+      "cn": "丹麦",
+      "original": "/assets/unit69-70/denmark.svg",
+      "asset": "/assets/unit69-70/denmark.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Australia",
+      "cn": "澳大利亚",
+      "original": "/assets/unit69-70/australia.svg",
+      "asset": "/assets/unit69-70/australia.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Austria",
+      "cn": "奥地利",
+      "original": "/assets/unit69-70/austria.svg",
+      "asset": "/assets/unit69-70/austria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Canada",
+      "cn": "加拿大",
+      "original": "/assets/unit69-70/canada.svg",
+      "asset": "/assets/unit69-70/canada.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "China",
+      "cn": "中国",
+      "original": "/assets/unit69-70/china.svg",
+      "asset": "/assets/unit69-70/china.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Finland",
+      "cn": "芬兰",
+      "original": "/assets/unit69-70/finland.svg",
+      "asset": "/assets/unit69-70/finland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "India",
+      "cn": "印度",
+      "original": "/assets/unit69-70/india.svg",
+      "asset": "/assets/unit69-70/india.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Poland",
+      "cn": "波兰",
+      "original": "/assets/unit69-70/poland.svg",
+      "asset": "/assets/unit69-70/poland.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Turkey",
+      "cn": "土耳其",
+      "original": "/assets/unit69-70/turkey.svg",
+      "asset": "/assets/unit69-70/turkey.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Japan",
+      "cn": "日本",
+      "original": "/assets/unit69-70/japan.svg",
+      "asset": "/assets/unit69-70/japan.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "Nigeria",
+      "cn": "尼日利亚",
+      "original": "/assets/unit69-70/nigeria.svg",
+      "asset": "/assets/unit69-70/nigeria.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "morning",
+      "cn": "早晨，上午",
+      "original": "/assets/unit69-70/morning.svg",
+      "asset": "/assets/unit5-6-word-cards/morning-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit69-70",
+      "word": "night",
+      "cn": "夜晚",
+      "original": "/assets/unit69-70/night.svg",
+      "asset": "/assets/word-art-v2/whole-book/night-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "night"
+    },
+    {
+      "unit": "unit71-72",
+      "word": "telephone",
+      "cn": "打电话；电话",
+      "original": "/assets/unit71-72/telephone.svg",
+      "asset": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "telephone"
+    },
+    {
+      "unit": "unit71-72",
+      "word": "phone",
+      "cn": "电话",
+      "original": "/assets/unit71-72/phone.svg",
+      "asset": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "telephone"
+    },
+    {
+      "unit": "unit73-74",
+      "word": "hand",
+      "cn": "手",
+      "original": "/assets/unit73-74/hand.svg",
+      "asset": "/assets/word-art-v2/whole-book/hand-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "hand"
+    },
+    {
+      "unit": "unit73-74",
+      "word": "pocket",
+      "cn": "衣袋",
+      "original": "/assets/unit73-74/pocket.svg",
+      "asset": "/assets/word-art-v2/whole-book/pocket-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "pocket"
+    },
+    {
+      "unit": "unit73-74",
+      "word": "phrasebook",
+      "cn": "短语手册；常用语手册",
+      "original": "/assets/unit73-74/phrasebook.svg",
+      "asset": "/assets/word-art-v2/whole-book/phrasebook-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "phrasebook"
+    },
+    {
+      "unit": "unit73-74",
+      "word": "tourist",
+      "cn": "游客；旅行者",
+      "original": "/assets/unit73-74/tourist.svg",
+      "asset": "/assets/unit15-16/cast-girl-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit75-76",
+      "word": "black",
+      "cn": "黑色的",
+      "original": "/assets/unit75-76/pair.svg",
+      "asset": "/assets/unit13-14/black.svg",
+      "method": "approved-source-reuse",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit77-78",
+      "word": "nurse",
+      "cn": "护士",
+      "original": "/assets/unit77-78/nurse.webp",
+      "asset": "/assets/word-art-v2/sample1-12/nurse-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit77-78",
+      "word": "toothache",
+      "cn": "牙痛",
+      "original": "/assets/unit77-78/toothache.svg",
+      "asset": "/assets/word-art-v2/whole-book/toothache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "toothache"
+    },
+    {
+      "unit": "unit77-78",
+      "word": "busy",
+      "cn": "忙碌的",
+      "original": "/assets/unit77-78/busy.svg",
+      "asset": "/assets/word-art-v2/sample1-12/busy-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "list",
+      "cn": "清单",
+      "original": "/assets/unit79-80/list.svg",
+      "asset": "/assets/word-art-v2/whole-book/shopping-list-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "shopping-list"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "vegetable",
+      "cn": "蔬菜",
+      "original": "/assets/unit79-80/vegetable.svg",
+      "asset": "/assets/word-art-v2/whole-book/vegetable-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "vegetable"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "fruit",
+      "cn": "水果",
+      "original": "/assets/unit79-80/fruit.svg",
+      "asset": "/assets/word-art-v2/whole-book/fruit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "fruit"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "stationery",
+      "cn": "文具",
+      "original": "/assets/unit79-80/stationery.svg",
+      "asset": "/assets/word-art-v2/whole-book/stationery-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "stationery"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "envelopes",
+      "cn": "信封（复数）",
+      "original": "/assets/unit79-80/envelopes.svg",
+      "asset": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "envelope",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/envelope-v1.webp",
+          "/assets/word-art-v2/whole-book/envelope-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit79-80",
+      "word": "glue",
+      "cn": "胶水",
+      "original": "/assets/unit79-80/glue.svg",
+      "asset": "/assets/word-art-v2/whole-book/glue-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "glue"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "writing paper",
+      "cn": "信纸",
+      "original": "/assets/unit79-80/writing-paper.svg",
+      "asset": "/assets/word-art-v2/whole-book/writing-paper-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "writing-paper"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "medicine",
+      "cn": "药",
+      "original": "/assets/unit79-80/medicine.svg",
+      "asset": "/assets/word-art-v2/whole-book/medicine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "medicine"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "cheese",
+      "cn": "奶酪",
+      "original": "/assets/unit79-80/cheese.svg",
+      "asset": "/assets/word-art-v2/whole-book/cheese-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cheese"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "bread",
+      "cn": "面包",
+      "original": "/assets/unit79-80/bread.svg",
+      "asset": "/assets/word-art-v2/whole-book/bread-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bread"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "butter",
+      "cn": "黄油",
+      "original": "/assets/unit79-80/butter.svg",
+      "asset": "/assets/word-art-v2/whole-book/butter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "butter"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "jam",
+      "cn": "果酱",
+      "original": "/assets/unit79-80/jam.svg",
+      "asset": "/assets/word-art-v2/whole-book/jam-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "jam"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "honey",
+      "cn": "蜂蜜",
+      "original": "/assets/unit79-80/honey.svg",
+      "asset": "/assets/word-art-v2/whole-book/honey-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "honey"
+    },
+    {
+      "unit": "unit79-80",
+      "word": "beans",
+      "cn": "豆角（复数）",
+      "original": "/assets/unit79-80/beans.svg",
+      "asset": "/assets/word-art-v2/whole-book/bean-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "bean",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/bean-v1.webp",
+          "/assets/word-art-v2/whole-book/bean-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit79-80",
+      "word": "peas",
+      "cn": "豌豆（复数）",
+      "original": "/assets/unit79-80/peas.svg",
+      "asset": "/assets/word-art-v2/whole-book/pea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "pea",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/pea-v1.webp",
+          "/assets/word-art-v2/whole-book/pea-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit79-80",
+      "word": "cabbages",
+      "cn": "卷心菜（复数）",
+      "original": "/assets/unit79-80/cabbages.svg",
+      "asset": "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "cabbage",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+          "/assets/word-art-v2/whole-book/cabbage-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit81-82",
+      "word": "bath",
+      "cn": "洗澡",
+      "original": "/assets/unit81-82/bath.svg",
+      "asset": "/assets/word-art-v2/whole-book/bath-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bath"
+    },
+    {
+      "unit": "unit81-82",
+      "word": "dinner",
+      "cn": "正餐；本故事指晚餐",
+      "original": "/assets/unit81-82/dinner.svg",
+      "asset": "/assets/word-art-v2/whole-book/dinner-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "dinner"
+    },
+    {
+      "unit": "unit81-82",
+      "word": "restaurant",
+      "cn": "饭馆；餐馆",
+      "original": "/assets/unit81-82/restaurant.svg",
+      "asset": "/assets/word-art-v2/whole-book/restaurant-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "restaurant"
+    },
+    {
+      "unit": "unit81-82",
+      "word": "breakfast",
+      "cn": "早饭",
+      "original": "/assets/unit81-82/breakfast.svg",
+      "asset": "/assets/word-art-v2/whole-book/breakfast-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "breakfast"
+    },
+    {
+      "unit": "unit81-82",
+      "word": "potatoes",
+      "cn": "土豆（复数）",
+      "original": "/assets/unit81-82/potatoes.svg",
+      "asset": "/assets/word-art-v2/whole-book/potato-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "potato",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/potato-v1.webp",
+          "/assets/word-art-v2/whole-book/potato-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "suitcase",
+      "cn": "手提箱；行李箱",
+      "original": "/assets/unit83-84/suitcase.svg",
+      "asset": "/assets/word-art-v2/whole-book/case-blue-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "case-blue"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "fruit",
+      "cn": "水果",
+      "original": "/assets/unit83-84/fruit.svg",
+      "asset": "/assets/word-art-v2/whole-book/fruit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "fruit"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "bananas",
+      "cn": "香蕉（复数）",
+      "original": "/assets/unit83-84/bananas.svg",
+      "asset": "/assets/word-art-v2/whole-book/banana-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "banana",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/banana-v1.webp",
+          "/assets/word-art-v2/whole-book/banana-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "oranges",
+      "cn": "橙子（复数）",
+      "original": "/assets/unit83-84/oranges.svg",
+      "asset": "/assets/word-art-v2/whole-book/orange-fruit-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/orange-fruit-v1.webp",
+          "/assets/word-art-v2/whole-book/orange-fruit-v1.webp"
+        ]
+      },
+      "references": [
+        "assets/unit83-84/keepsake-story-v1.webp",
+        "assets/word-art-v2/whole-book/orange-fruit-v1.webp"
+      ],
+      "meaningReview": "原词是橙子复数，呈现两个橙子；不能复用橙色色块。"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "peaches",
+      "cn": "桃子（复数）",
+      "original": "/assets/unit83-84/peaches.svg",
+      "asset": "/assets/word-art-v2/whole-book/peach-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "peach",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/peach-v1.webp",
+          "/assets/word-art-v2/whole-book/peach-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "apples",
+      "cn": "苹果（复数）",
+      "original": "/assets/unit83-84/apples.svg",
+      "asset": "/assets/word-art-v2/whole-book/apple-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "apple",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/apple-v1.webp",
+          "/assets/word-art-v2/whole-book/apple-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "vegetables",
+      "cn": "蔬菜（复数）",
+      "original": "/assets/unit83-84/vegetables.svg",
+      "asset": "/assets/word-art-v2/whole-book/vegetable-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "vegetable",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/vegetable-v1.webp",
+          "/assets/word-art-v2/whole-book/vegetable-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "lettuce",
+      "cn": "生菜",
+      "original": "/assets/unit83-84/lettuce.svg",
+      "asset": "/assets/word-art-v2/whole-book/lettuce-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "lettuce"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "cabbage",
+      "cn": "卷心菜",
+      "original": "/assets/unit83-84/cabbage.svg",
+      "asset": "/assets/word-art-v2/whole-book/cabbage-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cabbage"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "peas",
+      "cn": "豌豆（复数）",
+      "original": "/assets/unit83-84/peas.svg",
+      "asset": "/assets/word-art-v2/whole-book/pea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "pea",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/pea-v1.webp",
+          "/assets/word-art-v2/whole-book/pea-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "beans",
+      "cn": "豆子（复数）",
+      "original": "/assets/unit83-84/beans.svg",
+      "asset": "/assets/word-art-v2/whole-book/bean-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "bean",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/bean-v1.webp",
+          "/assets/word-art-v2/whole-book/bean-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit83-84",
+      "word": "meat",
+      "cn": "肉",
+      "original": "/assets/unit83-84/meat.svg",
+      "asset": "/assets/word-art-v2/whole-book/meat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "meat"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "beef",
+      "cn": "牛肉",
+      "original": "/assets/unit83-84/beef.svg",
+      "asset": "/assets/word-art-v2/whole-book/beef-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beef"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "steak",
+      "cn": "牛排",
+      "original": "/assets/unit83-84/steak.svg",
+      "asset": "/assets/word-art-v2/whole-book/steak-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "steak"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "milk",
+      "cn": "牛奶",
+      "original": "/assets/unit83-84/milk.svg",
+      "asset": "/assets/word-art-v2/whole-book/milk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "milk"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "tea",
+      "cn": "茶",
+      "original": "/assets/unit83-84/tea.svg",
+      "asset": "/assets/word-art-v2/whole-book/tea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tea"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "coffee",
+      "cn": "咖啡",
+      "original": "/assets/unit83-84/coffee.svg",
+      "asset": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coffee"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "wine",
+      "cn": "葡萄酒",
+      "original": "/assets/unit83-84/wine.svg",
+      "asset": "/assets/word-art-v2/whole-book/wine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "wine"
+    },
+    {
+      "unit": "unit83-84",
+      "word": "beer",
+      "cn": "啤酒",
+      "original": "/assets/unit83-84/beer.svg",
+      "asset": "/assets/word-art-v2/whole-book/beer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beer"
+    },
+    {
+      "unit": "unit85-86",
+      "word": "cinema",
+      "cn": "电影院",
+      "original": "/assets/unit85-86/cinema.svg",
+      "asset": "/assets/word-art-v2/whole-book/cinema-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cinema"
+    },
+    {
+      "unit": "unit85-86",
+      "word": "city",
+      "cn": "城市",
+      "original": "/assets/unit85-86/city.svg",
+      "asset": "/assets/word-art-v2/city-v1.webp",
+      "method": "approved-source-reuse"
+    },
+    {
+      "unit": "unit85-86",
+      "word": "spring",
+      "cn": "春天",
+      "original": "/assets/unit85-86/spring.svg",
+      "asset": "/assets/word-art-v2/whole-book/spring-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "spring"
+    },
+    {
+      "unit": "unit87-88",
+      "word": "garage",
+      "cn": "修理厂；车库",
+      "original": "/assets/unit87-88/garage.svg",
+      "asset": "/assets/word-art-v2/whole-book/garage-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "garage"
+    },
+    {
+      "unit": "unit87-88",
+      "word": "lamp-post",
+      "cn": "路灯柱",
+      "original": "/assets/unit87-88/lamp-post.svg",
+      "asset": "/assets/word-art-v2/whole-book/lamp-post-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "lamp-post"
+    },
+    {
+      "unit": "unit87-88",
+      "word": "mechanic",
+      "cn": "机械师；修理工",
+      "original": "/assets/unit87-88/repair.svg",
+      "asset": "/assets/word-art-v2/sample1-12/mechanic-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit91-92",
+      "word": "rain",
+      "cn": "下雨",
+      "original": "/assets/unit91-92/rain.svg",
+      "asset": "/assets/word-art-v2/whole-book/rain-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "rain"
+    },
+    {
+      "unit": "unit91-92",
+      "word": "snow",
+      "cn": "下雪",
+      "original": "/assets/unit91-92/snow.svg",
+      "asset": "/assets/word-art-v2/whole-book/snow-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "snow"
+    },
+    {
+      "unit": "unit93-94",
+      "word": "pilot",
+      "cn": "飞行员",
+      "original": "/assets/unit93-94/nigel.webp",
+      "asset": "/assets/unit93-94/nigel.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "train",
+      "cn": "火车",
+      "original": "/assets/unit95-96/train.svg",
+      "asset": "/assets/word-art-v2/whole-book/train-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "train"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "platform",
+      "cn": "站台",
+      "original": "/assets/unit95-96/platform.svg",
+      "asset": "/assets/word-art-v2/whole-book/platform-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "platform"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "station",
+      "cn": "车站；火车站",
+      "original": "/assets/unit95-96/station.svg",
+      "asset": "/assets/word-art-v2/whole-book/station-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "station"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "porter",
+      "cn": "乘务员（本课车站语境）",
+      "original": "/assets/unit95-96/porter.webp",
+      "asset": "/assets/unit95-96/porter.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "ticket",
+      "cn": "票；车票",
+      "original": "/assets/unit95-96/tickets.svg",
+      "asset": "/assets/unit3-4-journey/ticket-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit95-96",
+      "word": "bridge",
+      "cn": "桥；天桥",
+      "original": "/assets/unit95-96/bridge.svg",
+      "asset": "/assets/word-art-v2/whole-book/bridge-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bridge"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "zip",
+      "cn": "拉链",
+      "original": "/assets/unit97-98/zip.svg",
+      "asset": "/assets/word-art-v2/whole-book/zip-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "zip"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "label",
+      "cn": "标签",
+      "original": "/assets/unit97-98/label.svg",
+      "asset": "/assets/word-art-v2/whole-book/label-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "label"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "handle",
+      "cn": "提手；把手",
+      "original": "/assets/unit97-98/handle.svg",
+      "asset": "/assets/word-art-v2/whole-book/handle-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "handle"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "case",
+      "cn": "箱子",
+      "original": "/assets/unit97-98/blue-case.svg",
+      "asset": "/assets/word-art-v2/whole-book/case-blue-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "case-blue"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "keys",
+      "cn": "钥匙（复数）",
+      "original": "/assets/unit97-98/keys.svg",
+      "asset": "/assets/word-art-v2/whole-book/key-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "key",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/key-v1.webp",
+          "/assets/word-art-v2/whole-book/key-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit97-98",
+      "word": "letter",
+      "cn": "信",
+      "original": "/assets/unit97-98/letter.svg",
+      "asset": "/assets/word-art-v2/whole-book/letter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "letter"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "passport",
+      "cn": "护照",
+      "original": "/assets/unit97-98/passport.svg",
+      "asset": "/assets/word-art-v2/sample13-24/passport-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "tickets",
+      "cn": "票（复数）",
+      "original": "/assets/unit97-98/tickets.svg",
+      "asset": "/assets/unit3-4-journey/ticket-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/unit3-4-journey/ticket-v1.webp",
+          "/assets/unit3-4-journey/ticket-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit97-98",
+      "word": "watch",
+      "cn": "手表",
+      "original": "/assets/unit97-98/watch.svg",
+      "asset": "/assets/word-art-v2/sample1-12/watch-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "flowers",
+      "cn": "花（复数）",
+      "original": "/assets/unit97-98/flowers.svg",
+      "asset": "/assets/word-art-v2/whole-book/flower-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "flower",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/flower-v1.webp",
+          "/assets/word-art-v2/whole-book/flower-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit97-98",
+      "word": "boat",
+      "cn": "小船",
+      "original": "/assets/unit97-98/boat.svg",
+      "asset": "/assets/word-art-v2/whole-book/boat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "boat"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "phrasebook",
+      "cn": "短语手册",
+      "original": "/assets/unit97-98/phrasebook.svg",
+      "asset": "/assets/word-art-v2/whole-book/phrasebook-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "phrasebook"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "hammers",
+      "cn": "锤子（复数）",
+      "original": "/assets/unit97-98/hammers.svg",
+      "asset": "/assets/word-art-v2/whole-book/hammer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "relation",
+      "promptId": "hammer",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/whole-book/hammer-v1.webp",
+          "/assets/word-art-v2/whole-book/hammer-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit97-98",
+      "word": "car",
+      "cn": "汽车",
+      "original": "/assets/unit97-98/car.svg",
+      "asset": "/assets/unit5-6-word-cards/volvo-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit97-98",
+      "word": "pens",
+      "cn": "钢笔（复数）",
+      "original": "/assets/unit97-98/pens.svg",
+      "asset": "/assets/word-art-v2/sample1-12/pen-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample1-12/pen-v1.webp",
+          "/assets/word-art-v2/sample1-12/pen-v1.webp"
+        ]
+      }
+    },
+    {
+      "unit": "unit99-100",
+      "word": "tired",
+      "cn": "疲倦的",
+      "original": "/assets/unit99-100/tired.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tired-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit99-100",
+      "word": "thirsty",
+      "cn": "口渴的",
+      "original": "/assets/unit99-100/thirsty.svg",
+      "asset": "/assets/word-art-v2/sample13-24/thirsty-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit99-100",
+      "word": "cold",
+      "cn": "冷的",
+      "original": "/assets/unit99-100/cold.svg",
+      "asset": "/assets/word-art-v2/sample1-12/cold-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit99-100",
+      "word": "a headache",
+      "cn": "头痛",
+      "original": "/assets/unit99-100/headache.svg",
+      "asset": "/assets/word-art-v2/whole-book/headache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "headache"
+    },
+    {
+      "unit": "unit99-100",
+      "word": "an earache",
+      "cn": "耳痛",
+      "original": "/assets/unit99-100/earache.svg",
+      "asset": "/assets/word-art-v2/whole-book/earache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "earache"
+    },
+    {
+      "unit": "unit99-100",
+      "word": "a toothache",
+      "cn": "牙痛",
+      "original": "/assets/unit99-100/toothache.svg",
+      "asset": "/assets/word-art-v2/whole-book/toothache-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "toothache"
+    },
+    {
+      "unit": "unit101-102",
+      "word": "card",
+      "cn": "明信片（本课词义）",
+      "original": "/assets/unit101-102/card.svg",
+      "asset": "/assets/word-art-v2/whole-book/card-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "card"
+    },
+    {
+      "unit": "unit101-102",
+      "word": "letter",
+      "cn": "信",
+      "original": "/assets/unit101-102/letter.svg",
+      "asset": "/assets/word-art-v2/whole-book/letter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "letter"
+    },
+    {
+      "unit": "unit105-106",
+      "word": "present",
+      "cn": "礼物（本课名词）",
+      "original": "/assets/unit105-106/present.svg",
+      "asset": "/assets/word-art-v2/whole-book/present-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "present"
+    },
+    {
+      "unit": "unit105-106",
+      "word": "dictionary",
+      "cn": "词典",
+      "original": "/assets/unit105-106/dictionary.svg",
+      "asset": "/assets/word-art-v2/whole-book/dictionary-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "dictionary"
+    },
+    {
+      "unit": "unit107-108",
+      "word": "dress",
+      "cn": "连衣裙",
+      "original": "/assets/unit107-108/dress-blue.svg",
+      "asset": "/assets/word-art-v2/sample1-12/dress-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit107-108",
+      "word": "colour",
+      "cn": "颜色",
+      "original": "/assets/unit107-108/colour.svg",
+      "asset": "/assets/unit13-14/colour.svg",
+      "method": "approved-source-reuse",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit107-108",
+      "word": "small",
+      "cn": "小的",
+      "original": "/assets/unit107-108/small.svg",
+      "asset": "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 1
+      }
+    },
+    {
+      "unit": "unit107-108",
+      "word": "large",
+      "cn": "大的",
+      "original": "/assets/unit107-108/large.svg",
+      "asset": "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "comparison",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp",
+          "/assets/word-art-v2/sample13-24/bottle-v1.webp"
+        ],
+        "scales": [
+          1,
+          0.58
+        ],
+        "focus": 0
+      }
+    },
+    {
+      "unit": "unit107-108",
+      "word": "tall",
+      "cn": "高的",
+      "original": "/assets/unit107-108/tall.svg",
+      "asset": "/assets/word-art-v2/sample1-12/tall-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit107-108",
+      "word": "hot",
+      "cn": "热的",
+      "original": "/assets/unit107-108/hot.svg",
+      "asset": "/assets/unit9-10/hot-character-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "teaspoonful",
+      "cn": "一满茶匙的量",
+      "original": "/assets/unit109-110/teaspoonful.svg",
+      "asset": "/assets/word-art-v2/whole-book/teaspoonful-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "teaspoonful"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "coffee",
+      "cn": "咖啡",
+      "original": "/assets/unit109-110/coffee.svg",
+      "asset": "/assets/word-art-v2/whole-book/coffee-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coffee"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "milk",
+      "cn": "牛奶",
+      "original": "/assets/unit109-110/milk.svg",
+      "asset": "/assets/word-art-v2/whole-book/milk-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "milk"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "sugar",
+      "cn": "糖",
+      "original": "/assets/unit109-110/sugar.svg",
+      "asset": "/assets/word-art-v2/whole-book/sugar-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sugar"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "biscuit",
+      "cn": "饼干",
+      "original": "/assets/unit109-110/biscuit.svg",
+      "asset": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "biscuit"
+    },
+    {
+      "unit": "unit109-110",
+      "word": "empty",
+      "cn": "空的",
+      "original": "/assets/unit109-110/empty.svg",
+      "asset": "/assets/word-art-v2/sample13-24/glass-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "television",
+      "cn": "电视机",
+      "original": "/assets/unit111-112/television.svg",
+      "asset": "/assets/word-art-v2/sample13-24/television-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "tall",
+      "cn": "高的",
+      "original": "/assets/unit111-112/tall.svg",
+      "asset": "/assets/word-art-v2/sample1-12/tall-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "old",
+      "cn": "年老的；旧的",
+      "original": "/assets/unit111-112/old.svg",
+      "asset": "/assets/word-art-v2/sample1-12/old-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "blunt",
+      "cn": "钝的",
+      "original": "/assets/unit111-112/blunt.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-blunt-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "sharp",
+      "cn": "锋利的",
+      "original": "/assets/unit111-112/sharp.svg",
+      "asset": "/assets/word-art-v2/sample13-24/knife-sharp-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "clean",
+      "cn": "干净的",
+      "original": "/assets/unit111-112/clean.svg",
+      "asset": "/assets/word-art-v2/sample1-12/shirt-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit111-112",
+      "word": "fat",
+      "cn": "胖的",
+      "original": "/assets/unit111-112/fat.svg",
+      "asset": "/assets/word-art-v2/sample1-12/fat-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "conductor",
+      "cn": "售票员",
+      "original": "/assets/unit113-114/conductor.svg",
+      "asset": "/assets/unit113-114/conductor.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "bus",
+      "cn": "公共汽车",
+      "original": "/assets/unit113-114/bus.svg",
+      "asset": "/assets/word-art-v2/whole-book/bus-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bus"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "ticket",
+      "cn": "车票",
+      "original": "/assets/unit113-114/ticket.svg",
+      "asset": "/assets/unit3-4-journey/ticket-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "chocolate",
+      "cn": "巧克力",
+      "original": "/assets/unit113-114/chocolate.svg",
+      "asset": "/assets/word-art-v2/whole-book/chocolate-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "chocolate"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "envelope",
+      "cn": "信封",
+      "original": "/assets/unit113-114/envelope.svg",
+      "asset": "/assets/word-art-v2/whole-book/envelope-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "envelope"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "cake",
+      "cn": "蛋糕",
+      "original": "/assets/unit113-114/cake.svg",
+      "asset": "/assets/word-art-v2/whole-book/cake-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "cake"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "biscuit",
+      "cn": "饼干",
+      "original": "/assets/unit113-114/biscuit.svg",
+      "asset": "/assets/word-art-v2/whole-book/biscuit-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "biscuit"
+    },
+    {
+      "unit": "unit113-114",
+      "word": "coin",
+      "cn": "硬币",
+      "original": "/assets/unit113-114/coin.svg",
+      "asset": "/assets/word-art-v2/whole-book/coin-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coin"
+    },
+    {
+      "unit": "unit115-116",
+      "word": "lemonade",
+      "cn": "柠檬水",
+      "original": "/assets/unit115-116/lemonade.svg",
+      "asset": "/assets/word-art-v2/whole-book/lemonade-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "lemonade"
+    },
+    {
+      "unit": "unit115-116",
+      "word": "glasses",
+      "cn": "眼镜（复数形式）",
+      "original": "/assets/unit115-116/glasses.svg",
+      "asset": "/assets/word-art-v2/whole-book/eyeglasses-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "eyeglasses"
+    },
+    {
+      "unit": "unit115-116",
+      "word": "beer",
+      "cn": "啤酒（原文饮品）",
+      "original": "/assets/unit115-116/beer.svg",
+      "asset": "/assets/word-art-v2/whole-book/beer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beer"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "dining room",
+      "cn": "饭厅",
+      "original": "/assets/unit117-118/dining-room-icon.svg",
+      "asset": "/assets/word-art-v2/whole-book/dining-room-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "dining-room"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "coin",
+      "cn": "硬币",
+      "original": "/assets/unit117-118/coin.svg",
+      "asset": "/assets/word-art-v2/whole-book/coin-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "coin"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "mouth",
+      "cn": "嘴",
+      "original": "/assets/unit117-118/mouth.svg",
+      "asset": "/assets/word-art-v2/whole-book/mouth-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "mouth"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "toilet",
+      "cn": "厕所；盥洗室",
+      "original": "/assets/unit117-118/toilet.svg",
+      "asset": "/assets/word-art-v2/whole-book/toilet-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "toilet"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "breakfast",
+      "cn": "早餐",
+      "original": "/assets/unit117-118/breakfast.svg",
+      "asset": "/assets/word-art-v2/whole-book/breakfast-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "breakfast"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "phone",
+      "cn": "打电话；电话",
+      "original": "/assets/unit117-118/phone.svg",
+      "asset": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "telephone"
+    },
+    {
+      "unit": "unit117-118",
+      "word": "office",
+      "cn": "办公室",
+      "original": "/assets/unit117-118/office.svg",
+      "asset": "/assets/learning-sample-v2/office-world-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit119-120",
+      "word": "torch",
+      "cn": "手电筒",
+      "original": "/assets/unit119-120/torch.svg",
+      "asset": "/assets/word-art-v2/whole-book/torch-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "torch"
+    },
+    {
+      "unit": "unit119-120",
+      "word": "parrot",
+      "cn": "鹦鹉",
+      "original": "/assets/unit119-120/henry.webp",
+      "asset": "/assets/word-art-v2/whole-book/parrot-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "parrot"
+    },
+    {
+      "unit": "unit119-120",
+      "word": "exercise book",
+      "cn": "练习本",
+      "original": "/assets/unit119-120/exercise-book.svg",
+      "asset": "/assets/word-art-v2/whole-book/exercise-book-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "exercise-book"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "counter",
+      "cn": "柜台",
+      "original": "/assets/unit121-122/counter.svg",
+      "asset": "/assets/word-art-v2/whole-book/counter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "counter"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "road",
+      "cn": "路",
+      "original": "/assets/unit121-122/road.svg",
+      "asset": "/assets/word-art-v2/whole-book/road-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "road"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "dictionary",
+      "cn": "词典",
+      "original": "/assets/unit121-122/dictionary.svg",
+      "asset": "/assets/word-art-v2/whole-book/dictionary-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "dictionary"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "hat",
+      "cn": "帽子",
+      "original": "/assets/unit121-122/hat.svg",
+      "asset": "/assets/word-art-v2/whole-book/hat-brown-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "hat-brown"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "basket",
+      "cn": "篮子",
+      "original": "/assets/unit121-122/basket.svg",
+      "asset": "/assets/word-art-v2/whole-book/basket-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "basket"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "man",
+      "cn": "男人",
+      "original": "/assets/unit121-122/customer.webp",
+      "asset": "/assets/unit17-18/cast-jackson-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit121-122",
+      "word": "woman",
+      "cn": "女人",
+      "original": "/assets/unit121-122/caroline.webp",
+      "asset": "/assets/word-art-v2/sample1-12/woman-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "beard",
+      "cn": "络腮胡子",
+      "original": "/assets/unit123-124/beard-photo.webp",
+      "asset": "/assets/word-art-v2/whole-book/beard-v2-padded.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "beard-v2",
+      "references": [
+        "assets/unit123-124/keepsake-story-v1.webp",
+        "assets/word-art-v2/whole-book/beard-v2-padded.webp"
+      ]
+    },
+    {
+      "unit": "unit123-124",
+      "word": "kitten",
+      "cn": "小猫",
+      "original": "/assets/unit123-124/kitten.svg",
+      "asset": "/assets/word-art-v2/whole-book/kitten-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "kitten"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "photograph",
+      "cn": "照片",
+      "original": "/assets/unit123-124/photograph.svg",
+      "asset": "/assets/word-art-v2/whole-book/photograph-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "photograph"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "ship",
+      "cn": "船；轮船",
+      "original": "/assets/unit123-124/ship.svg",
+      "asset": "/assets/word-art-v2/whole-book/ship-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "ship"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "village",
+      "cn": "村庄",
+      "original": "/assets/unit123-124/village.svg",
+      "asset": "/assets/word-art-v2/whole-book/village-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "village"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "umbrella",
+      "cn": "伞",
+      "original": "/assets/unit123-124/umbrella.svg",
+      "asset": "/assets/unit3-4-journey/umbrella-purple-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit123-124",
+      "word": "medicine",
+      "cn": "药物",
+      "original": "/assets/unit123-124/medicine.svg",
+      "asset": "/assets/word-art-v2/whole-book/medicine-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "medicine"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "rain",
+      "cn": "下雨；雨",
+      "original": "/assets/unit125-126/rain.svg",
+      "asset": "/assets/word-art-v2/whole-book/rain-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "rain"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "tea",
+      "cn": "茶",
+      "original": "/assets/unit125-126/tea.svg",
+      "asset": "/assets/word-art-v2/whole-book/tea-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tea"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "window",
+      "cn": "窗户",
+      "original": "/assets/unit125-126/window.svg",
+      "asset": "/assets/word-art-v2/whole-book/window-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "window"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "summer",
+      "cn": "夏天",
+      "original": "/assets/unit125-126/summer.svg",
+      "asset": "/assets/word-art-v2/whole-book/summer-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "summer"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "taxi",
+      "cn": "出租车",
+      "original": "/assets/unit125-126/taxi.svg",
+      "asset": "/assets/word-art-v2/whole-book/taxi-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "taxi"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "bus",
+      "cn": "公共汽车",
+      "original": "/assets/unit125-126/bus.svg",
+      "asset": "/assets/word-art-v2/whole-book/bus-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "bus"
+    },
+    {
+      "unit": "unit125-126",
+      "word": "station",
+      "cn": "车站",
+      "original": "/assets/unit125-126/station.svg",
+      "asset": "/assets/word-art-v2/whole-book/station-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "station"
+    },
+    {
+      "unit": "unit127-128",
+      "word": "tired",
+      "cn": "疲倦的",
+      "original": "/assets/unit127-128/tired.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tired-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit127-128",
+      "word": "Danish",
+      "cn": "丹麦的；丹麦人",
+      "original": "/assets/unit127-128/danish.svg",
+      "asset": "/assets/unit127-128/danish.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit127-128",
+      "word": "Swedish",
+      "cn": "瑞典的；瑞典人",
+      "original": "/assets/unit127-128/swedish.svg",
+      "asset": "/assets/unit127-128/swedish.svg",
+      "method": "factual-source-preservation",
+      "presentation": "fact"
+    },
+    {
+      "unit": "unit127-128",
+      "word": "engineer",
+      "cn": "工程师",
+      "original": "/assets/unit127-128/engineer.svg",
+      "asset": "/assets/word-art-v2/sample1-12/engineer-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit129-130",
+      "word": "sign",
+      "cn": "标记；牌子",
+      "original": "/assets/unit129-130/sign.svg",
+      "asset": "/assets/word-art-v2/whole-book/sign-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sign"
+    },
+    {
+      "unit": "unit129-130",
+      "word": "officer",
+      "cn": "警官",
+      "original": "/assets/unit129-130/officer.svg",
+      "asset": "/assets/unit15-16/cast-officer-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit131-132",
+      "word": "house",
+      "cn": "房屋",
+      "original": "/assets/unit131-132/house.svg",
+      "asset": "/assets/word-art-v2/sample1-12/house-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit131-132",
+      "word": "dog",
+      "cn": "狗",
+      "original": "/assets/unit131-132/dog.svg",
+      "asset": "/assets/word-art-v2/sample13-24/dog-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit133-134",
+      "word": "mink coat",
+      "cn": "貂皮大衣",
+      "original": "/assets/unit133-134/coat.svg",
+      "asset": "/assets/word-art-v2/whole-book/mink-coat-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "mink-coat"
+    },
+    {
+      "unit": "unit133-134",
+      "word": "newspaper",
+      "cn": "报纸",
+      "original": "/assets/unit133-134/newspaper.svg",
+      "asset": "/assets/word-art-v2/sample13-24/newspaper-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit133-134",
+      "word": "airport",
+      "cn": "机场",
+      "original": "/assets/unit133-134/airport-icon.svg",
+      "asset": "/assets/word-art-v2/whole-book/airport-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "airport"
+    },
+    {
+      "unit": "unit133-134",
+      "word": "dress",
+      "cn": "连衣裙（本课名词）",
+      "original": "/assets/unit133-134/dress.svg",
+      "asset": "/assets/word-art-v2/sample1-12/dress-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit133-134",
+      "word": "tired",
+      "cn": "疲倦的",
+      "original": "/assets/unit133-134/tired.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tired-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit135-136",
+      "word": "hotel",
+      "cn": "饭店；旅馆",
+      "original": "/assets/unit135-136/hotel.svg",
+      "asset": "/assets/word-art-v2/whole-book/hotel-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "hotel"
+    },
+    {
+      "unit": "unit137-138",
+      "word": "football",
+      "cn": "足球",
+      "original": "/assets/unit137-138/football.svg",
+      "asset": "/assets/word-art-v2/whole-book/football-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "football"
+    },
+    {
+      "unit": "unit139-140",
+      "word": "engineer",
+      "cn": "工程师",
+      "original": "/assets/unit139-140/engineer.svg",
+      "asset": "/assets/word-art-v2/sample1-12/engineer-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit139-140",
+      "word": "telephone",
+      "cn": "电话",
+      "original": "/assets/unit139-140/telephone.svg",
+      "asset": "/assets/word-art-v2/whole-book/telephone-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "telephone"
+    },
+    {
+      "unit": "unit141-142",
+      "word": "powder",
+      "cn": "香粉",
+      "original": "/assets/unit141-142/powder.svg",
+      "asset": "/assets/word-art-v2/whole-book/powder-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "powder"
+    },
+    {
+      "unit": "unit141-142",
+      "word": "compact",
+      "cn": "带镜的化妆盒（名词）",
+      "original": "/assets/unit141-142/compact.svg",
+      "asset": "/assets/word-art-v2/whole-book/compact-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "compact"
+    },
+    {
+      "unit": "unit141-142",
+      "word": "handbag",
+      "cn": "手提包",
+      "original": "/assets/unit141-142/handbag.svg",
+      "asset": "/assets/word-art-v2/whole-book/handbag-brown-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "handbag-brown"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "surround",
+      "cn": "包围；环绕",
+      "original": "/assets/unit143-144/surround.svg",
+      "asset": "/assets/word-art-v2/surround-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "wood",
+      "cn": "树林（本课用法）",
+      "original": "/assets/unit143-144/wood.svg",
+      "asset": "/assets/word-art-v2/wood-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "beauty spot",
+      "cn": "风景点",
+      "original": "/assets/unit143-144/beauty-spot.svg",
+      "asset": "/assets/word-art-v2/beauty-spot-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "hundred",
+      "cn": "百",
+      "original": "/assets/unit143-144/hundred.svg",
+      "asset": "/assets/word-art-v2/hundred-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "city",
+      "cn": "城市",
+      "original": "/assets/unit143-144/city.svg",
+      "asset": "/assets/word-art-v2/city-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "through",
+      "cn": "穿过",
+      "original": "/assets/unit143-144/through.svg",
+      "asset": "/assets/word-art-v2/through-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "litter",
+      "cn": "散落的废弃物",
+      "original": "/assets/unit143-144/litter.svg",
+      "asset": "/assets/word-art-v2/whole-book/litter-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "litter"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "litter basket",
+      "cn": "废物筐",
+      "original": "/assets/unit143-144/litter-basket.svg",
+      "asset": "/assets/word-art-v2/whole-book/litter-basket-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "litter-basket"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "rubbish",
+      "cn": "垃圾",
+      "original": "/assets/unit143-144/rubbish.svg",
+      "asset": "/assets/word-art-v2/whole-book/rubbish-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "rubbish"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "tyre",
+      "cn": "轮胎",
+      "original": "/assets/unit143-144/tyre.svg",
+      "asset": "/assets/word-art-v2/whole-book/tyre-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "tyre"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "refrigerator",
+      "cn": "冰箱",
+      "original": "/assets/unit143-144/refrigerator.svg",
+      "asset": "/assets/word-art-v2/whole-book/refrigerator-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "refrigerator"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "sign",
+      "cn": "告示牌",
+      "original": "/assets/unit143-144/sign.svg",
+      "asset": "/assets/word-art-v2/whole-book/sign-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "sign"
+    },
+    {
+      "unit": "unit143-144",
+      "word": "tin",
+      "cn": "罐头盒；金属罐",
+      "original": "/assets/unit143-144/tin.svg",
+      "asset": "/assets/word-art-v2/sample13-24/tin-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "illustration"
+    },
+    {
+      "unit": "unit47-48",
+      "word": "Scotch whisky",
+      "cn": "苏格兰威士忌",
+      "original": "/assets/unit47-48/whisky.svg",
+      "asset": "/assets/word-art-v2/whole-book/whisky-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "whisky"
+    },
+    {
+      "unit": "unit59-60",
+      "word": "whisky",
+      "cn": "威士忌酒",
+      "original": "/assets/unit59-60/whisky.svg",
+      "asset": "/assets/word-art-v2/whole-book/whisky-v1.webp",
+      "method": "reference-generation",
+      "presentation": "illustration",
+      "promptId": "whisky"
+    },
+    {
+      "unit": "unit75-76",
+      "word": "a pair of shoes",
+      "cn": "一双鞋",
+      "original": "/assets/unit75-76/pair.svg",
+      "asset": "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+      "method": "approved-source-reuse",
+      "presentation": "relation",
+      "composition": {
+        "kind": "pair",
+        "sources": [
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp",
+          "/assets/word-art-v2/sample13-24/shoe-v1.webp"
+        ]
+      }
+    }
+  ]
+}

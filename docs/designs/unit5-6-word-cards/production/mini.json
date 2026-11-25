@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "asset": "mini",
+  "created_at_utc": "2026-10-30 13:51:14 UTC",
+  "generation_method": "built-in image_gen.imagegen",
+  "model": null,
+  "model_note": "The built-in tool did not expose a model name or seed.",
+  "inputs": [
+    {
+      "role": "edit_target",
+      "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/mini-before.png"
+    },
+    {
+      "role": "overall_style_reference",
+      "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp"
+    },
+    {
+      "role": "completed_car_style_reference",
+      "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mercedes-v1.png"
+    }
+  ],
+  "transparent_background": true,
+  "selected_attempt": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "use_case": "style-transfer",
+      "prompt": "Use case: style-transfer.\nAsset type: a transparent PNG vehicle illustration for a children's English vocabulary card, displayed at about 140 x 110 CSS pixels.\n\nInput images:\nImage 1 is the edit target: a tiny sage-green Mini-like two-door city car. Preserve its sage green color, very compact short body, rounded dome-shaped roof and two-door identity. Remove the original word \"Mini\".\nImage 2 is the overall style reference: warm children's storybook commemorative-card illustration. Use its warm dark-brown hand-drawn outlines, soft painted paper texture, gentle volume and friendly warmth; do not copy its people or scenery.\nImage 3 is an already completed car in the same vocabulary-card set. Match its softly painted illustration technique, warm brown contours, gentle highlights, right-facing slight front-side view and transparent asset presentation. Use it only for rendering consistency. Do NOT copy its long sedan proportions.\n\nPrimary request: redraw Image 1 as a polished, detailed children's storybook illustration of one sage-green, VERY SMALL, SHORT, ROUNDED TWO-DOOR city car. The body must be conspicuously shorter and more compact than the long sedan in Image 3. Keep a high rounded roof, short hood, tiny rear overhang, and one door on the visible side. The car should have the identity of a classic little Mini, not an SUV, not a sedan, and not a stretch vehicle. Preserve the cute compact silhouette while adding clear crafted details such as windows, a simple door handle, restrained headlights, and complete wheels.\nComposition: front points RIGHT, viewed mainly from the side with only a mild glimpse of the front face. Center the complete car on a horizontal canvas. It should occupy about 84% of canvas width with at least 8% real transparent safety margin on the left and right and comfortable space above and below. Keep every wheel, mirror and body corner inside the canvas. Two main near-side wheels must be complete and grounded; a naturally occluded small part of a far wheel is acceptable, but no duplicate, floating or extra wheel.\nStyle and material: clean warm dark-brown hand-drawn outline, softly painted muted sage green body, subtle paper-like grain, gentle volume, restrained cream highlights, pale blue-green windows, warm brown dark tires. Keep the drawing warm and clear at vocabulary-card size. Warm soft light and a small softly fading grounding shadow immediately below the car.\nBackground: genuine transparent alpha. Only the car and a restrained semitransparent grounding shadow. No opaque backdrop, floor scene, paper rectangle or colored halo.\nText: NO TEXT anywhere. No word \"Mini\", no letters or numbers, no license-plate text, no badge, brand emblem, watermark or logo.\nAvoid: photography, photorealism, glossy 3D toy rendering, simplistic geometric icon, plasticky materials, people, animals, scenery, border, frame, white sticker outline. Do not elongate the car. Do not crop the car.",
+      "referenced_image_paths": [
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/docs/designs/unit5-6-word-cards/references/mini-before.png",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/awards/unit5-6-friends.webp",
+        "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mercedes-v1.png"
+      ],
+      "transparent_background": true,
+      "generated_path": "C:/Users/duanxiaodong/.codex/generated_images/01a18d07-de68-7c91-afe5-99d6f4d65c7f/exec-3fb25f75-22a7-471a-a773-c91bf1929649.png",
+      "tool_output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a18d07-de68-7c91-afe5-99d6f4d65c7f\\exec-3fb25f75-22a7-471a-a773-c91bf1929649.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+      "selection_note": "Selected first draft: compact sage-green two-door city car, rounded roof, warm brown hand-drawn contours and paper-like painted volume."
+    }
+  ],
+  "output": {
+    "path": "C:/Users/duanxiaodong/.codex/worktrees/book-version/canranstudio/assets/unit5-6-word-cards/raw/mini-v1.png",
+    "width": 1584,
+    "height": 1056,
+    "crop": [
+      61,
+      193,
+      1327,
+      795
+    ],
+    "placement": [
+      128,
+      130
+    ],
+    "alpha": {
+      "width": 1584,
+      "height": 1056,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "alpha_bounds": [
+        128,
+        130,
+        1455,
+        925
+      ],
+      "visible_bounds_alpha_8": [
+        130,
+        132,
+        1453,
+        923
+      ],
+      "transparent_pixels": 855175,
+      "partial_alpha_pixels": 817004,
+      "opaque_pixels": 525,
+      "border_nontransparent_pixels": 0
+    },
+    "sha256": "b4e092040221aea31a537cdec55f3376097755de923fb0f02735bc3a8f822bc1",
+    "bytes": 1950558
+  },
+  "source_image_alpha": {
+    "width": 1437,
+    "height": 1095,
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "alpha_bounds": [
+      0,
+      9,
+      1389,
+      1095
+    ],
+    "visible_bounds_alpha_8": [
+      63,
+      195,
+      1386,
+      986
+    ],
+    "transparent_pixels": 753728,
+    "partial_alpha_pixels": 819262,
+    "opaque_pixels": 525,
+    "border_nontransparent_pixels": 36
+  },
+  "postprocessing": {
+    "method": "Lossless crop and transparent padding only",
+    "source_crop_xywh": [
+      61,
+      193,
+      1327,
+      795
+    ],
+    "crop_basis": "Bounds at alpha >= 8 with 2 px margin; near-transparent disconnected fringe outside the crop was trimmed.",
+    "canvas_size": [
+      1584,
+      1056
+    ],
+    "placement_xy": [
+      128,
+      130
+    ],
+    "resampling": false,
+    "repainting": false,
+    "content_pixel_values_preserved": true
+  },
+  "verification": {
+    "alpha": {
+      "width": 1584,
+      "height": 1056,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "alpha_bounds": [
+        128,
+        130,
+        1455,
+        925
+      ],
+      "visible_bounds_alpha_8": [
+        130,
+        132,
+        1453,
+        923
+      ],
+      "transparent_pixels": 855175,
+      "partial_alpha_pixels": 817004,
+      "opaque_pixels": 525,
+      "border_nontransparent_pixels": 0
+    },
+    "visual_checks": {
+      "complete_car": true,
+      "right_facing": true,
+      "mild_front_side_view": true,
+      "two_main_wheels_complete": true,
+      "reasonable_occluded_far_wheels": true,
+      "mirrors_complete": true,
+      "sage_green_body": true,
+      "short_compact_two_door_body": true,
+      "rounded_roof": true,
+      "no_text": true,
+      "no_logo_or_brand_badge": true,
+      "no_scene_or_people": true,
+      "no_white_outline": true,
+      "storybook_paper_fill_and_warm_brown_contour": true,
+      "small_grounding_shadow": true
+    },
+    "body_and_shadow_aspect_ratio": 1.669182389937107,
+    "mercedes_body_and_shadow_aspect_ratio_for_comparison": 2.1774193548387095,
+    "subject_width_fraction": 0.8377525252525253,
+    "minimum_horizontal_safety_margin_fraction": 0.08080808080808081,
+    "notes": "Viewed the new target and the saved output; previously inspected both style references. Naturally occluded portions of far-side wheels are visible, as permitted. Output PNG was reopened for alpha verification. No application code, browser session or deployment was touched."
+  }
+}
+

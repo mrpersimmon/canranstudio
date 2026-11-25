@@ -1,0 +1,30 @@
+'use strict';
+const {test,expect}=require('@playwright/test');
+const {devices}=require('../support/required-phone-devices');
+const {openCourseReference,courseReference}=require('../support/course-controls');
+
+for(const device of devices)test(device.name+'：图册与问答分别续页，关闭后焦点回到课程',async({page})=>{
+  await page.setViewportSize(device.viewport);
+  await page.goto('/unit25-26/#learn/apply');
+  const title='课本小参考 · 第26课',sheet=courseReference(page);
+  await openCourseReference(page,title);
+  const next=sheet.getByRole('button',{name:'下一组物品图'}),previous=sheet.getByRole('button',{name:'上一组物品图'});
+  await expect(previous).toBeDisabled();
+  await next.click();
+  await expect(sheet.locator('.gallery-current small')).toHaveText('4,000');
+  await sheet.getByRole('button',{name:'下一份问答'}).click();
+  await expect(sheet.locator('.model-current + .reference-pager span')).toHaveText('2 / 7');
+  await sheet.getByRole('button',{name:'关闭学习参考'}).click();
+  await expect(page.getByRole('button',{name:'更多学习操作'})).toBeFocused();
+  await openCourseReference(page,title);
+  await expect(sheet.locator('.gallery-current small')).toHaveText('4,000');
+  await previous.click();
+  await expect(previous).toBeDisabled();
+  await page.keyboard.press('Escape');
+  await page.reload();
+  await openCourseReference(page,title);
+  await expect(sheet.locator('.gallery-current small')).toHaveText('3,000');
+  await expect(sheet.locator('.model-current + .reference-pager span')).toHaveText('2 / 7');
+  expect(await sheet.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

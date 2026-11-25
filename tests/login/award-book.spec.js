@@ -102,7 +102,8 @@ test('离开课程的待同步成果由纪念册恢复上传，长姓名不裁�
  test.setTimeout(90000);const base=process.env.AWARD_TEST_BASE||'/lesson/',name='热爱探险和英语学习的小朋友李明小明';
  await adminLogin(page,base);const account=await createStudent(page,'离线纪念册班',name,[/Lesson 1–2/]);const learner=await studentLogin(browser,account,base);
  let blocked=true;await learner.page.route('**/api/progress',route=>blocked?route.abort():route.continue());
- await finishZone(learner.page,'trans',{base:base+'unit1-2/'});await expect(learner.page.locator('#starCount')).toHaveText('0');
+ await finishZone(learner.page,'trans',{base:base+'unit1-2/'});await expect(learner.page.locator('#starCount')).toHaveText('1');
+ const offline=await (await learner.page.request.get(base+'api/awards')).json();expect(offline.cards).toHaveLength(0);
  await learner.page.goto(base+'awards/');await expect(learner.page.getByText('点亮第一颗星，收藏第一张纪念卡。')).toBeVisible();await expect(learner.page.getByRole('status')).toContainText('待同步');
  blocked=false;await learner.page.reload();await expect(learner.page.locator('.postoffice-scene')).toBeVisible();await expect(learner.page.getByRole('button',{name:'打开纪念册',exact:true})).toHaveCount(0);await expect(learner.page.locator('.certificate')).toHaveAttribute('data-stars','1');
  await expect(learner.page.getByRole('button',{name:/^放大查看/})).toHaveCount(0);

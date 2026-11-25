@@ -1,0 +1,18 @@
+{
+  "id": "table",
+  "kind": "word",
+  "references": [
+    "output/sample-13-24/original-card-reference.png",
+    "assets/word-art-v2/sample1-12/book-v1.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Asset: one isolated English vocabulary illustration. ONE simple honey-brown rectangular dining table with four legs, EMPTY top, NO drawers, no chairs or accessories; clearly distinguishable from a writing desk. Match the original keepsake and approved book reference: warm deep-brown hand-drawn contour, softly painted rounded forms, restrained volume, gentle paper grain, warm welcoming colours. Transparent background, square composition, one clearly identifiable main subject, centred with generous safe padding all around, entire silhouette visible. NO white rectangle, card border, background scene, ground plane, outside drop shadow, Chinese, English labels or watermarks. No photorealism, no 3D toy rendering, no flat icon. The reference contact sheet gives visual style; do not insert its people into an object illustration.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-f19e1592-31ca-4690-970b-0a6ca0a30cf3.png",
+  "raw": "assets/learning-sample-v2/raw/table.png",
+  "adopted": "assets/word-art-v2/sample13-24/table-v1.webp",
+  "projectReferenceCopies": [
+    "docs/designs/learning-flow/sample-13-24-generations/references/original-keepsakes.png",
+    "assets/word-art-v2/sample1-12/book-v1.webp"
+  ]
+}

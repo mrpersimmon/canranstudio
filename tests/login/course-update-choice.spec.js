@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const crypto=require('node:crypto');
 const fs=require('node:fs'),path=require('node:path');
@@ -30,7 +31,7 @@ async function publish(page){
  await courseResponse(page,base+'course-index.json',{json:index});
  return {index,item,bytes};
 }
-async function ready(page){await expect(page.locator('#wordPageProgress')).toBeVisible({timeout:30000});await expect(page.locator('#courseLoader')).toHaveCount(0);}
+async function ready(page){await readyCourse(page);await expect(page.locator('#courseLoader')).toHaveCount(0);}
 async function position(page){await page.locator('.stage-words').getByRole('button',{name:'下一组',exact:true}).click();await expect(page.locator('#wordPageProgress')).toContainText('2 / 4');}
 
 test('已打开页仅提示刷新，下一次进入自动使用最新课包，无旧版选择且成果不被加载层改写',async({page,browser},info)=>{
@@ -54,7 +55,10 @@ test('已打开页仅提示刷新，下一次进入自动使用最新课包，�
   await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(card.locator('.primary-button')).toBeVisible();
   await expect(card.locator('.course-update-choice')).toHaveCount(0);
   await expect(card.getByRole('link',{name:'进入新版',exact:true})).toHaveCount(0);
-  await card.locator('.primary-button').click();await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
+  const entry=card.locator('.primary-button'),destination=new URL(await entry.getAttribute('href'),p.url()).href;
+  await entry.click();await expect(p).toHaveURL(destination);
+  await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
+  await expect(p.locator('.learning-surface')).toBeVisible();await expect(p).toHaveTitle('新版课程选择验收');
  }finally{await student.context.close();}
 });
 

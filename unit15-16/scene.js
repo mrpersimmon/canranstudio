@@ -4,11 +4,11 @@ const node=(tag,cls='',text='')=>{const e=document.createElement(tag);e.classNam
 const picture=(name,alt,cls='',extension='svg')=>{const e=node('img',cls);e.src='/assets/unit15-16/'+name+'.'+extension;e.alt=alt;return e;};
 function storyProps(){
  const element=node('div','travel-world');element.setAttribute('role','group');element.setAttribute('aria-label','海关官员与两位姑娘的检查站');
- const cast=node('div','travel-cast'),location=node('p','travel-location','海关检查站');
+ const cast=node('div','travel-cast');
  for(const [who,name,asset,alt]of [['officer','海关官员','cast-officer-v1','海关官员面向右侧的姑娘们，伸手示意'],['girls','姑娘们','cast-girls-v1','两位姑娘站在一起，面向左侧的官员']]){const actor=node('div','dialogue-actor '+who);actor.dataset.actor=who;actor.append(picture(asset,alt,'cast-image','webp'),node('span','actor-label',name));cast.append(actor);}
  const friends=node('div','travel-friends');friends.append(picture('cast-friends-v1','两位同行朋友在旁边等候','','webp'),node('span','actor-label','同行朋友'));
  const counter=picture('counter','','travel-counter'),passports=picture('passports','姑娘们拿出的两本护照','travel-passports'),other=picture('cases-grey','官员询问的一对灰色箱子，物主尚未确认','travel-other-cases'),own=picture('cases-brown','姑娘们自己的两只棕色箱子','travel-own-cases');
- cast.append(counter,passports,other,own);element.append(location,cast,friends);
+ cast.append(counter,passports,other,own);element.append(cast,friends);
  function placePassports(){
   if(passports.hidden)return;
   const who=passports.dataset.place,img=cast.querySelector('.'+who+' .cast-image'),bounds=img.getBoundingClientRect(),frame=cast.getBoundingClientRect();

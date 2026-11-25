@@ -1,0 +1,18 @@
+{
+  "version": "2026-10-31.1",
+  "unit": "CSS px",
+  "source": "https://github.com/ChromeDevTools/devtools-frontend/blob/main/front_end/models/emulation/EmulatedDevices.ts",
+  "verifiedAt": "2026-10-31",
+  "scope": "每次涉及学生界面的验证，受影响页面必须覆盖这些竖屏尺寸；不能用截图物理像素或测试库同名设备替代。",
+  "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+  "devices": [
+    { "id": "chrome-iphone-se", "name": "iPhone SE", "viewport": { "width": 375, "height": 667 }, "deviceScaleFactor": 2 },
+    { "id": "chrome-iphone-14-pro-max", "name": "iPhone 14 Pro Max", "sameSizeAs": ["iPhone 15 Pro Max"], "viewport": { "width": 430, "height": 932 }, "deviceScaleFactor": 3 },
+    { "id": "chrome-iphone-16-pro-max", "name": "iPhone 16 Pro Max", "viewport": { "width": 440, "height": 956 }, "deviceScaleFactor": 3 }
+  ],
+  "limitations": [
+    "自动测试只复现宽高、DPR、移动布局、触摸和UA；不等于真实iOS、浏览器地址栏、键盘或刘海安全区验收。",
+    "320×568仍是独立小屏压力尺寸，不标记为Chrome的iPhone SE。",
+    "更新设备预设时核对Chrome官方清单并保留准确型号；这些尺寸不代表本站95%流量覆盖。"
+  ]
+}

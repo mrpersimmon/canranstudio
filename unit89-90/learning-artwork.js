@@ -1,0 +1,27 @@
+/* Presentation-only word art. See scripts/prepare-learning-word-art.js. */
+CanranCore.learningWordArtwork={
+  "believe": "/assets/learning-words/unit89-90/believe-1debf9a5.svg",
+  "may": "/assets/learning-words/unit89-90/door-53c1a953.svg",
+  "how long": "/assets/learning-words/unit89-90/duration-c64d052d.svg",
+  "since": "/assets/learning-words/unit89-90/start-b95ff962.svg",
+  "why": "/assets/learning-words/unit89-90/why-e26d4be5.svg",
+  "sell": "/assets/learning-words/unit89-90/sale-328c909a.svg",
+  "because": "/assets/learning-words/unit89-90/because-154e8d35.svg",
+  "retire": "/assets/learning-words/unit89-90/retire-06438d5f.svg",
+  "cost": "/assets/learning-words/unit89-90/price-3efcb33c.svg",
+  "pound": "/assets/learning-words/unit89-90/pound-623e5245.svg",
+  "worth": "/assets/learning-words/unit89-90/worth-32806306.svg",
+  "penny": "/assets/learning-words/unit89-90/penny-b9f494d0.svg",
+  "for sale": "/assets/learning-words/unit89-90/sale-328c909a.svg",
+  "for": "/assets/learning-words/unit89-90/duration-c64d052d.svg",
+  "decide": "/assets/learning-words/unit89-90/decide-a2dfa899.svg",
+  "country": "/assets/learning-words/unit89-90/country-735845e6.svg",
+  "lived": "/assets/learning-words/unit89-90/house-bbd64f6e.svg",
+  "sold": "/assets/learning-words/unit89-90/sale-328c909a.svg",
+  "read – read – read": "/assets/learning-words/unit89-90/book-bbe20c6f.svg",
+  "done": "/assets/learning-words/unit89-90/homework-1500e49c.svg",
+  "spoken": "/assets/learning-words/unit89-90/speech-51f2f366.svg",
+  "swum": "/assets/learning-words/unit89-90/swim-a4f66f72.svg",
+  "taken": "/assets/learning-words/unit89-90/shoes-5d600ef1.svg",
+  "gone": "/assets/learning-words/unit89-90/door-53c1a953.svg"
+};

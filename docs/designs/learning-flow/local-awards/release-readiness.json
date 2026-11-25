@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-17",
+  "conclusion": "ready to enter formal release workflow; production cutover not performed",
+  "acceptedSnapshot": "review-local-stars-20261117-357a3334ca26",
+  "userAccepted": true,
+  "runtimeFilesChecked": 8450,
+  "runtimeCodeAndAssetsMatchPreview": true,
+  "documentationOnlyDifference": [
+    "deploy/mobile-review/README.md"
+  ],
+  "targetBranch": "codex/release-canranstudio",
+  "targetRemoteCommit": "eb96ef1d43ccbe6e0ece40ae48198d082b5fc6fb",
+  "currentHead": "e4b024c3243e59760c18e90c21d2b31aea315104",
+  "headAheadOfRelease": 2,
+  "headBehindRelease": 0,
+  "previewServiceActive": true,
+  "productionServiceActive": true,
+  "productionHttpsVerified": true,
+  "productionCertificateValidUntil": "2027-01-02",
+  "renewalTimerActive": true,
+  "previewRenewalDryRunPassed": false,
+  "remainingSteps": [
+    "Commit the accepted work with tests and standards",
+    "Open PR and satisfy required checks before merging",
+    "Back up current production database and compatibility key",
+    "Build immutable merged release, deploy and verify production"
+  ],
+  "fullCICompleted": false
+}

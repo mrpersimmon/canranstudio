@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const taskCases=require('./units1-30-tasks');
 const {reloadWithLatestCheck}=require('./offline-reentry');
 const { expect } = require('@playwright/test');
@@ -9,12 +10,12 @@ const ANSWERS=Object.fromEntries(Object.keys(taskCases.CASES['7-8'].old).map(id=
 async function completeStory(page,base=''){
  await page.goto(base+'/unit7-8/#learn/text');const room=page.locator('.stage-text');
  for(let i=0;i<DIALOGUE.length;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  await courseButton(room, i?'下一句':"startStory").click();
   await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
   await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
-  await expect(room.getByRole('button',{name:i===15?'完成课文':'下一句',exact:true})).toBeEnabled({timeout:15000});
+  await expect(courseButton(room, i===15?"finishStory":'下一句')).toBeEnabled({timeout:15000});
  }
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room).toContainText('故事看完了！');
+ await courseButton(room, "finishStory").click();await expect(room).toContainText('故事看完了！');
 }
 async function completeActivity(page,id,base='',{offlineContext}={}){
  await page.goto(base+'/unit7-8/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];
@@ -27,7 +28,7 @@ async function completeActivity(page,id,base='',{offlineContext}={}){
   await expect(check).toBeEnabled({timeout:15000});await check.click();await expect(room.getByRole('status')).toContainText('答对了！');
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
   if(id==='listen'&&i===11){if(offlineContext)await reloadWithLatestCheck(page,offlineContext);else await page.reload();await expect(room.getByRole('status')).toContainText('答对了！');}
-  await room.getByRole('button',{name:i===answers.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+  await courseButton(room, i===answers.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
  }
  await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
 }

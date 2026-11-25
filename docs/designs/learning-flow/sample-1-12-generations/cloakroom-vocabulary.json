@@ -1,0 +1,13 @@
+{
+  "id": "cloakroom-vocabulary",
+  "references": [
+    "assets/awards/unit3-4-umbrella.webp",
+    "assets/unit3-4-journey/cloakroom-interior-v1.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Create ONE compact vocabulary vignette clearly showing a CLOAKROOM / coat-check counter, not an empty room. Match the original keepsake's warm brown rounded outlines, soft painted color and paper texture. A small wooden counter in front; behind it a simple wooden rail holding one tan coat and a purple umbrella with cream polka dots; a small cream numbered ticket showing exactly 5 on the counter. Optional small warm cream arch as the backdrop within the vignette, but leave the outside genuinely transparent. NO people, no other text, no UI, no white rectangular background. Keep coat-check function unmistakable at 90px display size: emphasize coat, umbrella, counter and ticket, minimize architecture. Center square, complete objects with 10% safe margin. The second reference is environmental identity only; simplify it rather than copying the empty room. Original keepsake unchanged.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-e09a48cd-0f60-4df5-8382-f465b4ddc635.png",
+  "raw": "assets/learning-sample-v1/raw/cloakroom-vocabulary.png",
+  "adopted": "assets/word-art-v2/sample1-12/cloakroom-vocabulary-v1.webp"
+}

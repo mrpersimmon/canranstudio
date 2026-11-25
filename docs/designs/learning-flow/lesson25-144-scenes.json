@@ -1,0 +1,459 @@
+{
+  "unit25-26": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "context",
+    "fullScene": {
+      "captionSpace": 0,
+      "image": "/assets/unit25-26/kitchen-continuous-v2.webp"
+    }
+  },
+  "unit27-28": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "decorative",
+    "fullScene": {
+      "captionSpace": 0
+    }
+  },
+  "unit29-30": {
+    "version": 1,
+    "background": "/assets/unit29-30/bedroom-world-v2.webp",
+    "layout": "room-cast",
+    "location": "decorative",
+    "continuousRoom": true
+  },
+  "unit31-32": {
+    "version": 1,
+    "background": null,
+    "layout": "room-cast",
+    "location": "decorative",
+    "fullScene": {
+      "captionSpace": 0,
+      "image": "/assets/unit31-32/garden-observation-v2.webp"
+    }
+  },
+  "unit33-34": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "decorative",
+    "fullScene": {
+      "captionSpace": 0
+    }
+  },
+  "unit35-36": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "context",
+    "fullScene": {
+      "captionSpace": 0
+    }
+  },
+  "unit37-38": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "decorative",
+    "fullScene": {
+      "captionSpace": 28
+    }
+  },
+  "unit39-40": {
+    "version": 1,
+    "background": null,
+    "layout": "picture",
+    "location": "decorative",
+    "fullScene": {
+      "captionSpace": 28
+    }
+  },
+  "unit41-42": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-kitchen-v1.webp",
+    "layout": "plane",
+    "location": "decorative"
+  },
+  "unit43-44": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-kitchen-v1.webp",
+    "layout": "plane",
+    "location": "decorative"
+  },
+  "unit45-46": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/office-world-v1.webp",
+    "layout": "plane",
+    "location": "decorative"
+  },
+  "unit47-48": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-cafe-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit49-50": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-market-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit51-52": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/park-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit53-54": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/park-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit55-56": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "beat": {
+        "night": "/assets/learning-whole-book-v1/world-night-home-v1.webp",
+        "morning": "/assets/learning-sample-v1/street-world-v1.webp",
+        "early": "/assets/learning-sample-v1/street-world-v1.webp",
+        "late": "/assets/learning-sample-v1/street-world-v1.webp"
+      }
+    }
+  },
+  "unit57-58": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "beat": {
+        "tea": "/assets/learning-sample-v2/park-world-v1.webp",
+        "play": "/assets/learning-sample-v2/park-world-v1.webp",
+        "read": "/assets/learning-whole-book-v1/world-night-home-v1.webp"
+      }
+    }
+  },
+  "unit59-60": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-shop-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit61-62": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-bedroom-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit63-64": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-bedroom-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit65-66": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit67-68": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit69-70": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "beat": {
+        "home": "/assets/learning-whole-book-v1/world-roadside-v1.webp"
+      }
+    }
+  },
+  "unit71-72": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit73-74": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit75-76": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-shop-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit77-78": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-clinic-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit79-80": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-kitchen-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit81-82": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit83-84": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit85-86": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit87-88": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-roadside-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit89-90": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "scene": {
+        "living": "/assets/learning-whole-book-v1/world-evening-home-v1.webp"
+      }
+    }
+  },
+  "unit91-92": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/street-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit93-94": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-airport-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit95-96": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-station-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit97-98": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-station-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit99-100": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit101-102": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit103-104": {
+    "version": 1,
+    "background": "/assets/learning-sample-v1/classroom-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit105-106": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/office-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit107-108": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/dressing-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit109-110": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-cafe-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit111-112": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-shop-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit113-114": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-bus-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit115-116": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/park-world-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "place": {
+        "garden": "/assets/learning-sample-v2/park-world-v1.webp"
+      },
+      "view": {
+        "window": "/assets/learning-whole-book-v1/world-evening-home-v1.webp"
+      }
+    }
+  },
+  "unit117-118": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-kitchen-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "place": {
+        "phone": "/assets/learning-whole-book-v1/world-evening-home-v1.webp"
+      }
+    }
+  },
+  "unit119-120": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-night-dark-v1.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "place": {
+        "bedroom": "/assets/learning-whole-book-v1/world-night-home-v1.webp",
+        "lit": "/assets/learning-whole-book-v1/world-night-home-v1.webp"
+      }
+    }
+  },
+  "unit121-122": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/reading-world-v1.webp",
+    "layout": "cast",
+    "location": "decorative",
+    "cast": "bookshop-group",
+    "castLabels": "flow"
+  },
+  "unit123-124": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "cast",
+    "location": "context"
+  },
+  "unit125-126": {
+    "version": 1,
+    "background": "/assets/unit125-126/garden-home-v2.webp",
+    "layout": "cast",
+    "location": "context",
+    "backgroundStates": {
+      "phase": {
+        "rain": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+        "tea": "/assets/learning-whole-book-v1/world-evening-home-v1.webp"
+      }
+    },
+    "cast": "garden-group",
+    "castWidth": "74%"
+  },
+  "unit127-128": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-cafe-v1.webp",
+    "layout": "cast",
+    "location": "decorative"
+  },
+  "unit129-130": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-roadside-v1.webp",
+    "layout": "composite",
+    "location": "context",
+    "cast": "road-group"
+  },
+  "unit131-132": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "composite",
+    "location": "decorative",
+    "cast": "holiday-group"
+  },
+  "unit133-134": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-airport-v1.webp",
+    "layout": "composite",
+    "location": "context",
+    "cast": "news-group",
+    "backgroundStates": {
+      "scene": {
+        "street": "/assets/learning-sample-v1/street-world-v1.webp"
+      }
+    }
+  },
+  "unit135-136": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-hotel-v1.webp",
+    "layout": "composite",
+    "location": "context",
+    "cast": "report-group",
+    "backgroundStates": {
+      "scene": {
+        "street": "/assets/learning-sample-v1/street-world-v1.webp"
+      }
+    }
+  },
+  "unit137-138": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-evening-home-v1.webp",
+    "layout": "composite",
+    "location": "decorative",
+    "cast": "dream-group"
+  },
+  "unit139-140": {
+    "version": 1,
+    "background": "/assets/learning-sample-v2/office-world-v1.webp",
+    "layout": "composite",
+    "location": "context",
+    "cast": "phone-group"
+  },
+  "unit141-142": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-carriage-v1.webp",
+    "layout": "composite",
+    "location": "decorative",
+    "cast": "rail-group"
+  },
+  "unit143-144": {
+    "version": 1,
+    "background": "/assets/learning-whole-book-v1/world-forest-v1.webp",
+    "layout": "forest",
+    "location": "decorative",
+    "cast": "forest-group",
+    "castWidth": "43%"
+  }
+}

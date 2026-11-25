@@ -1,0 +1,14 @@
+{
+  "id": "world-bus",
+  "kind": "world",
+  "references": [
+    "output/whole-book-design/keepsake-reference-24.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: an empty vintage public bus interior, warm green-and-cream panels, side windows and a few seats pushed to far edges, spacious unobstructed aisle floor as the foreground stage; NO passengers, driver, tickets, route numbers or writing.",
+  "raw": "assets/learning-whole-book-v1/raw/world-bus.png",
+  "adopted": "assets/learning-whole-book-v1/world-bus-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-3c384cfb-c05d-413f-8679-c5fa2d4c4d49.png"
+}

@@ -1,0 +1,24 @@
+/* Same learning shell; keep the approved cloakroom, people and handover props. */
+body.unit34-workspace[data-learning-shell] .learning-word-content{--learning-word-height:176px}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .learning-scene-stacked .cloakroom-props{position:absolute;inset:0;grid-area:auto;width:100%;height:100%;border:0;border-radius:inherit;--actor-width:calc(var(--story-person-height) * .68);--hand-reach:calc(var(--story-person-height) * .2)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .dialogue-actor{bottom:9px;width:var(--actor-width);font-size:12px;line-height:20px}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .dialogue-visitor{left:21%}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .dialogue-attendant{left:76%}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .dialogue-actor>img{width:100%;height:var(--story-person-height);aspect-ratio:auto;object-fit:contain;object-position:bottom}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .dialogue-attendant>img{width:var(--story-person-height);max-width:none;left:50%;transform:translateX(-50%)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-desk{bottom:30px;height:calc(var(--story-person-height) * .38);width:56%;left:64%}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-prop{bottom:calc(18px + var(--story-person-height) * .38)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-prop>img{width:calc(var(--story-person-height) * .55);height:calc(var(--story-person-height) * .55)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .ticket-prop{left:calc(21% + var(--hand-reach));bottom:calc(var(--story-person-height) * .66)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .ticket-prop>img{width:calc(var(--story-person-height) * .24);height:calc(var(--story-person-height) * .24)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text [data-ticket='counter'] .ticket-prop{left:44%;bottom:calc(30px + var(--story-person-height) * .38)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props[data-beat='returned'] .umbrella-prop{left:calc(21% + var(--hand-reach));bottom:calc(var(--story-person-height) * .41)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props[data-beat='returned'] .umbrella-prop>img{width:calc(var(--story-person-height) * .49);height:calc(var(--story-person-height) * .7)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props[data-beat='returned'] .coat-prop{left:calc(21% - var(--story-person-height) * .13);bottom:calc(var(--story-person-height) * .26)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props[data-beat='returned'] .coat-prop>img{width:calc(var(--story-person-height) * .29);height:calc(var(--story-person-height) * .38)}
+body.unit34-workspace[data-learning-shell] #lessonWorkspace .learning-word-content .unit-word{height:176px;min-height:176px;overflow:visible}
+body.unit34-workspace[data-learning-shell][data-learning-view='cover'] .current-cover{background:#f1edf8}
+@media(orientation:landscape) and (max-height:480px){
+ body.unit34-workspace[data-learning-shell] .learning-story-content{overflow:auto;justify-content:flex-start}
+ body.unit34-workspace[data-learning-shell] #lessonWorkspace .learning-scene-stacked{flex:0 0 300px;min-height:300px;--story-person-height:110px}
+}

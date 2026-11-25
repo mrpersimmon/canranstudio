@@ -1,0 +1,18 @@
+{
+  "id": "dressing-table-clean",
+  "kind": "word",
+  "references": [
+    "C:/Users/duanxiaodong/.codex/generated_images/01a144fe-4a3a-7820-8418-b9fde4db67e1/exec-337b8ba1-c853-4d69-a89a-263180de4a32.png"
+  ],
+  "transparent": true,
+  "prompt": "Use case: background-extraction. Edit this generated dressing-table illustration: keep the exact wooden dressing table, oval blue mirror, drawers, handles and stool unchanged. Remove ALL white/grey fog, haze, noise, outside shadow and colour spill around it. The ENTIRE area outside the actual furniture silhouette must be genuinely transparent (alpha zero), including every corner, the spaces between stool legs, the gap behind/under the stool, and around the mirror. Do not add a white background, checkerboard, new shadow or halo. Preserve the warm brown outline and painted colours inside the furniture; leave generous transparent margin around the complete uncut silhouette. Square transparent PNG.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-022f21c5-0902-4bc3-8884-4b2ec5aba40e.png",
+  "raw": "assets/learning-sample-v2/raw/dressing-table-clean.png",
+  "adopted": "assets/word-art-v2/sample13-24/dressing-table-clean-v1.webp",
+  "replaces": "dressing-table",
+  "reason": "Original generated asset had a translucent white halo outside the furniture; excluded from adoption.",
+  "projectReferenceCopies": [
+    "assets/learning-sample-v2/raw/dressing-table.png"
+  ]
+}

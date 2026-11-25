@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 const { expect } = require('@playwright/test');
 async function adminLogin(page, base = '/lesson/') {
   await page.goto(base + 'admin/');
@@ -81,7 +82,7 @@ async function studentLogin(browser, account, base = '/lesson/', contextOptions 
 async function waitForCourseReady(page) {
   // Match the protected-course readiness boundary already used by later
   // units. Initial zero-star markup is not an interactive, restored course.
-  await expect(page.locator('html:not([data-course-preparing]) #wordPageProgress')).toBeVisible({ timeout: 30000 });
+  await readyCourse(page);
   await expect(page.locator('#courseLoader')).toHaveCount(0);
 }
 async function openMyAccount(page){
@@ -89,4 +90,17 @@ async function openMyAccount(page){
   if(await mobile.isVisible())await mobile.click();
   else await page.getByRole('button',{name:'我的',exact:true}).click();
 }
-module.exports = { saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };
+async function openCourseSettings(page){
+  const more=page.getByRole('button',{name:'更多学习操作',exact:true});
+  await more.click();
+  await page.getByRole('button',{name:'学习设置',exact:true}).click();
+  const dialog=page.getByRole('dialog',{name:/学习设置$/});
+  await expect(dialog).toBeVisible();
+  return dialog;
+}
+async function openCanranAward(page){
+  await page.getByRole('link',{name:'我的课程',exact:true}).click();
+  await page.getByRole('link',{name:'我的纪念册',exact:true}).click();
+  await expect(page).toHaveURL(/\/awards\/(?:[?#].*)?$/);
+}
+module.exports = { openCanranAward, openCourseSettings, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };

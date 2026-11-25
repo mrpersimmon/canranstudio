@@ -1,21 +1,24 @@
 'use strict';
 const { test, expect } = require('@playwright/test');
 test.use({ reducedMotion: 'reduce' });
+async function openCover(page) {
+  await page.getByRole('button', {name:'更多学习操作',exact:true}).click();
+  await page.getByRole('button', {name:'课程封面',exact:true}).click();
+  await expect(page.locator('#cover')).toBeInViewport();
+}
 
 for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续冒险']]) {
-  for (const base of ['/', '/lesson/']) for (const width of [390, 1280]) test(`${unit} ${base} ${width} 像素：手动滚回封面后，继续按钮重新定位当前章节`, async ({ page }) => {
+  for (const base of ['/', '/lesson/']) for (const width of [390, 1280]) test(`${unit} ${base} ${width} 像素：回到封面后继续当前章节`, async ({ page }) => {
     await page.setViewportSize({ width, height: 800 });
     await page.goto(`${base}${unit}/#l3`);
     // The chapter and activity share one visible title after copy cleanup.
     // Verify the learner's destination, not the removed duplicate wrapper.
-    const heading = unit === 'unit1-2'
-      ? page.locator('#l3').getByRole('heading', { name: '语法小工坊', exact: true })
-      : page.locator('#l3 > .chapter-heading h2');
+    const heading = page.locator('#l3 .learning-surface .practice-content h3');
     await expect(heading).toBeInViewport();
     const resume = page.getByRole('button', { name: label, exact: true });
     const address = page.url();
     for (let attempt = 0; attempt < 2; attempt++) {
-      await resume.scrollIntoViewIfNeeded();
+      await openCover(page);
       await expect(heading).not.toBeInViewport();
       await resume.click();
       await expect(page).toHaveURL(address);
@@ -23,9 +26,8 @@ for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续�
     }
     // Native chapter navigation still works, and Back returns to the prior stop.
     const previousTitle = await heading.textContent();
-    const navigation = page.getByRole('navigation', { name: '学习关卡', exact: true });
-    if (width < 700) await navigation.getByRole('combobox', { name: '选择关卡', exact: true }).selectOption({ index: 0 });
-    else await navigation.getByRole('link').first().click();
+    await page.getByRole('link', {name:'词汇',exact:true}).click();
+    await expect(page.locator('.stage-words')).toBeInViewport();
     await page.goBack();
     await expect(page).toHaveURL(address);
     await expect(heading).toHaveText(previousTitle);
@@ -35,7 +37,7 @@ for (const [unit, label] of [['unit1-2', '继续冒险'], ['unit49-50', '继续�
 
 test('不同地址时可以继续到已保存章节，排除按钮失效或保存位置错误', async ({ page }) => {
   await page.goto('/unit1-2/#l3');
-  const heading = page.locator('#l3').getByRole('heading', { name: '语法小工坊', exact: true });
+  const heading = page.locator('#l3 .learning-surface .practice-content h3');
   await expect(heading).toBeInViewport();
   await page.goto('/unit1-2/#cover');
   await page.getByRole('button', { name: '继续冒险', exact: true }).click();
@@ -49,12 +51,12 @@ for (const [unit, label, activity, answer] of [
 ]) test(`${unit} 继续到当前答题区：键盘操作、未提交选择和刷新恢复不变`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 700 });
   await page.goto(`/${unit}/#learn/${activity}`);
-  const room = page.locator('.stage-' + activity), heading = room.locator('.stage-heading h3');
+  const room = page.locator('.stage-' + activity), heading = room.locator('.practice-content h3');
   const option = room.getByRole('button', { name: answer, exact: true });
   await option.click();
   const stars = await page.locator('#starCount').textContent();
   const resume = page.getByRole('button', { name: label, exact: true });
-  await resume.scrollIntoViewIfNeeded();
+  await openCover(page);
   await expect(heading).not.toBeInViewport();
   await resume.focus(); await page.keyboard.press('Enter');
   await expect(heading).toBeInViewport();

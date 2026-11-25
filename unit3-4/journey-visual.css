@@ -1,0 +1,66 @@
+/* Approved journey art, shared across this unit's story and task surfaces.
+   The award card and archived certificates keep their original artwork. */
+body.unit34-workspace[data-unit34-journey]{--unit-page:#fffaef;--unit-wash:#faf0dc;--unit-line:#ddc8a3;--unit-accent:#2b7053;--unit-scene:url('/assets/unit3-4-journey/cloakroom-interior-v1.webp');--learning-paper:#fffdf5;--learning-line:#ddc8a3;background:#fff8e9}
+body.unit34-workspace[data-unit34-journey]::before{content:'';position:fixed;inset:92px 0 0;z-index:-1;pointer-events:none;background:var(--unit-scene) center bottom/cover no-repeat;opacity:.22}
+body.unit34-workspace[data-unit34-journey] .learning-route::before{content:'';width:23px;height:28px;flex:none;margin-right:6px;background:url('/assets/brand/starflower.png') center/contain no-repeat}
+body.unit34-workspace[data-unit34-journey] .practice-screen-toolbar,body.unit34-workspace[data-unit34-journey] .learning-milestones{background:#fffbf1;border-color:#ead7b8}
+body.unit34-workspace[data-unit34-journey] #lessonWorkspace .learning-surface .grammar-model{background:#f6eddc;border-color:#e1d1b4}
+body.unit34-workspace[data-unit34-journey] #lessonWorkspace .learning-surface .practice-content h3{text-align:left;color:#513422}
+body.unit34-workspace[data-unit34-journey] #lessonWorkspace .learning-surface .practice-screen-title{color:#755133}
+body.unit34-workspace[data-unit34-journey] #lessonWorkspace .learning-surface .opt-btn:not([aria-pressed='true']){background:#fffdf7;border-color:#d9c7a6}
+/* The stage has a quiet dialogue area above a fixed-proportion scene. */
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text.learning-surface .learning-scene-stacked{display:flex;flex-direction:column;background:#fffaf055;padding:0;gap:0;border-color:#dfc9a5}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text>.stage-ctrl{border:0}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .learning-scene-stacked .dialogue-log{position:relative;inset:auto;flex:1;min-height:96px;height:auto;width:100%;max-height:none;margin:0;padding:10px 18px 6px;box-sizing:border-box;border-radius:0;align-self:stretch;grid-area:auto;transform:none;background:transparent;z-index:5}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props{position:relative;inset:auto;flex:none;width:100%;height:auto;aspect-ratio:3/2;max-width:600px;margin:0 auto;border:0;border-radius:0;overflow:hidden;background:var(--unit-scene) center/100% 100% no-repeat}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .bubble{border-color:#d9c7a7;background:#fffdf5;color:#513422;box-shadow:0 2px 4px #8f673e0b}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .attendant .bubble{background:#eef4e8;border-color:#bdd0b4}
+/* All positions below refer to the same 3:2 artboard, not to the viewport. */
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace :is(.cloakroom-props,.counter-stage) .cloakroom-actor{bottom:3%;width:32%;height:78%;font-size:12px;line-height:18px;z-index:2}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace :is(.dialogue-visitor,.counter-visitor){left:24%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace :is(.dialogue-attendant,.counter-attendant){left:72%;width:35%;height:80%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace :is(.cloakroom-props,.counter-stage) .cloakroom-actor>img{position:static;left:auto;transform:none;display:block;width:100%;height:calc(100% - 18px);max-width:100%;aspect-ratio:auto;object-fit:contain;object-position:center bottom}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-actor>span{position:absolute;bottom:0;left:50%;transform:translateX(-50%);padding:0 5px;max-width:100%;line-height:18px;font-size:12px;border-radius:6px;background:#fffaf0f0}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace :is(.cloakroom-props,.counter-stage) .cloakroom-desk{left:66%;bottom:6%;width:59%;height:46%;object-fit:contain;z-index:3}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-prop{display:block;left:51%;bottom:20%;height:70%;width:31.12%;transform:translateX(-49.8%);z-index:4}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-prop>img{width:100%;height:100%;object-fit:contain;transform:none}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props .coat-prop{left:56%;bottom:12%;width:19%;height:33%;z-index:4}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props .ticket-prop{left:36%;bottom:42%;width:9%;height:18%;z-index:6}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props[data-ticket='counter'] .ticket-prop{left:56%;bottom:42%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props[data-beat='returned'] .umbrella-prop{left:35.1%;bottom:27.4%;width:31.12%;height:70%;transform:translateX(-49.8%) rotate(10deg);transform-origin:49.8% 75.5%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props[data-beat='returned'] .umbrella-prop>img{width:100%;height:100%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props[data-beat='returned'] .coat-prop{left:20%;bottom:9%;width:20%;height:40%;transform:translateX(-50%) rotate(6deg)}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .cloakroom-props[data-beat='returned'] .coat-prop>img{width:100%;height:100%;transform:none}
+/* Counter tasks reuse the same art coordinate plane below their dialogue. */
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage{width:min(100%,360px);height:auto;aspect-ratio:3/2;margin:0 auto 8px;background:var(--unit-scene) center/100% 100% no-repeat;border:1px solid #e1caa5;border-radius:14px;overflow:hidden}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-conversation{position:absolute;inset:4px 6px auto;height:82px;max-height:82px;min-height:0;padding:2px 3px;gap:6px;flex-direction:row;overflow:auto;grid-column:auto}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-conversation .counter-bubble:only-child{max-width:100%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-bubble{background:#fffaf0;border-color:#d4bd96;color:#513422}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .cloakroom-actor{height:56%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .cloakroom-desk{height:36%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item{left:51%;bottom:20%;height:40%;width:17.78%;transform:translateX(-49.8%);z-index:4;gap:0}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item>img{width:100%;height:100%;object-fit:contain}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item-ticket{left:35%;bottom:31%;width:9%;height:18%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item-ticket.is-presented{left:56%;bottom:31%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item-coat{inset:0;left:0;bottom:0;width:100%;height:100%;transform:none;display:block}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item-coat>img:first-child{position:absolute;left:53%;bottom:11%;height:25%;width:17%;margin:0}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item-coat>img:last-child{position:absolute;left:54%;bottom:26%;height:40%;width:17.78%;transform:translateX(-49.8%) rotate(6deg)}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item.is-returned{left:35.1%;bottom:24.4%;height:40%;width:17.78%;transform:translateX(-49.8%) rotate(10deg);transform-origin:49.8% 75.5%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .counter-item.is-returned>img{width:100%;height:100%}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .learning-result-content .journey-completion{position:relative;border-radius:14px;background:var(--unit-scene) center 46%/cover no-repeat;overflow:hidden}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .journey-completion>img{width:100%;height:100%;object-fit:contain;padding:2px;box-sizing:border-box}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .learning-result-content{background-color:#fffcf3;border-color:#ddc398}
+body.unit34-workspace[data-unit34-journey][data-learning-shell][data-learning-view='cover'] .current-cover{background:var(--unit-scene) center/cover no-repeat}
+body.unit34-workspace[data-unit34-journey][data-learning-shell] .current-cover>img{padding:4px;box-sizing:border-box}
+@media(max-height:620px){
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props{max-width:270px}
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage{max-width:264px;margin-bottom:4px}
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-conversation{height:72px;max-height:72px}
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .counter-stage .cloakroom-actor{height:50%}
+}
+@media(min-width:700px){body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props{max-width:510px}}
+@media(orientation:landscape) and (max-height:480px){
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .learning-scene-stacked{min-height:390px;flex:0 0 390px}
+ body.unit34-workspace[data-unit34-journey][data-learning-shell] #lessonWorkspace .stage-text .cloakroom-props{max-width:330px}
+}
+@media print{body.unit34-workspace[data-unit34-journey]::before{display:none}}

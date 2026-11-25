@@ -6,8 +6,9 @@ const timings = require('./timings.json');
 const ROOT = path.resolve(__dirname, '../..');
 const CLI = path.join(ROOT, 'node_modules/@playwright/test/cli.js');
 const SUITES = {
-  courses: { config: 'playwright.config.js', directory: 'tests/e2e', shards: 9, filters: ['--grep-invert', '@cache-performance'] },
-  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 6, filters: [] }
+  courses: { config: 'playwright.config.js', directory: 'tests/e2e', shards: 12, filters: ['--grep-invert', '@cache-performance'] },
+  accounts: { config: 'playwright.login.config.js', directory: 'tests/login', shards: 8, filters: [] },
+  recovery: { config: 'playwright.recovery.config.js', directory: 'tests/login', shards: 6, history: 'accounts', filters: [] }
 };
 
 function inventory(report) {
@@ -82,7 +83,7 @@ function plan(suite) {
   const def = definition(suite);
   // History estimates duration only. Live discovery alone determines coverage.
   const prefix = def.directory + '/';
-  const history = Object.fromEntries(Object.entries(timings[suite]).map(([file, value]) => [file.slice(prefix.length), value]));
+  const history = Object.fromEntries(Object.entries(timings[def.history || suite]).map(([file, value]) => [file.slice(prefix.length), value]));
   const files = list(suite);
   const groups = balance(files, history, def.shards);
   return { suite, totalTests: files.reduce((n, f) => n + f.ids.length, 0), groups };
@@ -152,7 +153,7 @@ if (require.main === module) {
     else if (command === 'plan') summarize(plan(suite));
     else if (command === 'verify') for (const name of Object.keys(SUITES)) verify(name);
     else if (command === 'run') process.exitCode = run(suite, shard);
-    else throw new Error('Usage: browser-suite.js plan <courses|accounts> | verify | run <suite> <shard> | gate');
+    else throw new Error('Usage: browser-suite.js plan <suite> | verify | run <suite> <shard> | gate');
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

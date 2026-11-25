@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/unit1314-legacy').historicalSuite(test);
 const {ANSWERS}=require('../support/unit13-14-flow');
@@ -26,7 +27,7 @@ test('320 窄屏21张词卡展开后字义和音标不裁切，图册双色物�
       expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);
       await card.click();await expect(card.locator('.word-phonetic')).toBeVisible();
     }
-    if(p<3)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+    if(p<3)await courseButton(room, "nextWords").click();
   }
   await page.goto('/unit13-14/#learn/models');const gallery=page.locator('.colour-gallery');
   await gallery.screenshot({path:'output/playwright/unit13-14/colour-gallery-320.png'});
@@ -38,12 +39,12 @@ for(const width of [320,1280])test(width+' 灯泡位于检查左边，反馈不�
   const top=()=>actions.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top(),h=await hint.boundingBox(),c=await check.boundingBox();
   expect(h.x+h.width).toBeLessThan(c.x);await hint.click();expect(await top()).toBeCloseTo(before,0);
   await room.getByRole('button',{name:'Whose hat is that?',exact:true}).click();await check.click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');expect(await top()).toBeCloseTo(before,0);
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));expect(await top()).toBeCloseTo(before,0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();
   for(const [i,answer] of ANSWERS.colours.entries()){
     await room.getByRole('button',{name:answer,exact:true}).click();await check.click();
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===1?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===1?"finishPractice":'下一题').click();
   }
   const group=room.getByRole('group',{name:'完成后的操作',exact:true});await expect(group.getByRole('button')).toHaveCount(2);
   for(const b of await group.getByRole('button').all()){const box=await b.boundingBox();expect(box.x).toBeGreaterThanOrEqual(0);expect(box.x+box.width).toBeLessThanOrEqual(width);expect(box.height).toBeGreaterThanOrEqual(44);}
@@ -54,12 +55,12 @@ test('390短屏阅读内部滚动，下一句与重新上演同行，展开中�
   await page.setViewportSize({width:390,height:500});await page.goto('/unit13-14/#learn/text');await page.evaluate(()=>document.fonts.ready);const room=page.locator('.stage-text');
   const buttons=room.locator('.stage-ctrl'),before=await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY);
   for(let i=0;i<13;i++){
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
   }
   await room.locator('.bbtns').last().getByRole('button').click();
   expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
-  const advance=await room.getByRole('button',{name:'完成课文',exact:true}).boundingBox(),replay=await room.getByRole('button',{name:'重新上演',exact:true}).boundingBox();
+  const advance=await courseButton(room, "finishStory").boundingBox(),replay=await room.getByRole('button',{name:'重新上演',exact:true}).boundingBox();
   expect(Math.abs(advance.y-replay.y)).toBeLessThan(2);
   await room.screenshot({path:'output/playwright/unit13-14/story-short-screen.png'});
 });

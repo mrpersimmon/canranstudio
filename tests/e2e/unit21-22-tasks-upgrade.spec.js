@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 require('../support/unit2122-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {finishRemainingActivity}=require('../support/unit21-22-flow');
@@ -8,7 +9,7 @@ test('旧34题真实完成后升级：旧题进度留存，新配对定位交接
  for(const name of ['content.js','unit.js']){const body=await fs.readFile('tests/fixtures/unit21-22-tasks-before/'+name);await page.route('**/unit21-22/'+name+'*',r=>old?r.fulfill({body,contentType:'text/javascript'}):r.continue());}
  await require('../fixtures/unit21-22-tasks-before/flow').completeUnit2122(page);
  await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('找书小伙伴');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');
- await page.goto('/unit21-22/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();old=false;await page.reload();
+ await page.goto('/unit21-22/#learn/words');await courseButton(page.locator('.stage-words'), "nextWords").click();old=false;await page.reload();
  await expect(page.locator('#starCount')).toHaveText('4');await expect(page.locator('#wordPageProgress')).toHaveText('2 / 6');await expect(page.locator('.stage-text .btext')).toHaveCount(8);
  for(const [id,count]of [['listen',6],['roles',0],['observe',2],['exam',0]]){
   await page.goto('/unit21-22/#learn/'+id);const room=page.locator('.stage-'+id);await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(count));await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();

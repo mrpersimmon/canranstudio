@@ -34,6 +34,12 @@
 .unit12-workspace .quest-handbag{width:108px;height:108px;object-fit:contain}
 .unit12-workspace .quest-bag-slot{position:absolute;right:15px;bottom:24px;width:52px;height:62px;pointer-events:none}
 .unit12-workspace .quest-bag-slot .quest-handbag{width:100%;height:100%;filter:drop-shadow(0 3px 0 #4a322625)}
+/* This plane follows the current 2:3 portrait, never the button or its label. */
+.unit12-workspace .quest-portrait{--quest-person-height:215px;position:relative;flex:none;width:calc(var(--quest-person-height) * 2 / 3);height:var(--quest-person-height);pointer-events:none}
+.unit12-workspace .quest-person-target>.quest-portrait{--quest-person-height:157px}
+.unit12-workspace .quest-portrait>img{display:block;width:100%;height:100%;max-width:none;object-fit:contain;margin:0;pointer-events:none}
+.unit12-workspace .street-stage .quest-portrait>.quest-bag-slot{left:0;right:auto;top:41%;bottom:auto;width:51%;height:34%}
+@media(max-width:600px){.unit12-workspace .quest-portrait{--quest-person-height:155px}.unit12-workspace .quest-person-target>.quest-portrait{--quest-person-height:86px}}
 .unit12-workspace .handbag-runner .practice-options:not(.sentence-options):not(.quest-recipients):not(.quest-object-targets){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;margin:18px auto 0;min-height:82px}
 .unit12-workspace .handbag-runner .practice-options>.opt-btn{font-size:20px;text-align:center;justify-content:center;line-height:1.25;min-height:76px;padding:12px}
 .unit12-workspace .handbag-runner .practice-options.quest-recipients{position:absolute;inset:12px 18px;display:grid;grid-template-columns:150px minmax(0,1fr) 150px;gap:12px;max-width:none;width:auto;min-height:0;margin:0;pointer-events:none;z-index:2}

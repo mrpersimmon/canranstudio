@@ -1,4 +1,5 @@
 'use strict';
+const {incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/classroom-history').historicalSuite(test);
 test.use({reducedMotion:'reduce',actionTimeout:5000});
@@ -7,17 +8,21 @@ test('7–8 逐空补完介绍，未填完不能检查，错答后可改且恢�
  await room.getByRole('button',{name:"I'm Italian.",exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
  const first=room.getByRole('group',{name:'第1处填空',exact:true}),second=room.getByRole('group',{name:'第2处填空',exact:true}),check=room.getByRole('button',{name:'检查答案',exact:true});
  await first.getByRole('button',{name:'am',exact:true}).click();await expect(check).toBeDisabled();await page.reload();await expect(first.getByRole('button',{name:'am',exact:true})).toHaveAttribute('aria-pressed','true');
- await second.getByRole('button',{name:'am',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+ await second.getByRole('button',{name:'am',exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await first.getByRole('button',{name:'is',exact:true}).press('Enter');await check.press('Enter');await expect(room.getByRole('status')).toHaveText('答对了！');
  await expect(room.locator('.cloze-sentence').first()).toHaveText('My name is Robert.');await expect(room.locator('.cloze-sentence').nth(1)).toHaveText('I am Italian.');
 });
 test('1–2 在完整感谢语中找程度词，错选不代答，刷新后原题可重试',async({page})=>{
  await page.addInitScript(()=>{window.Audio=class extends EventTarget{play(){queueMicrotask(()=>this.dispatchEvent(new Event('ended')));return Promise.resolve();}pause(){}};});
- await page.goto('/unit1-2/#learn/text');const story=page.locator('.stage-text');
+ await page.goto('/unit1-2/#learn/roles');const room=page.locator('.stage-roles'),story=page.locator('.stage-text');
+ await room.getByRole('button',{name:'先读故事',exact:true}).click();
+ await expect(page).toHaveURL(/#learn\/text$/);
  await story.getByRole('button',{name:'开始故事',exact:true}).click();
  for(let i=1;i<7;i++)await story.getByRole('button',{name:'下一句',exact:true}).click();
+ await expect(story.getByRole('log',{name:'课文对话'}).locator('.bubble-row')).toHaveCount(7);
  await story.getByRole('button',{name:'读完了',exact:true}).click();
- await page.goto('/unit1-2/#learn/roles');const room=page.locator('.stage-roles');
+ await story.getByRole('group',{name:'完成后的操作'}).getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();
+ await expect(page).toHaveURL(/#learn\/roles$/);
  for(const answer of [['这是','你的','手提包','吗？'],'女士请他重复。']){await require('../support/thirteen-types-flow').select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}
  const source=room.getByRole('group',{name:'原文选词',exact:true});
  await expect(source).toContainText('Thank you very much.');

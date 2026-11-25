@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect, chromium } = require('@playwright/test');
 const crypto = require('node:crypto');
 const fs = require('node:fs/promises');
@@ -27,13 +28,13 @@ test('两个标签页同时准备同课，关掉一页后另一页仍能完整�
   await second.goto('/lesson/unit1-2/#learn/words', { waitUntil: 'domcontentloaded' });
   await expect(second.getByRole('status', { name: '课程准备状态', exact: true })).toBeVisible();
   await first.close(); release();
-  await expect(second.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible();
+  await expect(second.getByRole('region',{name:'单词小图鉴',exact:true}).getByRole('button',{name:'下一组',exact:true})).toBeVisible();
   await expect.poll(() => second.locator('.stage-words img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
 });
 
 test('已知撤回版本不会继续推进作答，新版失败时保留位置等待更新', async ({ page, context, request }) => {
   await page.goto('/lesson/unit29-30/#learn/words');
-  await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   const index = await (await request.get('/lesson/course-index.json')).json();
   index.withdrawn = ['unit29-30@' + index.courses['unit29-30'].revision];
   await publishIndex(context,index);
@@ -42,7 +43,7 @@ test('已知撤回版本不会继续推进作答，新版失败时保留位置�
   await page.evaluate(() => window.dispatchEvent(new Event('online')));
   await page.clock.fastForward(31000);
   await expect(async () => {
-    await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+    await courseButton(page.locator('.stage-words'), "nextWords").click();
     await expect(page.getByText('课程需要更新，请联网后再试。', { exact: true })).toBeVisible();
   }).toPass({ timeout: 5000 });
   await page.reload();
@@ -89,7 +90,7 @@ async function revisedCourse(request, id = 'unit29-30') {
 test('重新进入自动使用完整新版，已打开页不混版且不重下未变文件', async ({ page, context, request }) => {
   await page.goto('/lesson/unit29-30/#learn/words');
   const oldTitle = await page.title();
-  await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   const revision = await revisedCourse(request);
   let newFetched = false;
   const fetched = [];
@@ -117,7 +118,7 @@ test('损坏一张已存图片，刷新只补齐该文件并保留词卡页', as
   const pack = await (await request.get(index.courses['unit29-30'].manifest)).json();
   const item = pack.required.find(item => item.key.endsWith('/assets/unit29-30/bedroom.svg')) || pack.required.find(item => item.type === 'image/svg+xml');
   await page.goto('/lesson/unit29-30/#learn/words');
-  await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
   // Fault injection at the browser storage boundary, without forging a learning record.
   await page.evaluate(async item => {
     for (const name of await caches.keys()) if (name.startsWith('canran:lesson:course-cache:')) {
@@ -149,7 +150,10 @@ test('浏览器重启后必须联网核验最新版，已有资源与进度保�
     context = await chromium.launchPersistentContext(profile, { headless: true });
     let page = await context.newPage();
     await page.goto(origin + '/lesson/unit29-30/#learn/words');
-    await page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true }).click();
+    await courseButton(page.locator('.stage-words'), "nextWords").click();
+    const savedPage=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity);
+    await expect(page.locator('#wordPageProgress')).toHaveText('2 / 5');
+    await expect(page.getByRole('button',{name:savedPage.unitWordDeck.anchor,exact:true})).toBeVisible();
     await context.close();
     await new Promise(resolve => { server.close(resolve); server.closeAllConnections(); });
     context = await chromium.launchPersistentContext(profile, { headless: true, offline: true });
@@ -157,7 +161,9 @@ test('浏览器重启后必须联网核验最新版，已有资源与进度保�
     await page.goto(origin + '/lesson/unit29-30/#learn/words');
     await expect(page.locator('#courseLoader')).toContainText('错误编号：L06');
     await expect(page.locator('.stage-words')).not.toBeVisible();
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity.unitWordPage)).toBe(1);
+    const retained=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:lesson:unit29-30:learning:v1')).activity);
+    expect(retained.unitWordDeck).toEqual(savedPage.unitWordDeck);
+    expect(retained.unitWordPage).toBe(savedPage.unitWordPage);
     await page.goto(origin + '/lesson/unit27-28/');
     await expect(page.getByRole('heading', { name: '这节课还没准备好', exact: true })).toBeVisible();
     await expect(page.getByRole('button', { name: '再试一次', exact: true })).toBeVisible();
@@ -171,7 +177,7 @@ test('无配音课断网走完所有题型并保存证书，不请求英语配�
   page.on('request', request => { if (/\.mp3(?:[?#]|$)/.test(request.url()) && !/duolingo-/.test(request.url())) recordings.push(request.url()); });
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/lesson/unit29-30/#learn/words');
-  await expect(page.locator('.stage-words').getByRole('button', { name: '下一组词卡', exact: true })).toBeVisible();
+  await expect(courseButton(page.locator('.stage-words'), "nextWords")).toBeVisible();
   await context.setOffline(true);
   await completeUnit2930(page, '/lesson');
   await page.getByRole('textbox', { name: '证书上的名字', exact: true }).fill('小小整理家');

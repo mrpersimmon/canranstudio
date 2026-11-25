@@ -11,7 +11,8 @@ const SETUP_NODE = 'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020'
 const NGINX = 'nginx:1.28.0-alpine@sha256:30f1c0d78e0ad60901648be663a710bdadf19e4c10ac6782c235200619158284';
 
 test('workflow uses read-only permissions and immutable dependencies', async () => {
-  const workflow = await fs.readFile(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8');
+  // Git may check YAML out as CRLF on Windows; permissions are the same on Linux.
+  const workflow = (await fs.readFile(path.join(ROOT, '.github/workflows/verify.yml'), 'utf8')).replace(/\r\n/g, '\n');
   assert.match(workflow, /^permissions:\n  contents: read$/m);
   assert.match(workflow, new RegExp(`uses: ${CHECKOUT}`));
   assert.match(workflow, /persist-credentials:\s*false/);

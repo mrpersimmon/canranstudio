@@ -16,7 +16,7 @@ test('旧版只打开手提包环节，升级后五题首次全对获星且刷�
  before=false;await page.reload();
  await expect(room.locator('.progress-copy')).toHaveText('第 1 / 5 题');
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
- await expect(room.locator('.fb')).toBeEmpty();
+ await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
  await activity(page,'1-2','manners');
  await expect(room.getByRole('list',{name:'本轮成果'}).locator('strong')).toHaveText(['5','5','0']);
  await expect(page.locator('#starCount')).toHaveText('1');

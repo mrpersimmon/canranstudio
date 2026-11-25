@@ -89,3 +89,4 @@
 /* Avoid empty vertical bands while keeping the complete reader clear of the cast. */
 .unit2324-workspace .desk-world{height:980px}
 @media(max-width:600px){.unit2324-workspace .desk-world{height:700px}}
+body.unit2324-workspace{--sample-world:url('/assets/learning-sample-v2/shelf-world-v1.webp')}

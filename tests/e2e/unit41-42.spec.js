@@ -1,3 +1,4 @@
+const {courseButton,courseReference,expectResultIcons,expectRoundCounts,incorrectFeedback,openCourseReference}=require('../support/course-controls');
 require('../support/unit4142-v153-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const { test, expect } = require('@playwright/test');
@@ -14,8 +15,8 @@ test('购物袋图鉴：先认物品、保留音标、点击翻义、翻页再�
   await expect(cheese.locator('.word-meaning')).toBeHidden();
   await cheese.click();
   await expect(cheese.locator('.word-meaning')).toHaveText('乳酪；干酪');
-  await expect(words.getByRole('button', { name: '上一组词卡', exact: true })).toBeDisabled();
-  for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  await expect(courseButton(words, "previousWords")).toBeDisabled();
+  for (let i = 0; i < 3; i++) await courseButton(words, "nextWords").click();
   await expect(words.getByRole('button', { name: 'some', exact: true })).toContainText('/sʌm/');
   await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
   await expect(page).toHaveURL(/#learn\/listen$/);
@@ -33,7 +34,7 @@ test('43 题完整流程：五区五星、无语音请求、所有结算三卡�
     const room=await activity(page,id);
     await expect(page.locator('#starCount')).toHaveText(String(++stars));
     await expect(room.getByRole('list',{name:'本轮成果'}).locator('li')).toHaveCount(3);
-    for(const [i,name] of ['streak','correct','incorrect'].entries())await expect(room.locator('.completion-stat img').nth(i)).toHaveAttribute('src',`/assets/unit1-2/completion/${name}-v1.png`);
+    await expectResultIcons(room);
     await expect(room.getByRole('group',{name:'完成后的操作'}).getByRole('button')).toHaveCount(2);
   }
   await page.goto('/unit41-42/#learn/certificate');
@@ -50,7 +51,7 @@ test('词块撤回、重复错答与提示：本次统计按提交，重练归�
   await select(room,{fills:['are','are']});
   for(let i=0;i<2;i++){
     await room.getByRole('button',{name:'检查答案',exact:true}).click();
-    await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+    await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
     await expect(room.locator('.is-correct')).toHaveCount(0);
     await page.reload();
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
@@ -71,16 +72,15 @@ test('词块撤回、重复错答与提示：本次统计按提交，重练归�
     if(i===11)await expect(room.getByRole('region',{name:'短示范'})).toHaveCount(0);
     await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();
     await expect(room.locator('.fb')).toHaveText('答对了！');
-    await room.getByRole('button',{name:i===11?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===11?"finishPractice":'下一题').click();
   }
-  await expect(room.locator('.completion-number')).toHaveText(['12','12','2']);
+  await expectRoundCounts(room.locator('.completion-number'), ['12','12','2']);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await page.reload();await expect(room.locator('.completion-number')).toHaveText(['12','12','2']);
+  await page.reload();await expectRoundCounts(room.locator('.completion-number'), ['12','12','2']);
   await page.goto('/unit41-42/#learn/certificate');
-  await page.getByText('星星进度',{exact:true}).click();
-  const retry=page.getByRole('list',{name:'五星任务'}).getByRole('listitem').filter({hasText:'语法小工坊'});
-  await expect(retry).toContainText('已完成 · 未获星');
-  await retry.getByRole('button',{name:'再练一轮',exact:true}).click();
+  await expect(page.locator('.story-award-tasks')).toHaveCount(0);
+  await page.goto('/unit41-42/#learn/grammar');
+  await room.getByRole('button',{name:'再练一轮',exact:true}).click();
   await expect(room.locator('.progress-copy')).toHaveText('第 1 / 12 题');
   await activity(page,'grammar');await expect(page.locator('#starCount')).toHaveText('1');
 });
@@ -116,7 +116,7 @@ for(const width of [320,390,768,1280])test(`${width} 宽：舞台、配对、长
 test('完整小剧场：袋子放上椅子，原文保留历史且阅读不发星', async ({ page }) => {
   await page.goto('/unit41-42/#learn/text');
   const room = page.locator('.stage-text');
-  await room.getByRole('button', { name: '开始看课文', exact: true }).click();
+  await courseButton(room, "startStory").click();
   await expect(room.getByRole('log')).toContainText('Is that bag heavy, Penny?');
   await expect(room.locator('.pantry-world')).toHaveAttribute('data-bag', 'carried');
   for (let i = 1; i < 16; i++) {
@@ -126,7 +126,7 @@ test('完整小剧场：袋子放上椅子，原文保留历史且阅读不发�
   }
   await expect(room.locator('.bubble-row')).toHaveCount(16);
   await expect(room.getByRole('log')).toContainText("Well, it's certainly not for me!");
-  await room.getByRole('button', { name: '完成课文', exact: true }).click();
+  await courseButton(room, "finishStory").click();
   await expect(page.locator('#starCount')).toHaveText('0');
   await expect(room.getByRole('list', { name: '本轮成果' })).toHaveCount(0);
   await room.getByRole('button', { name: '下一站：故事小侦探', exact: true }).click();
@@ -139,11 +139,11 @@ test('语法从 there be 和量词出发：错答不揭底，改正后才出现�
   await expect(room.getByRole('region', { name: '短示范' })).toContainText('There is some coffee.');
   await select(room, { fills: ['are', 'are'] });
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+  await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
   await expect(room.locator('.grammar-rule')).toBeHidden();
   await expect(room.locator('.is-correct')).toHaveCount(0);
   await page.reload();
-  await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+  await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button', { name: '再试一次', exact: true }).click();
   await select(room, { fills: ['is', 'is'] });
   await room.getByRole('button', { name: '检查答案', exact: true }).click();
@@ -173,7 +173,7 @@ test('场景先选后检查：数量改变有依据，第三题两次错答结�
   await room.getByRole('button',{name:'下一题',exact:true}).click();
   for(let i=0;i<2;i++){
     await select(room,'Yes, there is.');await check.click();
-    await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+    await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
     await expect(room.locator('.bag-inventory')).toContainText('袋子里：一条面包、两瓶牛奶');
     await room.getByRole('button',{name:'再试一次',exact:true}).click();
   }
@@ -181,16 +181,16 @@ test('场景先选后检查：数量改变有依据，第三题两次错答结�
     await select(room,ANSWERS.apply[i]);await check.click();
     await expect(room.locator('.fb')).toHaveText('答对了！');
     if(i===4){await expect(room.locator('.progress-copy')).toHaveText('第 5 / 5 题');await expect(room.locator('.practice-finish')).toHaveCount(0);}
-    await room.getByRole('button',{name:i===4?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===4?"finishPractice":'下一题').click();
   }
-  await expect(room.locator('.completion-number')).toHaveText(['3','5','2']);
+  await expectRoundCounts(room.locator('.completion-number'), ['3','5','2']);
   await expect(page.locator('#starCount')).toHaveText('0');
 });
 
 test('教材替换和书写保留为参考，不增加答题区',async({page})=>{
   await page.goto('/unit41-42/#learn/grammar');
-  await page.getByText('换个物品问一问',{exact:true}).click();
-  const cards=page.locator('.reference-card');await expect(cards).toHaveCount(16);
+  await openCourseReference(page,'换个物品问一问');
+  const cards=courseReference(page).locator(".reference-card");await expect(cards).toHaveCount(16);
   await expect(cards.filter({hasText:'19 · nineteen'})).toContainText('Is there any tea on that table?');
   await expect(cards.last()).toContainText('100 · a hundred');
   await page.goto('/unit41-42/#learn/certificate');await page.getByText('课后练习纸',{exact:true}).click();
@@ -223,7 +223,7 @@ test('同一批物品连续整理：错答和选择不移动，一瓶移出后�
  expect(instructions.y+instructions.height).toBeLessThanOrEqual(stage.y);
  const bag=room.locator('.bag-contents');const table=room.locator('.pantry-item');
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
- await select(room,'椅子上');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('再看看，试一次。');
+ await select(room,'椅子上');await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText(await incorrectFeedback(room));
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
  await room.getByRole('button',{name:'再试一次',exact:true}).click();await select(room,'桌上');
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(2);await expect(table.getByRole('img')).toHaveCount(0);
@@ -235,7 +235,7 @@ test('同一批物品连续整理：错答和选择不移动，一瓶移出后�
  await expect(bag.getByRole('img',{name:/牛奶/})).toHaveCount(1);await expect(table.getByRole('img')).toHaveCount(1);
  await expect(room.getByText('翻译这句话',{exact:true})).toHaveCount(0);
  await select(room,['There is','a bottle','of milk','on the table']);await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await room.getByRole('button',{name:'完成这一站',exact:true}).click();await expect(room.locator('.completion-number')).toHaveText(['3','5','1']);await expect(page.locator('#starCount')).toHaveText('0');
+ await courseButton(room, "finishPractice").click();await expectRoundCounts(room.locator('.completion-number'), ['3','5','1']);await expect(page.locator('#starCount')).toHaveText('0');
 });
 
 test('旧页面真实获星后升级：相同题保留，改题未答，旧星不扣',async({page})=>{
@@ -244,14 +244,14 @@ test('旧页面真实获星后升级：相同题保留，改题未答，旧星�
  const route=async r=>{const pathname=new URL(r.request().url()).pathname;const file=pathname.endsWith('/')?'index.html':path.basename(pathname);if(patterns.includes(file))return r.fulfill({path:path.join(dir,file)});return r.continue();};
  await page.route('**/unit41-42/**',route);await page.goto('/unit41-42/#learn/apply');const room=page.locator('.stage-apply');
  const prior=['bread','两瓶牛奶','No, there isn’t.',{fills:['in','on']},['There is','a piece','of cheese','on the table']];
- for(let i=0;i<prior.length;i++){await select(room,prior[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:i===4?'完成这一站':'下一题',exact:true}).click();}
+ for(let i=0;i<prior.length;i++){await select(room,prior[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await courseButton(room, i===4?"finishPractice":'下一题').click();}
  await expect(page.locator('#starCount')).toHaveText('1');await page.keyboard.press('Escape');
  await page.unroute('**/unit41-42/**',route);await page.reload();
  await expect(page.locator('#starCount')).toHaveText('1');await expect(room.locator('.progress-copy')).toHaveText('第 4 / 5 题');
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(room.locator('.pantry-item img')).toHaveCount(0);
  await select(room,'桌上');await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();
  await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
- await select(room,['There is','a bottle','of milk','on the table']);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'完成这一站',exact:true}).click();
+ await select(room,['There is','a bottle','of milk','on the table']);await room.getByRole('button',{name:'检查答案',exact:true}).click();await courseButton(room, "finishPractice").click();
  await expect(page.locator('#starCount')).toHaveText('1');await expect(room.locator('.completion-number')).toHaveText(['—','—','—']);
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await activity(page,'apply');await expect(page.locator('#starCount')).toHaveText('1');
 });
@@ -285,9 +285,9 @@ test('旧空白草稿升级可正常获星，未改语法保留选项与本轮�
  await room.getByRole('button',{name:'下一题',exact:true}).click();
  for(let i=2;i<ANSWERS.grammar.length;i++){
    await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();
-   await room.getByRole('button',{name:i===11?'完成这一站':'下一题',exact:true}).click();
+   await courseButton(room, i===11?"finishPractice":'下一题').click();
  }
- await expect(room.locator('.completion-number')).toHaveText(['12','12','1']);
+ await expectRoundCounts(room.locator('.completion-number'), ['12','12','1']);
  await expect(page.locator('#starCount')).toHaveText('0');
  await activity(page,'apply');await expect(page.locator('#starCount')).toHaveText('1');
 });
@@ -296,7 +296,7 @@ test('旧空白草稿升级可正常获星，未改语法保留选项与本轮�
 test('手机续看后切回桌面，当前对白保持在对话区内',async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/unit41-42/#learn/text');
  const room=page.locator('.stage-text'),log=room.getByRole('log');
- await room.getByRole('button',{name:'开始看课文',exact:true}).click();
+ await courseButton(room, "startStory").click();
  for(let i=1;i<6;i++)await room.getByRole('button',{name:'下一句',exact:true}).click();
  await page.goto('/unit41-42/#learn/grammar');await page.setViewportSize({width:1280,height:900});
  await page.goto('/unit41-42/#learn/text');

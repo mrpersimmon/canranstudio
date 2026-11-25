@@ -20,10 +20,15 @@
       if (correct) question.scene.after.forEach(item => speech.append(line(item, true)));
       speech.scrollTop = speech.scrollHeight;
     }
+    function portrait(picture, label) {
+      // The prop and portrait share a coordinate plane; the name is outside it.
+      const art = node('div', 'quest-portrait'), slot = node('div', 'quest-bag-slot');
+      slot.setAttribute('aria-hidden', 'true'); art.append(picture, slot); receivers.set(label, slot);
+      return art;
+    }
     function person(who, label) {
       const actor = node('div', 'quest-actor quest-actor-' + who);
-      actor.append(image(who), node('span', 'quest-name', label));
-      const slot = node('div', 'quest-bag-slot'); slot.setAttribute('aria-hidden', 'true'); actor.append(slot); receivers.set(label, slot);
+      actor.append(portrait(image(who), label), node('span', 'quest-name', label));
       return actor;
     }
     function present(q, progress) {
@@ -46,8 +51,7 @@
         for (const control of options.querySelectorAll('button')) {
           const label = control.getAttribute('aria-label') || control.textContent;
           control.setAttribute('aria-label', label); control.classList.add('quest-person-target'); control.dataset.person = label === '男士' ? 'man' : 'woman';
-          const slot = node('div', 'quest-bag-slot'); slot.setAttribute('aria-hidden', 'true'); control.append(slot);
-          receivers.set(label, slot);
+          control.prepend(portrait(control.querySelector(':scope > img'), label));
         }
         man.remove(); woman.remove(); scene.append(options);
       } else if (q.scene.beat === 'find') {

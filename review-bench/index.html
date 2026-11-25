@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>页面验收台 · 灿然英语</title><link rel="stylesheet" href="/review/styles.css"><script defer src="/review/state-model.js"></script><script defer src="/review/app.js"></script></head>
+<body>
+ <header class="bench-header"><div><span class="brand-mark" aria-hidden="true">✺</span><strong>页面验收台</strong><span class="local-badge">本地 · 演示数据</span></div><button id="refresh">刷新代码</button></header>
+ <div class="bench-body">
+  <aside id="directory" aria-label="页面目录"><div class="directory-heading"><h1>快速查看</h1><button id="close-directory" aria-label="关闭目录">×</button></div><p class="directory-note">直接选页面，无须从头答题。</p><label for="unit">教学单元</label><select id="unit"></select><label class="search-label" for="search">查找页面或题目</label><input type="search" id="search" placeholder="Lesson、题号、题干…" autocomplete="off"><div id="count" class="directory-count" role="status"></div><nav id="entries" aria-label="验收页面"></nav><p class="directory-foot">复用真实课程与原卡。演示作答仅在当前预览内有效。</p></aside>
+<main class="workspace"><section class="toolbar" aria-label="预览设置"><div class="toolbar-title"><button id="open-directory">页面目录</button><div><span id="current-course"></span><h2 id="current-title">正在准备课程…</h2></div></div><div class="controls"><label id="stars-control" hidden>星星数量<select id="stars"><option value="0">0 颗星</option><option value="1">1 颗星</option><option value="2">2 颗星</option><option value="3">3 颗星</option><option value="4">4 颗星</option><option value="5">5 颗星</option></select></label><label>页面尺寸<select id="device"></select></label><label>显示比例<select id="zoom"><option value="fit">适合窗口</option><option value="actual">100%</option></select></label></div><div class="state-control"><span id="state-label">展示状态</span><div id="state-buttons" role="group" aria-labelledby="state-label"></div><button type="button" id="clear-preset" hidden>取消沿用</button><span id="state-status" role="status"></span></div></section>
+   <div class="preview-area" id="preview-area"><div id="frame-shell"></div><div id="loading" role="status">正在准备真实课程页面…</div><div id="error" role="alert" hidden><p></p><button id="retry">重新打开本页</button></div></div>
+   <footer class="preview-footer"><div class="page-navigation"><button id="previous" aria-label="上一页">← 上一页</button><span id="position"></span><button id="next" aria-label="下一页">下一页 →</button></div><div class="preview-actions"><span id="dimensions"></span><button id="reset">重置本页</button><button id="copy">复制本项链接</button></div></footer>
+   <p class="bench-note" id="notice" role="status">← → 可连续浏览；交互后可重置本页。尺寸模拟不替代真机验收。</p>
+  </main>
+ </div>
+ <dialog id="directory-dialog" aria-label="页面目录"></dialog>
+ <dialog id="copy-dialog"><h2>复制本项链接</h2><p>选中下面的地址进行复制。</p><input id="copy-address" readonly aria-label="本项链接"><button id="close-copy">关闭</button></dialog>
+</body></html>

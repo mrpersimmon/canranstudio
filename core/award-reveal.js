@@ -13,10 +13,10 @@
 
   function create({ unit }) {
     const dialog = node('dialog', 'award-reveal'); dialog.tabIndex = -1;
-    dialog.setAttribute('aria-label', '纪念卡结算；点击任意位置，或按回车、空格、Esc 关闭');
+    dialog.setAttribute('aria-label', '纪念卡结算');
     const stage = node('div', 'award-reveal-stage'), panel = node('div', 'award-reveal-panel');
     const view = core.storyCertificate.card({ unit, label: unit.reward.title + '纪念卡' });
-    const wrap = node('div', 'award-reveal-card'); wrap.append(view.element);
+    const wrap = node('div', 'award-reveal-card'); wrap.append(view.frame);
     const slots = view.starImages.map((image, i) => {
       const slot = decorative('award-star'); slot.style.setProperty('--star-order', i);
       image.replaceWith(slot); slot.append(image, decorative('star-glint')); return slot;
@@ -27,7 +27,7 @@
     reminder.append(node('span', '', '课程已升级，重新挑战，'), node('span', '', '全对即可点亮星星！'));
     const confirmation = node('p', 'award-confirmation'); confirmation.setAttribute('role', 'status');
     panel.append(wrap, confirmation); stage.append(panel); dialog.append(stage); document.body.append(dialog);
-    let generation = 0, loading = false, queue = [], current = null, focusTarget;
+    let generation = 0, loading = false, queue = [], current = null, focusTarget, latestState;
     const seen = new Set(), rounds = new Map();
     // Keep the actual animation image ready, not just another image with the
     // same URL. A fresh unready <img> would reopen the course's page guard.
@@ -70,7 +70,10 @@
       release(current?.round);
       current = null;
       if (dialog.open) dialog.close();
-      if (restore && focusTarget?.isConnected && !focusTarget.closest('[inert]')) focusTarget.focus({ preventScroll: true });
+      const actions=focusTarget?.closest('.practice-finish-actions');
+      const onward=actions?.querySelector('.station-actions button, .station-actions a, [data-station-next]');
+      const target=onward||focusTarget;
+      if (restore && target?.isConnected && !target.closest('[inert]')) target.focus({ preventScroll: true });
       focusTarget = null;
       queueMicrotask(showNext);
     }
@@ -79,13 +82,15 @@
       dialog.dataset.phase = value;
       dialog.dataset.dismissible = String(value === 'ready');
       dialog.setAttribute('aria-busy', String(value !== 'ready'));
-      confirmation.textContent = value === 'pending' ? '正在确认星星，请稍候。' : value === 'ready' ? '点击任意位置继续' : '';
+      dialog.setAttribute('aria-label',value==='ready'?'纪念卡结算；点击任意位置，或按回车、空格、Esc 关闭':'纪念卡结算，请稍候');
+      confirmation.textContent = current?.kind === 'rejected' ? current.rejectionMessage
+        : value === 'ready' ? (current?.state.pendingZones?.length ? '已保存在本机，星星待同步 · 点击继续' : '点击任意位置继续') : '';
     }
     async function land(item, token) {
       dialog.dataset.kind = item.kind;
       phase('animating');
       paint(item.before);
-      try { await animate(item, token); }
+      try { if(item.kind!=='rejected')await animate(item, token);else paint(item.state); }
       catch { if (token === generation && current === item) paint(item.state); }
       if (token === generation && current === item) phase('ready');
     }
@@ -106,23 +111,23 @@
       // Ignore premature dismissal instead of replaying that click after the
       // star lands. Programmatic navigation/identity cancellation still works.
       dialog.dataset.motion = 'full';
-      phase(current.kind === 'pending' ? 'pending' : 'animating');
+      phase('animating');
       paint(current.kind === 'upgrade' ? current.state : current.before);
-      dialog.showModal(); dialog.focus({ preventScroll: true });
+      dialog.showModal(); view.resize(); dialog.focus({ preventScroll: true });
       const item = current;
       try { await panel.animate([{ opacity: 0, transform: 'translateY(10px) scale(.98)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: 'ease-out' }).finished; }
       catch { /* Cancellation releases the foreground round separately. */ }
       if (token !== generation || current !== item) return;
       item.entered = true;
-      if (item.kind !== 'pending') void land(item, token);
+      void land(item, token);
     }
     function enqueue(item) {
       if (seen.has(item.key)) return;
       seen.add(item.key); queue.push(item); queueMicrotask(showNext);
     }
     function earned({ before, state, zoneIds }) {
-      // A late/offline confirmation still updates the ledger, but must not
-      // interrupt a result already shown or a different activity/round.
+      // Only durable local completion emits this event. A later server
+      // acknowledgement reconciles the same star without replaying its flight.
       const round = zoneIds.map(id => rounds.get(id)).findLast(value => value?.waiting);
       if (!round) return;
       const kind = state.stars === 5 ? 'full' : 'earned';
@@ -138,10 +143,7 @@
       }
     }
     function pendingMessage() {
-      if (document.getElementById('studentSyncStatus')?.dataset.syncState === 'failed') return '暂未保存，请先别关闭页面。';
-      if (!unit.copy?.compact) return '整轮零错！联网同步后点亮星星。';
-      return root.navigator.onLine === false || document.getElementById('studentSyncStatus')?.dataset.syncState === 'retry'
-        ? '已保存，联网后同步星星。' : '正在同步星星…';
+      return '已在本机获得 · 待同步';
     }
     function complete({ id, states, round, awards, element }) {
       const finish = element.querySelector('.practice-finish');
@@ -152,9 +154,11 @@
       const previous = awards.state();
       const perfect = awards.record(id, states, round), state = awards.state();
       let message;
-      if (state.pendingZones.includes(id)) message = pendingMessage();
+      if (state.unsavedZones?.includes(id)) message = '本机尚未保存，请重试保存后再继续。';
+      else if (state.rejectedZones?.includes(id)) message = state.rejectionMessages[id];
+      else if (state.pendingZones.includes(id)) message = pendingMessage();
       else if (state.zones[id]) message = unit.copy?.compact ? '已获星' : '这颗星已经点亮。';
-      else if (states.some(item => item.firstCorrect === false)) message = unit.copy?.compact ? '这轮有过答错，再挑战一轮争取星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。';
+      else if (states.some(item => item.firstCorrect === false)) message = unit.copy?.correctedCompletion || (unit.copy?.compact ? '这轮有过答错，再挑战一轮争取星星。' : '本轮有过错答。再练一轮，整轮零错就能点亮星星。');
       else if (round.roundPolicy !== unit.reward.edition) {
         message = UPGRADE;
         if (foreground) enqueue({ kind: 'upgrade', before: state, state, round: foreground,
@@ -166,13 +170,7 @@
         kind: 'replay', before: state, state, round: foreground, key: 'replay:' + id + ':' + round.runId,
         target: element.querySelector('.practice-finish-actions button')
       });
-      if (foreground && perfect && state.pendingZones.includes(id)) {
-        if (root.navigator.onLine !== false && !['retry', 'failed'].includes(document.getElementById('studentSyncStatus')?.dataset.syncState)) {
-          foreground.item = { kind: 'pending', before: previous, state: previous, round: foreground,
-            key: 'pending:' + id + ':' + round.runId, target: foreground.target };
-          enqueue(foreground.item);
-        } else release(foreground);
-      } else if (foreground && !queue.some(item => item.round === foreground)) release(foreground);
+      if (foreground && !queue.some(item => item.round === foreground)) release(foreground);
       // The Finish button has been replaced by the completion actions. Restore
       // focus there after a foreground award, never to a detached old button.
       for (const item of queue) if (item.kind !== 'upgrade' && !item.target) item.target = element.querySelector('.practice-finish-actions button');
@@ -180,7 +178,8 @@
     }
     async function animate(item, token) {
       if (item.kind === 'upgrade') return;
-      for (let index = item.before.stars; index < item.state.stars && token === generation; index++) {
+      const targetStars = item.state.stars;
+      for (let index = item.before.stars; index < targetStars && token === generation; index++) {
         source.hidden = false; const origin = source.getBoundingClientRect(); source.hidden = true;
         const target = view.starImages[index], dest = target.getBoundingClientRect();
         const fly = decorative('travelling-star');
@@ -216,6 +215,7 @@
         }
         await landing.finished;
       }
+      if(token===generation)paint(item.state);
     }
     // Pointer/keyboard input that began during flight must not close the card
     // just because its corresponding click/key-up arrives after landing.
@@ -226,13 +226,28 @@
     dialog.addEventListener('keydown', event => {
       if (['Enter', ' ', 'Escape'].includes(event.key)) { event.preventDefault(); event.stopPropagation(); if (!event.repeat && dialog.dataset.dismissible === 'true') dismiss(); }
     });
-    function failedConfirmation() {
-      for (const item of queue.filter(item => item.kind === 'pending')) release(item.round);
-      queue = queue.filter(item => item.kind !== 'pending');
-      if (current?.kind === 'pending') dismiss();
+    function reconcileResults() {
+      if(!latestState)return;
+      for(const result of document.querySelectorAll('.award-round-result[data-perfect="true"]')){
+        const id=result.dataset.zone;
+        const message=latestState.rejectionMessages?.[id] || (latestState.unsavedZones?.includes(id)?'本机尚未保存，请重试保存后再继续。':null);
+        if(message&&result.textContent!==message)result.textContent=message;
+      }
     }
-    root.addEventListener('offline', failedConfirmation);
-    root.addEventListener('lesson-sync:status', event => { if (['retry', 'failed'].includes(event.detail?.state)) failedConfirmation(); });
+    root.addEventListener('lesson-awards:local-state',event=>{
+      if(event.detail?.unitId!==unit.id)return;
+      latestState=event.detail.state;
+      for(const item of [...queue,...(current?[current]:[])]){
+        item.state=latestState;
+        const reason=latestState.rejectionMessages?.[item.round?.id];
+        if(reason){item.kind='rejected';item.rejectionMessage=reason;item.before=latestState;
+          if(item===current){stop();paint(latestState);dialog.dataset.kind='rejected';phase('ready');}
+        }else if(item===current&&dialog.dataset.phase==='ready'){paint(latestState);phase('ready');}
+      }
+      queueMicrotask(reconcileResults);
+    });
+    root.addEventListener('lesson-practice:navigation',reconcileResults);
+    root.addEventListener('lesson-sync:status',reconcileResults);
     document.addEventListener('close', () => queueMicrotask(showNext), true);
     root.addEventListener('lesson49:leave-activity', cancel);
     root.addEventListener('hashchange', cancel);

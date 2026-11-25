@@ -26,7 +26,7 @@
   function open(base) {
     if (stores.has(base)) return stores.get(base);
     const prefix = 'canran:' + (base === '/' ? 'preview-root' : base.slice(1, -1).replaceAll('/', ':')) + ':course-cache:v1';
-    const memory = new Map(), tasks = new Map();
+    const memory = new Map(), tasks = new Map(), unavailableLayers=new Set(),encodedLayers=new WeakMap();
     const cacheKey = item => base + 'resources/' + item.sha256;
     const resourceResponse = (item, bytes) => new Response(bytes, { headers: { 'Content-Type': item.type, 'Content-Length': String(item.bytes), 'X-Course-Hash': item.sha256 } });
     const maintain = (work, { signal } = {}) => {
@@ -105,7 +105,39 @@
       memory.set(item.sha256, buffer);
       return buffer;
     }
-    async function download(item, signal) {
+    async function remember(item,bytes,signal) {
+      checkCancelled(signal);memory.set(item.sha256,bytes.buffer);
+      const disk=await readWhileActive(cache,signal);checkCancelled(signal);
+      if(disk){
+        // Native cache writes must finish before the per-resource lock is released.
+        const save=()=>{checkCancelled(signal);return disk.put(cacheKey(item),resourceResponse(item,bytes));};
+        try{await save();}catch{checkCancelled(signal);try{if(!api.onQuota)throw Error();await api.onQuota();await save();}catch{checkCancelled(signal);persistent=false;}}
+      }
+      checkCancelled(signal);return bytes.buffer;
+    }
+
+    const block=256*1024;
+    // Only two shared fonts may stage a prefix. A staging record is never
+    // a resource cache hit, a font face or proof that a course is ready.
+    const resumableFont=item=>root.navigator?.locks && item.type==='font/woff2' && item.bytes>=4*block && item.bytes<=32*block &&
+      (item.key===base+'assets/awards/fonts/award-gothic-500.woff2'||item.key===base+'assets/awards/award-round.woff2');
+    const checkpointKey=item=>base+'font-preparation/'+item.sha256;
+    function checkpointLength(size,total){
+      // A handful of complete checkpoints, not a rewrite per network chunk.
+      let mark=0;for(let n=block;n<total&&n<=size;n=n<4*block?n*2:n+4*block)mark=n;return mark;
+    }
+    async function fontPrefix(disk,item,signal){
+      if(!disk)return null;
+      try{
+        const saved=await readWhileActive(disk.match(checkpointKey(item)),signal);if(!saved)return null;
+        const size=Number(saved.headers.get('Content-Length'));
+        if(saved.headers.get('X-Course-Hash')!==item.sha256||!(Number(saved.headers.get('X-Font-Until'))>Date.now())||size<block||size>=item.bytes||checkpointLength(size,item.bytes)!==size)return null;
+        const buf=await readWhileActive(saved.arrayBuffer(),signal);return buf.byteLength===size?new Uint8Array(buf):null;
+      }catch{checkCancelled(signal);return null;}
+    }
+    async function download(item, signal, checkpointFonts=false) {
+      const font=resumableFont(item),disk=font?await readWhileActive(cache,signal):null;
+      let previous=font?await fontPrefix(disk,item,signal):null;
       let lastError;
       for (let attempt = 0; attempt < 3; attempt++) {
         checkCancelled(signal);
@@ -114,50 +146,81 @@
         let timer;
         const reset = () => { clearTimeout(timer); timer = setTimeout(cancel, 15000); }; reset();
         try {
-          const response = await fetch(item.url, { signal: controller.signal, cache: 'no-cache', credentials: 'same-origin' });
+          const offset=previous?.byteLength||0;
+          const response = await fetch(item.url, { signal: controller.signal, cache: 'no-cache', credentials: 'same-origin',...(offset?{headers:{Range:'bytes='+offset+'-'}}:{}) });
           const receivedType = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
           const expectedType = item.type.split(';')[0];
           const compatible = receivedType === expectedType || expectedType === 'text/javascript' && receivedType === 'application/javascript';
-          if (response.status !== 200 || !compatible) throw failure('L03', '资源未正确返回');
-          const reader = response.body.getReader(), chunks = []; let size = 0;
+          const resumed=offset>0 && response.status===206 && response.headers.get('Content-Range')==='bytes '+offset+'-'+(item.bytes-1)+'/'+item.bytes &&
+            (!response.headers.get('Content-Encoding')||response.headers.get('Content-Encoding')==='identity');
+          if ((!resumed&&response.status!==200) || !compatible){await response.body?.cancel().catch(()=>{});throw failure('L03','资源未正确返回');}
+          const reader = response.body.getReader(), chunks = [], assembled=font?new Uint8Array(item.bytes):null;
+          let size=resumed?offset:0,stored=size,canSave=checkpointFonts&&disk;
+          if(resumed)assembled.set(previous);
           for (;;) {
             const value = await reader.read(); if (value.done) break;
-            reset(); chunks.push(value.value); size += value.value.byteLength;
-            if (size > item.bytes) { await reader.cancel(); throw failure('L04', '资源大小不正确'); }
-          }
-          const bytes = new Uint8Array(size); let offset = 0;
-          for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.byteLength; }
-          if (size !== item.bytes || await readWhileActive(digest(bytes.buffer), signal) !== item.sha256) throw failure('L04', '资源校验失败');
-          checkCancelled(signal);
-          memory.set(item.sha256, bytes.buffer);
-          const disk = await readWhileActive(cache, signal);
-          checkCancelled(signal);
-          if (disk) {
-            // Once a put starts, await the actual write before releasing its
-            // lock. Cancellation must never leave an orphan cache write.
-            const save = () => { checkCancelled(signal); return disk.put(cacheKey(item), resourceResponse(item, bytes)); };
-            try { await save(); }
-            catch {
-              checkCancelled(signal);
-              try { if (!api.onQuota) throw new Error('No cleanup available'); await api.onQuota(); await save(); }
-              catch { checkCancelled(signal); persistent = false; }
+            reset();checkCancelled(signal);
+            if(size+value.value.byteLength>item.bytes){await reader.cancel();throw failure('L04','资源大小不正确');}
+            if(assembled)assembled.set(value.value,size);else chunks.push(value.value);
+            size+=value.value.byteLength;
+            if(canSave&&size<item.bytes){
+              const mark=checkpointLength(size,item.bytes);
+              if(mark>stored){
+                try{await disk.put(checkpointKey(item),new Response(assembled.slice(0,mark),{headers:{'Content-Length':String(mark),'X-Course-Hash':item.sha256,'X-Font-Until':String(Date.now()+30*60000)}}));stored=mark;}
+                catch{canSave=false;} // Optional: a full authorized download still works without storage.
+                checkCancelled(signal);
+              }
             }
           }
+          const bytes = assembled||new Uint8Array(size);let at=0;
+          for (const chunk of chunks) { bytes.set(chunk, at); at += chunk.byteLength; }
+          if (size !== item.bytes || await readWhileActive(digest(bytes.buffer), signal) !== item.sha256) throw failure('L04', '资源校验失败');
+          const verified=await remember(item,bytes,signal);if(disk)await disk.delete(checkpointKey(item)).catch(()=>{});
           checkCancelled(signal);
-          return bytes.buffer;
-        } catch (error) { lastError = error; if (signal?.aborted) throw error; }
+          return verified;
+        } catch (error) { lastError = error; if (signal?.aborted) throw error;
+          if(disk&&(previous||error.courseCode==='L04')){previous=null;await disk.delete(checkpointKey(item)).catch(()=>{});} // Bad ranges/bytes retry the original whole file.
+        }
         finally { clearTimeout(timer); signal?.removeEventListener('abort', cancel); }
         if (attempt < 2) await delay(350 * (attempt + 1));
       }
       if (!lastError.courseCode) lastError.courseCode = 'L03';
       throw lastError;
     }
-    async function obtain(item, { signal, network = true } = {}) {
+    async function assembledSvg(item,signal){
+      const parts=item.svgParts;if(item.type!=='image/svg+xml'||!Array.isArray(parts)||parts.length>17)return null;
+      const encoder=new TextEncoder();let length=0,literals=0;
+      for(const part of parts){
+        if(typeof part==='string'){const n=encoder.encode(part).length;length+=n;literals+=n;}
+        else{if(!part||part.type!=='image/png'||part.svgParts||unavailableLayers.has(part.sha256)||part.sha256===item.sha256||part.url!==base+'resources/'+part.sha256+'/shared-art.png')return null;
+          validateItem(part);length+=4*Math.ceil(part.bytes/3);}
+      }
+      if(length!==item.bytes||literals>32768)return null;
+      const strings=[];
+      for(const part of parts){
+        if(typeof part==='string'){strings.push(part);continue;}
+        let buffer;try{buffer=await obtain(part,{signal});}catch(error){checkCancelled(signal);unavailableLayers.add(part.sha256);throw error;}
+        let encoded=encodedLayers.get(buffer);
+        if(!encoded){const png=new Uint8Array(buffer),pieces=[];
+          for(let i=0;i<png.length;i+=16384)pieces.push(String.fromCharCode(...png.subarray(i,i+16384)));
+          encoded=btoa(pieces.join(''));encodedLayers.set(buffer,encoded);
+        }
+        strings.push(encoded);
+      }
+      const bytes=encoder.encode(strings.join(''));
+      if(bytes.byteLength!==item.bytes||await readWhileActive(digest(bytes.buffer),signal)!==item.sha256)return null;
+      return bytes;
+    }
+    async function obtain(item, { signal, network = true, checkpointFonts=false } = {}) {
       const found = await cached(item, { signal }); if (found) return found;
       checkCancelled(signal);
       if (!network) return null;
       if (!tasks.has(item.sha256)) {
-        const work = async () => { const value = await cached(item, { signal }); checkCancelled(signal); return value || download(item, signal); };
+        const work = async () => { const value = await cached(item, { signal }); checkCancelled(signal);if(value)return value;
+          if(item.svgParts){let bytes;try{bytes=await assembledSvg(item,signal);}catch{checkCancelled(signal);}
+            if(bytes)return remember(item,bytes,signal);}
+          return download(item,signal,checkpointFonts);
+        };
         const promise = root.navigator?.locks ? root.navigator.locks.request(prefix + ':' + item.sha256, signal ? { signal } : {}, work) : work();
         tasks.set(item.sha256, promise);
         promise.finally(() => tasks.delete(item.sha256)).catch(() => {});
@@ -215,7 +278,11 @@
       }
       const keep = referenced();
       for (const request of await disk.keys()) {
-        const sha = new URL(request.url).pathname.split('/').pop();
+        const pathname=new URL(request.url).pathname,sha=pathname.split('/').pop();
+        if(pathname.startsWith(base+'font-preparation/')){
+          if(manual||!keep.has(sha)||!(Number((await disk.match(request))?.headers.get('X-Font-Until'))>Date.now()))await disk.delete(request);
+          continue;
+        }
         if (!keep.has(sha)) { await disk.delete(request); memory.delete(sha); }
       }
     }

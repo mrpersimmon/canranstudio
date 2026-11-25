@@ -1,4 +1,5 @@
 'use strict';
+const {readyCourse}=require('../support/course-controls');
 // Frozen paper certificates used the learner's local date. Generate the
 // historical original in Shanghai; compare its current copy on a UTC device.
 const {test,expect}=require('@playwright/test');
@@ -17,7 +18,7 @@ test('原65题五星同库更新：原卡全部帧、日期、未改轮次和跨
  const base=process.env.AWARD_TEST_BASE||'/lesson/',prefix=base.slice(0,-1),ports=require('../support/login-test-ports'),origin=ports.origin(4271),chain=process.env.UNIT1920_CHAIN_LEGACY==='1';
  let server,first,second,oldIssuedAt,oldDate;
  const ledger=()=>{const {DatabaseSync}=require('node:sqlite'),db=new DatabaseSync(path.join(dataDir,'learning.sqlite'),{readOnly:true});try{return db.prepare('SELECT edition,value FROM unit_awards WHERE course=? ORDER BY edition').all('unit19-20');}finally{db.close();}};
- const ready=async p=>expect(p.locator('#wordPageProgress')).toBeVisible({timeout:30000});
+ const ready=async p=>readyCourse(p);
  const restore65=async()=>{for(const n of FILES)await fs.copyFile(path.join(root,'tests/fixtures/unit19-20-before-v153',n),path.join(oldRoot,'unit19-20',n));};
  try{
   await fs.mkdir(oldRoot);for(const entry of await fs.readdir(root,{withFileTypes:true})){if(['.git','unit19-20'].includes(entry.name))continue;if(/^unit\d+-\d+$/.test(entry.name)){await fs.mkdir(path.join(oldRoot,entry.name));for(const n of await fs.readdir(path.join(root,entry.name)))await linkOrCopy(path.join(root,entry.name,n),path.join(oldRoot,entry.name,n));}else await linkOrCopy(path.join(root,entry.name),path.join(oldRoot,entry.name));}

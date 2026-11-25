@@ -1,0 +1,14 @@
+{
+  "id": "world-clinic",
+  "kind": "world",
+  "references": [
+    "output/whole-book-design/keepsake-reference-24.png",
+    "assets/learning-sample-v1/claim-world-v1.webp"
+  ],
+  "transparent": false,
+  "prompt": "Use case: illustration-story. Create an EMPTY reusable 3:2 landscape theatre background for an English course. Match the approved original keepsake references: warm brown hand-drawn outlines, softly painted rounded shapes, gentle paper grain, restrained perspective, warm cream/sage/teal/wood palette. Eye-level stage view with broad clear floor, lighter low-detail upper half for actual dialogue UI. Fill the canvas edge to edge, no white border, no characters, UI, badges, writing, photography or 3D rendering. Exact story characters, moving props and factual diagrams are separate and must not be duplicated in this background. Scene: a friendly clinic room with pale cream and muted sage walls, a sunny window, a modest closed storage cupboard at far right and small plant at far left, completely empty foreground floor; NO people, bed, desk, medicine, medical text, cross logos or clocks.",
+  "raw": "assets/learning-whole-book-v1/raw/world-clinic.png",
+  "adopted": "assets/learning-whole-book-v1/world-clinic-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-9a8b381d-d8a7-42d7-9b14-42764c9ddec5.png"
+}

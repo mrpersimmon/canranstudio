@@ -1,0 +1,12 @@
+{
+  "id": "robert-self",
+  "references": [
+    "assets/unit7-8/keepsake-story-v1.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Derive a new standalone full-body pose of ROBERT, the brown-haired man at LEFT in the reference: mustard cardigan, cream collared shirt, blue trousers, brown belt and shoes. Robert smiles and clearly points at his own chest with one hand to indicate 'I'. Exactly ONE person; remove the woman, furniture, plant and book. Preserve face, hairstyle, clothing, proportions and warm brown hand-painted storybook linework from the reference. Full body centered, 10% empty margin, transparent background, no text or speech bubble, no white halo or border. This is a new vocabulary pose, the original keepsake must remain unchanged.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-c260119f-3a0a-4c2a-9be3-8c073c7867b0.png",
+  "raw": "assets/learning-sample-v1/raw/robert-self.png",
+  "adopted": "assets/word-art-v2/sample1-12/robert-self-v1.webp"
+}

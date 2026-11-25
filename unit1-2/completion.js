@@ -108,9 +108,11 @@
     if (caption) caption.lang = 'en';
     const actions = finish.querySelector('.practice-finish-actions');
     const onward = actions.querySelector('.station-actions button');
-    if (onward && onward.textContent.startsWith('下一站：')) {
-      const label = onward.textContent; onward.setAttribute('aria-label', label);
-      onward.replaceChildren(node('span', 'completion-next-prefix', '下一站'), node('span', 'completion-next-name', label.replace(/^下一站：/, '')));
+    const nextLabel=onward?.getAttribute('aria-label')||onward?.textContent||'';
+    if (onward && nextLabel.startsWith('下一站：')) {
+      onward.setAttribute('aria-label',nextLabel);
+      onward.replaceChildren(node('span','completion-next-prefix','下一站'));
+      onward.dataset.stationNext='true';
     }
     finish.classList.add('completion-card'); finish.dataset.activity = activity;
     finish.replaceChildren(artwork || illustration(theme), title, ...(caption ? [caption] : []), stats, actions);

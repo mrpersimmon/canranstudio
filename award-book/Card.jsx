@@ -22,14 +22,8 @@ export function Certificate({card,mini=false,lazy=false}){
 export function CardFrame({card,mini=false,lazy=false}){
  const ref=useRef(null);
  useLayoutEffect(()=>{
-  const node=ref.current;
-  const update=()=>node.style.setProperty('--card-scale',String(node.clientWidth/1640));
-  // offsetWidth is unaffected by the hero's tilt; ResizeObserver preserves
-  // fractional widths and never resizes the observed frame itself.
-  const initial=node.clientWidth;node.style.setProperty('--card-scale',String(initial/1640));
-  if(typeof ResizeObserver==='undefined'){update();window.addEventListener('resize',update);return()=>window.removeEventListener('resize',update);}
-  const observer=new ResizeObserver(entries=>node.style.setProperty('--card-scale',String(entries[0].contentRect.width/1640)));
-  observer.observe(node);return()=>observer.disconnect();
+  const sizing=cardLayout.observeFrame(ref.current);
+  return sizing.disconnect;
  },[]);
  return <div ref={ref} className={`card-frame ${mini?'is-mini':''}`} aria-hidden={mini?'true':undefined}><div className="card-design-plane"><Certificate card={card} mini={mini} lazy={lazy}/></div></div>;
 }

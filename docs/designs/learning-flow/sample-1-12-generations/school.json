@@ -1,0 +1,13 @@
+{
+  "id": "school",
+  "references": [
+    "assets/awards/unit1-2-handbag-closeup.webp",
+    "assets/awards/unit3-4-umbrella.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Create ONE educational vocabulary illustration of A friendly small primary school building, warm cream walls, green double doorway, red-tiled roof, central small clock and two classroom windows, compact three-quarter view, full building visible. No text, no labels, no people. Match the supplied original keepsake references: warm dark-brown hand-drawn rounded contours, soft gouache-like flat fills, restrained painted volume, subtle paper grain, warm gentle lighting. Child-friendly illustrated storybook, not a flat UI symbol, photograph, 3D render or plastic toy. Centered in a square, entire subject occupies 74–82% of the frame, generous clear margin all around. Transparent background with clean alpha, no white halo, no card, no border, no text, no watermark. References provide style only; do not include their people or umbrella. Preserve clear semantic identification at phone vocabulary-card size.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-2f9e148d-3569-4cc3-80a0-5ee7c38f7a1e.png",
+  "raw": "assets/learning-sample-v1/raw/school.png",
+  "adopted": "assets/word-art-v2/sample1-12/school-v1.webp"
+}

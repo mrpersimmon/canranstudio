@@ -1,8 +1,22 @@
 'use strict';
+const {inspectQuestionDiagrams}=require('../support/question-diagrams');
+const {devices,contextOptions}=require('../support/required-phone-devices');
 const{test,expect}=require('@playwright/test');const{ANSWERS,select}=require('../support/unit2728-fivezones');
 test.use({actionTimeout:7000,...(process.env.UNIT2728_BROWSER==='webkit'?{browserName:'webkit'}:{})});
+for(const device of devices)test.describe(device.name,()=>{
+ test.use(contextOptions(device));
+ test('选图可读，关闭放大图后仍能直接作答',async({page},info)=>{
+  await page.goto('/unit27-28/#learn/exam');const room=page.locator('.stage-exam');
+  await expect(room.locator('.picture-option')).toHaveCount(3);
+  await inspectQuestionDiagrams(room,150,info.outputPath('figures.png'));
+  const option=room.getByRole('button',{name:ANSWERS.exam[0],exact:true});
+  await option.tap();await expect(option).toHaveAttribute('aria-pressed','true');
+  await room.getByRole('button',{name:'检查答案',exact:true}).tap();
+  await expect(room.locator('.fb')).toHaveText('答对了！');
+ });
+});
 for(const width of [320,1280])test(`综合选图${width}能看清表面与距离，中性问句前提在未答页可见`,async({page},info)=>{
- await page.setViewportSize({width,height:width===320?568:900});await page.goto('/unit27-28/#learn/exam');const room=page.locator('.stage-exam');await expect(room.locator('.picture-option img')).toHaveCount(3);for(const image of await room.locator('.picture-option img').all()){const box=await image.boundingBox();expect(box.width).toBeGreaterThanOrEqual(150);expect(box.height/box.width).toBeCloseTo(.75,1);}expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await room.screenshot({path:info.outputPath('visible-picture-options-'+width+'.png')});
+ await page.setViewportSize({width,height:width===320?568:900});await page.goto('/unit27-28/#learn/exam');const room=page.locator('.stage-exam');await expect(room.locator('.picture-option img')).toHaveCount(3);await inspectQuestionDiagrams(room,150,info.outputPath('comparison-'+width+'.png'));expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);await room.screenshot({path:info.outputPath('visible-picture-options-'+width+'.png')});
  for(let i=0;i<4;i++){await select(room,ANSWERS.exam[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await room.getByRole('button',{name:'下一题',exact:true}).click();}await expect(room.locator('.practice-context')).toContainText('没有肯定预期');await expect(room.locator('.practice-context')).toContainText('主人确认那里没有杯子');await page.reload();await expect(room.locator('.practice-context')).toBeVisible();await expect(room.getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await room.screenshot({path:info.outputPath('neutral-question-'+width+'.png')});
 });
 test('补清语境的综合题使用新身份，真实旧答案仍留档而不代答',async({page})=>{

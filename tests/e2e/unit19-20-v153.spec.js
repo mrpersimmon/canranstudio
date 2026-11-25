@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,activity}=require('../support/unit1920-fivezones');
 test.use({actionTimeout:7000,...(process.env.UNIT1920_BROWSER==='webkit'?{browserName:'webkit'}:{})});
@@ -17,7 +18,7 @@ test('主语be和形容词两道旧题补短示范；实际帮助入手记',asyn
   await expect(room.getByRole('region',{name:'短示范',exact:true})).toBeVisible();
   await room.screenshot({path:info.outputPath('grammar-'+(i+1)+'-unanswered-320.png')});
   await select(room,ANSWERS.grammar[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
-  await room.getByRole('button',{name:i===15?'完成这一站':'下一题',exact:true}).click();
+  await courseButton(room, i===15?"finishPractice":'下一题').click();
  }
  const book=await page.evaluate(()=>JSON.parse(localStorage.getItem('canran:unit19-20:learning:v1')));
  expect(book.records['u1920-tasks-v4-be-subject'].revealed).toBe(true);expect(book.records['u1920-v1-be-adjective'].revealed).toBe(true);

@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const { isFeedbackAudio } = require('../support/course-resource-urls');
 const {test,expect}=require('@playwright/test');
@@ -10,7 +11,7 @@ test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('挑战错答与提示分别记账，刷新续做保留选择，不提前发证',async({page})=>{
   await page.goto('/unit15-16/#learn/exam');const room=page.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});
   await room.getByRole('button',{name:'朋友：Norwegian；身份：tourists',exact:true}).click();await check.click();
-  await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
+  await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'朋友：Russian；身份：tourists',exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();
   await room.getByRole('button',{name:'给点线索',exact:true}).click();await room.getByRole('button',{name:"Yes, they are.",exact:true}).click();
   await expect(room.getByRole('button',{name:'暂停，稍后继续',exact:true})).toHaveCount(0);await page.reload();await expect(room.getByRole('button',{name:'继续挑战',exact:true})).toHaveCount(0);
@@ -36,7 +37,7 @@ test('正误和完成反馈音实际播放结束，任何英语声音请求和�
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('incorrect')&&x.ended))).toBe(true);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:'朋友：Russian；身份：tourists',exact:true}).click();await check.click();
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('correct')&&!x.src.includes('incorrect')&&x.ended))).toBe(true);
-  await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"Yes, we are.",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+  await room.getByRole('button',{name:'下一题',exact:true}).click();await room.getByRole('button',{name:"Yes, we are.",exact:true}).click();await check.click();await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await room.getByRole('button',{name:"Yes, they are.",exact:true}).click();await check.click();await room.getByRole('button',{name:'下一题',exact:true}).click();await finishExamFrom(page,2);
   await expect.poll(()=>page.evaluate(()=>soundEvents.some(x=>x.src.includes('complete')&&x.ended))).toBe(true);
   expect(voices).toEqual([]);expect(speechCalls).toBe(0);
@@ -60,7 +61,7 @@ test('首页续学、同一位置继续冒险、重开取消与确认均遵守�
   await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(room.getByRole('heading').first()).toBeInViewport();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);await page.getByRole('link',{name:'继续学习：护照小检查站',exact:true}).click();
   await expect(page).toHaveURL(/#learn\/reply$/);await expect(room.getByRole('button',{name:"Yes, we are.",exact:true})).toHaveAttribute('aria-pressed','true');
-  await page.goto('/lesson/unit15-16/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+  await page.goto('/lesson/unit15-16/#learn/words');await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
   for(const confirm of [false,true]){
     await page.getByRole('button',{name:'设备冒险设置',exact:true}).click();await page.getByRole('button',{name:'重开冒险',exact:true}).click();await page.getByRole('button',{name:'继续确认',exact:true}).click();
@@ -74,7 +75,7 @@ test('首页续学、同一位置继续冒险、重开取消与确认均遵守�
 
 test('更新一道理解题只失效对应活动，不清除词卡位置、其他练习和拼句草稿',async({page})=>{
   await completeStory(page);await completeActivity(page,'roles');await completeActivity(page,'reply');
-  await page.goto('/unit15-16/#learn/words');await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
+  await page.goto('/unit15-16/#learn/words');await courseButton(page.locator('.stage-words'), "nextWords").click();
   await page.goto('/unit15-16/#learn/trans');await page.locator('.stage-trans').getByRole('group',{name:'待选词块',exact:true}).getByRole('button',{name:'Are',exact:true}).click();
   await page.route('**/unit15-16/content.js*',async route=>route.fulfill({contentType:'text/javascript',body:(await fs.readFile('tests/fixtures/unit15-16-before-fivezones/content.js','utf8')).replace("q('story-friends',","q('story-friends-v2',")}));
   await page.goto('/unit15-16/#learn/roles');await page.reload();await expect(page.locator('#starCount')).toHaveText('4');

@@ -1,0 +1,29 @@
+{
+  "id": "forest-litter-v2",
+  "unit": "unit143-144",
+  "transparent": true,
+  "refs": [
+    "assets/unit143-144/keepsake-story-v1.webp",
+    "output/story-book-review/litter-reference.png"
+  ],
+  "prompt": "Create a wide 3:1 transparent-background foreground prop strip for a children's picture-book forest. Match the original keepsake's softly painted warm brown outlines and textures. Preserve the four litter categories in reference2: a small crumpled white paper on LEFT, an empty pale green glass bottle leaning diagonally near left-middle, one discarded dark rubber tyre lying flat near right-middle, and an empty rusted tin can on RIGHT. Each object fully visible, separated with clear alpha between them, no overlap, similar visual weight. No trees, no people, no bins, no text, no rectangle, no ground patch, no external white glow. True transparent alpha, no white or gray background. All objects sit on a consistent shallow ground plane with subtle intrinsic shading only; keep generous transparent margins. Do not turn the glass bottle into a drink full of liquid.",
+  "output_hint": "Generated images are saved to C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1 as C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-b7a796b6-ba6f-430b-b972-276b75b21da7.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.",
+  "tool": "built-in image_gen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-b7a796b6-ba6f-430b-b972-276b75b21da7.png",
+  "raw": "assets/learning-whole-book-v1/raw/forest-litter-v2.png",
+  "adopted": "assets/unit143-144/forest-litter-v2.webp",
+  "status": "adopted-local-preview",
+  "alphaReview": "Actual alpha and cream-background composition inspected; built-in preview RGB haze is outside fully transparent alpha.",
+  "sha256": "dd4de4e5b2832242085ddfe6f5f16e9f782198a23ee056c3255ff71b7c3e1f3b",
+  "screenEvidence": [
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/first-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/middle-chrome-iphone-16-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-se.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-14-pro-max.jpg",
+    "docs/designs/learning-flow/evidence/2026-11-15-all-theatres/unit143-144/last-chrome-iphone-16-pro-max.jpg"
+  ]
+}

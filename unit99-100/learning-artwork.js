@@ -1,0 +1,46 @@
+/* Display mappings only; visual acceptance is tracked in assets/word-art-v2/adoptions.json. */
+CanranCore.learningWordArtwork={
+  "ow": "/assets/learning-words/unit99-100/ow-db591564.svg",
+  "slip": "/assets/learning-words/unit99-100/slip-8ef78f48.svg",
+  "fall": "/assets/learning-words/unit99-100/fall-5c6bdaf2.svg",
+  "downstairs": "/assets/learning-words/unit99-100/downstairs-cfe6a3d6.svg",
+  "hurt": "/assets/learning-words/unit99-100/hurt-89cb879f.svg",
+  "back": "/assets/learning-words/unit99-100/back-cdc09c24.svg",
+  "help": "/assets/learning-words/unit99-100/help-0ab45f3a.svg",
+  "at once": "/assets/learning-words/unit99-100/at-once-6a80cf0d.svg",
+  "sure": "/assets/learning-words/unit99-100/sure-fdb6d5b8.svg",
+  "X-ray": "/assets/learning-words/unit99-100/x-ray-c646ca8b.svg",
+  "licence": "/assets/learning-words/unit99-100/licence-13e87e7f.svg",
+  "fell": "/assets/learning-words/unit99-100/fall-5c6bdaf2.svg",
+  "fallen": "/assets/learning-words/unit99-100/fall-5c6bdaf2.svg",
+  "tired": "/assets/word-art-v2/sample13-24/tired-v1.webp",
+  "thirsty": "/assets/word-art-v2/sample13-24/thirsty-v1.webp",
+  "ill": "/assets/learning-words/unit99-100/ill-85cbd95c.svg",
+  "a cold": "/assets/learning-words/unit99-100/a-cold-7394bc4f.svg",
+  "a headache": "/assets/word-art-v2/whole-book/headache-v1.webp",
+  "an earache": "/assets/word-art-v2/whole-book/earache-v1.webp",
+  "a toothache": "/assets/word-art-v2/whole-book/toothache-v1.webp",
+  "a haircut": "/assets/learning-words/unit99-100/haircut-9f59b70b.svg",
+  "some money": "/assets/learning-words/unit99-100/money-d3d4c76c.svg",
+  "wait": "/assets/learning-words/unit99-100/wait-d310c6fc.svg",
+  "catch": "/assets/unit11-12/cast-catch-v1.webp",
+  "repair": "/assets/learning-words/unit99-100/repair-372cfb53.svg",
+  "sell": "/assets/learning-words/unit99-100/sell-1cc004cb.svg",
+  "say": "/assets/learning-words/unit99-100/say-8edb971c.svg",
+  "think": "/assets/learning-words/unit99-100/think-bad676b4.svg",
+  "believe": "/assets/learning-words/unit99-100/believe-bbeacfbf.svg",
+  "know": "/assets/learning-words/unit99-100/know-b544ec4e.svg",
+  "understand": "/assets/learning-words/unit99-100/understand-f38514b4.svg",
+  "afraid": "/assets/learning-words/unit99-100/afraid-17ec364a.svg",
+  "sorry": "/assets/learning-words/unit99-100/sorry-96f325ef.svg",
+  "cold": "/assets/word-art-v2/sample1-12/cold-v1.webp"
+};
+CanranCore.learningWordPresentation={
+  "tired": "illustration",
+  "thirsty": "illustration",
+  "cold": "illustration",
+  "a headache": "illustration",
+  "an earache": "illustration",
+  "a toothache": "illustration"
+};
+CanranCore.learningQuestionArtwork={};

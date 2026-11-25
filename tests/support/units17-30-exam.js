@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('./course-controls');
 const{expect}=require('@playwright/test');
 // Reviewed teaching blueprint answers; never read an answer from the running page.
 const EXAMS={
@@ -134,7 +135,7 @@ for(const pair of Object.keys(EXAMS))EXAMS[pair]=taskCases.answers(pair,'exam').
 EXAMS['25-26'][5]={fills:['an','The']};
 async function selectAnswer(room,answer){await taskCases.select(room,answer);}
 async function finishExamFrom(page,pair,start=0){const room=page.locator('.stage-exam'),answers=EXAMS[pair];
- for(let i=start;i<answers.length;i++){await selectAnswer(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText('答对了！');await room.getByRole('button',{name:i===answers.length-1?'查看本次记录':'下一题',exact:true}).click();}
+ for(let i=start;i<answers.length;i++){await selectAnswer(room,answers[i]);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toHaveText('答对了！');await courseButton(room, i===answers.length-1?"finishExam":'下一题').click();}
 }
 async function expectPagedTexts(room,selector,expected,label='图册'){
  const seen=[],next=room.getByRole('button',{name:'下一页'+label,exact:true}),prev=room.getByRole('button',{name:'上一页'+label,exact:true});

@@ -1,0 +1,26 @@
+/* Lesson 1–2 scene geometry; common learning UI is in core/learning-flow.css. */
+body[data-learning-shell] #lessonWorkspace .street-stage .quest-portrait{--quest-person-height:94px}
+body[data-learning-shell] #lessonWorkspace .street-stage .quest-person-target>.quest-portrait{--quest-person-height:78px}
+body[data-learning-shell] #lessonWorkspace .street-stage .quest-portrait>.quest-bag-slot{left:0;right:auto;top:41%;bottom:auto;width:51%;height:34%}
+body[data-learning-shell] #lessonWorkspace .stage-text.learning-surface #unit12-dialogue{position:relative;flex:1;min-height:0;height:auto;max-height:var(--story-scene-max);width:100%;max-width:none;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:minmax(90px,1fr) calc(var(--story-person-height) + 20px);gap:8px;padding:12px;margin:0;border:1px solid var(--learning-line);border-radius:22px;box-shadow:0 5px 20px #5a402709;align-items:end;box-sizing:border-box}
+body[data-learning-shell] #unit12-dialogue .dialogue-log{grid-row:1;grid-column:1/-1;width:100%;height:100%;min-height:0;padding:4px 12px;border:0;background:transparent;border-radius:14px;scroll-behavior:auto;scrollbar-gutter:stable}
+body[data-learning-shell] #unit12-dialogue .dialogue-actor{position:relative;grid-row:2;justify-self:center;align-self:end;width:calc(var(--story-person-height) * .667);max-width:none;font-size:13px;line-height:20px}
+body[data-learning-shell] #unit12-dialogue .dialogue-actor[data-actor='man']{grid-column:1}
+body[data-learning-shell] #unit12-dialogue .dialogue-actor[data-actor='woman']{grid-column:2}
+body[data-learning-shell] #unit12-dialogue .dialogue-actor>img:not(.dialogue-handbag){display:block;width:100%;height:var(--story-person-height);max-width:none;object-fit:contain;object-position:bottom}
+body[data-learning-shell] #unit12-dialogue>.dialogue-handbag{position:absolute;left:50%;right:auto;top:auto;bottom:42px;width:56px;height:56px;margin-left:-28px;object-fit:contain;transform:none}
+body[data-learning-shell] #unit12-dialogue .dialogue-actor>.dialogue-handbag{position:absolute;left:0;right:auto;top:calc(var(--story-person-height) * .41);bottom:auto;width:calc(var(--story-person-height) * .34);height:calc(var(--story-person-height) * .34);max-width:none;object-fit:contain;transform:none;z-index:3}
+body[data-learning-shell] #unit12-dialogue .bubble-row{margin-bottom:8px;animation:none}
+body[data-learning-shell] #unit12-dialogue .bubble{border:1px solid #d6c9b4;border-radius:14px;padding:8px 10px;box-shadow:none;max-width:96%}
+body[data-learning-shell] #unit12-dialogue .btext{font-size:18px;line-height:1.35;min-height:26px;padding:2px 0}
+body[data-learning-shell] #unit12-dialogue .bcn{font-size:15px;line-height:1.4;margin:4px 0}
+body[data-learning-shell] #unit12-dialogue .bbtns{margin-top:4px}
+body[data-learning-shell] #unit12-dialogue .bbtns .btn{min-height:44px;font-size:13px;padding:3px 12px;border:0;background:#efe7d5;box-shadow:none;border-radius:10px}
+@media(min-width:700px),(orientation:landscape) and (max-height:480px){
+ body[data-learning-shell] #lessonWorkspace .stage-text.learning-surface #unit12-dialogue{grid-template-columns:calc(var(--story-person-height) * .667) minmax(0,1fr) calc(var(--story-person-height) * .667);grid-template-rows:minmax(0,1fr)}
+ body[data-learning-shell] #unit12-dialogue .dialogue-log{grid-column:2;grid-row:1;align-self:start;height:calc(100% - 64px)}
+ body[data-learning-shell] #unit12-dialogue .dialogue-actor{grid-row:1}
+ body[data-learning-shell] #unit12-dialogue .dialogue-actor[data-actor='woman']{grid-column:3}
+ body[data-learning-shell] #unit12-dialogue>.dialogue-handbag{bottom:14px}
+}
+@media(orientation:landscape) and (max-height:480px){body[data-learning-shell] #lessonWorkspace .learning-surface.stage-text{--story-person-height:92px}body[data-learning-shell] #unit12-dialogue .dialogue-log{height:calc(100% - 48px)}body[data-learning-shell] #unit12-dialogue>.dialogue-handbag{left:50%;bottom:12px;width:36px;height:36px;margin-left:-18px}}

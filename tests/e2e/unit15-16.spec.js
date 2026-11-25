@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { DIALOGUE, SPEAKERS, ANSWERS, completeStory, completeActivity, completeUnit1516 } = require('../support/unit15-16-flow');
 test.use({ reducedMotion: 'reduce', actionTimeout: 5000 });
@@ -11,7 +12,7 @@ test('从导航进入护照小检查站，先看有音标的词卡，翻义无�
   await page.getByRole('link', { name: '开始学习：护照小检查站', exact: true }).click();
   await expect(page).toHaveURL(/\/unit15-16\/#learn\/words$/);
   const room = page.getByRole('region', { name: '出行小图鉴', exact: true });
-  await expect(room.getByRole('button', { name: '上一组词卡', exact: true })).toBeDisabled();
+  await expect(courseButton(room, "previousWords")).toBeDisabled();
   const card = room.getByRole('button', { name: 'customs', exact: true });
   await expect(card).toContainText('/ˈkʌstəmz/');
   await card.click(); await expect(card.locator('.word-meaning')).toHaveText('本课：海关');
@@ -59,7 +60,7 @@ test('从首页进入护照小检查站，25张音标词卡可翻义翻页，全
   const atlas = page.getByRole('region', { name: '出行小图鉴', exact: true });
   const words = ['customs','officer','girl','Danish','friend','Norwegian','passport','brown','tourist','Russian','Dutch','these','red','grey','yellow','black','orange','customs officer','we','our','they','Swedish','English','American','case'];
   const phonetics = ['/ˈkʌstəmz/','/ˈɑːfɪsɚ/','/ɡɝːl/','/ˈdeɪnɪʃ/','/frend/','/nɔːrˈwiːdʒən/','/ˈpæspɔːrt/','/braʊn/','/ˈtʊrɪst/','/ˈrʌʃən/','/dʌtʃ/','/ðiːz/','/red/','/ɡreɪ/','/ˈjeloʊ/','/blæk/','/ˈɔːrɪndʒ/','/ˈkʌstəmz ˌɑːfɪsɚ/','/wiː/','/ˈaʊər/','/ðeɪ/','/ˈswiːdɪʃ/','/ˈɪŋɡlɪʃ/','/əˈmerɪkən/','/keɪs/'];
-  await expect(atlas.getByRole('button', { name: '上一组词卡', exact: true })).toBeDisabled();
+  await expect(courseButton(atlas, "previousWords")).toBeDisabled();
   for (let p = 0; p < 5; p++) {
     for (let i = p * 6; i < Math.min(p * 6 + 6, words.length); i++) {
       const card = atlas.getByRole('button', { name: words[i], exact: true });
@@ -68,7 +69,7 @@ test('从首页进入护照小检查站，25张音标词卡可翻义翻页，全
       await card.click(); await expect(card.locator('.word-meaning')).toBeVisible();
       await card.click(); await expect(card.locator('.word-meaning')).toBeHidden();
     }
-    if (p < 4) await atlas.getByRole('button', { name: '下一组词卡', exact: true }).click();
+    if (p < 4) await courseButton(atlas, "nextWords").click();
   }
   await page.reload(); await expect(atlas).toContainText('5 / 5');
   await atlas.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
@@ -88,14 +89,14 @@ test('8组练习覆盖11个新词，错答可改，最后三题刷新不代答�
     await expect(room.locator('.practice-options [aria-pressed="true"]')).toHaveCount(0);
     if(i===0) {
       await room.getByRole('button',{name:'风俗',exact:true}).click(); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow','0');
       await room.getByRole('button',{name:'再试一次',exact:true}).click();
     }
     await require('../support/units1-30-tasks').select(room,answer); await check.click();
     await expect(room.getByRole('status')).toContainText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow',String(i+1));
-    await room.getByRole('button',{name:i===7?'完成这一站':'下一题',exact:true}).click();
+    await courseButton(room, i===7?"finishPractice":'下一题').click();
   }
   await expect(page.locator('#starCount')).toHaveText('3');
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
@@ -113,7 +114,7 @@ test('无音频时逐句读完18句原文，历史中文可展开，刷新续读
   const room = page.getByRole('region',{name:'海关小剧场',exact:true});
   await expect(room).toContainText('最后，海关检查顺利吗？');
   for(let i=0;i<DIALOGUE.length;i++) {
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     await expect(room.locator('.btext span')).toHaveText(DIALOGUE.slice(0,i+1));
     await expect(room.locator('.bname')).toHaveText(SPEAKERS.slice(0,i+1));
     await expect(room.locator('.dialogue-actor.is-current')).toHaveText(SPEAKERS[i]);
@@ -127,7 +128,7 @@ test('无音频时逐句读完18句原文，历史中文可展开，刷新续读
   }
   await expect(room.locator('.btext button')).toHaveCount(0);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();
+  await courseButton(room, "finishStory").click();
   await expect(room.getByRole('group',{name:'完成后的操作',exact:true}).getByRole('button')).toHaveCount(2);
   await expect(page.locator('#starCount')).toHaveText('1');
   await room.getByRole('button',{name:'下一站：故事小侦探',exact:true}).click();

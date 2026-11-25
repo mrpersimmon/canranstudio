@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,restoredPracticeIndex}=require('./course-controls');
 const {expect}=require('@playwright/test');
 const legacy=require('./units1-30-tasks');
 // Independent transcription of the reviewed teaching draft; no runtime answers.
@@ -28,17 +29,20 @@ async function select(room,answer){
 async function story(page,pair,base=''){
  await page.goto(`${base}/unit${pair}/#learn/text`);const room=page.locator('.stage-text');
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
- if(await room.getByRole('button',{name:pair==='1-2'?/^(重看故事|再看一遍)$/: '再看一遍',exact:true}).isVisible())return;
- if(await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).isVisible())await room.getByRole('button',{name:pair==='1-2'?/^(开始故事|开始看课文)$/: '开始看课文',exact:true}).click();
+ if(await room.locator(':scope > .practice-finish').isVisible())return;
+ const legacyFirst=pair==='1-2'&&!await page.locator('body[data-learning-shell]').count();
+ const start=legacyFirst?room.locator('.stage-ctrl').getByRole('button',{name:/^(开始故事|开始看课文)$/}):courseButton(room,'startStory');
+ if(await start.isVisible())await start.click();
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
- await room.getByRole('button',{name:pair==='1-2'?/^(读完了|完成课文)$/: '完成课文',exact:true}).click();
+ const end=legacyFirst?room.locator('.stage-ctrl').getByRole('button',{name:/^(读完了|完成课文)$/}):courseButton(room,'finishStory');
+ await end.click();
 }
 async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
  if(navigate)await page.goto(`${base}/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),items=ANSWERS[pair][id];
  await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing','',{timeout:30000});await expect(room).toBeVisible();
- if(await room.locator('.practice-finish').isVisible())return;
- const first=Number((await room.locator('.progress-copy').innerText()).match(/第 (\d+)/)[1])-1;
+ const first=await restoredPracticeIndex(room,room.locator('.practice-finish:visible'));
+ if(first===null)return;
  for(let i=first;i<items.length;i++){
   const check=room.getByRole('button',{name:'检查答案',exact:true});
   // A new scene can briefly hide its controls while the next question renders.
@@ -51,7 +55,12 @@ async function activity(page,pair,id,{base='',capture,keepAward=false,navigate=t
   }
   await expect(room.locator('.fb')).toHaveText('答对了！');
   if(capture)await capture(room,i,'correct');
-  await room.getByRole('button',{name:i===items.length-1?(pair==='1-2'?(id==='exam'?'完成挑战':'完成这一组'):(id==='exam'?'查看本次记录':'完成这一站')):'下一题',exact:true}).click();
+  let advance='下一题';
+  if(i===items.length-1){
+   advance=id==='exam'?'finishExam':'finishPractice';
+   if(pair==='1-2'&&!await page.locator('body[data-learning-shell]').count())advance=id==='exam'?'完成挑战':'完成这一组';
+  }
+  await courseButton(room,advance).click();
  }
  // The two actions are prepared in the DOM, but are intentionally inaccessible
  // while the keepsake owns the foreground. Callers may keep that card open.

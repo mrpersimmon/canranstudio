@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const previous = require('../support/unit12-grammar-predecessor');
@@ -13,7 +14,7 @@ test('前版27题已完成：语法新题从空白开始，八道未改综合题
     for (const [index, answer] of items.entries()) {
       await flow.select(room, answer); await room.getByRole('button', { name: '检查答案', exact: true }).click();
       await expect(room.locator('.fb')).toHaveText('答对了！');
-      await room.getByRole('button', { name: index < items.length - 1 ? '下一题' : id === 'exam' ? '查看本次记录' : '完成这一站', exact: true }).click();
+      await courseButton(room, index < items.length - 1 ? '下一题' : id === 'exam' ? "finishExam" : "finishPractice").click();
     }
   }
   await page.goto('/unit1-2/#learn/certificate');
@@ -28,7 +29,7 @@ test('前版27题已完成：语法新题从空白开始，八道未改综合题
     await page.goto(`/unit1-2/#learn/${id}`); const room = page.locator('.stage-' + id);
     await expect(room.locator('.progress-copy')).toHaveText(count);
     await expect(room.getByRole('button', { name: '检查答案', exact: true })).toBeDisabled();
-    await expect(room.locator('.fb')).toBeEmpty();
+    await expect(room.locator('.fb')).toHaveText(/^(本组每题一次答对，可点亮一颗星。)?$/);
   }
   await flow.complete(page, '1-2');
   expect(await page.evaluate(() => { const a=JSON.parse(localStorage.getItem('canran:unit1-2:learning:v1')).activity; return [a.unitName,a.unitCertificateIssuedAt]; })).toEqual(metadata);

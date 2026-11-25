@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectNoVerdict,incorrectFeedback}=require('../support/course-controls');
 const {reloadWithLatestCheck}=require('../support/offline-reentry');
 const { test, expect } = require('@playwright/test');
 const { EXAM, selectAnswer } = require('../support/unit7-8-exam');
@@ -20,7 +21,7 @@ test('十一题综合挑战逐项作答，冠词与缩写确实需要选择，�
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i));
     if (i === 0) {
       await selectAnswer(room, EXAM[i].wrong); await check.click();
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await expect(room.getByRole('button', { name: '下一题', exact: true })).toBeHidden();
       await expect(room.locator('.practice-options .correct')).toHaveCount(0);
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
@@ -33,7 +34,7 @@ test('十一题综合挑战逐项作答，冠词与缩写确实需要选择，�
     await selectAnswer(room, EXAM[i].answer); await check.click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
     await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', String(i + 1));
-    await room.getByRole('button', { name: i === 10 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === 10 ? "finishExam" : '下一题').click();
   }
   await expect(room).toContainText('首次独立答对 9 / 11');
   await expect(room).toContainText('提示后完成 1 题 · 修正后完成 1 题');
@@ -93,7 +94,7 @@ test('旧未提交选择升级仍是草稿，新增拼句刷新与暂停不代�
   await selectAnswer(room, EXAM[1].answer);
   upgrade(); await page.reload();
   await expect(room.getByRole('button', { name: EXAM[1].answer, exact: true })).toHaveAttribute('aria-pressed', 'true');
-  await expect(room.getByRole('status')).toBeEmpty();
+  await expectNoVerdict(room.getByRole('status'));
   await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '1');
   await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
   await selectAnswer(room, EXAM[2].answer); await room.getByRole('button', { name: '检查答案', exact: true }).click(); await room.getByRole('button', { name: '下一题', exact: true }).click();
@@ -135,9 +136,9 @@ for (const width of [320, 390, 768, 1280]) test(`${width} 十一题长题干、�
     if (i === 10) {
       await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '11');
       await page.reload(); await expect(room.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '11');
-      await expect(room.getByRole('button', { name: '查看本次记录', exact: true })).toBeVisible();
+      await expect(courseButton(room, "finishExam")).toBeVisible();
     }
-    await room.getByRole('button', { name: i === 10 ? '查看本次记录' : '下一题', exact: true }).click();
+    await courseButton(room, i === 10 ? "finishExam" : '下一题').click();
   }
   await expect(room).toContainText('首次独立答对 10 / 11');
   const finish = room.getByRole('group', { name: '完成后的操作', exact: true });

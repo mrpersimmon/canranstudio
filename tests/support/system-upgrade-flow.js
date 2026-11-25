@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,readyCourse}=require('./course-controls');
 const { expect } = require('@playwright/test');
 const first = require('./thirteen-types-flow');
 const paired = require('./units1-30-tasks');
@@ -8,7 +9,7 @@ async function ready(page) {
   await expect(page.locator('#courseLoader')).toHaveCount(0, { timeout: 30000 });
   await expect(page.locator('html')).not.toHaveAttribute('data-course-preparing', '');
   await expect(page.locator('html')).not.toHaveAttribute('data-course-painting', '');
-  await expect(page.locator('#wordPageProgress')).toBeVisible({ timeout: 30000 });
+  await readyCourse(page);
 }
 async function waitSynced(page) {
   await expect(page.locator('#studentSyncStatus')).toHaveText(/^(已同步|学习成果已同步)$/, { timeout: 15000 });
@@ -60,9 +61,12 @@ async function finishOpenCarsOffline(page) {
     await paired.select(room, question.answer);
     await room.getByRole('button', { name: '检查答案', exact: true }).click();
     await expect(room.getByRole('status')).toHaveText('答对了！');
-    await room.getByRole('button', { name: index === answers.length - 1 ? '完成这一站' : '下一题', exact: true }).click();
+    await courseButton(room, index === answers.length - 1 ? "finishPractice" : '下一题').click();
   }
-  await expect(page.getByRole('dialog', { name: /纪念卡结算/ })).not.toBeVisible();
+  const reward=page.getByRole('dialog',{name:/纪念卡结算/});
+  await expect(reward).toBeVisible();
+  await dismissRewardDialog(page);
+  await expect(reward).toBeHidden();
   await expect(page.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state', 'retry');
   return page.evaluate(() => {
     const access = CanranStudentAccess, prefix = CanranSystemUpgrade.namespace(access.student.id, access.systemUpgrade);

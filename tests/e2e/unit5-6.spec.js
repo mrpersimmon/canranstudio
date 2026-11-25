@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {directoryReady}=require('../support/directory-ready');
 const { test, expect } = require('@playwright/test');
 const { completeUnit56 } = require('../support/unit5-6-flow');
@@ -32,7 +33,7 @@ test('纸笔练习保留四组指代与十组替换，实际打印三页 A4 并�
 
 test('真实完成20句和36题获得五星，日期固定、重练连续，各单元记录独立',async({page})=>{
  test.setTimeout(200000);const errors=[];page.on('pageerror',e=>errors.push(e.message));await completeUnit56(page);
- const card=page.getByRole('article',{name:'我的单元纪念卡'});await expect(card.getByRole('img',{name:'布莱克先生和苏菲、汉斯在教室见面'})).toBeVisible();
+ const card=page.getByRole('region',{name:'我的单元纪念卡',exact:true}).getByRole('article',{name:'我的纪念卡',exact:true});await expect(card.getByRole('img',{name:'布莱克先生和苏菲、汉斯在教室见面'})).toBeVisible();
  await expect(page.getByRole('textbox',{name:'证书上的名字'})).toHaveCount(0);await expect(page.getByRole('button',{name:'保存动图',exact:true})).toBeDisabled();
  const date=await page.locator('#certificateDate').innerText();
  for(const width of [320,390,768,1280]){await page.setViewportSize({width,height:844});expect(await card.evaluate(el=>el.scrollWidth<=el.clientWidth+1)).toBe(true);}
@@ -54,7 +55,7 @@ test('新单元从图鉴开始，24 个词的音标与翻面可见，末组主�
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('/frentʃ/');
   await words.getByRole('button', { name: 'French', exact: true }).click();
   await expect(words.getByRole('button', { name: 'French', exact: true })).toContainText('法国');
-  for (let i = 0; i < 3; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  for (let i = 0; i < 3; i++) await courseButton(words, "nextWords").click();
   await expect(words.locator('.unit-word')).toHaveCount(6);
   await expect(words.locator('.word-phonetic')).toHaveCount(6);
   await words.getByRole('button', { name: '下一站：单词寻宝', exact: true }).click();
@@ -69,8 +70,8 @@ test('首页与 lesson 子目录有新单元入口，独立继续并保留资源
   await page.getByRole('link',{name:'开始学习：新朋友见面会',exact:true}).click();
   await expect(page).toHaveURL(/\/lesson\/unit5-6\/#learn\/words$/);
   await expect(page.locator('#starCount')).toHaveText('0');
-  await page.locator('.stage-words').getByRole('button',{name:'下一组词卡',exact:true}).click();
-  await page.getByRole('link',{name:'介绍有办法',exact:true}).click();
+  await courseButton(page.locator('.stage-words'), "nextWords").click();
+  await page.getByRole('link',{name:'语法',exact:true}).click();
   await page.locator('.stage-introduce').getByRole('button',{name:"It's a Toyota.",exact:true}).click();
   await page.getByRole('link',{name:'我的课程',exact:true}).click();await directoryReady(page);
   await expect(page.getByRole('link',{name:'继续学习：新朋友见面会',exact:true})).toHaveAttribute('href','/lesson/unit5-6/#learn/introduce');
@@ -87,7 +88,8 @@ test('题目升版不承接旧选择，未改活动保留；同地址继续仍�
   await page.goto('/unit5-6/#learn/refer');const refer=page.locator('.stage-introduce');
   await refer.getByRole('button',{name:"It's a Toyota.",exact:true}).click();await refer.getByRole('button',{name:'检查答案',exact:true}).click();
   await page.goto('/unit5-6/#learn/choice');const articles=page.locator('.stage-cars');await articles.getByRole('button',{name:"It's a Volvo.",exact:true}).click();
-  await page.locator('#startBtn').scrollIntoViewIfNeeded();await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(articles.getByRole('heading').first()).toBeInViewport();
+  await page.getByRole('button',{name:'更多学习操作',exact:true}).click();await page.getByRole('button',{name:'课程封面',exact:true}).click();
+  await page.getByRole('button',{name:'继续冒险',exact:true}).click();await expect(articles.locator('.practice-content h3')).toBeInViewport();
   await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');
   await page.route('**/unit5-6/content.js*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace("q('wh-meaning'","q('wh-meaning-revised'")});});
   await page.reload();await expect(articles.getByRole('button',{name:"It's a Volvo.",exact:true})).toHaveAttribute('aria-pressed','true');

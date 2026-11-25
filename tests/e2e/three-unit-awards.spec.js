@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 require('../support/classroom-history').historicalSuite(test);
 const tasks=require('../fixtures/classroom-before-fivezones/tests/support/units1-30-tasks');
@@ -25,11 +26,14 @@ for(const pair of ['3-4','5-6'])test(`${pair} 五答题区整轮零错才获星�
  const id=pair==='3-4'?'listen':'introduce',wrong=pair==='3-4'?'ticket':'He';
  await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id);
  await room.getByRole('button',{name:wrong,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();
- await expect(room.getByRole('status')).toHaveText('再看看，试一次。');await room.getByRole('button',{name:'再试一次',exact:true}).click();await tasks.activity(page,pair,id);
+ await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));await room.getByRole('button',{name:'再试一次',exact:true}).click();await tasks.activity(page,pair,id);
  await expect(page.locator('#starCount')).toHaveText('0');await expect(room.locator('.award-round-result')).toContainText('本轮有过错答');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await tasks.activity(page,pair,id);await expect(page.locator('#starCount')).toHaveText('1');
  await room.getByRole('button',{name:'再练一轮',exact:true}).click();await room.getByRole('button',{name:wrong,exact:true}).click();await room.getByRole('button',{name:'检查答案',exact:true}).click();await page.reload();await expect(page.locator('#starCount')).toHaveText('1');
- await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await page.getByText('星星进度',{exact:true}).click();await expect(page.getByRole('list',{name:'五星任务'}).getByRole('listitem')).toHaveCount(5);
+ await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#certificateDate')).toBeHidden();await expect(page.locator('.story-award-tasks')).toHaveCount(0);await expect(page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','1');
+ await expect(page.locator('.stage-certificate').getByRole('group',{name:'已获得 1 / 5 颗星',exact:true})).toBeVisible();
+ const zones=await page.evaluate(()=>Object.keys(CanranCore.lesson49Practice.activity('unitAwardClaims')||{}));
+ expect(zones).toEqual([id]);
 });
 
 for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留完成记录和旧证书，新版星星须重练`,async({page})=>{
@@ -44,7 +48,7 @@ for(const pair of ['3-4','5-6'])test(`${pair} 发卡前真实当前题目保留�
   await page.goto(`/unit${pair}/#learn/${id}`);const room=page.locator('.stage-'+id),questions=frozen.changes.find(change=>change.group===id)?.answers||frozen.old[id];
   for(const [index,q] of questions.entries()){
    await tasks.select(room,q.answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
-   await room.getByRole('button',{name:index===questions.length-1?(id==='exam'?'查看本次记录':'完成这一站'):'下一题',exact:true}).click();
+   await courseButton(room, index===questions.length-1?(id==='exam'?"finishExam":"finishPractice"):'下一题').click();
   }
  }
  await page.goto(`/unit${pair}/#learn/certificate`);await expect(page.locator('#starCount')).toHaveText('15');await page.getByRole('textbox',{name:'证书上的名字',exact:true}).fill('旧卡姓名');await page.getByRole('button',{name:'领取单元证书',exact:true}).click();const date=await page.locator('#certificateDate').innerText();await page.keyboard.press('Escape');

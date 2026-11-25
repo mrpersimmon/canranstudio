@@ -14,7 +14,7 @@ test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗
     }, true);
     if (!location.pathname.endsWith('/unit1-2/')) return;
     const sample = () => {
-      const card = document.querySelector('.stage-words .unit-word');
+      const card = document.querySelector('.learning-surface.stage-words .unit-word');
       if (card && !card.disabled && card.checkVisibility({ visibilityProperty: true, opacityProperty: true })
           && !document.querySelector('#courseLoader') && document.fonts.status === 'loaded'
           && [...document.images].every(image => !image.getAttribute('src') || image.complete && image.naturalWidth > 0)) {
@@ -32,13 +32,20 @@ test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗
   await page.goto('/lesson/', { waitUntil: 'domcontentloaded' });
   const entry = page.locator('a[href="/lesson/unit1-2/#learn/words"]');
   await expect(entry).toBeVisible({ timeout: 30000 });
+  const requestedObjects = new Set();
+  context.on('request', request => {
+    const pathname = new URL(request.url()).pathname;
+    if (pathname.startsWith('/lesson/resources/')) requestedObjects.add(pathname);
+  });
   const report = { browser: browser.version(), cpu: os.cpus()[0].model, downMbps: 10, latencyMs: 150,
     from: 'prepared navigation', target: 'unit1-2', trace: false,
     timing: 'actual click to fully usable rendered frame', elapsedMs: null, driverElapsedMs: null };
   try {
     const start = Date.now();
     await entry.click();
-    await expect(page.getByRole('heading', { name: '单词小图鉴', exact: true })).toBeVisible({ timeout: 30000 });
+    const firstCard = page.locator('.learning-surface.stage-words .unit-word').first();
+    await expect(firstCard).toBeVisible({ timeout: 30000 });
+    await expect(firstCard).toBeEnabled();
     report.driverElapsedMs = Date.now() - start;
     await page.waitForFunction(() => window.coldCourseUsableAt > 0);
     report.elapsedMs = await page.evaluate(() => window.coldCourseUsableAt);
@@ -46,6 +53,12 @@ test('固定 10 Mbps 与 150 毫秒环境记录首次点课到完整画面的耗
     // Include fonts, images, an enabled card and a rendered frame. Do not charge
     // Playwright's pre-click auto-wait or later assertion polling to the child.
     expect(report.elapsedMs).toBeLessThan(5000);
+    const embeddedIcons = await page.evaluate(async () => {
+      const course = await CanranCourseCache.open('/lesson/').current('unit1-2');
+      return course.required.filter(item => item.key.startsWith('/lesson/assets/lesson49/icons/') && item.svgParts).map(item => item.url);
+    });
+    expect(embeddedIcons.length).toBeGreaterThanOrEqual(30);
+    expect(embeddedIcons.filter(url => requestedObjects.has(url))).toEqual([]);
   } finally {
     const body = JSON.stringify(report, null, 2);
     await fs.writeFile(testInfo.outputPath('first-visit.json'), body);

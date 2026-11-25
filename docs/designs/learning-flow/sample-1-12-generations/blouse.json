@@ -1,0 +1,13 @@
+{
+  "id": "blouse",
+  "references": [
+    "assets/awards/unit1-2-handbag-closeup.webp",
+    "assets/awards/unit3-4-umbrella.webp"
+  ],
+  "transparent": true,
+  "prompt": "Use case: illustration-story. Create ONE educational vocabulary illustration of One soft dusty-rose women's blouse, small rounded collar, gently gathered shoulders and front buttons, full garment front view. No person or hanger. Match the supplied original keepsake references: warm dark-brown hand-drawn rounded contours, soft gouache-like flat fills, restrained painted volume, subtle paper grain, warm gentle lighting. Child-friendly illustrated storybook, not a flat UI symbol, photograph, 3D render or plastic toy. Centered in a square, entire subject occupies 74–82% of the frame, generous clear margin all around. Transparent background with clean alpha, no white halo, no card, no border, no text, no watermark. References provide style only; do not include their people or umbrella. Preserve clear semantic identification at phone vocabulary-card size.",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-7ca22454-b7ab-46a3-afa7-50aff1ca7992.png",
+  "raw": "assets/learning-sample-v1/raw/blouse.png",
+  "adopted": "assets/word-art-v2/sample1-12/blouse-v1.webp"
+}

@@ -1,11 +1,12 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 test.use({reducedMotion:'reduce',actionTimeout:5000});
 test('15–16 护照先递交，箱子先否认再指出另一对，刷新与重演不串场',async({page})=>{
  await page.goto('/unit15-16/#learn/text');const room=page.locator('.stage-text'),scene=room.locator('.customs-cast'),passports=scene.locator('.story-passports'),wrong=scene.locator('.story-other-cases'),own=scene.locator('.story-own-cases');
  await expect(scene).toHaveAttribute('data-phase','arrival');await expect(passports).toBeHidden();await expect(own).toBeHidden();
  for(let i=0;i<18;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+  await courseButton(room, i?'下一句':"startStory").click();
   if(i<6)await expect(passports).toBeHidden();else await expect(passports).toBeVisible();
   if(i===6)await expect(passports).toHaveAttribute('data-place','girls');
   if(i===7){await expect(passports).toHaveAttribute('data-place','counter');await page.reload();await expect(passports).toHaveAttribute('data-place','counter');}
@@ -14,7 +15,7 @@ test('15–16 护照先递交，箱子先否认再指出另一对，刷新与重
   if(i===11){await expect(own).toHaveAttribute('data-place','girls');await expect(wrong).toHaveAttribute('src',/cases-grey\.svg$/);}
   if(i<16)await expect(scene.locator('.customs-clear')).toBeHidden();else await expect(scene.locator('.customs-clear')).toBeVisible();
  }
- await room.getByRole('button',{name:'完成课文',exact:true}).click();await room.getByRole('button',{name:'再看一遍',exact:true}).click();await expect(scene).toHaveAttribute('data-phase','arrival');await expect(passports).toBeHidden();await expect(own).toBeHidden();
+ await courseButton(room, "finishStory").click();await courseButton(room, "replayStory").click();await expect(scene).toHaveAttribute('data-phase','arrival');await expect(passports).toBeHidden();await expect(own).toBeHidden();
 });
 test('15–16 画册每次一幅，共十五幅，翻页与刷新保留位置',async({page})=>{
  await page.goto('/unit15-16/#learn/models');const room=page.locator('.stage-models'),album=room.getByRole('group',{name:'当前出行图',exact:true});
@@ -27,7 +28,7 @@ for(const width of [320,390,768,1280])test(`${width} 对白与所有角色分区
  await page.setViewportSize({width,height:844});await page.goto('/unit15-16/#learn/text');const room=page.locator('.stage-text'),log=room.getByRole('log'),cast=room.locator('.customs-cast'),ctrl=room.locator('.stage-ctrl');
  const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
  for(let i=0;i<18;i++){
-  await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();expect(await top()).toBeCloseTo(before,0);
+  await courseButton(room, i?'下一句':"startStory").click();expect(await top()).toBeCloseTo(before,0);
   if([3,7,9,11,17].includes(i)){
    await log.locator('.bubble-row').last().getByRole('button',{name:'看中文',exact:true}).click();const b=await log.boundingBox(),cn=await log.locator('.bubble-row').last().locator('.bcn').boundingBox();expect(cn.y+cn.height).toBeLessThanOrEqual(b.y+b.height+.5);
    for(const figure of await cast.locator('.dialogue-actor,.customs-friends').all()){const r=await figure.boundingBox();expect(r.y).toBeGreaterThanOrEqual(b.y+b.height);}
@@ -40,8 +41,8 @@ for(const width of [320,390,768,1280])test(`${width} 对白与所有角色分区
 });
 test('720高桌面屏里当前对白、人物与下一句同时可见',async({page})=>{
  await page.setViewportSize({width:1280,height:720});await page.goto('/unit15-16/#learn/text');const room=page.locator('.stage-text');
- await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeInViewport({ratio:1});
- for(let i=0;i<12;i++)await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+ await expect(courseButton(room, "startStory")).toBeInViewport({ratio:1});
+ for(let i=0;i<12;i++)await courseButton(room, i?'下一句':"startStory").click();
  await expect(room.getByRole('log').locator('.bubble-row').last()).toBeInViewport({ratio:1});await expect(room.getByRole('button',{name:'下一句',exact:true})).toBeInViewport({ratio:1});
  await room.screenshot({path:'output/playwright/unit15-16/story-desktop-720.png'});
 });

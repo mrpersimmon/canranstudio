@@ -1,8 +1,58 @@
-# 旅程地图首页设计验收
+# 旅程地图与课程界面设计验收
+
+## 2026-11-01 后续：角色名与课内布局复查
+
+本节补充此前代表画面视觉验收未覆盖的文字边界问题，当前范围为Lesson1–6的106题，不将上一轮代表画面通过等同于所有题都通过。
+
+原生430×932回看测得“工作人员”52px文字超出32px列，侵入正文12px；Lesson5–6的Mr. Blake同类。现在同材料按字体测量最长姓名，各行统一列宽并保留正文，实际列53px、文本间隔9px。另修复短材料浪费空白、WebKit长句按钮旧高度及窄屏合法词块排列裁切。保持现有画风与插画、题库、学习记录、纪念卡和奖励条件。
+
+源证据：[原重叠画面](docs/designs/learning-flow/evidence/layout-audit-20261101/before-roles-430.jpg)。实现证据：[最终430px实页](docs/designs/learning-flow/evidence/layout-audit-20261101/final-roles-430.jpg)、[320px材料](docs/designs/learning-flow/evidence/layout-audit-20261101/after-material-320.jpg)、[WebKit长句](docs/designs/learning-flow/evidence/layout-audit-20261101/choice-320-webkit.png)、[固定320手机词块](docs/designs/learning-flow/evidence/layout-audit-20261101/bank-320-webkit.png)。原生同账号只读回看，不重练；截图与CSS尺寸匹配，跨浏览器截图按CSS像素输出，未改图遮盖问题。
+
+验收覆盖文本逐行范围、控件相交、图注与图片、题干与人物图、固定反馈与底部操作、课文完成、词卡、记录、刷新和回看；文本测量结合截图，明确截图可能触发WebKit重新排版，截图前后均须检查。15项Chromium、11项WebKit按本轮去重范围通过，两引擎1786组全题布局观测无新增问题，题目切换的逐帧检查单独保留。未运行全站／全部旧证导出或实体设备验收。
+
+无本轮范围内待修P0／P1／P2；首次失败、诊断与独立复验见[完整记录](docs/designs/learning-flow/2026-11-01-reading-labels-and-layout-audit.md)，下方历史范围保留。
+
+final result: passed
+
+---
+
+## 2026-11-01 Lesson3–4：首页→剧场→答题→结算
+
+分支`codex/book-version`。本节为最新的课程视觉样板验收，下面的首页历史记录完整保留。
+
+**source visual truth**：`assets/course-journey/umbrella-counter-v1.webp`、`assets/course-journey/modules-v3/opening-world-v1.webp`及本轮实际首页`docs/designs/learning-flow/evidence/unit34-journey-v1/01-home-se.jpg`。原纪念卡为身份辅助参照并保持文件不变。
+
+**implementation screenshots**：同目录`02-story-se.jpg`、`03-question-se.jpg`、`04-result-se.jpg`；完整并排证据为[comparison-se.png](docs/designs/learning-flow/evidence/unit34-journey-v1/comparison-se.png)。这是经用户批准的跨状态风格衔接，刻意保留首页高信息密度、剧场对白／插画、题目纸面三种不同布局，不将它们冒称同一页面的逐像素复制。
+
+**viewport / density**：同一原演示账号，375×667 CSS px。首页接口输出360×640像素，其他三图375×667；并排图按同CSS大小归一，误差为整数取整，无裁切或内容重绘。原图、[尺寸记录](docs/designs/learning-flow/evidence/unit34-journey-v1/comparison-metadata.json)保留；430×932、440×956另由新视觉专项逐状态截图复查，桌面沿用同画板。原生预览URL4203，课文已读、题目未提交、结算读取已有记录，没有为了截图重置真实学习。
+
+**比较历史与修正**：
+
+- P1，旧课堂的淡紫线框环境、修长人物、扁平柜台与首页落差明显。采用同一角色参考生成新动作和暖石／珊瑚拱窗／紫顶内部；画板固定3:2，人物和交接物共享参照。
+- P2，第一稿把整个对白区铺成白纸，仍有明显拼贴。改为透明对白容器与轻环境底，只有独立气泡保留纸色；后续原生`02-story-se.jpg`确认。
+- P2，第一稿柜台任务的对白另占行，使SE及320选项溢出。恢复固定场景内对白区，按题区剩余空间缩小同一画板；后续33题／279个布局样本严格通过，未提高容差或裁去选项。
+- P2，功能检查通过后的逐图复核发现认领前外套悬在台侧。把外套顶部支撑点对齐台沿，领回后仍搭在客人前臂；随后发现同组红伞靠近工作人员脸，将它移向台沿左侧。最终[4205柜台实页](docs/designs/learning-flow/evidence/unit34-journey-v1/05-counter-contact-final-se.jpg)清楚显示台面支撑和完整脸部，光学接触／避脸回归覆盖三手机，此项关闭。此前四联图为不受最后修正影响的领回后状态，保留原证据，不覆盖历史截图。
+- P3，不清楚的场景照片小图标替换为首页原星花标识；不创建另一套品牌图标。
+
+**逐项结论**：
+
+- 字体：保留寒蝉圆黑／Nunito／独立音标字体，原题干、对白、按钮与统计单位完整；没有将文本烘焙进背景。新素材唯一教学文字为寄存牌数字5，已目视核对。
+- 布局与节奏：课文人物完整、台面和脚点接地；领回时握柄与手、外套与前臂关系可读。常规题一屏操作、固定反馈及按钮继续保持。对白可滚动查看历史，不遮人物主区域。
+- 颜色与样式：首页的暖光、奶油石、珊瑚拱窗、青绿水景、蜂蜜木色与紫色顶棚贯穿；答题底图降低强度，文字纸面保持不透明。主操作绿、金色成果与状态含义未改变。
+- 素材：源参考和运行画面在同一并排输入中复核，人物身份/衣着/头身一致，透明图无可见白边。三把伞颜色／花纹区别仍准确，旋转与持物未镜像文字。
+- 文案和行为：没有新编题干或删教学事实；首页继续原续学路由，独立卡片与学习记录保持。实际打开首页、课程、课文、题目、已存结算；控制台无error。奖励与记录由隔离账号的影响性用例另验。
+
+**残余边界**：原图完整旧证迁移、全部GIF导出和实体微信／夸克本轮未重跑；自动视觉和布局通过不等于全站可访问性或真实设备验收。其他课程未套用本次美术。无待修P0/P1/P2；后续可在用户确认样板后扩展其它单元。
+
+**实施清单**：素材／提示词固定包已保存；原卡与题稿hash核对；3尺寸与压力屏检查；新增双引擎影响映射；统一标准已更新；本地预览保留。详细测试范围见[实施记录](docs/designs/learning-flow/2026-11-01-unit34-journey-visual.md)。
+
+final result: passed
+
+---
 
 现行要求统一在[首页入口统一设计标准 v2.0](docs/designs/course-journey/2026-10-22-1332-v2.0-首页入口统一设计标准与验收清单.md)维护。本页保存各阶段真实画面、检查及限制；各段通过结论仅适用于所记范围，不能代替全站或发布验收。
 
-最新日期：2026-10-26。分支：codex/fronted-opt-version。
+以下历史记录日期：2026-10-26。分支：codex/fronted-opt-version。
 
 ## 2026-10-26 全72入口手机优先整体复查
 

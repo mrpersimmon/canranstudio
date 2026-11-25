@@ -1,0 +1,13 @@
+{
+  "id": "world-night-dark",
+  "kind": "world",
+  "transparent": false,
+  "prompt": "Edit this exact empty storybook room into its lights-off nighttime state. Keep the same room, window, curtains, wall, cabinet, plant, floor perspective and 3:2 composition. The wall lamp MUST be switched OFF: no yellow bulb light, no glow, no light cone or illumination from the lamp. Only very faint cool moonlight from the window allows the shapes to be read. Dim blue-brown nighttime tones, clearly dark but not pure black. Preserve warm hand-drawn contours and painted paper texture. No people, no new props, no words. Output an opaque full 3:2 background; this is a teaching story where the light has not yet been turned on.",
+  "references": [
+    "assets/learning-whole-book-v1/world-night-home-v1.webp"
+  ],
+  "raw": "assets/learning-whole-book-v1/raw/world-night-dark.png",
+  "adopted": "assets/learning-whole-book-v1/world-night-dark-v1.webp",
+  "tool": "built-in-imagegen",
+  "generatedPath": "C:\\Users\\duanxiaodong\\.codex\\generated_images\\01a144fe-4a3a-7820-8418-b9fde4db67e1\\exec-7b47a976-b58c-4652-8e88-c7585814c1c4.png"
+}

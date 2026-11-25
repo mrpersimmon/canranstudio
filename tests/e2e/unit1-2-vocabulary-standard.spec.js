@@ -39,7 +39,8 @@ for (const width of [320, 1280]) test(`${width} 像素：21 张词卡正面有�
     });
     expect(await fitting(), `${en} 正面不裁切`).toBe(true);
     await card.click(); await expect(card).toHaveAttribute('aria-expanded', 'true');
-    await expect(pronunciation).toBeHidden();
+    await expect(pronunciation).toBeVisible();
+    await expect(card.locator('.word-meaning')).toBeVisible();
     expect(await fitting(), `${en} 词义不裁切`).toBe(true);
     await card.click(); await expect(pronunciation).toBeVisible();
   }

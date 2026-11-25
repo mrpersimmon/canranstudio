@@ -1,0 +1,69 @@
+{
+  "asset": "Lesson 3–4 cloakroom environment",
+  "createdAt": "2026-11-01",
+  "mode": "built-in image_gen",
+  "dimensions": {
+    "width": 1536,
+    "height": 1024,
+    "ratio": "3:2",
+    "transparent": false
+  },
+  "references": [
+    {
+      "path": "assets/course-journey/modules-v3/opening-world-v1.webp",
+      "role": "Authoritative environment style, architecture, palette and lighting"
+    },
+    {
+      "path": "assets/course-journey/umbrella-counter-v1.webp",
+      "role": "Supporting style and palette only; exclude people and counter"
+    }
+  ],
+  "generations": [
+    {
+      "status": "superseded geometry",
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-0d7f-74b3-8311-27b4e2c81757/exec-9669192e-99e3-43f5-a8dd-bb33e3ded873.png",
+      "prompt": "Create a production background asset derived from the attached visual references for Canran Studio Lesson 3–4.\nReference image 1 is the authoritative ENVIRONMENT STYLE reference: a warm illustrated garden town with creamy sandstone paving, coral-pink masonry arches, turquoise water, softly modeled sunlit foliage, gentle painterly texture and warm light from the upper left. Reference image 2 is only a STYLE/PALETTE reference for the wooden cloakroom counter and characters; DO NOT include those people or that counter in this output.\nOUTPUT: one opaque 1536 × 1024 landscape image, exactly 3:2, full-bleed scene with no borders, margins, vignette, labels, text, numbers or UI. This is an empty background, NOT a mockup.\nSCENE: inside the tiny purple-roofed cloakroom pavilion from the middle of reference 1, seen from the open front, straight-on with a gentle downward viewing angle. A welcoming cream sandstone interior with coral-pink arched window trim. Through a left/central arched window one can see the same turquoise canal, greenery and a hint of the same coral town architecture. A simple pale honey-wood cloak rail with two or three EMPTY wooden hangers is mounted high on the far right wall. Small restrained window greenery may be present high at the edges.\nCOMPOSITION AND PLACEMENT: The wall/floor junction is at approximately 42 percent of the image height, leaving the lower 58 percent as continuous pale cream sandstone floor. The near floor is broad, uncluttered and uninterrupted. Keep the foreground left, foreground center and foreground right completely empty for separate animated character and counter layers. No raised platform, no steps, no rug, no split floor planes. Both lower corners remain clear. Architectural lines have one coherent perspective. The upper-left sun creates soft believable light and restrained soft shadows only from the architecture. Reserve the lower half for people to be overlaid without having their heads intersect busy decorative details.\nSTYLE LOCK: Match the environment reference's cheerful premium storybook game illustration, soft rounded forms, warm gentle volume, creamy warm material, coral arch accents and teal/turquoise distant views. Clean readable shapes at 350px display width, carefully finished materials, moderate detail. The image must feel like walking INTO that exact illustrated town, not entering an unrelated purple flat vector room. Keep a calm interior brightness, not dark, not neon, not photorealistic, not hard 3D-rendered plastic.\nABSOLUTE EXCLUSIONS: no people, no faces, no body parts, no counter, no furniture in the foreground, no umbrellas, no coats, no other clothes, no claim tickets, no clocks, no numbers, no signs, no wording, no logos, no UI, no white outer edge. Do not draw the correct-answer objects into the permanent scenery.",
+      "finding": "Style accepted; center wall-floor boundary approximately 52%, less open floor than target 42%."
+    },
+    {
+      "status": "selected",
+      "source": "C:/Users/duanxiaodong/.codex/generated_images/01a1959b-0d7f-74b3-8311-27b4e2c81757/exec-9029804d-7539-4948-bab1-3258e1432759.png",
+      "reference": "Previous generated background only",
+      "prompt": "Edit the attached 1536x1024 empty cloakroom interior background. Preserve its exact illustration style, warm cream sandstone, coral arched windows, turquoise canal view, purple roof glimpse, three empty wood hangers, lighting, color palette, perspective, sharpness and full-bleed unbordered output. This is a targeted composition correction only.\nThe wall/floor meeting line currently sits approximately halfway down the image. Move that wall/floor meeting line UP so the back wall meets the floor at y=430 of the 1024px image (42% height); the entire lower 58% must be continuous empty cream sandstone floor. Keep the windows and wall features above this junction by making the back wall/window assembly visually shorter vertically, not by cropping the output or distorting the paving. Keep natural proportions of arches, wood hangers and bricks. The floor should have coherent foreshortening, no step/platform/rug/break. The front left/center/right remain fully open for characters to be overlaid.\nDo not add people, furniture, a counter, coats, umbrellas, tickets, letters, numbers, UI, labels, logos, white margins or vignette. Output one 1536x1024 opaque landscape image, exactly 3:2.",
+      "finding": "Center wall-floor boundary approximately 40–42%; continuous clean foreground. No people, counter, garments, umbrellas, tickets, text or UI. Full-bleed scene."
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/unit3-4-journey/cloakroom-interior-v1.png",
+      "bytes": 1881844,
+      "sha256": "531f8097f227d53dd81cff286a344a7e0a1cde2b159d8db2b8c84c8c27f31383",
+      "purpose": "Unmodified selected generated source"
+    },
+    {
+      "path": "assets/unit3-4-journey/cloakroom-interior-v1.webp",
+      "bytes": 147596,
+      "sha256": "9d48720577c5ba1d585a05cbfc944996af0cffa0ae68500c6195b7d4e21096bd",
+      "purpose": "Runtime copy; sharp WebP quality 90 effort 6; no resize or composition edits"
+    }
+  ],
+  "integration": {
+    "placement": "Background of a fixed 3:2 stage artboard. Separate people and counter layers must use the same artboard coordinates.",
+    "floor": {
+      "wallBoundaryCenterY": 0.41,
+      "unobstructedNearFloorYRange": [
+        0.47,
+        1
+      ]
+    },
+    "notes": "The top rail and flowers are background details; avoid placing UI text directly over them. Parent agent performs rendered UI/device QA."
+  },
+  "verification": {
+    "inspectedSource": true,
+    "inspectedRuntime": true,
+    "noCodeChanges": true,
+    "noCommit": true,
+    "noPush": true,
+    "noDeploy": true
+  }
+}

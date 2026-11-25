@@ -1,3 +1,4 @@
+const {courseButton}=require('../support/course-controls');
 require('../support/unit2526-legacy').historicalSuite(require('@playwright/test').test);
 'use strict';
 const {test,expect}=require('@playwright/test');
@@ -26,7 +27,7 @@ test('320 窄屏36张词卡展开后字义和音标不裁切，图册成对对�
       expect(await card.evaluate(el=>el.scrollHeight<=el.clientHeight+2&&el.scrollWidth<=el.clientWidth+2)).toBe(true);
       await card.click();await expect(card.locator('.word-phonetic')).toBeVisible();
     }
-    if(p<5)await room.getByRole('button',{name:'下一组词卡',exact:true}).click();
+    if(p<5)await courseButton(room, "nextWords").click();
   }
   await page.goto('/unit25-26/#learn/models');await page.getByText('看看八幅厨房图',{exact:true}).click();const gallery=page.locator('.comparison-gallery');
   await gallery.screenshot({path:'output/playwright/unit25-26/comparison-gallery-320.png'});
@@ -36,12 +37,12 @@ test('390短屏阅读内部滚动，下一句与从头看同行，展开中文�
   await page.setViewportSize({width:390,height:500});await page.goto('/unit25-26/#learn/text');await page.evaluate(()=>document.fonts.ready);const room=page.locator('.stage-text');
   const buttons=room.locator('.stage-ctrl'),before=await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY);
   for(let i=0;i<12;i++){
-    await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();
+    await courseButton(room, i?'下一句':"startStory").click();
     expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
   }
   await room.locator('.bbtns').last().getByRole('button').click();
   expect(await buttons.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(before,0);
-  const advance=await room.getByRole('button',{name:'完成课文',exact:true}).boundingBox(),replay=await room.getByRole('button',{name:'从头看',exact:true}).boundingBox();
+  const advance=await courseButton(room, "finishStory").boundingBox(),replay=await room.getByRole('button',{name:'从头看',exact:true}).boundingBox();
   expect(Math.abs(advance.y-replay.y)).toBeLessThan(2);
   await room.screenshot({path:'output/playwright/unit25-26/story-short-screen.png'});
 });
@@ -72,7 +73,7 @@ test('四种宽度全部拼句的词块完整可见，选取与撤回不推移�
    expect(await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(initialTop,0);
    await selected.getByRole('button').last().click();expect(await actions.evaluate(el=>el.getBoundingClientRect().top+scrollY)).toBeCloseTo(initialTop,0);await chooseTokens(room,[answer.at(-1)]);
    await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.getByRole('status')).toContainText('答对了！');
-   await room.getByRole('button',{name:i===ANSWERS.trans.length-1?'完成这一站':'下一题',exact:true}).click();
+   await courseButton(room, i===ANSWERS.trans.length-1?"finishPractice":'下一题').click();
   }
   await context.close();
  }

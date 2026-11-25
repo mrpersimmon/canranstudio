@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton,expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 // Historical 15-star/audio edition; current unit is checked in unit49-50-current/upgrade.
 test.beforeEach(async ({page})=>{await require('../support/unit4950-legacy').legacy(page);});
@@ -36,7 +37,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   await expect(exam).toContainText('Excuse me!');
   await require('../support/units1-30-tasks').select(exam,{fills:['Yes, it is.','Yes?']});
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看。');
+  await expect(exam.getByRole('status')).toHaveText('答错了，再试试。');
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, {fills:['Yes?','Yes, it is.']});
   await expect(exam.locator('.practice-content > h3')).toHaveText('手表不是你的，你怎么回答？');
@@ -46,7 +47,7 @@ test('Lesson 1–2 找物并入词汇，十题挑战保持各自判断', async (
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await choose(exam, "No, it isn't.");
   await finishExam(page, '1-2', 2);
-  await expect(exam.getByRole('list', { name: '本轮成果' }).locator('strong')).toHaveText(['10', '10', '1']);
+  await expectRoundCounts(exam.getByRole('list', { name: '本轮成果' }).locator('.completion-number'), ['10', '10', '1']);
   await expect(exam.getByRole('button', { name: '查看纪念卡', exact: true })).toBeVisible();
 });
 
@@ -54,11 +55,16 @@ test('Lesson 3–4 五区33题，语法与综合挑战保留各自判断', async
   const { completeActivity } = require('../support/unit3-4-flow');
   await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-ask, .stage-trans')).toHaveCount(0);
+  await page.goto('/unit3-4/#learn/listen');
   await expect(page.locator('.stage-listen').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '5');
+  await page.goto('/unit3-4/#learn/reply');
   await expect(page.locator('.stage-reply').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '10');
+  await page.goto('/unit3-4/#learn/exam');
   await expect(page.locator('.stage-exam').getByRole('progressbar')).toHaveAttribute('aria-valuemax', '11');
   await completeActivity(page, 'reply'); await completeActivity(page, 'exam');
-  await expect(page.locator('.stage-exam')).toContainText('首次独立答对 11 / 11');
+  const earned=page.locator('.stage-exam .completion-stats');
+  await expect(earned.locator('.completion-stat-label')).toHaveText(['连续答对','首答正确','订正完成']);
+  await expect(earned.locator('.completion-number')).toHaveText(['11','11','0']);
 });
 
 test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，五题挑战需要综合判断', async ({ page }) => {
@@ -71,7 +77,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   await expect(asking).toContainText('问 Sam');
   await asking.getByRole('button', { name: 'Does she like peaches?', exact: true }).click();
   await asking.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(asking.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(asking.getByRole('status')).toHaveText(await incorrectFeedback(asking));
   await asking.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(asking, 'Does she want peaches?', '完成这一站');
 
@@ -82,7 +88,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   for (const answer of base) await submitSubject(subjects, answer);
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
   await submitSubject(subjects, '第一人称', false);
-  await expect(subjects.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(subjects.getByRole('status')).toHaveText(await incorrectFeedback(subjects));
   await subjects.getByRole('button', { name: '再试一次', exact: true }).click();
   await expect(subjects).toContainText('第 11 / 11 题');
   await expect(subjects.getByRole('heading', { name: 'they', exact: true })).toBeVisible();
@@ -103,7 +109,7 @@ test('Lesson 49–50 区分本次需求和喜好，分拣错题就地重试，�
   await expect(exam).toContainText('B 喜欢鸡肉');
   await exam.getByRole('button', { name: 'I like chicken, too.', exact: true }).click();
   await exam.getByRole('button', { name: '检查答案', exact: true }).click();
-  await expect(exam.getByRole('status')).toHaveText('再看看，试一次。');
+  await expect(exam.getByRole('status')).toHaveText(await incorrectFeedback(exam));
   await exam.getByRole('button', { name: '再试一次', exact: true }).click();
   await choose(exam, 'I like chicken.');
   await expect(exam).toContainText("Sam doesn't likes grapes.");
@@ -122,12 +128,13 @@ async function priorEdition(page, unit) {
     ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit-dedup-before', unit + '.js'), contentType: 'text/javascript', headers: { 'cache-control': 'no-store' } })
     : unit==='unit49-50'?route.fallback():route.continue());
   if (unit === 'unit1-2') {
-    await page.route(/\/unit1-2\/(?:index\.html)?$/,async route=>{if(!prior)return route.continue();const response=await route.fetch();return route.fulfill({response,body:(await response.text()).replace('<script src="/core/lesson49-icons.js">','<script src="/core/audio-player.js"></script><script src="/core/lesson49-icons.js">')});});
-    // Keep the predecessor runner with the predecessor content. Mixing the
-    // current runner into a historical edition invents an unsupported release.
-    await page.route('**/unit1-2/unit.js*', route => prior
-      ? route.fulfill({ path: require('node:path').join(__dirname, '../fixtures/unit1-2-short-exam-before/unit.js'), contentType: 'text/javascript' })
-      : route.continue());
+    const folder=require('node:path').join(__dirname,'../fixtures/unit1-2-short-exam-before');
+    for(const name of ['index.html','unit.js','scene.js','unit.css']){
+      const pattern=name==='index.html'?/\/unit1-2\/(?:index\.html)?$/:('**/unit1-2/'+name+'*');
+      await page.route(pattern, route=>prior
+        ?route.fulfill({path:require('node:path').join(folder,name),contentType:name.endsWith('.html')?'text/html':name.endsWith('.css')?'text/css':'text/javascript'})
+        :route.continue());
+    }
   }
   if (unit === 'unit3-4') {
     for (const name of ['index.html', 'unit.js']) {
@@ -157,9 +164,9 @@ async function priorGroup(page, unit, activity, answers) {
 async function priorStory(page, unit, count) {
   await page.goto('/' + unit + '/#learn/text');
   const room = page.locator('.stage-text');
-  await room.getByRole('button', { name: '开始听课文', exact: true }).click();
+  await courseButton(room, "startVoicedStory").click();
   for (let i = 1; i < count; i++) await room.getByRole('button', { name: '下一句', exact: true }).click();
-  await room.getByRole('button', { name: '完成课文学习', exact: true }).click();
+  await courseButton(room, "finishVoicedStory").click();
 }
 async function expectFresh(page, unit, activity, count) {
   await page.goto('/' + unit + '/#learn/' + activity);
@@ -205,7 +212,9 @@ test('Lesson 3–4 更早的五题接力不冒充已核对兼容版本，原文�
   await expect(page.locator('.stage-roles').getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
   const retainedRecords = await page.evaluate(() => JSON.parse(localStorage.getItem('canran:unit3-4:learning:v1')).activity.unit34HistorySnapshot.records);
   expect(retainedRecords).toEqual(originalRecords);
-  await expect(page.locator('.stage-text')).toContainText('故事看完了！');
+  await page.goto('/unit3-4/#learn/text');
+  await expect(page.locator('.stage-text .dialogue-status')).toContainText('12 / 12');
+  await expect(page.locator('.stage-text > .practice-finish')).toBeVisible();
   // Reading and compatible answers survive, but neither establishes a zero-error
   // round in the new five-zone award edition.
   await expect(page.locator('#starCount')).toHaveText('0');

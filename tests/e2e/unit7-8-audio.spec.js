@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 // Historical 15-star behavior is exercised on its frozen edition.
 // Current five-zone and authenticated migration contracts have dedicated suites.
@@ -12,7 +13,7 @@ for (const base of ['', '/lesson']) test(`I 词卡保留音标和释义，翻面
   await page.route('**/unit7-8/audio/**', route => { requests.push(route.request().url()); return route.abort(); });
   await page.goto(base + '/unit7-8/#learn/words');
   const words = page.locator('.stage-words');
-  for (let i = 0; i < 2; i++) await words.getByRole('button', { name: '下一组词卡', exact: true }).click();
+  for (let i = 0; i < 2; i++) await courseButton(words, "nextWords").click();
   const card = words.getByRole('button', { name: 'I', exact: true });
   await expect(card).toContainText('/aɪ/');
   for (let i = 0; i < 2; i++) {

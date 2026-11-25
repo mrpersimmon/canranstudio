@@ -6,10 +6,22 @@ function storyProps(){
  const element=node('div','visit-world'),location=node('p','visit-location','Jill 家 · 晚间门厅');element.setAttribute('role','group');element.setAttribute('aria-label','Jill一家在门厅商量出门的场景');const actors={};
  for(const[key,label]of [['father','Father · Tom'],['mother','Mother'],['jill','Jill']]){const wrap=node('div','dialogue-actor visit-actor actor-'+key);wrap.dataset.actor=key;wrap.append(picture(key,'visit-cast',label+'完整人物','webp'),node('span','actor-label',label));element.append(wrap);actors[key]=wrap;}
  const key=node('div','story-key');key.append(picture('key','key-object','唯一一枚前门钥匙'));element.append(location,key);
+ function placeKey(){
+  const owner=element.dataset.keyOwner,actor=actors[owner],image=actor?.querySelector('img');if(!image?.naturalWidth||actor.hidden)return;
+  const r=image.getBoundingClientRect(),world=element.getBoundingClientRect(),scale=Math.min(r.width/image.naturalWidth,r.height/image.naturalHeight),width=image.naturalWidth*scale,height=image.naturalHeight*scale;
+  if(!width||!height)return;
+  // Reviewed palm positions in the unchanged source portraits. Father turns
+  // to the right-hand side during the parents' conversation.
+  const hand=owner==='jill'?[.16,.43]:[actor.classList.contains('at-right')?.48:.52,.46];
+  const x=r.left+(r.width-width)/2+width*hand[0]-world.left,y=r.bottom-height+height*hand[1]-world.top;
+  Object.assign(key.style,{left:(x-11)+'px',top:(y-18)+'px'});
+ }
+ const resize=new ResizeObserver(placeKey);resize.observe(element);Object.values(actors).forEach(actor=>actor.querySelector('img').addEventListener('load',placeKey));
  function update(i){
   const parents=i===6||i===7,mumDaughter=i>=10;const left=parents||mumDaughter?'mother':'father',right=parents?'father':'jill';
   element.dataset.beat=parents?'parents':mumDaughter?'goodbye':i>=8?'handover':'before';element.dataset.keyOwner=i>=8?'jill':'father';
   for(const[name,wrap]of Object.entries(actors)){wrap.hidden=name!==left&&name!==right;wrap.classList.toggle('at-left',name===left);wrap.classList.toggle('at-right',name===right);const flip=name==='father'&&name===right;wrap.querySelector('img').style.transform=flip?'scaleX(-1)':'';wrap.querySelector('img').alt={father:'爸爸',mother:'妈妈',jill:'Jill'}[name]+(name===left?'朝向右侧交谈者':'朝向左侧交谈者')+'，头发、双手、衣服与鞋子完整';}
+  requestAnimationFrame(placeKey);
  }
  update(-1);return{element,update};
 }

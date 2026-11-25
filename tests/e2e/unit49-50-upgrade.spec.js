@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {legacy,audioBoundary}=require('../support/unit4950-legacy');
 const {activity,story}=require('../support/unit4950');
@@ -14,7 +15,7 @@ for(const selected of [false,true])test(`旧${selected?'已选未交':'空白'}�
 });
 test('旧故事真实读到中段后升级，保留已展示的原文，不代做理解题',async({page})=>{
  const upgrade=await legacy(page);await audioBoundary(page);await page.goto('/unit49-50/#learn/text');const room=page.locator('.stage-text');
- await room.getByRole('button',{name:'开始听课文',exact:true}).click();for(let i=0;i<4;i++)await room.getByRole('button',{name:'下一句',exact:true}).click();
+ await courseButton(room, "startVoicedStory").click();for(let i=0;i<4;i++)await room.getByRole('button',{name:'下一句',exact:true}).click();
  await upgrade();await page.reload();await expect(room.locator('.bubble-row')).toHaveCount(5);await expect(room.locator('.bubble-row').last()).toContainText('This lamb’s very good.');
  await story(page);await page.goto('/unit49-50/#learn/roles');await expect(page.locator('.stage-roles .progress-copy')).toHaveText('第 1 / 6 题');await expect(page.locator('.stage-roles').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();await expect(page.locator('#starCount')).toHaveText('0');
 });

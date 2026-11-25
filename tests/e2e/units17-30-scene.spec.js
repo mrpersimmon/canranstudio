@@ -1,4 +1,5 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 // Lesson 17–18 here uses the frozen 29-task predecessor; five-zone checks are separate.
 require('../support/unit1718-legacy').historicalSuite(require('@playwright/test').test);
 const {test,expect}=require('@playwright/test');
@@ -8,10 +9,10 @@ async function capture(page,room,path){await room.screenshot({path,animations:'d
 for(const[pair,total]of Object.entries(FRAMES))test(`${pair} 分镜按原文推进，长句中文不裁切，四种宽度不移动推进按钮`,async({page})=>{
  test.setTimeout(90000);
  for(const width of [320,390,768,1280]){
-  await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');if(width===320)await expect(room.getByRole('button',{name:'开始看课文',exact:true})).toBeVisible();else await room.getByRole('button',{name:'再看一遍',exact:true}).click();
+  await page.setViewportSize({width,height:844});await page.goto(`/lesson/unit${pair}/#learn/text`);const room=page.locator('.stage-text'),log=room.getByRole('log'),view=room.locator('.classroom-illustration'),ctrl=room.locator('.stage-ctrl');if(width===320)await expect(courseButton(room, "startStory")).toBeVisible();else await courseButton(room, "replayStory").click();
   await expect(log.locator('.btext')).toHaveCount(0);const top=()=>ctrl.evaluate(el=>el.getBoundingClientRect().top+scrollY),before=await top();
   for(let i=0;i<total;i++){
-   await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
+   await courseButton(room, i?'下一句':"startStory").click();await expect(log.locator('.btext')).toHaveCount(i+1);expect(await top()).toBeCloseTo(before,0);
    if(width===1280){
     if(pair==='17-18'){await expect(view.locator('[data-part=nicola]'))[i>=2&&i<=6?'toBeVisible':'toBeHidden']();await expect(view.locator('[data-part=michael]'))[i>=7&&i<=12?'toBeVisible':'toBeHidden']();await expect(view.locator('[data-part=jim]'))[i>=13?'toBeVisible':'toBeHidden']();}
     if(pair==='19-20'){await expect(view.locator('[data-part=vendor-cart]'))[i>=6?'toBeVisible':'toBeHidden']();await expect(view.locator('[data-part=cone-girl]'))[i>=7?'toBeVisible':'toBeHidden']();if(i>=8){const cone=await view.locator('[data-part=cone-girl]').boundingBox(),child=await view.locator('[data-actor=girl]:visible').boundingBox();expect(cone.x).toBeGreaterThan(child.x-20);expect(cone.x).toBeLessThan(child.x+child.width);}}
@@ -33,7 +34,7 @@ for(const[pair,total]of Object.entries(FRAMES))test(`${pair} 分镜按原文推�
   await page.reload();await expect(log.locator('.btext')).toHaveCount(total);await expect(log.locator('.bubble-row').last()).toBeInViewport({ratio:1});
   if(pair==='25-26'){const left=await view.locator('[data-part=cooker]').boundingBox(),middle=await view.locator('[data-part=table]').boundingBox(),right=await view.locator('[data-part=fridge]').boundingBox();expect(left.x+left.width).toBeLessThan(middle.x);expect(middle.x+middle.width).toBeLessThan(right.x);}
   if(pair==='27-28'){const a=await view.locator('[data-part=magazines]').boundingBox(),tv=await view.locator('[data-part=television]').boundingBox();expect(a.x).toBeGreaterThan(tv.x);expect(a.y+a.height).toBeLessThanOrEqual(tv.y+10);}
-  await room.getByRole('button',{name:'完成课文',exact:true}).click();await expect(room.getByRole('group',{name:'完成后的操作',exact:true})).toBeVisible();
+  await courseButton(room, "finishStory").click();await expect(room.getByRole('group',{name:'完成后的操作',exact:true})).toBeVisible();
  }
 });
 

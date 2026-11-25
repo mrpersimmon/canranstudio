@@ -1,4 +1,5 @@
 'use strict';
+const {openLearningRecord}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const flow=require('../support/thirteen-types-flow');
 const {installPrevious,book,noOverflow,currentArt}=require('../support/unit12-v154');
@@ -13,7 +14,7 @@ test('首页与封面沿用已确认纪念卡故事插画',async({page})=>{
 test('实际显示的短示范写入本次提交，独立题不补记示范',async({page})=>{
  await page.goto('/unit1-2/#learn/trans');const room=page.locator('.stage-trans');
  await flow.select(room,'Is this your book?');await room.getByRole('button',{name:'检查答案',exact:true}).click();
- await page.getByRole('button',{name:'学习记录',exact:true}).click();
+ await openLearningRecord(page);
  await expect(page.locator('#learningRecord')).toContainText('看过示范');
  await page.getByRole('button',{name:'关闭',exact:true}).click();
  await room.getByRole('button',{name:'下一题',exact:true}).click();
@@ -45,7 +46,7 @@ for(const width of [320,390,768,1280])test(`四宽 ${width}：首页、词卡、
   if([0,2,5,6].includes(i))await text.locator('#unit12-dialogue').screenshot({path:info.outputPath('dialogue-'+i+'.png')});
   await text.locator('.bbtns button').last().click();
   if(i===3){await page.reload();await expect(text.locator('.btext')).toHaveCount(4);}
-  await text.getByRole('button',{name:i===6?'读完了':'下一句',exact:true}).click();
+  await text.getByRole('button',{name:i===6?'去练习':'下一句',exact:true}).click();
  }
  expect(await text.locator('.btext').allTextContents()).toEqual(['Excuse me!','Yes?','Is this your handbag?','Pardon?','Is this your handbag?','Yes, it is.','Thank you very much.']);
  await flow.activity(page,'1-2','manners',{capture:async(room,i,state)=>{if(state==='blank'&&i>=2){await currentArt(page);await room.screenshot({path:info.outputPath('manners-'+i+'.png')});await noOverflow(page,width);}}});

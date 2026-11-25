@@ -1,4 +1,5 @@
 'use strict';
+const {expectRoundCounts,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const flow = require('../support/thirteen-types-flow');
 const tasks = require('../support/units1-30-tasks');
@@ -25,9 +26,9 @@ for (const [pair, count] of [
   else if (Number(pair.split('-')[0]) >= 31) await require('../support/unit' + pair + '-flow').activity(page, 'listen', '/lesson');
   else await (pair === '25-26' ? flow : tasks).activity(page, pair, 'listen', { base: '/lesson' });
   const room = page.locator('.stage-listen'), results = room.getByRole('list', { name: '本轮成果', exact: true });
-  await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '本次答对', '本次答错']);
+  await expect(results.locator('.completion-stat-label')).toHaveText(['连续答对', '首答正确', '订正完成']);
   await expect(results.locator('.completion-number')).toHaveText([String(count), String(count), '0']);
-  await expect(results.locator('.completion-unit')).toHaveText(['次', '次', '次']);
+  await expect(results.locator('.completion-unit')).toHaveText(['次', '题', '题']);
   await expect.poll(() => results.locator('img').evaluateAll(images => images.every(img => img.complete && img.naturalWidth > 0))).toBe(true);
   expect(await results.evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
@@ -69,16 +70,16 @@ test('旧版49–50 分拣按真实回练顺序计算，订正后仍保留首次
   for (const [index, answer] of unitSubjectAnswers.entries()) {
     if (index === 2) for (let repeat = 0; repeat < 2; repeat++) {
       await submitSubject(room, '第一人称', false);
-      await expect(room.getByRole('status')).toHaveText('再看看，试一次。');
+      await expect(room.getByRole('status')).toHaveText(await incorrectFeedback(room));
       await page.reload();
       await room.getByRole('button', { name: '再试一次', exact: true }).click();
     }
     await submitSubject(room, answer);
   }
   // 对、对、错、错、对，再连续答对剩余八题。
-  await expect(room.locator('.completion-number')).toHaveText(['9', '11', '2']);
+  await expectRoundCounts(room.locator('.completion-number'), ['9', '11', '2']);
   await expect(room).toContainText('基础题首次答对 10 / 11');
-  await page.reload(); await expect(room.locator('.completion-number')).toHaveText(['9', '11', '2']);
+  await page.reload(); await expectRoundCounts(room.locator('.completion-number'), ['9', '11', '2']);
   await room.getByRole('button', { name: '再练一轮', exact: true }).click();
   for (const answer of unitSubjectAnswers) await submitSubject(room, answer);
   await expect(room.locator('.completion-number')).toHaveText(['11', '11', '0']);

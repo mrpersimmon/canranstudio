@@ -1,0 +1,42 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+const {DatabaseSync}=require('node:sqlite'),{openStore}=require('../../server/store');
+test('a progress receipt commits the star, notebook and submitted answers together, including on replay',t=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'canran-learning-commit-')),store=openStore(dir),db=new DatabaseSync(path.join(dir,'learning.sqlite'));
+ t.after(()=>{db.close();store.close();fs.rmSync(dir,{recursive:true,force:true});});
+ const group=store.createClass('测试'),[student]=store.createStudents([{name:'学员',pinyin:'xueyuan'}],group.id);
+ const course='unit1-2',reward={edition:'test',zones:['a','b','c','d','e'].map(id=>({id}))},claims=reward.zones.map(z=>[z.id,{runId:'first'}]);
+ const row={revision:'rev',activity:'a',run:'first',question:'q',attempts:1,correct:1,firstCorrect:1};
+ const commit=cs=>store.saveLearning(student.id,course,0,{version:1},[row],true,reward,cs);
+ const count=table=>db.prepare('SELECT COUNT(*) AS n FROM '+table).get().n;
+ db.exec("CREATE TRIGGER fail_answer BEFORE INSERT ON learning_submissions BEGIN SELECT RAISE(ABORT,'injected failure'); END");
+ assert.throws(()=>commit(claims),/injected failure/);assert.deepEqual(['unit_awards','progress','learning_submissions'].map(count),[0,0,0]);
+ db.exec('DROP TRIGGER fail_answer');
+ commit([]);assert.equal(count('unit_awards'),0);
+ const first=commit(claims).awards;assert.ok(first.firstFullStarAt);
+ db.exec("CREATE TRIGGER no_rewrite BEFORE UPDATE ON unit_awards BEGIN SELECT RAISE(ABORT,'changed an unchanged award'); END");
+ assert.deepEqual(commit(claims).awards,first);assert.deepEqual(commit([]).awards,first);
+ assert.deepEqual(['unit_awards','progress','learning_submissions'].map(count),[1,1,1]);
+});
+
+test('the real progress endpoint retries a failed commit without a stray star or duplicate counted answer',async t=>{
+ const {createApp}=require('../../server/app'),{definition}=require('../../server/progress'),wire=require('../../server/public/learning-observer'),{questionState}=require('../../review-bench/state-model');
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'canran-learning-receipt-')),store=openStore(dir),course='unit1-2',unit=definition(process.cwd(),course,'/'),group=store.createClass('成果');
+ let server,db; t.after(async()=>{if(server)await new Promise(r=>server.close(r));db?.close();store.close();fs.rmSync(dir,{recursive:true,force:true});});
+ store.updateClass(group.id,group.name,[course]);const [student]=store.createStudents([{name:'验收',pinyin:'yanshou'}],group.id);store.changePassword(student.id,'Local-Only-Test-123!');
+ const cookie='canran_student='+store.session('student',student.id,Date.now());
+ server=await createApp({root:process.cwd(),dataDir:dir,basePath:'/',origin:'http://127.0.0.1'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const send=(p,v)=>fetch('http://127.0.0.1:'+server.address().port+'/api/'+p,{method:'POST',headers:{Cookie:cookie,Origin:'http://127.0.0.1','Content-Type':'application/json'},body:JSON.stringify(v)});
+ const access=await (await send('courses/'+course+'/enter',{})).json(),qs=unit.questions.listen,runId='verified-round';
+ const states=qs.map(q=>questionState(q,runId,'correct')),proof={runId,states,index:qs.length,roundPolicy:unit.reward.edition,edition:unit.reward.edition,contentSignature:JSON.stringify([unit.version,qs])};
+ const snapshot={signature:qs.map(q=>q.id).join('|'),...proof,draftVersion:2};
+ const msg={course,studentId:student.id,generation:access.progress.generation,grant:access.grant,epoch:access.systemUpgrade?.epoch,value:{activity:{unitAwardClaims:{listen:proof}}},observations:wire.snapshot({groups:{listen:snapshot}})};
+ db=new DatabaseSync(path.join(dir,'learning.sqlite'));
+ db.exec("CREATE TRIGGER fail_progress BEFORE INSERT ON progress BEGIN SELECT RAISE(ABORT,'receipt test'); END");
+ assert.equal((await send('progress',msg)).status,500);assert.deepEqual(store.awards(student.id),[]);assert.deepEqual(store.progress(student.id,course).value,{});
+ db.exec('DROP TRIGGER fail_progress');
+ const first=await(await send('progress',msg)).json(),again=await(await send('progress',msg)).json();
+ assert.equal(first.ok,true);assert.equal(first.awardReviews[0].accepted,true);assert.deepEqual(first.awards,again.awards);assert.equal(first.awards.zones.listen.runId,runId);
+ assert.equal(db.prepare('SELECT count(*) AS n FROM learning_submissions WHERE student=? AND run=?').get(student.id,runId).n,qs.length);
+});

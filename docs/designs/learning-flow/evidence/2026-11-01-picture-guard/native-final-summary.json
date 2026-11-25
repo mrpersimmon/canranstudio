@@ -1,0 +1,34 @@
+[
+  {
+    "name": "grammar-mobile-final",
+    "url": "http://127.0.0.1:4200/unit1-2/#learn/trans",
+    "tabId": "22",
+    "from": "回看 5 / 12",
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "roundTrips": 20,
+    "frames": 58,
+    "loadingFrames": 0,
+    "targetFrames": 27,
+    "maxLabelError": 0,
+    "maxArtError": 0
+  },
+  {
+    "name": "exam-mobile-final",
+    "url": "http://127.0.0.1:4200/unit1-2/#learn/exam",
+    "tabId": "22",
+    "from": "回看 7 / 10",
+    "viewport": {
+      "width": 375,
+      "height": 667
+    },
+    "roundTrips": 20,
+    "frames": 56,
+    "loadingFrames": 0,
+    "targetFrames": 27,
+    "maxLabelError": 0,
+    "maxArtError": 0
+  }
+]

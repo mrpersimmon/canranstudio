@@ -1,8 +1,9 @@
 'use strict';
+const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
 const {ANSWERS,select,story}=require('../support/unit2324-fivezones');
 test.use({actionTimeout:7000,...(process.env.UNIT2324_BROWSER==='webkit'?{browserName:'webkit'}:{})});
-async function next(room,answer,last=false){await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await room.getByRole('button',{name:last?'完成这一站':'下一题',exact:true}).click();}
+async function next(room,answer,last=false){await select(room,answer);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');await courseButton(room, last?"finishPractice":'下一题').click();}
 test('两道继承复习题在未答时有短示范，并只向本次提交登记帮助',async({page},info)=>{
  await page.setViewportSize({width:320,height:568});await page.goto('/unit23-24/#learn/grammar');const room=page.locator('.stage-grammar');for(const answer of ANSWERS.grammar.slice(0,7))await next(room,answer);
  const model=room.getByRole('region',{name:'短示范',exact:true});await room.screenshot({path:info.outputPath('grammar-8-unanswered.png')});await expect(model).toContainText('The pens are on the table.');await expect(model).not.toContainText('甲组');await next(room,ANSWERS.grammar[7]);
@@ -19,7 +20,7 @@ test('归属与接收者题在未答时明确递回请求，不能只给物主�
 });
 test('候选杯组先由简拿起，被否定后放回，再换拿搁板杯组',async({page},info)=>{
  await page.setViewportSize({width:390,height:844});await page.goto('/unit23-24/#learn/text');const room=page.locator('.stage-text');
- for(let i=0;i<8;i++){await room.getByRole('button',{name:i?'下一句':'开始看课文',exact:true}).click();const jane=room.locator('.jane .cast-image'),man=room.locator('.man .cast-image');
+ for(let i=0;i<8;i++){await courseButton(room, i?'下一句':"startStory").click();const jane=room.locator('.jane .cast-image'),man=room.locator('.man .cast-image');
   await expect(room.locator('.table-set'))[i===2||i===3?'toBeHidden':'toBeVisible']();await expect(room.locator('.shelf-set'))[i<4?'toBeVisible':'toBeHidden']();
   await expect(jane).toHaveAttribute('data-holding',String(i>=2&&i<6));await expect(man).toHaveAttribute('data-holding',String(i>=6));
   if(i===2||i===3){await expect(jane).toHaveAttribute('alt','简双手托着桌上的候选杯组');await room.screenshot({path:info.outputPath('candidate-held-'+i+'.png')});}
