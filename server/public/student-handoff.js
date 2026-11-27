@@ -1,5 +1,6 @@
 /* The learner keeps using the current document while the next one renders.
    Only the exact same-origin frame created for this turn can take its place. */
+import {presentNavigationStatus} from '../../student-ui/navigation-status';
 (() => {
   'use strict';
   if (window.CanranStudentHandoff) return;
@@ -9,7 +10,7 @@
   const host = pane ? window.parent.CanranStudentHandoff : null;
   const nativeReplace = history.replaceState.bind(history);
   const nativePush = history.pushState.bind(history);
-  let owner, pending, active, leaving, notice, noticeTarget, idleTimer, progressTimer;
+  let owner, pending, active, leaving, dismissNotice, noticeTarget, idleTimer;
   let retired = false, staged = !!host, finishFade;
   const initial = route(location.href);
   let visible = initial;
@@ -30,14 +31,13 @@
   }
   function sourceWindow() { return active?.contentWindow || window; }
   function clearNotice() {
-    notice?.remove(); notice=null;
+    dismissNotice?.(); dismissNotice=null;
     if(noticeTarget?.getAttribute('aria-busy')==='true') noticeTarget.removeAttribute('aria-busy');
     noticeTarget=null;
   }
-  function clearTimers() { clearTimeout(idleTimer);clearTimeout(progressTimer); }
   function cancel(restore=true) {
     const item=pending;
-    pending=null;clearTimers();clearNotice();item?.frame?.remove();
+    pending=null;clearTimeout(idleTimer);clearNotice();item?.frame?.remove();
     if(item?.pop && restore && visible) nativeReplace(history.state,'',visible.url);
     if(item&&restore)sourceWindow().dispatchEvent(new Event('canran:resume-student-view'));
   }
@@ -45,21 +45,16 @@
     if(pending!==item)return;
     clearNotice();
     const doc=sourceWindow().document;
-    const box=doc.createElement('div'); box.className='student-navigation-status student-document-status';box.setAttribute('role','status');
-    const label=doc.createElement('span'),name={lesson:'课程',album:'纪念册',home:'学习旅程'}[item.target.kind];
-    label.textContent=error?'暂时无法打开'+name+'。':'正在打开'+name+'…';box.append(label);
-    function action(text,label,run) {
-      const button=doc.createElement('button');button.type='button';button.textContent=text;
-      button.setAttribute('aria-label',label);button.onclick=run;box.append(button);
-    }
-    if(error)action('重试','重试切换',()=>open(item.target,item.trigger,item.pop));
-    action('取消','取消切换',()=>{const from=item.trigger;cancel();from?.focus({preventScroll:true});});
-    (doc.querySelector('dialog[open]')||doc.body).append(box);notice=box;
-    if(item.trigger){noticeTarget=item.trigger;noticeTarget.setAttribute('aria-busy','true');}
+    dismissNotice=presentNavigationStatus(doc,{
+      kind:item.target.kind,detail:item.target.course,error,documentTransition:true,
+      onRetry:()=>open(item.target,item.trigger,item.pop),
+      onCancel:()=>{const from=item.trigger;cancel();from?.focus({preventScroll:true});}
+    });
+    if(item.trigger&&!error){noticeTarget=item.trigger;noticeTarget.setAttribute('aria-busy','true');}
   }
   function fail(item) {
     if(pending!==item)return;
-    clearTimers();item.frame?.remove();item.frame=null;renderNotice(item,true);
+    clearTimeout(idleTimer);item.frame?.remove();item.frame=null;renderNotice(item,true);
     sourceWindow().dispatchEvent(new Event('canran:resume-student-view'));
   }
   function arm(item) {
@@ -108,7 +103,7 @@
     source.dispatchEvent(new Event('canran:cancel-workspace-navigation'));
     source.dispatchEvent(new CustomEvent('canran:save-workspace',{detail:{target:target.url}}));
     source.dispatchEvent(new Event('canran:prepare-student-view'));
-    progressTimer=setTimeout(()=>renderNotice(item,false),160);arm(item);
+    renderNotice(item,false);arm(item);
     try{
       await source.CanranStudentHandoff?.beforeLeave?.();
       if(pending===item)frameFor(item);
@@ -156,7 +151,7 @@
       const destination=route(child.location.href);
       if(!destination||destination.kind!==item.target.kind)throw Error('Unexpected student destination');
       child.CanranStudentHandoff.activate(activate);
-      clearTimers();clearNotice();pending=null;
+      clearTimeout(idleTimer);clearNotice();pending=null;
       finishFade?.();
       finishPrevious();
       const previous=active;

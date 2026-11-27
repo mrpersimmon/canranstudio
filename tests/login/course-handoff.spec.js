@@ -27,7 +27,7 @@ for(const [index,device] of devices.entries())test(device.name+' keeps the map a
   const url=new URL(base,p.url()).href;
   await courseResponse(p,base+'course-index.json',{hold:true});
   await link.tap();
-  await expect(p.locator('.student-document-status')).toContainText('正在打开课程');
+  await expect(p.locator('.student-document-status')).toContainText('正在打开 Lesson '+id.slice(4).replace('-','–')+'…');
   await expect(p.locator('.journey-home')).toBeVisible();expect(p.url()).toBe(url);
   await expect(p.getByRole('button',{name:'取消切换'})).toBeInViewport();
   await p.getByRole('button',{name:'取消切换'}).tap();
@@ -55,7 +55,7 @@ for(const [index,device] of devices.entries())test(device.name+' keeps the map a
   await expect(course.getByRole('link',{name:'我的课程',exact:true})).toBeInViewport();
   await courseResponse(p,base+'api/me',{hold:true});
   await course.getByRole('link',{name:'我的课程',exact:true}).tap();
-  await expect(course.locator('.student-document-status')).toContainText('正在打开学习旅程');
+  await expect(course.locator('.student-document-status')).toContainText('正在打开课程首页…');
   await expect(course.locator('#wordPageProgress')).toBeVisible();
   await info.attach('等待时的课内视口',{contentType:'application/json',body:JSON.stringify(await course.locator('.student-document-status').evaluate(el=>{
    const rect=node=>node.getBoundingClientRect().toJSON(),s=getComputedStyle(el);

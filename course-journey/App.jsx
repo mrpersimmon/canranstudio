@@ -140,6 +140,12 @@ export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,op
     pendingLocate.current={id,browsing:true,scroll:remembered&&visit.width===mapRef.current.clientWidth?visit.scroll:null,trigger};
     setSelected(id);
   }
+  function cancelChapter(id){
+    pendingLocate.current=null;
+    setSelected(id);
+    const control=desktop?listRef.current?.querySelector('[data-course-select="'+id+'"]'):chapterLabel.current;
+    control?.focus({preventScroll:true});
+  }
   function replay(id){pendingLocate.current=null;setSelected(id);setCelebration(previous=>({id,serial:(previous?.serial||0)+1}));}
   const state=useRef({});
   state.current={selected,chapter:chapterId};
@@ -301,7 +307,7 @@ export function App({who,base,preview='',waiting=0,onRefresh,openLegacy=false,op
       <p className="journey-home-status" role="status" data-home-status>{waiting>0?'还有学习成果保存在本机，联网后将继续同步。':who.directoryReviewMessage||''}</p>
     </aside>
     <section className="journey-map" data-chapter={chapter.id} aria-label={chapter.label+' 旅程地图'} ref={mapRef}>
-      {modular?<ModuleJourney scopeKey={JSON.stringify([who.student.id,base,courses.map(course=>course.id)])} generation={moduleGeneration} chapter={chapter} courses={mapped} waypost={waypost} base={base} selected={selected} tap={tap} celebration={celebration} onChoose={choose} onArtReady={moduleArtReady} onPresented={setModulePresentation} renderInfo={course=><MapCourseInfo course={course} placement={{rewards:{width:desktop?184:148,height:desktop?48:44},label:{width:desktop?156:132,height:44,beside:false,multiline:false},starSize:desktop?20:17,starGap:2}} base={base} selected={selected===course.id} celebration={celebration} onChoose={choose} onReplay={replay}/>}/>:
+      {modular?<ModuleJourney allowNotice={active&&!preparingDocument} onCancelSwitch={cancelChapter} scopeKey={JSON.stringify([who.student.id,base,courses.map(course=>course.id)])} generation={moduleGeneration} chapter={chapter} courses={mapped} waypost={waypost} base={base} selected={selected} tap={tap} celebration={celebration} onChoose={choose} onArtReady={moduleArtReady} onPresented={setModulePresentation} renderInfo={course=><MapCourseInfo course={course} placement={{rewards:{width:desktop?184:148,height:desktop?48:44},label:{width:desktop?156:132,height:44,beside:false,multiline:false},starSize:desktop?20:17,starGap:2}} base={base} selected={selected===course.id} celebration={celebration} onChoose={choose} onReplay={replay}/>}/>:
       <div className="journey-map-scene" data-chapter={chapter.id} data-composition={composition} style={mapLayout?{height:mapLayout.height}:undefined} data-map-state={mapFailed?'error':mapReady?'ready':'loading'}>
         <div className="journey-map-canvas" style={mapLayout?{width:mapLayout.width,height:mapLayout.canvasHeight,left:mapLayout.left,top:mapLayout.top}:undefined}>
         <div key={scene.file+attempt} className="journey-environment">

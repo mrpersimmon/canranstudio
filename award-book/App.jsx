@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
 import {PostofficeAlbum} from './Postoffice';
+import {NavigationNotice} from '../student-ui/NavigationNotice';
 import {logo} from './media';
 const BASE=document.querySelector('meta[name="award-base"]').content;
 const dateLabel = value => value ? new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value)).replaceAll('/','.') : null;
@@ -56,6 +57,7 @@ export function App(){
     refresh();
     return()=>{active=false;run++;channel?.close();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('pageshow',resume);window.removeEventListener('pagehide',hide);window.removeEventListener('online',refresh);navigator.serviceWorker?.removeEventListener('message',worker);};
   },[revision]);
-  if(!data)return <main className="loading-panel"><img src={logo} alt=""/><h1>{error?error.status===401?'请重新登录':'暂时打不开纪念册':'正在打开纪念册…'}</h1>{error&&<><p>{error.status===401?'登录后查看自己的纪念卡。':'请重试，已获纪念卡会保留。'}</p><a className="button" href={BASE}>{error.status===401?'去登录':'返回课程'}</a>{error.status!==401&&<button className="button primary" onClick={()=>setRevision(v=>v+1)}>再试一次</button>}</>}</main>;
+  if(!data&&!error)return <NavigationNotice kind="album" heading/>;
+  if(!data)return <main className="loading-panel"><img src={logo} alt=""/><h1>{error.status===401?'请重新登录':'暂时打不开纪念册'}</h1><p>{error.status===401?'登录后查看自己的纪念卡。':'请重试，已获纪念卡会保留。'}</p><a className="button" href={BASE}>{error.status===401?'去登录':'返回课程'}</a>{error.status!==401&&<button className="button primary" onClick={()=>setRevision(v=>v+1)}>再试一次</button>}</main>;
   return <PostofficeAlbum collection={data} key={data.student.id+':'+revision}/>;
 }

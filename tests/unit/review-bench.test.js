@@ -94,10 +94,15 @@ test('导航验收重新读取当前地图代码，而已启动的页面保留�
  const dir=await fs.mkdtemp(path.join(require('node:os').tmpdir(),'canran-review-journey-'));
  t.after(()=>fs.rm(dir,{recursive:true,force:true}));
  const input=path.join(dir,'course-journey','main.jsx');await fs.mkdir(path.dirname(input));
+ const handoff=path.join(dir,'server/public/student-handoff.js');await fs.mkdir(path.dirname(handoff),{recursive:true});
+ await fs.writeFile(handoff,'window.handoffVersion="first";');
  await fs.writeFile(input,'window.mapVersion="first";');
  const first=await createCourseJourney(dir,'/lesson/');
  await fs.writeFile(input,'window.mapVersion="second";');
+ await fs.writeFile(handoff,'window.handoffVersion="second";');
  const current=await createCourseJourney(dir,'/lesson/',{cache:false});
  assert.match(current.files.get('journey.js').body.toString(),/second/);
  assert.match(first.files.get('journey.js').body.toString(),/first/);
+ assert.match(current.files.get('student-handoff.js').body.toString(),/second/);
+ assert.match(first.files.get('student-handoff.js').body.toString(),/first/);
 });

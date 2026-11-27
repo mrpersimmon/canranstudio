@@ -62,7 +62,7 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
   await expect(p.locator('[data-route-world="opening"] [data-route-terrain]')).toBeVisible();
   await expect(p.locator('.journey-panorama-layer[data-staging=true]')).toHaveCSS('opacity','0');
   await expect(p.locator('.journey-panorama-layer:not([data-staging=true])')).toHaveAttribute('inert','');
-  await expect(p.locator('.journey-switch-status')).toHaveText('正在打开 Lesson 7–12…');
+  await expect(p.locator('.student-navigation-label')).toHaveText('正在打开 Lesson 7–12 地图…');
   waiting.release();await readyModules(p,pilot[1].ids);
   expect(await p.evaluate(()=>window.__switchChrome.header===document.querySelector('#siteHeader')&&window.__switchChrome.distant===document.querySelector('.journey-world-distant'))).toBe(true);
   await expect(p.locator('.journey-panorama-layer')).toHaveCount(1);

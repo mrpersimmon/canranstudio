@@ -1,10 +1,11 @@
 import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
-import {House,BookOpen,User,ArrowClockwise,X} from '@phosphor-icons/react';
+import {House,BookOpen,User} from '@phosphor-icons/react';
 import {App as Journey} from '../course-journey/App';
 import journeyModel from '../course-journey/model';
 import {PostofficeAlbum} from '../award-book/Postoffice';
 import {loadCollection} from '../award-book/App';
 import {AccountDialog} from './AccountDialog';
+import {NavigationNotice} from './NavigationNotice';
 import routes from './workspace-route';
 import '../award-book/styles.css';
 import '../award-book/effects.css';
@@ -14,8 +15,8 @@ const title=page=>page==='awards'?'纪念册':'课程';
 export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,onSessionError,openLegacy,openProfile}){
  const initial=useRef(routes.destination(location.href,base,location.origin)||{page:'courses',url:base}),sequence=useRef(0);
  const [shown,setShown]=useState(()=>initial.current.page==='courses'?{id:0,page:'courses',url:base,who}:null),[candidate,setCandidate]=useState(null),[leaving,setLeaving]=useState(null);
- const shownRef=useRef(shown),candidateRef=useRef(null),pendingRef=useRef(null),alive=useRef(true),nodes=useRef(new Map()),root=useRef(null),timer=useRef(),hintTimer=useRef(),readyTimer=useRef();
- const [phase,setPhase]=useState('idle'),[pending,setPending]=useState(null),[error,setError]=useState(null),[hint,setHint]=useState(false),[announcement,setAnnouncement]=useState('');
+ const shownRef=useRef(shown),candidateRef=useRef(null),pendingRef=useRef(null),alive=useRef(true),nodes=useRef(new Map()),root=useRef(null),timer=useRef(),readyTimer=useRef();
+ const [phase,setPhase]=useState('idle'),[pending,setPending]=useState(null),[error,setError]=useState(null),[announcement,setAnnouncement]=useState('');
  const [account,setAccount]=useState(openLegacy?'legacy':openProfile?'profile':null),[historyRequest,setHistoryRequest]=useState(0),[suspended,setSuspended]=useState(false);
  const positions=useRef(),positionKey='canran:workspace:v1:'+who.student.id+':'+(who.systemUpgrade?.epoch||'original');
  if(!positions.current){try{positions.current=JSON.parse(sessionStorage.getItem(positionKey)||'{}');}catch{}if(!positions.current||typeof positions.current!=='object')positions.current={};}
@@ -30,14 +31,14 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   window.dispatchEvent(new CustomEvent('canran:save-journey',{detail:event?.detail}));
  }
  function cancel(){
-  sequence.current++;clearTimeout(timer.current);clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);
-  candidateRef.current=null;pendingRef.current=null;setCandidate(null);setLeaving(null);setPending(null);setError(null);setHint(false);setPhase('idle');
+  sequence.current++;clearTimeout(timer.current);clearTimeout(readyTimer.current);
+  candidateRef.current=null;pendingRef.current=null;setCandidate(null);setLeaving(null);setPending(null);setError(null);setPhase('idle');
  }
  function fail(id,reason){
   if(!alive.current||id!==sequence.current)return;
-  clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);
+  clearTimeout(readyTimer.current);
   if(reason?.status===401){cancel();setShown(null);shownRef.current=null;onSessionError(reason);return;}
-  candidateRef.current=null;setCandidate(null);setHint(false);setError(reason||Error('prepare'));setPhase('idle');
+  candidateRef.current=null;setCandidate(null);setError(reason||Error('prepare'));setPhase('idle');
  }
  async function navigate(route,{pop=false,initialLoad=false}={}){
   const previous=shownRef.current,wasPending=!!pendingRef.current;setAccount(null);cancel();
@@ -48,7 +49,6 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
    return;
   }
   savePosition();const id=++sequence.current,request={...route,id,pop,initialLoad};pendingRef.current=request;setPending(request);setPhase('preparing');
-  hintTimer.current=setTimeout(()=>{if(sequence.current===id)setHint(true);},160);
   readyTimer.current=setTimeout(()=>fail(id,Error('timeout')),80000);
   try{
    const data=route.page==='awards'?await loadCollection():initialLoad?who:await resolveWho();
@@ -60,7 +60,7 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
  function prepared(id){
   const next=candidateRef.current;if(!next||id!==sequence.current||next.id!==id||!alive.current)return;
   savePosition();const previous=shownRef.current,rect=previous&&nodes.current.get(previous.id)?.getBoundingClientRect();
-  clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);setHint(false);setError(null);
+  clearTimeout(readyTimer.current);setError(null);
   if(!next.initialLoad&&!next.pop)history.pushState({...history.state,studentWorkspace:true},'',next.url);
   else history.replaceState({...history.state,studentWorkspace:true},'',next.url);
   shownRef.current=next;candidateRef.current=null;pendingRef.current=null;
@@ -131,11 +131,10 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   const visibility=()=>{if(document.hidden){hidden=true;latest.current.savePosition();latest.current.cancel();setSuspended(true);setShown(null);shownRef.current=null;setAccount(null);}else if(hidden){hidden=false;onRefresh();}};
   document.addEventListener('click',click);window.addEventListener('popstate',pop);window.addEventListener('canran:open-account',account);window.addEventListener('pagehide',savePosition);document.addEventListener('visibilitychange',visibility);
   if(initial.current.page==='awards')void navigate(initial.current,{initialLoad:true});
-  return()=>{alive.current=false;sequence.current++;clearTimeout(timer.current);clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);document.removeEventListener('click',click);window.removeEventListener('popstate',pop);window.removeEventListener('canran:open-account',account);window.removeEventListener('canran:save-workspace',remember);window.removeEventListener('canran:cancel-workspace-navigation',stopPending);window.removeEventListener('pagehide',savePosition);document.removeEventListener('visibilitychange',visibility);history.scrollRestoration=oldRestoration;};
+  return()=>{alive.current=false;sequence.current++;clearTimeout(timer.current);clearTimeout(readyTimer.current);document.removeEventListener('click',click);window.removeEventListener('popstate',pop);window.removeEventListener('canran:open-account',account);window.removeEventListener('canran:save-workspace',remember);window.removeEventListener('canran:cancel-workspace-navigation',stopPending);window.removeEventListener('pagehide',savePosition);document.removeEventListener('visibilitychange',visibility);history.scrollRestoration=oldRestoration;};
  },[]);
  const layers=[leaving,shown,candidate].filter(Boolean);
  return <div ref={root} className="student-workspace" data-student-workspace data-page={shown?.page||'loading'} data-transition={phase} style={{visibility:suspended?'hidden':undefined}}>
-  {!shown&&<section className="workspace-loading" role="status"><h1>{error?'暂时无法打开'+title(pending?.page):'正在打开'+title(pending?.page||initial.current.page)+'…'}</h1></section>}
   {layers.map(layer=>{const stage=layer===candidate,old=layer===leaving,active=layer===shown;return <div key={layer.id} ref={node=>{if(node)nodes.current.set(layer.id,node);else nodes.current.delete(layer.id);}} className="student-page" data-page={layer.page} data-phase={stage?'preparing':old?'leaving':['entering','positioning'].includes(phase)?phase:'idle'} inert={!active} aria-hidden={!active||undefined} onAnimationEnd={event=>{if(active&&layer.id===shownRef.current?.id&&event.target===event.currentTarget&&event.animationName==='student-page-in'){setLeaving(null);setPhase('idle');}}} style={old?{top:layer.rect.top,left:layer.rect.left,width:layer.rect.width}:undefined}>
    {layer.page==='courses'?<Journey who={layer.who} base={base} waiting={layer.who.directoryWaiting??waiting} onRefresh={onRefresh} embedded active={active} onReady={restore=>journeyReady(layer,restore)}/>:<PostofficeAlbum collection={layer.collection} embedded active={active} onReady={()=>prepared(layer.id)} onPrepareError={reason=>fail(layer.id,reason)} onAccount={()=>setAccount('profile')} historyRequest={active?historyRequest:0}/>}
   </div>;})}
@@ -144,7 +143,7 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
    <a href={base+'awards/'} aria-label="我的纪念册" aria-current={shown?.page==='awards'?'page':undefined} aria-busy={pending?.page==='awards'&&!error||undefined}><BookOpen size={26} weight={shown?.page==='awards'?'fill':'regular'}/><span>纪念册</span></a>
    <button type="button" onClick={()=>setAccount('profile')} aria-haspopup="dialog"><User size={26}/><span>我的</span></button>
   </nav>
-  {(hint||error)&&pending&&<div className="student-navigation-status" role="status">{error?<><span>暂时无法打开{title(pending.page)}，请重试。</span><button type="button" onClick={()=>navigate(pending)}><ArrowClockwise size={18}/>重试切换</button></>:<span>正在打开{title(pending.page)}…</span>}{shown&&<button type="button" className="navigation-cancel" aria-label="取消切换" onClick={cancel}><X size={18}/></button>}</div>}
+  {pending&&<NavigationNotice key={pending.id} kind={pending.page==='awards'?'album':'home'} heading={!shown} error={!!error} onRetry={()=>navigate(pending,{pop:pending.pop,initialLoad:pending.initialLoad})} onCancel={shown?cancel:undefined}/>}
   <span className="journey-sr" aria-live="polite" aria-atomic="true">{announcement}</span>
   {account&&<AccountDialog student={(shown?.collection||shown?.who||who).student} base={base} view={account} onViewChange={setAccount} onClose={()=>setAccount(null)} onHistory={()=>{setAccount(null);navigate({page:'awards',url:base+'awards/',history:true});}}/>}
  </div>;

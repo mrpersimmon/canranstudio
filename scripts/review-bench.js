@@ -92,7 +92,11 @@ function watchSources(root,changed){
  return {close:()=>handles.forEach(w=>w.close()),reliable:()=>reliable};
 }
 async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watchSources,navigationPreview}={}){
- let navigationService,navigationRevision;
+ const navigationServices=new Map();let navigationRevision;
+ function closeNavigationPreviews(){
+  for(const service of navigationServices.values())service.then(preview=>preview.close()).catch(console.error);
+  navigationServices.clear();
+ }
  const courseHeaders={...LESSON_HEADER_CONTRACT,'x-frame-options':'SAMEORIGIN'};
  const cspKey=Object.keys(courseHeaders).find(k=>k.toLowerCase()==='content-security-policy');
  courseHeaders[cspKey]=courseHeaders[cspKey].replace(/frame-ancestors [^;]+/,"frame-ancestors 'self'");
@@ -130,9 +134,13 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
    const url=new URL(request.url,'http://'+request.headers.host);
    if(navigationPreview&&url.pathname==='/review/student-navigation'){
     if(request.method==='HEAD')return response.writeHead(200,{'Cache-Control':'no-store'}).end();
-    if(navigationRevision!==revision){navigationService?.then(service=>service.close()).catch(console.error);navigationService=null;navigationRevision=revision;}
-    navigationService??=navigationPreview(root).catch(error=>{navigationService=null;throw error;});
-    return (await navigationService).redirect(response);
+    if(navigationRevision!==revision){closeNavigationPreviews();navigationRevision=revision;}
+    const noticeDemo=url.searchParams.get('demo')==='notices';
+    if(!navigationServices.has(noticeDemo)){
+     const service=navigationPreview(root,{noticeDemo}).catch(error=>{if(navigationServices.get(noticeDemo)===service)navigationServices.delete(noticeDemo);throw error;});
+     navigationServices.set(noticeDemo,service);
+    }
+    return (await navigationServices.get(noticeDemo)).redirect(response);
    }
    let item,headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'"};
    if(url.pathname.startsWith('/review/word-concept/')){headers['X-Frame-Options']='SAMEORIGIN';headers['Content-Security-Policy']=headers['Content-Security-Policy'].replace("frame-ancestors 'none'","frame-ancestors 'self'");}
@@ -144,7 +152,7 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
     headers['X-Review-Build']=String(current.serial);item={body:current.catalogBody,type:'application/json; charset=utf-8'};
    }
    else if(publicFiles.has(url.pathname)){const file=publicFiles.get(url.pathname);item={body:await fs.readFile(path.join(root,file)),type:types[path.extname(file)]};
-    if(url.pathname==='/'&&navigationPreview)item.body=item.body.toString().replace('<!-- local-navigation -->','<a href="/review/student-navigation">验收首页与课程切换</a>');
+    if(url.pathname==='/'&&navigationPreview)item.body=item.body.toString().replace('<!-- local-navigation -->','<a href="/review/student-navigation">首页与课程</a><a href="/review/student-navigation?demo=notices">切换提示</a>');
    }
    else if(url.pathname.startsWith(base)){
     const relative=url.pathname.slice(base.length)+(url.pathname.endsWith('/')?'index.html':'');
@@ -155,7 +163,7 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
    response.writeHead(200,{...headers,'Content-Type':item.type});response.end(request.method==='HEAD'?undefined:item.body);
   }catch(error){console.error('Review request:',error.message);response.writeHead(500,{'Content-Type':'text/plain; charset=utf-8'}).end('验收服务暂时不可用，请查看本地日志。');}
  });
- server.on('close',()=>{watcher?.close?.();navigationService?.then(service=>service.close()).catch(console.error);});
+ server.on('close',()=>{watcher?.close?.();closeNavigationPreviews();});
  try{await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});}catch(error){watcher?.close?.();throw error;}return server;
 }
 if(require.main===module)createReviewServer({port:Number(process.env.REVIEW_PORT||4401),navigationPreview:require('./review-student-navigation').createNavigationPreview}).then(server=>console.log('页面验收台：http://127.0.0.1:'+server.address().port+'/')).catch(error=>{console.error(error);process.exitCode=1;});

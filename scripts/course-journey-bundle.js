@@ -11,8 +11,8 @@ function createCourseJourney(root,basePath,{cache=true}={}){
   return bundles.get(key);
 }
 async function compile(root,basePath){
-  const result=await build({absWorkingDir:root,entryPoints:['course-journey/main.jsx'],bundle:true,write:false,
-    outdir:path.join(root,'dist-login/journey'),entryNames:'journey',define:{'process.env.NODE_ENV':'"production"'},
+  const result=await build({absWorkingDir:root,entryPoints:{journey:'course-journey/main.jsx','student-handoff':'server/public/student-handoff.js'},bundle:true,write:false,
+    outdir:path.join(root,'dist-login/journey'),entryNames:'[name]',define:{'process.env.NODE_ENV':'"production"'},
     minify:true,target:['es2020'],legalComments:'eof',assetNames:'[name]-[hash]',publicPath:basePath+'awards/static',loader:{'.webp':'file','.png':'file','.woff2':'file'}});
   const types={'.js':'text/javascript','.css':'text/css','.webp':'image/webp','.png':'image/png','.woff2':'font/woff2'};
   const files=new Map(result.outputFiles.map(file=>{const extension=path.extname(file.path),name=path.basename(file.path);return [extension==='.js'||extension==='.css'?name:'awards/static/'+name,{body:Buffer.from(file.contents),type:types[extension]}];}));
