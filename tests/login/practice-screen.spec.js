@@ -42,6 +42,44 @@ test('375×667配对题不用滚动即可配对和检查，反馈保持原位',a
  }finally{await student.context.close();}
 });
 
+test('Lesson 5–6 的六个介绍词块恢复为三行时仍能同屏完成',async({page,browser})=>{
+ test.setTimeout(90000);await adminLogin(page,base);
+ const account=await createStudent(page,'小屏介绍词块','小禾',[/Lesson 5–6 /]);
+ const student=await studentLogin(browser,account,base,{viewport:{width:375,height:667},hasTouch:true}),p=student.page;
+ try{
+  await p.goto(base+'unit5-6/#learn/exam');await lastFlow.ready(p);
+  const room=p.locator('.stage-exam'),check=room.getByRole('button',{name:'检查答案',exact:true});
+  await room.getByRole('button',{name:'Hans 是德国人；汽车是日本品牌',exact:true}).click();await check.click();
+  await room.getByRole('button',{name:'下一题',exact:true}).click();await expect(room.locator('.wordbank .word-token')).toHaveCount(6);
+  // Restore the legal shuffle that placed "This is" on the third row in WebKit.
+  await p.evaluate(()=>{
+   const key=CanranCore.learningContext.progress.learningKey,book=JSON.parse(localStorage.getItem(key));
+   const group=Object.values(book.groups).find(g=>g.signature?.split('|').includes('u56-v1-exam-intro'));
+   if(group?.index!==1)throw Error('尚未进入第二道挑战题');
+   group.states[1].tokenOrder=[2,5,3,0,4,1];localStorage.setItem(key,JSON.stringify(book));
+  });
+  await p.reload();await lastFlow.ready(p);
+  const bank=room.locator('.wordbank'),tokens=bank.locator('button');
+  await expect(tokens.last()).toHaveAttribute('aria-label','This is');
+  const actionPositions=new Map();
+  for(const phase of ['blank','correct']){
+   for(const [width,height] of [...requiredPhoneViewports(),[320,568]]){
+    await p.setViewportSize({width,height});await expect(p.locator('body')).toHaveAttribute('data-practice-viewport',width+'x'+height);
+    const state=await measureQuestion(room);
+    expect(state.overflow,width+' '+phase).toBeLessThanOrEqual(2);expect(state.outside).toEqual([]);
+    if(phase==='blank'){
+     actionPositions.set(width,state.actions.y);
+     for(const token of await tokens.all())expect((await token.boundingBox()).height).toBeGreaterThanOrEqual(44);
+    }else expect(Math.abs(state.actions.y-actionPositions.get(width))).toBeLessThanOrEqual(1);
+   }
+   if(phase==='blank'){
+    for(const word of ['Good morning.','This is','Hans.',"He's",'a German','student.'])await bank.getByRole('button',{name:word,exact:true}).click();
+    await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');
+   }
+  }
+ }finally{await student.context.close();}
+});
+
 for(const pair of ['1-2','3-4','5-6'])test(`Lesson ${pair} 全部题目在手机的作答与反馈布局`,async({page,browser},info)=>{
  test.setTimeout(240000);await adminLogin(page,base);const label=pair.replace('-','–');
  const account=await createStudent(page,'全题单屏'+pair,'小禾',[new RegExp('Lesson '+label+' ')]),student=await studentLogin(browser,account,base,{viewport:{width:375,height:667},hasTouch:true}),p=student.page;

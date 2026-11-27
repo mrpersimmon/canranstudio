@@ -359,4 +359,5 @@ body[data-learning-shell] #lessonWorkspace .stage-certificate>.offline-task{marg
  body[data-learning-shell] #lessonWorkspace .learning-surface .translation-answer{padding:4px 18px 4px 4px;gap:4px;margin-bottom:4px}
  body[data-learning-shell] #lessonWorkspace .learning-surface .learning-tight-question .practice-progress{margin-bottom:4px}
  body[data-learning-shell] #lessonWorkspace .learning-surface .learning-tight-question .sentence-options{margin-block:2px;row-gap:3px}
+ body[data-learning-shell] #lessonWorkspace .learning-surface .learning-tight-question .sentence-options>:is(.word-answer,.wordbank){row-gap:3px;padding-block:0}
 }
