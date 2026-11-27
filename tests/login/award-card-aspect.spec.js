@@ -2,6 +2,7 @@
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {activity}=require('../support/thirteen-types-flow');
+const {devices,contextOptions}=require('../support/required-phone-devices');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 const sizes=[[375,667],[320,568],[600,800],[601,800],[768,1024],[1280,800],[667,375],[375,667]];
 const parts=['.story-award-brand,.card-brand','.story-award-title,.card-title','.story-award-name,.card-name','.story-award-stars,.card-stars','.story-award-illustration,.card-scene','.story-award-foot,.card-caption'];
@@ -53,5 +54,32 @@ test('真实得星卡片与课程及纪念册共用横版构图，旋转不改�
   const sheet=p.getByRole('dialog',{name:'Lesson 1–2 纪念卡',exact:true});
   sameComposition(await geometry(sheet.locator('.certificate')),original);
   expect((await(await p.request.get(base+'api/awards')).json()).cards).toEqual(before);
+ }finally{await learner.context.close();}
+});
+
+for(const device of devices)test(device.name+' 星星落位后的浏览器动画停住，仍能收下原卡并继续学习',async({page,browser})=>{
+ test.setTimeout(90000);await adminLogin(page,base);
+ const account=await createStudent(page,'落星收尾验收 '+device.id,'小禾',[/Lesson 1–2 /]);
+ const learner=await studentLogin(browser,account,base,contextOptions(device)),p=learner.page;
+ try{
+  await learner.context.addInitScript(()=>{
+   const animate=Element.prototype.animate;
+   Element.prototype.animate=function(frames,options){
+    const animation=animate.call(this,frames,options);
+    if(this.matches('.award-reveal .award-star')){
+     animation.pause();
+     window.landingWasLocked=this.closest('dialog').dataset.dismissible==='false';
+    }
+    return animation;
+   };
+  });
+  await activity(p,'1-2','listen',{base:base.slice(0,-1),keepAward:true});
+  const card=p.getByRole('dialog',{name:/纪念卡结算/});
+  await expect.poll(()=>p.evaluate(()=>window.landingWasLocked)).toBe(true);
+  await expect(card).toHaveAttribute('data-dismissible','true');
+  await expect(card.locator('.award-star[data-earned="true"]')).toHaveCount(1);
+  await card.press('Escape');await expect(card).toHaveCount(0);
+  await expect(p.locator('.stage-listen .completion-card')).toBeVisible();
+  await expect(p.locator('#starCount')).toHaveText('1');
  }finally{await learner.context.close();}
 });

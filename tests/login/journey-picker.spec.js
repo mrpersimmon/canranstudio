@@ -8,10 +8,12 @@ const {dismissRewardDialog}=require('../support/reward-dialog');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 const four=[/Lesson 1–2 /,/Lesson 3–4 /,/Lesson 5–6 /,/Lesson 7–8 /];
 const fourth='unit7-8';
+// The recovery project defaults to a touch phone, including for new contexts.
+const desktopOptions=height=>({viewport:{width:1048,height},screen:{width:1048,height},isMobile:false,hasTouch:false,deviceScaleFactor:1,userAgent:undefined});
 for(const device of [null,...devices])test((device?.name||'桌面')+' 四课账号选择第四课、双击、得星并返回原地标',async({page,browser},info)=>{
  test.setTimeout(100000);await adminLogin(page,base);
  const student=await createStudent(page,'课程选择 '+(device?.id||'desktop'),'小禾',four);
- const {page:p,context}=await studentLogin(browser,student,base,device?contextOptions(device):{viewport:{width:1048,height:900}});
+ const {page:p,context}=await studentLogin(browser,student,base,device?contextOptions(device):desktopOptions(900));
  try{
   // Observe the first mounted chapter in each new document, including the
   // returning home before it is presented. Never seed selection or progress.
@@ -94,10 +96,11 @@ test('从第五六课的纪念卡进入下一课，返回首页优先定位实�
 test('桌面长列表独立滚动，清除搜索保留当前课程',async({page,browser})=>{
  await adminLogin(page,base);const student=await createStudent(page,'侧栏长目录','小禾',[]);
  await page.getByRole('button',{name:'全选课程',exact:true}).click();await saveCourses(page);
- const {page:p,context}=await studentLogin(browser,student,base,{viewport:{width:1048,height:720}});
+ const {page:p,context}=await studentLogin(browser,student,base,desktopOptions(720));
  try{
   const list=p.locator('.journey-directory-desktop'),rows=list.locator('[data-course-select]'),search=p.getByRole('searchbox');
   await expect(rows).toHaveCount(72);
+  expect(await p.evaluate(()=>navigator.maxTouchPoints)).toBe(0);
   const before=[await search.boundingBox(),await p.locator('.journey-start').boundingBox(),await p.evaluate(()=>scrollY)];
   await list.hover();await p.mouse.wheel(0,1200);
   await expect.poll(()=>list.evaluate(node=>node.scrollTop)).toBeGreaterThan(100);
