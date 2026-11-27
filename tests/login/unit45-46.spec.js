@@ -1,5 +1,5 @@
 'use strict';
-const {returnToHome,studentDocument}=require('../support/student-document');
+const {expectCachedWordReturn,returnToHome,studentDocument}=require('../support/student-document');
 const {courseButton,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin: loginStudent, enterDirectoryCourse } = require('./helpers');
@@ -154,13 +154,7 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
     await ready(p);await expect(p.locator('.unit-word')).toHaveCount(6);await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     await courseButton(p, "nextWords").click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
-    await p.getByRole('link',{name:'我的课程',exact:true}).click();
-    const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
-    await p.locator('.course').getByRole('link',{name:/学习/}).click();
-    await ready(p);
-    await expect(p.locator('#wordPageProgress')).toHaveText('2 / 4');
-    expect(downloads).toEqual([]);
-    expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+    await expectCachedWordReturn(p,'2 / 4',ready);
   }finally{await student.context.close();}
 });
 

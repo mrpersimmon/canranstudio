@@ -19,9 +19,9 @@ function courseButton(scope,action,options={}){
   const find=name=>scope.getByRole('button',{exact:true,...options,name});
   if(!Object.hasOwn(buttons,action))return find(action);
   const [current,historical]=buttons[action];
-  const document=typeof scope.page==='function'?scope.page():scope;
-  return find(current).and(document.locator('body[data-learning-shell] button'))
-    .or(find(historical).and(document.locator('body:not([data-learning-shell]) button')));
+  // Check the body containing this button, including inside an active lesson frame.
+  return find(current).locator('xpath=self::button[ancestor::body[@data-learning-shell]]')
+    .or(find(historical).locator('xpath=self::button[ancestor::body[not(@data-learning-shell)]]'));
 }
 async function readyCourse(page){
   await courseReadyForAssertions(page);

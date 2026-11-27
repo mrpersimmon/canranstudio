@@ -1,5 +1,5 @@
 'use strict';
-const {expectCachedWordReturn,returnToHome,studentDocument}=require('../support/student-document');
+const {expectCachedWordReturn,returnToHome,studentDocument,openStudentDocument}=require('../support/student-document');
 const {courseButton,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const { adminLogin, createStudent, studentLogin: loginStudent, enterDirectoryCourse } = require('./helpers');
@@ -26,9 +26,9 @@ test('课程入口保持班级授权：新课可单独开放', async ({ page, br
     await enterDirectoryCourse(learner.page);
     const course=await studentDocument(learner.page,/unit27-28\/#learn\/words/);await ready(course);
     await expect(course.locator('.unit-word')).toHaveCount(6);
-    await learner.page.goto(base+'unit27-28/#learn/certificate');await ready(learner.page);
-    await expect(learner.page.locator('.legacy-learning')).toHaveCount(0);
-    await expect(learner.page.locator('.historical-learning')).toHaveCount(0);
+    const certificate=await openStudentDocument(learner.page,base+'unit27-28/#learn/certificate');await ready(certificate);
+    await expect(certificate.locator('.legacy-learning')).toHaveCount(0);
+    await expect(certificate.locator('.historical-learning')).toHaveCount(0);
   } finally { await learner.context.close(); }
 });
 

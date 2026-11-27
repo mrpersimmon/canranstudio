@@ -1,5 +1,5 @@
 'use strict';
-const {studentDocument}=require('../support/student-document');
+const {studentDocument,openStudentDocument}=require('../support/student-document');
 
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises'), os = require('node:os'), path = require('node:path');
@@ -59,10 +59,13 @@ test('已有学号密码和真实已完成活动从 lesson 迁至根目录，不
     await f.move('/');
     await signIn(page, account, '/'); await enterDirectoryCourse(page);
     const course=await studentDocument(page,/unit13-14\//);await expect(course.locator('#starCount')).toHaveText(stars);
-    await page.goto('/unit13-14/#learn/roles');
-    await expect(page.locator('.stage-roles').getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
-    await completeActivity(page, 'grammar'); await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    await page.reload(); await expect(page.locator('#starCount')).not.toHaveText(stars);
+    const story=await openStudentDocument(page,'/unit13-14/#learn/roles');
+    await expect(story.locator('.stage-roles').getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
+    await story.getByRole('link',{name:'语法',exact:true}).click();
+    const grammar=await studentDocument(page,/unit13-14\/#learn\/grammar$/);
+    await completeActivity(grammar,'grammar','',{navigate:false});
+    await expect(grammar.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+    await page.reload(); await expect(page.locator('#starCount')).toHaveText(String(Number(stars)+1));
   } finally { await f.close(); }
 });
 

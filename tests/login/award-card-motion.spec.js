@@ -78,9 +78,9 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     await student.context.setOffline(true);
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-one-star', false);
     await student.context.setOffline(false);
-    await openCanranAward(p);
-    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
-    await lights(p.locator('.postoffice-hero-card .certificate'), 1);
+    const firstAlbum=await openCanranAward(p);
+    await expect(firstAlbum.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
+    await lights(firstAlbum.locator('.postoffice-hero-card .certificate'), 1);
     await readStory(p, course);
     for (const id of ['roles', 'trans', 'manners', 'exam']) {
       await finishZone(p, id, { base: course, keepAward: true });
@@ -94,23 +94,23 @@ test('课程底部、纪念册和保存动图保持部分星与满星光效，�
     requests.length = 0;
     await saveMotion(p, p.getByRole('button', { name: '保存动图', exact: true }), 'course-full-stars', true);
     expect(requests).toEqual([]);
-    await openCanranAward(p);
-    await expect(p.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
-    await lights(p.locator('.postoffice-hero-card .certificate'), 5);
-    await p.getByRole('button', { name: '我的', exact: true }).click();
-    const turnSwitch = p.getByRole('switch', { name: '纪念册动效' });
+    const album=await openCanranAward(p);
+    await expect(album.locator('.postoffice-scene')).toHaveAttribute('aria-busy', 'false');
+    await lights(album.locator('.postoffice-hero-card .certificate'), 5);
+    await album.getByRole('button', { name: '我的', exact: true }).click();
+    const turnSwitch = album.getByRole('switch', { name: '纪念册动效' });
     if (await turnSwitch.getAttribute('aria-checked') === 'true') await turnSwitch.click();
-    await p.getByRole('button', { name: '关闭我的', exact: true }).click();
-    await lights(p.locator('.postoffice-hero-card .certificate'), 5);
-    await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
-    const modal = p.getByRole('dialog', { name: 'Lesson 1–2 纪念卡', exact: true });
+    await album.getByRole('button', { name: '关闭我的', exact: true }).click();
+    await lights(album.locator('.postoffice-hero-card .certificate'), 5);
+    await album.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
+    const modal = album.getByRole('dialog', { name: 'Lesson 1–2 纪念卡', exact: true });
     await lights(modal.locator('.certificate'), 5);
     // Closing during generation must not leave a delayed download behind.
     const downloads = []; p.on('download', file => downloads.push(file));
     await modal.getByRole('button', { name: '保存动图', exact: true }).click();
     await expect(modal.getByRole('button', { name: '正在保存…', exact: true })).toBeDisabled();
     await modal.getByRole('button', { name: '关闭纪念卡', exact: true }).click();
-    await p.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
+    await album.getByRole('button', { name: '查看并保存纪念卡：Lesson 1–2 礼貌小帮手', exact: true }).click();
     await saveMotion(p, modal.getByRole('button', { name: '保存动图', exact: true }), 'album-full-stars', true);
     expect(downloads).toHaveLength(1);
     await modal.getByRole('button', { name: '关闭纪念卡', exact: true }).click();

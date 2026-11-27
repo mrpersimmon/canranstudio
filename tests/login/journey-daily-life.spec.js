@@ -76,9 +76,8 @@ test('跨两段稀疏授权不泄露课程，缺图可切段和搜索，重试�
  const student=await studentLogin(browser,account,base,{viewport:{width:1440,height:1024},serviceWorkers:'block'}),p=student.page;
  try{
   const before=await(await p.request.get(base+'api/me')).json();
-  // Desktop keeps the directory in the sidebar; its real closing control is
-  // “返回地图”, unlike the mobile modal's “关闭课程目录”.
-  await p.getByRole('button',{name:'返回地图',exact:true}).click();
+  await expect(p.locator('.journey-directory-desktop [data-course-select]')).toHaveCount(2);
+  await expect(p.getByRole('searchbox',{name:'查找 Lesson',exact:true})).toBeVisible();
   await expect(p.locator('[data-map-course]')).toHaveCount(1);await expect(p.locator('[data-map-course]')).toHaveAttribute('data-map-course','unit23-24');
   expect((await p.request.get(base+'unit21-22/')).status()).toBe(403);
   let hits=0;await p.route('**/assets/course-journey/shelf-glasses-pair-v1.webp*',route=>{hits++;return route.abort();});
@@ -100,7 +99,7 @@ test('新六课人物有点击回弹，金章可重看，减少动态立即停�
  try{
   const before=await(await p.request.get(base+'api/me')).json();
   await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars:5}))}});});
-  await p.reload();await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
+  await p.reload();await expect(p.getByRole('button',{name:'搜索 Lesson 或课程名称',exact:true})).toHaveAttribute('aria-expanded','false');
   for(const [chapter,courseIds] of chapters){
    await chooseJourneyChapter(p,chapter);await waitForModulesReady(p,courseIds);await expect(p.locator('[data-completion-medal]')).toHaveCount(3);
    for(const id of courseIds){

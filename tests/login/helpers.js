@@ -1,5 +1,6 @@
 'use strict';
 const {readyCourse}=require('../support/course-controls');
+const {studentDocument,returnToHome}=require('../support/student-document');
 const { expect } = require('@playwright/test');
 async function adminLogin(page, base = '/lesson/') {
   await page.goto(base + 'admin/');
@@ -114,8 +115,9 @@ async function openCourseSettings(page){
   return dialog;
 }
 async function openCanranAward(page){
-  await page.getByRole('link',{name:'我的课程',exact:true}).click();
-  await page.getByRole('link',{name:'我的纪念册',exact:true}).click();
-  await expect(page).toHaveURL(/\/awards\/(?:[?#].*)?$/);
+  const course=await studentDocument(page,page.url());
+  const home=await returnToHome(page,course);
+  await home.getByRole('link',{name:'我的纪念册',exact:true}).click();
+  return studentDocument(page,/\/awards\/(?:[?#].*)?$/);
 }
 module.exports = { openCanranAward, openCourseSettings, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, selectDirectoryCourse, enterDirectoryCourse, openMyAccount, readInitialPassword };

@@ -16,9 +16,10 @@ async function story(page,base=''){
  while(await room.getByRole('button',{name:'下一句',exact:true}).isVisible())await room.getByRole('button',{name:'下一句',exact:true}).click();
  await expect(room.locator('.btext span')).toHaveText(DIALOGUE);await expect(room.locator('.bname')).toHaveText(SPEAKERS);await courseButton(room, "finishStory").click();
 }
-async function activity(page,id,{base='',inspect,keepAward=false,expectPerfect=true}={}){
+async function activity(page,id,{base='',inspect,keepAward=false,expectPerfect=true,navigate=true}={}){
  await require('./reward-dialog').handleRewardDialog(page,keepAward);
- await page.goto(base+'/unit13-14/#learn/'+id);const room=page.locator('.stage-'+id),answers=ANSWERS[id];await expect(room).toBeVisible({timeout:30000});
+ if(navigate)await page.goto(base+'/unit13-14/#learn/'+id);
+ const room=page.locator('.stage-'+id),answers=ANSWERS[id];await expect(room).toBeVisible({timeout:30000});
  const index=await restoredPracticeIndex(room);
  if(index===null){if(!keepAward)await require('./reward-dialog').finishRewardPresentation(page,room);return room;}
  for(let i=index;i<answers.length;i++){const check=room.getByRole('button',{name:'检查答案',exact:true});await expect(room.locator('.progress-copy')).toHaveText(`第 ${i+1} / ${answers.length} 题`);await inspect?.(room,i,'before');await select(room,answers[i]);await check.click();await expect(room.locator('.fb')).toHaveText('答对了！');await inspect?.(room,i,'correct');await courseButton(room, i===answers.length-1?"finishPractice":'下一题').click();}

@@ -1,12 +1,15 @@
 'use strict';
 const {courseButton}=require('../support/course-controls');
 const {test,expect}=require('@playwright/test');
-const {adminLogin,createStudent,studentLogin}=require('./helpers');
+const {openCourseDirectory,adminLogin,createStudent,studentLogin}=require('./helpers');
+const {returnToHome}=require('../support/student-document');
 const five=require('../support/unit3940-fivezones');
 const complete=async(page,base)=>{await five.story(page,base);for(const id of Object.keys(five.ANSWERS))await five.activity(page,id,{base});};
 test('39–40默认不开放、单课授权登录通关同步，换设备续用证书，其他班级直链拒绝',async({page,browser})=>{
  test.setTimeout(180000);await adminLogin(page);const account=await createStudent(page,'花瓶验收班','花瓶同学',[/Lesson 39–40 /]);const first=await studentLogin(browser,account);let second,closed;
- try{await expect(first.page.locator('.course')).toHaveCount(1);await expect(first.page.locator('.journey-row-copy strong')).toHaveText('花瓶安放小帮手');await expect(first.page.locator('.journey-dock').getByRole('link',{name:'开始学习：花瓶安放小帮手',exact:true})).toHaveAttribute('href','/lesson/unit39-40/#learn/words');await complete(first.page,'/lesson');await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');await first.page.getByRole('link',{name:'我的课程',exact:true}).click();await first.page.screenshot({path:'output/playwright/unit39-40/auth-banner.png',fullPage:true});await expect(first.page.locator('.course')).toContainText('5 / 5');
+ try{await expect(first.page.locator('.course')).toHaveCount(1);await expect(first.page.locator('.journey-row-copy strong')).toHaveText('花瓶安放小帮手');await expect(first.page.locator('.journey-dock').getByRole('link',{name:'开始学习：花瓶安放小帮手',exact:true})).toHaveAttribute('href','/lesson/unit39-40/#learn/words');await complete(first.page,'/lesson');await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
+ const home=await returnToHome(first.page);await openCourseDirectory(home);
+ await first.page.screenshot({path:'output/playwright/unit39-40/auth-banner.png',fullPage:true});await expect(home.locator('.course')).toContainText('5 / 5');
  second=await studentLogin(browser,account);await expect(second.page.locator('.course')).toContainText('5 / 5');await second.page.goto('/lesson/unit39-40/#learn/certificate');await expect(second.page.locator('.stage-certificate .story-award-paper')).toHaveAttribute('data-stars','5');await expect(second.page.locator('#certificateName')).toHaveText('花瓶同学');
  await page.goto('/lesson/admin/');const other=await createStudent(page,'只有花园的班','小河',[/Lesson 31–32 /]);await expect(page.getByRole('checkbox',{name:/Lesson 39–40 /})).not.toBeChecked();closed=await studentLogin(browser,other);await expect(closed.page.locator('[data-unit="unit39-40"]')).toHaveCount(0);await closed.page.goto('/lesson/unit39-40/');await expect(closed.page.getByRole('heading',{name:'这节课还没向你的班级开放',exact:true})).toBeVisible();await second.page.goto('/lesson/lesson49/');await expect(second.page.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();
  }finally{await first.context.close();await second?.context.close();await closed?.context.close();}

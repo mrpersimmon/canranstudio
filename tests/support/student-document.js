@@ -21,6 +21,11 @@ async function returnToHome(page,screen=page,name='我的课程'){
  await link.click();
  return studentDocument(page,url.href);
 }
+async function openStudentDocument(page,href){
+ const url=new URL(href,page.url()).href;
+ await page.goto(url);
+ return studentDocument(page,url);
+}
 async function expectCachedWordReturn(page,progress,ready){
  const url=new URL(page.url());
  const home=await returnToHome(page);
@@ -36,4 +41,4 @@ async function expectCachedWordReturn(page,progress,ready){
   expect(await course.locator('img').evaluateAll(images=>images.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
  }finally{page.off('request',track);}
 }
-module.exports={studentDocument,returnToHome,expectCachedWordReturn};
+module.exports={studentDocument,openStudentDocument,returnToHome,expectCachedWordReturn};
