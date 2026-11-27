@@ -3,8 +3,9 @@ const path=require('node:path');
 const {build}=require('esbuild');
 const {normalizeBasePath}=require('./public-base-path');
 const bundles=new Map();
-function createCourseJourney(root,basePath){
+function createCourseJourney(root,basePath,{cache=true}={}){
   normalizeBasePath(basePath);
+  if(!cache)return compile(root,basePath);
   const key=root+':'+basePath;
   if(!bundles.has(key))bundles.set(key,compile(root,basePath).catch(error=>{bundles.delete(key);throw error;}));
   return bundles.get(key);

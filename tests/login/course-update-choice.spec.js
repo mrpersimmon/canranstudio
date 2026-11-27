@@ -1,9 +1,10 @@
 'use strict';
 const {readyCourse}=require('../support/course-controls');
+const {studentDocument}=require('../support/student-document');
 const {test,expect}=require('@playwright/test');
 const crypto=require('node:crypto');
 const fs=require('node:fs'),path=require('node:path');
-const {adminLogin,createStudent,studentLogin}=require('./helpers');
+const {adminLogin,createStudent,studentLogin,enterDirectoryCourse}=require('./helpers');
 const {courseResponse}=require('../support/course-response-faults');
 const {finishZone}=require('../support/unit1-2-award-flow');
 const base=process.env.AWARD_TEST_BASE||'/lesson/',course=base+'unit1-2/';
@@ -52,13 +53,13 @@ test('已打开页仅提示刷新，下一次进入自动使用最新课包，�
   await Promise.all([p.waitForEvent('domcontentloaded'),notice.getByRole('button',{name:'刷新课程',exact:true}).click()]);await ready(p);await expect(p).toHaveTitle('新版课程选择验收');
   await expect(p).toHaveURL(resumeUrl);await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
   await expect(notice).toHaveCount(0);expect(await(await p.request.get(base+'api/awards')).json()).toEqual(awards);
-  await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(card.locator('.primary-button')).toBeVisible();
+  await p.goto(base);const card=p.locator('[data-unit="unit1-2"]');await expect(p.locator('.journey-start')).toBeVisible();
   await expect(card.locator('.course-update-choice')).toHaveCount(0);
   await expect(card.getByRole('link',{name:'进入新版',exact:true})).toHaveCount(0);
-  const entry=card.locator('.primary-button'),destination=new URL(await entry.getAttribute('href'),p.url()).href;
-  await entry.click();await expect(p).toHaveURL(destination);
-  await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
-  await expect(p.locator('.learning-surface')).toBeVisible();await expect(p).toHaveTitle('新版课程选择验收');
+  const entry=p.locator('.journey-start'),destination=new URL(await entry.getAttribute('href'),p.url()).href;
+  await entry.click();const screen=await studentDocument(p,destination);
+  await expect(screen.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
+  await expect(screen.locator('.learning-surface')).toBeVisible();await expect(p).toHaveTitle('新版课程选择验收');
  }finally{await student.context.close();}
 });
 
@@ -117,10 +118,10 @@ test('升级前缓存的旧加载程序在重新进入时直接使用最新版�
   let initialChecks=0;p.on('response',response=>{if(response.url().endsWith(base+'course-index.json'))initialChecks++;});
   await p.goto(course+'#learn/words');await ready(p);await position(p);await expect.poll(()=>initialChecks).toBeGreaterThanOrEqual(2);
   await courseResponse(p,base+'core/course-loader.js',null);await courseResponse(p,base+'course-index.json',null);await publish(p);
-  await p.goto(base);await expect(p.locator('[data-unit="unit1-2"] .primary-button')).toBeVisible();
+  await p.goto(base);await expect(p.locator('.journey-start')).toBeVisible();
   await expect(p.locator('[data-unit="unit1-2"] .course-update-choice')).toHaveCount(0);
-  await p.locator('[data-unit="unit1-2"] .primary-button').click();await ready(p);
-  await expect(p).toHaveTitle('新版课程选择验收');await expect(p.locator('#wordPageProgress')).toContainText('2 / 4');
-  await expect(p.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
+  await enterDirectoryCourse(p,'unit1-2');const screen=await studentDocument(p,/unit1-2\//);await ready(screen);
+  await expect(p).toHaveTitle('新版课程选择验收');await expect(screen.locator('#wordPageProgress')).toContainText('2 / 4');
+  await expect(screen.getByRole('button',{name:'继续当前版本',exact:true})).toHaveCount(0);
  }finally{await student.context.close();}
 });

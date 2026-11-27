@@ -32,7 +32,7 @@ function WorldStop({course,world,index,base,ground,groundReady,groundFailed,retr
  </article>;
 }
 
-export function PanoramaJourney({chapter,courses,base,selected,tap,celebration,onChoose,onArtReady,generation,renderInfo,active=true,onSceneSettled}){
+export function PanoramaJourney({chapter,courses,base,selected,tap,celebration,onChoose,onArtReady,generation,renderInfo,waypost,active=true,onSceneSettled}){
  const world=routeWorlds.worlds[chapter.id],slots=routeWorlds.visibleSlots(world,courses);
  const [attempt,setAttempt]=useState(0),[status,setStatus]=useState('loading'),version=useRef(0);
  const [people,setPeople]=useState({}),settledCallback=useRef(onSceneSettled),currentGeneration=useRef(generation);
@@ -50,9 +50,12 @@ export function PanoramaJourney({chapter,courses,base,selected,tap,celebration,o
  function retry(){version.current++;setStatus('loading');setAttempt(value=>value+1);}
  function loaded(event){const img=event.currentTarget,source=img.currentSrc,current=attempt;img.decode().then(()=>{if(img.isConnected&&img.currentSrc===source&&version.current===current)setStatus('ready');}).catch(()=>{if(img.isConnected&&version.current===current)setStatus('error');});}
  return <div className="journey-map-scene journey-modules journey-panorama" data-chapter={chapter.id} data-composition="modules" data-map-state="ready" data-empty={!slots.length}>
+  <div className="journey-world-frame">
   <div className="journey-world" data-route-world={chapter.id} data-world-state={status} style={{'--journey-stop-ratio':world.width*world.ids.length/world.height}}>
    {!!slots.length&&<img key={attempt} className="journey-world-terrain" data-route-terrain src={ground} alt="" width={world.width} height={world.height} decoding="async" draggable="false" style={{top:-slots[0].index*100/slots.length+'%',visibility:status==='ready'?'visible':'hidden'}} onLoad={loaded} onError={event=>{if(event.currentTarget.isConnected&&version.current===attempt)setStatus('error');}}/>}
    {slots.map(slot=>slot.course?<WorldStop key={slot.course.id} course={slot.course} world={world} index={slot.index} base={base} ground={ground} groundReady={status==='ready'} groundFailed={status==='error'} retryGround={retry} selected={selected===slot.course.id} tap={tap} celebration={celebration} onChoose={onChoose} onArtReady={onArtReady} onPersonState={personState} active={active} generation={generation} renderInfo={renderInfo}/>:<div key={'passage:'+slot.index} className="journey-world-passage" aria-hidden="true"/>)}
+  </div>
+  {waypost&&slots.length>0&&<div className="journey-path-end">{waypost}</div>}
   </div>
  </div>;
 }

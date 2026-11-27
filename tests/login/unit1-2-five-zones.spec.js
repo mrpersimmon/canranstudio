@@ -50,7 +50,7 @@ test('错答后完成可继续学习，首页与另一设备均不把完成换�
     await expect(report.locator('.learning-stars')).toHaveAttribute('aria-label', '已获得 0 颗星');
     second = await studentLogin(browser, account);
     await expect(second.page.locator('.course')).toContainText('0 / 5');
-    await expect(second.page.locator('.course').getByRole('link', { name: '继续学习：礼貌小帮手', exact: true })).toBeVisible();
+    await expect(second.page.locator('.journey-dock').getByRole('link', { name: '继续学习：礼貌小帮手', exact: true })).toBeVisible();
     await second.page.goto('/lesson/unit1-2/#learn/manners');
     await expect(second.page.locator('#starCount')).toHaveText('0');
     await expectRoundCounts(second.page.locator('.stage-manners .completion-number'), ['5','5','1']);

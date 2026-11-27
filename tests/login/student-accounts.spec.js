@@ -1,6 +1,8 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
+
 const { test, expect } = require('@playwright/test');
-const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword } = require('./helpers');
+const { saveCourses, adminLogin, createStudent, fillLogin, setPassword, studentLogin, readInitialPassword, enterDirectoryCourse } = require('./helpers');
 const {openMyAccount}=require('./helpers');
 const { completeActivity } = require('../support/account-course13');
 
@@ -198,6 +200,6 @@ test('丢失账号可按姓名找回，重置撤销旧密码与登录但保留�
     await fillLogin(b.page, account, resetPassword);
     await setPassword(b.page, 'Recovered-journey-2026!');
     await expect(b.page.locator('.course')).toContainText('1 / 5');
-    await b.page.locator('.course .primary-button').click(); await expect(b.page.locator('#starCount')).toHaveText('1');
+    await enterDirectoryCourse(b.page); const course=await studentDocument(b.page,/unit13-14\//); await expect(course.locator('#starCount')).toHaveText('1');
   } finally { await a.context.close(); await b.context.close(); }
 });

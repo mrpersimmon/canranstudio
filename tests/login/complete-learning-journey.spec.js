@@ -1,7 +1,8 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises');
-const {adminLogin,createStudent,studentLogin}=require('./helpers');
+const {adminLogin,createStudent,studentLogin,enterDirectoryCourse}=require('./helpers');
 const {definition}=require('../../server/progress');
 const {choose}=require('../support/answer-question');
 const {devices,contextOptions}=require('../support/required-phone-devices');
@@ -16,15 +17,16 @@ for(const [number,unit]of units.entries())test(unit+' complete learner journey p
  await adminLogin(page,base);const lessons=[new RegExp('^Lesson '+first+'–'+(first+1)+' ')];if(next)lessons.push(new RegExp('^Lesson '+(first+2)+'–'+(first+3)+' '));
  const account=await createStudent(page,'全流程-'+unit,'验收同学',lessons),student=await studentLogin(browser,account,base,contextOptions(device)),p=student.page,report={unit,device:device.id,activities:[],corrected:null};
  try{
-  await handleRewardDialog(p,false);
-  await p.locator('.course[data-unit="'+unit+'"] [data-course-enter]').click();await courseReadyForAssertions(p);
-  if(await p.getByRole('button',{name:'开始冒险',exact:true}).isVisible())await p.getByRole('button',{name:'开始冒险',exact:true}).click();
-  else await p.locator('.learning-milestones a').first().click();await expect(p.locator('body')).toHaveAttribute('data-learning-view','words');
-  const wordPages=+(await p.locator('#wordPageProgress').textContent()).split('/')[1];
-  for(let i=0;i<wordPages;i++){await p.locator('.unit-word').first().click();await expect(p.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');await p.locator('.word-controls button').last().click();}
+  await enterDirectoryCourse(p,unit);
+  let course=await studentDocument(p,new RegExp('/'+unit+'/'));await courseReadyForAssertions(course);
+  await handleRewardDialog(course,false);
+  if(await course.getByRole('button',{name:'开始冒险',exact:true}).isVisible())await course.getByRole('button',{name:'开始冒险',exact:true}).click();
+  else await course.locator('.learning-milestones a').first().click();await expect(course.locator('body')).toHaveAttribute('data-learning-view','words');
+  const wordPages=+(await course.locator('#wordPageProgress').textContent()).split('/')[1];
+  for(let i=0;i<wordPages;i++){await course.locator('.unit-word').first().click();await expect(course.locator('.unit-word').first()).toHaveAttribute('aria-expanded','true');await course.locator('.word-controls button').last().click();}
   for(const stage of u.stages)for(const [activity]of stage.activities){
    if(activity==='words'||activity==='certificate')continue;
-   const room=p.locator('.stage-'+activity);await expect(room).toBeVisible();
+   let room=course.locator('.stage-'+activity);await expect(room).toBeVisible();
    if(activity==='text'){
     for(let i=0;i<u.learning.DIALOGUE.length;i++)await room.locator('.stage-ctrl>.btn-green').click();
     await expect(room.locator('.bubble-row')).toHaveCount(u.learning.DIALOGUE.length);await room.locator('.stage-ctrl>.btn-green').click();report.activities.push({activity,lines:u.learning.DIALOGUE.length});continue;
@@ -37,22 +39,22 @@ for(const [number,unit]of units.entries())test(unit+' complete learner journey p
     }
     await choose(room,q);await room.getByRole('button',{name:'检查答案',exact:true}).click();await expect(room.locator('.fb')).toHaveText('答对了！');
     if(activity==='exam'&&i===2){
-     const snapshot=await stored(p);await room.getByRole('button',{name:'上一题',exact:true}).click();await expect(room.locator('[data-practice-review]')).toHaveCount(1);
-     expect(await stored(p)).toEqual(snapshot);await room.getByRole('button',{name:'回到当前题',exact:true}).click();await p.reload();await courseReadyForAssertions(p);expect(await stored(p)).toEqual(snapshot);
+     const snapshot=await stored(course);await room.getByRole('button',{name:'上一题',exact:true}).click();await expect(room.locator('[data-practice-review]')).toHaveCount(1);
+     expect(await stored(course)).toEqual(snapshot);await room.getByRole('button',{name:'回到当前题',exact:true}).click();await p.reload();course=p.mainFrame();room=course.locator('.stage-'+activity);await handleRewardDialog(course,false);await courseReadyForAssertions(course);expect(await stored(course)).toEqual(snapshot);
     }
     await room.getByRole('button',{name:i===list.length-1?/^完成/:'下一题',exact:i!==list.length-1}).click();
    }
-   await finishRewardPresentation(p,room);await expect(room.locator('.completion-number').nth(1)).toHaveText(String(list.length-corrected));await expect(room.locator('.completion-number').nth(2)).toHaveText(String(corrected));
+   await finishRewardPresentation(course,room);await expect(room.locator('.completion-number').nth(1)).toHaveText(String(list.length-corrected));await expect(room.locator('.completion-number').nth(2)).toHaveText(String(corrected));
    await expect(room.getByRole('link',{name:'返回首页',exact:true})).toHaveCount(0);
    report.activities.push({activity,questions:list.length,corrected});await room.locator('.practice-finish-actions .btn-green').click();
   }
-  const certificate=p.locator('.stage-certificate .story-award-paper');await expect(certificate).toBeVisible();const before=await stored(p),cardText=await certificate.innerText();
+  const certificate=course.locator('.stage-certificate .story-award-paper');await expect(certificate).toBeVisible();const before=await stored(course),cardText=await certificate.innerText();
   expect(before.records[report.corrected].attempts).toBe(2);expect(before.records[report.corrected].firstCorrect).toBe(false);
-  await p.reload();await courseReadyForAssertions(p);expect(await stored(p)).toEqual(before);expect(await certificate.innerText()).toBe(cardText);
+  await p.reload();course=p.mainFrame();await courseReadyForAssertions(course);expect(await stored(course)).toEqual(before);expect(await course.locator('.stage-certificate .story-award-paper').innerText()).toBe(cardText);
   await p.screenshot({path:info.outputPath(unit+'-card.png'),scale:'css'});
   if(next){await p.locator('[data-course-exit=next]').click();await courseReadyForAssertions(p);await expect(p).toHaveURL(new RegExp('/'+next+'/'));await p.locator('.practice-screen-back').click();}
   else await p.locator('[data-course-exit=home]').click();
-  await expect(p.locator('.journey-home')).toBeVisible();await expect(p.getByLabel('密码',{exact:true})).toHaveCount(0);
+  const home=await studentDocument(p,new URL(base,p.url()).href);await expect(home.locator('.journey-home')).toBeVisible();await expect(home.getByLabel('密码',{exact:true})).toHaveCount(0);
   await fs.writeFile(info.outputPath('journey.json'),JSON.stringify(report,null,2));
  }finally{await student.context.close();}
 });

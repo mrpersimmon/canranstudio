@@ -34,13 +34,15 @@ async function finishRewardPresentation(page, room) {
 // isVisible() probe after completion can miss a later server confirmation.
 // Animation tests explicitly keep the dialog and remove this handler.
 async function handleRewardDialog(page, keepAward = false) {
+  const owner=typeof page.page==='function'?page.page():page;
   const existing = handlers.get(page);
   if (keepAward) {
-    if (existing) await page.removeLocatorHandler(existing);
+    if (existing) await owner.removeLocatorHandler(existing);
     handlers.delete(page);
   } else if (!existing) {
-    const dialog = page.locator('dialog.award-reveal[open]');
-    await page.addLocatorHandler(dialog, async () => {
+    const scope=page.parentFrame?.()?owner.frameLocator('iframe[data-student-view="active"]'):owner;
+    const dialog = scope.locator('dialog.award-reveal[open]');
+    await owner.addLocatorHandler(dialog, async () => {
       // The card owns focus until its confirmed star has landed. A learning
       // walkthrough must wait for the same dismissal gate as the student;
       // repeated early Esc presses would now correctly leave the card open.

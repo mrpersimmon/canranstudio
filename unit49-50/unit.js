@@ -39,12 +39,7 @@
   }
   const aliases = unit.routeAliases;
   const normalizeRoute = id => aliases[id] || id;
-  const navigate = id => {
-    id = normalizeRoute(id);
-    // Scrolling back to the cover keeps the hash; resume must still reposition.
-    if (location.hash === '#' + id) route();
-    else location.hash = id;
-  };
+  const navigate = core.unitSession.navigator(normalizeRoute, route);
   const locationTracker = core.unitSession.location(routes, practice);
   const markLocation = locationTracker.mark;
   function route() {
@@ -53,7 +48,7 @@
     if (!routes.has(id)) id = 'cover';
     if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
     markLocation(id);
-    document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    core.unitSession.scrollToRoute(id);
     if(id==='learn/text'||id==='l2') log.scrollTop=log.scrollHeight;
   }
   $('#lessonWorkspace').addEventListener('click', event => {

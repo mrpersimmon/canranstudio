@@ -39,12 +39,7 @@
     $('#lessonWorkspace').append(section);
   }
   const routeAlias = id => unit.routeAliases?.[id] || id;
-  const navigate = id => {
-    id = routeAlias(id);
-    // Scrolling back to the cover keeps the hash; resume must still reposition.
-    if (location.hash === '#' + id) route();
-    else location.hash = id;
-  };
+  const navigate = core.unitSession.navigator(routeAlias, route);
   const locationTracker = core.unitSession.location(routes, practice, updateProgress);
   const markLocation = locationTracker.mark;
   function route() {
@@ -53,7 +48,7 @@
     if (id !== current) history.replaceState(null, '', '#' + id);
     if (!routes.has(id)) id = 'cover'; markLocation(id);
     document.documentElement.style.scrollPaddingTop = Math.ceil($('#topbar').getBoundingClientRect().height) + 12 + 'px';
-    document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    core.unitSession.scrollToRoute(id);
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     if(event.target.closest('[data-practice-review], [data-practice-review-navigation]'))return;

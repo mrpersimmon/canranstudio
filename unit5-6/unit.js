@@ -40,19 +40,14 @@
     }
     $('#lessonWorkspace').append(section);
   }
-  const navigate = id => {
-    id=canonicalRoute(id);
-    // Scrolling back to the cover keeps the hash; resume must still reposition.
-    if (location.hash === '#' + id) route();
-    else location.hash = id;
-  };
+  const navigate = core.unitSession.navigator(canonicalRoute, route);
   const locationTracker = core.unitSession.location(routes, practice);
   const markLocation = locationTracker.mark;
   function route() {
     let id; try { id = decodeURIComponent(location.hash.slice(1) || 'cover'); } catch { id = 'cover'; }
     id=canonicalRoute(id);if (!routes.has(id)) id = 'cover';if(location.hash!=='#'+id)history.replaceState(null,'','#'+id);markLocation(id);
     document.documentElement.style.scrollPaddingTop=($('#topbar').getBoundingClientRect().height+12)+'px';
-    document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    core.unitSession.scrollToRoute(id);
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     if(event.target.closest('[data-practice-review], [data-practice-review-navigation]'))return;

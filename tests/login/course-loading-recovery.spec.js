@@ -1,8 +1,9 @@
 'use strict';
+const {returnToHome,studentDocument}=require('../support/student-document');
 const { test, expect } = require('@playwright/test');
 const crypto = require('node:crypto');
 const { courseResponse } = require('../support/course-response-faults');
-const { adminLogin, createStudent, studentLogin } = require('./helpers');
+const { adminLogin, createStudent, studentLogin, enterDirectoryCourse } = require('./helpers');
 const { dismissRewardDialog } = require('../support/reward-dialog');
 const flow = require('../support/thirteen-types-flow');
 const base = process.env.AWARD_TEST_BASE || '/lesson/';
@@ -183,9 +184,11 @@ for (const { name, serviceWorkers, unwritable } of [
     await expect(room).toBeVisible({ timeout: 15000 });
     await expect(room).toContainText('第 2 / 5 题');
     await p.goto(base);
-    await p.locator('.course[data-unit="unit1-2"]').getByRole('link').click();
-    await expect(p.locator('#courseLoader')).toHaveCount(0, { timeout: 15000 });
-    await expect(p.locator('#starCount')).toHaveText('1');
+    await enterDirectoryCourse(p,'unit1-2');
+    const screen=await studentDocument(p,/unit1-2\//,15000);
+    await expect(screen.locator('#courseLoader')).toHaveCount(0, { timeout: 15000 });
+    await expect(screen.locator('#starCount')).toHaveText('1');
+    await p.reload();
     await flow.activity(p, '1-2', 'manners', { base: base.replace(/\/$/, '') });
     await expect(p.locator('#starCount')).toHaveText('1');
     const corrected=room.locator('.completion-stats .stat-incorrect');
@@ -328,9 +331,9 @@ test('满星后资源失效重试不改变姓名、五星和首次满星日期�
     await p.reload();
     await waitForCourseReady(p, info, 'certificate-reload');
     await expect(p.locator('#certificateDate')).toHaveText(date);
-    await p.getByRole('link', { name: '我的课程', exact: true }).click();
-    await p.locator('.course[data-unit="unit1-2"]').getByRole('link').click();
-    await p.goto(course + '#learn/certificate');
+    const home=await returnToHome(p);
+    await enterDirectoryCourse(home,'unit1-2');
+    await studentDocument(p,/unit1-2\//);await p.goto(course + '#learn/certificate');await p.reload();
     await waitForCourseReady(p, info, 'certificate-directory-return');
     await expect(p.locator('#starCount')).toHaveText('5');
     await expect(p.locator('#certificateName')).toHaveText('小禾');

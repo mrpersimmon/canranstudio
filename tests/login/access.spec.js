@@ -1,9 +1,11 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
+
 const {courseButton,incorrectFeedback}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
 const {devices}=require('../support/required-phone-devices');
 
-const {adminLogin, createStudent, fillLogin, openCourseSettings, openMyAccount, saveCourses, setPassword, signIn, studentLogin, waitForCourseReady}=require('./helpers');
+const {adminLogin, createStudent, fillLogin, openCourseSettings, openMyAccount, saveCourses, setPassword, signIn, studentLogin, waitForCourseReady,enterDirectoryCourse}=require('./helpers');
 
 test('未登录先看到学号密码入口，不能直接进入教学单元', async ({ page }) => {
   await page.goto('/lesson/');
@@ -21,9 +23,10 @@ test('学号密码进入自己的班级，七项下架且旧直链不能越权',
   await signIn(student,code);
   await expect(student.getByRole('heading',{name:'小明的课程'})).toBeVisible();
   await expect(student.locator('.course')).toHaveCount(1);
-  await student.locator('.course .primary-button').click();
+  await enterDirectoryCourse(student);
   await expect(student).toHaveURL(/\/unit1-2\/#learn\/words$/);
-  await expect(student.getByRole('region',{name:'单词小图鉴',exact:true}).getByRole('button',{name:'下一组',exact:true})).toBeVisible();
+  const course=await studentDocument(student,/unit1-2\/#learn\/words$/);
+  await expect(course.getByRole('region',{name:'单词小图鉴',exact:true}).getByRole('button',{name:'下一组',exact:true})).toBeVisible();
   await student.goto('/lesson/unit3-4/');
   await expect(student.getByRole('heading',{name:'这节课还没向你的班级开放'})).toBeVisible();
   for (const id of ['lesson49','lesson50','lesson51','lesson52','lesson53','lesson54','soundmark']) {

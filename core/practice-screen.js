@@ -157,7 +157,7 @@
   menuContent.replaceChildren();
   const status=document.getElementById('studentSyncStatus');if(status)menuContent.append(make('p','practice-screen-menu-status',flow&&status.dataset.syncState==='synced'?'已同步':status.textContent));
   const count=document.getElementById('starCount');if(count)menuContent.append(make('p','practice-screen-menu-stars','本单元星星 '+count.textContent+' / 5'));
-  if(flow){action('课程封面',()=>{menu.close();location.hash='cover';});action('我的纪念卡',()=>{menu.close();location.hash='learn/certificate';});}
+  if(flow){action('课程封面',()=>{menu.close();root.CanranCore.unitSession.navigate('cover');});action('我的纪念卡',()=>{menu.close();root.CanranCore.unitSession.navigate('learn/certificate');});}
   const controller=root.CanranCore.lesson49Practice.controllerFor?.(runner),progress=controller?.progress();
   if(progress?.reviewEnabled){
    if(progress.reviewing)action(progress.completed?'返回本轮结果':'回到当前题',()=>reviewAction(()=>controller.returnCurrent()));
@@ -191,7 +191,7 @@
  };
  menu.addEventListener('click',event=>{if(event.target===menu){const r=menu.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)menu.close();}});
  document.addEventListener('close',event=>{if(event.target===menu&&menu.hasAttribute('data-review-navigation')){menu.removeAttribute('data-review-navigation');return;}const fromMenu=event.target===menu||event.target.id==='unitNotebook'||event.target.matches?.('.student-settings-dialog');if(active&&fromMenu)requestAnimationFrame(()=>{if(!document.querySelector('dialog[open]'))more.focus({preventScroll:true});});},true);
- chapters.addEventListener('change',()=>{if(flow&&chapters.value==='cover')location.hash='cover';else{originalNav.value=chapters.value;originalNav.dispatchEvent(new Event('change',{bubbles:true}));}schedule();});
+ chapters.addEventListener('change',()=>{if(flow&&chapters.value==='cover')root.CanranCore.unitSession.navigate('cover');else{originalNav.value=chapters.value;originalNav.dispatchEvent(new Event('change',{bubbles:true}));}schedule();});
  function prepareHints(){
   const hint=runner?.querySelector('.practice-hint'),button=runner?.querySelector('.practice-hint-button');
   if(!hint||!button)return;

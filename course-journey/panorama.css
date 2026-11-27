@@ -6,7 +6,8 @@
 .journey-switch-status{position:absolute;z-index:5;top:16px;right:16px;padding:8px 14px!important;border-radius:20px;background:#fffaf0f5;box-shadow:0 3px 12px #51342220;font-size:14px}
 .journey-map-scene.journey-panorama{position:relative;padding:0;background:transparent;overflow:clip}
 .journey-world-distant{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
-.journey-world{position:relative;z-index:1;isolation:isolate;width:100%;max-width:480px;margin:0 auto;overflow:clip;background:#eee5cc}
+.journey-world-frame{position:relative;z-index:1;width:100%;max-width:480px;margin:0 auto;overflow:clip;background:#eee5cc}
+.journey-world{position:relative;isolation:isolate;width:100%;overflow:clip;background:#eee5cc}
 .journey-world-terrain{position:absolute;left:0;width:100%;height:auto;max-width:none;display:block;z-index:-1;pointer-events:none;user-select:none}
 .journey-world-stop.journey-module{box-sizing:border-box;width:100%;max-width:none;aspect-ratio:var(--journey-stop-ratio,1);flex:none;padding:0 0 16px;display:flex;flex-direction:column;align-items:center}
 .journey-world-stop .journey-module-stage{box-sizing:content-box;width:100%;aspect-ratio:auto;min-height:0;height:8px;padding-top:var(--journey-figure-bottom);flex:none;position:relative}
@@ -20,9 +21,16 @@
 .journey-world-stop .journey-map-stars,.journey-world-stop .journey-map-caption{z-index:2}
 .journey-world-passage{width:100%;aspect-ratio:var(--journey-stop-ratio,1);pointer-events:none}
 .journey-panorama[data-empty=true]{min-height:320px}
+.journey-path-end{position:relative;height:clamp(8px,calc(198px - 44vw),52px);background:var(--journey-paper)}
+.journey-path-end::before{content:'';position:absolute;top:-7px;left:-3%;width:106%;height:12px;border-radius:45% 55% 0 0/100% 100% 0 0;background:var(--journey-paper);pointer-events:none}
+.journey-home .journey-waypost{position:absolute;right:11%;bottom:8px;width:clamp(188px,49%,198px);aspect-ratio:3/1;min-height:44px;display:block;border:0;border-radius:8px;background:transparent;box-shadow:none;color:#fff8df;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.journey-waypost::before{content:'';position:absolute;inset:15% 12% 29% 4%;border-radius:5px;background:#345a36}
+.journey-waypost::after{content:'';position:absolute;inset:0;pointer-events:none;background:url('../assets/course-journey/next-map-waypost-v1.webp') center/contain no-repeat;filter:drop-shadow(0 1px 1px #50362235)}
+.journey-waypost-lettering{position:absolute;z-index:1;left:8%;right:13%;top:12%;bottom:29%;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;line-height:1.15;text-shadow:0 1px 1px #364223}
+.journey-waypost-lettering small{font-size:12px}.journey-waypost-lettering strong{font-size:15px}
 @media(min-width:768px){
  .journey-map-scene.journey-panorama{padding:24px}
- .journey-world{max-width:560px;border-radius:22px;outline:5px solid #fffbef;box-shadow:0 8px 28px #5b614c25}
+ .journey-world-frame{max-width:560px;border-radius:22px;outline:5px solid #fffbef;box-shadow:0 8px 28px #5b614c25}
  .journey-world-stop.journey-module{width:100%;align-self:auto}
 }
 @media(prefers-reduced-motion:reduce){.journey-world-stop .journey-landmark-select[data-pressed=true] .journey-story-motion{transform:none}}

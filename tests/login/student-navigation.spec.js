@@ -60,8 +60,8 @@ test('手机目录只有一个滚动区域，长目录、短结果和末课均�
  try{
   for(const [width,height] of [[320,568],[393,852],[612,913],[768,900]]){
    await p.setViewportSize({width,height});await p.goto(base);await expect(p.locator('.journey-home')).toBeVisible();
-   if(await p.locator('.journey-all').getAttribute('aria-expanded')!=='true')await p.getByRole('button',{name:'全部课程',exact:true}).click();
-   const dialog=p.getByRole('dialog',{name:'全部课程',exact:true});
+   await p.getByRole('button',{name:'搜索 Lesson 或课程名称',exact:true}).click();
+   const dialog=p.getByRole('dialog',{name:'选择课程',exact:true});
    await expect(p.getByLabel('旅程地图范围',{exact:true})).toHaveCount(0);
    if(browserName==='webkit'&&isMobile){
     testInfo.annotations.push({type:'platform-limit',description:'Mobile WebKit has no mouse wheel API; outer programmatic scroll and native focus scrolling remain checked.'});
@@ -70,11 +70,11 @@ test('手机目录只有一个滚动区域，长目录、短结果和末课均�
    // hidden/auto scroll container. The inner list still follows real focus.
    await dialog.evaluate(el=>{el.scrollTop=900;});
    expect(await dialog.evaluate(el=>el.scrollTop)).toBe(0);
-   const last=dialog.locator('.journey-locate').last();await last.focus();
+   const last=dialog.locator('[data-course-select]').last();await last.focus();
    const state=await dialog.evaluate(el=>{const list=el.querySelector('.journey-course-list'),r=list.getBoundingClientRect(),last=list.querySelector('.journey-course:last-child').getBoundingClientRect();return {outerScroll:el.scrollTop,listScroll:list.scrollTop,listBottom:r.bottom,lastBottom:last.bottom,dialogBottom:el.getBoundingClientRect().bottom,screen:innerHeight};});
    expect(state.outerScroll).toBe(0);expect(state.listScroll).toBeGreaterThan(0);expect(state.lastBottom).toBeLessThanOrEqual(state.listBottom+1);expect(state.dialogBottom).toBeLessThanOrEqual(height+1);
    await dialog.getByRole('searchbox',{name:'查找 Lesson',exact:true}).fill('9999');await expect(dialog.getByText('没有找到这节课',{exact:true})).toBeVisible();expect((await dialog.boundingBox()).height).toBeLessThanOrEqual(height);
-   await dialog.getByRole('searchbox',{name:'查找 Lesson',exact:true}).fill('144');await dialog.locator('.journey-course:not([hidden]) .journey-locate').click();await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','woodland');
+   await dialog.getByRole('searchbox',{name:'查找 Lesson',exact:true}).fill('144');await dialog.locator('.journey-course:not([hidden]) [data-course-select]').click();await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','woodland');
   }
  }finally{await learner.context.close();}
 });

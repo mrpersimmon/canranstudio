@@ -38,7 +38,7 @@
       }).finally(()=>controllers.delete(controller));
   }
   function sample(){
-    if(stopped||!ready||document.visibilityState!=='visible')return;
+    if(stopped||!ready||window.CanranStudentHandoff?.preparing||window.CanranStudentHandoff?.retired||document.visibilityState!=='visible')return;
     const current=pageKind(),data=measure();if(!current||!data)return;
     if(current!==activeKind){activeKind=current;last=null;seen=new Set();changes=0;capped=false;}
     const identity=JSON.stringify([current,...Object.values(data)]);
@@ -75,6 +75,8 @@
     for(const controller of controllers)controller.abort();controllers.clear();pending.clear();
   }
   window.CanranViewportMetrics={stop};
+  window.addEventListener('canran:student-view-active',schedule,{once:true});
+  window.addEventListener('canran:retire-student-view',stop,{once:true});
   Promise.resolve(document.fonts?.ready).catch(()=>{}).then(()=>{
     if(stopped)return;ready=true;
     // Portal login/home transitions happen without a full document navigation.

@@ -30,9 +30,9 @@ export function useMapLayout(mapRef,desktop,scenes=artwork.scenes,contentKey='')
       if(!width)return;
       if(!scenes){
         const scene=map.querySelector('.journey-map-scene');
-        const captions=[...map.querySelectorAll('[data-map-info]')].filter(node=>!node.closest('[data-staging=true]'));
-        const tail=scene&&captions.length?scene.getBoundingClientRect().bottom-Math.max(...captions.map(node=>node.getBoundingClientRect().bottom)):0;
-        const next=chrome(tail);
+        const controls=[...map.querySelectorAll('[data-map-info],.journey-waypost')].filter(node=>!node.closest('[data-staging=true]'));
+        const tail=scene&&controls.length?scene.getBoundingClientRect().bottom-Math.max(...controls.map(node=>node.getBoundingClientRect().bottom)):0;
+        const next={...chrome(tail),measuredFor:contentKey};
         setLayout(previous=>JSON.stringify(previous)===JSON.stringify(next)?previous:next);
         return;
       }
@@ -50,7 +50,7 @@ export function useMapLayout(mapRef,desktop,scenes=artwork.scenes,contentKey='')
       // Keep 16px above the dock plus a 2px underlap for fractional pixel and
       // scroll rounding, without scaling or moving the original artboard.
       if(!desktop)next.height=Math.max(next.height,next.top+next.overlays.bottom+18);
-      Object.assign(next,chrome(next.height-next.top-next.overlays.bottom));
+      Object.assign(next,chrome(next.height-next.top-next.overlays.bottom),{measuredFor:contentKey});
       setLayout(previous=>JSON.stringify(previous)===JSON.stringify(next)?previous:next);
     };
     const schedule=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(measure);};

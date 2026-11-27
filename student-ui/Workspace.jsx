@@ -1,6 +1,7 @@
 import React,{useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {House,BookOpen,User,ArrowClockwise,X} from '@phosphor-icons/react';
 import {App as Journey} from '../course-journey/App';
+import journeyModel from '../course-journey/model';
 import {PostofficeAlbum} from '../award-book/Postoffice';
 import {loadCollection} from '../award-book/App';
 import {AccountDialog} from './AccountDialog';
@@ -18,14 +19,15 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
  const [account,setAccount]=useState(openLegacy?'legacy':openProfile?'profile':null),[historyRequest,setHistoryRequest]=useState(0),[suspended,setSuspended]=useState(false);
  const positions=useRef(),positionKey='canran:workspace:v1:'+who.student.id+':'+(who.systemUpgrade?.epoch||'original');
  if(!positions.current){try{positions.current=JSON.parse(sessionStorage.getItem(positionKey)||'{}');}catch{}if(!positions.current||typeof positions.current!=='object')positions.current={};}
- if(!positions.current.courses)try{const previous=JSON.parse(sessionStorage.getItem('canran:journey:v1:'+who.student.id)||'null');if(previous)positions.current.courses={scroll:Number(previous.scroll)||0,sidebar:0};}catch{}
+ if(!positions.current.courses)try{const previous=JSON.parse(sessionStorage.getItem(journeyModel.bookmarkKey(who))||'null');if(previous)positions.current.courses={scroll:Number(previous.scroll)||0,sidebar:0};}catch{}
  const latest=useRef({});
- function savePosition(){
+ function savePosition(event){
+  if(window.CanranStudentHandoff?.retired)return;
   const current=shownRef.current;if(!current)return;
-  const node=nodes.current.get(current.id),sidebar=node?.querySelector('.journey-sidebar,.postoffice-sidebar');
-  positions.current[current.page]={scroll:window.scrollY,sidebar:sidebar?.scrollTop||0};
+  const node=nodes.current.get(current.id),sidebar=node?.querySelector('.journey-directory-desktop,.postoffice-sidebar');
+  positions.current[current.page]={scroll:window.scrollY,sidebar:sidebar?.scrollTop??positions.current[current.page]?.sidebar??0};
   try{sessionStorage.setItem(positionKey,JSON.stringify(positions.current));}catch{}
-  window.dispatchEvent(new Event('canran:save-journey'));
+  window.dispatchEvent(new CustomEvent('canran:save-journey',{detail:event?.detail}));
  }
  function cancel(){
   sequence.current++;clearTimeout(timer.current);clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);
@@ -67,6 +69,19 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   setPhase(animate?'positioning':'restore');if(next.history)setHistoryRequest(v=>v+1);
   document.title=next.page==='awards'?'我的纪念册 · 灿然英语工作室':'灿然英语工作室';setAnnouncement('我的'+title(next.page)+'已打开');
  }
+ function journeyReady(layer,restoreCoursePosition){
+  if(candidateRef.current?.id===layer.id){prepared(layer.id);return;}
+  const nav=window.CanranStudentHandoff;
+  if(!nav||shownRef.current?.id!==layer.id)return;
+  const node=nodes.current.get(layer.id);
+  if(nav.preparing){
+   if(node?.querySelector('[data-world-state="error"],[data-map-state="error"]')){nav.error();return;}
+   const position=positions.current.courses;
+   if(position){window.scrollTo({top:position.scroll||0,behavior:'instant'});const side=node?.querySelector('.journey-directory-desktop');if(side)side.scrollTop=position.sidebar||0;}
+   restoreCoursePosition?.();
+  }
+  nav.ready(layer.who);
+ }
  shownRef.current=shown;latest.current={navigate,cancel,savePosition};
  useEffect(()=>{
   const refreshed=async event=>{
@@ -83,7 +98,8 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   if(!shown||!['positioning','restore'].includes(phase))return;
   const position=positions.current[shown.page]||{scroll:0,sidebar:0},node=nodes.current.get(shown.id);
   window.scrollTo({top:Number(position.scroll)||0,behavior:'instant'});
-  const sidebar=node?.querySelector('.journey-sidebar,.postoffice-sidebar');if(sidebar)sidebar.scrollTop=Number(position.sidebar)||0;
+  const sidebar=node?.querySelector('.journey-directory-desktop,.postoffice-sidebar');if(sidebar)sidebar.scrollTop=Number(position.sidebar)||0;
+  if(shown.page==='awards'&&window.CanranStudentHandoff?.preparing)window.CanranStudentHandoff.ready(who);
   // Position and measure the incoming view before starting its CSS animation.
   // A fixed 240ms cleanup can beat WebKit's first painted frame under load.
   const frame=requestAnimationFrame(()=>{if(phase==='restore'){setLeaving(null);setPhase('idle');}else setPhase('entering');});
@@ -106,6 +122,8 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
  },[shown?.page,pending?.page,error,base]);
  useEffect(()=>{
   alive.current=true;const oldRestoration=history.scrollRestoration;history.scrollRestoration='manual';
+  const remember=event=>latest.current.savePosition(event);window.addEventListener('canran:save-workspace',remember);
+  const stopPending=()=>{if(pendingRef.current)latest.current.cancel();};window.addEventListener('canran:cancel-workspace-navigation',stopPending);
   const click=event=>{const link=event.target.closest?.('a[href]');if(!link||!routes.plainLink(event,link))return;const route=routes.destination(link.href,base,location.origin);if(!route)return;event.preventDefault();latest.current.navigate(route);};
   const pop=()=>{const route=routes.destination(location.href,base,location.origin);if(route)latest.current.navigate(route,{pop:true});else location.reload();};
   const account=()=>setAccount('profile');
@@ -113,13 +131,13 @@ export function Workspace({who,base,waiting,onRefresh,resolveWho,onPageActive,on
   const visibility=()=>{if(document.hidden){hidden=true;latest.current.savePosition();latest.current.cancel();setSuspended(true);setShown(null);shownRef.current=null;setAccount(null);}else if(hidden){hidden=false;onRefresh();}};
   document.addEventListener('click',click);window.addEventListener('popstate',pop);window.addEventListener('canran:open-account',account);window.addEventListener('pagehide',savePosition);document.addEventListener('visibilitychange',visibility);
   if(initial.current.page==='awards')void navigate(initial.current,{initialLoad:true});
-  return()=>{alive.current=false;sequence.current++;clearTimeout(timer.current);clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);document.removeEventListener('click',click);window.removeEventListener('popstate',pop);window.removeEventListener('canran:open-account',account);window.removeEventListener('pagehide',savePosition);document.removeEventListener('visibilitychange',visibility);history.scrollRestoration=oldRestoration;};
+  return()=>{alive.current=false;sequence.current++;clearTimeout(timer.current);clearTimeout(hintTimer.current);clearTimeout(readyTimer.current);document.removeEventListener('click',click);window.removeEventListener('popstate',pop);window.removeEventListener('canran:open-account',account);window.removeEventListener('canran:save-workspace',remember);window.removeEventListener('canran:cancel-workspace-navigation',stopPending);window.removeEventListener('pagehide',savePosition);document.removeEventListener('visibilitychange',visibility);history.scrollRestoration=oldRestoration;};
  },[]);
  const layers=[leaving,shown,candidate].filter(Boolean);
  return <div ref={root} className="student-workspace" data-student-workspace data-page={shown?.page||'loading'} data-transition={phase} style={{visibility:suspended?'hidden':undefined}}>
   {!shown&&<section className="workspace-loading" role="status"><h1>{error?'暂时无法打开'+title(pending?.page):'正在打开'+title(pending?.page||initial.current.page)+'…'}</h1></section>}
   {layers.map(layer=>{const stage=layer===candidate,old=layer===leaving,active=layer===shown;return <div key={layer.id} ref={node=>{if(node)nodes.current.set(layer.id,node);else nodes.current.delete(layer.id);}} className="student-page" data-page={layer.page} data-phase={stage?'preparing':old?'leaving':['entering','positioning'].includes(phase)?phase:'idle'} inert={!active} aria-hidden={!active||undefined} onAnimationEnd={event=>{if(active&&layer.id===shownRef.current?.id&&event.target===event.currentTarget&&event.animationName==='student-page-in'){setLeaving(null);setPhase('idle');}}} style={old?{top:layer.rect.top,left:layer.rect.left,width:layer.rect.width}:undefined}>
-   {layer.page==='courses'?<Journey who={layer.who} base={base} waiting={layer.who.directoryWaiting??waiting} onRefresh={onRefresh} embedded active={active} onReady={()=>prepared(layer.id)}/>:<PostofficeAlbum collection={layer.collection} embedded active={active} onReady={()=>prepared(layer.id)} onPrepareError={reason=>fail(layer.id,reason)} onAccount={()=>setAccount('profile')} historyRequest={active?historyRequest:0}/>}
+   {layer.page==='courses'?<Journey who={layer.who} base={base} waiting={layer.who.directoryWaiting??waiting} onRefresh={onRefresh} embedded active={active} onReady={restore=>journeyReady(layer,restore)}/>:<PostofficeAlbum collection={layer.collection} embedded active={active} onReady={()=>prepared(layer.id)} onPrepareError={reason=>fail(layer.id,reason)} onAccount={()=>setAccount('profile')} historyRequest={active?historyRequest:0}/>}
   </div>;})}
   <nav className="student-bottom-nav journey-bottom-nav" data-student-bottom-nav aria-label="底部主导航">
    <a href={base} aria-label="我的课程" aria-current={shown?.page==='courses'?'page':undefined} aria-busy={pending?.page==='courses'&&!error||undefined}><House size={26} weight={shown?.page==='courses'?'fill':'regular'}/><span>课程</span></a>

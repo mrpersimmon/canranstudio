@@ -1,4 +1,5 @@
 'use strict';
+const {returnToHome}=require('../support/student-document');
 const {courseTimeline,readyCourse}=require('../support/course-controls');
 const sharp = require('sharp');
 const { test, expect } = require('@playwright/test');
@@ -173,7 +174,7 @@ test('订正完成但零星，课程首页仍可继续学习',async({browser,pag
   await expectManagedLearning(page, account, mount, '学习中', 0);
   await room.getByRole('button',{name:'再试一次',exact:true}).click();await finishZone(p,'trans',{base});
   await expect(p.locator('#starCount')).toHaveText('0');await expect(p.locator('#studentSyncStatus')).toHaveText('已同步');
-  await p.getByRole('link',{name:'我的课程',exact:true}).click();
-  await expect(p.locator('.course').getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toBeVisible();
+  const home=await returnToHome(p);
+  await expect(home.locator('.journey-dock').getByRole('link',{name:'继续学习：礼貌小帮手',exact:true})).toBeVisible();
  }finally{await student.context.close();}
 });

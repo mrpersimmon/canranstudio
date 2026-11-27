@@ -1,4 +1,5 @@
 'use strict';
+const {returnToHome}=require('../support/student-document');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {finishZone,readStory,answers}=require('../support/unit1-2-award-flow');
@@ -50,18 +51,19 @@ test('真实一星持续亮光，满星庆祝一次留下金章，重看和刷�
   test.setTimeout(240000);await adminLogin(page,base);
   const account=await createStudent(page,'地图星光验收','星光同学',[/Lesson 1–2 /,/Lesson 3–4 /]);
   const student=await studentLogin(browser,account,base,{viewport:{width:1440,height:1024},reducedMotion:'no-preference'}),p=student.page;
-  const row=()=>p.locator('[data-stars-course="unit1-2"]');
-  const home=async()=>{await p.getByRole('link',{name:'我的课程',exact:true}).click();await expect(p.locator('[data-journey-ready]')).toBeVisible();};
+  let homeView=p.mainFrame();
+  const row=()=>homeView.locator('[data-stars-course="unit1-2"]');
+  const home=async()=>{homeView=await returnToHome(p);await expect(homeView.locator('[data-journey-ready]')).toBeVisible();};
   try{
     await expect(row().locator('.journey-star[data-earned="false"]')).toHaveCount(5);
-    await expect(p.locator('[data-landmark-course]')).toHaveCount(0);
+    await expect(homeView.locator('[data-landmark-course]')).toHaveCount(0);
     const zones=Object.keys(answers);
     await finishZone(p,zones[0],{base:base+'unit1-2/'});
     await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','synced');await home();
     await expect(row().locator('.journey-star[data-earned="true"]')).toHaveCount(1);
-    const earned=row().locator('.journey-star[data-earned="true"]');
+    let earned=row().locator('.journey-star[data-earned="true"]');
     await expect(earned.locator('img')).toHaveAttribute('src',base+'assets/awards/star-earned.webp');
-    await expect(p.locator('[data-landmark-course]')).toHaveCount(0);
+    await expect(homeView.locator('[data-landmark-course]')).toHaveCount(0);
     const glint=earned.locator('.journey-star-glint');
     const motion=await glint.evaluate(async element=>{
       const values=new Set(),start=performance.now();
@@ -76,16 +78,16 @@ test('真实一星持续亮光，满星庆祝一次留下金章，重看和刷�
     for(const zone of zones.slice(1))await finishZone(p,zone,{base:base+'unit1-2/'});
     await expect(p.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','synced');await home();
     await expect(row().locator('[data-earned="true"]')).toHaveCount(5);
-    await expect(p.locator('[data-landmark-course="unit1-2"]')).toBeVisible();
-    await expect.poll(()=>p.locator('[data-landmark-select="unit1-2"] .journey-story-sheen').evaluate(el=>el.getAnimations().length)).toBe(1);
-    await expect(p.locator('[data-landmark-course="unit3-4"]')).toHaveCount(0);
+    await expect(homeView.locator('[data-landmark-course="unit1-2"]')).toBeVisible();
+    await expect.poll(()=>homeView.locator('[data-landmark-select="unit1-2"] .journey-story-sheen').evaluate(el=>el.getAnimations().length)).toBe(1);
+    await expect(homeView.locator('[data-landmark-course="unit3-4"]')).toHaveCount(0);
     const saved=await(await p.request.get(base+'api/me')).json();
     const savedAwards=await(await p.request.get(base+'api/awards')).json();
     const fullCard=savedAwards.cards.find(card=>card.course==='unit1-2'&&card.current);
     expect(fullCard.stars).toBe(5);expect(fullCard.firstFullStarAt).toBeTruthy();
-    const medal=p.locator('[data-completion-medal="unit1-2"]');
-    const sheen=p.locator('[data-landmark-select="unit1-2"] .journey-story-sheen');
-    await expect(p.locator('.journey-landmark-light,.journey-landmark-ring')).toHaveCount(0);
+    let medal=homeView.locator('[data-completion-medal="unit1-2"]');
+    let sheen=homeView.locator('[data-landmark-select="unit1-2"] .journey-story-sheen');
+    await expect(homeView.locator('.journey-landmark-light,.journey-landmark-ring')).toHaveCount(0);
     await expect.poll(()=>sheen.evaluate(el=>el.getAnimations().length)).toBe(0);
     expect(await medal.locator('img').evaluate(el=>el.complete&&el.naturalWidth>0)).toBe(true);
     const medalLight=await medal.locator('.journey-medal-face').evaluate(async el=>{
@@ -99,9 +101,9 @@ test('真实一星持续亮光，满星庆祝一次留下金章，重看和刷�
     await medal.click();
     await expect.poll(()=>sheen.evaluate(el=>el.getAnimations().length)).toBe(1);
     await expect.poll(()=>sheen.evaluate(el=>el.getAnimations().length)).toBe(0);
-    await p.locator('[data-map-course="unit3-4"]').click();
-    await expect(medal).toBeVisible();await expect(p.locator('[data-landmark-course="unit3-4"]')).toHaveCount(0);
-    await p.reload();await expect(medal).toBeVisible();
+    await homeView.locator('[data-map-course="unit3-4"]').click();
+    await expect(medal).toBeVisible();await expect(homeView.locator('[data-landmark-course="unit3-4"]')).toHaveCount(0);
+    await p.reload();homeView=p.mainFrame();medal=homeView.locator('[data-completion-medal="unit1-2"]');sheen=homeView.locator('[data-landmark-select="unit1-2"] .journey-story-sheen');earned=row().locator('.journey-star[data-earned="true"]');await expect(medal).toBeVisible();
     expect(await sheen.evaluate(el=>el.getAnimations().length)).toBe(0);
     expect(await medal.locator('img').evaluate(el=>el.getAnimations().length)).toBe(0);
     await p.emulateMedia({reducedMotion:'reduce'});

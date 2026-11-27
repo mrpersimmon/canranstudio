@@ -41,12 +41,7 @@
   }
   const aliases = { 'learn/ask': 'learn/exam', 'learn/trans': 'learn/reply', 'learn/phrases': 'learn/reply' };
   const normalizeRoute = id => aliases[id] || id;
-  const navigate = id => {
-    id = normalizeRoute(id);
-    // Scrolling back to the cover keeps the hash; resume must still reposition.
-    if (location.hash === '#' + id) route();
-    else location.hash = id;
-  };
+  const navigate = core.unitSession.navigator(normalizeRoute, route);
   const locationTracker = core.unitSession.location(routes, practice);
   const markLocation = locationTracker.mark;
   function route() {
@@ -55,7 +50,7 @@
     if (!routes.has(id)) id = 'cover';
     if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
     markLocation(id);
-    document.getElementById(id).scrollIntoView({ block: 'start', behavior: 'instant' });
+    core.unitSession.scrollToRoute(id);
   }
   $('#lessonWorkspace').addEventListener('click', event => {
     if(event.target.closest('[data-practice-review], [data-practice-review-navigation]'))return;

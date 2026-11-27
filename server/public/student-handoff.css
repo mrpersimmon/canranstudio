@@ -1,0 +1,9 @@
+.student-document-pane{position:fixed;inset:0;display:block;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;padding:0;margin:0;border:0;background:#fffaf0;z-index:2147483600}
+.student-document-pane[data-student-view="preparing"]{visibility:hidden;opacity:0;pointer-events:none}
+.student-document-pane[data-student-view="leaving"]{z-index:2147483599;pointer-events:none}
+html[data-student-host],html[data-student-host] body{overflow:hidden!important}
+html[data-student-host] body>:not(.student-document-pane){display:none!important}
+.student-document-status[role="status"]{position:fixed;z-index:2147483602;left:50%;top:96px;bottom:auto;transform:translateX(-50%);display:flex;align-items:center;gap:10px;width:max-content;max-width:calc(100% - 24px);box-sizing:border-box;padding:7px 10px 7px 16px;border:1px solid #d5dfcf;border-radius:18px;background:#fffcf5;color:#385f40;box-shadow:0 5px 24px #463c261c;font:400 15px/1.5 'Student Shell',system-ui,sans-serif}
+.student-document-status>button{font:inherit;color:#246b45;background:transparent;border:0;box-shadow:none;border-radius:12px;min-width:44px;min-height:44px;padding:6px;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.student-document-status>button:focus-visible{outline:2px solid #246b45;outline-offset:1px}
+@media(max-width:1023px){.student-document-status[role="status"]{top:auto;bottom:calc(76px + env(safe-area-inset-bottom,0px))}}

@@ -29,7 +29,7 @@ const PORTAL_CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'uns
 // The course loader executes integrity-checked cached scripts inline. Keep that
 // compatibility only on authorized course documents, never the account portal.
 const COURSE_CSP = PORTAL_CSP.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'");
-async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/', viewportMetrics = {} } = {}) {
+async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.join(root, '.data/lesson-access'), origin = 'http://127.0.0.1:4181', bundle = null, trustProxy = false, basePath = '/lesson/', viewportMetrics = {}, cacheJourneyBundle = true } = {}) {
   const BASE = normalizeBasePath(basePath);
   if (trustProxy !== false && trustProxy !== 'loopback') throw Error('trustProxy must be false or loopback');
   const store = openStore(dataDir);
@@ -37,7 +37,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   const metrics=createViewportMetrics({dataDir,enabled:viewportMetrics.enabled===true&&(!localMetricsOrigin||viewportMetrics.allowLocal===true),buildVersion:viewportMetrics.buildVersion||'unversioned'});
   const instrument=(html,pageKind,excluded=false)=>!metrics.enabled||excluded?html:html.replace('<head>','<head><script defer src="'+BASE+'viewport-metrics.js" data-base="'+BASE+'" data-page-kind="'+pageKind+'"></script>');
   const awardBook = await createAwardBook(root, BASE);
-  const journey = await createCourseJourney(root, BASE);
+  const journey = await createCourseJourney(root, BASE, {cache:cacheJourneyBundle});
   const packages = bundle || await createCoursePackages({ root, basePath: BASE, courseIds: UNITS, isolatedDefinitions: true });
   const logical = new Map(), owners = new Map();
   const addOwner = (address, course) => { if (!owners.has(address)) owners.set(address, new Set()); owners.get(address).add(course); };
@@ -52,6 +52,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
   }
   for(const pack of await retainPackages(packages,dataDir,BASE)){addOwner(BASE+'course-packages/'+pack.id+'/'+pack.revision+'.json',pack.id);for(const item of [...pack.required,...pack.audio,...sharedArtObjects(pack)])addOwner(item.url,pack.id);}
   const navigation = await fs.readFile(path.join(root, 'index.html'), 'utf8');
+  const handoffCss = await fs.readFile(path.join(root,'server/public/student-handoff.css'),'utf8');
   const descriptions = await Promise.all(UNITS.map(async id => {
     const source = await fs.readFile(path.join(root, id, 'index.html'), 'utf8');
     const image = source.match(/<section id="cover"[\s\S]*?<img[^>]+src="([^"]+)"/)?.[1];
@@ -139,7 +140,7 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         return response.end(request.method === 'HEAD' ? undefined : file.body);
       }
       if (relative === 'core/course-worker.js') { response.writeHead(200, { 'Content-Type':'text/javascript' }); return response.end(await fs.readFile(path.join(root, relative))); }
-      if (["portal.css","portal.js","admin-learning.js","admin-learning.css","admin-teachers.js","admin-teachers.css","access-client.js","learning-observer.js","access-worker.js","system-upgrade.js","history-certificates.js","history-certificates.css","local-certificate-copies.js","viewport-metrics.js","admin-viewports.js","student-shell.css","student-shell.js","course-directory.js","course-book.css"].includes(relative)) {
+      if (["portal.css","portal.js","admin-learning.js","admin-learning.css","admin-teachers.js","admin-teachers.css","access-client.js","learning-observer.js","access-worker.js","system-upgrade.js","history-certificates.js","history-certificates.css","local-certificate-copies.js","viewport-metrics.js","admin-viewports.js","student-shell.css","student-shell.js","student-handoff.js","student-handoff.css","course-directory.js","course-book.css"].includes(relative)) {
         if (relative === 'access-worker.js') response.setHeader('Service-Worker-Allowed', BASE);
         return publicFile(response, relative, relative.endsWith('.css') ? 'text/css' : 'text/javascript');
       }
@@ -280,14 +281,26 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         if (permitting && !input) {
           const auth = session(request,'student',false), admin = session(request,'admin',false);
           const grant = auth && store.activeGrant(auth, permitting[1], Date.now());
+          if(url.searchParams.get('student-view')==='1'){
+            const who=identity(request,null);
+            if(!grant||!who.courses.includes(permitting[1]))throw fail(403,'这节课还没向你的班级开放');
+            return json(response,{studentId:who.student.id,systemUpgrade:store.systemUpgrade(who.student.id),generation:store.progress(who.student.id,permitting[1]).generation});
+          }
           if (!grant && !admin) throw fail(403,'请重新进入课程');
           return json(response,{studentId:auth?.subject || 'admin-preview',expires:grant?.expires || Date.now()+7200000,systemUpgrade:auth?store.systemUpgrade(auth.subject):null});
         }
         if (entering && input) {
           const who = identity(request, input.preview), course = entering[1];
           if (!UNITS.includes(course) || !who.courses.includes(course)) throw fail(403, '这节课还没向你的班级开放');
+          if(input.openedGrant){
+            const grant=!who.preview&&store.activeGrant(who.auth,course,Date.now());
+            const generation=store.progress(who.student.id,course).generation;
+            if(!grant||grant.id!==input.openedGrant||input.studentId!==who.student.id||input.generation!==generation)throw fail(403,'请重新进入课程');
+            store.learning.enter(who.student.id,course,generation);
+            return json(response,{ok:true});
+          }
           const grant = who.preview ? { id: '', expires: Date.now() + 7200000 } : store.grant(who.auth, course, Date.now());
-          if(!who.preview)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
+          if(!who.preview&&input.prepareOnly!==true)store.learning.enter(who.student.id,course,store.progress(who.student.id,course).generation);
           const nextId = UNITS[UNITS.indexOf(course) + 1];
           const nextCourse = who.courses.includes(nextId) ? {id:nextId} : null;
           return json(response, { student: who.student, preview: who.preview, nextCourse, grant: grant.id, expires: grant.expires, systemUpgrade:who.preview?null:store.systemUpgrade(who.student.id),retainedCompletion:who.preview?null:store.courseUpgrade(who.student.id,course),retainedCertificate:who.preview?null:retainedCertificate(who.student.id,course),awards: who.preview ? null : currentAwards(who.student.id, course), progress: who.preview ? { generation: 0, value: {} } : currentProgress(who.student.id, course) });
@@ -356,21 +369,41 @@ async function createApp({ root = path.resolve(__dirname, '..'), dataDir = path.
         return response.end(request.method==='HEAD'?undefined:resource.body);
       }
       if (RETIRED.includes(relative.split('/')[0]) && /^(?:lesson\d+|soundmark)\/?(?:index\.html)?$/.test(relative)) return notice(response, '这节课已下架', 410);
-      if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) return publicFile(response, 'index.html', 'text/html; charset=utf-8',200,url.searchParams.has('preview'));
+      const pane=url.searchParams.get('student-view')==='1'&&!url.searchParams.has('preview')&&request.headers['sec-fetch-site']!=='cross-site';
+      function framePolicy(policy){
+        response.setHeader('Content-Security-Policy',pane?policy.replace("frame-ancestors 'none'","frame-ancestors 'self'"):policy);
+        if(pane)response.setHeader('X-Frame-Options','SAMEORIGIN');
+      }
+      function paneError(code){
+        framePolicy(PORTAL_CSP);
+        response.writeHead(code,{'Content-Type':'text/html; charset=utf-8'});
+        return response.end('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="student-view-error" content="'+code+'"><script defer src="'+BASE+'student-handoff.js"></script></head><body></body></html>');
+      }
+      if (['','index.html','admin/','admin','home/','home/index.html'].includes(relative)) {
+        if(pane&&(relative===''||relative==='index.html')){
+          try{studentSession(request);}catch(error){return paneError(error.message==='请先设置新密码'?401:error.status||403);}
+          framePolicy(PORTAL_CSP);
+        }
+        return publicFile(response, 'index.html', 'text/html; charset=utf-8',200,url.searchParams.has('preview'));
+      }
       if (['awards','awards/'].includes(relative)) {
         try { studentSession(request); } catch(error) {
+          if(pane)return paneError(error.message==='请先设置新密码'?401:error.status||403);
           if (error.status===401 || error.message==='请先设置新密码') return publicFile(response,'index.html','text/html; charset=utf-8');
           throw error;
         }
+        framePolicy(PORTAL_CSP);
         return publicFile(response,'index.html','text/html; charset=utf-8',200,url.searchParams.has('preview'));
       }
       const courseRoute = relative.match(/^(unit\d+-\d+)(?:\/(?:index\.html)?)?$/);
       if (courseRoute) {
         const course = courseRoute[1]; if (!UNITS.includes(course)) throw fail(404, '课程不存在');
-        let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
-        if (!who.courses.includes(course)) return notice(response, '这节课还没向你的班级开放', 403);
-        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><script src="' + BASE + 'system-upgrade.js"></script><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
-        response.setHeader('Content-Security-Policy', COURSE_CSP);
+        let who; try { who = identity(request, url.searchParams.get('preview')); } catch (error) { if(pane)return paneError(error.message==='请先设置新密码'?401:error.status||403);if (error.status === 401 || error.message === '请先设置新密码') return publicFile(response, 'index.html', 'text/html; charset=utf-8'); throw error; }
+        if (!who.courses.includes(course)) return pane?paneError(403):notice(response, '这节课还没向你的班级开放', 403);
+        // The loader reinstalls the head after pinning the course's resources.
+        // Keep these shell styles inline so even an older pinned worker can render them.
+        const entry = packages.generated.get(course + '/index.html').body.toString().replace('<head>', '<head><style id="studentHandoffCss">'+handoffCss+'</style><script src="'+BASE+'student-handoff.js"></script><script src="' + BASE + 'system-upgrade.js"></script><script src="' + BASE + 'learning-observer.js"></script><script src="' + BASE + 'access-client.js"></script>');
+        framePolicy(COURSE_CSP);
         response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }).end(request.method === 'HEAD' ? undefined : instrument(entry,'lesson',who.preview)); return;
       }
       const auth = session(request, 'student', false), admin = management.authenticate(request, false, false);

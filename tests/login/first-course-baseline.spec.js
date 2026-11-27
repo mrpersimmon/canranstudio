@@ -1,4 +1,6 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
+
 const {test:baseTest,expect}=require('@playwright/test'),fs=require('node:fs/promises');
 const {adminLogin,createStudent,studentLogin,fillLogin}=require('./helpers');
 const {devices,contextOptions}=require('../support/required-phone-devices');
@@ -31,14 +33,14 @@ for(const device of devices)test('first course baseline '+device.name,async({pag
    await p.addInitScript(()=>{
     performance.setResourceTimingBufferSize(3000);
     const now=()=>performance.timeOrigin+performance.now(),key='first-course-click';
-    document.addEventListener('click',e=>{if(e.target.closest('a.journey-start,a[data-course-enter]'))sessionStorage.setItem(key,String(now()));},true);
+    document.addEventListener('click',e=>{if(e.target.closest('a.journey-start'))sessionStorage.setItem(key,String(now()));},true);
     if(!location.pathname.endsWith('/unit1-2/'))return;
     const t=Number(sessionStorage.getItem(key));if(!t)return;
     const data=window.firstCourseMeasurement={};const decodes=[];
     const native=HTMLImageElement.prototype.decode;
     HTMLImageElement.prototype.decode=async function(){const from=now();try{return await native.call(this);}finally{decodes.push([from,now()]);}};
     const tick=()=>{
-     if(!document.querySelector('#courseLoader')&&document.fonts.status==='loaded'){
+     if(!window.CanranStudentHandoff?.preparing&&!document.querySelector('#courseLoader')&&document.fonts.status==='loaded'){
       const visible=sel=>[...document.querySelectorAll(sel)].some(x=>!x.disabled&&x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden');
       if(!data.wordsMs&&visible('.learning-surface .unit-word')){
        data.wordsMs=Math.round(now()-t);data.decodes=decodes.length;
@@ -56,15 +58,15 @@ for(const device of devices)test('first course baseline '+device.name,async({pag
     const start=p.locator('.journey-start');await expect(start).toBeVisible({timeout:40000});
     if(kind==='directory-ready')await p.waitForFunction(()=>Number(document.documentElement.dataset.sharedFontsReady)>0,null,{timeout:60000});
     const fontsAtClick=await p.evaluate(()=>Number(document.documentElement.dataset.sharedFontsReady)||0);
-    await start.click();await p.waitForFunction(()=>window.firstCourseMeasurement?.wordsMs,null,{timeout:70000});
-    let steps=0;const next=p.locator('.learning-surface .word-controls button').last();
+    await start.click();const course=await studentDocument(p,/unit1-2\/#learn\/words$/,70000);await course.waitForFunction(()=>window.firstCourseMeasurement?.wordsMs,null,{timeout:70000});
+    let steps=0;const next=course.locator('.learning-surface .word-controls button').last();
     while(!p.url().endsWith('#learn/listen')&&steps<8){await next.click();steps++;}
-    await p.waitForFunction(()=>window.firstCourseMeasurement?.questionMs,null,{timeout:20000});
-    const first=p.locator('.learning-surface .practice-content button:visible:enabled').first();await first.click();
-    const {from,data}=await p.evaluate(()=>({from:Number(sessionStorage.getItem('first-course-click')),data:window.firstCourseMeasurement}));
-    const expected=await p.evaluate(async()=>{const pack=await CanranCourseCache.open(location.pathname.replace(/unit1-2\/$/,'')).current('unit1-2');
+    await course.waitForFunction(()=>window.firstCourseMeasurement?.questionMs,null,{timeout:20000});
+    const first=course.locator('.learning-surface .practice-content button:visible:enabled').first();await first.click();
+    const {from,data}=await course.evaluate(()=>({from:Number(sessionStorage.getItem('first-course-click')),data:window.firstCourseMeasurement}));
+    const expected=await course.evaluate(async()=>{const pack=await CanranCourseCache.open(location.pathname.replace(/unit1-2\/$/,'')).current('unit1-2');
      return Object.fromEntries(pack.required.flatMap(i=>[i,...(i.svgParts||[]).filter(p=>typeof p!=='string')]).map(i=>[i.url.replace(/^\/lesson\//,'/'),i.bytes]));});
-    const timing=await p.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/resources/')).map(e=>({path:new URL(e.name).pathname.replace(/^\/lesson\//,'/'),at:performance.timeOrigin+e.startTime,encoded:e.encodedBodySize,decoded:e.decodedBodySize})));
+    const timing=await course.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/resources/')).map(e=>({path:new URL(e.name).pathname.replace(/^\/lesson\//,'/'),at:performance.timeOrigin+e.startTime,encoded:e.encodedBodySize,decoded:e.decodedBodySize})));
     const trace=await snapshot(ctx,from,data.questionMs,expected,timing);
     if(!preview){
      const log=await(await page.request.get('/__test__/first-course-network')).json(),served=log.filter(r=>r.start>=from-2&&r.end<=from+data.questionMs+2&&(r.status===200||r.status===206));

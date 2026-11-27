@@ -1,4 +1,5 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
 const {test,expect}=require('@playwright/test');
 const crypto=require('node:crypto');
 const {adminLogin,createStudent,signIn}=require('./helpers');
@@ -68,7 +69,7 @@ test('来源、载荷、预览排除及统计失败不影响正常找课',async(
     await p.route('**/api/client-viewports',route=>route.fulfill({status:503}));
     await signIn(p,account,base);await expect(p.locator('.journey-home')).toBeVisible();
     await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
-    await p.locator('.journey-start').click();await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
+    await p.locator('.journey-start').click();const course=await studentDocument(p,/unit1-2\//);await expect(course.locator('#wordPageProgress')).toBeVisible();
     const state=await(await page.request.get(base+'api/admin/state')).json(),group=state.classes.find(c=>c.name==='采集边界验收');
     await page.goto(base+'?preview='+encodeURIComponent(group.id));
     expect(await page.locator('script[src$="/viewport-metrics.js"]').count()).toBe(0);

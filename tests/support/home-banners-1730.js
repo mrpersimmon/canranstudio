@@ -69,12 +69,11 @@ async function landmarks(page,base,info,widths=[320,390,768,1280],pairs=PAIRS){
  };
  const groups=[['1-2','3-4','5-6'],['17-18'],['19-20','21-22','23-24'],['25-26','27-28','29-30']];
  for(const width of widths){
-  await page.setViewportSize({width,height:900});await expect(page.locator('.journey-desktop-search')).toHaveCount(width>=1024?1:0);
+  await page.setViewportSize({width,height:900});await expect(page.locator('.journey-tools input[type=search]')).toHaveCount(width>=1024?1:0);
   for(const pair of pairs){
    await openCourseDirectory(page);const card=page.locator('[data-unit="unit'+pair+'"]');
-   await expect(card.locator('.primary-button')).toHaveAttribute('href',base+'unit'+pair+'/#learn/words');
    const authorized=await page.locator('.course').evaluateAll(cards=>cards.map(card=>card.dataset.unit));
-   await card.locator('.journey-locate').click();
+   await card.locator('[data-course-select]').click();await expect(page.locator('.journey-start')).toHaveAttribute('href',base+'unit'+pair+'/#learn/words');
    const ids=groups.find(group=>group.includes(pair)).map(value=>'unit'+value).filter(id=>authorized.includes(id)),bounds=Object.fromEntries(ids.map(id=>[id,acceptedBounds[id]]));
    const view=await assertModules(page,bounds,width),entry=page.locator('[data-module-course="unit'+pair+'"]'),picture=entry.locator('[data-story-course]');
    const url=new URL(await picture.getAttribute('src'),page.url());expect(url.origin).toBe(new URL(page.url()).origin);expect(url.pathname).toBe(base+LANDMARK_ART[pair]);

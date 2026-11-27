@@ -83,7 +83,7 @@ function watchSources(root,changed){
  // Watch course inputs only. Test output, databases, Git and dependencies must
  // never invalidate a build. A watcher error falls back to rebuilding on reads.
  let reliable=true;
- for(const dir of [...ids,'core','assets','review-bench','docs/designs/word-cards','tests/support','.']){
+ for(const dir of [...ids,'core','assets','review-bench','docs/designs/word-cards','tests/support','server/public','student-ui','course-journey','award-book','.']){
   const accept=name=>!name|| (dir==='.'?name==='index.html':dir==='tests/support'?name==='required-phone-devices.json':true);
   try{const w=watch(path.join(root,dir),{persistent:false,recursive:dir!=='.'&&dir!=='tests/support'},(_,name)=>{if(accept(name))changed();});
    w.on('error',()=>{reliable=false;changed();});handles.push(w);
@@ -91,7 +91,8 @@ function watchSources(root,changed){
  }
  return {close:()=>handles.forEach(w=>w.close()),reliable:()=>reliable};
 }
-async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watchSources}={}){
+async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watchSources,navigationPreview}={}){
+ let navigationService,navigationRevision;
  const courseHeaders={...LESSON_HEADER_CONTRACT,'x-frame-options':'SAMEORIGIN'};
  const cspKey=Object.keys(courseHeaders).find(k=>k.toLowerCase()==='content-security-policy');
  courseHeaders[cspKey]=courseHeaders[cspKey].replace(/frame-ancestors [^;]+/,"frame-ancestors 'self'");
@@ -127,6 +128,12 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
    if(!allowed.includes(request.headers.host)||request.headers.origin&&!allowed.map(h=>'http://'+h).includes(request.headers.origin))return response.writeHead(403).end();
    if(!['GET','HEAD'].includes(request.method))return response.writeHead(405,{Allow:'GET, HEAD'}).end();
    const url=new URL(request.url,'http://'+request.headers.host);
+   if(navigationPreview&&url.pathname==='/review/student-navigation'){
+    if(request.method==='HEAD')return response.writeHead(200,{'Cache-Control':'no-store'}).end();
+    if(navigationRevision!==revision){navigationService?.then(service=>service.close()).catch(console.error);navigationService=null;navigationRevision=revision;}
+    navigationService??=navigationPreview(root).catch(error=>{navigationService=null;throw error;});
+    return (await navigationService).redirect(response);
+   }
    let item,headers={'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer','X-Frame-Options':'DENY','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src 'self'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'"};
    if(url.pathname.startsWith('/review/word-concept/')){headers['X-Frame-Options']='SAMEORIGIN';headers['Content-Security-Policy']=headers['Content-Security-Policy'].replace("frame-ancestors 'none'","frame-ancestors 'self'");}
    if(url.pathname==='/review/word-concept/data.json')item={body:Buffer.from(JSON.stringify(current.wordConcept)),type:'application/json; charset=utf-8'};
@@ -136,7 +143,9 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
     else while(current.revision!==revision)await build();
     headers['X-Review-Build']=String(current.serial);item={body:current.catalogBody,type:'application/json; charset=utf-8'};
    }
-   else if(publicFiles.has(url.pathname)){const file=publicFiles.get(url.pathname);item={body:await fs.readFile(path.join(root,file)),type:types[path.extname(file)]};}
+   else if(publicFiles.has(url.pathname)){const file=publicFiles.get(url.pathname);item={body:await fs.readFile(path.join(root,file)),type:types[path.extname(file)]};
+    if(url.pathname==='/'&&navigationPreview)item.body=item.body.toString().replace('<!-- local-navigation -->','<a href="/review/student-navigation">验收首页与课程切换</a>');
+   }
    else if(url.pathname.startsWith(base)){
     const relative=url.pathname.slice(base.length)+(url.pathname.endsWith('/')?'index.html':'');
     item=current.generated.get(relative)||current.logical.get(relative)||previous?.generated.get(relative)||previous?.logical.get(relative);
@@ -146,8 +155,8 @@ async function createReviewServer({root=process.cwd(),port=4401,watchInputs=watc
    response.writeHead(200,{...headers,'Content-Type':item.type});response.end(request.method==='HEAD'?undefined:item.body);
   }catch(error){console.error('Review request:',error.message);response.writeHead(500,{'Content-Type':'text/plain; charset=utf-8'}).end('验收服务暂时不可用，请查看本地日志。');}
  });
- server.on('close',()=>watcher?.close?.());
+ server.on('close',()=>{watcher?.close?.();navigationService?.then(service=>service.close()).catch(console.error);});
  try{await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'127.0.0.1',resolve);});}catch(error){watcher?.close?.();throw error;}return server;
 }
-if(require.main===module)createReviewServer({port:Number(process.env.REVIEW_PORT||4401)}).then(server=>console.log('页面验收台：http://127.0.0.1:'+server.address().port+'/')).catch(error=>{console.error(error);process.exitCode=1;});
+if(require.main===module)createReviewServer({port:Number(process.env.REVIEW_PORT||4401),navigationPreview:require('./review-student-navigation').createNavigationPreview}).then(server=>console.log('页面验收台：http://127.0.0.1:'+server.address().port+'/')).catch(error=>{console.error(error);process.exitCode=1;});
 module.exports={loadCatalog,instrumentSource,createReviewServer,watchSources};

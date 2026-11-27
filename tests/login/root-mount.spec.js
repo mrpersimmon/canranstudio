@@ -1,8 +1,10 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
+
 const { test, expect } = require('@playwright/test');
 const fs = require('node:fs/promises'), os = require('node:os'), path = require('node:path');
 const { createApp } = require('../../server/app'), { openStore } = require('../../server/store');
-const { adminLogin, createStudent, signIn, fillLogin, setPassword } = require('./helpers');
+const { adminLogin, createStudent, signIn, fillLogin, setPassword, enterDirectoryCourse } = require('./helpers');
 const { completeActivity, completeStory, completeUnit1314 } = require('../support/account-course13');
 const historicalCourse = require('../support/unit13-14-flow');
 const { createSite, removeTemporaryDirectory } = require('../support/historical-site');
@@ -27,7 +29,7 @@ test('根目录真实登录、整课与缓存复访可用；旧 lesson 内容下
     await adminLogin(page, '/');
     const account = await createStudent(page, '根目录发布班', '小北', [/Lesson 13–14 /]);
     await signIn(page, account, '/');
-    await expect(page.locator('.course .primary-button')).toHaveAttribute('href', /\/unit13-14\//);
+    await expect(page.locator('.journey-start')).toHaveAttribute('href', /\/unit13-14\//);
     await completeUnit1314(page);
     await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     await page.reload(); await expect(page.locator('#starCount')).toHaveText('5');
@@ -55,8 +57,8 @@ test('已有学号密码和真实已完成活动从 lesson 迁至根目录，不
     await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
     const stars = await page.locator('#starCount').textContent();
     await f.move('/');
-    await signIn(page, account, '/'); await page.locator('.course .primary-button').click();
-    await expect(page.locator('#starCount')).toHaveText(stars);
+    await signIn(page, account, '/'); await enterDirectoryCourse(page);
+    const course=await studentDocument(page,/unit13-14\//);await expect(course.locator('#starCount')).toHaveText(stars);
     await page.goto('/unit13-14/#learn/roles');
     await expect(page.locator('.stage-roles').getByRole('group', { name: '完成后的操作', exact: true })).toBeVisible();
     await completeActivity(page, 'grammar'); await expect(page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');

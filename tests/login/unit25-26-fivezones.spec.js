@@ -1,7 +1,8 @@
 'use strict';
+const {expectCachedWordReturn,returnToHome,studentDocument}=require('../support/student-document');
 const {courseButton,readyCourse}=require('../support/course-controls');
 const { test, expect } = require('@playwright/test');
-const { adminLogin, createStudent, studentLogin: loginStudent } = require('./helpers');
+const { adminLogin, createStudent, studentLogin: loginStudent, enterDirectoryCourse } = require('./helpers');
 // Student windows are fresh contexts: carry mobile settings into them too.
 const {defaultBrowserType,...mobileProfile}=require('@playwright/test').devices['iPhone 13'];
 const studentLogin=(browser,account,base)=>loginStudent(browser,account,base,process.env.UNIT2526_BROWSER==='webkit'?mobileProfile:{});
@@ -22,9 +23,9 @@ test('课程入口保持班级授权：新课可单独开放', async ({ page, br
   try {
     await expect(learner.page.locator('.course')).toHaveCount(1);
     await expect(learner.page.locator('.course')).toContainText('厨房探访记');
-    await learner.page.locator('.course').getByRole('link', { name: /开始学习/ }).click();
-    await expect(learner.page).toHaveURL(/unit25-26\/#learn\/words/);await ready(learner.page);
-    await expect(learner.page.locator('.unit-word')).toHaveCount(6);
+    await enterDirectoryCourse(learner.page);
+    const course=await studentDocument(learner.page,/unit25-26\/#learn\/words/);await ready(course);
+    await expect(course.locator('.unit-word')).toHaveCount(6);
   } finally { await learner.context.close(); }
 });
 
@@ -163,12 +164,7 @@ test('缺图先拦截，恢复后完整进入；复访复用素材并恢复词�
     await expect(p.locator('.unit-word')).toHaveCount(6,{timeout:30000});await expect(p.locator('#courseLoader')).toHaveCount(0);
     expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
     await courseButton(p, "nextWords").click();await expect(p.locator('#wordPageProgress')).toHaveText('2 / 6');
-    await p.getByRole('link',{name:'我的课程',exact:true}).click();
-    const downloads=[];p.on('request',r=>{if(r.url().includes('/resources/'))downloads.push(r.url());});
-    await p.locator('.course').getByRole('link',{name:/学习/}).click();await ready(p);
-    await expect(p.locator('#wordPageProgress')).toHaveText('2 / 6');
-    expect(downloads).toEqual([]);
-    expect(await p.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete&&img.naturalWidth>0))).toBe(true);
+    await expectCachedWordReturn(p,'2 / 6',ready);
   }finally{await student.context.close();}
 });
 
@@ -248,7 +244,7 @@ test('关课重开保留收藏，导出故障可重试且离开取消下载',asy
   await p.getByRole('button',{name:'保存动图',exact:true}).click();await expect(p.locator('.story-award-status')).toHaveText('暂时没能保存，请再试一次。');expect(await p.evaluate(()=>window.failedGifReads)).toBeGreaterThan(0);expect(downloads).toHaveLength(0);
   await p.evaluate(()=>{CanvasRenderingContext2D.prototype.getImageData=window.originalGifRead;});const download=p.waitForEvent('download');await p.getByRole('button',{name:'保存动图',exact:true}).click();const gif=await download;await gif.saveAs(info.outputPath('export-recovered.gif'));
   const meta=await require('sharp')(info.outputPath('export-recovered.gif'),{animated:true}).metadata();expect(meta.pages).toBe(60);expect(meta.width).toBe(984);expect(meta.pageHeight).toBe(528);await expect(p.locator('.story-award-status')).toHaveText('动图已生成');expect(downloads).toHaveLength(1);
-  await p.getByRole('button',{name:'保存动图',exact:true}).click();await expect(p.locator('.story-award-status')).toHaveText('正在保存…');await p.getByRole('link',{name:'我的课程',exact:true}).click();await expect(p.locator('.course')).toHaveCount(1);await expect(p.locator('.course')).toContainText('1 / 5');expect(downloads).toHaveLength(1);
+  await p.getByRole('button',{name:'保存动图',exact:true}).click();await expect(p.locator('.story-award-status')).toHaveText('正在保存…');const returnedHome=await returnToHome(p);await expect(returnedHome.locator('.course')).toHaveCount(1);await expect(returnedHome.locator('.course')).toContainText('1 / 5');expect(downloads).toHaveLength(1);
   await p.goto(base+'unit25-26/#learn/certificate');await ready(p);await expect(p.locator('#starCount')).toHaveText('1');await expect(p.locator('.story-award-status')).toBeEmpty();expect(downloads).toHaveLength(1);
  }finally{await student.context.close();}
 });

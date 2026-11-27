@@ -1,4 +1,5 @@
 'use strict';
+const {returnToHome}=require('../support/student-document');
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {finishZone}=require('../support/unit1-2-award-flow');
@@ -57,8 +58,8 @@ test('course ending exits only from the keepsake, keeps records and respects uno
     await courseReadyForAssertions(p);expect(new URL(p.url()).pathname).toBe(base+'unit3-4/');
     await p.goto(base+'unit3-4/#learn/certificate');await courseReadyForAssertions(p);
     await expect(p.locator('.stage-certificate .course-ending-navigation [data-course-exit=next]')).toBeHidden();
-    await p.locator('.stage-certificate').getByRole('link',{name:'返回首页',exact:true}).click();
-    await expect(p.locator('.journey-home')).toBeVisible({timeout:30000});
+    const home=await returnToHome(p,p.locator('.stage-certificate'),'返回首页');
+    await expect(home.locator('.journey-home')).toBeVisible({timeout:30000});
     expect(new URL(p.url()).pathname).toBe(base);
     await p.goto(base+'unit1-2/#learn/exam');await courseReadyForAssertions(p);
     expect(await state(p)).toEqual(before);
