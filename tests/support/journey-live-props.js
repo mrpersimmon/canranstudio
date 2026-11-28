@@ -22,14 +22,14 @@ async function mountLiveJourneyProps(page,base){
   "}",
   "createRoot(document.getElementById('app')).render(<Harness/>);"
  ].join('\n');
- const bundle=await build({absWorkingDir:root,stdin:{contents:entry,resolveDir:root,sourcefile:'journey-live-props.jsx',loader:'jsx'},bundle:true,write:false,outdir:path.join(root,'.data/journey-live-props-virtual'),entryNames:'app',define:{'process.env.NODE_ENV':'"production"'},minify:true,target:['es2020']});
- const outputs=new Map(bundle.outputFiles.map(file=>[path.extname(file.path),Buffer.from(file.contents)]));
+ const bundle=await build({absWorkingDir:root,stdin:{contents:entry,resolveDir:root,sourcefile:'journey-live-props.jsx',loader:'jsx'},bundle:true,write:false,outdir:path.join(root,'.data/journey-live-props-virtual'),entryNames:'app',publicPath:prefix,loader:{'.webp':'file'},define:{'process.env.NODE_ENV':'"production"'},minify:true,target:['es2020']});
+ const outputs=new Map(bundle.outputFiles.map(file=>[path.basename(file.path),Buffer.from(file.contents)]));
  const html='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="'+base+'portal.css"><link rel="stylesheet" href="'+base+'student-shell.css"><link rel="stylesheet" href="'+prefix+'app.css"><style>.props-refresh{position:fixed;top:0;right:0;z-index:99999}output[aria-label]{position:fixed;top:45px;right:0;z-index:99999;background:white}</style></head><body class="journey-page student-portal"><main id="app"></main><script src="'+prefix+'app.js"></script></body></html>';
  await page.route('**'+prefix+'**',route=>{
   const pathname=new URL(route.request().url()).pathname;
   if(pathname===prefix)return route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:html});
-  const extension=path.extname(pathname),body=outputs.get(extension);
-  if(body&&pathname===prefix+'app'+extension)return route.fulfill({status:200,contentType:extension==='.css'?'text/css':'text/javascript',body});
+  const body=outputs.get(pathname.slice(prefix.length));
+  if(body)return route.fulfill({status:200,contentType:{'.css':'text/css','.js':'text/javascript','.webp':'image/webp'}[path.extname(pathname)],body});
   return route.fulfill({status:404,body:'Not a fixture resource'});
  });
  await page.goto(prefix);

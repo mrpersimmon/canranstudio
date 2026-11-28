@@ -113,7 +113,8 @@
   for(const image of referenceContent.querySelectorAll('.learning-material-image')){
    image.style.removeProperty('height');image.style.removeProperty('max-height');
   }
-  for(const card of referenceContent.querySelectorAll('.reference-card')){
+  // Phrase cards already lay out their picture, English and meaning in separate cells.
+  for(const card of referenceContent.querySelectorAll('.reference-card:not(.phrase-card)')){
    const copy=make('learning-reference-copy');
    for(const child of [...card.childNodes])if(!(child.nodeType===1&&['IMG','SVG','PICTURE'].includes(child.tagName)))copy.append(child);
    card.append(copy);card.classList.add('learning-reference-card');

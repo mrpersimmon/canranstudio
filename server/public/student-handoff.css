@@ -1,0 +1,33 @@
+.student-document-pane{position:fixed;inset:0;display:block;width:100%;height:100%;height:100dvh;max-width:none;max-height:none;padding:0;margin:0;border:0;background:#fffaf0;z-index:2147483600}
+.student-document-pane[data-student-view="preparing"]{visibility:hidden;opacity:0;pointer-events:none}
+.student-document-pane[data-student-view="leaving"]{z-index:2147483599;pointer-events:none}
+html[data-student-host],html[data-student-host] body{overflow:hidden!important}
+html[data-student-host] body>:not(.student-document-pane){display:none!important}
+
+.student-navigation-status[role="status"]{
+  position:fixed;z-index:2147483602;top:96px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:8px;box-sizing:border-box;
+  width:max-content;max-width:calc(100% - 24px);min-height:52px;margin:0;padding:3px 8px 3px 14px;
+  border:1px solid #d5dfcf;border-radius:18px;background:#fffcf5;color:#34543c;box-shadow:0 5px 24px #463c261c;
+  font:500 15px/1.45 system-ui,sans-serif;text-align:left;letter-spacing:normal;
+}
+.student-navigation-status[hidden],.student-navigation-status[inert]{display:none}
+.student-navigation-status::before{
+  content:'';flex:none;box-sizing:border-box;width:16px;height:16px;border:2px solid #cadaca;border-top-color:#276a49;border-radius:50%;
+  animation:student-notice-turn .9s linear infinite;
+}
+.student-navigation-status[data-state="error"]::before{content:'!';display:grid;place-items:center;border:1px solid #ac8151;color:#825528;font:600 11px/1 system-ui,sans-serif;animation:none}
+.student-navigation-status .student-navigation-label{min-width:0;margin:0;padding:0;border:0;color:inherit;font:inherit;overflow-wrap:anywhere}
+.student-navigation-status>button{
+  flex:none;display:grid;place-items:center;box-sizing:border-box;min-width:44px;min-height:44px;margin:0;padding:0 7px;
+  border:0;border-radius:12px;box-shadow:none;background:transparent;color:#246b45;font:inherit;
+  white-space:nowrap;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+.student-navigation-status[data-state="error"]>button:first-of-type{background:#e6efe3}
+.student-navigation-status>button:active{background:#dceadb;transform:none}
+.student-navigation-status>button:focus-visible{outline:2px solid #246b45;outline-offset:0}
+@keyframes student-notice-turn{to{transform:rotate(1turn)}}
+@media(max-width:1023px){
+  .student-navigation-status[role="status"]{top:auto;bottom:calc(76px + var(--notice-dock-height,0px) + env(safe-area-inset-bottom,0px))}
+}
+@media(prefers-reduced-motion:reduce){.student-navigation-status::before{animation:none}}

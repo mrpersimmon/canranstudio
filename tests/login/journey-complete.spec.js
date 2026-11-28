@@ -1,5 +1,5 @@
 'use strict';
-const {chooseJourneyChapter}=require('../support/journey-navigation');
+const {chooseJourneyChapter,enterCourseAndReturn}=require('../support/journey-navigation');
 const fs=require('node:fs'),path=require('node:path');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
@@ -79,7 +79,7 @@ test('新增入口在完整尺寸与三种获星状态下保持人物、星章�
        // landscape candidate cannot retain safe 12px entrance separation.
        // Actual rendered separation remains independently checked by the DOM
        // helper above; this calculation proves why the candidate was rejected.
-       const frame=await p.evaluate(()=>({width:document.querySelector('.journey-map').clientWidth,height:Math.max(1,innerHeight-(document.querySelector('#siteHeader')?.getBoundingClientRect().height||0)),desktop:!!document.querySelector('.journey-desktop-search')}));
+       const frame=await p.evaluate(()=>({width:document.querySelector('.journey-map').clientWidth,height:Math.max(1,innerHeight-(document.querySelector('#siteHeader')?.getBoundingClientRect().height||0)),desktop:!!document.querySelector('.journey-tools input[type=search]')}));
        const horizontalCandidate=frame.width>=600&&frame.width/frame.height>=1;
        if(horizontalCandidate){
         const landscape=fitFrame({scene:artwork.chapters[chapter.id].landscape,characters:artwork.characters,viewportWidth:frame.width,desktop:frame.desktop,composition:'landscape'});
@@ -107,22 +107,21 @@ test('每个新增单元支持奇偶 Lesson 搜索、地图定位、人物反馈
  const student=await studentLogin(browser,account,base,{viewport:{width:390,height:844},reducedMotion:'no-preference',serviceWorkers:'block'}),p=student.page;
  try{
   const before=await(await p.request.get(base+'api/me')).json();
+  let home=p.mainFrame();
   for(const chapter of chapters)for(const id of chapter.courses){
    const n=Number(id.match(/\d+/)[0]);
-   await openCourseDirectory(p);
+   await openCourseDirectory(home);
    for(const query of [String(n),'Lesson '+(n+1)]){
-    await p.getByLabel('查找 Lesson',{exact:true}).fill(query);
-    await expect(p.locator('.journey-course:visible')).toHaveCount(1);
-    await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
+    await home.getByLabel('查找 Lesson',{exact:true}).fill(query);
+    await expect(home.locator('.journey-course:visible')).toHaveCount(1);
+    await expect(home.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
    }
-   await p.locator('.journey-course:visible .journey-locate').click();
-   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',chapter.id);
-   if(continuous[chapter.id])await waitForModulesReady(p,chapter.courses);else await expect(p.locator('.journey-map-scene')).toHaveAttribute('data-map-state','ready');
-   const hit=p.locator('[data-landmark-select="'+id+'"]');await clickWithVisibleMotion(hit);
-   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
-   await p.locator('.journey-start').click();await expect(p).toHaveURL(new RegExp(id+'/#learn/words$'));
-   await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
-   await p.getByRole('link',{name:'我的课程',exact:true}).click();
+   await home.locator('.journey-course:visible [data-course-select]').click();
+   await expect(home.locator('.journey-map')).toHaveAttribute('data-chapter',chapter.id);
+   if(continuous[chapter.id])await waitForModulesReady(home,chapter.courses);else await expect(home.locator('.journey-map-scene')).toHaveAttribute('data-map-state','ready');
+   const hit=home.locator('[data-landmark-select="'+id+'"]');await clickWithVisibleMotion(hit);
+   await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
+   home=await enterCourseAndReturn(p,home,id);
   }
   await p.reload();await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',chapters.at(-1).courses.at(-1));
   expect(results(await(await p.request.get(base+'api/me')).json())).toEqual(results(before));

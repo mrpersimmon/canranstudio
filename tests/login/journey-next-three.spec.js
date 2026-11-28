@@ -1,5 +1,5 @@
 'use strict';
-const {chooseJourneyChapter}=require('../support/journey-navigation');
+const {chooseJourneyChapter,enterCourseAndReturn}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {viewports}=require('../support/journey-viewports');
@@ -25,19 +25,17 @@ test('第二段三课可切换、点人物、按Lesson定位和实际进入，�
     await expect(p.locator('[data-completion-medal]')).toHaveCount(0);
     // Searching an even lesson must land on the exact pair, even when the
     // student starts in the other map district. Enter the actual course route.
+    let home=p.mainFrame();
     for(const n of [8,10,12]){
-      await chooseJourneyChapter(p,'opening');
-      await openCourseDirectory(p);await p.getByLabel('查找 Lesson',{exact:true}).fill(String(n));
-      const result=p.locator('.journey-course:visible');await expect(result).toHaveCount(1);
+      await chooseJourneyChapter(home,'opening');
+      await openCourseDirectory(home);await home.getByLabel('查找 Lesson',{exact:true}).fill(String(n));
+      const result=home.locator('.journey-course:visible');await expect(result).toHaveCount(1);
       await expect(result).toHaveAttribute('data-unit',`unit${n-1}-${n}`);
-      await result.locator('.journey-locate').click();await ready(p);
-      await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');
-      await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
-      await p.locator('.journey-dock .journey-start').click();
-      await expect(p).toHaveURL(new RegExp(`unit${n-1}-${n}/#learn/words$`));
-      await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
-      await p.getByRole('link',{name:'我的课程',exact:true}).click();await ready(p);
-      await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
+      await result.locator('[data-course-select]').click();await ready(home);
+      await expect(home.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');
+      await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
+      home=await enterCourseAndReturn(p,home,`unit${n-1}-${n}`);await ready(home);
+      await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',`unit${n-1}-${n}`);
     }
     await p.reload();await ready(p);
     await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','neighborhood');

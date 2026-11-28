@@ -1,5 +1,6 @@
 'use strict';
 const {readyCourse}=require('../support/course-controls');
+const {studentDocument,returnToHome}=require('../support/student-document');
 const { expect } = require('@playwright/test');
 async function adminLogin(page, base = '/lesson/') {
   await page.goto(base + 'admin/');
@@ -64,8 +65,9 @@ async function openCourseDirectory(page) {
   // Wait for the actual usable surface, never reinstate a global font gate.
   await expect(page.locator('.journey-home, #openCourseBook:visible:enabled, .course:visible').first()).toBeVisible();
   if(await page.locator('.journey-home').count()){
-    if(!await page.locator('.course:visible').count())await page.locator('.journey-all').click();
-    await expect(page.locator('.course:visible').first()).toBeVisible();
+    const search=page.getByRole('button',{name:'搜索 Lesson 或课程名称',exact:true});
+    if(await search.isVisible()&&await search.getAttribute('aria-expanded')!=='true')await search.click();
+    await expect(page.locator('.journey-course-list:visible')).toBeVisible();
     return;
   }
   // Restoring a bookmark disables the cover until the saved page is ready,
@@ -74,6 +76,20 @@ async function openCourseDirectory(page) {
   await expect(page.locator('#openCourseBook:visible:enabled, .course:visible').first()).toBeVisible();
   if(await cover.isVisible())await cover.click();
   await expect(page.locator('.course:visible').first()).toBeVisible();
+}
+async function selectDirectoryCourse(page,id){
+  await openCourseDirectory(page);
+  if(!await page.locator('.journey-home').count())return page.locator(id?`.course[data-unit="${id}"] a`:'.course a').first();
+  const row=page.locator(id?`[data-course-select="${id}"]`:'[data-course-select]:visible').first();
+  if(id&&!await row.count())await page.getByRole('searchbox',{name:'查找 Lesson',exact:true}).fill('');
+  const expected=await row.getAttribute('data-course-select');
+  await row.click();
+  await expect(page.locator('.journey-dock')).toHaveAttribute('data-selected-course',expected);
+  return page.locator('.journey-start');
+}
+async function enterDirectoryCourse(page,id){
+  const entry=await selectDirectoryCourse(page,id);
+  await entry.click();
 }
 async function studentLogin(browser, account, base = '/lesson/', contextOptions = {}) {
   const context = await browser.newContext(contextOptions); const page = await context.newPage();
@@ -99,8 +115,9 @@ async function openCourseSettings(page){
   return dialog;
 }
 async function openCanranAward(page){
-  await page.getByRole('link',{name:'我的课程',exact:true}).click();
-  await page.getByRole('link',{name:'我的纪念册',exact:true}).click();
-  await expect(page).toHaveURL(/\/awards\/(?:[?#].*)?$/);
+  const course=await studentDocument(page,page.url());
+  const home=await returnToHome(page,course);
+  await home.getByRole('link',{name:'我的纪念册',exact:true}).click();
+  return studentDocument(page,/\/awards\/(?:[?#].*)?$/);
 }
-module.exports = { openCanranAward, openCourseSettings, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, openMyAccount, readInitialPassword };
+module.exports = { openCanranAward, openCourseSettings, saveCourses, adminLogin, addStudent, createStudent, fillLogin, setPassword, signIn, studentLogin, waitForCourseReady, openCourseDirectory, selectDirectoryCourse, enterDirectoryCourse, openMyAccount, readInitialPassword };

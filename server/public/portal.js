@@ -58,6 +58,7 @@
   }
   function authenticated(){app.dataset.sessionState='authenticated';app.setAttribute('aria-busy','false');app.style.visibility='';document.getElementById('siteHeader').style.visibility='';}
   function sessionFailure(error,admin=false){
+    if(!admin)window.CanranStudentHandoff?.error(error.status);
     // A student session is not a teacher session: admin/state returns 403 for
     // that role boundary, while the student's own 403 is never a logout.
     if(error.status===401||(admin&&error.status===403))login(admin,admin?'':legacyNotice);
@@ -274,7 +275,7 @@
     try{
       let who=await api('me'+(preview?'?preview='+encodeURIComponent(preview):''));
       if(turn!==sessionTurn)return;
-      if(who.mustChangePassword)return passwordForm(who,true);
+      if(who.mustChangePassword){window.CanranStudentHandoff?.error('identity');return passwordForm(who,true);}
       if(location.pathname.startsWith('/lesson/awards/history/')||location.pathname.startsWith('/lesson/awards/local-history/')){location.reload();return;}
       if(location.pathname.startsWith('/lesson/')&&/^unit\d+-\d+\//.test(location.pathname.slice('/lesson/'.length))){location.reload();return;}
       const waiting=pendingCount(who);who.directoryWaiting=waiting;
@@ -285,6 +286,7 @@
       if(!window.CanranCourseJourney){sessionScreen('error','画面暂时没有准备好，请重新加载页面。',()=>location.reload());return;}
       const openLegacy=!who.preview&&account==='history',openProfile=!who.preview&&account==='profile';
       if(openLegacy||openProfile){const address=new URL(location.href);address.searchParams.delete('account');history.replaceState(null,'',address);}
+      window.CanranStudentHandoff?.bind(who);
       studentHeader(who,()=>window.dispatchEvent(new Event('canran:open-account')));
       app.innerHTML='';
       const resolveWho=async()=>{const next=await api('me');if(!next.mustChangePassword){next.directoryWaiting=pendingCount(next);syncInBackground(next);}return next;};
@@ -464,6 +466,7 @@
     document.getElementById('back').onclick=()=>attempt(()=>loadAdmin());
   }
   async function start(){
+    if(window.CanranStudentHandoff?.retired)return;
     if(adminMode){const turn=++sessionTurn;state=null;sessionScreen('checking');try{await loadAdmin(currentClass,()=>turn===sessionTurn);}catch(error){if(turn===sessionTurn)sessionFailure(error,true);}return;}
     const card=new URLSearchParams(location.hash.slice(1)).get('card');
     if(card){history.replaceState(null,'',location.pathname+location.search);legacyNotice='已改为学号和密码登录，请向老师领取账号。旧学习码不再使用。';}
@@ -473,6 +476,9 @@
   // without exposing the login form before the server has answered.
   window.addEventListener('pagehide',()=>{sessionTurn++;app.style.visibility='hidden';document.getElementById('siteHeader').style.visibility='hidden';});
   window.addEventListener('pageshow',event=>{if(event.persisted)void start();});
+  window.addEventListener('canran:prepare-student-view',stopDirectoryFonts);
+  window.addEventListener('canran:resume-student-view',()=>{if(app.querySelector('.journey-start'))prepareDirectory(true);});
+  window.addEventListener('canran:retire-student-view',()=>{sessionTurn++;stopDirectoryFonts();clearHome?.();clearHome=null;clearHeader?.();});
   channel?.addEventListener('message',()=>{if(!adminMode){sessionTurn++;sessionScreen('checking');location.reload();}});
   start().catch(error=>sessionFailure(error,adminMode));
 })();

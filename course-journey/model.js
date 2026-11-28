@@ -13,17 +13,22 @@ const MAP_COURSES=Object.freeze(MAP_CHAPTERS.flatMap(chapter=>chapter.courses));
 function chapterFor(id){return MAP_CHAPTERS.find(chapter=>chapter.courses.includes(id))?.id;}
 function mapChapters(courses){return MAP_CHAPTERS.filter(chapter=>courses.some(course=>chapter.courses.includes(course.id)));}
 function lesson(course){return Number(/^unit(\d+)-\d+$/.exec(course.id)?.[1]);}
-function groups(courses){
-  return [...new Set(courses.map(course=>Math.floor((lesson(course)-1)/18)))].sort((a,b)=>a-b)
-    .map(index=>({id:String(index),label:`Lesson ${index*18+1}–${index*18+18}`,count:courses.filter(c=>Math.floor((lesson(c)-1)/18)===index).length}));
+function filter(courses,query=''){
+  return courses.filter(course=>matches(course,query));
 }
-function filter(courses,query='',group='all'){
-  return courses.filter(course=>matches(course,query)&&(query.trim()||group==='all'||Math.floor((lesson(course)-1)/18)===Number(group)));
+function bookmarkKey(who){
+  return 'canran:journey:v1:'+who.student.id+(who.systemUpgrade?.epoch?':'+who.systemUpgrade.epoch:'');
 }
-function restore(courses,saved){
-  const selected=courses.find(course=>course.id===saved?.selected)?.id||courses[0]?.id||null;
-  const chapters=mapChapters(courses),chapter=chapterFor(selected)||chapters.find(item=>item.id===saved?.chapter)?.id||chapters[0]?.id||'opening';
-  return {selected,chapter,directory:!!saved?.directory,group:groups(courses).some(g=>g.id===saved?.group)?saved.group:'all',query:typeof saved?.query==='string'?saved.query.slice(0,100):'',scroll:Math.max(0,Math.min(10000,Number(saved?.scroll)||0))};
+function restore(courses,saved,fromCourse){
+  const selected=courses.find(course=>course.id===fromCourse)?.id||courses.find(course=>course.id===saved?.selected)?.id||courses[0]?.id||null;
+  const visits={};
+  for(const course of courses){
+    const chapter=chapterFor(course.id),visit=saved?.visits?.[chapter];
+    if(visit?.selected===course.id&&Number.isFinite(visit.scroll)&&Number.isFinite(visit.width)){
+      visits[chapter]={selected:course.id,scroll:Math.max(0,visit.scroll),width:visit.width};
+    }
+  }
+  return {selected,chapter:chapterFor(selected)||'opening',scroll:Math.max(0,Math.min(10000,Number(saved?.scroll)||0)),visits};
 }
 function href(course,base,preview=''){
   return base+course.id+'/'+(preview?'?preview='+encodeURIComponent(preview):'')+'#learn/'+encodeURIComponent(course.next||'words');
@@ -33,4 +38,4 @@ function actionLabel(course,upgraded=false){
   if(upgraded&&course.completed)return '再次学习';
   return course.started||course.stars?'继续学习':'开始学习';
 }
-module.exports={MAP_COURSES,MAP_CHAPTERS,chapterFor,mapChapters,lesson,groups,filter,restore,href,actionLabel};
+module.exports={MAP_COURSES,MAP_CHAPTERS,chapterFor,mapChapters,lesson,filter,bookmarkKey,restore,href,actionLabel};

@@ -2,8 +2,8 @@
 const {expect}=require('@playwright/test'),flow=require('./unit1314-fivezones');
 const {dismissRewardDialog}=require('./reward-dialog');
 async function completeStory(page,base=''){await flow.story(page,base);}
-async function completeActivity(page,id,base=''){
- await flow.activity(page,id,{base,keepAward:true});
+async function completeActivity(page,id,base='',{navigate=true}={}){
+ await flow.activity(page,id,{base,keepAward:true,navigate});
  const reveal=page.locator('dialog.award-reveal[open]');
  await expect(reveal).toBeVisible();await dismissRewardDialog(page);await expect(reveal).toHaveCount(0);
 }

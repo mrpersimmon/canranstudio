@@ -2,6 +2,9 @@
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {waitForModulesReady}=require('../support/journey-modules');
+const {devices:requiredPhones,contextOptions}=require('../support/required-phone-devices');
+const {studentDocument,returnToHome}=require('../support/student-document');
+const {courseResponse}=require('../support/course-response-faults');
 const base=process.env.AWARD_TEST_BASE||'/lesson/';
 // Honour the WebKit release project as well as an explicit local override.
 test.use({...(process.env.JOURNEY_REVIEW_BROWSER?{browserName:process.env.JOURNEY_REVIEW_BROWSER,...(process.env.JOURNEY_REVIEW_BROWSER==='webkit'?devices['iPhone 13']:{})}:{}),actionTimeout:10000});
@@ -29,7 +32,12 @@ test('原生触摸轻点人物在正常抬手后仍选中，连续轻点和下�
     await p.evaluate(()=>{window.__nativeTaps=[];for(const type of ['pointerdown','pointerup','pointerleave','click'])document.addEventListener(type,event=>{if(event.target.matches?.('[data-landmark-select]'))window.__nativeTaps.push({type,pointerType:event.pointerType,trusted:event.isTrusted});},true);});
     for(const size of [{width:390,height:844},{width:320,height:568}]){
       await p.setViewportSize(size);
+      let previous;
       for(const id of ['unit3-4','unit3-4','unit5-6','unit1-2']){
+        // A second single tap after the selection bounce is distinct from
+        // the double-tap shortcut. Keep testing both interactions.
+        if(previous===id)await expect.poll(()=>p.locator(`[data-landmark-select="${id}"] .journey-story-motion`).evaluate(el=>el.getAnimations().length)).toBe(0);
+        previous=id;
         const point=await visibleTouchPoint(p,`[data-story-course="${id}"]`,id);
         await p.touchscreen.tap(point.x,point.y);
         await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
@@ -47,6 +55,90 @@ test('原生触摸轻点人物在正常抬手后仍选中，连续轻点和下�
     const after=await(await p.request.get(base+'api/me')).json();
     expect(after.courses.map(c=>[c.id,c.stars,c.firstFullStarAt])).toEqual(before.courses.map(c=>[c.id,c.stars,c.firstFullStarAt]));
   }finally{await student.context.close();}
+});
+
+for(const device of requiredPhones)test(device.name+' 人物和 Lesson 标签双击进课，单击选课可取消',async({page,browser})=>{
+  test.setTimeout(90000);
+  await adminLogin(page,base);
+  const account=await createStudent(page,'地图双击 '+device.id,'小禾',[/Lesson 1–2 /,/Lesson 3–4 /]);
+  const {page:p,context}=await studentLogin(browser,account,base,contextOptions(device));
+  const homeURL=p.url(),courseId='unit3-4',enter=base+'api/courses/'+courseId+'/enter';
+  const opened=[];
+  p.on('request',request=>{if(request.method()==='POST'&&request.url().endsWith(enter)&&request.postDataJSON()?.openedGrant)opened.push(request.url());});
+  try{
+    await p.getByRole('button',{name:'关闭课程目录',exact:true}).tap();
+    await waitForModulesReady(p,['unit1-2','unit3-4']);
+    let home=p.mainFrame();
+    for(const [i,hit] of ['data-story-course','data-map-course'].entries()){
+      const selector=`[${hit}="${courseId}"]`,control=home.locator(`[${i===0?'data-landmark-select':hit}="${courseId}"]`);
+      const point=await visibleTouchPoint(home,selector,courseId);
+      const tap=()=>p.touchscreen.tap(point.x,point.y);
+      await courseResponse(p,enter,{hold:true});
+      await tap();
+      await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',courseId);
+      const target=new URL(await home.locator('.journey-start').getAttribute('href'),homeURL).href;
+      expect(p.url()).toBe(homeURL);
+      await expect(p.locator('iframe[data-student-view="preparing"]')).toHaveCount(0);
+      if(i===0){
+        const otherX=point.x+32;
+        expect(await home.evaluate(({x,y})=>document.elementFromPoint(x,y)?.closest('[data-landmark-select]')?.dataset.landmarkSelect,{x:otherX,y:point.y})).toBe(courseId);
+        await p.touchscreen.tap(otherX,point.y);
+        await expect(p.locator('iframe[data-student-view="preparing"]')).toHaveCount(0);
+      }
+      // Start a fresh pair after the preceding single tap.
+      await home.getByRole('button',{name:'搜索 Lesson 或课程名称',exact:true}).tap();
+      await home.getByRole('button',{name:'关闭课程目录',exact:true}).tap();
+      const pair=await visibleTouchPoint(home,selector,courseId);
+      await p.touchscreen.tap(pair.x,pair.y);await p.touchscreen.tap(pair.x+1,pair.y+1);
+      await expect(home.getByRole('button',{name:'取消切换'})).toBeInViewport();
+      await expect(control).toHaveAttribute('aria-busy','true');
+      if(i===0){
+        // A third tap on the same landmark during a slow load keeps that request.
+        await p.touchscreen.tap(pair.x,pair.y);
+        await expect(control).toHaveAttribute('aria-busy','true');
+        await home.getByRole('button',{name:'取消切换'}).tap();
+        await expect(control).toBeFocused();
+        await expect(p.locator('iframe[data-student-view="preparing"]')).toHaveCount(0);
+      }
+      await courseResponse(p,enter,null,{resumeHeld:true});
+      if(i===0){await p.touchscreen.tap(pair.x,pair.y);await p.touchscreen.tap(pair.x,pair.y);}
+      const course=await studentDocument(p,target);
+      await expect(course.locator('#wordPageProgress')).toBeVisible();
+      await expect.poll(()=>opened.length).toBe(i+1);
+      home=await returnToHome(p,course);
+      await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',courseId);
+      expect(await home.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+    }
+  }finally{await courseResponse(p,enter,null,{resumeHeld:true});await context.close();}
+});
+
+test('已经得星的学生双击课名后继续下一环节',async({page,browser})=>{
+  test.setTimeout(90000);await adminLogin(page,base);
+  const account=await createStudent(page,'双击续学','小禾',[/Lesson 1–2 /]);
+  const {page:p,context}=await studentLogin(browser,account,base,{viewport:{width:1280,height:852}});
+  try{
+    await p.goto(base+'unit1-2/#learn/listen');
+    await require('../support/thirteen-types-flow').activity(p,'1-2','listen',{navigate:false});
+    const home=await returnToHome(p);
+    const entry=home.locator('.journey-start');
+    await expect(entry).toHaveAttribute('href',/#learn\/text$/);
+    await home.locator('[data-map-course="unit1-2"]').dblclick();
+    const course=await studentDocument(p,/#learn\/text$/);
+    await expect(course.locator('.learning-surface.stage-text')).toBeVisible();
+    await expect(course.locator('#starCount')).toHaveText('1');
+  }finally{await context.close();}
+});
+
+test('桌面鼠标双击人物与班级预览的学习入口一致',async({page})=>{
+  await adminLogin(page,base);
+  await createStudent(page,'桌面双击预览','小禾',[/Lesson 1–2 /,/Lesson 3–4 /]);
+  const url=await page.getByRole('link',{name:'预览这个班',exact:true}).getAttribute('href');
+  await page.goto(url);await waitForModulesReady(page,['unit1-2','unit3-4']);
+  const hit=page.locator('[data-landmark-select="unit3-4"]');
+  await hit.dblclick();
+  await expect(page).toHaveURL(/unit3-4\/\?preview=[^#]+#learn\/words$/);
+  await expect(page.locator('#wordPageProgress')).toBeVisible();
+  await expect(page.locator('#studentSyncStatus')).toHaveAttribute('data-sync-state','preview');
 });
 
 test('Lesson轻点不叠加系统蓝色高亮，选中状态与键盘焦点仍清晰',async({page,browser,browserName},testInfo)=>{

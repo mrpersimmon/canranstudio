@@ -1,5 +1,5 @@
 'use strict';
-const {chooseJourneyChapter}=require('../support/journey-navigation');
+const {chooseJourneyChapter,enterCourseAndReturn}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {waitForModulesReady,inspectModules,assertModuleGeometry,assertStableModule}=require('../support/journey-modules');
@@ -62,7 +62,7 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
   await expect(p.locator('[data-route-world="opening"] [data-route-terrain]')).toBeVisible();
   await expect(p.locator('.journey-panorama-layer[data-staging=true]')).toHaveCSS('opacity','0');
   await expect(p.locator('.journey-panorama-layer:not([data-staging=true])')).toHaveAttribute('inert','');
-  await expect(p.locator('.journey-switch-status')).toHaveText('正在打开 Lesson 7–12…');
+  await expect(p.locator('.student-navigation-label')).toHaveText('正在打开 Lesson 7–12 地图…');
   waiting.release();await readyModules(p,pilot[1].ids);
   expect(await p.evaluate(()=>window.__switchChrome.header===document.querySelector('#siteHeader')&&window.__switchChrome.distant===document.querySelector('.journey-world-distant'))).toBe(true);
   await expect(p.locator('.journey-panorama-layer')).toHaveCount(1);
@@ -90,7 +90,7 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
   await p.evaluate(()=>{window.__holdModuleDecode=true;});
   await p.locator('.journey-mobile-search').click();
   await p.getByLabel('查找 Lesson',{exact:true}).fill('12');
-  await p.getByRole('button',{name:'地图定位：失物招领小侦探',exact:true}).click();
+  await p.locator('[data-course-select="unit11-12"]').click();
   await expect.poll(()=>p.evaluate(()=>window.__modulePending.length)).toBeGreaterThan(0);
   expect(await p.evaluate(()=>!!document.activeElement.closest('[inert]'))).toBe(false);
   await p.evaluate(()=>window.__releaseModuleDecode());await readyModules(p,pilot[1].ids);
@@ -99,7 +99,7 @@ test('章节切换先保留已解码画面，目标就绪后替换，取消后�
  }finally{waiting.release();await p.evaluate(()=>window.__releaseModuleDecode?.()).catch(()=>{});await p.unroute(target);await student.context.close();}
 });
 
-test('同一挂载重读授权时校正失效章节和范围，保留有效选择与查询，空课程后能恢复',async({page,browser})=>{
+test('重读授权时校正失效章节，搜索只含已开放课，空课程后能恢复',async({page,browser})=>{
  test.setTimeout(90000);await adminLogin(page,base);
  // This authorization scenario deliberately owns the first two chapters and
  // one final course. Expanding the visual pilot must not silently grant139/141.
@@ -120,17 +120,19 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   await readyModules(p,pilot[1].ids);
   await p.locator('[data-map-course="unit9-10"]').click();
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit9-10');
-  await p.locator('.journey-all').click();
-  await p.getByLabel('课程范围',{exact:true}).selectOption('7');
+  await p.locator('.journey-mobile-search').click();
+  await p.getByLabel('查找 Lesson',{exact:true}).fill('144');
   await expect(p.locator('.journey-course:visible')).toHaveCount(1);
   await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit','unit143-144');
   // Re-fetch the real read-only API without closing the modal: normal close
   // intentionally clears search/range, so it cannot test prop-refresh retention.
   const refresh=async()=>{await p.locator('.props-refresh').evaluate(button=>button.click());await expect(p.getByLabel('读取次数',{exact:true})).toHaveText(String(++reads));};
-  // The previous selected chapter and range both disappear from authorization.
-  allowed=['unit1-2','unit5-6'];
-  await refresh();
-  await expect(p.getByLabel('课程范围',{exact:true})).toHaveValue('all');
+  // The open query persists, even after its course and the map selection are revoked.
+  allowed=['unit1-2','unit5-6'];await refresh();
+  await expect(p.getByLabel('查找 Lesson',{exact:true})).toHaveValue('144');
+  await expect(p.locator('[data-course-select="unit143-144"]')).toHaveCount(0);
+  await expect(p.getByText('没有找到这节课',{exact:true})).toBeVisible();
+  await p.getByRole('button',{name:'清除搜索',exact:true}).click();
   await expect(p.locator('.journey-course:visible')).toHaveCount(2);
   await p.getByLabel('查找 Lesson',{exact:true}).fill('5');
   await refresh();
@@ -145,12 +147,11 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   await expect(p.locator('[data-map-course="unit9-10"],[data-story-course="unit9-10"]')).toHaveCount(0);
   await expect(p.getByText('你的课程在目录里',{exact:true})).toHaveCount(0);
   await expect(p.locator('.journey-world-passage')).toHaveCount(1);
-  await p.locator('.journey-all').click();
-  await expect(p.getByLabel('课程范围',{exact:true})).toHaveValue('all');
+  await p.locator('.journey-mobile-search').click();
+  await expect(p.getByLabel('课程范围',{exact:true})).toHaveCount(0);
   await expect(p.getByLabel('查找 Lesson',{exact:true})).toHaveValue('');
-  await p.getByLabel('课程范围',{exact:true}).selectOption('0');
   await refresh();
-  await expect(p.getByLabel('课程范围',{exact:true})).toHaveValue('0');
+  await expect(p.getByLabel('课程范围',{exact:true})).toHaveCount(0);
   await expect(p.locator('.journey-course:visible')).toHaveCount(2);
   await closeDirectory(p);
   // A fresh response object with still-valid choices must not jump back to the
@@ -160,10 +161,10 @@ test('同一挂载重读授权时校正失效章节和范围，保留有效选�
   await expect(p.getByLabel('读取次数',{exact:true})).toHaveText(String(++reads));
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit5-6');
   await expect(p.locator('[data-map-course="unit5-6"]')).toHaveAttribute('aria-pressed','true');
-  await p.locator('.journey-all').click();
+  await p.locator('.journey-mobile-search').click();
   await p.getByLabel('查找 Lesson',{exact:true}).fill('5');
   await refresh();
-  await expect(p.getByLabel('课程范围',{exact:true})).toHaveValue('all');
+  await expect(p.getByLabel('课程范围',{exact:true})).toHaveCount(0);
   await expect(p.getByLabel('查找 Lesson',{exact:true})).toHaveValue('5');
   await expect(p.locator('.journey-course:visible')).toHaveCount(1);
   await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit','unit5-6');
@@ -262,7 +263,6 @@ test('新满星遇到章节共享地形失败时保留待庆祝，重试可见�
 async function closeDirectory(p){
  const mobile=p.getByRole('button',{name:'关闭课程目录',exact:true});
  if(await mobile.isVisible())await mobile.click();
- else if(await p.locator('.journey-directory-desktop:visible').count())await p.locator('.journey-all').click();
 }
 async function readyModules(p,ids){
  await waitForModulesReady(p,ids);
@@ -444,19 +444,17 @@ test('稀疏授权只渲染本班入口，共享地形和单课人物故障按�
    await expect(failed.getByRole('status')).toHaveCount(0);
    await readyModules(p,['unit9-10','unit11-12']);
   }
+  let home=p.mainFrame();
   for(const [query,id,chapter]of [['Lesson 12','unit11-12','neighborhood'],['Lesson 144','unit143-144','woodland']]){
-   await openCourseDirectory(p);await p.getByLabel('查找 Lesson',{exact:true}).fill(query);
-   await expect(p.locator('.journey-course:visible')).toHaveCount(1);
-   await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
-   await p.locator('.journey-course:visible .journey-locate').click();
-   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',chapter);
-   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
-   await expect(p.locator('[data-map-course="'+id+'"]')).toHaveAttribute('aria-pressed','true');
-   await p.locator('.journey-start').click();
-   await expect(p).toHaveURL(new RegExp(id+'/#learn/words$'));
-   await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
-   await p.getByRole('link',{name:'我的课程',exact:true}).click();
-   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
+   await openCourseDirectory(home);await home.getByLabel('查找 Lesson',{exact:true}).fill(query);
+   await expect(home.locator('.journey-course:visible')).toHaveCount(1);
+   await expect(home.locator('.journey-course:visible')).toHaveAttribute('data-unit',id);
+   await home.locator('.journey-course:visible [data-course-select]').click();
+   await expect(home.locator('.journey-map')).toHaveAttribute('data-chapter',chapter);
+   await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
+   await expect(home.locator('[data-map-course="'+id+'"]')).toHaveAttribute('aria-pressed','true');
+   home=await enterCourseAndReturn(p,home,id);
+   await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
   }
   await p.reload();
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit143-144');

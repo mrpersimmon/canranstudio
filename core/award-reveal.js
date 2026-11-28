@@ -3,6 +3,7 @@
   const core = root.CanranCore;
   const UPGRADE = '课程已升级，重新挑战，全对即可点亮星星！';
   const earnedImage = '/assets/awards/star-earned.webp';
+  const landingDuration = 540;
   // A foreground round owns its reveal and result handoff. This is transient
   // presentation state only; learning evidence and award dates stay in the ledger.
   const completions = new WeakMap();
@@ -202,7 +203,7 @@
         { duration: 1060, easing: 'cubic-bezier(.22,.7,.28,1)', fill: 'forwards' }).finished;
         if (token !== generation) return;
         fly.remove(); paint({ ...item.state, stars: index + 1 });
-        const landing = slots[index].animate([{ transform: 'scale(.7)' }, { transform: 'scale(1.3)', offset: .48 }, { transform: 'scale(1)' }], { duration: 540, easing: 'ease-out' });
+        const landing = slots[index].animate([{ transform: 'scale(.7)' }, { transform: 'scale(1.3)', offset: .48 }, { transform: 'scale(1)' }], { duration: landingDuration, easing: 'ease-out' });
         const bloom = decorative('star-bloom');
         Object.assign(bloom.style, { left: dest.x + dest.width / 2 - 45 + 'px', top: dest.y + dest.height / 2 - 45 + 'px' }); dialog.append(bloom);
         bloom.animate([{ opacity: 0, transform: 'scale(.25)' }, { opacity: .9, transform: 'scale(.7)', offset: .18 }, { opacity: 0, transform: 'scale(1.35)' }], { duration: 720, easing: 'ease-out' }).finished.then(() => bloom.remove(), () => bloom.remove());
@@ -213,7 +214,15 @@
             { opacity: 0, transform: `translate(${Math.cos(angle) * reach}px,${Math.sin(angle) * reach}px) scale(.1) rotate(30deg)` }],
           { duration: 760 + i % 3 * 90, easing: 'ease-out' }).finished.then(() => spark.remove(), () => spark.remove());
         }
-        await landing.finished;
+        // The star is already in its slot. WebKit can stall the decorative
+        // bounce after that paint. Give it a second playback interval,
+        // then return to the resting pose even if its finish signal is late.
+        let landingTimer;
+        try {
+          await Promise.race([landing.finished, new Promise(resolve => {
+            landingTimer = setTimeout(() => { resolve(); landing.cancel(); }, landingDuration * 2);
+          })]);
+        } finally { clearTimeout(landingTimer); }
       }
       if(token===generation)paint(item.state);
     }

@@ -193,7 +193,7 @@
         return false;
       }
       close();
-      if (target.hash.startsWith('#') && root.location) root.location.hash = target.hash.slice(1);
+      if (target.hash.startsWith('#') && root.location && !root.CanranStudentHandoff?.navigateFragment(target.hash)) root.location.hash = target.hash.slice(1);
       const requestedFocus = target.focusSelector
         ? targetElement.querySelector(target.focusSelector)
         : null;

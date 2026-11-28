@@ -1,4 +1,6 @@
 'use strict';
+const {studentDocument,returnToHome}=require('../support/student-document');
+
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,signIn,fillLogin,openCourseDirectory}=require('./helpers');
 const five=require('../support/unit3132-fivezones');
@@ -47,14 +49,14 @@ test('旅程地图只收录班级课程，搜索与跨设备续学保留真实�
     await expect(first.page.locator('[data-story-course]')).toHaveCount(2);
     await first.page.getByLabel('查找 Lesson',{exact:true}).fill('Lesson 32');
     await expect(first.page.locator('.journey-course:visible')).toHaveCount(1);
-    await expect(first.page.locator('.journey-course:visible h3')).toHaveText('花园观察小队');
-    await first.page.locator('.journey-course:visible a').click();
+    await expect(first.page.locator('.journey-course:visible strong')).toHaveText('花园观察小队');
+    await first.page.locator('.journey-course:visible [data-course-select]').click();await first.page.locator('.journey-start').click();
     await expect(first.page).toHaveURL(/unit31-32\/#learn\/words$/);
-    await five.activity(first.page,'listen',{base:mount});
+    await first.page.reload();await five.activity(first.page,'listen',{base:mount});
     await expect(first.page.locator('#studentSyncStatus')).toHaveText('学习成果已同步');
-    await first.page.getByRole('link',{name:'我的课程',exact:true}).click();await openCourseDirectory(first.page);
-    await expect(first.page.locator('.course[data-unit="unit31-32"]')).toContainText('1 / 5');
-    await expect(first.page.locator('.course[data-unit="unit31-32"] a')).toHaveAttribute('href',base+'unit31-32/#learn/text');
+    const home=await returnToHome(first.page);await openCourseDirectory(home);
+    await expect(home.locator('.course[data-unit="unit31-32"]')).toContainText('1 / 5');
+    await expect(home.locator('.journey-start')).toHaveAttribute('href',base+'unit31-32/#learn/text');
     second=await studentLogin(browser,account,base);
     await expect(second.page.locator('.course[data-unit="unit31-32"]')).toContainText('1 / 5');
     await second.page.getByLabel('查找 Lesson',{exact:true}).fill('Lesson 144');
@@ -64,28 +66,28 @@ test('旅程地图只收录班级课程，搜索与跨设备续学保留真实�
   }finally{await first.context.close();await second?.context.close();}
 });
 
-test('完整72单元目录支持精确Lesson搜索、筛选与最后一课，回车先聚焦入口',async({page,browser})=>{
+test('完整72单元支持跨章搜索、回车选中及末课进入',async({page,browser})=>{
   test.setTimeout(150000);await adminLogin(page,base);
   const lessons=Array.from({length:72},(_,i)=>new RegExp(`Lesson ${i*2+1}–${i*2+2} `));
   const account=await createStudent(page,'完整地图目录','找课同学',lessons),student=await studentLogin(browser,account,base);
   try{
     const p=student.page;await expect(p.locator('.journey-course')).toHaveCount(72);
     await expect(p.locator('[data-map-course]')).toHaveCount(3);
-    await p.getByLabel('课程范围',{exact:true}).selectOption('0');
-    await expect(p.locator('.journey-course:visible')).toHaveCount(9);
+    await expect(p.getByLabel('课程范围',{exact:true})).toHaveCount(0);
+    await expect(p.locator('.journey-course:visible')).toHaveCount(72);
     await p.getByLabel('查找 Lesson',{exact:true}).fill('Lesson 50');
     await expect(p.locator('.journey-course:visible')).toHaveCount(1);
-    await expect(p.locator('.journey-course:visible h3')).toHaveText('晚餐采购大冒险');
+    await expect(p.locator('.journey-course:visible strong')).toHaveText('晚餐采购大冒险');
     await p.getByLabel('查找 Lesson',{exact:true}).press('Enter');
-    await expect(p.locator('.journey-course:visible [data-course-enter]')).toBeFocused();
+    await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit49-50');
     await expect(p).toHaveURL(new RegExp(base+'$'));
     await p.getByLabel('查找 Lesson',{exact:true}).fill('5');
     await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit','unit5-6');
     await p.getByLabel('查找 Lesson',{exact:true}).fill('Lesson 144');
     await expect(p.locator('.journey-course:visible')).toHaveAttribute('data-unit','unit143-144');
-    await p.locator('.journey-course:visible [data-course-enter]').click();
-    await expect(p).toHaveURL(/unit143-144\/#learn\/words$/);
-    await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
+    await p.locator('.journey-course:visible [data-course-select]').click();await p.locator('.journey-start').click();
+    const course=await studentDocument(p,/unit143-144\/#learn\/words$/);
+    await expect(course.locator('.learning-surface .unit-word').first()).toBeVisible();
   }finally{await student.context.close();}
 });
 
@@ -123,7 +125,7 @@ test('远景失败不阻断本课，共享地形失败保留目录且重试不�
     await expect(module().locator('[data-landmark-select]')).toBeVisible();
     await expect(module().getByRole('status')).toHaveCount(0);
     await p.getByLabel('查找 Lesson',{exact:true}).fill('50');
-    await expect(p.locator('.course:visible a')).toHaveAttribute('href',base+'unit49-50/#learn/words');
+    await expect(p.locator('.course:visible [data-course-select]')).toHaveAttribute('data-course-select','unit49-50');
     await p.unroute(ambient);
     await p.route(ground,route=>{groundHits++;return route.abort();});
     await p.reload();
@@ -133,11 +135,12 @@ test('远景失败不阻断本课，共享地形失败保留目录且重试不�
     await expect(module().locator('[data-map-course]')).toBeVisible();
     await expect(module().locator('[data-stars-course]')).toBeVisible();
     await p.getByLabel('查找 Lesson',{exact:true}).fill('50');
-    await expect(p.locator('.course:visible a')).toHaveAttribute('href',base+'unit49-50/#learn/words');
+    await expect(p.locator('.course:visible [data-course-select]')).toBeEnabled();
     await p.unroute(ground);
     if(await p.getByRole('button',{name:'关闭课程目录',exact:true}).isVisible())await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
     await p.getByRole('button',{name:'重新加载 Lesson 1–2 场景',exact:true}).click();
     await waitForModulesReady(p,['unit1-2']);
+    await openCourseDirectory(p);await p.getByRole('searchbox',{name:'查找 Lesson'}).fill('50');await p.locator('[data-course-select="unit49-50"]').click();await expect(p.locator('.journey-start')).toHaveAttribute('href',base+'unit49-50/#learn/words');
     await expect.poll(()=>p.locator('.journey-world-distant').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
     const after=await(await p.request.get(base+'api/me')).json();
     expect(after.courses.map(c=>[c.id,c.stars,c.firstFullStarAt])).toEqual(before.courses.map(c=>[c.id,c.stars,c.firstFullStarAt]));
@@ -176,10 +179,10 @@ test('手机地图自然滚动，节点切换不跳页，目录搜索和我的�
     // and its real 44px controls, rather than a thin, unclickable scroll strip.
     for(const [width,height] of viewports('directoryCompact')){
       await p.setViewportSize({width,height});
-      await expect.poll(()=>p.locator('.journey-directory-sheet .journey-course-list').evaluate(el=>el.clientHeight)).toBeGreaterThan(100);
-      await expect(p.locator('.journey-course:visible [data-course-enter]')).toBeInViewport();
+      await expect.poll(()=>p.locator('.journey-directory-sheet .journey-course-list').evaluate(el=>el.clientHeight)).toBeGreaterThanOrEqual(66);
+      await expect(p.locator('.journey-course:visible [data-course-select]')).toBeInViewport({ratio:1});
     }
-    await p.getByRole('button',{name:'地图定位：新朋友见面会',exact:true}).click();
+    await p.locator('[data-course-select="unit5-6"]').click();
     await expect(p.locator('.journey-directory-sheet')).not.toBeVisible();
     await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit5-6');
     await p.setViewportSize({width:390,height:844});

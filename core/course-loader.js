@@ -53,6 +53,7 @@
     L07: '请返回课程，确认登录状态。'
   };
   function showFailure(error, fallback = 'L00', message) {
+    window.CanranStudentHandoff?.error(error?.status);
     const code = failureMessages[error?.courseCode] ? error.courseCode : fallback;
     status(message || failureMessages[code]);
     const retry = document.getElementById('courseLoadingRetry'); if (retry) retry.hidden = false;
@@ -233,7 +234,7 @@
         }
         done += item.bytes;
         const progress = foreground && document.getElementById('courseLoadingProgress');
-        if (progress) progress.value = Math.floor(90 * done / total);
+        if (progress) {progress.value = Math.floor(90 * done / total);window.CanranStudentHandoff?.progress();}
       }
     }));
     return resources;
@@ -294,7 +295,8 @@
     for (const style of parsed.querySelectorAll('style')) style.textContent = cssUrls(style.textContent, new URL(pack.entry, location.origin).href);
     for (const image of parsed.images) if (image.hasAttribute('src')) image.setAttribute('src', resourceAddress(image.getAttribute('src'), new URL(pack.entry, location.origin).href));
     const overlay = document.getElementById('courseLoader'), loaderStyle = document.getElementById('courseLoaderStyle');
-    document.head.replaceChildren(loaderStyle, ...[...parsed.head.children].map(node => document.importNode(node, true)));
+    const handoffStyle=document.getElementById('studentHandoffCss');
+    document.head.replaceChildren(loaderStyle,...(handoffStyle?[handoffStyle]:[]), ...[...parsed.head.children].map(node => document.importNode(node, true)));
     document.body.replaceChildren(overlay, ...[...parsed.body.childNodes].map(node => document.importNode(node, true)));
     document.body.className = parsed.body.className;
     for (const attribute of parsed.documentElement.attributes) if (attribute.name !== 'data-course-preparing') document.documentElement.setAttribute(attribute.name, attribute.value);
@@ -557,8 +559,8 @@
       showFailure(error, phase);
     } finally { clearTimeout(slow); clearTimeout(retryTimer); running = false; }
   }
-  window.addEventListener('pagehide', event => {
-    if (event.persisted) return;
+  function releasePage() {
+    if(cancellation.signal.aborted)return;
     cancellation.abort();
     clearTimeout(updateTimer); clearTimeout(withdrawalTimer); metadataResponses.clear();
     observer?.disconnect();
@@ -569,7 +571,9 @@
     store.memory.clear();
     for (const url of memoryUrls.values()) if (url.startsWith('blob:')) URL.revokeObjectURL(url);
     memoryUrls.clear();
-  });
+  }
+  window.addEventListener('pagehide',event=>{if(!event.persisted)releasePage();});
+  window.addEventListener('canran:retire-student-view',releasePage,{once:true});
   if (updates) updates.onmessage = event => { if (activePack && event.data?.withdrawn?.includes(activePack.id + '@' + activePack.revision)) withdrawn = true; };
   window.addEventListener('error', event => { if (executionStarted && !initialized && event instanceof ErrorEvent) visualFailure = true; });
   ready.then(() => {

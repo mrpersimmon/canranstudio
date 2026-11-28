@@ -4,7 +4,15 @@ const course=location.pathname.match(/\/(unit\d+-\d+)(?:\/|$)/)?.[1];
 if(!course)return;
 const preview=new URLSearchParams(location.search).get('preview');
 const native={get:Storage.prototype.getItem,set:Storage.prototype.setItem,remove:Storage.prototype.removeItem};
-const read=k=>native.get.call(localStorage,k),write=(k,v)=>native.set.call(localStorage,k,v);
+const handoff=window.CanranStudentHandoff;
+let staging=!!handoff?.preparing;
+const stagedValues=new Map(),initialValues=new Map();
+const read=k=>staging&&stagedValues.has(k)?stagedValues.get(k):native.get.call(localStorage,k);
+function change(k,v){
+ if(staging){if(!initialValues.has(k))initialValues.set(k,native.get.call(localStorage,k));stagedValues.set(k,v);return;}
+ if(v===null)native.remove.call(localStorage,k);else native.set.call(localStorage,k,v);
+}
+const write=(k,v)=>change(k,String(v));
 const key='canran:lesson:'+course+':learning:v1';
 let access,owner,prefix,timer,retryTimer,pending,pendingWriteFailed=false,lastSnapshot='',urgentPending=false,retryDelay=1000,renewing=false,flushing=false,hiddenAt=0,renewAt=0,locked=false;
 const memory=new Map();
@@ -80,7 +88,7 @@ function completedSnapshot(book){
  return {version:1,groups,records,activity};
 }
 function saveQueue(){
- if(access?.preview)return;const value=read(prefix+key);if(!value)return;
+ if(access?.preview||staging)return;const value=read(prefix+key);if(!value)return;
  try{
   const book=JSON.parse(value),completed=completedSnapshot(book),observations=CanranLearningObserver.snapshot(book),snapshot=JSON.stringify([completed,observations]);if(snapshot===lastSnapshot)return;
   const prior=lastSnapshot?JSON.parse(lastSnapshot)[0]:{},claims=completed.activity?.unitAwardClaims||{};
@@ -93,7 +101,14 @@ function saveQueue(){
   if(urgentPending)queueMicrotask(flush);else timer=setTimeout(flush,400);
  }catch{syncStatus('暂未保存，请先别关闭页面');}
 }
-async function flush(){
+let upload;
+function flush(){
+ if(upload)return upload;
+ if(staging||!pending||access?.preview||locked)return Promise.resolve();
+ const job=sendPending();upload=job;
+ const clear=()=>{if(upload===job)upload=null;};job.then(clear,clear);return job;
+}
+async function sendPending(){
  if(!pending||flushing||access?.preview||locked)return;
  if(navigator.onLine===false){syncStatus('已保存到本机 · 联网后同步','retry');return;}
  clearTimeout(retryTimer);
@@ -121,16 +136,17 @@ async function flush(){
    syncStatus('已保存到本机 · 联网后同步','retry');
    if(navigator.onLine!==false&&(!error.status||error.status>=500||error.status===429)){retryTimer=setTimeout(flush,retryDelay);retryDelay=Math.min(30000,retryDelay*2);}
   }
- }finally{flushing=false;if(pending&&pending!==sent){clearTimeout(retryTimer);if(urgentPending)queueMicrotask(flush);else timer=setTimeout(flush,400);}}
+ }finally{flushing=false;upload=null;if(pending&&pending!==sent){clearTimeout(retryTimer);if(urgentPending)queueMicrotask(flush);else timer=setTimeout(flush,400);}}
 }
 function lock(message,retry=()=>location.reload()){
+ if(handoff?.retired)return;
  locked=true;document.documentElement.setAttribute('data-access-locked','');
  let gate=document.getElementById('accessGate');if(!gate){gate=document.createElement('div');gate.id='accessGate';gate.setAttribute('role','alertdialog');gate.setAttribute('aria-label','课程访问');gate.style='position:fixed;inset:0;z-index:2147483646;background:#fcf8ef;display:grid;place-items:center;padding:24px;color:#4b3428;font:18px/1.7 system-ui';document.body.append(gate);}
  for(const child of document.body.children)if(child!==gate&&!child.inert){child.inert=true;child.dataset.accessInert='';}
  gate.style.setProperty('display','grid','important');gate.style.setProperty('visibility','visible','important');gate.replaceChildren();const box=document.createElement('div'),copy=document.createElement('h2'),button=document.createElement('button'),back=document.createElement('a');copy.textContent=message;button.textContent='再试一次';button.style='font:inherit;padding:12px 24px;margin:12px;border-radius:18px';button.onclick=retry;back.textContent='返回课程';back.href='/lesson/';box.append(copy,button,back);gate.append(box);button.focus({preventScroll:true});window.dispatchEvent(new Event('lesson49:leave-activity'));
 }
 function unlock(){document.querySelectorAll('[data-access-inert]').forEach(el=>{el.inert=false;delete el.dataset.accessInert;});locked=false;document.documentElement.removeAttribute('data-access-locked');document.getElementById('accessGate')?.remove();}
-async function renew(){if(renewing)return;renewing=true;for(const child of document.body.children)if(!child.inert){child.inert=true;child.dataset.accessInert='';}try{const next=await api('courses/'+course+'/enter',{preview});if(next.student.id!==owner){lock('学习身份已改变，请重新进入课程。');return;}if(next.systemUpgrade?.epoch!==access.systemUpgrade?.epoch){lock(next.systemUpgrade?.message||'课程已更新，请刷新课程。',()=>location.reload());return;}access.grant=next.grant;access.expires=next.expires;if(next.awards){access.awards=next.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:next.awards}));}renewAt=Date.now()+7200000;unlock();await pinAgain();flush();}catch(error){lock(error.status===403?error.message:'暂时无法核验，请联网后再试。',renew);}finally{renewing=false;}}
+async function renew(){if(renewing||staging||handoff?.retired)return;renewing=true;for(const child of document.body.children)if(!child.inert){child.inert=true;child.dataset.accessInert='';}try{const next=await api('courses/'+course+'/enter',{preview});if(next.student.id!==owner){lock('学习身份已改变，请重新进入课程。');return;}if(next.systemUpgrade?.epoch!==access.systemUpgrade?.epoch){lock(next.systemUpgrade?.message||'课程已更新，请刷新课程。',()=>location.reload());return;}access.grant=next.grant;access.expires=next.expires;if(next.awards){access.awards=next.awards;window.dispatchEvent(new CustomEvent('lesson-awards:synced',{detail:next.awards}));}renewAt=Date.now()+7200000;unlock();await pinAgain();flush();}catch(error){lock(error.status===403?error.message:'暂时无法核验，请联网后再试。',renew);}finally{renewing=false;}}
 async function pinAgain(){const controller=navigator.serviceWorker?.controller;if(!controller||!window.CanranCourseCache)return;const pack=await window.CanranCourseCache.open('/lesson/').current(course);if(pack)controller.postMessage({type:'course:pin',id:course,revision:pack.revision});}
 function mergeRemote(local,remote){
  const v=local&&typeof local==='object'?local:{version:1,groups:{},records:{},activity:{}};
@@ -154,16 +170,16 @@ function mergeRemote(local,remote){
  return v;
 }
 function installStorage(){
- Storage.prototype.getItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.get.call(this,k);return access.preview?(memory.get(k)??null):native.get.call(this,prefix+k);};
- Storage.prototype.setItem=function(k,v){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.set.call(this,k,v);if(access.preview){memory.set(k,String(v));return;}native.set.call(this,prefix+k,v);if(k===key)saveQueue();};
- Storage.prototype.removeItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.remove.call(this,k);if(access.preview){memory.delete(k);return;}native.remove.call(this,prefix+k);};
+ Storage.prototype.getItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.get.call(this,k);return access.preview?(memory.get(k)??null):read(prefix+k);};
+ Storage.prototype.setItem=function(k,v){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.set.call(this,k,v);if(access.preview){memory.set(k,String(v));return;}write(prefix+k,v);if(k===key)saveQueue();};
+ Storage.prototype.removeItem=function(k){k=String(k);if(this!==localStorage||!isCourseKey(k))return native.remove.call(this,k);if(access.preview){memory.delete(k);return;}change(prefix+k,null);};
 }
 window.CanranAccessReady=(async()=>{
- access=await api('courses/'+course+'/enter',{preview});owner=access.student.id;prefix=window.CanranSystemUpgrade?.namespace(owner,access.systemUpgrade)||'canran:student:'+owner+':'+(access.systemUpgrade?.epoch?'epoch:'+access.systemUpgrade.epoch+':':'');renewAt=Date.now()+7200000;
+ access=await api('courses/'+course+'/enter',staging?{preview,prepareOnly:true}:{preview});owner=access.student.id;prefix=window.CanranSystemUpgrade?.namespace(owner,access.systemUpgrade)||'canran:student:'+owner+':'+(access.systemUpgrade?.epoch?'epoch:'+access.systemUpgrade.epoch+':':'');renewAt=Date.now()+7200000;
  if(!access.preview){
   const generationKey=prefix+'generation:'+course;const oldGeneration=Number(read(generationKey)||0);
   let local=null;try{local=JSON.parse(read(prefix+key)||'null');pending=JSON.parse(read(prefix+'pending:'+course)||'null');}catch{}
-  if(oldGeneration!==access.progress.generation){local=null;pending=null;native.remove.call(localStorage,prefix+'pending:'+course);}
+  if(oldGeneration!==access.progress.generation){local=null;pending=null;change(prefix+'pending:'+course,null);}
   write(prefix+key,JSON.stringify(mergeRemote(local,access.progress.value)));write(generationKey,String(access.progress.generation));
  }
  const initial=JSON.parse(read(prefix+key)||'{}');lastSnapshot=JSON.stringify([completedSnapshot(initial),CanranLearningObserver.snapshot(initial)]);installStorage();window.CanranStudentAccess=access;
@@ -171,16 +187,32 @@ window.CanranAccessReady=(async()=>{
  // not be saved earlier, without resurrecting an explicitly rejected round.
  let rejected={};try{rejected=JSON.parse(read(prefix+key+':awards:'+access.awards?.edition)||'{}').rejected||{};}catch{}
  if(!access.preview&&!pending&&Object.entries(initial.activity?.unitAwardClaims||{}).some(([id,claim])=>typeof claim?.runId==='string'&&!access.awards?.zones?.[id]&&rejected[id]?.runId!==claim.runId)){lastSnapshot='';saveQueue();}
+ if(handoff){
+  handoff.beforeLeave=flush;
+  handoff.onActivate=async()=>{
+   if(!staging)return;
+   const next=await api('courses/'+course+'/permit?student-view=1');
+   if(!handoff.currentRequest())throw Error('导航已取消');
+   if(next.studentId!==owner||next.systemUpgrade?.epoch!==access.systemUpgrade?.epoch){handoff.error('identity');throw Error('学习身份已改变');}
+   if(next.generation!==access.progress.generation||[...initialValues].some(([k,value])=>native.get.call(localStorage,k)!==value))throw Error('学习记录已更新，请重试');
+   return ()=>{
+    staging=false;
+    for(const [k,value] of stagedValues)change(k,value);
+    stagedValues.clear();initialValues.clear();saveQueue();notifyPending();void flush();
+    void api('courses/'+course+'/enter',{openedGrant:access.grant,studentId:owner,generation:access.progress.generation}).catch(error=>{if(error.status===401||error.status===403)lock(error.message,renew);});
+   };
+  };
+ }
  return access;
 })();
-window.CanranAccessReady.catch(error=>{const show=()=>lock(error.status===403?error.message:'请联网后重新进入课程。');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show,{once:true});else show();});
+window.CanranAccessReady.catch(error=>{handoff?.error(error.status);const show=()=>lock(error.status===403?error.message:'请联网后重新进入课程。');if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',show,{once:true});else show();});
 channel?.addEventListener('message',()=>lock('学习身份已改变，请重新进入课程。'));
 navigator.serviceWorker?.addEventListener('message',event=>{if(event.data?.type==='identity:changed')lock('学习身份已改变，请重新进入课程。');});
 window.addEventListener('online',()=>{retryDelay=1000;flush();});
 window.addEventListener('offline',()=>clearTimeout(retryTimer));
 window.addEventListener('pagehide',event=>{if(event.persisted)lock('正在核验课程…',renew);});
 window.addEventListener('pageshow',event=>{if(event.persisted)renew();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)hiddenAt=Date.now();else if(access&&Date.now()-hiddenAt>1800000)renew();});
+document.addEventListener('visibilitychange',()=>{if(handoff?.retired)return;if(document.hidden)hiddenAt=Date.now();else if(access&&Date.now()-hiddenAt>1800000)renew();});
 setInterval(()=>{if(access&&!document.hidden&&!locked&&Date.now()>=renewAt)renew();},10000);
 document.addEventListener('click',event=>{if(locked&&!event.target.closest('#accessGate')){event.preventDefault();event.stopImmediatePropagation();}},true);
 document.addEventListener('canran:course-ready',()=>{

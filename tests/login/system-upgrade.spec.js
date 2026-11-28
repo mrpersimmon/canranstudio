@@ -6,7 +6,7 @@ const { createApp } = require('../../server/app');
 const { openStore } = require('../../server/store');
 const { UNITS } = require('../../server/catalog');
 const { EPOCH, MESSAGE } = require('../../server/system-upgrade');
-const { signIn } = require('./helpers');
+const { signIn,selectDirectoryCourse } = require('./helpers');
 const flow = require('../support/system-upgrade-flow');
 const paired = require('../support/units1-30-tasks');
 const { dismissRewardDialog } = require('../support/reward-dialog');
@@ -43,7 +43,10 @@ test('真实全星与未通关一次性升级：备份、原证归档、清零�
     await expect(p.getByRole('region', { name: '课程体系升级说明', exact: true })).toContainText(MESSAGE);
     for (const course of ['unit1-2', 'unit3-4']) {
       const card = p.locator('[data-unit="' + course + '"]');
-      await expect(card).toContainText('已通关'); await expect(card.getByRole('link', { name: /^再次学习/ })).toBeVisible();
+      await expect(card).toContainText('已通关');
+      const entry=await selectDirectoryCourse(p,course);
+      await expect(entry).toBeVisible();await expect(entry).toHaveAccessibleName(/^再次学习/);
+      await expect(entry).toHaveAttribute('href',base+course+'/#learn/words');
     }
     const me = await (await p.request.get(base + 'api/me')).json(); expect(me.systemUpgrade.epoch).toBe(EPOCH);
     expect(me.courses.filter(course => ['unit1-2', 'unit3-4', 'unit5-6'].includes(course.id)).map(course => [course.id, course.stars])).toEqual([['unit1-2', 5], ['unit3-4', 5], ['unit5-6', 0]]);

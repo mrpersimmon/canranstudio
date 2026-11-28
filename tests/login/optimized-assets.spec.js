@@ -1,4 +1,6 @@
 'use strict';
+const {studentDocument}=require('../support/student-document');
+
 const {test,expect}=require('@playwright/test'),fs=require('node:fs/promises'),path=require('node:path');
 const {adminLogin,createStudent,studentLogin,fillLogin}=require('./helpers');
 const {devices,contextOptions}=require('../support/required-phone-devices'),{courseReadyForAssertions}=require('../support/completion-layout');
@@ -72,11 +74,12 @@ for(const device of devices)test(device.name+' leaves a streaming directory font
   const saved=()=>p.evaluate(async({key,base})=>{if(!window.CanranCourseCache)return 0;const disk=await CanranCourseCache.open(base).cache;const r=await disk?.match(key);return Number(r?.headers.get('Content-Length'))||0;},{key,base});
   await expect.poll(saved,{timeout:20000,intervals:[50,100]}).toBeGreaterThanOrEqual(256*1024);const known=await saved();
   const suffix=p.waitForResponse(r=>r.url().endsWith(font.url)&&r.status()===206);
-  await p.locator('.journey-start').tap();const rangeHeader=(await suffix).headers()['content-range'],actual=await p.evaluate(()=>window.handoffRequest);
+  await p.locator('.journey-start').tap();const rangeHeader=(await suffix).headers()['content-range'];
+  const course=await studentDocument(p,/unit1-2\/#learn\/words$/),actual=await course.evaluate(()=>window.handoffRequest);
   expect(actual.stored).toBeGreaterThanOrEqual(known);expect(actual.range).toBe('bytes='+actual.stored+'-');
   expect(rangeHeader).toBe('bytes '+actual.stored+'-'+(font.bytes-1)+'/'+font.bytes);
-  await courseReadyForAssertions(p);await expect(p.locator('.learning-surface .unit-word').first()).toBeVisible();
-  const result=await p.evaluate(async({font,base})=>{const store=CanranCourseCache.open(base),bytes=await store.cached(font);
+  await courseReadyForAssertions(course);await expect(course.locator('.learning-surface .unit-word').first()).toBeVisible();
+  const result=await course.evaluate(async({font,base})=>{const store=CanranCourseCache.open(base),bytes=await store.cached(font);
    return {whole:await CanranCourseCache.digest(bytes),size:bytes.byteLength,partial:!!(await(await store.cache).match(base+'font-preparation/'+font.sha256)),width:innerWidth};},{font,base});
   expect(result).toEqual({whole:font.sha256,size:font.bytes,partial:false,width:device.viewport.width});
  }finally{await courseResponse(page,font.url).catch(()=>{});await ctx.close();}

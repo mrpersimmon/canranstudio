@@ -1,5 +1,5 @@
 'use strict';
-const {chooseJourneyChapter}=require('../support/journey-navigation');
+const {chooseJourneyChapter,enterCourseAndReturn}=require('../support/journey-navigation');
 const {test,expect,devices}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin,openCourseDirectory}=require('./helpers');
 const {viewports}=require('../support/journey-viewports');
@@ -27,18 +27,17 @@ test('六课精确搜索、跨段定位、人物选择、实际进入与刷新�
  const student=await studentLogin(browser,account,base,{viewport:{width:390,height:844}}),p=student.page;
  try{
   const before=await(await p.request.get(base+'api/me')).json();
+  let home=p.mainFrame();
   for(const n of pairs){
-   await openCourseDirectory(p);await p.getByLabel('查找 Lesson',{exact:true}).fill('Lesson '+(n+1));
-   const result=p.locator('.journey-course:visible');await expect(result).toHaveCount(1);
+   await openCourseDirectory(home);await home.getByLabel('查找 Lesson',{exact:true}).fill('Lesson '+(n+1));
+   const result=home.locator('.journey-course:visible');await expect(result).toHaveCount(1);
    const id='unit'+n+'-'+(n+1);await expect(result).toHaveAttribute('data-unit',id);
-   await result.locator('.journey-locate').click();
-   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter',n<25?'kindness':'home');
-   await waitForModulesReady(p,n<25?ids.slice(0,3):ids.slice(3));
-   await p.locator('[data-landmark-select="'+id+'"]').click();
-   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
-   await p.locator('.journey-start').click();await expect(p).toHaveURL(new RegExp(id+'/#learn/words$'));
-   await expect(p.locator('#courseLoader')).toHaveCount(0,{timeout:30000});
-   await p.getByRole('link',{name:'我的课程',exact:true}).click();
+   await result.locator('[data-course-select]').click();
+   await expect(home.locator('.journey-map')).toHaveAttribute('data-chapter',n<25?'kindness':'home');
+   await waitForModulesReady(home,n<25?ids.slice(0,3):ids.slice(3));
+   await home.locator('[data-landmark-select="'+id+'"]').click();
+   await expect(home.locator('.journey-dock')).toHaveAttribute('data-selected-course',id);
+   home=await enterCourseAndReturn(p,home,id);
   }
   await p.reload();await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','home');
   await expect(p.locator('.journey-dock')).toHaveAttribute('data-selected-course','unit29-30');
@@ -77,15 +76,14 @@ test('跨两段稀疏授权不泄露课程，缺图可切段和搜索，重试�
  const student=await studentLogin(browser,account,base,{viewport:{width:1440,height:1024},serviceWorkers:'block'}),p=student.page;
  try{
   const before=await(await p.request.get(base+'api/me')).json();
-  // Desktop keeps the directory in the sidebar; its real closing control is
-  // “返回地图”, unlike the mobile modal's “关闭课程目录”.
-  await p.getByRole('button',{name:'返回地图',exact:true}).click();
+  await expect(p.locator('.journey-directory-desktop [data-course-select]')).toHaveCount(2);
+  await expect(p.getByRole('searchbox',{name:'查找 Lesson',exact:true})).toBeVisible();
   await expect(p.locator('[data-map-course]')).toHaveCount(1);await expect(p.locator('[data-map-course]')).toHaveAttribute('data-map-course','unit23-24');
   expect((await p.request.get(base+'unit21-22/')).status()).toBe(403);
   let hits=0;await p.route('**/assets/course-journey/shelf-glasses-pair-v1.webp*',route=>{hits++;return route.abort();});
   await p.reload();await expect(p.locator('[data-module-course="unit23-24"]')).toHaveAttribute('data-art-state','error');expect(hits).toBeGreaterThan(0);
   await p.getByLabel('查找 Lesson',{exact:true}).fill('30');
-  const result=p.locator('.journey-course:visible');await expect(result).toHaveAttribute('data-unit','unit29-30');await result.locator('.journey-locate').click();
+  const result=p.locator('.journey-course:visible');await expect(result).toHaveAttribute('data-unit','unit29-30');await result.locator('[data-course-select]').click();
   await expect(p.locator('.journey-map')).toHaveAttribute('data-chapter','home');await waitForModulesReady(p,['unit29-30']);
   await expect(p.locator('[data-map-course]')).toHaveCount(1);await expect(p.locator('.journey-map-message')).toHaveCount(0);
   await chooseJourneyChapter(p,'kindness');await expect(p.locator('[data-module-course="unit23-24"]')).toHaveAttribute('data-art-state','error');
@@ -101,7 +99,7 @@ test('新六课人物有点击回弹，金章可重看，减少动态立即停�
  try{
   const before=await(await p.request.get(base+'api/me')).json();
   await p.route('**/api/me',async route=>{const response=await route.fetch(),who=await response.json();await route.fulfill({response,json:{...who,courses:who.courses.map(c=>({...c,stars:5}))}});});
-  await p.reload();await p.getByRole('button',{name:'关闭课程目录',exact:true}).click();
+  await p.reload();await expect(p.getByRole('button',{name:'搜索 Lesson 或课程名称',exact:true})).toHaveAttribute('aria-expanded','false');
   for(const [chapter,courseIds] of chapters){
    await chooseJourneyChapter(p,chapter);await waitForModulesReady(p,courseIds);await expect(p.locator('[data-completion-medal]')).toHaveCount(3);
    for(const id of courseIds){

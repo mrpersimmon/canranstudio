@@ -1,4 +1,6 @@
 'use strict';
+const {studentDocument,openStudentDocument}=require('../support/student-document');
+
 const {test,expect}=require('@playwright/test');
 const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
 const {execFileSync}=require('node:child_process');
@@ -6,7 +8,7 @@ const {createApp}=require('../../server/app'),{openStore}=require('../../server/
 const {completeActivity}=require('../support/account-course13');
 const historicalCourse=require('../support/unit13-14-flow');
 const {createSite,removeTemporaryDirectory}=require('../support/historical-site');
-const { saveCourses, adminLogin,addStudent,signIn,fillLogin,setPassword,openCourseDirectory,readInitialPassword}=require('./helpers');
+const { saveCourses, adminLogin,addStudent,signIn,fillLogin,setPassword,openCourseDirectory,readInitialPassword,enterDirectoryCourse}=require('./helpers');
 const {openMyAccount}=require('./helpers');
 test('停服务备份恢复后，原学号密码、班级和真实成果仍可使用',async({browser})=>{
  test.setTimeout(60000);const root=await fs.mkdtemp(path.join(os.tmpdir(),'canran-recovery-'));let server,context;
@@ -23,8 +25,9 @@ test('停服务备份恢复后，原学号密码、班级和真实成果仍可�
   execFileSync(process.execPath,['server/manage.js','backup',backup],{env:{...process.env,LESSON_DATA_DIR:active}});
   execFileSync(process.execPath,['server/manage.js','restore',backup],{env:{...process.env,LESSON_DATA_DIR:restored}});
   await start(restored);context=await browser.newContext({baseURL:require('../support/login-test-ports').origin(4194)});const recovered=await context.newPage();await recovered.goto('/lesson/');await fillLogin(recovered,account);await expect(recovered.getByRole('heading',{name:'豆豆的课程'})).toBeVisible();await expect(recovered.locator('.course')).toContainText('1 / 5');
-  await openCourseDirectory(recovered);await recovered.locator('.course .primary-button').click();await expect(recovered.locator('#starCount')).toHaveText('1');
-  await recovered.goto('/lesson/unit13-14/#learn/certificate');await expect(recovered.locator('#certificateName')).toHaveText('豆豆');await expect(recovered.locator('#certificateDate')).toHaveText(firstDate);
+  await openCourseDirectory(recovered);await enterDirectoryCourse(recovered);const course=await studentDocument(recovered,/unit13-14\//);await expect(course.locator('#starCount')).toHaveText('1');
+  const certificate=await openStudentDocument(recovered,'/lesson/unit13-14/#learn/certificate');
+  await expect(certificate.locator('#certificateName')).toHaveText('豆豆');await expect(certificate.locator('#certificateDate')).toHaveText(firstDate);
   await adminLogin(recovered);await recovered.getByRole('button',{name:'管理 备份班',exact:true}).click();
   const pendingRow=recovered.locator('.student-row').filter({hasText:pending.number});
   expect(await readInitialPassword(recovered,pendingRow)).toBe(pending.initialPassword);
@@ -70,6 +73,8 @@ test('旧公开缓存在线迁移后要求登录，真实匿名成果保留而�
   await page.goto('/lesson/admin/');await page.getByLabel('管理员账号').fill('teacher');await page.getByLabel('管理员密码').fill('Test-only-classroom-2026!');await page.getByRole('button',{name:'登录管理页'}).click();
   await expect(old.getByRole('heading',{name:'这节课已下架',exact:true})).toBeVisible();
   await page.getByLabel('新班级名称').fill('迁移班');await page.getByRole('button',{name:'创建班级',exact:true}).click();await page.getByRole('checkbox',{name:/Lesson 13–14 /}).check();await saveCourses(page);await expect(page.getByRole('status')).toContainText('开放课程已保存');const account=await addStudent(page,'新同学');await signIn(page,account);await expect(page.locator('.journey-home > .journey-legacy')).toHaveCount(0);await openMyAccount(page);await page.getByRole('button',{name:'本机旧记录',exact:true}).click();await expect(page.getByRole('dialog',{name:'本机旧记录',exact:true})).toBeVisible();await expect(page.locator('#legacy')).toContainText('Lesson 13–14');await expect(page.locator('#legacy')).toContainText('1 项活动完成');await page.getByRole('button',{name:'关闭本机旧记录',exact:true}).click();
-  await page.locator('.course .primary-button').click();await expect(page.locator('#starCount')).toHaveText('0');await page.goto('/lesson/unit13-14/#learn/grammar');await expect(page.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
+  await enterDirectoryCourse(page);const course=await studentDocument(page,/unit13-14\//);await expect(course.locator('#starCount')).toHaveText('0');
+  const grammar=await openStudentDocument(page,'/lesson/unit13-14/#learn/grammar');
+  await expect(grammar.locator('.stage-grammar').getByRole('button',{name:'检查答案',exact:true})).toBeDisabled();
  }finally{await context?.close();if(server)await new Promise(r=>server.close(r));await removeTemporaryDirectory(directory);}
 });

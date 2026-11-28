@@ -21,5 +21,22 @@
   /* @bench:completion */
   return id=>{completed[id]=signatures[id];practice.activity('unitCompleted',completed);updateProgress();};
  }
- root.CanranCore.unitSession={location,completion};
+ function navigate(id){
+  if(!root.CanranStudentHandoff?.navigateFragment(id))root.location.hash=id;
+ }
+ function navigator(normalize,show){
+  return requested=>{
+   const id=normalize(requested);
+   // Resume also works after scrolling back to the cover with the same hash.
+   if(root.location.hash==='#'+id)show();else navigate(id);
+  };
+ }
+ function scrollToRoute(id){
+  const target=document.getElementById(id);
+  if(!root.CanranStudentHandoff?.preparing){target.scrollIntoView({block:'start',behavior:'instant'});return;}
+  // scrollIntoView can move every ancestor, including the map in WebKit.
+  const padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;
+  root.scrollTo({top:root.scrollY+target.getBoundingClientRect().top-padding,behavior:'instant'});
+ }
+ root.CanranCore.unitSession={location,completion,navigate,navigator,scrollToRoute};
 })(globalThis);

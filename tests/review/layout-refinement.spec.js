@@ -3,6 +3,7 @@ const {test,expect}=require('@playwright/test');
 const {devices}=require('../support/required-phone-devices');
 const {definition}=require('../../server/progress');
 const unit=definition(process.cwd(),'unit143-144','/');
+const forestScene=require('../../docs/designs/learning-flow/lesson25-144-scenes.json')['unit143-144'];
 async function open(page,device,entry,state='view',id='unit143-144'){
  await page.goto('/?'+new URLSearchParams({unit:id,page:entry,state,device:device.id}));
  await expect(page.locator('#loading')).toBeHidden({timeout:45000});await expect(page.locator('#error')).toBeHidden();
@@ -46,12 +47,20 @@ for(const device of devices){
   await expect(button).toHaveText('中文');
   const box=await last.evaluate(row=>{const name=row.querySelector('.bname').getBoundingClientRect(),button=row.querySelector('.bbtns').getBoundingClientRect(),text=row.querySelector('.btext').getBoundingClientRect();return{name:name.toJSON(),button:button.toJSON(),text:text.toJSON()};});
   expect(box.name.top).toBeGreaterThanOrEqual(box.button.top-1);expect(box.name.bottom).toBeLessThanOrEqual(box.button.bottom+1);expect(box.text.top).toBeGreaterThanOrEqual(box.button.bottom-1);
-  await expect(scene).toHaveCSS('background-image',/woods-world-continuous/);await expect(scene.locator('.learning-story-art')).toHaveCSS('background-image','none');
+  const backgrounds=await scene.evaluate(async stage=>{
+   const images=[...getComputedStyle(stage).backgroundImage.matchAll(/url\("([^"]+)"\)/g)];
+   return Promise.all(images.map(async([,src])=>{const image=new Image();image.src=src;await image.decode();return new URL(src).pathname;}));
+  });
+  expect(backgrounds).toEqual(['/lesson'+forestScene.background]);
+  for(const layer of ['.learning-story-art','.dialogue-log']){
+   await expect(scene.locator(layer)).toHaveCSS('background-image','none');
+   await expect(scene.locator(layer)).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
+  }
   await button.click();await expect(last.locator('.bcn')).toHaveText(unit.learning.DIALOGUE[7].cn);await expect(last.locator('.bcn')).toBeVisible();await expect(last.getByRole('button',{name:'收起中文',exact:true})).toHaveText('收起');
   await page.locator('#frame-shell').screenshot({path:info.outputPath('story-translation.png')});
  });
  test(device.name+' progress stays inside its lane and the record question uses one complete material panel',async({page},info)=>{
-  const frame=await open(page,device,'q:u143144-v1-a-past','before');
+  const question=unit.questions.apply[1],frame=await open(page,device,'q:'+question.id,'before');
   for(const state of ['before','wrong','correct','review']){
    if(state!=='before'){await page.locator('#state-buttons [data-state="'+state+'"]').click();await settled(page);}
    const content=frame.locator('.learning-surface .practice-content');
@@ -59,11 +68,23 @@ for(const device of devices){
    expect(spacing.bottom).toBeLessThanOrEqual(spacing.meter.bottom+1);expect(spacing.heading-spacing.bottom).toBeGreaterThanOrEqual(10);
    expect(spacing.scroll).toBeLessThanOrEqual(2);
    await expect(content.locator('.learning-context-preview:visible')).toHaveCount(0);await expect(content.locator('.practice-context:visible')).toHaveCount(0);
-   const material=content.getByRole('button',{name:'查看题目材料',exact:true});await expect(material).toBeVisible();
+   await expect(content.locator('h3')).toHaveText(question.prompt);
+   const material=content.getByRole('button',{name:'查看题目材料',exact:true});await expect(material).toHaveCount(1);await expect(material).toBeVisible();
    const before=await content.evaluate(()=>JSON.stringify(JSON.parse(localStorage.getItem(CanranCore.learningContext.progress.learningKey)).groups));
    await material.click();const panel=frame.getByRole('dialog',{name:'题目材料',exact:true});await expect(panel).toBeVisible();
-   await expect(panel.locator('.practice-context')).toHaveText(unit.questions.apply[1].display.material);
-   await expect(panel.locator('img')).toHaveAttribute('src',/inspection-record\.svg$/);await expect(panel.getByRole('button',{name:'关闭学习参考'})).toBeInViewport();
+   await expect(panel.locator('.practice-context')).toHaveText(question.display.material);
+   const record=panel.locator('.learning-reference-content > img.learning-material-image');
+   await expect(record).toHaveAttribute('src','/lesson/assets/unit143-144/inspection-record.svg');
+   await expect(record).toHaveAttribute('alt',question.imageAlt);
+   const feedback=panel.getByRole('group',{name:'林间核对记录',exact:true}),prop=feedback.locator('img.application-prop');
+   const recorded=state==='correct'||state==='review';
+   await expect(feedback).toHaveAttribute('data-task','past');await expect(feedback).toHaveAttribute('data-recorded',String(recorded));
+   await expect(prop).toHaveAttribute('src','/lesson/assets/unit143-144/'+(recorded?'task-checked':'task-record')+'.svg');
+   await expect(feedback.locator('.record-page strong')).toHaveText(recorded?'The past process is recorded.':'Locate the past observation');
+   for(const image of [record,prop]){
+    await image.evaluate(element=>element.decode());await image.scrollIntoViewIfNeeded();await expect(image).toBeInViewport();
+   }
+   await expect(panel.getByRole('button',{name:'关闭学习参考'})).toBeInViewport();
    await panel.getByRole('button',{name:'关闭学习参考'}).click();await expect(material).toBeFocused();
    expect(await content.evaluate(()=>JSON.stringify(JSON.parse(localStorage.getItem(CanranCore.learningContext.progress.learningKey)).groups))).toBe(before);
    await page.locator('#frame-shell').screenshot({path:info.outputPath('record-'+state+'.png')});

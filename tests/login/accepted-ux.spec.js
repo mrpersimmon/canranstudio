@@ -1,4 +1,5 @@
 'use strict';
+const {returnToHome,studentDocument}=require('../support/student-document');
 const {test,expect}=require('@playwright/test');
 const {adminLogin,createStudent,studentLogin}=require('./helpers');
 const {devices,contextOptions}=require('../support/required-phone-devices');
@@ -68,10 +69,10 @@ test('奖卡退出优先继续，满星入口与单张收藏不误导',async({pa
  try{
   await flow.activity(p,'1-2','listen',{base:base.slice(0,-1),keepAward:true});const reveal=p.getByRole('dialog',{name:/纪念卡结算/});await expect(reveal).toHaveAttribute('data-dismissible','true');await reveal.press('Escape');const next=p.locator('.stage-listen').getByRole('button',{name:'下一站：相遇小剧场',exact:true});await expect(next).toBeFocused();await next.press('Enter');await expect(p).toHaveURL(/#learn\/text$/);
   await flow.complete(p,'1-2',base.slice(0,-1));const awards=(await(await p.request.get(base+'api/awards')).json()).cards;
-  await p.getByRole('link',{name:'我的课程',exact:true}).click();
-  const directory=p.getByRole('dialog',{name:'全部课程',exact:true});await expect(directory).toBeVisible();await directory.getByRole('button',{name:'关闭课程目录',exact:true}).click();await expect(directory).not.toBeVisible();
-  const entry=p.getByRole('region',{name:'当前课程',exact:true}).getByRole('link',{name:'查看纪念卡：礼貌小帮手',exact:true});await expect(entry).toBeVisible();await entry.click();await expect(p).toHaveURL(/#learn\/certificate$/);await courseReadyForAssertions(p);
-  await p.getByRole('link',{name:'我的纪念册',exact:true}).click();await p.getByRole('button',{name:'查看并保存纪念卡：Lesson 1–2 礼貌小帮手',exact:true}).click();const card=p.getByRole('dialog',{name:'Lesson 1–2 纪念卡',exact:true});await expect(card.getByRole('button',{name:'上一张纪念卡'})).toHaveCount(0);await expect(card.getByRole('button',{name:'下一张纪念卡'})).toHaveCount(0);await expect(card.getByRole('button',{name:'保存动图',exact:true})).toBeInViewport({ratio:1});
+  const home=await returnToHome(p);
+  await expect(home.getByRole('dialog',{name:'选择课程'})).toHaveCount(0);
+  const entry=home.getByRole('region',{name:'当前课程',exact:true}).getByRole('link',{name:'查看纪念卡：礼貌小帮手',exact:true});await expect(entry).toBeVisible();await entry.click();const course=await studentDocument(p,/#learn\/certificate$/);await courseReadyForAssertions(course);
+  await course.getByRole('link',{name:'我的纪念册',exact:true}).click();await p.getByRole('button',{name:'查看并保存纪念卡：Lesson 1–2 礼貌小帮手',exact:true}).click();const card=p.getByRole('dialog',{name:'Lesson 1–2 纪念卡',exact:true});await expect(card.getByRole('button',{name:'上一张纪念卡'})).toHaveCount(0);await expect(card.getByRole('button',{name:'下一张纪念卡'})).toHaveCount(0);await expect(card.getByRole('button',{name:'保存动图',exact:true})).toBeInViewport({ratio:1});
   await p.screenshot({path:info.outputPath('single-card.png'),scale:'css'});expect((await(await p.request.get(base+'api/awards')).json()).cards).toEqual(awards);
  }finally{await s.context.close();}
 });

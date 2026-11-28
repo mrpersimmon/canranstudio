@@ -10,7 +10,7 @@ test('entry wording follows the real destination without changing access or resu
  assert.equal(model.actionLabel({...all[0],completed:true,next:'certificate'},true),'查看纪念卡');
 });
 test('journey search covers all 72 pairs and exact lesson numbers without widening authorization',()=>{
-  assert.deepEqual(model.filter(all,'Lesson 50','0').map(c=>c.id),['unit49-50']);
+  assert.deepEqual(model.filter(all,'Lesson 50').map(c=>c.id),['unit49-50']);
   assert.deepEqual(model.filter(all,'144').map(c=>c.id),['unit143-144']);
   assert.deepEqual(model.filter(all,'5').map(c=>c.id),['unit5-6']);
   assert.deepEqual(model.filter(all,'晚餐采购').map(c=>c.id),['unit49-50']);
@@ -18,9 +18,11 @@ test('journey search covers all 72 pairs and exact lesson numbers without wideni
   assert.deepEqual(model.filter(all,'145'),[]);
 });
 test('chapter membership follows Lesson numbers even for sparse authorization, not list position',()=>{
-  assert.equal(model.groups(all).length,8);
-  assert.deepEqual(model.groups([all[0],all[15],all[71]]).map(g=>[g.id,g.count]),[['0',1],['1',1],['7',1]]);
-  assert.deepEqual(model.filter([all[0],all[15],all[71]],'','7').map(c=>c.id),['unit143-144']);
+  const sparse=[all[0],all[15],all[71]];
+  assert.deepEqual(model.filter(sparse,'').map(c=>c.id),['unit1-2','unit31-32','unit143-144']);
+  assert.deepEqual(model.mapChapters(sparse).map(c=>c.id),['opening','outdoors','woodland']);
+  assert.equal(model.restore(sparse,{selected:'unit1-2'},'unit143-144').chapter,'woodland');
+  assert.equal(model.restore(sparse,{selected:'unit31-32'},'unit7-8').selected,'unit31-32');
 });
 test('stale bookmarks cannot restore unauthorized courses; continuation uses the supplied base and preview',()=>{
   const before=JSON.stringify(all);
@@ -29,6 +31,13 @@ test('stale bookmarks cannot restore unauthorized courses; continuation uses the
   assert.equal(model.href({...all[24],next:'grammar'},'/','class / 1'),'/unit49-50/?preview=class%20%2F%201#learn/grammar');
   assert.equal(model.href(all[71],'/lesson/'),'/lesson/unit143-144/#learn/words');
   assert.equal(JSON.stringify(all),before);
+});
+
+test('chapter bookmarks restore only valid landmarks and finite positions for the current course list',()=>{
+ const positions={opening:{selected:'unit3-4',scroll:445,width:375},neighborhood:{selected:'unit7-8',scroll:0,width:375},woodland:{selected:'unit143-144',scroll:80,width:375}};
+ assert.deepEqual(model.restore(all.slice(0,4),{visits:positions}).visits,{opening:positions.opening,neighborhood:positions.neighborhood});
+ assert.deepEqual(model.restore(all,{visits:{opening:{selected:'unit7-8',scroll:0,width:375}}}).visits,{});
+ assert.deepEqual(model.restore(all,{selected:'unit3-4'}).visits,{});
 });
 test('journey component and art changes keep authenticated browser checks in the selected scope',()=>{
   const {select}=require('../../scripts/check-workflow.config');

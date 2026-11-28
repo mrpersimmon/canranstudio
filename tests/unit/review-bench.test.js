@@ -73,7 +73,7 @@ test('catalog requests share a build until invalidation; force refresh works wit
 test('the source watcher sees a saved course file without watching the output directory',async t=>{
  const {watchSources}=require('../../scripts/review-bench'),os=require('node:os'),dir=await fs.mkdtemp(path.join(os.tmpdir(),'canran-bench-watch-'));
  t.after(()=>fs.rm(dir,{recursive:true,force:true}));
- for(const name of [...require('../../server/catalog').UNITS,'core','assets','review-bench','tests/support','docs/designs/word-cards','output'])await fs.mkdir(path.join(dir,name),{recursive:true});
+ for(const name of [...require('../../server/catalog').UNITS,'core','assets','review-bench','tests/support','docs/designs/word-cards','student-ui','course-journey','award-book','server/public','output'])await fs.mkdir(path.join(dir,name),{recursive:true});
  let changed=0,notify;const signalled=new Promise(resolve=>notify=resolve);
  const watcher=watchSources(dir,()=>{changed++;notify();});t.after(()=>watcher.close());
  assert.equal(watcher.reliable(),true);await fs.writeFile(path.join(dir,'output','result.json'),'{}');
@@ -87,4 +87,22 @@ test('ordinary whitespace edits do not invalidate the award preview adapter',asy
  const source=await fs.readFile(path.join(root,'core/unit-awards.js'),'utf8');
  const reformatted=source.replaceAll('save();','save();  ').replaceAll(' = root.CanranStudentAccess','  =  root.CanranStudentAccess');
  const adapted=instrumentSource('core/unit-awards.js',reformatted);new vm.Script(adapted);assert.match(adapted,/registerAwards/);
+});
+
+test('导航验收重新读取当前地图代码，而已启动的页面保留原构建',async t=>{
+ const {createCourseJourney}=require('../../scripts/course-journey-bundle');
+ const dir=await fs.mkdtemp(path.join(require('node:os').tmpdir(),'canran-review-journey-'));
+ t.after(()=>fs.rm(dir,{recursive:true,force:true}));
+ const input=path.join(dir,'course-journey','main.jsx');await fs.mkdir(path.dirname(input));
+ const handoff=path.join(dir,'server/public/student-handoff.js');await fs.mkdir(path.dirname(handoff),{recursive:true});
+ await fs.writeFile(handoff,'window.handoffVersion="first";');
+ await fs.writeFile(input,'window.mapVersion="first";');
+ const first=await createCourseJourney(dir,'/lesson/');
+ await fs.writeFile(input,'window.mapVersion="second";');
+ await fs.writeFile(handoff,'window.handoffVersion="second";');
+ const current=await createCourseJourney(dir,'/lesson/',{cache:false});
+ assert.match(current.files.get('journey.js').body.toString(),/second/);
+ assert.match(first.files.get('journey.js').body.toString(),/first/);
+ assert.match(current.files.get('student-handoff.js').body.toString(),/second/);
+ assert.match(first.files.get('student-handoff.js').body.toString(),/first/);
 });

@@ -8,8 +8,9 @@ async function open(page,unit,entry,device,state){
   await expect(page.locator('#error')).toBeHidden();
   return page.frameLocator('#frame-shell iframe:not(.pending)');
 }
-function inspectReference(content){
+async function inspectReference(content){
   const issues=[],visible=el=>!!el.getClientRects().length;
+  await Promise.all([...content.querySelectorAll('.phrase-card>img')].filter(visible).map(image=>image.decode()));
   let previous;
   for(const card of content.querySelectorAll('.phrase-card')){
     if(!visible(card))continue;
@@ -18,13 +19,28 @@ function inspectReference(content){
     if(previous&&b.top>=previous.bottom-1&&b.top-previous.bottom<8)issues.push({type:'touching-reference-cards',text:card.textContent,gap:b.top-previous.bottom});
     previous=b;
     const texts=text.map(el=>({el,b:el.getBoundingClientRect()}));
-    if(image){const i=image.getBoundingClientRect();for(const t of texts)if(Math.min(i.right,t.b.right)-Math.max(i.left,t.b.left)>1&&Math.min(i.bottom,t.b.bottom)-Math.max(i.top,t.b.top)>1)issues.push({type:'image-over-text',text:t.el.textContent});}
+    const english=texts.find(t=>t.el.matches('strong')),meaning=texts.find(t=>t.el.matches('span:not(.reference-number)'));
+    if(!english||!meaning||english.b.bottom>meaning.b.top+1)issues.push({type:'missing-or-overlapping-phrase-lines',text:card.textContent});
+    if(image&&visible(image)){
+      const i=image.getBoundingClientRect();
+      if(!image.complete||!image.naturalWidth)issues.push({type:'unloaded-reference-picture',src:image.getAttribute('src')});
+      for(const t of texts)if(Math.min(i.right,t.b.right)-Math.max(i.left,t.b.left)>1&&Math.min(i.bottom,t.b.bottom)-Math.max(i.top,t.b.top)>1)issues.push({type:'image-over-text',text:t.el.textContent});
+    }else if(english){
+      const left=b.left+parseFloat(s.borderLeftWidth)+parseFloat(s.paddingLeft),right=b.right-parseFloat(s.borderRightWidth)-parseFloat(s.paddingRight);
+      if(Math.abs(english.b.left-left)>1||Math.abs(right-english.b.right)>1)issues.push({type:'unused-picture-column',text:card.textContent});
+    }
     const contentHeight=Math.max(image?.getBoundingClientRect().height||0,texts.reduce((sum,t)=>sum+t.b.height,0)+Math.max(0,texts.length-1)*(parseFloat(s.rowGap)||0));
     const padding=['paddingTop','paddingBottom','borderTopWidth','borderBottomWidth'].reduce((sum,p)=>sum+(parseFloat(s[p])||0),0);
     if(b.height-contentHeight-padding>16)issues.push({type:'excess-card-space',text:card.textContent,extra:b.height-contentHeight-padding});
     for(const {el,b:r}of texts)if(r.left<b.left||r.right>b.right+1)issues.push({type:'text-outside-card',text:el.textContent});
   }
   return issues;
+}
+function phraseContents(cards){
+  return cards.map(card=>{
+    const picture=card.querySelector('img');
+    return {lines:[...card.querySelectorAll('strong,span')].map(el=>el.textContent),picture:picture?.getAttribute('src'),hidden:picture?.hidden};
+  });
 }
 for(const device of devices){
   test('all six word cards stay usable on '+device.name,async({page},info)=>{
@@ -67,6 +83,11 @@ for(const device of devices){
       const frame=await open(page,course.id,entry.id,device.id,'open'),dialog=frame.locator('.learning-reference-sheet');
       await expect(dialog).toBeVisible();
       for(const summary of await dialog.locator('details>summary').all())if(await summary.isVisible())await summary.click();
+      if(!await dialog.locator('.learning-live-reference').count()){
+        const source=frame.locator('[id="'+entry.route+'"]').locator(':scope>details.offline-task,:scope>details.grammar-reference').nth(entry.referenceIndex);
+        await expect(source).toHaveCount(1);
+        expect(await dialog.locator('.phrase-card').evaluateAll(phraseContents)).toEqual(await source.locator('.phrase-card').evaluateAll(phraseContents));
+      }
       const issues=await dialog.locator('.learning-reference-content').evaluate(inspectReference);
       findings.push({unit:course.id,entry:entry.id,issues});
       await page.screenshot({path:info.outputPath(course.id+'-'+entry.id+'.png')});

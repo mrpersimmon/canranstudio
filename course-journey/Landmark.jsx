@@ -49,7 +49,7 @@ export function Landmark({course,character,position,src,selected,tap,celebration
     if(!reduced)bounce.current=motion.current.animate([{transform:'scale(1)'},{transform:softMotion?'scale(.992)':'scale(.97)'}],{duration:80,easing:'ease-out'});
   }
   return <button type="button" className="journey-landmark-select" data-landmark-select={course.id} data-pressed={pressed}
-    aria-pressed={selected} aria-label={`选择场景：${course.label} ${course.title}`}
+    aria-pressed={selected} aria-label={`选择场景：${course.label} ${course.title}`} title="单击选课，双击进入课程"
     style={children?{inset:0,width:'100%',height:'100%',transform:'none'}:{left:position.feet[0]*100+'%',top:position.feet[1]*100+'%',width:position.width*100+'%',transform:`translate(-${character.anchor[0]*100}%,-${character.anchor[1]*100}%)`}}
     onPointerDown={press}
     onPointerMove={event=>{const start=pointer.current;if(start&&start.id===event.pointerId&&Math.hypot(event.clientX-start.x,event.clientY-start.y)>10){bounce.current?.cancel();suppress.current=true;setPressed(false);}}}
